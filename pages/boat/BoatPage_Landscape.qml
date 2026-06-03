@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.Boat as Boat
 import Victron.VenusOS
 
@@ -14,33 +15,53 @@ Boat.Background { // the blue shadows
 
 	motorDrives: motorDrives
 
-	Boat.BatteryArc { // arc gauge on the far left
-		id: batteryGauge
 
+	Boat.SlotLeftArc {
+		id: slotLeftArc
 		anchors {
 			left: parent.left
 			leftMargin: Theme.geometry_page_content_horizontalMargin
 		}
 		y: (root.Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height - height) / 2
+		motorDrives: motorDrives
+		gps: _gps
 		animationEnabled: root.animationEnabled
 	}
 
-	Boat.BatteryPercentage { // vertical center left
-		id: batteryPercentage
+	Boat.SlotVerticalCenterLeft {
+		id: slotVerticalCenterLeft
 		anchors {
-			left: batteryGauge.left
+			left: slotLeftArc.left
 			leftMargin: Theme.geometry_boatPage_batteryGauge_leftMargin
-			verticalCenter: batteryGauge.verticalCenter
+			verticalCenter: slotLeftArc.verticalCenter
 			verticalCenterOffset: Theme.geometry_boatPage_batteryGauge_verticalCenterOffset
 		}
 		motorDrives: motorDrives
+		gps: _gps
+	}
+
+	// @temporary: waiting for design
+	CP.ColorImage {
+		anchors {
+			left: parent.left
+			leftMargin: Theme.geometry_boatPage_topRow_horizontalMargin
+			bottom: slotVerticalCenterLeft.top
+			bottomMargin: Theme.geometry_boatPage_verticalMargin
+		}
+
+		width: Theme.geometry_boatPage_shoreGauge_icon_size
+		height: width
+		color: Theme.color_boatPage_icon
+		source: "qrc:/images/shore.svg"
+
+		visible: Global.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Shore && (_gps.valid || motorDrives.dcConsumption.quotient.valid)
 	}
 
 	Boat.TimeToGo { // bottom left
 		id: ttg
 
 		anchors {
-			top: batteryPercentage.bottom
+			top: slotVerticalCenterLeft.bottom
 			topMargin: Theme.geometry_boatPage_verticalMargin
 			left: parent.left
 			leftMargin: Theme.geometry_boatPage_topRow_horizontalMargin
@@ -61,7 +82,7 @@ Boat.Background { // the blue shadows
 		id: consumption
 
 		anchors {
-			top: batteryPercentage.bottom
+			top: slotVerticalCenterLeft.bottom
 			topMargin: Theme.geometry_boatPage_verticalMargin
 			right: parent.right
 			rightMargin: Theme.geometry_boatPage_topRow_horizontalMargin
@@ -92,37 +113,22 @@ Boat.Background { // the blue shadows
 		animationEnabled: root.animationEnabled
 	}
 
-	Boat.ConsumptionGauge { // vertical center right
-		id: consumptionGauge
-
+	Boat.SlotVerticalCenterRight {
+		id: slotVerticalCenterRight
 		anchors {
-			verticalCenter: batteryPercentage.verticalCenter
+			verticalCenter: slotVerticalCenterLeft.verticalCenter
 			right: parent.right
 			rightMargin: Theme.geometry_boatPage_powerRow_rightMargin
 		}
-
 		motorDrives: motorDrives
 		gps: _gps
 	}
-
-	/*	Don't display motordrive temperatures for v1. TBD whether we want them for v2.
-	Boat.TemperatureGauges { // bottom right
-		id: temperatureGauges
-
-		anchors {
-			top: batteryTemperature.top
-			right: parent.right
-			rightMargin: Theme.geometry_boatPage_topRow_horizontalMargin
-		}
-		motorDrive: motorDrives.singleMotorDrive
-	}
-	*/
 
 	Boat.LoadArc { // arc gauge on the far right
 		id: loadArc
 
 		anchors {
-			verticalCenter: batteryGauge.verticalCenter
+			verticalCenter: slotLeftArc.verticalCenter
 			right: parent.right
 			rightMargin: Theme.geometry_page_content_horizontalMargin
 		}
@@ -156,11 +162,31 @@ Boat.Background { // the blue shadows
 		id: _gps
 	}
 
+	Item {
+		id: shorePowerListener
+
+		property int previousSource: Global.acInputs.activeInSource
+
+		Connections {
+			target: Global.acInputs
+
+			function onActiveInSourceChanged() {
+				if (shorePowerListener.previousSource !== VenusOS.AcInputs_InputSource_Shore &&
+					Global.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Shore) {
+					// Wake up display when shore power gets connected
+					ScreenBlanker.setDisplayOn();
+				}
+
+				shorePowerListener.previousSource = Global.acInputs.activeInSource
+			}
+		}
+	}
+
 	states: State {
 		name: "showing3Phases"
 		when: loadArc.showing3Phases
 		PropertyChanges {
-			batteryGauge.anchors.leftMargin: Theme.geometry_page_content_horizontalMargin / 2
+			slotLeftArc.anchors.leftMargin: Theme.geometry_page_content_horizontalMargin / 2
 			loadArc.anchors.rightMargin: Theme.geometry_page_content_horizontalMargin / 2
 		}
 	}

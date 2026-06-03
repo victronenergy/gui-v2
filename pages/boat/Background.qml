@@ -16,7 +16,7 @@ Item {
 		width: Theme.geometry_boatPage_shadow_width
 		height: Theme.geometry_boatPage_shadow_height
 		source: "qrc:/images/boat_glow.png"
-		color: motorDrives.isRegenerating ? Theme.color_boatPage_regenProgress : undefined
+		color: (Global.system.battery.mode === VenusOS.Battery_Mode_Charging || motorDrives.isRegenerating) ? Theme.color_boatPage_regenProgress : undefined
 	}
 
 	Shadow {

@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 import Victron.Boat as Boat
 
@@ -94,6 +95,32 @@ Item {
 		}
 	}
 
+	ProgressArc {
+		id: batteryOuterGauge
+
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry_boatPage_centerGauge_topMargin
+			horizontalCenter: parent.horizontalCenter
+		}
+		rotation: 0
+		width: Theme.geometry_boatPage_centerGauge_width
+		height: width
+		radius: width/2
+		endAngle: 360
+		value: Global.system.battery.stateOfCharge
+		strokeWidth: Theme.geometry_boatPage_centerGauge_strokeWidth
+		animationEnabled: root.animationEnabled
+		progressColor: Global.system.battery.mode === VenusOS.Battery_Mode_Charging ? Theme.color_boatPage_regenProgress : Theme.color_ok
+		remainderColor: Global.system.battery.mode === VenusOS.Battery_Mode_Charging ? Theme.color_boatPage_regenRemainder : Theme.color_darkOk
+		objectName: "batteryCenterGauge"
+		visible: root.activeDataSource === null && !isNaN(Global.system.battery.stateOfCharge)
+
+		layer.enabled: !UiConfig.msaaEnabled
+		layer.textureSize: Qt.size(2*width, 2*height)
+		layer.smooth: true
+	}
+
 	// Gear indicators
 	Item {
 		anchors {
@@ -122,7 +149,7 @@ Item {
 		}
 	}
 
-	// GPS speed or DC consumption
+	// GPS speed or DC consumption or battery details
 	Column {
 		anchors {
 			verticalCenter: outerGauge.verticalCenter
@@ -162,6 +189,85 @@ Item {
 			visible: root.activeDataSource === root.motorDriveDcConsumption
 			sourceType: VenusOS.ElectricalQuantity_Source_Dc
 			dataObject: motorDrives.dcConsumption.scalar
+		}
+
+		Row {
+			visible: batteryOuterGauge.visible
+			anchors.horizontalCenter: parent.horizontalCenter
+			bottomPadding: Theme.geometry_boatPage_batteryCenterGauge_title_bottomPadding
+
+			spacing: Theme.geometry_boatPage_batteryCenterGauge_title_spacing
+
+			CP.ColorImage {
+				anchors.verticalCenter: batteryLabel.verticalCenter
+				height: Theme.geometry_boatPage_batteryCenterGauge_title_iconHeight
+				color: Theme.color_font_primary
+				source: Global.system.battery.mode === VenusOS.Battery_Mode_Charging
+					? "qrc:/images/icon_battery_charging_24.svg"
+					: "qrc:/images/icon_battery_24.svg"
+			}
+
+			Label {
+				id: batteryLabel
+
+				verticalAlignment: Text.AlignVCenter
+				height: font.pixelSize
+				font.pixelSize: Theme.font_boatPage_batteryCenterGauge_title_pixelSize
+				color: Theme.color_font_primary
+				text: CommonWords.battery
+			}
+		}
+
+
+		QuantityLabel {
+			id: batteryStateOfCharge
+
+			visible: batteryOuterGauge.visible
+			anchors.horizontalCenter: parent.horizontalCenter
+			width: rpmGauge.width - rpmGauge.radius/2
+			height: font.pixelSize
+			font.pixelSize: Theme.font_boatPage_batteryCenterGauge_percentage_pixelSize
+			font.weight: Font.Medium
+			unit: VenusOS.Units_Percentage
+			value: Global.system.battery.stateOfCharge
+		}
+
+		Row {
+			visible: batteryOuterGauge.visible
+			anchors.horizontalCenter: parent.horizontalCenter
+			topPadding: Theme.geometry_boatPage_batteryCenterGauge_detailsRow_topPadding
+
+			spacing: Theme.geometry_boatPage_batteryCenterGauge_detailsRow_spacing
+
+			QuantityLabel {
+				value: Global.system.battery.voltage
+				unit: VenusOS.Units_Volt_DC
+				valueColor: Theme.color_font_secondary
+				unitColor: Theme.color_font_secondary
+				font.pixelSize: Theme.font_boatPage_batteryCenterGauge_detailsRow_pixelSize
+				height: font.pixelSize
+			}
+
+			ElectricalQuantityLabel {
+				sourceType: VenusOS.ElectricalQuantity_Source_Dc
+				dataObject: Global.system.battery
+				valueColor: Theme.color_font_secondary
+				unitColor: Theme.color_font_secondary
+				font.pixelSize: Theme.font_boatPage_batteryCenterGauge_detailsRow_pixelSize
+				height: font.pixelSize
+			}
+		}
+
+		Label {
+			visible: batteryOuterGauge.visible
+			anchors.horizontalCenter: parent.horizontalCenter
+			topPadding: Theme.geometry_boatPage_batteryCenterGauge_mode_topPadding
+
+			text: VenusOS.battery_modeToText(Global.system.battery.mode)
+			elide: Text.ElideRight
+			color: Theme.color_font_secondary
+			font.pixelSize: Theme.font_boatPage_batteryCenterGauge_mode_pixelSize
+			height: font.pixelSize
 		}
 	}
 
