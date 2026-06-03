@@ -863,6 +863,9 @@ set(VictronVenusOS_RESOURCES
     images/icon_sidepanel_off_32.svg
     images/icon_sidepanel_on_32.svg
     images/icon_screen_sleep_32.svg
+    images/icon_shore.svg
+    images/icon_shore_charging.svg
+    images/icon_shore_error.svg
     images/icon_switch_24.svg
     images/icon_temp_32.svg
     images/information.svg
