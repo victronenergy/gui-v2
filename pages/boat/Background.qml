@@ -10,13 +10,27 @@ import Victron.VenusOS
 Item {
 	id: root
 
+	required property Gps gps
 	required property MotorDrives motorDrives
+	required property bool isShoreConnected
+	required property bool isBatteryCharging
+
+	// The boat is considered moving if the GPS speed is above 0.2 m/s (0.72 km/h).
+	readonly property bool isMoving: root.gps.valid && root.gps.numerator > 0.2
 
 	component Shadow : CP.ColorImage {
 		width: Theme.geometry_boatPage_shadow_width
 		height: Theme.geometry_boatPage_shadow_height
 		source: "qrc:/images/boat_glow.png"
-		color: motorDrives.isRegenerating ? Theme.color_boatPage_regenProgress : undefined
+		color: {
+			if (isShoreConnected && isMoving) {
+				return Theme.color_red;
+			}
+			if (isBatteryCharging || motorDrives.isRegenerating) {
+				return Theme.color_boatPage_regenProgress;
+			}
+			return undefined;
+		}
 	}
 
 	Shadow {

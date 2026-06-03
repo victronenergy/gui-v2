@@ -72,6 +72,17 @@ QtObject {
 		AcInput {}
 	}
 
+	property int previousActiveInSource: root.activeInSource
+	onActiveInSourceChanged: {
+		if (root.previousActiveInSource !== VenusOS.AcInputs_InputSource_Shore &&
+			root.activeInSource === VenusOS.AcInputs_InputSource_Shore) {
+			// Wake up display when shore power gets connected
+			ScreenBlanker.setDisplayOn();
+		}
+
+		root.previousActiveInSource = root.activeInSource
+	}
+
 	function sourceValid(source) {
 		return source !== VenusOS.AcInputs_InputSource_NotAvailable && source !== VenusOS.AcInputs_InputSource_Inverting
 	}
