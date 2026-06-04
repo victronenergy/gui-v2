@@ -101,13 +101,15 @@ StackView {
 			root._topPageUrl = ""
 		}
 
-		if (root.depth === 0) {
-			// When the first page is added to the stack, move the stack into view.
+		if (root.state !== "opened") {
+			// When the stack is closed or hidden, push the first page without any animation and
+			// slide the stack into view.
 			const newPage = root.push(objectOrUrl, properties, StackView.Immediate)
 			fakePushAnimation.duration = _animationDuration(operation)
 			root.state = "opened"
 			return newPage
 		} else {
+			// Otherwise, push the push onto the visible stack, possibly with an animation.
 			return root.push(objectOrUrl, properties, _adjustedStackOperation(operation))
 		}
 	}
