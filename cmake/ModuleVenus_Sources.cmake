@@ -577,6 +577,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/devicelist/tank/PageTankSensor.qml
     pages/settings/devicelist/tank/PageTankSetup.qml
     pages/settings/devicelist/tank/PageTankShape.qml
+    pages/settings/devicelist/ac-in/AcLimitsConsumptionSettings.qml
+    pages/settings/devicelist/ac-in/AcLimitsProductionSettings.qml
     pages/settings/devicelist/ac-in/PageAcIn.qml
     pages/settings/devicelist/ac-in/PageAcInSetup.qml
     pages/settings/devicelist/ac-in/PageAcInModel.qml

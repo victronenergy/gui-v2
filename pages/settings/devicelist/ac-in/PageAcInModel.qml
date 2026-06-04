@@ -187,4 +187,12 @@ VisibleItemModel {
 			uid: root.bindPrefix + "/Role"
 		}
 	}
+
+	AcLimitsConsumptionSettings {
+		bindPrefix: root.bindPrefix
+	}
+
+	AcLimitsProductionSettings {
+		bindPrefix: root.bindPrefix
+	}
 }
