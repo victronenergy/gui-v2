@@ -46,6 +46,7 @@ Item {
 		x: Theme.geometry_page_content_horizontalMargin
 		y: mainGaugeBackground.y + mainGaugeBackground.height + Theme.geometry_sidePanel_spacing
 		sourceComponent: detailPanelActiveComponent
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load detail panel")
 
 		Component {
 			id: detailPanelActiveComponent

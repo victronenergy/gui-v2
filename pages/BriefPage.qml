@@ -74,7 +74,7 @@ SwipeViewPage {
 				Image {
 					width: status === Image.Null ? 0 : Theme.geometry_screen_width
 					fillMode: Image.PreserveAspectFit
-					source: BackendConnection.demoImageFileName
+					source: UiConfig.demoImageFileName
 					onStatusChanged: {
 						if (status === Image.Ready) {
 							console.info("Loaded demo image:", source)

@@ -17,7 +17,7 @@ Loader {
 	// Disable the visualizer and the model while the application isn't visible
 	active: FrameRateModel.enabled
 	property bool frameRateModelWasEnabled: false
-	property bool applicationVisible: BackendConnection.applicationVisible
+	property bool applicationVisible: UiConfig.applicationVisible
 	onApplicationVisibleChanged: {
 		if (!applicationVisible) {
 			frameRateModelWasEnabled = FrameRateModel.enabled

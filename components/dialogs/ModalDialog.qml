@@ -50,7 +50,7 @@ T.Dialog {
 	readonly property string rejectTextCancel: CommonWords.cancel
 
 	readonly property Item focusedInputItem: root.visible
-		&& (Qt.inputMethod.visible || BackendConnection.needsWasmKeyboardHandler)
+		&& (Qt.inputMethod.visible || UiConfig.needsWasmKeyboardHandler)
 			? (root.contentItem.Window.activeFocusItem as TextField ??
 				root.contentItem.Window.activeFocusItem as TextInput ??
 				// root.contentItem.Window.activeFocusItem as TextArea ?? // not used

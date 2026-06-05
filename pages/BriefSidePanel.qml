@@ -10,7 +10,7 @@ import Victron.VenusOS
 ColumnLayout {
 	id: root
 
-	property bool animationEnabled
+	required property bool animationEnabled
 
 	readonly property AcInput generatorInput: Global.acInputs.input1?.source === VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input1
 			: Global.acInputs.input2?.source === VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input2

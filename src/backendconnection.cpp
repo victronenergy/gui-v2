@@ -623,52 +623,6 @@ void BackendConnection::setVrm(bool v)
 	}
 }
 
-bool BackendConnection::isApplicationVisible() const
-{
-	return m_applicationVisible;
-}
-
-void BackendConnection::setApplicationVisible(bool v)
-{
-	if (m_applicationVisible != v) {
-		m_applicationVisible = v;
-		emit applicationVisibleChanged();
-	}
-}
-
-bool BackendConnection::needsWasmKeyboardHandler() const
-{
-	return m_needsWasmKeyboardHandler;
-}
-
-void BackendConnection::setNeedsWasmKeyboardHandler(bool needsWasmKeyboardHandler)
-{
-	if (m_needsWasmKeyboardHandler != needsWasmKeyboardHandler) {
-		m_needsWasmKeyboardHandler = needsWasmKeyboardHandler;
-		emit needsWasmKeyboardHandlerChanged();
-	}
-}
-
-bool BackendConnection::msaaEnabled() const
-{
-	return m_msaaEnabled;
-}
-
-void BackendConnection::setMsaaEnabled(bool e)
-{
-	if (m_msaaEnabled != e) {
-		m_msaaEnabled = e;
-		emit msaaEnabledChanged();
-	}
-}
-
-QUrl BackendConnection::demoImageFileName() const
-{
-	static const QUrl filePath = QUrl::fromLocalFile("/data/demo-brief.png");
-	static const bool fileExists = QFile::exists(filePath.toLocalFile());
-	return fileExists ? filePath : QUrl();
-}
-
 VeQItemProducer *BackendConnection::producer() const
 {
 	return m_producer;

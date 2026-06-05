@@ -22,7 +22,7 @@ T.Control {
 	readonly property int expandedHeight: getExpandedHeight(size)
 	property bool expanded
 	property bool animateGeometry
-	property bool animationEnabled
+	required property bool animationEnabled
 
 	// Font size for secondary widget details, e.g. AC-in state, battery temp, ESS numbers.
 	readonly property int secondaryFontSize: size >= VenusOS.OverviewWidget_Size_M

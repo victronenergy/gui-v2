@@ -17,7 +17,7 @@ Rectangle {
 	property color surfaceColor: Theme.color_levelsPage_gauge_separatorBarColor
 	property real value: 0.0
 	property int orientation: Qt.Vertical
-	property bool animationEnabled
+	required property bool animationEnabled
 
 	width: orientation === Qt.Vertical ? Theme.geometry_barGauge_vertical_width_large : parent.width
 	height: orientation === Qt.Vertical ? parent.height : Theme.geometry_barGauge_horizontal_height

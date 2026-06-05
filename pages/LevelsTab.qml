@@ -10,7 +10,7 @@ import Victron.Gauges
 BaseListView {
 	id: root
 
-	property bool animationEnabled: true
+	required property bool animationEnabled
 
 	bottomMargin: Global.pageManager?.expandLayout
 			? Theme.geometry_levelsPage_gaugesView_expanded_bottomMargin

@@ -515,7 +515,7 @@ Item {
 	}
 
 	// Antialiasing without requiring multisample framebuffers.
-	layer.enabled: !BackendConnection.msaaEnabled
+	layer.enabled: !UiConfig.msaaEnabled
 	layer.smooth: true
 	layer.textureSize: Qt.size(root.width*2, root.height*2)
 }

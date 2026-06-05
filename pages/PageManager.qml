@@ -26,7 +26,7 @@ QtObject {
 		running: !Global.splashScreenVisible
 			&& (currentMainPage?.fullScreenWhenIdle || Global.keyNavigationEnabled)
 			&& root.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-			&& BackendConnection.applicationVisible
+			&& UiConfig.applicationVisible
 		interval: Theme.animation_page_idleResize_timeout
 		onTriggered: {
 			Global.main.keyNavigationTimeout()

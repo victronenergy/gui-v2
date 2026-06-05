@@ -23,7 +23,7 @@ Item {
 	property int animationMode: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	property alias expanded: connectorPath.expanded
 	property bool animateGeometry
-	property bool animationEnabled
+	required property bool animationEnabled
 	readonly property bool defaultVisible: startWidget.visible && endWidget.visible && _initialized
 
 	required property FrameAnimation frameAnimation

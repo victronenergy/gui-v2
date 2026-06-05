@@ -139,7 +139,10 @@ FocusScope {
 					visible: active
 					sourceComponent: SolarYieldWidget {
 						size: leftInputColumn.widgetSize
+						animationEnabled: root.animationEnabled
 					}
+					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load solar widget")
+
 					Layout.fillWidth: true
 					Layout.fillHeight: true
 					Layout.minimumHeight: root._widgetHeightForSize(leftInputColumn.widgetSize)
@@ -170,7 +173,10 @@ FocusScope {
 							serviceType: modelData.serviceTypes[0] || ""
 							inputTypeFilter: modelData.commonMeterType
 							size: leftInputColumn.widgetSize
+							animationEnabled: root.animationEnabled
 						}
+						onStatusChanged: if (status === Loader.Error) console.warn("Unable to load dc input widget for type " + modelData.commonMeterType)
+
 						Layout.fillWidth: true
 						Layout.fillHeight: true
 						Layout.minimumHeight: root._widgetHeightForSize(leftInputColumn.widgetSize)
@@ -191,7 +197,10 @@ FocusScope {
 						serviceType: "dcsource"
 						inputTypeFilter: dcSourceModel.commonMeterType
 						size: leftInputColumn.widgetSize
+						animationEnabled: root.animationEnabled
 					}
+					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load combined dc input widget")
+
 					Layout.fillWidth: true
 					Layout.fillHeight: true
 					Layout.minimumHeight: root._widgetHeightForSize(leftInputColumn.widgetSize)
@@ -211,7 +220,10 @@ FocusScope {
 							serviceType: dcsourceWidgetLoader.device.serviceType
 							inputTypeFilter: dcsourceWidgetLoader.meterType
 							size: leftInputColumn.widgetSize
+							animationEnabled: root.animationEnabled
 						}
+						onStatusChanged: if (status === Loader.Error) console.warn("Unable to load dc source widget for type " + dcsourceWidgetLoader.meterType)
+
 						Layout.fillWidth: true
 						Layout.fillHeight: true
 						Layout.minimumHeight: root._widgetHeightForSize(leftInputColumn.widgetSize)
@@ -258,7 +270,9 @@ FocusScope {
 						type: VenusOS.OverviewWidget_Type_AcInputPriority
 						size: rightInputColumn.displayWidgetSize
 						stretchHorizontally: rightInputColumn.stretchHorizontally
+						animationEnabled: root.animationEnabled
 					}
+					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load ac input widget")
 				}
 
 				Loader {
@@ -276,7 +290,9 @@ FocusScope {
 						type: VenusOS.OverviewWidget_Type_AcInputOther
 						size: rightInputColumn.displayWidgetSize
 						stretchHorizontally: rightInputColumn.stretchHorizontally
+						animationEnabled: root.animationEnabled
 					}
+					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load ac input2 widget")
 				}
 			}
 		}
@@ -339,6 +355,8 @@ FocusScope {
 				id: batteryWidget
 
 				size: VenusOS.OverviewWidget_Size_L
+				animationEnabled: root.animationEnabled
+
 				Layout.fillWidth: true
 				Layout.fillHeight: true
 				Layout.minimumHeight: Theme.geometry_overviewPage_widget_height_l
@@ -348,6 +366,8 @@ FocusScope {
 				id: inverterChargerWidget
 
 				size: VenusOS.OverviewWidget_Size_L
+				animationEnabled: root.animationEnabled
+
 				Layout.fillWidth: true
 				Layout.fillHeight: true
 				Layout.minimumHeight: Theme.geometry_overviewPage_widget_height_l
@@ -410,7 +430,10 @@ FocusScope {
 				visible: active
 				sourceComponent: DcLoadsWidget {
 					size: VenusOS.OverviewWidget_Size_L
+					animationEnabled: root.animationEnabled
 				}
+				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load dc loads widget")
+
 				Layout.fillWidth: true
 				Layout.fillHeight: true
 				Layout.minimumHeight: root._widgetHeightForSize(VenusOS.OverviewWidget_Size_L)
@@ -442,7 +465,10 @@ FocusScope {
 					sourceComponent: AcLoadsWidget {
 						size: rightLoadsColumn.displayWidgetSize
 						stretchHorizontally: rightLoadsColumn.stretchHorizontally
+						animationEnabled: root.animationEnabled
 					}
+					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load ac loads widget")
+
 					Layout.fillWidth: true
 					Layout.fillHeight: true
 					Layout.minimumHeight: rightLoadsColumn.minimumWidgetHeight
@@ -455,7 +481,10 @@ FocusScope {
 					sourceComponent: EssentialLoadsWidget {
 						size: rightLoadsColumn.displayWidgetSize
 						stretchHorizontally: rightLoadsColumn.stretchHorizontally
+						animationEnabled: root.animationEnabled
 					}
+					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load essential loads widget")
+
 					Layout.fillWidth: true
 					Layout.fillHeight: true
 					Layout.minimumHeight: rightLoadsColumn.minimumWidgetHeight
@@ -469,7 +498,10 @@ FocusScope {
 					sourceComponent: EvcsWidget {
 						size: rightLoadsColumn.displayWidgetSize
 						stretchHorizontally: rightLoadsColumn.stretchHorizontally
+						animationEnabled: root.animationEnabled
 					}
+					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load evcs widget")
+
 					Layout.fillWidth: true
 					Layout.fillHeight: true
 					Layout.minimumHeight: rightLoadsColumn.minimumWidgetHeight

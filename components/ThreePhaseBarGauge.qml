@@ -15,7 +15,7 @@ Flow {
 	property real maximumValue
 	property bool inputMode
 	property int orientation: Qt.Vertical
-	property bool animationEnabled
+	required property bool animationEnabled
 	property bool inOverviewWidget
 
 	readonly property real _longEdgeLength: orientation === Qt.Vertical ? height : width

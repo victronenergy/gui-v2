@@ -21,7 +21,7 @@ Item {
 		anchors.fill: parent
 
 		// Antialiasing without requiring multisample framebuffers.
-		layer.enabled: !BackendConnection.msaaEnabled
+		layer.enabled: !UiConfig.msaaEnabled
 		layer.smooth: true
 		layer.textureSize: Qt.size(antialiased.width*2, antialiased.height*2)
 

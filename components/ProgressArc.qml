@@ -13,8 +13,8 @@ Shape {
 	property real value // 0 - 100
 	property real radius
 	property real strokeWidth: Theme.geometry_progressArc_strokeWidth
+	required property bool animationEnabled
 	property alias useLargeArc: progress.useLargeArc
-	property alias animationEnabled: progress.animationEnabled
 	property alias progressColor: progress.strokeColor
 	property alias remainderColor: remainder.strokeColor
 	property alias startAngle: remainder.startAngle
@@ -46,5 +46,6 @@ Shape {
 		strokeWidth: control.strokeWidth
 		strokeColor: Theme.color_ok
 		fillColor: control.fillColor
+		animationEnabled: control.animationEnabled
 	}
 }

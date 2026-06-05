@@ -17,7 +17,7 @@ Item {
 	property int horizontalAlignment
 	property real arcVerticalCenterOffset
 	property real phaseLabelHorizontalMargin
-	property bool animationEnabled
+	required property bool animationEnabled
 	property real minimumValue
 	property real maximumValue
 	property bool inputMode

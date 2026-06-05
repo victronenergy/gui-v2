@@ -368,6 +368,7 @@ Item {
 			height: Math.max(root._unexpandedHeight, implicitHeight)
 			animationEnabled: root.animationEnabled
 		}
+		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load side panel")
 
 		// the brief monitor panel has animations which mess with the asynchronous heuristic
 		// and cause the object hierarchy to take multiple seconds to load.

@@ -36,12 +36,8 @@ class BackendConnection : public QObject
 	Q_PROPERTY(QString token READ token WRITE setToken NOTIFY tokenChanged FINAL)
 	Q_PROPERTY(QString nodeRedUrl READ nodeRedUrl WRITE setNodeRedUrl NOTIFY nodeRedUrlChanged FINAL)
 	Q_PROPERTY(QString signalKUrl READ signalKUrl WRITE setSignalKUrl NOTIFY signalKUrlChanged FINAL)
-	Q_PROPERTY(QUrl demoImageFileName READ demoImageFileName CONSTANT FINAL)
 	Q_PROPERTY(int idUser READ idUser WRITE setIdUser NOTIFY idUserChanged FINAL)
 	Q_PROPERTY(bool vrm READ isVrm WRITE setVrm NOTIFY vrmChanged FINAL)
-	Q_PROPERTY(bool applicationVisible READ isApplicationVisible WRITE setApplicationVisible NOTIFY applicationVisibleChanged FINAL)
-	Q_PROPERTY(bool needsWasmKeyboardHandler READ needsWasmKeyboardHandler WRITE setNeedsWasmKeyboardHandler NOTIFY needsWasmKeyboardHandlerChanged FINAL)
-	Q_PROPERTY(bool msaaEnabled READ msaaEnabled WRITE setMsaaEnabled NOTIFY msaaEnabledChanged FINAL)
 
 	friend class BackendConnectionTester;
 public:
@@ -139,16 +135,6 @@ public:
 	bool isVrm() const;
 	void setVrm(bool v);
 
-	bool isApplicationVisible() const;
-	void setApplicationVisible(bool v);
-
-	bool needsWasmKeyboardHandler() const;
-	void setNeedsWasmKeyboardHandler(bool needsWasmKeyboardHandler);
-
-	bool msaaEnabled() const;
-	void setMsaaEnabled(bool e);
-
-	QUrl demoImageFileName() const;
 	VeQItemProducer *producer() const;
 
 	// Each service type (system, settings, battery, etc.) has a base uid, which has different
@@ -192,9 +178,6 @@ Q_SIGNALS:
 	void tokenChanged();
 	void idUserChanged();
 	void vrmChanged();
-	void applicationVisibleChanged();
-	void needsWasmKeyboardHandlerChanged();
-	void msaaEnabledChanged();
 	void nodeRedUrlChanged();
 	void signalKUrlChanged();
 	void producerChanged();
@@ -232,9 +215,6 @@ private:
 	QString m_signalKUrl;
 
 	bool m_vrm = false;
-	bool m_applicationVisible = true;
-	bool m_needsWasmKeyboardHandler = false;
-	bool m_msaaEnabled = true;
 
 	State m_state = BackendConnection::State::Idle;
 	HeartbeatState m_heartbeatState = BackendConnection::HeartbeatState::HeartbeatActive;
