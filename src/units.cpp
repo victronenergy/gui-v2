@@ -21,60 +21,61 @@ static const QString EmptyString = QString();
 struct UnitMetaData {
 	QString label;
 	Victron::VenusOS::Enums::Units_Type unit = Victron::VenusOS::Enums::Units_None;
+	Victron::VenusOS::Enums::Units_Scale maximumScale = Victron::VenusOS::Enums::Units_Scale_None;
 	Unit::Type veUnit = Unit::Default;
 	int decimals = 0;
-	bool scalable = false;
 };
 
 static const std::vector<UnitMetaData> UnitTable {
-	//              label                 unit                                        veUnit           defaultDecimals  scalable
-	{         EmptyString,   Victron::VenusOS::Enums::Units_None,                     Unit::Default,                0,   false   },
-	{                 "A",   Victron::VenusOS::Enums::Units_Amp,                      Unit::Default,                1,   true    },
-	{                "Ah",   Victron::VenusOS::Enums::Units_AmpHour,                  Unit::Default,                1,   true    },
-	{       DegreesSymbol,   Victron::VenusOS::Enums::Units_CardinalDirection,        Unit::Default,                0,   false   },
-	{               "kWh",   Victron::VenusOS::Enums::Units_Energy_KiloWattHour,      Unit::Default,                3,   true    },
-	{                "ft",   Victron::VenusOS::Enums::Units_Foot,                     Unit::Foot,                   0,   false   },
-	{               "hPa",   Victron::VenusOS::Enums::Units_Hectopascal,              Unit::Default,                1,   false   },
-	{                "Hz",   Victron::VenusOS::Enums::Units_Hertz,                    Unit::Default,                1,   true    },
-	{                "km",   Victron::VenusOS::Enums::Units_Kilometre,                Unit::Kilometre,              0,   false   },
-	{               "kPa",   Victron::VenusOS::Enums::Units_Kilopascal,               Unit::Default,                0,   false   },
-	{               "lux",   Victron::VenusOS::Enums::Units_Lux,                      Unit::Default,                0,   false   },
-	{                 "m",   Victron::VenusOS::Enums::Units_Metre,                    Unit::Metre,                  0,   true    },
-	{  "µg/" + CubicMetre,   Victron::VenusOS::Enums::Units_MicrogramPerCubicMeter,   Unit::Default,                1,   false   },
-	{                "mi",   Victron::VenusOS::Enums::Units_Mile,                     Unit::Mile,                   0,   false   },
-	{                "NM",   Victron::VenusOS::Enums::Units_Nautical_Mile,            Unit::NauticalMile,           0,   false   },
-	{                "Nm",   Victron::VenusOS::Enums::Units_NewtonMeter,              Unit::Default,                0,   false   },
-	{               "ppm",   Victron::VenusOS::Enums::Units_PartsPerMillion,          Unit::Default,                0,   false   },
-	{                 "%",   Victron::VenusOS::Enums::Units_Percentage,               Unit::Default,                0,   false   },
-	{         EmptyString,   Victron::VenusOS::Enums::Units_PowerFactor,              Unit::Default,                3,   false   },
-	{               "RPM",   Victron::VenusOS::Enums::Units_RevolutionsPerMinute,     Unit::RevolutionsPerMinute,   0,   true    },
-	{              "km/h",   Victron::VenusOS::Enums::Units_Speed_KilometresPerHour,  Unit::KilometresPerHour,      0,   true    },
-	{                "kn",   Victron::VenusOS::Enums::Units_Speed_Knots,              Unit::Knots,                  0,   false   },
-	{               "m/s",   Victron::VenusOS::Enums::Units_Speed_MetresPerSecond,    Unit::MetresPerSecond,        0,   true    },
-	{               "mph",   Victron::VenusOS::Enums::Units_Speed_MilesPerHour,       Unit::MilesPerHour,           0,   false   },
-	{ DegreesSymbol + "C",   Victron::VenusOS::Enums::Units_Temperature_Celsius,      Unit::Celsius,                0,   false   },
-	{ DegreesSymbol + "F",   Victron::VenusOS::Enums::Units_Temperature_Fahrenheit,   Unit::Fahrenheit,             0,   false   },
-	{ DegreesSymbol + "K",   Victron::VenusOS::Enums::Units_Temperature_Kelvin,       Unit::Kelvin,                 0,   false   },
-	{                 "d",   Victron::VenusOS::Enums::Units_Time_Day,                 Unit::Default,                0,   false   },
-	{                 "h",   Victron::VenusOS::Enums::Units_Time_Hour,                Unit::Default,                0,   false   },
-	{                 "m",   Victron::VenusOS::Enums::Units_Time_Minute,              Unit::Default,                0,   false   },
-	{                 "s",   Victron::VenusOS::Enums::Units_Time_Second,              Unit::Default,                0,   false   },
-	{                "VA",   Victron::VenusOS::Enums::Units_VoltAmpere,               Unit::Default,                1,   true    },
-	{               "var",   Victron::VenusOS::Enums::Units_VoltAmpereReactive,       Unit::Default,                1,   true    },
-	{                 "V",   Victron::VenusOS::Enums::Units_Volt_AC,                  Unit::Default,                1,   true    },
-	{                 "V",   Victron::VenusOS::Enums::Units_Volt_DC,                  Unit::Default,                2,   true    },
-	{          CubicMetre,   Victron::VenusOS::Enums::Units_Volume_CubicMetre,        Unit::CubicMetre,             3,   true    },
-	{               "gal",   Victron::VenusOS::Enums::Units_Volume_GallonImperial,    Unit::ImperialGallon,         0,   false   },
-	{               "gal",   Victron::VenusOS::Enums::Units_Volume_GallonUS,          Unit::UsGallon,               0,   false   },
-	{         LitreSymbol,   Victron::VenusOS::Enums::Units_Volume_Litre,             Unit::Litre,                  0,   true    },
-	{                 "W",   Victron::VenusOS::Enums::Units_Watt,                     Unit::Default,                0,   true    },
-	{              "W/m2",   Victron::VenusOS::Enums::Units_WattsPerSquareMetre,      Unit::Default,                0,   true    },
-	{             "Wh/km",   Victron::VenusOS::Enums::Units_WattHourPerKilometre,     Unit::WattHourPerKilometre,   0,   false   },
-	{             "Wh/mi",   Victron::VenusOS::Enums::Units_WattHourPerMile,          Unit::WattHourPerMile,        0,   false   },
-	{             "Wh/NM",   Victron::VenusOS::Enums::Units_WattHourPerNauticalMile,  Unit::WattHourPerNauticalMile,0,   false   },
-	{             "Ah/km",   Victron::VenusOS::Enums::Units_AmpHourPerKilometre,      Unit::AmpHourPerKilometre,    0,   false   },
-	{             "Ah/mi",   Victron::VenusOS::Enums::Units_AmpHourPerMile,           Unit::AmpHourPerMile,         0,   false   },
-	{             "Ah/NM",   Victron::VenusOS::Enums::Units_AmpHourPerNauticalMile,   Unit::AmpHourPerNauticalMile, 0,   false   },
+	//              label    unit                                                       maximumScale                                    veUnit                          defaultDecimals
+	{         EmptyString,   Victron::VenusOS::Enums::Units_None,                       Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  0   },
+	{                 "A",   Victron::VenusOS::Enums::Units_Amp,                        Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  1   },
+	{                "Ah",   Victron::VenusOS::Enums::Units_AmpHour,                    Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  1   },
+	{       DegreesSymbol,   Victron::VenusOS::Enums::Units_CardinalDirection,          Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  0   },
+	{               "kWh",   Victron::VenusOS::Enums::Units_Energy_KiloWattHour,        Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  3   },
+	{                "ft",   Victron::VenusOS::Enums::Units_Foot,                       Victron::VenusOS::Enums::Units_Scale_None,      Unit::Foot,                     0   },
+	{               "hPa",   Victron::VenusOS::Enums::Units_Hectopascal,                Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  1   },
+	{                "Hz",   Victron::VenusOS::Enums::Units_Hertz,                      Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  1   },
+	{                "km",   Victron::VenusOS::Enums::Units_Kilometre,                  Victron::VenusOS::Enums::Units_Scale_None,      Unit::Kilometre,                0   },
+	{               "kPa",   Victron::VenusOS::Enums::Units_Kilopascal,                 Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  0   },
+	{               "lux",   Victron::VenusOS::Enums::Units_Lux,                        Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  0   },
+	{                 "m",   Victron::VenusOS::Enums::Units_Metre,                      Victron::VenusOS::Enums::Units_Scale_Kilo,      Unit::Metre,                    0   },
+	{  "µg/" + CubicMetre,   Victron::VenusOS::Enums::Units_MicrogramPerCubicMeter,     Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  1   },
+	{                "mi",   Victron::VenusOS::Enums::Units_Mile,                       Victron::VenusOS::Enums::Units_Scale_None,      Unit::Mile,                     0   },
+	{                "NM",   Victron::VenusOS::Enums::Units_Nautical_Mile,              Victron::VenusOS::Enums::Units_Scale_None,      Unit::NauticalMile,             0   },
+	{                "Nm",   Victron::VenusOS::Enums::Units_NewtonMeter,                Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  0   },
+	{               "ppm",   Victron::VenusOS::Enums::Units_PartsPerMillion,            Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  0   },
+	{                 "%",   Victron::VenusOS::Enums::Units_Percentage,                 Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  0   },
+	{         EmptyString,   Victron::VenusOS::Enums::Units_PowerFactor,                Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  3   },
+	{               "RPM",   Victron::VenusOS::Enums::Units_RevolutionsPerMinute,       Victron::VenusOS::Enums::Units_Scale_None,      Unit::RevolutionsPerMinute,     0   },
+	{              "km/h",   Victron::VenusOS::Enums::Units_Speed_KilometresPerHour,    Victron::VenusOS::Enums::Units_Scale_None,      Unit::KilometresPerHour,        0   },
+	{                "kn",   Victron::VenusOS::Enums::Units_Speed_Knots,                Victron::VenusOS::Enums::Units_Scale_None,      Unit::Knots,                    0   },
+	{               "m/s",   Victron::VenusOS::Enums::Units_Speed_MetresPerSecond,      Victron::VenusOS::Enums::Units_Scale_Kilo,      Unit::MetresPerSecond,          0   },
+	{               "mph",   Victron::VenusOS::Enums::Units_Speed_MilesPerHour,         Victron::VenusOS::Enums::Units_Scale_None,      Unit::MilesPerHour,             0   },
+	{ DegreesSymbol + "C",   Victron::VenusOS::Enums::Units_Temperature_Celsius,        Victron::VenusOS::Enums::Units_Scale_None,      Unit::Celsius,                  0   },
+	{ DegreesSymbol + "F",   Victron::VenusOS::Enums::Units_Temperature_Fahrenheit,     Victron::VenusOS::Enums::Units_Scale_None,      Unit::Fahrenheit,               0   },
+	{ DegreesSymbol + "K",   Victron::VenusOS::Enums::Units_Temperature_Kelvin,         Victron::VenusOS::Enums::Units_Scale_None,      Unit::Kelvin,                   0   },
+	{                 "d",   Victron::VenusOS::Enums::Units_Time_Day,                   Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  0   },
+	{                 "h",   Victron::VenusOS::Enums::Units_Time_Hour,                  Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  0   },
+	{                 "m",   Victron::VenusOS::Enums::Units_Time_Minute,                Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  0   },
+	{                 "s",   Victron::VenusOS::Enums::Units_Time_Second,                Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  0   },
+	{                "VA",   Victron::VenusOS::Enums::Units_VoltAmpere,                 Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  1   },
+	{               "var",   Victron::VenusOS::Enums::Units_VoltAmpereReactive,         Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  1   },
+	{                 "V",   Victron::VenusOS::Enums::Units_Volt_AC,                    Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  1   },
+	{                 "V",   Victron::VenusOS::Enums::Units_Volt_DC,                    Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  2   },
+	{          CubicMetre,   Victron::VenusOS::Enums::Units_Volume_CubicMetre,          Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::CubicMetre,               3   },
+	{               "gal",   Victron::VenusOS::Enums::Units_Volume_GallonImperial,      Victron::VenusOS::Enums::Units_Scale_None,      Unit::ImperialGallon,           0   },
+	{               "gal",   Victron::VenusOS::Enums::Units_Volume_GallonUS,            Victron::VenusOS::Enums::Units_Scale_None,      Unit::UsGallon,                 0   },
+	{         LitreSymbol,   Victron::VenusOS::Enums::Units_Volume_Litre,               Victron::VenusOS::Enums::Units_Scale_Kilo,      Unit::Litre,                    0   },
+	{                 "W",   Victron::VenusOS::Enums::Units_Watt,                       Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  0   },
+	{              "W/m2",   Victron::VenusOS::Enums::Units_WattsPerSquareMetre,        Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  0   },
+	{             "Wh/km",   Victron::VenusOS::Enums::Units_WattHourPerKilometre,       Victron::VenusOS::Enums::Units_Scale_None,      Unit::WattHourPerKilometre,     0   },
+	{             "Wh/mi",   Victron::VenusOS::Enums::Units_WattHourPerMile,            Victron::VenusOS::Enums::Units_Scale_None,      Unit::WattHourPerMile,          0   },
+	{             "Wh/NM",   Victron::VenusOS::Enums::Units_WattHourPerNauticalMile,    Victron::VenusOS::Enums::Units_Scale_None,      Unit::WattHourPerNauticalMile,  0   },
+	{             "Ah/km",   Victron::VenusOS::Enums::Units_AmpHourPerKilometre,        Victron::VenusOS::Enums::Units_Scale_None,      Unit::AmpHourPerKilometre,      0   },
+	{             "Ah/mi",   Victron::VenusOS::Enums::Units_AmpHourPerMile,             Victron::VenusOS::Enums::Units_Scale_None,      Unit::AmpHourPerMile,           0   },
+	{             "Ah/NM",   Victron::VenusOS::Enums::Units_AmpHourPerNauticalMile,     Victron::VenusOS::Enums::Units_Scale_None,      Unit::AmpHourPerNauticalMile,   0   },
+
 };
 
 inline const UnitMetaData &unitMeta(Victron::VenusOS::Enums::Units_Type unit)
@@ -201,6 +202,11 @@ QString Units::defaultUnitString(VenusOS::Enums::Units_Type unit, Victron::Units
 	return unitMeta(unit).label;
 }
 
+VenusOS::Enums::Units_Scale Units::maximumUnitScale(VenusOS::Enums::Units_Type unit) const
+{
+	return unitMeta(unit).maximumScale;
+}
+
 QString Units::scaleToString(VenusOS::Enums::Units_Scale scale) const {
 	switch (scale) {
 	case VenusOS::Enums::Units_Scale_Tera:
@@ -215,11 +221,6 @@ QString Units::scaleToString(VenusOS::Enums::Units_Scale scale) const {
 	default:
 		return QString();
 	}
-}
-
-bool Units::isScalingSupported(VenusOS::Enums::Units_Type unit) const
-{
-	return unitMeta(unit).scalable;
 }
 
 // Returns the physical quantity as a tuple of strings: { number, unit }.
@@ -279,7 +280,8 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 
 	// scale value if the unit of measure is scalable
 	// check format hints for display override value
-	if (isScalingSupported(unit) && !(formatHints & Units::FormatHint::NoScaling)) {
+	const Victron::VenusOS::Enums::Units_Scale maxScale = maximumUnitScale(unit);
+	if (maxScale > VenusOS::Enums::Units_Scale_None && !(formatHints & Units::FormatHint::NoScaling)) {
 		qreal scaleMatch = !qIsNaN(unitMatchValue) ? unitMatchValue : scaledValue;
 
 		// Kilowatthour is already in kilos, normalize to plain watthours before scaling
@@ -312,8 +314,7 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 
 		// For some units, do not scale beyond the kilo range, as we don't want to display them in
 		// mega/tera/giga format.
-		if (unit == VenusOS::Enums::Units_Volume_Litre
-				|| unit == VenusOS::Enums::Units_Metre) {
+		if (maxScale == VenusOS::Enums::Units_Scale_Kilo) {
 			if (isOverLimit(scaleMatch, VenusOS::Enums::Units_Scale_Kilo, previousScale)) {
 				quantity.unit = QStringLiteral("k%1").arg(defaultUnitString(unit));
 				quantity.scale = VenusOS::Enums::Units_Scale_Kilo;

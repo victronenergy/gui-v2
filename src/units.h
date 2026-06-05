@@ -65,9 +65,8 @@ public:
 
 	Q_INVOKABLE int defaultUnitDecimals(VenusOS::Enums::Units_Type unit) const;
 	Q_INVOKABLE QString defaultUnitString(VenusOS::Enums::Units_Type unit, Victron::Units::Units::FormatHints formatHints = NoFormatHints) const;
-
+	Q_INVOKABLE VenusOS::Enums::Units_Scale maximumUnitScale(VenusOS::Enums::Units_Type unit) const;
 	Q_INVOKABLE QString scaleToString(VenusOS::Enums::Units_Scale scale) const;
-	Q_INVOKABLE bool isScalingSupported(VenusOS::Enums::Units_Type unit) const;
 
 	Q_INVOKABLE quantityInfo getDisplayText(
 		VenusOS::Enums::Units_Type unit,
