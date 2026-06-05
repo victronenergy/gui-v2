@@ -37,7 +37,7 @@ ListItem {
 
 		Label {
 			id: quantityTitle
-			width: parent.width
+			width: Math.min(parent.width, Math.max(parent.width, implicitWidth))
 			elide: Text.ElideRight
 			color: Theme.color_listItem_secondaryText
 			font.pixelSize: Theme.font_size_caption
