@@ -13,7 +13,7 @@ Item {
 
 	property alias model: arcRepeater.model
 	readonly property real strokeWidth: Theme.geometry_circularMultiGauge_strokeWidth
-	property bool animationEnabled
+	required property bool animationEnabled
 	property real labelMargin
 	property alias labelOpacity: textCol.opacity
 	property int leftGaugeCount
@@ -28,7 +28,7 @@ Item {
 		anchors.fill: parent
 
 		// Antialiasing without requiring multisample framebuffers.
-		layer.enabled: !BackendConnection.msaaEnabled
+		layer.enabled: !UiConfig.msaaEnabled
 		layer.smooth: true
 		layer.textureSize: Qt.size(antialiased.width*2, antialiased.height*2)
 
@@ -43,7 +43,7 @@ Item {
 				height: width
 				anchors.centerIn: parent
 				sourceComponent: model.tankType === VenusOS.Tank_Type_Battery ? shinyProgressArc : progressArc
-				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load circular multi gauge progress arc:", errorString())
+				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load circular multi gauge progress arc")
 
 				Component {
 					id: shinyProgressArc

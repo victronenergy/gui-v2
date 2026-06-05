@@ -6,6 +6,7 @@
 #include "src/language.h"
 #include "src/logging.h"
 #include "src/backendconnection.h"
+#include "src/uiconfig.h"
 #include "src/guiplugins.h"
 #include "src/allservicesmodel.h"
 #include "src/mockmanager.h"
@@ -45,8 +46,8 @@ namespace {
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 EM_BOOL visibilitychange_callback(int /* eventType */, const EmscriptenVisibilityChangeEvent *e, void *userData)
 {
-	Victron::VenusOS::BackendConnection *backend = static_cast<Victron::VenusOS::BackendConnection*>(userData);
-	backend->setApplicationVisible(!e->hidden);
+	Victron::VenusOS::UiConfig *uiconfig = static_cast<Victron::VenusOS::UiConfig*>(userData);
+	uiconfig->setApplicationVisible(!e->hidden);
 	return 0;
 }
 #endif // VENUS_WEBASSEMBLY_BUILD
@@ -69,11 +70,12 @@ QString calculateMqttAddressFromPortalId(const QString &portalId)
 
 void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 {
-	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::create();
+	Victron::VenusOS::UiConfig *uiconfig = Victron::VenusOS::UiConfig::create();
+	bool mockTimersEnabled = true;
 
-	QString queryMqttAddress, queryMqttPortalId, queryMqttShard, queryMqttUser, queryMqttPass, queryMqttToken, queryFpsCounter, queryColorScheme, queryNodeRedUrl, querySignalKUrl;
+	QString queryMqttAddress, queryMqttPortalId, queryMqttShard, queryMqttUser, queryMqttPass, queryMqttToken, queryFpsCounter, queryColorScheme, queryAnimationEnabled, queryNodeRedUrl, querySignalKUrl;
 #if defined(VENUS_WEBASSEMBLY_BUILD)
-	emscripten_set_visibilitychange_callback(static_cast<void*>(backend), 1, visibilitychange_callback);
+	emscripten_set_visibilitychange_callback(static_cast<void*>(uiconfig), 1, visibilitychange_callback);
 	emscripten::val webLocation = emscripten::val::global("location");
 	const QUrl webLocationUrl = QUrl(QString::fromStdString(webLocation["href"].as<std::string>()));
 	const QUrlQuery query(webLocationUrl);
@@ -107,6 +109,9 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	if (query.hasQueryItem("colorScheme")) {
 		// "dark" forces dark mode, "light" forces light mode, "auto" forces auto mode, "default" uses the user choice
 		queryColorScheme = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("colorScheme").toUtf8())); // e.g.: "dark", "light", "auto", "default"
+	}
+	if (query.hasQueryItem("animationEnabled")) {
+		queryAnimationEnabled = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("animationEnabled").toUtf8())); // e.g.: "true", "false"
 	}
 #endif
 
@@ -217,6 +222,12 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	parser.addOption(colorScheme);
 	optionList << colorScheme;
 
+	QCommandLineOption animationEnabled("animationEnabled",
+		QGuiApplication::tr("UI animations enabled (true, false)"),
+		QGuiApplication::tr("enabled", "Animation enabled value"));
+	parser.addOption(animationEnabled);
+	optionList << animationEnabled;
+
 
 	// parser.setUnknownOptionMode(QCommandLineParser::IgnoreUnknownOptions); did not work
 	// in Qt 6.8.3, so we manually filter the arguments.
@@ -267,7 +278,7 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	}
 
 	parser.process(filteredArgs);
-
+	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::create();
 	if (parser.isSet(mqttAddress) || parser.isSet(mqttPortalId)) {
 		if (parser.isSet(mqttUser)) {
 			backend->setUsername(parser.value(mqttUser));
@@ -301,7 +312,7 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	} else if (parser.isSet(mockMode)) {
 		backend->setType(Victron::VenusOS::BackendConnection::MockSource);
 		if (parser.isSet(noMockTimers)) {
-			Victron::VenusOS::MockManager::create()->setTimersActive(false);
+			mockTimersEnabled = false;
 		}
 		// Do not load the mock configuration until ui-test has been parsed, as the UI test config
 		// may specify a mock configuration.
@@ -343,6 +354,7 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 			&& Victron::VenusOS::UiTest::create()->testCaseCount() == 0) {
 		const QString configName = parser.value(mockConfig);
 		Victron::VenusOS::MockManager::create()->loadConfiguration(QString(":/data/mock/conf/%1.json").arg(configName));
+		Victron::VenusOS::MockManager::create()->setTimersActive(mockTimersEnabled);
 	}
 
 	if (parser.isSet(fpsCounter) || queryFpsCounter.contains(QStringLiteral("enable"))) {
@@ -368,6 +380,14 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	} else if (!queryColorScheme.isEmpty()) {
 		colorSchemeValue = queryColorScheme.toLower();
 	}
+
+	bool animationEnabledValue = true;
+	if (parser.isSet(animationEnabled)) {
+		animationEnabledValue = parser.value(animationEnabled).toLower() != QStringLiteral("false");
+	} else if (!queryAnimationEnabled.isEmpty()) {
+		animationEnabledValue = queryAnimationEnabled.toLower() != QStringLiteral("false");
+	}
+	uiconfig->setAnimationEnabled(animationEnabledValue);
 
 	Victron::VenusOS::Theme::ForcedColorScheme forcedScheme;
 	if (colorSchemeValue == "dark") {
@@ -447,7 +467,7 @@ int main(int argc, char *argv[])
 #if defined(VENUS_GX_BUILD_ARM) || defined(VENUS_WEBASSEMBLY_BUILD)
 	// CerboGX and WASM don't support multisample render buffers; other platforms do.
 	surfaceFormat.setSamples(-1);
-	Victron::VenusOS::BackendConnection::create()->setMsaaEnabled(false);
+	Victron::VenusOS::UiConfig::create()->setMsaaEnabled(false);
 #else
 	surfaceFormat.setSamples(4);
 #endif
@@ -477,7 +497,7 @@ int main(int argc, char *argv[])
 		scaleFactor = qMax(1.0, qMin(width/theme->geometry_screen_width(), height/theme->geometry_screen_height()));
 	}
 
-	Victron::VenusOS::BackendConnection::create()->setNeedsWasmKeyboardHandler(hasNativeVirtualKeyboard());
+	Victron::VenusOS::UiConfig::create()->setNeedsWasmKeyboardHandler(hasNativeVirtualKeyboard());
 #endif
 
 	std::string scaleAsString = std::to_string(scaleFactor);

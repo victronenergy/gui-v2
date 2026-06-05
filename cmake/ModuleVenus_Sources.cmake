@@ -732,6 +732,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/qrangemodel_p.h
     src/qrangemodel.h
     src/qrangemodel.cpp
+    src/uiconfig.h
+    src/uiconfig.cpp
     src/uitest.h
     src/uitest.cpp
     src/uitestcase.h

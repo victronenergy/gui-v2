@@ -25,8 +25,8 @@ QtObject {
 	property var dialogLayer
 	property var notificationLayer
 	property bool displayCpuUsage
-	readonly property bool animationEnabled: (systemSettings?.animationEnabled ?? true) && BackendConnection.applicationVisible && !ScreenBlanker.blanked
-	readonly property bool timersEnabled: BackendConnection.applicationVisible && !ScreenBlanker.blanked
+	readonly property bool animationEnabled: (systemSettings?.animationEnabled ?? true) && UiConfig.animationEnabled && UiConfig.applicationVisible && !ScreenBlanker.blanked
+	readonly property bool timersEnabled: UiConfig.applicationVisible && !ScreenBlanker.blanked
 
 	// data sources
 	property var acInputs

@@ -23,7 +23,7 @@ FocusScope {
 
 	property alias navBarAnimatingOut: animateNavBarOut.running
 
-	property bool mainViewVisible: BackendConnection.applicationVisible && !Global.splashScreenVisible
+	property bool mainViewVisible: UiConfig.applicationVisible && !Global.splashScreenVisible
 	onMainViewVisibleChanged: if (mainViewVisible) console.info("MainView: UI loaded and visible")
 
 	// To reduce the animation load, disable page animations when the PageStack is transitioning

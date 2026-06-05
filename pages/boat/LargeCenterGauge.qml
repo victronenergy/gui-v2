@@ -13,7 +13,7 @@ Item {
 	required property VeQuickItemsQuotient gps
 	required property MotorDrives motorDrives
 
-	property bool animationEnabled: false
+	required property bool animationEnabled
 
 	readonly property VeQuickItemsQuotient motorDriveDcConsumption: root.motorDrives.dcConsumption.quotient
 	readonly property VeQuickItemsQuotient activeDataSource: root.gps.valid ? root.gps
@@ -43,7 +43,7 @@ Item {
 		objectName: "centerGauge"
 		visible: root.activeDataSource === root.gps || root.activeDataSource === root.motorDriveDcConsumption
 
-		layer.enabled: !BackendConnection.msaaEnabled
+		layer.enabled: !UiConfig.msaaEnabled
 		layer.textureSize: Qt.size(2*width, 2*height)
 		layer.smooth: true
 
@@ -184,7 +184,7 @@ Item {
 		animationEnabled: root.animationEnabled
 		visible: root.motorDrives.singleMotorDrive.rpm.valid
 
-		layer.enabled: !BackendConnection.msaaEnabled
+		layer.enabled: !UiConfig.msaaEnabled
 		layer.textureSize: Qt.size(2*width, 2*height)
 		layer.smooth: true
 	}
@@ -208,7 +208,7 @@ Item {
 		animationEnabled: root.animationEnabled
 		visible: root.motorDrives.leftMotorDrive.rpm.valid
 
-		layer.enabled: !BackendConnection.msaaEnabled
+		layer.enabled: !UiConfig.msaaEnabled
 		layer.textureSize: Qt.size(2*width, 2*height)
 		layer.smooth: true
 	}
@@ -233,7 +233,7 @@ Item {
 		animationEnabled: root.animationEnabled
 		visible: root.motorDrives.rightMotorDrive.rpm.valid
 
-		layer.enabled: !BackendConnection.msaaEnabled
+		layer.enabled: !UiConfig.msaaEnabled
 		layer.textureSize: Qt.size(2*width, 2*height)
 		layer.smooth: true
 	}

@@ -76,7 +76,7 @@ Page {
 		interval: 10000
 		repeat: true
 		triggeredOnStart: true
-		running: BackendConnection.applicationVisible // even if !Global.timersEnabled
+		running: UiConfig.applicationVisible // even if !Global.timersEnabled
 		onTriggered: Global.systemSettings.time.getValue(true)
 	}
 

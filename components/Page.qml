@@ -15,6 +15,7 @@ FocusScope {
 	readonly property bool isCurrentPage: !!Global.mainView && Global.mainView.currentPage === root
 	readonly property bool defaultAnimationEnabled: !!Global.mainView
 			&& Global.mainView.allowPageAnimations
+			&& UiConfig.animationEnabled
 			&& !ScreenBlanker.blanked
 	property bool animationEnabled: defaultAnimationEnabled && isCurrentPage
 

@@ -10,7 +10,7 @@ import Victron.VenusOS
 ShapePath {
 	id: path
 
-	property bool animationEnabled: true
+	required property bool animationEnabled
 	property real radius
 	property real startAngle
 	property real endAngle

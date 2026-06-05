@@ -14,7 +14,7 @@ Item {
 	property real endAngle
 	property int horizontalAlignment
 	property real arcVerticalCenterOffset
-	property bool animationEnabled
+	required property bool animationEnabled
 
 	width: parent.width
 	height: parent.height

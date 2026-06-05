@@ -14,7 +14,7 @@ T.Slider {
 	property color grooveColor: enabled ? Theme.color_darkOk : Theme.color_background_disabled
 	property color highlightColor: enabled ? Theme.color_ok : Theme.color_switch_groove_disabled
 	property bool showHandle: true
-	property bool animationEnabled
+	property bool animationEnabled: Global.animationEnabled
 	property Item maskSource: sourceItem
 
 	implicitWidth: Math.max(implicitBackgroundWidth, implicitHandleWidth) + leftInset + rightInset

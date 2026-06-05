@@ -62,7 +62,7 @@ Item {
 		onLoaded: { console.info("DataManager: mock setup loaded!"); mockLoaded = true }
 		onStatusChanged: {
 			if (status === Loader.Error) {
-				console.warn("DataManager: Unable to load mock setup:", errorString())
+				console.warn("DataManager: Unable to load mock setup")
 			}
 		}
 	}
