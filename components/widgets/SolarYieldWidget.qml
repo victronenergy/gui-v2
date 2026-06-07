@@ -12,7 +12,8 @@ OverviewWidget {
 
 	readonly property bool _showPhases: Global.solarInputs.pvInverterDevices.count === 1
 			&& Global.solarInputs.devices.count === 0
-	readonly property bool _showGraph: Global.solarInputs.pvInverterDevices.count === 0
+	readonly property bool _canShowGraph: Global.solarInputs.pvInverterDevices.count === 0
+	readonly property bool _showGraph: _canShowGraph && root.size >= VenusOS.OverviewWidget_Size_M
 
 	onClicked: {
 		const singleDeviceOnly = (Global.solarInputs.devices.count + Global.solarInputs.pvInverterDevices.count) === 1
@@ -30,7 +31,7 @@ OverviewWidget {
 	title: CommonWords.solar
 	type: VenusOS.OverviewWidget_Type_Solar
 	enabled: true
-	preferredSize: _showPhases || _showGraph
+	preferredSize: _showPhases || _canShowGraph
 			? VenusOS.OverviewWidget_PreferredSize_PreferLarge
 			: VenusOS.OverviewWidget_PreferredSize_Any
 	bottomPadding: _showGraph
@@ -63,7 +64,8 @@ OverviewWidget {
 				if (root.size >= VenusOS.OverviewWidget_Size_M) {
 					if (root._showPhases) {
 						return phaseComponent
-					} else if (root._showGraph) {
+						} else if (root._showGraph) {
+						// Only show the history graph when the widget is large enough for it.
 						return historyComponent
 					}
 				}
