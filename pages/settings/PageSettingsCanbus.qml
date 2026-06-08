@@ -81,6 +81,13 @@ Page {
 			}
 
 			ListSwitch {
+				//% "NMEA2000 inbound alerts"
+				text: qsTrId("settings_canbus_nmea2000in_alerts")
+				dataItem.uid: root._vecanSettingsPrefix + "/AlertsInEnable"
+				preferredVisible: root._isVecan && dataItem.valid
+			}
+
+			ListSwitch {
 				//% "Reverse current polarity"
 				text: qsTrId("settings_canbus_rvc_reverse_current_polarity")
 				dataItem.uid: root._rvcSettingsPrefix + "/ReverseCurrent"
