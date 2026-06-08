@@ -31,6 +31,9 @@ static const std::vector<UnitMetaData> UnitTable {
 	{         EmptyString,   Victron::VenusOS::Enums::Units_None,                       Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  0   },
 	{                 "A",   Victron::VenusOS::Enums::Units_Amp,                        Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  1   },
 	{                "Ah",   Victron::VenusOS::Enums::Units_AmpHour,                    Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  1   },
+	{             "Ah/km",   Victron::VenusOS::Enums::Units_AmpHourPerKilometre,        Victron::VenusOS::Enums::Units_Scale_None,      Unit::AmpHourPerKilometre,      0   },
+	{             "Ah/mi",   Victron::VenusOS::Enums::Units_AmpHourPerMile,             Victron::VenusOS::Enums::Units_Scale_None,      Unit::AmpHourPerMile,           0   },
+	{             "Ah/NM",   Victron::VenusOS::Enums::Units_AmpHourPerNauticalMile,     Victron::VenusOS::Enums::Units_Scale_None,      Unit::AmpHourPerNauticalMile,   0   },
 	{       DegreesSymbol,   Victron::VenusOS::Enums::Units_CardinalDirection,          Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  0   },
 	{               "kWh",   Victron::VenusOS::Enums::Units_Energy_KiloWattHour,        Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  3   },
 	{                "ft",   Victron::VenusOS::Enums::Units_Foot,                       Victron::VenusOS::Enums::Units_Scale_None,      Unit::Foot,                     0   },
@@ -72,10 +75,6 @@ static const std::vector<UnitMetaData> UnitTable {
 	{             "Wh/km",   Victron::VenusOS::Enums::Units_WattHourPerKilometre,       Victron::VenusOS::Enums::Units_Scale_None,      Unit::WattHourPerKilometre,     0   },
 	{             "Wh/mi",   Victron::VenusOS::Enums::Units_WattHourPerMile,            Victron::VenusOS::Enums::Units_Scale_None,      Unit::WattHourPerMile,          0   },
 	{             "Wh/NM",   Victron::VenusOS::Enums::Units_WattHourPerNauticalMile,    Victron::VenusOS::Enums::Units_Scale_None,      Unit::WattHourPerNauticalMile,  0   },
-	{             "Ah/km",   Victron::VenusOS::Enums::Units_AmpHourPerKilometre,        Victron::VenusOS::Enums::Units_Scale_None,      Unit::AmpHourPerKilometre,      0   },
-	{             "Ah/mi",   Victron::VenusOS::Enums::Units_AmpHourPerMile,             Victron::VenusOS::Enums::Units_Scale_None,      Unit::AmpHourPerMile,           0   },
-	{             "Ah/NM",   Victron::VenusOS::Enums::Units_AmpHourPerNauticalMile,     Victron::VenusOS::Enums::Units_Scale_None,      Unit::AmpHourPerNauticalMile,   0   },
-
 };
 
 inline const UnitMetaData &unitMeta(Victron::VenusOS::Enums::Units_Type unit)
@@ -83,8 +82,8 @@ inline const UnitMetaData &unitMeta(Victron::VenusOS::Enums::Units_Type unit)
 	const auto index = static_cast<std::size_t>(unit);
 	Q_ASSERT(index < UnitTable.size());
 	Q_ASSERT(UnitTable[index].unit == unit);
-	Q_ASSERT(unit >= Victron::VenusOS::Enums::Units_None && unit <= Victron::VenusOS::Enums::Units_AmpHourPerNauticalMile);
-	if (unit < Victron::VenusOS::Enums::Units_None || unit > Victron::VenusOS::Enums::Units_AmpHourPerNauticalMile) {
+	Q_ASSERT(unit >= Victron::VenusOS::Enums::Units_None && unit <= Victron::VenusOS::Enums::Units_Type_Max);
+	if (unit < Victron::VenusOS::Enums::Units_None || unit > Victron::VenusOS::Enums::Units_Type_Max) {
 		return UnitTable[Victron::VenusOS::Enums::Units_None];
 	}
 	return UnitTable[index];

@@ -64,6 +64,9 @@ public:
 		Units_None = 0,
 		Units_Amp,
 		Units_AmpHour,
+		Units_AmpHourPerKilometre,
+		Units_AmpHourPerMile,
+		Units_AmpHourPerNauticalMile,
 		Units_CardinalDirection,
 		Units_Energy_KiloWattHour,
 		Units_Foot,
@@ -105,9 +108,8 @@ public:
 		Units_WattHourPerKilometre,
 		Units_WattHourPerMile,
 		Units_WattHourPerNauticalMile,
-		Units_AmpHourPerKilometre,
-		Units_AmpHourPerMile,
-		Units_AmpHourPerNauticalMile,
+
+		Units_Type_Max = Units_WattHourPerNauticalMile
 	};
 	Q_ENUM(Units_Type)
 
