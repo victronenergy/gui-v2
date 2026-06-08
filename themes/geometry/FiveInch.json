@@ -576,6 +576,7 @@
     "geometry_batteryListPage_item_verticalSpacing": 2,
 
     "geometry_loadListPage_item_height": 68,
+    "geometry_loadListPage_defaultColumnWidth": 128,
 
     "geometry_rangeSlider_labelWidth": 70,
 
