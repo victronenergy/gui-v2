@@ -20,6 +20,8 @@ QtObject {
 	// Affects whether DcInputWidget(s) are shown.
 	readonly property bool showDcInputs: Global.dcInputs?.model.count ?? 0 > 0
 	onShowDcInputsChanged: conditionChanged()
+	readonly property int dcInputCount: Global.dcInputs?.model.count ?? 0
+	onDcInputCountChanged: conditionChanged()
 
 	// Affects whether SolarYieldWidget is shown, and its widget size.
 	readonly property bool showSolar: Global.solarInputs.inputCount > 0
