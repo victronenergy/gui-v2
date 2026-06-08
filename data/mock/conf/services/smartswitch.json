@@ -7,6 +7,7 @@
     "com.victronenergy.settings": {
         "/Settings/Canbus/vecan0/Profile": 0,
         "/Settings/Canbus/vecan1/Profile": 1,
+        "/Settings/Vecan/vecan1/AlertsInEnable": 0,
         "/Settings/Vecan/vecan1/N2kGatewayEnabled": 0,
         "/Settings/Vecan/vecan1/VenusUniqueId": 1
     },
