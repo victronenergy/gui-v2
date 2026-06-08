@@ -4600,8 +4600,8 @@ Do you want to continue?</source>
       <source>Automatic scanning</source>
       <translation>正在自动扫描</translation>
     </message>
-    <message id="gauges_battery">
-      <location filename="../../components/Gauges.js" line="17"/>
+    <message id="boat_page_temperature_battery_label">
+      <location filename="../../pages/boat/Temperatures.qml" line="77"/>
       <source>Battery</source>
       <translation>电池</translation>
     </message>
@@ -9097,42 +9097,42 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>下一个</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="449"/>
+      <location filename="../../src/units.cpp" line="455"/>
       <source>N</source>
       <translation>北</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="451"/>
+      <location filename="../../src/units.cpp" line="457"/>
       <source>NE</source>
       <translation>东北</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="453"/>
+      <location filename="../../src/units.cpp" line="459"/>
       <source>E</source>
       <translation>东</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="455"/>
+      <location filename="../../src/units.cpp" line="461"/>
       <source>SE</source>
       <translation>东南</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="457"/>
+      <location filename="../../src/units.cpp" line="463"/>
       <source>S</source>
       <translation>南</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="459"/>
+      <location filename="../../src/units.cpp" line="465"/>
       <source>SW</source>
       <translation>西南</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="461"/>
+      <location filename="../../src/units.cpp" line="467"/>
       <source>W</source>
       <translation>西</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="463"/>
+      <location filename="../../src/units.cpp" line="469"/>
       <source>NW</source>
       <translation>西北</translation>
     </message>
@@ -9159,7 +9159,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <source>Boat page</source>
       <translation>船只页面</translation>
     </message>
-    <message id="switchable_output_unsupported">
+    <message id="switchable_output_unsupported_type">
       <location filename="../../src/enums.cpp" line="599"/>
       <source>Unsupported type: %1</source>
       <translation>不支持的类型：%1</translation>
@@ -9226,15 +9226,9 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>保险丝额定值</translation>
     </message>
     <message id="boat_page_rpm">
-      <location filename="../../pages/boat/LargeCenterGauge.qml" line="162"/>
-      <location filename="../../pages/boat/LargeCenterGauge.qml" line="302"/>
+      <location filename="../../pages/boat/LargeCenterGauge.qml" line="271"/>
       <source>RPM</source>
       <translation>转速</translation>
-    </message>
-    <message id="boat_page_motor_drive">
-      <location filename="../../pages/boat/MotorDriveGauges.qml" line="38"/>
-      <source>Motordrive</source>
-      <translation>汽车驱动</translation>
     </message>
     <message id="common_words_time_to_go">
       <location filename="../../components/CommonWords.qml" line="576"/>
@@ -10850,10 +10844,15 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <source>Target state of charge</source>
       <translation>目标充电状态</translation>
     </message>
+    <message id="boat_page_range_label">
+      <location filename="../../pages/boat/Range.qml" line="39"/>
+      <source>Range</source>
+      <translation>范围</translation>
+    </message>
     <message id="ev_range">
       <location filename="../../pages/ev/EvPage.qml" line="47"/>
       <source>Range</source>
-      <translation>范围</translation>
+      <translation type="unfinished">范围</translation>
     </message>
     <message id="ev_battery_capacity">
       <location filename="../../pages/ev/EvPage.qml" line="57"/>
@@ -11074,17 +11073,17 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>带有 VRM 实例的电动驱动器 #%1</translation>
     </message>
     <message id="pagesettingsboatpage_dual_drive_configuration">
-      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="86"/>
       <source>Dual-Drive Configuration</source>
       <translation>双驱动配置</translation>
     </message>
     <message id="pagesettingsboatpage_multi_drive_left">
-      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="92"/>
       <source>Left E-drive</source>
       <translation>左侧电动驱动器</translation>
     </message>
     <message id="pagesettingsboatpage_multi_drive_right">
-      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="100"/>
       <source>Right E-drive</source>
       <translation>右侧电动驱动器</translation>
     </message>
@@ -11811,6 +11810,36 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <source>Gensets</source>
       <translation>发电机组</translation>
     </message>
+    <message id="switchable_output_unsupported_function">
+      <location filename="../../src/enums.cpp" line="632"/>
+      <source>Unsupported function: %1</source>
+      <translation>不支持的功能：%1</translation>
+    </message>
+    <message id="pagesettingsboatpage_show_temperatures">
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="79"/>
+      <source>Show temperatures</source>
+      <translation>显示温度</translation>
+    </message>
+    <message id="boat_page_consumption_label">
+      <location filename="../../pages/boat/Consumption.qml" line="54"/>
+      <source>Consumption</source>
+      <translation>消耗</translation>
+    </message>
+    <message id="boat_page_temperature_coolant_label">
+      <location filename="../../pages/boat/Temperatures.qml" line="94"/>
+      <source>Coolant</source>
+      <translation>冷却剂</translation>
+    </message>
+    <message id="boat_page_temperature_controller_label">
+      <location filename="../../pages/boat/Temperatures.qml" line="106"/>
+      <source>Controller</source>
+      <translation>控制器</translation>
+    </message>
+    <message id="boat_page_temperature_motor_label">
+      <location filename="../../pages/boat/Temperatures.qml" line="118"/>
+      <source>Motor</source>
+      <translation>发动机</translation>
+    </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
@@ -11882,6 +11911,11 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <location filename="../../pages/vebusdevice/VeBusAlarm.qml" line="24"/>
       <source>Warning</source>
       <translation type="unfinished">警告</translation>
+    </message>
+    <message id="gauges_battery">
+      <location filename="../../components/Gauges.js" line="17"/>
+      <source>Battery</source>
+      <translation type="unfinished">电池</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
       <location filename="../../src/iochannel.cpp" line="342"/>

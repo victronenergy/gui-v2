@@ -4601,8 +4601,8 @@ Você quer continuar?</translation>
       <source>Automatic scanning</source>
       <translation>Análise automática</translation>
     </message>
-    <message id="gauges_battery">
-      <location filename="../../components/Gauges.js" line="17"/>
+    <message id="boat_page_temperature_battery_label">
+      <location filename="../../pages/boat/Temperatures.qml" line="77"/>
       <source>Battery</source>
       <translation>Bateria</translation>
     </message>
@@ -9099,42 +9099,42 @@ Com uma navegação simplificada e um visual renovado, tudo o que você adora ag
       <translation>Próximo</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="449"/>
+      <location filename="../../src/units.cpp" line="455"/>
       <source>N</source>
       <translation>N</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="451"/>
+      <location filename="../../src/units.cpp" line="457"/>
       <source>NE</source>
       <translation>NE</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="453"/>
+      <location filename="../../src/units.cpp" line="459"/>
       <source>E</source>
       <translation>L</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="455"/>
+      <location filename="../../src/units.cpp" line="461"/>
       <source>SE</source>
       <translation>SE</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="457"/>
+      <location filename="../../src/units.cpp" line="463"/>
       <source>S</source>
       <translation>S</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="459"/>
+      <location filename="../../src/units.cpp" line="465"/>
       <source>SW</source>
       <translation>SO</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="461"/>
+      <location filename="../../src/units.cpp" line="467"/>
       <source>W</source>
       <translation>O</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="463"/>
+      <location filename="../../src/units.cpp" line="469"/>
       <source>NW</source>
       <translation>NO</translation>
     </message>
@@ -9161,7 +9161,7 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <source>Boat page</source>
       <translation>Página do barco</translation>
     </message>
-    <message id="switchable_output_unsupported">
+    <message id="switchable_output_unsupported_type">
       <location filename="../../src/enums.cpp" line="599"/>
       <source>Unsupported type: %1</source>
       <translation>Tipo não suportado: %1</translation>
@@ -9228,15 +9228,9 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Corrente Nominal do Fusível</translation>
     </message>
     <message id="boat_page_rpm">
-      <location filename="../../pages/boat/LargeCenterGauge.qml" line="162"/>
-      <location filename="../../pages/boat/LargeCenterGauge.qml" line="302"/>
+      <location filename="../../pages/boat/LargeCenterGauge.qml" line="271"/>
       <source>RPM</source>
       <translation>RPM</translation>
-    </message>
-    <message id="boat_page_motor_drive">
-      <location filename="../../pages/boat/MotorDriveGauges.qml" line="38"/>
-      <source>Motordrive</source>
-      <translation>Acionamento do Motor</translation>
     </message>
     <message id="common_words_time_to_go">
       <location filename="../../components/CommonWords.qml" line="576"/>
@@ -10852,10 +10846,15 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <source>Target state of charge</source>
       <translation>Estado de carga alvo</translation>
     </message>
+    <message id="boat_page_range_label">
+      <location filename="../../pages/boat/Range.qml" line="39"/>
+      <source>Range</source>
+      <translation>Autonomia</translation>
+    </message>
     <message id="ev_range">
       <location filename="../../pages/ev/EvPage.qml" line="47"/>
       <source>Range</source>
-      <translation>Autonomia</translation>
+      <translation type="unfinished">Autonomia</translation>
     </message>
     <message id="ev_battery_capacity">
       <location filename="../../pages/ev/EvPage.qml" line="57"/>
@@ -11076,17 +11075,17 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>E-drive com instância VRM #%1</translation>
     </message>
     <message id="pagesettingsboatpage_dual_drive_configuration">
-      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="86"/>
       <source>Dual-Drive Configuration</source>
       <translation>Configuração de Acionamento Duplo</translation>
     </message>
     <message id="pagesettingsboatpage_multi_drive_left">
-      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="92"/>
       <source>Left E-drive</source>
       <translation>E-drive esquerdo</translation>
     </message>
     <message id="pagesettingsboatpage_multi_drive_right">
-      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="100"/>
       <source>Right E-drive</source>
       <translation>E-drive direito</translation>
     </message>
@@ -11813,6 +11812,36 @@ Por favor, atualize para o firmware mais recente para poder ajustar estas config
       <source>Gensets</source>
       <translation>Geradores</translation>
     </message>
+    <message id="switchable_output_unsupported_function">
+      <location filename="../../src/enums.cpp" line="632"/>
+      <source>Unsupported function: %1</source>
+      <translation>Função não suportada: %1</translation>
+    </message>
+    <message id="pagesettingsboatpage_show_temperatures">
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="79"/>
+      <source>Show temperatures</source>
+      <translation>Mostrar temperaturas</translation>
+    </message>
+    <message id="boat_page_consumption_label">
+      <location filename="../../pages/boat/Consumption.qml" line="54"/>
+      <source>Consumption</source>
+      <translation>Consumo</translation>
+    </message>
+    <message id="boat_page_temperature_coolant_label">
+      <location filename="../../pages/boat/Temperatures.qml" line="94"/>
+      <source>Coolant</source>
+      <translation>Líquido de arrefecimento</translation>
+    </message>
+    <message id="boat_page_temperature_controller_label">
+      <location filename="../../pages/boat/Temperatures.qml" line="106"/>
+      <source>Controller</source>
+      <translation>Controlador</translation>
+    </message>
+    <message id="boat_page_temperature_motor_label">
+      <location filename="../../pages/boat/Temperatures.qml" line="118"/>
+      <source>Motor</source>
+      <translation>motor</translation>
+    </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
@@ -11884,6 +11913,11 @@ Por favor, atualize para o firmware mais recente para poder ajustar estas config
       <location filename="../../pages/vebusdevice/VeBusAlarm.qml" line="24"/>
       <source>Warning</source>
       <translation type="unfinished">Aviso</translation>
+    </message>
+    <message id="gauges_battery">
+      <location filename="../../components/Gauges.js" line="17"/>
+      <source>Battery</source>
+      <translation type="unfinished">Bateria</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
       <location filename="../../src/iochannel.cpp" line="342"/>
