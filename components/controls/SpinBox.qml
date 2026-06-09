@@ -40,10 +40,13 @@ T.SpinBox {
 	property int indicatorImplicitWidth: Theme.geometry_spinBox_indicator_minimumWidth
 	property int orientation: Qt.Horizontal
 	property string suffix
+	property bool clampInput: true
 
 	property int _scalingFactor: 1
 	property int _originalStepSize
 
+	signal aboutToIncrease()
+	signal aboutToDecrease()
 	signal increaseFailed()
 	signal decreaseFailed()
 
@@ -171,6 +174,9 @@ T.SpinBox {
 				fontPixelSize: root.font.pixelSize
 				arrowKeysEnabled: upDownHintFrame.visible
 				focus: false
+				clampInput: root.clampInput
+				onAboutToIncrease: root.aboutToIncrease()
+				onAboutToDecrease: root.aboutToDecrease()
 				onIncreaseFailed: root.increaseFailed()
 				onDecreaseFailed: root.decreaseFailed()
 			}
@@ -269,6 +275,7 @@ T.SpinBox {
 		id: upIndicatorPressArea
 
 		function activate() {
+			root.aboutToIncrease()
 			if (!root.up.indicator.enabled) {
 				root.increaseFailed()
 				return
@@ -295,6 +302,7 @@ T.SpinBox {
 		id: downIndicatorPressArea
 
 		function activate() {
+			root.aboutToDecrease()
 			if (!root.down.indicator.enabled) {
 				root.decreaseFailed()
 				return
@@ -330,6 +338,10 @@ T.SpinBox {
 
 		return value
 	}
+	property var updateValueTo: function(v, text) {
+		root.value = v
+		root.valueModified()
+	}
 
 	Timer {
 		id: pressTimer
@@ -360,6 +372,7 @@ T.SpinBox {
 		onTriggered: {
 			interval = 100
 			if (up.pressed) {
+				root.aboutToIncrease()
 				if (root.up.indicator.enabled) {
 					root.increase()
 					root.valueModified()
@@ -367,6 +380,7 @@ T.SpinBox {
 					root.increaseFailed()
 				}
 			} else {
+				root.aboutToDecrease()
 				if (root.down.indicator.enabled) {
 					root.decrease()
 					root.valueModified()

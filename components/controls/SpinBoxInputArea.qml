@@ -15,7 +15,10 @@ TextInput {
 	property int fontPixelSize: Theme.font_dialog_control_largeSize
 	property int initialValue
 	property bool arrowKeysEnabled
+	property bool clampInput: true
 
+	signal aboutToIncrease()
+	signal aboutToDecrease()
 	signal increaseFailed()
 	signal decreaseFailed()
 
@@ -26,6 +29,7 @@ TextInput {
 	// These change the displayed value (which may not yet be accepted), rather than the actual
 	// spinBox value.
 	function increase() {
+		root.aboutToIncrease()
 		const nextValue = spinBox.valueFromText(text, spinBox.locale) + spinBox.stepSize
 		if (nextValue > spinBox.to) {
 			root.increaseFailed()
@@ -33,6 +37,7 @@ TextInput {
 		setTextFromValue(Math.min(spinBox.to, nextValue))
 	}
 	function decrease() {
+		root.aboutToDecrease()
 		const nextValue = spinBox.valueFromText(text, spinBox.locale) - spinBox.stepSize
 		if (nextValue < spinBox.from) {
 			root.decreaseFailed()
@@ -50,7 +55,17 @@ TextInput {
 		switch (event.key) {
 		case Qt.Key_Return:
 		case Qt.Key_Enter:
-			// Save the entered text. The text may at this time represent a value outside of the
+			// Save the entered text.
+			let origText = text
+			if (!root.clampInput) {
+				root.spinBox.updateValueTo(
+					root.spinBox.valueFromText(text, root.spinBox.locale),
+					origText)
+				text = root.spinBox.textFromValue(root.spinBox.value, root.spinBox.locale)
+				break
+			}
+
+			// The text may at this time represent a value outside of the
 			// to/from range, so clamp it here.
 			let v = root.spinBox.valueFromText(text, root.spinBox.locale)
 			if (v < root.spinBox.from) {
@@ -66,8 +81,7 @@ TextInput {
 			// user entering an out-of-range value on consecutive attempts.
 			text = root.spinBox.textFromValue(v, root.spinBox.locale)
 			if (v !== spinBox.value) {
-				root.spinBox.value = v
-				root.spinBox.valueModified()
+				root.spinBox.updateValueTo(v, origText)
 			}
 			break
 		case Qt.Key_Escape:
@@ -95,6 +109,8 @@ TextInput {
 			// Don't allow left/right keys to move focus away from the text input.
 			event.accepted = cursorPosition >= length
 			return
+		default:
+			break
 		}
 		event.accepted = false
 	}

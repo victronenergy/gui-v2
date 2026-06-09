@@ -24,6 +24,9 @@ ModalDialog {
 	property string fromErrorText
 	property string toErrorText
 
+	signal aboutToIncrease()
+	signal aboutToDecrease()
+
 	onAboutToShow: {
 		if (presets.length) {
 			let presetsIndex = -1
@@ -95,10 +98,30 @@ ModalDialog {
 				to: decimalConverter.intTo
 				stepSize: decimalConverter.intStepSize
 				value: decimalConverter.decimalToInt(root.value)
+				clampInput: false // do the clamping in updateValueTo() instead of in the input area.
 				textFromValue: (value, locale) => decimalConverter.textFromValue(value)
 				valueFromText: (text, locale) => {
 					const v = decimalConverter.valueFromText(text)
 					return isNaN(v) ? decimalConverter.decimalToInt(root.value) : v // if invalid, use the previous value
+				}
+				updateValueTo: (v, text) => {
+					// Manually set the root value from the text,
+					// rather than attempting to determine the appropriate next
+					// spinbox value for the given text (as SpinBoxInputArea does),
+					// because the text value might be associated with
+					// a different number of decimals than the current spinbox value.
+					let value = Units.formattedNumberToReal(text)
+					if (isNaN(value)) {
+						// don't change the current value
+						value = root.value
+					} else if (value < root.from) {
+						spinBox.decreaseFailed()
+						value = root.from
+					} else if (value > root.to) {
+						spinBox.increaseFailed()
+						value = root.to
+					}
+					root.value = value
 				}
 
 				// Use BeforeItem priority to override the default key Spinbox event handling, else
@@ -112,8 +135,9 @@ ModalDialog {
 
 				onValueModified: {
 					dialogContent.valueModified()
-					presetsRow.currentIndex = -1
 				}
+				onAboutToIncrease: root.aboutToIncrease()
+				onAboutToDecrease: root.aboutToDecrease()
 				onDecreaseFailed: {
 					if (root.fromErrorText) {
 						errorLabel.text = root.fromErrorText
@@ -152,8 +176,18 @@ ModalDialog {
 				visible: model.length > 0
 				enabled: visible
 				onButtonClicked: function (buttonIndex) {
-					spinBox.value = decimalConverter.decimalToInt(model[buttonIndex].value)
-					dialogContent.valueModified()
+					root.value = model[buttonIndex].value
+				}
+
+				property real rootValue: root.value
+				onRootValueChanged: {
+					for (let i = 0; i < model.length; ++i) {
+						if (model[i].value === rootValue) {
+							presetsRow.currentIndex = i
+							return
+						}
+					}
+					presetsRow.currentIndex = -1
 				}
 
 				KeyNavigation.down: root.footer
