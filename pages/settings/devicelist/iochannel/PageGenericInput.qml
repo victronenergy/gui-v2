@@ -11,6 +11,17 @@ Page {
 
 	required property GenericInput genericInput
 
+	// For Aurelia products, some settings are not visible at the user-access level. For now, hard
+	// code this configuration in gui-v2, but later on we will generalise this to configure the
+	// setting visibility in the backend data values instead. See #2941.
+	VeQuickItem {
+		id: productId
+
+		readonly property bool isAurelia: valid && (value === ProductInfo.ProductId_Dcdb_Aurelia)
+
+		uid: root.genericInput.serviceUid + "/ProductId"
+	}
+
 	GradientListView {
 		model: VisibleItemModel {
 			ListIOChannelNameField {
@@ -34,6 +45,7 @@ Page {
 				text: qsTrId("page_generic_input_invert")
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: dataItem.valid
+				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
 				dataItem.uid: root.genericInput.uid + "/Settings/Invert"
 				optionModel: [
 					//% "Normal"
@@ -48,6 +60,7 @@ Page {
 				text: qsTrId("iochannel_digital_input_mode")
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: dataItem.valid
+				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
 				dataItem.uid: root.genericInput.uid + "/Settings/DigitalInputMode"
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },

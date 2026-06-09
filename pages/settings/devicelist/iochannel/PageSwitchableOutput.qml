@@ -13,6 +13,17 @@ Page {
 
 	readonly property bool _writeable: !(settingsAdjustable.valid && settingsAdjustable.value === 0)
 
+	// For Aurelia products, some settings are not visible at the user-access level. For now, hard
+	// code this configuration in gui-v2, but later on we will generalise this to configure the
+	// setting visibility in the backend data values instead. See #2941.
+	VeQuickItem {
+		id: productId
+
+		readonly property bool isAurelia: valid && (value === ProductInfo.ProductId_Dcdb_Aurelia)
+
+		uid: root.switchableOutput.serviceUid + "/ProductId"
+	}
+
 	GradientListView {
 		model: VisibleItemModel {
 			ListIOChannelNameField {
@@ -30,6 +41,7 @@ Page {
 				text: qsTrId("page_switchable_output_switch_mode")
 				dataItem.uid: root.switchableOutput.uid + "/Settings/SwitchMode"
 				preferredVisible: dataItem.valid
+				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
 				interactive: _writeable
 				optionModel: [
 					//% "Disabled"
@@ -46,6 +58,7 @@ Page {
 				text: qsTrId("page_switchable_output_dim_mode")
 				dataItem.uid: root.switchableOutput.uid + "/Settings/DimMode"
 				preferredVisible: dataItem.valid
+				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
 				interactive: _writeable
 				optionModel: [
 					//% "Dimming disabled"
@@ -62,6 +75,7 @@ Page {
 				text: qsTrId("page_switchable_output_fuse_detection_mode")
 				dataItem.uid: root.switchableOutput.uid + "/Settings/FuseDetection"
 				preferredVisible: dataItem.valid
+				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
 				interactive: _writeable
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
@@ -78,6 +92,7 @@ Page {
 				decimals: 0 // backend does not allow for decimal precision
 				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 				preferredVisible: dataItem.valid
+				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
 				interactive: _writeable
 			}
 
@@ -92,6 +107,7 @@ Page {
 				dataItem.uid: root.switchableOutput.uid + "/Settings/Function"
 				preferredVisible: dataItem.valid
 						&& (root.switchableOutput.validFunctions !== (1 << VenusOS.SwitchableOutput_Function_Manual))
+				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
 				secondaryTextColor: root.switchableOutput.hasValidFunction ? Theme.color_listItem_secondaryText : Theme.color_critical
 				optionModel: {
 					let options = []
@@ -198,6 +214,7 @@ Page {
 				text: qsTrId("page_switchable_output_polarity")
 				dataItem.uid: root.switchableOutput.uid + "/Settings/Polarity"
 				preferredVisible: dataItem.valid
+				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
 				interactive: _writeable
 				optionModel: [
 					//% "Active high / Normally open"
@@ -211,6 +228,7 @@ Page {
 				//% "Output limit min"
 				text: qsTrId("settings_dvcc_output_limit_min")
 				preferredVisible: dataItem.valid
+				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
 				interactive: _writeable
 				from: 0
 				to: 100
@@ -223,6 +241,7 @@ Page {
 				//% "Output limit max"
 				text: qsTrId("settings_dvcc_output_limit_max")
 				preferredVisible: dataItem.valid
+				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
 				interactive: _writeable
 				from: 0
 				to: 100
