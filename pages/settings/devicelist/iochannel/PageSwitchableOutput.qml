@@ -152,6 +152,7 @@ Page {
 				text: qsTrId("page_switchable_output_startup_state")
 				dataItem.uid: root.switchableOutput.uid + "/Settings/StartupState"
 				preferredVisible: dataItem.valid
+				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
 				interactive: _writeable
 				optionModel: [
 					{ display: CommonWords.off, value: 0 },
@@ -166,6 +167,7 @@ Page {
 				text: qsTrId("page_switchable_output_startup_dim_level")
 				secondaryText: startupDimLevel.valid ? startupDimLevel.value === -1 ? qsTrId("page_switchable_output_startup_state_restore_from_memory") : startupDimLevel.value + "%" : ""
 				preferredVisible: startupDimLevel.valid
+				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
 				interactive: _writeable
 				onClicked: Global.pageManager.pushPage(dimStartupStateComponent, { title: text })
 
