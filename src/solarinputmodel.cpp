@@ -320,10 +320,9 @@ bool SortedSolarInputModel::lessThan(const QModelIndex &sourceLeft, const QModel
 	const QString rightGroup = sourceModel()->data(rightIndex, SolarInputModel::GroupRole).toString();
 
 	if (leftGroup == rightGroup) {
-		if (sourceModel()->data(leftIndex, SolarInputModel::ServiceUidRole) == sourceModel()->data(leftIndex, SolarInputModel::ServiceUidRole)) {
+		if (sourceModel()->data(leftIndex, SolarInputModel::ServiceUidRole) == sourceModel()->data(rightIndex, SolarInputModel::ServiceUidRole)) {
 			// If the two inputs belong to the same service, then these must be both trackers from
 			// the same device, so sort them by tracker index.
-
 			if (SolarInputModel *inputModel = qobject_cast<SolarInputModel *>(sourceModel())) {
 				// Note: this check is only used for PV chargers, as PV inverters do not have any
 				// individual trackers, so for them the trackerIndex is always -1.
