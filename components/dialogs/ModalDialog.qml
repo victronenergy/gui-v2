@@ -334,8 +334,19 @@ T.Dialog {
 				return
 			}
 
-			if (Qt.inputMethod.visible) {
-				// Move the dialog so that the text field is visible above the VKB.
+			if (BackendConnection.needsWasmKeyboardHandler) {
+				if (root._kbDismissGuard) {
+					return
+				}
+				// Theme.keyboardHeight is set from JavaScript via window._qtWasmModule.jsSetKeyboardHeight()
+				// (EMSCRIPTEN_BINDINGS export in theme.cpp). In portrait, keep the dialog attached to the
+				// bottom of the visible area (just above the keyboard). In landscape, centre it.
+				targetDialogY = Theme.screenSize === Theme.Portrait
+						? Math.max(0, Global.mainView.height - Theme.keyboardHeight - root.height)
+						: Math.max(0, (Global.mainView.height - Theme.keyboardHeight - root.height) / 2)
+				dialogStateGroup.state = "focused"
+			} else if (Qt.inputMethod.visible) {
+				// Qt VKB (physical GX device): move the dialog precisely above the keyboard.
 				const currentDialogOffset = root.y - root.centeredY // 0 or negative
 				const inputItemBottomPos = root.focusedInputItem.mapToItem(Global.mainView, 0, root.focusedInputItem.implicitHeight).y - currentDialogOffset
 
@@ -348,13 +359,13 @@ T.Dialog {
 					// the new location immediately without any animation.
 					targetDialogY += (vkbTopPos - inputItemBottomPos)
 				}
-			} else {
-				// We don't know how high the built-in keyboard is on Wasm, so just move the dialog
-				// to the top of the window, and hopefully that is enough to see the text field.
-				targetDialogY = 0
-			}
 
-			dialogStateGroup.state = "focused"
+				dialogStateGroup.state = "focused"
+			} else {
+				// No Qt VKB visible on a non-Wasm device; move to top as a fallback.
+				targetDialogY = 0
+				dialogStateGroup.state = "focused"
+			}
 		}
 
 		property StateGroup dialogStateGroup: StateGroup {
@@ -394,6 +405,51 @@ T.Dialog {
 		}
 	}
 
+
+	// Theme.keyboardHeight is set from JavaScript via Module.jsSetKeyboardHeight()
+	// (exported by EMSCRIPTEN_BINDINGS in theme.cpp — same pattern as jsSystemColorSchemeChanged).
+	// When it drops to 0 the keyboard was dismissed via the OS button; reset the dialog.
+	// _kbDismissGuard blocks updateState() and onAboutToFocusTextField for 300 ms so
+	// Qt's internal forceInputFocus() (fired during the focus = false below) cannot
+	// immediately re-elevate the dialog before the guard expires.
+	property bool _kbDismissGuard: false
+
+	Timer {
+		id: _kbDismissGuardTimer
+		interval: 300
+		onTriggered: root._kbDismissGuard = false
+	}
+
+	property int _themeKbH: Theme.keyboardHeight
+	on_ThemeKbHChanged: {
+		if (Qt.platform.os !== "wasm" || !root.visible) return
+		if (_themeKbH <= 0 && stateManager.dialogStateGroup.state !== "default") {
+			stateManager.dialogStateGroup.state = "default"
+			root._kbDismissGuard = true
+			_kbDismissGuardTimer.restart()
+			if (root.focusedInputItem) root.focusedInputItem.focus = false
+		} else if (_themeKbH > 0 && root.focusedInputItem) {
+			stateManager.updateState()
+		}
+	}
+
+	// After the OS keyboard is dismissed the field keeps its QML focus, so
+	// onFocusedInputItemChanged does not fire on the next tap. Detect the genuine
+	// user tap via onAboutToFocusTextField and re-trigger updateState().
+	Connections {
+		target: Global
+		enabled: Qt.platform.os === "wasm" && root.visible
+
+		function onAboutToFocusTextField(textField, textFieldContainer, viewToScroll) {
+			if (!root._kbDismissGuard
+					&& stateManager.dialogStateGroup.state === "default"
+					&& root.focusedInputItem !== null
+					&& textField === root.focusedInputItem) {
+				Qt.callLater(stateManager.updateState)
+			}
+		}
+	}
+
 	Component.onCompleted: {
 		if (Global.main && Global.main.requiresRotation) {
 			// we cannot manually position the header or footer.
@@ -404,4 +460,3 @@ T.Dialog {
 		}
 	}
 }
-
