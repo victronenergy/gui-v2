@@ -2,7 +2,7 @@
     "com.victronenergy.dcdc.ttyUSB3": {
         "/Capabilities/Capabilities1": 1342292476,
         "/Connected": 1,
-        "/CustomName": "",
+        "/CustomName": "Orion XS Charger (DCDC)",
         "/Dc/0/Current": 0.10000000149011612,
         "/Dc/0/Power": 1,
         "/Dc/0/Voltage": 13.510000228881836,
@@ -12,7 +12,7 @@
         "/Dc/In/V": 13.510000228881836,
         "/DeviceInstance": 291,
         "/DeviceOffReason": 0,
-        "/Devices/0/CustomName": "",
+        "/Devices/0/CustomName": "Orion XS Charger (DCDC)",
         "/Devices/0/DeviceInstance": 291,
         "/Devices/0/FirmwareVersion": 70143,
         "/Devices/0/ProductId": 41968,

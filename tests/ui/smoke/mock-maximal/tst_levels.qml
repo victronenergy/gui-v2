@@ -26,11 +26,11 @@ UiTestCase {
 	function test_tabs() {
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableParent(
 				findItem(Global.mainView.currentPage, { text: "Environment" }))) } })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "levels_environment" })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "environment" })
 
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableParent(
 				findItem(Global.mainView.currentPage, { text: "Tanks" }))) } })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "levels_tanks" })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "tanks" })
 
 		runSteps()
 	}
@@ -44,12 +44,12 @@ UiTestCase {
 				return mouseClick(findClickableChild(freshWaterGroup))
 			}
 		})
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "levels_freshWater_expanded" })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "tanks_expanded_freshWater" })
 
 		// Click anywhere inside the expanded view (a modal dialog) to close it.
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableChild(
 			Global.dialogLayer.currentDialog.contentItem, {})) } })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "levels_freshWater_unexpanded" })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "tanks_unexpanded_freshWater" })
 
 		runSteps()
 	}

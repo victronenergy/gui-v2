@@ -7,6 +7,7 @@
 #include <QMetaMethod>
 #include <QMouseEvent>
 #include <QCoreApplication>
+#include <QRegularExpression>
 #include <QTimer>
 
 #include <QQmlComponent>
@@ -333,6 +334,28 @@ bool UiTestCase::mouseClick(QQuickItem *item)
 	QCoreApplication::postEvent(item, pressEvent);
 	QCoreApplication::postEvent(item, releaseEvent);
 	return true;
+}
+
+QString UiTestCase::sanitizedImageName(const QString &imageName) const
+{
+	static const QString fallbackName = QStringLiteral("UNTITLED");
+	if (imageName.isEmpty()) {
+		return fallbackName;
+	}
+
+	// As a simple way to make a valid file name, normalize the string, then strip punctuation and
+	// whitespace.
+	static const QRegularExpression punctuationRegex("[!\"#$%&'()*+,-./:;<=>?@\[\\]^_`{|}~]");
+	static const QRegularExpression whitespaceRegex("\\s");
+
+	QString sanitized = imageName.normalized(QString::NormalizationForm_C)
+			.replace(punctuationRegex, QString())
+			.replace(whitespaceRegex, QString()); // remove whitespace, including any caused by punctuation removal
+
+	// Limit to 255 char limit, minus 3 for png file extension.
+	sanitized.truncate(252);
+
+	return sanitized.isEmpty() ? fallbackName : sanitized;
 }
 
 QObject *UiTestCase::findObject(QObject *sourceObject, const QVariantMap &params, const QString &typeName) const

@@ -11,6 +11,7 @@
 #include <QDir>
 #include <QFile>
 #include <QColorSpace>
+#include <QtEnvironmentVariables>
 
 #include <QQuickWindow>
 #include <QQmlInfo>
@@ -266,6 +267,13 @@ void CaptureAndCompareStep::finalize()
 		return;
 	}
 
+	static QSet<QString> capturedFileNames;
+	if (capturedFileNames.contains(captureFileName)) {
+		finish(false, QStringLiteral("Another file has already been captured with this name: '%1'").arg(captureFileName));
+		return;
+	}
+	capturedFileNames.insert(captureFileName);
+
 	if (QFile::exists(captureFileName)) {
 		// There is a previous capture for this image.
 		QImage previousCapture(captureFileName);
@@ -309,7 +317,12 @@ QString CaptureAndCompareStep::absoluteImagePath(const QString &fileName)
 {
 	static QString dirPath;
 	if (dirPath.isEmpty()) {
-		dirPath = settingValue(CaptureAndCompare, QStringLiteral("ImageDir")).toString();
+		static const QString imageDirOverride = qEnvironmentVariable("VENUS_GUI_TEST_CAPTURE_DIR");
+		if (imageDirOverride.isEmpty()) {
+			dirPath = settingValue(CaptureAndCompare, QStringLiteral("ImageDir")).toString();
+		} else {
+			dirPath = imageDirOverride;
+		}
 		if (!QDir().mkpath(dirPath)) {
 			qWarning() << "mkpath() failed for image directory!" << dirPath;
 			return QString();

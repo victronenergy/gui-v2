@@ -24,17 +24,23 @@ UiTestCase {
 	}
 
 	function test_sidePanel() {
+		if (Theme.screenSize === Theme.Portrait) {
+			// There is no side panel in the portrait layout.
+			goToNextTestFunction()
+			return
+		}
+
 		// Open side panel
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableParent(
 				findItem(Global.mainView.statusBar, { "source": Qt.url("qrc:/images/icon_sidepanel_off_32.svg") }))) } })
-		addStep(UiTestStep.WaitUntil, { callable: ()=> { return Global.mainView.currentPage.state === "panelOpened" } })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "brief_sidePanel_opened" })
+		addStep(UiTestStep.WaitUntil, { callable: ()=> { return root.findObject(Global.mainView.currentPage, {}, "BriefPage_Landscape")?.state === "panelOpened" } })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "sidePanel_opened" })
 
 		// Close side panel
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableParent(
 				findItem(Global.mainView.statusBar, { "source": Qt.url("qrc:/images/icon_sidepanel_on_32.svg") }))) } })
-		addStep(UiTestStep.WaitUntil, { callable: ()=> { return Global.mainView.currentPage.state === "initialized" } })
-		addStep(UiTestStep.CaptureAndCompare, { imageName: "brief_sidePanel_closed" })
+		addStep(UiTestStep.WaitUntil, { callable: ()=> { return root.findObject(Global.mainView.currentPage, {}, "BriefPage_Landscape")?.state === "initialized" } })
+		addStep(UiTestStep.CaptureAndCompare, { imageName: "sidePanel_closed" })
 
 		runSteps()
 	}
