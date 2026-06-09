@@ -15,6 +15,7 @@ ListRadioButtonGroup {
 	text: qsTrId("iochannel_type_buttongroup_type")
 	dataItem.uid: root.ioChannel.uid + "/Settings/Type"
 	preferredVisible: dataItem.valid
+	writeAccessLevel: VenusOS.User_AccessType_User
 	secondaryTextColor: root.ioChannel.hasValidType ? Theme.color_listItem_secondaryText : Theme.color_critical
 	optionModel: {
 		let options = []
