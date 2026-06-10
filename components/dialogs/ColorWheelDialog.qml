@@ -55,8 +55,6 @@ ModalDialog {
 		]
 	}
 
-	leftMargin: Theme.geometry_colorWheelDialog_horizontalMargin
-	rightMargin: Theme.geometry_colorWheelDialog_horizontalMargin
 	dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_NoOptions
 
 	header: Item {
