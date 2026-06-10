@@ -355,7 +355,6 @@
     "geometry_iochannel_status_minimum_width": 48,
     "geometry_iochannel_statusBackground_bottomPadding": 4,
 
-    "geometry_colorWheelDialog_horizontalMargin": 24,
     "geometry_colorWheelDialog_leftPadding": 48,
     "geometry_colorWheelDialog_rightPadding": 24,
     "geometry_colorWheelDialog_topPadding": 0,
