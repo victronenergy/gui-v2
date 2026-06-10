@@ -182,6 +182,12 @@ Boat.Background { // the blue shadows
 		}
 	}
 
+	Binding {
+		target: Global
+		property: "boatPageActive"
+		value: parent.visible && (_gps.valid || motorDrives.dcConsumption.quotient.valid)
+	}
+
 	states: State {
 		name: "showing3Phases"
 		when: loadArc.showing3Phases
