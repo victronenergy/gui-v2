@@ -633,6 +633,13 @@
     "geometry_boatPage_temperature_temperatureSeparator_height": 37,
     "geometry_boatPage_temperature_temperatureSeparator_width": 2,
     "geometry_boatPage_temperature_bottomMargin": 14,
+    "geometry_boatPage_batteryCenterGauge_title_bottomPadding": 12,
+    "geometry_boatPage_batteryCenterGauge_title_spacing": 4,
+    "geometry_boatPage_batteryCenterGauge_title_iconHeight": 24,
+    "geometry_boatPage_batteryCenterGauge_detailsRow_topPadding": 12,
+    "geometry_boatPage_batteryCenterGauge_detailsRow_spacing": 8,
+    "geometry_boatPage_batteryCenterGauge_mode_topPadding": 13,
+    "geometry_boatPage_shoreGauge_icon_size": 48,
 
     "geometry_opportunityLoad_button_radius": 6,
     "geometry_opportunityLoad_margin": 4,

@@ -24,6 +24,14 @@ Item {
 			],
 		},
 		{
+			name: "GPS, single-drive, shore power connected",
+			gps: {},
+			motorDrives: [
+				{ productName: "Motor drive A", power: 1000 },
+			],
+			shorePowerConnected: true
+		},
+		{
 			name: "GPS, single-drive, time to go, range, consumption",
 			gps: {},
 			motorDrives: [
@@ -78,6 +86,12 @@ Item {
 			],
 		},
 		{
+			name: "No GPS, single-drive, regeneration",
+			motorDrives: [
+				{ productName: "Motor drive A", power: -1000 },
+			],
+		},
+		{
 			name: "No GPS, dual-drive",
 			motorDrives: [
 				{ productName: "Motor drive A", power: 1000 },
@@ -85,7 +99,11 @@ Item {
 			],
 		},
 		{
-			name: "No GPS and no motordrives"
+			name: "No GPS, no motordrives"
+		},
+		{
+			name: "No GPS, no motordrives, shore power connected",
+			shorePowerConnected: true
 		},
 	]
 
@@ -145,6 +163,15 @@ Item {
 
 				MockManager.setValue(Global.system.serviceUid + "/MotorDrive/%1/DeviceInstance".arg(i), deviceInstance)
 			}
+		}
+		if (config.shorePowerConnected) {
+			MockManager.setValue(Global.system.serviceUid + "/Ac/In/1/Source", VenusOS.AcInputs_InputSource_Shore)
+			MockManager.setValue(Global.system.serviceUid + "/Ac/ActiveIn/Source", VenusOS.AcInputs_InputSource_Shore)
+			MockManager.setValue(MockManager.value(Global.system.serviceUid + "/Ac/In/1/ServiceName") + "/Ac/NumberOfPhases", 1)
+		} else {
+			MockManager.setValue(Global.system.serviceUid + "/Ac/In/1/Source", VenusOS.AcInputs_InputSource_Grid)
+			MockManager.setValue(Global.system.serviceUid + "/Ac/ActiveIn/Source", VenusOS.AcInputs_InputSource_Grid)
+			MockManager.setValue(MockManager.value(Global.system.serviceUid + "/Ac/In/1/ServiceName") + "/Ac/NumberOfPhases", 3)
 		}
 		MockManager.setValue(Global.system.serviceUid + "/Dc/Battery/TimeToGo", config.timeToGo ?? undefined)
 		MockManager.setValue(Global.system.serviceUid + "/MotorDrive/Range", config.range ?? undefined)

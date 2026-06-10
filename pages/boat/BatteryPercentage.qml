@@ -12,17 +12,18 @@ Row {
 
 	required property MotorDrives motorDrives
 
-	readonly property ActiveSystemBattery battery: Global.system && Global.system.battery ? Global.system.battery : null
-
 	spacing: Theme.geometry_boatPage_row_spacing
-	visible: battery && !isNaN(battery.stateOfCharge)
 
 	CP.ColorImage {
 		anchors.verticalCenter: parent.verticalCenter
 		width: Theme.geometry_boatPage_batteryGauge_iconWidth
 		height: width
-		color: root.motorDrives.isRegenerating ? Theme.color_boatPage_regenProgress : Theme.color_font_primary
-		source: root.motorDrives.isRegenerating ? "qrc:/images/icon_battery_charging_24.svg" : "qrc:/images/icon_battery_24.svg"
+		color: (Global.system.battery.mode === VenusOS.Battery_Mode_Charging || root.motorDrives.isRegenerating)
+			? Theme.color_boatPage_regenProgress
+			: Theme.color_font_primary
+		source: (Global.system.battery.mode === VenusOS.Battery_Mode_Charging || root.motorDrives.isRegenerating)
+			? "qrc:/images/icon_battery_charging_24.svg"
+			: "qrc:/images/icon_battery_24.svg"
 	}
 
 	QuantityLabel {
@@ -31,6 +32,6 @@ Row {
 		anchors.verticalCenter: parent.verticalCenter
 		font.pixelSize: Theme.font_boatPage_batterySoc_pixelSize
 		unit: VenusOS.Units_Percentage
-		value: battery.stateOfCharge
+		value: Global.system.battery.stateOfCharge
 	}
 }
