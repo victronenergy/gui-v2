@@ -1,0 +1,25 @@
+{
+    "com.victronenergy.switch.dcdb_aurelia": {
+        "/Connected": 1,
+        "/CustomName": "Aurelia DCDB",
+        "/DeviceInstance": 87,
+        "/FirmwareVersion": "0.1",
+        "/HardwareVersion": null,
+        "/Mgmt/Connection": "USB",
+        "/Mgmt/ProcessName": "/opt/victronenergy/dbus-switch/dbus-switch.py",
+        "/Mgmt/ProcessVersion": "0.8",
+        "/ProductId": 49328,
+        "/ProductName": "Aurelia DCDB",
+        "/State": 256,
+        "/SwitchableOutput/output_5/Name": "Output",
+        "/SwitchableOutput/output_5/Settings/CustomName": "Main Breaker",
+        "/SwitchableOutput/output_5/Settings/Function": 2,
+        "/SwitchableOutput/output_5/Settings/Group": "",
+        "/SwitchableOutput/output_5/Settings/ShowUIControl": 1,
+        "/SwitchableOutput/output_5/Settings/Type": 1,
+        "/SwitchableOutput/output_5/Settings/ValidFunctions": 16,
+        "/SwitchableOutput/output_5/Settings/ValidTypes": 16,
+        "/SwitchableOutput/output_5/State": 0,
+        "/SwitchableOutput/output_5/Status": 0
+    }
+}
