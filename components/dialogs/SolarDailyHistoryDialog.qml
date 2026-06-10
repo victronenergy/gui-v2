@@ -48,14 +48,18 @@ T.Dialog {
 	// Use x/y positioning instead of anchors, so that the dialog can be moved by DialogDragger.
 	x: (Theme.geometry_screen_width - width) / 2
 	y: (Theme.geometry_screen_height - height) / 2
-	implicitWidth: Math.max(
-		implicitBackgroundWidth + leftInset + rightInset,
-		implicitContentWidth + leftPadding + rightPadding) / Global.scalingRatio
-	implicitHeight: Math.max(
-		implicitBackgroundHeight + topInset + bottomInset,
-		implicitContentHeight + topPadding + bottomPadding + implicitHeaderHeight + implicitFooterHeight) / Global.scalingRatio
-	leftMargin: Theme.geometry_solarDailyHistoryDialog_horizontalMargin
-	rightMargin: Theme.geometry_solarDailyHistoryDialog_horizontalMargin
+
+	// As for ModalDialog, set the explicit width/height so that the position is correct in Wasm.
+	width: Math.min(
+		Theme.geometry_screen_width,
+		Math.max(
+			implicitBackgroundWidth + leftInset + rightInset,
+			implicitContentWidth + leftPadding + rightPadding))
+	height: Math.min(
+		Theme.geometry_screen_height,
+		Math.max(
+			implicitBackgroundHeight + topInset + bottomInset,
+			implicitContentHeight + topPadding + bottomPadding + implicitHeaderHeight + implicitFooterHeight))
 	modal: true
 	focus: Global.keyNavigationEnabled
 

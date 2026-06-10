@@ -106,14 +106,16 @@ T.Dialog {
 	rest of the app. Specifying 'width' and 'height' instead of only 'implicitWidth' and 'implicitHeight' for ModalDialog
 	makes it scale properly when you shrink the window. See https://bugreports.qt.io/browse/QTBUG-127068
 	*/
-	implicitWidth: Math.max(
-		implicitBackgroundWidth + leftInset + rightInset,
-		implicitContentWidth + leftPadding + rightPadding)
-	implicitHeight: Math.max(
-		implicitBackgroundHeight + topInset + bottomInset,
-		implicitContentHeight + topPadding + bottomPadding + implicitHeaderHeight + implicitFooterHeight)
-	width: Math.min(Theme.geometry_screen_width, implicitWidth)
-	height: Math.min(Theme.geometry_screen_height, implicitHeight)
+	width: Math.min(
+		Theme.geometry_screen_width,
+		Math.max(
+			implicitBackgroundWidth + leftInset + rightInset,
+			implicitContentWidth + leftPadding + rightPadding))
+	height: Math.min(
+		Theme.geometry_screen_height,
+		Math.max(
+			implicitBackgroundHeight + topInset + bottomInset,
+			implicitContentHeight + topPadding + bottomPadding + implicitHeaderHeight + implicitFooterHeight))
 	modal: true
 	topPadding: topInset + Theme.geometry_modalDialog_topPadding
 	bottomPadding: bottomInset + Theme.geometry_modalDialog_bottomPadding

@@ -355,12 +355,11 @@
     "geometry_iochannel_status_minimum_width": 48,
     "geometry_iochannel_statusBackground_bottomPadding": 4,
 
-    "geometry_colorWheelDialog_horizontalMargin": 128,
     "geometry_colorWheelDialog_leftPadding": 48,
     "geometry_colorWheelDialog_rightPadding": 24,
     "geometry_colorWheelDialog_topPadding": 0,
     "geometry_colorWheelDialog_bottomPadding": 24,
-    "geometry_colorWheelDialog_spacing": 24,
+    "geometry_colorWheelDialog_spacing": 48,
     "geometry_colorWheelDialog_mode_button_verticalMargin": 18,
     "geometry_colorWheelDialog_mode_button_width": 90,
     "geometry_colorWheelDialog_mode_button_height": 40,
