@@ -462,7 +462,7 @@
             // If mqtt param is set: use the provided MQTT address
             // If id/shard params are set: gui-v2 will use VRM
             // If none of these are set, will use a default MQTT address.
-            const needsDefaultArgs = !searchParams.has("mqtt") && !searchParams.has("id") && !searchParams.has("shard");
+            const needsDefaultArgs = !searchParams.has("mqtt") && !searchParams.has("id") && !searchParams.has("shard") && !searchParams.has("mock");
 
             // Options to change display size and border
             const displayModes = ['default', 'fullscreen', 'portrait', 'noframe', 'frame'];
@@ -530,10 +530,18 @@
 
                 let defaultMqttArg = (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt'
                 let argumentList = needsDefaultArgs ? ['--mqtt', defaultMqttArg] : [];
-                argumentList.push(
-                    '--nodeRedUrl', 'https://' + document.location.host + ':1881',
-                    '--signalKUrl', 'http://' + document.location.host + ':3000',
-                );
+                if (searchParams.has('mock')) {
+                    argumentList.push('--mock');
+                    const mockConf = searchParams.get('mock');
+                    if (mockConf) {
+                        argumentList.push('--mock-conf', mockConf);
+                    }
+                } else {
+                    argumentList.push(
+                        '--nodeRedUrl', 'https://' + document.location.host + ':1881',
+                        '--signalKUrl', 'http://' + document.location.host + ':3000',
+                    );
+                }
 
                 const instance = await qtLoad({
                     arguments: argumentList,
