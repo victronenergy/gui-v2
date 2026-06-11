@@ -36,7 +36,7 @@
       a:active {
         color: #387DC5;
       }
-      #mockup {
+      #device-frame {
         display: none;
         z-index: 0;
         position: absolute;
@@ -51,7 +51,7 @@
           color: #969591;
       }
       @media screen and (min-width: 1400px) and (min-height: 900px) {
-        #mockup {
+        #device-frame {
           display: block;
         }
         #wrapper-inner {
@@ -59,7 +59,7 @@
         }
       }
       /*
-        Apply mockup only on browsers that support aspect-ratio
+        Apply device-frame only on browsers that support aspect-ratio
         else on some older MFD devices the GUI will not be shown at all
       */
       @supports (aspect-ratio: 1/1) {
@@ -193,7 +193,7 @@
     </script>
   </head>
   <body onload="init()">
-    <img id="mockup" src="mockup.svg">
+    <img id="device-frame" src="device-frame.svg">
     <div id="wrapper-outer">
       <div id="wrapper-inner">
         <figure id="qtspinner">
@@ -444,7 +444,7 @@
         {
             const spinner = document.querySelector('#qtspinner');
             const screen = document.querySelector('#screen');
-            const mockup = document.querySelector('#mockup');
+            const deviceFrame = document.querySelector('#device-frame');
             const wrapper_inner = document.querySelector('#wrapper-inner');
             const loadingBarContainer = document.getElementById('loading-bar-container');
             const loadingBar = document.getElementById('loading-bar');
@@ -462,10 +462,10 @@
             // If mqtt param is set: use the provided MQTT address
             // If id/shard params are set: gui-v2 will use VRM
             // If none of these are set, will use a default MQTT address.
-            const needsDefaultArgs = !searchParams.has("mqtt") && !searchParams.has("id") && !searchParams.has("shard");
+            const needsDefaultArgs = !searchParams.has("mqtt") && !searchParams.has("id") && !searchParams.has("shard") && !searchParams.has("mock");
 
             // Options to change display size and border
-            const displayModes = ['default', 'fullscreen', 'portrait', 'nomock', 'mock'];
+            const displayModes = ['default', 'fullscreen', 'portrait', 'noframe', 'frame'];
             const displayMode = displayModes.find(m => searchParams.has(m)) || getCookie('venus-gui-v2-css-display');
 
             switch (displayMode) {
@@ -475,8 +475,8 @@
                 case 'fullscreen':
                     wrapper_inner.style.maxWidth = '100%';
                     wrapper_inner.style.height = '100%';
-                    mockup.style.visibility = 'hidden';
-                    mockup.style.display = 'none';
+                    deviceFrame.style.visibility = 'hidden';
+                    deviceFrame.style.display = 'none';
                     setCookie('venus-gui-v2-css-display', 'fullscreen', 365);
                     break;
                 case 'portrait':
@@ -485,19 +485,19 @@
                     wrapper_inner.style.maxWidth = '100%';
                     wrapper_inner.style.maxHeight = '100%';
                     wrapper_inner.style.aspectRatio = 'unset';
-                    mockup.style.visibility = 'hidden';
-                    mockup.style.display = 'none';
+                    deviceFrame.style.visibility = 'hidden';
+                    deviceFrame.style.display = 'none';
                     setCookie('venus-gui-v2-css-display', 'portrait', 365);
                     break;
-                case 'nomock':
-                    mockup.style.visibility = 'hidden';
+                case 'noframe':
+                    deviceFrame.style.visibility = 'hidden';
                     wrapper_inner.style.outline = 'none';
-                    setCookie('venus-gui-v2-css-display', 'nomock', 365);
+                    setCookie('venus-gui-v2-css-display', 'noframe', 365);
                     break;
-                case 'mock':
-                    mockup.style.visibility = 'visible';
-                    mockup.style.display = 'block';
-                    setCookie('venus-gui-v2-css-display', 'mock', 365);
+                case 'frame':
+                    deviceFrame.style.visibility = 'visible';
+                    deviceFrame.style.display = 'block';
+                    setCookie('venus-gui-v2-css-display', 'frame', 365);
                     break;
             }
 
@@ -530,10 +530,18 @@
 
                 let defaultMqttArg = (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt'
                 let argumentList = needsDefaultArgs ? ['--mqtt', defaultMqttArg] : [];
-                argumentList.push(
-                    '--nodeRedUrl', 'https://' + document.location.host + ':1881',
-                    '--signalKUrl', 'http://' + document.location.host + ':3000',
-                );
+                if (searchParams.has('mock')) {
+                    argumentList.push('--mock');
+                    const mockConf = searchParams.get('mock');
+                    if (mockConf) {
+                        argumentList.push('--mock-conf', mockConf);
+                    }
+                } else {
+                    argumentList.push(
+                        '--nodeRedUrl', 'https://' + document.location.host + ':1881',
+                        '--signalKUrl', 'http://' + document.location.host + ':3000',
+                    );
+                }
 
                 const instance = await qtLoad({
                     arguments: argumentList,
