@@ -137,7 +137,7 @@ if [ "${PWD}" = "${BUILD_DIR}" ]; then
     # Copy the files to the output directory
     cp venus-gui-v2.{html,js,wasm} qtloader.js \
         "${FILES_DIR}/wasm/"
-    cp  "${BASE_DIR}/images/victronenergy.svg" "${BASE_DIR}/images/victronenergy-light.svg" "${BASE_DIR}/images/mockup.svg" "${BASE_DIR}/LICENSE.txt" "${BASE_DIR}/.github/patches/Makefile" \
+    cp  "${BASE_DIR}/images/victronenergy.svg" "${BASE_DIR}/images/victronenergy-light.svg" "${BASE_DIR}/images/device-frame.svg" "${BASE_DIR}/LICENSE.txt" "${BASE_DIR}/.github/patches/Makefile" \
         "${FILES_DIR}/wasm/"
     cp -r "${BASE_DIR}/wasm/icons" "${FILES_DIR}/wasm/"
     mv "${FILES_DIR}/wasm/venus-gui-v2.html" "${FILES_DIR}/wasm/index.html"
