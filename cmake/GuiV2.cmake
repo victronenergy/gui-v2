@@ -17,8 +17,8 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
             "${CMAKE_CURRENT_SOURCE_DIR}/images/victronenergy-light.svg"
             "${CMAKE_CURRENT_BINARY_DIR}/victronenergy-light.svg"
        COMMAND ${CMAKE_COMMAND} -E copy
-            "${CMAKE_CURRENT_SOURCE_DIR}/images/mockup.svg"
-            "${CMAKE_CURRENT_BINARY_DIR}/mockup.svg"
+            "${CMAKE_CURRENT_SOURCE_DIR}/images/device-frame.svg"
+            "${CMAKE_CURRENT_BINARY_DIR}/device-frame.svg"
     )
 elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
     list(APPEND venusCompileFlags  ${UNIX_COMPILE_FLAGS})
