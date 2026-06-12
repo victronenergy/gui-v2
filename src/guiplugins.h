@@ -276,7 +276,7 @@ class GuiPluginIntegrationModel : public QAbstractListModel, public QQmlParserSt
 	// filtering
 	Q_PROPERTY(GuiPluginLoader::IntegrationType type READ type WRITE setType NOTIFY typeChanged)
 	Q_PROPERTY(QString productId READ productId WRITE setProductId NOTIFY productIdChanged)
-	// TODO: add filtering for cardType also.
+	Q_PROPERTY(GuiPluginLoader::QuickAccessPaneCardType cardType READ cardType WRITE setCardType NOTIFY cardTypeChanged)
 
 public:
 	enum RoleNames {
@@ -304,11 +304,14 @@ public:
 	void setType(GuiPluginLoader::IntegrationType t);
 	QString productId() const;
 	void setProductId(const QString &productId);
+	GuiPluginLoader::QuickAccessPaneCardType cardType() const;
+	void setCardType(GuiPluginLoader::QuickAccessPaneCardType ct);
 
 Q_SIGNALS:
 	void countChanged();
 	void typeChanged();
 	void productIdChanged();
+	void cardTypeChanged();
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
@@ -322,6 +325,7 @@ private:
 	QVector<GuiPluginIntegration> m_integrations;
 	QString m_productId;
 	GuiPluginLoader::IntegrationType m_type = GuiPluginLoader::InvalidIntegrationType;
+	GuiPluginLoader::QuickAccessPaneCardType m_cardType = GuiPluginLoader::InvalidCardType;
 	bool m_complete = false;
 };
 
