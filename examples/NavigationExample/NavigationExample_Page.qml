@@ -6,6 +6,18 @@ Page {
 	id: root
 
 	focusPolicy: Qt.TabFocus
+
+	onActiveFocusChanged: {
+		if (activeFocus && Global.keyNavigationEnabled) {
+			const fromBottom = (Global.mainView?.swipeView?.focusEdgeHint ?? 0) === Qt.BottomEdge
+			if (fromBottom) {
+				waterTile.forceActiveFocus()
+			} else {
+				batteryTile.forceActiveFocus()
+			}
+		}
+	}
+
 	property string systemUid: Global.system ? Global.system.serviceUid : ""
 	property bool fakePumpOn: false
 

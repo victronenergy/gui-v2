@@ -97,22 +97,30 @@ ObjectModel {
 				required property url icon
 				required property url url
 
-		active: true
-		sourceComponent: SwipeViewPage {
-			view: root.view
-			topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
-			title: pluginPageDelegate.title !== ""
-				? pluginPageDelegate.title
-				: pluginPageDelegate.pluginName
-			iconSource: pluginPageDelegate.icon
-			url: pluginPageDelegate.url
-			focusPolicy: Qt.TabFocus
+	active: true
+	sourceComponent: SwipeViewPage {
+		id: pluginSwipePage
+		view: root.view
+		topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
+		title: pluginPageDelegate.title !== ""
+			? pluginPageDelegate.title
+			: pluginPageDelegate.pluginName
+		iconSource: pluginPageDelegate.icon
+		url: pluginPageDelegate.url
+		focusPolicy: Qt.TabFocus
 
-				Loader {
-					anchors.fill: parent
-					source: pluginPageDelegate.url
-				}
+		onActiveFocusChanged: {
+			if (activeFocus && Global.keyNavigationEnabled && pluginContentLoader.item) {
+				pluginContentLoader.item.forceActiveFocus()
 			}
+		}
+
+			Loader {
+				id: pluginContentLoader
+				anchors.fill: parent
+				source: pluginPageDelegate.url
+			}
+		}
 			}
 		}
 	}
