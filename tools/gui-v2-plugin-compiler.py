@@ -154,7 +154,7 @@ if __name__ == '__main__':
     parser.add_argument('-x', '--max-required-version', default='', help='The maximum gui-v2 version compatible with this plugin')
     parser.add_argument('-s', '--settings', default='', help='The main settings page .qml associated with your plugin')
     parser.add_argument('-d', '--devicelist', required=False, nargs='+', action='append', help='Triplet of product id, settings page .qml, and title text (or translation id)')
-    parser.add_argument('-g', '--navigation', default='')
+    parser.add_argument('-g', '--navigation', required=False, nargs='+', action='append', help='2-4 args: page.qml icon.svg [title] [icon_active.svg]')
     parser.add_argument('-q', '--quickaccess', default='')
     parser.add_argument('-c', '--card', default='')
     parser.add_argument('-f', '--filter-empty-sources', action='store_true', help='Strip empty source entries from .ts files')
@@ -231,8 +231,45 @@ if __name__ == '__main__':
                     "title": integration[2]
                 }
                 integrations.append(devicelistIntegration)
-    if len(args.navigation) > 0:
-        print("TODO: navigation...")
+    if args.navigation:
+        for integration in args.navigation:
+            if len(integration) < 2 or len(integration) > 4:
+                print("\n\nERROR: --navigation requires 2-4 args: page.qml icon.svg [title] [icon_active.svg]")
+                sys.exit(1)
+            pageQml = integration[0]
+            iconFile = integration[1]
+            title = ''
+            iconActiveFile = ''
+            for extra in integration[2:]:
+                if extra.endswith('.svg') or extra.endswith('.png'):
+                    iconActiveFile = extra
+                else:
+                    title = extra
+            if not pageQml.endswith('.qml'):
+                print("\n\nERROR: Navigation page must be a .qml file")
+                sys.exit(1)
+            if not os.path.exists(pageQml):
+                print(f"\n\nERROR: Navigation page \"{pageQml}\" not found in current directory")
+                sys.exit(1)
+            if not (iconFile.endswith('.svg') or iconFile.endswith('.png')):
+                print("\n\nERROR: Navigation icon must be a .svg or .png file")
+                sys.exit(1)
+            if not os.path.exists(iconFile):
+                print(f"\n\nERROR: Navigation icon \"{iconFile}\" not found in current directory")
+                sys.exit(1)
+            navIntegration = {
+                "type": 3,
+                "url": "qrc:/" + args.name + "/" + pageQml,
+                "icon": "qrc:/" + args.name + "/" + iconFile
+            }
+            if len(title) > 0:
+                navIntegration["title"] = title
+            if len(iconActiveFile) > 0:
+                if not os.path.exists(iconActiveFile):
+                    print(f"\n\nERROR: Navigation active icon \"{iconActiveFile}\" not found in current directory")
+                    sys.exit(1)
+                navIntegration["iconActive"] = "qrc:/" + args.name + "/" + iconActiveFile
+            integrations.append(navIntegration)
     if len(args.quickaccess) > 0:
         print("TODO: quick access...")
     if len(args.card) > 0:
