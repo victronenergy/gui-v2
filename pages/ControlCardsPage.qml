@@ -141,6 +141,40 @@ Page {
 		}
 	}
 
+	// Plugin QuickAccessPaneCard (type 5, cardType=ControlsCard) injected
+	// after built-in control cards.
+	GuiPluginIntegrationModel {
+		id: pluginControlCards
+		type: GuiPluginLoader.QuickAccessPaneCard
+		cardType: GuiPluginLoader.ControlsCard
+	}
+
+	Row {
+		id: pluginControlCardsRow
+
+		anchors {
+			left: cardsView.left
+			top: cardsView.bottom
+			topMargin: pluginControlCards.count > 0 ? Theme.geometry_controlCardsPage_spacing : 0
+		}
+		spacing: Theme.geometry_controlCardsPage_spacing
+		visible: pluginControlCards.count > 0
+
+		Repeater {
+			model: pluginControlCards
+
+			delegate: Loader {
+				required property int index
+				required property url url
+				required property string pluginName
+
+				width: root.cardWidth
+				height: Theme.screenSize === Theme.Portrait ? implicitHeight : cardsView.height
+				source: url
+			}
+		}
+	}
+
 	Loader {
 		id: emptyPageLoader
 		anchors {
@@ -148,7 +182,7 @@ Page {
 			leftMargin: Theme.geometry_page_content_horizontalMargin
 			rightMargin: Theme.geometry_page_content_horizontalMargin
 		}
-		active: cardsView.count === 0 && !cardsView.headerItem.active
+		active: cardsView.count === 0 && !cardsView.headerItem.active && pluginControlCards.count === 0
 		sourceComponent: EmptyPageItem {
 			//% "Controls"
 			titleText: qsTrId("controlcards_empty_title")
