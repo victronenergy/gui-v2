@@ -166,7 +166,7 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 			readonly property bool hasPluginPanes: !root.pageStack.opened && pluginQuickAccessModelPortrait.count > 0
 			model: pluginQuickAccessModelPortrait
 
-		delegate: StatusBarButton {
+			delegate: StatusBarButton {
 				id: pluginPaneButtonPortrait
 
 				required property int index
@@ -175,7 +175,7 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 				readonly property url pluginIcon: pluginQuickAccessModelPortrait.integrationAt(index).icon
 				readonly property url pluginIconActive: pluginQuickAccessModelPortrait.integrationAt(index).iconActive
 
-					readonly property bool paneOpened: Global.mainView.cardsActive
+				readonly property bool paneOpened: Global.mainView.cardsActive
 						&& Global.mainView.cardsLoader.sourceComponent === _portraitPaneComponent
 
 				visible: !(Global.mainView?.cardsActive ?? false) || paneOpened
@@ -200,25 +200,25 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 					}
 				}
 
-			Component {
-				id: _portraitPaneComponent
+				Component {
+					id: _portraitPaneComponent
 
-				Page {
-					title: pluginPaneButtonPortrait.pluginName
-					focusPolicy: Qt.TabFocus
+					Page {
+						title: pluginPaneButtonPortrait.pluginName
+						focusPolicy: Qt.TabFocus
 
-					onActiveFocusChanged: {
-						if (activeFocus && Global.keyNavigationEnabled && _portraitPaneContentLoader.item) {
-							_portraitPaneContentLoader.item.forceActiveFocus()
+						onActiveFocusChanged: {
+							if (activeFocus && Global.keyNavigationEnabled && _portraitPaneContentLoader.item) {
+								_portraitPaneContentLoader.item.forceActiveFocus()
+							}
+						}
+
+						Loader {
+							id: _portraitPaneContentLoader
+							anchors.fill: parent
+							source: pluginPaneButtonPortrait.url
 						}
 					}
-
-					Loader {
-						id: _portraitPaneContentLoader
-						anchors.fill: parent
-						source: pluginPaneButtonPortrait.url
-					}
-				}
 				}
 			}
 		}

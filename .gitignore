@@ -3,9 +3,6 @@ CMakeLists.txt.user.*
 src/themeobjects.h
 build/
 build-*/
-.idea
-*.iml
-.DS_Store
 
 # Plugin compiler build artifacts (recompile with tools/gui-v2-plugin-compiler.py)
 examples/**/*.json
