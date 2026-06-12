@@ -200,17 +200,25 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 					}
 				}
 
-				Component {
-					id: _portraitPaneComponent
+			Component {
+				id: _portraitPaneComponent
 
-					Page {
-						title: pluginPaneButtonPortrait.pluginName
+				Page {
+					title: pluginPaneButtonPortrait.pluginName
+					focusPolicy: Qt.TabFocus
 
-						Loader {
-							anchors.fill: parent
-							source: pluginPaneButtonPortrait.url
+					onActiveFocusChanged: {
+						if (activeFocus && Global.keyNavigationEnabled && _portraitPaneContentLoader.item) {
+							_portraitPaneContentLoader.item.forceActiveFocus()
 						}
 					}
+
+					Loader {
+						id: _portraitPaneContentLoader
+						anchors.fill: parent
+						source: pluginPaneButtonPortrait.url
+					}
+				}
 				}
 			}
 		}
