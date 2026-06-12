@@ -137,8 +137,7 @@ There are currently 5 supported types of integrations:
 		  existing quick action pane views (i.e. either a
 		  controls card, or a switches card).
 
-** TODO: actually support 3/4/5. **
-In the prototype, only type 1 and 2 are supported.
+All five integration types are supported.
 */
 class GuiPluginIntegration
 {

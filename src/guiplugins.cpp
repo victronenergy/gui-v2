@@ -743,6 +743,7 @@ void GuiPluginLoader::populatePlugins()
 				pi.m_title = integrationTitle;
 			} else if (integrationType == GuiPluginLoader::NavigationPage || integrationType == GuiPluginLoader::QuickAccessPane) {
 				pi.m_icon = QUrl(integrationIcon);
+				pi.m_title = integrationTitle;
 			} else if (integrationType == GuiPluginLoader::QuickAccessPaneCard) {
 				pi.m_cardType = static_cast<GuiPluginLoader::QuickAccessPaneCardType>(integrationCardType);
 			}
