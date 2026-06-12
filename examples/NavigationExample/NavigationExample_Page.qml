@@ -5,6 +5,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	focus: true
 	focusPolicy: Qt.TabFocus
 
 	onActiveFocusChanged: {

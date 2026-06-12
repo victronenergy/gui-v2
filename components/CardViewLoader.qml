@@ -26,6 +26,12 @@ Loader {
 	opacity: 0.0
 	enabled: viewActive || outAnimation.running
 
+	onActiveFocusChanged: {
+		if (activeFocus && item) {
+			item.forceActiveFocus()
+		}
+	}
+
 	SequentialAnimation {
 		id: inAnimation
 		running: root.viewActive
