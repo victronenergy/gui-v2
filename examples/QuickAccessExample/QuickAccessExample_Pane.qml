@@ -6,7 +6,15 @@ Page {
 	id: root
 
 	title: "Quick Access"
+	focus: true
+	focusPolicy: Qt.TabFocus
 	property bool fakePumpOn: false
+
+	onActiveFocusChanged: {
+		if (activeFocus && Global.keyNavigationEnabled) {
+			batteryTile.forceActiveFocus()
+		}
+	}
 
 	function fmtPower(w) {
 		if (isNaN(w)) return "--"
@@ -31,12 +39,16 @@ Page {
 
 		// ── Battery ──
 		Rectangle {
+			id: batteryTile
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			radius: root.tileRadius
 			color: root.tileBackground
-			border.color: root.tileBorder
-			border.width: root.tileBorderWidth
+			border.color: activeFocus ? Theme.color_focus_highlight : root.tileBorder
+			border.width: activeFocus ? 3 : root.tileBorderWidth
+			activeFocusOnTab: true
+			KeyNavigation.right: solarTile
+			KeyNavigation.down: waterTile
 
 			Column {
 				anchors.fill: parent
@@ -75,12 +87,16 @@ Page {
 
 		// ── Solar ──
 		Rectangle {
+			id: solarTile
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			radius: root.tileRadius
 			color: root.tileBackground
-			border.color: root.tileBorder
-			border.width: root.tileBorderWidth
+			border.color: activeFocus ? Theme.color_focus_highlight : root.tileBorder
+			border.width: activeFocus ? 3 : root.tileBorderWidth
+			activeFocusOnTab: true
+			KeyNavigation.left: batteryTile
+			KeyNavigation.down: pumpTile
 
 			Column {
 				anchors.fill: parent
@@ -119,12 +135,16 @@ Page {
 
 		// ── Water ──
 		Rectangle {
+			id: waterTile
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			radius: root.tileRadius
 			color: root.tileBackground
-			border.color: root.tileBorder
-			border.width: root.tileBorderWidth
+			border.color: activeFocus ? Theme.color_focus_highlight : root.tileBorder
+			border.width: activeFocus ? 3 : root.tileBorderWidth
+			activeFocusOnTab: true
+			KeyNavigation.right: pumpTile
+			KeyNavigation.up: batteryTile
 
 			Column {
 				anchors.fill: parent
@@ -174,12 +194,19 @@ Page {
 
 		// ── Fake Button ──
 		Rectangle {
+			id: pumpTile
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			radius: root.tileRadius
 			color: root.fakePumpOn ? Theme.color_ok : root.tileBackground
-			border.color: root.tileBorder
-			border.width: root.tileBorderWidth
+			border.color: activeFocus ? Theme.color_focus_highlight : root.tileBorder
+			border.width: activeFocus ? 3 : root.tileBorderWidth
+			activeFocusOnTab: true
+			KeyNavigation.left: waterTile
+			KeyNavigation.up: solarTile
+
+			Keys.onSpacePressed: root.fakePumpOn = !root.fakePumpOn
+			Keys.onReturnPressed: root.fakePumpOn = !root.fakePumpOn
 
 			Behavior on color {
 				ColorAnimation { duration: 200 }
