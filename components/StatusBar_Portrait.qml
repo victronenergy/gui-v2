@@ -88,7 +88,15 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 		StatusBarButton {
 			id: controlCardsButton
 
-			readonly property int buttonType: Global.mainView.currentPage?.topLeftButton ?? VenusOS.StatusBar_LeftButton_None
+			readonly property bool controlsPaneActive: (Global.mainView?.cardsActive ?? false)
+					&& Global.mainView.cardsLoader.sourceComponent === Global.mainView.controlCardsComponent
+
+			readonly property int buttonType: {
+				if (controlsPaneActive) {
+					return VenusOS.StatusBar_LeftButton_ControlsActive
+				}
+				return Global.mainView.currentPage?.topLeftButton ?? VenusOS.StatusBar_LeftButton_None
+			}
 
 			leftInset: Theme.geometry_statusBar_spacing / 2
 			rightInset: Theme.geometry_statusBar_spacing / 2
@@ -97,7 +105,7 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 				: buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? "qrc:/images/icon_controls_on_32.svg"
 				: ""
 			enabled: !breadcrumbs.enabled && buttonType !== VenusOS.StatusBar_LeftButton_None
-			visible: enabled
+			visible: enabled && (!(Global.mainView?.cardsActive ?? false) || controlsPaneActive)
 
 			Layout.alignment: Qt.AlignTop
 			KeyNavigation.right: auxButton
@@ -119,20 +127,21 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 		StatusBarButton {
 			id: auxButton
 
-			readonly property bool auxCardsOpened: Global.mainView.cardsActive
-					&& controlCardsButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
+			readonly property bool auxCardsOpened: (Global.mainView?.cardsActive ?? false)
+					&& Global.mainView.cardsLoader.sourceComponent === Global.mainView.auxCardsComponent
 
-			// Expand clickable area on right and bottom edges, and on left if leftButton is hidden.
 			leftInset: Theme.geometry_statusBar_spacing / 2
-			rightInset: Theme.geometry_statusBar_horizontalMargin
+			rightInset: pluginPaneButtons.hasPluginPanes ? 0 : Theme.geometry_statusBar_horizontalMargin
 			bottomInset: Theme.geometry_statusBar_spacing
 
-			visible: ((!root.pageStack.opened && Global.switches.groups.count > 0)
-					|| auxCardsOpened) // allow cards to be closed if all switches are disconnected while opened
-			icon.source: controlCardsButton.buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? ""
-					: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
+			visible: (!root.pageStack.opened && Global.switches.groups.count > 0
+					&& !(Global.mainView?.cardsActive ?? false))
+					|| auxCardsOpened
+			icon.source: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
 					: "qrc:/images/icon_smartswitch_off_32.svg"
-			enabled: !breadcrumbs.enabled && controlCardsButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
+			enabled: !breadcrumbs.enabled
+			KeyNavigation.right: pluginPaneButtons.hasPluginPanes && pluginPaneButtons.count > 0
+					? pluginPaneButtons.itemAt(0) : null
 
 			Layout.alignment: Qt.AlignTop
 
@@ -141,6 +150,67 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 					root.cardsDeactivated()
 				} else {
 					root.auxCardsActivated()
+				}
+			}
+		}
+
+		// Plugin QuickAccessPane (type 4) buttons
+		GuiPluginIntegrationModel {
+			id: pluginQuickAccessModelPortrait
+			type: GuiPluginLoader.QuickAccessPane
+		}
+
+		Repeater {
+			id: pluginPaneButtons
+
+			readonly property bool hasPluginPanes: !root.pageStack.opened && pluginQuickAccessModelPortrait.count > 0
+			model: pluginQuickAccessModelPortrait
+
+		delegate: StatusBarButton {
+				id: pluginPaneButtonPortrait
+
+				required property int index
+				required property string pluginName
+				required property url url
+				readonly property url pluginIcon: pluginQuickAccessModelPortrait.integrationAt(index).icon
+				readonly property url pluginIconActive: pluginQuickAccessModelPortrait.integrationAt(index).iconActive
+
+					readonly property bool paneOpened: Global.mainView.cardsActive
+						&& Global.mainView.cardsLoader.sourceComponent === _portraitPaneComponent
+
+				visible: !(Global.mainView?.cardsActive ?? false) || paneOpened
+				leftInset: Theme.geometry_statusBar_spacing / 2
+				rightInset: index === pluginPaneButtons.count - 1 ? Theme.geometry_statusBar_horizontalMargin : Theme.geometry_statusBar_spacing / 2
+				bottomInset: Theme.geometry_statusBar_spacing
+				icon.cache: false
+				icon.source: (paneOpened && String(pluginIconActive).length > 0)
+						? pluginPaneButtonPortrait.pluginIconActive : pluginPaneButtonPortrait.pluginIcon
+				enabled: !breadcrumbs.enabled
+				KeyNavigation.left: index > 0 ? pluginPaneButtons.itemAt(index - 1) : auxButton
+				KeyNavigation.right: index < pluginPaneButtons.count - 1
+						? pluginPaneButtons.itemAt(index + 1) : null
+
+				Layout.alignment: Qt.AlignTop
+
+				onClicked: {
+					if (paneOpened) {
+						Global.mainView.cardsLoader.hide()
+					} else {
+						Global.mainView.cardsLoader.show(_portraitPaneComponent)
+					}
+				}
+
+				Component {
+					id: _portraitPaneComponent
+
+					Page {
+						title: pluginPaneButtonPortrait.pluginName
+
+						Loader {
+							anchors.fill: parent
+							source: pluginPaneButtonPortrait.url
+						}
+					}
 				}
 			}
 		}
