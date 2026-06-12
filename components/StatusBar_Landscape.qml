@@ -224,18 +224,26 @@ FocusScope {
 					}
 				}
 
-				Component {
-					id: _paneComponent
+			Component {
+				id: _paneComponent
 
-					Page {
-						title: pluginPaneButton.pluginName
+				Page {
+					title: pluginPaneButton.pluginName
+					focusPolicy: Qt.TabFocus
 
-						Loader {
-							anchors.fill: parent
-							source: pluginPaneButton.url
+					onActiveFocusChanged: {
+						if (activeFocus && Global.keyNavigationEnabled && _paneContentLoader.item) {
+							_paneContentLoader.item.forceActiveFocus()
 						}
 					}
+
+					Loader {
+						id: _paneContentLoader
+						anchors.fill: parent
+						source: pluginPaneButton.url
+					}
 				}
+			}
 			}
 		}
 	}
