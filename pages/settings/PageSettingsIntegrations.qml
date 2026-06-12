@@ -302,35 +302,35 @@ Page {
 							}
 							return null
 						}
-					readonly property var integrationTypes: {
-						var types = []
-						if (integrations !== null && integrations.length > 0) {
-							for (let i = 0; i < integrations.length; ++i) {
-								var t = integrations[i].type
-								if (types.indexOf(t) === -1)
-									types.push(t)
+						readonly property var integrationTypes: {
+							var types = []
+							if (integrations !== null && integrations.length > 0) {
+								for (let i = 0; i < integrations.length; ++i) {
+									var t = integrations[i].type
+									if (types.indexOf(t) === -1)
+										types.push(t)
+								}
 							}
+							return types
 						}
-						return types
-					}
 
-					text: switchNavigationItem.name
-					secondaryText: {
-						var parts = []
-						if (integrationTypes.indexOf(GuiPluginLoader.DeviceListSettingsPage) >= 0)
-							//% "Integrates with the device list"
-							parts.push(qsTrId("pagesettingsintegrations_uiplugin_integrates_with_devicelist"))
-						if (integrationTypes.indexOf(GuiPluginLoader.NavigationPage) >= 0)
-							//% "Navigation page"
-							parts.push(qsTrId("pagesettingsintegrations_uiplugin_navigation_page"))
-						if (integrationTypes.indexOf(GuiPluginLoader.QuickAccessPane) >= 0)
-							//% "Quick access pane"
-							parts.push(qsTrId("pagesettingsintegrations_uiplugin_quick_access_pane"))
-						if (integrationTypes.indexOf(GuiPluginLoader.QuickAccessPaneCard) >= 0)
-							//% "Quick access card"
-							parts.push(qsTrId("pagesettingsintegrations_uiplugin_quick_access_card"))
-						return parts.join(", ")
-					}
+						text: switchNavigationItem.name
+						secondaryText: {
+							var parts = []
+							if (integrationTypes.indexOf(GuiPluginLoader.DeviceListSettingsPage) >= 0)
+								//% "Integrates with the device list"
+								parts.push(qsTrId("pagesettingsintegrations_uiplugin_integrates_with_devicelist"))
+							if (integrationTypes.indexOf(GuiPluginLoader.NavigationPage) >= 0)
+								//% "Navigation page"
+								parts.push(qsTrId("pagesettingsintegrations_uiplugin_navigation_page"))
+							if (integrationTypes.indexOf(GuiPluginLoader.QuickAccessPane) >= 0)
+								//% "Quick access pane"
+								parts.push(qsTrId("pagesettingsintegrations_uiplugin_quick_access_pane"))
+							if (integrationTypes.indexOf(GuiPluginLoader.QuickAccessPaneCard) >= 0)
+								//% "Quick access card"
+								parts.push(qsTrId("pagesettingsintegrations_uiplugin_quick_access_card"))
+							return parts.join(", ")
+						}
 						indicatorColor: switchNavigationItem.color
 						pageSource: switchNavigationItem.pluginSettingsPageIntegration?.url ?? ""
 						interactive: switchNavigationItem.pluginSettingsPageIntegration !== null
