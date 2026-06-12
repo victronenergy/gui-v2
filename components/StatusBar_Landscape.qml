@@ -171,44 +171,44 @@ FocusScope {
 
 			model: pluginQuickAccessModel
 
-		delegate: StatusBarButton {
-			id: pluginPaneButton
+			delegate: StatusBarButton {
+				id: pluginPaneButton
 
-			required property int index
-			required property string pluginName
-			required property url url
-			readonly property url pluginIcon: pluginQuickAccessModel.integrationAt(index).icon
-			readonly property url pluginIconActive: pluginQuickAccessModel.integrationAt(index).iconActive
+				required property int index
+				required property string pluginName
+				required property url url
+				readonly property url pluginIcon: pluginQuickAccessModel.integrationAt(index).icon
+				readonly property url pluginIconActive: pluginQuickAccessModel.integrationAt(index).iconActive
 
-			readonly property bool paneOpened: Global.mainView.cardsActive
-					&& Global.mainView.cardsLoader.sourceComponent === _paneComponent
+				readonly property bool paneOpened: Global.mainView.cardsActive
+						&& Global.mainView.cardsLoader.sourceComponent === _paneComponent
 
-			activeFocusOnTab: true
-			visible: !(Global.mainView?.cardsActive ?? false) || paneOpened
-			rightInset: Theme.geometry_statusBar_spacing
-			bottomInset: Theme.geometry_statusBar_spacing
-			icon.cache: false
-			icon.source: (paneOpened && String(pluginIconActive).length > 0)
-					? pluginPaneButton.pluginIconActive : pluginPaneButton.pluginIcon
+				activeFocusOnTab: true
+				visible: !(Global.mainView?.cardsActive ?? false) || paneOpened
+				rightInset: Theme.geometry_statusBar_spacing
+				bottomInset: Theme.geometry_statusBar_spacing
+				icon.cache: false
+				icon.source: (paneOpened && String(pluginIconActive).length > 0)
+						? pluginPaneButton.pluginIconActive : pluginPaneButton.pluginIcon
 
-			Keys.onLeftPressed: function(event) {
-				if (index > 0) {
-					pluginRepeater.itemAt(index - 1).forceActiveFocus()
-				} else if (auxButton.visible) {
-					auxButton.forceActiveFocus()
-				} else if (leftButton.visible && leftButton.enabled) {
-					leftButton.forceActiveFocus()
+				Keys.onLeftPressed: function(event) {
+					if (index > 0) {
+						pluginRepeater.itemAt(index - 1).forceActiveFocus()
+					} else if (auxButton.visible) {
+						auxButton.forceActiveFocus()
+					} else if (leftButton.visible && leftButton.enabled) {
+						leftButton.forceActiveFocus()
+					}
+					event.accepted = true
 				}
-				event.accepted = true
-			}
-			Keys.onRightPressed: function(event) {
-				if (index < pluginRepeater.count - 1) {
-					pluginRepeater.itemAt(index + 1).forceActiveFocus()
-				} else if (wifiButton.visible && wifiButton.enabled) {
-					wifiButton.forceActiveFocus()
+				Keys.onRightPressed: function(event) {
+					if (index < pluginRepeater.count - 1) {
+						pluginRepeater.itemAt(index + 1).forceActiveFocus()
+					} else if (wifiButton.visible && wifiButton.enabled) {
+						wifiButton.forceActiveFocus()
+					}
+					event.accepted = true
 				}
-				event.accepted = true
-			}
 
 				onActiveFocusChanged: {
 					if (activeFocus) {
@@ -224,26 +224,26 @@ FocusScope {
 					}
 				}
 
-			Component {
-				id: _paneComponent
+				Component {
+					id: _paneComponent
 
-				Page {
-					title: pluginPaneButton.pluginName
-					focusPolicy: Qt.TabFocus
+					Page {
+						title: pluginPaneButton.pluginName
+						focusPolicy: Qt.TabFocus
 
-					onActiveFocusChanged: {
-						if (activeFocus && Global.keyNavigationEnabled && _paneContentLoader.item) {
-							_paneContentLoader.item.forceActiveFocus()
+						onActiveFocusChanged: {
+							if (activeFocus && Global.keyNavigationEnabled && _paneContentLoader.item) {
+								_paneContentLoader.item.forceActiveFocus()
+							}
+						}
+
+						Loader {
+							id: _paneContentLoader
+							anchors.fill: parent
+							source: pluginPaneButton.url
 						}
 					}
-
-					Loader {
-						id: _paneContentLoader
-						anchors.fill: parent
-						source: pluginPaneButton.url
-					}
 				}
-			}
 			}
 		}
 	}
