@@ -10,6 +10,65 @@ import QtTest
 TestCase {
 	name: "UnitsTest"
 
+	function expectedAdjustedQuantity(unit, value, fixedNumbers, fixedNumberScale) {
+		const baseUnitSymbol = Units.defaultUnitString(unit)
+
+		if (isNaN(value)) {
+			return { number: "--", unit: baseUnitSymbol, scale: VenusOS.Units_Scale_None }
+		} else if (unit === VenusOS.Units_Watt && Math.abs(value) < 1) {
+			// For Watts, values < abs(1.0) are always converted to zero, regardless of decimals.
+			return { number: "0", unit: baseUnitSymbol, scale: VenusOS.Units_Scale_None }
+		}
+
+		// Scale up if there are more than 4 digits.
+		let scale = VenusOS.Units_Scale_None
+		let scaledValue = value
+		if (Math.abs(value) > 9999) {
+			while (scale < Units.maximumUnitScale(unit)) {
+				scaledValue /= 1000
+				scale++
+				if (Math.abs(scaledValue) <= 9999) {
+					break
+				}
+			}
+		}
+
+		// Now set the desired fixed number depending on the unit type.
+		let fixedNumber
+		const unitsWith4Precision = [ VenusOS.Units_AmpHour, VenusOS.Units_Energy_KiloWattHour, VenusOS.Units_VoltAmpere, VenusOS.Units_VoltAmpereReactive, VenusOS.Units_Watt ]
+		if (Math.abs(value) > 9999 && unitsWith4Precision.indexOf(unit) >= 0) {
+			fixedNumber = scaledValue.toPrecision(4)
+		} else {
+			let decimals
+			if (Math.abs(value) > 100 && Math.abs(value) <= 9999 && (unit === VenusOS.Units_Amp || unit === VenusOS.Units_Volt_DC)) {
+				// Use 0 decimals when over 100 A or 100 V (DC).
+				decimals = 0
+			} else {
+				decimals = Units.defaultUnitDecimals(unit)
+			}
+			fixedNumber = scaledValue.toFixed(decimals)
+		}
+
+		if (parseInt(fixedNumber) === parseFloat(fixedNumber)) {
+			const fixedWithoutDecimals = scaledValue.toFixed(0)
+			if ((scaledValue < 0 && fixedWithoutDecimals.length === 5) // disregard minus symbol if present
+				   || (scaledValue > 0 && fixedWithoutDecimals.length === 4)) {
+				// Use zero decimals if that would give us the same value with 4 digits.
+				fixedNumber = fixedWithoutDecimals
+			}
+		}
+
+		if (fixedNumber === "-0") {
+			fixedNumber = "0"
+		}
+
+		return {
+			number: fixedNumber,
+			unit: Units.scaleToString(scale) + baseUnitSymbol,
+			scale: scale
+		}
+	}
+
 	function test_getDisplayText_data() {
 		function dataRow(unit, value, scale, fixedNumbers) {
 			const symbol = Units.defaultUnitString(unit)
@@ -32,9 +91,11 @@ TestCase {
 				default: break;
 			}
 			let expectedSymbol = Units.scaleToString(scale) + symbol
-			const tag = "%1 %2 -> %3 %4"
+			const adjusted = expectedAdjustedQuantity(unit, value, fixedNumbers, scale)
+			const tag = "%1 %2 -> nonAdjusted=%3%4, adjusted=%5%6"
 					.arg(value.toString()).arg(unitTag)
-					.arg("[%1]".arg(fixedNumbers.join(", "))).arg(expectedSymbol)
+					.arg(fixedNumbers[Units.defaultUnitDecimals(unit)]).arg(expectedSymbol)
+					.arg(adjusted.number).arg(adjusted.unit)
 			return {
 				tag: tag,
 				unit: unit,
@@ -43,7 +104,8 @@ TestCase {
 					fixedNumbers: fixedNumbers,
 					symbol: expectedSymbol,
 					scale: scale,
-				}
+				},
+				adjusted: adjusted
 			}
 		}
 
@@ -52,8 +114,8 @@ TestCase {
 			return [ v.toFixed(0), v.toFixed(1), v.toFixed(2), v.toFixed(3) ]
 		}
 
-		const unscaledTestValues = [ 0, 0.1234, 0.8888, 0.9999, 1, 88.8888, 99.9999, 123.4567, 888.8888, 999.9999, 1234.5678, 8888.8888, 9999.9999 ]
-		const scaledTestValues = [ 12345.6789, 88888.8888, 99999.9999, 123456.7899, 888888.8888, 999999.9999 ]
+		const unscaledTestValues = [ 0, 0.1234, 0.8888, 0.9999, 1, 12, 88.8888, 99.9999, 123, 123.4567, 888.8888, 999.9999, 1234, 1234.5678, 8888.8888 ]
+		const scaledTestValues = [  9999.9999, 12345.6789, 88888.8888, 99999.9999, 123456.7899, 888888.8888, 999999.9999 ]
 
 		// Expected results for unscaled values.
 		const expectedUnscaled = unscaledTestValues.map(v => ({ value: v, fixedNumbers: fixedNumbersForValue(v) }))
@@ -65,6 +127,7 @@ TestCase {
 		// Expected results for values that are expected to scale to the kilo range.
 		// E.g. for value 12345.6789, the test row is { value: 12345.6789, fixedNumbers: [ "12", "12.3", "12.35, "12.346" ] }
 		const expectedKilo = scaledTestValues.map(v => ({ value: v, fixedNumbers: fixedNumbersForValue(v / 1000) }))
+		const expectedNegativeKilo = scaledTestValues.map(v => ({ value: v * -1, fixedNumbers: fixedNumbersForValue(v / 1000 * -1) }))
 
 		// Expected results for values that are expected to scale to the mega range.
 		// E.g. for value 12345.6789, the test row is { value: 12345678.9, fixedNumbers: [ "12", "12.3", "12.35, "12.346" ] }
@@ -97,6 +160,9 @@ TestCase {
 				for (expectedInfo of expectedKilo) {
 					data.push(dataRow(unit, expectedInfo.value, VenusOS.Units_Scale_Kilo, expectedInfo.fixedNumbers))
 				}
+				for (expectedInfo of expectedNegativeKilo) {
+					data.push(dataRow(unit, expectedInfo.value, VenusOS.Units_Scale_Kilo, expectedInfo.fixedNumbers))
+				}
 			}
 			if (Units.maximumUnitScale(unit) >= VenusOS.Units_Scale_Mega) {
 				for (expectedInfo of expectedMega) {
@@ -124,6 +190,7 @@ TestCase {
 			VenusOS.Units_Time_Minute, // as above
 			VenusOS.Units_Time_Second, // as above
 		]
+
 		for (let i = 0; i <= VenusOS.Units_Type_Max; ++i) {
 			if (exceptions.indexOf(i) < 0) {
 				addDataRows(i)
@@ -133,21 +200,18 @@ TestCase {
 	}
 
 	function test_getDisplayText(data) {
-		// TODO currently for Watts, getDisplayText() returns an adjusted number even when
-		// Units.NoDecimalAdjustment is specified. Fix this and restore this test.
-		if (data.unit === VenusOS.Units_Watt) {
-			return
-		}
-
 		const baseUnitSymbol = Units.defaultUnitString(data.unit)
 		let decimals
 		let quantity
+
+		// For Watts, any number between -1 to 1 (exclusive) becomes zero, to ignore potential noise.
+		const overrideExpectedNumber = data.unit === VenusOS.Units_Watt && Math.abs(data.value) < 1 ? "0" : undefined
 
 		// When decimals = -1 and formatHints = NoDecimalAdjustment, the result should contain a
 		// fixed number with the default number of decimals for that unit. The resulting number
 		// should also be scaled if needed (e.g. 123456W becomes 12.34kW).
 		quantity = Units.getDisplayText(data.unit, data.value, -1, Units.NoDecimalAdjustment)
-		compare(quantity.number, data.nonAdjusted.fixedNumbers[Units.defaultUnitDecimals(data.unit)])
+		compare(quantity.number, overrideExpectedNumber ?? data.nonAdjusted.fixedNumbers[Units.defaultUnitDecimals(data.unit)])
 		compare(quantity.unit, Units.scaleToString(data.nonAdjusted.scale) + baseUnitSymbol)
 		compare(quantity.scale, data.nonAdjusted.scale)
 
@@ -155,7 +219,7 @@ TestCase {
 		// for that amount of decimals.
 		for (decimals = 0; decimals <= 3; ++decimals) {
 			quantity = Units.getDisplayText(data.unit, data.value, decimals, Units.NoDecimalAdjustment)
-			compare(quantity.number, data.nonAdjusted.fixedNumbers[decimals], decimals)
+			compare(quantity.number, overrideExpectedNumber ?? data.nonAdjusted.fixedNumbers[decimals])
 			compare(quantity.unit, Units.scaleToString(data.nonAdjusted.scale) + baseUnitSymbol, decimals)
 			compare(quantity.scale, data.nonAdjusted.scale, decimals)
 		}
@@ -170,11 +234,18 @@ TestCase {
 				if (unscaledNumber === "-0") {
 					unscaledNumber = "0"
 				}
-				compare(quantity.number, unscaledNumber) // expect an unscaled value
+				compare(quantity.number, overrideExpectedNumber ?? unscaledNumber) // expect an unscaled value
 				compare(quantity.unit, baseUnitSymbol) // expect the unit symbol without any scaling
 				compare(quantity.scale, VenusOS.Units_Scale_None) // expect no scaling has been applied
 			}
 		}
+
+		// When the default decimals, scaling and decimal adjustments are used, the resulting
+		// number should be scaled and formatted as needed.
+		quantity = Units.getDisplayText(data.unit, data.value)
+		compare(quantity.number, overrideExpectedNumber ?? data.adjusted.number)
+		compare(quantity.unit, data.adjusted.unit)
+		compare(quantity.scale, data.adjusted.scale)
 	}
 
 	function test_timeUnits_data() {
@@ -315,20 +386,23 @@ TestCase {
 		compare(quantity.unit, "TWh")
 
 		// choose scale based on different anchor value
-		quantity = Units.getDisplayText(unit, 19567890123, -1, Units.NoFormatHints, 123456789)
+		quantity = Units.getDisplayText(unit, 19567890123, 0, Units.NoFormatHints, 123456789)
 		compare(quantity.number, "19568")
 		compare(quantity.unit, "GWh")
 	}
 
 	function test_unitFormatHints() {
 		const unit = VenusOS.Units_Metre
-		var quantity = Units.getDisplayText(unit, 19.5678)
+		let quantity
+
+		quantity = Units.getDisplayText(unit, 19.5678)
 		compare(quantity.number, "20")
 		compare(quantity.unit, "m")
 
 		// default internal scaling algorithm ignores passed function parameters
+		// and uses four digits where possible
 		quantity = Units.getDisplayText(unit, 19.5678, 2)
-		compare(quantity.number, "19.6")
+		compare(quantity.number, "19.57")
 		compare(quantity.unit, "m")
 
 		// force internal scaling algorithm to adhere to function parameters
@@ -346,16 +420,14 @@ TestCase {
 		compare(quantity.number, "195.68")
 		compare(quantity.unit, "km")
 
-		// unscaled value correctly round to no decimal places
-		// (TODO: passing in decimal places does not result in displayed decimal places)
+		// unscaled value correctly round to two decimal places
 		quantity = Units.getDisplayText(unit, 195678, 2, Units.NoScaling)
-		compare(quantity.number, "195678")
+		compare(quantity.number, "195678.00")
 		compare(quantity.unit, "m")
 
-		// unscaled value correctly round to no decimal places
-		// (TODO: passing in decimal places rounds to whole value instead of displaying decimals places)
+		// unscaled value correctly round to two decimal places
 		quantity = Units.getDisplayText(unit, 195678.5, 2, Units.NoScaling)
-		compare(quantity.number, "195679")
+		compare(quantity.number, "195678.50")
 		compare(quantity.unit, "m")
 	}
 

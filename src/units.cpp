@@ -64,7 +64,7 @@ static const std::vector<UnitMetaData> UnitTable {
 	{                 "s",   Victron::VenusOS::Enums::Units_Time_Second,                Victron::VenusOS::Enums::Units_Scale_None,      Unit::Default,                  0   },
 	{                "VA",   Victron::VenusOS::Enums::Units_VoltAmpere,                 Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  1   },
 	{               "var",   Victron::VenusOS::Enums::Units_VoltAmpereReactive,         Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  1   },
-	{                 "V",   Victron::VenusOS::Enums::Units_Volt_AC,                    Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  1   },
+	{                 "V",   Victron::VenusOS::Enums::Units_Volt_AC,                    Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  0   },
 	{                 "V",   Victron::VenusOS::Enums::Units_Volt_DC,                    Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  2   },
 	{          CubicMetre,   Victron::VenusOS::Enums::Units_Volume_CubicMetre,          Victron::VenusOS::Enums::Units_Scale_None,      Unit::CubicMetre,               3   },
 	{               "gal",   Victron::VenusOS::Enums::Units_Volume_GallonImperial,      Victron::VenusOS::Enums::Units_Scale_None,      Unit::ImperialGallon,           0   },
@@ -98,6 +98,21 @@ const QLocale *formattingLocale()
 {
 	static const QLocale locale = QLocale::c();
 	return &locale;
+}
+
+bool hasDecimalPlaces(qreal num)
+{
+	return qAbs(num - std::floor(num)) > 0;
+}
+
+qreal roundToDecimals(qreal num, int decimals)
+{
+	// This is useful for rounding the number before converting it to a fixed string with
+	// QString::number(). Otherwise, we get some anomalies e.g. where 10.555 becomes "10.55" instead
+	// of "10.56" due to floating-point conversions.
+	const qreal vFixedMultiplier = std::pow(10, decimals);
+	const int vFixed = qRound(num * vFixedMultiplier);
+	return (1.0*vFixed) / vFixedMultiplier;
 }
 
 }
@@ -277,15 +292,15 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 
 	qreal scaledValue = value;
 
-	// scale value if the unit of measure is scalable
-	// check format hints for display override value
+	// Determine the scaling to be used for the number:
+	// - set quantity.scale to the desired scale
+	// - update scaledValue to match the applied scale
 	const Victron::VenusOS::Enums::Units_Scale maxScale = maximumUnitScale(unit);
 	if (maxScale > VenusOS::Enums::Units_Scale_None && !(formatHints & Units::FormatHint::NoScaling)) {
 		qreal scaleMatch = !qIsNaN(unitMatchValue) ? unitMatchValue : scaledValue;
 
 		// Kilowatthour is already in kilos, normalize to plain watthours before scaling
 		if (unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
-			quantity.unit = QStringLiteral("Wh");
 			scaledValue = 1000.0 * scaledValue;
 			scaleMatch = 1000.0 * scaleMatch;
 		}
@@ -315,62 +330,147 @@ quantityInfo Units::getDisplayTextWithHysteresis(VenusOS::Enums::Units_Type unit
 		// mega/tera/giga format.
 		if (maxScale == VenusOS::Enums::Units_Scale_Kilo) {
 			if (isOverLimit(scaleMatch, VenusOS::Enums::Units_Scale_Kilo, previousScale)) {
-				quantity.unit = QStringLiteral("k%1").arg(defaultUnitString(unit));
 				quantity.scale = VenusOS::Enums::Units_Scale_Kilo;
 				scaledValue = scaledValue / 1000.0;
 			}
 		} else {
 			for (const auto scale : scales) {
 				if (isOverLimit(scaleMatch, scale, previousScale)) {
-					quantity.unit = scaleToString(scale) + quantity.unit;
-					quantity.scale = scale;
 					scaledValue = scaledValue / qPow(10, 3*scale);
+					quantity.scale = scale;
 					break;
 				}
 			}
+		}
 
-			// If value is zero prefer kWh instead of Wh
-			if (scaledValue == 0 && unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
-				quantity.unit = defaultUnitString(unit, formatHints);
+		// If the unscaled value is over 4 digits (i.e. over 9999), scale up to the next magnitude.
+		// Otherwise, 9999.9Hz becomes 10000Hz instead of 10.0kHz.
+		if (quantity.scale < maxScale && qAbs(scaledValue) > 9999 && qIsNaN(unitMatchValue)) {
+			quantity.scale = static_cast<VenusOS::Enums::Units_Scale>(static_cast<int>(quantity.scale) + 1);
+			scaledValue /= 1000.0;
+		}
+
+		// Now that the scale is configured, adjust the unit symbol string accordingly.
+		if (unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
+			// quantity.unit is already set to "kWh" (the default).
+			// If value is zero, prefer the default "kWh" instead of "Wh". For other non-kilo
+			// values, use the appropriate string (Wh, MWh, etc).
+			if (qAbs(scaledValue) > 0 && quantity.scale != VenusOS::Enums::Units_Scale_Kilo) {
+				quantity.unit = scaleToString(quantity.scale) + QStringLiteral("Wh");
+			}
+		} else {
+			quantity.unit = scaleToString(quantity.scale) + quantity.unit;
+		}
+	}
+
+	// Determine the number of decimals.
+	if (!(formatHints & Units::FormatHint::NoDecimalAdjustment)) {
+		if (quantity.scale == VenusOS::Enums::Units_Scale_None && unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
+			// If kilowatt-hours have not been scaled avoid decimals.
+			decimals = 0;
+		} else if ((unit == VenusOS::Enums::Units_Amp || unit == VenusOS::Enums::Units_Volt_DC)
+				&& quantity.scale == VenusOS::Enums::Units_Scale_None
+				&& qAbs(value) > 100
+				&& qRound(qAbs(value)) < 10000) { // If value will round up to 10000 and be scaled up, use the default decimals instead
+			// For Amps and DC Volts, if the value is over 100 and would be displayed in the base
+			// unit, use zero decimals.
+			decimals = 0;
+		}
+	}
+	if (decimals < 0) {
+		decimals = defaultUnitDecimals(unit);
+	}
+
+	// For particular power and energy units, when value > 9999, ignore the default decimals and
+	// adjust the decimals such that the fixed number has four digits in total.
+	// E.g. for Watts, the default decimals=0, but ignore that in these examples:
+	//  10499W -> 10.50kW (instead of 10kW with zero decimals)
+	//  999999W -> 1000MW (zero decimals is fine, there are four digits exactly)
+	//  12345678W -> 12.35MW (instead of 10kW with zero decimals)
+	//
+	// This special adjustment is not required when the unscaled value is <= 9999, because that
+	// allows for showing four digits or less - e.g. we would show 999W or 9999W without decimals.
+	if (!(formatHints & Units::FormatHint::NoDecimalAdjustment)) {
+		switch (unit) {
+		case VenusOS::Enums::Units_AmpHour:
+		case VenusOS::Enums::Units_Energy_KiloWattHour:
+		case VenusOS::Enums::Units_VoltAmpere:
+		case VenusOS::Enums::Units_VoltAmpereReactive:
+		case VenusOS::Enums::Units_Watt:
+		{
+			qreal normalizedValue = value;
+			if (unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
+				normalizedValue *= 1000; // convert to Wh
+			}
+			if (qAbs(normalizedValue) > 9999) {
+				// For the scaled value, get the number of digits before the decimal. Used a fixed
+				// number string to determine this consistently (instead of continously dividing
+				// scaledValue by 10) to avoid floating-point issues.
+				int wholeNumberLength = formattingLocale()->toString(scaledValue, 'f', 0).length();
+				if (value < 0) {
+					wholeNumberLength--; // disregard the minus
+				}
+
+				// Calculate the number of decimals required to have four digits in total in the
+				// fixed string.
+				if (!hasDecimalPlaces(scaledValue) && wholeNumberLength == 4) {
+					// Use zero decimals if that would give us the same value with 4 digits.
+					decimals = 0;
+				} else if (qAbs(scaledValue) < 1) {
+					// For real numbers between 0-1, the leading zero already adds an extra digit,
+					// so add three digits here instead of four.
+					decimals = 3;
+				} else {
+					// Add as many digits as needed to have four digits in total.
+					decimals = qMax(0, 4 - wholeNumberLength);
+				}
+
+				// Create the preliminary fixed number.
+				quantity.number = formattingLocale()->toString(roundToDecimals(scaledValue, decimals), 'f', decimals);
+
+				// Get the number of digits in the fixed number, including decimals.
+				int totalDigitCount = quantity.number.length();
+				if (decimals > 0) {
+					totalDigitCount--; // disregard the decimal point
+				}
+				if (value < 0) {
+					totalDigitCount--;  // disregard the minus
+				}
+
+				// Pad the number with extra zeros.
+				const int decimalsToAdd = 4 - totalDigitCount;
+				if (decimalsToAdd > 0) {
+					if (decimals == 0) {
+						quantity.number += '.';
+					}
+					quantity.number.resize(quantity.number.size() + decimalsToAdd, '0');
+				}
+			}
+			break;
+		}
+		default:
+			break;
+		}
+	}
+
+	// For all other cases, create a fixed number based on the default decimals for this unit.
+	if (quantity.number.isEmpty()) {
+		scaledValue = roundToDecimals(scaledValue, decimals);
+		quantity.number = formattingLocale()->toString(scaledValue, 'f', decimals);
+
+		// We prefer four digits, so use zero decimals if that would give us the same value with
+		// four digits (e.g. "1000.0" could just be "1000" instead). This is true if:
+		// - the qreal number has no decimal places
+		// - in the fixed number, there are exactly four digits before the decimal (excluding minus)
+		if (!(formatHints & Units::FormatHint::NoDecimalAdjustment)
+				&& decimals > 0
+				&& !hasDecimalPlaces(scaledValue)) {
+			const int decimalIndex = quantity.number.indexOf('.');
+			 if ((value > 0 && decimalIndex == 4) || (value < 0 && decimalIndex == 5)) {
+				quantity.number = quantity.number.mid(0, decimalIndex);
 			}
 		}
 	}
-
-	auto numberOfDigits = [](int value) -> int {
-		int digits = 0;
-		while (value) {
-			value /= 10;
-			digits++;
-		}
-		return digits;
-	};
-
-	// If kilowatt-hours have not been scaled avoid decimals
-	if (!(formatHints & Units::FormatHint::NoDecimalAdjustment) && quantity.scale == VenusOS::Enums::Units_Scale_None && unit == VenusOS::Enums::Units_Energy_KiloWattHour) {
-		decimals = 0;
-	}
-
-	// If the scaled value is large then possibly clip the decimals by 1 or 2 fractional digits depending on initial decimals.
-	// Only apply this logic to scaled values with 2 non fractional digits if the units are not Units_Volt_DC.
-	// i.e. don't clip decimals for values like 53.35 V DC.
-	decimals = decimals < 0 ? defaultUnitDecimals(unit) : decimals;
-	const int digits = numberOfDigits(static_cast<int>(scaledValue));
-	if (!(formatHints & Units::FormatHint::NoDecimalAdjustment) && (unit != VenusOS::Enums::Units_Volt_DC || digits > 2)) {
-		if (digits >= 4) {
-			decimals = 0;
-		} else if (digits == 3) {
-			decimals = decimals >= 3 ? 1 : 0;
-		} else if (digits == 2) {
-			decimals = decimals >= 3 ? 2
-				: decimals >= 1 ? 1
-				: 0;
-		}
-	}
-
-	const qreal vFixedMultiplier = std::pow(10, decimals);
-	const int vFixed = qRound(scaledValue * vFixedMultiplier);
-	scaledValue = (1.0*vFixed) / vFixedMultiplier;
-	quantity.number = formattingLocale()->toString(scaledValue, 'f', decimals);
 
 	return quantity;
 }
