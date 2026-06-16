@@ -131,7 +131,9 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 					&& Global.mainView.cardsLoader.sourceComponent === Global.mainView.auxCardsComponent
 
 			leftInset: Theme.geometry_statusBar_spacing / 2
-			rightInset: pluginPaneButtons.hasPluginPanes ? 0 : Theme.geometry_statusBar_horizontalMargin
+			rightInset: pluginPaneButtons.hasPluginPanes
+					? Theme.geometry_statusBar_spacing / 2
+					: Theme.geometry_statusBar_horizontalMargin
 			bottomInset: Theme.geometry_statusBar_spacing
 
 			visible: (!root.pageStack.opened && Global.switches.groups.count > 0
@@ -177,8 +179,9 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 
 				readonly property bool paneOpened: Global.mainView.cardsActive
 						&& Global.mainView.cardsLoader.sourceComponent === _portraitPaneComponent
+				readonly property bool shouldHide: (Global.mainView?.cardsActive ?? false) && !paneOpened
 
-				visible: !(Global.mainView?.cardsActive ?? false) || paneOpened
+				opacity: shouldHide ? 0 : 1
 				leftInset: Theme.geometry_statusBar_spacing / 2
 				rightInset: index === pluginPaneButtons.count - 1 ? Theme.geometry_statusBar_horizontalMargin : Theme.geometry_statusBar_spacing / 2
 				bottomInset: Theme.geometry_statusBar_spacing

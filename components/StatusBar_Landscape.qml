@@ -122,7 +122,6 @@ FocusScope {
 			leftMargin: -leftInset
 		}
 		leftInset: leftButton.visible ? 0 : Theme.geometry_statusBar_spacing
-		rightInset: pluginPaneButtons.visible ? 0 : Theme.geometry_statusBar_spacing
 		bottomInset: Theme.geometry_statusBar_spacing
 
 		visible: (!root.pageStack.opened && Global.switches.groups.count > 0
@@ -182,10 +181,10 @@ FocusScope {
 
 				readonly property bool paneOpened: Global.mainView.cardsActive
 						&& Global.mainView.cardsLoader.sourceComponent === _paneComponent
+				readonly property bool shouldHide: (Global.mainView?.cardsActive ?? false) && !paneOpened
 
 				activeFocusOnTab: true
-				visible: !(Global.mainView?.cardsActive ?? false) || paneOpened
-				rightInset: Theme.geometry_statusBar_spacing
+				opacity: shouldHide ? 0 : 1
 				bottomInset: Theme.geometry_statusBar_spacing
 				icon.cache: false
 				icon.source: (paneOpened && String(pluginIconActive).length > 0)
