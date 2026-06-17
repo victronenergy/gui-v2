@@ -18,6 +18,8 @@ FocusScope {
 	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready && cardsLoader.item ? cardsLoader.item
 			: (pageStack.currentPage ?? swipeView?.currentItem ?? null)
 	readonly property alias cardsLoader: cardsLoader
+	readonly property alias controlCardsComponent: _controlCardsComponent
+	readonly property alias auxCardsComponent: _auxCardsComponent
 
 	readonly property bool notificationButtonsEnabled: (currentPage?.url?.endsWith("NotificationsPage.qml") ?? false)
 			&& (Global.notifications?.silenceAlarmVisible ?? false)
@@ -460,12 +462,12 @@ FocusScope {
 		KeyNavigation.up: statusBar
 
 		Component {
-			id: controlCardsComponent
+			id: _controlCardsComponent
 			ControlCardsPage {}
 		}
 
 		Component {
-			id: auxCardsComponent
+			id: _auxCardsComponent
 			AuxCardsPage {}
 		}
 	}
@@ -478,8 +480,8 @@ FocusScope {
 		opacity: 0.0
 		pageStack: root._pageStack
 
-		onControlCardsActivated: cardsLoader.show(controlCardsComponent)
-		onAuxCardsActivated: cardsLoader.show(auxCardsComponent)
+		onControlCardsActivated: cardsLoader.show(_controlCardsComponent)
+		onAuxCardsActivated: cardsLoader.show(_auxCardsComponent)
 		onCardsDeactivated: cardsLoader.hide()
 		onSidePanelToggled: root.currentPage.toggleSidePanel()
 
