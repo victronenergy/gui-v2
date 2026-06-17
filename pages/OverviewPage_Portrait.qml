@@ -99,21 +99,86 @@ FocusScope {
 		spacing: 0
 
 		// Input layout contains:
-		// |  DC inputs, Solar  |  AC inputs (Grid/Shore/Genset)  |
+		// | AC inputs (Grid/Shore/Genset) | DC inputs, Solar |
 		RowLayout {
 			id: inputLayout
 
-			readonly property int maximumColumnCount: Math.max(leftInputColumn.widgetCount, rightInputColumn.widgetCount)
+			readonly property int maximumColumnCount: Math.max(rightInputColumn.widgetCount, leftInputColumn.widgetCount)
 
 			spacing: Theme.geometry_overviewPage_widget_spacing
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			Layout.verticalStretchFactor: maximumColumnCount
 					// If the AC inputs are compressed, reduce the stretch factor.
-					- (rightInputColumn.stretchHorizontally ? 1 : 0)
+					- (leftInputColumn.stretchHorizontally ? 1 : 0)
+
+			// Use a GridLayout instead of a ColumnLayout so that the item order can be swapped
+			// easily when swapInputs=true.
+			GridLayout {
+				id: leftInputColumn
+
+				readonly property int widgetCount: (!!Global.acInputs.input1 ? 1 : 0) + (!!Global.acInputs.input2 ? 1 : 0)
+
+				readonly property bool stretchHorizontally: root._stretchWidgetHorizontally(widgetCount, rightInputColumn.widgetCount)
+				readonly property int displayWidgetSize: root._widgetSizeForSectionColumnCount(widgetCount, stretchHorizontally)
+
+				// If widgets are stretched horizontally, compress the height to standard XS size
+				// so other widgets can expand more vertically.
+				readonly property real minimumWidgetHeight: stretchHorizontally
+						? root._widgetHeightForSize(VenusOS.OverviewWidget_Size_XS)
+						: root._widgetHeightForSize(displayWidgetSize)
+
+				// Prefer to show the Grid/Shore AC input first, so swap the display order if needed.
+				readonly property bool swapInputs: (Global.acInputs.isGridOrShore(Global.acInputs.input2)
+													&& !Global.acInputs.isGridOrShore(Global.acInputs.input1))
+
+				rowSpacing: Theme.geometry_overviewPage_widget_spacing
+				columns: 1
+				visible: widgetCount > 0
+
+				Loader {
+					id: acInput1Loader
+
+					active: !!Global.acInputs.input1
+					visible: active
+					Layout.fillWidth: true
+					Layout.fillHeight: true
+					Layout.minimumHeight: leftInputColumn.minimumWidgetHeight
+					Layout.row: leftInputColumn.swapInputs ? 1 : 0
+
+					sourceComponent: AcInputWidget {
+						input: Global.acInputs.input1
+						type: VenusOS.OverviewWidget_Type_AcInputPriority
+						size: leftInputColumn.displayWidgetSize
+						stretchHorizontally: leftInputColumn.stretchHorizontally
+						animationEnabled: root.animationEnabled
+					}
+					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load ac input widget")
+				}
+
+				Loader {
+					id: acInput2Loader
+
+					active: !!Global.acInputs.input2
+					visible: active
+					Layout.fillWidth: true
+					Layout.fillHeight: true
+					Layout.minimumHeight: leftInputColumn.minimumWidgetHeight
+					Layout.row: leftInputColumn.swapInputs ? 0 : 1
+
+					sourceComponent: AcInputWidget {
+						input: Global.acInputs.input2
+						type: VenusOS.OverviewWidget_Type_AcInputOther
+						size: leftInputColumn.displayWidgetSize
+						stretchHorizontally: leftInputColumn.stretchHorizontally
+						animationEnabled: root.animationEnabled
+					}
+					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load ac input2 widget")
+				}
+			}
 
 			ColumnLayout {
-				id: leftInputColumn
+				id: rightInputColumn
 
 				readonly property int widgetCount: widgetCountWithoutDcsource + (combineDcSources ? 1 : dcSourceModel.count)
 				readonly property int widgetSize: root._widgetSizeForSectionColumnCount(widgetCount)
@@ -138,14 +203,14 @@ FocusScope {
 					active: layoutConditions.showSolar
 					visible: active
 					sourceComponent: SolarYieldWidget {
-						size: leftInputColumn.widgetSize
+						size: rightInputColumn.widgetSize
 						animationEnabled: root.animationEnabled
 					}
 					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load solar widget")
 
 					Layout.fillWidth: true
 					Layout.fillHeight: true
-					Layout.minimumHeight: root._widgetHeightForSize(leftInputColumn.widgetSize)
+					Layout.minimumHeight: root._widgetHeightForSize(rightInputColumn.widgetSize)
 				}
 
 				// For non-dcsource DC inputs, show one widget per service type.
@@ -172,14 +237,14 @@ FocusScope {
 							type: root.Global.dcInputs.overviewWidgetTypeForService(serviceType, modelData.commonMeterType)
 							serviceType: modelData.serviceTypes[0] || ""
 							inputTypeFilter: modelData.commonMeterType
-							size: leftInputColumn.widgetSize
+							size: rightInputColumn.widgetSize
 							animationEnabled: root.animationEnabled
 						}
 						onStatusChanged: if (status === Loader.Error) console.warn("Unable to load dc input widget for type " + modelData.commonMeterType)
 
 						Layout.fillWidth: true
 						Layout.fillHeight: true
-						Layout.minimumHeight: root._widgetHeightForSize(leftInputColumn.widgetSize)
+						Layout.minimumHeight: root._widgetHeightForSize(rightInputColumn.widgetSize)
 					}
 				}
 
@@ -190,25 +255,25 @@ FocusScope {
 				Loader {
 					id: combinedDcsourceWidgetLoader
 
-					active: leftInputColumn.combineDcSources
+					active: rightInputColumn.combineDcSources
 					visible: active
 					sourceComponent: DcInputWidget {
 						type: root.Global.dcInputs.overviewWidgetTypeForService(serviceType, dcSourceModel.commonMeterType)
 						serviceType: "dcsource"
 						inputTypeFilter: dcSourceModel.commonMeterType
-						size: leftInputColumn.widgetSize
+						size: rightInputColumn.widgetSize
 						animationEnabled: root.animationEnabled
 					}
 					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load combined dc input widget")
 
 					Layout.fillWidth: true
 					Layout.fillHeight: true
-					Layout.minimumHeight: root._widgetHeightForSize(leftInputColumn.widgetSize)
+					Layout.minimumHeight: root._widgetHeightForSize(rightInputColumn.widgetSize)
 				}
 				Repeater {
 					id: individualDcsourcesRepeater
 
-					model: leftInputColumn.combineDcSources ? null : dcSourceModel
+					model: rightInputColumn.combineDcSources ? null : dcSourceModel
 					delegate: Loader {
 						id: dcsourceWidgetLoader
 
@@ -219,80 +284,15 @@ FocusScope {
 							type: root.Global.dcInputs.overviewWidgetTypeForService(serviceType, dcsourceWidgetLoader.meterType)
 							serviceType: dcsourceWidgetLoader.device.serviceType
 							inputTypeFilter: dcsourceWidgetLoader.meterType
-							size: leftInputColumn.widgetSize
+							size: rightInputColumn.widgetSize
 							animationEnabled: root.animationEnabled
 						}
 						onStatusChanged: if (status === Loader.Error) console.warn("Unable to load dc source widget for type " + dcsourceWidgetLoader.meterType)
 
 						Layout.fillWidth: true
 						Layout.fillHeight: true
-						Layout.minimumHeight: root._widgetHeightForSize(leftInputColumn.widgetSize)
+						Layout.minimumHeight: root._widgetHeightForSize(rightInputColumn.widgetSize)
 					}
-				}
-			}
-
-			// Use a GridLayout instead of a ColumnLayout so that the item order can be swapped
-			// easily when swapInputs=true.
-			GridLayout {
-				id: rightInputColumn
-
-				readonly property int widgetCount: (!!Global.acInputs.input1 ? 1 : 0) + (!!Global.acInputs.input2 ? 1 : 0)
-
-				readonly property bool stretchHorizontally: root._stretchWidgetHorizontally(widgetCount, leftInputColumn.widgetCount)
-				readonly property int displayWidgetSize: root._widgetSizeForSectionColumnCount(widgetCount, stretchHorizontally)
-
-				// If widgets are stretched horizontally, compress the height to standard XS size
-				// so other widgets can expand more vertically.
-				readonly property real minimumWidgetHeight: stretchHorizontally
-						? root._widgetHeightForSize(VenusOS.OverviewWidget_Size_XS)
-						: root._widgetHeightForSize(displayWidgetSize)
-
-				// Prefer to show the Grid/Shore AC input first, so swap the display order if needed.
-				readonly property bool swapInputs: (Global.acInputs.isGridOrShore(Global.acInputs.input2)
-													&& !Global.acInputs.isGridOrShore(Global.acInputs.input1))
-
-				rowSpacing: Theme.geometry_overviewPage_widget_spacing
-				columns: 1
-				visible: widgetCount > 0
-
-				Loader {
-					id: acInput1Loader
-
-					active: !!Global.acInputs.input1
-					visible: active
-					Layout.fillWidth: true
-					Layout.fillHeight: true
-					Layout.minimumHeight: rightInputColumn.minimumWidgetHeight
-					Layout.row: rightInputColumn.swapInputs ? 1 : 0
-
-					sourceComponent: AcInputWidget {
-						input: Global.acInputs.input1
-						type: VenusOS.OverviewWidget_Type_AcInputPriority
-						size: rightInputColumn.displayWidgetSize
-						stretchHorizontally: rightInputColumn.stretchHorizontally
-						animationEnabled: root.animationEnabled
-					}
-					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load ac input widget")
-				}
-
-				Loader {
-					id: acInput2Loader
-
-					active: !!Global.acInputs.input2
-					visible: active
-					Layout.fillWidth: true
-					Layout.fillHeight: true
-					Layout.minimumHeight: rightInputColumn.minimumWidgetHeight
-					Layout.row: rightInputColumn.swapInputs ? 0 : 1
-
-					sourceComponent: AcInputWidget {
-						input: Global.acInputs.input2
-						type: VenusOS.OverviewWidget_Type_AcInputOther
-						size: rightInputColumn.displayWidgetSize
-						stretchHorizontally: rightInputColumn.stretchHorizontally
-						animationEnabled: root.animationEnabled
-					}
-					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load ac input2 widget")
 				}
 			}
 		}
@@ -300,22 +300,7 @@ FocusScope {
 		// Energy indicators between the top and middle widgets.
 		RowLayout {
 			spacing: Theme.geometry_overviewPage_widget_spacing
-			visible: leftInputColumn.widgetCount > 0 || rightInputColumn.widgetCount > 0
-
-			// Energy from DC inputs or PV chargers to battery.
-			OverviewEnergyIndicator {
-				// Show indicator when DC inputs or PV chargers are present.
-				opacity: Global.dcInputs.model.count > 0 || Global.solarInputs.devices.count > 0 ? 1 : 0
-
-				// Positive power means energy is flowing towards battery (downwards). It never
-				// flows in the opposite direction.
-				animationMode: !root.animationEnabled
-						|| (Global.dcInputs.power <= Theme.geometry_overviewPage_connector_animationPowerThreshold
-						   && Global.system.solar.dcPower <= Theme.geometry_overviewPage_connector_animationPowerThreshold)
-					? VenusOS.WidgetConnector_AnimationMode_NotAnimated
-					: VenusOS.WidgetConnector_AnimationMode_StartToEnd
-				Layout.fillWidth: true
-			}
+			visible: rightInputColumn.widgetCount > 0 || leftInputColumn.widgetCount > 0
 
 			// Energy between AC inputs or PV inverters and the Inverter/charger.
 			OverviewEnergyIndicator {
@@ -342,6 +327,21 @@ FocusScope {
 					: VenusOS.WidgetConnector_AnimationMode_StartToEnd
 				Layout.fillWidth: true
 			}
+
+			// Energy from DC inputs or PV chargers to battery.
+			OverviewEnergyIndicator {
+				// Show indicator when DC inputs or PV chargers are present.
+				opacity: Global.dcInputs.model.count > 0 || Global.solarInputs.devices.count > 0 ? 1 : 0
+
+				// Positive power means energy is flowing towards battery (downwards). It never
+				// flows in the opposite direction.
+				animationMode: !root.animationEnabled
+						|| (Global.dcInputs.power <= Theme.geometry_overviewPage_connector_animationPowerThreshold
+						   && Global.system.solar.dcPower <= Theme.geometry_overviewPage_connector_animationPowerThreshold)
+					? VenusOS.WidgetConnector_AnimationMode_NotAnimated
+					: VenusOS.WidgetConnector_AnimationMode_StartToEnd
+				Layout.fillWidth: true
+			}
 		}
 
 		RowLayout {
@@ -351,8 +351,8 @@ FocusScope {
 			Layout.fillHeight: true
 			Layout.verticalStretchFactor: 1
 
-			BatteryWidget {
-				id: batteryWidget
+			InverterChargerWidget {
+				id: inverterChargerWidget
 
 				size: VenusOS.OverviewWidget_Size_L
 				animationEnabled: root.animationEnabled
@@ -362,8 +362,8 @@ FocusScope {
 				Layout.minimumHeight: Theme.geometry_overviewPage_widget_height_l
 			}
 
-			InverterChargerWidget {
-				id: inverterChargerWidget
+			BatteryWidget {
+				id: batteryWidget
 
 				size: VenusOS.OverviewWidget_Size_L
 				animationEnabled: root.animationEnabled
@@ -377,6 +377,23 @@ FocusScope {
 		// Energy indicators between the middle and bottom widgets.
 		RowLayout {
 			spacing: Theme.geometry_overviewPage_widget_spacing
+
+			// Energy between Inverter/Charger and AC/Essential loads.
+			OverviewEnergyIndicator {
+				// Show indicator when AC/Essential loads or EVCS widget are shown.
+				opacity: layoutConditions.showAcLoads
+						 || layoutConditions.showEssentialLoads
+						 || layoutConditions.showEvChargers ? 1 : 0
+
+				// If load power is positive (i.e. consumed energy), energy flows to load (downwards).
+				// In portrait, there is only one energy indicator for AC/Essential loads and EVCS,
+				// so do not distinguish between AC-in/AC-out loads; just use the overall AC load.
+				animationMode: !root.animationEnabled
+						|| Math.abs(Global.system.load.ac.power) <= Theme.geometry_overviewPage_connector_animationPowerThreshold
+					? VenusOS.WidgetConnector_AnimationMode_NotAnimated
+					: VenusOS.WidgetConnector_AnimationMode_StartToEnd
+				Layout.fillWidth: true
+			}
 
 			// Energy between Battery and DC loads.
 			OverviewEnergyIndicator {
@@ -395,52 +412,21 @@ FocusScope {
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 				Layout.fillWidth: true
 			}
-
-			// Energy between Inverter/Charger and AC/Essential loads.
-			OverviewEnergyIndicator {
-				// Show indicator when AC/Essential loads or EVCS widget are shown.
-				opacity: layoutConditions.showAcLoads
-						 || layoutConditions.showEssentialLoads
-						 || layoutConditions.showEvChargers ? 1 : 0
-
-				// If load power is positive (i.e. consumed energy), energy flows to load (downwards).
-				// In portrait, there is only one energy indicator for AC/Essential loads and EVCS,
-				// so do not distinguish between AC-in/AC-out loads; just use the overall AC load.
-				animationMode: !root.animationEnabled
-						|| Math.abs(Global.system.load.ac.power) <= Theme.geometry_overviewPage_connector_animationPowerThreshold
-					? VenusOS.WidgetConnector_AnimationMode_NotAnimated
-					: VenusOS.WidgetConnector_AnimationMode_StartToEnd
-				Layout.fillWidth: true
-			}
 		}
 
+		// Loads/consumption layout contains:
+		// | AC loads & Essential loads, EVCS | DC loads |
 		RowLayout {
 			id: loadsLayout
 
-			readonly property int maximumColumnCount: Math.max(layoutConditions.showDcLoads ? 1 : 0, rightLoadsColumn.widgetCount)
+			readonly property int maximumColumnCount: Math.max(layoutConditions.showDcLoads ? 1 : 0, leftLoadsColumn.widgetCount)
 
 			spacing: Theme.geometry_overviewPage_widget_spacing
 			Layout.fillHeight: true
 			Layout.verticalStretchFactor: maximumColumnCount
 
-			Loader {
-				id: dcLoadsWidgetLoader
-
-				active: layoutConditions.showDcLoads
-				visible: active
-				sourceComponent: DcLoadsWidget {
-					size: VenusOS.OverviewWidget_Size_L
-					animationEnabled: root.animationEnabled
-				}
-				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load dc loads widget")
-
-				Layout.fillWidth: true
-				Layout.fillHeight: true
-				Layout.minimumHeight: root._widgetHeightForSize(VenusOS.OverviewWidget_Size_L)
-			}
-
 			ColumnLayout {
-				id: rightLoadsColumn
+				id: leftLoadsColumn
 
 				readonly property int widgetCount: (layoutConditions.showAcLoads ? 1 : 0)
 						+ (layoutConditions.showEssentialLoads ? 1 : 0)
@@ -463,15 +449,15 @@ FocusScope {
 					active: layoutConditions.showAcLoads
 					visible: active
 					sourceComponent: AcLoadsWidget {
-						size: rightLoadsColumn.displayWidgetSize
-						stretchHorizontally: rightLoadsColumn.stretchHorizontally
+						size: leftLoadsColumn.displayWidgetSize
+						stretchHorizontally: leftLoadsColumn.stretchHorizontally
 						animationEnabled: root.animationEnabled
 					}
 					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load ac loads widget")
 
 					Layout.fillWidth: true
 					Layout.fillHeight: true
-					Layout.minimumHeight: rightLoadsColumn.minimumWidgetHeight
+					Layout.minimumHeight: leftLoadsColumn.minimumWidgetHeight
 				}
 				Loader {
 					id: essentialLoadsWidgetLoader
@@ -479,15 +465,15 @@ FocusScope {
 					active: layoutConditions.showEssentialLoads
 					visible: active
 					sourceComponent: EssentialLoadsWidget {
-						size: rightLoadsColumn.displayWidgetSize
-						stretchHorizontally: rightLoadsColumn.stretchHorizontally
+						size: leftLoadsColumn.displayWidgetSize
+						stretchHorizontally: leftLoadsColumn.stretchHorizontally
 						animationEnabled: root.animationEnabled
 					}
 					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load essential loads widget")
 
 					Layout.fillWidth: true
 					Layout.fillHeight: true
-					Layout.minimumHeight: rightLoadsColumn.minimumWidgetHeight
+					Layout.minimumHeight: leftLoadsColumn.minimumWidgetHeight
 				}
 
 				Loader {
@@ -496,16 +482,31 @@ FocusScope {
 					active: layoutConditions.showEvChargers
 					visible: active
 					sourceComponent: EvcsWidget {
-						size: rightLoadsColumn.displayWidgetSize
-						stretchHorizontally: rightLoadsColumn.stretchHorizontally
+						size: leftLoadsColumn.displayWidgetSize
+						stretchHorizontally: leftLoadsColumn.stretchHorizontally
 						animationEnabled: root.animationEnabled
 					}
 					onStatusChanged: if (status === Loader.Error) console.warn("Unable to load evcs widget")
 
 					Layout.fillWidth: true
 					Layout.fillHeight: true
-					Layout.minimumHeight: rightLoadsColumn.minimumWidgetHeight
+					Layout.minimumHeight: leftLoadsColumn.minimumWidgetHeight
 				}
+			}
+
+			// DC loads widget
+			Loader {
+				active: layoutConditions.showDcLoads
+				visible: active
+				sourceComponent: DcLoadsWidget {
+					size: VenusOS.OverviewWidget_Size_L
+					animationEnabled: root.animationEnabled
+				}
+				onStatusChanged: if (status === Loader.Error) console.warn("Unable to load dc loads widget")
+
+				Layout.fillWidth: true
+				Layout.fillHeight: true
+				Layout.minimumHeight: root._widgetHeightForSize(VenusOS.OverviewWidget_Size_L)
 			}
 		}
 	}
