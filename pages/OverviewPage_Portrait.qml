@@ -312,17 +312,15 @@ FocusScope {
 						: null
 				readonly property real acInputPower: monitoredAcInput?.power ?? NaN
 
-				// Show indicator when highlighted AC input or PV inverters are present.
-				opacity: !!Global.acInputs.highlightedInput || Global.solarInputs.pvInverterDevices.count > 0 ? 1 : 0
+				// Shown when power from AC input or PV inverters is over the noise threshold.
+				opacity: Math.abs(acInputPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+						  || Math.abs(Global.system.solar.acPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
 
 				// Positive power means energy is flowing towards inverter/charger (downwards) and
 				// negative power means energy is flowing towards the input (upwards, only
 				// applicable for AC inputs, not for PV inverters).
 				// (If AC input has negative energy, flow upwards and ignore the PV inverter power.)
-				animationMode: !root.animationEnabled
-						|| (Math.abs(acInputPower) <= Theme.geometry_overviewPage_connector_animationPowerThreshold
-						   && Global.system.solar.acPower <= Theme.geometry_overviewPage_connector_animationPowerThreshold)
-					? VenusOS.WidgetConnector_AnimationMode_NotAnimated
+				animationMode: !root.animationEnabled || opacity === 0 ? VenusOS.WidgetConnector_AnimationMode_NotAnimated
 					: acInputPower < 0 ? VenusOS.WidgetConnector_AnimationMode_EndToStart
 					: VenusOS.WidgetConnector_AnimationMode_StartToEnd
 				Layout.fillWidth: true
@@ -330,15 +328,13 @@ FocusScope {
 
 			// Energy from DC inputs or PV chargers to battery.
 			OverviewEnergyIndicator {
-				// Show indicator when DC inputs or PV chargers are present.
-				opacity: Global.dcInputs.model.count > 0 || Global.solarInputs.devices.count > 0 ? 1 : 0
+				// Shown when power from DC inputs or PV chargers is over the noise threshold.
+				opacity: Math.abs(Global.dcInputs.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+						|| Math.abs(Global.system.solar.dcPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
 
 				// Positive power means energy is flowing towards battery (downwards). It never
 				// flows in the opposite direction.
-				animationMode: !root.animationEnabled
-						|| (Global.dcInputs.power <= Theme.geometry_overviewPage_connector_animationPowerThreshold
-						   && Global.system.solar.dcPower <= Theme.geometry_overviewPage_connector_animationPowerThreshold)
-					? VenusOS.WidgetConnector_AnimationMode_NotAnimated
+				animationMode: !root.animationEnabled || opacity === 0 ? VenusOS.WidgetConnector_AnimationMode_NotAnimated
 					: VenusOS.WidgetConnector_AnimationMode_StartToEnd
 				Layout.fillWidth: true
 			}
@@ -380,36 +376,34 @@ FocusScope {
 
 			// Energy between Inverter/Charger and AC/Essential loads.
 			OverviewEnergyIndicator {
-				// Show indicator when AC/Essential loads or EVCS widget are shown.
-				opacity: layoutConditions.showAcLoads
-						 || layoutConditions.showEssentialLoads
-						 || layoutConditions.showEvChargers ? 1 : 0
+				// Shown when AC/Essential loads or EVCS is visible and power is over the noise
+				// threshold. In portrait, there is only one energy indicator for AC/Essential loads
+				// and EVCS, so do not distinguish between AC-in/AC-out loads; just use the overall
+				// AC load.
+				opacity: (layoutConditions.showAcLoads
+						  || layoutConditions.showEssentialLoads)
+						  || layoutConditions.showEvChargers
+						 && Math.abs(Global.system.load.ac.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
 
 				// If load power is positive (i.e. consumed energy), energy flows to load (downwards).
-				// In portrait, there is only one energy indicator for AC/Essential loads and EVCS,
-				// so do not distinguish between AC-in/AC-out loads; just use the overall AC load.
-				animationMode: !root.animationEnabled
-						|| Math.abs(Global.system.load.ac.power) <= Theme.geometry_overviewPage_connector_animationPowerThreshold
-					? VenusOS.WidgetConnector_AnimationMode_NotAnimated
+				animationMode: !root.animationEnabled || opacity === 0 ? VenusOS.WidgetConnector_AnimationMode_NotAnimated
 					: VenusOS.WidgetConnector_AnimationMode_StartToEnd
 				Layout.fillWidth: true
 			}
 
 			// Energy between Battery and DC loads.
 			OverviewEnergyIndicator {
-				// Show indicator when DC loads are shown.
-				opacity: layoutConditions.showDcLoads ? 1 : 0
+				// Shown when DC loads is visible and its power is over the noise threshold.
+				opacity: layoutConditions.showDcLoads
+						 && Math.abs(Global.system.dc.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
 
 				// If load power is positive (i.e. consumed energy), energy flows to load (downwards).
 				// If load power is negative (i.e. devices generating power but not directly managed
 				// by GX), energy flows to battery (upwards).
-				animationMode: root.animationEnabled
-						&& !isNaN(Global.system.dc.power)
-						&& (Math.abs(Global.system.dc.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold)
-					? (Global.system.dc.power > 0
+				animationMode: !root.animationEnabled || opacity === 0 ? VenusOS.WidgetConnector_AnimationMode_NotAnimated
+					: (Global.system.dc.power > 0
 						? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 						: VenusOS.WidgetConnector_AnimationMode_EndToStart)
-					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 				Layout.fillWidth: true
 			}
 		}
