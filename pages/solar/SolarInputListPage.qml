@@ -83,7 +83,7 @@ Page {
 						QuantityObject {
 							object: solarInputDelegate
 							key: "voltage"
-							unit: solarInputDelegate.serviceType ? VenusOS.Units_Volt_AC : VenusOS.Units_Volt_DC
+							unit: solarInputDelegate.serviceType === "pvinverter" ? VenusOS.Units_Volt_AC : VenusOS.Units_Volt_DC
 						}
 						QuantityObject { object: solarInputDelegate; key: "current"; unit: VenusOS.Units_Amp }
 						QuantityObject { object: solarInputDelegate; key: "power"; unit: VenusOS.Units_Watt }
