@@ -77,6 +77,8 @@ public:
 
 	Q_INVOKABLE void acknowledge();
 
+	bool offline() const;
+
 Q_SIGNALS:
 	// These are the only signals we need.
 	// acknowledged, active, and silenced can all change values dynamically,
@@ -88,6 +90,7 @@ Q_SIGNALS:
 	void activeChanged();
 	void silencedChanged();
 	void descriptionChanged();
+	void offlineChanged();
 
 private:
 	VeQItem *m_notification = nullptr; // the "index item", parent of the below value items.
@@ -195,6 +198,7 @@ private:
 	void handleAcknowledgedChanged(NotificationSlot *slot);
 	void handleSilencedChanged(NotificationSlot *slot);
 	void handleDescriptionChanged(NotificationSlot *slot);
+	void handleSlotOffline(NotificationSlot *slot);
 	QHash<int, QByteArray> m_roleNames;
 	QVector<notificationData> m_data;
 	QVector<NotificationSlot*> m_slots;
