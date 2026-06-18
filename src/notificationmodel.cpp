@@ -247,7 +247,9 @@ void NotificationModel::watchSlot(VeQItem *slotItem)
 		connect(slot, &NotificationSlot::descriptionChanged, this, [this, slot] { handleDescriptionChanged(slot); });
 		connect(slot, &NotificationSlot::offlineChanged, this, [this, slot] { handleSlotOffline(slot); });
 		m_slots.append(slot);
-		addAssociatedEntry(slot, slot->active());
+		if (!slot->offline()) {
+			addAssociatedEntry(slot, slot->active());
+		}
 	}
 }
 
@@ -403,6 +405,7 @@ void NotificationModel::updateAssociatedEntry(NotificationSlot *slot, Notificati
 			// Only the active/acknowledged/silenced values can change dynamically.
 			// However, the description value can change ONCE after construction,
 			// due to a quirk in venus-platform (setting description value after active value).
+			const int oldType = data.type;
 			switch (role) {
 				case NotificationRoles::Active:
 					if (data.active == slot->active()) {
@@ -426,7 +429,18 @@ void NotificationModel::updateAssociatedEntry(NotificationSlot *slot, Notificati
 					if (data.description == slot->description()) {
 						return; // not an actual change.
 					}
+					// venus-platform sets the description value last when
+					// populating (or recycling) a notification slot.
+					// Re-read all fields here, as they may have been
+					// stale when addAssociatedEntry() captured them.
 					data.description = slot->description();
+					data.deviceName = slot->deviceName();
+					data.service = slot->service();
+					data.trigger = slot->trigger();
+					data.alarmValue = slot->alarmValue();
+					data.value = slot->value();
+					data.dateTime = slot->dateTime();
+					data.type = slot->type();
 					break;
 				default:
 					qWarning() << "Unknown notification slot data change";
@@ -436,9 +450,61 @@ void NotificationModel::updateAssociatedEntry(NotificationSlot *slot, Notificati
 			changedRoles.append(static_cast<int>(role));
 			if (role == NotificationRoles::Active || role == NotificationRoles::Acknowledged) {
 				changedRoles.append(static_cast<int>(NotificationRoles::Section));
+			} else if (role == NotificationRoles::Description) {
+				// All fields were refreshed alongside description.
+				changedRoles.append(static_cast<int>(NotificationRoles::DeviceName));
+				changedRoles.append(static_cast<int>(NotificationRoles::Service));
+				changedRoles.append(static_cast<int>(NotificationRoles::Trigger));
+				changedRoles.append(static_cast<int>(NotificationRoles::AlarmValue));
+				changedRoles.append(static_cast<int>(NotificationRoles::Value));
+				changedRoles.append(static_cast<int>(NotificationRoles::DateTime));
+				changedRoles.append(static_cast<int>(NotificationRoles::Type));
+				changedRoles.append(static_cast<int>(NotificationRoles::Section));
 			}
 			Q_EMIT dataChanged(createIndex(i, 0), createIndex(i, 0), changedRoles);
 			Q_EMIT changed(data.modelId, changedRoles);
+
+			// If the type changed during a description refresh, move the
+			// counters from the old type bucket to the new type bucket.
+			if (role == NotificationRoles::Description && oldType != data.type) {
+				auto adjustCounters = [&](int type, int delta) {
+					switch (type) {
+						case Enums::Notification_Alarm:
+							if (data.active) {
+								m_activeAlarms = std::max(0, m_activeAlarms + delta);
+								Q_EMIT activeAlarmsChanged();
+							}
+							if (!data.acknowledged) {
+								m_unacknowledgedAlarms = std::max(0, m_unacknowledgedAlarms + delta);
+								Q_EMIT unacknowledgedAlarmsChanged();
+							}
+							break;
+						case Enums::Notification_Warning:
+							if (data.active) {
+								m_activeWarnings = std::max(0, m_activeWarnings + delta);
+								Q_EMIT activeWarningsChanged();
+							}
+							if (!data.acknowledged) {
+								m_unacknowledgedWarnings = std::max(0, m_unacknowledgedWarnings + delta);
+								Q_EMIT unacknowledgedWarningsChanged();
+							}
+							break;
+						case Enums::Notification_Info:
+							if (data.active) {
+								m_activeInfos = std::max(0, m_activeInfos + delta);
+								Q_EMIT activeInfosChanged();
+							}
+							if (!data.acknowledged) {
+								m_unacknowledgedInfos = std::max(0, m_unacknowledgedInfos + delta);
+								Q_EMIT unacknowledgedInfosChanged();
+							}
+							break;
+						default: break;
+					}
+				};
+				adjustCounters(oldType, -1);   // remove from old type
+				adjustCounters(data.type, +1); // add to new type
+			}
 
 			switch (data.type) {
 				case Enums::Notification_Alarm: {
@@ -565,7 +631,18 @@ void NotificationModel::handleDescriptionChanged(NotificationSlot *slot)
 		return;
 	}
 
-	updateAssociatedEntry(slot, NotificationRoles::Description);
+	// Description is set last by venus-platform.
+	// If we skipped adding the row earlier (e.g. slot was offline)
+	// ensure we create an entry once the slot is populated;
+	// otherwise, update the associated entry as per normal.
+	const QString slotId = slot->notificationId();
+	for (qsizetype i = m_data.size() - 1; i >= 0; --i) {
+		if (m_data[i].notificationId == slotId) {
+			updateAssociatedEntry(slot, NotificationRoles::Description);
+			return;
+		}
+	}
+	addAssociatedEntry(slot, slot->active());
 }
 
 void NotificationModel::handleSlotOffline(NotificationSlot *slot)
