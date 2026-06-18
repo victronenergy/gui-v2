@@ -32,7 +32,13 @@ ListItem {
 
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: textLayout.height
+		implicitHeight: Math.max(icon.implicitHeight,
+			timestampLabel.implicitHeight,
+			(descriptionLabel.visible && secondaryLabel.visible)
+				? descriptionLabel.implicitHeight + secondaryLabel.anchors.topMargin + secondaryLabel.implicitHeight
+			: descriptionLabel.visible ? descriptionLabel.implicitHeight
+			: secondaryLabel.visible ? secondaryLabel.implicitHeight
+			: 0)
 
 		CP.ColorImage {
 			id: icon
@@ -50,54 +56,54 @@ ListItem {
 					: "qrc:/images/icon_alarm_32.svg"
 		}
 
-		GridLayout {
-			id: textLayout
-
+		Label {
+			id: timestampLabel
 			anchors {
+				top: parent.top
+				right: parent.right
+			}
+			color: secondaryLabel.color
+			font.pixelSize: Theme.font_notification_timestamp_size
+			text: Utils.formatTimestamp(root.dateTime, ClockTime.dateTime)
+		}
+
+
+		Label {
+			id: descriptionLabel
+			anchors {
+				top: parent.top
 				left: icon.right
 				leftMargin: Theme.geometry_listItem_content_horizontalMargin
-				right: parent.right
-				verticalCenter: parent.verticalCenter
-			}
-			columnSpacing: Theme.geometry_listItem_content_verticalSpacing
-			rowSpacing: Theme.geometry_listItem_content_verticalSpacing
-			columns: 2
-
-			Label {
-				id: descriptionLabel
-
-				wrapMode: Text.Wrap
-				visible: root.description.length > 0 || root.value.length > 0
-				elide: Text.ElideRight
-				color: root.historical ? Theme.color_listItem_secondaryText : Theme.color_font_primary
-				font: root.font
-				//: %1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')
-				//% "%1 %2"
-				text: qsTrId("notification_description_and_value").arg(root.description).arg(root.value)
-
-				Layout.fillWidth: true
+				right: timestampLabel.left
+				rightMargin: Theme.geometry_listItem_content_horizontalMargin
 			}
 
-			Label {
-				color: secondaryLabel.color
-				font.pixelSize: Theme.font_notification_timestamp_size
-				text: Utils.formatTimestamp(root.dateTime, ClockTime.dateTime)
+			wrapMode: Text.Wrap
+			visible: root.description.length > 0 || root.value.length > 0
+			elide: Text.ElideRight
+			color: root.historical ? Theme.color_listItem_secondaryText : Theme.color_font_primary
+			font: root.font
+			//: %1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')
+			//% "%1 %2"
+			text: qsTrId("notification_description_and_value").arg(root.description).arg(root.value)
+		}
 
-				Layout.alignment: Qt.AlignTop
+		Label {
+			id: secondaryLabel
+			anchors {
+				top: descriptionLabel.visible ? descriptionLabel.bottom : parent.top
+				topMargin: descriptionLabel.visible ? Theme.geometry_listItem_content_verticalSpacing : 0
+				left: icon.right
+				leftMargin: Theme.geometry_listItem_content_horizontalMargin
+				right: descriptionLabel.visible ? parent.right : timestampLabel.left
+				rightMargin: descriptionLabel.visible ? 0 : Theme.geometry_listItem_content_horizontalMargin
 			}
 
-			Label {
-				id: secondaryLabel
-
-				wrapMode: Text.Wrap
-				visible: text.length > 0
-				color: root.historical ? Theme.color_font_disabled : Theme.color_listItem_secondaryText
-				font.pixelSize: descriptionLabel.visible ? Theme.font_listItem_secondary_size : Theme.font_listItem_primary_size
-				text: root.deviceName
-
-				Layout.fillWidth: true
-				Layout.columnSpan: 2
-			}
+			wrapMode: Text.Wrap
+			visible: text.length > 0
+			color: root.historical ? Theme.color_font_disabled : Theme.color_listItem_secondaryText
+			font.pixelSize: descriptionLabel.visible ? Theme.font_listItem_secondary_size : Theme.font_listItem_primary_size
+			text: root.deviceName
 		}
 	}
 }
