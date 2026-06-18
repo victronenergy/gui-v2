@@ -45,9 +45,9 @@ OverviewWidget {
 			widgetSize: root.size
 			dataObject: Global.evChargers
 			sourceType: VenusOS.ElectricalQuantity_Source_Ac
-			font.pixelSize: widgetSize <= VenusOS.OverviewWidget_Size_XS ? Theme.font_overviewPage_widget_quantityLabel_minimumSize
-					: widgetSize <= VenusOS.OverviewWidget_Size_M ? Theme.font_overviewPage_widget_quantityLabel_minimumSize
-					: Theme.font_overviewPage_widget_quantityLabel_maximumSize
+			font.pixelSize: detailLoader.active && root.size === VenusOS.OverviewWidget_Size_M
+					? Theme.font_overviewPage_widget_quantityLabel_medium
+					: Theme.font_overviewPage_widget_quantityLabel_large
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			Layout.preferredWidth: root.stretchHorizontally
@@ -56,6 +56,7 @@ OverviewWidget {
 		}
 
 		Loader {
+			id: detailLoader
 			active: root.size >= VenusOS.OverviewWidget_Size_M
 			sourceComponent: Global.evChargers.model.count > 1 ? multiEvChargerComponent
 					: Global.evChargers.model.count > 0 && Global.evChargers.model.firstObject ? singleEvChargerComponent

@@ -11,6 +11,6 @@ ElectricalQuantityLabel {
 
 	alignment: Qt.AlignLeft
 	font.pixelSize: widgetSize === VenusOS.OverviewWidget_Size_XS
-			  ? Theme.font_overviewPage_widget_quantityLabel_minimumSize
-			  : Theme.font_overviewPage_widget_quantityLabel_maximumSize
+			  ? Theme.font_overviewPage_widget_quantityLabel_small
+			  : Theme.font_overviewPage_widget_quantityLabel_large
 }

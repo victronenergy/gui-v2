@@ -57,19 +57,17 @@ GridLayout {
 				alignment: Qt.AlignLeft
 				sourceType: root.widget.quantitySourceType
 				dataObject: root.widget.quantityDataObject
-
-				// Size the text according to the widget size.
-				font.pixelSize: root.widget.size === VenusOS.OverviewWidget_Size_XS ? Theme.font_overviewPage_widget_quantityLabel_minimumSize
+				font.pixelSize: root.widget.size === VenusOS.OverviewWidget_Size_XS ? Theme.font_overviewPage_widget_quantityLabel_small
 					: root.widget.size === VenusOS.OverviewWidget_Size_S
 						 ? root.widget.phaseModel?.count > 1
-							? Theme.font_overviewPage_widget_quantityLabel_smallSizeWithExtraContent // allow space for 3-phase metrics
-							: Theme.font_overviewPage_widget_quantityLabel_maximumSize
+							? Theme.font_overviewPage_widget_quantityLabel_tiny // allow space for 3-phase metrics
+							: Theme.font_overviewPage_widget_quantityLabel_large
 					: root.widget.size === VenusOS.OverviewWidget_Size_M
 						? root.widget.phaseModel?.count > 1
-							? Theme.font_overviewPage_widget_quantityLabel_minimumSize
-							: Theme.font_overviewPage_widget_quantityLabel_maximumSize
+							? Theme.font_overviewPage_widget_quantityLabel_medium
+							: Theme.font_overviewPage_widget_quantityLabel_large
 					// Size L and XL
-					: Theme.font_overviewPage_widget_quantityLabel_maximumSize
+					: Theme.font_overviewPage_widget_quantityLabel_large
 
 				AcInputDirectionIcon {
 					id: acInputDirectionIcon

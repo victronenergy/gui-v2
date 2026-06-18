@@ -54,8 +54,8 @@ OverviewWidget {
 
 			Label {
 				text: VenusOS.system_stateToText(Global.system.state)
-				font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_maximumSize
-				minimumPixelSize: Theme.font_overviewPage_widget_quantityLabel_minimumSize
+				font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_medium
+				minimumPixelSize: Theme.font_overviewPage_widget_quantityLabel_small
 				fontSizeMode: Text.Fit
 				wrapMode: Text.WordWrap
 				maximumLineCount: 4
