@@ -184,6 +184,8 @@ protected:
 
 private:
 	void init();
+	void reset();
+	void handleBackendStateChanged();
 	void watchSlot(VeQItem *slot);
 	void unwatchSlot(VeQItem *slot);
 	void breakAssociation(NotificationSlot *slot);

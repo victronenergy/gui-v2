@@ -92,39 +92,104 @@ NotificationModel* NotificationModel::create(QQmlEngine *engine, QJSEngine *)
 NotificationModel::NotificationModel(QObject *parent)
 	: QAbstractListModel(parent)
 {
-	init();
+	BackendConnection *backend = BackendConnection::create();
+	if (backend) {
+		connect(backend, &BackendConnection::stateChanged,
+			this, &NotificationModel::handleBackendStateChanged);
+	}
+	QMetaObject::invokeMethod(this, &NotificationModel::init, Qt::QueuedConnection);
+}
+
+void NotificationModel::reset()
+{
+	if (m_notifications) {
+		disconnect(m_notifications, nullptr, this, nullptr);
+	}
+
+
+	const qsizetype oldDataSize = m_data.size();
+	const int oldActiveAlarms = m_activeAlarms;
+	const int oldActiveWarnings = m_activeWarnings;
+	const int oldActiveInfos = m_activeInfos;
+	const int oldUnacknowledgedAlarms = m_unacknowledgedAlarms;
+	const int oldUnacknowledgedWarnings = m_unacknowledgedWarnings;
+	const int oldUnacknowledgedInfos = m_unacknowledgedInfos;
+
+	beginResetModel();
+	m_acknowledgeAll = nullptr;
+	qDeleteAll(m_slots);
+	m_slots.clear();
+	m_data.clear();
+	m_activeAlarms = 0;
+	m_activeWarnings = 0;
+	m_activeInfos = 0;
+	m_unacknowledgedAlarms = 0;
+	m_unacknowledgedWarnings = 0;
+	m_unacknowledgedInfos = 0;
+	m_notifications = nullptr;
+	endResetModel();
+
+	if (oldDataSize != m_data.size()) {
+		Q_EMIT countChanged();
+	}
+
+	if (oldActiveAlarms != m_activeAlarms) {
+		Q_EMIT activeAlarmsChanged();
+	}
+	if (oldUnacknowledgedAlarms != m_unacknowledgedAlarms) {
+		Q_EMIT unacknowledgedAlarmsChanged();
+	}
+
+	if (oldActiveWarnings != m_activeWarnings) {
+		Q_EMIT activeWarningsChanged();
+	}
+	if (oldUnacknowledgedWarnings != m_unacknowledgedWarnings) {
+		Q_EMIT unacknowledgedWarningsChanged();
+	}
+
+	if (oldActiveInfos != m_activeInfos) {
+		Q_EMIT activeInfosChanged();
+	}
+	if (oldUnacknowledgedInfos != m_unacknowledgedInfos) {
+		Q_EMIT unacknowledgedInfosChanged();
+	}
+}
+
+void NotificationModel::handleBackendStateChanged()
+{
+	BackendConnection *backend = BackendConnection::create();
+	if (!backend) {
+		return;
+	}
+
+	if (m_notifications != nullptr &&
+			(backend->state() == BackendConnection::Disconnected
+			|| backend->state() == BackendConnection::Reconnecting
+			|| backend->state() == BackendConnection::Failed)) {
+		qInfo() << "Resetting notifications backend due to backend disconnection";
+		reset();
+	} else if (backend->state() == BackendConnection::Ready) {
+		// Re-initialize when the connection is restored.
+		// The init() call will re-discover notification slots.
+		if (!m_notifications) {
+			QMetaObject::invokeMethod(this, &NotificationModel::init, Qt::QueuedConnection);
+		}
+	}
 }
 
 void NotificationModel::init()
 {
-	if (m_data.size()) {
-		qInfo() << "NotificationModel re-initialising!";
-		beginResetModel();
-		m_acknowledgeAll = nullptr;
-		qDeleteAll(m_slots);
-		m_slots.clear();
-		m_data.clear();
-		m_activeAlarms = 0;
-		m_activeWarnings = 0;
-		m_activeInfos = 0;
-		m_unacknowledgedAlarms = 0;
-		m_unacknowledgedWarnings = 0;
-		m_unacknowledgedInfos = 0;
-		endResetModel();
-		Q_EMIT countChanged();
-		Q_EMIT activeAlarmsChanged();
-		Q_EMIT unacknowledgedAlarmsChanged();
-		Q_EMIT activeWarningsChanged();
-		Q_EMIT unacknowledgedWarningsChanged();
-		Q_EMIT activeInfosChanged();
-		Q_EMIT unacknowledgedInfosChanged();
-	}
+	reset();
 
+	qInfo() << "Initialising notifications backend";
 	m_notifications = notificationsItem();
 	if (m_notifications) {
 		m_acknowledgeAll = m_notifications->itemGet(QStringLiteral("AcknowledgeAll"));
 		connect(m_notifications, &QObject::destroyed,
-			this, &NotificationModel::init, Qt::QueuedConnection);
+			this, [this] {
+				m_notifications = nullptr;
+				QMetaObject::invokeMethod(this, &NotificationModel::init, Qt::QueuedConnection);
+			});
 		connect(m_notifications, &VeQItem::childAboutToBeRemoved,
 			this, &NotificationModel::unwatchSlot);
 		// Use QueuedConnection when a child is added, as the "index item"
