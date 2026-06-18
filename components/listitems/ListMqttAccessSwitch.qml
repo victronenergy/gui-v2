@@ -6,10 +6,24 @@
 import QtQuick
 import Victron.VenusOS
 
-ListSwitch {
+ListRadioButtonGroup {
 	//% "MQTT Access"
 	text: qsTrId("settings_services_mqtt_access")
 	dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/MqttLocal"
+
+	optionModel: [
+		{ display: CommonWords.off, value: 0 },
+		//% "Paired devices only"
+		{ display: qsTrId("settings_services_mqtt_access_paired_devices_only"), value: 2, readOnly: !tokenUsers.valid || tokenUsers.value === "[]"},
+		{ display: CommonWords.on, value: 1 },
+	]
+
+	onOptionClicked: function (index) {
+		if (index == 0 && tokenUsers.valid && tokenUsers.value !== "[]") {
+			//% "Turning MQTT Access off also disables paired MQTT devices until access is enabled again."
+			Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("settings_services_mqtt_access_warning_paired_devices"), 10000)
+		}
+	}
 
 	MouseArea {
 		anchors.fill: parent
@@ -23,5 +37,10 @@ ListSwitch {
 	VeQuickItem {
 		id: securityProfile
 		uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
+	}
+
+	VeQuickItem {
+		id: tokenUsers
+		uid: Global.venusPlatform.serviceUid + "/Tokens/Users"
 	}
 }
