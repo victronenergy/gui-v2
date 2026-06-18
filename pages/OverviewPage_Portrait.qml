@@ -36,7 +36,7 @@ FocusScope {
 			return VenusOS.OverviewWidget_Size_L
 		}
 
-		// When stretching a widget horizontally, use L size so that the phase measurements
+		// When stretching a widget horizontally, use M size so that the phase measurements
 		// on the right fill up the available space.
 		if (stretchHorizontally) {
 			return VenusOS.OverviewWidget_Size_M
@@ -44,7 +44,7 @@ FocusScope {
 
 		// Return widget size based on widget count in the column.
 		if (widgetColumnCount > 2) {
-			return VenusOS.OverviewWidget_Size_XS
+			return VenusOS.OverviewWidget_Size_S
 		} else if (widgetColumnCount > 1) {
 			return VenusOS.OverviewWidget_Size_M
 		} else {

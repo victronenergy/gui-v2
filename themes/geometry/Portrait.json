@@ -384,10 +384,10 @@
     "geometry_overviewPage_widget_leftWidgetWidth": 224,
     "geometry_overviewPage_widget_centerWidgetWidth": 304,
     "geometry_overviewPage_widget_rightWidgetWidth": 224,
-    "geometry_overviewPage_widget_height_xs": 68,
+    "geometry_overviewPage_widget_height_xs": 76,
     "geometry_overviewPage_widget_height_s": 88,
-    "geometry_overviewPage_widget_height_m": 116,
-    "geometry_overviewPage_widget_height_l": 128,
+    "geometry_overviewPage_widget_height_m": 128,
+    "geometry_overviewPage_widget_height_l": 136,
 
     "geometry_overviewPage_widget_battery_background_radius": 4,
     "geometry_overviewPage_widget_battery_gradient_height": 48,

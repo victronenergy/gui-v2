@@ -179,7 +179,7 @@ OverviewWidget {
 		}
 
 		ElectricalQuantityLabel {
-			font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_maximumSize
+			font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_large
 			alignment: Qt.AlignLeft
 			value: Global.system.battery.stateOfCharge
 			unit: VenusOS.Units_Percentage
