@@ -41,7 +41,7 @@ Row {
 
 			width: root.fixedColumnWidth > 0 ? root.fixedColumnWidth
 				: quantityObject.unit === VenusOS.Units_None ? implicitWidth
-				: quantityMetrics.columnWidth(quantityObject.unit)
+				: quantityMetrics.columnWidth(quantityObject.unit, decimals)
 						+ (root.padLastColumn && index === root.model.count - 1 ? root.spacing : 0)
 			leftPadding: (verticalSeparator.visible ? Theme.geometry_listItem_separator_width : 0)
 					+ (root._showSeparators ? root.spacing : 0) // offset the space to the previous item
@@ -50,7 +50,7 @@ Row {
 			font.pixelSize: root.fontSize
 			value: quantityObject.numberValue
 			unit: quantityObject.unit
-			decimals: quantityObject.decimals
+			decimals: quantityObject.decimals < 0 ? Units.defaultUnitDecimals(quantityObject.unit) : quantityObject.decimals
 			valueText: unit === VenusOS.Units_PowerFactor ? "PF" : (quantityObject.textValue || quantityInfo.number)
 			unitText: unit === VenusOS.Units_PowerFactor ? (quantityObject.textValue || quantityInfo.number) : quantityInfo.unit
 			valueColor: unit === VenusOS.Units_PowerFactor ? Theme.color_quantityTable_quantityUnit
