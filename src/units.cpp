@@ -12,8 +12,8 @@
 
 namespace {
 
-// \u33A5 is not supported by the font
-static const QString CubicMetre = QStringLiteral("\u006D\u00B3");
+static const QString CubicMetre = QStringLiteral("\u006D\u00B3"); // \u33A5 ("m3" character) is not supported by the font, so use separate m3 characters
+static const QString SquareMetre = QStringLiteral("\u006D\u00B2");
 static const QString DegreesSymbol = QStringLiteral("\u00b0");
 static const QString LitreSymbol = QStringLiteral("\u2113");
 static const QString EmptyString = QString();
@@ -71,7 +71,7 @@ static const std::vector<UnitMetaData> UnitTable {
 	{               "gal",   Victron::VenusOS::Enums::Units_Volume_GallonUS,            Victron::VenusOS::Enums::Units_Scale_None,      Unit::UsGallon,                 0   },
 	{         LitreSymbol,   Victron::VenusOS::Enums::Units_Volume_Litre,               Victron::VenusOS::Enums::Units_Scale_Kilo,      Unit::Litre,                    0   },
 	{                 "W",   Victron::VenusOS::Enums::Units_Watt,                       Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  0   },
-	{              "W/m2",   Victron::VenusOS::Enums::Units_WattsPerSquareMetre,        Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  0   },
+	{  "W/" + SquareMetre,   Victron::VenusOS::Enums::Units_WattsPerSquareMetre,        Victron::VenusOS::Enums::Units_Scale_Tera,      Unit::Default,                  0   },
 	{             "Wh/km",   Victron::VenusOS::Enums::Units_WattHourPerKilometre,       Victron::VenusOS::Enums::Units_Scale_None,      Unit::WattHourPerKilometre,     0   },
 	{             "Wh/mi",   Victron::VenusOS::Enums::Units_WattHourPerMile,            Victron::VenusOS::Enums::Units_Scale_None,      Unit::WattHourPerMile,          0   },
 	{             "Wh/NM",   Victron::VenusOS::Enums::Units_WattHourPerNauticalMile,    Victron::VenusOS::Enums::Units_Scale_None,      Unit::WattHourPerNauticalMile,  0   },
