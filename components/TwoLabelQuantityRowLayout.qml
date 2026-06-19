@@ -27,7 +27,7 @@ Flow {
 	property bool forceColumnLayout
 
 	readonly property bool _useColumnLayout: forceColumnLayout
-			|| (Theme.geometry_listItem_primaryText_minimumWidth + quantityRow.implicitWidth > width)
+			|| (Math.min(primaryLabel.implicitWidth, Theme.geometry_listItem_primaryText_minimumWidth) + quantityRow.implicitWidth > width)
 
 	Label {
 		id: primaryLabel
