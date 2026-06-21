@@ -10,22 +10,20 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
-	// Skip the fade and logo animations on WebAssembly as startup speed is more important.
-	property bool showSplashAnimation: Qt.platform.os != "wasm"
 	readonly property bool allPagesLoaded: Global.allPagesLoaded
 
 	color: Theme.color_page_background
-	visible: Global.splashScreenVisible
+	visible: UiConfig.splashScreenVisible
 
 	onAllPagesLoadedChanged: {
-		if (allPagesLoaded && !showSplashAnimation) {
+		if (allPagesLoaded && !UiConfig.showSplashAnimation) {
 			hideSplashView()
 		}
 	}
 
 	function hideSplashView() {
 		console.info("SplashView: UI ready; hiding splash view")
-		Global.splashScreenVisible = false
+		UiConfig.splashScreenVisible = false
 		// reset the state variables we animated.
 		logoIcon.opacity = 1.0
 		logoText.opacity = 1.0
@@ -73,7 +71,7 @@ Rectangle {
 			}
 		}
 
-		source: !root.showSplashAnimation ? ""
+		source: !UiConfig.showSplashAnimation ? ""
 			: Theme.colorScheme === Theme.Light
 				? Theme.screenSize === Theme.SevenInch
 				  ? "qrc:/images/gauge_intro_7_matte_white.gif"
@@ -149,7 +147,7 @@ Rectangle {
 	SequentialAnimation {
 		id: initialFadeAnimation
 
-		running: Global.dataManagerLoaded && !welcomeLoader.active && Global.allPagesLoaded && root.showSplashAnimation
+		running: Global.dataManagerLoaded && !welcomeLoader.active && Global.allPagesLoaded && UiConfig.showSplashAnimation
 		onRunningChanged: {
 			if (running) {
 				console.info("SplashView: application content pages have loaded, running initial fade animation")
@@ -388,7 +386,7 @@ Rectangle {
 			// If the welcome screen is shown, force the splash animation to be shown even on wasm
 			// so that there is a nicer transition from the welcome to the main screen.
 			console.info("SplashView: welcome view loaded, starting splash animation")
-			root.showSplashAnimation = true
+			UiConfig.showSplashAnimation = true
 		}
 	}
 }

@@ -27,7 +27,7 @@ Window {
 	onIsDesktopChanged: Global.isDesktop = root.isDesktop
 
 	readonly property bool runTests: UiTest.status === UiTest.Ready
-			&& !Global.splashScreenVisible
+			&& !UiConfig.splashScreenVisible
 			&& Global.allPagesLoaded && !!Global.mainView && !Global.mainView.animating
 	onRunTestsChanged: if (runTests) UiTest.start()
 
@@ -35,7 +35,7 @@ Window {
 	// onActiveFocusItemChanged: console.info("** Active focused:", activeFocusItem, activeFocusItem?.title ?? activeFocusItem?.text ?? "")
 
 	function skipSplashScreen() {
-		Global.splashScreenVisible = false
+		UiConfig.splashScreenVisible = false
 	}
 
 	function rebuildUi() {
@@ -226,7 +226,7 @@ Window {
 		height: Theme.geometry_screen_height
 		anchors.centerIn: parent
 
-		active: Global.splashScreenVisible
+		active: UiConfig.splashScreenVisible
 		sourceComponent: SplashView {
 			anchors.centerIn: parent
 		}
@@ -263,7 +263,7 @@ Window {
 
 	Timer {
 		id: appIdleTimer
-		running: !Global.splashScreenVisible && Global.timersEnabled
+		running: !UiConfig.splashScreenVisible && Global.timersEnabled
 		interval: 60000
 		onTriggered: {
 			Global.applicationActive = false

@@ -43,7 +43,6 @@ QtObject {
 	property var tanks
 
 	property var venusPlatform
-	property bool splashScreenVisible: true
 	property bool dataManagerLoaded
 	property bool allPagesLoaded
 
@@ -94,7 +93,7 @@ QtObject {
 
 		// The last thing we do is set the splash screen visible.
 		allPagesLoaded = false
-		splashScreenVisible = true
+		UiConfig.splashScreenVisible = true
 	}
 
 	readonly property FontLoader _defaultFontLoader: FontLoader {

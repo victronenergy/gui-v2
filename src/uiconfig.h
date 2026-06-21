@@ -26,6 +26,8 @@ class UiConfig : public QObject
 	Q_PROPERTY(QUrl demoImageFileName READ demoImageFileName CONSTANT FINAL)
 	Q_PROPERTY(bool msaaEnabled READ msaaEnabled WRITE setMsaaEnabled NOTIFY msaaEnabledChanged FINAL)
 	Q_PROPERTY(bool needsWasmKeyboardHandler READ needsWasmKeyboardHandler WRITE setNeedsWasmKeyboardHandler NOTIFY needsWasmKeyboardHandlerChanged FINAL)
+	Q_PROPERTY(bool showSplashAnimation READ showSplashAnimation WRITE setShowSplashAnimation NOTIFY showSplashAnimationChanged FINAL)
+	Q_PROPERTY(bool splashScreenVisible READ splashScreenVisible WRITE setSplashScreenVisible NOTIFY splashScreenVisibleChanged FINAL)
 
 public:
 	static UiConfig* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
@@ -44,12 +46,19 @@ public:
 	bool needsWasmKeyboardHandler() const;
 	void setNeedsWasmKeyboardHandler(bool needsWasmKeyboardHandler);
 
+	bool showSplashAnimation() const;
+	void setShowSplashAnimation(bool showSplashAnimation);
+
+	bool splashScreenVisible() const;
+	void setSplashScreenVisible(bool v);
 
 Q_SIGNALS:
 	void animationEnabledChanged();
 	void applicationVisibleChanged();
 	void msaaEnabledChanged();
 	void needsWasmKeyboardHandlerChanged();
+	void showSplashAnimationChanged();
+	void splashScreenVisibleChanged();
 
 private:
 	explicit UiConfig(QQmlEngine* engine);
@@ -57,6 +66,13 @@ private:
 	bool m_applicationVisible = true;
 	bool m_msaaEnabled = true;
 	bool m_needsWasmKeyboardHandler = false;
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	// By default, skip the fade and logo animations on WebAssembly as startup speed is more important.
+	bool m_showSplashAnimation = false;
+#else
+	bool m_showSplashAnimation = true;
+#endif
+	bool m_splashScreenVisible = true;
 };
 
 } /* VenusOS */
