@@ -24,7 +24,7 @@ FocusScope {
 
 	property alias navBarAnimatingOut: animateNavBarOut.running
 
-	property bool mainViewVisible: UiConfig.applicationVisible && !Global.splashScreenVisible
+	property bool mainViewVisible: UiConfig.applicationVisible && !UiConfig.splashScreenVisible
 	onMainViewVisibleChanged: if (mainViewVisible) console.info("MainView: UI loaded and visible")
 
 	// To reduce the animation load, disable page animations when the PageStack is transitioning
@@ -330,7 +330,7 @@ FocusScope {
 
 	SequentialAnimation {
 		id: navBarStartupAnim
-		running: !Global.splashScreenVisible
+		running: !UiConfig.splashScreenVisible
 
 		// Force the final animation values in case the Animators are
 		// not run (skipping the splash screen causes the animations to
@@ -491,7 +491,7 @@ FocusScope {
 		}
 
 		SequentialAnimation {
-			running: !Global.splashScreenVisible && Global.animationEnabled
+			running: !UiConfig.splashScreenVisible && Global.animationEnabled
 
 			PauseAnimation {
 				duration: Theme.animation_statusBar_initialize_delayedStart_duration

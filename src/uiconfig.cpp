@@ -74,3 +74,30 @@ void UiConfig::setNeedsWasmKeyboardHandler(bool needsWasmKeyboardHandler)
 	}
 }
 
+
+bool UiConfig::showSplashAnimation() const
+{
+	return m_showSplashAnimation;
+}
+
+void UiConfig::setShowSplashAnimation(bool showSplashAnimation)
+{
+	if (m_showSplashAnimation != showSplashAnimation) {
+		m_showSplashAnimation = showSplashAnimation;
+		Q_EMIT showSplashAnimationChanged();
+	}
+}
+
+
+bool UiConfig::splashScreenVisible() const
+{
+	return m_splashScreenVisible;
+}
+
+void UiConfig::setSplashScreenVisible(bool v)
+{
+	if (m_splashScreenVisible != v) {
+		m_splashScreenVisible = v;
+		Q_EMIT splashScreenVisibleChanged();
+	}
+}

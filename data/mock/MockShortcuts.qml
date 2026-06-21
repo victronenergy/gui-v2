@@ -345,7 +345,7 @@ QtObject {
 			pageConfigTitle.text = "Access Level: " + Global.systemSettings.accessLevel.value
 			break
 		case Qt.Key_Space:
-			Global.splashScreenVisible = false
+			UiConfig.splashScreenVisible = false
 			break
 		default:
 			break

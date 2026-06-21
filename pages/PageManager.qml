@@ -23,7 +23,7 @@ QtObject {
 			|| root.interactivity === VenusOS.PageManager_InteractionMode_Idle
 
 	property Timer idleModeTimer: Timer {
-		running: !Global.splashScreenVisible
+		running: !UiConfig.splashScreenVisible
 			&& (currentMainPage?.fullScreenWhenIdle || Global.keyNavigationEnabled)
 			&& root.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			&& UiConfig.applicationVisible

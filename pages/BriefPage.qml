@@ -58,7 +58,7 @@ SwipeViewPage {
 			id: landscapeComponent
 
 			BriefPage_Landscape {
-				property bool _readyToInit: state === "" && !Global.splashScreenVisible && Global.allPagesLoaded
+				property bool _readyToInit: state === "" && !UiConfig.splashScreenVisible && Global.allPagesLoaded
 				on_ReadyToInitChanged: {
 					if (_readyToInit) {
 						_readyToInit = false    // break the binding
