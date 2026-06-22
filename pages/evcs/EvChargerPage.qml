@@ -147,6 +147,14 @@ DevicePage {
 			writeAccessLevel: VenusOS.User_AccessType_User
 		}
 
+		AcLimitsConsumptionSettings {
+			bindPrefix: root.bindPrefix
+		}
+
+		AcLimitsProductionSettings {
+			bindPrefix: root.bindPrefix
+		}
+
 		ListNavigation {
 			text: CommonWords.setup
 			preferredVisible: !root.energyMeterMode || allowedRoles.valid
