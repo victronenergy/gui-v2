@@ -170,10 +170,15 @@ FocusScope {
 			readonly property bool readyToLoad: swipePageModel.completed
 					&& Global.notifications && Global.notificationLayer // checked by onLoaded handler
 
+			// For the vertical anchors, use hardcoded margins instead of referring to the height
+			// of the StatusBar and NavBar, so that the SwipeView position does not jump when the
+			// StatusBar sizes to its internal content geometry or when the NavBar y position
+			// animates into view.
 			anchors {
 				top: parent.top
-				topMargin: statusBar.height
-				bottom: navBar.top
+				topMargin: Theme.geometry_statusBar_height
+				bottom: parent.bottom
+				bottomMargin: Theme.geometry_navigationBar_height
 				left: parent.left
 				right: parent.right
 			}
@@ -341,7 +346,7 @@ FocusScope {
 		}
 
 		PauseAnimation {
-			duration: Theme.animation_navBar_initialize_delayedStart_duration
+			duration: UiConfig.showSplashAnimation && Global.animationEnabled ? Theme.animation_navBar_initialize_delayedStart_duration : 1
 		}
 		ParallelAnimation {
 			YAnimator {
@@ -349,14 +354,14 @@ FocusScope {
 				target: navBar
 				from: root.height - navBar.height + Theme.geometry_navigationBar_initialize_margin
 				to: root.height - navBar.height
-				duration: Global.animationEnabled ? Theme.animation_navBar_initialize_fade_duration : 1
+				duration: UiConfig.showSplashAnimation && Global.animationEnabled ? Theme.animation_navBar_initialize_fade_duration : 1
 			}
 			OpacityAnimator {
 				id: navBarInitialOpacityAnimator
 				target: navBar
 				from: 0.0
 				to: 1.0
-				duration: Global.animationEnabled ? Theme.animation_navBar_initialize_fade_duration : 1
+				duration: UiConfig.showSplashAnimation && Global.animationEnabled ? Theme.animation_navBar_initialize_fade_duration : 1
 			}
 		}
 	}
@@ -483,7 +488,7 @@ FocusScope {
 		onCardsDeactivated: cardsLoader.hide()
 		onSidePanelToggled: root.currentPage.toggleSidePanel()
 
-		Component.onCompleted: if (!Global.animationEnabled) { statusBar.opacity = 1.0 }
+		Component.onCompleted: if (!UiConfig.showSplashAnimation || !Global.animationEnabled) { statusBar.opacity = 1.0 }
 
 		Rectangle {
 			anchors.fill: parent
@@ -491,7 +496,7 @@ FocusScope {
 		}
 
 		SequentialAnimation {
-			running: !UiConfig.splashScreenVisible && Global.animationEnabled
+			running: UiConfig.showSplashAnimation && !UiConfig.splashScreenVisible && Global.animationEnabled
 
 			PauseAnimation {
 				duration: Theme.animation_statusBar_initialize_delayedStart_duration
