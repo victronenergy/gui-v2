@@ -87,14 +87,14 @@ AbstractListItem {
 		// Width is always sized to the parent.
 		// Height is sized to the parent in landscape, and variable in portrait based on the number
 		// of gauge bars.
-		implicitHeight: Theme.screenSize === Theme.Portrait ? levelsGauge.height : 0
+		implicitHeight: Theme.screenSize === Theme.Portrait ? levelsGauge.implicitHeight + capacityLabel.implicitHeight : 0
 
 		LevelsGaugeOutline {
 			id: levelsGauge
 
 			width: parent.width
 			height: Theme.screenSize === Theme.Portrait
-					? implicitHeight + capacityLabel.height
+					? implicitHeight
 					: parent.height - capacityLabel.height
 			name: root.tank?.name ?? root.tankProperties?.name ?? ""
 			iconSource: root.tankProperties?.icon ?? ""
@@ -159,7 +159,6 @@ AbstractListItem {
 				right: parent.right
 			}
 			topPadding: Theme.geometry_levelsGauge_capacity_topPadding
-			height: opacity > 0 || Theme.screenSize !== Theme.Portrait ? implicitHeight : 0
 			horizontalAlignment: Theme.screenSize === Theme.Portrait ? Text.AlignLeft : Text.AlignHCenter
 			fontSizeMode: Text.HorizontalFit
 			font.pixelSize: Theme.font_levelsGauge_secondary
