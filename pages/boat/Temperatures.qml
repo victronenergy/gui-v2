@@ -72,6 +72,8 @@ Row {
 		id: batteryTemperatureColumn
 		spacing: Theme.geometry_boatPage_temperature_temperatureColumn_spacing
 
+		visible: Global.system && Global.system.battery && !isNaN(Global.system.battery.temperature)
+
 		ColumnHeader {
 			//% "Battery"
 			text: qsTrId("boat_page_temperature_battery_label")
