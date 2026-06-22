@@ -69,6 +69,8 @@ GridLayout {
 		horizontalAlignment: root._useColumnLayout ? Text.AlignLeft : Text.AlignRight
 		visible: text.length > 0
 		wrapMode: Text.WordWrap
+		fontSizeMode: Text.HorizontalFit
+		minimumPixelSize: Theme.font_size_tiny
 
 		Layout.alignment: (root._useColumnLayout ? Qt.AlignLeft : Qt.AlignRight)
 				| (root.stretchSecondaryText ? Qt.AlignVCenter : Qt.AlignTop)
