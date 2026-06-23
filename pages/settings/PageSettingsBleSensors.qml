@@ -97,9 +97,52 @@ Page {
 						filterFlags: VeQItemSortTableModel.FilterInvalid
 					}
 
-					delegate: ListSwitch {
-						text: model.item.value
-						dataItem.uid: model.item.itemParent().uid + "/Enabled"
+					delegate: SettingsColumn {
+						id: sensorDelegate
+
+						// The device's dbus path prefix, e.g. ".../Devices/xxxxxx_xxxxxxx".
+						readonly property string __devicePrefix: model.item.itemParent().uid
+						// Encrypted Instant Readout devices expose a Devices/<id>/Key path. When that
+						// path is present the device cannot be enabled until a valid key is entered.
+						readonly property bool __keyRequired: keyField.dataItem.seen
+						readonly property bool __keyValid: /^[0-9A-Fa-f]{32}$/.test(keyField.secondaryText)
+
+						width: parent ? parent.width : 0
+
+						ListSwitch {
+							id: enabledSwitch
+							text: model.item.value
+							dataItem.uid: sensorDelegate.__devicePrefix + "/Enabled"
+							// An encrypted device can only be enabled once a valid 32-character
+							// hexadecimal key has been entered.
+							interactive: defaultInteractive
+									&& (!sensorDelegate.__keyRequired || sensorDelegate.__keyValid)
+						}
+
+						ListTextField {
+							id: keyField
+
+							//% "Encryption key"
+							text: qsTrId("settings_ble_sensors_encryption_key")
+							dataItem.uid: sensorDelegate.__devicePrefix + "/Key"
+							preferredVisible: sensorDelegate.__keyRequired
+							// Limited to 32 hexadecimal characters; input is case insensitive.
+							maximumLength: 32
+							inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText | Qt.ImhSensitiveData
+							validator: RegularExpressionValidator { regularExpression: /[0-9A-Fa-f]{0,32}/ }
+							//% "Enter a 32-character key"
+							placeholderText: qsTrId("settings_ble_sensors_encryption_key_placeholder")
+							// Make the field read-only while the device is enabled.
+							interactive: dataItem.valid && !enabledSwitch.checked
+							validateInput: function() {
+								if (sensorDelegate.__keyValid) {
+									return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+								}
+								//% "The encryption key must be 32 hexadecimal characters."
+								return Utils.validationResult(VenusOS.InputValidation_Result_Error,
+										qsTrId("settings_ble_sensors_encryption_key_invalid"))
+							}
+						}
 					}
 				}
 			}
