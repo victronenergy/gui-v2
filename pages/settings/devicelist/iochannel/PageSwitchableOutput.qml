@@ -98,7 +98,7 @@ Page {
 
 			ListIOChannelTypeRadioButtonGroup {
 				ioChannel: root.switchableOutput
-				interactive: _writeable
+				interactive: hasSelectableType && _writeable
 			}
 
 			ListRadioButtonGroup {

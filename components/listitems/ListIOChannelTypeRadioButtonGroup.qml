@@ -10,6 +10,7 @@ ListRadioButtonGroup {
 	id: root
 
 	required property IOChannel ioChannel
+	readonly property bool hasSelectableType: optionModel.length > 1 || !root.ioChannel.hasValidType
 
 	//% "Type"
 	text: qsTrId("iochannel_type_buttongroup_type")
@@ -34,7 +35,7 @@ ListRadioButtonGroup {
 		}
 		return options
 	}
-	interactive: optionModel.length > 1 || !root.ioChannel.hasValidType
+	interactive: hasSelectableType
 
 	// Set the fallback text explicitly, in case the input/output Type is not supported by its
 	// ValidTypes, which means the current Type is not one of the listed options and
