@@ -16,6 +16,11 @@ ListSetting {
 	property string placeholderText
 	property int echoMode: TextInput.Normal
 	property int maximumLength: 32767 // as per TextInput default
+	// Optional input validator (e.g. a RegularExpressionValidator) applied to the text field, to
+	// restrict the characters that can be entered. Null by default (no restriction).
+	// This is a plain property (not an alias to the internal textField) so that it remains valid
+	// when a caller overrides contentItem and the default textField does not exist.
+	property var validator: null
 	property string suffix
 	property var flickable: root.ListView ? root.ListView.view : null
 
@@ -94,6 +99,7 @@ ListSetting {
 			inputMethodHints: root.inputMethodHints
 			placeholderText: root.placeholderText
 			maximumLength: root.maximumLength
+			validator: root.validator
 
 			flickable: root.flickable
 			validateInput: root.validateInput
