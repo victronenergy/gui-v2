@@ -381,8 +381,8 @@ FocusScope {
 				// and EVCS, so do not distinguish between AC-in/AC-out loads; just use the overall
 				// AC load.
 				opacity: (layoutConditions.showAcLoads
-						  || layoutConditions.showEssentialLoads)
-						  || layoutConditions.showEvChargers
+						  || layoutConditions.showEssentialLoads
+						  || layoutConditions.showEvChargers)
 						 && Math.abs(Global.system.load.ac.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
 
 				// If load power is positive (i.e. consumed energy), energy flows to load (downwards).
