@@ -10,6 +10,8 @@ Page {
 	id: root
 
 	implicitHeight: Theme.geometry_controlCard_height
+	showTopGradient: cardsView.orientation === Qt.Vertical && !cardsView.atYBeginning
+	showBottomGradient: cardsView.orientation === Qt.Vertical && !cardsView.atYEnd
 
 	//: Name of the Switch Controls feature
 	//% "Switches"
