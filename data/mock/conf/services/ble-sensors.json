@@ -7,6 +7,12 @@
         "/Devices/f00f00d00001/Name": "Ruuvi 41EA",
         "/Devices/f00f00d00001/Enabled": 1,
         "/Devices/afd683/Name": "SolarSense afd683",
-        "/Devices/afd683/Enabled": 1
+        "/Devices/afd683/Enabled": 1,
+        "/Devices/c2e4f10a8b3d_ruuvi/Name": "Ruuvi Garage (encrypted)",
+        "/Devices/c2e4f10a8b3d_ruuvi/Enabled": 0,
+        "/Devices/c2e4f10a8b3d_ruuvi/Key": "",
+        "/Devices/a14b9f23c5e6_ruuvi/Name": "Ruuvi Cellar (encrypted, keyed)",
+        "/Devices/a14b9f23c5e6_ruuvi/Enabled": 1,
+        "/Devices/a14b9f23c5e6_ruuvi/Key": "0123456789ABCDEF0123456789ABCDEF"
     }
 }
