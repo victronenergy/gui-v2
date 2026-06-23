@@ -135,44 +135,31 @@ Page {
 				width: parent ? parent.width : 0
 
 				Repeater {
-					model: Math.ceil(nrOfCellsPerBattery.value / 2)
+					model: nrOfCellsPerBattery.value
 
-					delegate: Row {
-						property int rowIndex: index * 2 + 1
+					delegate: ListQuantityGroup {
+						property int cellIndex: index + 1
 
-						width: parent.width
-						spacing: Theme.geometry_gradientList_spacing
+						//% "Cell #%1"
+						text: qsTrId("lynxionbatteryinfo_cell_number").arg(cellIndex)
+						model: QuantityObjectModel {
+							filterType: QuantityObjectModel.HasValue
 
-						Repeater {
-							model: 2
+							QuantityObject { object: cellVoltage; unit: VenusOS.Units_Volt_DC; decimals: 3 }
+							QuantityObject { object: cellTemperature; unit: Global.systemSettings.temperatureUnit }
+						}
+						preferredVisible: cellVoltage.valid
 
-							delegate: ListQuantityGroup {
-								property int cellIndex: rowIndex + index
+						VeQuickItem {
+							id: cellVoltage
+							uid: root.bindPrefix + "/Battery/" + batteryRequestId.value + "/Cell/" + cellIndex + "/Voltage"
+						}
 
-								width: parent.width / 2 - (Theme.geometry_gradientList_spacing / 2)
-
-								//% "Cell #%1"
-								text: qsTrId("lynxionbatteryinfo_cell_number").arg(cellIndex)
-								model: QuantityObjectModel {
-									filterType: QuantityObjectModel.HasValue
-
-									QuantityObject { object: cellVoltage; unit: VenusOS.Units_Volt_DC; decimals: 3 }
-									QuantityObject { object: cellTemperature; unit: Global.systemSettings.temperatureUnit }
-								}
-								preferredVisible: cellVoltage.valid
-
-								VeQuickItem {
-									id: cellVoltage
-									uid: root.bindPrefix + "/Battery/" + batteryRequestId.value + "/Cell/" + cellIndex + "/Voltage"
-								}
-
-								VeQuickItem {
-									id: cellTemperature
-									uid: root.bindPrefix + "/Battery/" + batteryRequestId.value + "/Cell/" + cellIndex + "/Temperature"
-									sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-									displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-								}
-							}
+						VeQuickItem {
+							id: cellTemperature
+							uid: root.bindPrefix + "/Battery/" + batteryRequestId.value + "/Cell/" + cellIndex + "/Temperature"
+							sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+							displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 						}
 					}
 				}
