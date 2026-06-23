@@ -42,7 +42,7 @@ ListNavigation {
 				left: root.iconSource.length > 0 ? mainIcon.right : parent.left
 				leftMargin: root.iconSource.length > 0 ? root.horizontalContentPadding : 0
 				right: arrowIcon.left
-				rightMargin: Theme.geometry_listItem_arrow_leftMargin
+				rightMargin: root.spacing
 			}
 			primaryText: root.text
 			primaryLabel.font: root.font

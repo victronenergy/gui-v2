@@ -41,7 +41,7 @@ ListSetting {
 			anchors {
 				left: parent.left
 				right: parent.right
-				rightMargin: arrowIcon.visible ? arrowIcon.width + Theme.geometry_listItem_arrow_leftMargin : 0
+				rightMargin: arrowIcon.visible ? arrowIcon.width + root.spacing : 0
 				verticalCenter: parent.verticalCenter
 			}
 			primaryText: root.text

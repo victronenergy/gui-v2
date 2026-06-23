@@ -25,6 +25,7 @@ ModalDialog {
 
 	contentItem: Column {
 		spacing: Theme.geometry_modalDialog_content_spacing
+		bottomPadding: Theme.geometry_modalDialog_content_spacing
 
 		CP.IconImage {
 			id: alarmIcon

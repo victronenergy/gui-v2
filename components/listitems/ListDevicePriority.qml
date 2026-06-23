@@ -142,7 +142,7 @@ ListSetting {
 
 			ForwardIcon {
 				visible: root.interactive
-				Layout.leftMargin: Theme.geometry_listItem_arrow_leftMargin
+				Layout.leftMargin: root.spacing
 			}
 		}
 	}

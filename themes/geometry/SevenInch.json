@@ -126,7 +126,6 @@
     "geometry_listItem_textField_minimumWidth": 236,
     "geometry_listItem_textField_maximumWidth": 472,
     "geometry_listItem_accessIndicator_width": 8,
-    "geometry_listItem_arrow_leftMargin": 8,
     "geometry_listItem_primaryText_minimumWidth": 240,
 
     "geometry_valueIndicator_horizontalMargin": 12,

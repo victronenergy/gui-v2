@@ -54,7 +54,7 @@ ListItem {
 		ColumnLayout {
 			id: contentLayout
 
-			width: parent.width - arrowIcon.width - Theme.geometry_listItem_arrow_leftMargin
+			width: parent.width - arrowIcon.width - root.spacing
 
 			RowLayout {
 				Layout.fillWidth: true

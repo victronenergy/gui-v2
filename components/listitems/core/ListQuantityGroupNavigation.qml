@@ -34,6 +34,10 @@ ListSetting {
 	interactive: true
 	hasSubMenu: interactive
 
+	// By default, remove spacing between the QuantityRow and the arrow icon, as the QuantityRow
+	// provides enough edge padding anyway, particularly with reduced screen width in portrait.
+	spacing: 0
+
 	// Layout is as per ListQuantityGroup (with either a wide or compact column layout depending on
 	// whether the primary text and quantities can fit on the same line) but with an arrow icon
 	// added on the right.
@@ -49,7 +53,7 @@ ListSetting {
 			anchors {
 				left: parent.left
 				right: arrowIcon.left
-				rightMargin: Theme.geometry_listItem_arrow_leftMargin
+				rightMargin: root.spacing
 				verticalCenter: parent.verticalCenter
 			}
 

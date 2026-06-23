@@ -112,8 +112,7 @@ Page {
 			rightPadding: Theme.screenSize === Theme.Portrait ? 0
 				: (Theme.geometry_page_content_horizontalMargin // list item right inset
 					+ Theme.geometry_listItem_content_horizontalMargin // list item right padding
-					+ Theme.geometry_icon_size_medium // arrow icon width
-					+ Theme.geometry_listItem_arrow_leftMargin) // arrow icon padding
+					+ Theme.geometry_icon_size_medium) // arrow icon width
 			textHorizontalAlignment: Text.AlignHCenter
 			headerText: section === "pvinverter" ? CommonWords.pv_inverter : ""
 			model: section === "pvinverter"
