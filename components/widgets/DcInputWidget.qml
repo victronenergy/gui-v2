@@ -76,7 +76,6 @@ OverviewWidget {
 					rightPadding: Theme.geometry_page_content_horizontalMargin // list item right inset
 							+ Theme.geometry_listItem_content_horizontalMargin // list item right padding
 							+ Theme.geometry_icon_size_medium // arrow icon width
-							+ Theme.geometry_listItem_arrow_leftMargin // arrow icon padding
 					textHorizontalAlignment: Text.AlignHCenter
 					model: [
 						{ text: CommonWords.voltage, unit: VenusOS.Units_Volt_DC },

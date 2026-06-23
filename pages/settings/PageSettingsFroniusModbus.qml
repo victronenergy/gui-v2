@@ -63,6 +63,7 @@ Page {
 			iconSource: "qrc:/images/icon_minus_32.svg"
 			iconColor: Theme.color_ok
 			hasSubMenu: false
+			spacing: Theme.geometry_listItem_content_spacing // add space between text and remove icon
 			quantityModel: QuantityObjectModel {
 				QuantityObject { object: locationDelegate; key: "portNumber"; unit: VenusOS.Units_None }
 				QuantityObject { object: locationDelegate; key: "unitAddress"; unit: VenusOS.Units_None }
