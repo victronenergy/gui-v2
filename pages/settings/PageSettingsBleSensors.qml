@@ -112,9 +112,11 @@ Page {
 						filterFlags: VeQItemSortTableModel.FilterInvalid
 					}
 
-					delegate: ListSwitch {
-						text: model.item.value
-						dataItem.uid: model.item.itemParent().uid + "/Enabled"
+					delegate: BleSensorDelegate {
+						required property VeQItem item
+
+						devicePrefix: item.itemParent().uid
+						deviceName: item.value || ""
 					}
 				}
 			}

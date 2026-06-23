@@ -391,6 +391,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/loads/AcLoadListPage.qml
     pages/loads/DcLoadListPage.qml
     pages/loads/LoadListDelegate.qml
+    pages/settings/BleSensorDelegate.qml
     pages/settings/CanbusProfile.qml
     pages/settings/CanbusServiceFinder.qml
     pages/settings/DvccCommonSettings.qml
