@@ -1,0 +1,12 @@
+{
+    "com.victronenergy.ble": {
+        "/ContinuousScan": 0,
+        "/Socket/BindAddress": "127.0.0.1",
+        "/Socket/Port": 8199,
+        "/Interfaces/hci0/Address": "DC:A6:32:00:11:22",
+        "/Devices/f00f00d00001/Name": "Ruuvi 41EA",
+        "/Devices/f00f00d00001/Enabled": 1,
+        "/Devices/afd683/Name": "SolarSense afd683",
+        "/Devices/afd683/Enabled": 1
+    }
+}

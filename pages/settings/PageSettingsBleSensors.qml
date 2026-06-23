@@ -82,6 +82,21 @@ Page {
 				}
 			}
 
+			ListRadioButtonGroup {
+				id: gatewayAccess
+				//% "BLE gateway access"
+				text: qsTrId("settings_ble_gateway_access")
+				dataItem.uid: root.bleServiceUid + "/Socket/BindAddress"
+				preferredVisible: enable.checked && dataItem.valid
+				optionModel: [
+					{ display: CommonWords.disabled, value: "" },
+					//% "Proxy"
+					{ display: qsTrId("settings_ble_gateway_access_proxy"), value: "127.0.0.1" },
+					//% "Proxy and direct"
+					{ display: qsTrId("settings_ble_gateway_access_proxy_and_direct"), value: "0.0.0.0" },
+				]
+			}
+
 			SettingsColumn {
 				width: parent ? parent.width : 0
 				preferredVisible: sensorRepeater.count > 0
