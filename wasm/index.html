@@ -9,7 +9,7 @@
       witch results in a scale of 1 and a 1:1 mapping between CSS pixels
       and Qt device independent pixels.
     -->
-    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, viewport-fit=cover"/>
+    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-visual-viewport"/>
 
     <title>Victron GUIv2</title>
     <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
@@ -66,7 +66,7 @@
         #wrapper-outer  {
           width: 100%;
           height: 100%;
-          max-height: 100dvh;
+          max-height: 100lvh;
           margin: 0;
           padding: 0;
           display: flex;
@@ -504,6 +504,70 @@
             applySpinnerLayout();
             window.addEventListener('resize', applySpinnerLayout);
 
+            // Keep the canvas anchored when the browser scrolls the visual viewport to
+            // bring Qt's hidden input element into view.
+            if (window.visualViewport) {
+                const onViewportChange = () => {
+                    document.getElementById('wrapper-outer').style.top =
+                        Math.round(window.visualViewport.offsetTop) + 'px';
+                };
+                window.visualViewport.addEventListener('resize', onViewportChange);
+                window.visualViewport.addEventListener('scroll', onViewportChange);
+            }
+
+            // Detect when the native OS keyboard opens or closes and signal QML via
+            // Theme.keyboardHeight (set through jsSetKeyboardHeight exported from theme.cpp
+            // via EMSCRIPTEN_BINDINGS). This gives QML both the open/close event and the
+            // accurate keyboard height for positioning dialogs above the keyboard.
+            //
+            // The Emscripten module is not a global; it is stored in window._qtWasmModule
+            // after qtLoad() resolves.
+            //
+            // iOS Safari ignores interactive-widget=resizes-visual-viewport, so
+            // window.innerHeight itself shrinks when the keyboard opens. Android Chrome
+            // keeps innerHeight stable while visualViewport.height drops. getKbHeight()
+            // handles both cases.
+            //
+            // iOS Safari also reports a stale visualViewport.height immediately after
+            // keyboard dismiss — the 100 ms setTimeout reads the correct value.
+            //
+            // Chrome Android 94+: navigator.virtualKeyboard gives zero-latency detection.
+            ;(function() {
+                let kbOpen = false;
+                let kbFullHeight = window.innerHeight;
+                const KB_THRESHOLD = 150;
+
+                function getKbHeight() {
+                    const ih = window.innerHeight;
+                    if (ih > kbFullHeight) kbFullHeight = ih;
+                    const vvh = window.visualViewport ? window.visualViewport.height : ih;
+                    return Math.max(Math.max(0, ih - vvh), Math.max(0, kbFullHeight - ih));
+                }
+
+                function signalQtKeyboard(kbHeight) {
+                    const mod = window._qtWasmModule;
+                    if (mod && typeof mod.jsSetKeyboardHeight === 'function') {
+                        mod.jsSetKeyboardHeight(Math.round(kbHeight));
+                    }
+                }
+
+                if ('virtualKeyboard' in navigator) {
+                    navigator.virtualKeyboard.addEventListener('geometrychange', (e) => {
+                        const h = e.target.boundingRect.height;
+                        if (h > KB_THRESHOLD && !kbOpen) { kbOpen = true;  signalQtKeyboard(h); }
+                        else if (h <= KB_THRESHOLD && kbOpen) { kbOpen = false; signalQtKeyboard(0); }
+                    });
+                } else if (window.visualViewport) {
+                    window.visualViewport.addEventListener('resize', () => {
+                        setTimeout(() => {
+                            const kbh = getKbHeight();
+                            if (kbh > KB_THRESHOLD && !kbOpen) { kbOpen = true;  signalQtKeyboard(kbh); }
+                            else if (kbh <= KB_THRESHOLD && kbOpen) { kbOpen = false; signalQtKeyboard(0); }
+                        }, 100);
+                    });
+                }
+            })();
+
             try {
                 showUi(spinner);
                 loadingBar.width.baseVal.value = '0';
@@ -560,6 +624,11 @@
                         containerElements: [screen],
                     }
                 });
+                // Expose the Emscripten module instance so keyboard detection can call
+                // EMSCRIPTEN_BINDINGS functions (e.g. jsSetKeyboardHeight). Qt WASM does
+                // not create a global Module object; the instance returned by qtLoad() is
+                // the module with all exported functions on it.
+                window._qtWasmModule = instance;
             } catch (e) {
                 console.error(e);
                 console.error(e.stack);
