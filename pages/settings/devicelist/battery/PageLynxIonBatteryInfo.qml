@@ -131,48 +131,48 @@ Page {
 				text: qsTrId("lynxionbatteryinfo_cell_measurements_section_header")
 			}
 
-			SettingsColumn {
+			SettingsFlow {
 				width: parent ? parent.width : 0
+				spacing: Theme.geometry_gradientList_spacing
+				leftPadding: Theme.geometry_page_content_horizontalMargin
+				rightPadding: Theme.geometry_page_content_horizontalMargin
 
 				Repeater {
-					model: Math.ceil(nrOfCellsPerBattery.value / 2)
+					model: nrOfCellsPerBattery.value
 
-					delegate: Row {
-						property int rowIndex: index * 2 + 1
+					delegate: ListQuantityGroup {
+						required property int index
+						property int cellIndex: index + 1
 
-						width: parent.width
-						spacing: Theme.geometry_gradientList_spacing
+						width: Theme.screenSize === Theme.Portrait
+							// In portrait, show all cells in a single column.
+							? parent.width - (2 * Theme.geometry_page_content_horizontalMargin)
+							// In landscape, show two cells per row.
+							: (parent.width - 2*Theme.geometry_page_content_horizontalMargin - Theme.geometry_gradientList_spacing) / 2
+						rightInset: 0
+						leftInset: 0
+						bottomInset: 0
 
-						Repeater {
-							model: 2
+						//% "Cell #%1"
+						text: qsTrId("lynxionbatteryinfo_cell_number").arg(cellIndex)
+						model: QuantityObjectModel {
+							filterType: QuantityObjectModel.HasValue
 
-							delegate: ListQuantityGroup {
-								property int cellIndex: rowIndex + index
+							QuantityObject { object: cellVoltage; unit: VenusOS.Units_Volt_DC; decimals: 3 }
+							QuantityObject { object: cellTemperature; unit: Global.systemSettings.temperatureUnit }
+						}
+						preferredVisible: cellVoltage.valid
 
-								width: parent.width / 2 - (Theme.geometry_gradientList_spacing / 2)
+						VeQuickItem {
+							id: cellVoltage
+							uid: root.bindPrefix + "/Battery/" + batteryRequestId.value + "/Cell/" + cellIndex + "/Voltage"
+						}
 
-								//% "Cell #%1"
-								text: qsTrId("lynxionbatteryinfo_cell_number").arg(cellIndex)
-								model: QuantityObjectModel {
-									filterType: QuantityObjectModel.HasValue
-
-									QuantityObject { object: cellVoltage; unit: VenusOS.Units_Volt_DC; decimals: 3 }
-									QuantityObject { object: cellTemperature; unit: Global.systemSettings.temperatureUnit }
-								}
-								preferredVisible: cellVoltage.valid
-
-								VeQuickItem {
-									id: cellVoltage
-									uid: root.bindPrefix + "/Battery/" + batteryRequestId.value + "/Cell/" + cellIndex + "/Voltage"
-								}
-
-								VeQuickItem {
-									id: cellTemperature
-									uid: root.bindPrefix + "/Battery/" + batteryRequestId.value + "/Cell/" + cellIndex + "/Temperature"
-									sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-									displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-								}
-							}
+						VeQuickItem {
+							id: cellTemperature
+							uid: root.bindPrefix + "/Battery/" + batteryRequestId.value + "/Cell/" + cellIndex + "/Temperature"
+							sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
+							displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 						}
 					}
 				}

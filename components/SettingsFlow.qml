@@ -1,31 +1,31 @@
 /*
-** Copyright (C) 2025 Victron Energy B.V.
+** Copyright (C) 2026 Victron Energy B.V.
 ** See LICENSE.txt for license information.
 */
 
 import QtQuick
 import Victron.VenusOS
 
-// TODO, ideally make a C++ Column-based type that is a focus scope, instead of making a QML type here
+// TODO, ideally make a C++ Flow-based type that is a focus scope, instead of making a QML type here
 // and redirecting the children using a default property alias.
 FocusScope {
 	id: root
 
-	// Allow the column to be filtered out by VisibleItemModel, similar to an AbstractListItem.
+	// Allow the flow to be filtered out by VisibleItemModel, similar to an AbstractListItem.
 	property bool preferredVisible: true
 	property bool effectiveVisible: preferredVisible
 
-	property alias spacing: contentColumn.spacing
-	property alias leftPadding: contentColumn.leftPadding
-	property alias rightPadding: contentColumn.rightPadding
-	property alias topPadding: contentColumn.topPadding
-	property alias bottomPadding: contentColumn.bottomPadding
+	property alias spacing: contentFlow.spacing
+	property alias leftPadding: contentFlow.leftPadding
+	property alias rightPadding: contentFlow.rightPadding
+	property alias topPadding: contentFlow.topPadding
+	property alias bottomPadding: contentFlow.bottomPadding
 
 	readonly property KeyNavigationListHelper __keyNavHelper: keyNavHelper
-	default property alias _data: contentColumn.data
+	default property alias _data: contentFlow.data
 
-	implicitWidth: contentColumn.implicitWidth
-	implicitHeight: contentColumn.implicitHeight
+	implicitWidth: contentFlow.implicitWidth
+	implicitHeight: contentFlow.implicitHeight
 
 	// Allow Utils.acceptsKeyNavigation() to accept moving focus to this item.
 	focusPolicy: effectiveVisible ? Qt.TabFocus : Qt.NoFocus
@@ -44,14 +44,14 @@ FocusScope {
 	KeyNavigationListHelper {
 		id: keyNavHelper
 
-		itemCount: contentColumn.children.length
+		itemCount: contentFlow.children.length
 		itemAtIndex: (index) => {
-			return contentColumn.children[index]
+			return contentFlow.children[index]
 		}
 	}
 
-	Column {
-		id: contentColumn
+	Flow {
+		id: contentFlow
 		width: parent.width
 		height: parent.height
 	}
