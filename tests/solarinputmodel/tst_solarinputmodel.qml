@@ -16,6 +16,11 @@ TestCase {
 		id: model
 	}
 
+	SortedSolarInputModel {
+		id: sortedModel
+		sourceModel: model
+	}
+
 	function roleFromName(roleName) {
 		switch (roleName) {
 		case "serviceUid": return SolarInputModel.ServiceUidRole
@@ -579,4 +584,74 @@ TestCase {
 		compare(model.count, 0)
 	}
 
+	function test_sort() {
+		// Add a multi-tracker device
+		setDeviceProperties([{
+			uid: "mock/com.victronenergy.multi.a",
+			children: {
+				"Pv/0/P": 100, "Pv/0/V": 10,
+				"Pv/1/P": 200, "Pv/1/V": 20,
+				NrOfTrackers: 2,
+				DeviceInstance: 0,
+				ProductName: "Multi",
+			},
+		}])
+		compare(model.count, 2)
+
+		// Add single-tracker chargers
+		setDeviceProperties([
+			{
+				uid: "mock/com.victronenergy.solarcharger.c",
+				children: { DeviceInstance: 0, ProductName: "Charger C" },
+			},
+			{
+				uid: "mock/com.victronenergy.solarcharger.a",
+				children: { DeviceInstance: 1, ProductName: "Charger A" },
+			},
+			{
+				uid: "mock/com.victronenergy.solarcharger.b",
+				children: { DeviceInstance: 2, ProductName: "Charger B" },
+			},
+		])
+		compare(model.count, 5)
+
+		// Add PV inverters
+		setDeviceProperties([
+			{
+				uid: "mock/com.victronenergy.pvinverter.c",
+				children: { DeviceInstance: 0, ProductName: "Inverter C" },
+			},
+			{
+				uid: "mock/com.victronenergy.pvinverter.b",
+				children: { DeviceInstance: 1, ProductName: "Inverter B" },
+			},
+			{
+				uid: "mock/com.victronenergy.pvinverter.a",
+				children: { DeviceInstance: 2, ProductName: "Inverter A" },
+			},
+		])
+		compare(model.count, 8)
+
+		// Expected: Charger A, Charger B, Charger C, Multi-#1, Multi-#2, Inverter A, Inverter B, Inverter C
+		compare(sortedModel.data(sortedModel.index(0, 0), SolarInputModel.NameRole), "Charger A")
+		compare(sortedModel.data(sortedModel.index(1, 0), SolarInputModel.NameRole), "Charger B")
+		compare(sortedModel.data(sortedModel.index(2, 0), SolarInputModel.NameRole), "Charger C")
+		compare(sortedModel.data(sortedModel.index(3, 0), SolarInputModel.NameRole), "Multi-#1")
+		compare(sortedModel.data(sortedModel.index(4, 0), SolarInputModel.NameRole), "Multi-#2")
+		compare(sortedModel.data(sortedModel.index(5, 0), SolarInputModel.NameRole), "Inverter A")
+		compare(sortedModel.data(sortedModel.index(6, 0), SolarInputModel.NameRole), "Inverter B")
+		compare(sortedModel.data(sortedModel.index(7, 0), SolarInputModel.NameRole), "Inverter C")
+
+		removeDevices([
+			{ uid: "mock/com.victronenergy.multi.a" },
+			{ uid: "mock/com.victronenergy.solarcharger.a" },
+			{ uid: "mock/com.victronenergy.solarcharger.b" },
+			{ uid: "mock/com.victronenergy.solarcharger.c" },
+			{ uid: "mock/com.victronenergy.pvinverter.a" },
+			{ uid: "mock/com.victronenergy.pvinverter.b" },
+			{ uid: "mock/com.victronenergy.pvinverter.c" },
+		])
+		compare(model.count, 0)
+		compare(sortedModel.rowCount(), 0)
+	}
 }
