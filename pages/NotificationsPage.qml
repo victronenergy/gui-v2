@@ -14,9 +14,11 @@ SwipeViewPage {
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/NotificationsPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	focusPolicy: notificationsView.count > 0 ? Qt.TabFocus : Qt.NoFocus
-	showTopGradient: Theme.screenSize === Theme.Portrait && !notificationsView.atYBeginning
+	showTopGradient: !notificationsView.atYBeginning
 
-	GradientListView {
+	// Use BaseListView instead of GradientListView, otherwise Page::showBottomGradient will show
+	// a gradient that overlaps with the "Silence alarm" button in portrait layout.
+	BaseListView {
 		id: notificationsView
 
 		height: parent.height - (silenceButtonLoader.active ? silenceButtonLoader.height : 0)
@@ -71,6 +73,14 @@ SwipeViewPage {
 				radius: Theme.geometry_listItem_radius
 				onReleased: NotificationModel.acknowledge(del.modelId)
 			}
+		}
+
+		ScrollBar.vertical: ScrollBar {
+			topPadding: Theme.geometry_gradientList_topMargin
+		}
+
+		ViewGradient {
+			anchors.bottom: parent.bottom
 		}
 
 		Component {
