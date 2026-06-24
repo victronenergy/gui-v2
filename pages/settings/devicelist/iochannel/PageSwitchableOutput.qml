@@ -45,11 +45,11 @@ Page {
 				interactive: _writeable
 				optionModel: [
 					//% "Disabled"
-					{ display: qsTrId("page_switchable_output_switch_mode_disabled"), value: 0 },
+					{ display: qsTrId("page_switchable_output_switch_mode_disabled"), value: VenusOS.SwitchableOutput_SwitchMode_Disabled },
 					//% "Permanent on"
-					{ display: qsTrId("page_switchable_output_switch_mode_linear"), value: 1 },
+					{ display: qsTrId("page_switchable_output_switch_mode_linear"), value: VenusOS.SwitchableOutput_SwitchMode_PermanentOn },
 					//% "Switching"
-					{ display: qsTrId("page_switchable_output_switch_mode_optical"), value: 2 }
+					{ display: qsTrId("page_switchable_output_switch_mode_optical"), value: VenusOS.SwitchableOutput_SwitchMode_Switching }
 				]
 			}
 

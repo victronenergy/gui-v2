@@ -5,9 +5,11 @@
 
 #include "iochannelproxymodel.h"
 #include "enums.h"
+#include "backendconnection.h"
 
 #include <veutil/qt/ve_qitem_table_model.hpp>
 
+#include <QStringView>
 #include <QQmlInfo>
 
 using namespace Victron::VenusOS;
@@ -23,6 +25,26 @@ QString IOChannelProxyModel::Entry::name() const
 	}
 }
 
+bool IOChannelProxyModel::Entry::isUserConfigurable() const
+{
+	// If /GenericInput/x/DigitalInputMode = 0 or /SwitchableOutput/x/SwitchMode = 0, consider the
+	// input/output to be disabled, and thus not user-configurable.
+	const QVariant modeValue = modeItem ? modeItem->getValue() : QVariant();
+	if (modeValue.isValid() && modeValue.toInt() == 0) {
+		return false;
+	}
+
+	// If /SwitchableOutput/x/Settings/FuseDetection = 0 (disabled) and /Settings/SwitchMode is
+	// absent/invalid or 1 (Permanent on) then the output is not user configurable.
+	if (fuseDetectionItem
+			&& fuseDetectionItem->getValue().isValid()
+			&& fuseDetectionItem->getValue().toInt() == 0
+			&& (!modeValue.isValid() || modeValue.toInt() == Enums::SwitchableOutput_SwitchMode_PermanentOn)) {
+		return false;
+	}
+	return true;
+}
+
 void IOChannelProxyModel::Entry::disconnect(QObject *object)
 {
 	if (nameItem) {
@@ -33,6 +55,12 @@ void IOChannelProxyModel::Entry::disconnect(QObject *object)
 	}
 	if (functionItem) {
 		functionItem->disconnect(object);
+	}
+	if (modeItem) {
+		modeItem->disconnect(object);
+	}
+	if (fuseDetectionItem) {
+		fuseDetectionItem->disconnect(object);
 	}
 }
 
@@ -94,6 +122,14 @@ void IOChannelProxyModel::setFilterType(FilterType filterType)
 		}
 
 		m_filterType = filterType;
+		if (m_filterType == UserConfigurable && !m_accessLevelItem) {
+			m_accessLevelItem = VeQItems::getRoot()->itemGetOrCreate(BackendConnection::create()->serviceUidForType("settings") + "/Settings/System/AccessLevel");
+			if (m_accessLevelItem) {
+				connect(m_accessLevelItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidate);
+			}
+		}
+
+		invalidate();
 		emit filterTypeChanged();
 	}
 }
@@ -148,6 +184,15 @@ bool IOChannelProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &) c
 	if (m_filterType == ManualFunction
 			&& (!entry.functionItem || entry.functionItem->getValue() != QVariant(VenusOS::Enums::SwitchableOutput_Function_Manual))) {
 		return false;
+	}
+
+	// If the model should only show user-configurable channels, include the channel if the access
+	// level is restricted to user-only and the channel is user-configurable.
+	if (m_filterType == UserConfigurable
+			&& m_accessLevelItem
+			&& m_accessLevelItem->getValue().toInt() == Enums::User_AccessType_User
+			&& !entry.isUserConfigurable()) {
+	   return false;
 	}
 
 	return true;
@@ -222,6 +267,26 @@ void IOChannelProxyModel::addEntry(const QString &channelUid)
 	entry.functionItem = channelItem->itemGet(QStringLiteral("/Settings/Function"));
 	if (entry.functionItem) {
 		connect(entry.functionItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidateFilter);
+	}
+
+	const int lastSlashIndex = channelUid.lastIndexOf('/');
+	if (lastSlashIndex >= 0) {
+		const int secondLastSlashIndex = channelUid.lastIndexOf('/', lastSlashIndex - 1);
+		if (secondLastSlashIndex >= 0) {
+			const QStringView &token = QStringView(channelUid).slice(secondLastSlashIndex, lastSlashIndex - secondLastSlashIndex);
+			if (token == QStringLiteral("/GenericInput")) {
+				entry.modeItem = channelItem->itemGet(QStringLiteral("/Settings/DigitalInputMode"));
+			} else if (token == QStringLiteral("/SwitchableOutput")) {
+				entry.modeItem = channelItem->itemGet(QStringLiteral("/Settings/SwitchMode"));
+				entry.fuseDetectionItem = channelItem->itemGet(QStringLiteral("/Settings/FuseDetection"));
+				if (entry.fuseDetectionItem) {
+					connect(entry.fuseDetectionItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidate);
+				}
+			}
+			if (entry.modeItem) {
+				connect(entry.modeItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidate);
+			}
+		}
 	}
 
 	m_entries.insert(channelUid, entry);
