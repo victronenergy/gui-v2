@@ -10,7 +10,7 @@ ListRadioButtonGroup {
 	id: root
 
 	required property IOChannel ioChannel
-	readonly property bool hasSelectableType: optionModel.length > 1 || !root.ioChannel.hasValidType
+	readonly property bool hasSelectableType: optionModel.length > 1 || (!root.ioChannel.hasValidType && optionModel.length > 0)
 
 	//% "Type"
 	text: qsTrId("iochannel_type_buttongroup_type")
