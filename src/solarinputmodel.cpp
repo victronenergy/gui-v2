@@ -150,7 +150,7 @@ void SolarInputModel::maybeAddDevice(Device *device)
 
 		// Add all enabled trackers to the model.
 		if (enabledTrackerIndexes.count() > 0) {
-			beginInsertRows(QModelIndex(), m_enabledInputs.count(), m_enabledInputs.count());
+			beginInsertRows(QModelIndex(), m_enabledInputs.count(), m_enabledInputs.count() + enabledTrackerIndexes.count() - 1);
 		}
 		for (int i = 0; i < enabledTrackerIndexes.count(); ++i) {
 			TrackerSolarInput *input = new TrackerSolarInput(device, trackerCount == 1, enabledTrackerIndexes.at(i), this);
