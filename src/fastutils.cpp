@@ -60,7 +60,6 @@ int FastUtils::fittedPixelSize(const QString &text, const qreal maxWidth, int mi
 			theme->font_size_caption(),
 			theme->font_size_tiny(),
 			theme->font_size_micro(),
-			theme->font_size_phase_medium(),
 			theme->font_size_phase_small(),
 			theme->font_size_phase_number(),
 		};

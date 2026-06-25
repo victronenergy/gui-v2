@@ -29,7 +29,6 @@
 
     "geometry_roundCloseButton_size": 44,
     "geometry_roundCloseButton_radius": 22,
-    "geometry_roundCloseButton_iconSize": 36,
 
     "geometry_colorWheel_width": 332,
     "geometry_colorWheel_height": 280,
@@ -74,7 +73,6 @@
     "geometry_droopGraph_axis_label_width": 20,
     "geometry_droopGraph_axis_label_height": 20,
     "geometry_droopGraph_xAxis_label_padding": 4,
-    "geometry_droopGraph_yAxis_label_padding": 0,
     "geometry_droopGraph_yAxis_label_leftMargin": 27.5,
     "geometry_droopGraph_yAxis_quantityLabel_width": 44,
     "geometry_droopGraph_guideline_width": 1.5,
@@ -135,7 +133,6 @@
     "geometry_valueIndicator_slider_handle_width": 8,
     "geometry_valueIndicator_slider_handle_border_width": 2,
 
-    "geometry_listLink_qrCodeSize": 96,
 
     "geometry_slider_button_size": 32,
     "geometry_slider_spacing": 12,
@@ -148,16 +145,12 @@
     "geometry_Slider_indicator_radius": 2,
 
     "geometry_miniSlider_text_padding": 12,
-    "geometry_miniSlider_handle_width": 12,
-    "geometry_miniSlider_indicator_width": 64,
     "geometry_miniSlider_separator_width": 2,
     "geometry_miniSlider_decorator_vertical_padding": 6,
 
     "geometry_temperatureSlider_text_horizontal_padding": 8,
     "geometry_temperatureSlider_dot_size": 4,
     "geometry_temperatureSlider_dot_padding": 4,
-    "geometry_temperatureSlider_indicator_size": 4,
-    "geometry_temperatureSlider_decorator_vertical_padding": 6,
     "geometry_temperatureSlider_popup_padding": 8,
     "geometry_temperatureSlider_popup_radius": 8,
     "geometry_temperatureSlider_popup_shadow_horizontalOffset": 2,
@@ -187,7 +180,6 @@
     "geometry_tabBar_height": "geometry_button_height",
     "geometry_tabBar_horizontalMargin": 6,
 
-    "geometry_timeSelector_spinBox_width": 238,
     "geometry_timeSelector_spinBox_height": 72,
     "geometry_spinBox_wide_spacing": 10,
     "geometry_numberSelector_spinBox_bottomPadding": 24,
@@ -198,7 +190,6 @@
     "geometry_navigationBar_height": 68,
     "geometry_navigationBar_horizontalMargin": 8,
     "geometry_navigationBar_button_minimumWidth": 64,
-    "geometry_navigationBar_button_height": 64,
     "geometry_navigationBar_button_icon_width": 24,
     "geometry_navigationBar_button_icon_height": 24,
     "geometry_navigationBar_button_spacing": 4,
@@ -255,11 +246,7 @@
     "geometry_modalDialog_grabber_topMargin": 6,
     "geometry_modalDialog_grabber_bottomDragLimit": 24,
 
-    "geometry_modalWarningDialog_alarmIcon_topMargin": 44,
-    "geometry_modalWarningDialog_title_spacing": 16,
-    "geometry_modalWarningDialog_title_horizontalMargin": "geometry_page_content_horizontalMargin",
     "geometry_modalWarningDialog_description_spacing": 12,
-    "geometry_modalWarningDialog_description_horizontalMargin": "geometry_page_content_horizontalMargin",
 
     "geometry_arc_strokeWidth": 8,
     "geometry_progressArc_strokeWidth": 8,
@@ -314,7 +301,6 @@
     "geometry_briefPage_sidePanel_loadGraph_height": 51,
     "geometry_briefPage_sidePanel_loadGraph_horizontalGradient_width": 10,
 
-    "geometry_sidePanel_sideWidget_width": 144,
     "geometry_sidePanel_sideWidget_horizontalMargin": "geometry_page_content_horizontalMargin",
     "geometry_sidePanel_sideWidget_verticalMargin": 14,
     "geometry_sidePanel_sideWidget_bottomMargin": 4,
@@ -327,13 +313,11 @@
     "geometry_quantityLabel_spacing": 2,
 
     "geometry_widgetHeader_spacing": 4,
-    "geometry_widgetHeader_bottomPadding": 4,
     "geometry_widgetHeader_icon_size": 24,
 
     "geometry_splashView_logo_verticalCenterOffset": -25,
     "geometry_splashView_logo_horizontalCenterOffset": -2,
     "geometry_splashView_gaugeAnimation_verticalCenterOffset": -4,
-    "geometry_splashView_progressBar_bottomMargin": 244,
     "geometry_splashView_progressBar_verticalCenterOffset": 50,
     "geometry_splashView_progressBar_width": 464,
     "geometry_splashView_progressText_topMargin": 12,
@@ -345,14 +329,11 @@
     "geometry_iochannel_topMargin": 8,
     "geometry_iochannel_height": 80,
     "geometry_iochannel_spacing": 16,
-    "geometry_iochannel_row_count": 5,
     "geometry_iochannel_label_margin": 2,
     "geometry_iochannel_control_height": 40,
     "geometry_iochannel_status_verticalPadding": 2,
     "geometry_iochannel_status_horizontalPadding": 8,
     "geometry_iochannel_status_radius": 10,
-    "geometry_iochannel_status_minimum_width": 48,
-    "geometry_iochannel_statusBackground_bottomPadding": 4,
 
     "geometry_colorWheelDialog_leftPadding": 12,
     "geometry_colorWheelDialog_rightPadding": 12,
@@ -388,9 +369,7 @@
     "geometry_overviewPage_widget_height_m": 128,
     "geometry_overviewPage_widget_height_l": 136,
 
-    "geometry_overviewPage_widget_battery_background_radius": 4,
     "geometry_overviewPage_widget_battery_gradient_height": 48,
-    "geometry_overviewPage_widget_battery_bottomRow_bottomMargin": 10,
 
     "geometry_overviewPage_widget_spacing": 8,
     "geometry_overviewPage_widget_compact_l_height": 120,
@@ -409,8 +388,6 @@
     "geometry_overviewPage_widget_solar_graph_bar_spacing": 4,
     "geometry_overviewPage_widget_solar_graph_bar_width": 10,
     "geometry_overviewPage_widget_solar_graph_bar_radius": 8,
-    "geometry_overviewPage_widget_solar_graph_margins": 12,
-    "geometry_overviewPage_batterywidget_renewable_icon_right_margin": 8,
     "geometry_overviewPage_batterywidget_renewable_icon_bottom_margin": 28,
 
     "geometry_overviewPage_energyIndicator_height": 32,
@@ -497,7 +474,6 @@
     "geometry_quantityTable_header_row_height": 24,
     "geometry_quantityTable_maximumWidth_small": 400,
     "geometry_quantityTable_maximumWidth_large": 480,
-    "geometry_quantityTable_bottomMargin": 14,
     "geometry_quantityTable_horizontalSpacing_tiny": 8,
     "geometry_quantityTable_horizontalSpacing_small": 8,
     "geometry_quantityTable_horizontalSpacing_medium": 12,
@@ -515,11 +491,9 @@
     "geometry_solarDetailBox_horizontalPadding": 0,
     "geometry_solarDetailBox_verticalPadding": 8,
     "geometry_solarDetailBox_margins": 12,
-    "geometry_solarDetailBox_column_spacing": 0,
     "geometry_solarDetailBox_header_bottomPadding": 4,
     "geometry_solarDetailBox_title_bottomPadding": 2,
     "geometry_solarDetailBox_separator_horizontalMargin": 12,
-    "geometry_solarDetailBox_separator_verticalMargin": 12,
 
     "geometry_solarChart_bar_spacing_sevenDays": 8,
     "geometry_solarChart_bar_spacing_fourteenDays": 6,
@@ -530,9 +504,7 @@
     "geometry_solarChart_horizontalMargin": 8,
     "geometry_solarChart_bottomMargin": 28,
 
-    "geometry_solarDailyHistoryDialog_background_height": 500,
     "geometry_solarDailyHistoryDialog_background_radius": 8,
-    "geometry_solarDailyHistoryDialog_horizontalMargin": 12,
     "geometry_solarDailyHistoryDialog_header_height": 50,
     "geometry_solarDailyHistoryDialog_arrow_icon_size": 72,
     "geometry_solarDailyHistoryDialog_arrow_horizontalMargin": 18,
@@ -572,16 +544,12 @@
     "geometry_vebusDeviceListPage_quantityTable_row_spacing": 0,
     "geometry_vebusDeviceListPage_quantityTable_header_height": 58,
 
-    "geometry_batteryListPage_item_height": 84,
     "geometry_batteryListPage_item_verticalSpacing": 2,
 
-    "geometry_loadListPage_item_height": 68,
     "geometry_loadListPage_defaultColumnWidth": 128,
 
     "geometry_rangeSlider_labelWidth": 60,
 
-    "geometry_modbus_device_protocol_width": 40,
-    "geometry_modbus_device_ip_address_width": 150,
 
     "geometry_boatPage_shadow_width": 244,
     "geometry_boatPage_shadow_height": 87,
@@ -611,8 +579,6 @@
     "geometry_boatPage_rpmGauge_minmax_rightMargin": 50,
     "geometry_boatPage_dualRpmGauge_spanAngle": 80,
     "geometry_boatPage_dualRpmLabel_margin": 40,
-    "geometry_boatPage_dualRpmSeparator_margin": 6,
-    "geometry_boatPage_dualRpmSeparator_width": 2,
     "geometry_boatPage_singleRpmLabel_bottomMargin": 25,
     "geometry_boatPage_dualRpmLabels_bottomMargin": 35,
     "geometry_boatPage_speedUnits_topPadding": -20,
@@ -623,8 +589,6 @@
     "geometry_boatPage_powerRow_rightMargin": 72,
     "geometry_boatPage_row_spacing": 4,
     "geometry_boatPage_motorDrive_temperaturesColumn_spacing": -2,
-    "geometry_boatPage_motorDriveColumn_spacing": 18,
-    "geometry_boatPage_motordriveRow_image_width": 32,
     "geometry_boatPage_temperature_row_spacing": 24,
     "geometry_boatPage_temperature_temperatureColumn_spacing": 2,
     "geometry_boatPage_temperature_temperatureRow_spacing": 8,
