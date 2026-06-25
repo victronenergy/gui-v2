@@ -80,7 +80,6 @@
     "color_listItem_background": "color_background_secondary",
     "color_listItem_down_background": "color_gray8",
     "color_listItem_forwardIcon": "color_button_icon",
-    "color_listItem_down_forwardIcon": "color_button_icon_down",
     "color_listItem_separator": "color_gray5",
     "color_listItem_secondaryText": "color_gray4",
     "color_listItem_highAccessLevel": "color_darkOrange",
@@ -167,9 +166,7 @@
 
     "color_levelsPage_panel_border_color": "#CCCBC7",
 
-    "color_levelsPage_environment_panel_background": "color_white",
     "color_levelsPage_environment_gauge_tick": "color_gray5",
-    "color_levelsPage_environment_gauge_tickText": "#64635F",
     "color_levelsPage_environment_temperatureGauge_highlightValue": "color_font_primary",
 
     "color_solarHistoryErrorView_primaryText": "color_white",
@@ -184,7 +181,6 @@
     "color_settings_breadcrumb_secondaryText": "color_font_primary",
 
     "color_boatPage_needle": "color_black",
-    "color_boatPage_gearHighlighter": "#387DC5",
     "color_boatPage_icon": "color_gray2",
     "color_boatPage_regenProgress": "#72B84C",
     "color_boatPage_regenRemainder": "#D1E5C2"
