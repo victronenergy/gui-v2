@@ -89,7 +89,7 @@ Page {
 				preferredVisible: ipAddressItem.valid
 				iconSource: "qrc:/images/icon_open_link_32.svg"
 				// Link is clickable on local Wasm only, not on VRM.
-				interactive: text.length && Qt.platform.os === "wasm" && !BackendConnection.isVrm
+				interactive: text.length && Qt.platform.os === "wasm" && !BackendConnection.vrm
 
 				onClicked: {
 					BackendConnection.openUrl("http://" + ipAddressItem.value)
