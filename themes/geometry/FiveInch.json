@@ -51,8 +51,10 @@
     "geometry_colorWheel_lowerSlider_padding": 5,
     "geometry_colorWheel_component_overlap": 7,
 
+    "geometry_demoModeIndicator_topMargin": 4,
     "geometry_demoModeIndicator_horizontalPadding": 12,
-    "geometry_demoModeIndicator_verticalPadding": 2,
+    "geometry_demoModeIndicator_topPadding": 2,
+    "geometry_demoModeIndicator_bottomPadding": 0,
 
     "geometry_droopGraph_container_width": 374,
     "geometry_droopGraph_container_height": 217,

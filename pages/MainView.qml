@@ -526,7 +526,8 @@ FocusScope {
 	}
 
 	Loader {
-		y: -height + statusBar.height
+		y: -height // add the height offset to account for the 90 degree rotation
+		   + statusBar.height + Theme.geometry_demoModeIndicator_topMargin
 		active: demoMode.valid && demoMode.value > 0
 		transformOrigin: Item.BottomLeft
 		rotation: 90
