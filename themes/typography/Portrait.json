@@ -28,6 +28,7 @@
     "font_dialog_secondaryTitle_size": "font_size_tiny",
     "font_dialog_title_size": "font_size_body2",
     "font_demoModeIndicator_size": 10,
+    "font_demoModeIndicator_letterSpacing": 1.0,
     "font_droopGraph_figure_label_size": "font_size_tiny",
     "font_droopGraph_axis_label_size": "font_size_micro",
     "font_levelsGauge_title": "font_size_tiny",

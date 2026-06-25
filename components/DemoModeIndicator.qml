@@ -18,11 +18,12 @@ Rectangle {
 
 		leftPadding: Theme.geometry_demoModeIndicator_horizontalPadding
 		rightPadding: Theme.geometry_demoModeIndicator_horizontalPadding
-		topPadding: Theme.geometry_demoModeIndicator_verticalPadding
-		bottomPadding: Theme.geometry_demoModeIndicator_verticalPadding
+		topPadding: Theme.geometry_demoModeIndicator_topPadding
+		bottomPadding: Theme.geometry_demoModeIndicator_bottomPadding
 		color: Theme.color_demoModeIndicator_foreground
 		font.pixelSize: Theme.font_demoModeIndicator_size
 		font.capitalization: Font.AllUppercase
+		font.letterSpacing: Theme.font_demoModeIndicator_letterSpacing
 		//% "Demo mode"
 		text: qsTrId("demo_mode_indicator_text")
 	}
