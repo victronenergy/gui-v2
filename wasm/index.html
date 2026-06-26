@@ -567,14 +567,15 @@
                 }
 
                 // Use instantiateWasm to intercept instantiation with timing
+                var tInstantiateEnd = 0;
                 const tQtLoadStart = performance.now();
                 const instance = await qtLoad({
                     arguments: argumentList,
                     instantiateWasm: (imports, successCallback) => {
                         const tInstStart = performance.now();
                         WebAssembly.instantiate(wasmModule, imports).then(instance => {
-                            const tInstEnd = performance.now();
-                            const instantiateMs = tInstEnd - tInstStart;
+                            tInstantiateEnd = performance.now();
+                            const instantiateMs = tInstantiateEnd - tInstStart;
                             perfLog.push(`Instantiate: ${instantiateMs.toFixed(1)}ms`);
                             console.log(`[WASM Perf] Instantiate complete: ${instantiateMs.toFixed(1)}ms`);
                             successCallback(instance, wasmModule);
@@ -584,11 +585,11 @@
                     qt: {
                         onLoaded: () => {
                             const tLoaded = performance.now();
-                            const qtInitMs = tLoaded - tQtLoadStart;
+                            const qtInitMs = tLoaded - tInstantiateEnd;
                             const totalMs = tLoaded - tInitStart;
-                            perfLog.push(`Qt init (instantiate to onLoaded): ${qtInitMs.toFixed(1)}ms`);
+                            perfLog.push(`Qt/QML init: ${qtInitMs.toFixed(1)}ms`);
                             perfLog.push(`Total: ${totalMs.toFixed(1)}ms`);
-                            console.log(`[WASM Perf] Qt init complete: ${qtInitMs.toFixed(1)}ms`);
+                            console.log(`[WASM Perf] Qt/QML init complete: ${qtInitMs.toFixed(1)}ms`);
                             console.log(`[WASM Perf] Total load time: ${totalMs.toFixed(1)}ms`);
                             console.log(`[WASM Perf] Summary:\n` + perfLog.map(l => `  ${l}`).join('\n'));
                             showUi(screen);
