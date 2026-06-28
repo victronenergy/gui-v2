@@ -249,22 +249,22 @@ void IOChannelProxyModel::addEntry(const QString &channelUid)
 		return;
 	}
 
-	VeQItem *channelItem = VeQItems::getRoot()->itemGet(channelUid);
+	VeQItem *channelItem = VeQItems::getRoot()->itemGetOrCreate(channelUid);
 	if (!channelItem) {
 		qmlWarning(this) << "Cannot monitor " << channelUid << ", cannot find matching VeQItem!";
 		return;
 	}
 
 	Entry entry;
-	entry.nameItem = channelItem->itemGet(QStringLiteral("/Name"));
+	entry.nameItem = channelItem->itemGetOrCreate(QStringLiteral("Name"));
 	if (entry.nameItem) {
 		connect(entry.nameItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidate);
 	}
-	entry.customNameItem = channelItem->itemGet(QStringLiteral("/Settings/CustomName"));
+	entry.customNameItem = channelItem->itemGetOrCreate(QStringLiteral("Settings/CustomName"));
 	if (entry.customNameItem) {
 		connect(entry.customNameItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidate);
 	}
-	entry.functionItem = channelItem->itemGet(QStringLiteral("/Settings/Function"));
+	entry.functionItem = channelItem->itemGetOrCreate(QStringLiteral("Settings/Function"));
 	if (entry.functionItem) {
 		connect(entry.functionItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidateFilter);
 	}
@@ -275,10 +275,10 @@ void IOChannelProxyModel::addEntry(const QString &channelUid)
 		if (secondLastSlashIndex >= 0) {
 			const QStringView &token = QStringView(channelUid).slice(secondLastSlashIndex, lastSlashIndex - secondLastSlashIndex);
 			if (token == QStringLiteral("/GenericInput")) {
-				entry.modeItem = channelItem->itemGet(QStringLiteral("/Settings/DigitalInputMode"));
+				entry.modeItem = channelItem->itemGetOrCreate(QStringLiteral("Settings/DigitalInputMode"));
 			} else if (token == QStringLiteral("/SwitchableOutput")) {
-				entry.modeItem = channelItem->itemGet(QStringLiteral("/Settings/SwitchMode"));
-				entry.fuseDetectionItem = channelItem->itemGet(QStringLiteral("/Settings/FuseDetection"));
+				entry.modeItem = channelItem->itemGetOrCreate(QStringLiteral("Settings/SwitchMode"));
+				entry.fuseDetectionItem = channelItem->itemGetOrCreate(QStringLiteral("Settings/FuseDetection"));
 				if (entry.fuseDetectionItem) {
 					connect(entry.fuseDetectionItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidate);
 				}
