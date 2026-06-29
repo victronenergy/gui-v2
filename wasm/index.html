@@ -366,7 +366,8 @@
                     wasmBinary.set(chunk, pos);
                     pos += chunk.length;
                 }
-                return wasmBinary;
+                var contentLength = response.headers.get('content-length');
+                return { wasmBinary: wasmBinary, compressedSize: contentLength ? parseInt(contentLength, 10) : null };
             } catch (e) {
                 console.error(e);
                 console.error(e.stack);
@@ -509,8 +510,11 @@
                 loadingBar.width.baseVal.value = '0';
                 loadingBarText.textContent = 'Downloading...';
 
+                const perfLog = [];
+                const tInitStart = performance.now();
+
                 // Preload WASM with progress
-                const wasmBinary = await preloadWasm('venus-gui-v2.wasm', (received, total) => {
+                const wasmPreload = await preloadWasm('venus-gui-v2.wasm', (received, total) => {
                     if (total) {
                         const ratio = Math.min(received / total, 1);
                         const percent = (ratio * 100).toFixed(1);
@@ -525,8 +529,27 @@
                     }
                 });
 
+                const wasmBinary = wasmPreload.wasmBinary;
+                const tDownloadEnd = performance.now();
+                const downloadMs = tDownloadEnd - tInitStart;
+                const wasmSizeMB = (wasmBinary.byteLength / (1024 * 1024)).toFixed(2);
+                const wireSizeMB = wasmPreload.compressedSize ? (wasmPreload.compressedSize / (1024 * 1024)).toFixed(2) : null;
+                const sizeInfo = wireSizeMB ? `${wireSizeMB} MB wire / ${wasmSizeMB} MB uncompressed` : `${wasmSizeMB} MB uncompressed`;
+                perfLog.push(`Download: ${downloadMs.toFixed(1)}ms (${sizeInfo})`);
+                console.log(`[WASM Perf] Download complete: ${downloadMs.toFixed(1)}ms (${sizeInfo})`);
+
                 loadingBar.width.baseVal.value = loadingBarContainer.width.baseVal.value;
-                loadingBarText.textContent = 'Loading application...';
+                loadingBarText.textContent = 'Compiling...';
+
+                // Compile WASM binary into a WebAssembly.Module
+                const tCompileStart = performance.now();
+                const wasmModule = await WebAssembly.compile(wasmBinary);
+                const tCompileEnd = performance.now();
+                const compileMs = tCompileEnd - tCompileStart;
+                perfLog.push(`Compile: ${compileMs.toFixed(1)}ms`);
+                console.log(`[WASM Perf] Compile complete: ${compileMs.toFixed(1)}ms`);
+
+                loadingBarText.textContent = 'Instantiating...';
 
                 let defaultMqttArg = (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt'
                 let argumentList = needsDefaultArgs ? ['--mqtt', defaultMqttArg] : [];
@@ -543,11 +566,34 @@
                     );
                 }
 
+                // Use instantiateWasm to intercept instantiation with timing
+                var tInstantiateEnd = 0;
+                const tQtLoadStart = performance.now();
                 const instance = await qtLoad({
                     arguments: argumentList,
-                    wasmBinary: wasmBinary,
+                    instantiateWasm: (imports, successCallback) => {
+                        const tInstStart = performance.now();
+                        WebAssembly.instantiate(wasmModule, imports).then(instance => {
+                            tInstantiateEnd = performance.now();
+                            const instantiateMs = tInstantiateEnd - tInstStart;
+                            perfLog.push(`Instantiate: ${instantiateMs.toFixed(1)}ms`);
+                            console.log(`[WASM Perf] Instantiate complete: ${instantiateMs.toFixed(1)}ms`);
+                            successCallback(instance, wasmModule);
+                        });
+                        return {};
+                    },
                     qt: {
-                        onLoaded: () => showUi(screen),
+                        onLoaded: () => {
+                            const tLoaded = performance.now();
+                            const qtInitMs = tLoaded - tInstantiateEnd;
+                            const totalMs = tLoaded - tInitStart;
+                            perfLog.push(`Qt/QML init: ${qtInitMs.toFixed(1)}ms`);
+                            perfLog.push(`Total: ${totalMs.toFixed(1)}ms`);
+                            console.log(`[WASM Perf] Qt/QML init complete: ${qtInitMs.toFixed(1)}ms`);
+                            console.log(`[WASM Perf] Total load time: ${totalMs.toFixed(1)}ms`);
+                            console.log(`[WASM Perf] Summary:\n` + perfLog.map(l => `  ${l}`).join('\n'));
+                            showUi(screen);
+                        },
                         onExit: exitData =>
                         {
                             let exitMsg = 'Application exit';
