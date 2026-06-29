@@ -75,7 +75,7 @@
       <translation>%1 wordt geïnstalleerd...</translation>
     </message>
     <message id="splash_view_unknown_error">
-      <location filename="../../components/SplashView.qml" line="329"/>
+      <location filename="../../components/SplashView.qml" line="327"/>
       <source>Unknown error</source>
       <translation>Onbekende fout</translation>
     </message>
@@ -255,15 +255,20 @@
       <source>Product</source>
       <translation>Product</translation>
     </message>
-    <message id="iochannel_name">
-      <location filename="../../components/listitems/ListIOChannelNameField.qml" line="11"/>
-      <source>Name</source>
-      <translation>Naam</translation>
-    </message>
     <message id="settings_deviceinfo_name">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="38"/>
       <source>Name</source>
       <translation type="unfinished">Naam</translation>
+    </message>
+    <message id="settings_deviceinfo_device_name">
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="84"/>
+      <source>Device name</source>
+      <translation type="unfinished">Apparaatnaam</translation>
+    </message>
+    <message id="iochannel_name">
+      <location filename="../../components/listitems/ListIOChannelNameField.qml" line="11"/>
+      <source>Name</source>
+      <translation>Naam</translation>
     </message>
     <message id="settings_deviceinfo_product_id">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="49"/>
@@ -275,8 +280,8 @@
       <source>Hardware version</source>
       <translation>Hardware versie</translation>
     </message>
-    <message id="settings_deviceinfo_device_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="84"/>
+    <message id="settings_shelly_device_name">
+      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="66"/>
       <source>Device name</source>
       <translation>Apparaatnaam</translation>
     </message>
@@ -1064,7 +1069,7 @@
       <translation type="unfinished">IP adres handmatig toevoegen</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="88"/>
       <source>Add IP address manually</source>
       <translation>IP adres handmatig toevoegen</translation>
     </message>
@@ -1185,7 +1190,7 @@
       <translation>Akoestisch alarm</translation>
     </message>
     <message id="demo_mode_indicator_text">
-      <location filename="../../components/DemoModeIndicator.qml" line="27"/>
+      <location filename="../../components/DemoModeIndicator.qml" line="28"/>
       <source>Demo mode</source>
       <translation>Demomodus</translation>
     </message>
@@ -4524,7 +4529,7 @@ Do you want to continue?</source>
       <translation>Automatisch zoeken</translation>
     </message>
     <message id="boat_page_temperature_battery_label">
-      <location filename="../../pages/boat/Temperatures.qml" line="77"/>
+      <location filename="../../pages/boat/Temperatures.qml" line="79"/>
       <source>Battery</source>
       <translation>Accu</translation>
     </message>
@@ -4963,7 +4968,7 @@ Do you want to continue?</source>
       <translation>Tracker</translation>
     </message>
     <message id="iochannel_type_buttongroup_type">
-      <location filename="../../components/listitems/ListIOChannelTypeRadioButtonGroup.qml" line="15"/>
+      <location filename="../../components/listitems/ListIOChannelTypeRadioButtonGroup.qml" line="16"/>
       <source>Type</source>
       <translation>Type</translation>
     </message>
@@ -5613,12 +5618,12 @@ Do you want to continue?</source>
       <translation>Max. vermogen</translation>
     </message>
     <message id="splash_view_unable_to_connect">
-      <location filename="../../components/SplashView.qml" line="281"/>
+      <location filename="../../components/SplashView.qml" line="279"/>
       <source>Unable to connect</source>
       <translation>Niet mogelijk verbinding te maken</translation>
     </message>
     <message id="splash_view_reconnecting">
-      <location filename="../../components/SplashView.qml" line="283"/>
+      <location filename="../../components/SplashView.qml" line="281"/>
       <source>Disconnected, attempting to reconnect</source>
       <translation>Verbinding verbroken, probeert de verbinding te herstellen</translation>
     </message>
@@ -5628,62 +5633,62 @@ Do you want to continue?</source>
       <translation>Verbinding wordt gemaakt</translation>
     </message>
     <message id="splash_view_connecting">
-      <location filename="../../components/SplashView.qml" line="286"/>
+      <location filename="../../components/SplashView.qml" line="284"/>
       <source>Connecting</source>
       <translation type="unfinished">Verbinding wordt gemaakt</translation>
     </message>
     <message id="splash_view_connected">
-      <location filename="../../components/SplashView.qml" line="288"/>
+      <location filename="../../components/SplashView.qml" line="286"/>
       <source>Connected, awaiting broker messages</source>
       <translation>Verbonden, wachten op brokerberichten</translation>
     </message>
     <message id="splash_view_initializing">
-      <location filename="../../components/SplashView.qml" line="290"/>
+      <location filename="../../components/SplashView.qml" line="288"/>
       <source>Connected, receiving broker messages</source>
       <translation>Verbonden, ontvangt brokerberichten</translation>
     </message>
     <message id="splash_view_ready">
-      <location filename="../../components/SplashView.qml" line="299"/>
+      <location filename="../../components/SplashView.qml" line="297"/>
       <source>Connected, loading user interface</source>
       <translation>Aangesloten, gebruikersinterface laden</translation>
     </message>
     <message id="splash_view_invalid_protocol_version">
-      <location filename="../../components/SplashView.qml" line="315"/>
+      <location filename="../../components/SplashView.qml" line="313"/>
       <source>Invalid protocol version</source>
       <translation>Ongeldige protocolversie</translation>
     </message>
     <message id="splash_view_client_id_rejected">
-      <location filename="../../components/SplashView.qml" line="317"/>
+      <location filename="../../components/SplashView.qml" line="315"/>
       <source>Client ID rejected</source>
       <translation>Klant ID afgewezen</translation>
     </message>
     <message id="splash_view_server_unavailable">
-      <location filename="../../components/SplashView.qml" line="319"/>
+      <location filename="../../components/SplashView.qml" line="317"/>
       <source>Broker service not available</source>
       <translation>Broker service niet beschikbaar</translation>
     </message>
     <message id="splash_view_bad_username_or_password">
-      <location filename="../../components/SplashView.qml" line="321"/>
+      <location filename="../../components/SplashView.qml" line="319"/>
       <source>Bad username or password</source>
       <translation>Ongeldige gebruikersnaam of wachtwoord</translation>
     </message>
     <message id="splash_view_not_authorized">
-      <location filename="../../components/SplashView.qml" line="323"/>
+      <location filename="../../components/SplashView.qml" line="321"/>
       <source>Client not authorized</source>
       <translation>Gebruiker niet geautoriseerd</translation>
     </message>
     <message id="splash_view_transport_invalid">
-      <location filename="../../components/SplashView.qml" line="325"/>
+      <location filename="../../components/SplashView.qml" line="323"/>
       <source>Transport connection error</source>
       <translation>Transport verbindingsfout</translation>
     </message>
     <message id="splash_view_protocol_violation">
-      <location filename="../../components/SplashView.qml" line="327"/>
+      <location filename="../../components/SplashView.qml" line="325"/>
       <source>Protocol violation error</source>
       <translation>Protocol fout</translation>
     </message>
     <message id="splash_view_mqtt5_error">
-      <location filename="../../components/SplashView.qml" line="331"/>
+      <location filename="../../components/SplashView.qml" line="329"/>
       <source>MQTT protocol level 5 error</source>
       <translation>MQTT protocol niveau 5 fout</translation>
     </message>
@@ -7928,22 +7933,22 @@ Do you want to continue?</source>
       <translation>Uitschakel waarde</translation>
     </message>
     <message id="splash_view_device_disconnected">
-      <location filename="../../components/SplashView.qml" line="295"/>
+      <location filename="../../components/SplashView.qml" line="293"/>
       <source>Connection to the device has been lost, awaiting reconnection</source>
       <translation>Verbinding met het apparaat is verbroken, wacht op nieuwe verbinding</translation>
     </message>
     <message id="splash_view_awaiting_heartbeat">
-      <location filename="../../components/SplashView.qml" line="297"/>
+      <location filename="../../components/SplashView.qml" line="295"/>
       <source>Connected to VRM, awaiting device</source>
       <translation>Verbonden met VRM, wacht op apparaat</translation>
     </message>
     <message id="splash_view_heartbeat_missing">
-      <location filename="../../components/SplashView.qml" line="347"/>
+      <location filename="../../components/SplashView.qml" line="345"/>
       <source>Device may have lost connectivity to VRM</source>
       <translation>Het apparaat heeft mogelijk geen verbinding meer met VRM</translation>
     </message>
     <message id="splash_view_heartbeat_inactive">
-      <location filename="../../components/SplashView.qml" line="349"/>
+      <location filename="../../components/SplashView.qml" line="347"/>
       <source>Device is not connected to VRM</source>
       <translation>Apparaat is niet aangesloten op VRM</translation>
     </message>
@@ -8343,7 +8348,7 @@ Do you want to continue?</source>
       <translation>AC uit L%1</translation>
     </message>
     <message id="notification_description_and_value">
-      <location filename="../../components/NotificationDelegate.qml" line="76"/>
+      <location filename="../../components/NotificationDelegate.qml" line="88"/>
       <source>%1 %2</source>
       <extracomment>%1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')</extracomment>
       <translation>%1 %2</translation>
@@ -8427,7 +8432,7 @@ Als het aggregaat momenteel draait vanwege een autostartconditie, zal het uitsch
       <translation>MQTT toegang</translation>
     </message>
     <message id="settings_security_warning_profile_configuration_order">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="19"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="33"/>
       <source>A Security Profile must be configured before the network services can be enabled, see Settings - General</source>
       <translation>Er moet een beveiligingsprofiel worden ingesteld voordat de netwerkdiensten kunnen worden ingeschakeld, zie Instellingen - Algemeen</translation>
     </message>
@@ -8712,7 +8717,7 @@ Let op: dit menu toont alleen Carlo Gavazzi-meters die zijn aangesloten via RS48
       <translation>Apparaat %1</translation>
     </message>
     <message id="page_settings_modbus_device_remove_device">
-      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="98"/>
+      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="100"/>
       <source>Remove Modbus device?</source>
       <translation>Modbus apparaat verwijderen?</translation>
     </message>
@@ -9001,42 +9006,42 @@ Met een gestroomlijnde navigatie en een frisse look is alles waar je van houdt n
       <translation>Volgende</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="455"/>
+      <location filename="../../src/units.cpp" line="555"/>
       <source>N</source>
       <translation>N</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="457"/>
+      <location filename="../../src/units.cpp" line="557"/>
       <source>NE</source>
       <translation>NO</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="459"/>
+      <location filename="../../src/units.cpp" line="559"/>
       <source>E</source>
       <translation>O</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="461"/>
+      <location filename="../../src/units.cpp" line="561"/>
       <source>SE</source>
       <translation>ZO</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="463"/>
+      <location filename="../../src/units.cpp" line="563"/>
       <source>S</source>
       <translation>Z</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="465"/>
+      <location filename="../../src/units.cpp" line="565"/>
       <source>SW</source>
       <translation>ZW</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="467"/>
+      <location filename="../../src/units.cpp" line="567"/>
       <source>W</source>
       <translation>W</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="469"/>
+      <location filename="../../src/units.cpp" line="569"/>
       <source>NW</source>
       <translation>NW</translation>
     </message>
@@ -10088,7 +10093,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation>Ga naar Instellingen → VRM → VRM apparaatinstanties om de Modbus TCP eenheid ID's te wijzigen.</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="97"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="74"/>
       <source>Refresh devices</source>
       <translation>Apparaten vernieuwen</translation>
     </message>
@@ -10115,7 +10120,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation>Polariteit (Relais 1)</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="214"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="216"/>
       <source>Polarity</source>
       <translation>Polariteit</translation>
     </message>
@@ -10464,7 +10469,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation>Poort: %1 (Unit %2)</translation>
     </message>
     <message id="page_settings_fronius_modbus_remove_location">
-      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="95"/>
       <source>Remove Modbus port and unit ID?</source>
       <translation>Modbus-poort en unit ID verwijderen?</translation>
     </message>
@@ -10561,43 +10566,43 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation>Opstartschakelstand</translation>
     </message>
     <message id="page_switchable_output_startup_state_restore_from_memory">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="160"/>
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="167"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="161"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="168"/>
       <source>Restore from memory</source>
       <translation>Herstellen vanuit geheugen</translation>
     </message>
     <message id="page_switchable_output_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="166"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="167"/>
       <source>Startup dim level</source>
       <translation type="unfinished">Opstartdimniveau</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="198"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="200"/>
       <source>Startup dim level</source>
       <translation>Opstartdimniveau</translation>
     </message>
     <message id="page_switchable_output_restore_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="187"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="189"/>
       <source>Restore dim level from memory</source>
       <translation>Dimniveau herstellen vanuit geheugen</translation>
     </message>
     <message id="page_switchable_output_polarity_active_high">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="221"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
       <source>Active high / Normally open</source>
       <translation>Actief hoog / Normaal open</translation>
     </message>
     <message id="page_switchable_output_polarity_active_low">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="225"/>
       <source>Active low / Normally closed</source>
       <translation>Actief laag / Normaal gesloten</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="229"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="231"/>
       <source>Output limit min</source>
       <translation>Minimale uitgangslimiet</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="242"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="244"/>
       <source>Output limit max</source>
       <translation>Maximale uitgangslimiet</translation>
     </message>
@@ -10812,7 +10817,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation>Celmetingen</translation>
     </message>
     <message id="lynxionbatteryinfo_cell_number">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="155"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="157"/>
       <source>Cell #%1</source>
       <translation>Cel #%1</translation>
     </message>
@@ -11213,21 +11218,6 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <source>Invert</source>
       <translation>Inverteren</translation>
     </message>
-    <message id="iochannel_digital_input_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="60"/>
-      <source>Digital input mode</source>
-      <translation>Digitale ingangsmodus</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_input">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="68"/>
-      <source>Digital input</source>
-      <translation>Digitale ingang</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_toggle_switch">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="72"/>
-      <source>Toggle switch</source>
-      <translation>Kip schakelaar</translation>
-    </message>
     <message id="page_microgrid_apply_all_parameters">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="308"/>
       <source>Apply all parameters</source>
@@ -11453,21 +11443,6 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
       <source>Discovered E-drive IDs</source>
       <translation>Gevonden E-drive ID's</translation>
     </message>
-    <message id="iochannel_digital_input_mode_on_off_switch">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="70"/>
-      <source>On/off switch</source>
-      <translation>Aan/uit-schakelaar</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_push_button_on_off">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="74"/>
-      <source>Push button on/off</source>
-      <translation>Drukknop aan/uit</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_push_button_dimmer">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="76"/>
-      <source>Push button dimmer</source>
-      <translation>Drukknop dimmer</translation>
-    </message>
     <message id="generic_input_label_released">
       <location filename="../../src/genericinput.cpp" line="132"/>
       <source>Released</source>
@@ -11541,7 +11516,7 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
       <translation>Systeembelasting hoog, grafieken worden verborgen om de CPU-belasting te verminderen</translation>
     </message>
     <message id="navbar_more">
-      <location filename="../../pages/MainView.qml" line="279"/>
+      <location filename="../../pages/MainView.qml" line="285"/>
       <source>More</source>
       <extracomment>Click to show more available items</extracomment>
       <translation>Meer</translation>
@@ -11700,17 +11675,17 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
       <translation>Verbruik</translation>
     </message>
     <message id="boat_page_temperature_coolant_label">
-      <location filename="../../pages/boat/Temperatures.qml" line="94"/>
+      <location filename="../../pages/boat/Temperatures.qml" line="96"/>
       <source>Coolant</source>
       <translation>Koelvloeistof</translation>
     </message>
     <message id="boat_page_temperature_controller_label">
-      <location filename="../../pages/boat/Temperatures.qml" line="106"/>
+      <location filename="../../pages/boat/Temperatures.qml" line="108"/>
       <source>Controller</source>
       <translation>Controller</translation>
     </message>
     <message id="boat_page_temperature_motor_label">
-      <location filename="../../pages/boat/Temperatures.qml" line="118"/>
+      <location filename="../../pages/boat/Temperatures.qml" line="120"/>
       <source>Motor</source>
       <translation>motor</translation>
     </message>
@@ -11815,7 +11790,7 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
     <message id="vebus_backup_restore_name">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="387"/>
       <source>Restore - %1</source>
-      <translation/>
+      <translation>Herstellen - %1</translation>
     </message>
     <message id="vebus_backup_cancel_actions">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="441"/>
@@ -11838,7 +11813,7 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
       <translation>Verwijderen - %1</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
       <source>Refresh</source>
       <translation>Vernieuwen</translation>
     </message>
@@ -11871,6 +11846,57 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
       <location filename="../../pages/settings/devicelist/ac-in/AcLimitsProductionSettings.qml" line="43"/>
       <source>Production current limit</source>
       <translation>Limiet productiestroom</translation>
+    </message>
+    <message id="settings_services_mqtt_access_paired_devices_only">
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="17"/>
+      <source>Paired devices only</source>
+      <translation>Alleen gekoppelde apparaten</translation>
+    </message>
+    <message id="settings_services_mqtt_access_warning_paired_devices">
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="24"/>
+      <source>Turning MQTT Access off also disables paired MQTT devices until access is enabled again.</source>
+      <translation>Het uitschakelen van MQTT-toegang schakelt ook gekoppelde MQTT-apparaten uit totdat de toegang weer wordt ingeschakeld.</translation>
+    </message>
+    <message id="settings_shelly_channel">
+      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="48"/>
+      <source>Channel %1</source>
+      <extracomment>%1 = channel number</extracomment>
+      <translation>Kanaal %1</translation>
+    </message>
+    <message id="settings_shelly_channels">
+      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="106"/>
+      <source>Channels</source>
+      <translation>Kanalen</translation>
+    </message>
+    <message id="iochannel_input_mode">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="60"/>
+      <source>Input mode</source>
+      <translation>Invoermodus</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_follow_state">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="68"/>
+      <source>Sensor | Outputs → Follow state</source>
+      <translation>Sensor | Uitgangen → Status volgen</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_follow_position">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="70"/>
+      <source>Switch | Outputs → Follow position</source>
+      <translation>Schakelaar | Uitgangen → Positie volgen</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_on_change">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="72"/>
+      <source>Switch | Outputs → Toggle on change</source>
+      <translation>Schakelaar | Uitgangen → Omschakelen bij wijziging</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_on_press">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="74"/>
+      <source>Button | Outputs → Toggle on press</source>
+      <translation>Knop | Uitgangen → Omschakelen bij indrukken</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_and_dim">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="76"/>
+      <source>Button | Outputs → Toggle and dim</source>
+      <translation>Knop | Uitgangen → Omschakelen en dimmen</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>

@@ -75,7 +75,7 @@
       <translation>Встановлення %1...</translation>
     </message>
     <message id="splash_view_unknown_error">
-      <location filename="../../components/SplashView.qml" line="329"/>
+      <location filename="../../components/SplashView.qml" line="327"/>
       <source>Unknown error</source>
       <translation>Невідома помилка</translation>
     </message>
@@ -255,15 +255,20 @@
       <source>Product</source>
       <translation>Продукт</translation>
     </message>
-    <message id="iochannel_name">
-      <location filename="../../components/listitems/ListIOChannelNameField.qml" line="11"/>
-      <source>Name</source>
-      <translation>Ім'я</translation>
-    </message>
     <message id="settings_deviceinfo_name">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="38"/>
       <source>Name</source>
       <translation type="unfinished">Ім'я</translation>
+    </message>
+    <message id="settings_deviceinfo_device_name">
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="84"/>
+      <source>Device name</source>
+      <translation type="unfinished">Назва пристрою</translation>
+    </message>
+    <message id="iochannel_name">
+      <location filename="../../components/listitems/ListIOChannelNameField.qml" line="11"/>
+      <source>Name</source>
+      <translation>Ім'я</translation>
     </message>
     <message id="settings_deviceinfo_product_id">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="49"/>
@@ -275,8 +280,8 @@
       <source>Hardware version</source>
       <translation>Апаратна версія</translation>
     </message>
-    <message id="settings_deviceinfo_device_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="84"/>
+    <message id="settings_shelly_device_name">
+      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="66"/>
       <source>Device name</source>
       <translation>Назва пристрою</translation>
     </message>
@@ -1064,7 +1069,7 @@
       <translation type="unfinished">Додайте IP-адресу вручну</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="88"/>
       <source>Add IP address manually</source>
       <translation>Додайте IP-адресу вручну</translation>
     </message>
@@ -1185,7 +1190,7 @@
       <translation>Звукова тривога</translation>
     </message>
     <message id="demo_mode_indicator_text">
-      <location filename="../../components/DemoModeIndicator.qml" line="27"/>
+      <location filename="../../components/DemoModeIndicator.qml" line="28"/>
       <source>Demo mode</source>
       <translation>Демонстраційний режим</translation>
     </message>
@@ -4528,7 +4533,7 @@ Do you want to continue?</source>
       <translation>Автоматичне сканування</translation>
     </message>
     <message id="boat_page_temperature_battery_label">
-      <location filename="../../pages/boat/Temperatures.qml" line="77"/>
+      <location filename="../../pages/boat/Temperatures.qml" line="79"/>
       <source>Battery</source>
       <translation>Батарея</translation>
     </message>
@@ -4967,7 +4972,7 @@ Do you want to continue?</source>
       <translation>Трекер</translation>
     </message>
     <message id="iochannel_type_buttongroup_type">
-      <location filename="../../components/listitems/ListIOChannelTypeRadioButtonGroup.qml" line="15"/>
+      <location filename="../../components/listitems/ListIOChannelTypeRadioButtonGroup.qml" line="16"/>
       <source>Type</source>
       <translation>Тип</translation>
     </message>
@@ -5617,12 +5622,12 @@ Do you want to continue?</source>
       <translation>Пік потужності</translation>
     </message>
     <message id="splash_view_unable_to_connect">
-      <location filename="../../components/SplashView.qml" line="281"/>
+      <location filename="../../components/SplashView.qml" line="279"/>
       <source>Unable to connect</source>
       <translation>Не вдається виконати з’єднання</translation>
     </message>
     <message id="splash_view_reconnecting">
-      <location filename="../../components/SplashView.qml" line="283"/>
+      <location filename="../../components/SplashView.qml" line="281"/>
       <source>Disconnected, attempting to reconnect</source>
       <translation>Від'єднано, спроба повторного підключення</translation>
     </message>
@@ -5632,62 +5637,62 @@ Do you want to continue?</source>
       <translation>Підключення...</translation>
     </message>
     <message id="splash_view_connecting">
-      <location filename="../../components/SplashView.qml" line="286"/>
+      <location filename="../../components/SplashView.qml" line="284"/>
       <source>Connecting</source>
       <translation type="unfinished">Підключення...</translation>
     </message>
     <message id="splash_view_connected">
-      <location filename="../../components/SplashView.qml" line="288"/>
+      <location filename="../../components/SplashView.qml" line="286"/>
       <source>Connected, awaiting broker messages</source>
       <translation>Підключено, чекаємо на повідомлення від брокера</translation>
     </message>
     <message id="splash_view_initializing">
-      <location filename="../../components/SplashView.qml" line="290"/>
+      <location filename="../../components/SplashView.qml" line="288"/>
       <source>Connected, receiving broker messages</source>
       <translation>Підключено, отримую повідомлення від брокера</translation>
     </message>
     <message id="splash_view_ready">
-      <location filename="../../components/SplashView.qml" line="299"/>
+      <location filename="../../components/SplashView.qml" line="297"/>
       <source>Connected, loading user interface</source>
       <translation>Підключено, завантажується користувацький інтерфейс</translation>
     </message>
     <message id="splash_view_invalid_protocol_version">
-      <location filename="../../components/SplashView.qml" line="315"/>
+      <location filename="../../components/SplashView.qml" line="313"/>
       <source>Invalid protocol version</source>
       <translation>Неправильна версія протоколу</translation>
     </message>
     <message id="splash_view_client_id_rejected">
-      <location filename="../../components/SplashView.qml" line="317"/>
+      <location filename="../../components/SplashView.qml" line="315"/>
       <source>Client ID rejected</source>
       <translation>ID клієнта відхилено</translation>
     </message>
     <message id="splash_view_server_unavailable">
-      <location filename="../../components/SplashView.qml" line="319"/>
+      <location filename="../../components/SplashView.qml" line="317"/>
       <source>Broker service not available</source>
       <translation>Послуга брокера недоступна</translation>
     </message>
     <message id="splash_view_bad_username_or_password">
-      <location filename="../../components/SplashView.qml" line="321"/>
+      <location filename="../../components/SplashView.qml" line="319"/>
       <source>Bad username or password</source>
       <translation>Неправильне ім'я користувача або пароль</translation>
     </message>
     <message id="splash_view_not_authorized">
-      <location filename="../../components/SplashView.qml" line="323"/>
+      <location filename="../../components/SplashView.qml" line="321"/>
       <source>Client not authorized</source>
       <translation>Клієнт не авторизований</translation>
     </message>
     <message id="splash_view_transport_invalid">
-      <location filename="../../components/SplashView.qml" line="325"/>
+      <location filename="../../components/SplashView.qml" line="323"/>
       <source>Transport connection error</source>
       <translation>Помилка транспортного з'єднання</translation>
     </message>
     <message id="splash_view_protocol_violation">
-      <location filename="../../components/SplashView.qml" line="327"/>
+      <location filename="../../components/SplashView.qml" line="325"/>
       <source>Protocol violation error</source>
       <translation>Помилка порушення протоколу</translation>
     </message>
     <message id="splash_view_mqtt5_error">
-      <location filename="../../components/SplashView.qml" line="331"/>
+      <location filename="../../components/SplashView.qml" line="329"/>
       <source>MQTT protocol level 5 error</source>
       <translation>Помилка 5-го рівня протоколу MQTT</translation>
     </message>
@@ -7932,22 +7937,22 @@ Do you want to continue?</source>
       <translation>Значення деактивації</translation>
     </message>
     <message id="splash_view_device_disconnected">
-      <location filename="../../components/SplashView.qml" line="295"/>
+      <location filename="../../components/SplashView.qml" line="293"/>
       <source>Connection to the device has been lost, awaiting reconnection</source>
       <translation>З'єднання з пристроєм втрачено, чекаємо на повторне підключення</translation>
     </message>
     <message id="splash_view_awaiting_heartbeat">
-      <location filename="../../components/SplashView.qml" line="297"/>
+      <location filename="../../components/SplashView.qml" line="295"/>
       <source>Connected to VRM, awaiting device</source>
       <translation>Підключено до VRM, очікує на пристрій</translation>
     </message>
     <message id="splash_view_heartbeat_missing">
-      <location filename="../../components/SplashView.qml" line="347"/>
+      <location filename="../../components/SplashView.qml" line="345"/>
       <source>Device may have lost connectivity to VRM</source>
       <translation>Можливо, пристрій втратив зв'язок з VRM</translation>
     </message>
     <message id="splash_view_heartbeat_inactive">
-      <location filename="../../components/SplashView.qml" line="349"/>
+      <location filename="../../components/SplashView.qml" line="347"/>
       <source>Device is not connected to VRM</source>
       <translation>Пристрій не підключено до VRM</translation>
     </message>
@@ -8347,7 +8352,7 @@ Do you want to continue?</source>
       <translation>AC Out L%1</translation>
     </message>
     <message id="notification_description_and_value">
-      <location filename="../../components/NotificationDelegate.qml" line="76"/>
+      <location filename="../../components/NotificationDelegate.qml" line="88"/>
       <source>%1 %2</source>
       <extracomment>%1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')</extracomment>
       <translation>%1 %2</translation>
@@ -8431,7 +8436,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>Доступ до MQTT</translation>
     </message>
     <message id="settings_security_warning_profile_configuration_order">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="19"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="33"/>
       <source>A Security Profile must be configured before the network services can be enabled, see Settings - General</source>
       <translation>Перш ніж увімкнути мережеві служби, необхідно налаштувати профіль безпеки, див. розділ Налаштування - Загальні</translation>
     </message>
@@ -8717,7 +8722,7 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <translation>Пристрій %1</translation>
     </message>
     <message id="page_settings_modbus_device_remove_device">
-      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="98"/>
+      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="100"/>
       <source>Remove Modbus device?</source>
       <translation>Видалити пристрій Modbus?</translation>
     </message>
@@ -9006,42 +9011,42 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>Далі</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="455"/>
+      <location filename="../../src/units.cpp" line="555"/>
       <source>N</source>
       <translation>Пн</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="457"/>
+      <location filename="../../src/units.cpp" line="557"/>
       <source>NE</source>
       <translation>ПнСх</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="459"/>
+      <location filename="../../src/units.cpp" line="559"/>
       <source>E</source>
       <translation>C</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="461"/>
+      <location filename="../../src/units.cpp" line="561"/>
       <source>SE</source>
       <translation>ПдСх</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="463"/>
+      <location filename="../../src/units.cpp" line="563"/>
       <source>S</source>
       <translation>Пд</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="465"/>
+      <location filename="../../src/units.cpp" line="565"/>
       <source>SW</source>
       <translation>ПдЗх</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="467"/>
+      <location filename="../../src/units.cpp" line="567"/>
       <source>W</source>
       <translation>Зх</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="469"/>
+      <location filename="../../src/units.cpp" line="569"/>
       <source>NW</source>
       <translation>ПнЗх</translation>
     </message>
@@ -10091,7 +10096,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Щоб змінити ідентифікатори пристроїв Modbus-TCP, перейдіть у меню Налаштування → VRM → VRM device instances.</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="97"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="74"/>
       <source>Refresh devices</source>
       <translation>Оновити пристрої</translation>
     </message>
@@ -10118,7 +10123,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Полярність (Реле 1)</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="214"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="216"/>
       <source>Polarity</source>
       <translation>Полярність</translation>
     </message>
@@ -10467,7 +10472,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Порт: %1 (Пристрій %2)</translation>
     </message>
     <message id="page_settings_fronius_modbus_remove_location">
-      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="95"/>
       <source>Remove Modbus port and unit ID?</source>
       <translation>Видалити порт Modbus та ідентифікатор пристрою?</translation>
     </message>
@@ -10564,43 +10569,43 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Стан перемикача під час запуску</translation>
     </message>
     <message id="page_switchable_output_startup_state_restore_from_memory">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="160"/>
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="167"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="161"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="168"/>
       <source>Restore from memory</source>
       <translation>Відновити з пам'яті</translation>
     </message>
     <message id="page_switchable_output_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="166"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="167"/>
       <source>Startup dim level</source>
       <translation type="unfinished">Рівень затемнення під час запуску</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="198"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="200"/>
       <source>Startup dim level</source>
       <translation>Рівень затемнення під час запуску</translation>
     </message>
     <message id="page_switchable_output_restore_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="187"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="189"/>
       <source>Restore dim level from memory</source>
       <translation>Відновити рівень затемнення з пам'яті</translation>
     </message>
     <message id="page_switchable_output_polarity_active_high">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="221"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
       <source>Active high / Normally open</source>
       <translation>Активний високий / Нормально відкритий</translation>
     </message>
     <message id="page_switchable_output_polarity_active_low">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="225"/>
       <source>Active low / Normally closed</source>
       <translation>Активний низький / Нормально закритий</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="229"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="231"/>
       <source>Output limit min</source>
       <translation>Мінімальний ліміт вихідного сигналу</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="242"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="244"/>
       <source>Output limit max</source>
       <translation>Максимальний ліміт вихідного сигналу</translation>
     </message>
@@ -10815,7 +10820,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Вимірювання елементів</translation>
     </message>
     <message id="lynxionbatteryinfo_cell_number">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="155"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="157"/>
       <source>Cell #%1</source>
       <translation>Елемент #%1</translation>
     </message>
@@ -11216,21 +11221,6 @@ The GX device can only control one connected genset and takes the one with the l
       <source>Invert</source>
       <translation>Інвертувати</translation>
     </message>
-    <message id="iochannel_digital_input_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="60"/>
-      <source>Digital input mode</source>
-      <translation>Режим цифрового входу</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_input">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="68"/>
-      <source>Digital input</source>
-      <translation>Цифровий вхід</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_toggle_switch">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="72"/>
-      <source>Toggle switch</source>
-      <translation>Перемикач</translation>
-    </message>
     <message id="page_microgrid_apply_all_parameters">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="308"/>
       <source>Apply all parameters</source>
@@ -11456,21 +11446,6 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <source>Discovered E-drive IDs</source>
       <translation>Знайдені ID E-приводів</translation>
     </message>
-    <message id="iochannel_digital_input_mode_on_off_switch">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="70"/>
-      <source>On/off switch</source>
-      <translation>Вимикач</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_push_button_on_off">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="74"/>
-      <source>Push button on/off</source>
-      <translation>Кнопковий вимикач</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_push_button_dimmer">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="76"/>
-      <source>Push button dimmer</source>
-      <translation>Кнопковий димер</translation>
-    </message>
     <message id="generic_input_label_released">
       <location filename="../../src/genericinput.cpp" line="132"/>
       <source>Released</source>
@@ -11544,7 +11519,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>Високе системне навантаження, графіки приховано для зменшення навантаження на процесор</translation>
     </message>
     <message id="navbar_more">
-      <location filename="../../pages/MainView.qml" line="279"/>
+      <location filename="../../pages/MainView.qml" line="285"/>
       <source>More</source>
       <extracomment>Click to show more available items</extracomment>
       <translation>Більше</translation>
@@ -11703,17 +11678,17 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>Споживання</translation>
     </message>
     <message id="boat_page_temperature_coolant_label">
-      <location filename="../../pages/boat/Temperatures.qml" line="94"/>
+      <location filename="../../pages/boat/Temperatures.qml" line="96"/>
       <source>Coolant</source>
       <translation>охолоджувальна рідина</translation>
     </message>
     <message id="boat_page_temperature_controller_label">
-      <location filename="../../pages/boat/Temperatures.qml" line="106"/>
+      <location filename="../../pages/boat/Temperatures.qml" line="108"/>
       <source>Controller</source>
       <translation>Controller</translation>
     </message>
     <message id="boat_page_temperature_motor_label">
-      <location filename="../../pages/boat/Temperatures.qml" line="118"/>
+      <location filename="../../pages/boat/Temperatures.qml" line="120"/>
       <source>Motor</source>
       <translation>Двигун</translation>
     </message>
@@ -11841,7 +11816,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>Видалити - %1</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
       <source>Refresh</source>
       <translation>Оновити</translation>
     </message>
@@ -11874,6 +11849,57 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <location filename="../../pages/settings/devicelist/ac-in/AcLimitsProductionSettings.qml" line="43"/>
       <source>Production current limit</source>
       <translation>Ліміт струму генерації</translation>
+    </message>
+    <message id="settings_services_mqtt_access_paired_devices_only">
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="17"/>
+      <source>Paired devices only</source>
+      <translation>Лише зв’язані пристрої</translation>
+    </message>
+    <message id="settings_services_mqtt_access_warning_paired_devices">
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="24"/>
+      <source>Turning MQTT Access off also disables paired MQTT devices until access is enabled again.</source>
+      <translation>Вимкнення доступу до MQTT також вимикає зв’язані пристрої MQTT, доки доступ не буде ввімкнено знову.</translation>
+    </message>
+    <message id="settings_shelly_channel">
+      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="48"/>
+      <source>Channel %1</source>
+      <extracomment>%1 = channel number</extracomment>
+      <translation>Канал %1</translation>
+    </message>
+    <message id="settings_shelly_channels">
+      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="106"/>
+      <source>Channels</source>
+      <translation>Канали</translation>
+    </message>
+    <message id="iochannel_input_mode">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="60"/>
+      <source>Input mode</source>
+      <translation>Режим входу</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_follow_state">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="68"/>
+      <source>Sensor | Outputs → Follow state</source>
+      <translation>Датчик | Виходи → Повторювати стан</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_follow_position">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="70"/>
+      <source>Switch | Outputs → Follow position</source>
+      <translation>Перемикач | Виходи → Повторювати положення</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_on_change">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="72"/>
+      <source>Switch | Outputs → Toggle on change</source>
+      <translation>Перемикач | Виходи → Перемикати при зміні</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_on_press">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="74"/>
+      <source>Button | Outputs → Toggle on press</source>
+      <translation>Кнопка | Виходи → Перемикати при натисканні</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_and_dim">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="76"/>
+      <source>Button | Outputs → Toggle and dim</source>
+      <translation>Кнопка | Виходи → Перемикати та димувати</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>

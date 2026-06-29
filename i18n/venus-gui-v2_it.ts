@@ -75,7 +75,7 @@
       <translation>Installazione in corso %1...</translation>
     </message>
     <message id="splash_view_unknown_error">
-      <location filename="../../components/SplashView.qml" line="329"/>
+      <location filename="../../components/SplashView.qml" line="327"/>
       <source>Unknown error</source>
       <translation>Errore sconosciuto</translation>
     </message>
@@ -255,15 +255,20 @@
       <source>Product</source>
       <translation>Prodotto</translation>
     </message>
-    <message id="iochannel_name">
-      <location filename="../../components/listitems/ListIOChannelNameField.qml" line="11"/>
-      <source>Name</source>
-      <translation>Nome</translation>
-    </message>
     <message id="settings_deviceinfo_name">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="38"/>
       <source>Name</source>
       <translation type="unfinished">Nome</translation>
+    </message>
+    <message id="settings_deviceinfo_device_name">
+      <location filename="../../pages/settings/PageDeviceInfo.qml" line="84"/>
+      <source>Device name</source>
+      <translation type="unfinished">Nome dispositivo</translation>
+    </message>
+    <message id="iochannel_name">
+      <location filename="../../components/listitems/ListIOChannelNameField.qml" line="11"/>
+      <source>Name</source>
+      <translation>Nome</translation>
     </message>
     <message id="settings_deviceinfo_product_id">
       <location filename="../../pages/settings/PageDeviceInfo.qml" line="49"/>
@@ -275,8 +280,8 @@
       <source>Hardware version</source>
       <translation>Versione hardware</translation>
     </message>
-    <message id="settings_deviceinfo_device_name">
-      <location filename="../../pages/settings/PageDeviceInfo.qml" line="84"/>
+    <message id="settings_shelly_device_name">
+      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="66"/>
       <source>Device name</source>
       <translation>Nome dispositivo</translation>
     </message>
@@ -1064,7 +1069,7 @@
       <translation type="unfinished">Aggiungi manualmento indirizzo IP</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="111"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="88"/>
       <source>Add IP address manually</source>
       <translation>Aggiungi manualmento indirizzo IP</translation>
     </message>
@@ -1185,7 +1190,7 @@
       <translation>Allarme udibile</translation>
     </message>
     <message id="demo_mode_indicator_text">
-      <location filename="../../components/DemoModeIndicator.qml" line="27"/>
+      <location filename="../../components/DemoModeIndicator.qml" line="28"/>
       <source>Demo mode</source>
       <translation>Modalità demo</translation>
     </message>
@@ -4525,7 +4530,7 @@ Si desidera continuare?</translation>
       <translation>Scansione automatica</translation>
     </message>
     <message id="boat_page_temperature_battery_label">
-      <location filename="../../pages/boat/Temperatures.qml" line="77"/>
+      <location filename="../../pages/boat/Temperatures.qml" line="79"/>
       <source>Battery</source>
       <translation>Batteria</translation>
     </message>
@@ -4964,7 +4969,7 @@ Si desidera continuare?</translation>
       <translation>Tracciatore</translation>
     </message>
     <message id="iochannel_type_buttongroup_type">
-      <location filename="../../components/listitems/ListIOChannelTypeRadioButtonGroup.qml" line="15"/>
+      <location filename="../../components/listitems/ListIOChannelTypeRadioButtonGroup.qml" line="16"/>
       <source>Type</source>
       <translation>Tipo</translation>
     </message>
@@ -5614,12 +5619,12 @@ Si desidera continuare?</translation>
       <translation>Potenza max</translation>
     </message>
     <message id="splash_view_unable_to_connect">
-      <location filename="../../components/SplashView.qml" line="281"/>
+      <location filename="../../components/SplashView.qml" line="279"/>
       <source>Unable to connect</source>
       <translation>Impossibile connettersi</translation>
     </message>
     <message id="splash_view_reconnecting">
-      <location filename="../../components/SplashView.qml" line="283"/>
+      <location filename="../../components/SplashView.qml" line="281"/>
       <source>Disconnected, attempting to reconnect</source>
       <translation>Disconnesso, tentativo di riconnessione in corso</translation>
     </message>
@@ -5629,62 +5634,62 @@ Si desidera continuare?</translation>
       <translation>Collegamento in corso</translation>
     </message>
     <message id="splash_view_connecting">
-      <location filename="../../components/SplashView.qml" line="286"/>
+      <location filename="../../components/SplashView.qml" line="284"/>
       <source>Connecting</source>
       <translation type="unfinished">Collegamento in corso</translation>
     </message>
     <message id="splash_view_connected">
-      <location filename="../../components/SplashView.qml" line="288"/>
+      <location filename="../../components/SplashView.qml" line="286"/>
       <source>Connected, awaiting broker messages</source>
       <translation>Connesso, in attesa dei messaggi del broker</translation>
     </message>
     <message id="splash_view_initializing">
-      <location filename="../../components/SplashView.qml" line="290"/>
+      <location filename="../../components/SplashView.qml" line="288"/>
       <source>Connected, receiving broker messages</source>
       <translation>Connesso, ricezione dei messaggi del broker in corso</translation>
     </message>
     <message id="splash_view_ready">
-      <location filename="../../components/SplashView.qml" line="299"/>
+      <location filename="../../components/SplashView.qml" line="297"/>
       <source>Connected, loading user interface</source>
       <translation>Connesso, caricamento interfaccia utente in corso</translation>
     </message>
     <message id="splash_view_invalid_protocol_version">
-      <location filename="../../components/SplashView.qml" line="315"/>
+      <location filename="../../components/SplashView.qml" line="313"/>
       <source>Invalid protocol version</source>
       <translation>Versione del protocollo non valida</translation>
     </message>
     <message id="splash_view_client_id_rejected">
-      <location filename="../../components/SplashView.qml" line="317"/>
+      <location filename="../../components/SplashView.qml" line="315"/>
       <source>Client ID rejected</source>
       <translation>ID cliente rifiutato</translation>
     </message>
     <message id="splash_view_server_unavailable">
-      <location filename="../../components/SplashView.qml" line="319"/>
+      <location filename="../../components/SplashView.qml" line="317"/>
       <source>Broker service not available</source>
       <translation>Servizio del broker non disponibile</translation>
     </message>
     <message id="splash_view_bad_username_or_password">
-      <location filename="../../components/SplashView.qml" line="321"/>
+      <location filename="../../components/SplashView.qml" line="319"/>
       <source>Bad username or password</source>
       <translation>Nome utente o password errati</translation>
     </message>
     <message id="splash_view_not_authorized">
-      <location filename="../../components/SplashView.qml" line="323"/>
+      <location filename="../../components/SplashView.qml" line="321"/>
       <source>Client not authorized</source>
       <translation>Cliente non autorizzato</translation>
     </message>
     <message id="splash_view_transport_invalid">
-      <location filename="../../components/SplashView.qml" line="325"/>
+      <location filename="../../components/SplashView.qml" line="323"/>
       <source>Transport connection error</source>
       <translation>Errore di connessione trasporto</translation>
     </message>
     <message id="splash_view_protocol_violation">
-      <location filename="../../components/SplashView.qml" line="327"/>
+      <location filename="../../components/SplashView.qml" line="325"/>
       <source>Protocol violation error</source>
       <translation>Errore di violazione del protocollo</translation>
     </message>
     <message id="splash_view_mqtt5_error">
-      <location filename="../../components/SplashView.qml" line="331"/>
+      <location filename="../../components/SplashView.qml" line="329"/>
       <source>MQTT protocol level 5 error</source>
       <translation>Errore di livello 5 del protocollo MQTT</translation>
     </message>
@@ -7928,22 +7933,22 @@ Si desidera continuare?</translation>
       <translation>Valore disattivazione</translation>
     </message>
     <message id="splash_view_device_disconnected">
-      <location filename="../../components/SplashView.qml" line="295"/>
+      <location filename="../../components/SplashView.qml" line="293"/>
       <source>Connection to the device has been lost, awaiting reconnection</source>
       <translation>È stata persa la connessione al dispositivo, in attesa di riconnessione</translation>
     </message>
     <message id="splash_view_awaiting_heartbeat">
-      <location filename="../../components/SplashView.qml" line="297"/>
+      <location filename="../../components/SplashView.qml" line="295"/>
       <source>Connected to VRM, awaiting device</source>
       <translation>Collegato al VRM, in attesa del dispositivo</translation>
     </message>
     <message id="splash_view_heartbeat_missing">
-      <location filename="../../components/SplashView.qml" line="347"/>
+      <location filename="../../components/SplashView.qml" line="345"/>
       <source>Device may have lost connectivity to VRM</source>
       <translation>Il dispositivo potrebbe aver perso la connettività con il VRM</translation>
     </message>
     <message id="splash_view_heartbeat_inactive">
-      <location filename="../../components/SplashView.qml" line="349"/>
+      <location filename="../../components/SplashView.qml" line="347"/>
       <source>Device is not connected to VRM</source>
       <translation>Il dispositivo non è collegato al VRM</translation>
     </message>
@@ -8343,7 +8348,7 @@ Si desidera continuare?</translation>
       <translation>AC Out L%1</translation>
     </message>
     <message id="notification_description_and_value">
-      <location filename="../../components/NotificationDelegate.qml" line="76"/>
+      <location filename="../../components/NotificationDelegate.qml" line="88"/>
       <source>%1 %2</source>
       <extracomment>%1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')</extracomment>
       <translation>%1 %2</translation>
@@ -8427,7 +8432,7 @@ Se il generatore è in funzione in seguito a una condizione di avvio automatico,
       <translation>Accesso MQTT</translation>
     </message>
     <message id="settings_security_warning_profile_configuration_order">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="19"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="33"/>
       <source>A Security Profile must be configured before the network services can be enabled, see Settings - General</source>
       <translation>Prima di poter attivare i servizi di rete, è necessario configurare un profilo di sicurezza, vedere Impostazioni - Generale</translation>
     </message>
@@ -8712,7 +8717,7 @@ Notare che questo menu mostra solo i contatori Carlo Gavazzi collegati tramite R
       <translation>Dispositivo %1</translation>
     </message>
     <message id="page_settings_modbus_device_remove_device">
-      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="98"/>
+      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="100"/>
       <source>Remove Modbus device?</source>
       <translation>Eliminare il dispositivo Modbus?</translation>
     </message>
@@ -8999,42 +9004,42 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation>Successivo</translation>
     </message>
     <message id="direction_north">
-      <location filename="../../src/units.cpp" line="455"/>
+      <location filename="../../src/units.cpp" line="555"/>
       <source>N</source>
       <translation>N</translation>
     </message>
     <message id="direction_northeast">
-      <location filename="../../src/units.cpp" line="457"/>
+      <location filename="../../src/units.cpp" line="557"/>
       <source>NE</source>
       <translation>NE</translation>
     </message>
     <message id="direction_east">
-      <location filename="../../src/units.cpp" line="459"/>
+      <location filename="../../src/units.cpp" line="559"/>
       <source>E</source>
       <translation>E</translation>
     </message>
     <message id="direction_southeast">
-      <location filename="../../src/units.cpp" line="461"/>
+      <location filename="../../src/units.cpp" line="561"/>
       <source>SE</source>
       <translation>SE</translation>
     </message>
     <message id="direction_south">
-      <location filename="../../src/units.cpp" line="463"/>
+      <location filename="../../src/units.cpp" line="563"/>
       <source>S</source>
       <translation>S</translation>
     </message>
     <message id="direction_southwest">
-      <location filename="../../src/units.cpp" line="465"/>
+      <location filename="../../src/units.cpp" line="565"/>
       <source>SW</source>
       <translation>SO</translation>
     </message>
     <message id="direction_west">
-      <location filename="../../src/units.cpp" line="467"/>
+      <location filename="../../src/units.cpp" line="567"/>
       <source>W</source>
       <translation>O</translation>
     </message>
     <message id="direction_northwest">
-      <location filename="../../src/units.cpp" line="469"/>
+      <location filename="../../src/units.cpp" line="569"/>
       <source>NW</source>
       <translation>NO</translation>
     </message>
@@ -10084,7 +10089,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Consultare il menu Impostazioni → VRM → Istanze dispositivo VRM per modificare gli ID unità Modbus-TCP.</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="97"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="74"/>
       <source>Refresh devices</source>
       <translation>Aggiorna dispositivi</translation>
     </message>
@@ -10111,7 +10116,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Polarità (Relè 1)</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="214"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="216"/>
       <source>Polarity</source>
       <translation>Polarità</translation>
     </message>
@@ -10460,7 +10465,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Porta: %1 (Unità %2)</translation>
     </message>
     <message id="page_settings_fronius_modbus_remove_location">
-      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="94"/>
+      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="95"/>
       <source>Remove Modbus port and unit ID?</source>
       <translation>Rimuovere la porta Modbus e l'ID unità?</translation>
     </message>
@@ -10557,43 +10562,43 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Stato interruttore all'avvio</translation>
     </message>
     <message id="page_switchable_output_startup_state_restore_from_memory">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="160"/>
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="167"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="161"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="168"/>
       <source>Restore from memory</source>
       <translation>Ripristina da memoria</translation>
     </message>
     <message id="page_switchable_output_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="166"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="167"/>
       <source>Startup dim level</source>
       <translation type="unfinished">Livello di dimmer all'avvio</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="198"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="200"/>
       <source>Startup dim level</source>
       <translation>Livello di dimmer all'avvio</translation>
     </message>
     <message id="page_switchable_output_restore_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="187"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="189"/>
       <source>Restore dim level from memory</source>
       <translation>Ripristina il livello di dimmer dalla memoria</translation>
     </message>
     <message id="page_switchable_output_polarity_active_high">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="221"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
       <source>Active high / Normally open</source>
       <translation>Attivo alto / Normalmente aperto</translation>
     </message>
     <message id="page_switchable_output_polarity_active_low">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="225"/>
       <source>Active low / Normally closed</source>
       <translation>Attivo basso / Normalmente chiuso</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="229"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="231"/>
       <source>Output limit min</source>
       <translation>Limite minimo di uscita</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="242"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="244"/>
       <source>Output limit max</source>
       <translation>Limite massimo di uscita</translation>
     </message>
@@ -10808,7 +10813,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Misurazioni delle celle</translation>
     </message>
     <message id="lynxionbatteryinfo_cell_number">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="155"/>
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="157"/>
       <source>Cell #%1</source>
       <translation>Cella n. %1</translation>
     </message>
@@ -11209,21 +11214,6 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <source>Invert</source>
       <translation>Inverti</translation>
     </message>
-    <message id="iochannel_digital_input_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="60"/>
-      <source>Digital input mode</source>
-      <translation>Modalità ingresso digitale</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_input">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="68"/>
-      <source>Digital input</source>
-      <translation>Entrata digitale</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_toggle_switch">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="72"/>
-      <source>Toggle switch</source>
-      <translation>Interruttore a levetta</translation>
-    </message>
     <message id="page_microgrid_apply_all_parameters">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="308"/>
       <source>Apply all parameters</source>
@@ -11449,21 +11439,6 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
       <source>Discovered E-drive IDs</source>
       <translation>ID azionamenti E rilevati</translation>
     </message>
-    <message id="iochannel_digital_input_mode_on_off_switch">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="70"/>
-      <source>On/off switch</source>
-      <translation>Interruttore on/off</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_push_button_on_off">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="74"/>
-      <source>Push button on/off</source>
-      <translation>Pulsante on/off</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_push_button_dimmer">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="76"/>
-      <source>Push button dimmer</source>
-      <translation>Pulsante dimmer</translation>
-    </message>
     <message id="generic_input_label_released">
       <location filename="../../src/genericinput.cpp" line="132"/>
       <source>Released</source>
@@ -11537,7 +11512,7 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
       <translation>Carico di sistema elevato, grafici nascosti per ridurre il carico della CPU</translation>
     </message>
     <message id="navbar_more">
-      <location filename="../../pages/MainView.qml" line="279"/>
+      <location filename="../../pages/MainView.qml" line="285"/>
       <source>More</source>
       <extracomment>Click to show more available items</extracomment>
       <translation>Altro</translation>
@@ -11696,17 +11671,17 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
       <translation>Consumo</translation>
     </message>
     <message id="boat_page_temperature_coolant_label">
-      <location filename="../../pages/boat/Temperatures.qml" line="94"/>
+      <location filename="../../pages/boat/Temperatures.qml" line="96"/>
       <source>Coolant</source>
       <translation>Refrigerante</translation>
     </message>
     <message id="boat_page_temperature_controller_label">
-      <location filename="../../pages/boat/Temperatures.qml" line="106"/>
+      <location filename="../../pages/boat/Temperatures.qml" line="108"/>
       <source>Controller</source>
       <translation>Controller</translation>
     </message>
     <message id="boat_page_temperature_motor_label">
-      <location filename="../../pages/boat/Temperatures.qml" line="118"/>
+      <location filename="../../pages/boat/Temperatures.qml" line="120"/>
       <source>Motor</source>
       <translation>Motore</translation>
     </message>
@@ -11714,17 +11689,17 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="148"/>
       <source>Sync</source>
       <extracomment>Trigger a synchronisation of the battery SOC</extracomment>
-      <translation/>
+      <translation>Sincronizza</translation>
     </message>
     <message id="batterysettingsbattery_set_to_0">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="163"/>
       <source>Set to 0</source>
-      <translation/>
+      <translation>Imposta a 0</translation>
     </message>
     <message id="settings_canbus_nmea2000in_alerts">
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="85"/>
       <source>NMEA2000 inbound alerts</source>
-      <translation/>
+      <translation>Allarmi NMEA2000 in entrata</translation>
     </message>
     <message id="settings_firmware_boot_to_version">
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="63"/>
@@ -11735,22 +11710,22 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
     <message id="settings_tcpip_disable_ethernet_gateway">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
       <source>Disable internet access over ethernet?</source>
-      <translation/>
+      <translation>Disattivare l'accesso a Internet tramite Ethernet?</translation>
     </message>
     <message id="settings_tcpip_disable_ethernet_gateway_confirm">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="155"/>
       <source>This will disconnect the device from VRM, unless it can connect to VRM over WiFi. Are you sure that you want to disable internet access over ethernet?</source>
-      <translation/>
+      <translation>Questo scollegherà il dispositivo dal VRM, a meno che non possa connettersi al VRM tramite Wi-Fi. Sei sicuro di voler disattivare l'accesso a Internet tramite Ethernet?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway">
       <location filename="../../pages/settings/PageSettingsWifi.qml" line="163"/>
       <source>Disable internet access over WiFi?</source>
-      <translation/>
+      <translation>Disattivare l'accesso a Internet tramite Wi-Fi?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway_confirm">
       <location filename="../../pages/settings/PageSettingsWifi.qml" line="165"/>
       <source>This will disconnect the device from VRM, unless it can connect to VRM over ethernet. Are you sure that you want to disable internet access over WiFi?</source>
-      <translation/>
+      <translation>Questo scollegherà il dispositivo dal VRM, a meno che non possa connettersi al VRM tramite Ethernet. Sei sicuro di voler disattivare l'accesso a Internet tramite Wi-Fi?</translation>
     </message>
     <message id="vebus_device_restart">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="228"/>
@@ -11761,7 +11736,7 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
       <location filename="../../components/CommonWords.qml" line="136"/>
       <source>Check now</source>
       <extracomment>Checks for a particular state</extracomment>
-      <translation/>
+      <translation>Verifica ora</translation>
     </message>
     <message id="common_words_clear_action">
       <location filename="../../components/CommonWords.qml" line="140"/>
@@ -11772,7 +11747,7 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
     <message id="common_words_redetect">
       <location filename="../../components/CommonWords.qml" line="479"/>
       <source>Redetect</source>
-      <translation/>
+      <translation>Rileva nuovamente</translation>
     </message>
     <message id="common_words_scan_action">
       <location filename="../../components/CommonWords.qml" line="503"/>
@@ -11796,77 +11771,128 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
       <location filename="../../components/CommonWords.qml" line="610"/>
       <source>Update to %1</source>
       <extracomment>Update the firmware to a specific version</extracomment>
-      <translation/>
+      <translation>Aggiorna a %1</translation>
     </message>
     <message id="components_mount_state_eject">
       <location filename="../../components/listitems/ListMountStateButton.qml" line="17"/>
       <source>Eject</source>
-      <translation/>
+      <translation>Espelli</translation>
     </message>
     <message id="vebus_backup_with_name">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="351"/>
       <source>Backup - %1</source>
-      <translation/>
+      <translation>Backup - %1</translation>
     </message>
     <message id="vebus_backup_restore_name">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="387"/>
       <source>Restore - %1</source>
-      <translation/>
+      <translation>Ripristina - %1</translation>
     </message>
     <message id="vebus_backup_cancel_actions">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="441"/>
       <source>Cancel actions</source>
-      <translation/>
+      <translation>Annulla azioni</translation>
     </message>
     <message id="vebus_backup_cancel_password_entry">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="464"/>
       <source>Cancel password entry</source>
-      <translation/>
+      <translation>Annulla inserimento password</translation>
     </message>
     <message id="vebus_backup_delete_backup">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="404"/>
       <source>Delete backup</source>
-      <translation/>
+      <translation>Elimina backup</translation>
     </message>
     <message id="vebus_backup_delete_named_backup">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="423"/>
       <source>Delete - %1</source>
-      <translation/>
+      <translation>Elimina - %1</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
       <source>Refresh</source>
       <translation>Aggiorna</translation>
     </message>
     <message id="ac-limits-consumptionsettings_consumption_limit">
       <location filename="../../pages/settings/devicelist/ac-in/AcLimitsConsumptionSettings.qml" line="22"/>
       <source>Consumption limit</source>
-      <translation/>
+      <translation>Limite di consumo</translation>
     </message>
     <message id="ac-limits-consumptionsettings_consumption_power_limit">
       <location filename="../../pages/settings/devicelist/ac-in/AcLimitsConsumptionSettings.qml" line="32"/>
       <source>Consumption power limit</source>
-      <translation/>
+      <translation>Limite potenza di consumo</translation>
     </message>
     <message id="ac-limits-consumptionsettings_consumption_current_limit">
       <location filename="../../pages/settings/devicelist/ac-in/AcLimitsConsumptionSettings.qml" line="43"/>
       <source>Consumption current limit</source>
-      <translation/>
+      <translation>Limite corrente di consumo</translation>
     </message>
     <message id="ac-limits-productionsettings_production_limit">
       <location filename="../../pages/settings/devicelist/ac-in/AcLimitsProductionSettings.qml" line="22"/>
       <source>Production limit</source>
-      <translation/>
+      <translation>Limite di produzione</translation>
     </message>
     <message id="ac-limits-productionsettings_production_power_limit">
       <location filename="../../pages/settings/devicelist/ac-in/AcLimitsProductionSettings.qml" line="32"/>
       <source>Production power limit</source>
-      <translation/>
+      <translation>Limite potenza di produzione</translation>
     </message>
     <message id="ac-limits-productionsettings_production_current_limit">
       <location filename="../../pages/settings/devicelist/ac-in/AcLimitsProductionSettings.qml" line="43"/>
       <source>Production current limit</source>
-      <translation/>
+      <translation>Limite corrente di produzione</translation>
+    </message>
+    <message id="settings_services_mqtt_access_paired_devices_only">
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="17"/>
+      <source>Paired devices only</source>
+      <translation>Solo dispositivi associati</translation>
+    </message>
+    <message id="settings_services_mqtt_access_warning_paired_devices">
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="24"/>
+      <source>Turning MQTT Access off also disables paired MQTT devices until access is enabled again.</source>
+      <translation>La disattivazione dell'accesso MQTT disabilita anche i dispositivi MQTT associati finché l'accesso non viene nuovamente abilitato.</translation>
+    </message>
+    <message id="settings_shelly_channel">
+      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="48"/>
+      <source>Channel %1</source>
+      <extracomment>%1 = channel number</extracomment>
+      <translation>Canale %1</translation>
+    </message>
+    <message id="settings_shelly_channels">
+      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="106"/>
+      <source>Channels</source>
+      <translation>Canali</translation>
+    </message>
+    <message id="iochannel_input_mode">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="60"/>
+      <source>Input mode</source>
+      <translation>Modalità ingresso</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_follow_state">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="68"/>
+      <source>Sensor | Outputs → Follow state</source>
+      <translation>Sensore | Uscite → Segui stato</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_follow_position">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="70"/>
+      <source>Switch | Outputs → Follow position</source>
+      <translation>Interruttore | Uscite → Segui posizione</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_on_change">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="72"/>
+      <source>Switch | Outputs → Toggle on change</source>
+      <translation>Interruttore | Uscite → Alterna al cambio</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_on_press">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="74"/>
+      <source>Button | Outputs → Toggle on press</source>
+      <translation>Pulsante | Uscite → Alterna alla pressione</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_and_dim">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="76"/>
+      <source>Button | Outputs → Toggle and dim</source>
+      <translation>Pulsante | Uscite → Alterna e regola</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
@@ -13645,7 +13671,7 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
     <message>
       <location filename="../../src/main.cpp" line="226"/>
       <source>UI animations enabled (true, false)</source>
-      <translation/>
+      <translation>Animazioni UI abilitate (true, false)</translation>
     </message>
     <message>
       <location filename="../../src/main.cpp" line="227"/>
