@@ -34,7 +34,17 @@ public:
 
 	enum FilterType {
 		NoFilter,
+
+		// Only include channels where /Settings/Function = 2 (Manual).
 		ManualFunction,
+
+		// Only include channels that are configurable by the user access level.
+		// If access level > 0 (User), no filtering is applied. If access level = 0, the model excludes:
+		// - Inputs with /Settings/DigitalInputMode = 0 (Disabled)
+		// - Outputs with /Settings/SwitchMode = 0 (Disabled)
+		// - Outputs with /Settings/SwitchMode = 1 (Permanent on) and /Settings/FuseDetection = 0 (Disabled)
+		// - Outputs with /Settings/SwitchMode = invalid/absent and /Settings/FuseDetection = 0 (Disabled)
+		UserConfigurable,
 	};
 	Q_ENUM(FilterType)
 
@@ -62,11 +72,14 @@ private:
 	class Entry {
 	public:
 		QString name() const;
+		bool isUserConfigurable() const;
 		void disconnect(QObject *object);
 
 		QPointer<VeQItem> nameItem;
 		QPointer<VeQItem> customNameItem;
 		QPointer<VeQItem> functionItem;
+		QPointer<VeQItem> modeItem;
+		QPointer<VeQItem> fuseDetectionItem; // for outputs only
 	};
 
 	void sourceModelRowsInserted(const QModelIndex &parent, int first, int last);
@@ -75,6 +88,7 @@ private:
 	void addEntry(const QString &outputUid);
 	void updateCount();
 
+	QPointer<VeQItem> m_accessLevelItem;
 	QMap<QString, Entry> m_entries;
 	FilterType m_filterType = NoFilter;
 	int m_count = 0;
