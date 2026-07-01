@@ -218,12 +218,12 @@
     <message id="generator_condition_start_when_property_is_higher_than">
       <location filename="../../pages/settings/GeneratorCondition.qml" line="30"/>
       <source>Start when %1 is higher than</source>
-      <translation>1'den yüksek olduğunda başlat</translation>
+      <translation>%1 yüksek olduğunda başlat</translation>
     </message>
     <message id="generator_condition_start_when_property_is_lower_than">
       <location filename="../../pages/settings/GeneratorCondition.qml" line="33"/>
       <source>Start when %1 is lower than</source>
-      <translation>1'den düşük olduğunda başlat</translation>
+      <translation>%1 düşük olduğunda başlat</translation>
     </message>
     <message id="generator_condition_stop_when_property_is_higher_than">
       <location filename="../../pages/settings/GeneratorCondition.qml" line="38"/>
@@ -428,7 +428,7 @@
     <message id="page_generator_conditions_battery_soc">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="105"/>
       <source>Battery SOC</source>
-      <translation>Akü SOC</translation>
+      <translation>SOC bu değerden</translation>
     </message>
     <message id="page_generator_conditions_periodic_run">
       <location filename="../../pages/settings/PageGeneratorConditions.qml" line="173"/>
@@ -8430,7 +8430,7 @@ Jeneratör otomatik başlatma koşulu nedeniyle çalışıyorsa otomatik başlat
       <translation>Bağlantıyı aç</translation>
     </message>
     <message id="settings_services_mqtt_access">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="11"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="13"/>
       <source>MQTT Access</source>
       <translation>MQTT Erişimi</translation>
     </message>
@@ -11848,12 +11848,12 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <translation>Üretim akımı limiti</translation>
     </message>
     <message id="settings_services_mqtt_access_paired_devices_only">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="17"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="19"/>
       <source>Paired devices only</source>
       <translation>Yalnızca eşleştirilmiş cihazlar</translation>
     </message>
     <message id="settings_services_mqtt_access_warning_paired_devices">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="24"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="44"/>
       <source>Turning MQTT Access off also disables paired MQTT devices until access is enabled again.</source>
       <translation>MQTT Erişimini kapatmak, erişim yeniden etkinleştirilene kadar eşleştirilmiş MQTT cihazlarını da devre dışı bırakır.</translation>
     </message>

@@ -8427,7 +8427,7 @@ Als het aggregaat momenteel draait vanwege een autostartconditie, zal het uitsch
       <translation>Open link</translation>
     </message>
     <message id="settings_services_mqtt_access">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="11"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="13"/>
       <source>MQTT Access</source>
       <translation>MQTT toegang</translation>
     </message>
@@ -11848,12 +11848,12 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
       <translation>Limiet productiestroom</translation>
     </message>
     <message id="settings_services_mqtt_access_paired_devices_only">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="17"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="19"/>
       <source>Paired devices only</source>
       <translation>Alleen gekoppelde apparaten</translation>
     </message>
     <message id="settings_services_mqtt_access_warning_paired_devices">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="24"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="44"/>
       <source>Turning MQTT Access off also disables paired MQTT devices until access is enabled again.</source>
       <translation>Het uitschakelen van MQTT-toegang schakelt ook gekoppelde MQTT-apparaten uit totdat de toegang weer wordt ingeschakeld.</translation>
     </message>

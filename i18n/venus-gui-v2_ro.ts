@@ -8431,7 +8431,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>Deschideți link-ul</translation>
     </message>
     <message id="settings_services_mqtt_access">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="11"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="13"/>
       <source>MQTT Access</source>
       <translation>Acces MQTT</translation>
     </message>
@@ -11851,12 +11851,12 @@ Vă rugăm să actualizați la cel mai recent firmware pentru a putea ajusta ace
       <translation>Limită curent producție</translation>
     </message>
     <message id="settings_services_mqtt_access_paired_devices_only">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="17"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="19"/>
       <source>Paired devices only</source>
       <translation>Doar dispozitivele asociate</translation>
     </message>
     <message id="settings_services_mqtt_access_warning_paired_devices">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="24"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="44"/>
       <source>Turning MQTT Access off also disables paired MQTT devices until access is enabled again.</source>
       <translation>Dezactivarea accesului MQTT dezactivează, de asemenea, dispozitivele MQTT asociate până când accesul este reactivat.</translation>
     </message>

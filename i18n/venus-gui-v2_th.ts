@@ -8429,7 +8429,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>เปิดลิงค์</translation>
     </message>
     <message id="settings_services_mqtt_access">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="11"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="13"/>
       <source>MQTT Access</source>
       <translation>การเข้าถึง MQTT</translation>
     </message>
@@ -11847,12 +11847,12 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>ขีดจำกัดกระแสไฟฟ้าการผลิต</translation>
     </message>
     <message id="settings_services_mqtt_access_paired_devices_only">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="17"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="19"/>
       <source>Paired devices only</source>
       <translation>เฉพาะอุปกรณ์ที่จับคู่เท่านั้น</translation>
     </message>
     <message id="settings_services_mqtt_access_warning_paired_devices">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="24"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="44"/>
       <source>Turning MQTT Access off also disables paired MQTT devices until access is enabled again.</source>
       <translation>การปิดการเข้าถึง MQTT จะปิดใช้งานอุปกรณ์ MQTT ที่จับคู่ไว้ด้วย จนกว่าจะเปิดใช้งานการเข้าถึงอีกครั้ง</translation>
     </message>
