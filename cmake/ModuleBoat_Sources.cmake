@@ -25,6 +25,11 @@ set(VictronBoat_QML_MODULE_SOURCES
     pages/boat/MotorDrives.qml
     pages/boat/QuantityLabelIconRow.qml
     pages/boat/Range.qml
+    pages/boat/ShoreArc.qml
+    pages/boat/ShoreGauge.qml
+    pages/boat/SlotLeftArc.qml
+    pages/boat/SlotVerticalCenterLeft.qml
+    pages/boat/SlotVerticalCenterRight.qml
     pages/boat/TemperatureGauge.qml
     pages/boat/TemperatureGauges.qml
     pages/boat/Temperatures.qml
@@ -46,6 +51,11 @@ set_source_files_properties(pages/boat/MotorDrive.qml PROPERTIES QT_RESOURCE_ALI
 set_source_files_properties(pages/boat/MotorDrives.qml PROPERTIES QT_RESOURCE_ALIAS MotorDrives.qml)
 set_source_files_properties(pages/boat/QuantityLabelIconRow.qml PROPERTIES QT_RESOURCE_ALIAS QuantityLabelIconRow.qml)
 set_source_files_properties(pages/boat/Range.qml PROPERTIES QT_RESOURCE_ALIAS Range.qml)
+set_source_files_properties(pages/boat/ShoreArc.qml PROPERTIES QT_RESOURCE_ALIAS ShoreArc.qml)
+set_source_files_properties(pages/boat/ShoreGauge.qml PROPERTIES QT_RESOURCE_ALIAS ShoreGauge.qml)
+set_source_files_properties(pages/boat/SlotLeftArc.qml PROPERTIES QT_RESOURCE_ALIAS SlotLeftArc.qml)
+set_source_files_properties(pages/boat/SlotVerticalCenterLeft.qml PROPERTIES QT_RESOURCE_ALIAS SlotVerticalCenterLeft.qml)
+set_source_files_properties(pages/boat/SlotVerticalCenterRight.qml PROPERTIES QT_RESOURCE_ALIAS SlotVerticalCenterRight.qml)
 set_source_files_properties(pages/boat/TemperatureGauge.qml PROPERTIES QT_RESOURCE_ALIAS TemperatureGauge.qml)
 set_source_files_properties(pages/boat/TemperatureGauges.qml PROPERTIES QT_RESOURCE_ALIAS TemperatureGauges.qml)
 set_source_files_properties(pages/boat/Temperatures.qml PROPERTIES QT_RESOURCE_ALIAS Temperatures.qml)

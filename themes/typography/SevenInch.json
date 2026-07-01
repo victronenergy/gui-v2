@@ -80,5 +80,10 @@
     "font_boatPage_consumption_label_pixelSize": "font_size_body2",
     "font_boatPage_consumption_value_pixelSize": "font_size_body3",
     "font_boatPage_temperature_columnHeader_pixelSize": "font_size_body2",
-    "font_boatPage_temperature_value_pixelSize": "font_size_body3"
+    "font_boatPage_temperature_value_pixelSize": "font_size_body3",
+    "font_boatPage_batteryCenterGauge_title_pixelSize": "font_size_body3",
+    "font_boatPage_batteryCenterGauge_percentage_pixelSize": 108,
+    "font_boatPage_batteryCenterGauge_detailsRow_pixelSize": 32,
+    "font_boatPage_batteryCenterGauge_mode_pixelSize": "font_size_body2",
+    "font_boatPage_shoreGauge_label_pixelSize": 40
 }
