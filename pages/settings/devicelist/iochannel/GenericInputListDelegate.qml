@@ -39,7 +39,7 @@ ListQuantityGroupNavigation {
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/iochannel/PageGenericInput.qml", {
-			genericInput: input,
+			inputUid: input.uid,
 			title: Qt.binding(function() { return root.text })
 		})
 	}
