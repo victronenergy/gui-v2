@@ -8429,7 +8429,7 @@ If the generator is currently running due to a autostart condition, disabling au
       <translation>Öppna länk</translation>
     </message>
     <message id="settings_services_mqtt_access">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="11"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="13"/>
       <source>MQTT Access</source>
       <translation>MQTT-åtkomst</translation>
     </message>
@@ -11848,12 +11848,12 @@ Uppdatera till den senaste firmwaren för att kunna justera dessa inställningar
       <translation>Strömgräns för produktion</translation>
     </message>
     <message id="settings_services_mqtt_access_paired_devices_only">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="17"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="19"/>
       <source>Paired devices only</source>
       <translation>Endast parade enheter</translation>
     </message>
     <message id="settings_services_mqtt_access_warning_paired_devices">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="24"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="44"/>
       <source>Turning MQTT Access off also disables paired MQTT devices until access is enabled again.</source>
       <translation>Om du stänger av MQTT-åtkomst inaktiveras även parade MQTT-enheter tills åtkomsten aktiveras igen.</translation>
     </message>

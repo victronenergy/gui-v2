@@ -8430,7 +8430,7 @@ As die kragopwekker tans aan die gang is as gevolg van 'n outostart toestand, sa
       <translation>Maak skakel oop</translation>
     </message>
     <message id="settings_services_mqtt_access">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="11"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="13"/>
       <source>MQTT Access</source>
       <translation>MQTT Toegang</translation>
     </message>
@@ -11849,12 +11849,12 @@ Dateer asseblief op na die nuutste fermware om hierdie instellings te kan aanpas
       <translation>Produksiestroomlimiet</translation>
     </message>
     <message id="settings_services_mqtt_access_paired_devices_only">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="17"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="19"/>
       <source>Paired devices only</source>
       <translation>Slegs gekoppelde toestelle</translation>
     </message>
     <message id="settings_services_mqtt_access_warning_paired_devices">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="24"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="44"/>
       <source>Turning MQTT Access off also disables paired MQTT devices until access is enabled again.</source>
       <translation>Deur MQTT-toegang af te skakel, word gekoppelde MQTT-toestelle ook gedeaktiveer totdat toegang weer geaktiveer word.</translation>
     </message>

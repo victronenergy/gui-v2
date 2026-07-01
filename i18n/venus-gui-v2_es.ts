@@ -8429,7 +8429,7 @@ If el generador está funcionando en este momento por una condición de arranque
       <translation>Abrir enlace</translation>
     </message>
     <message id="settings_services_mqtt_access">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="11"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="13"/>
       <source>MQTT Access</source>
       <translation>Acceso MQTT</translation>
     </message>
@@ -11848,12 +11848,12 @@ Actualice al firmware más reciente para poder ajustar esta configuración.</tra
       <translation>Límite de corriente de producción</translation>
     </message>
     <message id="settings_services_mqtt_access_paired_devices_only">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="17"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="19"/>
       <source>Paired devices only</source>
       <translation>Solo dispositivos emparejados</translation>
     </message>
     <message id="settings_services_mqtt_access_warning_paired_devices">
-      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="24"/>
+      <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="44"/>
       <source>Turning MQTT Access off also disables paired MQTT devices until access is enabled again.</source>
       <translation>Desactivar el acceso MQTT también desactiva los dispositivos MQTT emparejados hasta que se vuelva a activar el acceso.</translation>
     </message>
