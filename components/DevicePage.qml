@@ -34,6 +34,7 @@ Page {
 			uids: [ root.serviceUid + "/SwitchableOutput" ]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
+		filterType: IOChannelProxyModel.UserConfigurable
 	}
 
 	readonly property IOChannelProxyModel genericInputModel: IOChannelProxyModel {
@@ -41,6 +42,7 @@ Page {
 			uids: [ root.serviceUid + "/GenericInput" ]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
+		filterType: IOChannelProxyModel.UserConfigurable
 	}
 
 	title: _device.name

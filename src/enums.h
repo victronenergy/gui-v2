@@ -619,6 +619,13 @@ public:
 	};
 	Q_ENUM(SwitchableOutput_Status)
 
+	enum SwitchableOutput_SwitchMode {
+		SwitchableOutput_SwitchMode_Disabled,
+		SwitchableOutput_SwitchMode_PermanentOn,
+		SwitchableOutput_SwitchMode_Switching,
+	};
+	Q_ENUM(SwitchableOutput_SwitchMode)
+
 	enum IOChannel_ShowUI {
 		IOChannel_ShowUI_Off = 0x0,
 		IOChannel_ShowUI_Always = 0x1,
