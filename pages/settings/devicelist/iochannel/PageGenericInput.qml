@@ -9,7 +9,12 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	required property GenericInput genericInput
+	required property string inputUid
+
+	GenericInput {
+		id: genericInput
+		uid: root.inputUid
+	}
 
 	// For Aurelia products, some settings are not visible at the user-access level. For now, hard
 	// code this configuration in gui-v2, but later on we will generalise this to configure the
@@ -19,25 +24,25 @@ Page {
 
 		readonly property bool isAurelia: valid && (value === ProductInfo.ProductId_Dcdb_Aurelia)
 
-		uid: root.genericInput.serviceUid + "/ProductId"
+		uid: genericInput.serviceUid + "/ProductId"
 	}
 
 	GradientListView {
 		model: VisibleItemModel {
 			ListIOChannelNameField {
-				dataItem.uid: root.genericInput.uid + "/Settings/CustomName"
+				dataItem.uid: genericInput.uid + "/Settings/CustomName"
 			}
 
 			ListIOChannelGroupField {
-				dataItem.uid: root.genericInput.uid + "/Settings/Group"
+				dataItem.uid: genericInput.uid + "/Settings/Group"
 			}
 
 			ListIOChannelTypeRadioButtonGroup {
-				ioChannel: root.genericInput
+				ioChannel: genericInput
 			}
 
 			ListIOChannelShowRadioButtonGroup {
-				dataItem.uid: root.genericInput.uid + "/Settings/ShowUIInput"
+				dataItem.uid: genericInput.uid + "/Settings/ShowUIInput"
 			}
 
 			ListRadioButtonGroup {
@@ -46,7 +51,7 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: dataItem.valid
 				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
-				dataItem.uid: root.genericInput.uid + "/Settings/Invert"
+				dataItem.uid: genericInput.uid + "/Settings/Invert"
 				optionModel: [
 					//% "Normal"
 					{ display: qsTrId("iochannel_invert_normal"), value: 0 },
@@ -61,7 +66,7 @@ Page {
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: dataItem.valid
 				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
-				dataItem.uid: root.genericInput.uid + "/Settings/DigitalInputMode"
+				dataItem.uid: genericInput.uid + "/Settings/DigitalInputMode"
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
 					//% "Sensor | Outputs → Follow state"

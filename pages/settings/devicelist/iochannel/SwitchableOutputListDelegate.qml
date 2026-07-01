@@ -43,7 +43,7 @@ ListQuantityGroupNavigation {
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/settings/devicelist/iochannel/PageSwitchableOutput.qml", {
-			switchableOutput: output,
+			outputUid: output.uid,
 			title: Qt.binding(function() { return root.text })
 		})
 	}
