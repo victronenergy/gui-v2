@@ -173,9 +173,9 @@ bool IOChannelProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &) c
 
 	const Entry &entry = it.value();
 
-	// If the /Name is not present, this channel is not valid (e.g. it may be a system relay
-	// configured as an input), so do not show it in the list.
-	if (!entry.nameItem || !entry.nameItem->getValue().isValid()) {
+	// If the /Name is not present or is an empty string, this channel is not valid (e.g. it may be
+	// a system relay configured as an input), so do not show it in the list.
+	if (!entry.nameItem || entry.nameItem->getValue().toString().isEmpty()) {
 		return false;
 	}
 
@@ -248,22 +248,22 @@ void IOChannelProxyModel::addEntry(const QString &channelUid)
 		return;
 	}
 
-	VeQItem *channelItem = VeQItems::getRoot()->itemGet(channelUid);
+	VeQItem *channelItem = VeQItems::getRoot()->itemGetOrCreate(channelUid);
 	if (!channelItem) {
 		qmlWarning(this) << "Cannot monitor " << channelUid << ", cannot find matching VeQItem!";
 		return;
 	}
 
 	Entry entry;
-	entry.nameItem = channelItem->itemGet(QStringLiteral("/Name"));
+	entry.nameItem = channelItem->itemGetOrCreate(QStringLiteral("Name"));
 	if (entry.nameItem) {
 		connect(entry.nameItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidate);
 	}
-	entry.customNameItem = channelItem->itemGet(QStringLiteral("/Settings/CustomName"));
+	entry.customNameItem = channelItem->itemGetOrCreate(QStringLiteral("Settings/CustomName"));
 	if (entry.customNameItem) {
 		connect(entry.customNameItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidate);
 	}
-	entry.functionItem = channelItem->itemGet(QStringLiteral("/Settings/Function"));
+	entry.functionItem = channelItem->itemGetOrCreate(QStringLiteral("Settings/Function"));
 	if (entry.functionItem) {
 		connect(entry.functionItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidate);
 	}
@@ -274,10 +274,10 @@ void IOChannelProxyModel::addEntry(const QString &channelUid)
 		if (secondLastSlashIndex >= 0) {
 			const QString token = channelUid.mid(secondLastSlashIndex, lastSlashIndex - secondLastSlashIndex);
 			if (token == QStringLiteral("/GenericInput")) {
-				entry.modeItem = channelItem->itemGet(QStringLiteral("/Settings/DigitalInputMode"));
+				entry.modeItem = channelItem->itemGetOrCreate(QStringLiteral("Settings/DigitalInputMode"));
 			} else if (token == QStringLiteral("/SwitchableOutput")) {
-				entry.modeItem = channelItem->itemGet(QStringLiteral("/Settings/SwitchMode"));
-				entry.fuseDetectionItem = channelItem->itemGet(QStringLiteral("/Settings/FuseDetection"));
+				entry.modeItem = channelItem->itemGetOrCreate(QStringLiteral("Settings/SwitchMode"));
+				entry.fuseDetectionItem = channelItem->itemGetOrCreate(QStringLiteral("Settings/FuseDetection"));
 				if (entry.fuseDetectionItem) {
 					connect(entry.fuseDetectionItem, &VeQItem::valueChanged, this, &IOChannelProxyModel::invalidate);
 				}
