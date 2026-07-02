@@ -55,7 +55,7 @@ Page {
 					// which animate up & down by clicking the up & down arrows.
 			y: -gradientListView.contentY
 			leftPadding: Theme.geometry_page_content_horizontalMargin
-			spacing: parent.spacing
+			spacing: Theme.geometry_gradientList_spacing
 
 			Repeater {
 				model: gradientListView.count
@@ -92,7 +92,7 @@ Page {
 			width: parent?.width ?? 0
 
 			PrimaryListLabel {
-				//% "Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess."
+				//% "Devices will be controlled in order, based on available solar surplus."
 				text: qsTrId("pagecontrollableloads_arrange")
 				preferredVisible: mode.value
 			}
@@ -100,6 +100,7 @@ Page {
 			ListNavigation {
 				//% "Preferences"
 				text: qsTrId("pagecontrollableloads_preferences")
+				visible: mode.value
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageControllableLoadsPreferences.qml", { title: text })
 				}
