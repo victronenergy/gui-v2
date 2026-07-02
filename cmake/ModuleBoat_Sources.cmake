@@ -1,10 +1,8 @@
 set(VictronBoat_QML_MODULE_RESOURCES
     images/boat_glow.png
-    images/icon_battery_40.png
     images/icon_boat_32.svg
     images/icon_engine_temp_32.svg
     images/icon_motorController_32.svg
-    images/icon_propeller_32.png
     images/icon_propeller.svg
     images/icon_temp_coolant_32.svg
 )

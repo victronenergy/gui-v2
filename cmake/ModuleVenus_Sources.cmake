@@ -796,18 +796,14 @@ set(VictronVenusOS_RESOURCES
     images/icon_system_32.svg
     images/icon_vrm_32.svg
     images/brief.svg
-    images/cloud.svg
     images/color_wheel_rgb.png
     images/color_wheel_temperature.png
-    images/consumption.svg
     images/controlcards-no-devices.svg
     images/dcloads.svg
     images/dot.svg
-    images/dropdown.svg
     images/electron.svg
     images/electron_arrow.svg
     images/ess.svg
-    images/freshWater.svg
     images/key_navigation_highlight_dark.svg
     images/key_navigation_highlight_light.svg
     images/overview_lightning_bolts.svg
@@ -830,7 +826,6 @@ set(VictronVenusOS_RESOURCES
     images/icon_lpg_32.svg
     images/icon_open_link_32.svg
     images/icon_to_grid.svg
-    images/fueltank.svg
     images/gauge_intro_5_matte_black.gif
     images/gauge_intro_5_matte_white.gif
     images/gauge_intro_7_matte_black.gif
@@ -843,7 +838,6 @@ set(VictronVenusOS_RESOURCES
     images/icon_alarm_48.svg
     images/icon_alarm_snooze_24.svg
     images/icon_autostart_24.svg
-    images/icon_arrow_32.svg
     images/icon_back_32.svg
     images/icon_charging_station_24.svg
     images/icon_checkmark_48.svg
@@ -851,7 +845,6 @@ set(VictronVenusOS_RESOURCES
     images/icon_controls_on_32.svg
     images/icon_dc_24.svg
     images/icon_humidity_32.svg
-    images/icon_input_24.svg
     images/icon_manualstart_24.svg
     images/icon_manualstart_timer_24.svg
     images/icon_minus.svg
@@ -866,15 +859,12 @@ set(VictronVenusOS_RESOURCES
     images/icon_switch_24.svg
     images/icon_temp_32.svg
     images/information.svg
-    images/inverter.svg
     images/inverter_charger.svg
     images/levels.svg
     images/notifications.svg
     images/notifications_subtract.svg
     images/overview.svg
     images/prompt_device_rotation.svg
-    images/rain.svg
-    images/scatteredcloud.svg
     images/selection_dot.svg
     images/settings.svg
     images/shore.svg
@@ -886,7 +876,6 @@ set(VictronVenusOS_RESOURCES
     images/splash-logo-text.svg
     images/sunny.svg
     images/switch_indicator.png
-    images/switches.svg
     images/icon_warning_32.svg
     images/icon_checkmark_32.svg
     images/icon_close_32.svg
