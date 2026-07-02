@@ -1,6 +1,7 @@
 {
     "files": [
         ":/data/mock/conf/services/alternator.json",
+        ":/data/mock/conf/services/ble-sensors.json",
         ":/data/mock/conf/services/dcload-fridge.json",
         ":/data/mock/conf/services/dcsystem1.json",
         ":/data/mock/conf/services/dcsystem2.json",
