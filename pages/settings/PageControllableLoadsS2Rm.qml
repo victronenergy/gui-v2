@@ -17,8 +17,6 @@ Page {
 				unit: VenusOS.Units_Watt
 				//% "Expected power consumption"
 				text: qsTrId("pagecontrollableloads_acload_expected_power_consumption")
-				//% "This should reflect the device’s typical power consumption while turned on."
-				caption: qsTrId("pagecontrollableloads_acload_this_should_reflect")
 				dataItem.uid: root.device ? root.device.serviceUid + "/S2/0/RmSettings/PowerSetting" : ""
 				preferredVisible: dataItem.valid
 			}

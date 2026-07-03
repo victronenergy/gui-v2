@@ -28,11 +28,9 @@ Page {
 			ListQuantityField {
 				preferredVisible: dataItem.valid
 				unit: VenusOS.Units_Percentage
-				//% "Nominal inverter utilization limit"
+				//% "Nominal inverter utilisation limit"
 				text: qsTrId("pagecontrollableloads_preferences_nominal_inverter_utilization_limit")
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/NominalInverterUtilizationLimit"
-				//% "Limits how much of the inverter/charger’s nominal power the algorithm plans to use to convert DC-coupled PV to AC for base loads and scheduled loads."
-				caption: qsTrId("pagecontrollableloads_preferences_limits_how_much")
 			}
 
 			SettingsListHeader {
@@ -41,12 +39,17 @@ Page {
 			}
 
 			ListSwitch {
+				id: batteryLifeSupportSwitch
 				preferredVisible: dataItem.valid
-				//% "Pause Opportunity Loads when Active SOC limit exceeds 85%"
+				//% "Pause Opportunity Loads after several days without full charge"
 				text: qsTrId("page_controllable_loads_preferences_pause_opportunity_load_when_active_soc_limit_exceeds_85")
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/BatteryLifeSupport"
-				//% "This helps the BatteryLife algorithm recharge the battery to 100%."
-				caption: qsTrId("page_controllable_loads_preferences_this_helps")
+			}
+
+			PrimaryListLabel {
+				//% "Only applies when using Optimized with BatteryLife. Opportunity Loads automatically resumes after a full charge."
+				text: qsTrId("page_controllable_loads_preferences_this_helps")
+				preferredVisible: batteryLifeSupportSwitch.dataItem.valid
 			}
 		}
 	}
