@@ -31,6 +31,7 @@ SwipeViewPage {
 			id: landscapeComponent
 
 			OverviewPage_Landscape {
+				isCurrentPage: root.isCurrentPage
 				animationEnabled: root.animationEnabled
 			}
 		}
