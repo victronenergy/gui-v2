@@ -16,12 +16,15 @@ Page {
 			ListQuantityField {
 				id: startingBatterySoc
 				unit: VenusOS.Units_Percentage
-				//% "Allow additional loads starting at a battery SOC of"
+				//% "Activate following loads when battery reaches"
 				text: qsTrId("pagecontrollableloads_battery_allow_additional_loads_starting_at_battery_soc")
-
-				//% "Below this SOC, surplus power is used for battery charging as much as possible. From this SOC onward, additional loads may also use surplus power. They may still run earlier if PV production exceeds what the battery can absorb."
-				caption: qsTrId("pagecontrollableloads_battery_below_this_soc")
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/ReservationStartSoc"
+			}
+
+			PrimaryListLabel {
+				//% "Below this SOC, battery charging can use all solar surplus power."
+				text: qsTrId("pagecontrollableloads_battery_below_this_soc")
+				preferredVisible: startingBatterySoc.dataItem.valid
 			}
 
 			SettingsListHeader {
@@ -31,7 +34,7 @@ Page {
 
 			ListQuantityField {
 				unit: VenusOS.Units_Watt
-				//% "At <font color=\"%1\">%2%</font> SOC, reserve for battery charging"
+				//% "At or above <font color=\"%1\">%2%</font> SOC"
 				text: qsTrId("pagecontrollableloads_battery_at_grey_x_soc_reserve_for_battery_charging")
 						.arg(Theme.color_font_secondary)
 						.arg(startingBatterySoc.dataItem.value)
@@ -41,11 +44,16 @@ Page {
 
 			ListQuantityField {
 				unit: VenusOS.Units_Watt
-				//% "At %1% SOC, reserve for battery charging"
+				//% "At %1% SOC"
 				text: qsTrId("pagecontrollableloads_battery_at_x_soc_reserve_for_battery_charging").arg(100)
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/ReservationEndPower"
-				//% "Between the SOC set in “Allow additional loads from battery SOC” and 100% SOC, the reserved power is adjusted gradually between these values. This allows battery charging to decrease as the SOC rises, leaving more surplus power available for controlled devices."
-				caption: qsTrId("pagecontrollableloads_battery_between_the_soc")
+
+			}
+
+			PrimaryListLabel {
+				//% "From the configured SOC to %1%, the power reserved for battery charging is reduced gradually, making more power available for loads."
+				text: qsTrId("pagecontrollableloads_battery_from_configured_soc_to_100_percent").arg(100)
+				preferredVisible: startingBatterySoc.dataItem.valid
 			}
 		}
 	}

@@ -92,7 +92,7 @@ Page {
 			width: parent?.width ?? 0
 
 			PrimaryListLabel {
-				//% "Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess."
+				//% "Devices will be controlled in order, based on available solar surplus."
 				text: qsTrId("pagecontrollableloads_arrange")
 				preferredVisible: mode.value
 			}

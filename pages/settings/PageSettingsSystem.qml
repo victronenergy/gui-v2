@@ -57,7 +57,7 @@ Page {
 				topInset: Theme.geometry_listItem_itemSeparator_height
 				//% "Opportunity Loads"
 				text: qsTrId("pagesettingssystem_opportunity_loads")
-				//% "Automate controllable devices to maximize PV self-use"
+				//% "Automate controllable devices to maximize solar self-consumption"
 				caption: qsTrId("pagesettingssystem_automate_controllable_devices")
 				secondaryText: opportunityLoadsMode.value ? CommonWords.enabled : CommonWords.disabled
 				pageSource: "/pages/settings/PageControllableLoads.qml"
