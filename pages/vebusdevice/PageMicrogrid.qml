@@ -134,6 +134,7 @@ Page {
 
 				MicrogridModeListText {}
 
+				/* Chart feature is hidden, pending review. See issue #3099.
 				ListDroopGraph {
 					// reference values
 					p0Value: p0.value
@@ -161,6 +162,7 @@ Page {
 						uid: root.bindPrefix + "/Ac/ActiveIn/L1/V"
 					}
 				}
+				*/
 
 				SettingsListHeader {
 					//% "Hybrid droop parameters"
