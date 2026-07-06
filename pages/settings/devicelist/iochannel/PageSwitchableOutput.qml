@@ -226,10 +226,10 @@ Page {
 				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
 				interactive: _writeable
 				optionModel: [
-					//% "Active high / Normally open"
-					{ display: qsTrId("page_switchable_output_polarity_active_high"), value: 0 },
-					//% "Active low / Normally closed"
-					{ display: qsTrId("page_switchable_output_polarity_active_low"), value: 1 }
+					//% "Normal"
+					{ display: qsTrId("page_switchable_output_polarity_normal"), value: 0 },
+					//% "Inverted"
+					{ display: qsTrId("page_switchable_output_polarity_inverted"), value: 1 }
 				]
 			}
 
