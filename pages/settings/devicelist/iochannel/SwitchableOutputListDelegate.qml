@@ -24,7 +24,9 @@ ListQuantityGroupNavigation {
 		// and otherwise, just show the status text (On, Off, Fault, etc.)
 		QuantityObject {
 			object: root._showDetail || output.status > VenusOS.SwitchableOutput_Status_Off ? output : null
-			key: !isNaN(output.dataNumber) ? "dataNumber" : "dataText"
+			key: !isNaN(output.dataNumber) ? "dataNumber"
+					: output.dataText.length ? "dataText"
+					: ""
 			unit: output.dataNumberUnit
 			decimals: output.decimals
 		}
@@ -69,34 +71,30 @@ ListQuantityGroupNavigation {
 
 		// The text data to show for this output, if dataNumber is not applicable.
 		readonly property string dataText: {
-			switch (output.type) {
-			case VenusOS.SwitchableOutput_Type_Momentary:
-				if (output.status === VenusOS.SwitchableOutput_Status_On) {
-					return CommonWords.onOrOff(output.state)
+			// If the status is just "on" (without any other masked value), then show "On" as the
+			// status text (or for dropdown types, the matching selected option).
+			if (output.status === VenusOS.SwitchableOutput_Status_On) {
+				// If the switch mode is "permanently on", the "on" status is redundant, so omit it.
+				if (switchModeItem.value === VenusOS.SwitchableOutput_SwitchMode_PermanentOn) {
+					return ""
 				}
-				break
-			case VenusOS.SwitchableOutput_Type_Toggle:
-				if (output.status === VenusOS.SwitchableOutput_Status_On) {
-					return CommonWords.onOrOff(output.state)
-				}
-				break
-			case VenusOS.SwitchableOutput_Type_Dropdown:
-				// Show the label for the current dropdown index.
-				if (output.status === VenusOS.SwitchableOutput_Status_On) {
+				switch (output.type) {
+				case VenusOS.SwitchableOutput_Type_Momentary: // fall through
+				case VenusOS.SwitchableOutput_Type_Toggle:
+					return CommonWords.on
+				case VenusOS.SwitchableOutput_Type_Dropdown:
+					// Show the label for the current dropdown index.
 					return dropdownLabelsItem.selectedLabel
-				}
-				break
-			case VenusOS.SwitchableOutput_Type_ThreeStateSwitch:
-				if (output.status === VenusOS.SwitchableOutput_Status_On) {
-					const stateText = CommonWords.onOrOff(output.state)
+				case VenusOS.SwitchableOutput_Type_ThreeStateSwitch:
 					if (autoItem.value === 1) {
-						return CommonWords.autoStatus(stateText)
+						// Show status text that includes the auto status.
+						return CommonWords.autoStatus(CommonWords.on)
 					} else {
-						return stateText
+						return CommonWords.on
 					}
 				}
-				break
 			}
+			// Otherwise, show text that indicates the off/error/other status.
 			return statusText
 		}
 
@@ -129,6 +127,11 @@ ListQuantityGroupNavigation {
 	VeQuickItem {
 		id: outputCurrent
 		uid: root.uid + "/Current"
+	}
+
+	VeQuickItem {
+		id: switchModeItem
+		uid: root.uid + "/Settings/SwitchMode"
 	}
 
 	VeQuickItem {
