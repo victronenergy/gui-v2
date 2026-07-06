@@ -10216,92 +10216,92 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Aktivní režim</translation>
     </message>
     <message id="page_microgrid_hybrid_droop_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="167"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="169"/>
       <source>Hybrid droop parameters</source>
       <translation>Parametry hybridní kompenzace poklesu</translation>
     </message>
     <message id="page_microgrid_reference_active_power_p0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="173"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="175"/>
       <source>Reference active power (P&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referenční činný výkon (P&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_frequency_f0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="186"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="188"/>
       <source>Reference frequency (f&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referenční frekvence (f&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_frequency_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="200"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="202"/>
       <source>Frequency droop slope (droop&lt;sub&gt;fP&lt;/sub&gt;)</source>
       <translation>Sklon frekvenční kompenzace poklesu (droop&lt;sub&gt;fP&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_reactive_power">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="214"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="216"/>
       <source>Reference reactive power (Q&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referenční jalový výkon (Q&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_voltage">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="227"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="229"/>
       <source>Reference Voltage (U&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referenční napětí (U&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_voltage_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="241"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="243"/>
       <source>Voltage droop slope (droop&lt;sub&gt;UQ&lt;/sub&gt;)</source>
       <translation>Sklon napěťové kompenzace poklesu (droop&lt;sub&gt;UQ&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_minimum_and_maximum_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="254"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="256"/>
       <source>Minimum and maximum parameters</source>
       <translation>Minimální a maximální parametry</translation>
     </message>
     <message id="page_microgrid_allowed_active_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="260"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="262"/>
       <source>Allowed active power range</source>
       <translation>Povolený rozsah činného výkonu</translation>
     </message>
     <message id="page_microgrid_allowed_reactive_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="282"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="284"/>
       <source>Allowed reactive power range</source>
       <translation>Povolený rozsah jalového výkonu</translation>
     </message>
     <message id="page_microgrid_p_q_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="335"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="337"/>
       <source>P-Q direct drive settings</source>
       <translation>Nastavení P-Q přímého řízení</translation>
     </message>
     <message id="page_microgrid_active_power_setpoint_p">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="340"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="342"/>
       <source>Active power setpoint (P)</source>
       <translation>Žádaná hodnota činného výkonu (P)</translation>
     </message>
     <message id="page_microgrid_reactive_power_setpoint_q">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="347"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="349"/>
       <source>Reactive power setpoint (Q)</source>
       <translation>Žádaná hodnota jalového výkonu (Q)</translation>
     </message>
     <message id="page_microgrid_allowed_frequency_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="354"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="356"/>
       <source>Allowed frequency range</source>
       <translation>Povolený rozsah frekvence</translation>
     </message>
     <message id="page_microgrid_allowed_voltage_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="362"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="364"/>
       <source>Allowed voltage range</source>
       <translation>Povolený rozsah napětí</translation>
     </message>
     <message id="page_microgrid_v_f_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="379"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="381"/>
       <source>V-f direct drive settings</source>
       <translation>Nastavení V-f přímého řízení</translation>
     </message>
     <message id="page_microgrid_voltage_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="384"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="386"/>
       <source>Voltage setpoint (U)</source>
       <translation>Žádaná hodnota napětí (U)</translation>
     </message>
     <message id="page_microgrid_frequency_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="391"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="393"/>
       <source>Frequency setpoint (f)</source>
       <translation>Žádaná hodnota frekvence (f)</translation>
     </message>
@@ -11222,12 +11222,12 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Invertovat</translation>
     </message>
     <message id="page_microgrid_apply_all_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="308"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="310"/>
       <source>Apply all parameters</source>
       <translation>Použít všechny parametry</translation>
     </message>
     <message id="page_microgrid_apply">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="310"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="312"/>
       <source>Apply</source>
       <translation>Použít</translation>
     </message>

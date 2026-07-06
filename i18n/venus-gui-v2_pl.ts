@@ -10216,92 +10216,92 @@ Urządzenie GX może sterować tylko jednym podłączonym agregatem i wybiera te
       <translation>Tryb aktywny</translation>
     </message>
     <message id="page_microgrid_hybrid_droop_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="167"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="169"/>
       <source>Hybrid droop parameters</source>
       <translation>Parametry spadku hybrydowego</translation>
     </message>
     <message id="page_microgrid_reference_active_power_p0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="173"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="175"/>
       <source>Reference active power (P&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referencyjna moc czynna (P&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_frequency_f0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="186"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="188"/>
       <source>Reference frequency (f&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referencyjna częstotliwość (f&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_frequency_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="200"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="202"/>
       <source>Frequency droop slope (droop&lt;sub&gt;fP&lt;/sub&gt;)</source>
       <translation>Nachylenie spadku częstotliwości (droop&lt;sub&gt;fP&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_reactive_power">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="214"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="216"/>
       <source>Reference reactive power (Q&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referencyjna moc bierna (Q&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_voltage">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="227"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="229"/>
       <source>Reference Voltage (U&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referencyjne Napięcie (U&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_voltage_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="241"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="243"/>
       <source>Voltage droop slope (droop&lt;sub&gt;UQ&lt;/sub&gt;)</source>
       <translation>Nachylenie spadku napięcia (droop&lt;sub&gt;UQ&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_minimum_and_maximum_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="254"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="256"/>
       <source>Minimum and maximum parameters</source>
       <translation>Parametry minimalne i maksymalne</translation>
     </message>
     <message id="page_microgrid_allowed_active_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="260"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="262"/>
       <source>Allowed active power range</source>
       <translation>Dopuszczalny zakres mocy czynnej</translation>
     </message>
     <message id="page_microgrid_allowed_reactive_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="282"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="284"/>
       <source>Allowed reactive power range</source>
       <translation>Dopuszczalny zakres mocy biernej</translation>
     </message>
     <message id="page_microgrid_p_q_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="335"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="337"/>
       <source>P-Q direct drive settings</source>
       <translation>Ustawienia bezpośredniego sterowania P-Q</translation>
     </message>
     <message id="page_microgrid_active_power_setpoint_p">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="340"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="342"/>
       <source>Active power setpoint (P)</source>
       <translation>Wartość zadana mocy czynnej (P)</translation>
     </message>
     <message id="page_microgrid_reactive_power_setpoint_q">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="347"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="349"/>
       <source>Reactive power setpoint (Q)</source>
       <translation>Wartość zadana mocy biernej (Q)</translation>
     </message>
     <message id="page_microgrid_allowed_frequency_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="354"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="356"/>
       <source>Allowed frequency range</source>
       <translation>Dopuszczalny zakres częstotliwości</translation>
     </message>
     <message id="page_microgrid_allowed_voltage_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="362"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="364"/>
       <source>Allowed voltage range</source>
       <translation>Dopuszczalny zakres napięcia</translation>
     </message>
     <message id="page_microgrid_v_f_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="379"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="381"/>
       <source>V-f direct drive settings</source>
       <translation>Ustawienia bezpośredniego sterowania V-f</translation>
     </message>
     <message id="page_microgrid_voltage_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="384"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="386"/>
       <source>Voltage setpoint (U)</source>
       <translation>Wartość zadana napięcia (U)</translation>
     </message>
     <message id="page_microgrid_frequency_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="391"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="393"/>
       <source>Frequency setpoint (f)</source>
       <translation>Wartość zadana częstotliwości (f)</translation>
     </message>
@@ -11222,12 +11222,12 @@ Urządzenie GX może sterować tylko jednym podłączonym agregatem i wybiera te
       <translation>Odwróć</translation>
     </message>
     <message id="page_microgrid_apply_all_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="308"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="310"/>
       <source>Apply all parameters</source>
       <translation>Zastosuj wszystkie parametry</translation>
     </message>
     <message id="page_microgrid_apply">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="310"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="312"/>
       <source>Apply</source>
       <translation>Zastosuj</translation>
     </message>
