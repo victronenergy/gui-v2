@@ -143,6 +143,17 @@
         "/SwitchableOutput/toggle_3/State": 1,
         "/SwitchableOutput/toggle_3/Status": 41,
 
+        "/SwitchableOutput/toggle_4/Name": "Out-01d. Toggle, permanent on",
+        "/SwitchableOutput/toggle_4/Settings/CustomName": "",
+        "/SwitchableOutput/toggle_4/Settings/FuseDetection": 1,
+        "/SwitchableOutput/toggle_4/Settings/Group": "",
+        "/SwitchableOutput/toggle_4/Settings/ShowUIControl": 1,
+        "/SwitchableOutput/toggle_4/Settings/SwitchMode": 1,
+        "/SwitchableOutput/toggle_4/Settings/Type": 1,
+        "/SwitchableOutput/toggle_4/Settings/ValidTypes": 16383,
+        "/SwitchableOutput/toggle_4/State": 1,
+        "/SwitchableOutput/toggle_4/Status": 9,
+
         "/SwitchableOutput/dimming_1/Dimming": 2,
         "/SwitchableOutput/dimming_1/Name": "Out-02a. Dimming",
         "/SwitchableOutput/dimming_1/Settings/CustomName": "",

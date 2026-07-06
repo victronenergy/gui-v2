@@ -42,6 +42,8 @@ Page {
 			}
 
 			ListRadioButtonGroup {
+				id: switchMode
+
 				//% "Switch mode"
 				text: qsTrId("page_switchable_output_switch_mode")
 				dataItem.uid: switchableOutput.uid + "/Settings/SwitchMode"
@@ -86,7 +88,7 @@ Page {
 					{ display: CommonWords.disabled, value: 0 },
 					{ display: CommonWords.enabled, value: 1 },
 					//% "Only when the output is off"
-					{ display: qsTrId("page_switchable_output_fuse_detection_mode_only_when_off"), value: 2 }
+					{ display: qsTrId("page_switchable_output_fuse_detection_mode_only_when_off"), value: 2, readOnly: switchMode.currentValue === VenusOS.SwitchableOutput_SwitchMode_PermanentOn }
 				]
 			}
 
