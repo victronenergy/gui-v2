@@ -5,6 +5,20 @@ find_package(Qt6 ${REQUIRED_QT_VERSION}
         Core Gui Qml Quick QuickControls2 Svg Xml Mqtt LinguistTools ShaderTools
     REQUIRED)
 
+if(APPLE)
+    # Recent macOS/Xcode toolchains cannot link against AGL.
+    # Qt6::Gui links WrapOpenGL::WrapOpenGL, which injects AGL via FindWrapOpenGL.
+    # Remove that wrapper link and keep the regular OpenGL framework linkage.
+    # NOTE: This is a workaround for Qt6 bug QTBUG-137687, which will be fixed in Qt 6.8.4.
+    if(TARGET Qt6::Gui)
+        get_target_property(_qt_gui_link_libs Qt6::Gui INTERFACE_LINK_LIBRARIES)
+        if(_qt_gui_link_libs)
+            list(REMOVE_ITEM _qt_gui_link_libs WrapOpenGL::WrapOpenGL)
+            set_property(TARGET Qt6::Gui PROPERTY INTERFACE_LINK_LIBRARIES "${_qt_gui_link_libs}")
+        endif()
+    endif()
+endif()
+
 if(VENUS_WEBASSEMBLY_BUILD)
     find_package(Qt6 ${REQUIRED_QT_VERSION} COMPONENTS WebSockets REQUIRED)
 else()
