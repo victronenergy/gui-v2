@@ -93,14 +93,14 @@ Page {
 
 			PrimaryListLabel {
 				//% "Devices will be controlled in order, based on available solar surplus."
-				text: qsTrId("pagecontrollableloads_arrange")
+				text: qsTrId("pagecontrollableloads_controlled_in_order_based_on_available_solar_surplus")
 				preferredVisible: mode.value
 			}
 
 			ListNavigation {
 				//% "Preferences"
 				text: qsTrId("pagecontrollableloads_preferences")
-				visible: mode.value
+				preferredVisible: mode.value && loads.valid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageControllableLoadsPreferences.qml", { title: text })
 				}

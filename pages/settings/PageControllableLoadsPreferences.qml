@@ -20,8 +20,8 @@ Page {
 
 			ListSwitch {
 				preferredVisible: dataItem.valid
-				//% "Pause Opportunity Loads if no AC input is connected"
-				text: qsTrId("page_controllable_loads_preferences_pause_opportunity_loads_if_no_ac")
+				//% "Pause if no AC input is connected"
+				text: qsTrId("page_controllable_loads_preferences_pause_if_no_ac")
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/PauseWhenOffgrid"
 			}
 
@@ -41,14 +41,14 @@ Page {
 			ListSwitch {
 				id: batteryLifeSupportSwitch
 				preferredVisible: dataItem.valid
-				//% "Pause Opportunity Loads after several days without full charge"
-				text: qsTrId("page_controllable_loads_preferences_pause_opportunity_load_when_active_soc_limit_exceeds_85")
+				//% "Pause after several days without full charge"
+				text: qsTrId("page_controllable_loads_preferences_pause_after_several_days_without_full_charge")
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/BatteryLifeSupport"
 			}
 
 			PrimaryListLabel {
 				//% "Only applies when using Optimized with BatteryLife. Opportunity Loads automatically resumes after a full charge."
-				text: qsTrId("page_controllable_loads_preferences_this_helps")
+				text: qsTrId("page_controllable_loads_preferences_only_applies_when_using_optimized_with_battery_life")
 				preferredVisible: batteryLifeSupportSwitch.dataItem.valid
 			}
 		}
