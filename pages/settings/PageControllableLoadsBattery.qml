@@ -17,13 +17,13 @@ Page {
 				id: startingBatterySoc
 				unit: VenusOS.Units_Percentage
 				//% "Activate following loads when battery reaches"
-				text: qsTrId("pagecontrollableloads_battery_allow_additional_loads_starting_at_battery_soc")
+				text: qsTrId("pagecontrollableloads_battery_activate_following_loads_when_battery_reaches")
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/ReservationStartSoc"
 			}
 
 			PrimaryListLabel {
 				//% "Below this SOC, battery charging can use all solar surplus power."
-				text: qsTrId("pagecontrollableloads_battery_below_this_soc")
+				text: qsTrId("pagecontrollableloads_battery_below_this_soc_batt_charging_can_use_all_solar_surplus_power")
 				preferredVisible: startingBatterySoc.dataItem.valid
 			}
 
@@ -35,7 +35,7 @@ Page {
 			ListQuantityField {
 				unit: VenusOS.Units_Watt
 				//% "At or above <font color=\"%1\">%2%</font> SOC"
-				text: qsTrId("pagecontrollableloads_battery_at_grey_x_soc_reserve_for_battery_charging")
+				text: qsTrId("pagecontrollableloads_battery_at_or_above_x_soc")
 						.arg(Theme.color_font_secondary)
 						.arg(startingBatterySoc.dataItem.value)
 				textFormat: Text.RichText
@@ -45,9 +45,8 @@ Page {
 			ListQuantityField {
 				unit: VenusOS.Units_Watt
 				//% "At %1% SOC"
-				text: qsTrId("pagecontrollableloads_battery_at_x_soc_reserve_for_battery_charging").arg(100)
+				text: qsTrId("pagecontrollableloads_battery_at_x_soc").arg(100)
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/ReservationEndPower"
-
 			}
 
 			PrimaryListLabel {
