@@ -4,28 +4,46 @@ import QtQuick.Controls
 ListView {
 	id: root
 
-	property string currentFilename
+	property var currentResult: ({})
 
 	delegate: ImageListViewDelegate {
+		required property int index
+		readonly property int fileNameSeparatorIndex: fileName.indexOf('-')
+
 		width: ListView.view.width - listViewScrollBar.width
-		onClicked: (index, fileName) => {
+		height: 80
+		title: fileName.substring(4, fileNameSeparatorIndex) // start at 4 to skip "tst_" prefix
+		secondaryTitle: fileName.substring(fileNameSeparatorIndex + 1)
+		imageSize: Qt.size(height, height)
+
+		onClicked: {
 			root.currentIndex = index
-			root.currentFilename = fileName
 		}
 	}
 	highlight: Rectangle {
-		color: "#E3F2FD"
+		z: 1
+		color: "transparent"
 		border.color: "#2196F3"
 		border.width: 2
 		radius: 4
 	}
 	highlightFollowsCurrentItem: true
 	highlightMoveDuration: 100
+	keyNavigationEnabled: true
+	focus: true
+
+	onCurrentIndexChanged: {
+		currentResult = root.model.get(currentIndex)
+	}
 
 	// Auto-select first item when model is populated
-	onCountChanged: {
-		if (count > 0 && currentIndex < 0) {
-			currentIndex = 0
+	Connections {
+		target: root.model
+
+		function onFirstResultAvailable() {
+			if (root.currentIndex < 0) {
+				root.currentIndex = 0
+			}
 		}
 	}
 

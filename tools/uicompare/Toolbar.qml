@@ -14,24 +14,59 @@ Rectangle {
 
 	signal filterChanged(filterMode : int)
 
+	implicitWidth: toolBarLayout.implicitWidth
+	implicitHeight: toolBarLayout.implicitHeight
 	color: "#f5f5f5"
 	border.color: "#ddd"
 	border.width: 1
 
+	component StatisticDisplay : ColumnLayout {
+		required property string title
+		required property string number
+		required property color numberColor
+
+		spacing: 0
+
+		Text {
+			Layout.alignment: Text.AlignHCenter
+			Layout.preferredWidth: 60
+			horizontalAlignment: Text.AlignHCenter
+			text: number
+			font.pixelSize: 18
+			font.bold: true
+			color: numberColor
+			leftPadding: 4
+			rightPadding: 4
+		}
+
+		Text {
+			Layout.alignment: Text.AlignHCenter
+			horizontalAlignment: Text.AlignHCenter
+			text: title
+			font.pixelSize: 12
+			color: "#666"
+			leftPadding: 4
+			rightPadding: 4
+		}
+	}
+
 	RowLayout {
+		id: toolBarLayout
+
 		anchors.fill: parent
 		anchors.margins: 8
 		spacing: 12
 
 		// Statistics display
 		Rectangle {
-			Layout.preferredWidth: 280
+			Layout.preferredWidth: toolBarContentLayout.implicitWidth
 			Layout.fillHeight: true
 			color: "#fff"
 			border.color: "#ddd"
 			radius: 4
 
 			ColumnLayout {
+				id: toolBarContentLayout
 				anchors.centerIn: parent
 				spacing: 2
 
@@ -44,80 +79,35 @@ Rectangle {
 
 				RowLayout {
 					Layout.alignment: Qt.AlignHCenter
-					spacing: 16
 
-					Column {
-						Text {
-							anchors.horizontalCenter: parent.horizontalCenter
-							text: root.totalCount
-							font.pixelSize: 18
-							font.bold: true
-						}
-						Text {
-							text: "Total"
-							font.pixelSize: 9
-							color: "#666"
-						}
+					StatisticDisplay {
+						title: "Total"
+						number: root.totalCount
+						numberColor: "black"
 					}
 
-					Column {
-						Text {
-							anchors.horizontalCenter: parent.horizontalCenter
-							text: root.passCount
-							font.pixelSize: 18
-							font.bold: true
-							color: "#4CAF50"
-						}
-						Text {
-							text: "Pass"
-							font.pixelSize: 9
-							color: "#666"
-						}
+					StatisticDisplay {
+						title: "Pass"
+						number: root.passCount
+						numberColor: "#4CAF50"
 					}
 
-					Column {
-						Text {
-							anchors.horizontalCenter: parent.horizontalCenter
-							text: root.failCount
-							font.pixelSize: 18
-							font.bold: true
-							color: "#F44336"
-						}
-						Text {
-							text: "Fail"
-							font.pixelSize: 9
-							color: "#666"
-						}
+					StatisticDisplay {
+						title: "Fail"
+						number: root.failCount
+						numberColor: "#F44336"
 					}
 
-					Column {
-						Text {
-							anchors.horizontalCenter: parent.horizontalCenter
-							text: root.missingBaselineCount
-							font.pixelSize: 18
-							font.bold: true
-							color: "#FF9800"
-						}
-						Text {
-							text: "No Base"
-							font.pixelSize: 9
-							color: "#666"
-						}
+					StatisticDisplay {
+						title: "No baseline"
+						number: root.missingBaselineCount
+						numberColor: "orange"
 					}
 
-					Column {
-						Text {
-							anchors.horizontalCenter: parent.horizontalCenter
-							text: root.missingCandidateCount
-							font.pixelSize: 18
-							font.bold: true
-							color: "#FF9800"
-						}
-						Text {
-							text: "No Cand"
-							font.pixelSize: 9
-							color: "#666"
-						}
+					StatisticDisplay {
+						title: "No candidate"
+						number: root.missingCandidateCount
+						numberColor: "orange"
 					}
 				}
 			}

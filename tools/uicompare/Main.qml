@@ -15,9 +15,11 @@ Window {
 
 	ColumnLayout {
 		anchors.fill: parent
+		spacing: 0
+
 		Toolbar {
 			id: toolbar
-			Layout.preferredHeight: 70
+			Layout.preferredHeight: 80
 			Layout.fillWidth: true
 
 			totalCount: testModel.count
@@ -26,46 +28,43 @@ Window {
 			missingBaselineCount: testModel.missingBaselineCount
 			missingCandidateCount: testModel.missingCandidateCount
 
-			onFilterChanged: (filterMode) => testModel.setFilterMode(filterMode)
+			onFilterChanged: (filterMode) => {
+				listView.currentIndex = -1
+				testModel.setFilterMode(filterMode)
+			}
 		}
 
 		SplitView {
 			Layout.fillHeight: true
 			Layout.fillWidth: true
+			z: -1 // scroll list view beneath the toolbar
 			orientation: Qt.Horizontal
 
-			ImageListView {
-				id: listView
-				SplitView.preferredWidth: 310
+			Rectangle { // background behind the list view
+				SplitView.preferredWidth: 360
 				SplitView.minimumWidth: 100
 				SplitView.maximumWidth: 600
-				model: testModel
-				clip: true
 
-				// Update currentFilename when currentIndex changes
-				onCurrentIndexChanged: {
-					if (currentIndex >= 0) {
-						const fileName = testModel.data(testModel.index(currentIndex, 0), 0x0101) // TextRole
-						if (fileName && fileName.length > 0) {
-							currentFilename = fileName
-						}
-					} else {
-						currentFilename = ""
-					}
+				ImageListView {
+					id: listView
+					anchors.fill: parent
+					model: testModel
 				}
 			}
+
 			CompareView {
 				id: compareView
 				SplitView.fillWidth: true
-
-				fileName: listView.currentFilename
-				leftImageUri: listView.currentFilename ? ("file:image-captures-baseline/" + listView.currentFilename) : ""
-				rightImageUri: listView.currentFilename ? ("file:image-captures/" +  listView.currentFilename) : ""
+				SplitView.fillHeight: true
+				z: -1 // do not allow comparison image to pan above the list view
+				resultStatus: listView.currentResult.status ?? CompareModel.ComparisonPending
+				imagesIdentical: listView.currentResult.mse === undefined ? false : Math.round(listView.currentResult.mse) === 0
+				fileName: listView.currentResult.fileName ?? ""
 			}
 		}
 
 		Rectangle {
-			Layout.preferredHeight: 24
+			Layout.preferredHeight: 30
 			Layout.fillWidth: true
 			color: "#f5f5f5"
 			border.color: "#ddd"
@@ -73,8 +72,8 @@ Window {
 
 			Text {
 				anchors.centerIn: parent
-				text: listView.currentFilename || "Select an image to compare"
-				font.pixelSize: 11
+				text: compareView.fileName || "Select an image to compare"
+				font.pixelSize: 14
 				color: "#666"
 			}
 		}
@@ -82,5 +81,6 @@ Window {
 
 	CompareModel {
 		id: testModel
+		errorTolerance: 10.0
 	}
 }
