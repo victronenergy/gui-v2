@@ -1,116 +1,93 @@
 import QtQuick
-import QtQuick.Layouts
 
-Item {
+MouseArea {
 	id: root
 
-	readonly property var splitName: model.text.split("-")
-	readonly property bool isIdentical: model.identical
-	readonly property bool isPassing: model.similarity >= 0.999
-	readonly property bool hasError: model.errorMessage && model.errorMessage.length > 0
-	readonly property color statusColor: hasError ? "#F44336" : (isIdentical ? "#4CAF50" : (isPassing ? "#4CAF50" : "#FFC107"))
+	required property string title
+	required property string secondaryTitle
+	required property size imageSize
+	required property string fileName
 
-	signal clicked(index : int, fileName : string)
+	required property int status
+	required property real mse
+	required property string errorMessage
 
-	implicitHeight: column.height + column.anchors.margins * 2
+	readonly property bool ready: status !== CompareModel.ComparisonPending
+	readonly property real similarity: 1 - (mse / (255 * 255 * 4))
+	readonly property bool isIdentical: Math.round(mse) === 0
+	readonly property bool isPassing: ready && mse < ListView.view.model.errorTolerance
+	readonly property bool hasError: ready && errorMessage.length > 0
+	readonly property color statusColor: isPassing || isIdentical ? "#4CAF50"
+			: status === CompareModel.ComparisonPending
+				|| status === CompareModel.NoBaselineImage
+				|| status === CompareModel.NoCandidateImage ? "orange"
+			: "#F44336"
+
+	implicitHeight: column.implicitHeight + column.anchors.margins * 2
+
+	Rectangle {
+		id: statusBadge
+		anchors {
+			left: parent.left
+			leftMargin: 8
+			top: column.top
+			bottom: column.bottom
+		}
+		width: 8
+		radius: 4
+		color: root.statusColor
+	}
 
 	Column {
 		id: column
 		width: parent.width
 		anchors {
 			top: parent.top
-			left: parent.left
-			right: parent.right
+			bottom: parent.bottom
+			left: statusBadge.right
+			right: thumbnail.left
 			margins: 8
 		}
 		spacing: 4
 
-		// Header with status indicator
-		Item {
+		Text {
 			width: parent.width
-			height: 40
-
-			Rectangle {
-				id: statusBadge
-				anchors.left: parent.left
-				anchors.verticalCenter: parent.verticalCenter
-				width: 8
-				height: 30
-				radius: 4
-				color: statusColor
-			}
-
-			Column {
-				id: headerColumn
-				anchors {
-					left: statusBadge.right
-					leftMargin: 8
-					right: metricsColumn.left
-					rightMargin: 4
-					verticalCenter: parent.verticalCenter
-				}
-
-				Text {
-					id: sectionText
-					text: splitName[0].replace("tst_", "")
-					font.capitalization: Font.Capitalize
-					font.bold: true
-					width: headerColumn.width
-					elide: Text.ElideRight
-				}
-				Text {
-					id: subSectionText
-					text: splitName.length > 1 ? splitName[1] : ""
-					font.pixelSize: 10
-					color: "#666"
-					width: headerColumn.width
-					elide: Text.ElideRight
-				}
-			}
-
-			Column {
-				id: metricsColumn
-				anchors.right: parent.right
-				anchors.verticalCenter: parent.verticalCenter
-				spacing: 2
-
-				Text {
-					id: similarityText
-					anchors.right: parent.right
-					text: hasError ? "⚠" : (isIdentical ? "✓ " : "") + ((model.similarity * 100).toFixed(2) + "%")
-					font.pixelSize: 10
-					color: statusColor
-					font.bold: true
-				}
-				Text {
-					id: errorText
-					anchors.right: parent.right
-					text: hasError ? model.errorMessage : ("Δ " + model.error.toFixed(2))
-					font.pixelSize: 9
-					color: hasError ? statusColor : "#666"
-					elide: Text.ElideRight
-					width: Math.min(implicitWidth, 100)
-				}
-			}
+			text: root.title
+			font.pixelSize: 16
+			font.capitalization: Font.Capitalize
+			font.bold: true
+			elide: Text.ElideRight
 		}
 
-		// Difference thumbnail
-		Image {
-			id: differenceImage
+		Text {
 			width: parent.width
-			height: 140
-			source: model.text && model.text.length > 0 ? ("image://difference/" + model.text) : ""
-			sourceSize: Qt.size(width, 140)
-			fillMode: Image.PreserveAspectFit
-			visible: source.toString().length > 0
+			text: root.secondaryTitle
+			font.pixelSize: 14
+			color: "#666"
+			elide: Text.ElideRight
+		}
+
+		Text {
+			text: root.errorMessage ? root.errorMessage
+				: root.isIdentical ? "✓"
+				: "⚠ %1%".arg((root.similarity * 100).toFixed(3))
+			font.pixelSize: 16
+			color: root.statusColor
+			font.bold: true
 		}
 	}
 
-	MouseArea {
-		anchors.fill: parent
-		onClicked: {
-			root.clicked(index, model.text)
+	// Difference thumbnail
+	Image {
+		id: thumbnail
+		anchors {
+			right: parent.right
+			rightMargin: 8
 		}
+		width: root.imageSize.width
+		height: root.imageSize.height
+		source: root.fileName && root.fileName.length > 0 ? ("image://difference/" + root.fileName) : ""
+		sourceSize: root.imageSize
+		fillMode: Image.PreserveAspectFit
 	}
 }
-

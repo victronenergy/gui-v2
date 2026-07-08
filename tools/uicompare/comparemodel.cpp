@@ -23,8 +23,7 @@ public:
         // Scan baseline directory
         QDir baselineDir("image-captures-baseline");
         if (baselineDir.exists() && !baselineDir.isEmpty() && baselineDir.isReadable()) {
-            const QStringList fileList = baselineDir.entryList(QStringList() << "*.*", QDir::Files);
-            allFiles.append(fileList);
+            allFiles = baselineDir.entryList(QStringList() << "*.*", QDir::Files, QDir::Name);
         } else {
             qDebug() << "Baseline directory not exist/is empty/not accessible";
         }
@@ -32,11 +31,13 @@ public:
         // Scan candidate directory
         QDir candidateDir("image-captures");
         if (candidateDir.exists() && !candidateDir.isEmpty() && candidateDir.isReadable()) {
-            const QStringList fileList = candidateDir.entryList(QStringList() << "*.*", QDir::Files);
-            for (const QString &file : fileList) {
-                if (!allFiles.contains(file)) {
-                    allFiles.append(file);
-                }
+            const QStringList candidateFiles = candidateDir.entryList(QStringList() << "*.*", QDir::Files, QDir::Name);
+            if (candidateFiles != allFiles) {
+                // Add the candidate files into allFiles and sort the result.
+                QSet allFilesSet(allFiles.constBegin(), allFiles.constEnd());
+                allFilesSet.unite(QSet(candidateFiles.constBegin(), candidateFiles.constEnd()));
+                allFiles = QList<QString>(allFilesSet.constBegin(), allFilesSet.constEnd());
+                allFiles.sort();
             }
         } else {
             qDebug() << "Candidate directory not exist/is empty/not accessible";
@@ -58,8 +59,8 @@ private:
 class ComparisonWorker : public QRunnable
 {
 public:
-    ComparisonWorker(CompareModel *model, const QString &fileName, const CompareModel::ImageResult &preValidated)
-        : m_model(model), m_fileName(fileName), m_preValidated(preValidated)
+    ComparisonWorker(CompareModel *model, const QString &fileName)
+        : m_model(model), m_fileName(fileName)
     {
         setAutoDelete(true);
     }
@@ -76,101 +77,79 @@ public:
         }, Qt::QueuedConnection);
     }
 
+    int squaredDifference(const QRgb &rgb1, const QRgb &rgb2) const
+    {
+        const int aDiff = qAlpha(rgb1) - qAlpha(rgb2);
+        const int rDiff = qRed(rgb1) - qRed(rgb2);
+        const int gDiff = qGreen(rgb1) - qGreen(rgb2);
+        const int bDiff = qBlue(rgb1) - qBlue(rgb2);
+        return (aDiff * aDiff) + (rDiff * rDiff) + (gDiff * gDiff) + (bDiff * bDiff);
+    }
+
     CompareModel::ImageResult compare(const QString fileName) const
     {
-        CompareModel::ImageResult result;
-        result.fileName = fileName;
-
-        // Check if we have pre-validated this image
-        if (m_preValidated.fileName == fileName) {
-            // If validation failed, return error result
-            if (!m_preValidated.baselineExists || !m_preValidated.candidateExists || !m_preValidated.sizesMatch) {
-                result.similarity = 0.0;
-                result.meanError = 255.0;
-                result.valid = false;
-                result.identical = false;
-                result.pending = false;
-                return result;
-            }
-        }
-
-        QString baselinePath = "image-captures-baseline/" + fileName;
-        QString candidatePath = "image-captures/" + fileName;
+        const QString baselinePath = "image-captures-baseline/" + fileName;
+        const QString candidatePath = "image-captures/" + fileName;
 
         // Load images for comparison
         QImage a(baselinePath);
         QImage b(candidatePath);
+        if (a.format() != QImage::Format_ARGB32) {
+            a = a.convertToFormat(QImage::Format_ARGB32);
+        }
+        if (b.format() != QImage::Format_ARGB32) {
+            b = b.convertToFormat(QImage::Format_ARGB32);
+        }
 
-        // Double-check images loaded successfully (in case validation was skipped)
+        CompareModel::ImageResult result;
+
         if (a.isNull() || b.isNull() || a.size() != b.size()) {
-            result.valid = false;
-            result.identical = false;
-            result.pending = false;
-            result.similarity = 0.0;
-            result.meanError = 255.0;
-
             if (a.isNull() && !b.isNull()) {
+                result.status = CompareModel::NoBaselineImage;
                 result.errorMessage = "Baseline image missing";
-                result.baselineExists = false;
-                result.candidateExists = true;
             } else if (!a.isNull() && b.isNull()) {
+                result.status = CompareModel::NoCandidateImage;
                 result.errorMessage = "Candidate image missing";
-                result.baselineExists = true;
-                result.candidateExists = false;
-            } else if (a.isNull() && b.isNull()) {
+            } else if (a.isNull() && !b.isNull()) {
+                result.status = CompareModel::ComparisonReady;
                 result.errorMessage = "Both images missing";
-                result.baselineExists = false;
-                result.candidateExists = false;
-            } else if (a.size() != b.size()) {
+            } else {
+                result.status = CompareModel::ComparisonReady;
                 result.errorMessage = QString("Size mismatch: %1x%2 vs %3x%4")
                                          .arg(a.width()).arg(a.height())
                                          .arg(b.width()).arg(b.height());
-                result.baselineExists = true;
-                result.candidateExists = true;
-                result.sizesMatch = false;
-                result.baselineSize = a.size();
-                result.candidateSize = b.size();
             }
             return result;
         }
 
         const int width = a.width();
         const int height = a.height();
-
         quint64 totalDiff = 0;
+
         for (int y = 0; y < height; ++y) {
+            const uchar *scanLineA = a.constScanLine(y);
+            const uchar *scanLineB = b.constScanLine(y);
+            const QRgb *pixelA = reinterpret_cast<const QRgb*>(scanLineA);
+            const QRgb *pixelB = reinterpret_cast<const QRgb*>(scanLineB);
+
             for (int x = 0; x < width; ++x) {
-                const QRgb rgb1 = a.pixel(x, y);
-                const QRgb rgb2 = b.pixel(x, y);
-                totalDiff += qAbs(qRed(rgb1) - qRed(rgb2))
-                             + qAbs(qGreen(rgb1) - qGreen(rgb2))
-                             + qAbs(qBlue(rgb1) - qBlue(rgb2))
-                             + qAbs(qAlpha(rgb1) - qAlpha(rgb2));
+                const QRgb &rgb1 = pixelA[x];
+                const QRgb &rgb2 = pixelB[x];
+                totalDiff += squaredDifference(rgb1, rgb2);
             }
         }
-        const double meanError = totalDiff / (width * height * 4.0);
-        const double similarity = 1.0 - (meanError / 255.0);
 
-        result.similarity = similarity;
-        result.meanError = meanError;
-        result.valid = true;
-        result.identical = (totalDiff == 0);
-        result.pending = false;
-        result.errorMessage = QString();
-        result.baselineExists = true;
-        result.candidateExists = true;
-        result.sizesMatch = true;
-        result.baselineSize = a.size();
-        result.candidateSize = b.size();
-
+        // Mean squared error = total difference / (image size * number of channels)
+        result.mse = static_cast<double>(totalDiff) / (width * height * 4);
+        result.status = CompareModel::ComparisonReady;
         return result;
     }
 
 private:
-    CompareModel::ImageResult m_preValidated;
     QPointer<CompareModel> m_model;
     QString m_fileName;
 };
+
 
 CompareModel::CompareModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -181,9 +160,6 @@ CompareModel::CompareModel(QObject *parent)
 
     // Limit threads to avoid overwhelming the system
     m_threadPool->setMaxThreadCount(qMax(2, QThread::idealThreadCount() / 2));
-
-    // Don't automatically run discovery/validation/comparison
-    // Let the UI trigger it when ready
 }
 
 CompareModel::~CompareModel()
@@ -198,11 +174,9 @@ CompareModel::~CompareModel()
 QHash<int, QByteArray> CompareModel::roleNames() const
 {
     static QHash<int, QByteArray> roles {
-        { TitleRole, "title" },
-        { TextRole, "text" },
-        { SimilarityRole, "similarity" },
-        { MeanErrorRole, "error" },
-        { IdenticalRole, "identical"},
+        { FileNameRole, "fileName" },
+        { StatusRole, "status"},
+        { MeanSquaredErrorRole, "mse" },
         { ErrorMessageRole, "errorMessage"},
     };
     return roles;
@@ -221,51 +195,22 @@ QVariant CompareModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
+    auto result = m_results.constFind(m_data.at(row));
+
     switch(role) {
-    case TitleRole:
+    case FileNameRole:
         return m_data.at(row);
-    case TextRole:
-        return m_data.at(row);
-    case SimilarityRole: {
-        return getResultData(m_data.at(row)).similarity;
+    case StatusRole: {
+        return result == m_results.constEnd() ? ComparisonPending : result->status;
     }
-    case MeanErrorRole: {
-        return getResultData(m_data.at(row)).meanError;
-    }
-    case IdenticalRole: {
-        return getResultData(m_data.at(row)).identical;
+    case MeanSquaredErrorRole: {
+        return result == m_results.constEnd() ? ImageResult::DefaultMse : result->mse;
     }
     case ErrorMessageRole: {
-        return getResultData(m_data.at(row)).errorMessage;
+        return result == m_results.constEnd() ? QString() : result->errorMessage;
     }
     }
     return QVariant();
-}
-
-bool CompareModel::setData(const QModelIndex &index, const QVariant &value, int role)
-{
-    if (index.isValid()) {
-        int row = index.row();
-        if(row < 0 || row >= m_data.count()) {
-            return false;
-        }
-
-        switch(role) {
-        case TitleRole:
-            m_data[row] = value.toString();
-            break;
-        case TextRole:
-            m_data[row] = value.toString();
-            break;
-        default:
-            return false;
-        }
-
-        emit dataChanged(index, index, {role});
-
-        return true;
-    }
-    return false;
 }
 
 void CompareModel::discoverImages()
@@ -277,72 +222,44 @@ void CompareModel::discoverImages()
     m_threadPool->start(worker);
 }
 
-void CompareModel::validateImages()
-{
-    qDebug() << "Starting image validation...";
-    int validCount = 0;
-    int missingBaseline = 0;
-    int missingCandidate = 0;
-    int sizeMismatch = 0;
-
-    for (const QString &fileName : m_allData) {
-        validateImage(fileName);
-        const ImageResult &result = m_results.value(fileName);
-
-        if (!result.baselineExists) {
-            missingBaseline++;
-        }
-        if (!result.candidateExists) {
-            missingCandidate++;
-        }
-        if (result.baselineExists && result.candidateExists && !result.sizesMatch) {
-            sizeMismatch++;
-        }
-        if (result.baselineExists && result.candidateExists && result.sizesMatch) {
-            validCount++;
-        }
-    }
-
-    qDebug() << "Image validation complete:"
-             << validCount << "valid pairs,"
-             << missingBaseline << "missing baseline,"
-             << missingCandidate << "missing candidate,"
-             << sizeMismatch << "size mismatches";
-}
-
 void CompareModel::startComparisons()
 {
-    qDebug() << "Starting image comparisons...";
-    int skipped = 0;
-    int started = 0;
+    const qreal requiredSimilarity = 1 - (m_errorTolerance / (255 * 255 * 4));
+    qDebug() << qPrintable(QStringLiteral("Starting image comparisons with MSE errorTolerance=%1. Image comparison passes when image similarity is least %2%.")
+                .arg(m_errorTolerance)
+                .arg(QString::number(requiredSimilarity * 100, 'f', 3)));
 
-    // Start async comparisons for all files that passed validation
+    m_comparisonTimer.start();
+
     for (const QString &fileName : m_allData) {
-        // Check if we have validation results
-        if (m_results.contains(fileName)) {
-            const ImageResult &result = m_results.value(fileName);
-
-            // Only compare if both images exist and sizes match
-            if (result.baselineExists && result.candidateExists && result.sizesMatch) {
-                startAsyncComparison(fileName);
-                started++;
-            } else {
-                // Validation error already stored in result
-                skipped++;
-            }
-        } else {
-            // No validation result, start comparison anyway (will validate inside compare())
-            startAsyncComparison(fileName);
-            started++;
-        }
+        // Queue the comparison task
+        ComparisonWorker *worker = new ComparisonWorker(this, fileName);
+        m_threadPool->start(worker);
     }
-
-    qDebug() << "Comparison started for" << started << "images, skipped" << skipped << "invalid images";
 }
 
 void CompareModel::refresh()
 {
     discoverImages();
+}
+
+QVariantMap CompareModel::get(int index) const
+{
+    QVariantMap map;
+    if (index < 0 || index >= m_data.length()) {
+        return map;
+    }
+
+    auto result = m_results.constFind(m_data.at(index));
+    if (result == m_results.constEnd()) {
+        return map;
+    }
+
+    map.insert(QStringLiteral("fileName"), m_data.at(index));
+    map.insert(QStringLiteral("status"), result->status);
+    map.insert(QStringLiteral("mse"), result->mse);
+    map.insert(QStringLiteral("errorMessage"), result->errorMessage);
+    return map;
 }
 
 void CompareModel::onDiscoveryComplete(const QStringList &fileNames)
@@ -360,7 +277,6 @@ void CompareModel::onDiscoveryComplete(const QStringList &fileNames)
     endResetModel();
     emit countChanged();
 
-    validateImages();
     startComparisons();
 }
 
@@ -380,28 +296,28 @@ bool CompareModel::passesFilter(const QString &fileName) const
         return true;  // Show all
     }
 
-    ImageResult result = getResultData(fileName);
+    auto result = m_results.constFind(fileName);
+    if (result == m_results.constEnd()) {
+        return false;
+    }
 
     // Filter modes 3 and 4 need to check error messages even if result is invalid
     if (m_filterMode == 3) {
         // Missing Baseline - show images where baseline is missing
-        return result.errorMessage == "Baseline image missing";
+        return result->status == NoBaselineImage;
     } else if (m_filterMode == 4) {
         // Missing Candidate - show images where candidate is missing
-        return result.errorMessage == "Candidate image missing";
+        return result->status == NoCandidateImage;
     }
 
-    if (!result.valid) {
+    if (result->status != ComparisonReady) {
         return false;
     }
 
-    // Use meanError for more precise comparison (0.255 corresponds to 99.9% similarity)
-    const double errorThreshold = 0.255;
-
     if (m_filterMode == 1) {
-        return result.meanError <= errorThreshold;  // Pass only
+        return result->mse <= m_errorTolerance;  // Pass only
     } else if (m_filterMode == 2) {
-        return result.meanError > errorThreshold;  // Fail only
+        return result->mse > m_errorTolerance;  // Fail only
     }
 
     return true;
@@ -419,132 +335,21 @@ void CompareModel::setFilterMode(int mode)
     }
 }
 
-int CompareModel::count()
+void CompareModel::setErrorTolerance(qreal errorTolerance)
+{
+    if (m_data.count() > 0) {
+        qWarning() << "Error: cannot change error tolerance after model is populated!";
+        return;
+    }
+    if (errorTolerance != m_errorTolerance) {
+        m_errorTolerance = errorTolerance;
+        emit errorToleranceChanged();
+    }
+}
+
+int CompareModel::count() const
 {
     return m_data.count();
-}
-
-int CompareModel::exactMatchCount()
-{
-    int exact = 0;
-    for (const QString &fileName : m_allData) {
-        if (getResultData(fileName).identical) {
-            exact++;
-        }
-    }
-    return exact;
-}
-
-int CompareModel::passCount()
-{
-    int pass = 0;
-    const double errorThreshold = 0.255;  // Corresponds to 99.9% similarity
-    for (const QString &fileName : m_allData) {
-        ImageResult result = getResultData(fileName);
-        if (result.valid && result.meanError <= errorThreshold) {
-            pass++;
-        }
-    }
-    return pass;
-}
-
-int CompareModel::failedCount()
-{
-    int fail = 0;
-    const double errorThreshold = 0.255;  // Corresponds to 99.9% similarity
-    for (const QString &fileName : m_allData) {
-        ImageResult result = getResultData(fileName);
-        if (result.valid && result.meanError > errorThreshold) {
-            fail++;
-        }
-    }
-    return fail;
-}
-
-int CompareModel::missingBaselineCount()
-{
-    int missing = 0;
-    for (const QString &fileName : m_allData) {
-        ImageResult result = getResultData(fileName);
-        if (result.errorMessage == "Baseline image missing") {
-            missing++;
-        }
-    }
-    return missing;
-}
-
-int CompareModel::missingCandidateCount()
-{
-    int missing = 0;
-    for (const QString &fileName : m_allData) {
-        ImageResult result = getResultData(fileName);
-        if (result.errorMessage == "Candidate image missing") {
-            missing++;
-        }
-    }
-    return missing;
-}
-
-void CompareModel::validateImage(const QString &fileName)
-{
-    QString baselinePath = "image-captures-baseline/" + fileName;
-    QString candidatePath = "image-captures/" + fileName;
-
-    ImageResult result;
-    result.fileName = fileName;
-    result.baselineExists = QFile::exists(baselinePath);
-    result.candidateExists = QFile::exists(candidatePath);
-    result.sizesMatch = false;
-
-    if (!result.baselineExists && result.candidateExists) {
-        result.errorMessage = "Baseline image missing";
-        m_results.insert(fileName, result);
-        return;
-    }
-
-    if (result.baselineExists && !result.candidateExists) {
-        result.errorMessage = "Candidate image missing";
-        m_results.insert(fileName, result);
-        return;
-    }
-
-    if (!result.baselineExists && !result.candidateExists) {
-        result.errorMessage = "Both images missing";
-        m_results.insert(fileName, result);
-        return;
-    }
-
-    // Both exist, check sizes
-    QImage baselineImg(baselinePath);
-    QImage candidateImg(candidatePath);
-
-    result.baselineSize = baselineImg.size();
-    result.candidateSize = candidateImg.size();
-
-    if (baselineImg.size() != candidateImg.size()) {
-        result.errorMessage = QString("Size mismatch: %1x%2 vs %3x%4")
-                                  .arg(baselineImg.width()).arg(baselineImg.height())
-                                  .arg(candidateImg.width()).arg(candidateImg.height());
-        result.sizesMatch = false;
-        m_results.insert(fileName, result);
-        return;
-    }
-
-    result.sizesMatch = true;
-    result.errorMessage = QString();
-    m_results.insert(fileName, result);
-}
-
-CompareModel::ImageResult CompareModel::getResultData(const QString fileName) const
-{
-    if (!m_results.contains(fileName)) {
-        // Return a pending result - comparison is in progress or queued
-        ImageResult result;
-        result.pending = true;
-        result.errorMessage = "Comparing...";
-        return result;
-    }
-    return m_results.value(fileName);
 }
 
 void CompareModel::onComparisonComplete(const QString &fileName, const ImageResult &result)
@@ -561,26 +366,32 @@ void CompareModel::onComparisonComplete(const QString &fileName, const ImageResu
     }
 
     // Update counts
-    emit passCountChanged();
-    emit failedCountChanged();
-    emit exactMatchCountChanged();
-    emit missingBaselineCountChanged();
-    emit missingCandidateCountChanged();
-}
-
-void CompareModel::startAsyncComparison(const QString &fileName)
-{
-    // Mark as pending (preserve existing validation data if present)
-    ImageResult pendingResult;
-    pendingResult.fileName = fileName;
-    if (m_results.contains(fileName)) {
-        pendingResult = m_results.value(fileName);
+    switch (result.status) {
+    case ComparisonPending:
+        break;
+    case ComparisonReady:
+        if (result.mse > m_errorTolerance) {
+            m_failedCount++;
+            emit failedCountChanged();
+        } else {
+            m_passCount++;
+            emit passCountChanged();
+        }
+        break;
+    case NoBaselineImage:
+        m_missingBaselineCount++;
+        emit missingBaselineCountChanged();
+        break;
+    case NoCandidateImage:
+        m_missingCandidateCount++;
+        emit missingCandidateCountChanged();
+        break;
     }
-    pendingResult.pending = true;
-    pendingResult.errorMessage = "Pending...";
-    m_results.insert(fileName, pendingResult);
 
-    // Queue the comparison task
-    ComparisonWorker *worker = new ComparisonWorker(this, fileName, m_results.value(fileName));
-    m_threadPool->start(worker);
+    if (row == 0) {
+        emit firstResultAvailable();
+    }
+    if (m_results.count() == m_allData.count()) {
+        qDebug() << "Image comparisons completed in" << m_comparisonTimer.elapsed() << "ms";
+    }
 }

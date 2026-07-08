@@ -5,302 +5,250 @@ import QtQuick.Layouts
 Item {
 	id: root
 
-	property string fileName
-	property string leftImageUri
-	property string rightImageUri
-	property int comparisonMode: 0  // 0=side-by-side, 1=overlay
+	required property int resultStatus
+	required property bool imagesIdentical
+	required property string fileName
+
 	property real zoomLevel: overlayZoomSlider.value
+	property int comparisonMode: 0 // 0 = diff overlay, 1 = candidate overlay
+	property real cropLineX: width / 2
 
-	Column {
-		anchors.fill: parent
-		spacing: 4
+	readonly property string baselineImageUri: !fileName || resultStatus === CompareModel.NoBaselineImage ? ""
+			: "file:image-captures-baseline/" + fileName
+	readonly property string candidateImageUri: !fileName || resultStatus === CompareModel.NoCandidateImage ? ""
+			: "file:image-captures/" + fileName
+	readonly property bool bothImagesExist: baselineImageUri.length > 0 && candidateImageUri.length > 0
 
-		// Mode selector toolbar
-		Rectangle {
+	// Mode selector toolbar
+	Rectangle {
+		id: modeSelector
+		width: parent.width
+		height: toolBarLayout.height + 8
+		color: "#f5f5f5"
+		border.color: "#ddd"
+
+		RowLayout {
+			id: toolBarLayout
 			width: parent.width
-			height: 40
-			color: "#f5f5f5"
-			border.color: "#ddd"
+			anchors.verticalCenter: parent.verticalCenter
+
+			Text {
+				text: root.resultStatus === CompareModel.NoBaselineImage ? "Nothing to compare: baseline image missing"
+					: root.resultStatus === CompareModel.NoCandidateImage ? "Nothing to compare: candidate image missing"
+					: root.imagesIdentical ? "Nothing to compare: baseline and candidate images are identical"
+					: ""
+				font.pixelSize: 16
+				leftPadding: 16
+				visible: !modeButtonsLayout.visible
+			}
 
 			RowLayout {
-				anchors.centerIn: parent
+				id: modeButtonsLayout
+				Layout.fillWidth: false
 				spacing: 8
+				visible: root.resultStatus === CompareModel.ComparisonReady && !root.imagesIdentical
 
 				Text {
-					text: "Mode:"
-					font.pixelSize: 11
+					text: "Compare images:"
+					leftPadding: 16
+					font.pixelSize: 16
 				}
 
 				Button {
-					text: "Side by Side"
+					text: "Diff overlay"
 					checked: root.comparisonMode === 0
 					onClicked: root.comparisonMode = 0
-					checkable: true
 					autoExclusive: true
 				}
 
 				Button {
-					text: "Overlay"
+					text: "Candidate overlay"
 					checked: root.comparisonMode === 1
 					onClicked: root.comparisonMode = 1
-					checkable: true
 					autoExclusive: true
 				}
-
-				Item { Layout.fillWidth: true }
 
 				// Opacity slider for overlay mode
 				RowLayout {
 					Text {
 						text: "Opacity:"
-						font.pixelSize: 10
+						font.pixelSize: 12
 					}
 					Slider {
 						id: overlayOpacitySlider
 						from: 0
 						to: 1
 						value: 0.5
-						Layout.preferredWidth: 100
+						Layout.preferredWidth: 200
 					}
 				}
 
-				// Zoom controls
-				RowLayout {
-					Text {
-						text: "Zoom:"
-						font.pixelSize: 10
-					}
-					Slider {
-						id: overlayZoomSlider
-						from: 0.8
-						to: 10
-						value: 1.0
-						Layout.preferredWidth: 100
-					}
-					Button {
-						text: "1:1"
-						onClicked: overlayZoomSlider.value = 1.0
-					}
+				CheckBox {
+					id: cropLineCheckBox
+					text: "Crop line (right click to move)"
 				}
-
-
-			}
-		}
-
-		// Comparison display area
-		Rectangle {
-			width: parent.width
-			height: parent.height - 44
-			color: "#2a2a2a"
-
-			Flickable {
-				id: flickable
-				anchors.fill: parent
-				contentWidth: comparisonLoader.item ? comparisonLoader.item.width * root.zoomLevel : width
-				contentHeight: comparisonLoader.item ? comparisonLoader.item.height * root.zoomLevel : height
-				boundsBehavior: Flickable.StopAtBounds
-
-				Loader {
-					id: comparisonLoader
-					x: (flickable.contentWidth > flickable.width) ? 0 : (flickable.width - width * root.zoomLevel) / 2
-					y: (flickable.contentHeight > flickable.height) ? 0 : (flickable.height - height * root.zoomLevel) / 2
-					scale: root.zoomLevel
-					transformOrigin: Item.TopLeft
-
-					sourceComponent: {
-						switch (root.comparisonMode) {
-						case 0: return sideBySideComponent
-						case 1: return overlayComponent
-						case 2: return differenceComponent
-						case 3: return flickerComponent
-						default: return sideBySideComponent
-						}
-					}
-				}
-
-				ScrollBar.vertical: ScrollBar { }
-				ScrollBar.horizontal: ScrollBar { }
 			}
 
-			// Mouse wheel zoom
-			MouseArea {
-				anchors.fill: parent
-				acceptedButtons: Qt.NoButton
-				onWheel: (wheel) => {
-					if (wheel.modifiers & Qt.ControlModifier) {
-						if (wheel.angleDelta.y > 0) {
-							overlayZoomSlider.value = Math.min(4.0, root.zoomLevel + 0.1)
-						} else {
-							overlayZoomSlider.value = Math.max(0.25, root.zoomLevel - 0.1)
-						}
-						wheel.accepted = true
-					}
+			Item {
+				Layout.fillWidth: true
+			}
+
+			// Zoom controls
+			RowLayout {
+				Layout.rightMargin: 8
+
+				Text {
+					text: "Zoom:"
+					font.pixelSize: 12
+				}
+				Slider {
+					id: overlayZoomSlider
+					from: 0.5
+					to: 5
+					value: 1.0
+					Layout.preferredWidth: 200
+				}
+				Button {
+					text: "1:1"
+					onClicked: overlayZoomSlider.value = 1.0
 				}
 			}
 		}
 	}
 
-	// Side-by-side comparison (original with slider)
-	Component {
-		id: sideBySideComponent
+	// Comparison display area
+	Rectangle {
+		anchors {
+			left: parent.left
+			right: parent.right
+			top: modeSelector.bottom
+			bottom: parent.bottom
+		}
+		color: "#2a2a2a"
+		z: -1 // prevent image from panning over the toolbar
 
-		Item {
-			readonly property bool leftExists: leftImage.status === Image.Ready
-			readonly property bool rightExists: rightImage.status === Image.Ready
-			readonly property bool bothExist: leftExists && rightExists
+		Flickable {
+			id: flickable
+			anchors.fill: parent
+			contentWidth: comparisonContainer.width * root.zoomLevel
+			contentHeight: comparisonContainer.height * root.zoomLevel
+			boundsBehavior: Flickable.StopAtBounds
 
-			implicitWidth: Math.max(leftImage.implicitWidth, rightImage.implicitWidth)
-			implicitHeight: Math.max(leftImage.implicitHeight, rightImage.implicitHeight)
+			Item {
+				id: comparisonContainer
+				x: (flickable.contentWidth > flickable.width) ? 0 : (flickable.width - width * root.zoomLevel) / 2
+				y: (flickable.contentHeight > flickable.height) ? 0 : (flickable.height - height * root.zoomLevel) / 2
+				width: mainImage.width
+				height: mainImage.height
+				scale: root.zoomLevel
+				transformOrigin: Item.TopLeft
 
-			Image {
-				id: leftImage
-				source: leftImageUri && leftImageUri.length > 0 ? leftImageUri : ""
-				fillMode: Image.Pad
-				visible: leftExists
+				Image {
+					id: mainImage
+					source: baselineImageUri.length > 0 ? baselineImageUri : candidateImageUri
+				}
+
+				Loader {
+					active: root.resultStatus === CompareModel.ComparisonReady && !root.imagesIdentical
+					sourceComponent: overlayComponent
+				}
 			}
 
-			Rectangle {
+			ScrollBar.vertical: ScrollBar { }
+			ScrollBar.horizontal: ScrollBar { }
+		}
+
+		// Mouse wheel zoom
+		MouseArea {
+			anchors.fill: parent
+			acceptedButtons: Qt.NoButton
+			onWheel: (wheel) => {
+				if (wheel.modifiers & Qt.ControlModifier) {
+					if (wheel.angleDelta.y > 0) {
+						overlayZoomSlider.value = Math.min(overlayZoomSlider.to, root.zoomLevel + 0.1)
+					} else {
+						overlayZoomSlider.value = Math.max(overlayZoomSlider.from, root.zoomLevel - 0.1)
+					}
+					wheel.accepted = true
+				}
+			}
+		}
+	}
+
+	// Missing image indicator
+	Rectangle {
+		anchors.centerIn: parent
+		width: missingImageText.implicitWidth + 40
+		height: missingImageText.implicitHeight + 20
+		border.color: "white"
+		color: "orange"
+		radius: 4
+		visible: root.resultStatus !== CompareModel.ComparisonPending && !root.bothImagesExist
+
+		Text {
+			id: missingImageText
+			anchors.centerIn: parent
+			text: root.baselineImageUri.length === 0 && root.candidateImageUri.length > 0 ? "Candidate image only (baseline missing)"
+				: root.baselineImageUri.length > 0 && root.candidateImageUri.length === 0 ? "Baseline image only (candidate missing)"
+				: ""
+			color: "white"
+			font.bold: true
+			font.pixelSize: 32
+		}
+	}
+
+	Component {
+		id: overlayComponent
+
+		Item {
+			implicitWidth: candidateImage.implicitWidth
+			implicitHeight: candidateImage.implicitHeight
+
+			Item {
 				anchors {
 					left: parent.left
 					top: parent.top
 					bottom: parent.bottom
 				}
-				width: bothExist ? sliderRect.x : (rightExists ? parent.width : 0)
+				width: overlayCropLine.visible ? Math.min(root.cropLineX, parent.width) : parent.width
 				clip: true
 
 				Image {
-					id: rightImage
-					source: rightImageUri && rightImageUri.length > 0 ? rightImageUri : ""
-					fillMode: Image.Pad
-					visible: rightExists
+					id: candidateImage
+					source: root.comparisonMode === 0 ? "image://difference/" + root.fileName : root.candidateImageUri
+					opacity: overlayOpacitySlider.value
 				}
 			}
 
-			// Slider only visible when both images exist
+			// Slider for changing the visible part of the overlay. Can be dragged with left
+			// mouse button, or clicking anywhere with the right mouse button will move it.
 			Rectangle {
-				id: sliderRect
-				x: parent.width / 2
-				y: 0
-				width: 3
-				height: parent.height
+				id: overlayCropLine
+				anchors.verticalCenter: parent.verticalCenter
+				x: root.cropLineX
+				width: 8
+				height: flickable.height * 2
 				color: "#00BCD4"
-				visible: bothExist
-			}
+				visible: cropLineCheckBox.checked && root.resultStatus === CompareModel.ComparisonReady && !root.imagesIdentical
 
-			// Missing image indicator for baseline (left)
-			Rectangle {
-				anchors.centerIn: parent
-				width: missingLeftText.implicitWidth + 40
-				height: missingLeftText.implicitHeight + 20
-				color: "#FF9800"
-				radius: 4
-				visible: !leftExists && rightExists
-
-				Text {
-					id: missingLeftText
-					anchors.centerIn: parent
-					text: "Baseline image missing"
-					color: "white"
-					font.bold: true
-					font.pixelSize: 32
-				}
-			}
-
-			// Missing image indicator for candidate (right)
-			Rectangle {
-				anchors.centerIn: parent
-				width: missingRightText.implicitWidth + 40
-				height: missingRightText.implicitHeight + 20
-				color: "#FF9800"
-				radius: 4
-				visible: leftExists && !rightExists
-
-				Text {
-					id: missingRightText
-					anchors.centerIn: parent
-					text: "Candidate image missing"
-					color: "white"
-					font.bold: true
-					font.pixelSize: 32
+				MouseArea {
+					anchors.fill: parent
+					drag.target: parent
+					drag.axis: Drag.XAxis
 				}
 			}
 
 			MouseArea {
 				anchors.fill: parent
-				enabled: bothExist
-				onClicked: sliderRect.x = mouseX
-				onPressAndHold: sliderRect.x = mouseX
-				onPressed: sliderRect.x = mouseX
+				enabled: overlayCropLine.visible
+				acceptedButtons: Qt.RightButton
+				onClicked: root.cropLineX = mouseX
+				onPressAndHold: root.cropLineX = mouseX
+				onPressed: root.cropLineX = mouseX
 				onPositionChanged: {
 					if (pressed) {
-						sliderRect.x = mouseX
+						root.cropLineX = mouseX
 					}
-				}
-			}
-		}
-	}
-
-	// Overlay comparison
-	Component {
-		id: overlayComponent
-
-		Item {
-			readonly property bool baseExists: baseImage.status === Image.Ready
-			readonly property bool overlayExists: overlayImage.status === Image.Ready
-
-			implicitWidth: Math.max(baseImage.implicitWidth, overlayImage.implicitWidth)
-			implicitHeight: Math.max(baseImage.implicitHeight, overlayImage.implicitHeight)
-
-			Image {
-				id: baseImage
-				source: leftImageUri && leftImageUri.length > 0 ? leftImageUri : ""
-				fillMode: Image.Pad
-				visible: baseExists
-			}
-
-			Image {
-				id: overlayImage
-				source: rightImageUri && rightImageUri.length > 0 ? rightImageUri : ""
-				fillMode: Image.Pad
-				opacity: overlayOpacitySlider.value
-				visible: overlayExists
-			}
-
-			// Missing image indicator for baseline
-			Rectangle {
-				anchors.centerIn: parent
-				width: missingBaseText.implicitWidth + 40
-				height: missingBaseText.implicitHeight + 20
-				color: "#FF9800"
-				radius: 4
-				visible: !baseExists && overlayExists
-
-				Text {
-					id: missingBaseText
-					anchors.centerIn: parent
-					text: "Baseline image missing"
-					color: "white"
-					font.bold: true
-					font.pixelSize: 32
-				}
-			}
-
-			// Missing image indicator for candidate
-			Rectangle {
-				anchors.centerIn: parent
-				width: missingOverlayText.implicitWidth + 40
-				height: missingOverlayText.implicitHeight + 20
-				color: "#FF9800"
-				radius: 4
-				visible: baseExists && !overlayExists
-
-				Text {
-					id: missingOverlayText
-					anchors.centerIn: parent
-					text: "Candidate image missing"
-					color: "white"
-					font.bold: true
-					font.pixelSize: 32
 				}
 			}
 		}
