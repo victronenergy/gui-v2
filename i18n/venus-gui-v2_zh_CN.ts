@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message id="page_switchable_output_switch_mode_disabled">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="48"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="55"/>
       <source>Disabled</source>
       <translation>已禁用</translation>
     </message>
@@ -1011,7 +1011,7 @@
       <translation>固件类型</translation>
     </message>
     <message id="iochannel_invert_normal">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="52"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
       <source>Normal</source>
       <translation>正常</translation>
     </message>
@@ -1980,7 +1980,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>功能（继电器1）</translation>
     </message>
     <message id="page_switchable_output_function">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="113"/>
       <source>Function</source>
       <translation>功能</translation>
     </message>
@@ -3861,7 +3861,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>直流</translation>
     </message>
     <message id="iochannel_invert_inverted">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="54"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
       <source>Inverted</source>
       <translation>倒置</translation>
     </message>
@@ -4072,7 +4072,7 @@ Do you want to continue?</source>
       <translation type="unfinished">高级</translation>
     </message>
     <message id="pagecontrollableloads_battery_advanced">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="29"/>
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="32"/>
       <source>Advanced</source>
       <translation>高级</translation>
     </message>
@@ -4780,7 +4780,7 @@ Do you want to continue?</source>
       <translation>无错误</translation>
     </message>
     <message id="acInputs_not_available">
-      <location filename="../../data/AcInputs.qml" line="109"/>
+      <location filename="../../data/AcInputs.qml" line="120"/>
       <source>Not available</source>
       <translation>不可用</translation>
     </message>
@@ -5781,27 +5781,27 @@ Do you want to continue?</source>
       <translation>电动汽车充电器</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="116"/>
+      <location filename="../../data/AcInputs.qml" line="127"/>
       <source>Shore</source>
       <translation>岸电</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="142"/>
+      <location filename="../../data/AcInputs.qml" line="153"/>
       <source>Grid current limit</source>
       <translation>电网电流限制</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="145"/>
+      <location filename="../../data/AcInputs.qml" line="156"/>
       <source>Generator current limit</source>
       <translation>发电机电流限制</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="148"/>
+      <location filename="../../data/AcInputs.qml" line="159"/>
       <source>Shore current limit</source>
       <translation>岸电电流限制</translation>
     </message>
     <message id="acInputs_statusCode_stopping">
-      <location filename="../../data/AcInputs.qml" line="170"/>
+      <location filename="../../data/AcInputs.qml" line="181"/>
       <source>Stopping</source>
       <translation type="unfinished">停止</translation>
     </message>
@@ -9131,12 +9131,12 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>组</translation>
     </message>
     <message id="page_switchable_output_fuse_rating">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="90"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="97"/>
       <source>Fuse rating</source>
       <translation>保险丝额定值</translation>
     </message>
     <message id="boat_page_rpm">
-      <location filename="../../pages/boat/LargeCenterGauge.qml" line="271"/>
+      <location filename="../../pages/boat/LargeCenterGauge.qml" line="379"/>
       <source>RPM</source>
       <translation>转速</translation>
     </message>
@@ -9495,7 +9495,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>更新</translation>
     </message>
     <message id="pagecontrollableloads_documentation">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="112"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="113"/>
       <source>Documentation</source>
       <translation>文档</translation>
     </message>
@@ -10119,7 +10119,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>极性 (继电器 1)</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="216"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
       <source>Polarity</source>
       <translation>极性</translation>
     </message>
@@ -10363,7 +10363,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>自动 (%1)</translation>
     </message>
     <message id="switchableoutput_list_delegate_state_forced">
-      <location filename="../../pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml" line="109"/>
+      <location filename="../../pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml" line="107"/>
       <source>Forced</source>
       <translation>强制</translation>
     </message>
@@ -10515,93 +10515,93 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>设备列表</translation>
     </message>
     <message id="page_switchable_output_switch_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="41"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="48"/>
       <source>Switch mode</source>
       <translation>开关模式</translation>
     </message>
     <message id="page_switchable_output_switch_mode_linear">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="50"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="57"/>
       <source>Permanent on</source>
       <translation>永久开启</translation>
     </message>
     <message id="page_switchable_output_switch_mode_optical">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="52"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="59"/>
       <source>Switching</source>
       <translation>切换</translation>
     </message>
     <message id="page_switchable_output_dim_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="58"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="65"/>
       <source>Dim mode</source>
       <translation>调光模式</translation>
     </message>
     <message id="page_switchable_output_dim_mode_disabled">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="65"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="72"/>
       <source>Dimming disabled</source>
       <translation>禁用调光</translation>
     </message>
     <message id="page_switchable_output_dim_mode_linear">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="67"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="74"/>
       <source>Linear</source>
       <translation>线性</translation>
     </message>
     <message id="page_switchable_output_dim_mode_optical">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="69"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="76"/>
       <source>Optical curve</source>
       <translation>光曲线</translation>
     </message>
     <message id="page_switchable_output_fuse_detection_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="75"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="82"/>
       <source>Fuse detection mode</source>
       <translation>熔断器检测模式</translation>
     </message>
     <message id="page_switchable_output_fuse_detection_mode_only_when_off">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="84"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="91"/>
       <source>Only when the output is off</source>
       <translation>仅在输出关闭时</translation>
     </message>
     <message id="page_switchable_output_startup_state">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="152"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="159"/>
       <source>Startup switch state</source>
       <translation>启动开关状态</translation>
     </message>
     <message id="page_switchable_output_startup_state_restore_from_memory">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="161"/>
       <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="168"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="175"/>
       <source>Restore from memory</source>
       <translation>从内存恢复</translation>
     </message>
     <message id="page_switchable_output_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="167"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="174"/>
       <source>Startup dim level</source>
       <translation type="unfinished">启动调光级别</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="200"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="207"/>
       <source>Startup dim level</source>
       <translation>启动调光级别</translation>
     </message>
     <message id="page_switchable_output_restore_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="189"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="196"/>
       <source>Restore dim level from memory</source>
       <translation>从内存恢复调光级别</translation>
     </message>
-    <message id="page_switchable_output_polarity_active_high">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
-      <source>Active high / Normally open</source>
-      <translation>高电平有效/常开</translation>
+    <message id="page_switchable_output_polarity_normal">
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="230"/>
+      <source>Normal</source>
+      <translation type="unfinished">正常</translation>
     </message>
-    <message id="page_switchable_output_polarity_active_low">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="225"/>
-      <source>Active low / Normally closed</source>
-      <translation>低电平有效/常闭</translation>
+    <message id="page_switchable_output_polarity_inverted">
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="232"/>
+      <source>Inverted</source>
+      <translation type="unfinished">倒置</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="231"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="238"/>
       <source>Output limit min</source>
       <translation>输出限制最小值</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="244"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="251"/>
       <source>Output limit max</source>
       <translation>输出限制最大值</translation>
     </message>
@@ -10990,11 +10990,6 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <source>Opportunity Loads</source>
       <translation>机会负载</translation>
     </message>
-    <message id="pagesettingssystem_automate_controllable_devices">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="61"/>
-      <source>Automate controllable devices to maximize PV self-use</source>
-      <translation>自动化可控设备，以最大限度地利用光伏自用</translation>
-    </message>
     <message id="microgrid_mode_ems_hybrid_droop">
       <location filename="../../src/enums.cpp" line="873"/>
       <source>EMS Control: Hybrid droop</source>
@@ -11156,7 +11151,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>输入 VE.Bus 密码以访问级别 %1</translation>
     </message>
     <message id="device_page_inputs">
-      <location filename="../../components/DevicePage.qml" line="81"/>
+      <location filename="../../components/DevicePage.qml" line="83"/>
       <source>Inputs</source>
       <translation>输入</translation>
     </message>
@@ -11177,43 +11172,28 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <source>Devices and Priorities</source>
       <translation>设备和优先级</translation>
     </message>
-    <message id="pagecontrollableloads_arrange">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="96"/>
-      <source>Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess.</source>
-      <translation>根据可控设备的优先级对其进行排序；控制算法将根据当前可用的光伏盈余来控制它们。</translation>
-    </message>
     <message id="pagecontrollableloads_acload_expected_power_consumption">
       <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="19"/>
       <source>Expected power consumption</source>
       <translation>预期功耗</translation>
     </message>
     <message id="pagecontrollableloads_acload_minimum_run_duration">
-      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="28"/>
+      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="26"/>
       <source>Minimum run duration when turned on</source>
       <translation>开启时的最短运行时间</translation>
     </message>
     <message id="pagecontrollableloads_acload_minimum_rest_duration">
-      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="35"/>
+      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="33"/>
       <source>Minimum rest duration when turned off</source>
       <translation>关闭时的最短休息时间</translation>
     </message>
     <message id="page_controllable_loads_preferences_battery_life_compatibility">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="40"/>
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="38"/>
       <source>BatteryLife compatibility</source>
       <translation>BatteryLife 兼容性</translation>
     </message>
-    <message id="page_controllable_loads_preferences_pause_opportunity_load_when_active_soc_limit_exceeds_85">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="46"/>
-      <source>Pause Opportunity Loads when Active SOC limit exceeds 85%</source>
-      <translation>当有效 SOC 限制超过 85% 时，暂停机会负载</translation>
-    </message>
-    <message id="page_controllable_loads_preferences_this_helps">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="49"/>
-      <source>This helps the BatteryLife algorithm recharge the battery to 100%.</source>
-      <translation>这有助于 BatteryLife 算法将电池充电至 100%。</translation>
-    </message>
     <message id="page_generic_input_invert">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="45"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="50"/>
       <source>Invert</source>
       <translation>反转</translation>
     </message>
@@ -11286,7 +11266,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>通道配置</translation>
     </message>
     <message id="device_page_outputs">
-      <location filename="../../components/DevicePage.qml" line="62"/>
+      <location filename="../../components/DevicePage.qml" line="64"/>
       <source>Outputs</source>
       <extracomment>Settings page for switchable outputs</extracomment>
       <translation>输出</translation>
@@ -11520,70 +11500,15 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <extracomment>Click to show more available items</extracomment>
       <translation>更多</translation>
     </message>
-    <message id="pagecontrollableloads_battery_allow_additional_loads_starting_at_battery_soc">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="20"/>
-      <source>Allow additional loads starting at a battery SOC of</source>
-      <translation>允许在电池 SOC 达到此值时开启附加负载</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_below_this_soc">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="23"/>
-      <source>Below this SOC, surplus power is used for battery charging as much as possible. From this SOC onward, additional loads may also use surplus power. They may still run earlier if PV production exceeds what the battery can absorb.</source>
-      <translation>低于此 SOC 时，剩余功率将尽可能用于电池充电。达到此 SOC 后，附加负载也可使用剩余功率。如果光伏发电量超过电池接收能力，这些负载可能会提前运行。</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_at_grey_x_soc_reserve_for_battery_charging">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="35"/>
-      <source>At &lt;font color="%1"&gt;%2%&lt;/font&gt; SOC, reserve for battery charging</source>
-      <translation>当 SOC 为 &lt;font color="%1"&gt;%2%&lt;/font&gt; 时，预留用于电池充电</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_at_x_soc_reserve_for_battery_charging">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="45"/>
-      <source>At %1% SOC, reserve for battery charging</source>
-      <translation>当 SOC 为 %1% 时，预留用于电池充电</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_between_the_soc">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="48"/>
-      <source>Between the SOC set in “Allow additional loads from battery SOC” and 100% SOC, the reserved power is adjusted gradually between these values. This allows battery charging to decrease as the SOC rises, leaving more surplus power available for controlled devices.</source>
-      <translation>在“允许使用电池 SOC 开启附加负载”设置的值与 100% SOC 之间，预留功率会逐渐调整。这使得电池充电功率随 SOC 升高而降低，从而为受控设备留出更多剩余功率。</translation>
-    </message>
     <message id="pagecontrollableloads_evcs_maximum_charging_power">
       <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="20"/>
       <source>Maximum charging power</source>
       <translation>最大充电功率</translation>
     </message>
-    <message id="pagecontrollableloads_evcs_limiting_the_maximum">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="23"/>
-      <source>Limiting the maximum charging power can leave room for lower-priority devices to run at the same time.</source>
-      <translation>限制最大充电功率可为同时运行的低优先级设备留出空间。</translation>
-    </message>
     <message id="pagecontrollableloads_evcs_remember_detected_ev_phases">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="29"/>
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="27"/>
       <source>Remember detected EV phases</source>
       <translation>记住已检测到的电动汽车相位</translation>
-    </message>
-    <message id="pagecontrollableloads_evcs_reuses_the_last_detected">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="32"/>
-      <source>Reuses the last detected phase configuration for new charging sessions. Recommended only for a single EV, or when all EVs using this station support the same 1-, 2-, or 3-phase configuration.</source>
-      <translation>为新的充电会话重复使用上次检测到的相位配置。仅建议用于单辆电动汽车，或者当所有使用此充电站的电动汽车均支持相同的 1 相、2 相或 3 相配置时使用。</translation>
-    </message>
-    <message id="pagecontrollableloads_acload_this_should_reflect">
-      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="21"/>
-      <source>This should reflect the device’s typical power consumption while turned on.</source>
-      <translation>此数值应反映设备开启时的典型功耗。</translation>
-    </message>
-    <message id="page_controllable_loads_preferences_pause_opportunity_loads_if_no_ac">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="24"/>
-      <source>Pause Opportunity Loads if no AC input is connected</source>
-      <translation>若无交流输入连接，则暂停机会负载</translation>
-    </message>
-    <message id="pagecontrollableloads_preferences_nominal_inverter_utilization_limit">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="32"/>
-      <source>Nominal inverter utilization limit</source>
-      <translation>标称逆变器利用率限制</translation>
-    </message>
-    <message id="pagecontrollableloads_preferences_limits_how_much">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="35"/>
-      <source>Limits how much of the inverter/charger’s nominal power the algorithm plans to use to convert DC-coupled PV to AC for base loads and scheduled loads.</source>
-      <translation>限制算法用于将直流耦合光伏转换为交流电以供基本负载和计划负载使用的逆变器/充电器标称功率比例。</translation>
     </message>
     <message id="page_dc_gensets_settings_enabled_dc_gensets">
       <location filename="../../pages/settings/PageDcGensetsSettings.qml" line="61"/>
@@ -11868,34 +11793,89 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>通道</translation>
     </message>
     <message id="iochannel_input_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="65"/>
       <source>Input mode</source>
       <translation>输入模式</translation>
     </message>
     <message id="iochannel_digital_input_mode_follow_state">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="68"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="73"/>
       <source>Sensor | Outputs → Follow state</source>
       <translation>传感器 | 输出 → 跟随状态</translation>
     </message>
     <message id="iochannel_digital_input_mode_follow_position">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="70"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="75"/>
       <source>Switch | Outputs → Follow position</source>
       <translation>开关 | 输出 → 跟随位置</translation>
     </message>
     <message id="iochannel_digital_input_mode_toggle_on_change">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="72"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="77"/>
       <source>Switch | Outputs → Toggle on change</source>
       <translation>开关 | 输出 → 改变时切换</translation>
     </message>
     <message id="iochannel_digital_input_mode_toggle_on_press">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="74"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="79"/>
       <source>Button | Outputs → Toggle on press</source>
       <translation>按钮 | 输出 → 按下时切换</translation>
     </message>
     <message id="iochannel_digital_input_mode_toggle_and_dim">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="76"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
       <source>Button | Outputs → Toggle and dim</source>
       <translation>按钮 | 输出 → 切换并调光</translation>
+    </message>
+    <message id="pagesettingssystem_automate_controllable_devices">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="61"/>
+      <source>Automate controllable devices to maximize solar self-consumption</source>
+      <translation>自动控制可控设备，最大化太阳能自发自用</translation>
+    </message>
+    <message id="pagecontrollableloads_controlled_in_order_based_on_available_solar_surplus">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="96"/>
+      <source>Devices will be controlled in order, based on available solar surplus.</source>
+      <translation>设备将根据可用的太阳能余电按顺序进行控制。</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_activate_following_loads_when_battery_reaches">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="20"/>
+      <source>Activate following loads when battery reaches</source>
+      <translation>当电池达到以下状态时激活后续负载</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_below_this_soc_batt_charging_can_use_all_solar_surplus_power">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="26"/>
+      <source>Below this SOC, battery charging can use all solar surplus power.</source>
+      <translation>低于此 SOC 时，电池充电可以使用所有太阳能余电。</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_at_or_above_x_soc">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="38"/>
+      <source>At or above &lt;font color="%1"&gt;%2%&lt;/font&gt; SOC</source>
+      <translation>处于或高于 &lt;font color="%1"&gt;%2%&lt;/font&gt; SOC</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_at_x_soc">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="48"/>
+      <source>At %1% SOC</source>
+      <translation>处于 %1% SOC</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_from_configured_soc_to_100_percent">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="54"/>
+      <source>From the configured SOC to %1%, the power reserved for battery charging is reduced gradually, making more power available for loads.</source>
+      <translation>从配置的 SOC 到 %1%，保留用于电池充电的功率会逐渐减少，从而为负载提供更多可用功率。</translation>
+    </message>
+    <message id="page_controllable_loads_preferences_pause_if_no_ac">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="24"/>
+      <source>Pause if no AC input is connected</source>
+      <translation>若未连接交流输入则暂停</translation>
+    </message>
+    <message id="pagecontrollableloads_preferences_nominal_inverter_utilization_limit">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="32"/>
+      <source>Nominal inverter utilisation limit</source>
+      <translation>额定逆变器利用率限制</translation>
+    </message>
+    <message id="page_controllable_loads_preferences_pause_after_several_days_without_full_charge">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="45"/>
+      <source>Pause after several days without full charge</source>
+      <translation>数天未充满电后暂停</translation>
+    </message>
+    <message id="page_controllable_loads_preferences_only_applies_when_using_optimized_with_battery_life">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="51"/>
+      <source>Only applies when using Optimized with BatteryLife. Opportunity Loads automatically resumes after a full charge.</source>
+      <translation>仅在使用 Optimized (带有 BatteryLife) 时适用。满电后“择机负载”将自动恢复。说明自动恢复”将自动恢复</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>

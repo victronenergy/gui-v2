@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message id="page_switchable_output_switch_mode_disabled">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="48"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="55"/>
       <source>Disabled</source>
       <translation>Deshabilitado</translation>
     </message>
@@ -1011,7 +1011,7 @@
       <translation>Tipo de imagen</translation>
     </message>
     <message id="iochannel_invert_normal">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="52"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
       <source>Normal</source>
       <translation>Normal</translation>
     </message>
@@ -1980,7 +1980,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>Función (Relé 1)</translation>
     </message>
     <message id="page_switchable_output_function">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="113"/>
       <source>Function</source>
       <translation>Función</translation>
     </message>
@@ -3862,7 +3862,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>CC</translation>
     </message>
     <message id="iochannel_invert_inverted">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="54"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
       <source>Inverted</source>
       <translation>Invertido</translation>
     </message>
@@ -4072,7 +4072,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation type="unfinished">Avanzado</translation>
     </message>
     <message id="pagecontrollableloads_battery_advanced">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="29"/>
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="32"/>
       <source>Advanced</source>
       <translation>Avanzado</translation>
     </message>
@@ -4780,7 +4780,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Ningún error</translation>
     </message>
     <message id="acInputs_not_available">
-      <location filename="../../data/AcInputs.qml" line="109"/>
+      <location filename="../../data/AcInputs.qml" line="120"/>
       <source>Not available</source>
       <translation>No disponible</translation>
     </message>
@@ -5781,27 +5781,27 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Estación de carga de vehículos eléctricos</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="116"/>
+      <location filename="../../data/AcInputs.qml" line="127"/>
       <source>Shore</source>
       <translation>Toma de puerto</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="142"/>
+      <location filename="../../data/AcInputs.qml" line="153"/>
       <source>Grid current limit</source>
       <translation>Límite de corriente de la red</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="145"/>
+      <location filename="../../data/AcInputs.qml" line="156"/>
       <source>Generator current limit</source>
       <translation>Límite de corriente del generador</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="148"/>
+      <location filename="../../data/AcInputs.qml" line="159"/>
       <source>Shore current limit</source>
       <translation>Límite de corriente del pantalán</translation>
     </message>
     <message id="acInputs_statusCode_stopping">
-      <location filename="../../data/AcInputs.qml" line="170"/>
+      <location filename="../../data/AcInputs.qml" line="181"/>
       <source>Stopping</source>
       <translation type="unfinished">Parando</translation>
     </message>
@@ -9132,12 +9132,12 @@ El dispositivo GX solo puede controlar un generador conectado y elige el que tie
       <translation>Grupo</translation>
     </message>
     <message id="page_switchable_output_fuse_rating">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="90"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="97"/>
       <source>Fuse rating</source>
       <translation>Valor nominal del fusible</translation>
     </message>
     <message id="boat_page_rpm">
-      <location filename="../../pages/boat/LargeCenterGauge.qml" line="271"/>
+      <location filename="../../pages/boat/LargeCenterGauge.qml" line="379"/>
       <source>RPM</source>
       <translation>RPM</translation>
     </message>
@@ -9496,7 +9496,7 @@ El dispositivo GX solo puede controlar un generador conectado y elige el que tie
       <translation>Actualizar</translation>
     </message>
     <message id="pagecontrollableloads_documentation">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="112"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="113"/>
       <source>Documentation</source>
       <translation>Documentación</translation>
     </message>
@@ -10120,7 +10120,7 @@ El dispositivo GX solo puede controlar un generador conectado y elige el que tie
       <translation>Polaridad (Relé 1)</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="216"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
       <source>Polarity</source>
       <translation>Polaridad</translation>
     </message>
@@ -10364,7 +10364,7 @@ El dispositivo GX solo puede controlar un generador conectado y elige el que tie
       <translation>Automático (%1)</translation>
     </message>
     <message id="switchableoutput_list_delegate_state_forced">
-      <location filename="../../pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml" line="109"/>
+      <location filename="../../pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml" line="107"/>
       <source>Forced</source>
       <translation>Forzado</translation>
     </message>
@@ -10516,93 +10516,93 @@ El dispositivo GX solo puede controlar un generador conectado y elige el que tie
       <translation>Lista de dispositivos</translation>
     </message>
     <message id="page_switchable_output_switch_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="41"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="48"/>
       <source>Switch mode</source>
       <translation>Modo de conmutación</translation>
     </message>
     <message id="page_switchable_output_switch_mode_linear">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="50"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="57"/>
       <source>Permanent on</source>
       <translation>Encendido permanente</translation>
     </message>
     <message id="page_switchable_output_switch_mode_optical">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="52"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="59"/>
       <source>Switching</source>
       <translation>Conmutación</translation>
     </message>
     <message id="page_switchable_output_dim_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="58"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="65"/>
       <source>Dim mode</source>
       <translation>Modo atenuación</translation>
     </message>
     <message id="page_switchable_output_dim_mode_disabled">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="65"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="72"/>
       <source>Dimming disabled</source>
       <translation>Atenuación desactivada</translation>
     </message>
     <message id="page_switchable_output_dim_mode_linear">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="67"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="74"/>
       <source>Linear</source>
       <translation>Lineal</translation>
     </message>
     <message id="page_switchable_output_dim_mode_optical">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="69"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="76"/>
       <source>Optical curve</source>
       <translation>Curva óptica</translation>
     </message>
     <message id="page_switchable_output_fuse_detection_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="75"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="82"/>
       <source>Fuse detection mode</source>
       <translation>Modo de detección de fusible</translation>
     </message>
     <message id="page_switchable_output_fuse_detection_mode_only_when_off">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="84"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="91"/>
       <source>Only when the output is off</source>
       <translation>Solo cuando la salida está apagada</translation>
     </message>
     <message id="page_switchable_output_startup_state">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="152"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="159"/>
       <source>Startup switch state</source>
       <translation>Estado del interruptor de inicio</translation>
     </message>
     <message id="page_switchable_output_startup_state_restore_from_memory">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="161"/>
       <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="168"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="175"/>
       <source>Restore from memory</source>
       <translation>Restaurar desde la memoria</translation>
     </message>
     <message id="page_switchable_output_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="167"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="174"/>
       <source>Startup dim level</source>
       <translation type="unfinished">Nivel de atenuación de inicio</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="200"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="207"/>
       <source>Startup dim level</source>
       <translation>Nivel de atenuación de inicio</translation>
     </message>
     <message id="page_switchable_output_restore_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="189"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="196"/>
       <source>Restore dim level from memory</source>
       <translation>Restaurar el nivel de atenuación desde la memoria</translation>
     </message>
-    <message id="page_switchable_output_polarity_active_high">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
-      <source>Active high / Normally open</source>
-      <translation>Activo alto / Normalmente abierto</translation>
+    <message id="page_switchable_output_polarity_normal">
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="230"/>
+      <source>Normal</source>
+      <translation type="unfinished">Normal</translation>
     </message>
-    <message id="page_switchable_output_polarity_active_low">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="225"/>
-      <source>Active low / Normally closed</source>
-      <translation>Activo bajo / Normalmente cerrado</translation>
+    <message id="page_switchable_output_polarity_inverted">
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="232"/>
+      <source>Inverted</source>
+      <translation type="unfinished">Invertido</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="231"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="238"/>
       <source>Output limit min</source>
       <translation>Límite mínimo de salida</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="244"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="251"/>
       <source>Output limit max</source>
       <translation>Límite máximo de salida</translation>
     </message>
@@ -10991,11 +10991,6 @@ El dispositivo GX solo puede controlar un generador conectado y elige el que tie
       <source>Opportunity Loads</source>
       <translation>Cargas de oportunidad</translation>
     </message>
-    <message id="pagesettingssystem_automate_controllable_devices">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="61"/>
-      <source>Automate controllable devices to maximize PV self-use</source>
-      <translation>Automatice los dispositivos controlables para maximizar el uso de energía fotovoltaica</translation>
-    </message>
     <message id="microgrid_mode_ems_hybrid_droop">
       <location filename="../../src/enums.cpp" line="873"/>
       <source>EMS Control: Hybrid droop</source>
@@ -11157,7 +11152,7 @@ El dispositivo GX solo puede controlar un generador conectado y elige el que tie
       <translation>Introduzca la contraseña de VE.Bus para el nivel de acceso %1</translation>
     </message>
     <message id="device_page_inputs">
-      <location filename="../../components/DevicePage.qml" line="81"/>
+      <location filename="../../components/DevicePage.qml" line="83"/>
       <source>Inputs</source>
       <translation>Entradas</translation>
     </message>
@@ -11178,43 +11173,28 @@ El dispositivo GX solo puede controlar un generador conectado y elige el que tie
       <source>Devices and Priorities</source>
       <translation>Dispositivos y prioridades</translation>
     </message>
-    <message id="pagecontrollableloads_arrange">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="96"/>
-      <source>Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess.</source>
-      <translation>Organice los dispositivos controlables según su prioridad; el algoritmo de control los controlará en función del exceso de energía fotovoltaica disponible en ese momento.</translation>
-    </message>
     <message id="pagecontrollableloads_acload_expected_power_consumption">
       <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="19"/>
       <source>Expected power consumption</source>
       <translation>Consumo de energía esperado</translation>
     </message>
     <message id="pagecontrollableloads_acload_minimum_run_duration">
-      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="28"/>
+      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="26"/>
       <source>Minimum run duration when turned on</source>
       <translation>Duración mínima de funcionamiento cuando está encendido</translation>
     </message>
     <message id="pagecontrollableloads_acload_minimum_rest_duration">
-      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="35"/>
+      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="33"/>
       <source>Minimum rest duration when turned off</source>
       <translation>Duración mínima de descanso cuando está apagado</translation>
     </message>
     <message id="page_controllable_loads_preferences_battery_life_compatibility">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="40"/>
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="38"/>
       <source>BatteryLife compatibility</source>
       <translation>Compatibilidad con BatteryLife</translation>
     </message>
-    <message id="page_controllable_loads_preferences_pause_opportunity_load_when_active_soc_limit_exceeds_85">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="46"/>
-      <source>Pause Opportunity Loads when Active SOC limit exceeds 85%</source>
-      <translation>Pausar las cargas de oportunidad cuando el límite de SOC activo supere el 85 %</translation>
-    </message>
-    <message id="page_controllable_loads_preferences_this_helps">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="49"/>
-      <source>This helps the BatteryLife algorithm recharge the battery to 100%.</source>
-      <translation>Esto ayuda al algoritmo BatteryLife a recargar la batería al 100 %.</translation>
-    </message>
     <message id="page_generic_input_invert">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="45"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="50"/>
       <source>Invert</source>
       <translation>Invertir</translation>
     </message>
@@ -11287,7 +11267,7 @@ Actualice al firmware más reciente para poder ajustar esta configuración.</tra
       <translation>Configuración de canal</translation>
     </message>
     <message id="device_page_outputs">
-      <location filename="../../components/DevicePage.qml" line="62"/>
+      <location filename="../../components/DevicePage.qml" line="64"/>
       <source>Outputs</source>
       <extracomment>Settings page for switchable outputs</extracomment>
       <translation>Salidas</translation>
@@ -11521,70 +11501,15 @@ Actualice al firmware más reciente para poder ajustar esta configuración.</tra
       <extracomment>Click to show more available items</extracomment>
       <translation>Más</translation>
     </message>
-    <message id="pagecontrollableloads_battery_allow_additional_loads_starting_at_battery_soc">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="20"/>
-      <source>Allow additional loads starting at a battery SOC of</source>
-      <translation>Permitir cargas adicionales a partir de un SOC de batería de</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_below_this_soc">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="23"/>
-      <source>Below this SOC, surplus power is used for battery charging as much as possible. From this SOC onward, additional loads may also use surplus power. They may still run earlier if PV production exceeds what the battery can absorb.</source>
-      <translation>Por debajo de este SOC, el excedente de energía se utiliza al máximo para cargar la batería. A partir de este SOC, las cargas adicionales también pueden usar el excedente de energía. Aun así, podrían activarse antes si la producción fotovoltaica supera la capacidad de absorción de la batería.</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_at_grey_x_soc_reserve_for_battery_charging">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="35"/>
-      <source>At &lt;font color="%1"&gt;%2%&lt;/font&gt; SOC, reserve for battery charging</source>
-      <translation>Con un SOC del &lt;font color="%1"&gt;%2%&lt;/font&gt;, reservar para carga de batería</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_at_x_soc_reserve_for_battery_charging">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="45"/>
-      <source>At %1% SOC, reserve for battery charging</source>
-      <translation>Con un SOC del %1%, reservar para carga de batería</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_between_the_soc">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="48"/>
-      <source>Between the SOC set in “Allow additional loads from battery SOC” and 100% SOC, the reserved power is adjusted gradually between these values. This allows battery charging to decrease as the SOC rises, leaving more surplus power available for controlled devices.</source>
-      <translation>Entre el SOC configurado en «Permitir cargas adicionales a partir de un SOC de batería» y el 100% de SOC, la potencia reservada se ajusta gradualmente entre estos valores. Esto permite que la carga de la batería disminuya a medida que aumenta el SOC, dejando más excedente de energía disponible para los dispositivos controlados.</translation>
-    </message>
     <message id="pagecontrollableloads_evcs_maximum_charging_power">
       <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="20"/>
       <source>Maximum charging power</source>
       <translation>Potencia de carga máxima</translation>
     </message>
-    <message id="pagecontrollableloads_evcs_limiting_the_maximum">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="23"/>
-      <source>Limiting the maximum charging power can leave room for lower-priority devices to run at the same time.</source>
-      <translation>Limitar la potencia de carga máxima puede dejar espacio para que funcionen simultáneamente dispositivos de menor prioridad.</translation>
-    </message>
     <message id="pagecontrollableloads_evcs_remember_detected_ev_phases">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="29"/>
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="27"/>
       <source>Remember detected EV phases</source>
       <translation>Recordar fases detectadas del VE</translation>
-    </message>
-    <message id="pagecontrollableloads_evcs_reuses_the_last_detected">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="32"/>
-      <source>Reuses the last detected phase configuration for new charging sessions. Recommended only for a single EV, or when all EVs using this station support the same 1-, 2-, or 3-phase configuration.</source>
-      <translation>Reutiliza la última configuración de fases detectada para nuevas sesiones de carga. Se recomienda solo para un único VE, o cuando todos los VE que utilizan esta estación admiten la misma configuración de 1, 2 o 3 fases.</translation>
-    </message>
-    <message id="pagecontrollableloads_acload_this_should_reflect">
-      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="21"/>
-      <source>This should reflect the device’s typical power consumption while turned on.</source>
-      <translation>Esto debe reflejar el consumo de energía típico del dispositivo mientras está encendido.</translation>
-    </message>
-    <message id="page_controllable_loads_preferences_pause_opportunity_loads_if_no_ac">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="24"/>
-      <source>Pause Opportunity Loads if no AC input is connected</source>
-      <translation>Pausar cargas de oportunidad si no hay entrada de CA conectada</translation>
-    </message>
-    <message id="pagecontrollableloads_preferences_nominal_inverter_utilization_limit">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="32"/>
-      <source>Nominal inverter utilization limit</source>
-      <translation>Límite de uso nominal del inversor</translation>
-    </message>
-    <message id="pagecontrollableloads_preferences_limits_how_much">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="35"/>
-      <source>Limits how much of the inverter/charger’s nominal power the algorithm plans to use to convert DC-coupled PV to AC for base loads and scheduled loads.</source>
-      <translation>Limita cuánta potencia nominal del inversor/cargador planea usar el algoritmo para convertir la energía fotovoltaica de acoplamiento CC a CA para las cargas base y programadas.</translation>
     </message>
     <message id="page_dc_gensets_settings_enabled_dc_gensets">
       <location filename="../../pages/settings/PageDcGensetsSettings.qml" line="61"/>
@@ -11869,34 +11794,89 @@ Actualice al firmware más reciente para poder ajustar esta configuración.</tra
       <translation>Canales</translation>
     </message>
     <message id="iochannel_input_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="65"/>
       <source>Input mode</source>
       <translation>Modo de entrada</translation>
     </message>
     <message id="iochannel_digital_input_mode_follow_state">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="68"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="73"/>
       <source>Sensor | Outputs → Follow state</source>
       <translation>Sensor | Salidas → Seguir estado</translation>
     </message>
     <message id="iochannel_digital_input_mode_follow_position">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="70"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="75"/>
       <source>Switch | Outputs → Follow position</source>
       <translation>Interruptor | Salidas → Seguir posición</translation>
     </message>
     <message id="iochannel_digital_input_mode_toggle_on_change">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="72"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="77"/>
       <source>Switch | Outputs → Toggle on change</source>
       <translation>Interruptor | Salidas → Alternar al cambiar</translation>
     </message>
     <message id="iochannel_digital_input_mode_toggle_on_press">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="74"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="79"/>
       <source>Button | Outputs → Toggle on press</source>
       <translation>Botón | Salidas → Alternar al pulsar</translation>
     </message>
     <message id="iochannel_digital_input_mode_toggle_and_dim">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="76"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
       <source>Button | Outputs → Toggle and dim</source>
       <translation>Botón | Salidas → Alternar y regular</translation>
+    </message>
+    <message id="pagesettingssystem_automate_controllable_devices">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="61"/>
+      <source>Automate controllable devices to maximize solar self-consumption</source>
+      <translation>Automatizar los dispositivos controlables para maximizar el autoconsumo solar</translation>
+    </message>
+    <message id="pagecontrollableloads_controlled_in_order_based_on_available_solar_surplus">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="96"/>
+      <source>Devices will be controlled in order, based on available solar surplus.</source>
+      <translation>Los dispositivos se controlarán en orden, según el excedente solar disponible.</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_activate_following_loads_when_battery_reaches">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="20"/>
+      <source>Activate following loads when battery reaches</source>
+      <translation>Activar las siguientes cargas cuando la batería alcance</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_below_this_soc_batt_charging_can_use_all_solar_surplus_power">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="26"/>
+      <source>Below this SOC, battery charging can use all solar surplus power.</source>
+      <translation>Por debajo de este SOC, la carga de la batería puede utilizar todo el excedente de energía solar.</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_at_or_above_x_soc">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="38"/>
+      <source>At or above &lt;font color="%1"&gt;%2%&lt;/font&gt; SOC</source>
+      <translation>Con un SOC igual o superior al &lt;font color="%1"&gt;%2%&lt;/font&gt;</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_at_x_soc">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="48"/>
+      <source>At %1% SOC</source>
+      <translation>Con un %1% de SOC</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_from_configured_soc_to_100_percent">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="54"/>
+      <source>From the configured SOC to %1%, the power reserved for battery charging is reduced gradually, making more power available for loads.</source>
+      <translation>Desde el SOC configurado hasta el %1%, la potencia reservada para la carga de la batería se reduce gradualmente, lo que deja más potencia disponible para las cargas.</translation>
+    </message>
+    <message id="page_controllable_loads_preferences_pause_if_no_ac">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="24"/>
+      <source>Pause if no AC input is connected</source>
+      <translation>Pausar si no hay ninguna entrada de CA conectada</translation>
+    </message>
+    <message id="pagecontrollableloads_preferences_nominal_inverter_utilization_limit">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="32"/>
+      <source>Nominal inverter utilisation limit</source>
+      <translation>Límite nominal de utilización del inversor</translation>
+    </message>
+    <message id="page_controllable_loads_preferences_pause_after_several_days_without_full_charge">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="45"/>
+      <source>Pause after several days without full charge</source>
+      <translation>Pausar después de varios días sin carga completa</translation>
+    </message>
+    <message id="page_controllable_loads_preferences_only_applies_when_using_optimized_with_battery_life">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="51"/>
+      <source>Only applies when using Optimized with BatteryLife. Opportunity Loads automatically resumes after a full charge.</source>
+      <translation>Solo se aplica cuando se utiliza Optimizado con BatteryLife. Opportunity Loads se reanuda automáticamente después de una carga completa.</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
