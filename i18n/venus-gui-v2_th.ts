@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message id="page_switchable_output_switch_mode_disabled">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="48"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="55"/>
       <source>Disabled</source>
       <translation>พิการ</translation>
     </message>
@@ -1011,7 +1011,7 @@
       <translation>ประเภทรูปภาพ</translation>
     </message>
     <message id="iochannel_invert_normal">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="52"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
       <source>Normal</source>
       <translation>ปกติ</translation>
     </message>
@@ -1980,7 +1980,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>ฟังก์ชั่น (รีเลย์ 1)</translation>
     </message>
     <message id="page_switchable_output_function">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="106"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="113"/>
       <source>Function</source>
       <translation>ฟังก์ชั่น</translation>
     </message>
@@ -3861,7 +3861,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>กระแสตรง</translation>
     </message>
     <message id="iochannel_invert_inverted">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="54"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
       <source>Inverted</source>
       <translation>คว่ำ</translation>
     </message>
@@ -4072,7 +4072,7 @@ Do you want to continue?</source>
       <translation type="unfinished">ขั้นสูง</translation>
     </message>
     <message id="pagecontrollableloads_battery_advanced">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="29"/>
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="32"/>
       <source>Advanced</source>
       <translation>ขั้นสูง</translation>
     </message>
@@ -4780,7 +4780,7 @@ Do you want to continue?</source>
       <translation>ไม่มีข้อผิดพลาด</translation>
     </message>
     <message id="acInputs_not_available">
-      <location filename="../../data/AcInputs.qml" line="109"/>
+      <location filename="../../data/AcInputs.qml" line="120"/>
       <source>Not available</source>
       <translation>ไม่ว่าง</translation>
     </message>
@@ -5781,27 +5781,27 @@ Do you want to continue?</source>
       <translation>อีวีซีเอส</translation>
     </message>
     <message id="acInputs_shore">
-      <location filename="../../data/AcInputs.qml" line="116"/>
+      <location filename="../../data/AcInputs.qml" line="127"/>
       <source>Shore</source>
       <translation>ชายฝั่ง</translation>
     </message>
     <message id="acInputs_current_limit_grid">
-      <location filename="../../data/AcInputs.qml" line="142"/>
+      <location filename="../../data/AcInputs.qml" line="153"/>
       <source>Grid current limit</source>
       <translation>ขีด จำกัด ปัจจุบันของกริด</translation>
     </message>
     <message id="acInputs_current_limit_generator">
-      <location filename="../../data/AcInputs.qml" line="145"/>
+      <location filename="../../data/AcInputs.qml" line="156"/>
       <source>Generator current limit</source>
       <translation>ขีด จำกัด กระแสไฟของเครื่องกำเนิดไฟฟ้า</translation>
     </message>
     <message id="acInputs_current_limit_shore">
-      <location filename="../../data/AcInputs.qml" line="148"/>
+      <location filename="../../data/AcInputs.qml" line="159"/>
       <source>Shore current limit</source>
       <translation>ขีดจำกัดกระแสฝั่ง</translation>
     </message>
     <message id="acInputs_statusCode_stopping">
-      <location filename="../../data/AcInputs.qml" line="170"/>
+      <location filename="../../data/AcInputs.qml" line="181"/>
       <source>Stopping</source>
       <translation type="unfinished">หยุด</translation>
     </message>
@@ -9131,12 +9131,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>กลุ่ม</translation>
     </message>
     <message id="page_switchable_output_fuse_rating">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="90"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="97"/>
       <source>Fuse rating</source>
       <translation>ฟิวส์เรทติ้ง</translation>
     </message>
     <message id="boat_page_rpm">
-      <location filename="../../pages/boat/LargeCenterGauge.qml" line="271"/>
+      <location filename="../../pages/boat/LargeCenterGauge.qml" line="379"/>
       <source>RPM</source>
       <translation>รอบต่อนาที</translation>
     </message>
@@ -9495,7 +9495,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>อัปเดต</translation>
     </message>
     <message id="pagecontrollableloads_documentation">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="112"/>
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="113"/>
       <source>Documentation</source>
       <translation>เอกสาร</translation>
     </message>
@@ -10119,7 +10119,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ขั้ว (รีเลย์ 1)</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="216"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
       <source>Polarity</source>
       <translation>ขั้ว</translation>
     </message>
@@ -10363,7 +10363,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>อัตโนมัติ (%1)</translation>
     </message>
     <message id="switchableoutput_list_delegate_state_forced">
-      <location filename="../../pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml" line="109"/>
+      <location filename="../../pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml" line="107"/>
       <source>Forced</source>
       <translation>บังคับ</translation>
     </message>
@@ -10515,93 +10515,93 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>รายการอุปกรณ์</translation>
     </message>
     <message id="page_switchable_output_switch_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="41"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="48"/>
       <source>Switch mode</source>
       <translation>โหมดสวิตช์</translation>
     </message>
     <message id="page_switchable_output_switch_mode_linear">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="50"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="57"/>
       <source>Permanent on</source>
       <translation>เปิดตลอดเวลา</translation>
     </message>
     <message id="page_switchable_output_switch_mode_optical">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="52"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="59"/>
       <source>Switching</source>
       <translation>การสลับ</translation>
     </message>
     <message id="page_switchable_output_dim_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="58"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="65"/>
       <source>Dim mode</source>
       <translation>โหมดหรี่แสง</translation>
     </message>
     <message id="page_switchable_output_dim_mode_disabled">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="65"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="72"/>
       <source>Dimming disabled</source>
       <translation>ปิดใช้งานการหรี่แสง</translation>
     </message>
     <message id="page_switchable_output_dim_mode_linear">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="67"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="74"/>
       <source>Linear</source>
       <translation>เชิงเส้น</translation>
     </message>
     <message id="page_switchable_output_dim_mode_optical">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="69"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="76"/>
       <source>Optical curve</source>
       <translation>เส้นโค้งแสง</translation>
     </message>
     <message id="page_switchable_output_fuse_detection_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="75"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="82"/>
       <source>Fuse detection mode</source>
       <translation>โหมดตรวจจับฟิวส์</translation>
     </message>
     <message id="page_switchable_output_fuse_detection_mode_only_when_off">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="84"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="91"/>
       <source>Only when the output is off</source>
       <translation>เมื่อปิดเอาต์พุตเท่านั้น</translation>
     </message>
     <message id="page_switchable_output_startup_state">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="152"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="159"/>
       <source>Startup switch state</source>
       <translation>สถานะสวิตช์เริ่มต้น</translation>
     </message>
     <message id="page_switchable_output_startup_state_restore_from_memory">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="161"/>
       <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="168"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="175"/>
       <source>Restore from memory</source>
       <translation>คืนค่าจากหน่วยความจำ</translation>
     </message>
     <message id="page_switchable_output_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="167"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="174"/>
       <source>Startup dim level</source>
       <translation type="unfinished">ระดับหรี่แสงเริ่มต้น</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="200"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="207"/>
       <source>Startup dim level</source>
       <translation>ระดับหรี่แสงเริ่มต้น</translation>
     </message>
     <message id="page_switchable_output_restore_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="189"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="196"/>
       <source>Restore dim level from memory</source>
       <translation>คืนค่าระดับหรี่แสงจากหน่วยความจำ</translation>
     </message>
-    <message id="page_switchable_output_polarity_active_high">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
-      <source>Active high / Normally open</source>
-      <translation>Active high / ปกติเปิด</translation>
+    <message id="page_switchable_output_polarity_normal">
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="230"/>
+      <source>Normal</source>
+      <translation type="unfinished">ปกติ</translation>
     </message>
-    <message id="page_switchable_output_polarity_active_low">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="225"/>
-      <source>Active low / Normally closed</source>
-      <translation>Active low / ปกติปิด</translation>
+    <message id="page_switchable_output_polarity_inverted">
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="232"/>
+      <source>Inverted</source>
+      <translation type="unfinished">คว่ำ</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="231"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="238"/>
       <source>Output limit min</source>
       <translation>ขีดจำกัดเอาต์พุตต่ำสุด</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="244"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="251"/>
       <source>Output limit max</source>
       <translation>ขีดจำกัดเอาต์พุตสูงสุด</translation>
     </message>
@@ -10990,11 +10990,6 @@ The GX device can only control one connected genset and takes the one with the l
       <source>Opportunity Loads</source>
       <translation>โหลดโอกาส</translation>
     </message>
-    <message id="pagesettingssystem_automate_controllable_devices">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="61"/>
-      <source>Automate controllable devices to maximize PV self-use</source>
-      <translation>ระบบอัตโนมัติสำหรับอุปกรณ์ที่ควบคุมได้เพื่อเพิ่มการใช้พลังงานแสงอาทิตย์ด้วยตนเองให้สูงสุด</translation>
-    </message>
     <message id="microgrid_mode_ems_hybrid_droop">
       <location filename="../../src/enums.cpp" line="873"/>
       <source>EMS Control: Hybrid droop</source>
@@ -11156,7 +11151,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ป้อนรหัสผ่าน VE.Bus สำหรับระดับการเข้าถึง %1</translation>
     </message>
     <message id="device_page_inputs">
-      <location filename="../../components/DevicePage.qml" line="81"/>
+      <location filename="../../components/DevicePage.qml" line="83"/>
       <source>Inputs</source>
       <translation>อินพุต</translation>
     </message>
@@ -11177,43 +11172,28 @@ The GX device can only control one connected genset and takes the one with the l
       <source>Devices and Priorities</source>
       <translation>อุปกรณ์และลำดับความสำคัญ</translation>
     </message>
-    <message id="pagecontrollableloads_arrange">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="96"/>
-      <source>Arrange the controllable devices according to their priority; the control algorithm will control them based on the currently available PV excess.</source>
-      <translation>จัดเรียงอุปกรณ์ที่ควบคุมได้ตามลำดับความสำคัญ อัลกอริทึมการควบคุมจะควบคุมอุปกรณ์เหล่านี้ตามพลังงานแสงอาทิตย์ส่วนเกินที่มีอยู่ในปัจจุบัน</translation>
-    </message>
     <message id="pagecontrollableloads_acload_expected_power_consumption">
       <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="19"/>
       <source>Expected power consumption</source>
       <translation>การใช้พลังงานที่คาดหวัง</translation>
     </message>
     <message id="pagecontrollableloads_acload_minimum_run_duration">
-      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="28"/>
+      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="26"/>
       <source>Minimum run duration when turned on</source>
       <translation>ระยะเวลาการทำงานขั้นต่ำเมื่อเปิด</translation>
     </message>
     <message id="pagecontrollableloads_acload_minimum_rest_duration">
-      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="35"/>
+      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="33"/>
       <source>Minimum rest duration when turned off</source>
       <translation>ระยะเวลาพักขั้นต่ำเมื่อปิด</translation>
     </message>
     <message id="page_controllable_loads_preferences_battery_life_compatibility">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="40"/>
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="38"/>
       <source>BatteryLife compatibility</source>
       <translation>ความเข้ากันได้ของ BatteryLife</translation>
     </message>
-    <message id="page_controllable_loads_preferences_pause_opportunity_load_when_active_soc_limit_exceeds_85">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="46"/>
-      <source>Pause Opportunity Loads when Active SOC limit exceeds 85%</source>
-      <translation>หยุดโหลดโอกาสชั่วคราวเมื่อขีดจำกัด Active SOC เกิน 85%</translation>
-    </message>
-    <message id="page_controllable_loads_preferences_this_helps">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="49"/>
-      <source>This helps the BatteryLife algorithm recharge the battery to 100%.</source>
-      <translation>วิธีนี้ช่วยให้อัลกอริทึม BatteryLife ชาร์จแบตเตอรี่จนเต็ม 100%</translation>
-    </message>
     <message id="page_generic_input_invert">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="45"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="50"/>
       <source>Invert</source>
       <translation>ผกผัน</translation>
     </message>
@@ -11286,7 +11266,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>การกำหนดค่าช่อง</translation>
     </message>
     <message id="device_page_outputs">
-      <location filename="../../components/DevicePage.qml" line="62"/>
+      <location filename="../../components/DevicePage.qml" line="64"/>
       <source>Outputs</source>
       <extracomment>Settings page for switchable outputs</extracomment>
       <translation>เอาต์พุต</translation>
@@ -11520,70 +11500,15 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <extracomment>Click to show more available items</extracomment>
       <translation>เพิ่มเติม</translation>
     </message>
-    <message id="pagecontrollableloads_battery_allow_additional_loads_starting_at_battery_soc">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="20"/>
-      <source>Allow additional loads starting at a battery SOC of</source>
-      <translation>อนุญาตให้ใช้โหลดเพิ่มเติมเริ่มที่ SOC แบตเตอรี่ระดับ</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_below_this_soc">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="23"/>
-      <source>Below this SOC, surplus power is used for battery charging as much as possible. From this SOC onward, additional loads may also use surplus power. They may still run earlier if PV production exceeds what the battery can absorb.</source>
-      <translation>ต่ำกว่าค่า SOC นี้ พลังงานส่วนเกินจะถูกนำไปใช้ชาร์จแบตเตอรี่ให้มากที่สุดเท่าที่จะทำได้ ตั้งแต่ค่า SOC นี้เป็นต้นไป โหลดเพิ่มเติมอาจใช้พลังงานส่วนเกินได้เช่นกัน โดยอาจทำงานก่อนหน้านั้นได้หากการผลิตจาก PV เกินกว่าที่แบตเตอรี่จะรองรับได้</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_at_grey_x_soc_reserve_for_battery_charging">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="35"/>
-      <source>At &lt;font color="%1"&gt;%2%&lt;/font&gt; SOC, reserve for battery charging</source>
-      <translation>ที่ SOC &lt;font color="%1"&gt;%2%&lt;/font&gt; สำรองไว้สำหรับการชาร์จแบตเตอรี่</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_at_x_soc_reserve_for_battery_charging">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="45"/>
-      <source>At %1% SOC, reserve for battery charging</source>
-      <translation>ที่ SOC %1% สำรองไว้สำหรับการชาร์จแบตเตอรี่</translation>
-    </message>
-    <message id="pagecontrollableloads_battery_between_the_soc">
-      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="48"/>
-      <source>Between the SOC set in “Allow additional loads from battery SOC” and 100% SOC, the reserved power is adjusted gradually between these values. This allows battery charging to decrease as the SOC rises, leaving more surplus power available for controlled devices.</source>
-      <translation>ระหว่างค่า SOC ที่ตั้งไว้ใน “อนุญาตให้ใช้โหลดเพิ่มเติมจาก SOC แบตเตอรี่” และ SOC 100% พลังงานที่สำรองไว้จะถูกปรับเปลี่ยนไปเรื่อยๆ ระหว่างค่าเหล่านี้ สิ่งนี้ช่วยให้การชาร์จแบตเตอรี่ลดลงเมื่อ SOC เพิ่มขึ้น ทำให้มีพลังงานส่วนเกินเหลือมากขึ้นสำหรับอุปกรณ์ที่ควบคุมไว้</translation>
-    </message>
     <message id="pagecontrollableloads_evcs_maximum_charging_power">
       <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="20"/>
       <source>Maximum charging power</source>
       <translation>กำลังการชาร์จสูงสุด</translation>
     </message>
-    <message id="pagecontrollableloads_evcs_limiting_the_maximum">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="23"/>
-      <source>Limiting the maximum charging power can leave room for lower-priority devices to run at the same time.</source>
-      <translation>การจำกัดกำลังการชาร์จสูงสุดสามารถช่วยให้อุปกรณ์ที่มีความสำคัญต่ำกว่าทำงานได้ในเวลาเดียวกัน</translation>
-    </message>
     <message id="pagecontrollableloads_evcs_remember_detected_ev_phases">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="29"/>
+      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="27"/>
       <source>Remember detected EV phases</source>
       <translation>จดจำเฟส EV ที่ตรวจพบ</translation>
-    </message>
-    <message id="pagecontrollableloads_evcs_reuses_the_last_detected">
-      <location filename="../../pages/settings/PageControllableLoadsEVCS.qml" line="32"/>
-      <source>Reuses the last detected phase configuration for new charging sessions. Recommended only for a single EV, or when all EVs using this station support the same 1-, 2-, or 3-phase configuration.</source>
-      <translation>ใช้การตั้งค่าเฟสที่ตรวจพบครั้งล่าสุดสำหรับการเริ่มชาร์จครั้งใหม่ แนะนำให้ใช้เฉพาะสำหรับ EV คันเดียว หรือเมื่อ EV ทั้งหมดที่ใช้สถานีนี้รองรับการตั้งค่า 1, 2 หรือ 3 เฟสแบบเดียวกัน</translation>
-    </message>
-    <message id="pagecontrollableloads_acload_this_should_reflect">
-      <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="21"/>
-      <source>This should reflect the device’s typical power consumption while turned on.</source>
-      <translation>ค่านี้ควรสะท้อนถึงการใช้พลังงานปกติของอุปกรณ์ขณะเปิดเครื่อง</translation>
-    </message>
-    <message id="page_controllable_loads_preferences_pause_opportunity_loads_if_no_ac">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="24"/>
-      <source>Pause Opportunity Loads if no AC input is connected</source>
-      <translation>หยุดการใช้โหลดตามโอกาส (Opportunity Loads) หากไม่มีการเชื่อมต่อ AC อินพุต</translation>
-    </message>
-    <message id="pagecontrollableloads_preferences_nominal_inverter_utilization_limit">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="32"/>
-      <source>Nominal inverter utilization limit</source>
-      <translation>ขีดจำกัดการใช้งานอินเวอร์เตอร์สูงสุด</translation>
-    </message>
-    <message id="pagecontrollableloads_preferences_limits_how_much">
-      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="35"/>
-      <source>Limits how much of the inverter/charger’s nominal power the algorithm plans to use to convert DC-coupled PV to AC for base loads and scheduled loads.</source>
-      <translation>จำกัดปริมาณพลังงานปกติของอินเวอร์เตอร์/เครื่องชาร์จที่อัลกอริทึมวางแผนจะใช้เพื่อแปลง PV แบบ DC-coupled เป็น AC สำหรับโหลดพื้นฐานและโหลดที่ตั้งเวลาไว้</translation>
     </message>
     <message id="page_dc_gensets_settings_enabled_dc_gensets">
       <location filename="../../pages/settings/PageDcGensetsSettings.qml" line="61"/>
@@ -11868,34 +11793,89 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>ช่อง</translation>
     </message>
     <message id="iochannel_input_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="65"/>
       <source>Input mode</source>
       <translation>โหมดอินพุต</translation>
     </message>
     <message id="iochannel_digital_input_mode_follow_state">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="68"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="73"/>
       <source>Sensor | Outputs → Follow state</source>
       <translation>เซ็นเซอร์ | เอาต์พุต → ตามสถานะ</translation>
     </message>
     <message id="iochannel_digital_input_mode_follow_position">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="70"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="75"/>
       <source>Switch | Outputs → Follow position</source>
       <translation>สวิตช์ | เอาต์พุต → ตามตำแหน่ง</translation>
     </message>
     <message id="iochannel_digital_input_mode_toggle_on_change">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="72"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="77"/>
       <source>Switch | Outputs → Toggle on change</source>
       <translation>สวิตช์ | เอาต์พุต → สลับเมื่อเปลี่ยน</translation>
     </message>
     <message id="iochannel_digital_input_mode_toggle_on_press">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="74"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="79"/>
       <source>Button | Outputs → Toggle on press</source>
       <translation>ปุ่ม | เอาต์พุต → สลับเมื่อกด</translation>
     </message>
     <message id="iochannel_digital_input_mode_toggle_and_dim">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="76"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
       <source>Button | Outputs → Toggle and dim</source>
       <translation>ปุ่ม | เอาต์พุต → สลับและหรี่</translation>
+    </message>
+    <message id="pagesettingssystem_automate_controllable_devices">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="61"/>
+      <source>Automate controllable devices to maximize solar self-consumption</source>
+      <translation>ทำงานอุปกรณ์ที่ควบคุมได้โดยอัตโนมัติ เพื่อเพิ่มการใช้งานพลังงานแสงอาทิตย์ด้วยตนเองให้ได้มากที่สุด</translation>
+    </message>
+    <message id="pagecontrollableloads_controlled_in_order_based_on_available_solar_surplus">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="96"/>
+      <source>Devices will be controlled in order, based on available solar surplus.</source>
+      <translation>อุปกรณ์ต่างๆ จะถูกควบคุมตามลำดับ โดยขึ้นอยู่กับพลังงานแสงอาทิตย์ส่วนเกินที่มีอยู่</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_activate_following_loads_when_battery_reaches">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="20"/>
+      <source>Activate following loads when battery reaches</source>
+      <translation>เปิดใช้งานโหลดต่อไปนี้เมื่อแบตเตอรี่ถึงระดับ</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_below_this_soc_batt_charging_can_use_all_solar_surplus_power">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="26"/>
+      <source>Below this SOC, battery charging can use all solar surplus power.</source>
+      <translation>เมื่อต่ำกว่า SOC นี้ การชาร์จแบตเตอรี่จะสามารถใช้พลังงานแสงอาทิตย์ส่วนเกินทั้งหมดได้</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_at_or_above_x_soc">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="38"/>
+      <source>At or above &lt;font color="%1"&gt;%2%&lt;/font&gt; SOC</source>
+      <translation>ที่ระดับหรือสูงกว่า &lt;font color="%1"&gt;%2%&lt;/font&gt; SOC</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_at_x_soc">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="48"/>
+      <source>At %1% SOC</source>
+      <translation>ที่ %1% SOC</translation>
+    </message>
+    <message id="pagecontrollableloads_battery_from_configured_soc_to_100_percent">
+      <location filename="../../pages/settings/PageControllableLoadsBattery.qml" line="54"/>
+      <source>From the configured SOC to %1%, the power reserved for battery charging is reduced gradually, making more power available for loads.</source>
+      <translation>จาก SOC ที่กำหนดค่าไว้จนถึง %1% พลังงานที่สำรองไว้สำหรับการชาร์จแบตเตอรี่จะลดลงทีละน้อย เพื่อให้มีพลังงานสำหรับโหลดมากขึ้น</translation>
+    </message>
+    <message id="page_controllable_loads_preferences_pause_if_no_ac">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="24"/>
+      <source>Pause if no AC input is connected</source>
+      <translation>หยุดชั่วคราวหากไม่มีการเชื่อมต่ออินพุต AC</translation>
+    </message>
+    <message id="pagecontrollableloads_preferences_nominal_inverter_utilization_limit">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="32"/>
+      <source>Nominal inverter utilisation limit</source>
+      <translation>ขีดจำกัดการใช้งานอินเวอร์เตอร์ปกติ</translation>
+    </message>
+    <message id="page_controllable_loads_preferences_pause_after_several_days_without_full_charge">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="45"/>
+      <source>Pause after several days without full charge</source>
+      <translation>หยุดชั่วคราวหลังจากผ่านไปหลายวันโดยไม่มีการชาร์จจนเต็ม</translation>
+    </message>
+    <message id="page_controllable_loads_preferences_only_applies_when_using_optimized_with_battery_life">
+      <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="51"/>
+      <source>Only applies when using Optimized with BatteryLife. Opportunity Loads automatically resumes after a full charge.</source>
+      <translation>ใช้ได้เฉพาะเมื่อใช้ Optimized ร่วมกับ BatteryLife เท่านั้น Opportunity Loads จะกลับมาทำงานโดยอัตโนมัติหลังจากการชาร์จเต็มรูปแบบเต็มที่ชาร์จจนเต็มแล้ว</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
