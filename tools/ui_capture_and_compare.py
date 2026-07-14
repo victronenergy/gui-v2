@@ -190,7 +190,7 @@ def copy_images_to_uicompare(baseline_dir, candidate_dir, uicompare_dir):
     candidate_images = os.path.join(candidate_dir, 'image-captures')
 
     dest_baseline = os.path.join(uicompare_dir, 'image-captures-baseline')
-    dest_candidate = os.path.join(uicompare_dir, 'image-captures')
+    dest_candidate = os.path.join(uicompare_dir, 'image-captures-candidate')
 
     print(f'Copying baseline images from {baseline_images} to {dest_baseline}...')
     if not DRY_RUN:

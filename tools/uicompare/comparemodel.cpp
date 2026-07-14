@@ -25,11 +25,11 @@ public:
         if (baselineDir.exists() && !baselineDir.isEmpty() && baselineDir.isReadable()) {
             allFiles = baselineDir.entryList(QStringList() << "*.*", QDir::Files, QDir::Name);
         } else {
-            qDebug() << "Baseline directory not exist/is empty/not accessible";
+            qDebug() << "Cannot find images in baseline directory:" << baselineDir.absolutePath();
         }
 
         // Scan candidate directory
-        QDir candidateDir("image-captures");
+        QDir candidateDir("image-captures-candidate");
         if (candidateDir.exists() && !candidateDir.isEmpty() && candidateDir.isReadable()) {
             const QStringList candidateFiles = candidateDir.entryList(QStringList() << "*.*", QDir::Files, QDir::Name);
             if (candidateFiles != allFiles) {
@@ -40,7 +40,7 @@ public:
                 allFiles.sort();
             }
         } else {
-            qDebug() << "Candidate directory not exist/is empty/not accessible";
+            qDebug() << "Cannot find images in candidate directory:" << candidateDir.absolutePath();
         }
 
         // Send results back to UI thread
@@ -89,7 +89,7 @@ public:
     CompareModel::ImageResult compare(const QString fileName) const
     {
         const QString baselinePath = "image-captures-baseline/" + fileName;
-        const QString candidatePath = "image-captures/" + fileName;
+        const QString candidatePath = "image-captures-candidate/" + fileName;
 
         // Load images for comparison
         QImage a(baselinePath);
@@ -110,7 +110,7 @@ public:
             } else if (!a.isNull() && b.isNull()) {
                 result.status = CompareModel::NoCandidateImage;
                 result.errorMessage = "Candidate image missing";
-            } else if (a.isNull() && !b.isNull()) {
+            } else if (a.isNull() && b.isNull()) {
                 result.status = CompareModel::ComparisonReady;
                 result.errorMessage = "Both images missing";
             } else {
