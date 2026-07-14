@@ -13,6 +13,10 @@ Page {
 
 	// Declare ObjectModelMonitor before the model that it is monitoring. See QTBUG-123496
 	ObjectModelMonitor {
+		id: batteryBankModelMonitor
+		model: batteryBankModel
+	}
+	ObjectModelMonitor {
 		id: alarmSettingsMonitor
 		model: batterySettingsAlarmModel
 	}
@@ -21,11 +25,14 @@ Page {
 		model: batterySettingsRelayModel
 	}
 
+	BatteryBankModel {
+		id: batteryBankModel
+		bindPrefix: root.bindPrefix
+	}
 	BatterySettingsAlarmModel {
 		id: batterySettingsAlarmModel
 		bindPrefix: root.bindPrefix
 	}
-
 	BatterySettingsRelayModel {
 		id: batterySettingsRelayModel
 		bindPrefix: root.bindPrefix
@@ -34,11 +41,12 @@ Page {
 	GradientListView {
 		model: VisibleItemModel {
 			ListNavigation {
+				preferredVisible: batteryBankModelMonitor.hasVisibleItem
 				//% "Battery bank"
 				text: qsTrId("batterysettings_battery_bank")
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatterySettingsBattery.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+					Global.pageManager.pushPage(emptySettingsComponent,
+							{ "title": text, "model": batteryBankModel })
 				}
 			}
 
