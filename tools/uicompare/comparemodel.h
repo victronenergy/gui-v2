@@ -29,13 +29,13 @@ public:
     };
     Q_ENUM(Role);
 
-    enum ComparisonResult {
-        ComparisonPending,
-        ComparisonReady,
+    enum ResultStatus {
+        ResultPending,
+        ResultReady,
         NoBaselineImage,
         NoCandidateImage,
     };
-    Q_ENUM(ComparisonResult);
+    Q_ENUM(ResultStatus);
 
     struct ImageResult
     {
@@ -44,7 +44,7 @@ public:
 
         QString errorMessage;
         qreal mse = DefaultMse;
-        int status = ComparisonPending;
+        int status = ResultPending;
     };
 
     explicit CompareModel(QObject *parent = 0);

@@ -12,13 +12,13 @@ MouseArea {
 	required property real mse
 	required property string errorMessage
 
-	readonly property bool ready: status !== CompareModel.ComparisonPending
+	readonly property bool ready: status !== CompareModel.ResultPending
 	readonly property real similarity: 1 - (mse / (255 * 255 * 4))
 	readonly property bool isIdentical: Math.round(mse) === 0
 	readonly property bool isPassing: ready && mse < ListView.view.model.errorTolerance
 	readonly property bool hasError: ready && errorMessage.length > 0
 	readonly property color statusColor: isPassing || isIdentical ? "#4CAF50"
-			: status === CompareModel.ComparisonPending
+			: status === CompareModel.ResultPending
 				|| status === CompareModel.NoBaselineImage
 				|| status === CompareModel.NoCandidateImage ? "orange"
 			: "#F44336"

@@ -119,12 +119,14 @@ Rectangle {
 
 			Text {
 				text: "Filter:"
-				font.pixelSize: 11
+				font.pixelSize: 12
 			}
 
 			ComboBox {
 				id: filterCombo
 				model: ["Show All", "Pass Only", "Fail Only", "Missing Baseline", "Missing Candidate"]
+				focusPolicy: Qt.TabFocus // avoid stealing focus (and preventing key nav on main list view) when clicked
+				implicitContentWidthPolicy: ComboBox.WidestTextWhenCompleted
 				onCurrentIndexChanged: root.filterChanged(currentIndex)
 			}
 		}
