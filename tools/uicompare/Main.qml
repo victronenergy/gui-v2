@@ -57,7 +57,7 @@ Window {
 				SplitView.fillWidth: true
 				SplitView.fillHeight: true
 				z: -1 // do not allow comparison image to pan above the list view
-				resultStatus: listView.currentResult.status ?? CompareModel.ComparisonPending
+				resultStatus: listView.currentResult.status ?? CompareModel.ResultPending
 				imagesIdentical: listView.currentResult.mse === undefined ? false : Math.round(listView.currentResult.mse) === 0
 				fileName: listView.currentResult.fileName ?? ""
 			}

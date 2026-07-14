@@ -16,10 +16,10 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
-    ImageProvider *imageProvider = new ImageProvider;
+    ImageProvider *imageProvider = new ImageProvider("image-captures-baseline/", "image-captures-candidate/");
     ApplicationSettings settings;
     QObject::connect(&engine, &QQmlApplicationEngine::destroyed,
-                     &app, []() { QCoreApplication::exit(-1); },
+                     &app, []() { QCoreApplication::exit(1); },
                      Qt::QueuedConnection);
 
     QQmlComponent component(&engine, "uicompare", "Main");
@@ -31,7 +31,6 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    imageProvider->setImageDirectories("image-captures-baseline/", "image-captures/");
     engine.addImageProvider(QLatin1String("difference"), imageProvider);
 
     QScopedPointer<QObject> object(component.beginCreate(engine.rootContext()));

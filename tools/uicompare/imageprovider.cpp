@@ -1,18 +1,10 @@
 #include "imageprovider.h"
 
-ImageProvider::ImageProvider()
+ImageProvider::ImageProvider(const QString &baselineDirectory, const QString &candidateDirectory)
     : QQuickImageProvider(QQuickImageProvider::Image)
+    , m_baselineDirectory(baselineDirectory)
+    , m_candidateDirectory(candidateDirectory)
 {
-}
-
-void ImageProvider::setImageDirectories(const QString &baselineDirectory, const QString &candidateDirectory)
-{
-    if (m_baselineDirectory != baselineDirectory) {
-        m_baselineDirectory = baselineDirectory;
-    }
-    if (m_candidateDirectory != candidateDirectory) {
-        m_candidateDirectory = candidateDirectory;
-    }
 }
 
 QImage ImageProvider::requestImage(const QString &id, QSize *size, const QSize &requestedSize)

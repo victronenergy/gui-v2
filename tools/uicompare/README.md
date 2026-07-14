@@ -8,7 +8,7 @@ A testing tool for comparing sets of images. This tool compares a baseline set o
 The tool expects two directories in the `tools/uicompare` directory:
 
 - **`image-captures-baseline/`** - Contains the baseline (reference) images
-- **`image-captures/`** - Contains the candidate (test) images to compare against the baseline
+- **`image-captures-candidate/`** - Contains the candidate (test) images to compare against the baseline
 
 The tool will automatically discover all images in both directories and compare images with matching filenames. Supported image formats include PNG, JPG, and other formats supported by Qt's image loading.
 
