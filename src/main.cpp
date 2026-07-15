@@ -454,10 +454,34 @@ EM_JS(bool, hasNativeVirtualKeyboard, (), {
 		|| (/Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
 });
 
+EM_JS(void, wasmPerfMark, (const char *name), {
+	const label = UTF8ToString(name);
+	try { performance.mark(label); } catch (e) {}
+	console.log("[WASM Perf] " + label + " [t=" + performance.now().toFixed(1) + "ms]");
+});
+
 #endif
+
+// Log a named startup phase to the browser console and DevTools performance
+// timeline, in the same format as the [WASM Perf] entries in wasm/index.html.
+// No-op on non-WASM builds.
+static inline void perfMark(const char *phase)
+{
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	wasmPerfMark(phase);
+#else
+	Q_UNUSED(phase);
+#endif
+}
 
 int main(int argc, char *argv[])
 {
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	// Timestamp Qt log lines so browser console output can be correlated with
+	// the [WASM Perf] entries logged by wasm/index.html.
+	qSetMessagePattern(QStringLiteral("[%{time process}] %{if-category}%{category}: %{endif}%{message}"));
+#endif
+	perfMark("main() entered");
 	qInfo().nospace() << "Victron gui version: v" << PROJECT_VERSION_MAJOR << "." << PROJECT_VERSION_MINOR << "." << PROJECT_VERSION_PATCH;
 
 	// Must set the default QSurfaceFormat before creating the app object.
@@ -505,6 +529,7 @@ int main(int argc, char *argv[])
 	qputenv("QT_SCALE_FACTOR", scaleAsQByteArray);
 
 	QGuiApplication app(argc, argv);
+	perfMark("QGuiApplication created");
 	QGuiApplication::setApplicationName("Venus");
 	QGuiApplication::setApplicationVersion("2.0");
 
@@ -521,6 +546,7 @@ int main(int argc, char *argv[])
 	QZXing::registerQMLImageProvider(engine);
 
 	initBackend(&enableFpsCounter, &skipSplashScreen);
+	perfMark("backend initialized");
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 
 	/* Force construction of screen blanker */
@@ -542,6 +568,7 @@ int main(int argc, char *argv[])
 	languageLoader->setFontUrlPrefix(fontUrlPrefix);
 #endif
 	languageLoader->init(); // load the translation catalogue.
+	perfMark("translations loaded");
 
 	/* Force construction of gui plugin loader */
 	Victron::VenusOS::GuiPluginLoader *guiPluginLoader = Victron::VenusOS::GuiPluginLoader::create(&engine);
@@ -550,12 +577,14 @@ int main(int argc, char *argv[])
 	Victron::VenusOS::FrameRateModel* fpsCounter = Victron::VenusOS::FrameRateModel::create();
 
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/venus-gui-v2/Main.qml")));
+	perfMark("Main.qml compiled");
 	if (component.isError()) {
 		qWarning() << component.errorString();
 		return EXIT_FAILURE;
 	}
 
 	QScopedPointer<QObject> object(component.beginCreate(engine.rootContext()));
+	perfMark("root object instantiated (beginCreate)");
 	const auto window = qobject_cast<QQuickWindow *>(object.data());
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
@@ -576,9 +605,20 @@ int main(int argc, char *argv[])
 
 	engine.setIncubationController(window->incubationController());
 
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	// Report when the first frame reaches the browser: this is when the QML
+	// splash becomes visible, well before the asynchronously loaded scene.
+	// WASM uses the single-threaded basic render loop, so a direct connection
+	// is safe here.
+	QObject::connect(window, &QQuickWindow::frameSwapped, window,
+		[] { perfMark("first frame rendered (QML splash visible)"); },
+		Qt::ConnectionType(Qt::DirectConnection | Qt::SingleShotConnection));
+#endif
+
 	/* Write to window properties here to perform any additional initialization
 	   before initial binding evaluation. */
 	component.completeCreate();
+	perfMark("root object completed (completeCreate)");
 
 	if (skipSplashScreen) {
 		QMetaObject::invokeMethod(window, "skipSplashScreen");
@@ -598,5 +638,6 @@ int main(int argc, char *argv[])
 		window->showFullScreen();
 	}
 
+	perfMark("window shown, entering event loop");
 	return app.exec();
 }
