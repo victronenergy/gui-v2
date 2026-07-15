@@ -441,6 +441,38 @@
             tspan.setAttribute('y', Math.round(barY + barH + 29));
         }
 
+        // Log main-thread stalls to the console. On engines with the Long Tasks
+        // API every task blocking the main thread for >50ms is reported;
+        // elsewhere fall back to detecting gaps between animation frames.
+        function observeMainThreadStalls() {
+            try {
+                if (typeof PerformanceObserver !== 'undefined'
+                        && PerformanceObserver.supportedEntryTypes
+                        && PerformanceObserver.supportedEntryTypes.includes('longtask')) {
+                    new PerformanceObserver((list) => {
+                        for (const entry of list.getEntries()) {
+                            console.log(`[WASM Perf] Main thread blocked for ${entry.duration.toFixed(0)}ms [t=${entry.startTime.toFixed(1)}ms]`);
+                        }
+                    }).observe({type: 'longtask', buffered: true});
+                    return;
+                }
+            } catch (e) {
+                // Diagnostics only; fall through to the animation frame fallback.
+            }
+            let lastFrame = performance.now();
+            // requestAnimationFrame does not fire while the tab is hidden; reset
+            // the baseline on visibility changes so that is not reported as a stall.
+            document.addEventListener('visibilitychange', () => { lastFrame = performance.now(); });
+            function frameGapCheck(now) {
+                if (now - lastFrame > 200 && !document.hidden) {
+                    console.log(`[WASM Perf] Main thread stalled for ~${(now - lastFrame).toFixed(0)}ms [t=${now.toFixed(1)}ms]`);
+                }
+                lastFrame = now;
+                requestAnimationFrame(frameGapCheck);
+            }
+            requestAnimationFrame(frameGapCheck);
+        }
+
         async function init()
         {
             const spinner = document.querySelector('#qtspinner');
@@ -521,6 +553,7 @@
                 const perfMark = (name) => {
                     try { performance.mark(name); } catch (e) {}
                 };
+                observeMainThreadStalls();
                 const tInitStart = performance.now();
 
                 // Preload WASM with progress
