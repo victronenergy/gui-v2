@@ -511,6 +511,16 @@
                 loadingBarText.textContent = 'Downloading...';
 
                 const perfLog = [];
+                // Log with the absolute page time so console output can be
+                // correlated with wall-clock observations and Qt-side logs.
+                const logPerf = (line) => {
+                    perfLog.push(line);
+                    console.log(`[WASM Perf] ${line} [t=${performance.now().toFixed(1)}ms]`);
+                };
+                // Named marks show up in the DevTools Performance timeline.
+                const perfMark = (name) => {
+                    try { performance.mark(name); } catch (e) {}
+                };
                 const tInitStart = performance.now();
 
                 // Preload WASM with progress
@@ -535,19 +545,20 @@
                 const wasmSizeMB = (wasmBinary.byteLength / (1024 * 1024)).toFixed(2);
                 const wireSizeMB = wasmPreload.compressedSize ? (wasmPreload.compressedSize / (1024 * 1024)).toFixed(2) : null;
                 const sizeInfo = wireSizeMB ? `${wireSizeMB} MB wire / ${wasmSizeMB} MB uncompressed` : `${wasmSizeMB} MB uncompressed`;
-                perfLog.push(`Download: ${downloadMs.toFixed(1)}ms (${sizeInfo})`);
-                console.log(`[WASM Perf] Download complete: ${downloadMs.toFixed(1)}ms (${sizeInfo})`);
+                perfMark('wasm-download-end');
+                logPerf(`Download: ${downloadMs.toFixed(1)}ms (${sizeInfo})`);
 
                 loadingBar.width.baseVal.value = loadingBarContainer.width.baseVal.value;
                 loadingBarText.textContent = 'Compiling...';
 
                 // Compile WASM binary into a WebAssembly.Module
+                perfMark('wasm-compile-start');
                 const tCompileStart = performance.now();
                 const wasmModule = await WebAssembly.compile(wasmBinary);
                 const tCompileEnd = performance.now();
+                perfMark('wasm-compile-end');
                 const compileMs = tCompileEnd - tCompileStart;
-                perfLog.push(`Compile: ${compileMs.toFixed(1)}ms`);
-                console.log(`[WASM Perf] Compile complete: ${compileMs.toFixed(1)}ms`);
+                logPerf(`Compile: ${compileMs.toFixed(1)}ms`);
 
                 loadingBarText.textContent = 'Instantiating...';
 
@@ -568,15 +579,17 @@
 
                 // Use instantiateWasm to intercept instantiation with timing
                 let tInstantiateEnd = 0;
+                let tRuntimeInitEnd = 0;
                 const instance = await qtLoad({
                     arguments: argumentList,
                     instantiateWasm: (imports, successCallback) => {
+                        perfMark('wasm-instantiate-start');
                         const tInstStart = performance.now();
                         WebAssembly.instantiate(wasmModule, imports).then(instance => {
                             tInstantiateEnd = performance.now();
+                            perfMark('wasm-instantiate-end');
                             const instantiateMs = tInstantiateEnd - tInstStart;
-                            perfLog.push(`Instantiate: ${instantiateMs.toFixed(1)}ms`);
-                            console.log(`[WASM Perf] Instantiate complete: ${instantiateMs.toFixed(1)}ms`);
+                            logPerf(`Instantiate: ${instantiateMs.toFixed(1)}ms`);
                             successCallback(instance, wasmModule);
                         }).catch(e => {
                             // Instantiation is where out-of-memory failures surface
@@ -589,15 +602,14 @@
                         return {};
                     },
                     qt: {
+                        // qtloader.js invokes onLoaded at Emscripten's
+                        // onRuntimeInitialized, which is before main() runs: Qt and
+                        // QML startup happen after this point, and are measured
+                        // below and by the [WASM Perf] marks in src/main.cpp.
                         onLoaded: () => {
-                            const tLoaded = performance.now();
-                            const qtInitMs = tLoaded - tInstantiateEnd;
-                            const totalMs = tLoaded - tInitStart;
-                            perfLog.push(`Qt/QML init: ${qtInitMs.toFixed(1)}ms`);
-                            perfLog.push(`Total: ${totalMs.toFixed(1)}ms`);
-                            console.log(`[WASM Perf] Qt/QML init complete: ${qtInitMs.toFixed(1)}ms`);
-                            console.log(`[WASM Perf] Total load time: ${totalMs.toFixed(1)}ms`);
-                            console.log(`[WASM Perf] Summary:\n` + perfLog.map(l => `  ${l}`).join('\n'));
+                            tRuntimeInitEnd = performance.now();
+                            perfMark('wasm-runtime-initialized');
+                            logPerf(`Emscripten runtime init: ${(tRuntimeInitEnd - tInstantiateEnd).toFixed(1)}ms`);
                             showUi(screen);
                         },
                         onExit: exitData =>
@@ -612,6 +624,16 @@
                         containerElements: [screen],
                     }
                 });
+
+                // qtLoad() resolves after main() has run: QGuiApplication and the
+                // QML engine are set up and app.exec() has unwound back to the
+                // browser event loop. Asynchronous QML scene loading continues
+                // after this; see the [WASM Perf] marks logged from src/main.cpp.
+                const tMainDone = performance.now();
+                perfMark('wasm-qt-main-done');
+                logPerf(`Qt main() + QML engine setup: ${(tMainDone - tRuntimeInitEnd).toFixed(1)}ms`);
+                logPerf(`Total (to Qt event loop): ${(tMainDone - tInitStart).toFixed(1)}ms`);
+                console.log(`[WASM Perf] Summary:\n` + perfLog.map(l => `  ${l}`).join('\n'));
             } catch (e) {
                 console.error(e);
                 console.error(e.stack);
