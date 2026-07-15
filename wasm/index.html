@@ -366,7 +366,7 @@
                     wasmBinary.set(chunk, pos);
                     pos += chunk.length;
                 }
-                var contentLength = response.headers.get('content-length');
+                const contentLength = response.headers.get('content-length');
                 return { wasmBinary: wasmBinary, compressedSize: contentLength ? parseInt(contentLength, 10) : null };
             } catch (e) {
                 console.error(e);
@@ -567,8 +567,7 @@
                 }
 
                 // Use instantiateWasm to intercept instantiation with timing
-                var tInstantiateEnd = 0;
-                const tQtLoadStart = performance.now();
+                let tInstantiateEnd = 0;
                 const instance = await qtLoad({
                     arguments: argumentList,
                     instantiateWasm: (imports, successCallback) => {
@@ -579,6 +578,13 @@
                             perfLog.push(`Instantiate: ${instantiateMs.toFixed(1)}ms`);
                             console.log(`[WASM Perf] Instantiate complete: ${instantiateMs.toFixed(1)}ms`);
                             successCallback(instance, wasmModule);
+                        }).catch(e => {
+                            // Instantiation is where out-of-memory failures surface
+                            // on low-memory devices; without this the page hangs
+                            // silently at "Instantiating...".
+                            console.error(e);
+                            console.error(e.stack);
+                            showLoadError(e, 'Error instantiating application!');
                         });
                         return {};
                     },
