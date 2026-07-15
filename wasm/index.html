@@ -307,6 +307,7 @@
         async function preloadWasm(url, onProgress) {
             try {
                 let total = null;
+                let exactSize = false;
                 // This is needed, since the reported size is the compressed size
                 // but the downloaded size is shown as uncompressed size, since the browser decompresses it
                 const sizeResp = await fetch('venus-gui-v2.wasm.size');
@@ -342,6 +343,7 @@
 
                 if (sizeResp.ok) {
                     total = parseInt(await sizeResp.text(), 10);
+                    exactSize = Number.isFinite(total) && total > 0;
                 } else {
                     // should not be needed, but just in case?
                     const estimatedCompressionRatio = 0.4; // Assume 40% as compressed size
@@ -352,22 +354,41 @@
 
                 const reader = response.body.getReader();
                 let received = 0;
-                let chunks = [];
+                // When the exact uncompressed size is known, stream directly into a
+                // preallocated buffer: accumulating chunks and assembling a copy
+                // afterwards doubles the peak memory use on low-memory devices.
+                let buffer = exactSize ? new Uint8Array(total) : null;
+                const chunks = [];
                 while (true) {
                     const {done, value} = await reader.read();
                     if (done) break;
-                    chunks.push(value);
+                    if (buffer && received + value.length <= buffer.length) {
+                        buffer.set(value, received);
+                    } else {
+                        if (buffer) {
+                            // The .size file under-reported the actual size
+                            chunks.push(buffer.subarray(0, received));
+                            buffer = null;
+                        }
+                        chunks.push(value);
+                    }
                     received += value.length;
                     onProgress(received, total);
                 }
-                let wasmBinary = new Uint8Array(received);
-                let pos = 0;
-                for (let chunk of chunks) {
-                    wasmBinary.set(chunk, pos);
-                    pos += chunk.length;
+                let wasmBinary;
+                if (buffer) {
+                    // subarray trims a .size over-report without copying
+                    wasmBinary = buffer.length === received ? buffer : buffer.subarray(0, received);
+                } else {
+                    wasmBinary = new Uint8Array(received);
+                    let pos = 0;
+                    for (const chunk of chunks) {
+                        wasmBinary.set(chunk, pos);
+                        pos += chunk.length;
+                    }
                 }
-                const contentLength = response.headers.get('content-length');
-                return { wasmBinary: wasmBinary, compressedSize: contentLength ? parseInt(contentLength, 10) : null };
+                const compressedLength = response.headers.get('content-length');
+                return { wasmBinary: wasmBinary, compressedSize: compressedLength ? parseInt(compressedLength, 10) : null };
             } catch (e) {
                 console.error(e);
                 console.error(e.stack);
@@ -572,7 +593,7 @@
                     }
                 });
 
-                const wasmBinary = wasmPreload.wasmBinary;
+                let wasmBinary = wasmPreload.wasmBinary;
                 const tDownloadEnd = performance.now();
                 const downloadMs = tDownloadEnd - tInitStart;
                 const wasmSizeMB = (wasmBinary.byteLength / (1024 * 1024)).toFixed(2);
@@ -590,6 +611,11 @@
                 const wasmModule = await WebAssembly.compile(wasmBinary);
                 const tCompileEnd = performance.now();
                 perfMark('wasm-compile-end');
+                // Drop the source bytes: the compiled module supersedes them, and
+                // the closures below would otherwise keep them referenced (tens of
+                // MB) for the lifetime of the app.
+                wasmBinary = null;
+                wasmPreload.wasmBinary = null;
                 const compileMs = tCompileEnd - tCompileStart;
                 logPerf(`Compile: ${compileMs.toFixed(1)}ms`);
 
