@@ -12,14 +12,14 @@
     ],
     "Mock": {
         "Configuration": ":/data/mock/conf/maximal.json",
-        "TimersActive": false,
-        "UIAnimations": 0
+        "TimersActive": false
     },
     "Steps": {
         "CaptureAndCompare": {
             "ImageDir": "image-captures",
             "StabilizationInterval": 16,
-            "MaximumStabilizationCaptures": 20,
+            "StabilizationTimeout": 1000,
+            "MaximumStabilizationAttempts": 3,
             "FailIfComparisonFails": false
         },
         "WaitUntil": {

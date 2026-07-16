@@ -12,8 +12,11 @@
 #include <QLoggingCategory>
 #include <QQmlComponent>
 
+#include "veutil/qt/ve_qitem.hpp"
+
 #include "uitest.h"
 #include "uitestcase.h"
+#include "backendconnection.h"
 #include "mockmanager.h"
 #include "logging.h"
 #include "clocktime.h"
@@ -69,9 +72,12 @@ void UiTest::loadConfiguration(const QString &relativeTestDir)
 	if (mockSettings.value("TimersActive").isValid()) {
 		mockManager->setTimersActive(mockSettings.value("TimersActive").toBool());
 	}
-	if (mockSettings.value("UIAnimations").isValid()) {
-		mockManager->setValue("com.victronenergy.settings/Settings/Gui2/UIAnimations",
-				mockSettings.value("UIAnimations").toBool());
+
+	// Disable UI animations for tests. Do this after any mock values have been applied, to override
+	// any value set by a mock configuration.
+	if (VeQItem *uiAnimationsItem = VeQItems::getRoot()->itemGetOrCreate(
+				BackendConnection::create()->serviceUidForType("settings") + "/Settings/Gui2/UIAnimations")) {
+		uiAnimationsItem->setValue(0);
 	}
 
 	// Read 'Tests' configuration values.
@@ -93,6 +99,7 @@ void UiTest::start()
 
 	// Stop ClockTime updates so that the time changes do not interfere with test image comparisons.
 	ClockTime::create()->setUpdatesActive(false);
+	ClockTime::create()->setClockTime(1);
 
 	qCInfo(venusGuiTest) << "Starting UI tests...";
 	qCInfo(venusGuiTest) << "Image captures will be saved to" << CaptureAndCompareStep::absoluteImagePath(QString());
