@@ -1,0 +1,7 @@
+{
+    "ExitWhenFinished": true,
+    "Logging": "info",
+    "Tests": [
+        "tst_all.qml"
+    ]
+}
