@@ -15,6 +15,14 @@ Page {
 	//% "Switches"
 	title: qsTrId("aux_page_switches")
 
+	// Plugin QuickAccessPaneCard (type 5, cardType=SwitchesCard) injected
+	// after built-in switch group cards.
+	GuiPluginIntegrationModel {
+		id: pluginSwitchCards
+		type: GuiPluginLoader.QuickAccessPaneCard
+		cardType: GuiPluginLoader.SwitchesCard
+	}
+
 	BaseListView {
 		id: cardsView
 
@@ -84,6 +92,26 @@ Page {
 				}
 			}
 		}
+
+		footer: Row {
+			visible: pluginSwitchCards.count > 0
+			spacing: Theme.geometry_controlCardsPage_spacing
+
+			Repeater {
+				model: pluginSwitchCards
+
+				delegate: Loader {
+					required property int index
+					required property url url
+					required property string pluginName
+
+					width: Theme.screenSize === Theme.Portrait ? cardsView.width : implicitWidth
+					height: Theme.screenSize === Theme.Portrait ? implicitHeight : cardsView.height
+					source: url
+				}
+			}
+		}
+
 		WheelHandler {
 			enabled: Qt.platform.os === "wasm" || Global.isDesktop
 			onWheel: (wheel) => {

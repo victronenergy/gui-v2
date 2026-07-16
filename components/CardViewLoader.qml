@@ -38,6 +38,12 @@ Loader {
 	opacity: 0.0
 	enabled: viewActive || outAnimation.running
 
+	onActiveFocusChanged: {
+		if (activeFocus && item) {
+			item.forceActiveFocus()
+		}
+	}
+
 	states: State {
 		name: "displaced"
 		PropertyChanges {

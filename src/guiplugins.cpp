@@ -708,6 +708,7 @@ void GuiPluginLoader::populatePlugins()
 			const QString integrationProductId = integration.value(QStringLiteral("productId")).toString();
 			const QString integrationTitle = integration.value(QStringLiteral("title")).toString();
 			const QString integrationIcon = integration.value(QStringLiteral("icon")).toString();
+			const QString integrationIconActive = integration.value(QStringLiteral("iconActive")).toString();
 			const int integrationCardType = integration.value(QStringLiteral("cardType")).toInt(0);
 
 			const bool invalidType = integrationType == GuiPluginLoader::InvalidIntegrationType
@@ -743,6 +744,10 @@ void GuiPluginLoader::populatePlugins()
 				pi.m_title = integrationTitle;
 			} else if (integrationType == GuiPluginLoader::NavigationPage || integrationType == GuiPluginLoader::QuickAccessPane) {
 				pi.m_icon = QUrl(integrationIcon);
+				if (!integrationIconActive.isEmpty()) {
+					pi.m_iconActive = QUrl(integrationIconActive);
+				}
+				pi.m_title = integrationTitle;
 			} else if (integrationType == GuiPluginLoader::QuickAccessPaneCard) {
 				pi.m_cardType = static_cast<GuiPluginLoader::QuickAccessPaneCardType>(integrationCardType);
 			}
@@ -1154,6 +1159,8 @@ QVariant GuiPluginIntegrationModel::data(const QModelIndex &index, int role) con
 		return QVariant(m_integrations.at(row).productId());
 	case IconRole:
 		return QVariant(m_integrations.at(row).icon());
+	case IconActiveRole:
+		return QVariant(m_integrations.at(row).iconActive());
 	case UrlRole:
 		return QVariant(m_integrations.at(row).url());
 	case TypeRole:
@@ -1179,6 +1186,7 @@ QHash<int, QByteArray> GuiPluginIntegrationModel::roleNames() const
 		{ TitleRole, "title" },
 		{ ProductIdRole, "productId" },
 		{ IconRole, "icon" },
+		{ IconActiveRole, "iconActive" },
 		{ UrlRole, "url" },
 		{ TypeRole, "type" },
 		{ CardTypeRole, "cardType" }
@@ -1213,7 +1221,8 @@ void GuiPluginIntegrationModel::updateIntegrations()
 		const QVector<GuiPluginIntegration> integrations = p.integrations();
 		for (const GuiPluginIntegration &i : integrations) {
 			if ((m_type == GuiPluginLoader::InvalidIntegrationType || i.type() == m_type)
-					&& (m_productId.isEmpty() || i.productId().compare(m_productId, Qt::CaseInsensitive) == 0)) {
+					&& (m_productId.isEmpty() || i.productId().compare(m_productId, Qt::CaseInsensitive) == 0)
+					&& (m_cardType == GuiPluginLoader::InvalidCardType || i.cardType() == m_cardType)) {
 				data.append(i);
 			}
 		}
@@ -1258,6 +1267,20 @@ void GuiPluginIntegrationModel::setProductId(const QString &id)
 	if (m_productId != id) {
 		m_productId = id;
 		Q_EMIT productIdChanged();
+		updateIntegrations();
+	}
+}
+
+GuiPluginLoader::QuickAccessPaneCardType GuiPluginIntegrationModel::cardType() const
+{
+	return m_cardType;
+}
+
+void GuiPluginIntegrationModel::setCardType(GuiPluginLoader::QuickAccessPaneCardType ct)
+{
+	if (m_cardType != ct) {
+		m_cardType = ct;
+		Q_EMIT cardTypeChanged();
 		updateIntegrations();
 	}
 }
