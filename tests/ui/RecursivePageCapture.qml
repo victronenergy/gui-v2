@@ -58,7 +58,8 @@ QtObject {
 		// console.log("_captureNext():", imageNameSequence)
 
 		// First, capture all screens within this list view.
-		if (_canCaptureCurrentPage() && pageCaptureCounts[Global.mainView.currentPage] === undefined) {
+		const canCapturePage = _canCaptureCurrentPage()
+		if (canCapturePage && pageCaptureCounts[Global.mainView.currentPage] === undefined) {
 			// No screens have been captured yet for this page. Call _captureNextScreen() to grab
 			// all screens for this page, and that function will call _captureNext() again when the
 			// screen captures are completed.
@@ -71,7 +72,7 @@ QtObject {
 		// Then, find all clickable list items within this view, and click to open those pages and
 		// capture them as well.
 		let nextClickableItem
-		const listView = _canCaptureCurrentPage() ? testCase.findObject(Global.mainView.currentPage, {}, "BaseListView") : null
+		const listView = canCapturePage ? testCase.findObject(Global.mainView.currentPage, {}, "BaseListView") : null
 		if (listView) {
 			nextClickableItem = _yieldNextClickableItem(listView)
 		}
@@ -100,11 +101,15 @@ QtObject {
 				testCase.runSteps(root.doneCallback)
 				root._busy = false
 			} else {
-				// Pop to the previous page, in both the page stack and image sequence.
-				// Also clear the page counter, as a future page may have the same pageCaptureCounts
-				// key if it is of the same QML type and is loaded into the same memory location.
-				delete pageCaptureCounts[Global.mainView.currentPage]
-				imageNameSequence.pop()
+				// Pop to the previous page.
+				if (canCapturePage) {
+					// If the page was captured, clear the page counter, as a future page may have
+					// the same pageCaptureCounts key if it is of the same QML type and is loaded
+					// into the same memory location.
+					// Also update the name sequence since the page will be popped.
+					delete pageCaptureCounts[Global.mainView.currentPage]
+					imageNameSequence.pop()
+				}
 				testCase.addStep(UiTestStep.Invoke, {
 					callable: ()=> { Global.pageManager.popPage() },
 					message: "Finished page: %1".arg(listView?.parent?.title ?? ""),
