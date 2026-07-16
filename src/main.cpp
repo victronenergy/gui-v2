@@ -342,18 +342,21 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 #endif
 	}
 
+	// Load any mock config before the UI test config, in case the latter overrides any values.
+	if (backend->type() == Victron::VenusOS::BackendConnection::MockSource) {
+		const QString configName = parser.value(mockConfig);
+		Victron::VenusOS::MockManager::create()->loadConfiguration(QString(":/data/mock/conf/%1.json").arg(configName));
+	}
+
 	// Load the --ui-test option, if specified.
 	const QString uiTestConf = parser.value(uiTest);
 	if (!uiTestConf.isEmpty()) {
 		Victron::VenusOS::UiTest::create()->loadConfiguration(uiTestConf);
 	}
 
-	// Load a mock configuration for mock mode, if --ui-test option was not set (since tests will
-	// specify their own mock configurations, if running in mock mode).
-	if (Victron::VenusOS::BackendConnection::create()->type() == Victron::VenusOS::BackendConnection::MockSource
-			&& Victron::VenusOS::UiTest::create()->testCaseCount() == 0) {
-		const QString configName = parser.value(mockConfig);
-		Victron::VenusOS::MockManager::create()->loadConfiguration(QString(":/data/mock/conf/%1.json").arg(configName));
+	// If --no-mock-timers is set, it overrides any value set by the UI test configuration.
+	if (parser.isSet(noMockTimers)
+			&& backend->type() == Victron::VenusOS::BackendConnection::MockSource) {
 		Victron::VenusOS::MockManager::create()->setTimersActive(mockTimersEnabled);
 	}
 

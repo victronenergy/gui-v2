@@ -64,21 +64,26 @@ void UiTest::loadConfiguration(const QString &relativeTestDir)
 		QLoggingCategory::setFilterRules(QString("venus.gui.test.%1=true").arg(logLevel.toString()));
 	}
 
-	// Read 'Mock' configuration values.
-	MockManager *mockManager = MockManager::create();
-	const QVariantMap mockSettings = settingValue("Mock").toMap();
-	if (mockSettings.value("Configuration").isValid()) {
-		mockManager->loadConfiguration(mockSettings.value("Configuration").toString());
-	}
-	if (mockSettings.value("TimersActive").isValid()) {
-		mockManager->setTimersActive(mockSettings.value("TimersActive").toBool());
+	BackendConnection *backend = BackendConnection::create();
+	if (backend->type() == BackendConnection::MockSource) {
+		// Read 'Mock' configuration values.
+		MockManager *mockManager = MockManager::create();
+		const QVariantMap mockSettings = settingValue("Mock").toMap();
+		if (mockSettings.value("Configuration").isValid()) {
+			mockManager->loadConfiguration(mockSettings.value("Configuration").toString());
+		}
+		if (mockSettings.value("TimersActive").isValid()) {
+			mockManager->setTimersActive(mockSettings.value("TimersActive").toBool());
+		}
 	}
 
 	// Disable UI animations for tests. Do this after any mock values have been applied, to override
 	// any value set by a mock configuration.
-	if (VeQItem *uiAnimationsItem = VeQItems::getRoot()->itemGetOrCreate(
-				BackendConnection::create()->serviceUidForType("settings") + "/Settings/Gui2/UIAnimations")) {
-		uiAnimationsItem->setValue(0);
+	if (backend->type() != BackendConnection::UnknownSource && VeQItems::getRoot()) {
+		if (VeQItem *uiAnimationsItem = VeQItems::getRoot()->itemGet(
+					backend->serviceUidForType("settings") + "/Settings/Gui2/UIAnimations")) {
+			uiAnimationsItem->setValue(0);
+		}
 	}
 
 	// Read 'Tests' configuration values.
