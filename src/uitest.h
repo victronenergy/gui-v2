@@ -26,11 +26,9 @@ namespace VenusOS {
 		"Mock": {
 			"Configuration": "/data/mock/conf/maximal.json",
 			"TimersActive": false,
-			"UIAnimations": 0
 		},
 		"Steps": {
 			"CaptureAndCompare": {
-				"MaximumStabilizationCaptures": 20,
 				"StabilizationInterval": 16,
 				"ImageDir": "image-captures",
 			},
