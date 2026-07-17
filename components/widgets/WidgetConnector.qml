@@ -36,6 +36,7 @@ Item {
 		_initialized = false
 		connectorPath.widgetConnectorLayoutChanged()
 		_initialized = true
+		pathUpdater.invalidateLut()
 		Qt.callLater(_resetDistance)
 	}
 
@@ -234,6 +235,8 @@ Item {
 	// Force drawing the final positions even if animations disabled.
 	property real _transitionUpdating
 	on_TransitionUpdatingChanged: {
+		// Path geometry changes during transitions, so invalidate the LUT
+		pathUpdater.invalidateLut()
 		if (root.frameAnimation.paused
 				|| (!root.animationEnabled && (_transitionUpdating == 1.0 || _transitionUpdating == 0.0))) {
 			pathUpdater.update()
