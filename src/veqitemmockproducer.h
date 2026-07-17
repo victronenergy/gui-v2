@@ -39,6 +39,7 @@ public:
 
 	void setValue(const QString &uid, const QVariant &value);
 	QVariant value(const QString &uid) const;
+	bool hasItem(const QString &uid) const;
 	void setProperty(const QString &uid, const QString &name, const QVariant &value);
 	void removeValue(const QString &uid);
 	void removeServices(const QString &serviceType);
@@ -51,6 +52,9 @@ public:
 Q_SIGNALS:
 	void dbusUidChanged();
 	void mqttUidChanged();
+	// A client wrote an item, for example with VeQuickItem::setValue().
+	// Not emitted by VeQItemMockProducer::setValue().
+	void valueWritten(const QString &uid);
 
 private:
 	static QString normalizedUid(const QString &uid);
