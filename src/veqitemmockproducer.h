@@ -51,6 +51,9 @@ public:
 Q_SIGNALS:
 	void dbusUidChanged();
 	void mqttUidChanged();
+	// A client wrote an item, for example with VeQuickItem::setValue().
+	// Not emitted by VeQItemMockProducer::setValue().
+	void valueWritten(const QString &uid);
 
 private:
 	static QString normalizedUid(const QString &uid);

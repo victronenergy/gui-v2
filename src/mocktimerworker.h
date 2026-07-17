@@ -1,0 +1,323 @@
+/*
+** Copyright (C) 2026 Victron Energy B.V.
+** See LICENSE.txt for license information.
+*/
+
+#ifndef VICTRON_GUIV2_MOCKTIMERWORKER_H
+#define VICTRON_GUIV2_MOCKTIMERWORKER_H
+
+#include <QHash>
+#include <QObject>
+#include <QPair>
+#include <QRandomGenerator>
+#include <QSet>
+#include <QTimerEvent>
+#include <QVariant>
+#include <QVector>
+
+namespace Victron {
+namespace VenusOS {
+
+using MockValueUpdate = QPair<QString, QVariant>;
+using MockValueUpdateList = QVector<MockValueUpdate>;
+using MockValueCache = QHash<QString, QVariant>;
+
+// A QML notifyUpdate/notifyTotal to emit after the listed uids have been written.
+// The worker queues these with the value batch. It must not emit the QML signals.
+struct MockNotifyEvent {
+	enum Type {
+		Update,
+		Total
+	};
+	int type = Update;
+	int animatorId = -1;
+	int index = -1;
+	qreal value = 0.0;
+	QStringList dependsOn;
+};
+using MockNotifyEventList = QVector<MockNotifyEvent>;
+
+// One animator tick. The applier uses this to drop a whole tick when any of its
+// uids was written or removed after the batch was sent.
+struct MockTickRecord {
+	int animatorId = -1;
+	QStringList inputs;
+	QStringList outputs;
+};
+using MockTickRecordList = QVector<MockTickRecord>;
+
+// Configuration for consumption calculation
+struct MockConsumptionServiceInfo {
+	QString uid;
+	QString serviceType;
+	int index = 0;
+};
+using MockConsumptionConfig = QVector<MockConsumptionServiceInfo>;
+
+// Producer paths and the worker cache omit a leading "mock/". QML service uids include it.
+inline QString normalizedMockUid(const QString &uid)
+{
+	return uid.startsWith(QLatin1String("mock/")) ? uid.mid(5) : uid;
+}
+
+// Exact uid, or a descendant. prefix + "0" is a sibling, not a descendant.
+inline bool mockUidUnderPrefix(const QString &uid, const QString &prefix)
+{
+	const QString normalized = normalizedMockUid(uid);
+	const QString normalizedPrefix = normalizedMockUid(prefix);
+	if (normalized.isEmpty() || normalizedPrefix.isEmpty()) {
+		return false;
+	}
+	return normalized == normalizedPrefix
+			|| normalized.startsWith(normalizedPrefix + QLatin1Char('/'));
+}
+
+inline QString consumptionAcInPrefix(const QString &uid, const QString &serviceType, int index)
+{
+	if (serviceType == QLatin1String("vebus")) {
+		return uid + QStringLiteral("/Ac/ActiveIn");
+	}
+	if (serviceType == QLatin1String("acsystem")) {
+		return uid + QStringLiteral("/Ac/In/") + QString::number(index + 1);
+	}
+	if (serviceType == QLatin1String("charger")) {
+		return uid + QStringLiteral("/Ac/In");
+	}
+	return QString();
+}
+
+inline QString consumptionAcOutPrefix(const QString &uid, const QString &serviceType)
+{
+	if (serviceType == QLatin1String("charger")) {
+		return QString();
+	}
+	return uid + QStringLiteral("/Ac/Out");
+}
+
+inline void appendPhaseMeasureUids(QStringList &uids, const QString &prefix)
+{
+	if (prefix.isEmpty()) {
+		return;
+	}
+	for (int phase = 1; phase <= 3; ++phase) {
+		const QString phasePath = prefix + QStringLiteral("/L%1").arg(phase);
+		uids.append(phasePath + QStringLiteral("/P"));
+		uids.append(phasePath + QStringLiteral("/I"));
+	}
+}
+
+inline QStringList consumptionGaugePaths()
+{
+	return {
+		QStringLiteral("/Ac/AcIn1/Consumption/Current/Max"),
+		QStringLiteral("/Ac/AcIn2/Consumption/Current/Max"),
+		QStringLiteral("/Ac/NoAcIn/Consumption/Current/Max"),
+	};
+}
+
+inline void appendPhaseSumSourceUids(QStringList &uids, const QStringList &serviceUids,
+		const QString &powerPattern, const QString &currentPattern)
+{
+	for (const QString &serviceUid : serviceUids) {
+		if (serviceUid.isEmpty()) {
+			continue;
+		}
+		for (int phase = 1; phase <= 3; ++phase) {
+			if (!powerPattern.isEmpty()) {
+				uids.append(serviceUid + powerPattern.arg(phase));
+			}
+			if (!currentPattern.isEmpty()) {
+				uids.append(serviceUid + currentPattern.arg(phase));
+			}
+		}
+	}
+}
+
+struct MockAnimatorConfig {
+	int animatorId = 0;
+	enum Type { Randomizer, RangeAnimator, Stepper, Toggler } type = Randomizer;
+	QStringList uids;
+	qreal interval = 1000.0;
+	bool repeat = true;
+
+	// Randomizer params
+	qreal deltaLow = qQNaN();
+	qreal deltaHigh = qQNaN();
+	qreal minimumValue = qQNaN();
+	qreal maximumValue = qQNaN();
+	qreal followSignOf = qQNaN();
+
+	// RangeAnimator params
+	qreal stepSize = 1.0;
+	qreal rangeMin = 0.0;
+	qreal rangeMax = 100.0;
+	QVector<qreal> actualStepSizes;
+
+	// Toggler params
+	QVariant toggleA;
+	QVariant toggleB;
+
+	// Derived value outputs (computed in worker, no GUI-thread JS needed)
+	// If totalTargetUid is set, the sum of all data item values is written to that uid.
+	QString totalTargetUid;
+	// Per-item derived output: derivedTargetUids[i] = value[i] / current[derivedDivisorUids[i]]
+	// (e.g. current = power / voltage). Lists must be same size as uids.
+	QStringList derivedTargetUids;
+	QStringList derivedDivisorUids;
+	// Per-item multiply derived output: derivedMultiplyTargetUids[i] = value[i] * current[derivedMultiplierUids[i]]
+	// (e.g. power = current * voltage). Lists must be same size as uids.
+	QStringList derivedMultiplyTargetUids;
+	QStringList derivedMultiplierUids;
+	// If set, the sum of all multiply-derived values is written here (e.g. total power)
+	QString derivedMultiplyTotalTargetUid;
+};
+
+/*
+	MockTimerWorker owns the mock-data timers and calculates animator ticks,
+	AC consumption, and phase sums. It lives on its own thread when threads
+	are available, so a once-a-second tick does not stall the thread that paints.
+	Applying values stays on the GUI thread.
+
+	The worker keeps its own copy of the values it reads. That copy is filled
+	from the producer when an animator or calculator is registered, and updated
+	when a value is written or a batch is sent to the GUI. Ticks do not read
+	the producer or the applier.
+
+	A UI write updates the producer immediately. The applier then holds that uid
+	until the worker has stored the written value and dropped the unflushed tick
+	that wrote it, including values calculated from it. Removing a path holds
+	every uid under it until the worker has paused those writers and dropped
+	their tick. The registration stays, so a later write can resume it.
+*/
+class MockTimerWorker : public QObject
+{
+	Q_OBJECT
+
+public:
+	explicit MockTimerWorker(QObject *parent = nullptr);
+	~MockTimerWorker() override;
+
+	void registerAnimator(const MockAnimatorConfig &config);
+	void unregisterAnimator(int animatorId);
+	void setAnimatorActive(int animatorId, bool active);
+	void setAllTimersActive(bool active);
+	void updateAnimatorFollowSignOf(int animatorId, qreal followSignOf);
+	QVector<qreal> actualStepSizes(int animatorId) const;
+	void updateAnimatorActualStepSizes(int animatorId, const QVector<qreal> &stepSizes);
+
+	void setConsumptionConfig(const QString &systemUidPrefix,
+		const MockConsumptionConfig &services,
+		bool gaugesAutoMax, const QString &gaugesUidPrefix);
+	void clearConsumptionConfig();
+	void scheduleCalculatorFlush();
+
+	void setPhaseSumConfig(int ruleId, const QString &targetPrefix,
+		const QStringList &serviceUids, const QString &sourcePhasePattern,
+		const QString &sourceCurrentPattern);
+	void clearPhaseSumConfig(int ruleId);
+
+	// Store a GUI write, drop the unflushed tick that wrote uid, and resume a
+	// writer paused for that path. Emits externalValueObserved when done.
+	void observeExternalValue(const QString &uid, const QVariant &value);
+	// Drop the unflushed tick that wrote uid, including values calculated from it.
+	void dropPendingUpdate(const QString &uid);
+	// Pause writers under prefix and drop their unflushed tick. Does not write.
+	// The registration is kept so a later setValue() of that path can resume it.
+	// Emits uidPrefixForgotten when the pause is done.
+	void forgetUidPrefix(const QString &prefix);
+	// Resume writers paused for this path. Called after the worker copy is updated.
+	void noteUidWritten(const QString &uid);
+	// Test hooks. The tick finishes before these return, but the flush waits
+	// until the caller returns to the event loop, so the caller can write first.
+	void queueUpdateForTest(const QString &uid, const QVariant &value);
+	void tickAnimatorsForTest();
+
+Q_SIGNALS:
+	void valuesReady(const MockValueUpdateList &updates,
+			const MockNotifyEventList &notifications,
+			const MockTickRecordList &ticks);
+	// The vector is copied with the signal. The animator must not read it back
+	// from this object: that object may be on another thread.
+	void actualStepSizesChanged(int animatorId, const QVector<qreal> &stepSizes);
+	void externalValueObserved(const QString &uid);
+	void uidPrefixForgotten(const QString &prefix);
+
+protected:
+	void timerEvent(QTimerEvent *event) override;
+
+private:
+	QVariant readValue(const QString &uid) const;
+	void writePending(const QString &uid, const QVariant &value);
+	void absorbCache(const MockValueCache &values);
+	void processTick(MockAnimatorConfig &config);
+	// dropped starts as uids already known to be stale. dropAnimators are writers
+	// paused for a removed path; their tick is dropped even though they stay registered.
+	void dropPendingTicks(QSet<QString> dropped, const QSet<int> &dropAnimators = {});
+	void startAnimatorTimer(int animatorId, bool applyPhase = true, bool deferred = false);
+	void stopAnimatorTimer(int animatorId);
+	void pauseAnimator(int animatorId);
+	void processRandomizer(MockAnimatorConfig &config);
+	void processRangeAnimator(MockAnimatorConfig &config);
+	void processStepper(MockAnimatorConfig &config);
+	void processToggler(MockAnimatorConfig &config);
+	void scheduleBatchFlush();
+	void flushBatch();
+	void evaluateConsumption();
+	void invalidateConsumptionValues();
+	void evaluatePhaseSums();
+	void invalidatePhaseSumValues(int ruleId);
+
+	// Last value sent to the GUI, or last value written from the GUI.
+	// Not the producer. Ticks read this after not-yet-flushed updates.
+	MockValueCache m_valueCache;
+
+	QHash<int, MockAnimatorConfig> m_configs;
+	QHash<int, int> m_timerIdToAnimator;
+	QHash<int, int> m_animatorToTimer;
+	QSet<int> m_phasePending; // animators whose current timer is only the initial offset
+
+	// Batching: accumulate updates from multiple animators firing in the same tick.
+	// Notifications stay with the writes they describe; the applier emits them.
+	MockValueUpdateList m_pendingUpdates;
+	MockNotifyEventList m_pendingNotifications;
+	// One entry per tick that wrote something, so a later write can drop that tick whole.
+	QVector<MockTickRecord> m_pendingTicks;
+	QStringList *m_recordingOutputs = nullptr;
+	int m_flushTimerId = 0;
+
+	// Consumption calculation state
+	QString m_consumptionSystemPrefix;
+	MockConsumptionConfig m_consumptionServices;
+	bool m_gaugesAutoMax = false;
+	QString m_gaugesUidPrefix;
+
+	// Phase sum calculation state (generic per-phase aggregation)
+	struct PhaseSumConfig {
+		QString targetPrefix;          // canonical uid, without a "mock/" prefix
+		QStringList serviceUids;
+		QString sourcePhasePattern;    // e.g. "/Ac/L%1/Power" (%1 = phase number)
+		QString sourceCurrentPattern;  // e.g. "/Ac/L%1/Current"
+	};
+	QHash<int, PhaseSumConfig> m_phaseSumConfigs;
+
+	QSet<int> m_inactiveAnimators; // animators individually deactivated via setAnimatorActive(false)
+	// Removed path. Kept registered so the QML object can resume on a later write.
+	QSet<int> m_pausedAnimators;
+	QSet<int> m_pausedPhaseSums;
+	bool m_consumptionPaused = false;
+	bool m_gaugesPaused = false;
+	bool m_globalActive = false;
+	QRandomGenerator m_rng;
+};
+
+} // namespace VenusOS
+} // namespace Victron
+
+Q_DECLARE_METATYPE(Victron::VenusOS::MockValueUpdateList)
+Q_DECLARE_METATYPE(Victron::VenusOS::MockNotifyEvent)
+Q_DECLARE_METATYPE(Victron::VenusOS::MockNotifyEventList)
+Q_DECLARE_METATYPE(Victron::VenusOS::MockTickRecord)
+Q_DECLARE_METATYPE(Victron::VenusOS::MockTickRecordList)
+Q_DECLARE_METATYPE(Victron::VenusOS::MockValueCache)
+
+#endif // VICTRON_GUIV2_MOCKTIMERWORKER_H

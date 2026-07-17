@@ -21,6 +21,9 @@ int VeQItemMock::setValue(QVariant const &value)
 {
 	VeQItem::setValue(value);
 	produceValue(value);
+	if (m_producer) {
+		Q_EMIT m_producer->valueWritten(uniqueId());
+	}
 	return 0;
 }
 
@@ -92,9 +95,9 @@ VeQItem *VeQItemMockProducer::createItem()
 
 QString VeQItemMockProducer::normalizedUid(const QString &uid)
 {
+	// Must match normalizedMockUid(): strip a leading "mock/" only.
 	return uid.startsWith("mock/") ? uid.mid(5) : uid;
 }
-
 
 } /* VenusOS */
 

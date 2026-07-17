@@ -282,14 +282,24 @@ Desktop builds define `cmake install` rules so that `cmake --install` deploys th
 
 ## Mock system
 
-For desktop development, the mock system provides simulated data:
-- `VeQItemMockProducer` — in-memory VeQItem tree (no D-Bus/MQTT needed)
-- `MockManager` (C++ singleton) — loads JSON configuration files to populate mock values
-- `data/mock/MockSetup.qml` — instantiates domain-specific mock implementations
-- `data/mock/*Impl.qml` — animate data values to simulate a working energy system
-- `data/mock/conf/` — JSON configuration files defining mock device setups
+For desktop development, the mock system provides simulated data. Run with `--mock` to use the mock backend. Configurations such as `maximal` and `minimal` select which devices are simulated.
 
-Run with `--mock` flag to use mock backend. Mock configurations (e.g. "maximal", "minimal") define which devices are simulated.
+- `VeQItemMockProducer` — in-memory VeQItem tree (no D-Bus/MQTT needed)
+- `MockManager` (C++ singleton) — loads `data/mock/conf/*.json` and owns the animation runtime
+- `data/mock/MockSetup.qml` — instantiates domain-specific mock implementations
+- `data/mock/*Impl.qml` — configure animators and calculators. Periodic animation owned by those types is not advanced in the Impl files; some Impl files still update other values from their own timers or `valueChanged` handlers
+- `data/mock/conf/` — JSON configuration files defining mock device setups
+- `src/mockanimators.h` — QML types `MockDataRandomizer`, `MockDataRangeAnimator`, `MockDataToggler`, and `MockDataStepper`
+
+Animator timers and derived-value calculation run in C++ on a worker thread (`MockTimerWorkerThread` when threads are available). A once-a-second tick then does not stall the thread that paints. Applying values, bindings, and text layout stay on the GUI thread. Where threads are unavailable, the same objects run on the GUI thread. The GUI applies one queued value at a time, then returns so the window can paint. Applying a whole tick at once freezes the overview, because each setValue() runs bindings that take several milliseconds. Each animator starts at a deterministic offset inside its interval.
+
+- `MockTimerWorker` (`src/mocktimerworker.cpp`) owns the timers. It calculates randomizer, range, toggler, and stepper updates, plus AC phase sums and AC consumption. It keeps its own copy of the values it reads. That copy is filled from the producer when an animator or calculator is registered, and updated when a value is written or a batch is sent to the GUI. Ticks do not read the producer. Loading a JSON configuration does not send each value to the worker; registration copies the values that are already in the producer. A range animator publishes its initial step direction when it completes. A later change carries the new step sizes in the signal. The animator assigns that vector directly and does not call `setActualStepSizes()`.
+- `MockManager.setValue()` and `VeQuickItem.setValue()` write the producer immediately. The applier then holds that uid until the worker has stored the written value and dropped the unflushed tick that wrote it, including values calculated from it. An already-sent copy of that uid is not applied. The next tick continues from the written value. Item uid changes re-register the animator. A write of a path that was removed resumes writers paused by that removal.
+- Calculator inputs are remembered by uid. A write to one of them reruns the calculation, even when the timers are off. The uid list does not create a missing item. Adding the same service again updates its index instead of summing it twice. The AC page publishes the service again when its model index changes.
+- `MockValueApplier` applies one queued value per turn, about every 10ms. A longer queue is not applied in one turn. `notifyUpdate` and `notifyTotal` are records in that same `valuesReady()` batch. The applier copies the callback and calls it only after `VeQItemMockProducer::setValue()` has applied every uid listed for that record. A handler can re-register its animator. The applier finishes the current notify pass before starting another. The worker must not emit those QML signals itself: the handler would then run before `setValue()`. `MockManager.removeValue()` and `removeServices()` hold every uid under the removed path until the worker has paused the writers and dropped their unflushed tick, including outputs outside that path. They do not write invalidation values. The registration stays, so a later `setValue()` of that path starts them again. Dropping the registration would leave the QML object thinking it was still registered. `VeQItemMockProducer::setValue()` calls `itemGetOrCreate()` and would recreate the deleted service.
+- Derived values (for example `P/V` current and multiplied totals) are calculated from the worker's copy. `*Impl.qml` only supplies the uid lists.
+
+`MockManager.timersActive` and each animator's `active` flag both have to be true before a timer starts. The interval must be finite, positive, and no greater than `INT_MAX` milliseconds; otherwise the timer is not started. Turning either flag back on continues from the worker's copy, which a GUI write has already updated.
 
 ## GUI plugins
 
