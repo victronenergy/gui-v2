@@ -1,0 +1,22 @@
+{
+    "ExitWhenFinished": false,
+    "Tests": [
+        "tst_benchmark_overview.qml"
+    ],
+    "Mock": {
+        "Configuration": ":/data/mock/conf/maximal.json",
+        "TimersActive": false,
+        "UIAnimations": 1
+    },
+    "Steps": {
+        "CaptureAndCompare": {
+            "ImageDir": "image-captures",
+            "StabilizationInterval": 16,
+            "MaximumStabilizationCaptures": 20,
+            "FailIfComparisonFails": false
+        },
+        "WaitUntil": {
+            "DefaultTimeout": 30000
+        }
+    }
+}
