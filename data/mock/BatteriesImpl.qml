@@ -27,10 +27,10 @@ Item {
 	readonly property var batteryServiceTypes: ["battery", "dcsource"]
 
 	function setSystemValue(path, value) {
-		MockManager.setValue("com.victronenergy.system" + path, value)
+		MockManager.setValue(Global.system.serviceUid + path, value)
 	}
 	function systemValue(path) {
-		return MockManager.value("com.victronenergy.system" + path)
+		return MockManager.value(Global.system.serviceUid + path)
 	}
 	function settingsValue(path) {
 		return MockManager.value("com.victronenergy.settings" + path)
@@ -246,7 +246,7 @@ Item {
 		function removeBattery(battery) {
 			const prefix = configPath(battery)
 			for (const path of ["/Enabled", "/Name", "/Service"]) {
-				MockManager.removeValue(`${prefix}/path`)
+				MockManager.removeValue(`${prefix}${path}`)
 			}
 		}
 	}

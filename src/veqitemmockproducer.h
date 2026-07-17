@@ -43,6 +43,7 @@ public:
 	void removeValue(const QString &uid);
 	void removeServices(const QString &serviceType);
 	void dumpValues();
+	VeQItem *itemForUid(const QString &uid, bool create);
 
 	VeQItem *createItem() override;
 
