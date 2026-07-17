@@ -31,6 +31,10 @@ Item {
 	property real _electronTravelDistance
 	property bool _initialized
 
+	// Optional: when set, the electrons container is reparented to this Item,
+	// keeping electrons outside the connector paths layer for better batching.
+	property Item electronsParent
+
 	function reset() {
 		// Disable _initialized to ensure path distance calculations are not updated before layout is complete.
 		_initialized = false
@@ -86,8 +90,10 @@ Item {
 	visible: defaultVisible
 	on_AnimatedChanged: Qt.callLater(_resetDistance)
 
-	// Ensure electrons are shown above connector paths that do not have electrons, to avoid a
-	// situation where non-animated connector paths partially obscure electrons from other paths.
+	// When electronsParent is set, all electrons render in a separate container above all paths,
+	// so this z ordering only affects stacking of path shapes within the paths container.
+	// When electronsParent is not set, this ensures animated connectors render above non-animated
+	// ones so electrons are not obscured by overlapping paths.
 	z: electronRepeater.count === 0 ? -1 : 0
 
 	states: State {
@@ -208,6 +214,19 @@ Item {
 				fillColor: "transparent"
 				pathElements: connectorPath.pathElements
 			}
+		}
+
+		// Electrons are separated from the Shape so that per-frame electron
+		// position/opacity updates do not trigger re-rendering of the Shape layer.
+		Item {
+			id: electronsContainer
+
+			// When reparented to an external container, position ourselves at
+			// the same absolute location as the Shape within the page.
+			parent: root.electronsParent ?? connectorPath
+			x: root.electronsParent ? connectorPath.x : 0
+			y: root.electronsParent ? connectorPath.y + connectorPath.startAnchorY : connectorPath.startAnchorY
+			visible: root.visible
 
 			Repeater {
 				id: electronRepeater
