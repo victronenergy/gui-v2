@@ -10,17 +10,17 @@ Item {
 	id: root
 
 	function setSystemValue(path, value) {
-		MockManager.setValue("com.victronenergy.system" + path, value)
+		MockManager.setValue(Global.system.serviceUid + path, value)
 	}
 	function systemValue(path) {
-		return MockManager.value("com.victronenergy.system" + path)
+		return MockManager.value(Global.system.serviceUid + path)
 	}
 
 	function setGaugesValue(path, value) {
 		MockManager.setValue(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges" + path, value)
 	}
 	function gaugesValue(path) {
-		return MockManager.value("com.victronenergy.settings/Settings/Gui/Gauges" + path)
+		return MockManager.value(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges" + path)
 	}
 
 	VeQuickItem {
@@ -61,52 +61,23 @@ Item {
 	}
 
 	// Set /Ac/PvOnOutput to the total PV power/current of each phase of PV inverters on the system.
+	// Computation runs entirely on the worker thread.
+	MockPhaseSumCalculator {
+		id: pvAcTotals
+		targetPrefix: Global.system.serviceUid + "/Ac/PvOnOutput"
+		sourcePhasePattern: "/Ac/L%1/Power"
+		sourceCurrentPattern: "/Ac/L%1/Current"
+	}
+
 	Instantiator {
 		id: pvInverters
-
-		function updateAcTotals() {
-			let phaseIndex
-			if (pvInverters.count) {
-				let phaseCount = 0
-				let phasePowers = []
-				let phaseCurrents = []
-				for (let i = 0; i < pvInverters.count; ++i) {
-					const inverter = pvInverters.objectAt(i)
-					if (inverter) {
-						phaseCount = Math.max(phaseCount, inverter.phases.count)
-						for (phaseIndex = 0; phaseIndex < inverter.phases.count; ++phaseIndex) {
-							const phase = inverter.phases.get(phaseIndex)
-							phasePowers[phaseIndex] = Units.sumRealNumbers(phasePowers[phaseIndex], phase.power)
-							phaseCurrents[phaseIndex] = Units.sumRealNumbers(phaseCurrents[phaseIndex], phase.current)
-						}
-					}
-				}
-				root.setSystemValue("/Ac/PvOnOutput/NumberOfPhases", phaseCount)
-				for (phaseIndex = 0; phaseIndex < phaseCount; ++phaseIndex) {
-					root.setSystemValue("/Ac/PvOnOutput/L%1/Power".arg(phaseIndex + 1), phasePowers[phaseIndex])
-					root.setSystemValue("/Ac/PvOnOutput/L%1/Current".arg(phaseIndex + 1), phaseCurrents[phaseIndex])
-				}
-				// Reset any other phase values from previous configurations.
-				for (phaseIndex = phaseCount; phaseIndex < 3; ++phaseIndex) {
-					root.setSystemValue("/Ac/PvOnOutput/L%1/Power".arg(phaseIndex + 1), undefined)
-					root.setSystemValue("/Ac/PvOnOutput/L%1/Current".arg(phaseIndex + 1), undefined)
-				}
-			} else {
-				root.setSystemValue("/Ac/PvOnOutput/NumberOfPhases", undefined)
-				for (phaseIndex = 0; phaseIndex < 3; ++phaseIndex) {
-					root.setSystemValue("/Ac/PvOnOutput/L%1/Power".arg(phaseIndex + 1), undefined)
-					root.setSystemValue("/Ac/PvOnOutput/L%1/Current".arg(phaseIndex + 1), undefined)
-				}
-			}
-		}
-
 		model: Global.solarInputs.pvInverterDevices
-		delegate: PvInverter {
+		delegate: QtObject {
 			required property BaseDevice device
-			serviceUid: device.serviceUid
-			onPowerChanged: Qt.callLater(pvInverters.updateAcTotals)
+			readonly property string uid: device.serviceUid
+			Component.onCompleted: pvAcTotals.addService(uid)
+			Component.onDestruction: pvAcTotals.removeService(uid)
 		}
-		onCountChanged: Qt.callLater(updateAcTotals)
 	}
 
 	// Animate PV chargers.
@@ -188,13 +159,17 @@ Item {
 
 			MockDataRandomizer {
 				active: Global.mainView && Global.mainView.mainViewVisible
-				onNotifyUpdate: (index, value) => {
-					const voltage = MockManager.value(pvInverter.uid + "/Ac/L%1/Voltage".arg(index + 1))
-					if (voltage > 0) {
-						MockManager.setValue(pvInverter.uid + "/Ac/L%1/Current".arg(index + 1), value / voltage)
-					}
-				}
-				onNotifyTotal: (totalPower) => { MockManager.setValue(pvInverter.uid + "/Ac/Power", totalPower) }
+				totalTargetUid: pvInverter.uid + "/Ac/Power"
+				derivedTargetUids: [
+					pvInverter.uid + "/Ac/L1/Current",
+					pvInverter.uid + "/Ac/L2/Current",
+					pvInverter.uid + "/Ac/L3/Current"
+				]
+				derivedDivisorUids: [
+					pvInverter.uid + "/Ac/L1/Voltage",
+					pvInverter.uid + "/Ac/L2/Voltage",
+					pvInverter.uid + "/Ac/L3/Voltage"
+				]
 
 				VeQuickItem { uid: pvInverter.uid + "/Ac/L1/Power" }
 				VeQuickItem { uid: pvInverter.uid + "/Ac/L2/Power" }
