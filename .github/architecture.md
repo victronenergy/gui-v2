@@ -270,14 +270,24 @@ Desktop builds define `cmake install` rules so that `cmake --install` deploys th
 
 ## Mock system
 
-For desktop development, the mock system provides simulated data:
-- `VeQItemMockProducer` — in-memory VeQItem tree (no D-Bus/MQTT needed)
-- `MockManager` (C++ singleton) — loads JSON configuration files to populate mock values
-- `data/mock/MockSetup.qml` — instantiates domain-specific mock implementations
-- `data/mock/*Impl.qml` — animate data values to simulate a working energy system
-- `data/mock/conf/` — JSON configuration files defining mock device setups
+For desktop development, the mock system provides simulated data. Run with `--mock` to use the mock backend. Configurations such as `maximal` and `minimal` select which devices are simulated.
 
-Run with `--mock` flag to use mock backend. Mock configurations (e.g. "maximal", "minimal") define which devices are simulated.
+- `VeQItemMockProducer` — in-memory VeQItem tree (no D-Bus/MQTT needed)
+- `MockManager` (C++ singleton) — loads `data/mock/conf/*.json` and owns the animation runtime
+- `data/mock/MockSetup.qml` — instantiates domain-specific mock implementations
+- `data/mock/*Impl.qml` — configure animators and calculators. Periodic animation owned by those types is not advanced in the Impl files; some Impl files still update other values from their own timers or `valueChanged` handlers
+- `data/mock/conf/` — JSON configuration files defining mock device setups
+- `src/mockanimators.h` — QML types `MockDataRandomizer`, `MockDataRangeAnimator`, `MockDataToggler`, and `MockDataStepper`
+
+Timers and derived-value calculation run off the GUI thread when threads are available:
+
+- `MockTimerWorker` (`src/mocktimerworker.cpp`) owns the timers on `MockTimerWorkerThread`. It calculates randomizer, range, toggler, and stepper updates, plus AC phase sums and AC consumption. On builds without thread support (WebAssembly) it stays on the GUI thread. Each animator starts with a deterministic offset inside its interval, so services that share a period do not tick on the same frame. The repeating interval is unchanged. A range animator publishes its initial step direction when it completes, before a later `followSignOf` binding is evaluated, so that sign does not depend on the offset.
+- Animator config and value snapshots are copied to the worker with queued calls. The worker does not read live QML objects. External writes are mirrored into the worker cache via watched `valueChanged` handlers. The same write drops that uid from the applier queue and ignores in-flight worker batches until the worker has observed the new value. Item uid changes re-register the animator.
+- `m_valueCache` is not evicted when an animator or calculator is unregistered. It is one map, not a separate input map: it holds snapshotted source UIDs and the last value written for animator UIDs and derived targets. Readers only look up UIDs in the active animator, phase-sum, or consumption config, so leftover keys are not republished and do not make live outputs stale. `invalidateConsumptionValues()` and `invalidatePhaseSumValues()` still remove the output paths those calculators own. Page configs such as `LevelsPageConfig.qml` mint a new `mock_<n>` UID on each cycle, so unregistered keys remain until process exit. That is a few strings per cycle on a desktop mock process. Refcounting every key to evict them costs more than the leak, so it is left as-is.
+- `MockValueApplier` stays on the GUI thread. It applies worker results to the mock producer in small per-frame batches. `notifyUpdate` and `notifyTotal` are records in that same `valuesReady()` batch, not worker signals. The applier calls the animator callbacks, which emit the QML signals, only after `VeQItemMockProducer::setValue()` has applied every uid listed for that record. The worker must not emit those QML signals itself: a queued worker signal can run the handler before `setValue()`. `MockManager.removeValue()` and `removeServices()` drop queued updates under that uid and ignore in-flight batches until `MockTimerWorker::forgetUidPrefix()` has stopped writers for the prefix and emitted `uidPrefixForgotten()`. The worker must not call `invalidateConsumptionValues()` or `invalidatePhaseSumValues()` for that prefix, and must not emit `valuesReady()` for it before the ack: `VeQItemMockProducer::setValue()` calls `itemGetOrCreate()` and would recreate the deleted service. Cache keys for the removed uid are still not evicted.
+- Derived values (for example `P/V` current and multiplied totals) are calculated on the worker from snapshotted operands. `*Impl.qml` only supplies the uid lists.
+
+`MockManager.timersActive` and each animator's `active` flag both have to be true before a timer starts. The interval must be finite, positive, and no greater than `INT_MAX` milliseconds; otherwise the timer is not started. Turning either flag back on re-snapshots the current values so the next tick does not resume from a stale cache.
 
 ## GUI plugins
 
