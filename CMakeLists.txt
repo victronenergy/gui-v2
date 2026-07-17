@@ -72,7 +72,14 @@ if(VENUS_GUI_V2_TESTS_ENABLED)
 endif()
 
 if ("${GUI_V2_BUILD}" STREQUAL "ON")
-    include(cmake/QZXing.cmake)
+    # QZXing is only used to render QR codes in the ListLink "Show QR code"
+    # dialog, which is unreachable on WASM (ListLink shows an "Open link"
+    # button in the browser instead). Excluding it also avoids its transitive
+    # QtQuickControls2 dependency pulling every Controls style into the
+    # statically linked binary.
+    if(NOT VENUS_WEBASSEMBLY_BUILD)
+        include(cmake/QZXing.cmake)
+    endif()
     include(cmake/GuiV2.cmake)
     target_link_libraries(${PROJECT_NAME} PRIVATE
         VictronVenusOS
@@ -85,8 +92,10 @@ if ("${GUI_V2_BUILD}" STREQUAL "ON")
         VictronBoatplugin
         VictronMock
         VictronMockplugin
-        qzxing
     )
+    if(NOT VENUS_WEBASSEMBLY_BUILD)
+        target_link_libraries(${PROJECT_NAME} PRIVATE qzxing)
+    endif()
     qt_import_qml_plugins(${PROJECT_NAME})
     add_dependencies(generate_translation_sources_file theme_parser)
     add_dependencies(${PROJECT_NAME} theme_parser)
