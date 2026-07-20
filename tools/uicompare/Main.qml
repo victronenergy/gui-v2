@@ -5,13 +5,17 @@ import QtQuick.Controls
 import QtQuick.Dialogs
 
 Window {
+	id: root
+
+	required property real errorTolerance
+
 	width: 1280
 	height: 800
 	visible: true
 	title: qsTr("UI Compare")
 
 	// On startup, begin the image comparisons.
-	Component.onCompleted: Qt.callLater(testModel.refresh)
+	Component.onCompleted: Qt.callLater(testModel.load)
 
 	ColumnLayout {
 		anchors.fill: parent
@@ -22,11 +26,11 @@ Window {
 			Layout.preferredHeight: 80
 			Layout.fillWidth: true
 
-			totalCount: testModel.count
+			totalCount: testModel.totalCount
 			passCount: testModel.passCount
-			failCount: testModel.failedCount
-			missingBaselineCount: testModel.missingBaselineCount
-			missingCandidateCount: testModel.missingCandidateCount
+			failCount: testModel.failCount
+			noBaselineCount: testModel.noBaselineCount
+			noCandidateCount: testModel.noCandidateCount
 
 			onFilterChanged: (filterMode) => {
 				listView.currentIndex = -1
@@ -81,6 +85,6 @@ Window {
 
 	CompareModel {
 		id: testModel
-		errorTolerance: 10.0
+		errorTolerance: root.errorTolerance
 	}
 }

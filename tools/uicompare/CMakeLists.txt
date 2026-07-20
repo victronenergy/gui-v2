@@ -18,6 +18,7 @@ qt_add_qml_module(uicompare
     QML_FILES Main.qml ImageListView.qml CompareView.qml ImageListViewDelegate.qml Toolbar.qml
     SOURCES applicationsettings.h applicationsettings.cpp
     SOURCES comparemodel.h comparemodel.cpp
+    SOURCES imagecomparator.h imagecomparator.cpp
     SOURCES imageprovider.h imageprovider.cpp
 )
 

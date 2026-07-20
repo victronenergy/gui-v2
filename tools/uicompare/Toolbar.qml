@@ -8,8 +8,8 @@ Rectangle {
 	property int totalCount: 0
 	property int passCount: 0
 	property int failCount: 0
-	property int missingBaselineCount: 0
-	property int missingCandidateCount: 0
+	property int noBaselineCount: 0
+	property int noCandidateCount: 0
 	property int filterMode: 0  // 0=all, 1=pass, 2=fail, 3=missing baseline, 4=missing candidate
 
 	signal filterChanged(filterMode : int)
@@ -100,13 +100,13 @@ Rectangle {
 
 					StatisticDisplay {
 						title: "No baseline"
-						number: root.missingBaselineCount
+						number: root.noBaselineCount
 						numberColor: "orange"
 					}
 
 					StatisticDisplay {
 						title: "No candidate"
-						number: root.missingCandidateCount
+						number: root.noCandidateCount
 						numberColor: "orange"
 					}
 				}
