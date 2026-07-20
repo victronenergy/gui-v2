@@ -3208,52 +3208,52 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Disconnessione per Bassa Tensione (sempre ignorato)</translation>
     </message>
     <message id="batterysettings_battery_bank">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="38"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="46"/>
       <source>Battery bank</source>
       <translation>Banco batterie</translation>
     </message>
     <message id="batterysettings_relay_on_battery_monitor">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="56"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="64"/>
       <source>Relay (on battery monitor)</source>
       <translation>Relè (sul monitor batteria)</translation>
     </message>
     <message id="batterysettings_restore_factory_defaults">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="74"/>
       <source>Restore factory defaults</source>
       <translation>Ripristina impostazioni di fabbrica</translation>
     </message>
     <message id="batterysettings_restore">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="68"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="76"/>
       <source>Restore</source>
       <translation type="unfinished">Ripristina</translation>
     </message>
     <message id="batterysettings_confirm_restore_factory_defaults">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="79"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="87"/>
       <source>Restore factory defaults?</source>
       <translation>Ripristinare impostazioni di fabbrica?</translation>
     </message>
     <message id="batterysettings_bluetooth_enabled">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="93"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="101"/>
       <source>Bluetooth Enabled</source>
       <translation>Bluetooth attivo</translation>
     </message>
     <message id="batterysettingsbattery_nominal_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="24"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="21"/>
       <source>Nominal Voltage</source>
       <translation>Tensione Nominale</translation>
     </message>
     <message id="batterysettingsbattery_12_volt">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="28"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="25"/>
       <source>12 Volt</source>
       <translation>12 Volt</translation>
     </message>
     <message id="batterysettingsbattery_24_volt">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="30"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="27"/>
       <source>24 Volt</source>
       <translation>24 Volt</translation>
     </message>
     <message id="batterysettingsbattery_48_volt">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="32"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="29"/>
       <source>48 Volt</source>
       <translation>48 Volt</translation>
     </message>
@@ -3263,62 +3263,62 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation>Capacità</translation>
     </message>
     <message id="batterysettingsbattery_capacity">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="39"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="36"/>
       <source>Capacity</source>
       <translation type="unfinished">Capacità</translation>
     </message>
     <message id="batterysettingsbattery_charged_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="48"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="45"/>
       <source>Charged voltage</source>
       <translation>Tensione caricata</translation>
     </message>
     <message id="batterysettingsbattery_tail_current">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="59"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="56"/>
       <source>Tail current</source>
       <translation>Corrente di coda</translation>
     </message>
     <message id="batterysettingsbattery_charged_detection_time">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="70"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="67"/>
       <source>Charged detection time</source>
       <translation>Tempo di rilevamento batteria carica</translation>
     </message>
     <message id="batterysettingsbattery_peukert_exponent">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="79"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="76"/>
       <source>Peukert exponent</source>
       <translation>Coefficiente Peukert</translation>
     </message>
     <message id="batterysettingsbattery_charge_efficiency_factor">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="89"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="86"/>
       <source>Charge efficiency factor</source>
       <translation>Fattore di efficienza di carica</translation>
     </message>
     <message id="batterysettingsbattery_current_threshold">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="95"/>
       <source>Current threshold</source>
       <translation>Soglia corrente</translation>
     </message>
     <message id="batterysettingsbattery_time_to_go_averaging_period">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="109"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="106"/>
       <source>Time-to-go averaging period</source>
       <translation>Periodo medio rimanente di autonomia</translation>
     </message>
     <message id="batterysettingsbattery_time_to_go_discharge_floor">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="126"/>
       <source>Time-to-go discharge floor</source>
       <translation>Tempo restante soglia di scaricamento</translation>
     </message>
     <message id="batterysettingsbattery_current_offset">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="138"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="135"/>
       <source>Current offset</source>
       <translation>Discrepanza di corrente</translation>
     </message>
     <message id="batterysettingsbattery_synchronise_state_of_charge_to_100%">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="145"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="142"/>
       <source>Synchronise state-of-charge to 100%</source>
       <translation>Sincronizza stato di carica al 100%</translation>
     </message>
     <message id="batterysettingsbattery_calibrate_zero_current">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="161"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="158"/>
       <source>Calibrate zero current</source>
       <translation>Calibrazione corrente a zero</translation>
     </message>
@@ -6378,7 +6378,7 @@ Si desidera continuare?</translation>
       <translation>Allarmi di alta tensione batteria di avviamento</translation>
     </message>
     <message id="batterysettingsbattery_time_to_go_discharge_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="118"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="115"/>
       <source>Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu.</source>
       <translation>Tenere presente che cambiando l’impostazione "Soglia di scarica tempo restante" cambia anche l'impostazione "Basso livello di carica" nel menù relè.</translation>
     </message>
@@ -11611,13 +11611,13 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
       <translation>Motore</translation>
     </message>
     <message id="batterysettingsbattery_sync">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="148"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="145"/>
       <source>Sync</source>
       <extracomment>Trigger a synchronisation of the battery SOC</extracomment>
       <translation>Sincronizza</translation>
     </message>
     <message id="batterysettingsbattery_set_to_0">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="163"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="160"/>
       <source>Set to 0</source>
       <translation>Imposta a 0</translation>
     </message>
@@ -11873,6 +11873,21 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
       <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="51"/>
       <source>Only applies when using Optimized with BatteryLife. Opportunity Loads automatically resumes after a full charge.</source>
       <translation>Si applica solo quando si utilizza la modalità Ottimizzata con BatteryLife. I carichi di opportunità riprendono automaticamente dopo una ricarica completa.</translation>
+    </message>
+    <message id="settings_ble_gateway_access">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="88"/>
+      <source>BLE gateway access</source>
+      <translation>Accesso gateway BLE</translation>
+    </message>
+    <message id="settings_ble_gateway_access_proxy">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="94"/>
+      <source>Proxy</source>
+      <translation>Proxy</translation>
+    </message>
+    <message id="settings_ble_gateway_access_proxy_and_direct">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="96"/>
+      <source>Proxy and direct</source>
+      <translation>Proxy e diretto</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>

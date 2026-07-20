@@ -3208,52 +3208,52 @@ Use unless prohibited by the utility provider.</source>
       <translation>低電圧切断 (常に無視)</translation>
     </message>
     <message id="batterysettings_battery_bank">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="38"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="46"/>
       <source>Battery bank</source>
       <translation>バッテリーバンク</translation>
     </message>
     <message id="batterysettings_relay_on_battery_monitor">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="56"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="64"/>
       <source>Relay (on battery monitor)</source>
       <translation>リレー (バッテリーモニター上)</translation>
     </message>
     <message id="batterysettings_restore_factory_defaults">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="74"/>
       <source>Restore factory defaults</source>
       <translation>工場出荷時設定に復元</translation>
     </message>
     <message id="batterysettings_restore">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="68"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="76"/>
       <source>Restore</source>
       <translation type="unfinished">復元</translation>
     </message>
     <message id="batterysettings_confirm_restore_factory_defaults">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="79"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="87"/>
       <source>Restore factory defaults?</source>
       <translation>工場出荷時設定に復元しますか？</translation>
     </message>
     <message id="batterysettings_bluetooth_enabled">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="93"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="101"/>
       <source>Bluetooth Enabled</source>
       <translation>Bluetooth 有効</translation>
     </message>
     <message id="batterysettingsbattery_nominal_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="24"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="21"/>
       <source>Nominal Voltage</source>
       <translation>公称電圧</translation>
     </message>
     <message id="batterysettingsbattery_12_volt">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="28"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="25"/>
       <source>12 Volt</source>
       <translation>12 ボルト</translation>
     </message>
     <message id="batterysettingsbattery_24_volt">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="30"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="27"/>
       <source>24 Volt</source>
       <translation>24 ボルト</translation>
     </message>
     <message id="batterysettingsbattery_48_volt">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="32"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="29"/>
       <source>48 Volt</source>
       <translation>48ボルト</translation>
     </message>
@@ -3263,62 +3263,62 @@ Use unless prohibited by the utility provider.</source>
       <translation>定員</translation>
     </message>
     <message id="batterysettingsbattery_capacity">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="39"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="36"/>
       <source>Capacity</source>
       <translation type="unfinished">定員</translation>
     </message>
     <message id="batterysettingsbattery_charged_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="48"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="45"/>
       <source>Charged voltage</source>
       <translation>充電済み電圧</translation>
     </message>
     <message id="batterysettingsbattery_tail_current">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="59"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="56"/>
       <source>Tail current</source>
       <translation>テール電流</translation>
     </message>
     <message id="batterysettingsbattery_charged_detection_time">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="70"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="67"/>
       <source>Charged detection time</source>
       <translation>充電検知時間</translation>
     </message>
     <message id="batterysettingsbattery_peukert_exponent">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="79"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="76"/>
       <source>Peukert exponent</source>
       <translation>ポイカート指数</translation>
     </message>
     <message id="batterysettingsbattery_charge_efficiency_factor">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="89"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="86"/>
       <source>Charge efficiency factor</source>
       <translation>充電効率要因</translation>
     </message>
     <message id="batterysettingsbattery_current_threshold">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="95"/>
       <source>Current threshold</source>
       <translation>電流しきい値</translation>
     </message>
     <message id="batterysettingsbattery_time_to_go_averaging_period">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="109"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="106"/>
       <source>Time-to-go averaging period</source>
       <translation>残り時間平均計算期間</translation>
     </message>
     <message id="batterysettingsbattery_time_to_go_discharge_floor">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="126"/>
       <source>Time-to-go discharge floor</source>
       <translation>放電下限までの残り時間</translation>
     </message>
     <message id="batterysettingsbattery_current_offset">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="138"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="135"/>
       <source>Current offset</source>
       <translation>電流オフセット</translation>
     </message>
     <message id="batterysettingsbattery_synchronise_state_of_charge_to_100%">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="145"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="142"/>
       <source>Synchronise state-of-charge to 100%</source>
       <translation>充電率を100%に同期</translation>
     </message>
     <message id="batterysettingsbattery_calibrate_zero_current">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="161"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="158"/>
       <source>Calibrate zero current</source>
       <translation>ゼロ電流を校正</translation>
     </message>
@@ -6379,7 +6379,7 @@ Do you want to continue?</source>
       <translation>始動用バッテリー高電圧アラーム</translation>
     </message>
     <message id="batterysettingsbattery_time_to_go_discharge_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="118"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="115"/>
       <source>Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu.</source>
       <translation>残存時間放電下限設定を変更すると、リレーメニューの低充電状態設定も変更されることに注意してください。</translation>
     </message>
@@ -11613,13 +11613,13 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>エンジン</translation>
     </message>
     <message id="batterysettingsbattery_sync">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="148"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="145"/>
       <source>Sync</source>
       <extracomment>Trigger a synchronisation of the battery SOC</extracomment>
       <translation>同期</translation>
     </message>
     <message id="batterysettingsbattery_set_to_0">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="163"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="160"/>
       <source>Set to 0</source>
       <translation>0に設定</translation>
     </message>
@@ -11875,6 +11875,21 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="51"/>
       <source>Only applies when using Optimized with BatteryLife. Opportunity Loads automatically resumes after a full charge.</source>
       <translation>「BatteryLifeで最適化」を使用している場合のみ適用されます。満充電されると、オポチュニティロードは自動的に再開されます。</translation>
+    </message>
+    <message id="settings_ble_gateway_access">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="88"/>
+      <source>BLE gateway access</source>
+      <translation>BLEゲートウェイアクセス</translation>
+    </message>
+    <message id="settings_ble_gateway_access_proxy">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="94"/>
+      <source>Proxy</source>
+      <translation>プロキシ</translation>
+    </message>
+    <message id="settings_ble_gateway_access_proxy_and_direct">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="96"/>
+      <source>Proxy and direct</source>
+      <translation>プロキシおよび直接</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
