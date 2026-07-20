@@ -45,6 +45,13 @@ The comparison tool provides a split-pane interface with the following features:
 - Displays the currently selected image filename
 
 
+## Headless mode
+
+Run with the `--headless` option to perform image comparisons without showing the GUI application.
+
+In headless mode, you can also set `--output` with a file path, where the comparison results will be written in JSON format.
+
+
 ## TODO
 
 - Add keyboard shortcuts
