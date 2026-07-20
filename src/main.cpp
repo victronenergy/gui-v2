@@ -189,7 +189,6 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	QCommandLineOption mockConfig({ "mc", "mock-conf" },
 		QGuiApplication::tr("Name of mock configuration"),
 		QGuiApplication::tr("mockConfig", "Configuration name"));
-	mockConfig.setDefaultValue("maximal");
 	parser.addOption(mockConfig);
 	optionList << mockConfig;
 
@@ -278,6 +277,8 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	}
 
 	parser.process(filteredArgs);
+	QString mockConfigName = parser.value(mockConfig);
+
 	Victron::VenusOS::BackendConnection *backend = Victron::VenusOS::BackendConnection::create();
 	if (parser.isSet(mqttAddress) || parser.isSet(mqttPortalId)) {
 		if (parser.isSet(mqttUser)) {
@@ -309,10 +310,13 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 		}
 	} else if (parser.isSet(mqttPortalId)) {
 		backend->setType(Victron::VenusOS::BackendConnection::MqttSource, calculateMqttAddressFromPortalId(parser.value(mqttPortalId)));
-	} else if (parser.isSet(mockMode)) {
+	} else if (parser.isSet(mockMode) || !mockConfigName.isEmpty()) {
 		backend->setType(Victron::VenusOS::BackendConnection::MockSource);
 		if (parser.isSet(noMockTimers)) {
 			mockTimersEnabled = false;
+		}
+		if (mockConfigName.isEmpty()) {
+			mockConfigName = "maximal";
 		}
 		// Do not load the mock configuration until ui-test has been parsed, as the UI test config
 		// may specify a mock configuration.
@@ -343,9 +347,9 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	}
 
 	// Load any mock config before the UI test config, in case the latter overrides any values.
-	if (backend->type() == Victron::VenusOS::BackendConnection::MockSource) {
-		const QString configName = parser.value(mockConfig);
-		Victron::VenusOS::MockManager::create()->loadConfiguration(QString(":/data/mock/conf/%1.json").arg(configName));
+	if (backend->type() == Victron::VenusOS::BackendConnection::MockSource
+			&& !mockConfigName.isEmpty()) {
+		Victron::VenusOS::MockManager::create()->loadConfiguration(QString(":/data/mock/conf/%1.json").arg(mockConfigName));
 	}
 
 	// Load the --ui-test option, if specified.
