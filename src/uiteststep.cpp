@@ -209,12 +209,10 @@ CaptureAndCompareStep::CaptureAndCompareStep(QObject *parent, QQuickWindow *wind
 
 QString CaptureAndCompareStep::summary() const
 {
-	QString s = QStringLiteral("%1: %2").arg(UiTestStep::summary()).arg(m_filePrefix);
-	if (m_stabilizationCaptures > maxStabilizationCaptures()) {
-		s += QStringLiteral(" (image is unstable?)");
-	} else if (m_stabilizationCaptures > 2) { // disregard initial capture verifications
-		s += QStringLiteral(" (%1 captures to stabilize)").arg(m_stabilizationCaptures - 2);
-	}
+	QString s = QStringLiteral("%1: %2 (%3 frame swaps, %4ms to stabilize)")
+			.arg(UiTestStep::summary()).arg(m_filePrefix)
+			.arg(m_frameSwapCount)
+			.arg(m_elapsedTimer.elapsed());
 	if (m_comparisonResult == ComparisonFailed) {
 		s += QStringLiteral(" - comparison failed! See %1-FAIL.png").arg(m_filePrefix);
 	}
@@ -226,41 +224,69 @@ void CaptureAndCompareStep::start()
 	Q_ASSERT(m_window);
 	Q_ASSERT(!m_filePrefix.isEmpty());
 
-	// Do an initial capture, then wait briefly and check whether the image has changed, before
-	// doing the image comparison. Otherwise, if the page is still being loaded (e.g. if a Repeater
-	// has not created all of its items) then the test may fail unnecessarily.
-	capture();
-	const int interval = settingValue(QStringLiteral("StabilizationInterval"), 16).toInt();
-	m_stabilizationTimerId = startTimer(interval);
+	// The UI needs to be stable before an image can be captured. Wait <StabilizationInterval>ms
+	// for QQuickWindow::frameSwapped() to be emitted, which indicates the scene has been updated.
+	// If it is emitted, restart the wait.
+	// This way we do not capture the scene before a view is fully loaded. It may be delayed for
+	// all sorts of reasons, e.g. Repeater item loading, waiting for a QQuickItem value, etc.
+	m_stabilizationInterval = settingValue(QStringLiteral("StabilizationInterval"), 16).toInt();
+	m_stabilizationTimerId = startTimer(m_stabilizationInterval);
+	m_elapsedTimer.start();
+
+	connect(m_window, &QQuickWindow::frameSwapped,
+			this, &CaptureAndCompareStep::sceneGraphFrameSwapped,
+			Qt::QueuedConnection);
 }
 
 void CaptureAndCompareStep::timerEvent(QTimerEvent *event)
 {
 	Q_UNUSED(event);
 
-	const QImage prevCapture = m_lastCapture;
-	capture();
+	if (m_stabilizationTimerId == 0) {
+		return;
+	}
 
-	// The image has not changed in the last <X> ms and we assume the UI has now stabilized. Or,
-	// we've made too many unsuccessful attempts. Either way, use this latest capture for comparison
-	// testing.
-	if (prevCapture == m_lastCapture || m_stabilizationCaptures + 1 > maxStabilizationCaptures()) {
-		killTimer(m_stabilizationTimerId);
+	static const int maxAttempts = settingValue(
+				QStringLiteral("MaximumStabilizationAttempts"), 3).toInt();
+
+	// A frame swap has not occurred in the last <X> ms. If this has happened more than
+	// <MaximumStabilizationAttempts> times, or the total wait time exceeds <StabilizationTimeout>,
+	// then capture now and finish the test case.
+	m_stabilizationAttempts++;
+	if (m_stabilizationAttempts >= maxAttempts || m_elapsedTimer.elapsed() >= stabilizationTimeout()) {
 		finalize();
-	} else {
-		m_stabilizationCaptures++;
 	}
 }
 
-void CaptureAndCompareStep::capture()
+void CaptureAndCompareStep::sceneGraphFrameSwapped()
 {
-	m_lastCapture = m_window->grabWindow().convertToFormat(QImage::Format_ARGB32);
+	if (m_stabilizationTimerId == 0) {
+		return;
+	}
+
+	m_frameSwapCount++;
+
+	if (m_elapsedTimer.elapsed() >= stabilizationTimeout()) {
+		finalize();
+	} else {
+		// Wait for the next frameSwapped() signal or for the stabilisation timeout.
+		killTimer(m_stabilizationTimerId);
+		m_stabilizationTimerId = startTimer(m_stabilizationInterval);
+	}
 }
 
 void CaptureAndCompareStep::finalize()
 {
-	QString filePath = m_filePrefix;
+	// Stop listening for frame swaps and stop the stabilisation timer.
+	disconnect(m_window, &QQuickWindow::frameSwapped, this, &CaptureAndCompareStep::sceneGraphFrameSwapped);
+	killTimer(m_stabilizationTimerId);
+	m_stabilizationTimerId = 0;
 
+	// Capture the current view.
+	m_lastCapture = m_window->grabWindow().convertToFormat(QImage::Format_ARGB32);
+
+	// Prepare to save the captured image.
+	QString filePath = m_filePrefix;
 	const QString captureFileName = absoluteImagePath(filePath + ".png");
 	if (captureFileName.isEmpty()) {
 		finish(false, QStringLiteral("Cannot determine capture image path from: '%1'").arg(filePath));
@@ -313,15 +339,25 @@ void CaptureAndCompareStep::finalize()
 	}
 }
 
+int CaptureAndCompareStep::stabilizationTimeout() const
+{
+	static const int maxElapsed = settingValue(
+				QStringLiteral("StabilizationTimeout"), 3000).toInt();
+	return maxElapsed;
+}
+
 QString CaptureAndCompareStep::absoluteImagePath(const QString &fileName)
 {
 	static QString dirPath;
 	if (dirPath.isEmpty()) {
 		static const QString imageDirOverride = qEnvironmentVariable("VENUS_GUI_TEST_CAPTURE_DIR");
 		if (imageDirOverride.isEmpty()) {
-			dirPath = settingValue(CaptureAndCompare, QStringLiteral("ImageDir")).toString();
+			dirPath = settingValue(CaptureAndCompare, QStringLiteral("ImageDir"), QStringLiteral("image-captures")).toString();
 		} else {
 			dirPath = imageDirOverride;
+		}
+		if (dirPath.isEmpty()) {
+			qCFatal(venusGuiTest) << "No image capture directory specified!";
 		}
 		if (!QDir().mkpath(dirPath)) {
 			qWarning() << "mkpath() failed for image directory!" << dirPath;
@@ -330,12 +366,6 @@ QString CaptureAndCompareStep::absoluteImagePath(const QString &fileName)
 	}
 	static QDir dir(dirPath);
 	return dir.absoluteFilePath(fileName);
-}
-
-int CaptureAndCompareStep::maxStabilizationCaptures() const
-{
-	static const int attempts = settingValue(QStringLiteral("MaximumStabilizationCaptures"), 10).toInt();
-	return attempts;
 }
 
 CaptureAndCompareStep *CaptureAndCompareStep::create(QObject *parent, QQuickWindow *window, const QString &imagePrefix, const QVariantMap &params)

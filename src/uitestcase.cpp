@@ -230,13 +230,14 @@ void UiTestCase::goToNextTestFunction()
 			}
 		}
 	} else {
+		const int elapsed = m_totals.elapsed.elapsed();
 		qCInfo(venusGuiTest) << qPrintable(QStringLiteral("Totals: %1 steps passed, %2 steps failed, %3 ms")
 				.arg(m_totals.passed)
 				.arg(m_totals.failed)
-				.arg(m_totals.elapsed.elapsed()));
+				.arg(elapsed));
 		qCInfo(venusGuiTest) << qPrintable(QStringLiteral("********* Finished testing of %1 *********").arg(name()));
 		m_totals.elapsed.invalidate();
-		emit finished();
+		emit finished(m_totals.passed, m_totals.failed, elapsed);
 	}
 }
 
