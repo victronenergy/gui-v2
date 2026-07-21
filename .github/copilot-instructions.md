@@ -7,6 +7,7 @@ Venus OS GUI v2 — Qt6/QML touch UI for Victron Energy GX devices and WebAssemb
 > **Keep documentation current.** When making changes that affect any of the topics below, update the relevant documentation file(s) as part of the same change.
 
 - [Architecture](.github/architecture.md) — backend data layer, singletons, navigation hierarchy, component organization
+- [Code Review](.github/code-review.md) — structured correctness, performance, and maintainability checklist for reviews
 - [Key Navigation](.github/key-navigation.md) — keyboard/button navigation system (must be supported by all features)
 - [Layout Modes](.github/layout-modes.md) — landscape and portrait mode implementation (must be supported by all features)
 - [Internationalisation](.github/i18n-l10n.md) — translations, dynamic language changes, POEditor workflow

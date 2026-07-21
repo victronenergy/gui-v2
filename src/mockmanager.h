@@ -7,10 +7,15 @@
 #define VICTRON_GUIV2_MOCKMANAGER_H
 
 #include <QQmlEngine>
+#if QT_CONFIG(thread)
+#include <QThread>
+#endif
 
 namespace Victron {
 namespace VenusOS {
 
+class MockTimerWorker;
+class MockValueApplier;
 class VeQItemMockProducer;
 
 class MockManager : public QObject
@@ -32,6 +37,10 @@ public:
 	Q_INVOKABLE bool loadConfiguration(const QString &fileName);
 	Q_INVOKABLE void dumpValues();
 
+	// Access the worker thread (for animator registration)
+	MockTimerWorker *timerWorker() const;
+	MockValueApplier *valueApplier() const;
+
 	static MockManager* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
 Q_SIGNALS:
@@ -40,11 +49,20 @@ Q_SIGNALS:
 
 private:
 	explicit MockManager(QObject *parent = nullptr);
+	~MockManager() override;
+
+	void initWorkerThread();
+
 	bool setValuesFromJson(const QString &fileName);
 	void setServiceValues(const QJsonObject &object);
 	VeQItemMockProducer *producer() const;
 
 	bool m_timersActive = false;
+#if QT_CONFIG(thread)
+	QThread *m_workerThread = nullptr;
+#endif
+	MockTimerWorker *m_timerWorker = nullptr;
+	MockValueApplier *m_valueApplier = nullptr;
 };
 
 }

@@ -70,7 +70,7 @@ Item {
 
 				const minimumCurrent = Global.system.feedbackEnabled ? maximumCurrent * -1 : 0
 				const minimumCurrentPath = "/Ac/In/" + acInputDelegate.index + "/Current/Min"
-				root.setGaugesValue(minimumCurrentPath, Math.min(minimumCurrent, root.gaugesValue(minimumCurrent) || 0))
+				root.setGaugesValue(minimumCurrentPath, Math.min(minimumCurrent, root.gaugesValue(minimumCurrentPath) || 0))
 			}
 		}
 		onObjectAdded: (index, inputDelegate) => {
@@ -78,94 +78,15 @@ Item {
 		}
 	}
 
-	// AC loads: set /Ac/Consumption, /Ac/ConsumptionOnOutput and /Ac/ConsumptionOnInput values
-	// using the AC-in and AC-out data from all inverter/chargers. This is a simple and incomplete
-	// way to get some numbers to show up for AC Loads and Essential Loads in mock mode.
-	// - ConsumptionOnOutput = essential loads
-	// - ConsumptionOnInput = AC loads
-	// - Consumption = combined loads
+	// AC loads: consumption is computed entirely on the worker thread via
+	// MockConsumptionCalculator. The QML side only manages service discovery.
+	MockConsumptionCalculator {
+		id: consumptionCalculator
+		systemUidPrefix: Global.system.serviceUid
+	}
+
 	Instantiator {
 		id: acServiceObjects
-
-		function updateConsumption() {
-			let maxPhaseIndex = 0
-			const updateGaugeRanges = gaugesAutoMax.value === 1
-			let acIn1MaxCurrent = 0
-			let acIn2MaxCurrent = 0
-			let noAcInMaxCurrent = 0
-
-			for (let phaseIndex = 0; phaseIndex < 3; ++phaseIndex) {
-				let phaseAcInPower = NaN
-				let phaseAcInCurrent = NaN
-				let phaseAcOutPower = NaN
-				let phaseAcOutCurrent = NaN
-				for (let objectIndex = 0; objectIndex < count; ++objectIndex) {
-					const acService = objectAt(objectIndex)
-					if (!acService) {
-						continue
-					}
-					const acServicePhaseCount = Math.max(acService.acIn.phaseCount, acService.acOut.phaseCount)
-					if (phaseIndex >= acServicePhaseCount) {
-						continue
-					}
-					phaseAcInPower = Units.sumRealNumbers(phaseAcInPower, acService.acIn["powerL" + (phaseIndex + 1)].value)
-					phaseAcInCurrent = Units.sumRealNumbers(phaseAcInCurrent, acService.acIn["currentL" + (phaseIndex + 1)].value)
-					phaseAcOutPower = Units.sumRealNumbers(phaseAcOutPower, acService.acOut["powerL" + (phaseIndex + 1)].value)
-					phaseAcOutCurrent = Units.sumRealNumbers(phaseAcOutCurrent, acService.acOut["currentL" + (phaseIndex + 1)].value)
-					if (updateGaugeRanges) {
-						const inputCurrent = (phaseAcInCurrent || 0) + (phaseAcOutCurrent || 0)
-						if (acService.index === 0) {
-							acIn1MaxCurrent = Math.max(acIn1MaxCurrent, inputCurrent)
-						} else if (acService.index === 1) {
-							acIn2MaxCurrent = Math.max(acIn2MaxCurrent, inputCurrent)
-						} else {
-							noAcInMaxCurrent = Math.max(noAcInMaxCurrent, inputCurrent)
-						}
-					}
-				}
-
-				// This is not how consumption on input is calculated on a real system, but it gives
-				// us some numbers to show in mock mode.
-				const consumptionOnInputPower = Math.max(0, phaseAcInPower - phaseAcOutPower)
-				const consumptionOnInputCurrent = Math.max(0, phaseAcInCurrent - phaseAcOutCurrent)
-				const consumptionOnOutputPower = phaseAcOutPower
-				const consumptionOnOutputCurrent = phaseAcOutCurrent
-				const systemValues = [
-					{ path: "/Ac/ConsumptionOnInput/L%1/Power".arg(phaseIndex + 1), value: consumptionOnInputPower },
-					{ path: "/Ac/ConsumptionOnInput/L%1/Current".arg(phaseIndex + 1), value: consumptionOnInputCurrent },
-					{ path: "/Ac/ConsumptionOnOutput/L%1/Power".arg(phaseIndex + 1), value: consumptionOnOutputPower },
-					{ path: "/Ac/ConsumptionOnOutput/L%1/Current".arg(phaseIndex + 1), value: consumptionOnOutputCurrent },
-					{ path: "/Ac/Consumption/L%1/Power".arg(phaseIndex + 1), value: Units.sumRealNumbers(consumptionOnInputPower, consumptionOnOutputPower) },
-					{ path: "/Ac/Consumption/L%1/Current".arg(phaseIndex + 1), value: Units.sumRealNumbers(consumptionOnInputCurrent, consumptionOnOutputCurrent) },
-				]
-				for (const systemValue of systemValues) {
-					// If a value is available, or changing from an invalid value, then update the
-					// consumption value for this phase.
-					if (!isNaN(systemValue.value) || !isNaN(root.systemValue(systemValue.path))) {
-						root.setSystemValue(systemValue.path, systemValue.value)
-						maxPhaseIndex = Math.max(maxPhaseIndex, phaseIndex)
-					}
-				}
-			}
-
-			root.setSystemValue("/Ac/ConsumptionOnOutput/NumberOfPhases", maxPhaseIndex + 1)
-			root.setSystemValue("/Ac/ConsumptionOnInput/NumberOfPhases", maxPhaseIndex + 1)
-			root.setSystemValue("/Ac/Consumption/NumberOfPhases", maxPhaseIndex + 1)
-
-			// Update the AC load current min/max for the Brief/Overview gauge ranges, to the
-			// highest-seen AC out values.
-			if (updateGaugeRanges) {
-				const gaugeValues = [
-					{ path: "/Ac/AcIn1/Consumption/Current/Max", value: acIn1MaxCurrent },
-					{ path: "/Ac/AcIn2/Consumption/Current/Max", value: acIn2MaxCurrent },
-					{ path: "/Ac/NoAcIn/Consumption/Current/Max", value: noAcInMaxCurrent },
-				]
-				for (const gaugeValue of gaugeValues) {
-					const newMax = Math.max(gaugeValue.value, root.gaugesValue(gaugeValue.path) || 0)
-					root.setGaugesValue(gaugeValue.path, newMax)
-				}
-			}
-		}
 
 		model: FilteredServiceModel { serviceTypes: ["vebus", "acsystem", "inverter", "charger"] }
 		delegate: QtObject {
@@ -174,56 +95,36 @@ Item {
 			required property int index
 			required property string uid
 			readonly property string serviceType: BackendConnection.serviceTypeFromUid(uid)
-			property bool completed
 
-			readonly property string phaseCountUid: (acService.serviceType === "vebus" || acService.serviceType === "acsystem")
-					? acService.uid + "/Ac/NumberOfPhases"
-					: (acService.serviceType === "grid" || acService.serviceType === "genset")
-						? acService.uid + "/NrOfPhases"
-						: ""
+			Component.onCompleted: consumptionCalculator.addService(uid, serviceType, index)
+			Component.onDestruction: consumptionCalculator.removeService(uid)
+		}
+	}
 
-			// For simplicity, attempt to fetch L1/L2/L3 in/out data, regardless of the actual
-			// number of phases on the device.
-			readonly property ObjectAcConnection acIn: ObjectAcConnection {
-				powerKey: "P"
-				currentKey: "I"
-				bindPrefix: acService.serviceType === "vebus" ? acService.uid + "/Ac/ActiveIn"
-					: acService.serviceType === "acsystem" ? acService.uid + "/Ac/In/%1".arg(index + 1)
-					: acService.serviceType === "charger" ? acService.uid + "/Ac/In"
-					: "" // no AC-in for inverters
-				_phaseCount.uid: acService.phaseCountUid
-				onPhaseCountChanged: {
-					if (acService.completed) {
-						Qt.callLater(acServiceObjects.updateConsumption)
-					}
-				}
-				onPowerChanged: {
-					if (acService.completed) {
-						Qt.callLater(acServiceObjects.updateConsumption)
-					}
-				}
+	// Consumption gauge AutoMax: track highest-seen consumption current and
+	// write to gauge settings paths (read by SystemLoad.qml for gauge scaling).
+	QtObject {
+		id: gaugeMaxTracker
+
+		function updateGaugeMax() {
+			if (gaugesAutoMax.value !== 1) return
+			let maxCurrent = 0
+			for (const item of [_consL1Current, _consL2Current, _consL3Current]) {
+				if (!isNaN(item.value)) maxCurrent = Math.max(maxCurrent, item.value)
 			}
-			readonly property ObjectAcConnection acOut: ObjectAcConnection {
-				powerKey: "P"
-				currentKey: "I"
-				bindPrefix: acService.serviceType === "charger" ? "" : acService.uid + "/Ac/Out"
-				_phaseCount.uid: acService.phaseCountUid
-				onPhaseCountChanged: {
-					if (acService.completed) {
-						Qt.callLater(acServiceObjects.updateConsumption)
-					}
-				}
-				onPowerChanged: {
-					if (acService.completed) {
-						Qt.callLater(acServiceObjects.updateConsumption)
-					}
-				}
+			const paths = [
+				"/Ac/AcIn1/Consumption/Current/Max",
+				"/Ac/AcIn2/Consumption/Current/Max",
+				"/Ac/NoAcIn/Consumption/Current/Max",
+			]
+			for (const path of paths) {
+				root.setGaugesValue(path, Math.max(maxCurrent, root.gaugesValue(path) || 0))
 			}
 		}
-		onObjectAdded: (index, acService) => {
-			Qt.callLater(acServiceObjects.updateConsumption)
-			acService.completed = true
-		}
+
+		property var _consL1Current: VeQuickItem { uid: Global.system.serviceUid + "/Ac/Consumption/L1/Current"; onValueChanged: gaugeMaxTracker.updateGaugeMax() }
+		property var _consL2Current: VeQuickItem { uid: Global.system.serviceUid + "/Ac/Consumption/L2/Current"; onValueChanged: gaugeMaxTracker.updateGaugeMax() }
+		property var _consL3Current: VeQuickItem { uid: Global.system.serviceUid + "/Ac/Consumption/L3/Current"; onValueChanged: gaugeMaxTracker.updateGaugeMax() }
 	}
 
 	// Animate AC input values.
@@ -234,8 +135,17 @@ Item {
 			required property AcInputSystemInfo modelData
 			readonly property AcInputSystemInfo acInputInfo: modelData
 			readonly property AcInput acInput: Global.acInputs["input" + (index + 1)]
+			readonly property string bindPrefix: acInput?._phaseMeasurements.bindPrefix ?? ""
+			readonly property string voltageId: (acInput?.serviceType === "vebus" || acInput?.serviceType === "acsystem") ? "V" : "Voltage"
+			readonly property string totalPowerUid: {
+				if (!acInput) return ""
+				if (acInput.serviceType === "vebus") return acInput.serviceUid + "/Ac/ActiveIn/P"
+				if (acInput.serviceType === "acsystem") return acInput.serviceUid + "/Ac/In/%1/P".arg(index + 1)
+				return ""
+			}
 
 			// For each phase, slide between the minimum and maximum current values.
+			// Power = current * voltage is computed in the worker thread.
 			MockDataRangeAnimator {
 				active: Global.mainView && Global.mainView.mainViewVisible
 				maximumValue: acInputInfo.maximumCurrent
@@ -246,27 +156,17 @@ Item {
 					acInput?._phaseMeasurements.currentL2 ?? null,
 					acInput?._phaseMeasurements.currentL3 ?? null,
 				]
-
-				onNotifyTotal: {
-					if (!acInput || !acInput._phaseMeasurements.bindPrefix || index < 0) {
-						return
-					}
-					// When the phase current changes, update the phase power as well.
-					let totalPower = 0
-					for (let phaseIndex = 0; phaseIndex < acInput.phases.count; ++phaseIndex) {
-						const current = dataItems[phaseIndex].value
-						const voltageId = acInput.serviceType === "vebus" || acInput.serviceType === "acsystem" ? "V" : "Voltage"
-						const voltage = MockManager.value(`${acInput._phaseMeasurements.bindPrefix}/L${phaseIndex + 1}/${voltageId}`)
-						const power = current * voltage
-						acInput._phaseMeasurements["powerL" + (phaseIndex+1)].setValue(power)
-						totalPower += power
-					}
-					if (acInput.serviceType === "vebus") {
-						MockManager.setValue(acInput.serviceUid + "/Ac/ActiveIn/P", totalPower)
-					} else if (acInput.serviceType === "acsystem") {
-						MockManager.setValue(acInput.serviceUid + "/Ac/%1/P".arg(index + 1), totalPower)
-					}
-				}
+				derivedMultiplyTargetUids: bindPrefix ? [
+					bindPrefix + "/L1/P",
+					bindPrefix + "/L2/P",
+					bindPrefix + "/L3/P"
+				] : []
+				derivedMultiplierUids: bindPrefix ? [
+					bindPrefix + "/L1/" + voltageId,
+					bindPrefix + "/L2/" + voltageId,
+					bindPrefix + "/L3/" + voltageId
+				] : []
+				derivedMultiplyTotalTargetUid: totalPowerUid
 			}
 		}
 	}
@@ -282,13 +182,17 @@ Item {
 
 			MockDataRandomizer {
 				active: Global.mainView && Global.mainView.mainViewVisible
-				onNotifyUpdate: (index, value) => {
-					const voltage = MockManager.value(acObject.uid + "/Ac/L%1/Voltage".arg(index + 1))
-					if (voltage > 0) {
-						MockManager.setValue(acObject.uid + "/Ac/L%1/Current".arg(index + 1), value / voltage)
-					}
-				}
-				onNotifyTotal: (totalPower) => { MockManager.setValue(uid + "/Ac/Power", totalPower) }
+				totalTargetUid: acObject.uid + "/Ac/Power"
+				derivedTargetUids: [
+					acObject.uid + "/Ac/L1/Current",
+					acObject.uid + "/Ac/L2/Current",
+					acObject.uid + "/Ac/L3/Current"
+				]
+				derivedDivisorUids: [
+					acObject.uid + "/Ac/L1/Voltage",
+					acObject.uid + "/Ac/L2/Voltage",
+					acObject.uid + "/Ac/L3/Voltage"
+				]
 
 				VeQuickItem { uid: acObject.uid + "/Ac/L1/Power" }
 				VeQuickItem { uid: acObject.uid + "/Ac/L2/Power" }
