@@ -10,7 +10,10 @@ also optionally launches the UI Compare tool to visually show the comparisons.
 For example, to compare the gui-v2 UI between the 'main' branch and the current working branch,
 using the "maximal" mock configuration and the default "smoke/mock-maximal" UI test:
 
-    python tools/ui_capture_and_compare.py --qt-dir=~/Qt/6.8.3/gcc_64 --ui-test smoke/mock-maximal --mock-conf maximal
+    python tools/ui_capture_and_compare.py
+        --qt-dir=~/Qt/6.8.3/gcc_64
+        --ui-test smoke/mock-maximal
+        --mock-conf maximal
 
 Build directories will be created in the system temp location, unless specified otherwise by the
 --baseline-dir, --candidate-dir and --uicompare-dir options.
@@ -30,6 +33,8 @@ python tools/ui_capture_and_compare.py
     --qt-dir=~/Qt/6.8.3/gcc_64
     --baseline=v1.3.9
     --candidate=my-feature-branch
+    --ui-test smoke/mock-maximal
+    --mock-conf maximal
 
 The above command triggers a sequence as follows:
 
@@ -65,7 +70,7 @@ DRY_RUN = False
 
 # --- Utility functions ---
 
-def run_command(cmd, cwd=None, check=True):
+def run_command(cmd, cwd=None, check=True, env=None):
     '''Run a command, printing it and streaming output. Returns CompletedProcess.'''
     print(f'\n> {" ".join(cmd)}')
     if DRY_RUN:
@@ -73,17 +78,19 @@ def run_command(cmd, cwd=None, check=True):
     else:
         if cwd:
             print(f'  (in {cwd})')
-        result = subprocess.run(cmd, cwd=cwd, check=check)
+        result = subprocess.run(cmd, cwd=cwd, check=check, env=env)
         return result
 
 
-def start_and_wait(binary, cwd=None):
+def start_and_wait(binary, cwd=None, args=None):
     '''Starts a process and blocks until the process is finished.'''
-    print(f'\n > {binary}')
+    args = args or []
+    args.insert(0, binary)
+    print(f'\n > {" ".join(args)}')
     if not DRY_RUN:
         if not os.path.exists(binary):
             sys.exit(f'Error: binary not found at {binary}')
-        binary_process = subprocess.Popen([binary], cwd=cwd)
+        binary_process = subprocess.Popen(args, cwd=cwd)
         binary_process.wait()
 
 
@@ -171,7 +178,7 @@ def cmake_build(source_dir, build_dir, qt_dir, extra_cmake_args=None, jobs=None)
 
 # --- Image generation ---
 
-def generate_images(build_dir, ui_test, mock_conf=None):
+def generate_images(build_dir, ui_test, mock_conf=None, offscreen=False):
     '''Run venus-gui-v2 with the specified UI test to generate image captures.'''
     binary = find_binary(build_dir, 'venus-gui-v2')
     if not DRY_RUN and not os.path.exists(binary):
@@ -181,7 +188,8 @@ def generate_images(build_dir, ui_test, mock_conf=None):
     if mock_conf:
         cmd.append('--mock')
         cmd.append(f'--mock-conf={mock_conf}')
-    run_command(cmd, cwd=build_dir)
+    env = {**os.environ, 'QT_QPA_PLATFORM': 'offscreen'} if offscreen else None
+    run_command(cmd, cwd=build_dir, env=env)
 
 
 def copy_images_to_uicompare(baseline_dir, candidate_dir, uicompare_dir):
@@ -229,8 +237,11 @@ if __name__ == '__main__':
     parser.add_argument('--ui-test', help=f'gui-v2 argument: The UI test configuration to run')
     parser.add_argument('--mock-conf', help=f'gui-v2 argument: the mock configuration to use, if mock mode is desired')
     parser.add_argument('--clean-up', action='store_true', default=False, help='Delete all build directories on exit')
+    parser.add_argument('--headless', action='store_true', default=False, help='Run image generation and comparison without showing the UI')
     parser.add_argument('--skip-baseline', action='store_true', default=False, help='Skip baseline build and image generation')
     parser.add_argument('--skip-candidate', action='store_true', default=False, help='Skip candidate build and image generation')
+    parser.add_argument('-e', '--error-tolerance', help='UI Compare argument: MSE error tolerance threshold for image comparisons')
+    parser.add_argument('-o', '--output', help='UI Compare argument: output file for JSON comparison results (only in headless mode)')
     parser.add_argument('-j', '--jobs', type=int, default=8, help='Number of parallel build jobs')
     parser.add_argument('-n', '--dry-run', action='store_true', help='Run the script without actually triggering any actions')
     args = parser.parse_args()
@@ -267,7 +278,7 @@ if __name__ == '__main__':
             print(f'\n=== Generate images for baseline "{baseline_ref}" in {args.baseline_dir} ===')
             git_checkout(baseline_ref)
             cmake_build(source_dir, args.baseline_dir, qt_dir, jobs=args.jobs)
-            generate_images(args.baseline_dir, args.ui_test, mock_conf=args.mock_conf)
+            generate_images(args.baseline_dir, args.ui_test, mock_conf=args.mock_conf, offscreen=args.headless)
 
         if args.skip_candidate:
             print('Skipping candidate build and image generation...')
@@ -275,7 +286,7 @@ if __name__ == '__main__':
             print(f'\n=== Generate images for candidate "{candidate_ref}" in {args.candidate_dir} ===')
             git_checkout(candidate_ref)
             cmake_build(source_dir, args.candidate_dir, qt_dir, jobs=args.jobs)
-            generate_images(args.candidate_dir, args.ui_test, mock_conf=args.mock_conf)
+            generate_images(args.candidate_dir, args.ui_test, mock_conf=args.mock_conf, offscreen=args.headless)
 
         if not (args.skip_baseline and args.skip_candidate):
             print('\n=== Restore original branch ===')
@@ -286,7 +297,14 @@ if __name__ == '__main__':
         cmake_build(uicompare_source, args.uicompare_dir, qt_dir, jobs=args.jobs)
         uicompare_binary = find_binary(args.uicompare_dir, 'uicompare')
         copy_images_to_uicompare(args.baseline_dir, args.candidate_dir, args.uicompare_dir)
-        start_and_wait(uicompare_binary, cwd=args.uicompare_dir)
+        uicompare_args = []
+        if args.headless:
+            uicompare_args.append('--headless')
+        if args.output:
+            uicompare_args.append(f'--output={args.output}')
+        if args.error_tolerance is not None:
+            uicompare_args.append(f'--error-tolerance={args.error_tolerance}')
+        start_and_wait(uicompare_binary, cwd=args.uicompare_dir, args=uicompare_args)
 
         print('\nDone!')
 
