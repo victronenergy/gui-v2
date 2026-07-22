@@ -113,266 +113,208 @@ Page {
 						filterFlags: VeQItemSortTableModel.FilterInvalid
 					}
 
-					// A single list item combining the device's enable switch with the encryption
-					// key entry field. Based on ListTextField (which owns the /Key data item,
-					// validation and virtual-keyboard handling); the enable switch is added into
-					// a custom contentItem and wired to a separate /Enabled data item.
-					delegate: ListTextField {
+					// Each Bluetooth sensor is shown either as an enable switch or, for an
+					// encrypted Instant Readout device that is not yet enabled, as an encryption
+					// key entry field. A Loader swaps between two standard list items as the
+					// device's state changes, so neither has to emulate the other.
+					delegate: Loader {
 						id: sensorDelegate
 
 						// The device's dbus path prefix, e.g. ".../Devices/xxxxxx_xxxxxxx".
-						readonly property string __devicePrefix: model.item.itemParent().uid
-						// Encrypted Instant Readout devices expose a Devices/<id>/Key path. When
-						// that path is present the device cannot be enabled until a valid key is
-						// entered.
-						readonly property bool __keyRequired: dataItem.seen
-						// Validity of the value currently in the text field (the live edit buffer).
-						// A key is valid if it is empty (clearing the key) or exactly 32 hex chars.
-						// Used to decide whether the edited input can be saved.
-						readonly property bool __keyValid: /^([0-9A-Fa-f]{32})?$/.test(secondaryText)
-						// True when the field currently holds a complete 32-character key. The switch
-						// gates on this (the live field), matching the requirement that the slider is
-						// disabled until the field contains a valid key. Enabling then saves the key
-						// first (see __toggleEnabled), so the device is never enabled against an
-						// unsaved key even though the switch reflects the live buffer.
-						readonly property bool __liveKeyValid: /^[0-9A-Fa-f]{32}$/.test(secondaryText)
-						// Validity of the key already committed to the backend (dataItem.value). The
-						// read-only gating keys off this (not the live buffer) so the field does not
-						// become read-only / disappear mid-edit the instant the 32nd char is typed.
-						readonly property bool __savedKeyValid: dataItem.valid
-								&& /^[0-9A-Fa-f]{32}$/.test(dataItem.value)
-						readonly property bool __enabled: enabledDataItem.value === 1
-						// An encrypted device can only be enabled once the field holds a valid
-						// 32-character hexadecimal key. An already-enabled device can always be
-						// disabled, so the user is never trapped if the backend presents an enabled
-						// device with an invalid key.
-						readonly property bool __switchClickable: userHasWriteAccess
-								&& enabledDataItem.valid
-								&& (__enabled || !__keyRequired || __liveKeyValid)
+						readonly property string devicePrefix: model.item.itemParent().uid
+						readonly property string deviceName: model.item.value
+						// Encrypted Instant Readout devices expose a Devices/<id>/Key path; such a
+						// device is enabled by entering a valid key rather than via a switch.
+						readonly property bool keyRequired: keyItem.seen
+						readonly property bool deviceEnabled: enabledItem.value === 1
 
-						// When enabling an encrypted device we save the key, then defer writing
-						// /Enabled=1 until the backend confirms that exact key (dataItem.value),
-						// so the device is never enabled against an unsaved or rejected key.
-						property bool __enablePending: false
-						property string __pendingKey
+						// True from when we enable the device with an entered key until the backend
+						// either rejects it (Enabled returns to 0) or the window below elapses with
+						// the device still enabled. Used to report a rejected key to the user.
+						property bool awaitingValidation: false
+						// Set while the user deliberately disables the device, so the resulting
+						// Enabled -> 0 is not mistaken for a backend key rejection.
+						property bool userDisabling: false
 
-						function __toggleEnabled() {
-							if (!checkWriteAccessLevel()) {
-								return
-							}
-							if (__enabled) {
-								// Disabling is always allowed and needs no key.
-								enabledDataItem.setValue(0)
-								return
-							}
-							if (!__keyRequired) {
-								enabledDataItem.setValue(1)
-								return
-							}
-							// Encrypted device: save the entered key first (the Qt.NoFocus switch does
-							// not trigger a focus-loss save). Abort if it does not validate.
-							if (runValidation(VenusOS.InputValidation_ValidateAndSave)
-									=== VenusOS.InputValidation_Result_Error) {
-								return
-							}
-							__pendingKey = secondaryText
-							__enablePending = true
-							__applyPendingEnable()
-						}
-
-						// Write /Enabled=1 once the saved key has round-tripped back from the
-						// backend. Requires the live field to still equal the pending key, so an
-						// edit made before the key is confirmed cancels the enable rather than
-						// enabling against a superseded key.
-						function __applyPendingEnable() {
-							if (__enablePending
-									&& secondaryText === __pendingKey
-									&& dataItem.valid
-									&& String(dataItem.value) === __pendingKey) {
-								__enablePending = false
-								enabledDataItem.setValue(1)
-							}
-						}
-
-						// Complete a deferred enable when the key write is confirmed.
-						Connections {
-							target: sensorDelegate.dataItem
-							function onValueChanged() { sensorDelegate.__applyPendingEnable() }
-						}
-
-						// Editing the field abandons any deferred enable.
-						onSecondaryTextChanged: {
-							if (__enablePending && secondaryText !== __pendingKey) {
-								__enablePending = false
-							}
-						}
-
-						// When the device becomes enabled (and the field turns read-only), discard
-						// any uncommitted edit by re-binding the field to the committed key, so the
-						// read-only field can never display a value that differs from the backend.
-						Connections {
-							target: enabledDataItem
-							function onValueChanged() {
-								if (sensorDelegate.__enabled) {
-									sensorDelegate.secondaryText = Qt.binding(function() {
-										return sensorDelegate.dataItem.valid ? sensorDelegate.dataItem.value : ""
-									})
-								}
-							}
-						}
-
+						// Width is set, height is left to follow the loaded list item's implicit height.
 						width: parent ? parent.width : 0
 
-						// Primary label is the device name; the caption labels the key field.
-						text: model.item.value
-						//% "Encryption key"
-						caption: qsTrId("settings_ble_sensors_encryption_key")
+						// Show the key field while an encrypted device is disabled; otherwise (a
+						// non-encrypted device, or an enabled encrypted one) show the enable switch.
+						sourceComponent: (keyRequired && !deviceEnabled) ? keyFieldComponent : switchComponent
 
-						// The text field edits the encryption key (/Key).
-						dataItem.uid: __devicePrefix + "/Key"
-						// Limited to 32 hexadecimal characters; input is case insensitive.
-						maximumLength: 32
-						inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText | Qt.ImhSensitiveData
-						// The key is sensitive, so mask it both while typing and in the
-						// read-only display shown once the device is enabled.
-						echoMode: TextInput.Password
-						validator: RegularExpressionValidator { regularExpression: /^[0-9A-Fa-f]{0,32}$/ }
-						//% "Enter a 32-character key"
-						placeholderText: qsTrId("settings_ble_sensors_encryption_key_placeholder")
-						// Make the field read-only once the device is enabled with a saved valid
-						// key, but keep it editable if the saved key is invalid so the user can
-						// correct it. Keying off the saved (not live) value means the field stays
-						// editable while typing a correction, until the new key is actually saved.
-						// Editable when either not yet enabled or the saved key is invalid (so an
-						// enabled device with a bad key can still be corrected). Once enabled with a
-						// valid saved key the field is read-only; any uncommitted edit made during
-						// the enable round-trip is discarded when the device reports enabled.
-						interactive: dataItem.valid && (!__enabled || !__savedKeyValid)
-						validateInput: function() {
-							if (sensorDelegate.__keyValid) {
-								return Utils.validationResult(VenusOS.InputValidation_Result_OK)
-							}
-							//% "The encryption key must be 32 hexadecimal characters."
-							return Utils.validationResult(VenusOS.InputValidation_Result_Error,
-									qsTrId("settings_ble_sensors_encryption_key_invalid"))
+						// Save the key, then enable the device. The backend validates the key and,
+						// if it is wrong, disables the device again (see the enabledItem Connections).
+						// Deferred via Qt.callLater so it is safe to call from the key field's own
+						// signal handlers - enabling swaps the field out from under them.
+						function enableWithKey(key) {
+							keyItem.setValue(key)
+							awaitingValidation = true
+							validationTimer.restart()
+							enabledItem.setValue(1)
 						}
 
-						// This delegate replaces a ListSwitch, so keep Space toggling the enable
-						// switch like a ListSwitch would (ListTextField's default Space handler,
-						// which focuses the text field, is overridden here). When the switch is
-						// locked - e.g. an encrypted device whose key is not yet valid - fall back
-						// to focusing the key field so the key can still be entered via the keyboard.
-						Keys.onSpacePressed: {
-							if (__switchClickable) {
-								__toggleEnabled()
-							} else if (clickable && contentItem && contentItem.forceInputFocus) {
-								contentItem.forceInputFocus()
-							}
+						function disable() {
+							userDisabling = true
+							awaitingValidation = false
+							validationTimer.stop()
+							enabledItem.setValue(0)
 						}
 
-						// Two rows, each laid out as a RowLayout so that the control on the right is
-						// vertically centered with its label on the left. The key caption/field row
-						// is only shown for encrypted devices that require a key.
-						// | Device name | Enable switch |
-						// | Key caption | Key field     |
-						contentItem: Column {
-							// Called by ListTextField.runValidation() and Keys.onSpacePressed.
-							function runValidation(mode) {
-								return keyField.runValidation(mode)
-							}
-							function forceInputFocus() {
-								keyField.forceInputFocus()
-							}
-
-							// Since the root top/bottomPadding is 0, add the content margins back
-							// here. The inter-row spacing matches the top/bottom padding so that the
-							// gap above the switch (to the top of the delegate) equals the gap below
-							// it (to the text entry box); the switch is centered within its row, so
-							// its centering offset applies equally on both sides.
-							topPadding: Theme.geometry_listItem_content_verticalMargin
-							bottomPadding: Theme.geometry_listItem_content_verticalMargin
-							spacing: Theme.geometry_listItem_content_verticalMargin
-
-							RowLayout {
-								width: parent.width
-								spacing: sensorDelegate.spacing
-
-								Label {
-									text: sensorDelegate.text
-									textFormat: sensorDelegate.textFormat
-									font: sensorDelegate.font
-									wrapMode: Text.Wrap
-
-									Layout.fillWidth: true
-									Layout.alignment: Qt.AlignVCenter
-								}
-
-								Switch {
-									id: enabledSwitch
-
-									checked: sensorDelegate.__enabled
-									// Keep 'checked' bound to the backend state: a Switch is checkable
-									// by default, so clicking would otherwise assign 'checked' and break
-									// the binding above. With checkable: false the click still emits
-									// onClicked (driving __toggleEnabled), but the visual state only ever
-									// follows __enabled - so a rejected/failed toggle can't desync the UI.
-									checkable: false
-									focusPolicy: Qt.NoFocus
-									enabled: sensorDelegate.__switchClickable
-									onClicked: sensorDelegate.__toggleEnabled()
-
-									Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-								}
-							}
-
-							RowLayout {
-								width: parent.width
-								spacing: sensorDelegate.spacing
-								visible: sensorDelegate.__keyRequired
-
-								CaptionLabel {
-									text: sensorDelegate.caption
-
-									Layout.fillWidth: true
-									Layout.alignment: Qt.AlignVCenter
-								}
-
-								TextValidationField {
-									id: keyField
-
-									horizontalAlignment: Text.AlignHCenter
-									text: sensorDelegate.secondaryText
-									// Editable only while clickable; otherwise the field stays visible
-									// but disabled, showing the masked key (echoMode is Password) so an
-									// enabled/read-only device still indicates a key is set instead of
-									// showing a bare caption. The enclosing row is already hidden for
-									// non-encrypted devices via its visible: __keyRequired binding.
-									enabled: sensorDelegate.clickable
-									echoMode: sensorDelegate.echoMode
-									inputMethodHints: sensorDelegate.inputMethodHints
-									placeholderText: sensorDelegate.placeholderText
-									maximumLength: sensorDelegate.maximumLength
-									validator: sensorDelegate.validator
-
-									flickable: sensorDelegate.flickable
-									validateInput: sensorDelegate.validateInput
-									validateOnFocusLost: sensorDelegate.validateOnFocusLost
-
-									onInputValidated: sensorDelegate.saveInput()
-									onTextChanged: sensorDelegate.secondaryText = text
-
-									Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-									Layout.minimumWidth: Theme.geometry_listItem_textField_minimumWidth
-									Layout.maximumWidth: Theme.geometry_listItem_textField_maximumWidth
-								}
-							}
-						}
-
-						// The device's enabled state (/Enabled) lives on a separate data item
-						// from the key field's /Key data item.
 						VeQuickItem {
-							id: enabledDataItem
-							uid: sensorDelegate.__devicePrefix + "/Enabled"
+							id: enabledItem
+							uid: sensorDelegate.devicePrefix + "/Enabled"
+						}
+						VeQuickItem {
+							id: keyItem
+							uid: sensorDelegate.devicePrefix + "/Key"
+						}
+
+						// Detect the backend rejecting an entered key: Enabled dropping back to 0
+						// while we were awaiting validation and the user did not disable the device.
+						Connections {
+							target: enabledItem
+							function onValueChanged() {
+								if (sensorDelegate.deviceEnabled) {
+									return
+								}
+								if (sensorDelegate.userDisabling) {
+									sensorDelegate.userDisabling = false
+								} else if (sensorDelegate.awaitingValidation) {
+									//% "The submitted encryption key is invalid."
+									Global.showToastNotification(VenusOS.Notification_Warning,
+											qsTrId("settings_ble_sensors_encryption_key_rejected"), 5000)
+								}
+								sensorDelegate.awaitingValidation = false
+								validationTimer.stop()
+							}
+						}
+
+						// If the device is still enabled when this elapses, assume the key was
+						// accepted; a rejection is expected to disable the device before then.
+						Timer {
+							id: validationTimer
+							interval: 20000
+							onTriggered: sensorDelegate.awaitingValidation = false
+						}
+
+						Component {
+							id: switchComponent
+
+							ListSwitch {
+								text: sensorDelegate.deviceName
+								dataItem.uid: sensorDelegate.devicePrefix + "/Enabled"
+								// A non-encrypted device toggles Enabled directly. An encrypted device
+								// only shows the switch while enabled, so clicking it disables the
+								// device (routed through disable() to keep the delegate's state in sync).
+								updateDataOnClick: !sensorDelegate.keyRequired
+								onClicked: {
+									if (sensorDelegate.keyRequired) {
+										sensorDelegate.disable()
+									}
+								}
+							}
+						}
+
+						Component {
+							id: keyFieldComponent
+
+							ListTextField {
+								id: keyField
+
+								//% "Encryption key"
+								readonly property string _keyCaption: qsTrId("settings_ble_sensors_encryption_key")
+								//% "The encryption key must be 32 hexadecimal characters."
+								readonly property string _keyInvalid: qsTrId("settings_ble_sensors_encryption_key_invalid")
+
+								text: sensorDelegate.deviceName
+								// The field is for entering a new key; the stored key is never shown,
+								// so a disabled device always presents an empty field. A fresh instance
+								// is loaded each time the device becomes disabled.
+								secondaryText: ""
+								dataItem.uid: sensorDelegate.devicePrefix + "/Key"
+								// Limited to 32 hexadecimal characters; input is case insensitive.
+								maximumLength: 32
+								inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText | Qt.ImhSensitiveData
+								// The key is sensitive, so mask it while typing.
+								echoMode: TextInput.Password
+								validator: RegularExpressionValidator { regularExpression: /^[0-9A-Fa-f]{0,32}$/ }
+								//% "Enter a 32-character key"
+								placeholderText: qsTrId("settings_ble_sensors_encryption_key_placeholder")
+								validateInput: function() {
+									if (/^[0-9A-Fa-f]{32}$/.test(secondaryText)) {
+										return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+									}
+									return Utils.validationResult(VenusOS.InputValidation_Result_Error, _keyInvalid)
+								}
+								// Entering a complete, valid key enables the device. Fires for any
+								// input method (typing, paste); enabling swaps this field out for the
+								// switch, so defer the write until this handler has returned.
+								onSecondaryTextChanged: {
+									if (/^[0-9A-Fa-f]{32}$/.test(secondaryText)) {
+										Qt.callLater(sensorDelegate.enableWithKey, secondaryText)
+									}
+								}
+								// Also enable on an explicit submit (Enter / focus lost) as a fallback.
+								saveInput: function() {
+									if (/^[0-9A-Fa-f]{32}$/.test(secondaryText)) {
+										Qt.callLater(sensorDelegate.enableWithKey, secondaryText)
+									}
+								}
+
+								// Single row: device name on the left, then the "Encryption key" label
+								// immediately before the entry box, instead of a caption on its own row.
+								contentItem: RowLayout {
+									function forceInputFocus() { keyTextField.forceInputFocus() }
+									function runValidation(mode) { return keyTextField.runValidation(mode) }
+
+									spacing: keyField.spacing
+
+									Label {
+										// ListTextField clears the root's vertical padding; add it back
+										// here so the row keeps its normal height.
+										topPadding: Theme.geometry_listItem_content_verticalMargin
+										bottomPadding: Theme.geometry_listItem_content_verticalMargin
+										text: keyField.text
+										font: keyField.font
+										textFormat: keyField.textFormat
+										wrapMode: Text.Wrap
+
+										Layout.fillWidth: true
+										Layout.alignment: Qt.AlignVCenter
+									}
+
+									CaptionLabel {
+										text: keyField._keyCaption
+
+										Layout.alignment: Qt.AlignVCenter
+									}
+
+									TextValidationField {
+										id: keyTextField
+
+										horizontalAlignment: Text.AlignHCenter
+										text: keyField.secondaryText
+										enabled: keyField.clickable
+										echoMode: keyField.echoMode
+										inputMethodHints: keyField.inputMethodHints
+										placeholderText: keyField.placeholderText
+										maximumLength: keyField.maximumLength
+										validator: keyField.validator
+
+										flickable: keyField.flickable
+										validateInput: keyField.validateInput
+										validateOnFocusLost: keyField.validateOnFocusLost
+
+										onInputValidated: keyField.saveInput()
+										onTextChanged: keyField.secondaryText = text
+
+										Layout.alignment: Qt.AlignVCenter
+										Layout.minimumWidth: Theme.geometry_listItem_textField_minimumWidth
+										Layout.maximumWidth: Theme.geometry_listItem_textField_maximumWidth
+									}
+								}
+							}
 						}
 					}
 				}
