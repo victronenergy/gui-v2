@@ -8,6 +8,7 @@ Structured checklist for reviewing changes to gui-v2. Items are ordered by prior
   - [1.a. Per-function discipline](#1a-per-function-discipline)
   - [1.b. Cross-file verification](#1b-cross-file-verification)
   - [1.c. Temporal reasoning](#1c-temporal-reasoning)
+  - [1.d. Feature interaction analysis](#1d-feature-interaction-analysis)
 - [2. Correctness (highest priority)](#2-correctness-highest-priority)
   - [2.a. Invariant consistency](#2a-invariant-consistency)
   - [2.b. Data flow and path correctness](#2b-data-flow-and-path-correctness)
@@ -27,15 +28,21 @@ Structured checklist for reviewing changes to gui-v2. Items are ordered by prior
   - [2.p. Access level gating consistency](#2p-access-level-gating-consistency)
   - [2.q. Mock data synchronization](#2q-mock-data-synchronization)
   - [2.r. Platform-specific correctness](#2r-platform-specific-correctness)
+  - [2.s. API design and encapsulation](#2s-api-design-and-encapsulation)
 - [3. Performance (medium priority)](#3-performance-medium-priority)
   - [3.a. GUI thread stalls](#3a-gui-thread-stalls)
   - [3.b. GUI thread execution pressure](#3b-gui-thread-execution-pressure)
   - [3.c. Rendering performance](#3c-rendering-performance)
   - [3.d. Memory pressure](#3d-memory-pressure)
+  - [3.e. Optimization fidelity](#3e-optimization-fidelity)
 - [4. Maintainability (lower priority)](#4-maintainability-lower-priority)
   - [4.a. Code clarity](#4a-code-clarity)
   - [4.b. Code style](#4b-code-style)
   - [4.c. Documentation](#4c-documentation)
+  - [4.d. Test coverage](#4d-test-coverage)
+  - [4.e. Observability and debuggability](#4e-observability-and-debuggability)
+  - [4.f. Build system and tooling](#4f-build-system-and-tooling)
+  - [4.g. Security](#4g-security)
 
 ---
 
@@ -70,6 +77,14 @@ For each function or property setter that is new or modified:
 1.c.ii. **Consider ordering between async operations.** When code posts multiple queued invocations or emits multiple signals, reason about what happens if other events interleave between them. Verify correctness doesn't depend on the assumption that queued calls execute atomically as a group.
 
 1.c.iii. **Ask "what if this is called twice?"** For setup/teardown operations, registrations, timer starts, and config posts — what happens if the same operation is triggered redundantly? It should be idempotent or properly guarded.
+
+### 1.d. Feature interaction analysis
+
+1.d.i. **Enumerate sibling features on the same page/component.** When a change modifies behaviour on a page (e.g., animation rendering), explicitly list other features active on that page (throttling, CPU governors, lazy loading, theme changes, dynamic model updates) and reason about interaction. Changes that are correct in isolation can break when combined with sibling features.
+
+1.d.ii. **Trace shared resource contention.** If the change introduces caches, timers, or background work, identify what else uses the same resources (memory on embedded, CPU budget, scene graph batches). Verify the new usage doesn't push aggregate consumption past acceptable limits under realistic combinations.
+
+1.d.iii. **Verify visual regression test coverage.** When a change alters the rendering pipeline (reparenting, layer changes, opacity handling, scene graph structure), check whether existing visual regression tests cover the affected area. Rendering changes that produce mathematically equivalent coordinates can still introduce visible differences (subpixel positioning, antialiasing, batch boundaries). If coverage is missing, note it.
 
 ---
 
@@ -285,6 +300,16 @@ See [Device Settings](.github/device-settings.md) for the access level system.
 
 2.r.iv. **Platform-specific timer and threading behaviour**: Timer precision and thread scheduling differ across platforms (embedded Linux, desktop, WASM). Verify that timing-sensitive code does not depend on platform-specific behaviour (e.g., exact timer resolution, thread priority, or event loop timing).
 
+### 2.s. API design and encapsulation
+
+2.s.i. **Internal implementation leaked to callers**: If a public or `Q_INVOKABLE` method exposes an internal optimisation strategy (e.g., `invalidateCache()`, `rebuildLut()`), callers become coupled to the implementation. Verify whether the invalidation could instead be handled internally (e.g., by connecting to a `changed()` signal on the underlying data). If external invalidation is necessary, verify the method name describes the *intent* (e.g., `pathGeometryChanged()`) rather than the mechanism.
+
+2.s.ii. **Property contract changes**: When a Q_PROPERTY changes from `MEMBER` to explicit `READ`/`WRITE`/`NOTIFY`, the notification semantics change (MEMBER auto-notifies on every write including same-value; explicit setter can guard). Verify no existing QML bindings depend on the old notification behaviour (e.g., relying on signal emission even when the value hasn't changed).
+
+2.s.iii. **Method constness changes**: When a method changes from `const` to non-`const` (or vice versa), verify no callers hold the object through a const pointer/reference. In QML-facing code this is rare, but C++ unit tests or helper functions may be affected.
+
+2.s.iv. **Ownership and lifetime ambiguity**: When a component accepts an externally-provided object via property (e.g., `property Item electronsParent`), the ownership boundary should be clear. Verify the component does not destroy, reparent, or retain the provided object beyond its own lifetime. Document who owns what.
+
 ---
 
 ## 3. Performance (medium priority)
@@ -349,6 +374,20 @@ These don't block but consume excessive CPU time on the GUI thread, causing fram
 
 3.d.v. **Connection accumulation**: Each `connect()` call in C++ or `Connections {}` in QML that isn't eventually disconnected (via parent destruction or explicit disconnect) creates a retained closure. Verify connections in dynamic delegates are cleaned up on delegate destruction.
 
+### 3.e. Optimization fidelity
+
+These apply when a change introduces a performance optimisation that trades off exactness for speed.
+
+3.e.i. **Approximation error bounds**: When an optimisation replaces exact computation with approximation (lookup tables, linear interpolation, reduced precision), quantify the maximum error. For visual output, verify the error is sub-pixel for the expected input ranges. For data output, verify the error is within acceptable tolerance for downstream consumers.
+
+3.e.ii. **Performance claim validation**: Changes described as performance improvements should be accompanied by measured data (before/after timings, profiler output, or benchmark results). If the change adds a benchmark tool, verify the tool was used to measure the actual improvement. Unvalidated performance claims risk introducing complexity without proven benefit.
+
+3.e.iii. **Steady-state vs transient cost**: Optimisations often shift cost from steady-state to transient events (e.g., cache rebuild on geometry change). Verify the transient cost is acceptable — if the cache is rebuilt every frame during a common interaction (transitions, scrolling), the optimisation may be counterproductive during those periods. Document which scenarios benefit and which fall back to unoptimised cost.
+
+3.e.iv. **Cache invalidation completeness**: For any cache or precomputed data structure, enumerate ALL inputs that affect its validity. Verify that changes to EVERY input trigger invalidation. A cache that is correct 99% of the time but stale during a specific interaction (e.g., theme change, orientation switch, dynamic widget add/remove) is a bug. Add a comment near the cache listing its invalidation triggers.
+
+3.e.v. **Hardcoded sizing and tunability**: Fixed-size caches and lookup tables (e.g., `LUT_SIZE = 512`) should be justified relative to the expected input range. Document why the chosen size is sufficient (e.g., "512 entries over a 400px path gives <1px maximum interpolation error"). Consider whether resource-constrained platforms need a different size.
+
 ---
 
 ## 4. Maintainability (lower priority)
@@ -384,3 +423,31 @@ These don't block but consume excessive CPU time on the GUI thread, causing fram
 4.c.ii. **Non-obvious logic**: Complex algorithms, workarounds for Qt bugs, and platform-specific code should have comments explaining WHY, not WHAT.
 
 4.c.iii. **Architecture decisions**: If a design choice isn't obvious (e.g., "why is this on a worker thread?"), document the reasoning near the code or in the relevant topic guide under `.github/`.
+
+### 4.d. Test coverage
+
+4.d.i. **New algorithmic code**: Non-trivial algorithms (interpolation, coordinate transforms, state machines, parsers) introduced or modified by a change should have corresponding unit tests. If the logic has edge cases (boundary values, wrap-around, empty inputs), verify they are tested.
+
+4.d.ii. **Regression test adequacy**: When modifying behaviour that is covered by existing visual regression or integration tests, verify those tests still exercise the modified code path. A test that passes vacuously (because it no longer hits the changed path) is false confidence.
+
+4.d.iii. **Testability of new components**: New C++ classes and QML components should be structured so they can be tested in isolation (dependency injection, mockable interfaces). If a component can only be exercised by running the full application, note the gap.
+
+### 4.e. Observability and debuggability
+
+4.e.i. **Diagnostic hooks for new subsystems**: When introducing internal caches, lookup tables, or optimisation layers, consider how a developer would diagnose incorrect behaviour at runtime. At minimum, a debug-level log on cache rebuild or invalidation helps trace timing-related bugs. Avoid making internal state entirely opaque with no way to inspect it.
+
+4.e.ii. **Failure mode visibility**: When a function fails silently (early return, no-op on invalid input), verify this is appropriate. A `qmlDebug` message for a situation that indicates a bug (not just a transient state) should be `qmlWarning` so it appears in normal test output. Reserve `qmlDebug` for expected/informational messages.
+
+### 4.f. Build system and tooling
+
+4.f.i. **CMake/build file correctness**: When adding files to cmake source lists, verify: alphabetical ordering is maintained within the list, the file is in the correct target/module, and existing test/build targets still pass without modification.
+
+4.f.ii. **Script portability and standards**: New scripts (Python, shell) should: specify minimum language version requirements, handle platform differences (path separators, process signals, encoding), and include error handling for common failure modes (missing dependencies, file not found, process crash). Scripts committed to the repository should have a license/copyright header consistent with other source files.
+
+4.f.iii. **Script input validation**: Scripts that accept file paths, executable paths, or user-provided arguments should validate inputs before use. Paths should be checked for existence, numeric arguments should be range-checked, and arguments passed to subprocess calls should not introduce injection vulnerabilities if the script is ever used in automated pipelines.
+
+### 4.g. Security
+
+4.g.i. **Subprocess argument handling**: Scripts or code that constructs command lines from external input (user arguments, environment variables, file contents) must avoid shell injection. Prefer array-form subprocess invocation over shell string interpolation. Verify that user-controlled values cannot break out of their intended argument position.
+
+4.g.ii. **Temporary file handling**: Temporary files containing application output, logs, or intermediate data should be created with restrictive permissions, in platform-appropriate temporary directories, and cleaned up in all exit paths (including exceptions and signals). Verify no sensitive data persists in temp files after the tool completes.
