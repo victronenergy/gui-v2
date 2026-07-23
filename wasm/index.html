@@ -307,6 +307,7 @@
         async function preloadWasm(url, onProgress) {
             try {
                 let total = null;
+                let exactSize = false;
                 // This is needed, since the reported size is the compressed size
                 // but the downloaded size is shown as uncompressed size, since the browser decompresses it
                 const sizeResp = await fetch('venus-gui-v2.wasm.size');
@@ -342,6 +343,7 @@
 
                 if (sizeResp.ok) {
                     total = parseInt(await sizeResp.text(), 10);
+                    exactSize = Number.isFinite(total) && total > 0;
                 } else {
                     // should not be needed, but just in case?
                     const estimatedCompressionRatio = 0.4; // Assume 40% as compressed size
@@ -352,21 +354,41 @@
 
                 const reader = response.body.getReader();
                 let received = 0;
-                let chunks = [];
+                // When the exact uncompressed size is known, stream directly into a
+                // preallocated buffer: accumulating chunks and assembling a copy
+                // afterwards doubles the peak memory use on low-memory devices.
+                let buffer = exactSize ? new Uint8Array(total) : null;
+                const chunks = [];
                 while (true) {
                     const {done, value} = await reader.read();
                     if (done) break;
-                    chunks.push(value);
+                    if (buffer && received + value.length <= buffer.length) {
+                        buffer.set(value, received);
+                    } else {
+                        if (buffer) {
+                            // The .size file under-reported the actual size
+                            chunks.push(buffer.subarray(0, received));
+                            buffer = null;
+                        }
+                        chunks.push(value);
+                    }
                     received += value.length;
                     onProgress(received, total);
                 }
-                let wasmBinary = new Uint8Array(received);
-                let pos = 0;
-                for (let chunk of chunks) {
-                    wasmBinary.set(chunk, pos);
-                    pos += chunk.length;
+                let wasmBinary;
+                if (buffer) {
+                    // subarray trims a .size over-report without copying
+                    wasmBinary = buffer.length === received ? buffer : buffer.subarray(0, received);
+                } else {
+                    wasmBinary = new Uint8Array(received);
+                    let pos = 0;
+                    for (const chunk of chunks) {
+                        wasmBinary.set(chunk, pos);
+                        pos += chunk.length;
+                    }
                 }
-                return wasmBinary;
+                const compressedLength = response.headers.get('content-length');
+                return { wasmBinary: wasmBinary, compressedSize: compressedLength ? parseInt(compressedLength, 10) : null };
             } catch (e) {
                 console.error(e);
                 console.error(e.stack);
@@ -440,6 +462,38 @@
             tspan.setAttribute('y', Math.round(barY + barH + 29));
         }
 
+        // Log main-thread stalls to the console. On engines with the Long Tasks
+        // API every task blocking the main thread for >50ms is reported;
+        // elsewhere fall back to detecting gaps between animation frames.
+        function observeMainThreadStalls() {
+            try {
+                if (typeof PerformanceObserver !== 'undefined'
+                        && PerformanceObserver.supportedEntryTypes
+                        && PerformanceObserver.supportedEntryTypes.includes('longtask')) {
+                    new PerformanceObserver((list) => {
+                        for (const entry of list.getEntries()) {
+                            console.log(`[WASM Perf] Main thread blocked for ${entry.duration.toFixed(0)}ms [t=${entry.startTime.toFixed(1)}ms]`);
+                        }
+                    }).observe({type: 'longtask', buffered: true});
+                    return;
+                }
+            } catch (e) {
+                // Diagnostics only; fall through to the animation frame fallback.
+            }
+            let lastFrame = performance.now();
+            // requestAnimationFrame does not fire while the tab is hidden; reset
+            // the baseline on visibility changes so that is not reported as a stall.
+            document.addEventListener('visibilitychange', () => { lastFrame = performance.now(); });
+            function frameGapCheck(now) {
+                if (now - lastFrame > 200 && !document.hidden) {
+                    console.log(`[WASM Perf] Main thread stalled for ~${(now - lastFrame).toFixed(0)}ms [t=${now.toFixed(1)}ms]`);
+                }
+                lastFrame = now;
+                requestAnimationFrame(frameGapCheck);
+            }
+            requestAnimationFrame(frameGapCheck);
+        }
+
         async function init()
         {
             const spinner = document.querySelector('#qtspinner');
@@ -509,8 +563,22 @@
                 loadingBar.width.baseVal.value = '0';
                 loadingBarText.textContent = 'Downloading...';
 
+                const perfLog = [];
+                // Log with the absolute page time so console output can be
+                // correlated with wall-clock observations and Qt-side logs.
+                const logPerf = (line) => {
+                    perfLog.push(line);
+                    console.log(`[WASM Perf] ${line} [t=${performance.now().toFixed(1)}ms]`);
+                };
+                // Named marks show up in the DevTools Performance timeline.
+                const perfMark = (name) => {
+                    try { performance.mark(name); } catch (e) {}
+                };
+                observeMainThreadStalls();
+                const tInitStart = performance.now();
+
                 // Preload WASM with progress
-                const wasmBinary = await preloadWasm('venus-gui-v2.wasm', (received, total) => {
+                const wasmPreload = await preloadWasm('venus-gui-v2.wasm', (received, total) => {
                     if (total) {
                         const ratio = Math.min(received / total, 1);
                         const percent = (ratio * 100).toFixed(1);
@@ -525,8 +593,33 @@
                     }
                 });
 
+                let wasmBinary = wasmPreload.wasmBinary;
+                const tDownloadEnd = performance.now();
+                const downloadMs = tDownloadEnd - tInitStart;
+                const wasmSizeMB = (wasmBinary.byteLength / (1024 * 1024)).toFixed(2);
+                const wireSizeMB = wasmPreload.compressedSize ? (wasmPreload.compressedSize / (1024 * 1024)).toFixed(2) : null;
+                const sizeInfo = wireSizeMB ? `${wireSizeMB} MB wire / ${wasmSizeMB} MB uncompressed` : `${wasmSizeMB} MB uncompressed`;
+                perfMark('wasm-download-end');
+                logPerf(`Download: ${downloadMs.toFixed(1)}ms (${sizeInfo})`);
+
                 loadingBar.width.baseVal.value = loadingBarContainer.width.baseVal.value;
-                loadingBarText.textContent = 'Loading application...';
+                loadingBarText.textContent = 'Compiling...';
+
+                // Compile WASM binary into a WebAssembly.Module
+                perfMark('wasm-compile-start');
+                const tCompileStart = performance.now();
+                const wasmModule = await WebAssembly.compile(wasmBinary);
+                const tCompileEnd = performance.now();
+                perfMark('wasm-compile-end');
+                // Drop the source bytes: the compiled module supersedes them, and
+                // the closures below would otherwise keep them referenced (tens of
+                // MB) for the lifetime of the app.
+                wasmBinary = null;
+                wasmPreload.wasmBinary = null;
+                const compileMs = tCompileEnd - tCompileStart;
+                logPerf(`Compile: ${compileMs.toFixed(1)}ms`);
+
+                loadingBarText.textContent = 'Instantiating...';
 
                 let defaultMqttArg = (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt'
                 let argumentList = needsDefaultArgs ? ['--mqtt', defaultMqttArg] : [];
@@ -543,11 +636,41 @@
                     );
                 }
 
+                // Use instantiateWasm to intercept instantiation with timing
+                let tInstantiateEnd = 0;
+                let tRuntimeInitEnd = 0;
                 const instance = await qtLoad({
                     arguments: argumentList,
-                    wasmBinary: wasmBinary,
+                    instantiateWasm: (imports, successCallback) => {
+                        perfMark('wasm-instantiate-start');
+                        const tInstStart = performance.now();
+                        WebAssembly.instantiate(wasmModule, imports).then(instance => {
+                            tInstantiateEnd = performance.now();
+                            perfMark('wasm-instantiate-end');
+                            const instantiateMs = tInstantiateEnd - tInstStart;
+                            logPerf(`Instantiate: ${instantiateMs.toFixed(1)}ms`);
+                            successCallback(instance, wasmModule);
+                        }).catch(e => {
+                            // Instantiation is where out-of-memory failures surface
+                            // on low-memory devices; without this the page hangs
+                            // silently at "Instantiating...".
+                            console.error(e);
+                            console.error(e.stack);
+                            showLoadError(e, 'Error instantiating application!');
+                        });
+                        return {};
+                    },
                     qt: {
-                        onLoaded: () => showUi(screen),
+                        // qtloader.js invokes onLoaded at Emscripten's
+                        // onRuntimeInitialized, which is before main() runs: Qt and
+                        // QML startup happen after this point, and are measured
+                        // below and by the [WASM Perf] marks in src/main.cpp.
+                        onLoaded: () => {
+                            tRuntimeInitEnd = performance.now();
+                            perfMark('wasm-runtime-initialized');
+                            logPerf(`Emscripten runtime init: ${(tRuntimeInitEnd - tInstantiateEnd).toFixed(1)}ms`);
+                            showUi(screen);
+                        },
                         onExit: exitData =>
                         {
                             let exitMsg = 'Application exit';
@@ -560,6 +683,16 @@
                         containerElements: [screen],
                     }
                 });
+
+                // qtLoad() resolves after main() has run: QGuiApplication and the
+                // QML engine are set up and app.exec() has unwound back to the
+                // browser event loop. Asynchronous QML scene loading continues
+                // after this; see the [WASM Perf] marks logged from src/main.cpp.
+                const tMainDone = performance.now();
+                perfMark('wasm-qt-main-done');
+                logPerf(`Qt main() + QML engine setup: ${(tMainDone - tRuntimeInitEnd).toFixed(1)}ms`);
+                logPerf(`Total (to Qt event loop): ${(tMainDone - tInitStart).toFixed(1)}ms`);
+                console.log(`[WASM Perf] Summary:\n` + perfLog.map(l => `  ${l}`).join('\n'));
             } catch (e) {
                 console.error(e);
                 console.error(e.stack);
