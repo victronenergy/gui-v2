@@ -18,6 +18,7 @@ When asked to review code, you **must** read and follow the complete checklist i
 - [Device Settings](.github/device-settings.md) — settings data binding, access levels, ListSetting component hierarchy
 - [Unit Tests](.github/unit-tests.md) — test framework, creating tests, running tests, best practices
 - [Visual Regression Tests](.github/visual-regression-tests.md) — image-capture testing, comparison tool, verifying UI changes
+- [Benchmarking](.github/benchmarking.md) — animation performance measurement, QSG_RENDER_TIMING workflow
 
 ## Build & test
 
