@@ -2,6 +2,10 @@
 
 Venus OS GUI v2 — Qt6/QML touch UI for Victron Energy GX devices and WebAssembly remote console.
 
+## Code review
+
+When asked to review code, you **must** read and follow the complete checklist in [Code Review](.github/code-review.md) before producing your review. Work through every section of that document systematically.
+
 ## Topic guides
 
 > **Keep documentation current.** When making changes that affect any of the topics below, update the relevant documentation file(s) as part of the same change.
