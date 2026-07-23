@@ -240,6 +240,16 @@ QString Theme::applicationVersion() const
 	return QStringLiteral("v%1.%2.%3").arg(PROJECT_VERSION_MAJOR).arg(PROJECT_VERSION_MINOR).arg(PROJECT_VERSION_PATCH);
 }
 
+int Theme::keyboardHeight() const { return m_keyboardHeight; }
+
+void Theme::setKeyboardHeight(int height)
+{
+	if (m_keyboardHeight != height) {
+		m_keyboardHeight = height;
+		emit keyboardHeightChanged();
+	}
+}
+
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 
 // Called from JavaScript when theme changes
@@ -252,8 +262,18 @@ void jsSystemColorSchemeChanged(emscripten::val event)
 	g_themeInstance->setSystemColorScheme(systemSchemeDark ? Victron::VenusOS::Theme::SystemColorSchemeDark : Victron::VenusOS::Theme::SystemColorSchemeLight);
 }
 
-// Bind C++ function to JS
+// Called from JavaScript (index.html) when the native mobile keyboard opens or closes.
+// Height is in CSS pixels (logical pixels), matching QML coordinate space on WASM.
+void jsSetKeyboardHeight(int height)
+{
+	if (g_themeInstance)
+		g_themeInstance->setKeyboardHeight(height);
+}
+
+// Bind C++ functions to JS — callable as Module.jsSetKeyboardHeight(h) etc.
 EMSCRIPTEN_BINDINGS(theme_bindings) {
+	using namespace emscripten;
 	function("jsSystemColorSchemeChanged", &jsSystemColorSchemeChanged);
+	function("jsSetKeyboardHeight", &jsSetKeyboardHeight);
 }
 #endif
