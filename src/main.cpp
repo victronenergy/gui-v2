@@ -39,7 +39,10 @@
 #include <QtDebug>
 
 #include "themeobjects.h"
+
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
 #include "QZXing.h"
+#endif
 
 namespace {
 
@@ -517,8 +520,10 @@ int main(int argc, char *argv[])
 #if VENUS_GX_BUILD
 	engine.addUrlInterceptor(new Victron::VenusOS::UrlInterceptor());
 #endif
+#if !defined(VENUS_WEBASSEMBLY_BUILD)
 	QZXing::registerQMLTypes();
 	QZXing::registerQMLImageProvider(engine);
+#endif
 
 	initBackend(&enableFpsCounter, &skipSplashScreen);
 	QObject::connect(&engine, &QQmlEngine::quit, &app, &QGuiApplication::quit);

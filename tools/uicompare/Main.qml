@@ -1,8 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Window
-import QtQuick.Controls
-import QtQuick.Dialogs
+import QtQuick.Controls.Basic
 
 Window {
 	width: 1280
