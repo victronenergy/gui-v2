@@ -426,24 +426,54 @@ EM_JS(int, getWindowInnerHeight, (), {
 	return window.innerHeight;
 });
 
-EM_JS(void, setContentEditable, (bool editable), {
-	// Work-around Qt Android issue where keyboard constantly pops up (see QTBUG-88803)
-	const android = /Android/i.test(navigator.userAgent);
-	if (android) {
-		const inputs = document.querySelectorAll('input[type="text"]');
-		for (let i = 0; i < inputs.length; i++) {
-			const input = inputs[i];
-			const rect = input.getBoundingClientRect();
-
-			// Qt <input> has no identifier so identify using off-screen co-ordinates.
-			if (rect.x === -1000 && rect.y === -1000) {
-				input.style.visibility = editable ? "visible" : "hidden";
-				if (editable) {
-					input.focus();
-				}
+EM_JS(void, setInputMethodActive, (bool active), {
+	// Keep the browser's on-screen keyboard open while a Qt item accepts input.
+	//
+	// The keyboard is open exactly while Qt's hidden IME <input> element (created
+	// by QWasmInputContext, recognizable by its 'data-qinputcontext' JS property)
+	// holds DOM focus. Qt calls preventDefault() on all pointer events, which is
+	// supposed to suppress the browser's synthesized compatibility mouse events,
+	// but older mobile WebViews (e.g. Raymarine/Garmin MFDs) still fire them after
+	// touchend - or run context-menu handling after a long press - which blurs
+	// the IME input onto <body> and closes the keyboard right after it opened.
+	// See https://github.com/victronenergy/venus-html5-app/issues/558
+	//
+	// Two defenses, both armed only while a Qt item accepting input method has
+	// active focus:
+	//
+	// 1. Cancel touchend to suppress the compatibility machinery at the source
+	//    (the classic "FastClick" technique, implemented by exactly these old
+	//    WebViews). Qt is unaffected: it consumes pointerup, which fires before
+	//    touchend, and never uses the compatibility mouse events.
+	//
+	// 2. As a safety net for steal paths not covered by 1, restore focus when
+	//    the IME input blurs and shortly after nothing but <body> holds focus.
+	//    Qt's intentional keyboard dismissal is unaffected: it deactivates the
+	//    field first (disarming this guard, synchronously before any queued
+	//    callback runs) and refocuses its canvas rather than <body>.
+	Module.qtInputMethodActive = active;
+	if (Module.qtImeFocusGuardInstalled)
+		return;
+	Module.qtImeFocusGuardInstalled = true;
+	document.addEventListener("touchend", function(e) {
+		if (Module.qtInputMethodActive)
+			e.preventDefault();
+	}, { passive: false, capture: true });
+	document.addEventListener("focusout", function(e) {
+		var input = e.target;
+		if (!input || input["data-qinputcontext"] === undefined)
+			return;
+		if (Module.qtImeRestoreTimer)
+			clearTimeout(Module.qtImeRestoreTimer);
+		Module.qtImeRestoreTimer = setTimeout(function() {
+			Module.qtImeRestoreTimer = undefined;
+			if (Module.qtInputMethodActive
+					&& document.activeElement === document.body
+					&& input.isConnected) {
+				input.focus({ preventScroll: true });
 			}
-		}
-	}
+		}, 16);
+	}, true);
 });
 
 EM_JS(bool, hasNativeVirtualKeyboard, (), {
@@ -561,7 +591,7 @@ int main(int argc, char *argv[])
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	QObject::connect(window, &QQuickWindow::activeFocusItemChanged, [window] {
 		const bool editable = window->activeFocusItem() != nullptr && (window->activeFocusItem()->flags() & QQuickItem::ItemAcceptsInputMethod);
-		setContentEditable(editable);
+		setInputMethodActive(editable);
 	});
 #endif
 
