@@ -4,6 +4,7 @@
 */
 
 #include "theme.h"
+#include <QInputMethod>
 
 using namespace Victron::VenusOS;
 
@@ -69,6 +70,15 @@ Theme::Theme(QObject *parent) : QObject(parent)
 	setScreenSize((round(screenDiagonalMm / 10 / 2.5) == 7)
 		? Victron::VenusOS::Theme::SevenInch
 		: Victron::VenusOS::Theme::FiveInch);
+
+	if (QInputMethod *inputMethod = QGuiApplication::inputMethod()) {
+		connect(inputMethod, &QInputMethod::keyboardRectangleChanged, this, [inputMethod, this]() {
+			setKeyboardHeight(inputMethod && inputMethod->isVisible() ? inputMethod->keyboardRectangle().height() : 0);
+		});
+		connect(inputMethod, &QInputMethod::visibleChanged, this, [inputMethod, this]() {
+			setKeyboardHeight(inputMethod && inputMethod->isVisible() ? inputMethod->keyboardRectangle().height() : 0);
+		});
+	}
 #endif
 }
 
@@ -230,6 +240,15 @@ bool Theme::windowIsLandscape() const
 #endif
 }
 
+int Theme::windowHeight() const
+{
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	return getWindowHeight();
+#else
+	return m_screenHeight;
+#endif
+}
+
 bool Theme::objectHasQObjectParent(QObject *obj) const
 {
 	return obj && obj->parent();
@@ -240,7 +259,10 @@ QString Theme::applicationVersion() const
 	return QStringLiteral("v%1.%2.%3").arg(PROJECT_VERSION_MAJOR).arg(PROJECT_VERSION_MINOR).arg(PROJECT_VERSION_PATCH);
 }
 
-int Theme::keyboardHeight() const { return m_keyboardHeight; }
+int Theme::keyboardHeight() const
+{
+	return m_keyboardHeight;
+}
 
 void Theme::setKeyboardHeight(int height)
 {

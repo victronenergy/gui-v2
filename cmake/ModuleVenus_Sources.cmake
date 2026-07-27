@@ -142,6 +142,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/VeQItemFilteredServiceModel.qml
     components/ViewGradient.qml
     components/WasmVirtualKeyboardHandler.qml
+    components/KeyboardInputScroller.qml
     components/WifiModel.qml
     components/controls/AutoToggleButton.qml
     components/controls/Button.qml

@@ -1,5 +1,9 @@
 #include "uiconfig.h"
+#include "themeobjects.h"
 
+#include <QQuickWindow>
+#include <QQuickItem>
+#include <QGuiApplication>
 #include <QFile>
 
 using namespace Victron::VenusOS;
@@ -101,3 +105,17 @@ void UiConfig::setSplashScreenVisible(bool v)
 		Q_EMIT splashScreenVisibleChanged();
 	}
 }
+
+qreal UiConfig::itemBottomDistanceToVKB(QQuickItem *item) const
+{
+	if (!item) {
+		qWarning() << "itemBottomDistanceToVKB(): invalid item!";
+		return 0;
+	}
+
+	ThemeSingleton *theme = ThemeSingleton::create();
+	const int itemBottom = std::round(item->mapToGlobal(0, item->height()).y()) + theme->geometry_inputPanel_topMargin();
+	const int vkbTop = theme->windowHeight() - theme->keyboardHeight();
+	return itemBottom - vkbTop;
+}
+

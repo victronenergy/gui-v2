@@ -9,6 +9,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	readonly property alias cardViewFlickable: cardsView
+
 	implicitHeight: Theme.geometry_controlCard_height
 
 	//: Name of the Switch Controls feature
@@ -61,12 +63,11 @@ Page {
 			}
 		}
 
-		anchors {
-			fill: parent
-			leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
-			rightMargin: Theme.geometry_controlCardsPage_horizontalMargin
-			bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
-		}
+		// Use x/y/width/height instead of anchors so that KeyboardInputScroller can adjust the
+		// flickable geometry when a text field is focused within the cards.
+		x: Theme.geometry_controlCardsPage_horizontalMargin
+		width: parent.width - (2 * Theme.geometry_controlCardsPage_horizontalMargin)
+		height: parent.height - Theme.geometry_controlCardsPage_bottomMargin
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
 
