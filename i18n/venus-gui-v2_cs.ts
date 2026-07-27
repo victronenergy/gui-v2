@@ -3208,52 +3208,52 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Odpojení při nízkém napětí (vždy ignorováno)</translation>
     </message>
     <message id="batterysettings_battery_bank">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="38"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="46"/>
       <source>Battery bank</source>
       <translation>PowerBanka</translation>
     </message>
     <message id="batterysettings_relay_on_battery_monitor">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="56"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="64"/>
       <source>Relay (on battery monitor)</source>
       <translation>Relé (na monitoru baterie)</translation>
     </message>
     <message id="batterysettings_restore_factory_defaults">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="66"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="74"/>
       <source>Restore factory defaults</source>
       <translation>Obnovit standardní tovární nastavení</translation>
     </message>
     <message id="batterysettings_restore">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="68"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="76"/>
       <source>Restore</source>
       <translation type="unfinished">Obnovení</translation>
     </message>
     <message id="batterysettings_confirm_restore_factory_defaults">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="79"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="87"/>
       <source>Restore factory defaults?</source>
       <translation>Obnovení továrního nastavení?</translation>
     </message>
     <message id="batterysettings_bluetooth_enabled">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="93"/>
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="101"/>
       <source>Bluetooth Enabled</source>
       <translation>Bluetooth povoleno</translation>
     </message>
     <message id="batterysettingsbattery_nominal_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="24"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="21"/>
       <source>Nominal Voltage</source>
       <translation>Jmenovité napětí</translation>
     </message>
     <message id="batterysettingsbattery_12_volt">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="28"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="25"/>
       <source>12 Volt</source>
       <translation>12 V</translation>
     </message>
     <message id="batterysettingsbattery_24_volt">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="30"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="27"/>
       <source>24 Volt</source>
       <translation>24 voltů</translation>
     </message>
     <message id="batterysettingsbattery_48_volt">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="32"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="29"/>
       <source>48 Volt</source>
       <translation>48 voltů</translation>
     </message>
@@ -3263,62 +3263,62 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Kapacita</translation>
     </message>
     <message id="batterysettingsbattery_capacity">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="39"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="36"/>
       <source>Capacity</source>
       <translation type="unfinished">Kapacita</translation>
     </message>
     <message id="batterysettingsbattery_charged_voltage">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="48"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="45"/>
       <source>Charged voltage</source>
       <translation>Napětí nabité baterie</translation>
     </message>
     <message id="batterysettingsbattery_tail_current">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="59"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="56"/>
       <source>Tail current</source>
       <translation>Zbytkový proud</translation>
     </message>
     <message id="batterysettingsbattery_charged_detection_time">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="70"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="67"/>
       <source>Charged detection time</source>
       <translation>Doba detekce nabití</translation>
     </message>
     <message id="batterysettingsbattery_peukert_exponent">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="79"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="76"/>
       <source>Peukert exponent</source>
       <translation>Peukertův exponent</translation>
     </message>
     <message id="batterysettingsbattery_charge_efficiency_factor">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="89"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="86"/>
       <source>Charge efficiency factor</source>
       <translation>Faktor účinnosti nabití</translation>
     </message>
     <message id="batterysettingsbattery_current_threshold">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="98"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="95"/>
       <source>Current threshold</source>
       <translation>Prahová hodnota proudu</translation>
     </message>
     <message id="batterysettingsbattery_time_to_go_averaging_period">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="109"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="106"/>
       <source>Time-to-go averaging period</source>
       <translation>Průměrovací doba zbývajícího času</translation>
     </message>
     <message id="batterysettingsbattery_time_to_go_discharge_floor">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="129"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="126"/>
       <source>Time-to-go discharge floor</source>
       <translation>Zbývající čas do vybití</translation>
     </message>
     <message id="batterysettingsbattery_current_offset">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="138"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="135"/>
       <source>Current offset</source>
       <translation>Kompenzace proudu</translation>
     </message>
     <message id="batterysettingsbattery_synchronise_state_of_charge_to_100%">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="145"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="142"/>
       <source>Synchronise state-of-charge to 100%</source>
       <translation>Synchronizovat stav nabití na 100%</translation>
     </message>
     <message id="batterysettingsbattery_calibrate_zero_current">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="161"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="158"/>
       <source>Calibrate zero current</source>
       <translation>Kalibrovat nulový proud</translation>
     </message>
@@ -6381,7 +6381,7 @@ Chcete pokračovat?</translation>
       <translation>Alarmy vysokého napětí startovací baterie</translation>
     </message>
     <message id="batterysettingsbattery_time_to_go_discharge_note">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="118"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="115"/>
       <source>Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu.</source>
       <translation>Všimněte si, že změnou nastavení dolní meze vybíjení Time-to-go se změní také nastavení Low state-of-charge (Nízký stav nabití) v nabídce relé.</translation>
     </message>
@@ -9081,7 +9081,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
     <message id="common_words_press">
       <location filename="../../components/CommonWords.qml" line="463"/>
       <source>Press</source>
-      <translation>Tisk</translation>
+      <translation>Stisk</translation>
     </message>
     <message id="output_aux_battery_service_changed_dcdc">
       <location filename="../../components/listitems/ListOutputBatteryRadioButtonGroup.qml" line="27"/>
@@ -11618,13 +11618,13 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <translation>motor</translation>
     </message>
     <message id="batterysettingsbattery_sync">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="148"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="145"/>
       <source>Sync</source>
       <extracomment>Trigger a synchronisation of the battery SOC</extracomment>
       <translation>Synchronizovat</translation>
     </message>
     <message id="batterysettingsbattery_set_to_0">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettingsBattery.qml" line="163"/>
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="160"/>
       <source>Set to 0</source>
       <translation>Nastavit na 0</translation>
     </message>
@@ -11880,6 +11880,21 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="51"/>
       <source>Only applies when using Optimized with BatteryLife. Opportunity Loads automatically resumes after a full charge.</source>
       <translation>Platí pouze při použití režimu Optimalizováno s BatteryLife. Neprioritní spotřebiče se automaticky obnoví po plném nabití.</translation>
+    </message>
+    <message id="settings_ble_gateway_access">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="88"/>
+      <source>BLE gateway access</source>
+      <translation>Přístup k bráně BLE</translation>
+    </message>
+    <message id="settings_ble_gateway_access_proxy">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="94"/>
+      <source>Proxy</source>
+      <translation>Proxy</translation>
+    </message>
+    <message id="settings_ble_gateway_access_proxy_and_direct">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="96"/>
+      <source>Proxy and direct</source>
+      <translation>Proxy a přímé</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
