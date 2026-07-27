@@ -30,7 +30,10 @@ T.Dialog {
 	property bool canAccept: true
 	property bool headerShowsTitles: true
 
-	readonly property real centeredY: (Theme.geometry_screen_height - height) / 2
+	readonly property real defaultY: Theme.screenSize === Theme.Portrait
+			? (Theme.geometry_screen_height - height)
+			: (Theme.geometry_screen_height - height) / 2
+	property real vkbOffset
 
 	// Optional functions: called when accept/reject is attempted.
 	// These should return true if the accept/reject can be executed, and false otherwise.
@@ -49,8 +52,7 @@ T.Dialog {
 
 	readonly property string rejectTextCancel: CommonWords.cancel
 
-	readonly property Item focusedInputItem: root.visible
-		&& (Qt.inputMethod.visible || UiConfig.needsWasmKeyboardHandler)
+	readonly property Item focusedInputItem: root.visible && Theme.keyboardHeight > 0
 			? (root.contentItem.Window.activeFocusItem as TextField ??
 				root.contentItem.Window.activeFocusItem as TextInput ??
 				// root.contentItem.Window.activeFocusItem as TextArea ?? // not used
@@ -98,7 +100,7 @@ T.Dialog {
 	// Use x/y positioning instead of anchors, so that the dialog can be moved for the VKB and by
 	// the DialogDragger.
 	x: (Theme.geometry_screen_width - width) / 2
-	y: root.centeredY
+	y: root.defaultY
 
 	/*
 	If you only specify implicitWidth & implicitHeight here, and shrink the browser (or desktop app) window from 100% -> 0%,
@@ -168,6 +170,11 @@ T.Dialog {
 				// dialog is at the bottom of the screen.
 				verticalCenterOffset: Theme.screenSize === Theme.Portrait ? -(root.y / 2) : 0
 			}
+
+			// Increase the shadow height beyond the screen, in case the dialog moves upwards to
+			// make space for the VKB.
+			height: (Screen.height * 2) / Global.scalingRatio
+
 			Component.onCompleted: root.shadow = dialogShadow
 		}
 	}
@@ -326,8 +333,6 @@ T.Dialog {
 	property QtObject _stateManager: QtObject {
 		id: stateManager
 
-		property real targetDialogY: 0
-
 		// To ensure the focused text field is not hidden behind the VKB, move the dialog when a
 		// text field is focused, and the Qt VKB (on GX) or the native mobile VKB (on Wasm) appears.
 		function updateState() {
@@ -336,38 +341,16 @@ T.Dialog {
 				return
 			}
 
-			if (BackendConnection.needsWasmKeyboardHandler) {
-				if (root._kbDismissGuard) {
-					return
-				}
-				// Theme.keyboardHeight is set from JavaScript via window._qtWasmModule.jsSetKeyboardHeight()
-				// (EMSCRIPTEN_BINDINGS export in theme.cpp). In portrait, keep the dialog attached to the
-				// bottom of the visible area (just above the keyboard). In landscape, centre it.
-				targetDialogY = Theme.screenSize === Theme.Portrait
-						? Math.max(0, Global.mainView.height - Theme.keyboardHeight - root.height)
-						: Math.max(0, (Global.mainView.height - Theme.keyboardHeight - root.height) / 2)
-				dialogStateGroup.state = "focused"
-			} else if (Qt.inputMethod.visible) {
-				// Qt VKB (physical GX device): move the dialog precisely above the keyboard.
-				const currentDialogOffset = root.y - root.centeredY // 0 or negative
-				const inputItemBottomPos = root.focusedInputItem.mapToItem(Global.mainView, 0, root.focusedInputItem.implicitHeight).y - currentDialogOffset
-
-				targetDialogY = root.centeredY
-
-				const vkbTopPos = Global.mainView.height - Qt.inputMethod.keyboardRectangle.height
-
-				if (inputItemBottomPos > vkbTopPos) {
-					// Note: moving the Dialog while in "focused" state will change to
-					// the new location immediately without any animation.
-					targetDialogY += (vkbTopPos - inputItemBottomPos)
-				}
-
-				dialogStateGroup.state = "focused"
+			const delta = UiConfig.itemBottomDistanceToVKB(root.focusedInputItem)
+			if (delta > 0) {
+				// Note: moving the Dialog while in "focused" state will change to
+				// the new location immediately without any animation.
+				root.vkbOffset = -delta
 			} else {
-				// No Qt VKB visible on a non-Wasm device; move to top as a fallback.
-				targetDialogY = 0
-				dialogStateGroup.state = "focused"
+				root.vkbOffset = 0
 			}
+
+			dialogStateGroup.state = "focused"
 		}
 
 		property StateGroup dialogStateGroup: StateGroup {
@@ -379,15 +362,13 @@ T.Dialog {
 					PropertyChanges {
 						// reset to the "default" binding explicitly
 						// so we can get the transition
-						root.y: Theme.screenSize === Theme.Portrait
-								? Theme.geometry_screen_height - root.height
-								: root.centeredY
+						root.y: root.defaultY
 					}
 				},
 				State {
 					name: "focused"
 					PropertyChanges {
-						root.y: stateManager.targetDialogY
+						root.y: root.defaultY + root.vkbOffset
 					}
 				}
 			]
@@ -404,51 +385,6 @@ T.Dialog {
 					}
 				}
 			]
-		}
-	}
-
-
-	// Theme.keyboardHeight is set from JavaScript via Module.jsSetKeyboardHeight()
-	// (exported by EMSCRIPTEN_BINDINGS in theme.cpp — same pattern as jsSystemColorSchemeChanged).
-	// When it drops to 0 the keyboard was dismissed via the OS button; reset the dialog.
-	// _kbDismissGuard blocks updateState() and onAboutToFocusTextField for 300 ms so
-	// Qt's internal forceInputFocus() (fired during the focus = false below) cannot
-	// immediately re-elevate the dialog before the guard expires.
-	property bool _kbDismissGuard: false
-
-	Timer {
-		id: _kbDismissGuardTimer
-		interval: 300
-		onTriggered: root._kbDismissGuard = false
-	}
-
-	property int _themeKbH: Theme.keyboardHeight
-	on_ThemeKbHChanged: {
-		if (Qt.platform.os !== "wasm" || !root.visible) return
-		if (_themeKbH <= 0 && stateManager.dialogStateGroup.state !== "default") {
-			stateManager.dialogStateGroup.state = "default"
-			root._kbDismissGuard = true
-			_kbDismissGuardTimer.restart()
-			if (root.focusedInputItem) root.focusedInputItem.focus = false
-		} else if (_themeKbH > 0 && root.focusedInputItem) {
-			stateManager.updateState()
-		}
-	}
-
-	// After the OS keyboard is dismissed the field keeps its QML focus, so
-	// onFocusedInputItemChanged does not fire on the next tap. Detect the genuine
-	// user tap via onAboutToFocusTextField and re-trigger updateState().
-	Connections {
-		target: Global
-		enabled: Qt.platform.os === "wasm" && root.visible
-
-		function onAboutToFocusTextField(textField, textFieldContainer, viewToScroll) {
-			if (!root._kbDismissGuard
-					&& stateManager.dialogStateGroup.state === "default"
-					&& root.focusedInputItem !== null
-					&& textField === root.focusedInputItem) {
-				Qt.callLater(stateManager.updateState)
-			}
 		}
 	}
 

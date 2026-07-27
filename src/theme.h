@@ -89,6 +89,7 @@ public:
 
 	Q_INVOKABLE Victron::VenusOS::Theme::StatusLevel getValueStatus(qreal value, Victron::VenusOS::Enums::Gauges_ValueType valueType) const;
 	Q_INVOKABLE bool windowIsLandscape() const;
+	Q_INVOKABLE int windowHeight() const;
 	Q_INVOKABLE bool objectHasQObjectParent(QObject *obj) const;
 
 	bool adjustingGeometry() const;

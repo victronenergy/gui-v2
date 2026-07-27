@@ -10,6 +10,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	readonly property alias cardViewFlickable: cardsView
 	readonly property int cardWidth: Theme.screenSize === Theme.Portrait
 		? Theme.geometry_screen_width - (2 * Theme.geometry_page_content_horizontalMargin)
 		: (cardsView.count > 2 ? Theme.geometry_controlCard_minimumWidth : Theme.geometry_controlCard_maximumWidth)
@@ -25,12 +26,11 @@ Page {
 	BaseListView {
 		id: cardsView
 
-		anchors {
-			fill: parent
-			leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
-			rightMargin: Theme.geometry_controlCardsPage_horizontalMargin
-			bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
-		}
+		// Use x/y/width/height instead of anchors so that KeyboardInputScroller can adjust the
+		// flickable geometry when a text field is focused within the cards.
+		x: Theme.geometry_controlCardsPage_horizontalMargin
+		width: parent.width - (2 * Theme.geometry_controlCardsPage_horizontalMargin)
+		height: parent.height - Theme.geometry_controlCardsPage_bottomMargin
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
 
