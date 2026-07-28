@@ -114,7 +114,7 @@ DevicePage {
 			//% "Last contact"
 			text: qsTrId("ev_last_contact")
 			secondaryText: dataItem.valid ? Utils.formatTimestamp(new Date(dataItem.value * 1000), ClockTime.dateTime) : ""
-			dataItem.uid: root.bindPrefix + "/LastEvContact"
+			dataItem.uid: root.bindPrefix + "/LastUpdated/EvContact"
 			preferredVisible: dataItem.valid
 		}
 
