@@ -579,14 +579,14 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/devicelist/tank/PageTankSensor.qml
     pages/settings/devicelist/tank/PageTankSetup.qml
     pages/settings/devicelist/tank/PageTankShape.qml
-    pages/settings/devicelist/ac-in/AcLimitsConsumptionSettings.qml
-    pages/settings/devicelist/ac-in/AcLimitsProductionSettings.qml
     pages/settings/devicelist/ac-in/PageAcIn.qml
     pages/settings/devicelist/ac-in/PageAcInSetup.qml
     pages/settings/devicelist/ac-in/PageAcInModel.qml
     pages/settings/devicelist/ac-in/PageSmappeeCTList.qml
     pages/settings/devicelist/ac-in/PageSmappeeCTSetup.qml
     pages/settings/devicelist/ac-in/PageSmappeeDeviceList.qml
+    pages/settings/devicelist/ac-in/PowerGuardConsumptionSettings.qml
+    pages/settings/devicelist/ac-in/PowerGuardProductionSettings.qml
     pages/settings/devicelist/pulsemeter/PagePulseCounter.qml
     pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml
     pages/settings/devicelist/iochannel/GenericInputListDelegate.qml
