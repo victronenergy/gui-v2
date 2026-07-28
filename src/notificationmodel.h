@@ -70,7 +70,7 @@ public:
 	QVariant alarmValue() const { return m_alarmValue ? m_alarmValue->getValue() : QString(); }
 	QVariant value() const { return m_value ? m_value->getValue() : QString(); }
 	qint64 dateTime() const { return m_dateTime ? m_dateTime->getValue().value<qint64>() : -1; }
-	int type() const { return m_type ? m_type->getValue().toInt() : -1; }
+	int type() const { return (m_type && m_type->getValue().isValid()) ? m_type->getValue().toInt() : -1; }
 	bool acknowledged() const { return m_acknowledged ? m_acknowledged->getValue().toInt() > 0 : false; }
 	bool active() const { return m_active ? m_active->getValue().toInt() > 0 : false; }
 	bool silenced() const { return m_silenced ? m_silenced->getValue().toInt() > 0 : false; }
@@ -80,16 +80,20 @@ public:
 	bool offline() const;
 
 Q_SIGNALS:
-	// These are the only signals we need.
 	// acknowledged, active, and silenced can all change values dynamically,
 	// and we need to handle those changes by updating the associated NotificationData entry.
 	// description cannot change dynamically, but we need to listen to it to determine
 	// when the backend has "finished" setting data for a given notification,
 	// as venus platform sets the description last, unfortunately.
+	// type and deviceName do not change during normal operation, but during
+	// D-Bus bulk-init (GetItems response), items are populated in alphabetical
+	// order, so Type and DeviceName may arrive after Active/Description.
 	void acknowledgedChanged();
 	void activeChanged();
 	void silencedChanged();
 	void descriptionChanged();
+	void typeChanged();
+	void deviceNameChanged();
 	void offlineChanged();
 
 private:
@@ -198,6 +202,8 @@ private:
 	void handleAcknowledgedChanged(NotificationSlot *slot);
 	void handleSilencedChanged(NotificationSlot *slot);
 	void handleDescriptionChanged(NotificationSlot *slot);
+	void handleTypeChanged(NotificationSlot *slot);
+	void handleDeviceNameChanged(NotificationSlot *slot);
 	void handleSlotOffline(NotificationSlot *slot);
 	QHash<int, QByteArray> m_roleNames;
 	QVector<notificationData> m_data;

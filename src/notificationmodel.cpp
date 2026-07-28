@@ -63,6 +63,12 @@ NotificationSlot::NotificationSlot(VeQItem *notification, QObject *parent)
 			connect(m_active, &VeQItem::valueChanged, this, &NotificationSlot::activeChanged);
 			connect(m_silenced, &VeQItem::valueChanged, this, &NotificationSlot::silencedChanged);
 			connect(m_description, &VeQItem::valueChanged, this, &NotificationSlot::descriptionChanged);
+			if (m_type) {
+				connect(m_type, &VeQItem::valueChanged, this, &NotificationSlot::typeChanged);
+			}
+			if (m_deviceName) {
+				connect(m_deviceName, &VeQItem::valueChanged, this, &NotificationSlot::deviceNameChanged);
+			}
 			// Monitor the Active item's state to detect when the device goes offline
 			// (e.g. when the device disconnects from VRM and topics are cleared).
 			connect(m_active, &VeQItem::stateChanged, this, [this](VeQItem::State state) {
@@ -245,6 +251,8 @@ void NotificationModel::watchSlot(VeQItem *slotItem)
 		connect(slot, &NotificationSlot::acknowledgedChanged, this, [this, slot] { handleAcknowledgedChanged(slot); });
 		connect(slot, &NotificationSlot::silencedChanged, this, [this, slot] { handleSilencedChanged(slot); });
 		connect(slot, &NotificationSlot::descriptionChanged, this, [this, slot] { handleDescriptionChanged(slot); });
+		connect(slot, &NotificationSlot::typeChanged, this, [this, slot] { handleTypeChanged(slot); });
+		connect(slot, &NotificationSlot::deviceNameChanged, this, [this, slot] { handleDeviceNameChanged(slot); });
 		connect(slot, &NotificationSlot::offlineChanged, this, [this, slot] { handleSlotOffline(slot); });
 		m_slots.append(slot);
 		if (!slot->offline()) {
@@ -309,6 +317,14 @@ void NotificationModel::addAssociatedEntry(NotificationSlot *slot, bool isNew)
 		entry.active = true;
 	} else {
 		entry.active = slot->active();
+	}
+
+	if (entry.type < 0) {
+		// Type not yet populated (e.g., during D-Bus bulk-init where items
+		// arrive in alphabetical order, so Active is populated before Type).
+		// Entry will be created when handleTypeChanged fires once the Type
+		// value is available.
+		return;
 	}
 
 	if (entry.type != Enums::Notification_Alarm
@@ -432,6 +448,18 @@ void NotificationModel::updateAssociatedEntry(NotificationSlot *slot, Notificati
 						changedRoles.append(static_cast<int>(NotificationRoles::Silenced));
 					}
 					break;
+				case NotificationRoles::Type:
+					if (data.type != slot->type()) {
+						data.type = slot->type();
+						changedRoles.append(static_cast<int>(NotificationRoles::Type));
+					}
+					break;
+				case NotificationRoles::DeviceName:
+					if (data.deviceName != slot->deviceName()) {
+						data.deviceName = slot->deviceName();
+						changedRoles.append(static_cast<int>(NotificationRoles::DeviceName));
+					}
+					break;
 				case NotificationRoles::Description:
 					// venus-platform sets the description value last when
 					// populating (or recycling) a notification slot.
@@ -496,9 +524,10 @@ void NotificationModel::updateAssociatedEntry(NotificationSlot *slot, Notificati
 			Q_EMIT dataChanged(createIndex(i, 0), createIndex(i, 0), changedRoles);
 			Q_EMIT changed(data.modelId, changedRoles);
 
-			// If the type changed during a description refresh, move the
-			// counters from the old type bucket to the new type bucket.
-			if (role == NotificationRoles::Description && oldType != data.type) {
+			// If the type changed, move the counters from the old type bucket
+			// to the new type bucket.
+			if ((role == NotificationRoles::Description || role == NotificationRoles::Type)
+					&& oldType != data.type) {
 				auto adjustCounters = [&](int type, int delta, bool active, bool acknowledged) {
 					switch (type) {
 						case Enums::Notification_Alarm:
@@ -683,6 +712,47 @@ void NotificationModel::handleDescriptionChanged(NotificationSlot *slot)
 		}
 	}
 	addAssociatedEntry(slot, slot->active());
+}
+
+void NotificationModel::handleTypeChanged(NotificationSlot *slot)
+{
+	if (slot->offline()) {
+		return;
+	}
+
+	// If the type value is not yet valid, nothing to do.
+	if (slot->type() < 0) {
+		return;
+	}
+
+	// During D-Bus bulk-init, items are populated in alphabetical order,
+	// so Type (T) arrives after Active (A) and Description (D).
+	// If no entry was created earlier (because type was not yet valid),
+	// create it now that the type is known.
+	const QString slotId = slot->notificationId();
+	for (qsizetype i = m_data.size() - 1; i >= 0; --i) {
+		if (m_data[i].notificationId == slotId) {
+			updateAssociatedEntry(slot, NotificationRoles::Type);
+			return;
+		}
+	}
+	addAssociatedEntry(slot, slot->active());
+}
+
+void NotificationModel::handleDeviceNameChanged(NotificationSlot *slot)
+{
+	if (slot->offline()) {
+		return;
+	}
+
+	const QString slotId = slot->notificationId();
+	for (qsizetype i = m_data.size() - 1; i >= 0; --i) {
+		if (m_data[i].notificationId == slotId) {
+			updateAssociatedEntry(slot, NotificationRoles::DeviceName);
+			return;
+		}
+	}
+	// No associated entry yet; don't create one here — wait for Type to be valid.
 }
 
 void NotificationModel::handleSlotOffline(NotificationSlot *slot)
