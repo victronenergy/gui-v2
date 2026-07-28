@@ -12,23 +12,21 @@ import Victron.VenusOS
 	happens in landscape orientation, the view needs to move upwards or be scrolled upwards, so
 	that the focused field is not obscured by the native VKB.
 
-	Ideally this would only scroll the view up as much as is necessary to make space for the VKB,
-	but Qt.inputMethod does not provide the geometry of the native VKB (see QTBUG-128406). So, the
-	safest bet is to scroll enough to show the text field at the very top of the view, as the native
-	VKB may almost fill the entire screen on a mobile device in landscape orientation.
+	The index.html viewport fixes (visualViewport tracking + interactive-widget + 100lvh) keep the
+	canvas pinned in place so Qt does not see a resize event when the keyboard opens. This means the
+	focused field stays at its natural position near the bottom of the visible area above the
+	keyboard, rather than being reflowed to the top.
 
-	Two separate cases are handled:
+	This handler therefore only scrolls when the focused field is actually outside the visible area:
 
-	- When a text field is focused within the Control Cards or Switch Pane view, the view is moved
-	upwards. (If the mouse is pressed outside of the text field container item, then the view's
-	original position is restored. Ideally this would also be done when the native VKB was closed
-	independently of the text field focus, but it is not possible to determine when this happens.)
+	- When a text field is focused within the Control Cards or Switch Pane view, the cardsLoader is
+	offset only if the field is hidden behind the status bar; otherwise no movement is applied.
+	(If the mouse is pressed outside of the text field container item, the original position is
+	restored.)
 
 	- When a text field is focused within a flickable elsewhere in the UI, the flickable is scrolled
-	and space is added below it, if the text field would otherwise be obscured by the native VKB.
-	(The original scroll position is not restored  when the mouse is pressed outside of the of the
-	container, as the user may continue to scroll  through the view, and may choose to focus some
-	other text field without wanting to make the VKB disappear and re-appear again.)
+	just enough to show the field at the bottom of the viewport (above the keyboard), but only if
+	the field is not already fully visible.
 */
 Item {
 	id: root
@@ -38,6 +36,17 @@ Item {
 	property real initialCacheBuffer
 
 	property Item focusedCardItem
+
+	// Blocks the "already-focused" re-trigger paths in onAboutToFocusTextField for
+	// 500 ms after Screen.heightChanged resets keyboard state, preventing Qt's internal
+	// forceInputFocus()-during-resize from spuriously re-applying offsets.
+	property bool _kbDismissGuard: false
+
+	Timer {
+		id: _kbDismissGuardTimer
+		interval: 300
+		onTriggered: root._kbDismissGuard = false
+	}
 
 	function acceptMouseEvent(item, itemMouseX, itemMouseY) {
 		if (!!focusedCardItem) {
@@ -77,22 +86,9 @@ Item {
 	}
 
 	function updateFocusItem(textField, textFieldContainer, flickable) {
-		// Whenever a text field is focused inside the flickable:
-		// 1. Increase the bottomMargin of the flickable if this is necessary to allow the text
-		//    field to be scrolled to the top of the viewport. (This ensures the native VKB does not
-		//    obscure the text field, providing the VKB is anchored to the bottom of the screen and
-		//    is not so high that it obscures almost the whole of the app UI.)
-		// 2. Scroll the text field into view with a contentY animation.
-		//
-		// As a flickable is scrolled and text fields lower down in the flickable receive focus, the
-		// bottomMargin is increased, as those fields will need more space below them to ensure the
-		// VKB is visible.
-		//
-		// Note the bottomMargin is always increased, and never decreased. Otherwise, if the user
-		// focuses a text field at the bottom of the flickable, then focuses another field higher up
-		// in the flickable, then scrolls down without changing focus and without closing the VKB,
-		// then the lower text field would no longer be visible, due to the shortened bottomMargin.
-		//
+		// Scroll just enough to show the focused text field at the bottom of the flickable
+		// viewport (just above the keyboard), rather than scrolling it to the top.
+		// Only scrolls at all if the field is currently outside the visible area.
 		if (!textField || !textFieldContainer || !flickable) {
 			console.warn("updateFocusItem(): invalid item/container/flickable:", textField, textFieldContainer, flickable)
 			return
@@ -102,20 +98,29 @@ Item {
 			root.setFlickable(flickable)
 		}
 
-		// Find the position of the text field container within the flickable content item.
 		const textContainerContentY = textFieldContainer.mapToItem(flickable.contentItem, 0, 0).y
+		const textContainerHeight = textFieldContainer.height
+		const margin = Theme.geometry_page_content_verticalMargin
 
-		if (textContainerContentY + flickable.height > flickable.contentHeight) {
-			// Find the distance that would be scrolled to place the text container at the top
-			// of the content view.
-			const jumpDistance = textFieldContainer.mapToItem(flickable, 0, 0).y
+		// contentY that places the bottom of the field at the bottom of the viewport.
+		const targetContentY = Math.max(0, textContainerContentY + textContainerHeight + margin - flickable.height)
 
-			// Set the bottomMargin to increase the scrollable height of the flickable. The
-			// bottomMargin is never decreased, even if a shorter margin is sufficient.
-			flickable.bottomMargin = Math.max(jumpDistance, flickable.bottomMargin)
+		const fieldVisibleTop = textContainerContentY >= flickable.contentY
+		const fieldVisibleBottom = textContainerContentY + textContainerHeight <= flickable.contentY + flickable.height
+		if (fieldVisibleTop && fieldVisibleBottom) {
+			return  // already fully visible, don't disturb the scroll position
 		}
 
-		flickable.contentY = textContainerContentY
+		// Ensure the flickable can be scrolled far enough to show the field at the bottom.
+		const requiredHeight = textContainerContentY + textContainerHeight + margin
+		if (requiredHeight > flickable.contentHeight) {
+			flickable.bottomMargin = Math.max(flickable.bottomMargin,
+					requiredHeight - flickable.contentHeight)
+		}
+
+		flickable.contentY = fieldVisibleBottom
+				? textContainerContentY  // field is above viewport: scroll up to its top
+				: targetContentY         // field is below viewport: scroll down to show bottom
 	}
 
 	Connections {
@@ -123,6 +128,10 @@ Item {
 
 		// Called when a text field is pressed, before it receives focus.
 		function onAboutToFocusTextField(textField, textFieldContainer, viewToScroll) {
+			if (Qt.platform.os !== "wasm") {
+				return
+			}
+
 			if (Global.currentDialog) {
 				// If the text field is in a dialog, do not auto-scroll, as this will automatically
 				// be done by the platform.
@@ -130,13 +139,25 @@ Item {
 			}
 
 			if (viewToScroll === Global.mainView.cardsLoader) {
-				// The text field is in the Control Cards or Switch Pane view. Find the position of
-				// the text field container within the view, and move the MainView cardsLoader by
-				// this amount, below the status bar. Delay the call to cardsLoader.setYOffset()
-				// until the item actually has active focus, otherwise the native VKB doesn't show.
+				// The text field is in the Control Cards or Switch Pane view.
+				// Only offset the cardsLoader if the field is hidden behind the status bar;
+				// otherwise leave it in place so it stays near the bottom of the visible area
+				// above the keyboard rather than being moved to the top.
 				const textContainerY = textFieldContainer.mapToItem(viewToScroll, 0, 0).y
-				focusListener.cardLoaderOffset = -textContainerY + Theme.geometry_statusBar_height + Theme.geometry_page_content_verticalMargin
+				const topBound = Theme.geometry_statusBar_height + Theme.geometry_page_content_verticalMargin
+				focusListener.cardLoaderOffset = textContainerY < topBound
+						? topBound - textContainerY
+						: 0
 				focusedCardItem = textField
+				// If the field already has focus (keyboard was dismissed but focus kept),
+				// onActiveFocusItemChanged won't fire. Apply the offset directly —
+				// but only outside the guard period (to skip Qt's internal re-focus).
+				if (!root._kbDismissGuard && Global.main.activeFocusItem === textField) {
+					Qt.callLater(() => {
+						if (root.focusedCardItem === textField)
+							Global.mainView.cardsLoader.setYOffset(focusListener.cardLoaderOffset, false)
+					})
+				}
 			} else {
 				// The text field is in a flickable in some other view. Delay the call to
 				// updateFocusItem() until the onReleased event, to avoid confused scrolling
@@ -145,6 +166,13 @@ Item {
 				focusListener.textField = textField
 				focusListener.textFieldContainer = textFieldContainer
 				focusListener.flickable = viewToScroll
+				// Same "already focused" guard for the flickable case.
+				if (!root._kbDismissGuard && Global.main.activeFocusItem === textField) {
+					Qt.callLater(() => {
+						if (focusListener.textField === textField)
+							updateFocusItem(textField, textFieldContainer, viewToScroll)
+					})
+				}
 			}
 		}
 	}
@@ -167,6 +195,17 @@ Item {
 				} else if (Global.main.activeFocusItem === textField) {
 					updateFocusItem(textField, textFieldContainer, flickable)
 				}
+			} else if (!root._kbDismissGuard) {
+				// Active focus cleared and we are not in the dismiss-guard window.
+				// Reset all keyboard-adjusted positions so the UI returns to normal.
+				if (!!root.focusedCardItem) {
+					root.focusedCardItem = null
+					Global.mainView.cardsLoader.clearYOffset()
+				}
+				root.setFlickable(null)
+				textField = null
+				textFieldContainer = null
+				flickable = null
 			}
 		}
 	}
@@ -178,5 +217,28 @@ Item {
 			// original property values and stop tracking it.
 			root.setFlickable(null)
 		}
+	}
+
+	// Detect native keyboard close via Theme.keyboardHeight, which is set from
+	// JavaScript via Module.jsSetKeyboardHeight() (EMSCRIPTEN_BINDINGS in theme.cpp).
+	// Screen.heightChanged does not fire for keyboard events on WASM, so that approach
+	// was replaced by this direct C++→QML channel.
+	property int _themeKbH: Theme.keyboardHeight
+	on_ThemeKbHChanged: {
+		if (Qt.platform.os !== "wasm" || _themeKbH > 0) return
+		if (!!root.focusedCardItem) {
+			root.focusedCardItem.focus = false
+			root.focusedCardItem = null
+			Global.mainView.cardsLoader.clearYOffset()
+		}
+		if (!!focusListener.textField) {
+			focusListener.textField.focus = false
+		}
+		root.setFlickable(null)
+		focusListener.textField = null
+		focusListener.textFieldContainer = null
+		focusListener.flickable = null
+		root._kbDismissGuard = true
+		_kbDismissGuardTimer.restart()
 	}
 }
