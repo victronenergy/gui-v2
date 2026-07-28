@@ -38,8 +38,8 @@ Item {
 	property Item focusedCardItem
 
 	// Blocks the "already-focused" re-trigger paths in onAboutToFocusTextField for
-	// 500 ms after Screen.heightChanged resets keyboard state, preventing Qt's internal
-	// forceInputFocus()-during-resize from spuriously re-applying offsets.
+	// 300 ms after Theme.keyboardHeight drops to 0 (keyboard closed), preventing Qt's
+	// internal forceInputFocus()-during-resize from spuriously re-applying offsets.
 	property bool _kbDismissGuard: false
 
 	Timer {

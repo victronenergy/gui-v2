@@ -246,7 +246,7 @@ void Theme::setKeyboardHeight(int height)
 {
 	if (m_keyboardHeight != height) {
 		m_keyboardHeight = height;
-		emit keyboardHeightChanged();
+		Q_EMIT keyboardHeightChanged();
 	}
 }
 
