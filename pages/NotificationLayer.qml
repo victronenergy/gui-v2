@@ -44,7 +44,15 @@ Item {
 								"" + entry.deviceName + "\n" + entry.description)
 					}
 				}
-			} else if (roles.indexOf(NotificationModel.NotificationRoles.Description) >= 0) {
+			} else if (roles.indexOf(NotificationModel.NotificationRoles.Type) >= 0) {
+				// replace the toast with one of the correct type.
+				if (ToastModel.removeNotification(modelId)) {
+					ToastModel.addNotification(modelId, entry.type,
+							"" + entry.deviceName + "\n" + entry.description)
+				}
+			} else if (roles.indexOf(NotificationModel.NotificationRoles.Description) >= 0
+					|| roles.indexOf(NotificationModel.NotificationRoles.DeviceName) >= 0) {
+				// update the text in the toast.
 				let text = "" + entry.deviceName + "\n" + entry.description
 				ToastModel.updateNotification(modelId, text)
 			}
