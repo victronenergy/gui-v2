@@ -29,6 +29,7 @@ class Theme : public QObject
 	Q_PROPERTY(int geometry_screen_width READ geometry_screen_width WRITE setGeometry_screen_width NOTIFY geometry_screen_widthChanged FINAL)
 	Q_PROPERTY(int geometry_screen_height READ geometry_screen_height WRITE setGeometry_screen_height NOTIFY geometry_screen_heightChanged FINAL)
 	Q_PROPERTY(bool adjustingGeometry READ adjustingGeometry NOTIFY adjustingGeometryChanged FINAL)
+	Q_PROPERTY(int keyboardHeight READ keyboardHeight WRITE setKeyboardHeight NOTIFY keyboardHeightChanged FINAL)
 
 public:
 	enum ScreenSize {
@@ -93,6 +94,9 @@ public:
 	bool adjustingGeometry() const;
 	QString applicationVersion() const;
 
+	int keyboardHeight() const;
+	void setKeyboardHeight(int height);
+
 Q_SIGNALS:
 	void screenSizeChanged(Victron::VenusOS::Theme::ScreenSize screenSize);
 	void screenSizeChanged_parameterless();
@@ -104,6 +108,7 @@ Q_SIGNALS:
 	void geometry_screen_widthChanged();
 	void geometry_screen_heightChanged();
 	void adjustingGeometryChanged();
+	void keyboardHeightChanged();
 
 protected:
 	void setAdjustingGeometry(bool adjusting);
@@ -115,6 +120,7 @@ protected:
 	int m_screenWidth = 1024;
 	int m_screenHeight = 600;
 	bool m_adjustingGeometry = false;
+	int m_keyboardHeight = 0;
 };
 
 }
