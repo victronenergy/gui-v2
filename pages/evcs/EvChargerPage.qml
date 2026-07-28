@@ -147,11 +147,11 @@ DevicePage {
 			writeAccessLevel: VenusOS.User_AccessType_User
 		}
 
-		AcLimitsConsumptionSettings {
+		PowerGuardConsumptionSettings {
 			bindPrefix: root.bindPrefix
 		}
 
-		AcLimitsProductionSettings {
+		PowerGuardProductionSettings {
 			bindPrefix: root.bindPrefix
 		}
 

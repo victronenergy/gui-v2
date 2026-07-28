@@ -188,11 +188,11 @@ VisibleItemModel {
 		}
 	}
 
-	AcLimitsConsumptionSettings {
+	PowerGuardConsumptionSettings {
 		bindPrefix: root.bindPrefix
 	}
 
-	AcLimitsProductionSettings {
+	PowerGuardProductionSettings {
 		bindPrefix: root.bindPrefix
 	}
 }
