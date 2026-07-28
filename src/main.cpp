@@ -44,10 +44,27 @@
 namespace {
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
+// Set once, early in main(), from isIosStandaloneWebapp() (defined further down, after the
+// EM_JS helpers). Only iOS home-screen webapps are known to hit the touch-input lockup
+// worked around in visibilitychange_callback(); see the comment there for details.
+bool s_isIosStandaloneWebapp = false;
+
 EM_BOOL visibilitychange_callback(int /* eventType */, const EmscriptenVisibilityChangeEvent *e, void *userData)
 {
 	Victron::VenusOS::UiConfig *uiconfig = static_cast<Victron::VenusOS::UiConfig*>(userData);
 	uiconfig->setApplicationVisible(!e->hidden);
+
+	// On iOS, a standalone (home screen) webapp can silently drop its touch event
+	// listeners while backgrounded: the UI keeps rendering and receiving data updates,
+	// but stops reacting to touches once switched back to. This does not happen when the
+	// same page is open as a normal Safari tab. Work around it by reloading the page after
+	// every backgrounding, however brief. This is a WebKit bug, not a Qt one, and isn't
+	// fixable by re-registering our own listeners; see the comment on
+	// BackendConnection::handleApplicationVisibleChanged() for why.
+	// See https://github.com/victronenergy/gui-v2/issues/3087
+	if (s_isIosStandaloneWebapp) {
+		Victron::VenusOS::BackendConnection::create()->handleApplicationVisibleChanged(!e->hidden);
+	}
 	return 0;
 }
 #endif // VENUS_WEBASSEMBLY_BUILD
@@ -454,6 +471,16 @@ EM_JS(bool, hasNativeVirtualKeyboard, (), {
 		|| (/Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
 });
 
+EM_JS(bool, isIosStandaloneWebapp, (), {
+	// Detect an iOS/iPadOS webapp launched from a home screen icon ("Add to Home Screen"),
+	// as opposed to a normal Safari tab. See visibilitychange_callback() in this file for why
+	// this matters (issue #3087).
+	const isIos = /iPad|iPhone|iPod/i.test(navigator.userAgent)
+		// Newer iPads use a Macintosh user agent (see hasNativeVirtualKeyboard() above).
+		|| (/Macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
+	return isIos && window.navigator.standalone === true;
+});
+
 #endif
 
 int main(int argc, char *argv[])
@@ -498,6 +525,7 @@ int main(int argc, char *argv[])
 	}
 
 	Victron::VenusOS::UiConfig::create()->setNeedsWasmKeyboardHandler(hasNativeVirtualKeyboard());
+	s_isIosStandaloneWebapp = isIosStandaloneWebapp();
 #endif
 
 	std::string scaleAsString = std::to_string(scaleFactor);

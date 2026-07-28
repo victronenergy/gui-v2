@@ -163,6 +163,31 @@ public:
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	Q_INVOKABLE void hitWatchdog();
+
+	// Called from the emscripten visibilitychange callback in main.cpp. On some iOS
+	// standalone (home screen) webapps, touch input silently stops working after the
+	// app was backgrounded, however briefly, while rendering and data updates continue
+	// normally. Reload the page to recover.
+	//
+	// This is a WebKit bug (backgrounded standalone PWAs stop receiving pointer/touch
+	// events on resume; see e.g. Apple Developer Forums thread 682171), not a Qt one:
+	// Qt's WebAssembly platform plugin binds pointerdown/move/up/cancel once at window
+	// creation and has no visibilitychange-based recovery, still true as of the latest
+	// Qt release (6.11.1) at the time of writing, and it isn't Qt's bug to fix. A full
+	// reload is the only reliable workaround found; re-registering listeners ourselves
+	// isn't possible since Qt owns them, and isn't expected to help anyway since the
+	// browser appears to suspend event dispatch to the page itself, not just drop
+	// individual listener registrations.
+	//
+	// Known remaining gap: this can only recover cases where 'hidden' toggles at all.
+	// iOS's App Switcher (swipe up and hold to see all open apps, then return without
+	// picking a different app) can leave the app in the same broken touch-input state,
+	// but does not reliably fire visibilitychange, focus, or blur for standalone
+	// home-screen webapps - Apple's own developer forums (thread 123606, "iOS 13+
+	// WebClips have no way of knowing when the user has brought it to the front")
+	// confirm there is no supported way to detect this case. Not fixed here.
+	// See https://github.com/victronenergy/gui-v2/issues/3087
+	void handleApplicationVisibleChanged(bool visible);
 #endif
 
 Q_SIGNALS:
@@ -223,6 +248,10 @@ private:
 	QMqttClient::ClientError m_mqttClientError = QMqttClient::NoError;
 
 	QTimer *mRestartDelayTimer = nullptr;
+
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	bool m_wasHidden = false;
+#endif
 
 	VeQItemProducer *m_producer = nullptr;
 #if !defined(VENUS_WEBASSEMBLY_BUILD)

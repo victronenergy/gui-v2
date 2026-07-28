@@ -281,6 +281,23 @@ void BackendConnection::hitWatchdog()
 	emscripten_run_script("if (typeof guiv2initialized !== 'undefined') guiv2initialized = true");
 }
 
+void BackendConnection::handleApplicationVisibleChanged(bool visible)
+{
+	if (visible) {
+		if (m_wasHidden) {
+			// Testing on #3087 showed the touch-input lockup also happens after being
+			// hidden for well under a second, so reload on every hidden->visible
+			// transition rather than trying to guess a "safe" minimum duration.
+			qWarning() << "BackendConnection: application became visible again after being "
+				"hidden; reloading page to recover from a possible iOS touch-input lockup (#3087)";
+			reloadPage();
+		}
+		return;
+	}
+
+	m_wasHidden = true;
+}
+
 #else
 
 void BackendConnection::onNetworkConfigChanged(const QVariant var) { Q_UNUSED(var); }
