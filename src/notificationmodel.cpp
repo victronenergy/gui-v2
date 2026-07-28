@@ -47,38 +47,37 @@ NotificationSlot::NotificationSlot(VeQItem *notification, QObject *parent)
 	: QObject(parent), m_notification(notification)
 {
 	if (m_notification) {
-		m_description = m_notification->itemGet(QStringLiteral("Description"));
-		m_deviceName = m_notification->itemGet(QStringLiteral("DeviceName"));
-		m_service = m_notification->itemGet(QStringLiteral("Service"));
-		m_trigger = m_notification->itemGet(QStringLiteral("Trigger"));
-		m_alarmValue = m_notification->itemGet(QStringLiteral("AlarmValue"));
-		m_value = m_notification->itemGet(QStringLiteral("Value"));
-		m_dateTime = m_notification->itemGet(QStringLiteral("DateTime"));
-		m_type = m_notification->itemGet(QStringLiteral("Type"));
-		m_acknowledged = m_notification->itemGet(QStringLiteral("Acknowledged"));
-		m_active = m_notification->itemGet(QStringLiteral("Active"));
-		m_silenced = m_notification->itemGet(QStringLiteral("Silenced"));
-		if (m_acknowledged && m_active && m_silenced && m_description) {
-			connect(m_acknowledged, &VeQItem::valueChanged, this, &NotificationSlot::acknowledgedChanged);
-			connect(m_active, &VeQItem::valueChanged, this, &NotificationSlot::activeChanged);
-			connect(m_silenced, &VeQItem::valueChanged, this, &NotificationSlot::silencedChanged);
-			connect(m_description, &VeQItem::valueChanged, this, &NotificationSlot::descriptionChanged);
-			if (m_type) {
-				connect(m_type, &VeQItem::valueChanged, this, &NotificationSlot::typeChanged);
+		// Use itemGetOrCreate rather than itemGet: on MQTT (WASM), notification
+		// slot child items are created individually as separate MQTT messages arrive.
+		// When watchSlot is triggered by the first message, most children don't exist
+		// yet. itemGetOrCreate ensures the VeQItems are always available for signal
+		// connections; values arrive later via produceValue when MQTT messages come in.
+		// On D-Bus this is a no-op since all children already exist by the time
+		// watchSlot runs (they are created synchronously by venus-platform).
+		m_description = m_notification->itemGetOrCreate(QStringLiteral("Description"));
+		m_deviceName = m_notification->itemGetOrCreate(QStringLiteral("DeviceName"));
+		m_service = m_notification->itemGetOrCreate(QStringLiteral("Service"));
+		m_trigger = m_notification->itemGetOrCreate(QStringLiteral("Trigger"));
+		m_alarmValue = m_notification->itemGetOrCreate(QStringLiteral("AlarmValue"));
+		m_value = m_notification->itemGetOrCreate(QStringLiteral("Value"));
+		m_dateTime = m_notification->itemGetOrCreate(QStringLiteral("DateTime"));
+		m_type = m_notification->itemGetOrCreate(QStringLiteral("Type"));
+		m_acknowledged = m_notification->itemGetOrCreate(QStringLiteral("Acknowledged"));
+		m_active = m_notification->itemGetOrCreate(QStringLiteral("Active"));
+		m_silenced = m_notification->itemGetOrCreate(QStringLiteral("Silenced"));
+		connect(m_acknowledged, &VeQItem::valueChanged, this, &NotificationSlot::acknowledgedChanged);
+		connect(m_active, &VeQItem::valueChanged, this, &NotificationSlot::activeChanged);
+		connect(m_silenced, &VeQItem::valueChanged, this, &NotificationSlot::silencedChanged);
+		connect(m_description, &VeQItem::valueChanged, this, &NotificationSlot::descriptionChanged);
+		connect(m_type, &VeQItem::valueChanged, this, &NotificationSlot::typeChanged);
+		connect(m_deviceName, &VeQItem::valueChanged, this, &NotificationSlot::deviceNameChanged);
+		// Monitor the Active item's state to detect when the device goes offline
+		// (e.g. when the device disconnects from VRM and topics are cleared).
+		connect(m_active, &VeQItem::stateChanged, this, [this](VeQItem::State state) {
+			if (state == VeQItem::Offline) {
+				Q_EMIT offlineChanged();
 			}
-			if (m_deviceName) {
-				connect(m_deviceName, &VeQItem::valueChanged, this, &NotificationSlot::deviceNameChanged);
-			}
-			// Monitor the Active item's state to detect when the device goes offline
-			// (e.g. when the device disconnects from VRM and topics are cleared).
-			connect(m_active, &VeQItem::stateChanged, this, [this](VeQItem::State state) {
-				if (state == VeQItem::Offline) {
-					Q_EMIT offlineChanged();
-				}
-			});
-		} else {
-			qWarning() << "Invalid notification slot:" << m_notification->id();
-		}
+		});
 	}
 }
 
