@@ -748,5 +748,170 @@
             watchdogHit = false
         }
     </script>
+    <script type="text/javascript">
+        // ---- Touch input recovery guard ---------------------------------
+        //
+        // On iOS, system gestures that start on the page - the home-indicator
+        // swipe, App Switcher and Control Center swipes - deliver a trusted
+        // pointerdown (+ pointermoves) to the page, after which iOS takes over
+        // the gesture and never delivers the matching pointerup/pointercancel.
+        // This affects Safari, standalone home-screen webapps and WKWebView
+        // (as used by the VRM app).
+        //
+        // The Qt WASM platform plugin keeps such a touch point registered
+        // forever (it is only removed on pointerup, see QTBUG-147635), and one
+        // permanently-pressed touch point wedges Qt Quick's touch-to-mouse
+        // synthesis, so every MouseArea-based control in the application stops
+        // reacting to touch until the page is reloaded. See
+        // https://github.com/victronenergy/gui-v2/issues/3087.
+        //
+        // This guard tracks active touch pointers and, when a pointer is
+        // provably orphaned, synthesizes the missing pointerup into the Qt
+        // window element so Qt cleans up its state. The synthetic release is
+        // preceded by a pointermove away from the press position so that the
+        // release cannot complete the orphaned press into a spurious click.
+        (function() {
+            'use strict';
+
+            const params = new URLSearchParams(window.location.search);
+            const overlay = params.has('touchlog') ? createOverlay() : null;
+            const log = function(message) {
+                console.log('[touch-guard] ' + message);
+                if (overlay) overlay(message);
+            };
+
+            // Qt calls setPointerCapture()/releasePointerCapture() unguarded
+            // from its pointer event handlers. For a pointer the browser no
+            // longer considers active these throw NotFoundError, which would
+            // abort Qt's handler halfway through. Make them non-throwing.
+            for (const fn of ['setPointerCapture', 'releasePointerCapture']) {
+                const orig = Element.prototype[fn];
+                Element.prototype[fn] = function(id) {
+                    try { return orig.call(this, id); } catch (e) { /* pointer no longer active */ }
+                };
+            }
+
+            const tracked = new Map(); // pointerId -> {target, lastSeen}
+            const SYNTHETIC = '__touchGuardSynthetic';
+
+            // Find the Qt client area element inside the #screen shadow DOM.
+            // Synthetic events dispatched outside Qt's element tree never
+            // reach Qt's listeners.
+            function qtWindowElement(fallback) {
+                const walk = function(container) {
+                    const all = [container].concat(Array.from(container.querySelectorAll('*')));
+                    for (const el of all) {
+                        if (el.shadowRoot) {
+                            const hit = el.shadowRoot.querySelector('div.qt-window-contents')
+                                    || walk(el.shadowRoot);
+                            if (hit) return hit;
+                        }
+                    }
+                    return null;
+                };
+                const screen = document.querySelector('#screen');
+                return (screen && walk(screen)) || fallback || screen || document.body;
+            }
+
+            function releasePointer(id, entry, reason) {
+                const el = qtWindowElement(entry.target);
+                // Release at the top edge of the app, far away from typical
+                // stuck-press positions (system gestures start at the bottom
+                // edge): a MouseArea only emits a click when the release
+                // happens inside it.
+                const rect = (document.querySelector('#screen') || el).getBoundingClientRect();
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + 2;
+                for (const move of [true, false]) {
+                    const ev = new PointerEvent(move ? 'pointermove' : 'pointerup', {
+                        bubbles: true, composed: true, cancelable: true,
+                        pointerId: id, pointerType: 'touch', isPrimary: true,
+                        clientX: x, clientY: y,
+                        pressure: move ? 1 : 0, button: move ? -1 : 0, buttons: move ? 1 : 0,
+                    });
+                    ev[SYNTHETIC] = true;
+                    el.dispatchEvent(ev);
+                }
+                log('released orphaned touch pointer ' + id + ' (' + reason + ')');
+            }
+
+            function flushOrphans(reason, minAgeMs, exceptId) {
+                const now = Date.now();
+                for (const [id, entry] of Array.from(tracked)) {
+                    if (id === exceptId || now - entry.lastSeen < minAgeMs) continue;
+                    tracked.delete(id);
+                    releasePointer(id, entry, reason);
+                }
+            }
+
+            window.addEventListener('pointerdown', function(e) {
+                if (e.pointerType !== 'touch' || e[SYNTHETIC]) return;
+                // A new primary touch means the browser considers no other
+                // touch active: everything still tracked is orphaned. A new
+                // non-primary touch may be a genuine second finger, so then
+                // only release pointers that have been silent for a while.
+                flushOrphans(e.isPrimary ? 'new primary touch' : 'stale pointer on new touch',
+                             e.isPrimary ? 0 : 5000, e.pointerId);
+                tracked.set(e.pointerId, {target: e.composedPath()[0] || e.target, lastSeen: Date.now()});
+            }, true);
+
+            window.addEventListener('pointermove', function(e) {
+                const entry = tracked.get(e.pointerId);
+                if (entry && !e[SYNTHETIC]) entry.lastSeen = Date.now();
+            }, true);
+
+            for (const type of ['pointerup', 'pointercancel']) {
+                window.addEventListener(type, function(e) {
+                    if (!e[SYNTHETIC]) tracked.delete(e.pointerId);
+                }, true);
+            }
+
+            // touchstart reports all current touches: a single touch while
+            // multiple pointers are tracked proves the older ones are
+            // orphaned. The 500ms minimum age protects the pointer belonging
+            // to this very touch (its pointerdown was dispatched just before).
+            window.addEventListener('touchstart', function(e) {
+                if (e.touches.length === 1 && tracked.size > 1)
+                    flushOrphans('single remaining touch', 500);
+            }, true);
+
+            // A gesture cannot legitimately continue once the page is hidden.
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) flushOrphans('page hidden', 0);
+            });
+            window.addEventListener('pagehide', function() { flushOrphans('page hidden', 0); });
+
+            // Optional on-screen event log for on-device debugging: ?touchlog
+            function createOverlay() {
+                const div = document.createElement('div');
+                div.style.cssText = 'position:fixed;left:0;bottom:0;max-height:40%;overflow-y:auto;'
+                        + 'z-index:99999;background:rgba(0,0,0,0.75);color:#0f0;'
+                        + 'font:10px monospace;padding:4px;pointer-events:none;white-space:pre;';
+                document.body.appendChild(div);
+                const append = function(message) {
+                    div.textContent += new Date().toISOString().substr(11, 12) + ' ' + message + '\n';
+                    while (div.childNodes.length && div.textContent.length > 4000)
+                        div.textContent = div.textContent.substring(div.textContent.indexOf('\n') + 1);
+                    div.scrollTop = div.scrollHeight;
+                };
+                for (const type of ['pointerdown', 'pointerup', 'pointercancel']) {
+                    window.addEventListener(type, function(e) {
+                        append(type + ' id=' + e.pointerId + ' primary=' + e.isPrimary
+                                + ' type=' + e.pointerType + ' trusted=' + e.isTrusted
+                                + ' x=' + Math.round(e.clientX) + ' y=' + Math.round(e.clientY));
+                    }, true);
+                }
+                for (const type of ['touchstart', 'touchend', 'touchcancel']) {
+                    window.addEventListener(type, function(e) {
+                        append(type + ' touches=' + e.touches.length);
+                    }, true);
+                }
+                document.addEventListener('visibilitychange', function() {
+                    append('visibilitychange hidden=' + document.hidden);
+                });
+                return append;
+            }
+        })();
+    </script>
   </body>
 </html>
