@@ -765,11 +765,18 @@
         // reacting to touch until the page is reloaded. See
         // https://github.com/victronenergy/gui-v2/issues/3087.
         //
-        // This guard tracks active touch pointers and, when a pointer is
-        // provably orphaned, synthesizes the missing pointerup into the Qt
-        // window element so Qt cleans up its state. The synthetic release is
-        // preceded by a pointermove away from the press position so that the
-        // release cannot complete the orphaned press into a spurious click.
+        // This guard repairs two related WebKit/Qt failure modes, both of
+        // which corrupt Qt's touch state the same way:
+        // 1. a touch pointer whose pointerup/pointercancel is never delivered
+        //    (orphaned pointer) - flushed once it is provably orphaned;
+        // 2. a properly delivered pointercancel: Qt (up to at least 6.9)
+        //    removes touch points from its bookkeeping only on pointerup, so
+        //    a cancelled touch leaks a permanently-pressed point - repaired
+        //    by delivering the missing pointerup after the cancel. This is
+        //    the mode observed on iOS 27.
+        // Synthetic releases are preceded by a pointermove away from the
+        // press position so that the release cannot complete a stuck press
+        // into a spurious click.
         (function() {
             'use strict';
 
@@ -848,28 +855,36 @@
                 if (e.pointerType !== 'touch' || e[SYNTHETIC]) return;
                 // A new primary touch means the browser considers no other
                 // touch active: everything still tracked is orphaned. A new
-                // non-primary touch may be a genuine second finger, so then
-                // only release pointers that have been silent for a while.
-                flushOrphans(e.isPrimary ? 'new primary touch' : 'stale pointer on new touch',
-                             e.isPrimary ? 0 : 5000, e.pointerId);
+                // non-primary touch may be a genuine second finger and is
+                // left alone.
+                if (e.isPrimary)
+                    flushOrphans('new primary touch', 0, e.pointerId);
                 tracked.set(e.pointerId, {target: e.composedPath()[0] || e.target, lastSeen: Date.now()});
             }, true);
 
-            window.addEventListener('pointermove', function(e) {
-                const entry = tracked.get(e.pointerId);
-                if (entry && !e[SYNTHETIC]) entry.lastSeen = Date.now();
+            window.addEventListener('pointerup', function(e) {
+                if (!e[SYNTHETIC]) tracked.delete(e.pointerId);
             }, true);
 
-            for (const type of ['pointerup', 'pointercancel']) {
-                window.addEventListener(type, function(e) {
-                    if (!e[SYNTHETIC]) tracked.delete(e.pointerId);
-                }, true);
-            }
+            // Failure mode 2: Qt removes a touch point from its bookkeeping
+            // only on pointerup, so a pointercancel leaves the point
+            // registered forever - with the same consequences as a pointer
+            // that never ends. Deliver the missing pointerup after Qt has
+            // processed the cancel (Qt stops propagation of pointer events,
+            // so a bubble-phase listener would never run; a task runs after
+            // the whole dispatch).
+            window.addEventListener('pointercancel', function(e) {
+                if (e[SYNTHETIC] || e.pointerType !== 'touch') return;
+                const entry = tracked.get(e.pointerId) || { target: e.composedPath()[0] || e.target };
+                tracked.delete(e.pointerId);
+                const id = e.pointerId;
+                setTimeout(function() { releasePointer(id, entry, 'pointercancel leak repair'); }, 0);
+            }, true);
 
-            // touchstart reports all current touches: a single touch while
-            // multiple pointers are tracked proves the older ones are
-            // orphaned. The 500ms minimum age protects the pointer belonging
-            // to this very touch (its pointerdown was dispatched just before).
+            // touchstart also reports all current touches: a single touch
+            // while multiple pointers are tracked proves the older ones are
+            // orphaned (failure mode 1). The 500ms minimum age protects the
+            // pointer belonging to this very touch.
             window.addEventListener('touchstart', function(e) {
                 if (e.touches.length === 1 && tracked.size > 1)
                     flushOrphans('single remaining touch', 500);
@@ -898,7 +913,8 @@
                     window.addEventListener(type, function(e) {
                         append(type + ' id=' + e.pointerId + ' primary=' + e.isPrimary
                                 + ' type=' + e.pointerType + ' trusted=' + e.isTrusted
-                                + ' x=' + Math.round(e.clientX) + ' y=' + Math.round(e.clientY));
+                                + ' x=' + Math.round(e.clientX) + ' y=' + Math.round(e.clientY)
+                                + ' tracked=' + tracked.size);
                     }, true);
                 }
                 for (const type of ['touchstart', 'touchend', 'touchcancel']) {
@@ -909,6 +925,15 @@
                 document.addEventListener('visibilitychange', function() {
                     append('visibilitychange hidden=' + document.hidden);
                 });
+                for (const type of ['pagehide', 'pageshow', 'focus', 'blur']) {
+                    window.addEventListener(type, function(e) {
+                        append(type + (e.persisted !== undefined ? ' persisted=' + e.persisted : ''));
+                    });
+                }
+                append('touch-guard v3 active'
+                        + ' standalone=' + (navigator.standalone === true)
+                        + ' display-mode-standalone=' + window.matchMedia('(display-mode: standalone)').matches
+                        + ' ' + location.href);
                 return append;
             }
         })();
