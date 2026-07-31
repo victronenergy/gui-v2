@@ -133,10 +133,39 @@ DevicePage {
 			writeAccessLevel: VenusOS.User_AccessType_User
 		}
 
+		ListText {
+			//% "Auto mode source"
+			text: qsTrId("evcs_auto_mode_source")
+			//% "Internal (EV Charging Station)"
+			readonly property string evcsInternalText: qsTrId("evcs_auto_mode_source_evcs_internal")
+			readonly property string externalSourceName: {
+				if (gxAutoModeSource.valid && gxAutoModeSource.value !== undefined && gxAutoModeSource.value !== null) {
+					const sourceText = String(gxAutoModeSource.value).trim()
+					if (sourceText.length > 0) {
+						return sourceText
+					}
+				}
+				//% "GX device"
+				return qsTrId("gx_device")
+			}
+			//: %1 = source string from /GxAutoMode/Source, or "GX" when not available
+			//% "External (%1)"
+			secondaryText: Number(dataItem.value) === 1
+						   ? qsTrId("evcs_auto_mode_source_external_with_source").arg(externalSourceName)
+						   : evcsInternalText
+			dataItem.uid: evCharger.serviceUid + "/GxAutoMode/Enabled"
+			preferredVisible: dataItem.valid && Number(chargeMode.dataItem.value) === VenusOS.Evcs_Mode_Auto
+
+			VeQuickItem {
+				id: gxAutoModeSource
+				uid: evCharger.serviceUid + "/GxAutoMode/Source"
+			}
+		}
+
 		ListEvcsSetCurrentSpinBox {
 			serviceUid: evCharger.serviceUid
 			text: CommonWords.charge_current
-			interactive: dataItem.valid && chargeMode.dataItem.value === VenusOS.Evcs_Mode_Manual
+			preferredVisible: dataItem.valid && chargeMode.dataItem.value === VenusOS.Evcs_Mode_Manual
 		}
 
 		ListSwitch {
