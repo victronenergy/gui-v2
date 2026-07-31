@@ -69,7 +69,13 @@ GridLayout {
 		horizontalAlignment: root._useColumnLayout ? Text.AlignLeft : Text.AlignRight
 		visible: text.length > 0
 		wrapMode: Text.WordWrap
-		fontSizeMode: Text.HorizontalFit
+
+		// In a non-column layout, keep the default secondary font size so that the secondary text
+		// visually aligns with the font size of the adjacent primary text.
+		// In a column layout where the secondary label is on a newline rather than adjacent to the
+		// primary text, shrink the secondary text if necessary to fit it on a single line, in case
+		// the text is a really long word (e.g. a hash key) that should not be wrapped halfway.
+		fontSizeMode: root._useColumnLayout ? Text.HorizontalFit : Text.FixedSize
 		minimumPixelSize: Theme.font_size_tiny
 
 		Layout.alignment: (root._useColumnLayout ? Qt.AlignLeft : Qt.AlignRight)
