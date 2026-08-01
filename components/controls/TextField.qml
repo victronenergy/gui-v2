@@ -16,8 +16,8 @@ T.TextField {
 	font.pixelSize: Theme.font_listItem_primary_size
 	passwordCharacter: "\u2022"
 
-	leftPadding: Theme.geometry_textField_horizontalMargin
-	rightPadding: Theme.geometry_textField_horizontalMargin
+	leftPadding: leftInset + Theme.geometry_textField_horizontalMargin
+	rightPadding: rightInset + Theme.geometry_textField_horizontalMargin
 
 	implicitWidth: Math.max(contentWidth, placeholderText.implicitWidth) + leftPadding + rightPadding
 	implicitHeight: Theme.geometry_textField_height
@@ -40,13 +40,8 @@ T.TextField {
 		// create our own placeholder here.
 		Label {
 			id: placeholderText
-			anchors {
-				left: parent.left
-				leftMargin: root.leftPadding
-				right: parent.right
-				rightMargin: root.rightPadding
-				verticalCenter: parent.verticalCenter
-			}
+			anchors.centerIn: parent
+			width: root.width - root.leftPadding - root.rightPadding
 			horizontalAlignment: root.horizontalAlignment
 			text: root.placeholderText
 			font: root.font

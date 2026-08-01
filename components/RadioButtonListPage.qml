@@ -109,7 +109,6 @@ Page {
 						id: passwordField
 
 						width: Theme.geometry_listItem_textField_minimumWidth + rightInset
-						rightPadding: rightInset + Theme.geometry_textField_horizontalMargin
 						rightInset: confirmButton.width + confirmButton.anchors.rightMargin + radioButton.spacing
 						flickable: optionsListView
 						echoMode: TextInput.Password
