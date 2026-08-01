@@ -861,6 +861,37 @@ QString Enums::tank_fluidTypeToText(Tank_Type type) const
 	}
 }
 
+QString Enums::temperature_typeToText(Temperature_DeviceType type) const
+{
+	switch (type) {
+	case Temperature_DeviceType_Battery:
+		//% "Battery"
+		return qtTrId("temperature_type_battery");
+	case Temperature_DeviceType_Fridge:
+		//% "Fridge"
+		return qtTrId("temperature_type_fridge");
+	case Temperature_DeviceType_Generic:
+		//% "Generic"
+		return qtTrId("temperature_type_generic");
+	case Temperature_DeviceType_Room:
+		//% "Room"
+		return qtTrId("temperature_type_room");
+	case Temperature_DeviceType_Outdoor:
+		//% "Outdoor"
+		return qtTrId("temperature_type_outdoor");
+	case Temperature_DeviceType_WaterHeater:
+		//% "Water heater"
+		return qtTrId("temperature_type_water_header");
+	case Temperature_DeviceType_Freezer:
+		//% "Freezer"
+		return qtTrId("temperature_type_freezer");
+	}
+
+	//: Unknown temperature type
+	//% "Unknown"
+	return qtTrId("temperature_type_unknown");
+}
+
 QString Enums::microgridModeToText(MicrogridMode mode, MicrogridExternalControl control) const
 {
 	switch (mode) {

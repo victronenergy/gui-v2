@@ -39,8 +39,13 @@ Item {
 	}
 
 	// Global data types
-	AcInputs {}
-	DcInputs {}
+	AcInputs {
+		systemServiceUid: system.serviceUid
+		settingsServiceUid: settings.serviceUid
+	}
+	DcInputs {
+		settingsServiceUid: settings.serviceUid
+	}
 	EnvironmentInputs {}
 	EvChargers {}
 	Generators {}
@@ -48,10 +53,18 @@ Item {
 	Notifications {}
 	SolarInputs {}
 	Switches {}
-	System {}
-	SystemSettings {}
+	System {
+		id: system
+		settingsServiceUid: settings.serviceUid
+	}
+	SystemSettings {
+		id: settings
+		platformServiceUid: platform.serviceUid
+	}
 	Tanks {}
-	VenusPlatform {}
+	VenusPlatform {
+		id: platform
+	}
 
 	Loader {
 		id: mockSetupLoader
