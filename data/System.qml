@@ -9,6 +9,8 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	required property string settingsServiceUid
+
 	readonly property string serviceUid: BackendConnection.serviceUidForType("system")
 	readonly property int state: _systemState.valid ? _systemState.value : VenusOS.System_State_Off
 
@@ -27,6 +29,7 @@ QtObject {
 
 	readonly property QtObject load: SystemLoad {
 		systemServiceUid: root.serviceUid
+		veBusServiceUid: root.veBus.serviceUid
 	}
 
 	readonly property QtObject dc: QtObject {
@@ -49,11 +52,11 @@ QtObject {
 		}
 
 		readonly property VeQuickItem _maximumDcPower: VeQuickItem {
-			uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/System/Power/Max"
+			uid: root.settingsServiceUid + "/Settings/Gui/Gauges/Dc/System/Power/Max"
 		}
 
 		readonly property VeQuickItem _hasDcSystem: VeQuickItem {
-			uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
+			uid: root.settingsServiceUid + "/Settings/SystemSetup/HasDcSystem"
 		}
 
 		readonly property FilteredServiceModel serviceModel: FilteredServiceModel {
@@ -68,7 +71,7 @@ QtObject {
 		readonly property real maximumPower: _maximumPower.valid ? _maximumPower.value : NaN
 
 		readonly property VeQuickItem _maximumPower: VeQuickItem {
-			uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Pv/Power/Max"
+			uid: root.settingsServiceUid + "/Settings/Gui/Gauges/Pv/Power/Max"
 		}
 
 		readonly property PvMonitor _pvMonitor: PvMonitor {
@@ -108,11 +111,11 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _hasAcOutSystem: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem"
+		uid: root.settingsServiceUid + "/Settings/SystemSetup/HasAcOutSystem"
 	}
 
 	readonly property VeQuickItem _withoutGridMeter: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/RunWithoutGridMeter"
+		uid: root.settingsServiceUid + "/Settings/CGwacs/RunWithoutGridMeter"
 	}
 
 	readonly property VeQuickItem _feedbackEnabled: VeQuickItem {

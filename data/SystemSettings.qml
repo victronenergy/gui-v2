@@ -9,6 +9,8 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	required property string platformServiceUid
+
 	readonly property string serviceUid: BackendConnection.serviceUidForType("settings")
 	readonly property bool needsOnboarding: _onboardingState.needsOnboarding
 			// The needsOnboarding setting can't be updated in ReadOnly mode, so never show onboarding in that case.
@@ -301,7 +303,7 @@ QtObject {
 	}
 
 	property VeQuickItem time: VeQuickItem {
-		uid: Global.venusPlatform.serviceUid + "/Device/Time"
+		uid: root.platformServiceUid + "/Device/Time"
 		onValueChanged: {
 			if (value !== undefined) {
 				ClockTime.clockTime = value
@@ -489,7 +491,7 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _gpsPositionFormat: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
+		uid: root.serviceUid + "/Settings/Gps/Format"
 	}
 
 	function reset() {

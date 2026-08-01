@@ -356,7 +356,7 @@ Item {
 		if (config) {
 			for (let i = 0; i < config.length; ++i) {
 				let properties = {}
-				properties["/ProductName"] = Global.environmentInputs.temperatureTypeToText(config[i].temperatureType)
+				properties["/ProductName"] = VenusOS.temperature_typeToText(config[i].temperatureType)
 				properties["/TemperatureType"] = config[i].temperatureType ?? VenusOS.Temperature_DeviceType_Generic
 				properties["/Temperature"] = config[i].temperature
 				properties["/Humidity"] = config[i].humidity

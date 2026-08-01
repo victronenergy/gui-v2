@@ -25,11 +25,11 @@ ListNavigation {
 			if (inputNumber === "") {
 				//: %1 = temperature sensor type
 				//% "%1 temperature sensor"
-				return qsTrId("settings_relay_title_type_only").arg(Global.environmentInputs.temperatureTypeToText(temperatureType.value))
+				return qsTrId("settings_relay_title_type_only").arg(VenusOS.temperature_typeToText(value))
 			} else {
 				//: %1 = temperature sensor type, %2 = input number of the sensor
 				//% "%1 temperature sensor (%2)"
-				return qsTrId("settings_relay_title_type_and_number").arg(Global.environmentInputs.temperatureTypeToText(temperatureType.value)).arg(inputNumber)
+				return qsTrId("settings_relay_title_type_and_number").arg(VenusOS.temperature_typeToText(value)).arg(inputNumber)
 			}
 		}
 
