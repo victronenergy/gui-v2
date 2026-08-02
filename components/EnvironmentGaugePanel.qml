@@ -126,9 +126,9 @@ AbstractListItem {
 				gauge: EnvironmentGauge {
 					orientation: Theme.screenSize === Theme.Portrait ? Qt.Horizontal : Qt.Vertical
 					value: temperatureItem.value ?? NaN
-					minimumValue: Global.environmentInputs.temperatureGaugeMinimum(root.temperatureType)
-					maximumValue: Global.environmentInputs.temperatureGaugeMaximum(root.temperatureType)
-					stepSize: Global.environmentInputs.temperatureGaugeStepSize(root.temperatureType)
+					minimumValue: Global.environmentInputs.temperatureGaugeMinimum(temperatureType.value)
+					maximumValue: Global.environmentInputs.temperatureGaugeMaximum(temperatureType.value)
+					stepSize: Global.environmentInputs.temperatureGaugeStepSize(temperatureType.value)
 					highlightedValue: Theme.geometry_levelsPage_environment_temperatureGauge_highlightedValue
 					minimumValueColor: Theme.color_blue
 					maximumValueColor: Theme.color_red
