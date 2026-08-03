@@ -205,7 +205,7 @@
     "geometry_notificationsPage_snoozeButton_height": 44,
     "geometry_notificationsPage_placeholder_icon_size": 32,
 
-    "geometry_textField_height": 40,
+    "geometry_textField_height": "geometry_button_height",
     "geometry_textField_horizontalMargin": 8,
 
     "geometry_toastNotification_horizontalMargin": 24,
