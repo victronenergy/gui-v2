@@ -11745,35 +11745,25 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <source>Refresh</source>
       <translation>Обновить</translation>
     </message>
-    <message id="ac-limits-consumptionsettings_consumption_limit">
-      <location filename="../../pages/settings/devicelist/ac-in/AcLimitsConsumptionSettings.qml" line="22"/>
+    <message id="powerguard_consumption_active">
+      <location filename="../../pages/settings/devicelist/ac-in/PowerGuardConsumptionSettings.qml" line="25"/>
       <source>Consumption limit</source>
       <translation>Лимит потребления</translation>
     </message>
-    <message id="ac-limits-consumptionsettings_consumption_power_limit">
-      <location filename="../../pages/settings/devicelist/ac-in/AcLimitsConsumptionSettings.qml" line="32"/>
+    <message id="powerguard_consumption_power_limit">
+      <location filename="../../pages/settings/devicelist/ac-in/PowerGuardConsumptionSettings.qml" line="35"/>
       <source>Consumption power limit</source>
       <translation>Лимит мощности потребления</translation>
     </message>
-    <message id="ac-limits-consumptionsettings_consumption_current_limit">
-      <location filename="../../pages/settings/devicelist/ac-in/AcLimitsConsumptionSettings.qml" line="43"/>
-      <source>Consumption current limit</source>
-      <translation>Лимит тока потребления</translation>
-    </message>
-    <message id="ac-limits-productionsettings_production_limit">
-      <location filename="../../pages/settings/devicelist/ac-in/AcLimitsProductionSettings.qml" line="22"/>
+    <message id="powerguard_production_active">
+      <location filename="../../pages/settings/devicelist/ac-in/PowerGuardProductionSettings.qml" line="25"/>
       <source>Production limit</source>
       <translation>Лимит генерации</translation>
     </message>
-    <message id="ac-limits-productionsettings_production_power_limit">
-      <location filename="../../pages/settings/devicelist/ac-in/AcLimitsProductionSettings.qml" line="32"/>
+    <message id="powerguard_production_power_limit">
+      <location filename="../../pages/settings/devicelist/ac-in/PowerGuardProductionSettings.qml" line="35"/>
       <source>Production power limit</source>
       <translation>Лимит мощности генерации</translation>
-    </message>
-    <message id="ac-limits-productionsettings_production_current_limit">
-      <location filename="../../pages/settings/devicelist/ac-in/AcLimitsProductionSettings.qml" line="43"/>
-      <source>Production current limit</source>
-      <translation>Лимит тока генерации</translation>
     </message>
     <message id="settings_services_mqtt_access_paired_devices_only">
       <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="19"/>
@@ -11895,6 +11885,36 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="96"/>
       <source>Proxy and direct</source>
       <translation>Прокси и</translation>
+    </message>
+    <message id="powerguard_consumption_l1_current_limit">
+      <location filename="../../pages/settings/devicelist/ac-in/PowerGuardConsumptionSettings.qml" line="46"/>
+      <source>Consumption L1 current limit</source>
+      <translation>Ограничение тока потребления L1</translation>
+    </message>
+    <message id="powerguard_consumption_l2_current_limit">
+      <location filename="../../pages/settings/devicelist/ac-in/PowerGuardConsumptionSettings.qml" line="57"/>
+      <source>Consumption L2 current limit</source>
+      <translation>Ограничение тока потребления L2</translation>
+    </message>
+    <message id="powerguard_consumption_l3_current_limit">
+      <location filename="../../pages/settings/devicelist/ac-in/PowerGuardConsumptionSettings.qml" line="68"/>
+      <source>Consumption L3 current limit</source>
+      <translation>Ограничение тока потребления L3</translation>
+    </message>
+    <message id="powerguard_production_l1_current_limit">
+      <location filename="../../pages/settings/devicelist/ac-in/PowerGuardProductionSettings.qml" line="46"/>
+      <source>Production L1 current limit</source>
+      <translation>Ограничение тока генерации L1</translation>
+    </message>
+    <message id="powerguard_production_l2_current_limit">
+      <location filename="../../pages/settings/devicelist/ac-in/PowerGuardProductionSettings.qml" line="57"/>
+      <source>Production L2 current limit</source>
+      <translation>Ограничение тока генерации L2</translation>
+    </message>
+    <message id="powerguard_production_l3_current_limit">
+      <location filename="../../pages/settings/devicelist/ac-in/PowerGuardProductionSettings.qml" line="68"/>
+      <source>Production L3 current limit</source>
+      <translation>Ограничение тока генерации L3</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
