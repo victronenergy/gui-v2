@@ -100,7 +100,7 @@ ListSetting {
 			validateOnFocusLost: root.validateOnFocusLost
 
 			onInputValidated: root.saveInput()
-			onTextChanged: root.secondaryText = text
+			onTextEdited: root.secondaryText = text
 
 			Layout.minimumWidth: Theme.geometry_listItem_textField_minimumWidth
 			Layout.maximumWidth: Theme.geometry_listItem_textField_maximumWidth
