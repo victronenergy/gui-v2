@@ -35,7 +35,7 @@ Page {
 	VeQuickItem {
 		id: gensetOperatingHours
 
-		uid: gensetBindPrefix + "/Engine/OperatingHours"
+		uid: root.gensetBindPrefix ? gensetBindPrefix + "/Engine/OperatingHours" : ""
 	}
 
 	GradientListView {
@@ -50,12 +50,11 @@ Page {
 				secondaryText: Math.round(accumulatedTotalItem.value / 60 / 60) + "h"
 			}
 
-			ListIntField {
-				id: setTotalRunTime
-
+			ListQuantityField {
 				//% "Generator total run time (hours)"
 				text: qsTrId("page_settings_run_time_and_service_generator_total_run_time")
-				secondaryText: Math.round(accumulatedTotalItem.value / 60 / 60) - Math.round(dataItem.value / 60 / 60) + "h"
+				value: Math.round(accumulatedTotalItem.value / 60 / 60) - Math.round(dataItem.value / 60 / 60)
+				unit: VenusOS.Units_Time_Hour
 				dataItem.uid: settingsBindPrefix + "/AccumulatedTotalOffset"
 				interactive: dataItem.valid && state.value === 0
 				preferredVisible: dataItem.valid && gensetBindPrefix === ""
@@ -153,12 +152,13 @@ Page {
 				preferredVisible: dataItem.valid
 			}
 
-			ListIntField {
+			ListQuantityField {
 				id: serviceInterval
 
 				//% "Generator service interval (hours)"
 				text: qsTrId("page_settings_generator_service_interval")
-				secondaryText: Math.round(dataItem.value / 60 / 60)
+				value: Math.round(dataItem.value / 60 / 60)
+				unit: VenusOS.Units_Time_Hour
 				dataItem.uid: settingsBindPrefix + "/ServiceInterval"
 				saveInput: function() {
 					var serviceInterval = parseInt(secondaryText, 10) * 60 * 60
