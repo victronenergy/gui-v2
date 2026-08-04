@@ -333,6 +333,9 @@ QString Enums::digitalInput_typeToText(DigitalInput_Type type) const
 	case DigitalInput_Type_TouchInputControl:
 		//% "Touch input control"
 		return qtTrId("digitalinputs_touch_input_control");
+	case DigitalInput_Type_SurgeProtectionAlarm:
+		//% "Surge protection alarm"
+		return qtTrId("digitalinputs_type_surge_protection_alarm");
 	default:
 		return QString();
 	}
