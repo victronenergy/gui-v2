@@ -9,15 +9,15 @@ MouseArea {
 	required property string fileName
 
 	required property int status
+	required property bool passed
+	required property bool identical
 	required property real mse
 	required property string errorMessage
 
 	readonly property bool ready: status !== CompareModel.ComparisonPending
 	readonly property real similarity: 1 - (mse / (255 * 255 * 4))
-	readonly property bool isIdentical: Math.round(mse) === 0
-	readonly property bool isPassing: ready && mse < ListView.view.model.errorTolerance
 	readonly property bool hasError: ready && errorMessage.length > 0
-	readonly property color statusColor: isPassing || isIdentical ? "#4CAF50"
+	readonly property color statusColor: passed || identical ? "#4CAF50"
 			: status === CompareModel.ComparisonPending
 				|| status === CompareModel.NoBaselineImage
 				|| status === CompareModel.NoCandidateImage ? "orange"
@@ -69,7 +69,7 @@ MouseArea {
 
 		Text {
 			text: root.errorMessage ? root.errorMessage
-				: root.isIdentical ? "✓"
+				: root.identical ? "✓"
 				: "⚠ %1%".arg((root.similarity * 100).toFixed(3))
 			font.pixelSize: 16
 			color: root.statusColor
