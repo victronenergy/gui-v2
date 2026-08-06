@@ -455,6 +455,9 @@ EM_JS(bool, hasNativeVirtualKeyboard, (), {
 });
 
 EM_JS(void, wasmPerfMark, (const char *name), {
+	// window.wasmDebugEnabled is set by wasm/index.html once the HEAD
+	// /debug check resolves, before qtLoad() (and therefore main()) runs.
+	if (!window.wasmDebugEnabled) return;
 	const label = UTF8ToString(name);
 	try { performance.mark(label); } catch (e) {}
 	console.log("[WASM Perf] " + label + " [t=" + performance.now().toFixed(1) + "ms]");

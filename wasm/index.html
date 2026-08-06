@@ -238,6 +238,19 @@
             check(location.href, 30, 1000, (function() { location.reload(); }), (function() { console.log("Failed to reload gui-v2: web server unavailable"); }) );
         }
 
+        // The [WASM Perf] instrumentation (console logging, Long Tasks
+        // observer, and the perfMark() calls in src/main.cpp) is only
+        // enabled when the /debug endpoint is available, since it adds
+        // console/PerformanceObserver overhead not needed in normal use.
+        async function checkDebugEnabled() {
+            try {
+                const response = await fetch('/debug', { method: 'HEAD', cache: 'no-cache' });
+                return response.status === 200;
+            } catch (e) {
+                return false;
+            }
+        }
+
         // Helper functions for cookies
         function setCookie(name, value, days) {
             // Check if document.cookie is available, since it might not be on some older MFD devices
@@ -563,18 +576,25 @@
                 loadingBar.width.baseVal.value = '0';
                 loadingBarText.textContent = 'Downloading...';
 
+                window.wasmDebugEnabled = await checkDebugEnabled();
+                if (window.wasmDebugEnabled) {
+                    console.log('[WASM Perf] Debug instrumentation enabled (/debug returned 200)');
+                }
+
                 const perfLog = [];
                 // Log with the absolute page time so console output can be
                 // correlated with wall-clock observations and Qt-side logs.
                 const logPerf = (line) => {
+                    if (!window.wasmDebugEnabled) return;
                     perfLog.push(line);
                     console.log(`[WASM Perf] ${line} [t=${performance.now().toFixed(1)}ms]`);
                 };
                 // Named marks show up in the DevTools Performance timeline.
                 const perfMark = (name) => {
+                    if (!window.wasmDebugEnabled) return;
                     try { performance.mark(name); } catch (e) {}
                 };
-                observeMainThreadStalls();
+                if (window.wasmDebugEnabled) observeMainThreadStalls();
                 const tInitStart = performance.now();
 
                 // Preload WASM with progress
@@ -692,7 +712,9 @@
                 perfMark('wasm-qt-main-done');
                 logPerf(`Qt main() + QML engine setup: ${(tMainDone - tRuntimeInitEnd).toFixed(1)}ms`);
                 logPerf(`Total (to Qt event loop): ${(tMainDone - tInitStart).toFixed(1)}ms`);
-                console.log(`[WASM Perf] Summary:\n` + perfLog.map(l => `  ${l}`).join('\n'));
+                if (window.wasmDebugEnabled) {
+                    console.log(`[WASM Perf] Summary:\n` + perfLog.map(l => `  ${l}`).join('\n'));
+                }
             } catch (e) {
                 console.error(e);
                 console.error(e.stack);
