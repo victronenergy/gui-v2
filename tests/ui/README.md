@@ -2,20 +2,24 @@
 
 The `gui-v2/tests/ui` directory contains automated UI unit tests. These are run in-process, if the `--ui-test` command-line option has been specified on startup.
 
-For example, this runs the `mock-maximal` test when gui-v2 is loaded:
+For example, this runs the `smoke/mock-maximal` test when gui-v2 is loaded:
 
 ```
 ./bin/venus-gui-v2 --mock --ui-test smoke/mock-maximal
 ```
 
-Image captures are stored in the directory specified by the test JSON configuration; for the `mock-maximal` test, this is `<working-directory>/image-captures`.
+The `smoke/mock-maximal` test configuration specifies that the UI should also load the "maximal" mock configuration, so it is not necessary to set `--mock-conf maximal`.
 
-Note: you may set VENUS_GUI_TEST_CAPTURE_DIR to override the configured image capture directory:
-
-```
-VENUS_GUI_TEST_CAPTURE_DIR=~/tests/ui/image-captures ./bin/venus-gui-v2 --mock --ui-test smoke/mock-maximal
+In comparison, the `smoke/generic-capture` test does not specify a mock configuration, because the test simply captures all available screens regardless of the backend:
 
 ```
+# Run `smoke/generic-capture` test on the default D-Bus backend
+venus-gui-v2 --ui-test smoke/generic-capture
+
+# Or run it on a mock backend against the `barebones` mock configuration
+venus-gui-v2 --mock --mock-conf barebones --ui-test smoke/generic-capture
+```
+
 
 ## Tests directory structure
 
@@ -37,13 +41,19 @@ For example, the `gui-v2/tests/ui/smoke/mock-maximal` is a smoke test for the "m
 
 ## Test configuration
 
-See `smoke/mock-maximal` for an example. The main configuration settings are:
+Tests are configured with a JSON file; see `smoke/mock-maximal` for an example. The main configuration settings are:
 
 * Tests - a list of QML test files
 * Logging - enable a venus.gui.test logging type - e.g. "debug", "info". The default level is "info".
 * Mock - when running in mock mode, sets the mock mode parameters
 * Steps - contains configurations for UI test steps
   * For example, for the "CaptureAndCompare" step, if you set "ComparisonThreshold" to 0.1, then it will compare captured images with an error threshold of 0.1%.
+
+Image captures are stored in the directory specified by the test JSON configuration; for the `mock-maximal` test, this is `<working-directory>/image-captures`. You may set `VENUS_GUI_TEST_CAPTURE_DIR` to override the configured image capture directory:
+
+```
+VENUS_GUI_TEST_CAPTURE_DIR=~/tests/ui/image-captures ./bin/venus-gui-v2 --mock --ui-test smoke/mock-maximal
+```
 
 ## UI test case API
 

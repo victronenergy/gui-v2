@@ -9,6 +9,7 @@
 #include <QVariantMap>
 #include <QJSValue>
 #include <QImage>
+#include <QElapsedTimer>
 #include <qqmlintegration.h>
 
 class QQuickWindow;
@@ -122,12 +123,10 @@ private:
 };
 
 /*
-	Performs a screen capture of the current UI, and compares it with the specified saved image.
+	Performs a screen capture of the current UI.
 
-	If the specified image name is not found, the capture is saved as the reference image instead,
-	so that a comparison can be performed the next time the tests are run.
-
-	If a comparison is done and it fails, the capture is saved.
+	If FailIfComparisonFails=true, then a comparison is done with a previous saved image.
+	(TODO: remove this behaviour and rename to CaptureStep and only do comparison in uicompare.)
 
 	Parameters:
 	- imageName (string): an image name (without a file extension) to be used for saving/comparing.
@@ -135,11 +134,11 @@ private:
 
 	JSON configuration parameters:
 	- "ImageDir" (string): the directory where image captures are to be stored.
-	- "StabilizationInterval" (int): the interval (ms) to wait between each capture. The comparison
-	is not performed until two consecutive captures are found to be identical. This prevents
-	a premature comparison if the UI has not yet finalized its layout.
-	- "MaximumStabilizationCaptures" (int): the maximum number of captures to perform for
-	stabilization, before giving up.
+	- "StabilizationInterval" (int): the interval (ms) to wait for a frame sync before capturing.
+	  If a frame sync occurs, the wait is restarted.
+	- "MaximumStabilizationAttempts" (int): the maximum number of times to wait for frame sync.
+	- "StabilizationTimeout" (int): the maximum time (ms) to wait before capturing, regardless of
+	  the number of frame syncs that have occurred.
 	- "ComparisonThreshold" (real): if set, the captured image is compared to the previously saved
 	capture (if it exists). E.g. if the threshold is 0.05, then 95% of the pixels between the two
 	images must be the same. If comparison fails, the failed and diff images are saved, instead of
@@ -161,6 +160,7 @@ public:
 
 	QString summary() const override;
 	void start() override;
+	int stabilizationTimeout() const;
 	static CaptureAndCompareStep *create(QObject *parent, QQuickWindow *window, const QString &imagePrefix, const QVariantMap &params);
 	static QString absoluteImagePath(const QString &fileName);
 
@@ -168,16 +168,18 @@ protected:
 	void timerEvent(QTimerEvent *event) override;
 
 private:
-	void capture();
+	void sceneGraphFrameSwapped();
 	void finalize();
-	int maxStabilizationCaptures() const;
 
 	QQuickWindow *m_window;
+	QElapsedTimer m_elapsedTimer;
 	QImage m_lastCapture;
 	QString m_filePrefix;
 	int m_comparisonResult = NoComparison;
 	int m_stabilizationTimerId = 0;
-	int m_stabilizationCaptures = 0;
+	int m_stabilizationAttempts = 0;
+	int m_stabilizationInterval = 0;
+	int m_frameSwapCount = 0;
 };
 
 /*

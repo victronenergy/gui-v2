@@ -103,7 +103,7 @@ public:
 Q_SIGNALS:
 	void nameChanged();
 	void windowChanged();
-	void finished();
+	void finished(int passCount, int failCount, int elapsed);
 
 private:
 	struct TestFunction {

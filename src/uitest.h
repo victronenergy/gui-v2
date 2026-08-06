@@ -26,11 +26,9 @@ namespace VenusOS {
 		"Mock": {
 			"Configuration": "/data/mock/conf/maximal.json",
 			"TimersActive": false,
-			"UIAnimations": 0
 		},
 		"Steps": {
 			"CaptureAndCompare": {
-				"MaximumStabilizationCaptures": 20,
 				"StabilizationInterval": 16,
 				"ImageDir": "image-captures",
 			},
@@ -81,12 +79,15 @@ private:
 	void setStatus(Status status);
 	void startNextTestCase();
 	bool exitWhenFinished() const;
-	void testCaseFinished();
+	void testCaseFinished(int passCount, int failCount, int elapsed);
 
 	QVariantMap m_settings;
 	QStringList m_testFileNames;
 	QString m_relativeTestDir;
 	int m_currentTestIndex = -1;
+	int m_passCount = 0;
+	int m_failCount = 0;
+	int m_elapsed = 0;
 	Status m_status = NotConfigured;
 };
 
