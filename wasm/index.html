@@ -583,6 +583,14 @@
                 }
             })();
 
+            // Notify gui-v2 Theme when the window innerHeight has changed.
+            window.addEventListener('resize', (e) => {
+                const mod = window._qtWasmModule;
+                if (mod && typeof mod.jsSetWindowInnerHeight === 'function') {
+                    mod.jsSetWindowInnerHeight(window.innerHeight);
+                }
+            });
+
             try {
                 showUi(spinner);
                 loadingBar.width.baseVal.value = '0';

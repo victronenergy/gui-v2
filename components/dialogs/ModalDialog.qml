@@ -33,7 +33,6 @@ T.Dialog {
 	readonly property real defaultY: Theme.screenSize === Theme.Portrait
 			? (Theme.geometry_screen_height - height)
 			: (Theme.geometry_screen_height - height) / 2
-	property real vkbOffset
 
 	// Optional functions: called when accept/reject is attempted.
 	// These should return true if the accept/reject can be executed, and false otherwise.
@@ -337,54 +336,20 @@ T.Dialog {
 		// text field is focused, and the Qt VKB (on GX) or the native mobile VKB (on Wasm) appears.
 		function updateState() {
 			if (!root.focusedInputItem) {
-				dialogStateGroup.state = "default"
+				dialogStateGroup.state = ""
 				return
 			}
-
-			const delta = UiConfig.itemBottomDistanceToVKB(root.focusedInputItem)
-			if (delta > 0) {
-				// Note: moving the Dialog while in "focused" state will change to
-				// the new location immediately without any animation.
-				root.vkbOffset = -delta
-			} else {
-				root.vkbOffset = 0
-			}
-
 			dialogStateGroup.state = "focused"
 		}
 
 		property StateGroup dialogStateGroup: StateGroup {
-			state: "default"
-
-			states: [
-				State {
-					name: "default"
-					PropertyChanges {
-						// reset to the "default" binding explicitly
-						// so we can get the transition
-						root.y: root.defaultY
-					}
-				},
-				State {
-					name: "focused"
-					PropertyChanges {
-						root.y: root.defaultY + root.vkbOffset
-					}
+			states: State {
+				name: "focused"
+				PropertyChanges {
+					root.y: root.defaultY - Math.max(0,
+						Global.itemDistanceToVKB(root.focusedInputItem, root.focusedInputItem.height, Overlay.overlay))
 				}
-			]
-
-			transitions: [
-				Transition {
-					to: "*"
-					enabled: Global.animationEnabled
-					NumberAnimation {
-						target: root
-						property: "y"
-						duration: Theme.animation_inputPanel_slide_duration
-						easing.type: Easing.InOutQuad
-					}
-				}
-			]
+			}
 		}
 	}
 
