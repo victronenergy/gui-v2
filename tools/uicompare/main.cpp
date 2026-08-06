@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    imageProvider->setImageDirectories("image-captures-baseline/", "image-captures/");
+    imageProvider->setImageDirectories("image-captures-baseline/", "image-captures-candidate/");
     engine.addImageProvider(QLatin1String("difference"), imageProvider);
 
     QScopedPointer<QObject> object(component.beginCreate(engine.rootContext()));

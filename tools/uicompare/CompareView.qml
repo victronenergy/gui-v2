@@ -10,13 +10,13 @@ Item {
 	required property string fileName
 
 	property real zoomLevel: overlayZoomSlider.value
-	property int comparisonMode: 0 // 0 = diff overlay, 1 = candidate overlay
+	property int comparisonMode: 1 // 0 = none, 1 = diff overlay, 2 = candidate overlay
 	property real cropLineX: width / 2
 
 	readonly property string baselineImageUri: !fileName || resultStatus === CompareModel.NoBaselineImage ? ""
 			: "file:image-captures-baseline/" + fileName
 	readonly property string candidateImageUri: !fileName || resultStatus === CompareModel.NoCandidateImage ? ""
-			: "file:image-captures/" + fileName
+			: "file:image-captures-candidate/" + fileName
 	readonly property bool bothImagesExist: baselineImageUri.length > 0 && candidateImageUri.length > 0
 
 	// Mode selector toolbar
@@ -54,22 +54,22 @@ Item {
 					font.pixelSize: 16
 				}
 
-				Button {
+				CheckBox {
 					text: "Diff overlay"
-					checked: root.comparisonMode === 0
-					onClicked: root.comparisonMode = 0
-					autoExclusive: true
+					checked: root.comparisonMode === 1
+					onClicked: root.comparisonMode = checked ? 1 : 0
 				}
 
-				Button {
+				CheckBox {
 					text: "Candidate overlay"
-					checked: root.comparisonMode === 1
-					onClicked: root.comparisonMode = 1
-					autoExclusive: true
+					checked: root.comparisonMode === 2
+					onClicked: root.comparisonMode = checked ? 2 : 0
 				}
 
 				// Opacity slider for overlay mode
 				RowLayout {
+					visible: root.comparisonMode > 0
+
 					Text {
 						text: "Opacity:"
 						font.pixelSize: 12
@@ -79,13 +79,14 @@ Item {
 						from: 0
 						to: 1
 						value: 0.5
-						Layout.preferredWidth: 200
+						Layout.preferredWidth: 150
 					}
 				}
 
 				CheckBox {
 					id: cropLineCheckBox
-					text: "Crop line (right click to move)"
+					text: "Show crop line"
+					visible: root.comparisonMode > 0
 				}
 			}
 
@@ -149,7 +150,7 @@ Item {
 				}
 
 				Loader {
-					active: root.resultStatus === CompareModel.ComparisonReady && !root.imagesIdentical
+					active: root.comparisonMode > 0 && root.resultStatus === CompareModel.ComparisonReady && !root.imagesIdentical
 					sourceComponent: overlayComponent
 				}
 			}
@@ -215,7 +216,9 @@ Item {
 
 				Image {
 					id: candidateImage
-					source: root.comparisonMode === 0 ? "image://difference/" + root.fileName : root.candidateImageUri
+					source: root.comparisonMode === 1 ? "image://difference/" + root.fileName
+							: root.comparisonMode === 2 ? root.candidateImageUri
+							: ""
 					opacity: overlayOpacitySlider.value
 				}
 			}
@@ -231,10 +234,38 @@ Item {
 				color: "#00BCD4"
 				visible: cropLineCheckBox.checked && root.resultStatus === CompareModel.ComparisonReady && !root.imagesIdentical
 
+				onXChanged: root.cropLineX = x
+
 				MouseArea {
 					anchors.fill: parent
 					drag.target: parent
 					drag.axis: Drag.XAxis
+				}
+
+				Text {
+					anchors {
+						top: parent.top
+						topMargin: parent.height / 6
+						right: parent.left
+						rightMargin: 8
+					}
+					text: "→"
+					color: parent.color
+					font.pixelSize: 48
+					font.bold: true
+				}
+
+				Text {
+					anchors {
+						bottom: parent.bottom
+						bottomMargin: parent.height / 6
+						right: parent.left
+						rightMargin: 8
+					}
+					text: "→"
+					color: parent.color
+					font.pixelSize: 48
+					font.bold: true
 				}
 			}
 
