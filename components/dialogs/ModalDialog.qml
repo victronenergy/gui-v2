@@ -30,7 +30,9 @@ T.Dialog {
 	property bool canAccept: true
 	property bool headerShowsTitles: true
 
-	readonly property real centeredY: (Theme.geometry_screen_height - height) / 2
+	readonly property real defaultY: Theme.screenSize === Theme.Portrait
+			? (Theme.geometry_screen_height - height)
+			: (Theme.geometry_screen_height - height) / 2
 
 	// Optional functions: called when accept/reject is attempted.
 	// These should return true if the accept/reject can be executed, and false otherwise.
@@ -49,8 +51,7 @@ T.Dialog {
 
 	readonly property string rejectTextCancel: CommonWords.cancel
 
-	readonly property Item focusedInputItem: root.visible
-		&& (Qt.inputMethod.visible || UiConfig.needsWasmKeyboardHandler)
+	readonly property Item focusedInputItem: root.visible && Theme.keyboardHeight > 0
 			? (root.contentItem.Window.activeFocusItem as TextField ??
 				root.contentItem.Window.activeFocusItem as TextInput ??
 				// root.contentItem.Window.activeFocusItem as TextArea ?? // not used
@@ -98,7 +99,7 @@ T.Dialog {
 	// Use x/y positioning instead of anchors, so that the dialog can be moved for the VKB and by
 	// the DialogDragger.
 	x: (Theme.geometry_screen_width - width) / 2
-	y: root.centeredY
+	y: root.defaultY
 
 	/*
 	If you only specify implicitWidth & implicitHeight here, and shrink the browser (or desktop app) window from 100% -> 0%,
@@ -168,6 +169,11 @@ T.Dialog {
 				// dialog is at the bottom of the screen.
 				verticalCenterOffset: Theme.screenSize === Theme.Portrait ? -(root.y / 2) : 0
 			}
+
+			// Increase the shadow height beyond the screen, in case the dialog moves upwards to
+			// make space for the VKB.
+			height: (Screen.height * 2) / Global.scalingRatio
+
 			Component.onCompleted: root.shadow = dialogShadow
 		}
 	}
@@ -326,8 +332,6 @@ T.Dialog {
 	property QtObject _stateManager: QtObject {
 		id: stateManager
 
-		property real targetDialogY: 0
-
 		// To ensure the focused text field is not hidden behind the VKB, move the dialog when a
 		// text field is focused, and the Qt VKB (on GX) or the native mobile VKB (on Wasm) appears.
 		function updateState() {
@@ -335,27 +339,6 @@ T.Dialog {
 				dialogStateGroup.state = "default"
 				return
 			}
-
-			if (Qt.inputMethod.visible) {
-				// Move the dialog so that the text field is visible above the VKB.
-				const currentDialogOffset = root.y - root.centeredY // 0 or negative
-				const inputItemBottomPos = root.focusedInputItem.mapToItem(Global.mainView, 0, root.focusedInputItem.implicitHeight).y - currentDialogOffset
-
-				targetDialogY = root.centeredY
-
-				const vkbTopPos = Global.mainView.height - Qt.inputMethod.keyboardRectangle.height
-
-				if (inputItemBottomPos > vkbTopPos) {
-					// Note: moving the Dialog while in "focused" state will change to
-					// the new location immediately without any animation.
-					targetDialogY += (vkbTopPos - inputItemBottomPos)
-				}
-			} else {
-				// We don't know how high the built-in keyboard is on Wasm, so just move the dialog
-				// to the top of the window, and hopefully that is enough to see the text field.
-				targetDialogY = 0
-			}
-
 			dialogStateGroup.state = "focused"
 		}
 
@@ -368,23 +351,22 @@ T.Dialog {
 					PropertyChanges {
 						// reset to the "default" binding explicitly
 						// so we can get the transition
-						root.y: Theme.screenSize === Theme.Portrait
-								? Theme.geometry_screen_height - root.height
-								: root.centeredY
+						root.y: root.defaultY
 					}
 				},
 				State {
 					name: "focused"
 					PropertyChanges {
-						root.y: stateManager.targetDialogY
+						root.y: root.defaultY - Math.max(0,
+							Utils.itemBottomDistanceToVKB(root.focusedInputItem, Theme, Global.main, Overlay.overlay))
 					}
 				}
 			]
 
 			transitions: [
 				Transition {
-					to: "*"
-					enabled: Global.animationEnabled
+					enabled: Global.isGxDevice && Global.animationEnabled
+
 					NumberAnimation {
 						target: root
 						property: "y"
@@ -406,4 +388,3 @@ T.Dialog {
 		}
 	}
 }
-

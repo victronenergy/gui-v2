@@ -12,6 +12,7 @@
 #include <qqmlintegration.h>
 
 class QJSEngine;
+class QQuickItem;
 
 namespace Victron {
 namespace VenusOS {

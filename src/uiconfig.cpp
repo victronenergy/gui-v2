@@ -1,5 +1,9 @@
 #include "uiconfig.h"
+#include "themeobjects.h"
 
+#include <QQuickWindow>
+#include <QQuickItem>
+#include <QGuiApplication>
 #include <QFile>
 
 using namespace Victron::VenusOS;

@@ -4,6 +4,7 @@
 */
 
 #include "theme.h"
+#include <QInputMethod>
 
 using namespace Victron::VenusOS;
 
@@ -23,11 +24,7 @@ EM_JS(int, getScreenHeight, (), {
 	return screen.height;
 });
 
-EM_JS(int, getWindowWidth, (), {
-	return window.innerWidth;
-});
-
-EM_JS(int, getWindowHeight, (), {
+EM_JS(int, getThemeInnerHeight, (), {
 	return window.innerHeight;
 });
 
@@ -62,6 +59,8 @@ Theme::Theme(QObject *parent) : QObject(parent)
 
 	// Register JavaScript listener for dynamic updates
 	mql.call<void>("addEventListener", std::string("change"), emscripten::val::module_property("jsSystemColorSchemeChanged"));
+
+	setWindowInnerHeight(getThemeInnerHeight());
 #else
 	const QSizeF physicalScreenSize = QGuiApplication::primaryScreen()->physicalSize();
 	const int screenDiagonalMm = static_cast<int>(sqrt((physicalScreenSize.width() * physicalScreenSize.width())
@@ -69,6 +68,15 @@ Theme::Theme(QObject *parent) : QObject(parent)
 	setScreenSize((round(screenDiagonalMm / 10 / 2.5) == 7)
 		? Victron::VenusOS::Theme::SevenInch
 		: Victron::VenusOS::Theme::FiveInch);
+
+	if (QInputMethod *inputMethod = QGuiApplication::inputMethod()) {
+		connect(inputMethod, &QInputMethod::keyboardRectangleChanged, this, [inputMethod, this]() {
+			setKeyboardHeight(inputMethod && inputMethod->isVisible() ? inputMethod->keyboardRectangle().height() : 0);
+		});
+		connect(inputMethod, &QInputMethod::visibleChanged, this, [inputMethod, this]() {
+			setKeyboardHeight(inputMethod && inputMethod->isVisible() ? inputMethod->keyboardRectangle().height() : 0);
+		});
+	}
 #endif
 }
 
@@ -221,13 +229,24 @@ Victron::VenusOS::Theme::StatusLevel Theme::getValueStatus(qreal value, Victron:
 	}
 }
 
-bool Theme::windowIsLandscape() const
+int Theme::windowHeight() const
 {
 #if defined(VENUS_WEBASSEMBLY_BUILD)
-	return getWindowWidth() > getWindowHeight();
+	return m_windowInnerHeight;
 #else
-	return false;
+	return m_screenHeight;
 #endif
+}
+
+void Theme::setWindowInnerHeight(int height)
+{
+	if (height != m_windowInnerHeight) {
+		const int prevWindowHeight = windowHeight();
+		m_windowInnerHeight = height;
+		if (prevWindowHeight != windowHeight()) {
+			Q_EMIT windowHeightChanged();
+		}
+	}
 }
 
 bool Theme::objectHasQObjectParent(QObject *obj) const
@@ -238,6 +257,19 @@ bool Theme::objectHasQObjectParent(QObject *obj) const
 QString Theme::applicationVersion() const
 {
 	return QStringLiteral("v%1.%2.%3").arg(PROJECT_VERSION_MAJOR).arg(PROJECT_VERSION_MINOR).arg(PROJECT_VERSION_PATCH);
+}
+
+int Theme::keyboardHeight() const
+{
+	return m_keyboardHeight;
+}
+
+void Theme::setKeyboardHeight(int height)
+{
+	if (m_keyboardHeight != height) {
+		m_keyboardHeight = height;
+		Q_EMIT keyboardHeightChanged();
+	}
 }
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
@@ -252,8 +284,25 @@ void jsSystemColorSchemeChanged(emscripten::val event)
 	g_themeInstance->setSystemColorScheme(systemSchemeDark ? Victron::VenusOS::Theme::SystemColorSchemeDark : Victron::VenusOS::Theme::SystemColorSchemeLight);
 }
 
-// Bind C++ function to JS
+// Called from JavaScript (index.html) when the native mobile keyboard opens or closes.
+// Height is in CSS pixels (logical pixels), matching QML coordinate space on WASM.
+void jsSetKeyboardHeight(int height)
+{
+	if (g_themeInstance)
+		g_themeInstance->setKeyboardHeight(height);
+}
+
+void jsSetWindowInnerHeight(int height)
+{
+	if (g_themeInstance)
+		g_themeInstance->setWindowInnerHeight(height);
+}
+
+// Bind C++ functions to JS — callable as Module.jsSetKeyboardHeight(h) etc.
 EMSCRIPTEN_BINDINGS(theme_bindings) {
+	using namespace emscripten;
 	function("jsSystemColorSchemeChanged", &jsSystemColorSchemeChanged);
+	function("jsSetKeyboardHeight", &jsSetKeyboardHeight);
+	function("jsSetWindowInnerHeight", &jsSetWindowInnerHeight);
 }
 #endif

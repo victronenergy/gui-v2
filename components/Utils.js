@@ -374,3 +374,11 @@ function acceptsKeyNavigation(item) {
 			&& (item.focusPolicy & 0x1) // 0x1 = Qt.TabFocus
 			&& item.enabled
 }
+
+function itemBottomDistanceToVKB(item, theme, main, mapToItemDest) {
+	const viewBottom = main.y
+			+ Math.round(item.mapToItem(mapToItemDest, 0, item.height).y)
+			+ theme.geometry_inputPanel_topMargin
+	const vkbTop = theme.windowHeight - theme.keyboardHeight
+	return viewBottom - vkbTop
+}
