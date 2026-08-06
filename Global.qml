@@ -67,6 +67,14 @@ QtObject {
 		return ToastModel.add(type, text, autoCloseInterval)
 	}
 
+	function itemDistanceToVKB(item, itemY, mapToItemDest) {
+		const viewBottom = main.y
+				+ Math.round(item.mapToItem(mapToItemDest, 0, itemY).y)
+				+ Theme.geometry_inputPanel_topMargin
+		const vkbTop = Theme.windowHeight - Theme.keyboardHeight
+		return viewBottom - vkbTop
+	}
+
 	function reset() {
 		// unload the gui.
 		dataManagerLoaded = false

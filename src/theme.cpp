@@ -24,11 +24,7 @@ EM_JS(int, getScreenHeight, (), {
 	return screen.height;
 });
 
-EM_JS(int, getWindowWidth, (), {
-	return window.innerWidth;
-});
-
-EM_JS(int, getWindowHeight, (), {
+EM_JS(int, getThemeInnerHeight, (), {
 	return window.innerHeight;
 });
 
@@ -63,6 +59,8 @@ Theme::Theme(QObject *parent) : QObject(parent)
 
 	// Register JavaScript listener for dynamic updates
 	mql.call<void>("addEventListener", std::string("change"), emscripten::val::module_property("jsSystemColorSchemeChanged"));
+
+	setWindowInnerHeight(getThemeInnerHeight());
 #else
 	const QSizeF physicalScreenSize = QGuiApplication::primaryScreen()->physicalSize();
 	const int screenDiagonalMm = static_cast<int>(sqrt((physicalScreenSize.width() * physicalScreenSize.width())
@@ -231,22 +229,24 @@ Victron::VenusOS::Theme::StatusLevel Theme::getValueStatus(qreal value, Victron:
 	}
 }
 
-bool Theme::windowIsLandscape() const
-{
-#if defined(VENUS_WEBASSEMBLY_BUILD)
-	return getWindowWidth() > getWindowHeight();
-#else
-	return false;
-#endif
-}
-
 int Theme::windowHeight() const
 {
 #if defined(VENUS_WEBASSEMBLY_BUILD)
-	return getWindowHeight();
+	return m_windowInnerHeight;
 #else
 	return m_screenHeight;
 #endif
+}
+
+void Theme::setWindowInnerHeight(int height)
+{
+	if (height != m_windowInnerHeight) {
+		const int prevWindowHeight = windowHeight();
+		m_windowInnerHeight = height;
+		if (prevWindowHeight != windowHeight()) {
+			Q_EMIT windowHeightChanged();
+		}
+	}
 }
 
 bool Theme::objectHasQObjectParent(QObject *obj) const
@@ -292,10 +292,17 @@ void jsSetKeyboardHeight(int height)
 		g_themeInstance->setKeyboardHeight(height);
 }
 
+void jsSetWindowInnerHeight(int height)
+{
+	if (g_themeInstance)
+		g_themeInstance->setWindowInnerHeight(height);
+}
+
 // Bind C++ functions to JS — callable as Module.jsSetKeyboardHeight(h) etc.
 EMSCRIPTEN_BINDINGS(theme_bindings) {
 	using namespace emscripten;
 	function("jsSystemColorSchemeChanged", &jsSystemColorSchemeChanged);
 	function("jsSetKeyboardHeight", &jsSetKeyboardHeight);
+	function("jsSetWindowInnerHeight", &jsSetWindowInnerHeight);
 }
 #endif
