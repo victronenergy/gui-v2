@@ -33,7 +33,6 @@ T.Dialog {
 	readonly property real defaultY: Theme.screenSize === Theme.Portrait
 			? (Theme.geometry_screen_height - height)
 			: (Theme.geometry_screen_height - height) / 2
-	property real vkbOffset
 
 	// Optional functions: called when accept/reject is attempted.
 	// These should return true if the accept/reject can be executed, and false otherwise.
@@ -340,16 +339,6 @@ T.Dialog {
 				dialogStateGroup.state = "default"
 				return
 			}
-
-			const delta = UiConfig.itemBottomDistanceToVKB(root.focusedInputItem)
-			if (delta > 0) {
-				// Note: moving the Dialog while in "focused" state will change to
-				// the new location immediately without any animation.
-				root.vkbOffset = -delta
-			} else {
-				root.vkbOffset = 0
-			}
-
 			dialogStateGroup.state = "focused"
 		}
 
@@ -368,15 +357,16 @@ T.Dialog {
 				State {
 					name: "focused"
 					PropertyChanges {
-						root.y: root.defaultY + root.vkbOffset
+						root.y: root.defaultY - Math.max(0,
+							Utils.itemBottomDistanceToVKB(root.focusedInputItem, Theme, Global.main, Overlay.overlay))
 					}
 				}
 			]
 
 			transitions: [
 				Transition {
-					to: "*"
-					enabled: Global.animationEnabled
+					enabled: Global.isGxDevice && Global.animationEnabled
+
 					NumberAnimation {
 						target: root
 						property: "y"

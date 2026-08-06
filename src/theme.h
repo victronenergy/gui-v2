@@ -28,8 +28,9 @@ class Theme : public QObject
 	Q_PROPERTY(QString applicationVersion READ applicationVersion CONSTANT)
 	Q_PROPERTY(int geometry_screen_width READ geometry_screen_width WRITE setGeometry_screen_width NOTIFY geometry_screen_widthChanged FINAL)
 	Q_PROPERTY(int geometry_screen_height READ geometry_screen_height WRITE setGeometry_screen_height NOTIFY geometry_screen_heightChanged FINAL)
-	Q_PROPERTY(bool adjustingGeometry READ adjustingGeometry NOTIFY adjustingGeometryChanged FINAL)
+	Q_PROPERTY(int windowHeight READ windowHeight NOTIFY windowHeightChanged FINAL)
 	Q_PROPERTY(int keyboardHeight READ keyboardHeight WRITE setKeyboardHeight NOTIFY keyboardHeightChanged FINAL)
+	Q_PROPERTY(bool adjustingGeometry READ adjustingGeometry NOTIFY adjustingGeometryChanged FINAL)
 
 public:
 	enum ScreenSize {
@@ -87,16 +88,17 @@ public:
 	int geometry_screen_height() const;
 	void setGeometry_screen_height(int height);
 
-	Q_INVOKABLE Victron::VenusOS::Theme::StatusLevel getValueStatus(qreal value, Victron::VenusOS::Enums::Gauges_ValueType valueType) const;
-	Q_INVOKABLE bool windowIsLandscape() const;
-	Q_INVOKABLE int windowHeight() const;
+	Q_INVOKABLE Victron::VenusOS::Theme::StatusLevel getValueStatus(qreal value, Victron::VenusOS::Enums::Gauges_ValueType valueType) const;    
 	Q_INVOKABLE bool objectHasQObjectParent(QObject *obj) const;
 
-	bool adjustingGeometry() const;
-	QString applicationVersion() const;
+	int windowHeight() const;
+	void setWindowInnerHeight(int height);
 
 	int keyboardHeight() const;
 	void setKeyboardHeight(int height);
+
+	bool adjustingGeometry() const;
+	QString applicationVersion() const;
 
 Q_SIGNALS:
 	void screenSizeChanged(Victron::VenusOS::Theme::ScreenSize screenSize);
@@ -110,6 +112,7 @@ Q_SIGNALS:
 	void geometry_screen_heightChanged();
 	void adjustingGeometryChanged();
 	void keyboardHeightChanged();
+	void windowHeightChanged();
 
 protected:
 	void setAdjustingGeometry(bool adjusting);
@@ -120,8 +123,9 @@ protected:
 	ForcedColorScheme m_forcedColorScheme = ForcedColorSchemeDefault;
 	int m_screenWidth = 1024;
 	int m_screenHeight = 600;
-	bool m_adjustingGeometry = false;
+	int m_windowInnerHeight = 0;
 	int m_keyboardHeight = 0;
+	bool m_adjustingGeometry = false;
 };
 
 }

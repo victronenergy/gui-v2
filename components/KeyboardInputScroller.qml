@@ -18,11 +18,11 @@ import Victron.VenusOS
 Item {
 	id: root
 
+	property Item focusedItem
 	property Flickable focusedView
 
-	property real _toViewContentY
-	property real _toViewHeight
 	property real _initialViewHeight
+	property real _initialViewContentY
 
 	function update(textField, view) {
 		if (!textField || !view) {
@@ -30,48 +30,43 @@ Item {
 			return
 		}
 
-		if (state !== "active") {
-			_toViewContentY = 0
-			_toViewHeight = 0
+		if (state === "") {
 			_initialViewHeight = view.height
+			_initialViewContentY = view.contentY
 		}
 		root.focusedView = view
+		root.focusedItem = textField
 
-		const delta = UiConfig.itemBottomDistanceToVKB(textField)
-		if (delta > 0) {
-			// Scroll the flickable upwards to show the item above the VKB. (For the cards view in
-			// landscape, this forces the view upwards to make space for the VKB.)
-			root._toViewContentY = view.contentY + delta
-		} else {
-			root._toViewContentY = view.contentY
-		}
-
-		// For vertical list views, shrink the view height to allow the user to see content at the
-		// bottom of the view that would otherwise be hidden by the VKB. Do not do this for
-		// horizontally-oriented views (e.g. the Control Cards in landscape layout) as it would
-		// cause the view to be collapsed to follow the adjusted height, whereas for vertically
-		// oriented views, it would only reduce the scrollable area.
-		if (view.orientation === ListView.Vertical) {
-			const viewDeltaToVKB = UiConfig.itemBottomDistanceToVKB(view)
-			root._toViewHeight = root._initialViewHeight - Math.max(0, viewDeltaToVKB)
-		} else {
-			root._toViewHeight = root._initialViewHeight
-		}
-
-		state = "active"
+		// If the Flickable is a vertical ListView, then apply vertical scrolling behaviour;
+		// otherwise for horizontal ListViews or generic flickables, use the horizontal scrolling
+		// behaviour.
+		state = view.orientation === ListView.Vertical ? "scrollVertically" : "scrollHorizontally"
 	}
 
 	function deactivate() {
 		state = ""
 	}
 
+	function itemBottomDistanceToVKB(item) {
+		return Utils.itemBottomDistanceToVKB(item, Theme, Global.main, Global.main.contentItem)
+	}
+
 	states: [
+		// For vertical list views (e.g. general settings list views, or Switch Pane in portrait):
+		//
+		//  - When a text field is focused, shrink the view height to allow the user to see content at
+		//    the bottom of the view that would otherwise be hidden by the VKB, and if needed, also
+		//    scroll the contentY to bring the field into view.
+		//
+		//  - When focus is lost, restore the previous view height, but do not restore the contentY as
+		//    this makes the view visually quite jumpy, and also if the user has scrolled the view to a
+		//    new preferred contentY this would moves the user's view away from the preferred position.
 		State {
-			name: "active"
+			name: "scrollVertically"
 
 			PropertyChanges {
 				target: root.focusedView
-				height: root._toViewHeight
+				height: root._initialViewHeight - Math.max(0, root.itemBottomDistanceToVKB(root.focusedView))
 
 				// In case the platform shows the VKB in a partially transparent manner (e.g. on
 				// iOS), increase the ListView display margin so that delegates below the view (i.e.
@@ -81,41 +76,46 @@ Item {
 				// Note: only ListView types have displayMarginEnd, so if the view is a generic
 				// Flickable, this will produce a warning.
 				displayMarginEnd: Theme.keyboardHeight
-
-				// Do not update the values after the initial property change, otherwise the view
-				// height flickers when selecting consecutive text fields in the same view. There is
-				// no need to update it after the initial change anyway.
-				explicit: true
 			}
+
+			// To scroll the contentY, activate the verticalViewScroller instead of changing the
+			// contentY property directly here; otherwise, the contentY will change as soon as the
+			// state is entered, which results in the wrong contentY being applied. Instead, we
+			// must wait until the height change is applied by the other PropertyChanges before
+			// updating the contentY.
+			PropertyChanges {
+				verticalViewScroller.enabled: true
+			}
+		},
+
+		// For horizontal list views (e.g. Switch Pane in landscape):
+		//
+		//  - When a text field is focused, scroll the contentY to bring the field into view. (This
+		//    works even for horizontal-scrolling ListViews, as the Flickable just create the empty
+		//    space in the view as needed.) Do not shrink the view height as this would collapse
+		//    the area available to ListView delegates.
+		//
+		//  - When focus is lost, restore the contentY, otherwise the empty space remains and the
+		//    user also cannot scroll to remove it (as the list view only scrolls horizontally).
+		State {
+			name: "scrollHorizontally"
 
 			PropertyChanges {
 				target: root.focusedView
-				contentY: root._toViewContentY
-
-				// The user may scroll the flickable (thus changing the contentY) while the text
-				// field is focused, so do not revert the contentY (and thus change from the user's
-				// preferred contentY) when the VKB closes.
-				// The exception is when the VKB is shown for the cards view in landscape, where the
-				// contentY change from the auto-scroll behaviour actually displaces the entire view
-				// upwards (instead of just scrolling it), so when the VKB closes, revert to the
-				// view's original position.
-				restoreEntryValues: root.focusedView === Global.mainView.cardsLoader.cardViewFlickable
-						&& Theme.screenSize !== Theme.Portrait
+				contentY: root._initialViewContentY + Math.max(0, root.itemBottomDistanceToVKB(root.focusedItem))
 			}
 		}
 	]
 
 	transitions: [
 		Transition {
-			// Do not animate property changes for regular list views on Wasm, as the
-			// GradientListView's bottom gradient visually stutters because Theme.keyboardHeight
-			// does not change until the native VKB is fully opened.
-			// In the Switch Pane, it is fine to animate the changes as there is no bottom gradient.
-			// And on the GX, the changes can be animated because the height animates with the same
+			// Do not animate property changes on Wasm, as the Theme.keyboardHeight may change after
+			// the VKB opens, causing stutters in GradientListView's bottom gradient and height
+			// changes.
+			// On the GX, the changes can be animated because the height animates with the same
 			// duration (Theme.animation_inputPanel_slide_duration) as that of the Qt VKB slide
 			// in/out animation, as implemented in InputPanel.qml.
-			enabled: Global.isGxDevice
-					|| root.focusedView === Global.mainView.cardsLoader.cardViewFlickable
+			enabled: Global.isGxDevice && Global.animationEnabled
 
 			NumberAnimation {
 				properties: "contentY,height,displayMarginEnd"
@@ -125,11 +125,28 @@ Item {
 		}
 	]
 
+	// We cannot do this from PropertyChanges as we cannot control the timing of when contentY
+	// is changed, but it must always follow the height change, and not before.
+	Connections {
+		id: verticalViewScroller
+
+		target: root.focusedView
+		enabled: false
+
+		function onHeightChanged() {
+			const delta = root.itemBottomDistanceToVKB(root.focusedItem)
+			if (delta > 0) {
+				// Scroll the flickable upwards to show the item above the VKB.
+				root.focusedView.contentY = root._initialViewContentY + delta
+			}
+		}
+	}
+
 	readonly property Item activeInputItem: Theme.keyboardHeight > 0 ? Global.main.activeFocusItem : null
 	onActiveInputItemChanged: {
 		if (activeInputItem && activeInputItem === focusListener.textField) {
 			root.update(focusListener.textField, focusListener.viewToScroll)
-		} else if (root.state === "active") {
+		} else if (root.state !== "") {
 			root.deactivate()
 			if (focusListener.textField) {
 				// Forcibly remove focus from the old field. Otherwise, if you go into a sub-page

@@ -53,8 +53,6 @@ public:
 	bool splashScreenVisible() const;
 	void setSplashScreenVisible(bool v);
 
-	Q_INVOKABLE qreal itemBottomDistanceToVKB(QQuickItem *item) const;
-
 Q_SIGNALS:
 	void animationEnabledChanged();
 	void applicationVisibleChanged();
