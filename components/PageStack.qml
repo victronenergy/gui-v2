@@ -14,13 +14,26 @@ StackView {
 	readonly property Page currentPage: opened ? currentItem : null
 
 	readonly property int animationDuration: Global.mainView && Global.mainView.allowPageAnimations ? Theme.animation_page_slide_duration : 0
-	readonly property bool animating: busy || fakePushTransition.running || fakePopTransition.running
+	// True while navigation is in flight and the stack has not settled: a page is
+	// transitioning, or the page that was asked for is still being built. Anything
+	// waiting for a navigation to complete must wait for this, not just for the
+	// transitions, otherwise it acts on the page it was already on.
+	readonly property bool animating: _transitioning || !!_pendingBuild
+
+	// True only while a transition is running. Going back is allowed while a page is
+	// being built - that is how the user cancels it - so the back path tests this
+	// rather than 'animating'.
+	readonly property bool _transitioning: busy || fakePushTransition.running || fakePopTransition.running
 
 	// The file url of the top page on the stack. Undefined if depth=0 or not opened, or an empty
 	// string if the top page is from a component (and so no url is available).
 	property var topPageUrl: opened ? _topPageUrl : undefined
 
 	property var _pageUrls: []
+
+	// The incubator of the page currently being built, if any. Cleared when the page
+	// is no longer wanted, which is how a build that has been superseded is discarded.
+	property var _pendingBuild
 	property Page _poppedPage
 	property var _topPageUrl
 	property bool _fullyOpened
@@ -72,7 +85,29 @@ StackView {
 		}
 	}
 
-	function pushPage(obj, properties, operation) {
+	/*
+		Pushes a page onto the stack.
+
+		'obj' is either a page url or an already-constructed page object.
+
+		A page pushed by url is built asynchronously. Building one is slow: on a GX
+		device the median page takes over 100ms to instantiate and the worst over
+		700ms, and building it synchronously blocked the UI thread for that long, so
+		the whole application stopped responding until the page was ready. Building
+		it a piece at a time between frames instead leaves the application running
+		while the user waits, and the page is pushed once it is complete.
+
+		If the user goes back before the page is ready, the page is discarded rather
+		than appearing on top of wherever they went instead. Only one page is built
+		at a time; a push made while another page is being built is ignored, as it
+		was previously ignored because the UI was blocked.
+
+		Because the page does not exist yet when this returns, a page object is
+		returned only when one was pushed synchronously, i.e. when 'obj' is already a
+		page object. Pass 'readyCallback' to be given the page once it is on the
+		stack; it is not called if the page was discarded or could not be built.
+	*/
+	function pushPage(obj, properties, operation, readyCallback) {
 		if (root.animating) {
 			return null
 		}
@@ -82,42 +117,98 @@ StackView {
 			_popAndDestroyAllPages(StackView.Immediate)
 		}
 
-		let objectOrUrl = typeof(obj) !== "string" ? obj
-			: obj.indexOf("qrc:") === 0 ? obj
-			: ".." + obj
-		if (typeof(obj) === "string") {
-			// pre-construct the object to make sure there are no errors
-			// to avoid messing up the page stack state.
-			let checkComponent = Qt.createComponent(objectOrUrl)
-			if (checkComponent.status !== Component.Ready) {
-				console.warn("Aborted attempt to push page with errors: " + obj + ": " + checkComponent.errorString())
-				return null
-			}
-			objectOrUrl = checkComponent.createObject(null, properties)
-			root._pageUrls.push(obj)
-			root._topPageUrl = obj
-		} else {
+		if (typeof(obj) !== "string") {
 			root._pageUrls.push("")
 			root._topPageUrl = ""
+			const page = _pushItem(obj, properties, operation)
+			if (page && readyCallback) {
+				readyCallback(page)
+			}
+			return page
 		}
 
+		// Compile the page first, to make sure there are no errors, to avoid messing up the page
+		// stack state. Qt caches the compiled unit, so this is only slow the first time.
+		const component = Qt.createComponent(obj.indexOf("qrc:") === 0 ? obj : ".." + obj)
+		if (component.status !== Component.Ready) {
+			console.warn("Aborted attempt to push page with errors: " + obj + ": " + component.errorString())
+			return null
+		}
+
+		// incubateObject() returns null if given an undefined properties argument.
+		const incubator = component.incubateObject(null, properties || {}, Qt.Asynchronous)
+		if (!incubator) {
+			console.warn("Aborted attempt to push page: " + obj + ": could not start building it")
+			return null
+		}
+		root._pendingBuild = incubator
+
+		// Going back is not the only way to leave: while the stack is closed the user can
+		// also swipe to another main page, which does not touch the stack at all. So
+		// remember the page this was asked from, and only open the new page if that is
+		// still the page being shown.
+		const origin = Global.mainView ? Global.mainView.currentPage : null
+
+		const finish = function() {
+			const stillPending = root._pendingBuild === incubator
+			if (stillPending) {
+				root._pendingBuild = null
+			}
+			if (incubator.status !== Component.Ready) {
+				console.warn("Aborted attempt to push page with errors: " + obj)
+				return
+			}
+			if (!stillPending || (Global.mainView && Global.mainView.currentPage !== origin)) {
+				// The user left while this page was being built, so it is no longer wanted.
+				incubator.object.destroy()
+				return
+			}
+			root._pageUrls.push(obj)
+			root._topPageUrl = obj
+			const page = _pushItem(incubator.object, properties, operation)
+			if (page && readyCallback) {
+				readyCallback(page)
+			}
+		}
+
+		if (incubator.status === Component.Loading) {
+			incubator.onStatusChanged = function(status) {
+				if (status !== Component.Loading) {
+					finish()
+				}
+			}
+		} else {
+			// A page small enough to be built within the first slice is already done.
+			finish()
+		}
+		return null
+	}
+
+	function _pushItem(page, properties, operation) {
 		if (root.state !== "opened") {
 			// When the stack is closed or hidden, push the first page without any animation and
 			// slide the stack into view.
-			const newPage = root.push(objectOrUrl, properties, StackView.Immediate)
+			const newPage = root.push(page, properties, StackView.Immediate)
 			fakePushAnimation.duration = _animationDuration(operation)
 			root.state = "opened"
 			return newPage
-		} else {
-			// Otherwise, push the push onto the visible stack, possibly with an animation.
-			return root.push(objectOrUrl, properties, _adjustedStackOperation(operation))
 		}
+		// Otherwise, push the page onto the visible stack, possibly with an animation.
+		return root.push(page, properties, _adjustedStackOperation(operation))
+	}
+
+	// Abandons the page currently being built, if any. Its build still runs to
+	// completion - an incubator cannot be aborted from QML - but the finished page is
+	// discarded instead of being pushed.
+	function _abandonPendingBuild() {
+		root._pendingBuild = null
 	}
 
 	function popAllPages(operation) {
 		if (!_canPopTo(null)) {
 			return
 		}
+		_abandonPendingBuild()
 		fakePopAnimation.duration = _animationDuration(operation)
 		root.state = "closed"
 	}
@@ -131,6 +222,7 @@ StackView {
 		if (!_canPopTo(toPage)) {
 			return
 		}
+		_abandonPendingBuild()
 		root._pageUrls.pop()
 		root._topPageUrl = root._pageUrls[root._pageUrls.length-1]
 
@@ -146,7 +238,7 @@ StackView {
 	}
 
 	function show() {
-		if (animating || state === "opened" || depth === 0) {
+		if (_transitioning || state === "opened" || depth === 0) {
 			return false
 		}
 		fakePushAnimation.duration = _animationDuration(StackView.PushTransition)
@@ -155,15 +247,17 @@ StackView {
 	}
 
 	function hide() {
-		if (animating || state !== "opened") {
+		if (_transitioning || state !== "opened") {
 			return false
 		}
+		_abandonPendingBuild()
 		fakePopAnimation.duration = _animationDuration(StackView.PopTransition)
 		state = "hidden"
 		return true
 	}
 
 	function _popAndDestroyAllPages(operation) {
+		_abandonPendingBuild()
 		root._pageUrls = []
 		root._topPageUrl = undefined
 
@@ -185,7 +279,7 @@ StackView {
 	}
 
 	function _canPopTo(toPage) {
-		if (root.animating
+		if (root._transitioning
 				|| (!!root.currentItem && !!root.currentItem.tryPop && !root.currentItem.tryPop(toPage))) {
 			return false
 		}
