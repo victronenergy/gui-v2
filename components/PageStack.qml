@@ -100,6 +100,10 @@ StackView {
 		it a piece at a time between frames instead leaves the application running
 		while the user waits, and the page is pushed once it is complete.
 
+		Note that compiling the page is still synchronous, so the first time a given
+		page is opened the UI does still block, for up to ~460ms on a GX device.
+		Qt caches the compiled unit, so only the first open pays it.
+
 		If the user leaves before the page is ready, the page is discarded rather than
 		appearing on top of wherever they went instead. Only one page is being waited
 		for at a time; a push made while another page is being built is ignored, as it
