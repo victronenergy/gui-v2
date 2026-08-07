@@ -163,6 +163,31 @@ UiTestCase {
 	}
 
 	/*
+		A page opened from the ready callback of another page must open too.
+
+		MainView.goToConnectivityPage() is the one caller that needs the page it just
+		asked for: it opens the connectivity page and then tells that page to open one
+		of its own sub-pages. That second request is made from inside the completion of
+		the first, which is the awkward moment for a stack that only builds one page at
+		a time.
+	*/
+	function test_pageOpenedFromAReadyCallbackOpens() {
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.mainView.goToConnectivityPage("wifi"); return true },
+			message: "Go to the Wi-Fi page via the connectivity page",
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.animating
+					&& Global.pageManager.pageStack.topPageUrl === "/pages/settings/PageSettingsWifi.qml"
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { return Global.pageManager.pageStack.depth === 2 },
+			message: "Both the connectivity page and the Wi-Fi page are on the stack",
+		})
+		runSteps()
+	}
+
+	/*
 		Opening a second page while the first is still being opened must not leave
 		both on the stack, nor leave the wrong one on top.
 	*/
