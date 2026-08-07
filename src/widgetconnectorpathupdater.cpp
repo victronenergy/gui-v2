@@ -118,23 +118,33 @@ void WidgetConnectorPathUpdater::update()
 
 	electrons.removeIf([](const QPointer<QQuickItem> &e) { return e.isNull(); });
 
-	for (int i = 0; i < electrons.count(); i++) {
+	const int count = electrons.count();
+	if (count == 0) {
+		return;
+	}
+
+	// Can't use % operator, that gives remainder rather than a modulo that wraps.
+	const auto modulo = [](qreal dividend, qreal divisor)
+	{
+		return dividend - divisor * qFloor(dividend / divisor);
+	};
+
+	const bool startToEnd = animationMode == Enums::WidgetConnector_AnimationMode::WidgetConnector_AnimationMode_StartToEnd;
+	const qreal spacing = 1.0 / count;
+	const qreal baseProgress = qIsNaN(progress) ? 0.0 : progress;
+
+	for (int i = 0; i < count; i++) {
 		QQuickItem *electron = electrons.at(i);
-		// Can't use % operator, that gives remainder rather than a modulo that wraps.
-		auto modulo = [](qreal dividend, qreal divisor)
-		{
-			return dividend - divisor * qFloor(dividend / divisor);
-		};
 
 		// Evenly space out the progress of each electron
-		const qreal _progress = modulo((qIsNaN(progress) ? 0.0 : progress) - ((1.0 / electrons.count()) * i), 1.0);
+		const qreal _progress = modulo(baseProgress - (spacing * i), 1.0);
 
 		const PathPoint pp = sampleLut(_progress);
 
-		electron->setX(pp.position.x() - electron->width()/2);
-		electron->setY(pp.position.y() - electron->height()/2);
-
-		const bool startToEnd = animationMode == Enums::WidgetConnector_AnimationMode::WidgetConnector_AnimationMode_StartToEnd;
+		// Use setPosition() rather than setX() and setY(), so that the item emits a
+		// single geometry change instead of two.
+		electron->setPosition(QPointF(pp.position.x() - electron->width()/2,
+									  pp.position.y() - electron->height()/2));
 
 		// The rotation expects clock-wise angle
 		electron->setRotation(startToEnd ? 360.0 - pp.angle : 180 - pp.angle);
