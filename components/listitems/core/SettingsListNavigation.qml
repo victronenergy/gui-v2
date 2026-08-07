@@ -8,7 +8,7 @@ import QtQuick.Layouts
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
-ListNavigation {
+ListNavigationBase {
 	id: root
 
 	property string pageSource
