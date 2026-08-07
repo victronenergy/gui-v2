@@ -232,17 +232,12 @@ Item {
 				id: electronRepeater
 
 				delegate: Image {
-					opacity: 0.0
+					// The opacity is owned by pathUpdater, which starts the electron faded
+					// out and fades it in and out at the ends of the path.
 					source: animationEnabled ? "qrc:/images/electron.svg" : "qrc:/images/electron_arrow.svg"
 					visible: root.animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated
 					rotation: animationEnabled ? 0.0 : pathUpdater.angleForArrow(pathUpdater.progress, pathUpdater.startToEnd)
 
-					Behavior on opacity {
-						enabled: root._animated
-						OpacityAnimator {
-							duration: Theme.animation_overviewPage_connector_fade_duration
-						}
-					}
 					Component.onCompleted: pathUpdater.add(this)
 					Component.onDestruction: pathUpdater.remove(this)
 				}
@@ -265,13 +260,13 @@ Item {
 	WidgetConnectorPathUpdater {
 		id: pathUpdater
 
-		property real duration
 		property real normalizedElapsed: 1000 * root.frameAnimation.animationElapsed / pathUpdater.duration
 		readonly property real loopedElapsed: normalizedElapsed - Math.trunc(normalizedElapsed)
 		readonly property bool startToEnd: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
 		progress: root.animationEnabled ? (startToEnd ? loopedElapsed : 1.0 - loopedElapsed) : 0.515
 
 		animationMode: root.animationMode
+		fadeDuration: Theme.animation_overviewPage_connector_fade_duration
 
 		// Create a separate Path for the animation, instead of using the ShapePath,
 		// because WidgetConnectorPathUpdater does not work for ShapePath.

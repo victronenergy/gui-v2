@@ -170,3 +170,35 @@ python scripts/benchmark-overview.py compare -a baseline.csv -b feature.csv
 > **Tip:** Close other GPU-intensive applications during benchmarking to reduce
 > variance.  Run each capture 2–3 times and compare the most representative
 > results.
+
+## Benchmarking page construction
+
+`--ui-test benchmark/pages` measures how long pages take to construct, which is
+what determines the delay between pressing a settings entry or an Overview
+widget and the page appearing.  `PageStack.pushPage()` compiles and instantiates
+the whole page synchronously before the push transition starts, so this time is
+a hard freeze of the UI.
+
+```bash
+./venus-gui-v2 --mock --skip-splash --ui-test benchmark/pages
+```
+
+It emits three kinds of line on stderr:
+
+| Line | Meaning |
+|------|---------|
+| `PAGEBENCH <pass> <compile> <instantiate> <url>` | Per page, in ms. The `cold` pass includes QML compilation; the `warm` pass is instantiation only, since Qt caches the compiled unit. |
+| `PAGEBENCH-TOTAL <pass> <pages> <compile> <instantiate>` | Totals for the pass. |
+| `COMPBENCH <ms> <type>` | Average construction cost of one instance of a list item type. Settings pages are built almost entirely out of these, so this is where a page's instantiation time goes. |
+
+The page list is deliberately a small, representative sample — the Overview
+widget drilldowns plus the most-used settings pages — rather than every page in
+the app, so that it does not need updating whenever a page is added or removed.
+
+Reference numbers on a Cerbo GX (v3.80~39), for orientation:
+
+```
+warm instantiate      median 114 ms/page, worst ~740 ms
+cold compile          up to ~460 ms extra on the first open of a page
+one settings row      ListSetting 8 ms, ListNavigation 17 ms, ListSwitch 18 ms
+```

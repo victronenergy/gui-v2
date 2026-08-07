@@ -251,6 +251,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/core/ListItemBackground.qml
     components/listitems/core/ListItemLoader.qml
     components/listitems/core/ListNavigation.qml
+    components/listitems/core/ListNavigationBase.qml
     components/listitems/core/ListPortField.qml
     components/listitems/core/ListQuantityField.qml
     components/listitems/core/ListQuantityGroup.qml
