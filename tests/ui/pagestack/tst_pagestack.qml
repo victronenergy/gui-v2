@@ -163,6 +163,52 @@ UiTestCase {
 	}
 
 	/*
+		Leaving while a page is being opened must not make the stack ignore what the
+		user does next.
+
+		Abandoning the build has to happen when the user leaves, not when the build
+		eventually finishes. Otherwise the stack counts as busy for the rest of the
+		build and silently drops the next thing the user asks for on the page they
+		moved to, which on a GX device is most of a second.
+	*/
+	function test_leavingDuringAnOpenDoesNotBlockTheNextOne() {
+		const startIndex = Global.mainView.swipeView.currentIndex
+		// Separate steps, because these are separate things the user does: leaving and
+		// then pressing something on the page they moved to.
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.pageManager.pushPage(root.slowPageUrl); return true },
+			message: "Open %1".arg(root.slowPageUrl),
+		})
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.mainView.swipeView.setCurrentIndex(startIndex === 0 ? 1 : startIndex - 1); return true },
+			message: "Swipe to another main page while it is still being built",
+		})
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.pageManager.pushPage(root.otherPageUrl); return true },
+			message: "Open %1 from the page moved to".arg(root.otherPageUrl),
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.animating && Global.pageManager.pageStack.topPageUrl === root.otherPageUrl
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				return Global.pageManager.pageStack.depth === 1
+						&& Global.pageManager.pageStack.topPageUrl === root.otherPageUrl
+			},
+			message: "The second page opened, and the abandoned one did not",
+		})
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.pageManager.popPage(null, PageStack.Immediate); return true },
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> { return _stackIsClosed() } })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.mainView.swipeView.setCurrentIndex(startIndex); return true },
+			message: "Swipe back",
+		})
+		runSteps()
+	}
+
+	/*
 		A page opened from the ready callback of another page must open too.
 
 		MainView.goToConnectivityPage() is the one caller that needs the page it just
