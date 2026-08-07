@@ -26,7 +26,7 @@ UiTestCase {
 	// A page that is slow to build, so that a push of it is unlikely to complete
 	// within a single event loop iteration.
 	readonly property string slowPageUrl: "/pages/settings/devicelist/battery/PageBatterySettings.qml"
-	readonly property string otherPageUrl: "/pages/settings/PageSettingsDisplay.qml"
+	readonly property string otherPageUrl: "/pages/settings/PageSettingsDisplayAndAppearance.qml"
 
 	window: Global.main
 
