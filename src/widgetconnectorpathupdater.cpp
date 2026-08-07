@@ -35,6 +35,9 @@ void WidgetConnectorPathUpdater::setPath(QQuickPath *newPath)
 void WidgetConnectorPathUpdater::add(QQuickItem *electron)
 {
 	if (!electrons.contains(electron)) {
+		// Start faded out, so that the electron is not visible in its default
+		// position until update() first places it on the path.
+		electron->setOpacity(FadedOutOpacity);
 		electrons.append(electron);
 	} else {
 		qmlWarning(this) << "Trying to add an electron item that was already added";
@@ -102,6 +105,34 @@ WidgetConnectorPathUpdater::PathPoint WidgetConnectorPathUpdater::sampleLut(qrea
 	};
 }
 
+qreal WidgetConnectorPathUpdater::opacityAt(qreal normalizedProgress) const
+{
+	// The electron fades out once it passes fadeOutThreshold, and fades back in
+	// after it wraps around to the start of the path. Both fades take fadeDuration,
+	// which as a fraction of the progress of a whole lap is fadeDuration/duration.
+	//
+	// The fade is calculated here, rather than by stepping the opacity between two
+	// values and letting a QML Behavior animate between them, because that Behavior
+	// used an OpacityAnimator. An OpacityAnimator advances on the render thread on
+	// every single frame, so it dirtied the scene graph on the frames in between
+	// the animation ticks as well. On a GX device, where the ticks are throttled to
+	// 20fps, that alone accounted for a quarter of all frames.
+	const qreal fadeSpan = duration > 0 ? qBound(0.0, fadeDuration / duration, 1.0) : 0.0;
+	if (fadeSpan <= 0) {
+		return normalizedProgress > fadeOutThreshold ? FadedOutOpacity : FadedInOpacity;
+	}
+
+	qreal fadedIn = 1.0;
+	if (normalizedProgress > fadeOutThreshold) {
+		fadedIn = 1.0 - ((normalizedProgress - fadeOutThreshold) / fadeSpan);
+	} else if (normalizedProgress < fadeSpan) {
+		fadedIn = normalizedProgress / fadeSpan;
+	}
+	fadedIn = qBound(0.0, fadedIn, 1.0);
+
+	return FadedOutOpacity + (fadedIn * (FadedInOpacity - FadedOutOpacity));
+}
+
 void WidgetConnectorPathUpdater::update()
 {
 	if (!path) {
@@ -149,10 +180,7 @@ void WidgetConnectorPathUpdater::update()
 		// The rotation expects clock-wise angle
 		electron->setRotation(startToEnd ? 360.0 - pp.angle : 180 - pp.angle);
 
-		const qreal normalizedProgress = startToEnd ? _progress : (1.0 - _progress);
-
-		// Set opacity using setProperty() to make sure the behavior animation plays
-		electron->setProperty("opacity", normalizedProgress > fadeOutThreshold ? 0 : 1);
+		electron->setOpacity(opacityAt(startToEnd ? _progress : (1.0 - _progress)));
 	}
 }
 
