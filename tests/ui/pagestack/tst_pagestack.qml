@@ -30,6 +30,15 @@ UiTestCase {
 
 	window: Global.main
 
+	// Counts event loop turns, to tell whether the UI is still running.
+	property int _ticks
+
+	property Timer ticker: Timer {
+		interval: 16
+		repeat: true
+		onTriggered: root._ticks++
+	}
+
 	function initTestCase() {
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !!findItem(Global.mainView, { text: "Settings" }) } })
 		runSteps()
@@ -45,6 +54,38 @@ UiTestCase {
 	function _stackIsClosed() {
 		const stack = Global.pageManager.pageStack
 		return !Global.mainView.animating && !stack.opened && stack.depth === 0
+	}
+
+	/*
+		The UI must keep running while a page is being opened.
+
+		Building a page takes over 100ms for the median page and over 700ms for the
+		worst on a GX device. If that is done in one go on the UI thread, the whole
+		application stops for that long: no timer fires, no animation advances and no
+		press is handled. So a timer must still be firing while the page is opened.
+	*/
+	function test_uiKeepsRunningWhileAPageIsOpened() {
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				root._ticks = 0
+				root.ticker.start()
+				Global.pageManager.pushPage(root.slowPageUrl)
+				return true
+			},
+			message: "Open %1".arg(root.slowPageUrl),
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.animating && Global.pageManager.pageStack.topPageUrl === root.slowPageUrl
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				root.ticker.stop()
+				console.warn("Event loop turns while the page was opened: " + root._ticks)
+				return root._ticks > 0
+			},
+			message: "The UI kept running while the page was opened",
+		})
+		runSteps()
 	}
 
 	/*
@@ -87,6 +128,36 @@ UiTestCase {
 		addStep(UiTestStep.Invoke, {
 			callable: ()=> { return _stackIsClosed() },
 			message: "The page stack is still closed",
+		})
+		runSteps()
+	}
+
+	/*
+		Swiping to another main page while a page is being opened must not leave that
+		page behind either.
+
+		While the page stack is closed the user can leave without touching the stack
+		at all, just by swiping between the main pages, so the stack cannot rely on
+		being told.
+	*/
+	function test_pushSupersededBySwipingAwayDoesNotOpen() {
+		const startIndex = Global.mainView.swipeView.currentIndex
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				Global.pageManager.pushPage(root.slowPageUrl)
+				Global.mainView.swipeView.setCurrentIndex(startIndex === 0 ? 1 : startIndex - 1)
+				return true
+			},
+			message: "Open %1 and immediately swipe to another main page".arg(root.slowPageUrl),
+		})
+		addStep(UiTestStep.Wait, { timeout: 3000 })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { return _stackIsClosed() },
+			message: "The page stack is still closed",
+		})
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.mainView.swipeView.setCurrentIndex(startIndex); return true },
+			message: "Swipe back",
 		})
 		runSteps()
 	}

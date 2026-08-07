@@ -23,10 +23,8 @@ SwipeViewPage {
 	showTopGradient: Theme.screenSize === Theme.Portrait && !settingsListView.atYBeginning
 
 	function goToConnectivityPage(pageId) {
-		const page = Global.pageManager.pushPage(connectivityListItem.pageSource, connectivityListItem.pageProperties, PageStack.Immediate)
-		if (page) {
-			page.goToPage(pageId)
-		}
+		Global.pageManager.pushPage(connectivityListItem.pageSource, connectivityListItem.pageProperties,
+				PageStack.Immediate, (page) => page.goToPage(pageId))
 	}
 
 	GradientListView {

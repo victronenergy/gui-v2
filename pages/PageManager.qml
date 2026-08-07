@@ -39,8 +39,10 @@ QtObject {
 
 	property string _hiddenStackMainPage
 
-	function pushPage(obj, properties, operation = PageStack.PushTransition) {
-		return pageStack.pushPage(obj, properties, operation)
+	// A page pushed by url does not exist yet when this returns; see PageStack::pushPage().
+	// Pass 'readyCallback' if you need the page itself.
+	function pushPage(obj, properties, operation = PageStack.PushTransition, readyCallback = undefined) {
+		return pageStack.pushPage(obj, properties, operation, readyCallback)
 	}
 
 	function popPage(toPage, operation = PageStack.PopTransition) {
