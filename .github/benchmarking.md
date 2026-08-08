@@ -189,16 +189,33 @@ It emits three kinds of line on stderr:
 |------|---------|
 | `PAGEBENCH <pass> <compile> <instantiate> <url>` | Per page, in ms. The `cold` pass includes QML compilation; the `warm` pass is instantiation only, since Qt caches the compiled unit. |
 | `PAGEBENCH-TOTAL <pass> <pages> <compile> <instantiate>` | Totals for the pass. |
-| `COMPBENCH <ms> <type>` | Average construction cost of one instance of a list item type. Settings pages are built almost entirely out of these, so this is where a page's instantiation time goes. |
+| `COMPBENCH <ms> <type>` | Average construction cost of one instance of a list item type. Settings pages are built almost entirely out of these, so this is where a page's instantiation time goes. The types are declared as Components in the test, so this measures constructing one, not compiling it. |
 
 The page list is deliberately a small, representative sample — the Overview
 widget drilldowns plus the most-used settings pages — rather than every page in
 the app, so that it does not need updating whenever a page is added or removed.
 
-Reference numbers on a Cerbo GX (v3.80~39), for orientation:
+Reference numbers on a Cerbo GX (v3.80~57), median of 3 runs, for orientation:
 
 ```
-warm instantiate      median 114 ms/page, worst ~740 ms
-cold compile          up to ~460 ms extra on the first open of a page
-one settings row      ListSetting 8 ms, ListNavigation 17 ms, ListSwitch 18 ms
+warm instantiate      median 331 ms/page, worst 749 ms
+cold compile          21 ms/page median, 124 ms worst; 526 ms for the whole sample
+one settings row      ListSetting 4 ms, ListNavigation 12 ms, ListSwitch 14 ms
 ```
+
+The compile column is much noisier between runs than the instantiate column, so
+treat a single page's compile figure as indicative only.
+
+The cold compile figure is per page, and it is what blocks the UI on the first
+open of a given page: `PageStack.pushPage()` builds the page with an incubator,
+but compiles it with `Qt.createComponent()` first, which for a local url compiles
+synchronously. The pages of
+the sample together compile in 526 ms, but no single page cost more than 124 ms,
+and Qt caches the compiled unit so only the first open of each pays it.
+
+A page's instantiation cost tracks the number of items its model builds, not the
+number of rows the user can see on it: `PageAcIn` declares a single row of its
+own, but the `PageAcInModel` it loads declares about thirty items, several of
+them Repeaters over the AC phases, and the page takes 474 ms to instantiate.  So
+the two ways to make a page open faster are to build fewer items or to make an
+item cheaper.

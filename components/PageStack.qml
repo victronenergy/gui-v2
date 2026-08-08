@@ -94,15 +94,16 @@ StackView {
 		'obj' is either a page url or an already-constructed page object.
 
 		A page pushed by url is built asynchronously. Building one is slow: on a GX
-		device the median page takes over 100ms to instantiate and the worst over
+		device the median page takes over 300ms to instantiate and the worst over
 		700ms, and building it synchronously blocked the UI thread for that long, so
 		the whole application stopped responding until the page was ready. Building
 		it a piece at a time between frames instead leaves the application running
 		while the user waits, and the page is pushed once it is complete.
 
 		Note that compiling the page is still synchronous, so the first time a given
-		page is opened the UI does still block, for up to ~460ms on a GX device.
-		Qt caches the compiled unit, so only the first open pays it.
+		page is opened the UI does still block, for a median of 21ms and a worst
+		measured case of 124ms on a GX device. Qt caches the compiled unit, so only
+		the first open pays it.
 
 		If the user leaves before the page is ready, the page is discarded rather than
 		appearing on top of wherever they went instead. Only one page is being waited
