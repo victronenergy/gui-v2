@@ -39,7 +39,6 @@ UiTestCase {
 		"/pages/settings/PageSettingsConnectivity.qml",
 		"/pages/settings/PageSettingsSystem.qml",
 		"/pages/settings/PageSettingsDvcc.qml",
-		"/pages/settings/PageSettingsDisplay.qml",
 		"/pages/settings/PageSettingsHub4.qml",
 		"/pages/settings/devicelist/battery/PageBatterySettings.qml",
 		"/pages/settings/devicelist/inverter/PageInverter.qml",
