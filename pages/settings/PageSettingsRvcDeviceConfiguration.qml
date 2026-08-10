@@ -106,6 +106,13 @@ Page {
 				dataItem.uid: root.bindPrefix + "/TankInstance"
 				preferredVisible: dataItem.valid
 			}
+
+			ListSpinBox {
+				//% "Transfer switch instance"
+				text: qsTrId("settings_rvc_transfer_switch_instance")
+				dataItem.uid: root.bindPrefix + "/AtsInstance"
+				preferredVisible: dataItem.valid
+			}
 		}
 	}
 }
