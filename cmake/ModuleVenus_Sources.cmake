@@ -472,7 +472,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsRelayTempSensors.qml
     pages/settings/PageSettingsRootfsSelect.qml
     pages/settings/PageSettingsRvcDevice.qml
-    pages/settings/PageSettingsRvcDeviceConfiguration.qml
     pages/settings/PageSettingsRvcDevices.qml
     pages/settings/PageSettingsShelly.qml
     pages/settings/PageSettingsShellyDevice.qml
@@ -488,6 +487,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsWifi.qml
     pages/settings/PageTzInfo.qml
     pages/settings/PageVrmDeviceInstances.qml
+    pages/settings/RvcDeviceConfigurationModel.qml
     pages/settings/debug/HubData.qml
     pages/settings/debug/PageDebug.qml
     pages/settings/debug/PageDebugVeQItems.qml
