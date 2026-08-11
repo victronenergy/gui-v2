@@ -11,6 +11,10 @@ To use mock data in the browser, append `?mock` or `?mock=<config>` to the `inde
 
 If --mock is set but no configuration is specified, the 'maximal' configuration is used.
 
+Also, if --mock-conf is set, the --mock option is implied. For example, the above command could also just be:
+
+    ./venus-gui-v2 --mock-conf multi-rs  # the --mock arg is optional, since --mock-conf is set
+
 
 ## Available mock configurations
 

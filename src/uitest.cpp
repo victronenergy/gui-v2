@@ -24,21 +24,22 @@
 
 using namespace Victron::VenusOS;
 
-UiTest* UiTest::create(QQmlEngine *, QJSEngine *)
-{
-	static UiTest* object = new UiTest();
-	return object;
-}
-
-UiTest::UiTest(QObject *parent)
-	: QObject(parent)
+UiTestConfiguration::UiTestConfiguration()
 {
 }
 
-void UiTest::loadConfiguration(const QString &relativeTestDir)
+UiTestConfiguration::~UiTestConfiguration()
 {
-	const QString confName = relativeTestDir.mid(relativeTestDir.lastIndexOf('/') + 1);
-	const QString filePath = QString(":/tests/ui/%1/%2.json").arg(relativeTestDir).arg(confName);
+}
+
+void UiTestConfiguration::load(const QString &dirName)
+{
+	if (dirName.isEmpty()) {
+		qCFatal(venusGuiTest) << "Cannot load empty test configuration!";
+	}
+
+	const QString confName = dirName.mid(dirName.lastIndexOf('/') + 1);
+	const QString filePath = QString(":/tests/ui/%1/%2.json").arg(dirName).arg(confName);
 
 	QFile file(filePath);
 	if (!file.open(QFile::ReadOnly | QFile::Text)) {
@@ -52,10 +53,43 @@ void UiTest::loadConfiguration(const QString &relativeTestDir)
 				   << parseError.errorString() << "from file:" << filePath;
 	}
 
-	qCInfo(venusGuiTest) << "Loaded test configuration:" << filePath;
-
+	m_dirName = dirName;
 	m_settings = doc.object().toVariantMap();
-	m_relativeTestDir = relativeTestDir;
+
+	qCInfo(venusGuiTest) << "Loaded test configuration:" << filePath;
+}
+
+QString UiTestConfiguration::dirName() const
+{
+	return m_dirName;
+}
+
+const QVariantMap &UiTestConfiguration::settingsMap() const
+{
+	return m_settings;
+}
+
+bool UiTestConfiguration::hasMockConfiguration() const
+{
+	return m_settings.contains("Mock");
+}
+
+
+UiTest* UiTest::create(QQmlEngine *, QJSEngine *)
+{
+	static UiTest* object = new UiTest();
+	return object;
+}
+
+UiTest::UiTest(QObject *parent)
+	: QObject(parent)
+{
+}
+
+void UiTest::loadConfiguration(const UiTestConfiguration &conf)
+{
+	m_settings = conf.settingsMap();
+	m_relativeTestDir = conf.dirName();
 
 	// Read general configuration values.
 	const QVariant logLevel = settingValue("Logging");
@@ -89,7 +123,7 @@ void UiTest::loadConfiguration(const QString &relativeTestDir)
 	// Read 'Tests' configuration values.
 	m_testFileNames = m_settings.value("Tests").toStringList();
 	if (m_testFileNames.isEmpty()) {
-		qCFatal(venusGuiTest) << "UiTest: no tests have been defined in test conf:" << filePath;
+		qCFatal(venusGuiTest) << "UiTest: no tests have been defined in test:" << conf.dirName();
 	}
 
 	emit testCaseCountChanged();
