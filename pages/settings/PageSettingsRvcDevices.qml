@@ -23,8 +23,8 @@ Page {
 		delegate: ListNavigation {
 			text: {
 				let name = modelName.value || ""
-				if (vrmInstance.value) {
-					name += "[VRM# %1]".arg(vrmInstance.value)
+				if (vrmInstance.valid) {
+					name += " [VRM# %1]".arg(vrmInstance.value)
 				}
 				return name
 			}
