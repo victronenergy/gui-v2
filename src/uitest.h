@@ -12,6 +12,28 @@
 namespace Victron {
 namespace VenusOS {
 
+class UiTestConfiguration
+{
+public:
+	UiTestConfiguration();
+	~UiTestConfiguration();
+
+	// Loads a configuration from the specified directory. This is a relative dir under tests/ui,
+	// and it must contain a JSON file of the same name.
+	// E.g. if dirName="smoke/mock-maximal", then this attempts to load a JSON file from
+	// qrc:tests/ui/smoke/mock-maximal/mock-maximal.json.
+	void load(const QString &dirName);
+
+	bool isValid() const { return !dirName().isEmpty(); }
+	QString dirName() const;
+	const QVariantMap &settingsMap() const;
+	bool hasMockConfiguration() const;
+
+private:
+	QVariantMap m_settings;
+	QString m_dirName;
+};
+
 /*
 	Configures and executes the UI testing.
 
@@ -55,12 +77,7 @@ public:
 	};
 	Q_ENUM(Status);
 
-	// Loads a configuration from the specified directory. This is a relative dir under tests/ui,
-	// and it must contain a JSON file of the same name.
-	// E.g. if confDir="smoke/mock-maximal", then this attempts to load a JSON file from
-	// qrc:tests/ui/smoke/mock-maximal/mock-maximal.json.
-	void loadConfiguration(const QString &relativeTestDir);
-
+	void loadConfiguration(const UiTestConfiguration &conf);
 	Q_INVOKABLE void start();
 
 	Status status() const;

@@ -24,12 +24,12 @@ public:
 	bool timersActive() const;
 	void setTimersActive(bool active);
 
+	bool loadConfiguration(const QString &fileName);
+
 	Q_INVOKABLE void setValue(const QString &uid, const QVariant &value);
 	Q_INVOKABLE QVariant value(const QString &uid) const;
 	Q_INVOKABLE void removeValue(const QString &uid);
 	Q_INVOKABLE void removeServices(const QString &serviceType);
-
-	Q_INVOKABLE bool loadConfiguration(const QString &fileName);
 	Q_INVOKABLE void dumpValues();
 
 	static MockManager* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
