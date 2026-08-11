@@ -11,11 +11,15 @@ Page {
 
 	property string bindPrefix
 
-	readonly property bool isLocalSender: manufacturer.value === 358 && vrmInstance.dataItem.valid
+	// Declare ObjectModelMonitor before the model that it is monitoring. See QTBUG-123496
+	ObjectModelMonitor {
+		id: configurationModelMonitor
+		model: configurationModel
+	}
 
-	VeQuickItem {
-		id: manufacturer
-		uid: root.bindPrefix + "/Manufacturer"
+	RvcDeviceConfigurationModel {
+		id: configurationModel
+		bindPrefix: root.bindPrefix
 	}
 
 	GradientListView {
@@ -57,18 +61,30 @@ Page {
 
 				text: CommonWords.vrm_instance
 				dataItem.uid: root.bindPrefix + "/VrmInstance"
-				preferredVisible: root.isLocalSender
+				preferredVisible: dataItem.valid
 			}
 
 			ListNavigation {
 				//% "Configuration"
 				text: qsTrId("settings_rvc_configuration")
-				preferredVisible: root.isLocalSender && userHasWriteAccess
+				preferredVisible: configurationModelMonitor.hasVisibleItem && userHasWriteAccess
 
 				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsRvcDeviceConfiguration.qml",
-						{ bindPrefix: root.bindPrefix, title: text })
+					Global.pageManager.pushPage(emptySettingsComponent,
+						{ "title": text, "model": configurationModel })
 				}
+			}
+		}
+	}
+
+	Component {
+		id: emptySettingsComponent
+
+		Page {
+			property alias model: settingsListView.model
+
+			GradientListView {
+				id: settingsListView
 			}
 		}
 	}
