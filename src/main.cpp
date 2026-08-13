@@ -280,7 +280,10 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 
 	// Load a UI test configuration if --ui-test is specified.
 	Victron::VenusOS::UiTestConfiguration uiTestConf;
-	uiTestConf.load(parser.value(uiTest));
+	const QString uiTestName = parser.value(uiTest);
+	if (!uiTestName.isEmpty()) {
+		uiTestConf.load(uiTestName);
+	}
 
 	// Load the specified --mock-conf option.
 	QString mockConfName = parser.value(mockConfig);
