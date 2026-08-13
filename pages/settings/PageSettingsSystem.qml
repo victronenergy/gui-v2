@@ -53,15 +53,15 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SystemName"
 			}
 
-			SettingsListNavigation {
+			ListNavigation {
 				topInset: Theme.geometry_listItem_itemSeparator_height
 				//% "Opportunity Loads"
 				text: qsTrId("pagesettingssystem_opportunity_loads")
 				//% "Automate controllable devices to maximize solar self-consumption"
 				caption: qsTrId("pagesettingssystem_automate_controllable_devices")
 				secondaryText: opportunityLoadsMode.value ? CommonWords.enabled : CommonWords.disabled
-				pageSource: "/pages/settings/PageControllableLoads.qml"
 				preferredVisible: opportunityLoadsMode.valid
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageControllableLoads.qml", { title: text })
 
 				VeQuickItem {
 					id: opportunityLoadsMode
@@ -69,20 +69,20 @@ Page {
 				}
 			}
 
-			SettingsListNavigation {
+			ListNavigation {
 				topInset: Theme.geometry_listItem_itemSeparator_height
 				//% "AC System"
 				text: qsTrId("pagesettingssystem_ac_system")
 				//% "Inputs and Monitoring"
 				caption: qsTrId("pagesettingssystem_inputs_and_monitoring")
-				pageSource: "/pages/settings/PageSettingsAcSystem.qml"
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAcSystem.qml", { title: text })
 			}
 
-			SettingsListNavigation {
+			ListNavigation {
 				text: systemType.value === "Hub-4" ? systemType.value : CommonWords.ess
 				//% "Energy Storage System"
 				caption: qsTrId("pagesettingssystem_energy_storage_System")
-				pageSource: "/pages/settings/PageSettingsHub4.qml"
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsHub4.qml", { title: text })
 
 				VeQuickItem {
 					id: systemType
@@ -90,19 +90,19 @@ Page {
 				}
 			}
 
-			SettingsListNavigation {
+			ListNavigation {
 				text: CommonWords.batteries
 				//% "Batteries and Battery Management Systems (BMS)"
 				caption: qsTrId("pagesettingssystem_batteries_and_bms")
-				pageSource: "/pages/settings/PageSettingsBatteries.qml"
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBatteries.qml", { title: text })
 			}
 
-			SettingsListNavigation {
+			ListNavigation {
 				//% "Charge Control"
 				text: qsTrId("settings_system_charge_control")
 				//% "Distributed Voltage and Current Control (DVCC)"
 				caption: qsTrId("pagesettingssystem_distributed_voltage_and_current_control")
-				pageSource: "/pages/settings/PageSettingsDvcc.qml"
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDvcc.qml", { title: text })
 			}
 
 			ListSwitch {
