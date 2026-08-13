@@ -273,7 +273,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/core/SectionHeader.qml
     components/listitems/core/ListSettingBackground.qml
     components/listitems/core/SettingsListHeader.qml
-    components/listitems/core/SettingsListNavigation.qml
     components/listitems/core/SliderHandleHighlight.qml
 
     components/switches/GenericInputCardDelegateBackground.qml

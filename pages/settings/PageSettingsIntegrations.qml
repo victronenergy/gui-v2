@@ -286,7 +286,7 @@ Page {
 				preferredVisible: guiPluginsHeader.preferredVisible
 				Repeater {
 					model: GuiPluginModel { id: pluginModel }
-					delegate: SettingsListNavigation {
+					delegate: ListNavigation {
 						id: switchNavigationItem
 
 						required property string name
@@ -319,8 +319,14 @@ Page {
 							? qsTrId("pagesettingsintegrations_uiplugin_integrates_with_devicelist")
 							: ""
 						indicatorColor: switchNavigationItem.color
-						pageSource: switchNavigationItem.pluginSettingsPageIntegration?.url ?? ""
 						interactive: switchNavigationItem.pluginSettingsPageIntegration !== null
+
+						onClicked: {
+							const url = switchNavigationItem.pluginSettingsPageIntegration?.url ?? ""
+							if (url) {
+								Global.pageManager.pushPage(url, { title: text })
+							}
+						}
 					}
 				}
 			}

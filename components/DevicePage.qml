@@ -118,15 +118,15 @@ Page {
 						type: GuiPluginLoader.DeviceListSettingsPage
 						productId: root.device.productId > 0 ? Utils.toHexFormat(root.device.productId) : ""
 					}
-					delegate: SettingsListNavigation {
+					delegate: ListNavigation {
 						required property string pluginName
 						required property color pluginColor
 						required property string url
 						required property string title
 						text: qsTrId(title)
 						indicatorColor: pluginColor
-						pageSource: url
-						pageProperties: ({"device": root.device})
+
+						onClicked: Global.pageManager.pushPage(url, {"device": root.device})
 					}
 				}
 			}

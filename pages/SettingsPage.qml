@@ -9,6 +9,7 @@
  */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 SwipeViewPage {
@@ -23,9 +24,36 @@ SwipeViewPage {
 	showTopGradient: Theme.screenSize === Theme.Portrait && !settingsListView.atYBeginning
 
 	function goToConnectivityPage(pageId) {
-		const page = Global.pageManager.pushPage(connectivityListItem.pageSource, connectivityListItem.pageProperties, PageStack.Immediate)
+		const properties = { title: Qt.binding(function() { return connectivityListItem.text }) }
+		const page = Global.pageManager.pushPage(connectivityListItem.pageSource, properties, PageStack.Immediate)
 		if (page) {
 			page.goToPage(pageId)
+		}
+	}
+
+	component SettingsListNavigation : ListNavigation {
+		property string pageIconSource
+		property string pageSource
+
+		// Push the ListNavigation content to the right to make space for the icon. We wouldn't do
+		// this if SettingsListNavigation was a standalone reusable type, as the leftPadding could
+		// no longer be customised to shift the mainIcon, but this is an inline component and we
+		// know its leftPadding is never adjusted further.
+		leftPadding: leftInset + horizontalContentPadding + mainIcon.width + horizontalContentPadding
+		topPadding: topInset + Theme.geometry_settingsListNavigation_verticalPadding
+		bottomPadding: bottomInset + Theme.geometry_settingsListNavigation_verticalPadding
+		onClicked: Global.pageManager.pushPage(pageSource, { title: Qt.binding(function() { return text }) })
+
+		CP.ColorImage {
+			id: mainIcon
+
+			anchors {
+				verticalCenter: parent.contentItem.verticalCenter
+				left: parent.left
+				leftMargin: parent.leftInset + parent.horizontalContentPadding
+			}
+			source: parent.pageIconSource
+			color: Theme.color_font_primary
 		}
 	}
 
@@ -39,7 +67,7 @@ SwipeViewPage {
 				//% "All connected devices"
 				caption: qsTrId("settings_all_connected_devices")
 				pageSource: "/pages/settings/devicelist/DeviceListPage.qml"
-				iconSource: "qrc:/images/icon_devices_32.svg"
+				pageIconSource: "qrc:/images/icon_devices_32.svg"
 			}
 
 			SettingsListNavigation {
@@ -49,7 +77,7 @@ SwipeViewPage {
 				//% "Access control, Display, Firmware, Support"
 				caption: qsTrId("settings_access_control_display_firmware")
 				pageSource: "/pages/settings/PageSettingsGeneral.qml"
-				iconSource: "qrc:/images/icon_general_32.svg"
+				pageIconSource: "qrc:/images/icon_general_32.svg"
 			}
 
 			SettingsListNavigation {
@@ -60,7 +88,7 @@ SwipeViewPage {
 				//% "Ethernet, Wi-Fi, Bluetooth, VE.Can"
 				caption: qsTrId("settings_ethernet_wifi_bluetooth_vecan")
 				pageSource: "/pages/settings/PageSettingsConnectivity.qml"
-				iconSource: "qrc:/images/icon_connectivity_32.svg"
+				pageIconSource: "qrc:/images/icon_connectivity_32.svg"
 			}
 
 			SettingsListNavigation {
@@ -69,7 +97,7 @@ SwipeViewPage {
 				//% "Remote monitoring portal"
 				caption: qsTrId("settings_remote_monitoring_portal")
 				pageSource: "/pages/settings/PageSettingsLogger.qml"
-				iconSource: "qrc:/images/icon_vrm_32.svg"
+				pageIconSource: "qrc:/images/icon_vrm_32.svg"
 			}
 
 			SettingsListHeader {
@@ -83,7 +111,7 @@ SwipeViewPage {
 				//% "Relays, Sensors, PV Inverters, Modbus, Node-RED"
 				caption: qsTrId("settings_relays_sensors_tanks")
 				pageSource: "/pages/settings/PageSettingsIntegrations.qml"
-				iconSource: "qrc:/images/icon_integration_32.svg"
+				pageIconSource: "qrc:/images/icon_integration_32.svg"
 			}
 
 			SettingsListNavigation {
@@ -92,7 +120,7 @@ SwipeViewPage {
 				//% "AC/DC system, ESS, DVCC, Battery..."
 				caption: qsTrId("settings_acdcsystem_ess_dvcc_battery")
 				pageSource: "/pages/settings/PageSettingsSystem.qml"
-				iconSource: "qrc:/images/icon_system_32.svg"
+				pageIconSource: "qrc:/images/icon_system_32.svg"
 			}
 
 			SettingsListNavigation {
@@ -101,7 +129,7 @@ SwipeViewPage {
 				//% "Profiling tools, debug statistics, app version..."
 				caption: qsTrId("settings_profilingtools_debugstatistics_appversion")
 				pageSource: "/pages/settings/debug/PageDebug.qml"
-				iconSource: "qrc:/images/icon_debug_32.svg"
+				pageIconSource: "qrc:/images/icon_debug_32.svg"
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
 			}
 		}
