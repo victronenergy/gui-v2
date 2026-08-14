@@ -125,6 +125,20 @@ Page {
 				secondaryText: dataItem.valid ? Units.formatNumber(dataItem.value, rawUnit.displayDecimals) + (rawUnit.value || "") : "--"
 			}
 
+			ListButton {
+				//% "Auto-calibration"
+				text: qsTrId("devicelist_tanksetup_auto_calibration")
+				//% "Calibrate"
+				secondaryText: qsTrId("devicelist_tanksetup_calibrate")
+				preferredVisible: autoCalibrate.valid
+				onClicked: autoCalibrate.setValue(1)
+
+				VeQuickItem {
+					id: autoCalibrate
+					uid: root.bindPrefix + "/AutoCalibrate"
+				}
+			}
+
 			ListNavigation {
 				text: CommonWords.low_level_alarm
 				preferredVisible: low.seen
