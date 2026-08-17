@@ -301,17 +301,17 @@
       <translation>Na AC vstupu není detekován generátor</translation>
     </message>
     <message id="settings_page_run_time_and_service_accumulated_running_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="141"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="140"/>
       <source>Accumulated running time since last test run</source>
       <translation>Celková doba chodu od posledního testu</translation>
     </message>
     <message id="settings_page_run_time_and_service_time_to_next_test_run">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="117"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="116"/>
       <source>Time to next test run</source>
       <translation>Doba do dalšího testu</translation>
     </message>
     <message id="settings_page_run_time_and_service_running_now">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="134"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="133"/>
       <source>Running now</source>
       <translation>Nyní v chodu</translation>
     </message>
@@ -326,7 +326,7 @@
       <translation>Spustit generátor</translation>
     </message>
     <message id="settings_page_run_time_and_service_daily_run_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="70"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="69"/>
       <source>Daily run time</source>
       <translation>Doba chodu za den</translation>
     </message>
@@ -1276,22 +1276,22 @@
       <translation>Doba provozu a servis</translation>
     </message>
     <message id="page_settings_run_time_and_service_reset_daily_run_time_counters">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="90"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="89"/>
       <source>Reset daily run time counters</source>
       <translation>Resetovat čítače času denního chodu</translation>
     </message>
     <message id="page_settings_run_time_and_service_runtime_counter_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="100"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="99"/>
       <source>The daily runtime counter has been reset</source>
       <translation>Čítač denního chodu byl resetován</translation>
     </message>
     <message id="page_settings_run_time_and_service_runtime_counter_cant_reset_while_running">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="103"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="102"/>
       <source>It is not possible to modify the counters while the generator is running</source>
       <translation>Není možné upravit čítače, pokud je generátor v chodu</translation>
     </message>
     <message id="page_settings_generator_service_interval">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="160"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="159"/>
       <source>Generator service interval (hours)</source>
       <translation>Servisní interval generátoru (v hodinách)</translation>
     </message>
@@ -2611,12 +2611,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Session</source>
       <translation>Relace</translation>
     </message>
-    <message id="evcs_charging_time">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="57"/>
-      <source>Time</source>
-      <extracomment>Charging time for the EV charger</extracomment>
-      <translation type="unfinished">Čas</translation>
-    </message>
     <message id="common_words_locale_time">
       <location filename="../../components/CommonWords.qml" line="316"/>
       <source>Time</source>
@@ -2644,7 +2638,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Nižší sazby za elektřinu v době mimo špičku nebo pokud chcete mít jistotu, že bude váš elektromobil v určitou dobu plně nabitý a připravený k jízdě.</translation>
     </message>
     <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="144"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="165"/>
       <source>Enable charging</source>
       <translation>Povolit nabíjení</translation>
     </message>
@@ -6173,7 +6167,7 @@ Chcete pokračovat?</translation>
       <translation>Celková doba chodu</translation>
     </message>
     <message id="page_settings_run_time_and_service_generator_total_run_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="57"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="55"/>
       <source>Generator total run time (hours)</source>
       <translation>Celková doba chodu generátoru (hodiny)</translation>
     </message>
@@ -6538,7 +6532,7 @@ Chcete pokračovat?</translation>
       <translation>Zastavení na hladině v nádrži</translation>
     </message>
     <message id="settings_page_run_time_and_service_time_to_service">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="150"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
       <source>Runtime until service</source>
       <translation>Doba běhu do servisu</translation>
     </message>
@@ -11276,7 +11270,7 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <translation>Výstupy</translation>
     </message>
     <message id="radiobutton_list_password_validation_not_supported">
-      <location filename="../../components/RadioButtonListPage.qml" line="124"/>
+      <location filename="../../components/RadioButtonListPage.qml" line="123"/>
       <source>Password validation not supported!</source>
       <translation>Ověření hesla není podporováno!</translation>
     </message>
@@ -11915,6 +11909,53 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <location filename="../../pages/settings/devicelist/ac-in/PowerGuardProductionSettings.qml" line="68"/>
       <source>Production L3 current limit</source>
       <translation>Proudový limit výroby L3</translation>
+    </message>
+    <message id="evcs_charging_time">
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="57"/>
+      <source>Time</source>
+      <extracomment>Charging time for the EV charger</extracomment>
+      <translation type="unfinished">Čas</translation>
+    </message>
+    <message id="evcs_auto_mode_source">
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="138"/>
+      <source>Auto mode source</source>
+      <translation>Zdroj automatického režimu</translation>
+    </message>
+    <message id="gx_device">
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="141"/>
+      <source>GX device</source>
+      <translation>Zařízení GX</translation>
+    </message>
+    <message id="evcs_auto_mode_source_external_with_source">
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="145"/>
+      <source>External (%1)</source>
+      <extracomment>%1 = source string from /GxAutoMode/Source, or "GX device" when not available</extracomment>
+      <translation>Externí (%1)</translation>
+    </message>
+    <message id="evcs_auto_mode_source_evcs_internal">
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="147"/>
+      <source>Internal (EV Charging Station)</source>
+      <translation>Interní (nabíjecí stanice EV)</translation>
+    </message>
+    <message id="settings_ble_sensors_encryption_key_rejected">
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <source>The submitted encryption key is invalid.</source>
+      <translation>Odeslaný šifrovací klíč je neplatný.</translation>
+    </message>
+    <message id="settings_ble_sensors_encryption_key_placeholder">
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <source>Enter a 32-character key</source>
+      <translation>Zadejte 32znakový klíč</translation>
+    </message>
+    <message id="settings_ble_sensors_encryption_key_invalid">
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <source>The encryption key must be 32 hexadecimal characters.</source>
+      <translation>Šifrovací klíč musí mít 32 hexadecimálních znaků.</translation>
+    </message>
+    <message id="settings_ble_sensors_encryption_key">
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <source>Encryption key</source>
+      <translation>Šifrovací klíč</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
@@ -13642,61 +13683,61 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <translation>mockConfig</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="203"/>
+      <location filename="../../src/main.cpp" line="202"/>
       <source>Set to disable mock timers on startup</source>
       <translation>Nastaveno na vypnutí simulovaných časovačů při spuštění</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="208"/>
+      <location filename="../../src/main.cpp" line="207"/>
       <source>Node-RED URL</source>
       <translation>Adresa URL Node-RED</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="209"/>
+      <location filename="../../src/main.cpp" line="208"/>
       <source>url</source>
       <comment>Node-RED URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="214"/>
+      <location filename="../../src/main.cpp" line="213"/>
       <source>Signal K URL</source>
       <translation>Adresa URL Signal K</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="215"/>
+      <location filename="../../src/main.cpp" line="214"/>
       <source>url</source>
       <comment>Signal K URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="220"/>
+      <location filename="../../src/main.cpp" line="219"/>
       <source>Color scheme (dark, light, auto, default)</source>
       <translation>Barevné schéma (tmavé, světlé, automatické, výchozí)</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="221"/>
+      <location filename="../../src/main.cpp" line="220"/>
       <source>scheme</source>
       <comment>Color scheme value</comment>
       <translation>scheme</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="197"/>
+      <location filename="../../src/main.cpp" line="196"/>
       <source>Name of UI test</source>
       <translation>Název UI testu</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="198"/>
+      <location filename="../../src/main.cpp" line="197"/>
       <source>uiTest</source>
       <comment>UI test name</comment>
       <translation>UI test</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="226"/>
+      <location filename="../../src/main.cpp" line="225"/>
       <source>UI animations enabled (true, false)</source>
       <translation>Animace UI povoleny (true, false)</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="227"/>
+      <location filename="../../src/main.cpp" line="226"/>
       <source>enabled</source>
       <comment>Animation enabled value</comment>
       <translation>Aktivováno</translation>

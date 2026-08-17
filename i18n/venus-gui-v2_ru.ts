@@ -301,17 +301,17 @@
       <translation>Генератор не обнаружен на входе переменного тока</translation>
     </message>
     <message id="settings_page_run_time_and_service_accumulated_running_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="141"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="140"/>
       <source>Accumulated running time since last test run</source>
       <translation>Общее время работы от последнего тестового запуска</translation>
     </message>
     <message id="settings_page_run_time_and_service_time_to_next_test_run">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="117"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="116"/>
       <source>Time to next test run</source>
       <translation>Время до следующего тестового запуска</translation>
     </message>
     <message id="settings_page_run_time_and_service_running_now">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="134"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="133"/>
       <source>Running now</source>
       <translation>Сейчас работает</translation>
     </message>
@@ -326,7 +326,7 @@
       <translation>Запуск генератора</translation>
     </message>
     <message id="settings_page_run_time_and_service_daily_run_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="70"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="69"/>
       <source>Daily run time</source>
       <translation>Ежедневное время работы</translation>
     </message>
@@ -1276,22 +1276,22 @@
       <translation>Время работы и обслуживание</translation>
     </message>
     <message id="page_settings_run_time_and_service_reset_daily_run_time_counters">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="90"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="89"/>
       <source>Reset daily run time counters</source>
       <translation>Сброс счетчиков ежедневной работы</translation>
     </message>
     <message id="page_settings_run_time_and_service_runtime_counter_reset">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="100"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="99"/>
       <source>The daily runtime counter has been reset</source>
       <translation>Счетчик ежедневной работы был обнулен</translation>
     </message>
     <message id="page_settings_run_time_and_service_runtime_counter_cant_reset_while_running">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="103"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="102"/>
       <source>It is not possible to modify the counters while the generator is running</source>
       <translation>Нет возможности изменить счетчики во время работы генератора</translation>
     </message>
     <message id="page_settings_generator_service_interval">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="160"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="159"/>
       <source>Generator service interval (hours)</source>
       <translation>Интервал обслуживания генератора (часы)</translation>
     </message>
@@ -2611,12 +2611,6 @@ Use unless prohibited by the utility provider.</source>
       <source>Session</source>
       <translation>Сессия</translation>
     </message>
-    <message id="evcs_charging_time">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="57"/>
-      <source>Time</source>
-      <extracomment>Charging time for the EV charger</extracomment>
-      <translation type="unfinished">Время</translation>
-    </message>
     <message id="common_words_locale_time">
       <location filename="../../components/CommonWords.qml" line="316"/>
       <source>Time</source>
@@ -2644,7 +2638,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>Более низкие тарифы на электроэнергию в непиковые часы или если вы хотите, чтобы ваш EV был полностью заряжен и готов к работе в определенное время.</translation>
     </message>
     <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="144"/>
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="165"/>
       <source>Enable charging</source>
       <translation>Начать зарядку</translation>
     </message>
@@ -6173,7 +6167,7 @@ Do you want to continue?</source>
       <translation>Общее время работы</translation>
     </message>
     <message id="page_settings_run_time_and_service_generator_total_run_time">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="57"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="55"/>
       <source>Generator total run time (hours)</source>
       <translation>Общее время работы генератора (часы)</translation>
     </message>
@@ -6538,7 +6532,7 @@ Do you want to continue?</source>
       <translation>Остановка на уровне бака</translation>
     </message>
     <message id="settings_page_run_time_and_service_time_to_service">
-      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="150"/>
+      <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="149"/>
       <source>Runtime until service</source>
       <translation>Срок действия до обслуживания</translation>
     </message>
@@ -11276,7 +11270,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>Выходы</translation>
     </message>
     <message id="radiobutton_list_password_validation_not_supported">
-      <location filename="../../components/RadioButtonListPage.qml" line="124"/>
+      <location filename="../../components/RadioButtonListPage.qml" line="123"/>
       <source>Password validation not supported!</source>
       <translation>Проверка пароля не поддерживается!</translation>
     </message>
@@ -11915,6 +11909,53 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <location filename="../../pages/settings/devicelist/ac-in/PowerGuardProductionSettings.qml" line="68"/>
       <source>Production L3 current limit</source>
       <translation>Ограничение тока генерации L3</translation>
+    </message>
+    <message id="evcs_charging_time">
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="57"/>
+      <source>Time</source>
+      <extracomment>Charging time for the EV charger</extracomment>
+      <translation type="unfinished">Время</translation>
+    </message>
+    <message id="evcs_auto_mode_source">
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="138"/>
+      <source>Auto mode source</source>
+      <translation>Источник автоматического режима</translation>
+    </message>
+    <message id="gx_device">
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="141"/>
+      <source>GX device</source>
+      <translation>Устройство GX</translation>
+    </message>
+    <message id="evcs_auto_mode_source_external_with_source">
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="145"/>
+      <source>External (%1)</source>
+      <extracomment>%1 = source string from /GxAutoMode/Source, or "GX device" when not available</extracomment>
+      <translation>Внешний (%1)</translation>
+    </message>
+    <message id="evcs_auto_mode_source_evcs_internal">
+      <location filename="../../pages/evcs/EvChargerPage.qml" line="147"/>
+      <source>Internal (EV Charging Station)</source>
+      <translation>Внутренний (Зарядная станция электромобилей)</translation>
+    </message>
+    <message id="settings_ble_sensors_encryption_key_rejected">
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <source>The submitted encryption key is invalid.</source>
+      <translation>Переданный ключ шифрования недействителен.</translation>
+    </message>
+    <message id="settings_ble_sensors_encryption_key_placeholder">
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <source>Enter a 32-character key</source>
+      <translation>Введите 32-значный ключ</translation>
+    </message>
+    <message id="settings_ble_sensors_encryption_key_invalid">
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <source>The encryption key must be 32 hexadecimal characters.</source>
+      <translation>Ключ шифрования должен состоять из 32 шестнадцатеричных символов.</translation>
+    </message>
+    <message id="settings_ble_sensors_encryption_key">
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <source>Encryption key</source>
+      <translation>Ключ шифрования</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
@@ -13642,61 +13683,61 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>mockConfig</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="203"/>
+      <location filename="../../src/main.cpp" line="202"/>
       <source>Set to disable mock timers on startup</source>
       <translation>Установите, чтобы отключить макетные таймеры при запуске</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="208"/>
+      <location filename="../../src/main.cpp" line="207"/>
       <source>Node-RED URL</source>
       <translation>URL-адрес Node-RED</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="209"/>
+      <location filename="../../src/main.cpp" line="208"/>
       <source>url</source>
       <comment>Node-RED URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="214"/>
+      <location filename="../../src/main.cpp" line="213"/>
       <source>Signal K URL</source>
       <translation>URL-адрес Signal K</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="215"/>
+      <location filename="../../src/main.cpp" line="214"/>
       <source>url</source>
       <comment>Signal K URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="220"/>
+      <location filename="../../src/main.cpp" line="219"/>
       <source>Color scheme (dark, light, auto, default)</source>
       <translation>Цветовая схема (темная, светлая, авто, по умолчанию)</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="221"/>
+      <location filename="../../src/main.cpp" line="220"/>
       <source>scheme</source>
       <comment>Color scheme value</comment>
       <translation>схема</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="197"/>
+      <location filename="../../src/main.cpp" line="196"/>
       <source>Name of UI test</source>
       <translation>Название UI-теста</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="198"/>
+      <location filename="../../src/main.cpp" line="197"/>
       <source>uiTest</source>
       <comment>UI test name</comment>
       <translation>UI-тест</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="226"/>
+      <location filename="../../src/main.cpp" line="225"/>
       <source>UI animations enabled (true, false)</source>
       <translation>Анимация интерфейса включена (true, false)</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="227"/>
+      <location filename="../../src/main.cpp" line="226"/>
       <source>enabled</source>
       <comment>Animation enabled value</comment>
       <translation>Включено</translation>
