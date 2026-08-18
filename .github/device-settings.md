@@ -165,44 +165,54 @@ These demonstrate the pattern: combine a core list item type with domain-specifi
 
 ## Typical settings page structure
 
-The typical settings page is a Page which contains a GradientListView whose item model is a VisibleItemModel (which ensures that settings are only visible if the user meets the required access level), which itself contains a variety of controls to display or set values in the backend.
+The typical settings page is a Page which contains a GradientListView whose item model is a `DelegateComponentModel`. Each entry is a `DelegateComponent` which wraps a single list item in a component scope — delegates are only instantiated on demand when they scroll into the viewport, significantly improving page load performance. The `preferredVisible` property on each `DelegateComponent` controls whether the entry appears in the model at all (e.g. for access-level gating or conditional items).
 
 ```qml
 Page {
     title: "Device Settings"
 
     GradientListView {
-        model: VisibleItemModel {
-            ListNavigation {
-                text: "General"
-                onClicked: Global.pageManager.pushPage("/path/to/GeneralSettingsPage.qml")
+        model: DelegateComponentModel {
+            DelegateComponent {
+                ListNavigation {
+                    text: "General"
+                    onClicked: Global.pageManager.pushPage("/path/to/GeneralSettingsPage.qml")
+                }
             }
 
-            ListSwitch {
-                text: "Enable monitoring"
-                dataItem.uid: device.serviceUid + "/Settings/MonitoringEnabled"
+            DelegateComponent {
+                ListSwitch {
+                    text: "Enable monitoring"
+                    dataItem.uid: device.serviceUid + "/Settings/MonitoringEnabled"
+                }
             }
 
-            ListSpinBox {
-                text: "Update interval"
-                suffix: "s"
-                dataItem.uid: device.serviceUid + "/Settings/UpdateInterval"
+            DelegateComponent {
+                ListSpinBox {
+                    text: "Update interval"
+                    suffix: "s"
+                    dataItem.uid: device.serviceUid + "/Settings/UpdateInterval"
+                }
             }
 
-            ListRadioButtonGroup {
-                text: "Mode"
-                dataItem.uid: device.serviceUid + "/Mode"
-                optionModel: [
-                    { display: CommonWords.off, value: 0 },
-                    { display: CommonWords.on, value: 1 },
-                ]
-                writeAccessLevel: VenusOS.User_AccessType_Installer
+            DelegateComponent {
+                ListRadioButtonGroup {
+                    text: "Mode"
+                    dataItem.uid: device.serviceUid + "/Mode"
+                    optionModel: [
+                        { display: CommonWords.off, value: 0 },
+                        { display: CommonWords.on, value: 1 },
+                    ]
+                    writeAccessLevel: VenusOS.User_AccessType_Installer
+                }
             }
 
-            ListText {
-                text: "Serial number"
-                dataItem.uid: device.serviceUid + "/Serial"
-                showAccessLevel: VenusOS.User_AccessType_SuperUser
+            DelegateComponent {
+                ListText {
+                    text: "Serial number"
+                    dataItem.uid: device.serviceUid + "/Serial"
+                    showAccessLevel: VenusOS.User_AccessType_SuperUser
+                }
             }
         }
     }
@@ -215,7 +225,7 @@ Page {
 - Bind `dataItem.uid` to connect UI to backend data — avoid manual value management where possible
 - Set appropriate `showAccessLevel` and `writeAccessLevel` for each item
 - Check `dataItem.valid` / use the default `interactive` binding to handle disconnected states gracefully
-- Use `GradientListView` (a `BaseListView` subclass) with a `VisibleItemModel` for settings page content
+- Use `GradientListView` (a `BaseListView` subclass) with a `DelegateComponentModel` for settings page content — wrap each item in a `DelegateComponent`
 - Respect the interaction rules: never disable the item itself, always call `checkWriteAccessLevel()` before writes
 - Items that only display data (no user writes) should use `ListText` or `ListQuantity`
 - Items that navigate to sub-pages should use `ListNavigation` — it does not require write access to click

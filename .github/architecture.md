@@ -327,10 +327,16 @@ Page {
     title: "My Settings"
 
     GradientListView {
-        model: VisibleItemModel {
-            ListNavigation { text: "Sub-page"; onClicked: Global.pageManager.pushPage(subPageComponent) }
-            ListSwitch { text: "Enable feature"; dataItem.uid: settingsUid + "/Path/To/Setting" }
-            ListSpinBox { text: "Max value"; dataItem.uid: settingsUid + "/Path/To/Value" }
+        model: DelegateComponentModel {
+            DelegateComponent {
+                ListNavigation { text: "Sub-page"; onClicked: Global.pageManager.pushPage(subPageComponent) }
+            }
+            DelegateComponent {
+                ListSwitch { text: "Enable feature"; dataItem.uid: settingsUid + "/Path/To/Setting" }
+            }
+            DelegateComponent {
+                ListSpinBox { text: "Max value"; dataItem.uid: settingsUid + "/Path/To/Value" }
+            }
         }
     }
 }
