@@ -18,6 +18,20 @@ WidgetConnectorPathUpdater::~WidgetConnectorPathUpdater()
 {
 }
 
+QQuickPath *WidgetConnectorPathUpdater::getPath() const
+{
+	return path;
+}
+
+void WidgetConnectorPathUpdater::setPath(QQuickPath *newPath)
+{
+	if (path != newPath) {
+		path = newPath;
+		invalidateLut();
+		emit pathChanged();
+	}
+}
+
 void WidgetConnectorPathUpdater::add(QQuickItem *electron)
 {
 	if (!electrons.contains(electron)) {
@@ -36,12 +50,73 @@ void WidgetConnectorPathUpdater::remove(QQuickItem *electron)
 	}
 }
 
-void WidgetConnectorPathUpdater::update() const {
+void WidgetConnectorPathUpdater::invalidateLut()
+{
+	m_lutValid = false;
+}
 
+void WidgetConnectorPathUpdater::rebuildLut()
+{
+	if (!path) {
+		m_lutValid = false;
+		return;
+	}
+
+	m_lut.resize(LUT_SIZE + 1);
+	for (int i = 0; i <= LUT_SIZE; ++i) {
+		const qreal p = static_cast<qreal>(i) / LUT_SIZE;
+		qreal angle = 0;
+		const QPointF pos = path->sequentialPointAt(p, &angle);
+		m_lut[i] = { pos, angle };
+	}
+	m_lutValid = true;
+}
+
+WidgetConnectorPathUpdater::PathPoint WidgetConnectorPathUpdater::sampleLut(qreal p) const
+{
+	const qreal scaledProgress = qBound(0.0, p, 1.0) * LUT_SIZE;
+	const int idx = static_cast<int>(scaledProgress);
+	const qreal frac = scaledProgress - idx;
+
+	if (idx >= LUT_SIZE) {
+		return m_lut[LUT_SIZE];
+	}
+
+	if (frac < 1e-6) {
+		return m_lut[idx];
+	}
+
+	const PathPoint &a = m_lut[idx];
+	const PathPoint &b = m_lut[idx + 1];
+	const qreal oneMinusFrac = 1.0 - frac;
+
+	// Use shortest-arc interpolation for angles to handle the 360/0 wrap correctly
+	qreal angleDiff = b.angle - a.angle;
+	if (angleDiff > 180.0) angleDiff -= 360.0;
+	else if (angleDiff < -180.0) angleDiff += 360.0;
+
+	return {
+		QPointF(a.position.x() * oneMinusFrac + b.position.x() * frac,
+				a.position.y() * oneMinusFrac + b.position.y() * frac),
+		a.angle + frac * angleDiff
+	};
+}
+
+void WidgetConnectorPathUpdater::update()
+{
 	if (!path) {
 		qmlDebug(this) << "Cannot animate electrons without a specified path";
 		return;
 	}
+
+	if (!m_lutValid) {
+		rebuildLut();
+		if (!m_lutValid) {
+			return;
+		}
+	}
+
+	electrons.removeIf([](const QPointer<QQuickItem> &e) { return e.isNull(); });
 
 	for (int i = 0; i < electrons.count(); i++) {
 		QQuickItem *electron = electrons.at(i);
@@ -54,16 +129,15 @@ void WidgetConnectorPathUpdater::update() const {
 		// Evenly space out the progress of each electron
 		const qreal _progress = modulo((qIsNaN(progress) ? 0.0 : progress) - ((1.0 / electrons.count()) * i), 1.0);
 
-		qreal angle = 0;
-		const QPointF position = path->sequentialPointAt(_progress, &angle);
+		const PathPoint pp = sampleLut(_progress);
 
-		electron->setX(position.x() - electron->width()/2);
-		electron->setY(position.y() - electron->height()/2);
+		electron->setX(pp.position.x() - electron->width()/2);
+		electron->setY(pp.position.y() - electron->height()/2);
 
 		const bool startToEnd = animationMode == Enums::WidgetConnector_AnimationMode::WidgetConnector_AnimationMode_StartToEnd;
 
 		// The rotation expects clock-wise angle
-		electron->setRotation(startToEnd ? 360.0 - angle : 180 - angle);
+		electron->setRotation(startToEnd ? 360.0 - pp.angle : 180 - pp.angle);
 
 		const qreal normalizedProgress = startToEnd ? _progress : (1.0 - _progress);
 
@@ -79,7 +153,13 @@ qreal WidgetConnectorPathUpdater::angleForArrow(qreal progress, bool startToEnd)
 		return qQNaN();
 	}
 
-	qreal angle = 0;
-	const QPointF position = path->sequentialPointAt(progress, &angle);
-	return startToEnd ? 360.0 - angle : 180 - angle;
+	if (!m_lutValid) {
+		rebuildLut();
+		if (!m_lutValid) {
+			return qQNaN();
+		}
+	}
+
+	const PathPoint pp = sampleLut(progress);
+	return startToEnd ? 360.0 - pp.angle : 180 - pp.angle;
 }
