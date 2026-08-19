@@ -15,6 +15,7 @@
 
 #include "uitestcase.h"
 #include "uitest.h"
+#include "uiconfig.h"
 #include "logging.h"
 
 using namespace Victron::VenusOS;
@@ -315,24 +316,7 @@ bool UiTestCase::mouseClick(QQuickItem *item)
 		return false;
 	}
 
-	QPoint localPos(item->width() / 2, item->height() / 2);
-	QMouseEvent *pressEvent = new QMouseEvent(
-				QEvent::MouseButtonPress,
-				localPos,
-				item->mapToGlobal(localPos),
-				Qt::LeftButton,
-				Qt::LeftButton,
-				Qt::NoModifier);
-	QMouseEvent *releaseEvent = new QMouseEvent(
-				QEvent::MouseButtonRelease,
-				localPos,
-				item->mapToGlobal(localPos),
-				Qt::LeftButton,
-				Qt::LeftButton,
-				Qt::NoModifier);
-
-	QCoreApplication::postEvent(item, pressEvent);
-	QCoreApplication::postEvent(item, releaseEvent);
+	UiConfig::create()->mouseClick(item);
 	return true;
 }
 

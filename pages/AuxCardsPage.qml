@@ -9,6 +9,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	readonly property alias flickableView: cardsView
+
 	implicitHeight: Theme.geometry_controlCard_height
 
 	//: Name of the Switch Controls feature

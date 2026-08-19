@@ -18,5 +18,9 @@ BaseListView {
 
 	ViewGradient {
 		anchors.bottom: root.bottom
+
+		// In case the VKB area is partially transparent (e.g. on iOS with Wasm), hide the gradient
+		// when the VKB is visible, to avoid showing a floating gradient above the VKB.
+		visible: !Theme.virtualKeyboardOpened
 	}
 }

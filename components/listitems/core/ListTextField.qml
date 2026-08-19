@@ -17,7 +17,7 @@ ListSetting {
 	property int echoMode: TextInput.Normal
 	property int maximumLength: 32767 // as per TextInput default
 	property string suffix
-	property var flickable: root.ListView ? root.ListView.view : null
+	property Flickable flickable: root.ListView ? root.ListView.view : null
 
 	// These are functions that can optionally be overridden.
 	// - validateInput: validates the TextField input, and returns the object provided by

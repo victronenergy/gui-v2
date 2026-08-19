@@ -61,7 +61,7 @@ QtObject {
 	property bool backendReadyLatched
 	onBackendReadyChanged: if (backendReady) backendReadyLatched = true
 
-	signal aboutToFocusTextField(var textField, var textFieldContainer, var viewToScroll)
+	signal aboutToFocusTextField(textField : Item, viewToScroll : Flickable)
 
 	function showToastNotification(type, text, autoCloseInterval = 0) {
 		return ToastModel.add(type, text, autoCloseInterval)
