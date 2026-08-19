@@ -9,8 +9,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property bool _isGrid: acInput1.currentIndex === 1 || acInput2.currentIndex === 1
-	property bool _isShore: acInput1.currentIndex === 3 || acInput2.currentIndex === 3
+	property bool _isGrid: acInput1DC.currentValue === 1 || acInput2DC.currentValue === 1
+	property bool _isShore: acInput1DC.currentValue === 3 || acInput2DC.currentValue === 3
 
 	property var _acInputsModel: [
 		{ display: CommonWords.not_available, value: 0 },
@@ -26,7 +26,6 @@ Page {
 
 		uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem"
 	}
-
 	VeQuickItem {
 		id: hasAcInLoadsItem
 
@@ -34,71 +33,85 @@ Page {
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListRadioButtonGroup {
-				id: acInput1
+		model: DelegateComponentModel {
+			DelegateComponent {
+				id: acInput1DC
+				dataItem: VeQuickItem { uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput1" }
+				property var currentValue: dataItem.valid ? dataItem.value : undefined
+				ListRadioButtonGroup {
+					id: acInput1
 
-				//% "AC input 1"
-				text: qsTrId("settings_system_ac_input_1")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput1"
-				optionModel: root._acInputsModel
-			}
-
-			ListRadioButtonGroup {
-				id: acInput2
-
-				//% "AC input 2"
-				text: qsTrId("settings_system_ac_input_2")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput2"
-				optionModel: root._acInputsModel
-			}
-
-			ListRadioButtonGroup {
-				//% "Position of AC loads"
-				text: qsTrId("settings_system_ac_position")
-				currentIndex: (hasAcInLoadsItem.value === 1 ? 1 : 0) + (
-					hasAcOutLoadsItem.value === 1 ? 2 : 0) - 1
-				optionModel: [
-					{
-						//% "AC input only"
-						display: qsTrId("settings_system_ac_input_only"),
-						//% "The AC output of the Inverter/Charger is not used."
-						caption: qsTrId("settings_system_ac_input_only_description"),
-						readOnly: !Global.system.hasEss
-					},
-					{
-						//% "AC output only"
-						display: qsTrId("settings_system_ac_output_only"),
-						//% "All AC loads are on the output of the Inverter/Charger."
-						caption: qsTrId("settings_system_ac_output_only_description"),
-					},
-					{
-						//% "AC input & output"
-						display: qsTrId("settings_system_ac_input_and_output"),
-						//% "The system will automatically display loads on the input of the Inverter/Charger if a grid meter is present. Loads on the output are always displayed."
-						caption: qsTrId("settings_system_ac_input_and_output_description"),
-					},
-				]
-
-				onOptionClicked: function(index) {
-					index += 1
-					hasAcInLoadsItem.setValue(index & 1)
-					hasAcOutLoadsItem.setValue((index & 2) >> 1)
+					//% "AC input 1"
+					text: qsTrId("settings_system_ac_input_1")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput1"
+					optionModel: root._acInputsModel
 				}
 			}
 
-			ListRadioButtonGroup {
-				text: root._isGrid
-					  //% "Monitor for grid failure"
-					? qsTrId("settings_system_monitor_for_grid_failure")
-					  //% "Monitor for shore disconnect"
-					: qsTrId("settings_system_monitor_for_shore_disconnect")
+			DelegateComponent {
+				id: acInput2DC
+				dataItem: VeQuickItem { uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput2" }
+				property var currentValue: dataItem.valid ? dataItem.value : undefined
+				ListRadioButtonGroup {
+					id: acInput2
+
+					//% "AC input 2"
+					text: qsTrId("settings_system_ac_input_2")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput2"
+					optionModel: root._acInputsModel
+				}
+			}
+
+			DelegateComponent {
+				ListRadioButtonGroup {
+					//% "Position of AC loads"
+					text: qsTrId("settings_system_ac_position")
+					currentIndex: (hasAcInLoadsItem.value === 1 ? 1 : 0) + (
+						hasAcOutLoadsItem.value === 1 ? 2 : 0) - 1
+					optionModel: [
+						{
+							//% "AC input only"
+							display: qsTrId("settings_system_ac_input_only"),
+							//% "The AC output of the Inverter/Charger is not used."
+							caption: qsTrId("settings_system_ac_input_only_description"),
+							readOnly: !Global.system.hasEss
+						},
+						{
+							//% "AC output only"
+							display: qsTrId("settings_system_ac_output_only"),
+							//% "All AC loads are on the output of the Inverter/Charger."
+							caption: qsTrId("settings_system_ac_output_only_description"),
+						},
+						{
+							//% "AC input & output"
+							display: qsTrId("settings_system_ac_input_and_output"),
+							//% "The system will automatically display loads on the input of the Inverter/Charger if a grid meter is present. Loads on the output are always displayed."
+							caption: qsTrId("settings_system_ac_input_and_output_description"),
+						},
+					]
+
+					onOptionClicked: function(index) {
+						index += 1
+						hasAcInLoadsItem.setValue(index & 1)
+						hasAcOutLoadsItem.setValue((index & 2) >> 1)
+					}
+				}
+			}
+
+			DelegateComponent {
 				preferredVisible: root._isGrid || root._isShore
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/System/GridLost"
-				optionModel: [
-					{ display: CommonWords.disabled, value: 0 },
-					{ display: CommonWords.enabled, value: 1 },
-				]
+				ListRadioButtonGroup {
+					text: root._isGrid
+						  //% "Monitor for grid failure"
+						? qsTrId("settings_system_monitor_for_grid_failure")
+						  //% "Monitor for shore disconnect"
+						: qsTrId("settings_system_monitor_for_shore_disconnect")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/System/GridLost"
+					optionModel: [
+						{ display: CommonWords.disabled, value: 0 },
+						{ display: CommonWords.enabled, value: 1 },
+					]
+				}
 			}
 		}
 	}

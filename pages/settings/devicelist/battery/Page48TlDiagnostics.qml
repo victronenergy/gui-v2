@@ -13,76 +13,90 @@ Page {
 	property string bindPrefix
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListItem {
-				id: statusLeds
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListItem {
+					id: statusLeds
 
-				contentItem: RowLayout {
-					spacing: statusLeds.spacing
+					contentItem: RowLayout {
+						spacing: statusLeds.spacing
 
-					Label {
-						//% "Status LEDs"
-						text: qsTrId("batterydiagnostics_status_leds")
-						font: statusLeds.font
-						Layout.fillWidth: true
-					}
+						Label {
+							//% "Status LEDs"
+							text: qsTrId("batterydiagnostics_status_leds")
+							font: statusLeds.font
+							Layout.fillWidth: true
+						}
 
-					Repeater {
-						model: [
-							{ servicePath: "/Diagnostics/LedStatus/Green", color: "#00FF00" },
-							{ servicePath: "/Diagnostics/LedStatus/Amber", color: "#FFBF00" },
-							{ servicePath: "/Diagnostics/LedStatus/Blue", color: "#0000FF" },
-							{ servicePath: "/Diagnostics/LedStatus/Red", color: "#FF0000" },
-						]
-						delegate: Led {
-							dataItem.uid: root.bindPrefix + modelData.servicePath
-							color: modelData.color
+						Repeater {
+							model: [
+								{ servicePath: "/Diagnostics/LedStatus/Green", color: "#00FF00" },
+								{ servicePath: "/Diagnostics/LedStatus/Amber", color: "#FFBF00" },
+								{ servicePath: "/Diagnostics/LedStatus/Blue", color: "#0000FF" },
+								{ servicePath: "/Diagnostics/LedStatus/Red", color: "#FF0000" },
+							]
+							delegate: Led {
+								dataItem.uid: root.bindPrefix + modelData.servicePath
+								color: modelData.color
+							}
 						}
 					}
 				}
 			}
 
-			ListText {
-				text: CommonWords.alarm
-				dataItem.uid: root.bindPrefix + "/Diagnostics/IoStatus/AlarmOutActive"
-				secondaryText: dataItem.value
-						 //: Indicates no alarm is set
-						 //% "None"
-					   ? qsTrId("batterydiagnostics_none")
-					   : CommonWords.active_status
+			DelegateComponent {
+				ListText {
+					text: CommonWords.alarm
+					dataItem.uid: root.bindPrefix + "/Diagnostics/IoStatus/AlarmOutActive"
+					secondaryText: dataItem.value
+							 //: Indicates no alarm is set
+							 //% "None"
+						   ? qsTrId("batterydiagnostics_none")
+						   : CommonWords.active_status
+				}
 			}
 
-			ListText {
-				//% "Main Switch"
-				text: qsTrId("batterydiagnostics_main_switch")
-				dataItem.uid: root.bindPrefix + "/Diagnostics/IoStatus/MainSwitchClosed"
-				secondaryText: dataItem.value ? CommonWords.closed_status : CommonWords.open_status
+			DelegateComponent {
+				ListText {
+					//% "Main Switch"
+					text: qsTrId("batterydiagnostics_main_switch")
+					dataItem.uid: root.bindPrefix + "/Diagnostics/IoStatus/MainSwitchClosed"
+					secondaryText: dataItem.value ? CommonWords.closed_status : CommonWords.open_status
+				}
 			}
 
-			ListText {
-				//% "Heater"
-				text: qsTrId("batterydiagnostics_heater")
-				dataItem.uid: root.bindPrefix + "/Diagnostics/IoStatus/HeaterOn"
-				secondaryText: CommonWords.onOrOff(dataItem.value)
+			DelegateComponent {
+				ListText {
+					//% "Heater"
+					text: qsTrId("batterydiagnostics_heater")
+					dataItem.uid: root.bindPrefix + "/Diagnostics/IoStatus/HeaterOn"
+					secondaryText: CommonWords.onOrOff(dataItem.value)
+				}
 			}
 
-			ListText {
-				//% "Internal Fan"
-				text: qsTrId("batterydiagnostics_internal_fan")
-				dataItem.uid: root.bindPrefix + "/Diagnostics/IoStatus/InternalFanActive"
-				secondaryText: CommonWords.onOrOff(dataItem.value)
+			DelegateComponent {
+				ListText {
+					//% "Internal Fan"
+					text: qsTrId("batterydiagnostics_internal_fan")
+					dataItem.uid: root.bindPrefix + "/Diagnostics/IoStatus/InternalFanActive"
+					secondaryText: CommonWords.onOrOff(dataItem.value)
+				}
 			}
 
-			ListText {
-				//% "Warning Flags"
-				text: qsTrId("batterydiagnostics_warning_flags")
-				dataItem.uid: root.bindPrefix + "/Diagnostics/WarningFlags"
+			DelegateComponent {
+				ListText {
+					//% "Warning Flags"
+					text: qsTrId("batterydiagnostics_warning_flags")
+					dataItem.uid: root.bindPrefix + "/Diagnostics/WarningFlags"
+				}
 			}
 
-			ListText {
-				//% "Alarm Flags"
-				text: qsTrId("batterydiagnostics_alarm_flags")
-				dataItem.uid: root.bindPrefix + "/Diagnostics/AlarmFlags"
+			DelegateComponent {
+				ListText {
+					//% "Alarm Flags"
+					text: qsTrId("batterydiagnostics_alarm_flags")
+					dataItem.uid: root.bindPrefix + "/Diagnostics/AlarmFlags"
+				}
 			}
 		}
 	}

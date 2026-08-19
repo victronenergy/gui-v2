@@ -13,344 +13,406 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: VisibleItemModel {
-			PrimaryListLabel {
-				text: "This page demonstrates the components that can be used to build settings pages."
-			}
-
-			ListNavigation {
-				text: "Page launch"
-				secondaryText: "Secondary text"
-				onClicked: Global.pageManager.pushPage(newPageComponent, { title: "Page name" })
-			}
-
-			ListNavigation {
-				text: "Key navigation"
-				onClicked: Global.pageManager.pushPage(keyNavigationComponent, { title: "Press up/down to navigate" })
-			}
-
-			ListNavigation {
-				text: "VisibleItemModel demo"
-				onClicked: Global.pageManager.pushPage(visibleItemDemoComponent, { title: text })
-			}
-
-			ListSwitch {
-				text: "Switch"
-				property bool value
-				checked: value
-				onClicked: {
-					value = !checked
-					console.log("Switch now checked?", checked)
+		model: DelegateComponentModel {
+			DelegateComponent {
+				PrimaryListLabel {
+					text: "This page demonstrates the components that can be used to build settings pages."
 				}
 			}
 
-			ListSwitch {
-				text: "Toggle setting: /Settings/Alarm/Audible"
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/Audible"
-			}
-
-			ListRadioButtonGroup {
-				text: "Radio buttons with array model"
-				optionModel: [
-					{ display: "Option A", value: 1 },
-					{ display: "Option B", value: 2, readOnly: true },
-					{ display: "Option C", value: 3, caption: "Some extra description below" },
-					{ display: "Option D", value: 4, promptPassword: true, caption: "Password is 'abc'" },
-					{ display: "Option E", value: 5, promptPassword: true, caption: "Password is '1234'" },
-					{ display: "Option F", value: 6 },
-					{ display: "Option G", value: 7 },
-					{ display: "Option H", value: 8 },
-					{ display: "Option I", value: 9 },
-					{ display: "Option J", value: 10 },
-					{ display: "Option K", value: 11 },
-					{ display: "Option L", value: 12 },
-					{ display: "Option M", value: 13 },
-					{ display: "Option N", value: 14 },
-					{ display: "Option O", value: 15 },
-					{ display: "Option P", value: 16 },
-					{ display: "Option Q", value: 17 },
-					{ display: "Option R", value: 18 },
-					{ display: "Option S", value: 19 },
-					{ display: "Option T", value: 20 },
-					{ display: "Option U", value: 21 },
-				]
-				currentIndex: 1
-				validatePassword: (index, password) => {
-					if ((index === 3 && password === "abc") || (index === 4 && password === "1234")) {
-						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
-					}
-					return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Wrong password!")
-				}
-
-				onOptionClicked: function(index) {
-					currentIndex = index
-					console.log("Radio button clicked at index", index)
+			DelegateComponent {
+				ListNavigation {
+					text: "Page launch"
+					secondaryText: "Secondary text"
+					onClicked: Global.pageManager.pushPage(newPageComponent, { title: "Page name" })
 				}
 			}
 
-			ListRadioButtonGroup {
-				text: "Radio buttons with complex model"
-				optionModel: ListModel {
-					ListElement { display: "Option A"; value: 1 }
-					ListElement { display: "Option B"; value: 2; readOnly: true }
-					ListElement { display: "Option C"; value: 3 }
-					ListElement { display: "Option D (with password 'AAA')"; value: 4; promptPassword: true }
-					ListElement { display: "Option E"; value: 5 }
-					ListElement { display: "Option F"; value: 6 }
-					ListElement { display: "Option G"; value: 7 }
-					ListElement { display: "Option H"; value: 8 }
-					ListElement { display: "Option I"; value: 9 }
-					ListElement { display: "Option J"; value: 10 }
-					ListElement { display: "Option K"; value: 11 }
-					ListElement { display: "Option L"; value: 12 }
-					ListElement { display: "Option M"; value: 13 }
-					ListElement { display: "Option N"; value: 14 }
-					ListElement { display: "Option O"; value: 15 }
-					ListElement { display: "Option P"; value: 16 }
-					ListElement { display: "Option Q"; value: 17 }
-					ListElement { display: "Option R"; value: 18 }
-					ListElement { display: "Option S"; value: 19 }
-					ListElement { display: "Option T"; value: 20 }
-					ListElement { display: "Option U"; value: 21 }
-				}
-				currentIndex: 2
-				secondaryText: optionModel.get(2).display
-				validatePassword: (index, password) => {
-					if (index === 3 && password === "AAA") {
-						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
-					}
-					return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Wrong password!")
-				}
-
-				onOptionClicked: function(index) {
-					currentIndex = index
-					console.log("Radio button clicked at index", index)
-					secondaryText = optionModel.get(index).display
+			DelegateComponent {
+				ListNavigation {
+					text: "Key navigation"
+					onClicked: Global.pageManager.pushPage(keyNavigationComponent, { title: "Press up/down to navigate" })
 				}
 			}
 
-			ListText {
-				text: "Text only"
-				secondaryText: "Status text"
-			}
-
-			ListText {
-				text: "Text only, from dbus source"
-				dataItem.uid: Global.system.serviceUid + "/FirmwareBuild"
-			}
-
-			ListQuantity {
-				text: "Quantity"
-				value: 33.5
-				unit: VenusOS.Units_Temperature_Celsius
-			}
-
-			ListQuantityGroup {
-				text: "Multiple quantities or text"
-
-				model: QuantityObjectModel {
-					QuantityObject { object: customDataObject; key: "voltage"; unit: VenusOS.Units_Volt_DC }
-					QuantityObject { object: customDataObject; key: "current"; unit: VenusOS.Units_Amp }
-					QuantityObject { object: customDataObject; key: "name" }
-
-					// This does not specify a "key", as the default key is "value", which is appropriate for VeQuickItem.
-					QuantityObject { object: batterySoc; unit: VenusOS.Units_Percentage }
-				}
-
-				QtObject {
-					id: customDataObject
-					property real voltage: 0.345
-					property real current: NaN
-					property string name: "Foo"
-				}
-
-				Timer {
-					running: root.isCurrentPage && Global.timersEnabled
-					interval: 3000
-					repeat: true
-					onTriggered: customDataObject.voltage = Math.random()
-				}
-
-				VeQuickItem {
-					id: batterySoc
-					uid: Global.system.serviceUid + "/Dc/Battery/Soc"
+			DelegateComponent {
+				ListNavigation {
+					text: "DelegateComponentModel demo"
+					onClicked: Global.pageManager.pushPage(visibleItemDemoComponent, { title: text })
 				}
 			}
 
-			ListSlider {
-				text: "Slider"
-				from: 1
-				to: 100
-				stepSize: 10
-			}
-
-			ListRangeSlider {
-				text: "Range slider"
-				from: 0
-				to: 100
-				firstValue: 25
-				secondValue: 75
-				suffix: "%"
-				decimals: 1
-			}
-
-			ListButton {
-				text: "Button"
-				secondaryText: "Click this"
-				onClicked: console.log("Button was clicked")
-			}
-
-			ListButton {
-				text: "Read-only button"
-				readOnly: true
-				secondaryText: "Try to click this"
-				onClicked: console.log("Will not happen, button cannot be clicked")
-			}
-
-			ListTextField {
-				text: "Text input"
-				placeholderText: "Enter text"
-			}
-
-			ListTextField {
-				text: "Text input: forced capitalization, numbers disallowed"
-				placeholderText: "Enter text"
-				validateInput: function() {
-					if (secondaryText.match(/[0-9]/)) {
-						return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Numbers are not allowed!")
-					} else if (secondaryText.match(/[a-z]/)) {
-						return Utils.validationResult(VenusOS.InputValidation_Result_Warning, "Characters changed to uppercase", secondaryText.toUpperCase())
-					} else {
-						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
-					}
-				}
-				saveInput: function() {
-					console.log("Saving text: %1".arg(secondaryText))
-				}
-			}
-
-			ListIntField {
-				text: "Number with 5 digits max"
-				maximumLength: 5
-			}
-
-			ListQuantityField {
-				text: "Quantity input"
-				value: 123.5324
-				unit: VenusOS.Units_Amp
-				decimals: 1
-			}
-
-			ListIpAddressField {
-				text: "IP address"
-				secondaryText: "12.23.21.4"
-			}
-
-			ListSpinBox {
-				text: "Spin box"
-				value: 1.2
-				decimals: 2
-				stepSize: Math.pow(10, -decimals)
-				from: 1
-				to: 1.5
-			}
-
-			ListSpinBoxRange {
-				text: "Spin box range"
-
-				dataItemFrom.value: 0
-				rangeModelFrom.minimumValue: -5
-				rangeModelFrom.maximumValue: 20
-				rangeModelFrom.stepSize: 0.5
-
-				dataItemTo.value: 75
-				rangeModelTo.minimumValue: 50
-				rangeModelTo.maximumValue: 100
-				rangeModelTo.stepSize: 10
-
-				unit: VenusOS.Units_Volume_Litre
-			}
-
-			ListDateSelector {
-				text: "Date selection"
-				date: new Date()
-			}
-
-			ListTimeSelector {
-				text: "Time selection"
-			}
-
-			ListItem {
-				id: toastItem
-
-				topPadding: topInset
-				bottomPadding: bottomInset
-				contentItem: RowLayout {
-					spacing: toastItem.spacing
-
-					Label {
-						text: "Toast"
-						font: toastItem.font
-						Layout.fillWidth: true
-					}
-					ListItemButton {
-						text: "Warning"
-						onClicked: Global.showToastNotification(VenusOS.Notification_Warning, "Warning toast")
-					}
-					ListItemButton {
-						text: "Alarm"
-						onClicked: Global.showToastNotification(VenusOS.Notification_Alarm, "Alarm toast")
-					}
-					ListItemButton {
-						text: "Info"
-						onClicked: Global.showToastNotification(VenusOS.Notification_Info, "Info toast")
+			DelegateComponent {
+				ListSwitch {
+					text: "Switch"
+					property bool value
+					checked: value
+					onClicked: {
+						value = !checked
+						console.log("Switch now checked?", checked)
 					}
 				}
 			}
 
-			ListItem {
-				id: customItem
+			DelegateComponent {
+				ListSwitch {
+					text: "Toggle setting: /Settings/Alarm/Audible"
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/Audible"
+				}
+			}
 
-				contentItem: RowLayout {
-					spacing: customItem.spacing
+			DelegateComponent {
+				ListRadioButtonGroup {
+					text: "Radio buttons with array model"
+					optionModel: [
+						{ display: "Option A", value: 1 },
+						{ display: "Option B", value: 2, readOnly: true },
+						{ display: "Option C", value: 3, caption: "Some extra description below" },
+						{ display: "Option D", value: 4, promptPassword: true, caption: "Password is 'abc'" },
+						{ display: "Option E", value: 5, promptPassword: true, caption: "Password is '1234'" },
+						{ display: "Option F", value: 6 },
+						{ display: "Option G", value: 7 },
+						{ display: "Option H", value: 8 },
+						{ display: "Option I", value: 9 },
+						{ display: "Option J", value: 10 },
+						{ display: "Option K", value: 11 },
+						{ display: "Option L", value: 12 },
+						{ display: "Option M", value: 13 },
+						{ display: "Option N", value: 14 },
+						{ display: "Option O", value: 15 },
+						{ display: "Option P", value: 16 },
+						{ display: "Option Q", value: 17 },
+						{ display: "Option R", value: 18 },
+						{ display: "Option S", value: 19 },
+						{ display: "Option T", value: 20 },
+						{ display: "Option U", value: 21 },
+					]
+					currentIndex: 1
+					validatePassword: (index, password) => {
+						if ((index === 3 && password === "abc") || (index === 4 && password === "1234")) {
+							return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+						}
+						return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Wrong password!")
+					}
 
-					Label {
-						text: "Custom item"
-						font: customItem.font
-						Layout.fillWidth: true
-					}
-					Rectangle {
-						width: 30
-						height: 30
-						radius: 15
-						color: Theme.color_ok
-					}
-					Rectangle {
-						width: 30
-						height: 30
-						color: Theme.color_warning
+					onOptionClicked: function(index) {
+						currentIndex = index
+						console.log("Radio button clicked at index", index)
 					}
 				}
 			}
 
-			ListText {
-				text: "Primary text is long, maybe long enough to span multiple lines"
-				secondaryText: "Short secondary text"
+			DelegateComponent {
+				ListRadioButtonGroup {
+					text: "Radio buttons with complex model"
+					optionModel: ListModel {
+						ListElement { display: "Option A"; value: 1 }
+						ListElement { display: "Option B"; value: 2; readOnly: true }
+						ListElement { display: "Option C"; value: 3 }
+						ListElement { display: "Option D (with password 'AAA')"; value: 4; promptPassword: true }
+						ListElement { display: "Option E"; value: 5 }
+						ListElement { display: "Option F"; value: 6 }
+						ListElement { display: "Option G"; value: 7 }
+						ListElement { display: "Option H"; value: 8 }
+						ListElement { display: "Option I"; value: 9 }
+						ListElement { display: "Option J"; value: 10 }
+						ListElement { display: "Option K"; value: 11 }
+						ListElement { display: "Option L"; value: 12 }
+						ListElement { display: "Option M"; value: 13 }
+						ListElement { display: "Option N"; value: 14 }
+						ListElement { display: "Option O"; value: 15 }
+						ListElement { display: "Option P"; value: 16 }
+						ListElement { display: "Option Q"; value: 17 }
+						ListElement { display: "Option R"; value: 18 }
+						ListElement { display: "Option S"; value: 19 }
+						ListElement { display: "Option T"; value: 20 }
+						ListElement { display: "Option U"; value: 21 }
+					}
+					currentIndex: 2
+					secondaryText: optionModel.get(2).display
+					validatePassword: (index, password) => {
+						if (index === 3 && password === "AAA") {
+							return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+						}
+						return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Wrong password!")
+					}
+
+					onOptionClicked: function(index) {
+						currentIndex = index
+						console.log("Radio button clicked at index", index)
+						secondaryText = optionModel.get(index).display
+					}
+				}
 			}
 
-			ListText {
-				text: "Short primary text"
-				secondaryText: "Secondary text is long, maybe long enough to span multiple lines"
+			DelegateComponent {
+				ListText {
+					text: "Text only"
+					secondaryText: "Status text"
+				}
 			}
 
-			ListText {
-				text: "Both primary and secondary text are quite long"
-				secondaryText: "Both primary and secondary text are quite long"
+			DelegateComponent {
+				ListText {
+					text: "Text only, from dbus source"
+					dataItem.uid: Global.system.serviceUid + "/FirmwareBuild"
+				}
 			}
 
-			ListLink {
-				text: "Victron Energy"
-				url: "https://www.victronenergy.com"
+			DelegateComponent {
+				ListQuantity {
+					text: "Quantity"
+					value: 33.5
+					unit: VenusOS.Units_Temperature_Celsius
+				}
+			}
+
+			DelegateComponent {
+				ListQuantityGroup {
+					text: "Multiple quantities or text"
+
+					model: QuantityObjectModel {
+						QuantityObject { object: customDataObject; key: "voltage"; unit: VenusOS.Units_Volt_DC }
+						QuantityObject { object: customDataObject; key: "current"; unit: VenusOS.Units_Amp }
+						QuantityObject { object: customDataObject; key: "name" }
+
+						// This does not specify a "key", as the default key is "value", which is appropriate for VeQuickItem.
+						QuantityObject { object: batterySoc; unit: VenusOS.Units_Percentage }
+					}
+
+					QtObject {
+						id: customDataObject
+						property real voltage: 0.345
+						property real current: NaN
+						property string name: "Foo"
+					}
+
+					Timer {
+						running: root.isCurrentPage && Global.timersEnabled
+						interval: 3000
+						repeat: true
+						onTriggered: customDataObject.voltage = Math.random()
+					}
+
+					VeQuickItem {
+						id: batterySoc
+						uid: Global.system.serviceUid + "/Dc/Battery/Soc"
+					}
+				}
+			}
+
+			DelegateComponent {
+				ListSlider {
+					text: "Slider"
+					from: 1
+					to: 100
+					stepSize: 10
+				}
+			}
+
+			DelegateComponent {
+				ListRangeSlider {
+					text: "Range slider"
+					from: 0
+					to: 100
+					firstValue: 25
+					secondValue: 75
+					suffix: "%"
+					decimals: 1
+				}
+			}
+
+			DelegateComponent {
+				ListButton {
+					text: "Button"
+					secondaryText: "Click this"
+					onClicked: console.log("Button was clicked")
+				}
+			}
+
+			DelegateComponent {
+				ListButton {
+					text: "Read-only button"
+					readOnly: true
+					secondaryText: "Try to click this"
+					onClicked: console.log("Will not happen, button cannot be clicked")
+				}
+			}
+
+			DelegateComponent {
+				ListTextField {
+					text: "Text input"
+					placeholderText: "Enter text"
+				}
+			}
+
+			DelegateComponent {
+				ListTextField {
+					text: "Text input: forced capitalization, numbers disallowed"
+					placeholderText: "Enter text"
+					validateInput: function() {
+						if (secondaryText.match(/[0-9]/)) {
+							return Utils.validationResult(VenusOS.InputValidation_Result_Error, "Numbers are not allowed!")
+						} else if (secondaryText.match(/[a-z]/)) {
+							return Utils.validationResult(VenusOS.InputValidation_Result_Warning, "Characters changed to uppercase", secondaryText.toUpperCase())
+						} else {
+							return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+						}
+					}
+					saveInput: function() {
+						console.log("Saving text: %1".arg(secondaryText))
+					}
+				}
+			}
+
+			DelegateComponent {
+				ListIntField {
+					text: "Number with 5 digits max"
+					maximumLength: 5
+				}
+			}
+
+			DelegateComponent {
+				ListQuantityField {
+					text: "Quantity input"
+					value: 123.5324
+					unit: VenusOS.Units_Amp
+					decimals: 1
+				}
+			}
+
+			DelegateComponent {
+				ListIpAddressField {
+					text: "IP address"
+					secondaryText: "12.23.21.4"
+				}
+			}
+
+			DelegateComponent {
+				ListSpinBox {
+					text: "Spin box"
+					value: 1.2
+					decimals: 2
+					stepSize: Math.pow(10, -decimals)
+					from: 1
+					to: 1.5
+				}
+			}
+
+			DelegateComponent {
+				ListSpinBoxRange {
+					text: "Spin box range"
+
+					dataItemFrom.value: 0
+					rangeModelFrom.minimumValue: -5
+					rangeModelFrom.maximumValue: 20
+					rangeModelFrom.stepSize: 0.5
+
+					dataItemTo.value: 75
+					rangeModelTo.minimumValue: 50
+					rangeModelTo.maximumValue: 100
+					rangeModelTo.stepSize: 10
+
+					unit: VenusOS.Units_Volume_Litre
+				}
+			}
+
+			DelegateComponent {
+				ListDateSelector {
+					text: "Date selection"
+					date: new Date()
+				}
+			}
+
+			DelegateComponent {
+				ListTimeSelector {
+					text: "Time selection"
+				}
+			}
+
+			DelegateComponent {
+				ListItem {
+					id: toastItem
+
+					topPadding: topInset
+					bottomPadding: bottomInset
+					contentItem: RowLayout {
+						spacing: toastItem.spacing
+
+						Label {
+							text: "Toast"
+							font: toastItem.font
+							Layout.fillWidth: true
+						}
+						ListItemButton {
+							text: "Warning"
+							onClicked: Global.showToastNotification(VenusOS.Notification_Warning, "Warning toast")
+						}
+						ListItemButton {
+							text: "Alarm"
+							onClicked: Global.showToastNotification(VenusOS.Notification_Alarm, "Alarm toast")
+						}
+						ListItemButton {
+							text: "Info"
+							onClicked: Global.showToastNotification(VenusOS.Notification_Info, "Info toast")
+						}
+					}
+				}
+			}
+
+			DelegateComponent {
+				ListItem {
+					id: customItem
+
+					contentItem: RowLayout {
+						spacing: customItem.spacing
+
+						Label {
+							text: "Custom item"
+							font: customItem.font
+							Layout.fillWidth: true
+						}
+						Rectangle {
+							width: 30
+							height: 30
+							radius: 15
+							color: Theme.color_ok
+						}
+						Rectangle {
+							width: 30
+							height: 30
+							color: Theme.color_warning
+						}
+					}
+				}
+			}
+
+			DelegateComponent {
+				ListText {
+					text: "Primary text is long, maybe long enough to span multiple lines"
+					secondaryText: "Short secondary text"
+				}
+			}
+
+			DelegateComponent {
+				ListText {
+					text: "Short primary text"
+					secondaryText: "Secondary text is long, maybe long enough to span multiple lines"
+				}
+			}
+
+			DelegateComponent {
+				ListText {
+					text: "Both primary and secondary text are quite long"
+					secondaryText: "Both primary and secondary text are quite long"
+				}
+			}
+
+			DelegateComponent {
+				ListLink {
+					text: "Victron Energy"
+					url: "https://www.victronenergy.com"
+				}
 			}
 		}
 	}
@@ -360,9 +422,11 @@ Page {
 
 		Page {
 			GradientListView {
-				model: VisibleItemModel {
-					ListText {
-						text: "New page item"
+				model: DelegateComponentModel {
+					DelegateComponent {
+						ListText {
+							text: "New page item"
+						}
 					}
 				}
 			}
@@ -374,50 +438,69 @@ Page {
 
 		Page {
 			component VisibleModelSwitch : ListSwitch {
-				preferredVisible: true
-				checked: preferredVisible
-				onClicked: preferredVisible = !preferredVisible
+				property bool rowVisible: true
+				signal toggleRequested()
+				checked: rowVisible
+				onClicked: toggleRequested()
 			}
 
 			GradientListView {
 				header: PrimaryListLabel {
-					text: "VisibleItemModel filters out any non-visible items from the model.\nFor example, click a switch below to set preferredVisible=false and remove it from the model."
+					text: "DelegateComponentModel filters out any non-visible items from the model.\nFor example, click a switch below to set preferredVisible=false and remove it from the model."
 				}
 				footer: Column {
 					width: parent.width
 					PrimaryListLabel {
 						horizontalAlignment: Text.AlignHCenter
 						text: "%1 items in source model, %2 items in visible model"
-								.arg(visibleItemModel.sourceModel.length)
+								.arg(visibleItemModel.entries.length)
 								.arg(visibleItemModel.count)
 					}
 					ListItemButton {
 						anchors.horizontalCenter: parent.horizontalCenter
 						text: "Reset 'preferredVisible' values"
 						onClicked: {
-							toggle1.preferredVisible = true
-							toggle2.preferredVisible = true
-							toggle3.preferredVisible = true
+							toggle1DC.rowVisible = true
+							toggle2DC.rowVisible = true
+							toggle3DC.rowVisible = true
 						}
 					}
 				}
 
-				model: VisibleItemModel {
+				model: DelegateComponentModel {
 					id: visibleItemModel
 
-					VisibleModelSwitch {
-						id: toggle1
-						text: "Toggle A"
+					DelegateComponent {
+						id: toggle1DC
+						property bool rowVisible: true
+						preferredVisible: rowVisible
+						VisibleModelSwitch {
+							rowVisible: toggle1DC.rowVisible
+							onToggleRequested: toggle1DC.rowVisible = !toggle1DC.rowVisible
+							text: "Toggle A"
+						}
 					}
 
-					VisibleModelSwitch {
-						id: toggle2
-						text: "Toggle B"
+					DelegateComponent {
+						id: toggle2DC
+						property bool rowVisible: true
+						preferredVisible: rowVisible
+						VisibleModelSwitch {
+							rowVisible: toggle2DC.rowVisible
+							onToggleRequested: toggle2DC.rowVisible = !toggle2DC.rowVisible
+							text: "Toggle B"
+						}
 					}
 
-					VisibleModelSwitch {
-						id: toggle3
-						text: "Toggle C"
+					DelegateComponent {
+						id: toggle3DC
+						property bool rowVisible: true
+						preferredVisible: rowVisible
+						VisibleModelSwitch {
+							rowVisible: toggle3DC.rowVisible
+							onToggleRequested: toggle3DC.rowVisible = !toggle3DC.rowVisible
+							text: "Toggle C"
+						}
 					}
 				}
 			}

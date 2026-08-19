@@ -22,45 +22,50 @@ Page {
 			blink.setValue(isCurrentPage)
 		}
 	}
-
 	VeQuickItem {
 		id: blink
 		uid: root.ctPrefix + "/Identify"
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListRadioButtonGroup {
-				id: type
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListRadioButtonGroup {
+					id: type
 
-				text: CommonWords.type
-				dataItem.uid: root.ctPrefix + "/Type"
+					text: CommonWords.type
+					dataItem.uid: root.ctPrefix + "/Type"
 
-				VeQuickItem {
-					uid: root.bindPrefix + "/CTTypes"
-					onValueChanged: {
-						type.optionModel = Utils.jsonSettingsToModel(value, true)
+					VeQuickItem {
+						uid: root.bindPrefix + "/CTTypes"
+						onValueChanged: {
+							type.optionModel = Utils.jsonSettingsToModel(value, true)
+						}
 					}
 				}
 			}
 
-			ListRadioButtonGroup {
-				text: CommonWords.phase
-				dataItem.uid: root.ctPrefix + "/Phase"
-				optionModel: [
-					//: Indicates no phase
-					//% "None"
-					{ display: qsTrId("smappeect_phase_none"), value: -1 },
-					{ display: "L1", value: 0 },
-					{ display: "L2", value: 1 },
-					{ display: "L3", value: 2 },
-				]
+			DelegateComponent {
+				ListRadioButtonGroup {
+					text: CommonWords.phase
+					dataItem.uid: root.ctPrefix + "/Phase"
+					optionModel: [
+						//: Indicates no phase
+						//% "None"
+						{ display: qsTrId("smappeect_phase_none"), value: -1 },
+						{ display: "L1", value: 0 },
+						{ display: "L2", value: 1 },
+						{ display: "L3", value: 2 },
+					]
+				}
 			}
 
-			PrimaryListLabel {
-				//% "Flashing LED indicates this CT"
-				text: qsTrId("smappeect_flashing_led_indicates_this_ct")
-				horizontalAlignment: Text.AlignHCenter
+			DelegateComponent {
+				PrimaryListLabel {
+					//% "Flashing LED indicates this CT"
+					text: qsTrId("smappeect_flashing_led_indicates_this_ct")
+					horizontalAlignment: Text.AlignHCenter
+				}
 			}
 		}
 	}

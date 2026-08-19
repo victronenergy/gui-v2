@@ -11,7 +11,7 @@ Page {
 
 	property string bindPrefix
 
-	readonly property bool isLocalSender: manufacturer.value === 358 && vrmInstance.dataItem.valid
+	readonly property bool isLocalSender: manufacturer.value === 358 && vrmInstanceDC.dataItem.valid
 
 	VeQuickItem {
 		id: manufacturer
@@ -19,55 +19,73 @@ Page {
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
+		model: DelegateComponentModel {
 
-			ListText {
-				text: CommonWords.model_name
-				dataItem.uid: root.bindPrefix + "/ModelName"
+			DelegateComponent {
+				ListText {
+					text: CommonWords.model_name
+					dataItem.uid: root.bindPrefix + "/ModelName"
+				}
 			}
 
-			ListText {
-				text: CommonWords.manufacturer
-				dataItem.uid: root.bindPrefix + "/ManufacturerName"
+			DelegateComponent {
+				ListText {
+					text: CommonWords.manufacturer
+					dataItem.uid: root.bindPrefix + "/ManufacturerName"
+				}
 			}
 
-			ListText {
-				//% "Source Address"
-				text: qsTrId("settings_rvc_source_address")
-				secondaryText: Utils.toHexFormat(dataItem.value)
-				dataItem.uid: root.bindPrefix + "/Nad"
+			DelegateComponent {
+				ListText {
+					//% "Source Address"
+					text: qsTrId("settings_rvc_source_address")
+					secondaryText: Utils.toHexFormat(dataItem.value)
+					dataItem.uid: root.bindPrefix + "/Nad"
+				}
 			}
 
-			ListFirmwareVersion {
-				bindPrefix: root.bindPrefix
+			DelegateComponent {
+				ListFirmwareVersion {
+					bindPrefix: root.bindPrefix
+				}
 			}
 
-			ListText {
-				text: CommonWords.serial_number
-				dataItem.uid: root.bindPrefix + "/Serial"
+			DelegateComponent {
+				ListText {
+					text: CommonWords.serial_number
+					dataItem.uid: root.bindPrefix + "/Serial"
+				}
 			}
 
-			ListText {
-				text: CommonWords.unique_identity_number
-				dataItem.uid: root.bindPrefix + "/RvcUniqueNumber"
+			DelegateComponent {
+				ListText {
+					text: CommonWords.unique_identity_number
+					dataItem.uid: root.bindPrefix + "/RvcUniqueNumber"
+				}
 			}
 
-			ListText {
-				id: vrmInstance
-
-				text: CommonWords.vrm_instance
-				dataItem.uid: root.bindPrefix + "/VrmInstance"
+			DelegateComponent {
+				id: vrmInstanceDC
+				dataItem: VeQuickItem { uid: root.bindPrefix + "/VrmInstance" }
 				preferredVisible: root.isLocalSender
+				ListText {
+					id: vrmInstance
+
+					text: CommonWords.vrm_instance
+					dataItem.uid: root.bindPrefix + "/VrmInstance"
+				}
 			}
 
-			ListNavigation {
-				//% "Configuration"
-				text: qsTrId("settings_rvc_configuration")
+			DelegateComponent {
 				preferredVisible: root.isLocalSender && userHasWriteAccess
+				ListNavigation {
+					//% "Configuration"
+					text: qsTrId("settings_rvc_configuration")
 
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsRvcDeviceConfiguration.qml",
-						{ bindPrefix: root.bindPrefix, title: text })
+					onClicked: {
+						Global.pageManager.pushPage("/pages/settings/PageSettingsRvcDeviceConfiguration.qml",
+							{ bindPrefix: root.bindPrefix, title: text })
+					}
 				}
 			}
 		}

@@ -16,19 +16,23 @@ DevicePage {
 
 	serviceUid: bindPrefix
 
-	settingsModel: VisibleItemModel {
-		ListQuantity {
-			//% "Aggregate"
-			text: qsTrId("pulsecounter_aggregate")
-			dataItem.uid: bindPrefix + "/Aggregate"
-			unit: Global.systemSettings.volumeUnit
+	settingsModel: DelegateComponentModel {
+		DelegateComponent {
+			ListQuantity {
+				//% "Aggregate"
+				text: qsTrId("pulsecounter_aggregate")
+				dataItem.uid: bindPrefix + "/Aggregate"
+				unit: Global.systemSettings.volumeUnit
+			}
 		}
 
-		ListNavigation {
-			text: CommonWords.setup
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix, "inputNumber": device.deviceInstance })
+		DelegateComponent {
+			ListNavigation {
+				text: CommonWords.setup
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml",
+							{ "title": text, "bindPrefix": root.bindPrefix, "inputNumber": device.deviceInstance })
+				}
 			}
 		}
 	}

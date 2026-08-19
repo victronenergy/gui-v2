@@ -12,10 +12,15 @@ Page {
 	function goToPage(pageId) {
 		switch (pageId) {
 		case "mobile":
-			mobileListItem.click()
+			Global.pageManager.pushPage("/pages/settings/PageSettingsGsm.qml", {
+				"title": qsTrId("pagesettingsconnectivity_mobile_network")
+			})
 			break
 		case "wifi":
-			wifiListItem.click()
+			Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml", {
+				"title": qsTrId("pagesettingsconnectivity_wifi"),
+				"ethernetNetworkServices": networkServices
+			})
 			break
 		default:
 			console.warn("goToPage(): unknown pageId:", pageId)
@@ -26,99 +31,114 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: VisibleItemModel {
-			ListNavigation {
-				//% "Ethernet"
-				text: qsTrId("pagesettingsconnectivity_ethernet")
-				secondaryText: networkServices.networkState !== "idle" && networkServices.networkState !== ""
-					? (networkServices.ipAddress ? networkServices.ipAddress : Utils.connmanServiceState(networkServices.networkState))
-					//% "Unplugged"
-					: qsTrId("settings_tcpip_connection_unplugged")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsTcpIp.qml", {"title": text})
-			}
-
-			ListNavigation {
-				id: wifiListItem
-
-				//% "Wi-Fi"
-				text: qsTrId("pagesettingsconnectivity_wifi")
-				secondaryText: wifiModel.connectedNetworkName
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml", {"title": text, "ethernetNetworkServices": networkServices})
-				WifiModel {
-					id: wifiModel
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListNavigation {
+					//% "Ethernet"
+					text: qsTrId("pagesettingsconnectivity_ethernet")
+					secondaryText: networkServices.networkState !== "idle" && networkServices.networkState !== ""
+						? (networkServices.ipAddress ? networkServices.ipAddress : Utils.connmanServiceState(networkServices.networkState))
+						//% "Unplugged"
+						: qsTrId("settings_tcpip_connection_unplugged")
+					onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsTcpIp.qml", {"title": text})
 				}
 			}
 
-			ListNavigation {
-				//% "Bluetooth (for VictronConnect App)"
-				text: qsTrId("pagesettingsconnectivity_bluetooth_for_victronconnect_app")
-				secondaryText: networkServices.hasBluetoothSupport
-					? (bluetooth.value === 1 ? CommonWords.enabled : CommonWords.disabled)
-					//% "No Bluetooth available"
-					: qsTrId("pagesettingsconnectivity_bluetooth_not_available")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBluetooth.qml", {"title": text})
+			DelegateComponent {
+				ListNavigation {
+					id: wifiListItem
 
-				VeQuickItem {
-					id: bluetooth
-					uid: Global.systemSettings.serviceUid + "/Settings/Services/Bluetooth"
-				}
-			}
-
-			ListNavigation {
-				id: mobileListItem
-
-				//% "Mobile Network"
-				text: qsTrId("pagesettingsconnectivity_mobile_network")
-				//% "No cellular modem connected"
-				secondaryText: simStatus.valid ? networkServices.mobileNetworkName : qsTrId("page_settings_no_cellular_modem_connected")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGsm.qml", {"title": text})
-
-				VeQuickItem {
-					id: simStatus
-					uid: BackendConnection.serviceUidForType("modem") + "/SimStatus"
-				}
-			}
-
-			SettingsColumn {
-				width: parent ? parent.width : 0
-				preferredVisible: canInterfaceRepeater.count > 0
-				topPadding: Theme.geometry_listItem_itemSeparator_height
-
-				Repeater {
-					id: canInterfaceRepeater
-					model: canInterfaces.value || []
-					delegate: ListNavigation {
-						text: modelData["name"] || ""
-						secondaryText: canbusProfile.profileText
-						onClicked: Global.pageManager.pushPage(canBusComponent, { title: text, canbusProfile: canbusProfile })
-
-						Component {
-							id: canBusComponent
-
-							PageSettingsCanbus { }
-						}
-
-						CanbusProfile {
-							id: canbusProfile
-
-							gateway: modelData["interface"]
-							canConfig: modelData["config"]
-						}
+					//% "Wi-Fi"
+					text: qsTrId("pagesettingsconnectivity_wifi")
+					secondaryText: wifiModel.connectedNetworkName
+					onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml", {"title": text, "ethernetNetworkServices": networkServices})
+					WifiModel {
+						id: wifiModel
 					}
 				}
+			}
 
-				VeQuickItem {
-					id: canInterfaces
-					uid: Global.venusPlatform.serviceUid + "/CanBus/Interfaces"
-					// eg. value: [{"config":1,"interface":"can1","name":"BMS-Can port"},{"config":0,"interface":"can0","name":"VE.Can port"}]
+			DelegateComponent {
+				ListNavigation {
+					//% "Bluetooth (for VictronConnect App)"
+					text: qsTrId("pagesettingsconnectivity_bluetooth_for_victronconnect_app")
+					secondaryText: networkServices.hasBluetoothSupport
+						? (bluetooth.value === 1 ? CommonWords.enabled : CommonWords.disabled)
+						//% "No Bluetooth available"
+						: qsTrId("pagesettingsconnectivity_bluetooth_not_available")
+					onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBluetooth.qml", {"title": text})
+
+					VeQuickItem {
+						id: bluetooth
+						uid: Global.systemSettings.serviceUid + "/Settings/Services/Bluetooth"
+					}
 				}
 			}
 
-			ListSwitch {
-				//% "CAN-bus over TCP/IP (Debug)"
-				text: qsTrId("settings_services_canbus_over_tcpip_debug")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Socketcand"
-				showAccessLevel: VenusOS.User_AccessType_Service
+			DelegateComponent {
+				ListNavigation {
+					id: mobileListItem
+
+					//% "Mobile Network"
+					text: qsTrId("pagesettingsconnectivity_mobile_network")
+					//% "No cellular modem connected"
+					secondaryText: simStatus.valid ? networkServices.mobileNetworkName : qsTrId("page_settings_no_cellular_modem_connected")
+					onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGsm.qml", {"title": text})
+
+					VeQuickItem {
+						id: simStatus
+						uid: BackendConnection.serviceUidForType("modem") + "/SimStatus"
+					}
+				}
+			}
+
+			DelegateComponent {
+				id: canInterfaceRepeaterDC
+				property int count
+				preferredVisible: canInterfaceRepeaterDC.count > 0
+				SettingsColumn {
+					width: parent ? parent.width : 0
+					topPadding: Theme.geometry_listItem_itemSeparator_height
+
+					Repeater {
+						id: canInterfaceRepeater
+						model: canInterfaces.value || []
+						delegate: ListNavigation {
+							text: modelData["name"] || ""
+							secondaryText: canbusProfile.profileText
+							onClicked: Global.pageManager.pushPage(canBusComponent, { title: text, canbusProfile: canbusProfile })
+
+							Component {
+								id: canBusComponent
+
+								PageSettingsCanbus { }
+							}
+
+							CanbusProfile {
+								id: canbusProfile
+
+								gateway: modelData["interface"]
+								canConfig: modelData["config"]
+							}
+						}
+					}
+
+					VeQuickItem {
+						id: canInterfaces
+						uid: Global.venusPlatform.serviceUid + "/CanBus/Interfaces"
+						// eg. value: [{"config":1,"interface":"can1","name":"BMS-Can port"},{"config":0,"interface":"can0","name":"VE.Can port"}]
+					}
+					Binding { target: canInterfaceRepeaterDC; property: "count"; value: canInterfaceRepeater.count }
+				}
+			}
+
+			DelegateComponent {
+				ListSwitch {
+					//% "CAN-bus over TCP/IP (Debug)"
+					text: qsTrId("settings_services_canbus_over_tcpip_debug")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Socketcand"
+					showAccessLevel: VenusOS.User_AccessType_Service
+				}
 			}
 		}
 	}

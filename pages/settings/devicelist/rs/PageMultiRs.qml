@@ -17,126 +17,153 @@ DevicePage {
 	readonly property bool multiPhase: numberOfPhases.valid && numberOfPhases.value >= 2 && !_phase.valid
 	readonly property int trackerCount: numberOfTrackers.value || 0
 
-	serviceUid: bindPrefix
-
-	settingsModel: VisibleItemModel {
-		ListText {
-			text: CommonWords.state
-			secondaryText: VenusOS.system_stateToText(dataItem.value)
-			dataItem.uid: root.bindPrefix + "/State"
-		}
-
-		ListQuantity {
-			text: CommonWords.state_of_charge
-			dataItem.uid: root.bindPrefix + "/Soc"
-			unit: VenusOS.Units_Percentage
-		}
-
-		ListTemperature {
-			text: CommonWords.battery_temperature
-			dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-			preferredVisible: dataItem.valid
-		}
-
-		ListActiveAcInput {
-			bindPrefix: root.bindPrefix
-		}
-
-		Loader {
-			width: parent ? parent.width : 0
-			sourceComponent: root.multiPhase ? threePhaseTables : singlePhaseAcInOut
-		}
-
-		ListDcOutputQuantityGroup {
-			text: CommonWords.dc
-			bindPrefix: root.bindPrefix
-		}
-
-		ListItemLoader {
-			width: parent ? parent.width : 0
-			sourceComponent: root.trackerCount === 1 ? singleTrackerComponent
-					: root.trackerCount > 1 ? multiTrackerComponent
-					: null
-		}
-
-		ListQuantity {
-			//% "Total yield"
-			text: qsTrId("settings_multirs_total_yield")
-			preferredVisible: root.trackerCount > 0
-			unit: VenusOS.Units_Energy_KiloWattHour
-			dataItem.uid: root.bindPrefix + "/Yield/User"
-		}
-
-		ListQuantity {
-			//% "System yield"
-			text: qsTrId("settings_multirs_system_yield")
-			preferredVisible: root.trackerCount > 0
-			unit: VenusOS.Units_Energy_KiloWattHour
-			dataItem.uid: root.bindPrefix + "/Yield/System"
-		}
-
-		ListText {
-			text: CommonWords.error
-			dataItem.uid: root.bindPrefix + "/ErrorCode"
-			secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
-		}
-
-		ListRelayState {
-			dataItem.uid: root.bindPrefix + "/Relay/0/State"
-		}
-
-		ListNavigation {
-			text: CommonWords.daily_history
-			preferredVisible: root.trackerCount > 0
-			onClicked: {
-				Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
-						{ "serviceUid": root.bindPrefix })
-			}
-		}
-
-		ListNavigation {
-			text: CommonWords.overall_history
-			preferredVisible: root.trackerCount > 0
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
-			}
-		}
-
-		ListNavigation {
-			text: CommonWords.alarm_status
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarms.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
-			}
-		}
+	VeQuickItem {
+		id: temperatureItem
+		uid: root.bindPrefix + "/Dc/0/Temperature"
 	}
-
 	VeQuickItem {
 		id: numberOfPhases
 		uid: root.bindPrefix + "/Ac/NumberOfPhases"
 	}
-
 	VeQuickItem {
 		id: _phase
 		uid: root.bindPrefix + "/Settings/System/AcPhase"
 	}
-
 	VeQuickItem {
 		id: numberOfTrackers
 		uid: root.bindPrefix + "/NrOfTrackers"
 	}
-
 	VeQuickItem {
 		id: pvTotalPower
 		uid: root.bindPrefix + "/Yield/Power"
 	}
-
 	VeQuickItem {
 		id: pvVoltage
 		uid: root.bindPrefix + "/Pv/V"
 	}
 
+	serviceUid: bindPrefix
+
+	settingsModel: DelegateComponentModel {
+		DelegateComponent {
+			ListText {
+				text: CommonWords.state
+				secondaryText: VenusOS.system_stateToText(dataItem.value)
+				dataItem.uid: root.bindPrefix + "/State"
+			}
+		}
+
+		DelegateComponent {
+			ListQuantity {
+				text: CommonWords.state_of_charge
+				dataItem.uid: root.bindPrefix + "/Soc"
+				unit: VenusOS.Units_Percentage
+			}
+		}
+
+		DelegateComponent {
+			preferredVisible: temperatureItem.valid
+			ListTemperature {
+				text: CommonWords.battery_temperature
+				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
+			}
+		}
+
+		DelegateComponent {
+			ListActiveAcInput {
+				bindPrefix: root.bindPrefix
+			}
+		}
+
+		DelegateComponent {
+			Loader {
+				width: parent ? parent.width : 0
+				sourceComponent: root.multiPhase ? threePhaseTables : singlePhaseAcInOut
+			}
+		}
+
+		DelegateComponent {
+			ListDcOutputQuantityGroup {
+				text: CommonWords.dc
+				bindPrefix: root.bindPrefix
+			}
+		}
+
+		DelegateComponent {
+			ListItemLoader {
+				width: parent ? parent.width : 0
+				sourceComponent: root.trackerCount === 1 ? singleTrackerComponent
+						: root.trackerCount > 1 ? multiTrackerComponent
+						: null
+			}
+		}
+
+		DelegateComponent {
+			preferredVisible: root.trackerCount > 0
+			ListQuantity {
+				//% "Total yield"
+				text: qsTrId("settings_multirs_total_yield")
+				unit: VenusOS.Units_Energy_KiloWattHour
+				dataItem.uid: root.bindPrefix + "/Yield/User"
+			}
+		}
+
+		DelegateComponent {
+			preferredVisible: root.trackerCount > 0
+			ListQuantity {
+				//% "System yield"
+				text: qsTrId("settings_multirs_system_yield")
+				unit: VenusOS.Units_Energy_KiloWattHour
+				dataItem.uid: root.bindPrefix + "/Yield/System"
+			}
+		}
+
+		DelegateComponent {
+			ListText {
+				text: CommonWords.error
+				dataItem.uid: root.bindPrefix + "/ErrorCode"
+				secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
+			}
+		}
+
+		DelegateComponent {
+			ListRelayState {
+				dataItem.uid: root.bindPrefix + "/Relay/0/State"
+			}
+		}
+
+		DelegateComponent {
+			preferredVisible: root.trackerCount > 0
+			ListNavigation {
+				text: CommonWords.daily_history
+				onClicked: {
+					Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
+							{ "serviceUid": root.bindPrefix })
+				}
+			}
+		}
+
+		DelegateComponent {
+			preferredVisible: root.trackerCount > 0
+			ListNavigation {
+				text: CommonWords.overall_history
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
+							{ "title": text, "bindPrefix": root.bindPrefix })
+				}
+			}
+		}
+
+		DelegateComponent {
+			ListNavigation {
+				text: CommonWords.alarm_status
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarms.qml",
+							{ "title": text, "bindPrefix": root.bindPrefix })
+				}
+			}
+		}
+	}
 	Component {
 		id: singlePhaseAcInOut
 

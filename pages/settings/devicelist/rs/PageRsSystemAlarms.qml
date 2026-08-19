@@ -17,51 +17,62 @@ Page {
 		uid: root.bindPrefix + "/Ac/NumberOfPhases"
 	}
 
-	VisibleItemModel {
+	DelegateComponentModel {
 		id: validAlarmsModel
 
-		VeBusAlarm {
-			id: phaseRotationAlarm
-
-			//% "Phase rotation"
-			text: qsTrId("rssystemalarms_phase_rotation")
-			bindPrefix: root.bindPrefix
-			alarmSuffix: "/PhaseRotation"
-			errorItem: true
-			multiPhase: false
+		DelegateComponent {
+			id: phaseRotationAlarmDC
+			dataItem: VeQuickItem { uid: root.bindPrefix + "/Alarms/PhaseRotation" }
+			preferredVisible: phaseRotationAlarmDC.dataItem.valid
+			VeBusAlarm {
+				//% "Phase rotation"
+				text: qsTrId("rssystemalarms_phase_rotation")
+				bindPrefix: root.bindPrefix
+				alarmSuffix: "/PhaseRotation"
+				errorItem: true
+				multiPhase: false
+			}
 		}
 
-		VeBusAlarm {
-			id: temperatureAlarm
-
-			text: CommonWords.temperature
-			bindPrefix: root.bindPrefix
-			numOfPhases: root.numberOfPhases
-			alarmSuffix: "/HighTemperature"
-			multiPhase: false
+		DelegateComponent {
+			id: temperatureAlarmDC
+			dataItem: VeQuickItem { uid: root.bindPrefix + "/Alarms/HighTemperature" }
+			preferredVisible: temperatureAlarmDC.dataItem.valid
+			VeBusAlarm {
+				text: CommonWords.temperature
+				bindPrefix: root.bindPrefix
+				numOfPhases: root.numberOfPhases
+				alarmSuffix: "/HighTemperature"
+				multiPhase: false
+			}
 		}
 
-		VeBusAlarm {
-			id: overloadAlarm
-
-			//% "Overload"
-			text: qsTrId("rssystemalarms_overload")
-			bindPrefix: root.bindPrefix
-			alarmSuffix: "/Overload"
-			multiPhase: false
+		DelegateComponent {
+			id: overloadAlarmDC
+			dataItem: VeQuickItem { uid: root.bindPrefix + "/Alarms/Overload" }
+			preferredVisible: overloadAlarmDC.dataItem.valid
+			VeBusAlarm {
+				//% "Overload"
+				text: qsTrId("rssystemalarms_overload")
+				bindPrefix: root.bindPrefix
+				alarmSuffix: "/Overload"
+				multiPhase: false
+			}
 		}
 	}
 
-	VisibleItemModel {
+	DelegateComponentModel {
 		id: noAlarmsModel
 
-		PrimaryListLabel {
-			//% "No system alarms"
-			text: qsTrId("rs_no_system_alarms")
+		DelegateComponent {
+			PrimaryListLabel {
+				//% "No system alarms"
+				text: qsTrId("rs_no_system_alarms")
+			}
 		}
 	}
 
 	GradientListView {
-		model: phaseRotationAlarm.preferredVisible || temperatureAlarm.preferredVisible || overloadAlarm.preferredVisible ? validAlarmsModel : noAlarmsModel
+		model: phaseRotationAlarmDC.preferredVisible || temperatureAlarmDC.preferredVisible || overloadAlarmDC.preferredVisible ? validAlarmsModel : noAlarmsModel
 	}
 }

@@ -83,12 +83,10 @@ Page {
 		// ""
 		return Theme.color_font_secondary
 	}
-
 	VeQuickItem {
 		id: modelItem
 		uid: Global.venusPlatform.serviceUid + "/Device/Model"
 	}
-
 	VeQuickItem {
 		id: modbusTcpItem
 		uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
@@ -101,221 +99,244 @@ Page {
 		id: nodeRedItem
 		uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
 	}
+	VeQuickItem {
+		id: fsModifiedStateItem
+		uid: Global.venusPlatform.serviceUid + "/ModificationChecks/FsModifiedState"
+	}
+	VeQuickItem {
+		id: systemHooksStateItem
+		uid: Global.venusPlatform.serviceUid + "/ModificationChecks/SystemHooksState"
+	}
 
 	GradientListView {
-		model: VisibleItemModel {
-			SettingsListHeader {
-				//% "System"
-				text: qsTrId("pagesettingsgeneral_system")
-			}
-
-			ListNavigation {
-				//% "Firmware"
-				text: qsTrId("pagesettingsgeneral_firmware")
-				secondaryText: FirmwareVersion.versionText(firmwareVersion.value, "venus")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFirmware.qml", {"title": text})
-
-				VeQuickItem {
-					id: firmwareVersion
-					uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
+		model: DelegateComponentModel {
+			DelegateComponent {
+				SettingsListHeader {
+					//% "System"
+					text: qsTrId("pagesettingsgeneral_system")
 				}
 			}
 
-			ListNavigation {
-				//% "Access & Security"
-				text: qsTrId("pagesettingsgeneral_access_and_security")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAccessAndSecurity.qml", {"title": text})
-			}
+			DelegateComponent {
+				ListNavigation {
+					//% "Firmware"
+					text: qsTrId("pagesettingsgeneral_firmware")
+					secondaryText: FirmwareVersion.versionText(firmwareVersion.value, "venus")
+					onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFirmware.qml", {"title": text})
 
-			SettingsListHeader {
-				//% "Preferences"
-				text: qsTrId("pagesettingsgeneral_preferences")
-			}
-
-			ListNavigation {
-				//% "Display & Appearance"
-				text: qsTrId("pagesettingsgeneral_display_and_appearance")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayAndAppearance.qml", {"title": text})
-			}
-
-			ListNavigation {
-				//% "Alarms & Feedback"
-				text: qsTrId("pagesettingsgeneral_alarms_and_feedback")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAlarmsAndFeedback.qml", {"title": text})
-			}
-
-			ListRadioButtonGroup {
-				topInset: Theme.geometry_listItem_itemSeparator_height
-				//% "Language"
-				text: qsTrId("settings_language")
-				writeAccessLevel: VenusOS.User_AccessType_User
-				optionModel: languageModel
-				currentIndex: optionModel.currentIndex
-				secondaryText: optionModel.currentDisplayText
-				popDestination: undefined // don't pop page automatically.
-				updateCurrentIndexOnClick: false // don't update the radio button selection automatically.
-
-				onOptionClicked: function(index) {
-					// The SystemSettings data point listener will set the Language.
-					// It may take a few seconds for the backend to deliver the value
-					// change to that other data point. So, display a message to the user.
-					Global.dialogLayer.open(changingLanguageDialog)
-					languageDataItem.setValue(Language.toCode(optionModel.languageAt(index)))
+					VeQuickItem {
+						id: firmwareVersion
+						uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
+					}
 				}
+			}
 
-				LanguageModel {
-					id: languageModel
+			DelegateComponent {
+				ListNavigation {
+					//% "Access & Security"
+					text: qsTrId("pagesettingsgeneral_access_and_security")
+					onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAccessAndSecurity.qml", {"title": text})
 				}
+			}
 
-				Instantiator {
-					model: languageModel
-					delegate: FontLoader {
-						source: model.fontFileUrl
-						onStatusChanged: {
-							if (status === FontLoader.Ready) {
-								languageModel.setFontFamily(source, name)
+			DelegateComponent {
+				SettingsListHeader {
+					//% "Preferences"
+					text: qsTrId("pagesettingsgeneral_preferences")
+				}
+			}
+
+			DelegateComponent {
+				ListNavigation {
+					//% "Display & Appearance"
+					text: qsTrId("pagesettingsgeneral_display_and_appearance")
+					onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayAndAppearance.qml", {"title": text})
+				}
+			}
+
+			DelegateComponent {
+				ListNavigation {
+					//% "Alarms & Feedback"
+					text: qsTrId("pagesettingsgeneral_alarms_and_feedback")
+					onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAlarmsAndFeedback.qml", {"title": text})
+				}
+			}
+
+			DelegateComponent {
+				ListRadioButtonGroup {
+					topInset: Theme.geometry_listItem_itemSeparator_height
+					//% "Language"
+					text: qsTrId("settings_language")
+					writeAccessLevel: VenusOS.User_AccessType_User
+					optionModel: languageModel
+					currentIndex: optionModel.currentIndex
+					secondaryText: optionModel.currentDisplayText
+					popDestination: undefined // don't pop page automatically.
+					updateCurrentIndexOnClick: false // don't update the radio button selection automatically.
+
+					onOptionClicked: function(index) {
+						// The SystemSettings data point listener will set the Language.
+						// It may take a few seconds for the backend to deliver the value
+						// change to that other data point. So, display a message to the user.
+						Global.dialogLayer.open(changingLanguageDialog)
+						languageDataItem.setValue(Language.toCode(optionModel.languageAt(index)))
+					}
+
+					LanguageModel {
+						id: languageModel
+					}
+
+					Instantiator {
+						model: languageModel
+						delegate: FontLoader {
+							source: model.fontFileUrl
+							onStatusChanged: {
+								if (status === FontLoader.Ready) {
+									languageModel.setFontFamily(source, name)
+								}
+							}
+						}
+					}
+
+					VeQuickItem {
+						id: languageDataItem
+						uid: Global.systemSettings.serviceUid + "/Settings/Gui/Language"
+						onValueChanged: {
+							if (value !== undefined) {
+								languageModel.currentLanguage = Language.fromCode(value)
+							}
+						}
+					}
+
+					Component {
+						id: changingLanguageDialog
+
+						ModalWarningDialog {
+							id: dlg
+							property bool languageChangeFailed
+							property bool languageChangeSucceeded
+							dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
+							//% "Changing language"
+							title: qsTrId("settings_language_changing_language")
+							description: dlg.languageChangeFailed
+								//% "Failed to change language!"
+								? qsTrId("settings_language_change_failed")
+								: dlg.languageChangeSucceeded
+								//% "Successfully changed language!"
+								? qsTrId("settings_language_change_succeeded")
+								//% "Please wait while the language is changed."
+								: qsTrId("settings_language_please_wait")
+							Connections {
+								target: Language
+								function onLanguageChangeFailed() { dlg.languageChangeFailed = true; dlg.languageChangeSucceeded = false }
+								function onCurrentLanguageChanged() { if (!dlg.languageChangeFailed) { dlg.languageChangeSucceeded = true } }
 							}
 						}
 					}
 				}
+			}
 
-				VeQuickItem {
-					id: languageDataItem
-					uid: Global.systemSettings.serviceUid + "/Settings/Gui/Language"
-					onValueChanged: {
-						if (value !== undefined) {
-							languageModel.currentLanguage = Language.fromCode(value)
-						}
-					}
-				}
-
-				Component {
-					id: changingLanguageDialog
-
-					ModalWarningDialog {
-						id: dlg
-						property bool languageChangeFailed
-						property bool languageChangeSucceeded
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkOnly
-						//% "Changing language"
-						title: qsTrId("settings_language_changing_language")
-						description: dlg.languageChangeFailed
-							//% "Failed to change language!"
-							? qsTrId("settings_language_change_failed")
-							: dlg.languageChangeSucceeded
-							//% "Successfully changed language!"
-							? qsTrId("settings_language_change_succeeded")
-							//% "Please wait while the language is changed."
-							: qsTrId("settings_language_please_wait")
-						Connections {
-							target: Language
-							function onLanguageChangeFailed() { dlg.languageChangeFailed = true; dlg.languageChangeSucceeded = false }
-							function onCurrentLanguageChanged() { if (!dlg.languageChangeFailed) { dlg.languageChangeSucceeded = true } }
-						}
-					}
+			DelegateComponent {
+				ListNavigation {
+					//% "Date & Time"
+					text: qsTrId("pagesettingsgeneral_date_and_time")
+					onClicked: Global.pageManager.pushPage("/pages/settings/PageTzInfo.qml", {"title": text})
 				}
 			}
 
-			ListNavigation {
-				//% "Date & Time"
-				text: qsTrId("pagesettingsgeneral_date_and_time")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageTzInfo.qml", {"title": text})
+			DelegateComponent {
+				ListRebootButton {
+					topInset: Theme.geometry_listItem_itemSeparator_height
+				}
 			}
 
-			ListRebootButton {
-				topInset: Theme.geometry_listItem_itemSeparator_height
+			DelegateComponent {
+				ListNavigation {
+					topInset: Theme.geometry_listItem_itemSeparator_height
+					//% "Documentation"
+					text: qsTrId("pagesettingsgeneral_documentation")
+					onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDocumentation.qml", {"title": text})
+				}
 			}
 
-			ListNavigation {
-				topInset: Theme.geometry_listItem_itemSeparator_height
-				//% "Documentation"
-				text: qsTrId("pagesettingsgeneral_documentation")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDocumentation.qml", {"title": text})
-			}
-
-			ListNavigation {
-				id: supportStatus
-
-				//% "Support status"
-				text: qsTrId("pagesettingsgeneral_support_status")
+			DelegateComponent {
 				preferredVisible: fsModifiedStateItem.valid && systemHooksStateItem.valid
-				contentItem: Item {
-					implicitWidth: Theme.geometry_listItem_width
-					implicitHeight: supportStatusLayout.implicitHeight
+				ListNavigation {
+					id: supportStatus
 
-					ThreeLabelLayout {
-						id: supportStatusLayout
+					//% "Support status"
+					text: qsTrId("pagesettingsgeneral_support_status")
+					contentItem: Item {
+						implicitWidth: Theme.geometry_listItem_width
+						implicitHeight: supportStatusLayout.implicitHeight
 
-						anchors {
-							left: parent.left
-							right: supportStatusIcon.left
-							rightMargin: supportStatus.spacing
-							verticalCenter: parent.verticalCenter
+						ThreeLabelLayout {
+							id: supportStatusLayout
+
+							anchors {
+								left: parent.left
+								right: supportStatusIcon.left
+								rightMargin: supportStatus.spacing
+								verticalCenter: parent.verticalCenter
+							}
+
+							primaryText: supportStatus.text
+							primaryLabel.font: supportStatus.font
+							secondaryText: root.supportStateText()
 						}
 
-						primaryText: supportStatus.text
-						primaryLabel.font: supportStatus.font
-						secondaryText: root.supportStateText()
-					}
+						CP.ColorImage {
+							id: supportStatusIcon
 
-					CP.ColorImage {
-						id: supportStatusIcon
-
-						anchors {
-							verticalCenter: parent.verticalCenter
-							right: supportStatusForwardIcon.left
-							rightMargin: supportStatus.spacing
+							anchors {
+								verticalCenter: parent.verticalCenter
+								right: supportStatusForwardIcon.left
+								rightMargin: supportStatus.spacing
+							}
+							source: root.supportStateColor() === Theme.color_green ? "qrc:/images/icon_checkmark_32.svg"
+									: root.supportStateColor() === Theme.color_orange ? "qrc:/images/icon_warning_32.svg"
+									: "qrc:/images/icon_alarm_32.svg"
+							color: supportStateColor()
 						}
-						source: root.supportStateColor() === Theme.color_green ? "qrc:/images/icon_checkmark_32.svg"
-								: root.supportStateColor() === Theme.color_orange ? "qrc:/images/icon_warning_32.svg"
-								: "qrc:/images/icon_alarm_32.svg"
-						color: supportStateColor()
-					}
 
-					ForwardIcon {
-						id: supportStatusForwardIcon
-						anchors {
-							right: parent.right
-							verticalCenter: parent.verticalCenter
+						ForwardIcon {
+							id: supportStatusForwardIcon
+							anchors {
+								right: parent.right
+								verticalCenter: parent.verticalCenter
+							}
 						}
 					}
-				}
 
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsSupportStatus.qml", {"title": text})
-
-				VeQuickItem {
-					id: fsModifiedStateItem
-					uid: Global.venusPlatform.serviceUid + "/ModificationChecks/FsModifiedState"
-				}
-				VeQuickItem {
-					id: systemHooksStateItem
-					uid: Global.venusPlatform.serviceUid + "/ModificationChecks/SystemHooksState"
+					onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsSupportStatus.qml", {"title": text})
 				}
 			}
 
-			ListRadioButtonGroup {
-				topInset: Theme.geometry_listItem_itemSeparator_height
-				//% "Demo mode"
-				text: qsTrId("settings_demo_mode")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/DemoMode"
-				popDestination: undefined // don't pop page automatically.
-				updateDataOnClick: false // handle option clicked manually.
-				optionModel: [
-					{ display: CommonWords.disabled, value: 0 },
-					//% "ESS demo"
-					{ display: qsTrId("page_settings_demo_ess"), value: 1 },
-					//% "Boat/Motorhome demo 1"
-					{ display: qsTrId("page_settings_demo_1"), value: 2 },
-					//% "Boat/Motorhome demo 2"
-					{ display: qsTrId("page_settings_demo_2"), value: 3 },
-				]
+			DelegateComponent {
+				ListRadioButtonGroup {
+					topInset: Theme.geometry_listItem_itemSeparator_height
+					//% "Demo mode"
+					text: qsTrId("settings_demo_mode")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/DemoMode"
+					popDestination: undefined // don't pop page automatically.
+					updateDataOnClick: false // handle option clicked manually.
+					optionModel: [
+						{ display: CommonWords.disabled, value: 0 },
+						//% "ESS demo"
+						{ display: qsTrId("page_settings_demo_ess"), value: 1 },
+						//% "Boat/Motorhome demo 1"
+						{ display: qsTrId("page_settings_demo_1"), value: 2 },
+						//% "Boat/Motorhome demo 2"
+						{ display: qsTrId("page_settings_demo_2"), value: 3 },
+					]
 
-				//% "Starting demo mode will change some settings and the user interface will be unresponsive for a moment."
-				caption: qsTrId("settings_demo_mode_caption")
+					//% "Starting demo mode will change some settings and the user interface will be unresponsive for a moment."
+					caption: qsTrId("settings_demo_mode_caption")
 
-				onOptionClicked: function(index) {
-					Qt.callLater(Global.main.rebuildUi)
-					dataItem.setValue(index)
+					onOptionClicked: function(index) {
+						Qt.callLater(Global.main.rebuildUi)
+						dataItem.setValue(index)
+					}
 				}
 			}
 		}

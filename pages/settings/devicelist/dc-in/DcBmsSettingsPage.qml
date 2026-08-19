@@ -13,34 +13,49 @@ Page {
 	required property string bindPrefix
 	required property Item settingsPage
 
+	VeQuickItem {
+		id: bmsPresentItem
+		uid: root.bindPrefix + "/Settings/BmsPresent"
+	}
+
 	title: CommonWords.settings
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListOutputBatteryRadioButtonGroup {
-				bindPrefix: root.bindPrefix
-				settingsPage: root.settingsPage
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListOutputBatteryRadioButtonGroup {
+					bindPrefix: root.bindPrefix
+					settingsPage: root.settingsPage
+				}
 			}
-			ListText {
-				id: bmsControlled
-				text: CommonWords.bms_controlled
-				secondaryText: CommonWords.yesOrNo(dataItem.value)
-				dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
-				preferredVisible: dataItem.valid
-			}
-
-			ListButton {
-				text: CommonWords.bms_control
-				secondaryText: CommonWords.reset
-				preferredVisible: bmsControlled.dataItem.value === 1
-				onClicked: {
-					bmsControlled.dataItem.setValue(0)
+			DelegateComponent {
+				id: bmsControlledDC
+				dataItem: VeQuickItem { uid: root.bindPrefix + "/Settings/BmsPresent" }
+				preferredVisible: bmsPresentItem.valid
+				ListText {
+					id: bmsControlled
+					text: CommonWords.bms_controlled
+					secondaryText: CommonWords.yesOrNo(dataItem.value)
+					dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
 				}
 			}
 
-			ListInfoLabel {
-				text: CommonWords.bms_control_info
-				preferredVisible: bmsControlled.dataItem.value === 1
+			DelegateComponent {
+				preferredVisible: bmsControlledDC.dataItem.value === 1
+				ListButton {
+					text: CommonWords.bms_control
+					secondaryText: CommonWords.reset
+					onClicked: {
+						bmsControlledDC.dataItem.setValue(0)
+					}
+				}
+			}
+
+			DelegateComponent {
+				preferredVisible: bmsControlledDC.dataItem.value === 1
+				ListInfoLabel {
+					text: CommonWords.bms_control_info
+				}
 			}
 		}
 	}
