@@ -4,6 +4,7 @@
 */
 
 #include "theme.h"
+#include <QInputMethod>
 
 using namespace Victron::VenusOS;
 
@@ -23,12 +24,16 @@ EM_JS(int, getScreenHeight, (), {
 	return screen.height;
 });
 
-EM_JS(int, getWindowWidth, (), {
-	return window.innerWidth;
-});
-
 EM_JS(int, getWindowHeight, (), {
 	return window.innerHeight;
+});
+
+EM_JS(int, getVisualViewportHeight, (), {
+	return window.visualViewport ? window.visualViewport.height : window.innerHeight;
+});
+
+EM_JS(int, getVisualViewportOffsetTop, (), {
+	return window.visualViewport ? window.visualViewport.offsetTop : 0;
 });
 
 #endif
@@ -44,6 +49,10 @@ Theme::Theme(QObject *parent) : QObject(parent)
 			? Victron::VenusOS::Theme::SevenInch
 			: Victron::VenusOS::Theme::FiveInch);
 	}
+
+	setWindowHeight(getWindowHeight());
+	setVisualViewportHeight(getVisualViewportHeight());
+	setVisualViewportOffsetTop(getVisualViewportOffsetTop());
 
 	// Assign global instance for callbacks
 	g_themeInstance = this;
@@ -69,6 +78,11 @@ Theme::Theme(QObject *parent) : QObject(parent)
 	setScreenSize((round(screenDiagonalMm / 10 / 2.5) == 7)
 		? Victron::VenusOS::Theme::SevenInch
 		: Victron::VenusOS::Theme::FiveInch);
+
+	if (QInputMethod *inputMethod = QGuiApplication::inputMethod()) {
+		connect(inputMethod, &QInputMethod::keyboardRectangleChanged, this, &Theme::updateViewportAndKeyboardProperties);
+		connect(inputMethod, &QInputMethod::visibleChanged, this, &Theme::updateViewportAndKeyboardProperties);
+	}
 #endif
 }
 
@@ -221,15 +235,6 @@ Victron::VenusOS::Theme::StatusLevel Theme::getValueStatus(qreal value, Victron:
 	}
 }
 
-bool Theme::windowIsLandscape() const
-{
-#if defined(VENUS_WEBASSEMBLY_BUILD)
-	return getWindowWidth() > getWindowHeight();
-#else
-	return false;
-#endif
-}
-
 bool Theme::objectHasQObjectParent(QObject *obj) const
 {
 	return obj && obj->parent();
@@ -240,13 +245,66 @@ QString Theme::applicationVersion() const
 	return QStringLiteral("v%1.%2.%3").arg(PROJECT_VERSION_MAJOR).arg(PROJECT_VERSION_MINOR).arg(PROJECT_VERSION_PATCH);
 }
 
-int Theme::keyboardHeight() const { return m_keyboardHeight; }
-
-void Theme::setKeyboardHeight(int height)
+bool Theme::virtualKeyboardOpened() const
 {
-	if (m_keyboardHeight != height) {
-		m_keyboardHeight = height;
-		Q_EMIT keyboardHeightChanged();
+	return m_virtualKeyboardOpened;
+}
+
+int Theme::visualViewportBottom() const
+{
+	return m_visualViewportBottom;
+}
+
+void Theme::updateViewportAndKeyboardProperties()
+{
+	const int prevViewportBottom = m_visualViewportBottom;
+	const bool prevVirtualKeyboardOpened = m_virtualKeyboardOpened;
+
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	// Update the y pos of the bottom of the viewport.
+	m_visualViewportBottom = m_visualViewportOffsetTop + m_visualViewportHeight;
+
+	// If the visual viewport is at least 150px shorter than the layout viewport, assume the
+	// keyboard is open.
+	static const int keyboardMinHeight = 150;
+	m_virtualKeyboardOpened = (m_windowHeight - m_visualViewportHeight) > keyboardMinHeight;
+
+#else
+	if (QInputMethod *inputMethod = QGuiApplication::inputMethod()) {
+		m_virtualKeyboardOpened = inputMethod->isVisible();
+		m_visualViewportBottom = inputMethod->keyboardRectangle().y();
+	}
+#endif
+
+	if (prevViewportBottom != m_visualViewportBottom) {
+		Q_EMIT visualViewportBottomChanged();
+	}
+	if (prevVirtualKeyboardOpened != m_virtualKeyboardOpened) {
+		Q_EMIT virtualKeyboardOpenedChanged();
+	}
+}
+
+void Theme::setVisualViewportOffsetTop(int offsetTop)
+{
+	if (m_visualViewportOffsetTop != offsetTop) {
+		m_visualViewportOffsetTop = offsetTop;
+		updateViewportAndKeyboardProperties();
+	}
+}
+
+void Theme::setVisualViewportHeight(int height)
+{
+	if (m_visualViewportHeight != height) {
+		m_visualViewportHeight = height;
+		updateViewportAndKeyboardProperties();
+	}
+}
+
+void Theme::setWindowHeight(int height)
+{
+	if (m_windowHeight != height) {
+		m_windowHeight = height;
+		updateViewportAndKeyboardProperties();
 	}
 }
 
@@ -262,18 +320,30 @@ void jsSystemColorSchemeChanged(emscripten::val event)
 	g_themeInstance->setSystemColorScheme(systemSchemeDark ? Victron::VenusOS::Theme::SystemColorSchemeDark : Victron::VenusOS::Theme::SystemColorSchemeLight);
 }
 
-// Called from JavaScript (index.html) when the native mobile keyboard opens or closes.
-// Height is in CSS pixels (logical pixels), matching QML coordinate space on WASM.
-void jsSetKeyboardHeight(int height)
+void jsSetWindowInnerHeight(int height)
 {
 	if (g_themeInstance)
-		g_themeInstance->setKeyboardHeight(height);
+		g_themeInstance->setWindowHeight(height);
+}
+
+void jsSetVisualViewportHeight(int height)
+{
+	if (g_themeInstance)
+		g_themeInstance->setVisualViewportHeight(height);
+}
+
+void jsSetVisualViewportOffsetTop(int offsetTop)
+{
+	if (g_themeInstance)
+		g_themeInstance->setVisualViewportOffsetTop(offsetTop);
 }
 
 // Bind C++ functions to JS — callable as Module.jsSetKeyboardHeight(h) etc.
 EMSCRIPTEN_BINDINGS(theme_bindings) {
 	using namespace emscripten;
 	function("jsSystemColorSchemeChanged", &jsSystemColorSchemeChanged);
-	function("jsSetKeyboardHeight", &jsSetKeyboardHeight);
+	function("jsSetWindowInnerHeight", &jsSetWindowInnerHeight);
+	function("jsSetVisualViewportHeight", &jsSetVisualViewportHeight);
+	function("jsSetVisualViewportOffsetTop", &jsSetVisualViewportOffsetTop);
 }
 #endif

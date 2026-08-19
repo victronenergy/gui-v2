@@ -46,6 +46,7 @@ ListView {
 
 	width: parent?.width ?? 0
 	height: parent?.height ?? 0
+	orientation: ListView.Vertical
 	boundsBehavior: Flickable.StopAtBounds
 	maximumFlickVelocity: Theme.geometry_flickable_maximumFlickVelocity
 	flickDeceleration: Theme.geometry_flickable_flickDeceleration

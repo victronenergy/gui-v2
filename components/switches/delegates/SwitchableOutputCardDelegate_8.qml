@@ -103,7 +103,7 @@ FocusScope {
 		MouseArea {
 			anchors.fill: spinBox.contentItem
 			onPressed: (event) => {
-				Global.aboutToFocusTextField(spinBox.textInput, spinBox, Global.mainView.cardsLoader)
+				Global.aboutToFocusTextField(spinBox.textInput, Global.mainView.cardsLoader.flickableView)
 				event.accepted = false
 			}
 		}

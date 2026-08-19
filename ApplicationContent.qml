@@ -12,8 +12,6 @@ FocusScope {
 
 	property alias mainView: mainView
 
-	property var _inputComponent
-
 	MainView {
 		id: mainView
 		anchors.fill: parent
@@ -83,11 +81,6 @@ FocusScope {
 			if (mainView.pageManager.ensureInteractive()) {
 				mouse.accepted = true
 			}
-
-			// Consume the event if the press event closes the VKB.
-			if (keyboardHandlerLoader.item && keyboardHandlerLoader.item.acceptMouseEvent(idleModeMouseArea, mouse.x, mouse.y)) {
-				mouse.accepted = true
-			}
 		}
 	}
 
@@ -112,9 +105,6 @@ FocusScope {
 	//   text field is not obscured by the native VKB.
 	// - On Wasm desktop and desktop platforms, no special input handling is required, as the
 	//   hardware keyboard can be used for text input.
-	//
-	// Note this Loader is the top-most layer, to allow the idleModeMouseArea beneath to call
-	// acceptMouseEvent() when clicking outside of the focused text field, to auto-close the Qt VKB.
 	property Loader _vkbLoader: Loader {
 		id: keyboardHandlerLoader
 

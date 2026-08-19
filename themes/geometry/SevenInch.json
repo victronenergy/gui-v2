@@ -91,6 +91,8 @@
     "geometry_focus_highlight_corner_size": 14,
     "geometry_focus_highlight_border_size": 4,
 
+    "geometry_inputPanel_topMargin": 16,
+
     "geometry_silenceAlarmButton_horizontalPadding": 16,
 
     "geometry_listItemButton_horizontalPadding": 16,

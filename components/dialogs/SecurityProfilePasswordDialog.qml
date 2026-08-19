@@ -12,39 +12,23 @@ ModalDialog {
 
 	property string password
 
-	function validate() : bool {
-
+	function validate() {
 		root.password = ""
 
-		if (firstPassword.length < 8) {
-
+		if (firstPassword.text.length < 8) {
 			// First, validate that the firstPassword is at least 8 characters long.
-			// If not, the border turns red the passwordHint warning about length
-			// becomes visible.
-
-			firstPassword.borderColor = Theme.color_critical
-			passwordHint.visible = true
 			//% "Password needs to be at least 8 characters long"
 			passwordHint.text = qsTrId("settings_security_profile_password_incorrect_length")
-
-			return false
+			return Utils.validationResult(VenusOS.InputValidation_Result_Error)
 		}
 
 		resetValidation()
-
 		root.password = firstPassword.text
 
-		return true
+		return Utils.validationResult(VenusOS.InputValidation_Result_OK)
 	}
 
 	function resetValidation() {
-
-		// As soon as the input in any input field changes,
-		// the borderColor turns back to blue and the red passwordHint turns invisible.
-		// This is also this is ths default "validated" state
-
-		firstPassword.borderColor = Theme.color_ok
-		passwordHint.visible = false
 		passwordHint.text = ""
 	}
 
@@ -89,7 +73,7 @@ ModalDialog {
 				wrapMode: Text.Wrap
 			}
 
-			TextField {
+			TextValidationField {
 				id: firstPassword
 
 				Layout.fillWidth: true
@@ -99,15 +83,10 @@ ModalDialog {
 				//% "Enter new password"
 				placeholderText: qsTrId("settings_security_profile_enter_new_password")
 				echoMode: TextInput.Password
+				validateInput: root.validate
 
-				// As soon as the input in any input field changes,
-				// the borderColors turns back to blue and the red passwordHint turns invisible.
+				// As soon as the input changes, remove the password hint.
 				onTextEdited: root.resetValidation()
-
-				// When Return/Enter key is pressed (and as per current behaviour onFocusLost),
-				// the password shall be validated
-				onAccepted: root.acceptButton?.clicked()
-				onActiveFocusChanged: if(!focus) root.validate()
 			}
 
 			Label {
@@ -118,12 +97,13 @@ ModalDialog {
 				color: Theme.color_red
 				horizontalAlignment: Label.AlignHCenter
 				wrapMode: Text.Wrap
+				opacity: text.length > 0 ? 1 : 0
 			}
 		}
 	}
 
 	tryAccept: function() {
 		// When “Confirm” is tapped the passwords shall be validated
-		return root.validate()
+		return root.validate().status === VenusOS.InputValidation_Result_OK
 	}
 }
