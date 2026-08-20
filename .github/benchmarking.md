@@ -195,17 +195,35 @@ The page list is deliberately a small, representative sample — the Overview
 widget drilldowns plus the most-used settings pages — rather than every page in
 the app, so that it does not need updating whenever a page is added or removed.
 
-Reference numbers on a Cerbo GX (v3.80~57), median of 3 runs, for orientation:
+Reference numbers on a Cerbo GX, median of 3 runs, for orientation. Both columns
+were measured with the same harness on the same device (v3.80~39):
 
 ```
-warm instantiate      median 330 ms/page, worst 749 ms
-cold compile          86 ms/page median, 309 ms worst; 2036 ms for the sample
-                      (21 / 124 / 526 ms with Qt's bytecode cache populated)
-one settings row      ListSetting 4 ms, ListNavigation 12 ms, ListSwitch 14 ms
+                      before the DelegateComponentModel port   after
+warm instantiate      median 329 ms/page, worst 691 ms         median 195 ms, worst 481 ms
+                      5714 ms for the 19-page sample           3996 ms
+cold compile          2084 ms for the sample                   2104 ms (unchanged, as expected)
+one settings row      ListNavigation 12.5 ms, ListSwitch 12.7 ms, ListSetting 3.8 ms
+                      SettingsListNavigation 19.3 ms           12.5 ms
 ```
 
-The compile column is much noisier between runs than the instantiate column, so
-treat a single page's compile figure as indicative only.
+Compilation is not affected by that port and should not be expected to be — the
+change is in what a document instantiates, not in the document text.
+
+Three caveats before quoting any of these:
+
+- The compile column is much noisier between runs than the instantiate column
+  (the sample total spanned 7.8% across three runs, against 0.8% for instantiate),
+  so treat a single page's compile figure as indicative only.
+- **Per-page cold compile figures are order-dependent.** The whole cold pass runs
+  in one process and nothing calls `trimComponentCache()`, so the first page in
+  `pageUrls` pays the compile of every shared type it pulls in and later pages only
+  pay for what is still new. Moving a page down the list changes its compile figure
+  with no code change.
+- The app compiles ~300 QML documents during its own startup before the benchmark
+  begins, so even with the bytecode caches cleared the "cold" column is not a true
+  empty-cache endpoint — it sits between the two endpoints described below. That
+  applies equally to any two revisions being compared, so an A/B is still fair.
 
 **Read the compile column carefully: it has two very different values, and
 which one you measure depends on the state of a cache you cannot see.**  A GX
