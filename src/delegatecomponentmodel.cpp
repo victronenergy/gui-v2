@@ -6,6 +6,7 @@
 #include "delegatecomponentmodel.h"
 
 #include <private/qqmlchangeset_p.h>
+#include <QPointer>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQmlInfo>
@@ -21,7 +22,10 @@ class Victron::VenusOS::DelegateComponentModelPrivate : public QObjectPrivate
 	Q_DECLARE_PUBLIC(DelegateComponentModel)
 public:
 	struct ObjectInfo {
-		QObject *object = nullptr;
+		// A QPointer, not a raw pointer: nothing in the tree currently destroys a
+		// delegate from QML, but if anything ever does, object(), release(),
+		// variantValue() and indexOf() all dereference this.
+		QPointer<QObject> object;
 		int refCount = 0;
 	};
 
@@ -49,15 +53,17 @@ public:
 	{
 		auto it = objects.find(entry);
 		if (it != objects.end()) {
-			if (it->object) {
-				if (QQuickItem *item = qobject_cast<QQuickItem *>(it->object)) {
-					const int index = visibleEntries.indexOf(entry);
-					emit model->destroyingItem(item);
-					Q_UNUSED(index);
-				}
-				it->object->deleteLater();
-			}
+			// Take the object and drop the hash entry before emitting. A slot connected
+			// to destroyingItem may reenter and insert into objects, which rehashes and
+			// invalidates any iterator held across the emit.
+			QObject *const object = it->object;
 			objects.erase(it);
+			if (object) {
+				if (QQuickItem *item = qobject_cast<QQuickItem *>(object)) {
+					emit model->destroyingItem(item);
+				}
+				object->deleteLater();
+			}
 		}
 	}
 
@@ -181,15 +187,23 @@ void DelegateComponentModel::entries_clear(QQmlListProperty<DelegateComponent> *
 		emit model->countChanged();
 	}
 
-	for (auto it = d->objects.begin(); it != d->objects.end(); ++it) {
-		if (it->object) {
-			if (QQuickItem *item = qobject_cast<QQuickItem *>(it->object)) {
-				emit model->destroyingItem(item);
-			}
-			it->object->deleteLater();
-		}
+	// Detach the whole map before emitting: a slot connected to destroyingItem may
+	// reenter and insert into objects, which would rehash under the iterator.
+	QList<QPointer<QObject>> createdObjects;
+	createdObjects.reserve(d->objects.count());
+	for (auto it = d->objects.constBegin(); it != d->objects.constEnd(); ++it) {
+		createdObjects.append(it->object);
 	}
 	d->objects.clear();
+
+	for (const QPointer<QObject> &object : createdObjects) {
+		if (object) {
+			if (QQuickItem *item = qobject_cast<QQuickItem *>(object.data())) {
+				emit model->destroyingItem(item);
+			}
+			object->deleteLater();
+		}
+	}
 
 	emit model->entriesChanged();
 }
@@ -214,7 +228,13 @@ void DelegateComponentModel::entries_removeLast(QQmlListProperty<DelegateCompone
 		emit model->countChanged();
 	}
 
-	d->destroyObject(last, model);
+	// Only destroy the object if the view is not still holding a reference to it.
+	// If it is, the view's own release() will destroy it. Matches the refCount
+	// guard in entryVisibilityChanged().
+	auto objIt = d->objects.find(last);
+	if (objIt != d->objects.end() && objIt->refCount <= 0) {
+		d->destroyObject(last, model);
+	}
 	emit model->entriesChanged();
 }
 
@@ -281,9 +301,14 @@ QObject *DelegateComponentModel::object(int index, QQmlIncubator::IncubationMode
 	}
 
 	QQmlEngine::setObjectOwnership(object, QQmlEngine::CppOwnership);
-	component->completeCreate();
 
+	// Record the object before completeCreate(), not after. completeCreate() evaluates
+	// bindings and runs Component.onCompleted, which can change a DelegateComponent's
+	// preferredVisible and reenter entryVisibilityChanged(). If the bookkeeping is not
+	// in place by then, that path cannot see the object it needs to account for.
 	d->objects[entry] = { object, 1 };
+
+	component->completeCreate();
 
 	if (QQuickItem *item = qobject_cast<QQuickItem *>(object)) {
 		emit initItem(index, item);
@@ -301,11 +326,13 @@ QQmlInstanceModel::ReleaseFlags DelegateComponentModel::release(QObject *object,
 			if (--it->refCount > 0) {
 				return QQmlInstanceModel::Referenced;
 			}
-			if (QQuickItem *item = qobject_cast<QQuickItem *>(it->object)) {
+			// Drop the hash entry before emitting; destroyingItem may reenter and
+			// insert into objects, invalidating an iterator held across the emit.
+			d->objects.erase(it);
+			if (QQuickItem *item = qobject_cast<QQuickItem *>(object)) {
 				emit destroyingItem(item);
 			}
-			it->object->deleteLater();
-			d->objects.erase(it);
+			object->deleteLater();
 			return QQmlInstanceModel::Destroyed;
 		}
 	}
