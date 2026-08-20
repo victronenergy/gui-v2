@@ -164,8 +164,15 @@ void WidgetConnectorPathUpdater::update()
 	const qreal spacing = 1.0 / count;
 	const qreal baseProgress = qIsNaN(progress) ? 0.0 : progress;
 
-	for (int i = 0; i < count; i++) {
+	// Re-read the count each iteration rather than caching it: setPosition(),
+	// setRotation() and setOpacity() below can reenter QML (bindings, onXChanged, a
+	// Component.onDestruction that calls remove()), and an electron removed part way
+	// through would make a cached count index past the end.
+	for (int i = 0; i < electrons.count(); i++) {
 		QQuickItem *electron = electrons.at(i);
+		if (!electron) {
+			continue;
+		}
 
 		// Evenly space out the progress of each electron
 		const qreal _progress = modulo(baseProgress - (spacing * i), 1.0);

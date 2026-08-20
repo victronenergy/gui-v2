@@ -42,10 +42,13 @@ public:
 	//
 	// Fading between two values that sit strictly inside that range means an
 	// electron never changes classification, so fading in and out no longer causes
-	// any full rebuild. Neither endpoint is visually distinguishable from the true
-	// 0.0 and 1.0 that they replace: the faded out electron contributes less than
-	// half of one 8-bit alpha step, and the faded in one is within half a step of
-	// fully opaque.
+	// any full rebuild. Against an 8-bit alpha channel the difference from the true
+	// 0.0 and 1.0 they replace is about one quantisation step at each end: 0.002
+	// is 0.51 of a step above zero, and 0.996 is 1.02 steps below fully opaque.
+	// That is not distinguishable in the electron's own artwork, but it is not the
+	// exact match a casual reading would assume, and it does mean a faded out
+	// electron is never subtree-blocked, so its geometry stays in the render lists
+	// for the part of each lap it used to be culled from.
 	static constexpr qreal FadedOutOpacity = 0.002;
 	static constexpr qreal FadedInOpacity = 0.996;
 
