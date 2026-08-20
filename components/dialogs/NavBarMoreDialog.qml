@@ -118,8 +118,8 @@ ModalDialog {
 				checked: true
 				enabled: false
 			}
-			onCurrentIndexChanged: {
-				root.buttonClicked(currentIndex)
+			onButtonClicked: (pageIndex) => {
+				root.buttonClicked(pageIndex)
 			}
 		}
 	}
