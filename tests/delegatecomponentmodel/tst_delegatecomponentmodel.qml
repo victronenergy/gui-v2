@@ -155,8 +155,39 @@ TestCase {
 					}
 				}
 			}
+
+			// --- Test G: delegates are actually constructed and destroyed ---
+			//
+			// Every other test here asserts only on count, and ListView.count is just
+			// model.count, so they would all still pass if object() and release() did
+			// nothing at all. These two count real construction and destruction, which
+			// is the behaviour the model exists for.
+			ListView {
+				id: viewG
+				anchors.fill: parent
+				model: DelegateComponentModel {
+					id: modelG
+					DelegateComponent {
+						id: builtDC
+						property bool rowVisible: false
+						preferredVisible: rowVisible
+						delegate: Component {
+							Rectangle {
+								width: 800
+								height: 20
+								objectName: "G1"
+								Component.onCompleted: root.delegatesBuilt++
+								Component.onDestruction: root.delegatesDestroyed++
+							}
+						}
+					}
+				}
+			}
 		}
 	}
+
+	property int delegatesBuilt: 0
+	property int delegatesDestroyed: 0
 
 	function test_allEntriesVisible() {
 		compare(modelA.count, 3)
@@ -285,5 +316,33 @@ TestCase {
 		compare(nestedStateDC.sharedValue, 0)
 
 		subPage.destroy()
+	}
+
+	// A hidden entry must not construct its delegate — that is the whole point of the
+	// model, and nothing else in this file checks it.
+	function test_hiddenEntryNeverConstructsItsDelegate() {
+		compare(builtDC.rowVisible, false)
+		tryCompare(modelG, "count", 0)
+		compare(root.delegatesBuilt, 0)
+
+		builtDC.rowVisible = true
+		tryCompare(modelG, "count", 1)
+		tryCompare(root, "delegatesBuilt", 1)
+		verify(findChild(viewG, "G1") !== null)
+	}
+
+	// Hiding an entry must release and destroy the delegate it built, not merely cull
+	// it. release() returning Destroyed is what makes the delegate's own lifetime
+	// observable, so the destruction has to be asserted, not assumed.
+	function test_hidingAnEntryDestroysItsDelegate() {
+		builtDC.rowVisible = true
+		tryCompare(modelG, "count", 1)
+		tryCompare(root, "delegatesBuilt", 1)
+
+		const destroyedBefore = root.delegatesDestroyed
+		builtDC.rowVisible = false
+		tryCompare(modelG, "count", 0)
+		tryCompare(root, "delegatesDestroyed", destroyedBefore + 1)
+		verify(findChild(viewG, "G1") === null)
 	}
 }
