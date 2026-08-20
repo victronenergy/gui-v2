@@ -24,14 +24,6 @@ Page {
 		uid: root.bindPrefix + "/ButaneRatio"
 	}
 	VeQuickItem {
-		id: rawValueFullItem
-		uid: root.bindPrefix + "/RawValueFull"
-	}
-	VeQuickItem {
-		id: rawValueEmptyItem
-		uid: root.bindPrefix + "/RawValueEmpty"
-	}
-	VeQuickItem {
 		id: standardItem
 		uid: root.bindPrefix + "/Standard"
 	}
@@ -125,7 +117,7 @@ Page {
 
 			DelegateComponent {
 				dataItem: VeQuickItem { uid: root.bindPrefix + "/RawValueEmpty" }
-				preferredVisible: dataItem.seen && (!rawValueEmptyItem.valid || standardDC.currentValue === 2)
+				preferredVisible: dataItem.seen && (!standardItem.valid || standardDC.currentValue === 2)
 				ListSpinBox {
 					//% "Sensor value when empty"
 					text: qsTrId("devicelist_tanksetup_sensor_value_when_empty")
@@ -138,7 +130,7 @@ Page {
 
 			DelegateComponent {
 				dataItem: VeQuickItem { uid: root.bindPrefix + "/RawValueFull" }
-				preferredVisible: dataItem.seen && (!rawValueFullItem.valid || standardDC.currentValue === 2)
+				preferredVisible: dataItem.seen && (!standardItem.valid || standardDC.currentValue === 2)
 				ListSpinBox {
 					//% "Sensor value when full"
 					text: qsTrId("devicelist_tanksetup_sensor_value_when_full")

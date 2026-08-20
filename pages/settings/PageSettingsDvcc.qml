@@ -14,6 +14,28 @@ Page {
 		uid: Global.system.serviceUid + "/ActiveBmsService"
 	}
 
+	// Note: kept at page scope (rather than inside the 'Controlling BMS' delegate) because
+	// bmsOptionsDC.preferredVisible depends on the optionModel this handler builds; if it lived
+	// inside the delegate it would never run once that delegate is hidden.
+	VeQuickItem {
+		id: availableBmsServicesItem
+		uid: Global.system.serviceUid + "/AvailableBmsServices"
+		onValueChanged: {
+			if (value === undefined) {
+				return
+			}
+			let options = bmsOptionsDC.defaultOptionModel.slice()
+			const bmses = value
+			for (let i = 0; i < bmses.length; i++) {
+				options.push({
+					"display": bmses[i].name,
+					"value": bmses[i].instance
+				})
+			}
+			bmsOptionsDC.optionModel = options
+		}
+	}
+
 	GradientListView {
 		id: dvccSettings
 
@@ -29,7 +51,7 @@ Page {
 			DelegateComponent {
 				id: commonSettingsDC
 				dataItem: VeQuickItem { uid: Global.systemSettings.serviceUid + "/Settings/Services/Bol" }
-				property bool dvccActive: dataItem.value === 1
+				property bool dvccActive: dataItem.value === 1 || dataItem.value === VenusOS.Switch_ForcedOn
 				property bool userHasWriteAccess: Global.systemSettings.canAccess(VenusOS.User_AccessType_Installer)
 				DvccCommonSettings {
 					id: commonSettings
@@ -90,7 +112,7 @@ Page {
 			DelegateComponent {
 				id: sharedTempSenseDC
 				dataItem: VeQuickItem { uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SharedTemperatureSense" }
-				property bool checked: dataItem.value === 1
+				property bool checked: dataItem.value === 1 || dataItem.value === VenusOS.Switch_ForcedOn
 				preferredVisible: commonSettingsDC.dvccActive
 				ListSwitchForced {
 					id: sharedTempSense
@@ -222,24 +244,6 @@ Page {
 					//: Shown when BMS instance is invalid
 					//% "Unavailable, set another"
 					defaultSecondaryText: qsTrId("settings_dvcc_unavailable_bms")
-
-					VeQuickItem {
-						uid: Global.system.serviceUid + "/AvailableBmsServices"
-						onValueChanged: {
-							if (value === undefined) {
-								return
-							}
-							let options = bmsOptionsDC.defaultOptionModel.slice()
-							const bmses = value
-							for (let i = 0; i < bmses.length; i++) {
-								options.push({
-									"display": bmses[i].name,
-									"value": bmses[i].instance
-								})
-							}
-							bmsOptionsDC.optionModel = options
-						}
-					}
 				}
 			}
 

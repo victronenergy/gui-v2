@@ -310,10 +310,17 @@ Page {
 		model: DelegateComponentModel {
 			DelegateComponent {
 				id: _backupNameInputDC
+				// Only the action term gates the model entry. The backupFileName term
+				// stays on the ListTextField, as it was before the port: saveInput()
+				// sets root.backupFileName and then writes secondaryText, so gating the
+				// DelegateComponent on it would destroy the field midway through its own
+				// commit. Hiding the row leaves it in the model with zero height, which
+				// is what VisibleItemModel did.
 				preferredVisible: _backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Backup
-						&& !root.backupFileName
 				ListTextField {
 					id: _backupNameInput
+
+					preferredVisible: !root.backupFileName
 					//% "Backup name"
 					text: qsTrId("backup_name")
 					interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
@@ -359,8 +366,14 @@ Page {
 			}
 			DelegateComponent {
 				id: _restoreOptionsListDC
+				// Note: the '!root.fileToRestore' term is deliberately applied to the
+				// ListRadioButtonGroup below, and not here. The group declares its options sub-page
+				// as a Component inside this delegate, and it is the sub-page that assigns
+				// root.fileToRestore. Filtering the delegate out of the model at that moment would
+				// destroy the delegate, and with it invalidate the context of the sub-page that is
+				// still open and closing itself. Hiding the list item instead gives the same result
+				// (the item is zero-height and invisible) without destroying it.
 				preferredVisible: _backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Restore
-						&& !root.fileToRestore
 				ListRadioButtonGroup {
 					id: _restoreOptionsList
 					//% "Restore"
@@ -370,6 +383,7 @@ Page {
 					secondaryText: qsTrId("vebus_backup_select_backup_file_to_restore")
 					updateDataOnClick: false
 					popDestination: root
+					preferredVisible: !root.fileToRestore
 					interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
 					onOptionClicked: function(index) {
 						root.fileNameToRestore = _availableBackupsModel.get(index).display
@@ -398,8 +412,9 @@ Page {
 			}
 			DelegateComponent {
 				id: _deleteOptionsListDC
+				// Note: '!root.fileToDelete' is applied to the ListRadioButtonGroup below rather
+				// than here, for the same reason as for the restore options list above.
 				preferredVisible: _backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Delete
-						&& !root.fileToDelete
 				ListRadioButtonGroup {
 					id: _deleteOptionsList
 					//% "Delete backup"
@@ -409,6 +424,7 @@ Page {
 					secondaryText: qsTrId("vebus_backup_select_backup_file_to_delete")
 					updateDataOnClick: false
 					popDestination: root
+					preferredVisible: !root.fileToDelete
 					interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
 					onOptionClicked: function(index) {
 						root.fileNameToDelete = _mergedBackupsModel.get(index).display

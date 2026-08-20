@@ -80,21 +80,21 @@ Page {
 				}
 			}
 
-			DelegateComponent {
-				// TODO implement when venus-platform provides equivalent of vePlatform.getMemInfo()
-				/*ListNavigation {
+			// TODO implement when venus-platform provides equivalent of vePlatform.getMemInfo()
+			/*DelegateComponent {
+				ListNavigation {
 					text: "glibc memory"
 					onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryLibc.qml", { title: text })
-				}*/
-			}
+				}
+			}*/
 
-			DelegateComponent {
-				// TODO implement when venus-platform provides equivalent of QuickView.imageCacheSize()
-				/*ListNavigation {
+			// TODO implement when venus-platform provides equivalent of QuickView.imageCacheSize()
+			/*DelegateComponent {
+				ListNavigation {
 					text: "Qt memory"
 					onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryQt.qml", { title: text })
-				}*/
-			}
+				}
+			}*/
 		}
 	}
 }

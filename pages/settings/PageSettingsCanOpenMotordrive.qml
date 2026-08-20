@@ -26,6 +26,7 @@ Page {
 	GradientListView {
 		model: DelegateComponentModel {
 			DelegateComponent {
+				property bool userHasWriteAccess: Global.systemSettings.canAccess(VenusOS.User_AccessType_Installer)
 				preferredVisible: userHasWriteAccess
 				ListButton {
 					//% "Scan for E-drives"

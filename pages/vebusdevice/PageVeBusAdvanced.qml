@@ -331,6 +331,7 @@ Page {
 
 			DelegateComponent {
 				preferredVisible: masterHasNetworkQuality.valid
+						&& Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
 				ListNavigation {
 					//% "VE.Bus diagnostics"
 					text: qsTrId("vebus_diagnostics")

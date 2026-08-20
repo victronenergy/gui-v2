@@ -58,6 +58,14 @@ DevicePage {
 		id: firmwareVersion
 		uid: root.bindPrefix + "/FirmwareVersion"
 	}
+
+	// Declared at page scope, as its count is read by a DelegateComponent.preferredVisible binding
+	// which is evaluated outside of the delegate.
+	AcInputSettingsModel {
+		id: inputSettingsModel
+		serviceUid: root.bindPrefix
+	}
+
 	VeQuickItem {
 		id: state
 		uid: root.bindPrefix + "/State"
@@ -112,15 +120,12 @@ DevicePage {
 		DelegateComponent {
 			/*	This shows the current limits for Ac/In/<x>/CurrentLimit.
 				Note that gui-v1 instead shows a single current limit based on Ac/ActiveIn/CurrentLimit, which is deprecated in the dbus doco. */
+			preferredVisible: inputSettingsModel.count > 0
 			SettingsColumn {
 				width: parent ? parent.width : 0
-				preferredVisible: inputSettingsModel.count > 0
 
 				Repeater {
-					model: AcInputSettingsModel {
-						id: inputSettingsModel
-						serviceUid: root.bindPrefix
-					}
+					model: inputSettingsModel
 					delegate: ListCurrentLimitButton {
 						required property AcInputSettings inputSettings
 
@@ -344,6 +349,7 @@ DevicePage {
 		}
 
 		DelegateComponent {
+			preferredVisible: Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
 			ListNavigation {
 				text: CommonWords.ac_sensors
 				showAccessLevel: VenusOS.User_AccessType_Service
@@ -356,6 +362,7 @@ DevicePage {
 		}
 
 		DelegateComponent {
+			preferredVisible: Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
 			ListNavigation {
 				text: CommonWords.debug
 				showAccessLevel: VenusOS.User_AccessType_Service

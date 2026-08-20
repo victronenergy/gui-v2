@@ -28,6 +28,17 @@ Page {
 	}
 
 	VeQItemSortTableModel {
+		id: namedSensors
+
+		model: VeQItemChildModel {
+			model: sensors
+			childId: "Name"
+		}
+		dynamicSortFilter: true
+		filterFlags: VeQItemSortTableModel.FilterInvalid
+	}
+
+	VeQItemSortTableModel {
 		id: interfaces
 		model: VeQItemTableModel {
 			uids: [ root.bleServiceUid + "/Interfaces" ]
@@ -119,22 +130,13 @@ Page {
 			}
 
 			DelegateComponent {
-				id: sensorRepeaterDC
-				property int count
-				preferredVisible: sensorRepeaterDC.count > 0
+				preferredVisible: namedSensors.rowCount > 0
 				SettingsColumn {
 					width: parent ? parent.width : 0
 
 					Repeater {
 						id: sensorRepeater
-						model: VeQItemSortTableModel {
-							model: VeQItemChildModel {
-								model: sensors
-								childId: "Name"
-							}
-							dynamicSortFilter: true
-							filterFlags: VeQItemSortTableModel.FilterInvalid
-						}
+						model: namedSensors
 
 						delegate: BleSensorDelegate {
 							required property VeQItem item
@@ -143,7 +145,6 @@ Page {
 							deviceName: item.value || ""
 						}
 					}
-					Binding { target: sensorRepeaterDC; property: "count"; value: sensorRepeater.count }
 				}
 			}
 		}

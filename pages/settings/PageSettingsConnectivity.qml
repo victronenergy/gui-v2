@@ -93,9 +93,7 @@ Page {
 			}
 
 			DelegateComponent {
-				id: canInterfaceRepeaterDC
-				property int count
-				preferredVisible: canInterfaceRepeaterDC.count > 0
+				preferredVisible: (canInterfaces.value || []).length > 0
 				SettingsColumn {
 					width: parent ? parent.width : 0
 					topPadding: Theme.geometry_listItem_itemSeparator_height
@@ -122,13 +120,6 @@ Page {
 							}
 						}
 					}
-
-					VeQuickItem {
-						id: canInterfaces
-						uid: Global.venusPlatform.serviceUid + "/CanBus/Interfaces"
-						// eg. value: [{"config":1,"interface":"can1","name":"BMS-Can port"},{"config":0,"interface":"can0","name":"VE.Can port"}]
-					}
-					Binding { target: canInterfaceRepeaterDC; property: "count"; value: canInterfaceRepeater.count }
 				}
 			}
 
@@ -141,6 +132,12 @@ Page {
 				}
 			}
 		}
+	}
+
+	VeQuickItem {
+		id: canInterfaces
+		uid: Global.venusPlatform.serviceUid + "/CanBus/Interfaces"
+		// eg. value: [{"config":1,"interface":"can1","name":"BMS-Can port"},{"config":0,"interface":"can0","name":"VE.Can port"}]
 	}
 
 	NetworkServices {

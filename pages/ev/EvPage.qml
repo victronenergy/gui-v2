@@ -106,7 +106,6 @@ DevicePage {
 				text: qsTrId("ev_power")
 				dataItem.uid: root.bindPrefix + "/Ac/Power"
 				unit: VenusOS.Units_Watt
-								 (chargingState.value === 3 || chargingState.value === 256 || chargingState.value === 259)
 			}
 		}
 

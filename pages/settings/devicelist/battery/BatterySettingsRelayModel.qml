@@ -71,7 +71,9 @@ DelegateComponentModel {
 
 	DelegateComponent {
 		id: lowSocDC
-		preferredVisible: dataValid && showSetting(0, 1)
+		property VeQuickItem firstItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Relay/LowSoc" }
+		property VeQuickItem secondItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Relay/LowSocClear" }
+		preferredVisible: firstItem.valid && secondItem.valid && showSetting(0, 1)
 		ListRangeSlider {
 			id: lowSoc
 
@@ -85,7 +87,9 @@ DelegateComponentModel {
 	}
 
 	DelegateComponent {
-		preferredVisible: dataValid && showSetting(0, 1)
+		property VeQuickItem firstItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Relay/LowVoltage" }
+		property VeQuickItem secondItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Relay/LowVoltageClear" }
+		preferredVisible: firstItem.valid && secondItem.valid && showSetting(0, 1)
 		ListRangeSlider {
 			text: CommonWords.low_battery_voltage
 			suffix: "V"
@@ -99,7 +103,9 @@ DelegateComponentModel {
 	}
 
 	DelegateComponent {
-		preferredVisible: dataValid && showSetting(0)
+		property VeQuickItem firstItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Relay/HighVoltageClear" }
+		property VeQuickItem secondItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Relay/HighVoltage" }
+		preferredVisible: firstItem.valid && secondItem.valid && showSetting(0)
 		ListRangeSlider {
 			text: CommonWords.high_battery_voltage
 			suffix: "V"
@@ -113,7 +119,9 @@ DelegateComponentModel {
 	}
 
 	DelegateComponent {
-		preferredVisible: dataValid && showSetting(0)
+		property VeQuickItem firstItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Relay/LowStarterVoltage" }
+		property VeQuickItem secondItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Relay/LowStarterVoltageClear" }
+		preferredVisible: firstItem.valid && secondItem.valid && showSetting(0)
 		ListRangeSlider {
 			text: CommonWords.low_starter_battery_voltage
 			suffix: "V"
@@ -127,7 +135,9 @@ DelegateComponentModel {
 	}
 
 	DelegateComponent {
-		preferredVisible: dataValid && showSetting(0)
+		property VeQuickItem firstItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Relay/HighStarterVoltageClear" }
+		property VeQuickItem secondItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Relay/HighStarterVoltage" }
+		preferredVisible: firstItem.valid && secondItem.valid && showSetting(0)
 		ListRangeSlider {
 			text: CommonWords.high_starter_battery_voltage
 			suffix: "V"
@@ -151,7 +161,9 @@ DelegateComponentModel {
 	}
 
 	DelegateComponent {
-		preferredVisible: dataValid && showSetting(0)
+		property VeQuickItem firstItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Relay/LowBatteryTemperature" }
+		property VeQuickItem secondItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Relay/LowBatteryTemperatureClear" }
+		preferredVisible: firstItem.valid && secondItem.valid && showSetting(0)
 		ListRangeSlider {
 			text: CommonWords.low_battery_temperature
 			suffix: Global.systemSettings.temperatureUnitSuffix
@@ -167,7 +179,9 @@ DelegateComponentModel {
 	}
 
 	DelegateComponent {
-		preferredVisible: dataValid && showSetting(0)
+		property VeQuickItem firstItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Relay/HighBatteryTemperatureClear" }
+		property VeQuickItem secondItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Relay/HighBatteryTemperature" }
+		preferredVisible: firstItem.valid && secondItem.valid && showSetting(0)
 		ListRangeSlider {
 			text: CommonWords.high_battery_temperature
 			suffix: Global.systemSettings.temperatureUnitSuffix

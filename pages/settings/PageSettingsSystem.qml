@@ -25,9 +25,11 @@ Page {
 		{ display: qsTrId("settings_system_name_user_defined"), value: "custom" },
 	]
 
-	// True when the backend value does not match any non-custom option.
+	// True when the backend value does not match any non-custom option. Note: when the value is not
+	// yet valid, ListRadioButtonGroup.currentIndex falls back to its defaultIndex, which is the
+	// custom option, so the radio group displays "User defined" and this must be true as well.
 	readonly property bool _isCustomSystemName: {
-		if (!systemNameItem.valid) return false
+		if (!systemNameItem.valid) return true
 		const v = systemNameItem.value
 		for (let i = 0; i < _systemNameOptions.length - 1; ++i) {
 			if (_systemNameOptions[i].value === v) return false

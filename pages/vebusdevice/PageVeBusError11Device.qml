@@ -59,11 +59,11 @@ Page {
 					https://wiki.victronenergy.com/rend/ccgx/specs/mk2-dbus/vebus-error-11
 					is set */
 
+				preferredVisible: code.valid && (code.value & 0x08) != 0
 				ListText {
 					text: CommonWords.error_colon
 					//% "AC0 /AC1 mismatch"
 					secondaryText: qsTrId("vebus_device_ac0_ac1_mismatch")
-					preferredVisible: code.valid && (code.value & 0x08) != 0
 				}
 			}
 

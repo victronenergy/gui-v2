@@ -204,15 +204,14 @@ Page {
 			id: maxChargePowerSwitchDC
 			dataItem: VeQuickItem { uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePower" }
 			property bool checked: dataItem.value >= 0
-				&& !(maxChargeCurrentControl.valid && maxChargeCurrentControl.value)
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+				&& !(maxChargeCurrentControl.valid && maxChargeCurrentControl.value)
 			ListSwitch {
 				id: maxChargePowerSwitch
 
 				//% "Limit charge power"
 				text: qsTrId("settings_ess_limit_charge_power")
 				checked: maxChargePowerSwitchDC.dataItem.value >= 0
-					&& !(maxChargeCurrentControl.valid && maxChargeCurrentControl.value)
 
 				onClicked: {
 					if (maxChargePowerSwitchDC.dataItem.value < 0) {
@@ -243,15 +242,14 @@ Page {
 			id: maxInverterPowerSwitchDC
 			dataItem: VeQuickItem { uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower" }
 			property bool checked: dataItem.value >= 0
-				&& batteryLifeStateItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+				&& batteryLifeStateItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			ListSwitch {
 				id: maxInverterPowerSwitch
 
 				//% "Limit inverter power"
 				text: qsTrId("settings_ess_limit_inverter_power")
 				checked: maxInverterPowerSwitchDC.dataItem.value >= 0
-					&& batteryLifeStateItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 
 				onClicked: {
 					if (maxInverterPowerSwitchDC.dataItem.value < 0) {

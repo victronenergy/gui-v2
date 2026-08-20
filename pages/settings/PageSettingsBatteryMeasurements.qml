@@ -36,11 +36,6 @@ Page {
 		uid: Global.system.serviceUid + "/ActiveBatteryService"
 	}
 
-	VeQuickItem {
-		id: nameItem
-		uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
-	}
-
 	GradientListView {
 		id: batteryListView
 
@@ -105,7 +100,10 @@ Page {
 							}
 
 							DelegateComponent {
-								preferredVisible: nameItem.valid
+								dataItem: VeQuickItem {
+									uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
+								}
+								preferredVisible: dataItem.valid
 								ListTextField {
 									//% "Name"
 									text: qsTrId("settings_batteries_name")

@@ -18,18 +18,22 @@ Page {
 	VeQuickItem {
 		id: deviceNameItem
 		uid: root.serviceUid + "/DeviceName"
+		invalidate: false
 	}
 	VeQuickItem {
 		id: serialItem
 		uid: root.serviceUid + "/Serial"
+		invalidate: false
 	}
 	VeQuickItem {
 		id: hardwareVersionItem
 		uid: root.serviceUid + "/HardwareVersion"
+		invalidate: false
 	}
 	VeQuickItem {
 		id: customNameItem
 		uid: root.serviceUid + "/CustomName"
+		invalidate: false
 	}
 
 	title: CommonWords.device_info_title
@@ -78,7 +82,7 @@ Page {
 			}
 
 			DelegateComponent {
-				dataItem: VeQuickItem { uid: root.serviceUid + "/FirmwareVersion" }
+				dataItem: VeQuickItem { uid: root.serviceUid + "/FirmwareVersion"; invalidate: false }
 				preferredVisible: dataItem.valid
 				ListFirmwareVersion {
 					bindPrefix: root.serviceUid

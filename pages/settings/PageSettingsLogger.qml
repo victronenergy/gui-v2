@@ -12,14 +12,6 @@ Page {
 	readonly property string loggerServiceUid: BackendConnection.serviceUidForType("logger")
 
 	VeQuickItem {
-		id: timeLastContactItem
-		uid: root.loggerServiceUid + "/Vrm/TimeLastContact"
-	}
-	VeQuickItem {
-		id: logIntervalItem
-		uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/LogInterval"
-	}
-	VeQuickItem {
 		id: httpsConnectionError
 		uid: root.loggerServiceUid + "/Vrm/ConnectionError"
 	}
@@ -161,7 +153,7 @@ Page {
 			}
 
 			DelegateComponent {
-				preferredVisible: logIntervalItem.valid && vrmPortalModeDC.dataItem.value > 0
+				preferredVisible: vrmPortalModeDC.dataItem.valid && vrmPortalModeDC.dataItem.value > 0
 				ListRadioButtonGroup {
 					//% "Log interval"
 					text: qsTrId("settings_log_interval")
@@ -210,7 +202,7 @@ Page {
 			}
 
 			DelegateComponent {
-				preferredVisible: timeLastContactItem.valid && vrmPortalModeDC.dataItem.value !== VenusOS.Vrm_PortalMode_Off
+				preferredVisible: vrmPortalModeDC.dataItem.valid && vrmPortalModeDC.dataItem.value !== VenusOS.Vrm_PortalMode_Off
 				ListText {
 					//% "Last contact"
 					text: qsTrId("settings_last_contact")

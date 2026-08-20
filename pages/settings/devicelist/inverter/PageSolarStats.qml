@@ -23,6 +23,10 @@ Page {
 		id: maxPvVoltageItem
 		uid: root.bindPrefix + "/History/Overall/MaxPvVoltage"
 	}
+	SolarHistoryErrorModel {
+		id: errorModel
+		uidPrefix: root.bindPrefix + "/History/Overall"
+	}
 
 	GradientListView {
 		model: DelegateComponentModel {
@@ -57,25 +61,18 @@ Page {
 			}
 
 			DelegateComponent {
-				id: errorModelDC
-				property int count
-				preferredVisible: errorModelDC.count > 0
+				preferredVisible: errorModel.count > 0
 				SettingsColumn {
 					width: parent ? parent.width : 0
 
 					Repeater {
-						model: SolarHistoryErrorModel {
-							id: errorModel
-							uidPrefix: root.bindPrefix + "/History/Overall"
-						}
+						model: errorModel
 
 						delegate: ListText {
 							text: errorModel.count === 1 ? "" : CommonWords.lastErrorName(model.index)
 							secondaryText: ChargerError.description(model.errorCode)
 						}
 					}
-					Binding { target: errorModelDC; property: "count"; value: errorModel.count }
-
 				}
 			}
 		}

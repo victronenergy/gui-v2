@@ -50,7 +50,10 @@ DevicePage {
 		DelegateComponent {
 			id: errorCodeDC
 			dataItem: VeQuickItem { uid: root.bindPrefix + "/ErrorCode" }
-			preferredVisible: errorCodeDC.dataItem.valid && (configStatus === 2 || configStatus === 3)
+			// Check bits 26-27 of ErrorCode for Configuration Incomplete status
+			// 0=Unsupported, 1=OK, 2=Warning, 3=Alarm
+			property int configStatus: errorCodeDC.dataItem.valid ? ((errorCodeDC.dataItem.value >> 26) & 0x3) : 1
+			preferredVisible: errorCodeDC.dataItem.valid && (errorCodeDC.configStatus === 2 || errorCodeDC.configStatus === 3)
 			ListLink {
 				//% "Configuration required"
 				text: qsTrId("page_meteo_configuration_required")

@@ -16,7 +16,8 @@ Page {
 			DelegateComponent {
 				id: acFeedinDC
 				dataItem: VeQuickItem { uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/PreventFeedback" }
-				property bool checked: dataItem.value === 1
+				// Mirrors the ListSwitch below, which sets invertSourceValue: true
+				property bool checked: dataItem.value === 0
 				preferredVisible: hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
 				ListSwitch {
 					id: acFeedin

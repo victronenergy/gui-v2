@@ -98,8 +98,10 @@ Page {
 							   : disabledModel
 
 						DelegateComponentModel {
+							id: tempRelayModel
+
 							DelegateComponent {
-								id: tempRelayModel
+								id: functionEnabledDelegate
 								dataItem: VeQuickItem { uid: relayDelegate.tempRelayPrefix + "/Enabled" }
 								property bool functionEnabled: dataItem.value === true || dataItem.value === 1
 
@@ -116,7 +118,7 @@ Page {
 								TemperatureRelaySettings {
 									relayNumber: 0
 									sensorId: relayDelegate.sensorId
-									relayActivateOnTemperature: tempRelayModel.functionEnabled
+									relayActivateOnTemperature: functionEnabledDelegate.functionEnabled
 									hasInvalidRelayTempConfig: _hasInvalidRelayTempConfig(relayValue)
 								}
 							}
@@ -125,16 +127,16 @@ Page {
 								TemperatureRelaySettings {
 									relayNumber: 1
 									sensorId: relayDelegate.sensorId
-									relayActivateOnTemperature: tempRelayModel.functionEnabled
+									relayActivateOnTemperature: functionEnabledDelegate.functionEnabled
 									hasInvalidRelayTempConfig: _hasInvalidRelayTempConfig(relayValue)
 								}
 							}
 						}
 
 						DelegateComponentModel {
-							DelegateComponent {
-								id: disabledModel
+							id: disabledModel
 
+							DelegateComponent {
 								PrimaryListLabel {
 									//% "No relay is configured to be activated by temperature. Go to the relay settings page located in the main settings menu and set the relay function to \"Temperature\"."
 									text: qsTrId("settings_relay_no_temperature_relay")

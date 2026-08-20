@@ -77,6 +77,7 @@ Page {
 			}
 
 			DelegateComponent {
+				property bool userHasWriteAccess: Global.systemSettings.canAccess(VenusOS.User_AccessType_Installer)
 				preferredVisible: root.isLocalSender && userHasWriteAccess
 				ListNavigation {
 					//% "Configuration"

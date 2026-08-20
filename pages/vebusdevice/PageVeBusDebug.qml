@@ -10,9 +10,14 @@ Page {
 	id: root
 
 	property string bindPrefix
+
+	// These properties and the timer below hold the state of the delegates further down. The
+	// delegates are destroyed and recreated as they scroll in and out of view, so any state that
+	// must survive that (and the periodic writes themselves) has to live here at page scope.
 	property real sliderL1Value
 	property real sliderL2Value
 	property real sliderL3Value
+	property bool sendSetpoints
 
 	VeQuickItem {
 		id: sustainDataItem
@@ -45,6 +50,26 @@ Page {
 	VeQuickItem {
 		id: remoteSetpointL3
 		uid: root.bindPrefix + "/Hub4/L3/AcPowerSetpoint"
+	}
+
+	Timer {
+		id: hub4Control
+
+		property bool toggle
+
+		interval: 1000
+		repeat: true
+		running: root.sendSetpoints
+
+		onTriggered: {
+			toggle = !toggle
+			let noise = (toggle ? 0 : 1)
+
+			// FIXME: only do this if the paths are valid (but that is unknown yet)
+			remoteSetpointL1.setValue(root.sliderL1Value + noise)
+			remoteSetpointL2.setValue(root.sliderL2Value + noise)
+			remoteSetpointL3.setValue(root.sliderL3Value + noise)
+		}
 	}
 
 	GradientListView {
@@ -126,25 +151,9 @@ Page {
 					id: doSend
 
 					text: "Send setpoints"
-					Timer {
-						id: hub4Control
-
-						property bool toggle
-
-						interval: 1000
-						repeat: true
-						running: doSend.checked
-
-						onTriggered: {
-							toggle = !toggle
-							let noise = (toggle ? 0 : 1)
-
-							// FIXME: only do this if the paths are valid (but that is unknown yet)
-							remoteSetpointL1.setValue(root.sliderL1Value + noise)
-							remoteSetpointL2.setValue(root.sliderL2Value + noise)
-							remoteSetpointL3.setValue(root.sliderL3Value + noise)
-						}
-					}
+					checkable: true
+					checked: root.sendSetpoints
+					onCheckedChanged: root.sendSetpoints = checked
 				}
 			}
 
@@ -154,7 +163,7 @@ Page {
 					from: -5000
 					to: 5000
 					stepSize: 50
-					Component.onCompleted: root.sliderL1Value = value
+					value: root.sliderL1Value
 					onValueChanged: root.sliderL1Value = value
 				}
 			}
@@ -165,7 +174,7 @@ Page {
 					from: -5000
 					to: 5000
 					stepSize: 50
-					Component.onCompleted: root.sliderL2Value = value
+					value: root.sliderL2Value
 					onValueChanged: root.sliderL2Value = value
 				}
 			}
@@ -176,7 +185,7 @@ Page {
 					from: -5000
 					to: 5000
 					stepSize: 50
-					Component.onCompleted: root.sliderL3Value = value
+					value: root.sliderL3Value
 					onValueChanged: root.sliderL3Value = value
 				}
 			}

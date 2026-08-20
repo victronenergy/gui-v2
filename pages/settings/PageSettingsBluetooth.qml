@@ -19,9 +19,9 @@ Page {
 		model: hasBluetoothSupport.value ? bluetoothAvailable : bluetoothUnavailable
 
 		DelegateComponentModel {
-			DelegateComponent {
-				id: bluetoothUnavailable
+			id: bluetoothUnavailable
 
+			DelegateComponent {
 				PrimaryListLabel {
 					//% "Connect a compatible Bluetooth USB dongle to enable Bluetooth connectivity."
 					text: qsTrId("settings_bluetooth_unavailable_message")
@@ -30,8 +30,10 @@ Page {
 		}
 
 		DelegateComponentModel {
+			id: bluetoothAvailable
+
 			DelegateComponent {
-				id: bluetoothAvailable
+				id: bluetoothEnabledDelegate
 				dataItem: VeQuickItem { uid: Global.systemSettings.serviceUid + "/Settings/Services/Bluetooth" }
 				property bool checked: dataItem.value === 1
 
@@ -44,7 +46,7 @@ Page {
 			}
 
 			DelegateComponent {
-				preferredVisible: bluetoothAvailable.checked
+				preferredVisible: bluetoothEnabledDelegate.checked
 				ListTextField {
 					//% "Pincode"
 					text: qsTrId("settings_pincode")

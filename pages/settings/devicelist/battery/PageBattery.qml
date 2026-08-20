@@ -418,9 +418,7 @@ DevicePage {
 		}
 
 		DelegateComponent {
-			id: batteryDetailsDC
-			property bool hasAllowedItem
-			preferredVisible: batteryDetailsDC.hasAllowedItem
+			preferredVisible: batteryDetails.hasAllowedItem
 			ListNavigation {
 				//% "Details"
 				text: qsTrId("battery_details")
@@ -428,12 +426,6 @@ DevicePage {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryDetails.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix, "details": batteryDetails })
 				}
-
-				BatteryDetails {
-					id: batteryDetails
-					bindPrefix: root.bindPrefix
-				}
-				Binding { target: batteryDetailsDC; property: "hasAllowedItem"; value: batteryDetails.hasAllowedItem }
 			}
 		}
 
@@ -461,21 +453,13 @@ DevicePage {
 		}
 
 		DelegateComponent {
-			id: batteryHistoryDC
-			property bool hasAllowedItem
-			preferredVisible: !isFiamm48TL && batteryHistoryDC.hasAllowedItem
+			preferredVisible: !isFiamm48TL && batteryHistory.hasAllowedItem
 			ListNavigation {
 				text: CommonWords.history
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBatteryHistory.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix, "history": batteryHistory })
 				}
-
-				BatteryHistory {
-					id: batteryHistory
-					bindPrefix: root.bindPrefix
-				}
-				Binding { target: batteryHistoryDC; property: "hasAllowedItem"; value: batteryHistory.hasAllowedItem }
 			}
 		}
 
@@ -631,6 +615,14 @@ DevicePage {
 				}
 			}
 		}
+	}
+	BatteryDetails {
+		id: batteryDetails
+		bindPrefix: root.bindPrefix
+	}
+	BatteryHistory {
+		id: batteryHistory
+		bindPrefix: root.bindPrefix
 	}
 	VeQItemSortTableModel {
 		id: moduleAlarmModel

@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	VeQuickItem {
-		id:  TBCItem
+		id: tbcItem
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/CenterGauge/Type" // TBC
 	}
 	VeQuickItem {
@@ -262,7 +262,7 @@ Page {
 			}
 
 			DelegateComponent {
-				preferredVisible:  TBCItem.valid
+				preferredVisible: tbcItem.valid
 				ListRadioButtonGroup {
 					//% "Gauge Display"
 					text: qsTrId("settings_minmax_gauge_display")

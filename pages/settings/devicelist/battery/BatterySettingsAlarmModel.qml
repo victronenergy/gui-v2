@@ -12,7 +12,9 @@ DelegateComponentModel {
 	property string bindPrefix
 
 	DelegateComponent {
-		preferredVisible: dataValid
+		property VeQuickItem firstItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Alarm/LowSoc" }
+		property VeQuickItem secondItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Alarm/LowSocClear" }
+		preferredVisible: firstItem.valid && secondItem.valid
 		ListRangeSlider {
 			text: CommonWords.low_state_of_charge
 			suffix: "%"
@@ -24,7 +26,9 @@ DelegateComponentModel {
 	}
 
 	DelegateComponent {
-		preferredVisible: dataValid
+		property VeQuickItem firstItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Alarm/LowVoltage" }
+		property VeQuickItem secondItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Alarm/LowVoltageClear" }
+		preferredVisible: firstItem.valid && secondItem.valid
 		ListRangeSlider {
 			text: CommonWords.low_battery_voltage
 			suffix: "V"
@@ -38,7 +42,9 @@ DelegateComponentModel {
 	}
 
 	DelegateComponent {
-		preferredVisible: dataValid
+		property VeQuickItem firstItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Alarm/HighVoltageClear" }
+		property VeQuickItem secondItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Alarm/HighVoltage" }
+		preferredVisible: firstItem.valid && secondItem.valid
 		ListRangeSlider {
 			text: CommonWords.high_battery_voltage
 			suffix: "V"
@@ -52,7 +58,9 @@ DelegateComponentModel {
 	}
 
 	DelegateComponent {
-		preferredVisible: dataValid
+		property VeQuickItem firstItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Alarm/LowStarterVoltage" }
+		property VeQuickItem secondItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Alarm/LowStarterVoltageClear" }
+		preferredVisible: firstItem.valid && secondItem.valid
 		ListRangeSlider {
 			text: CommonWords.low_starter_battery_voltage
 			suffix: "V"
@@ -66,7 +74,9 @@ DelegateComponentModel {
 	}
 
 	DelegateComponent {
-		preferredVisible: dataValid
+		property VeQuickItem firstItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Alarm/HighStarterVoltageClear" }
+		property VeQuickItem secondItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Alarm/HighStarterVoltage" }
+		preferredVisible: firstItem.valid && secondItem.valid
 		ListRangeSlider {
 			text: CommonWords.high_starter_battery_voltage
 			suffix: "V"
@@ -80,7 +90,9 @@ DelegateComponentModel {
 	}
 
 	DelegateComponent {
-		preferredVisible: dataValid
+		property VeQuickItem firstItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Alarm/LowBatteryTemperature" }
+		property VeQuickItem secondItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Alarm/LowBatteryTemperatureClear" }
+		preferredVisible: firstItem.valid && secondItem.valid
 		ListRangeSlider {
 			text: CommonWords.low_battery_temperature
 			suffix: Global.systemSettings.temperatureUnitSuffix
@@ -96,7 +108,9 @@ DelegateComponentModel {
 	}
 
 	DelegateComponent {
-		preferredVisible: dataValid
+		property VeQuickItem firstItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Alarm/HighBatteryTemperatureClear" }
+		property VeQuickItem secondItem: VeQuickItem { uid: root.bindPrefix + "/Settings/Alarm/HighBatteryTemperature" }
+		preferredVisible: firstItem.valid && secondItem.valid
 		ListRangeSlider {
 			text: CommonWords.high_battery_temperature
 			suffix: Global.systemSettings.temperatureUnitSuffix

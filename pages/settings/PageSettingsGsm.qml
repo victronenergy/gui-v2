@@ -49,9 +49,9 @@ Page {
 		model: simStatus.valid ? modemConnected : notConnected
 
 		DelegateComponentModel {
-			DelegateComponent {
-				id: notConnected
+			id: notConnected
 
+			DelegateComponent {
 				PrimaryListLabel {
 					//% "Connect a Victron Energy GX GSM or GX LTE 4G modem to enable mobile network connectivity."
 					text: qsTrId("page_settings_connect_cellular_modem")
@@ -274,9 +274,10 @@ Page {
 											id: useDefaultApn
 											//% "Use default APN"
 											text: qsTrId("page_settings_gsm_use_default_apn")
-											checked: apnSetting.value === ""
+											checked: useDefaultApnDC.checked
 											checkable: true
-											onCheckedChanged: {
+											onClicked: {
+												useDefaultApnDC.checked = checked
 												if (apnSetting.valid && checked) {
 													apnSetting.setValue("")
 												}
@@ -311,7 +312,8 @@ Page {
 					text: qsTrId("page_settings_gsm_use_authentication")
 					checked: useAuthDC.checked
 					checkable: true
-					onCheckedChanged: {
+					onClicked: {
+						useAuthDC.checked = checked
 						if (!checked) {
 							useAuthDC.dataItem.setValue("")
 							useAuthDC.authPassItem.setValue("")

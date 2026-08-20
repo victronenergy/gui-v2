@@ -78,7 +78,9 @@ DevicePage {
 		}
 
 		DelegateComponent {
-			preferredVisible: nrOfOutputs.valid
+			// Always visible: the repeater falls back to a single output when /NrOfOutputs is not
+			// published, so that a charger that only publishes /Dc/0/Voltage and /Dc/0/Current
+			// still shows its battery voltage and current.
 			SettingsColumn {
 				width: parent ? parent.width : 0
 
