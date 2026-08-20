@@ -12,94 +12,106 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: VisibleItemModel {
-			ListRadioButtonGroup {
-				text: CommonWords.temperature
-				writeAccessLevel: VenusOS.User_AccessType_User
-				optionModel: [
-					//% "Celsius"
-					{ display: qsTrId("settings_units_celsius"), value: VenusOS.Units_Temperature_Celsius },
-					//% "Fahrenheit"
-					{ display: qsTrId("settings_units_fahrenheit"), value: VenusOS.Units_Temperature_Fahrenheit },
-				]
-				currentIndex: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Fahrenheit ? 1 : 0
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListRadioButtonGroup {
+					text: CommonWords.temperature
+					writeAccessLevel: VenusOS.User_AccessType_User
+					optionModel: [
+						//% "Celsius"
+						{ display: qsTrId("settings_units_celsius"), value: VenusOS.Units_Temperature_Celsius },
+						//% "Fahrenheit"
+						{ display: qsTrId("settings_units_fahrenheit"), value: VenusOS.Units_Temperature_Fahrenheit },
+					]
+					currentIndex: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Fahrenheit ? 1 : 0
 
-				onOptionClicked: function(index) {
-					Global.systemSettings.setTemperatureUnit(optionModel[index].value)
+					onOptionClicked: function(index) {
+						Global.systemSettings.setTemperatureUnit(optionModel[index].value)
+					}
 				}
 			}
 
-			ListVolumeUnitRadioButtonGroup {
-				//: Title for a list of units of volume (e.g. cubic metres, litres, gallons)
-				//% "Volume"
-				text: qsTrId("components_volumeunit_volume")
-			}
-
-			ListRadioButtonGroup {
-				//% "Electrical power display"
-				text: qsTrId("settings_units_energy")
-				writeAccessLevel: VenusOS.User_AccessType_User
-				optionModel: [
-					//% "Power (Watts)"
-					{ display: qsTrId("settings_units_watts"), value: VenusOS.ElectricalPowerDisplay_PreferWatts },
-					{
-						//% "Current (Amps)"
-						display: qsTrId("settings_units_amps"),
-						value: VenusOS.ElectricalPowerDisplay_PreferAmps,
-						//% "Note: If current cannot be displayed (for example, when showing a total for combined AC and DC sources) then power will be shown instead."
-						caption: qsTrId("settings_units_amps_exceptions"),
-					},
-					//% "Mixed (AC in Watts, DC in Amps)"
-					{ display: qsTrId("settings_units_mixed"), value: VenusOS.ElectricalPowerDisplay_Mixed },
-				]
-				currentIndex: Global.systemSettings.electricalPowerDisplay
-
-				onOptionClicked: function(index) {
-					Global.systemSettings.setElectricalPowerDisplay(optionModel[index].value)
+			DelegateComponent {
+				ListVolumeUnitRadioButtonGroup {
+					//: Title for a list of units of volume (e.g. cubic metres, litres, gallons)
+					//% "Volume"
+					text: qsTrId("components_volumeunit_volume")
 				}
 			}
 
-			SettingsListHeader {
-				//: GPS units
-				//% "GPS"
-				text: qsTrId("settings_units_gps")
+			DelegateComponent {
+				ListRadioButtonGroup {
+					//% "Electrical power display"
+					text: qsTrId("settings_units_energy")
+					writeAccessLevel: VenusOS.User_AccessType_User
+					optionModel: [
+						//% "Power (Watts)"
+						{ display: qsTrId("settings_units_watts"), value: VenusOS.ElectricalPowerDisplay_PreferWatts },
+						{
+							//% "Current (Amps)"
+							display: qsTrId("settings_units_amps"),
+							value: VenusOS.ElectricalPowerDisplay_PreferAmps,
+							//% "Note: If current cannot be displayed (for example, when showing a total for combined AC and DC sources) then power will be shown instead."
+							caption: qsTrId("settings_units_amps_exceptions"),
+						},
+						//% "Mixed (AC in Watts, DC in Amps)"
+						{ display: qsTrId("settings_units_mixed"), value: VenusOS.ElectricalPowerDisplay_Mixed },
+					]
+					currentIndex: Global.systemSettings.electricalPowerDisplay
+
+					onOptionClicked: function(index) {
+						Global.systemSettings.setElectricalPowerDisplay(optionModel[index].value)
+					}
+				}
 			}
 
-			ListRadioButtonGroup {
-				//: Format of reported GPS data
-				//% "Format"
-				text: qsTrId("settings_gps_format")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				optionModel: [
-					//: Example of GPS data in the 'Degrees, Minutes, Seconds' format
-					//% "52° 20' 41.6\" N, 5° 13' 12.3\" E"
-					{ display: qsTrId("settings_gps_format_dms_example"), value: VenusOS.GpsData_Format_DegreesMinutesSeconds },
-					//: Example of GPS data in the 'Decimal Degrees' format
-					//% "52.34489, 5.22008"
-					{ display: qsTrId("settings_gps_format_dd_example"), value: VenusOS.GpsData_Format_DecimalDegrees },
-					//: Example of GPS data in the 'Degrees Minutes' format
-					//% "52° 20.693 N, 5° 13.205 E"
-					{ display: qsTrId("settings_gps_format_dm_example"), value: VenusOS.GpsData_Format_DegreesMinutes },
-				]
+			DelegateComponent {
+				SettingsListHeader {
+					//: GPS units
+					//% "GPS"
+					text: qsTrId("settings_units_gps")
+				}
 			}
 
-			ListRadioButtonGroup {
-				//: Speed unit for reported GPS data
-				//% "Speed Unit"
-				text: qsTrId("settings_gps_speed_unit")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				optionModel: [
-					//% "Kilometres per hour"
-					{ display: qsTrId("settings_gps_format_kmh"), value: "km/h" },
-					//% "Metres per second"
-					{ display: qsTrId("settings_gps_format_ms"), value: "m/s" },
-					//% "Miles per hour"
-					{ display: qsTrId("settings_gps_format_mph"), value: "mph" },
-					//% "Knots"
-					{ display: qsTrId("settings_gps_format_kt"), value: "kt" },
-				]
+			DelegateComponent {
+				ListRadioButtonGroup {
+					//: Format of reported GPS data
+					//% "Format"
+					text: qsTrId("settings_gps_format")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
+					writeAccessLevel: VenusOS.User_AccessType_User
+					optionModel: [
+						//: Example of GPS data in the 'Degrees, Minutes, Seconds' format
+						//% "52° 20' 41.6\" N, 5° 13' 12.3\" E"
+						{ display: qsTrId("settings_gps_format_dms_example"), value: VenusOS.GpsData_Format_DegreesMinutesSeconds },
+						//: Example of GPS data in the 'Decimal Degrees' format
+						//% "52.34489, 5.22008"
+						{ display: qsTrId("settings_gps_format_dd_example"), value: VenusOS.GpsData_Format_DecimalDegrees },
+						//: Example of GPS data in the 'Degrees Minutes' format
+						//% "52° 20.693 N, 5° 13.205 E"
+						{ display: qsTrId("settings_gps_format_dm_example"), value: VenusOS.GpsData_Format_DegreesMinutes },
+					]
+				}
+			}
+
+			DelegateComponent {
+				ListRadioButtonGroup {
+					//: Speed unit for reported GPS data
+					//% "Speed Unit"
+					text: qsTrId("settings_gps_speed_unit")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
+					writeAccessLevel: VenusOS.User_AccessType_User
+					optionModel: [
+						//% "Kilometres per hour"
+						{ display: qsTrId("settings_gps_format_kmh"), value: "km/h" },
+						//% "Metres per second"
+						{ display: qsTrId("settings_gps_format_ms"), value: "m/s" },
+						//% "Miles per hour"
+						{ display: qsTrId("settings_gps_format_mph"), value: "mph" },
+						//% "Knots"
+						{ display: qsTrId("settings_gps_format_kt"), value: "kt" },
+					]
+				}
 			}
 		}
 	}

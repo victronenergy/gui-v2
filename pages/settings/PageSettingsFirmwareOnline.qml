@@ -12,102 +12,117 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: VisibleItemModel {
+		model: DelegateComponentModel {
 
-			ListRadioButtonGroup {
-				//% "Auto update"
-				text: qsTrId("settings_auto_update")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/AutoUpdate"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				optionModel: [
-					{ display: CommonWords.disabled, value: VenusOS.Firmware_AutoUpdate_Disabled },
-					//% "Check only"
-					{ display: qsTrId("settings_firmware_check_only"), value: VenusOS.Firmware_AutoUpdate_CheckOnly },
-					//% "Check and download only"
-					{ display: qsTrId("settings_firmware_check_and_download_only"), value: VenusOS.Firmware_AutoUpdate_CheckAndDownloadOnly, readOnly: true },
-					//% "Check and update"
-					{ display: qsTrId("settings_firmware_check_and_update"), value: VenusOS.Firmware_AutoUpdate_CheckAndUpdate }
-				]
-			}
-
-			ListRadioButtonGroup {
-				//% "Update feed"
-				text: qsTrId("settings_update_feed")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/ReleaseType"
-				optionModel: [
-					//% "Official release"
-					{ display: qsTrId("settings_firmware_official_release"), value: FirmwareUpdater.FirmwareRelease },
-					//% "Beta release"
-					{ display: qsTrId("settings_firmware_beta_release"), value: FirmwareUpdater.FirmwareCandidate },
-					//: Select the 'Testing' update feed
-					//% "Testing (Victron internal)"
-					{ display: qsTrId("settings_firmware_testing_internal"), value: FirmwareUpdater.FirmwareTesting, readOnly: !Global.systemSettings.canAccess(VenusOS.User_AccessType_Service) },
-					//: Select the 'Develop' update feed
-					//% "Develop (Victron internal)"
-					{ display: qsTrId("settings_firmware_develop_internal"), value: FirmwareUpdater.FirmwareDevelop, readOnly: true },
-				]
-			}
-
-			ListRadioButtonGroup {
-				text: CommonWords.image_type
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/ImageType"
-				preferredVisible: largeImageSupport.value === 1
-				optionModel: [
-					{ display: CommonWords.firmware_type_normal, value: FirmwareUpdater.ImageTypeNormal },
-					{ display: CommonWords.firmware_type_large, value: FirmwareUpdater.ImageTypeLarge },
-				]
-
-				VeQuickItem {
-					id: largeImageSupport
-					uid: Global.venusPlatform.serviceUid + "/Firmware/LargeImageSupport"
+			DelegateComponent {
+				ListRadioButtonGroup {
+					//% "Auto update"
+					text: qsTrId("settings_auto_update")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/AutoUpdate"
+					writeAccessLevel: VenusOS.User_AccessType_User
+					optionModel: [
+						{ display: CommonWords.disabled, value: VenusOS.Firmware_AutoUpdate_Disabled },
+						//% "Check only"
+						{ display: qsTrId("settings_firmware_check_only"), value: VenusOS.Firmware_AutoUpdate_CheckOnly },
+						//% "Check and download only"
+						{ display: qsTrId("settings_firmware_check_and_download_only"), value: VenusOS.Firmware_AutoUpdate_CheckAndDownloadOnly, readOnly: true },
+						//% "Check and update"
+						{ display: qsTrId("settings_firmware_check_and_update"), value: VenusOS.Firmware_AutoUpdate_CheckAndUpdate }
+					]
 				}
 			}
 
-			ListFirmwareCheckButton {
-				//% "Check for updates"
-				text: qsTrId("settings_firmware_check_for_updates")
-				updateType: VenusOS.Firmware_UpdateType_Online
+			DelegateComponent {
+				ListRadioButtonGroup {
+					//% "Update feed"
+					text: qsTrId("settings_update_feed")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/ReleaseType"
+					optionModel: [
+						//% "Official release"
+						{ display: qsTrId("settings_firmware_official_release"), value: FirmwareUpdater.FirmwareRelease },
+						//% "Beta release"
+						{ display: qsTrId("settings_firmware_beta_release"), value: FirmwareUpdater.FirmwareCandidate },
+						//: Select the 'Testing' update feed
+						//% "Testing (Victron internal)"
+						{ display: qsTrId("settings_firmware_testing_internal"), value: FirmwareUpdater.FirmwareTesting, readOnly: !Global.systemSettings.canAccess(VenusOS.User_AccessType_Service) },
+						//: Select the 'Develop' update feed
+						//% "Develop (Victron internal)"
+						{ display: qsTrId("settings_firmware_develop_internal"), value: FirmwareUpdater.FirmwareDevelop, readOnly: true },
+					]
+				}
 			}
 
-			ListButton {
-				id: installUpdate
+			DelegateComponent {
+				id: largeImageSupportDC
+				dataItem: VeQuickItem { uid: Global.venusPlatform.serviceUid + "/Firmware/LargeImageSupport" }
+				preferredVisible: largeImageSupportDC.dataItem.value === 1
+				ListRadioButtonGroup {
+					text: CommonWords.image_type
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/ImageType"
+					optionModel: [
+						{ display: CommonWords.firmware_type_normal, value: FirmwareUpdater.ImageTypeNormal },
+						{ display: CommonWords.firmware_type_large, value: FirmwareUpdater.ImageTypeLarge },
+					]
 
-				//% "Update available"
-				text: qsTrId("settings_firmware_update_available")
-				secondaryText: {
-					if (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
-						if (progress.value) {
-							//: Firmware update progress. %1 = firmware version, %2 = current update progress
-							//% "Installing %1 %2%"
-							return qsTrId("settings_firmware_online_installing_progress").arg(Global.firmwareUpdate.onlineAvailableVersion).arg(progress.value)
-						}
-						//: %1 = firmware version
-						//% "Installing %1..."
-						return qsTrId("settings_firmware_online_installing").arg(Global.firmwareUpdate.onlineAvailableVersion)
-					} else {
-						return CommonWords.update_to_version.arg(Global.firmwareUpdate.onlineAvailableVersion)
+					VeQuickItem {
+						id: largeImageSupport
+						uid: Global.venusPlatform.serviceUid + "/Firmware/LargeImageSupport"
 					}
 				}
+			}
 
-				interactive: !Global.firmwareUpdate.busy
-				writeAccessLevel: VenusOS.User_AccessType_User
-				preferredVisible: !!Global.firmwareUpdate.onlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
-				onClicked: {
-					Global.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Online)
-				}
-
-				VeQuickItem {
-					id: progress
-					uid: Global.venusPlatform.serviceUid + "/Firmware/Progress"
+			DelegateComponent {
+				ListFirmwareCheckButton {
+					//% "Check for updates"
+					text: qsTrId("settings_firmware_check_for_updates")
+					updateType: VenusOS.Firmware_UpdateType_Online
 				}
 			}
 
-			ListText {
-				//% "Update build date/time"
-				text: qsTrId("settings_firmware_update_build_date_time")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableBuild"
-				preferredVisible: installUpdate.preferredVisible
+			DelegateComponent {
+				id: installUpdateDC
+				preferredVisible: !!Global.firmwareUpdate.onlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
+				ListButton {
+					id: installUpdate
+
+					//% "Update available"
+					text: qsTrId("settings_firmware_update_available")
+					secondaryText: {
+						if (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
+							if (progress.value) {
+								//: Firmware update progress. %1 = firmware version, %2 = current update progress
+								//% "Installing %1 %2%"
+								return qsTrId("settings_firmware_online_installing_progress").arg(Global.firmwareUpdate.onlineAvailableVersion).arg(progress.value)
+							}
+							//: %1 = firmware version
+							//% "Installing %1..."
+							return qsTrId("settings_firmware_online_installing").arg(Global.firmwareUpdate.onlineAvailableVersion)
+						} else {
+							return CommonWords.update_to_version.arg(Global.firmwareUpdate.onlineAvailableVersion)
+						}
+					}
+
+					interactive: !Global.firmwareUpdate.busy
+					writeAccessLevel: VenusOS.User_AccessType_User
+					onClicked: {
+						Global.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Online)
+					}
+
+					VeQuickItem {
+						id: progress
+						uid: Global.venusPlatform.serviceUid + "/Firmware/Progress"
+					}
+				}
+			}
+
+			DelegateComponent {
+				preferredVisible: installUpdateDC.preferredVisible
 					&& Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
+				ListText {
+					//% "Update build date/time"
+					text: qsTrId("settings_firmware_update_build_date_time")
+					dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableBuild"
+				}
 			}
 		}
 	}

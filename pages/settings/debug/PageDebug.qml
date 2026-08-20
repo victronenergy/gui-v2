@@ -10,70 +10,90 @@ Page {
 	id: root
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListText {
-				//% "Application version"
-				text: qsTrId("settings_page_debug_application_version")
-				secondaryText: Theme.applicationVersion
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListText {
+					//% "Application version"
+					text: qsTrId("settings_page_debug_application_version")
+					secondaryText: Theme.applicationVersion
+				}
 			}
 
-			ListButton {
-				id: quitSwitch
+			DelegateComponent {
+				ListButton {
+					id: quitSwitch
 
-				//% "Quit application"
-				text: qsTrId("settings_page_debug_quit_application")
+					//% "Quit application"
+					text: qsTrId("settings_page_debug_quit_application")
 
-				//% "Quit"
-				secondaryText: qsTrId("settings_page_debug_quit")
+					//% "Quit"
+					secondaryText: qsTrId("settings_page_debug_quit")
 
-				onClicked: Qt.quit()
+					onClicked: Qt.quit()
+				}
 			}
 
-			ListNavigation {
-				text: "Power"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PagePowerDebug.qml", { title: text })
+			DelegateComponent {
+				ListNavigation {
+					text: "Power"
+					onClicked: Global.pageManager.pushPage("/pages/settings/debug/PagePowerDebug.qml", { title: text })
+				}
 			}
 
-			ListNavigation {
-				text: "System data"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSystemData.qml", { title: text })
+			DelegateComponent {
+				ListNavigation {
+					text: "System data"
+					onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSystemData.qml", { title: text })
+				}
 			}
 
-			ListNavigation {
-				text: "Values"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml", { title: text })
+			DelegateComponent {
+				ListNavigation {
+					text: "Values"
+					onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugVeQItems.qml", { title: text })
+				}
 			}
 
-			ListSwitch {
-				//% "Enable frame-rate visualizer"
-				text: qsTrId("settings_page_debug_enable_fps_visualizer")
-				checked: FrameRateModel.enabled
-				onClicked: FrameRateModel.enabled = !FrameRateModel.enabled
+			DelegateComponent {
+				ListSwitch {
+					//% "Enable frame-rate visualizer"
+					text: qsTrId("settings_page_debug_enable_fps_visualizer")
+					checked: FrameRateModel.enabled
+					onClicked: FrameRateModel.enabled = !FrameRateModel.enabled
+				}
 			}
 
-			ListSwitch {
-				//% "Display CPU usage"
-				text: qsTrId("settings_page_debug_display_cpu_usage")
-				checked: Global.displayCpuUsage
-				onClicked: Global.displayCpuUsage = !Global.displayCpuUsage
+			DelegateComponent {
 				preferredVisible: Qt.platform.os === "linux"
+				ListSwitch {
+					//% "Display CPU usage"
+					text: qsTrId("settings_page_debug_display_cpu_usage")
+					checked: Global.displayCpuUsage
+					onClicked: Global.displayCpuUsage = !Global.displayCpuUsage
+				}
 			}
 
-			ListNavigation {
-				text: "UI Library"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSettingsDemo.qml", { title: text })
+			DelegateComponent {
+				ListNavigation {
+					text: "UI Library"
+					onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageSettingsDemo.qml", { title: text })
+				}
 			}
 
 			// TODO implement when venus-platform provides equivalent of vePlatform.getMemInfo()
-			/*ListNavigation {
-				text: "glibc memory"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryLibc.qml", { title: text })
+			/*DelegateComponent {
+				ListNavigation {
+					text: "glibc memory"
+					onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryLibc.qml", { title: text })
+				}
 			}*/
 
 			// TODO implement when venus-platform provides equivalent of QuickView.imageCacheSize()
-			/*ListNavigation {
-				text: "Qt memory"
-				onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryQt.qml", { title: text })
+			/*DelegateComponent {
+				ListNavigation {
+					text: "Qt memory"
+					onClicked: Global.pageManager.pushPage("/pages/settings/debug/PageDebugMemoryQt.qml", { title: text })
+				}
 			}*/
 		}
 	}

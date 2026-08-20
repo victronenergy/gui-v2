@@ -9,218 +9,306 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	VeQuickItem {
+		id: tbcItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/CenterGauge/Type" // TBC
+	}
+	VeQuickItem {
+		id: acIn0MinCurrentItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/0/Current/Min"
+	}
+	VeQuickItem {
+		id: acIn0MaxCurrentItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/0/Current/Max"
+	}
+	VeQuickItem {
+		id: acIn1MinCurrentItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/1/Current/Min"
+	}
+	VeQuickItem {
+		id: acIn1MaxCurrentItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/1/Current/Max"
+	}
+	VeQuickItem {
+		id: dcInMaxPowerItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/Input/Power/Max"
+	}
+	VeQuickItem {
+		id: acIn1MaxOutCurrentItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn1/Consumption/Current/Max"
+	}
+	VeQuickItem {
+		id: acIn2MaxOutCurrentItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn2/Consumption/Current/Max"
+	}
+	VeQuickItem {
+		id: noAcInMaxOutCurrentItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/NoAcIn/Consumption/Current/Max"
+	}
+	VeQuickItem {
+		id: dcOutMaxPowerItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/System/Power/Max"
+	}
+	VeQuickItem {
+		id: pvMaxPowerItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Pv/Power/Max"
+	}
+	VeQuickItem {
+		id: motorDriveMaxPowerItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/Power/Max"
+	}
+	VeQuickItem {
+		id: maxSpeedItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Speed/Max"
+	}
+	VeQuickItem {
+		id: motorDriveMaxRpmItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max"
+	}
+
 	GradientListView {
-		model: VisibleItemModel {
-			ListSwitch {
-				//: Whether to adjust the min/max values in the range dynamically, based on the lowest and highest values observed on the system.
-				//% "Auto-ranging"
-				text: qsTrId("settings_minmax_autorange")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				//% "When enabled, the minima and maxima of gauges and graphs are automatically adjusted based on past values."
-				caption: qsTrId("settings_minmax_autorange_desc")
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListSwitch {
+					//: Whether to adjust the min/max values in the range dynamically, based on the lowest and highest values observed on the system.
+					//% "Auto-ranging"
+					text: qsTrId("settings_minmax_autorange")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
+					writeAccessLevel: VenusOS.User_AccessType_User
+					//% "When enabled, the minima and maxima of gauges and graphs are automatically adjusted based on past values."
+					caption: qsTrId("settings_minmax_autorange_desc")
+				}
 			}
 
-			ListButton {
-				//% "Reset all range values to zero"
-				text: qsTrId("settings_minmax_reset")
-				secondaryText: CommonWords.reset
-				writeAccessLevel: VenusOS.User_AccessType_User
-				onClicked: Global.dialogLayer.open(confirmResetDialog)
+			DelegateComponent {
+				ListButton {
+					//% "Reset all range values to zero"
+					text: qsTrId("settings_minmax_reset")
+					secondaryText: CommonWords.reset
+					writeAccessLevel: VenusOS.User_AccessType_User
+					onClicked: Global.dialogLayer.open(confirmResetDialog)
 
-				Component {
-					id: confirmResetDialog
+					Component {
+						id: confirmResetDialog
 
-					ModalWarningDialog {
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						//% "Reset Range Values"
-						title: qsTrId("settings_minmax_reset_range_values")
-						//% "Are you sure that you want to reset all the values to zero?"
-						description: qsTrId("settings_minmax_reset_are_you_sure")
+						ModalWarningDialog {
+							dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+							//% "Reset Range Values"
+							title: qsTrId("settings_minmax_reset_range_values")
+							//% "Are you sure that you want to reset all the values to zero?"
+							description: qsTrId("settings_minmax_reset_are_you_sure")
 
-						onAccepted: {
-							for (let i = 0; i < acInputsRepeater.count; ++i) {
-								acInputsRepeater.itemAt(i).reset()
+							onAccepted: {
+								acIn0MinCurrentItem.setValue(0)
+								acIn0MaxCurrentItem.setValue(0)
+								acIn1MinCurrentItem.setValue(0)
+								acIn1MaxCurrentItem.setValue(0)
+								dcInMaxPowerItem.setValue(0)
+								acIn1MaxOutCurrentItem.setValue(0)
+								acIn2MaxOutCurrentItem.setValue(0)
+								noAcInMaxOutCurrentItem.setValue(0)
+								dcOutMaxPowerItem.setValue(0)
+								pvMaxPowerItem.setValue(0)
+								motorDriveMaxPowerItem.setValue(0)
+								maxSpeedItem.setValue(0)
+								motorDriveMaxRpmItem.setValue(0)
 							}
-							dcInMaxPower.dataItem.setValue(0)
-							acIn1MaxOutCurrent.dataItem.setValue(0)
-							acIn2MaxOutCurrent.dataItem.setValue(0)
-							noAcInMaxOutCurrent.dataItem.setValue(0)
-							dcOutMaxPower.dataItem.setValue(0)
-							pvMaxPower.dataItem.setValue(0)
-							motorDriveMaxPower.dataItem.setValue(0)
-							maxSpeed.dataItem.setValue(0)
-							motorDriveMaxRpm.dataItem.setValue(0)
 						}
 					}
 				}
 			}
 
-			SettingsColumn {
-				width: parent ? parent.width : 0
+			DelegateComponent {
+				SettingsColumn {
+					width: parent ? parent.width : 0
 
-				Repeater {
-					id: acInputsRepeater
+					Repeater {
+						model: 2
+						delegate: SettingsColumn {
+							required property int index
 
-					model: 2
-					delegate: SettingsColumn {
-						required property int index
-						function reset() {
-							acInputMinCurrent.dataItem.setValue(0)
-							acInputMaxCurrent.dataItem.setValue(0)
-						}
+							width: parent ? parent.width : 0
 
-						width: parent ? parent.width : 0
-
-						SettingsListHeader {
-							text: {
-								const inputInfo = Global.acInputs["input" + (index + 1) + "Info"]
-								if (inputInfo.source === VenusOS.AcInputs_InputSource_NotAvailable) {
-									//: %1 = 'AC input 1' or 'AC input 2'
-									//% "%1 (not available)"
-									return qsTrId("settings_minmax_ac_in_not_available").arg(CommonWords.acInputFromIndex(index))
+							SettingsListHeader {
+								text: {
+									const inputInfo = Global.acInputs["input" + (index + 1) + "Info"]
+									if (inputInfo.source === VenusOS.AcInputs_InputSource_NotAvailable) {
+										//: %1 = 'AC input 1' or 'AC input 2'
+										//% "%1 (not available)"
+										return qsTrId("settings_minmax_ac_in_not_available").arg(CommonWords.acInputFromIndex(index))
+									}
+									//: %1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)
+									//% "%1 (%2)"
+									return qsTrId("settings_minmax_ac_in_header_with_source")
+											.arg(CommonWords.acInputFromIndex(index))
+											.arg(Global.acInputs.sourceToText(inputInfo.source))
 								}
-								//: %1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)
-								//% "%1 (%2)"
-								return qsTrId("settings_minmax_ac_in_header_with_source")
-										.arg(CommonWords.acInputFromIndex(index))
-										.arg(Global.acInputs.sourceToText(inputInfo.source))
 							}
-						}
 
-						ListQuantityField {
-							id: acInputMinCurrent
-							text: CommonWords.minimum_current
-							dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/%1/Current/Min".arg(index)
-							writeAccessLevel: VenusOS.User_AccessType_User
-							unit: VenusOS.Units_Amp
-						}
-						ListQuantityField {
-							id: acInputMaxCurrent
-							text: CommonWords.maximum_current
-							dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/%1/Current/Max".arg(index)
-							writeAccessLevel: VenusOS.User_AccessType_User
-							unit: VenusOS.Units_Amp
+							ListQuantityField {
+								id: acInputMinCurrent
+								text: CommonWords.minimum_current
+								dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/%1/Current/Min".arg(index)
+								writeAccessLevel: VenusOS.User_AccessType_User
+								unit: VenusOS.Units_Amp
+							}
+							ListQuantityField {
+								id: acInputMaxCurrent
+								text: CommonWords.maximum_current
+								dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/%1/Current/Max".arg(index)
+								writeAccessLevel: VenusOS.User_AccessType_User
+								unit: VenusOS.Units_Amp
+							}
 						}
 					}
 				}
 			}
 
-			SettingsListHeader {
-				//% "DC input"
-				text: qsTrId("settings_minmax_dc_input")
+			DelegateComponent {
+				SettingsListHeader {
+					//% "DC input"
+					text: qsTrId("settings_minmax_dc_input")
+				}
 			}
 
-			ListQuantityField {
-				id: dcInMaxPower
-				text: CommonWords.maximum_power
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/Input/Power/Max"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				unit: VenusOS.Units_Watt
+			DelegateComponent {
+				ListQuantityField {
+					id: dcInMaxPower
+					text: CommonWords.maximum_power
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/Input/Power/Max"
+					writeAccessLevel: VenusOS.User_AccessType_User
+					unit: VenusOS.Units_Watt
+				}
 			}
 
-			SettingsListHeader {
-				//% "AC output"
-				text: qsTrId("settings_minmax_acout_max_power")
+			DelegateComponent {
+				SettingsListHeader {
+					//% "AC output"
+					text: qsTrId("settings_minmax_acout_max_power")
+				}
 			}
 
-			ListQuantityField {
-				id: acIn1MaxOutCurrent
-				//% "Maximum current: AC in 1 connected"
-				text: qsTrId("settings_minmax_acout_max_acin1")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn1/Consumption/Current/Max"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				unit: VenusOS.Units_Amp
+			DelegateComponent {
+				ListQuantityField {
+					id: acIn1MaxOutCurrent
+					//% "Maximum current: AC in 1 connected"
+					text: qsTrId("settings_minmax_acout_max_acin1")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn1/Consumption/Current/Max"
+					writeAccessLevel: VenusOS.User_AccessType_User
+					unit: VenusOS.Units_Amp
+				}
 			}
 
-			ListQuantityField {
-				id: acIn2MaxOutCurrent
-				//% "Maximum current: AC in 2 connected"
-				text: qsTrId("settings_minmax_acout_max_acin2")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn2/Consumption/Current/Max"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				unit: VenusOS.Units_Amp
+			DelegateComponent {
+				ListQuantityField {
+					id: acIn2MaxOutCurrent
+					//% "Maximum current: AC in 2 connected"
+					text: qsTrId("settings_minmax_acout_max_acin2")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/AcIn2/Consumption/Current/Max"
+					writeAccessLevel: VenusOS.User_AccessType_User
+					unit: VenusOS.Units_Amp
+				}
 			}
 
-			ListQuantityField {
-				id: noAcInMaxOutCurrent
-				//% "Maximum current: no AC inputs"
-				text: qsTrId("settings_minmax_acout_max")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/NoAcIn/Consumption/Current/Max"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				unit: VenusOS.Units_Amp
+			DelegateComponent {
+				ListQuantityField {
+					id: noAcInMaxOutCurrent
+					//% "Maximum current: no AC inputs"
+					text: qsTrId("settings_minmax_acout_max")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/NoAcIn/Consumption/Current/Max"
+					writeAccessLevel: VenusOS.User_AccessType_User
+					unit: VenusOS.Units_Amp
+				}
 			}
 
-			SettingsListHeader {
-				//% "DC output"
-				text: qsTrId("settings_minmax_dc_out")
+			DelegateComponent {
+				SettingsListHeader {
+					//% "DC output"
+					text: qsTrId("settings_minmax_dc_out")
+				}
 			}
 
-			ListQuantityField {
-				id: dcOutMaxPower
-				text: CommonWords.maximum_power
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/System/Power/Max"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				unit: VenusOS.Units_Watt
+			DelegateComponent {
+				ListQuantityField {
+					id: dcOutMaxPower
+					text: CommonWords.maximum_power
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/System/Power/Max"
+					writeAccessLevel: VenusOS.User_AccessType_User
+					unit: VenusOS.Units_Watt
+				}
 			}
 
-			SettingsListHeader {
-				text: CommonWords.solar
+			DelegateComponent {
+				SettingsListHeader {
+					text: CommonWords.solar
+				}
 			}
 
-			ListQuantityField {
-				id: pvMaxPower
-				text: CommonWords.maximum_power
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Pv/Power/Max"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				unit: VenusOS.Units_Watt
+			DelegateComponent {
+				ListQuantityField {
+					id: pvMaxPower
+					text: CommonWords.maximum_power
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Pv/Power/Max"
+					writeAccessLevel: VenusOS.User_AccessType_User
+					unit: VenusOS.Units_Watt
+				}
 			}
 
-			SettingsListHeader {
-				//% "Boat page"
-				text: qsTrId("settings_minmax_boat_page")
+			DelegateComponent {
+				SettingsListHeader {
+					//% "Boat page"
+					text: qsTrId("settings_minmax_boat_page")
+				}
 			}
 
-			ListRadioButtonGroup {
-				//% "Gauge Display"
-				text: qsTrId("settings_minmax_gauge_display")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/CenterGauge/Type" // TBC
-				preferredVisible: dataItem.valid
-				writeAccessLevel: VenusOS.User_AccessType_User
-				optionModel: [
-					//% "Speed"
-					{ display: qsTrId("settings_minmax_speed"), value: 0 },
-					{ display: CommonWords.time_to_go, value: 1 }
-				]
+			DelegateComponent {
+				preferredVisible: tbcItem.valid
+				ListRadioButtonGroup {
+					//% "Gauge Display"
+					text: qsTrId("settings_minmax_gauge_display")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/CenterGauge/Type" // TBC
+					writeAccessLevel: VenusOS.User_AccessType_User
+					optionModel: [
+						//% "Speed"
+						{ display: qsTrId("settings_minmax_speed"), value: 0 },
+						{ display: CommonWords.time_to_go, value: 1 }
+					]
+				}
 			}
 
-			ListQuantityField {
-				id: motorDriveMaxPower
-				text: CommonWords.maximum_power
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/Power/Max"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				unit: VenusOS.Units_Watt
+			DelegateComponent {
+				ListQuantityField {
+					id: motorDriveMaxPower
+					text: CommonWords.maximum_power
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/Power/Max"
+					writeAccessLevel: VenusOS.User_AccessType_User
+					unit: VenusOS.Units_Watt
+				}
 			}
 
-			ListQuantityField {
-				id: maxSpeed
-				//% "Max Speed"
-				text: qsTrId("settings_minmax_max_speed")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Speed/Max"
-				dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Speed_MetresPerSecond)
-				dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.speedUnit)
-				writeAccessLevel: VenusOS.User_AccessType_User
-				unit: Global.systemSettings.speedUnit
-				decimals: 0
+			DelegateComponent {
+				ListQuantityField {
+					id: maxSpeed
+					//% "Max Speed"
+					text: qsTrId("settings_minmax_max_speed")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Speed/Max"
+					dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Speed_MetresPerSecond)
+					dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.speedUnit)
+					writeAccessLevel: VenusOS.User_AccessType_User
+					unit: Global.systemSettings.speedUnit
+					decimals: 0
+				}
 			}
 
-			ListQuantityField {
-				id: motorDriveMaxRpm
-				//% "Max RPM"
-				text: qsTrId("settings_minmax_max_rpm")
-				unit: VenusOS.Units_RevolutionsPerMinute
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max"
-				writeAccessLevel: VenusOS.User_AccessType_User
+			DelegateComponent {
+				ListQuantityField {
+					id: motorDriveMaxRpm
+					//% "Max RPM"
+					text: qsTrId("settings_minmax_max_rpm")
+					unit: VenusOS.Units_RevolutionsPerMinute
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max"
+					writeAccessLevel: VenusOS.User_AccessType_User
+				}
 			}
 		}
 	}

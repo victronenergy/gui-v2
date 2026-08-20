@@ -29,18 +29,20 @@ Page {
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
+		model: DelegateComponentModel {
 
-			SettingsColumn {
-				width: parent ? parent.width : 0
+			DelegateComponent {
 				preferredVisible: tableModel.rowCount > 0
+				SettingsColumn {
+					width: parent ? parent.width : 0
 
-				Repeater {
-					model: tableModel
-					delegate: ListText {
-						preferredVisible: dataItem.valid
-						text: name(model.id)
-						dataItem.uid: model.uid + "/SerialNumber"
+					Repeater {
+						model: tableModel
+						delegate: ListText {
+							preferredVisible: dataItem.valid
+							text: name(model.id)
+							dataItem.uid: model.uid + "/SerialNumber"
+						}
 					}
 				}
 			}

@@ -89,7 +89,8 @@ QtObject {
 				callable: ()=> { return testCase.mouseClick(testCase.findClickableChild(nextClickableItem)) },
 				message: "Click menu: %1".arg(subMenuText),
 			})
-			testCase.addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating && Global.mainView.currentPage !== listView.parent } })
+			const fromPage = Global.mainView.currentPage
+			testCase.addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating && !!Global.mainView.currentPage && Global.mainView.currentPage !== fromPage } })
 			testCase.runSteps(_captureNext, [imageNameSequence, subMenuText])
 		} else {
 			// There is no ListView in this page, or there are no more items to be clicked in the

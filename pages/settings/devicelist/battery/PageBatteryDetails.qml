@@ -13,92 +13,108 @@ Page {
 	property BatteryDetails details
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListQuantityGroup {
-				//% "Lowest cell voltage"
-				text: qsTrId("batterydetails_lowest_cell_voltage")
-				model: QuantityObjectModel {
-					QuantityObject { object: details.minVoltageCellId; decimals: details.minVoltageCellId.decimals }
-					QuantityObject { object: details.minCellVoltage; unit: VenusOS.Units_Volt_DC; decimals: 3 }
-				}
+		model: DelegateComponentModel {
+			DelegateComponent {
 				preferredVisible: details.allowsLowestCellVoltage
+				ListQuantityGroup {
+					//% "Lowest cell voltage"
+					text: qsTrId("batterydetails_lowest_cell_voltage")
+					model: QuantityObjectModel {
+						QuantityObject { object: details.minVoltageCellId; decimals: details.minVoltageCellId.decimals }
+						QuantityObject { object: details.minCellVoltage; unit: VenusOS.Units_Volt_DC; decimals: 3 }
+					}
+				}
 			}
 
-			ListQuantityGroup {
-				//% "Highest cell voltage"
-				text: qsTrId("batterydetails_highest_cell_voltage")
-				model: QuantityObjectModel {
-					QuantityObject { object: details.maxVoltageCellId; decimals: details.maxVoltageCellId.decimals }
-					QuantityObject { object: details.maxCellVoltage; unit: VenusOS.Units_Volt_DC; decimals: 3 }
-				}
+			DelegateComponent {
 				preferredVisible: details.allowsHighestCellVoltage
+				ListQuantityGroup {
+					//% "Highest cell voltage"
+					text: qsTrId("batterydetails_highest_cell_voltage")
+					model: QuantityObjectModel {
+						QuantityObject { object: details.maxVoltageCellId; decimals: details.maxVoltageCellId.decimals }
+						QuantityObject { object: details.maxCellVoltage; unit: VenusOS.Units_Volt_DC; decimals: 3 }
+					}
+				}
 			}
 
-			ListQuantityGroup {
-				//% "Minimum cell temperature"
-				text: qsTrId("batterydetails_minimum_cell_temperature")
-				model: QuantityObjectModel {
-					QuantityObject { object: details.minTemperatureCellId; decimals: details.minTemperatureCellId.decimals }
-					QuantityObject { object: details.minCellTemperature; unit: Global.systemSettings.temperatureUnit }
-				}
+			DelegateComponent {
 				preferredVisible: details.allowsMinimumCellTemperature
+				ListQuantityGroup {
+					//% "Minimum cell temperature"
+					text: qsTrId("batterydetails_minimum_cell_temperature")
+					model: QuantityObjectModel {
+						QuantityObject { object: details.minTemperatureCellId; decimals: details.minTemperatureCellId.decimals }
+						QuantityObject { object: details.minCellTemperature; unit: Global.systemSettings.temperatureUnit }
+					}
+				}
 			}
 
-			ListQuantityGroup {
-				//% "Maximum cell temperature"
-				text: qsTrId("batterydetails_maximum_cell_temperature")
-				model: QuantityObjectModel {
-					QuantityObject { object: details.maxTemperatureCellId; decimals: details.maxTemperatureCellId.decimals }
-					QuantityObject { object: details.maxCellTemperature; unit: Global.systemSettings.temperatureUnit }
-				}
+			DelegateComponent {
 				preferredVisible: details.allowsMaximumCellTemperature
+				ListQuantityGroup {
+					//% "Maximum cell temperature"
+					text: qsTrId("batterydetails_maximum_cell_temperature")
+					model: QuantityObjectModel {
+						QuantityObject { object: details.maxTemperatureCellId; decimals: details.maxTemperatureCellId.decimals }
+						QuantityObject { object: details.maxCellTemperature; unit: Global.systemSettings.temperatureUnit }
+					}
+				}
 			}
 
-			ListQuantityGroup {
-				id: batteryModules
-
-				//: %1 = number of battery modules that are online
-				//% "%1 online"
-				readonly property string onlineText: details.modulesOnline.valid ? qsTrId("devicelist_batterydetails_modules_online").arg(details.modulesOnline.value) : "--"
-
-				//: %1 = number of battery modules that are offline
-				//% "%1 offline"
-				readonly property string offlineText: details.modulesOffline.valid ? qsTrId("devicelist_batterydetails_modules_offline").arg(details.modulesOffline.value) : "--"
-
-				//% "Battery modules"
-				text: qsTrId("batterydetails_modules")
-				model: QuantityObjectModel {
-					QuantityObject { object: batteryModules; key: "onlineText" }
-					QuantityObject { object: batteryModules; key: "offlineText" }
-				}
+			DelegateComponent {
 				preferredVisible: details.allowsBatteryModules
+				ListQuantityGroup {
+					id: batteryModules
+
+					//: %1 = number of battery modules that are online
+					//% "%1 online"
+					readonly property string onlineText: details.modulesOnline.valid ? qsTrId("devicelist_batterydetails_modules_online").arg(details.modulesOnline.value) : "--"
+
+					//: %1 = number of battery modules that are offline
+					//% "%1 offline"
+					readonly property string offlineText: details.modulesOffline.valid ? qsTrId("devicelist_batterydetails_modules_offline").arg(details.modulesOffline.value) : "--"
+
+					//% "Battery modules"
+					text: qsTrId("batterydetails_modules")
+					model: QuantityObjectModel {
+						QuantityObject { object: batteryModules; key: "onlineText" }
+						QuantityObject { object: batteryModules; key: "offlineText" }
+					}
+				}
 			}
 
-			ListQuantityGroup {
-				//% "Number of modules blocking charge / discharge"
-				text: qsTrId("batterydetails_number_of_modules_blocking_charge_discharge")
-				model: QuantityObjectModel {
-					QuantityObject { object: details.nrOfModulesBlockingCharge; decimals: details.nrOfModulesBlockingCharge.decimals }
-					QuantityObject { object: details.nrOfModulesBlockingDischarge; decimals: details.nrOfModulesBlockingDischarge.decimals }
-				}
+			DelegateComponent {
 				preferredVisible: details.allowsNumberOfModulesBlockingChargeDischarge
-			}
-
-			ListQuantityGroup {
-				//% "Installed / Available capacity"
-				text: qsTrId("batterydetails_installed_available_capacity")
-				model: QuantityObjectModel {
-					QuantityObject { object: details.installedCapacity; unit: VenusOS.Units_AmpHour }
-					QuantityObject { object: details.capacity; unit: VenusOS.Units_AmpHour }
+				ListQuantityGroup {
+					//% "Number of modules blocking charge / discharge"
+					text: qsTrId("batterydetails_number_of_modules_blocking_charge_discharge")
+					model: QuantityObjectModel {
+						QuantityObject { object: details.nrOfModulesBlockingCharge; decimals: details.nrOfModulesBlockingCharge.decimals }
+						QuantityObject { object: details.nrOfModulesBlockingDischarge; decimals: details.nrOfModulesBlockingDischarge.decimals }
+					}
 				}
-				preferredVisible: details.allowsCapacity
 			}
 
-			ListText {
-				//% "Connection information"
-				text: qsTrId("batterydetails_connection_information")
-				secondaryText: details.connectionInformation.value ?? ""
+			DelegateComponent {
+				preferredVisible: details.allowsCapacity
+				ListQuantityGroup {
+					//% "Installed / Available capacity"
+					text: qsTrId("batterydetails_installed_available_capacity")
+					model: QuantityObjectModel {
+						QuantityObject { object: details.installedCapacity; unit: VenusOS.Units_AmpHour }
+						QuantityObject { object: details.capacity; unit: VenusOS.Units_AmpHour }
+					}
+				}
+			}
+
+			DelegateComponent {
 				preferredVisible: details.connectionInformation.valid
+				ListText {
+					//% "Connection information"
+					text: qsTrId("batterydetails_connection_information")
+					secondaryText: details.connectionInformation.value ?? ""
+				}
 			}
 		}
 	}

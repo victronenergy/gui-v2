@@ -11,48 +11,69 @@ Page {
 
 	property string bindPrefix
 
+	VeQuickItem {
+		id: minBatteryVoltageItem
+		uid: root.bindPrefix + "/History/Overall/MinBatteryVoltage"
+	}
+	VeQuickItem {
+		id: maxBatteryVoltageItem
+		uid: root.bindPrefix + "/History/Overall/MaxBatteryVoltage"
+	}
+	VeQuickItem {
+		id: maxPvVoltageItem
+		uid: root.bindPrefix + "/History/Overall/MaxPvVoltage"
+	}
+	SolarHistoryErrorModel {
+		id: errorModel
+		uidPrefix: root.bindPrefix + "/History/Overall"
+	}
+
 	GradientListView {
-		model: VisibleItemModel {
-			ListQuantity {
-				//% "Maximum PV voltage"
-				text: qsTrId("inverter_maximum_pv_voltage")
-				dataItem.uid: root.bindPrefix + "/History/Overall/MaxPvVoltage"
-				unit: VenusOS.Units_Volt_DC
-				preferredVisible: dataItem.valid
+		model: DelegateComponentModel {
+			DelegateComponent {
+				preferredVisible: maxPvVoltageItem.valid
+				ListQuantity {
+					//% "Maximum PV voltage"
+					text: qsTrId("inverter_maximum_pv_voltage")
+					dataItem.uid: root.bindPrefix + "/History/Overall/MaxPvVoltage"
+					unit: VenusOS.Units_Volt_DC
+				}
 			}
 
-			ListQuantity {
-				//% "Maximum battery voltage"
-				text: qsTrId("inverter_maximum_battery_voltage")
-				dataItem.uid: root.bindPrefix + "/History/Overall/MaxBatteryVoltage"
-				unit: VenusOS.Units_Volt_DC
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				preferredVisible: maxBatteryVoltageItem.valid
+				ListQuantity {
+					//% "Maximum battery voltage"
+					text: qsTrId("inverter_maximum_battery_voltage")
+					dataItem.uid: root.bindPrefix + "/History/Overall/MaxBatteryVoltage"
+					unit: VenusOS.Units_Volt_DC
+				}
 			}
 
-			ListQuantity {
-				//% "Minimum battery voltage"
-				text: qsTrId("inverter_minimum_battery_voltage")
-				dataItem.uid: root.bindPrefix + "/History/Overall/MinBatteryVoltage"
-				unit: VenusOS.Units_Volt_DC
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				preferredVisible: minBatteryVoltageItem.valid
+				ListQuantity {
+					//% "Minimum battery voltage"
+					text: qsTrId("inverter_minimum_battery_voltage")
+					dataItem.uid: root.bindPrefix + "/History/Overall/MinBatteryVoltage"
+					unit: VenusOS.Units_Volt_DC
+				}
 			}
 
-			SettingsColumn {
-				width: parent ? parent.width : 0
+			DelegateComponent {
 				preferredVisible: errorModel.count > 0
+				SettingsColumn {
+					width: parent ? parent.width : 0
 
-				Repeater {
-					model: SolarHistoryErrorModel {
-						id: errorModel
-						uidPrefix: root.bindPrefix + "/History/Overall"
-					}
+					Repeater {
+						model: errorModel
 
-					delegate: ListText {
-						text: errorModel.count === 1 ? "" : CommonWords.lastErrorName(model.index)
-						secondaryText: ChargerError.description(model.errorCode)
+						delegate: ListText {
+							text: errorModel.count === 1 ? "" : CommonWords.lastErrorName(model.index)
+							secondaryText: ChargerError.description(model.errorCode)
+						}
 					}
 				}
-
 			}
 		}
 	}

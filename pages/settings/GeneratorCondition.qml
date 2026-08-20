@@ -45,15 +45,46 @@ ListNavigation {
 	// Autocalculate step size based on number of decimals
 	readonly property real stepSize: Math.pow(10, -decimals)
 
-	secondaryText: dataItem.value === 1 ? CommonWords.enabled : CommonWords.disabled
-	onClicked: Global.pageManager.pushPage(subpage)
-
+	VeQuickItem {
+		id: preventStartValueItem
+		uid: bindPrefix + "/PreventStartValue"
+	}
+	VeQuickItem {
+		id: stopTimerItem
+		uid: bindPrefix + "/StopTimer"
+	}
+	VeQuickItem {
+		id: quietHoursStopValueItem
+		uid: bindPrefix + "/QuietHoursStopValue"
+	}
+	VeQuickItem {
+		id: stopValueItem
+		uid: bindPrefix + "/StopValue"
+	}
+	VeQuickItem {
+		id: startTimerItem
+		uid: bindPrefix + "/StartTimer"
+	}
+	VeQuickItem {
+		id: quietHoursStartValueItem
+		uid: bindPrefix + "/QuietHoursStartValue"
+	}
+	VeQuickItem {
+		id: startValueItem
+		uid: bindPrefix + "/StartValue"
+	}
+	VeQuickItem {
+		id: tankServiceItem
+		uid: bindPrefix + "/TankService"
+	}
 	VeQuickItem {
 		id: dataItem
 
 		uid: bindPrefix + "/Enabled"
 	}
 
+	secondaryText: dataItem.value === 1 ? CommonWords.enabled : CommonWords.disabled
+	onClicked: Global.pageManager.pushPage(subpage)
 	Component {
 		id: subpage
 
@@ -62,144 +93,166 @@ ListNavigation {
 
 			GradientListView {
 
-				model: VisibleItemModel {
+				model: DelegateComponentModel {
 
-					ListSwitch {
-						text: root.enableDescription
-						dataItem.uid: bindPrefix + "/Enabled"
+					DelegateComponent {
+						ListSwitch {
+							text: root.enableDescription
+							dataItem.uid: bindPrefix + "/Enabled"
+						}
 					}
 
-					ListRadioButtonGroup {
-						id: tankService
-						preferredVisible: showTankServices && dataItem.valid
+					DelegateComponent {
+						preferredVisible: showTankServices && tankServiceItem.valid
+						ListRadioButtonGroup {
+							id: tankService
 
-						//% "Tank service"
-						text: qsTrId("page_generator_conditions_tank_service")
-						//% "Unavailable tank service, set another"
-						defaultSecondaryText: qsTrId("page_generator_conditions_unavailable_tank_service_set_another")
-						dataItem.uid: bindPrefix + "/TankService"
+							//% "Tank service"
+							text: qsTrId("page_generator_conditions_tank_service")
+							//% "Unavailable tank service, set another"
+							defaultSecondaryText: qsTrId("page_generator_conditions_unavailable_tank_service_set_another")
+							dataItem.uid: bindPrefix + "/TankService"
 
-						VeQuickItem {
-							id: availableTankServices
+							VeQuickItem {
+								id: availableTankServices
 
-							uid: startStopBindPrefix + "/AvailableTankServices"
-							onValueChanged: {
-								if (value === undefined) {
-									return
-								}
-								const modelArray = Utils.jsonSettingsToModel(value)
-								if (modelArray) {
-									tankService.optionModel = modelArray
-								} else {
-									console.warn("Unable to parse data from", source)
+								uid: startStopBindPrefix + "/AvailableTankServices"
+								onValueChanged: {
+									if (value === undefined) {
+										return
+									}
+									const modelArray = Utils.jsonSettingsToModel(value)
+									if (modelArray) {
+										tankService.optionModel = modelArray
+									} else {
+										console.warn("Unable to parse data from", source)
+									}
 								}
 							}
 						}
 					}
 
-					ListSpinBox {
-						id: startValue
+					DelegateComponent {
+						preferredVisible: startValueItem.valid
+						ListSpinBox {
+							id: startValue
 
-						text: startValueDescription
-						preferredVisible: dataItem.valid
-						dataItem.uid: bindPrefix + "/StartValue"
-						suffix: root.unit
-						decimals: root.decimals
-						stepSize: root.stepSize
-						from: stopValue.dataItem.valid && root.startValueIsGreater ? stopValue.value + stepSize : dataItem.defaultMin
-						to: stopValue.dataItem.valid && !root.startValueIsGreater ? stopValue.value - stepSize : dataItem.defaultMax
-						toErrorText: root.startValueIsGreater ? "" : CommonWords.value_must_be_lower_than_stop_value
-						fromErrorText: root.startValueIsGreater ? CommonWords.value_must_be_greater_than_stop_value : ""
+							text: startValueDescription
+							dataItem.uid: bindPrefix + "/StartValue"
+							suffix: root.unit
+							decimals: root.decimals
+							stepSize: root.stepSize
+							from: stopValueItem.valid && root.startValueIsGreater ? stopValueItem.value + stepSize : dataItem.defaultMin
+							to: stopValueItem.valid && !root.startValueIsGreater ? stopValueItem.value - stepSize : dataItem.defaultMax
+							toErrorText: root.startValueIsGreater ? "" : CommonWords.value_must_be_lower_than_stop_value
+							fromErrorText: root.startValueIsGreater ? CommonWords.value_must_be_greater_than_stop_value : ""
+						}
 					}
 
-					ListSpinBox {
-						id: quietHoursStartValue
+					DelegateComponent {
+						preferredVisible: quietHoursStartValueItem.valid
+						ListSpinBox {
+							id: quietHoursStartValue
 
-						text: CommonWords.start_value_during_quiet_hours
-						preferredVisible: dataItem.valid
-						dataItem.uid: bindPrefix + "/QuietHoursStartValue"
-						suffix: root.unit
-						decimals: root.decimals
-						stepSize: root.stepSize
-						from: quietHoursStopValue.dataItem.valid && root.startValueIsGreater ? quietHoursStopValue.value + stepSize : dataItem.defaultMin
-						to: quietHoursStopValue.dataItem.valid && !root.startValueIsGreater ? quietHoursStopValue.value - stepSize : dataItem.defaultMax
-						toErrorText: root.startValueIsGreater ? "" : CommonWords.value_must_be_lower_than_stop_value
-						fromErrorText: root.startValueIsGreater ? CommonWords.value_must_be_greater_than_stop_value : ""
+							text: CommonWords.start_value_during_quiet_hours
+							dataItem.uid: bindPrefix + "/QuietHoursStartValue"
+							suffix: root.unit
+							decimals: root.decimals
+							stepSize: root.stepSize
+							from: quietHoursStopValueItem.valid && root.startValueIsGreater ? quietHoursStopValueItem.value + stepSize : dataItem.defaultMin
+							to: quietHoursStopValueItem.valid && !root.startValueIsGreater ? quietHoursStopValueItem.value - stepSize : dataItem.defaultMax
+							toErrorText: root.startValueIsGreater ? "" : CommonWords.value_must_be_lower_than_stop_value
+							fromErrorText: root.startValueIsGreater ? CommonWords.value_must_be_greater_than_stop_value : ""
+						}
 					}
 
-					ListSpinBox {
-						id: startTime
+					DelegateComponent {
+						preferredVisible: startTimerItem.valid
+						ListSpinBox {
+							id: startTime
 
-						text: startTimeDescription
-						preferredVisible: dataItem.valid
-						dataItem.uid: bindPrefix + "/StartTimer"
-						suffix: root.timeUnit
+							text: startTimeDescription
+							dataItem.uid: bindPrefix + "/StartTimer"
+							suffix: root.timeUnit
+						}
 					}
 
-					ListSpinBox {
-						id: stopValue
+					DelegateComponent {
+						preferredVisible: stopValueItem.valid
+						ListSpinBox {
+							id: stopValue
 
-						text: stopValueDescription
-						preferredVisible: dataItem.valid
-						dataItem.uid: bindPrefix + "/StopValue"
-						suffix: root.unit
-						decimals: root.decimals
-						stepSize: root.stepSize
-						to: startValue.dataItem.valid && root.startValueIsGreater ? startValue.value - stepSize : dataItem.defaultMax
-						from: startValue.dataItem.valid && !root.startValueIsGreater ? startValue.value + stepSize : dataItem.defaultMin
-						toErrorText: root.startValueIsGreater ? CommonWords.value_must_be_lower_than_start_value : ""
-						fromErrorText: root.startValueIsGreater ? "" : CommonWords.value_must_be_greater_than_start_value
+							text: stopValueDescription
+							dataItem.uid: bindPrefix + "/StopValue"
+							suffix: root.unit
+							decimals: root.decimals
+							stepSize: root.stepSize
+							to: startValueItem.valid && root.startValueIsGreater ? startValueItem.value - stepSize : dataItem.defaultMax
+							from: startValueItem.valid && !root.startValueIsGreater ? startValueItem.value + stepSize : dataItem.defaultMin
+							toErrorText: root.startValueIsGreater ? CommonWords.value_must_be_lower_than_start_value : ""
+							fromErrorText: root.startValueIsGreater ? "" : CommonWords.value_must_be_greater_than_start_value
+						}
 					}
 
-					ListSpinBox {
-						id: quietHoursStopValue
+					DelegateComponent {
+						preferredVisible: quietHoursStopValueItem.valid
+						ListSpinBox {
+							id: quietHoursStopValue
 
-						text: CommonWords.stop_value_during_quiet_hours
-						preferredVisible: dataItem.valid
-						dataItem.uid: bindPrefix + "/QuietHoursStopValue"
-						suffix: root.unit
-						decimals: root.decimals
-						stepSize: root.stepSize
-						to: quietHoursStartValue.dataItem.valid && root.startValueIsGreater ? quietHoursStartValue.value - stepSize : dataItem.defaultMax
-						from: quietHoursStartValue.dataItem.valid && !root.startValueIsGreater ? quietHoursStartValue.value + stepSize : dataItem.defaultMin
-						toErrorText: root.startValueIsGreater ? CommonWords.value_must_be_lower_than_start_value : ""
-						fromErrorText: root.startValueIsGreater ? "" : CommonWords.value_must_be_greater_than_start_value
+							text: CommonWords.stop_value_during_quiet_hours
+							dataItem.uid: bindPrefix + "/QuietHoursStopValue"
+							suffix: root.unit
+							decimals: root.decimals
+							stepSize: root.stepSize
+							to: quietHoursStartValueItem.valid && root.startValueIsGreater ? quietHoursStartValueItem.value - stepSize : dataItem.defaultMax
+							from: quietHoursStartValueItem.valid && !root.startValueIsGreater ? quietHoursStartValueItem.value + stepSize : dataItem.defaultMin
+							toErrorText: root.startValueIsGreater ? CommonWords.value_must_be_lower_than_start_value : ""
+							fromErrorText: root.startValueIsGreater ? "" : CommonWords.value_must_be_greater_than_start_value
+						}
 					}
 
-					ListSpinBox {
-						id: stopTime
+					DelegateComponent {
+						preferredVisible: stopTimerItem.valid
+						ListSpinBox {
+							id: stopTime
 
-						text: stopTimeDescription
-						preferredVisible: dataItem.valid
-						dataItem.uid: bindPrefix + "/StopTimer"
-						suffix: root.timeUnit
+							text: stopTimeDescription
+							dataItem.uid: bindPrefix + "/StopTimer"
+							suffix: root.timeUnit
+						}
 					}
 
-					ListSpinBox {
-						id: preventStartValue
+					DelegateComponent {
+						preferredVisible: preventStartValueItem.valid
+						ListSpinBox {
+							id: preventStartValue
 
-						text: preventStartValueDescription
-						preferredVisible: dataItem.valid
-						dataItem.uid: bindPrefix + "/PreventStartValue"
-						suffix: root.unit
-						decimals: root.decimals
-						stepSize: root.stepSize
-						from: stopValue.dataItem.valid && root.startValueIsGreater ? stopValue.value + stepSize : dataItem.defaultMin
-						to: stopValue.dataItem.valid && !root.startValueIsGreater ? stopValue.value - stepSize : dataItem.defaultMax
+							text: preventStartValueDescription
+							dataItem.uid: bindPrefix + "/PreventStartValue"
+							suffix: root.unit
+							decimals: root.decimals
+							stepSize: root.stepSize
+							from: stopValueItem.valid && root.startValueIsGreater ? stopValueItem.value + stepSize : dataItem.defaultMin
+							to: stopValueItem.valid && !root.startValueIsGreater ? stopValueItem.value - stepSize : dataItem.defaultMax
+						}
 					}
 
-					ListSwitch {
-						//% "Skip generator warm-up"
-						text: qsTrId("settings_generator_condition_skip_warmup")
-						dataItem.uid: bindPrefix + "/SkipWarmup"
+					DelegateComponent {
 						preferredVisible: root.supportsWarmup
+						ListSwitch {
+							//% "Skip generator warm-up"
+							text: qsTrId("settings_generator_condition_skip_warmup")
+							dataItem.uid: bindPrefix + "/SkipWarmup"
+						}
 					}
 
-					ListSwitch {
-						//% "Trigger warning when the generator is stopped"
-						text: qsTrId("settings_generator_condition_tank_level_enable_warning")
-						dataItem.uid: bindPrefix + "/WarningEnabled"
+					DelegateComponent {
 						preferredVisible: showTankServices
+						ListSwitch {
+							//% "Trigger warning when the generator is stopped"
+							text: qsTrId("settings_generator_condition_tank_level_enable_warning")
+							dataItem.uid: bindPrefix + "/WarningEnabled"
+						}
 					}
 				}
 			}

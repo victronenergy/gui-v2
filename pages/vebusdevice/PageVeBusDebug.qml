@@ -11,166 +11,198 @@ Page {
 
 	property string bindPrefix
 
+	// These properties and the timer below hold the state of the delegates further down. The
+	// delegates are destroyed and recreated as they scroll in and out of view, so any state that
+	// must survive that (and the periodic writes themselves) has to live here at page scope.
+	property real sliderL1Value
+	property real sliderL2Value
+	property real sliderL3Value
+	property bool sendSetpoints
+
 	VeQuickItem {
 		id: sustainDataItem
 
 		uid: root.bindPrefix + "/Hub4/Sustain"
 	}
-
 	VeQuickItem {
 		id: lowSocDataItem
 
 		uid: root.bindPrefix + "/Hub4/LowSoc"
 	}
-
 	VeQuickItem {
 		id: maxChargePower
 
 		uid: BackendConnection.serviceUidForType("hub4") + "/MaxChargePower"
 	}
-
 	VeQuickItem {
 		id: maxDischargePower
 
 		uid: BackendConnection.serviceUidForType("hub4") + "/MaxDischargePower"
 	}
+	VeQuickItem {
+		id: remoteSetpointL1
+		uid: root.bindPrefix + "/Hub4/L1/AcPowerSetpoint"
+	}
+	VeQuickItem {
+		id: remoteSetpointL2
+		uid: root.bindPrefix + "/Hub4/L2/AcPowerSetpoint"
+	}
+	VeQuickItem {
+		id: remoteSetpointL3
+		uid: root.bindPrefix + "/Hub4/L3/AcPowerSetpoint"
+	}
+
+	Timer {
+		id: hub4Control
+
+		property bool toggle
+
+		interval: 1000
+		repeat: true
+		running: root.sendSetpoints
+
+		onTriggered: {
+			toggle = !toggle
+			let noise = (toggle ? 0 : 1)
+
+			// FIXME: only do this if the paths are valid (but that is unknown yet)
+			remoteSetpointL1.setValue(root.sliderL1Value + noise)
+			remoteSetpointL2.setValue(root.sliderL2Value + noise)
+			remoteSetpointL3.setValue(root.sliderL3Value + noise)
+		}
+	}
 
 	GradientListView {
-		model: VisibleItemModel {
+		model: DelegateComponentModel {
 
-			ListNavigation {
-				text: CommonWords.ac_sensors
-				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageAcSensors.qml", {
-														   "title": text,
-														   "bindPrefix": root.bindPrefix + "/AcSensor"
-													   }
-													   )
-			}
-
-			ListNavigation {
-				text: "kWh Counters"
-				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusKwhCounters.qml", {
-														   "title": text,
-														   "bindPrefix": root.bindPrefix + "/Energy",
-														   "service": root.bindPrefix
-													   }
-													   )
-			}
-
-			ListText {
-				text: "Multi SOC"
-				dataItem.uid: root.bindPrefix + "/Soc"
-			}
-
-			ListQuantityGroup {
-				id: flagsGroup
-
-				readonly property string sustain: "Sustain: " + Units.getDisplayText(VenusOS.Units_None, sustainDataItem.value).number
-				readonly property string lowSoc: "Low SOC: " + Units.getDisplayText(VenusOS.Units_None, lowSocDataItem.value).number
-
-				text: "Flags"
-				model: QuantityObjectModel {
-					QuantityObject { object: flagsGroup; key: "sustain" }
-					QuantityObject { object: flagsGroup; key: "lowSoc" }
+			DelegateComponent {
+				ListNavigation {
+					text: CommonWords.ac_sensors
+					onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageAcSensors.qml", {
+															   "title": text,
+															   "bindPrefix": root.bindPrefix + "/AcSensor"
+														   }
+														   )
 				}
 			}
 
-			ListQuantityGroup {
-				text: "AC power setpoint"
-				model: QuantityObjectModel {
-					QuantityObject { object: remoteSetpointL1; unit: VenusOS.Units_Watt }
-					QuantityObject { object: remoteSetpointL2; unit: VenusOS.Units_Watt }
-					QuantityObject { object: remoteSetpointL3; unit: VenusOS.Units_Watt }
+			DelegateComponent {
+				ListNavigation {
+					text: "kWh Counters"
+					onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusKwhCounters.qml", {
+															   "title": text,
+															   "bindPrefix": root.bindPrefix + "/Energy",
+															   "service": root.bindPrefix
+														   }
+														   )
 				}
 			}
 
-			ListQuantityGroup {
-				id: limitsGroup
-
-				readonly property string charge: "Charge: " + Units.getDisplayText(VenusOS.Units_None, maxChargePower.value).number
-				readonly property string discharge: "Discharge: " + Units.getDisplayText(VenusOS.Units_None, maxDischargePower.value).number
-
-				text: "Limits"
-				model: QuantityObjectModel {
-					QuantityObject { object: limitsGroup; key: "charge" }
-					QuantityObject { object: limitsGroup; key: "discharge" }
+			DelegateComponent {
+				ListText {
+					text: "Multi SOC"
+					dataItem.uid: root.bindPrefix + "/Soc"
 				}
 			}
 
-			ListSwitch {
-				id: doSend
+			DelegateComponent {
+				ListQuantityGroup {
+					id: flagsGroup
 
-				text: "Send setpoints"
-				Timer {
-					id: hub4Control
+					readonly property string sustain: "Sustain: " + Units.getDisplayText(VenusOS.Units_None, sustainDataItem.value).number
+					readonly property string lowSoc: "Low SOC: " + Units.getDisplayText(VenusOS.Units_None, lowSocDataItem.value).number
 
-					property bool toggle
-
-					interval: 1000
-					repeat: true
-					running: doSend.checked
-
-					onTriggered: {
-						toggle = !toggle
-						let noise = (toggle ? 0 : 1)
-
-						// FIXME: only do this if the paths are valid (but that is unknown yet)
-						remoteSetpointL1.setValue(sliderL1.value + noise)
-						remoteSetpointL2.setValue(sliderL2.value + noise)
-						remoteSetpointL3.setValue(sliderL3.value + noise)
+					text: "Flags"
+					model: QuantityObjectModel {
+						QuantityObject { object: flagsGroup; key: "sustain" }
+						QuantityObject { object: flagsGroup; key: "lowSoc" }
 					}
 				}
+			}
 
-				VeQuickItem {
-					id: remoteSetpointL1
-
-					uid: root.bindPrefix + "/Hub4/L1/AcPowerSetpoint"
-				}
-
-				VeQuickItem {
-					id: remoteSetpointL2
-
-					uid: root.bindPrefix + "/Hub4/L2/AcPowerSetpoint"
-				}
-
-				VeQuickItem {
-					id: remoteSetpointL3
-
-					uid: root.bindPrefix + "/Hub4/L3/AcPowerSetpoint"
+			DelegateComponent {
+				ListQuantityGroup {
+					text: "AC power setpoint"
+					model: QuantityObjectModel {
+						QuantityObject { object: remoteSetpointL1; unit: VenusOS.Units_Watt }
+						QuantityObject { object: remoteSetpointL2; unit: VenusOS.Units_Watt }
+						QuantityObject { object: remoteSetpointL3; unit: VenusOS.Units_Watt }
+					}
 				}
 			}
 
-			ListSlider {
-				id: sliderL1
-				from: -5000
-				to: 5000
-				stepSize: 50
+			DelegateComponent {
+				ListQuantityGroup {
+					id: limitsGroup
+
+					readonly property string charge: "Charge: " + Units.getDisplayText(VenusOS.Units_None, maxChargePower.value).number
+					readonly property string discharge: "Discharge: " + Units.getDisplayText(VenusOS.Units_None, maxDischargePower.value).number
+
+					text: "Limits"
+					model: QuantityObjectModel {
+						QuantityObject { object: limitsGroup; key: "charge" }
+						QuantityObject { object: limitsGroup; key: "discharge" }
+					}
+				}
 			}
 
-			ListSlider {
-				id: sliderL2
-				from: -5000
-				to: 5000
-				stepSize: 50
+			DelegateComponent {
+				ListSwitch {
+					id: doSend
+
+					text: "Send setpoints"
+					checkable: true
+					checked: root.sendSetpoints
+					onCheckedChanged: root.sendSetpoints = checked
+				}
 			}
 
-			ListSlider {
-				id: sliderL3
-				from: -5000
-				to: 5000
-				stepSize: 50
+			DelegateComponent {
+				ListSlider {
+					id: sliderL1
+					from: -5000
+					to: 5000
+					stepSize: 50
+					value: root.sliderL1Value
+					onValueChanged: root.sliderL1Value = value
+				}
 			}
 
-			ListSwitch {
-				text: "Disable Charge"
-				dataItem.uid: root.bindPrefix + "/Hub4/DisableCharge"
+			DelegateComponent {
+				ListSlider {
+					id: sliderL2
+					from: -5000
+					to: 5000
+					stepSize: 50
+					value: root.sliderL2Value
+					onValueChanged: root.sliderL2Value = value
+				}
 			}
 
-			ListSwitch {
-				text: "Disable Feed In"
-				dataItem.uid: root.bindPrefix + "/Hub4/DisableFeedIn"
+			DelegateComponent {
+				ListSlider {
+					id: sliderL3
+					from: -5000
+					to: 5000
+					stepSize: 50
+					value: root.sliderL3Value
+					onValueChanged: root.sliderL3Value = value
+				}
+			}
+
+			DelegateComponent {
+				ListSwitch {
+					text: "Disable Charge"
+					dataItem.uid: root.bindPrefix + "/Hub4/DisableCharge"
+				}
+			}
+
+			DelegateComponent {
+				ListSwitch {
+					text: "Disable Feed In"
+					dataItem.uid: root.bindPrefix + "/Hub4/DisableFeedIn"
+				}
 			}
 		}
 	}
 }
-

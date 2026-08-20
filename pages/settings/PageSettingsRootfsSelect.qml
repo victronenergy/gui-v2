@@ -45,62 +45,72 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: VisibleItemModel {
-			PrimaryListLabel {
-				//% "This option allows you to switch between the current and the previous firmware version. No internet or sdcard needed."
-				text: qsTrId("settings_firmware_version_switch_option")
+		model: DelegateComponentModel {
+			DelegateComponent {
+				PrimaryListLabel {
+					//% "This option allows you to switch between the current and the previous firmware version. No internet or sdcard needed."
+					text: qsTrId("settings_firmware_version_switch_option")
+				}
 			}
 
-			ListButton {
-				id: backupVersion
-
-				//: %1 = backup version, %2 = backup version build number
-				//% "Firmware %1 (%2)"
-				text: qsTrId("settings_firmware_backup_version").arg(backupVersionItem.value).arg(backupBuildItem.value)
-				secondaryText: root._autoUpdateDisabled
-					 //: Boot the system to a particular firmware version
-					 //% "Boot"
-				   ? qsTrId("settings_firmware_boot_to_version")
-				   : CommonWords.disabled
+			DelegateComponent {
+				id: backupVersionDC
 				preferredVisible: root._switchingEnabled
+				ListButton {
+					id: backupVersion
 
-				onClicked: {
-					if (securityProfile.value === VenusOS.Security_Profile_Indeterminate) {
-						//% "Switching firmware version is not possible without \"Network Security Profile\" in "
-						//% "\"Settings / General\" being selected."
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_firmware_switching_not_possible_indeterminate_profile"), 10000)
-						return
-					}
+					//: %1 = backup version, %2 = backup version build number
+					//% "Firmware %1 (%2)"
+					text: qsTrId("settings_firmware_backup_version").arg(backupVersionItem.value).arg(backupBuildItem.value)
+					secondaryText: root._autoUpdateDisabled
+						 //: Boot the system to a particular firmware version
+						 //% "Boot"
+					   ? qsTrId("settings_firmware_boot_to_version")
+					   : CommonWords.disabled
 
-					if (_autoUpdateDisabled) {
-						text = ""
-						root._rebooting = true
-						// TODO confirm whether we need to show "icon-restart-active" instead of the normal notification icon
-						//: %1 = backup version
-						//% "Rebooting to %1"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_firmware_rebooting_to").arg(backupVersionItem.value), 50000)
-						activateBackup.setValue(1)
-					} else {
-						//% "Switching firmware version is not possible when auto update is set to \"Check and update\". Set auto update to \"Disabled\" or \"Check only\" to enable this option."
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_firmware_switching_not_possible"), 10000)
+					onClicked: {
+						if (securityProfile.value === VenusOS.Security_Profile_Indeterminate) {
+							//% "Switching firmware version is not possible without \"Network Security Profile\" in "
+							//% "\"Settings / General\" being selected."
+							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_firmware_switching_not_possible_indeterminate_profile"), 10000)
+							return
+						}
+
+						if (_autoUpdateDisabled) {
+							text = ""
+							root._rebooting = true
+							// TODO confirm whether we need to show "icon-restart-active" instead of the normal notification icon
+							//: %1 = backup version
+							//% "Rebooting to %1"
+							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_firmware_rebooting_to").arg(backupVersionItem.value), 50000)
+							activateBackup.setValue(1)
+						} else {
+							//% "Switching firmware version is not possible when auto update is set to \"Check and update\". Set auto update to \"Disabled\" or \"Check only\" to enable this option."
+							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_firmware_switching_not_possible"), 10000)
+						}
 					}
 				}
 			}
 
-			ListText {
-				id: currentVersion
-
-				//: %1 = current firmware version, %2 = current firmware build number
-				//% "Firmware %1 (%2)"
-				text: qsTrId("settings_firmware_current_version").arg(currentVersionItem.value).arg(currentBuildItem.value)
-				secondaryText: CommonWords.running_status
+			DelegateComponent {
+				id: currentVersionDC
 				preferredVisible: currentVersionItem.valid && root._switchingEnabled
+				ListText {
+					id: currentVersion
+
+					//: %1 = current firmware version, %2 = current firmware build number
+					//% "Firmware %1 (%2)"
+					text: qsTrId("settings_firmware_current_version").arg(currentVersionItem.value).arg(currentBuildItem.value)
+					secondaryText: CommonWords.running_status
+				}
 			}
 
-			ListText {
-				//% "Backup firmware not available"
-				text: qsTrId("settings_firmware_backup_not_available")
-				preferredVisible: !currentVersion.visible && !backupVersion.visible && !root._rebooting
+			DelegateComponent {
+				preferredVisible: !currentVersionDC.preferredVisible && !backupVersionDC.preferredVisible && !root._rebooting
+				ListText {
+					//% "Backup firmware not available"
+					text: qsTrId("settings_firmware_backup_not_available")
+				}
 			}
 		}
 	}

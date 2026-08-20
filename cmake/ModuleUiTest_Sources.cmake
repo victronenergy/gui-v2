@@ -1,6 +1,8 @@
 set(VictronUiTest_QML_MODULE_SOURCES
     tests/ui/RecursivePageCapture.qml
     tests/ui/benchmark/overview/tst_benchmark_overview.qml
+    tests/ui/benchmark/pages/tst_benchmark_pages.qml
+    tests/ui/pagestack/tst_pagestack.qml
     tests/ui/smoke/generic-capture/tst_all.qml
     tests/ui/smoke/mock-maximal/tst_boat.qml
     tests/ui/smoke/mock-maximal/tst_brief.qml
@@ -13,6 +15,8 @@ set(VictronUiTest_QML_MODULE_SOURCES
 
 SET(VictronUiTest_QML_MODULE_RESOURCES
     tests/ui/benchmark/overview/overview.json
+    tests/ui/benchmark/pages/pages.json
+    tests/ui/pagestack/pagestack.json
     tests/ui/smoke/generic-capture/generic-capture.json
     tests/ui/smoke/mock-maximal/mock-maximal.json
 )

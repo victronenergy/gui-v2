@@ -7,7 +7,7 @@ import QtQuick
 import QtQuick.Layouts
 import Victron.VenusOS
 
-VisibleItemModel {
+DelegateComponentModel {
 	id: root
 
 	property string bindPrefix
@@ -18,6 +18,16 @@ VisibleItemModel {
 	readonly property int nrOfPhases: phases.valid ? phases.value
 												   : dcGenset ? 0
 															  : 3
+
+	readonly property VeQuickItem chargeVoltageItem: VeQuickItem {
+		uid: root.bindPrefix + "/Settings/ChargeVoltage"
+	}
+	readonly property VeQuickItem chargeCurrentItem: VeQuickItem {
+		uid: root.bindPrefix + "/Settings/ChargeCurrentLimit"
+	}
+	readonly property VeQuickItem bmsControlledItem: VeQuickItem {
+		uid: root.bindPrefix + "/Settings/BmsPresent"
+	}
 
 	// In case of multiple gensets, startstop will control the one with the lowest device instance.
 	// Check if this genset is controlled by startstop by checking if the instance and service type
@@ -55,302 +65,327 @@ VisibleItemModel {
 		gensetServiceUid: root.bindPrefix
 	}
 
-	readonly property VeQuickItem generatorState: VeQuickItem {
-		uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/State" : ""
-	}
-
 	// Show when startstop controlled but not enabled (because the required helper relay is not configured) and only if the genset service is present.
-	PrimaryListLabel {
+	DelegateComponent {
 		preferredVisible: gensetInstance.valid && root.isStartStopControlled && !root.isGensetEnabled
-		//% "This genset controller requires a helper relay to be controlled but the helper relay is not configured. Please configure Relay 1 under Settings → Relay to \"Connected genset helper relay\"."
-		text: qsTrId("genset_controller_requires_helper_relay")
+		PrimaryListLabel {
+			//% "This genset controller requires a helper relay to be controlled but the helper relay is not configured. Please configure Relay 1 under Settings → Relay to \"Connected genset helper relay\"."
+			text: qsTrId("genset_controller_requires_helper_relay")
+		}
 	}
 
 	// Show when not startstop controlled, but only if the genset service is present.
-	PrimaryListLabel {
+	DelegateComponent {
 		preferredVisible: gensetInstance.valid && !root.isStartStopControlled
-		//% "Multiple genset controllers detected.\nThe GX device can only control one connected genset and takes the one with the lowest VRM instance number. To avoid unexpected behavior, make sure that only one unit is available to the GX device."
-		text: qsTrId("genset_controller_multiple_genset_controllers")
+		PrimaryListLabel {
+			//% "Multiple genset controllers detected.\nThe GX device can only control one connected genset and takes the one with the lowest VRM instance number. To avoid unexpected behavior, make sure that only one unit is available to the GX device."
+			text: qsTrId("genset_controller_multiple_genset_controllers")
+		}
 	}
 
-	ListGeneratorAutoStartSwitch {
-		id: autostartSwitch
+	DelegateComponent {
 		preferredVisible: root.isGensetEnabled && root.isStartStopControlled
-		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/AutoStartEnabled" : ""
+		ListGeneratorAutoStartSwitch {
+			id: autostartSwitch
+			dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/AutoStartEnabled" : ""
+		}
 	}
 
-	ListGeneratorManualControlButton {
+	DelegateComponent {
 		preferredVisible: root.isGensetEnabled && root.isStartStopControlled
-		generatorUid: root.startStopBindPrefix
-		gensetUid: root.bindPrefix
+		ListGeneratorManualControlButton {
+			generatorUid: root.startStopBindPrefix
+			gensetUid: root.bindPrefix
+		}
 	}
 
-	ListText {
-		//% "Current run time"
-		text: qsTrId("settings_page_genset_generator_run_time")
-		secondaryText: dataItem.valid ? Utils.secondsToString(dataItem.value, false) : "0"
-		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Runtime" : ""
-		preferredVisible: generatorState.value >= 1 && generatorState.value <= 3 // Running, Warm-up, Cool-down
+	DelegateComponent {
+		dataItem: VeQuickItem { uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Runtime" : "" }
+		property VeQuickItem stateItem: VeQuickItem {
+			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/State" : ""
+		}
+		preferredVisible: stateItem.value >= 1 && stateItem.value <= 3 // Running, Warm-up, Cool-down
+		ListText {
+			//% "Current run time"
+			text: qsTrId("settings_page_genset_generator_run_time")
+			secondaryText: dataItem.valid ? Utils.secondsToString(dataItem.value, false) : "0"
+			dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Runtime" : ""
+		}
 	}
 
-	ListGeneratorControlStatus {
+	DelegateComponent {
 		preferredVisible: root.isStartStopControlled
-		startStopBindPrefix: root.startStopBindPrefix
+		ListGeneratorControlStatus {
+			startStopBindPrefix: root.startStopBindPrefix
+		}
 	}
 
-	ListGeneratorError {
-		//% "Control error code"
-		text: qsTrId("ac-in-genset_control_error_code")
+	DelegateComponent {
+		dataItem: VeQuickItem { uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : "" }
 		preferredVisible: dataItem.valid && root.isStartStopControlled
-		dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
-	}
-
-	ListText {
-		//% "Genset status"
-		text: qsTrId("ac-in-genset_status")
-		secondaryText: Global.acInputs.gensetStatusCodeToText(gensetStatus.value)
-
-		VeQuickItem {
-			id: gensetStatus
-			uid: root.bindPrefix + "/StatusCode"
+		ListGeneratorError {
+			//% "Control error code"
+			text: qsTrId("ac-in-genset_control_error_code")
+			dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
 		}
 	}
 
-	ListNavigation {
-		//% "Genset error codes"
-		text: qsTrId("ac-in-genset_error")
-		secondaryText: {
-			let errorStrings = ""
-			for (let i = 0; i < errorModel.count; ++i) {
-				const errorCode = errorModel.get(i).errorCode
-				if (errorCode) {
-					errorStrings += (errorStrings.length ? " " : "") + GensetError.description(errorCode, root.nrOfPhases)
-				}
+	DelegateComponent {
+		ListText {
+			//% "Genset status"
+			text: qsTrId("ac-in-genset_status")
+			secondaryText: Global.acInputs.gensetStatusCodeToText(gensetStatus.value)
+
+			VeQuickItem {
+				id: gensetStatus
+				uid: root.bindPrefix + "/StatusCode"
 			}
-			return errorStrings.length ? errorStrings : CommonWords.none_errors
 		}
+	}
 
-		preferredVisible: _dataItem.valid
-		interactive: secondaryText !== CommonWords.none_errors
+	DelegateComponent {
+		dataItem: VeQuickItem { uid: root.bindPrefix + "/Error/0/Id" }
+		preferredVisible: dataItem.valid
+		ListNavigation {
+			//% "Genset error codes"
+			text: qsTrId("ac-in-genset_error")
+			secondaryText: {
+				let errorStrings = ""
+				for (let i = 0; i < errorModel.count; ++i) {
+					const errorCode = errorModel.get(i).errorCode
+					if (errorCode) {
+						errorStrings += (errorStrings.length ? " " : "") + GensetError.description(errorCode, root.nrOfPhases)
+					}
+				}
+				return errorStrings.length ? errorStrings : CommonWords.none_errors
+			}
 
-		onClicked: Global.mainView.goToNotificationsPage()
+			interactive: secondaryText !== CommonWords.none_errors
 
-		VeQuickItem {
-			id: _dataItem
+			onClicked: Global.mainView.goToNotificationsPage()
 
-			uid: root.bindPrefix + "/Error/0/Id"
-		}
+			GensetErrorModel {
+				id: errorModel
 
-		GensetErrorModel {
-			id: errorModel
-
-			uidPrefix: root.bindPrefix
+				uidPrefix: root.bindPrefix
+			}
 		}
 	}
 
 	// Clear Error Button
-	ListButton {
-		readonly property bool hasGensetError: _gensetErrorId.valid && _gensetErrorId.value !== ""
-		readonly property bool canClearGeneratorError: clearControlError.valid
-				&& Number(clearControlError.value) === 2
-		readonly property bool remoteStartModeIsEnabled: remoteStartModeEnabled.valid
-				&& (remoteStartModeEnabled.value === 1 || remoteStartModeEnabled.value === true)
-
-		//% "Clear generator error"
-		text: qsTrId("clear-generator-error")
-		secondaryText: CommonWords.clear_action
-		preferredVisible: clearErrorItem.valid
-		interactive: hasGensetError && canClearGeneratorError && remoteStartModeIsEnabled
-		onClicked: {
-			clearErrorItem.setValue(1)
-		}
-		VeQuickItem {
-			id: clearErrorItem
-			uid: root.bindPrefix + "/ClearError"
-		}
-		VeQuickItem {
-			id: clearControlError
-			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
-		}
-		VeQuickItem {
-			id: _gensetErrorId
-			uid: root.bindPrefix + "/Error/0/Id"
-		}
-	}
-
-	SettingsColumn {
-		width: parent ? parent.width : 0
-		preferredVisible: phaseRepeater.count > 0
-
-		Repeater {
-			id: phaseRepeater
-
-			model: root.nrOfPhases
-			delegate: ListVoltageCurrentPower {
-				required property int index
-
-				bindPrefix: `${root.bindPrefix}/Ac/L${index + 1}`
-				text: phaseRepeater.count === 1
-									  ? CommonWords.ac
-									  : CommonWords.ac_phase_x.arg(index + 1)
-			}
-		}
-	}
-
-	ListButton {
-		readonly property bool showReenableRemoteStartButton: remoteStartModeEnabled.valid
-				&& (remoteStartModeEnabled.value === 0 || remoteStartModeEnabled.value === false)
-				&& enableRemoteStartMode.valid
-		readonly property bool canReenableRemoteStart: showReenableRemoteStartButton
-				&& remoteStartStatusCode.valid
-				&& remoteStartStatusCode.value === VenusOS.Genset_StatusCode_Standby
-
-		readonly property string remoteStartSecondaryText: {
-			if (canReenableRemoteStart) {
-				//% "Re-enable remote start mode"
-				return qsTrId("Re-enable_remote_start_mode")
-			}
-			if (showReenableRemoteStartButton) {
-				return CommonWords.disabled
-			}
-			return CommonWords.enabledOrDisabled(remoteStartModeEnabled.value)
-		}
-		//% "Remote start mode"
-		text: qsTrId("ac-in-genset_remote_start_mode")
-		secondaryText: remoteStartSecondaryText
-		interactive: canReenableRemoteStart
-		writeAccessLevel: VenusOS.User_AccessType_User
-		onClicked: enableRemoteStartMode.setValue(1)
-
-		VeQuickItem {
-			id: remoteStartModeEnabled
+	DelegateComponent {
+		id: clearErrorItemDC
+		dataItem: VeQuickItem { uid: root.bindPrefix + "/ClearError" }
+		property VeQuickItem remoteStartModeEnabledItem: VeQuickItem {
 			uid: root.bindPrefix + "/RemoteStartModeEnabled"
 		}
+		preferredVisible: dataItem.valid
+		ListButton {
+			readonly property bool hasGensetError: _gensetErrorId.valid && _gensetErrorId.value !== ""
+			readonly property bool canClearGeneratorError: clearControlError.valid
+					&& Number(clearControlError.value) === 2
+			readonly property bool remoteStartModeIsEnabled: clearErrorItemDC.remoteStartModeEnabledItem.valid
+					&& (clearErrorItemDC.remoteStartModeEnabledItem.value === 1
+						|| clearErrorItemDC.remoteStartModeEnabledItem.value === true)
 
-		VeQuickItem {
-			id: enableRemoteStartMode
-			uid: root.bindPrefix + "/EnableRemoteStartMode"
-		}
-
-		VeQuickItem {
-			id: remoteStartStatusCode
-			uid: root.bindPrefix + "/StatusCode"
-		}
-		VeQuickItem {
-			id: controlError
-			uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
+			//% "Clear generator error"
+			text: qsTrId("clear-generator-error")
+			secondaryText: CommonWords.clear_action
+			interactive: hasGensetError && canClearGeneratorError && remoteStartModeIsEnabled
+			onClicked: {
+				clearErrorItemDC.dataItem.setValue(1)
+			}
+			VeQuickItem {
+				id: clearControlError
+				uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
+			}
+			VeQuickItem {
+				id: _gensetErrorId
+				uid: root.bindPrefix + "/Error/0/Id"
+			}
 		}
 	}
 
-	ListDcOutputQuantityGroup {
-		bindPrefix: root.bindPrefix
+	DelegateComponent {
+		preferredVisible: root.nrOfPhases > 0
+		SettingsColumn {
+			width: parent ? parent.width : 0
+
+			Repeater {
+				id: phaseRepeater
+
+				model: root.nrOfPhases
+				delegate: ListVoltageCurrentPower {
+					required property int index
+
+					bindPrefix: `${root.bindPrefix}/Ac/L${index + 1}`
+					text: phaseRepeater.count === 1
+										  ? CommonWords.ac
+										  : CommonWords.ac_phase_x.arg(index + 1)
+				}
+			}
+		}
+	}
+
+	DelegateComponent {
+		ListButton {
+			readonly property bool showReenableRemoteStartButton: remoteStartModeEnabled.valid
+					&& (remoteStartModeEnabled.value === 0 || remoteStartModeEnabled.value === false)
+					&& enableRemoteStartMode.valid
+			readonly property bool canReenableRemoteStart: showReenableRemoteStartButton
+					&& remoteStartStatusCode.valid
+					&& remoteStartStatusCode.value === VenusOS.Genset_StatusCode_Standby
+
+			readonly property string remoteStartSecondaryText: {
+				if (canReenableRemoteStart) {
+					//% "Re-enable remote start mode"
+					return qsTrId("Re-enable_remote_start_mode")
+				}
+				if (showReenableRemoteStartButton) {
+					return CommonWords.disabled
+				}
+				return CommonWords.enabledOrDisabled(remoteStartModeEnabled.value)
+			}
+			//% "Remote start mode"
+			text: qsTrId("ac-in-genset_remote_start_mode")
+			secondaryText: remoteStartSecondaryText
+			interactive: canReenableRemoteStart
+			writeAccessLevel: VenusOS.User_AccessType_User
+			onClicked: enableRemoteStartMode.setValue(1)
+
+			VeQuickItem {
+				id: remoteStartModeEnabled
+				uid: root.bindPrefix + "/RemoteStartModeEnabled"
+			}
+
+			VeQuickItem {
+				id: enableRemoteStartMode
+				uid: root.bindPrefix + "/EnableRemoteStartMode"
+			}
+
+			VeQuickItem {
+				id: remoteStartStatusCode
+				uid: root.bindPrefix + "/StatusCode"
+			}
+			VeQuickItem {
+				id: controlError
+				uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/Error" : ""
+			}
+		}
+	}
+
+	DelegateComponent {
 		preferredVisible: root.dcGenset
-	}
-
-	ListNavigation {
-		text: CommonWords.engine
-		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/PageEngine.qml",
-										{
-											title: text,
-											bindPrefix: root.bindPrefix
-										})
+		ListDcOutputQuantityGroup {
+			bindPrefix: root.bindPrefix
 		}
 	}
 
-	ListNavigation {
-		//% "Run time and service"
-		text: qsTrId("page_settings_generator_run_time_and_service")
+	DelegateComponent {
+		ListNavigation {
+			text: CommonWords.engine
+			onClicked: {
+				Global.pageManager.pushPage("/pages/settings/PageEngine.qml",
+											{
+												title: text,
+												bindPrefix: root.bindPrefix
+											})
+			}
+		}
+	}
+
+	DelegateComponent {
 		preferredVisible: root.isStartStopControlled
-		onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
-											   {
-												   title: text,
-												   settingsBindPrefix: root.settingsBindPrefix,
-												   startStopBindPrefix: root.startStopBindPrefix,
-												   gensetBindPrefix: root.bindPrefix
-											   })
+		ListNavigation {
+			//% "Run time and service"
+			text: qsTrId("page_settings_generator_run_time_and_service")
+			onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
+												   {
+													   title: text,
+													   settingsBindPrefix: root.settingsBindPrefix,
+													   startStopBindPrefix: root.startStopBindPrefix,
+													   gensetBindPrefix: root.bindPrefix
+												   })
+		}
 	}
 
-	ListNavigation {
-		//% "DC genset settings"
-		text: qsTrId("page_genset_model_dc_genset_settings")
-		preferredVisible: root.isStartStopControlled && (chargeVoltage.valid || chargeCurrent.valid || bmsControlled.valid)
-		onClicked: Global.pageManager.pushPage(settingsComponent, {"title": text})
+	DelegateComponent {
+		preferredVisible: root.isStartStopControlled && (chargeVoltageItem.valid || chargeCurrentItem.valid || bmsControlledItem.valid)
+		ListNavigation {
+			//% "DC genset settings"
+			text: qsTrId("page_genset_model_dc_genset_settings")
+			onClicked: Global.pageManager.pushPage(settingsComponent, {"title": text})
 
-		VeQuickItem {
-			id: chargeVoltage
-			uid: root.bindPrefix + "/Settings/ChargeVoltage"
-		}
+			Component {
+				id: settingsComponent
 
-		VeQuickItem {
-			id: chargeCurrent
-			uid: root.bindPrefix + "/Settings/ChargeCurrentLimit"
-		}
+				Page {
+					GradientListView {
+						model: DelegateComponentModel {
+								DelegateComponent {
+									preferredVisible: chargeVoltageItem.valid
+									ListSpinBox {
+										//% "Charge voltage"
+										text: qsTrId("genset_charge_voltage")
+										dataItem.uid: root.bindPrefix + "/Settings/ChargeVoltage"
+										decimals: 1
+										stepSize: 0.1
+										suffix: Units.defaultUnitString(VenusOS.Units_Volt_DC)
+										interactive: dataItem.valid && bmsControlledItem.value === 0
+									}
+								}
 
-		VeQuickItem {
-			id: bmsControlled
-			uid: root.bindPrefix + "/Settings/BmsPresent"
-		}
+								DelegateComponent {
+									preferredVisible: bmsControlledItem.value === 1
+									ListText {
+										//% "The charge voltage is currently controlled by the BMS."
+										text: qsTrId("genset_charge_voltage_controlled_by_bms")
+									}
+								}
 
-		Component {
-			id: settingsComponent
+								DelegateComponent {
+									preferredVisible: chargeCurrentItem.valid
+									ListSpinBox {
+										//% "Charge current limit"
+										text: qsTrId("genset_charge_current_limit")
+										dataItem.uid: root.bindPrefix + "/Settings/ChargeCurrentLimit"
+										suffix: Units.defaultUnitString(VenusOS.Units_Amp)
+									}
+								}
 
-			Page {
-				GradientListView {
-					model: VisibleItemModel {
-						ListSpinBox {
-							//% "Charge voltage"
-							text: qsTrId("genset_charge_voltage")
-							dataItem.uid: root.bindPrefix + "/Settings/ChargeVoltage"
-							decimals: 1
-							stepSize: 0.1
-							suffix: Units.defaultUnitString(VenusOS.Units_Volt_DC)
-							preferredVisible: dataItem.valid
-							interactive: dataItem.valid && bmsControlled.dataItem.value === 0
-						}
+								DelegateComponent {
+									preferredVisible: bmsControlledItem.valid
+									ListText {
+										text: CommonWords.bms_controlled
+										secondaryText: CommonWords.yesOrNo(dataItem.value)
+										dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
+										caption: bmsControlledItem.value === 1 ? CommonWords.bms_control_info : ""
+									}
+								}
 
-						ListText {
-							//% "The charge voltage is currently controlled by the BMS."
-							text: qsTrId("genset_charge_voltage_controlled_by_bms")
-							preferredVisible: bmsControlled.dataItem.value === 1
-						}
-
-						ListSpinBox {
-							//% "Charge current limit"
-							text: qsTrId("genset_charge_current_limit")
-							dataItem.uid: root.bindPrefix + "/Settings/ChargeCurrentLimit"
-							suffix: Units.defaultUnitString(VenusOS.Units_Amp)
-							preferredVisible: dataItem.valid
-						}
-
-						ListText {
-							id: bmsControlled
-
-							text: CommonWords.bms_controlled
-							secondaryText: CommonWords.yesOrNo(dataItem.value)
-							dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
-							preferredVisible: dataItem.valid
-							caption: bmsControlled.dataItem.value === 1 ? CommonWords.bms_control_info : ""
-						}
-
-						ListButton {
-							text: CommonWords.bms_control
-							secondaryText: CommonWords.reset
-							preferredVisible: bmsControlled.dataItem.value === 1
-							onClicked: bmsControlled.dataItem.setValue(0)
-						}
+								DelegateComponent {
+									preferredVisible: bmsControlledItem.value === 1
+									ListButton {
+										text: CommonWords.bms_control
+										secondaryText: CommonWords.reset
+										onClicked: bmsControlledItem.setValue(0)
+									}
+								}
+							}
 					}
 				}
 			}
 		}
 	}
 
-	ListNavigation { // to test, use the 'gdh' simulation. Not visible with the 'gdf' simulation.
-		text: CommonWords.settings
+	DelegateComponent {
 		preferredVisible: root.isStartStopControlled
-		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
-										{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+		ListNavigation { // to test, use the 'gdh' simulation. Not visible with the 'gdf' simulation.
+			text: CommonWords.settings
+			onClicked: {
+				Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
+											{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+			}
 		}
 	}
 }
