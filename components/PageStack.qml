@@ -93,12 +93,18 @@ StackView {
 
 		'obj' is either a page url or an already-constructed page object.
 
-		A page pushed by url is built asynchronously. Building one is slow: on a GX
-		device the median page takes over 300ms to instantiate and the worst over
-		700ms, and building it synchronously blocked the UI thread for that long, so
-		the whole application stopped responding until the page was ready. Building
-		it a piece at a time between frames instead leaves the application running
-		while the user waits, and the page is pushed once it is complete.
+		A page pushed by url is built asynchronously. Building one is slow: before the
+		port to DelegateComponentModel the median page took 329ms to instantiate on a
+		Cerbo GX and the worst 691ms, and building it synchronously blocked the UI
+		thread for that long, so the whole application stopped responding until the
+		page was ready. Building it a piece at a time between frames instead leaves
+		the application running while the user waits, and the page is pushed once it
+		is complete.
+
+		Lazy delegate construction has since cut those figures to a 195ms median and
+		481ms worst, so the block this avoids is smaller than it was — but it is
+		still far more than a frame, and it is the pages that are slowest to build
+		that the user is most likely to notice.
 
 		Note that the Qt.createComponent() call is still synchronous, so the first
 		time a given page is opened the UI does still block while the page is
@@ -223,6 +229,25 @@ StackView {
 	function _abandonPendingBuild() {
 		root._pendingBuild = null
 		root._pendingOrigin = null
+	}
+
+	// A build in flight holds a closure that dereferences root unconditionally. The
+	// stack can be destroyed before that closure runs: Main.qml's rebuildUi() drops
+	// guiLoader on a backend connection loss, a demo-mode change or a plugin reload,
+	// and popAllPages() cannot be relied on to have abandoned the build first because
+	// _canPopTo() lets the current page veto the pop.
+	//
+	// Clear _pendingBuild before forcing completion, so finish() takes its
+	// "no longer wanted" branch and destroys the built page instead of pushing it onto
+	// a stack that is going away. Forcing completion blocks, but this only happens
+	// while the UI is being torn down, where a hitch does not matter.
+	Component.onDestruction: {
+		const incubator = root._pendingBuild
+		if (incubator) {
+			root._pendingBuild = null
+			root._pendingOrigin = null
+			incubator.forceCompletion()
+		}
 	}
 
 	// Abandon the page being built as soon as the user leaves the page they asked for
