@@ -95,8 +95,8 @@ Page {
 			}
 
 			ListNavigation {
-				//% "RS devices"
-				text: qsTrId("settings_rs_devices")
+				//% "Inverters"
+				text: qsTrId("settings_rssystem_inverters")
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemDevices.qml",
 							{ "title": text, "bindPrefix": root.bindPrefix })
