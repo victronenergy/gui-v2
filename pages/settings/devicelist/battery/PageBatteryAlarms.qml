@@ -165,7 +165,7 @@ Page {
 			}
 
 			ListAlarm {
-				//% "BMS cable fault"
+				//% "Battery communication lost"
 				text: qsTrId("batteryalarms_bms_cable")
 				dataItem.uid: root.bindPrefix + "/Alarms/BmsCable"
 				preferredVisible: dataItem.valid
