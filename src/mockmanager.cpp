@@ -125,8 +125,14 @@ bool MockManager::loadConfiguration(const QString &fileName)
 	}
 
 	setServiceValues(object.value(QStringLiteral("setup")).toObject());
+	m_confFileName = fileName;
 
 	return true;
+}
+
+QString MockManager::configurationFileName() const
+{
+	return m_confFileName;
 }
 
 /*
