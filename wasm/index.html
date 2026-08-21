@@ -951,5 +951,42 @@
             };
         })();
     </script>
+    <script type="text/javascript">
+        // ---- Virtual keyboard backspace normalization --------------------
+        //
+        // Qt's WASM input context only synthesizes backspace/delete for the
+        // directional inputTypes "deleteContentBackward"/"...Forward" and
+        // drops other deletion inputTypes. Virtual keyboards that drive the
+        // editor via generic editing commands (Garmin OneHelm's embedded
+        // WebKit, https://github.com/victronenergy/gui-v2/issues/3153)
+        // produce the direction-agnostic "deleteContent" instead, with
+        // keydown reported as key="Unidentified"/keyCode=229 — so backspace
+        // never reaches the QML text field.
+        //
+        // Rewrite "deleteContent" to "deleteContentBackward" on Qt's hidden
+        // IME <input> (identified by the "data-qinputcontext" JS property Qt
+        // sets on it) before Qt sees the event: a capture-phase listener on
+        // document runs first, and the own property shadows the read-only
+        // prototype getter. Semantically safe: both mean "delete selection,
+        // else the character before the cursor". Reported upstream as
+        // QTBUG-149393; needed until gui-v2 builds against a fixed Qt.
+        (function() {
+            'use strict';
+
+            document.addEventListener('input', function(event) {
+                const target = event.target;
+                if (!target
+                        || target.tagName !== 'INPUT'
+                        || typeof target['data-qinputcontext'] === 'undefined'
+                        || event.inputType !== 'deleteContent') {
+                    return;
+                }
+                Object.defineProperty(event, 'inputType', {
+                    configurable: true,
+                    value: 'deleteContentBackward'
+                });
+            }, true);
+        })();
+    </script>
   </body>
 </html>
