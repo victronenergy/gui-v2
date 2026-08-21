@@ -25,6 +25,7 @@ public:
 	void setTimersActive(bool active);
 
 	bool loadConfiguration(const QString &fileName);
+	QString configurationFileName() const;
 
 	Q_INVOKABLE void setValue(const QString &uid, const QVariant &value);
 	Q_INVOKABLE QVariant value(const QString &uid) const;
@@ -44,6 +45,7 @@ private:
 	void setServiceValues(const QJsonObject &object);
 	VeQItemMockProducer *producer() const;
 
+	QString m_confFileName;
 	bool m_timersActive = false;
 };
 
