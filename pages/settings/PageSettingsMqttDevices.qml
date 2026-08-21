@@ -9,11 +9,15 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	// These product names should NOT be translated.
 	function _findProductName(tokenPart) {
 		switch (tokenPart) {
 		case "evcharger":
-			//% "EV Charging Station"
-			return qsTrId("mqtt_devices_ev_charging_station")
+			return "EV Charging Station"
+		case "homeassistant":
+			return "Home Assistant"
+		case "opencampercore":
+			return "OpenCamperCore"
 		default:
 			return tokenPart
 		}
