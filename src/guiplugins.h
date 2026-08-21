@@ -137,8 +137,7 @@ There are currently 5 supported types of integrations:
 		  existing quick action pane views (i.e. either a
 		  controls card, or a switches card).
 
-** TODO: actually support 3/4/5. **
-In the prototype, only type 1 and 2 are supported.
+All five integration types are supported.
 */
 class GuiPluginIntegration
 {
@@ -151,6 +150,7 @@ class GuiPluginIntegration
 
 	// valid for navigation page and quick access pane integrations
 	Q_PROPERTY(QUrl icon READ icon)
+	Q_PROPERTY(QUrl iconActive READ iconActive)
 
 	// valid for device list settings page integrations only
 	Q_PROPERTY(QString title READ title)
@@ -164,6 +164,7 @@ public:
 	QString title() const { return m_title; }
 	QString productId() const { return m_productId; }
 	QUrl icon() const { return m_icon; }
+	QUrl iconActive() const { return m_iconActive; }
 	QUrl url() const { return m_url; }
 	GuiPluginLoader::IntegrationType type() const { return m_type; }
 	GuiPluginLoader::QuickAccessPaneCardType cardType() const { return m_cardType; }
@@ -174,6 +175,7 @@ private:
 	QString m_title;
 	QString m_productId;
 	QUrl m_icon;
+	QUrl m_iconActive;
 	QUrl m_url;
 	GuiPluginLoader::IntegrationType m_type = GuiPluginLoader::InvalidIntegrationType;
 	GuiPluginLoader::QuickAccessPaneCardType m_cardType = GuiPluginLoader::InvalidCardType;
@@ -274,7 +276,7 @@ class GuiPluginIntegrationModel : public QAbstractListModel, public QQmlParserSt
 	// filtering
 	Q_PROPERTY(GuiPluginLoader::IntegrationType type READ type WRITE setType NOTIFY typeChanged)
 	Q_PROPERTY(QString productId READ productId WRITE setProductId NOTIFY productIdChanged)
-	// TODO: add filtering for cardType also.
+	Q_PROPERTY(GuiPluginLoader::QuickAccessPaneCardType cardType READ cardType WRITE setCardType NOTIFY cardTypeChanged)
 
 public:
 	enum RoleNames {
@@ -284,6 +286,7 @@ public:
 		TitleRole,
 		ProductIdRole,
 		IconRole,
+		IconActiveRole,
 		UrlRole,
 		TypeRole,
 		CardTypeRole
@@ -301,11 +304,14 @@ public:
 	void setType(GuiPluginLoader::IntegrationType t);
 	QString productId() const;
 	void setProductId(const QString &productId);
+	GuiPluginLoader::QuickAccessPaneCardType cardType() const;
+	void setCardType(GuiPluginLoader::QuickAccessPaneCardType ct);
 
 Q_SIGNALS:
 	void countChanged();
 	void typeChanged();
 	void productIdChanged();
+	void cardTypeChanged();
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
@@ -319,6 +325,7 @@ private:
 	QVector<GuiPluginIntegration> m_integrations;
 	QString m_productId;
 	GuiPluginLoader::IntegrationType m_type = GuiPluginLoader::InvalidIntegrationType;
+	GuiPluginLoader::QuickAccessPaneCardType m_cardType = GuiPluginLoader::InvalidCardType;
 	bool m_complete = false;
 };
 
