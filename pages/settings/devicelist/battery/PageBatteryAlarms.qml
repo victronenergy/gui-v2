@@ -177,6 +177,13 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Alarms/Contactor"
 				preferredVisible: dataItem.valid
 			}
+
+			ListAlarm {
+				//% "Cell measurements fault"
+				text: qsTrId("batteryalarms_cell_measurements_fault")
+				dataItem.uid: root.bindPrefix + "/Alarms/CellMeasurementsFault"
+				preferredVisible: dataItem.valid
+			}
 		}
 	}
 }
