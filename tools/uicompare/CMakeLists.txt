@@ -30,6 +30,20 @@ set_target_properties(uicompare PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+if(APPLE)
+    # Recent macOS/Xcode toolchains cannot link against AGL.
+    # Qt6::Gui links WrapOpenGL::WrapOpenGL, which injects AGL via FindWrapOpenGL.
+    # Remove that wrapper link and keep the regular OpenGL framework linkage.
+    # NOTE: This is a workaround for Qt6 bug QTBUG-137687, which will be fixed in Qt 6.8.4.
+    if(TARGET Qt6::Gui)
+        get_target_property(_qt_gui_link_libs Qt6::Gui INTERFACE_LINK_LIBRARIES)
+        if(_qt_gui_link_libs)
+            list(REMOVE_ITEM _qt_gui_link_libs WrapOpenGL::WrapOpenGL)
+            set_property(TARGET Qt6::Gui PROPERTY INTERFACE_LINK_LIBRARIES "${_qt_gui_link_libs}")
+        endif()
+    endif()
+endif()
+
 target_link_libraries(uicompare
     PRIVATE Qt6::Quick
 )
