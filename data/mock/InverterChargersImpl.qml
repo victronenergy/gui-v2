@@ -134,10 +134,10 @@ Item {
 	VeQuickItem {
 		id: _backupRestoreAction
 
-		uid: Global.venusPlatform.serviceUid + "/Vebus/Interface/ttyS2/Action"
+		uid: Services.platform.serviceUid + "/Vebus/Interface/ttyS2/Action"
 		onValueChanged: {
 			if (valid && value !== VenusOS.VeBusDevice_Backup_Restore_Action_None) {
-				MockManager.setValue(Global.venusPlatform.serviceUid + "/Vebus/Interface/ttyS2/Info", 10) // State = "Init"
+				MockManager.setValue(Services.platform.serviceUid + "/Vebus/Interface/ttyS2/Info", 10) // State = "Init"
 				_actionResetTimer.restart()
 			}
 		}
@@ -166,17 +166,17 @@ Item {
 				}
 				availableBackupsItem.setValue(JSON.stringify(backupList))
 				_backupRestoreAction.setValue(VenusOS.VeBusDevice_Backup_Restore_Action_None)
-				MockManager.setValue(Global.venusPlatform.serviceUid + "/Vebus/Interface/ttyS2/Notify", successCode)
+				MockManager.setValue(Services.platform.serviceUid + "/Vebus/Interface/ttyS2/Notify", successCode)
 			}
 		}
 	}
 	VeQuickItem {
 		id: availableBackupsItem
-		uid: Global.venusPlatform.serviceUid + "/Vebus/Interface/ttyS2/AvailableBackups"
+		uid: Services.platform.serviceUid + "/Vebus/Interface/ttyS2/AvailableBackups"
 	}
 	VeQuickItem {
 		id: backupRestoreFileItem
-		uid: Global.venusPlatform.serviceUid + "/Vebus/Interface/ttyS2/File"
+		uid: Services.platform.serviceUid + "/Vebus/Interface/ttyS2/File"
 	}
 
 	// Animate AC-out values; AC-in values are already animated by SystemAcImpl.qml, and DC values
@@ -228,18 +228,18 @@ Item {
 			"/MicroGrid/DroopModeParameters/Qmax",
 		]
 		delegate: VeQuickItem {
-			uid: Global.system.veBus.serviceUid + modelData + "/Value"
-			onValueChanged: MockManager.setValue(Global.system.veBus.serviceUid + modelData + "/Modified", 1)
+			uid: Services.system.veBus.serviceUid + modelData + "/Value"
+			onValueChanged: MockManager.setValue(Services.system.veBus.serviceUid + modelData + "/Modified", 1)
 		}
 	}
 	VeQuickItem {
-		uid: Global.system.veBus.serviceUid + "/MicroGrid/DroopModeParameters/ActivateAndStore"
+		uid: Services.system.veBus.serviceUid + "/MicroGrid/DroopModeParameters/ActivateAndStore"
 		onValueChanged: {
 			if (valid && value === 1) {
 				for (let i = 0; i < microgridParameters.model.length; ++i) {
-					MockManager.setValue(Global.system.veBus.serviceUid + microgridParameters.model[i] + "/Modified", 0)
+					MockManager.setValue(Services.system.veBus.serviceUid + microgridParameters.model[i] + "/Modified", 0)
 				}
-				MockManager.setValue(Global.system.veBus.serviceUid + "/MicroGrid/DroopModeParameters/ActivateAndStore", 0)
+				MockManager.setValue(Services.system.veBus.serviceUid + "/MicroGrid/DroopModeParameters/ActivateAndStore", 0)
 			}
 		}
 	}
@@ -253,7 +253,7 @@ Item {
 		minimumValue: 47.55
 		maximumValue: 54.30
 
-		VeQuickItem { uid: Global.system.veBus.serviceUid + "/Ac/ActiveIn/L1/F" }
+		VeQuickItem { uid: Services.system.veBus.serviceUid + "/Ac/ActiveIn/L1/F" }
 	}
 	MockDataRandomizer {
 		active: Global.mainView && Global.mainView.mainViewVisible
@@ -263,6 +263,6 @@ Item {
 		minimumValue: 223.5
 		maximumValue: 236.5
 
-		VeQuickItem { uid: Global.system.veBus.serviceUid + "/Ac/ActiveIn/L1/V" }
+		VeQuickItem { uid: Services.system.veBus.serviceUid + "/Ac/ActiveIn/L1/V" }
 	}
 }

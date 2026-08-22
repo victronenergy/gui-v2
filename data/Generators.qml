@@ -133,6 +133,4 @@ QtObject {
 			return false
 		}
 	}
-
-	Component.onCompleted: Global.generators = root
 }

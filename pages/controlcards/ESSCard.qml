@@ -32,7 +32,7 @@ ControlCard {
 			id: repeater
 
 			width: parent.width
-			model: Global.systemSettings.ess.stateModel
+			model: Services.settings.ess.stateModel
 			delegate: SettingsColumn {
 				width: parent.width
 
@@ -40,9 +40,9 @@ ControlCard {
 					writeAccessLevel: VenusOS.User_AccessType_User
 					text: modelData.display
 					flat: true
-					checked: Global.systemSettings.ess.state === modelData.value
+					checked: Services.settings.ess.state === modelData.value
 					ButtonGroup.group: stateRadioButtonGroup
-					onClicked: Global.systemSettings.ess.setState(modelData.value)
+					onClicked: Services.settings.ess.setState(modelData.value)
 				}
 
 				FlatListItemSeparator {}
@@ -55,7 +55,7 @@ ControlCard {
 			//% "Minimum SOC"
 			text: qsTrId("ess_card_minimum_soc")
 			flat: true
-			secondaryText: Units.getCombinedDisplayText(VenusOS.Units_Percentage, Global.systemSettings.ess.minimumStateOfCharge)
+			secondaryText: Units.getCombinedDisplayText(VenusOS.Units_Percentage, Services.settings.ess.minimumStateOfCharge)
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			writeAccessLevel: VenusOS.User_AccessType_User
@@ -65,19 +65,19 @@ ControlCard {
 				id: minSocDialogComponent
 
 				ESSMinimumSOCDialog {
-					minimumStateOfCharge: Global.systemSettings.ess.minimumStateOfCharge
-					onAccepted: Global.systemSettings.ess.setMinimumStateOfCharge(minimumStateOfCharge)
+					minimumStateOfCharge: Services.settings.ess.minimumStateOfCharge
+					onAccepted: Services.settings.ess.setMinimumStateOfCharge(minimumStateOfCharge)
 				}
 			}
 
 			VeQuickItem {
 				id: batteryLifeState
-				uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
+				uid: Services.settings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
 			}
 
 			VeQuickItem {
 				id: essMode
-				uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/Hub4Mode"
+				uid: Services.settings.serviceUid + "/Settings/CGwacs/Hub4Mode"
 			}
 		}
 
@@ -86,9 +86,9 @@ ControlCard {
 		ListInfoLabel {
 			id: activeSocLimit
 
-			preferredVisible: Global.systemSettings.ess.state === VenusOS.Ess_State_OptimizedWithBatteryLife
+			preferredVisible: Services.settings.ess.state === VenusOS.Ess_State_OptimizedWithBatteryLife
 			//% "Active SOC Limit: %1%"
-			text: qsTrId("ess_active_soc_limit").arg(Math.max(Global.systemSettings.ess.minimumStateOfCharge, Global.systemSettings.ess.stateOfChargeLimit))
+			text: qsTrId("ess_active_soc_limit").arg(Math.max(Services.settings.ess.minimumStateOfCharge, Services.settings.ess.stateOfChargeLimit))
 			flat: true
 
 			PressArea {

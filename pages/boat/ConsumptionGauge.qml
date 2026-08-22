@@ -43,10 +43,10 @@ Column {
 		font.pixelSize: root._pixelSize
 		height: font.pixelSize
 		sourceType: VenusOS.ElectricalQuantity_Source_Ac
-		dataObject: Global.system.load.ac
+		dataObject: Services.system.load.ac
 		icon.source: "qrc:/images/acloads.svg"
 		icon.width: Theme.geometry_widgetHeader_icon_size
-		visible: !motorDriveLoad.visible && Global.system?.hasAcLoads // && !isNaN(value) once #2159 is resolved
+		visible: !motorDriveLoad.visible && Services.system?.hasAcLoads // && !isNaN(value) once #2159 is resolved
 	}
 
 	QuantityLabelIconRow {
@@ -56,7 +56,7 @@ Column {
 		font.pixelSize: root._pixelSize
 		height: font.pixelSize
 		sourceType: VenusOS.ElectricalQuantity_Source_Dc
-		dataObject: Global.system.dc
+		dataObject: Services.system.dc
 		icon.source: "qrc:/images/dcloads.svg"
 		icon.width: Theme.geometry_widgetHeader_icon_size
 		visible: !motorDriveLoad.visible && !isNaN(value)

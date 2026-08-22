@@ -12,7 +12,7 @@ Page {
 	VeQuickItem {
 		id: _devices
 
-		uid: Global.systemSettings.serviceUid + "/Settings/ModbusClient/tcp/Devices"
+		uid: Services.settings.serviceUid + "/Settings/ModbusClient/tcp/Devices"
 		// eg: [[tcp,192.168.20.75,502,1],[tcp,192.168.21.234,502,1],[tcp,192.168.21.43,502,1]]
 	}
 

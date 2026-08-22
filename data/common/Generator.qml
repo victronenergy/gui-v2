@@ -16,8 +16,8 @@ Device {
 	readonly property int runningBy: _runningBy.valid ? _runningBy.value : 0
 	readonly property bool enabled: _enabled.value === 1
 
-	readonly property string runningByText: Global.generators.runningByText(runningBy)
-	readonly property string stateText: Global.generators.stateText(state)
+	readonly property string runningByText: Services.generators.runningByText(runningBy)
+	readonly property string stateText: Services.generators.stateText(state)
 
 	readonly property bool isRunning: {
 		switch (state) {
@@ -31,7 +31,7 @@ Device {
 		}
 	}
 
-	readonly property bool isAutoStarted: Global.generators.isAutoStarted(runningBy)
+	readonly property bool isAutoStarted: Services.generators.isAutoStarted(runningBy)
 
 	readonly property VeQuickItem _state: VeQuickItem {
 		uid: serviceUid + "/State"

@@ -23,7 +23,7 @@ SwitchableOutputSlider {
 	rightPadding: rightLabelWidth
 	indicatorBackgroundWidth: 0 // align handle exactly with the start/end dots
 	sourceUnit: VenusOS.Units_Temperature_Celsius
-	displayUnit: Global.systemSettings.temperatureUnit
+	displayUnit: Services.settings.temperatureUnit
 
 	background: Rectangle {
 		implicitWidth: Theme.geometry_controlCard_minimumWidth

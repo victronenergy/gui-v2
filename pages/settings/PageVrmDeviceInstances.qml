@@ -156,7 +156,7 @@ Page {
 					return true
 				}
 
-				Global.venusPlatform.reboot()
+				Services.platform.reboot()
 
 				if (BackendConnection.type === BackendConnection.DBusSource) {
 					//% "Device is rebooting..."

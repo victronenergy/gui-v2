@@ -8,7 +8,7 @@ import Victron.VenusOS
 
 /*
 	Shows a quantity in Amps or Watts depending on the user-preferred display mode, as per
-	Global.systemSettings.electricalPowerDisplay:
+	Services.settings.electricalPowerDisplay:
 
 	- PreferWatts: show dataObject.power in Watts.
 	- PreferAmps: show dataObject.current in Amps, if the current is valid. Otherwise, show
@@ -28,9 +28,9 @@ QuantityLabel {
 	property var dataObject
 
 	readonly property bool _dataObjectValid: dataObject !== null && dataObject !== undefined
-	readonly property bool _unitAmps: (Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps
+	readonly property bool _unitAmps: (Services.settings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps
 					&& !isNaN(dataObject?.current))
-			|| (Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_Mixed
+			|| (Services.settings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_Mixed
 				&& sourceType === VenusOS.ElectricalQuantity_Source_Dc)
 	readonly property real _value: !_dataObjectValid ? NaN
 		: _unitAmps ? (dataObject.current ?? NaN)

@@ -37,7 +37,7 @@ Page {
 			ListSwitch {
 				id: enable
 				text: CommonWords.enable
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/BleSensors"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Services/BleSensors"
 			}
 
 			ListSwitch {

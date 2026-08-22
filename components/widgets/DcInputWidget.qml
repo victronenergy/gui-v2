@@ -52,7 +52,7 @@ OverviewWidget {
 						root.detailUrl,
 						{ "bindPrefix": inputDeviceModel.firstObject.serviceUid })
 		} else {
-			Global.pageManager.pushPage(root._widgetOnlyPresentsDcGensets && Global.generators.multipleDcGensetsSupported
+			Global.pageManager.pushPage(root._widgetOnlyPresentsDcGensets && Services.generators.multipleDcGensetsSupported
 										? "/pages/settings/PageDcGensets.qml" : listPageComponent)
 		}
 	}

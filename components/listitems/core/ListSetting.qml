@@ -45,8 +45,8 @@ ListItem {
 
 	property int showAccessLevel: VenusOS.User_AccessType_User
 	property int writeAccessLevel: VenusOS.User_AccessType_Installer
-	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
-	readonly property bool userHasReadAccess: Global.systemSettings.canAccess(showAccessLevel)
+	readonly property bool userHasWriteAccess: Services.settings.canAccess(writeAccessLevel)
+	readonly property bool userHasReadAccess: Services.settings.canAccess(showAccessLevel)
 
 	// Set to true if the user can interact with the control with the mouse or key presses.
 	// This is provided as a convenience for determining whether an item can be activated,

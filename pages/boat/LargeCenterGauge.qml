@@ -109,13 +109,13 @@ Item {
 		height: width
 		radius: width/2
 		endAngle: 360
-		value: Global.system.battery.stateOfCharge
+		value: Services.system.battery.stateOfCharge
 		strokeWidth: Theme.geometry_boatPage_centerGauge_strokeWidth
 		animationEnabled: root.animationEnabled
 		progressColor: root.isBatteryCharging ? Theme.color_boatPage_regenProgress : Theme.color_ok
 		remainderColor: root.isBatteryCharging ? Theme.color_boatPage_regenRemainder : Theme.color_darkOk
 		objectName: "batteryCenterGauge"
-		visible: root.activeDataSource === null && !isNaN(Global.system.battery.stateOfCharge)
+		visible: root.activeDataSource === null && !isNaN(Services.system.battery.stateOfCharge)
 
 		layer.enabled: !UiConfig.msaaEnabled
 		layer.textureSize: Qt.size(2*width, 2*height)
@@ -231,7 +231,7 @@ Item {
 			font.pixelSize: Theme.font_boatPage_batteryCenterGauge_percentage_pixelSize
 			font.weight: Font.Medium
 			unit: VenusOS.Units_Percentage
-			value: Global.system.battery.stateOfCharge
+			value: Services.system.battery.stateOfCharge
 		}
 
 		Row {
@@ -242,7 +242,7 @@ Item {
 			spacing: Theme.geometry_boatPage_batteryCenterGauge_detailsRow_spacing
 
 			QuantityLabel {
-				value: Global.system.battery.voltage
+				value: Services.system.battery.voltage
 				unit: VenusOS.Units_Volt_DC
 				valueColor: Theme.color_font_secondary
 				unitColor: Theme.color_font_secondary
@@ -252,7 +252,7 @@ Item {
 
 			ElectricalQuantityLabel {
 				sourceType: VenusOS.ElectricalQuantity_Source_Dc
-				dataObject: Global.system.battery
+				dataObject: Services.system.battery
 				valueColor: Theme.color_font_secondary
 				unitColor: Theme.color_font_secondary
 				font.pixelSize: Theme.font_boatPage_batteryCenterGauge_detailsRow_pixelSize
@@ -265,7 +265,7 @@ Item {
 			anchors.horizontalCenter: parent.horizontalCenter
 			topPadding: Theme.geometry_boatPage_batteryCenterGauge_mode_topPadding
 			opacity: root.isBatteryCharging ? 1 : 0
-			text: VenusOS.battery_modeToText(Global.system.battery.mode)
+			text: VenusOS.battery_modeToText(Services.system.battery.mode)
 			elide: Text.ElideRight
 			color: Theme.color_boatPage_regenProgress
 			font.pixelSize: Theme.font_boatPage_batteryCenterGauge_mode_pixelSize

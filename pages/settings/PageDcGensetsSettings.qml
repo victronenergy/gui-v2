@@ -22,7 +22,7 @@ Page {
 
 	VeQuickItem {
 		id: activeCondition
-		readonly property bool isAutoStarted: valid && Global.generators.isAutoStarted(value)
+		readonly property bool isAutoStarted: valid && Services.generators.isAutoStarted(value)
 		uid: root.startStopBindPrefix + "/RunningByConditionCode"
 	}
 
@@ -134,7 +134,7 @@ Page {
 							}
 						}
 
-						model: mode.currentIndex == 2 ? Global.generators.dcModel : null
+						model: mode.currentIndex == 2 ? Services.generators.dcModel : null
 						delegate: ListSwitch {
 							required property Device device
 

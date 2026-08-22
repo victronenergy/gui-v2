@@ -59,7 +59,7 @@ Page {
 
 			VeQuickItem {
 				id: systemType
-				uid: Global.system.serviceUid + "/SystemType"
+				uid: Services.system.serviceUid + "/SystemType"
 			}
 		}
 

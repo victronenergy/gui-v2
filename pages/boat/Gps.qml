@@ -24,12 +24,12 @@ VeQuickItemsQuotient {
 	}
 
 	readonly property VeQuickItem _speedUnits : VeQuickItem {
-		uid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gps/SpeedUnit" : ""
+		uid: Services.settings ? Services.settings.serviceUid  + "/Settings/Gps/SpeedUnit" : ""
 	}
 
 	objectName: "Boat.Gps"
-	numeratorUid: Global.system.serviceUid ? Global.system.serviceUid + "/GpsSpeed" : "" // metres per second
-	denominatorUid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gui/Gauges/Speed/Max" : ""
+	numeratorUid: Services.system.serviceUid ? Services.system.serviceUid + "/GpsSpeed" : "" // metres per second
+	denominatorUid: Services.settings ? Services.settings.serviceUid  + "/Settings/Gui/Gauges/Speed/Max" : ""
 	sourceUnit: VenusOS.Units_Speed_MetresPerSecond
-	displayUnit: Global.systemSettings.speedUnit
+	displayUnit: Services.settings.speedUnit
 }

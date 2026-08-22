@@ -106,7 +106,7 @@ SwipeViewPage {
 
 			anchors.fill: parent
 			animationEnabled: root.animationEnabled
-			enabled: Global.tanks.totalTankCount > 0
+			enabled: Services.tanks.totalTankCount > 0
 			visible: tabBar.currentIndex === 0
 			focus: visible
 		}
@@ -116,7 +116,7 @@ SwipeViewPage {
 
 			anchors.fill: parent
 			animationEnabled: root.animationEnabled
-			enabled: Global.environmentInputs.model.count > 0
+			enabled: Services.temperature.model.count > 0
 			visible: tabBar.currentIndex === 1
 			focus: visible
 		}

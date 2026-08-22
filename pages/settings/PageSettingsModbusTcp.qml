@@ -28,14 +28,14 @@ Page {
 
 				//% "Enable Modbus TCP Server"
 				text: qsTrId("settings_modbus_enable_modbus_tcp")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Services/Modbus"
 			}
 
 			ListRadioButtonGroup {
 				//% "Access permissions"
 				text: qsTrId("settings_modbus_access_rights")
 				preferredVisible: enableModbusTcp.checked
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/ModbusServer/ReadWrite"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/ModbusServer/ReadWrite"
 				optionModel: [
 					//% "Write allowed"
 					{ display: qsTrId("settings_modbus_access_readwrite"), value: 1 },

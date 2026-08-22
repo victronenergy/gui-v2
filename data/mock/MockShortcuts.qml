@@ -47,9 +47,9 @@ QtObject {
 	}
 
 	function setShowInputLoads(showInputLoads) {
-		MockManager.setValue(Global.system.serviceUid + "/Ac/Grid/DeviceType", showInputLoads ? 0 : undefined)
-		MockManager.setValue(Global.systemSettings.serviceUid + "/Settings/CGwacs/RunWithoutGridMeter", showInputLoads ? 0 : 1)
-		MockManager.setValue(Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem", showInputLoads ? 1 : 0)
+		MockManager.setValue(Services.system.serviceUid + "/Ac/Grid/DeviceType", showInputLoads ? 0 : undefined)
+		MockManager.setValue(Services.settings.serviceUid + "/Settings/CGwacs/RunWithoutGridMeter", showInputLoads ? 0 : 1)
+		MockManager.setValue(Services.settings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem", showInputLoads ? 1 : 0)
 	}
 
 	function removeTanksAndTemperatures() {
@@ -112,11 +112,11 @@ QtObject {
 			}
 			break
 		case Qt.Key_A:
-			MockManager.setValue(Global.systemSettings.serviceUid + "/Settings/Gui2/UIAnimations", Global.systemSettings.animationEnabled ? 0 : 1)
+			MockManager.setValue(Services.settings.serviceUid + "/Settings/Gui2/UIAnimations", Services.settings.animationEnabled ? 0 : 1)
 			break
 		case Qt.Key_B:
-			MockManager.setValue(Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled",
-				MockManager.value(Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled") == 0 ? 1 : 0)
+			MockManager.setValue(Services.settings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled",
+				MockManager.value(Services.settings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled") == 0 ? 1 : 0)
 			break
 		case Qt.Key_C:
 			Theme.colorScheme = Theme.colorScheme == Theme.Dark ? Theme.Light : Theme.Dark
@@ -128,7 +128,7 @@ QtObject {
 			Global.isGxDevice = !Global.isGxDevice
 			break
 		case Qt.Key_F:
-			MockManager.setValue(Global.system.serviceUid + "/Ac/ActiveIn/FeedbackEnabled", Global.system.feedbackEnabled ? 0 : 1)
+			MockManager.setValue(Services.system.serviceUid + "/Ac/ActiveIn/FeedbackEnabled", Services.system.feedbackEnabled ? 0 : 1)
 			break
 		case Qt.Key_G:
 			let oldValue
@@ -174,16 +174,16 @@ QtObject {
 			}
 			break
 		case Qt.Key_H:
-			const hasAcLoads = MockManager.value(Global.system.serviceUid + "/Ac/HasAcLoads")
-			MockManager.setValue(Global.system.serviceUid + "/Ac/HasAcLoads", hasAcLoads === 1 ? 0 : 1)
+			const hasAcLoads = MockManager.value(Services.system.serviceUid + "/Ac/HasAcLoads")
+			MockManager.setValue(Services.system.serviceUid + "/Ac/HasAcLoads", hasAcLoads === 1 ? 0 : 1)
 			break
 		case Qt.Key_L:
 			Language.setCurrentLanguage((Language.current === Language.English ? Language.French : Language.English))
 			pageConfigTitle.text = "Language: " + Language.toString(Language.current)
 			break
 		case Qt.Key_M:
-			for (i = 0; i < Global.dcInputs.model.count; ++i) {
-				const dcMeter = Global.dcInputs.model.deviceAt(i)
+			for (i = 0; i < Services.dcInputs.model.count; ++i) {
+				const dcMeter = Services.dcInputs.model.deviceAt(i)
 				const monitorMode = MockManager.value(dcMeter.serviceUid + "/Settings/MonitorMode")
 				if (monitorMode !== undefined) {
 					const newMonitorMode = monitorMode + ((modifiers & Qt.ShiftModifier) ? 1 : -1)
@@ -216,7 +216,7 @@ QtObject {
 			break
 		case Qt.Key_P:
 		{
-			const phases = Global.acInputs.highlightedInput.phases
+			const phases = Services.acInputs.highlightedInput.phases
 			for (i = 0; i < phases.count; ++i) {
 				const phaseCurrent = phases.get(i).current
 				const phasePower = phases.get(i).power
@@ -234,32 +234,32 @@ QtObject {
 			break
 		}
 		case Qt.Key_Q:
-			root.setShowInputLoads(!Global.system.showInputLoads)
+			root.setShowInputLoads(!Services.system.showInputLoads)
 			break
 		case Qt.Key_S:
 		{
 			if (modifiers & Qt.ShiftModifier) {
-				var g = Global.generators.model.firstObject
+				var g = Services.generators.model.firstObject
 				g._runningBy.setValue(g._runningBy.value + 1)
 				break
 			}
 			if (modifiers & Qt.ControlModifier) {
-				var g = Global.generators.model.firstObject
+				var g = Services.generators.model.firstObject
 				g._runningBy.setValue(g._runningBy.value - 1)
 				break
 			}
 
-			Global.system.load._l2L1OutSummed.setValue(!!Global.system.load._l2L1OutSummed.value ? 0 : 1)
+			Services.system.load._l2L1OutSummed.setValue(!!Services.system.load._l2L1OutSummed.value ? 0 : 1)
 			break
 		}
 		case Qt.Key_T:
 			if (modifiers & Qt.ShiftModifier) {
-				var g = Global.generators.model.firstObject
+				var g = Services.generators.model.firstObject
 				g._state.setValue(g._state.value + 1)
 				break
 			}
 			if (modifiers & Qt.ControlModifier) {
-				var g = Global.generators.model.firstObject
+				var g = Services.generators.model.firstObject
 				g._state.setValue(g._state.value - 1)
 				break
 			}
@@ -269,7 +269,7 @@ QtObject {
 		case Qt.Key_U:
 			// Change the unit display of the Brief view center gauges
 			if (modifiers & Qt.ControlModifier) {
-				const v = MockManager.value(Global.systemSettings.serviceUid + "/Settings/Gui/BriefView/Unit")
+				const v = MockManager.value(Services.settings.serviceUid + "/Settings/Gui/BriefView/Unit")
 				let newBriefUnit = ""
 				if (v === VenusOS.BriefView_Unit_None) {
 					newBriefUnit = VenusOS.BriefView_Unit_Absolute
@@ -278,57 +278,57 @@ QtObject {
 				} else {
 					newBriefUnit = VenusOS.BriefView_Unit_None
 				}
-				MockManager.setValue(Global.systemSettings.serviceUid + "/Settings/Gui/BriefView/Unit", newBriefUnit)
+				MockManager.setValue(Services.settings.serviceUid + "/Settings/Gui/BriefView/Unit", newBriefUnit)
 				return
 			}
 
 			// Change the system unit
-			Global.systemSettings.setElectricalPowerDisplay(
-					Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferWatts
+			Services.settings.setElectricalPowerDisplay(
+					Services.settings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferWatts
 					? VenusOS.ElectricalPowerDisplay_PreferAmps
-					: Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps
+					: Services.settings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps
 						? VenusOS.ElectricalPowerDisplay_Mixed
 						: VenusOS.ElectricalPowerDisplay_PreferWatts)
-			Global.systemSettings.setTemperatureUnit(
-					Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Celsius
+			Services.settings.setTemperatureUnit(
+					Services.settings.temperatureUnit === VenusOS.Units_Temperature_Celsius
 					? VenusOS.Units_Temperature_Fahrenheit
 					: VenusOS.Units_Temperature_Celsius)
-			Global.systemSettings.setVolumeUnit(
-					Global.systemSettings.volumeUnit === VenusOS.Units_Volume_CubicMetre
+			Services.settings.setVolumeUnit(
+					Services.settings.volumeUnit === VenusOS.Units_Volume_CubicMetre
 					? VenusOS.Units_Volume_Litre
-					: Global.systemSettings.volumeUnit === VenusOS.Units_Volume_Litre
+					: Services.settings.volumeUnit === VenusOS.Units_Volume_Litre
 					  ? VenusOS.Units_Volume_GallonUS
-					  : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_GallonUS
+					  : Services.settings.volumeUnit === VenusOS.Units_Volume_GallonUS
 						? VenusOS.Units_Volume_GallonImperial
 						: VenusOS.Units_Volume_CubicMetre)
-			Global.systemSettings.setSpeedUnit(
-					Global.systemSettings.speedUnit === VenusOS.Units_Speed_KilometresPerHour
+			Services.settings.setSpeedUnit(
+					Services.settings.speedUnit === VenusOS.Units_Speed_KilometresPerHour
 					? VenusOS.Units_Speed_MetresPerSecond
-					: Global.systemSettings.speedUnit === VenusOS.Units_Speed_MetresPerSecond
+					: Services.settings.speedUnit === VenusOS.Units_Speed_MetresPerSecond
 					  ? VenusOS.Units_Speed_Knots
-					  : Global.systemSettings.speedUnit === VenusOS.Units_Speed_Knots
+					  : Services.settings.speedUnit === VenusOS.Units_Speed_Knots
 						? VenusOS.Units_Speed_MilesPerHour
 						: VenusOS.Units_Speed_KilometresPerHour)
 
 			pageConfigTitle.text = "Units: "
-					+ (Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferWatts ? "Watts"
-					   : Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps ? "Amps"
+					+ (Services.settings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferWatts ? "Watts"
+					   : Services.settings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps ? "Amps"
 					   : "Mixed") + " | "
-					+ (Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Celsius
+					+ (Services.settings.temperatureUnit === VenusOS.Units_Temperature_Celsius
 					   ? "Celsius"
 					   : "Fahrenheit") + " | "
-					+ (Global.systemSettings.volumeUnit === VenusOS.Units_Volume_CubicMetre
+					+ (Services.settings.volumeUnit === VenusOS.Units_Volume_CubicMetre
 					   ? "Cubic metres"
-					   : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_Litre
+					   : Services.settings.volumeUnit === VenusOS.Units_Volume_Litre
 						 ? "Litres"
-						 : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_GallonUS
+						 : Services.settings.volumeUnit === VenusOS.Units_Volume_GallonUS
 						   ? "Gallons (US)"
 						   : "Gallons (Imperial)") + " | "
-					+ (Global.systemSettings.speedUnit === VenusOS.Units_Speed_KilometresPerHour
+					+ (Services.settings.speedUnit === VenusOS.Units_Speed_KilometresPerHour
 					   ? "km/h"
-					   : Global.systemSettings.speedUnit === VenusOS.Units_Speed_MetresPerSecond
+					   : Services.settings.speedUnit === VenusOS.Units_Speed_MetresPerSecond
 						 ? "m/s"
-						 : Global.systemSettings.speedUnit === VenusOS.Units_Speed_Knots
+						 : Services.settings.speedUnit === VenusOS.Units_Speed_Knots
 						   ? "kt"
 						   : "mph")
 			break
@@ -341,8 +341,8 @@ QtObject {
 			Global.mainView.loadStartPage()
 			break
 		case Qt.Key_X:
-			Global.systemSettings.accessLevel.setValue(Utils.modulo(Global.systemSettings.accessLevel.value + 1, VenusOS.User_AccessType_Service + 1))
-			pageConfigTitle.text = "Access Level: " + Global.systemSettings.accessLevel.value
+			Services.settings.accessLevel.setValue(Utils.modulo(Services.settings.accessLevel.value + 1, VenusOS.User_AccessType_Service + 1))
+			pageConfigTitle.text = "Access Level: " + Services.settings.accessLevel.value
 			break
 		case Qt.Key_Space:
 			UiConfig.splashScreenVisible = false

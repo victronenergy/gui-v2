@@ -19,7 +19,7 @@ Page {
 			ListText {
 				//% "Genset status"
 				text: qsTrId("page-dc-genset-genset_status")
-				secondaryText: Global.acInputs.gensetStatusCodeToText(gensetStatus.value)
+				secondaryText: Services.acInputs.gensetStatusCodeToText(gensetStatus.value)
 
 				VeQuickItem {
 					id: gensetStatus

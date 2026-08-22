@@ -12,6 +12,4 @@ QtObject {
 	readonly property FilteredDeviceModel model: FilteredDeviceModel {
 		serviceTypes: ["temperature"]
 	}
-
-	Component.onCompleted: Global.environmentInputs = root
 }

@@ -18,7 +18,7 @@ Page {
 
 				//% "AC-coupled PV - feed in excess"
 				text: qsTrId("settings_ess_ac_coupled_pv")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/PreventFeedback"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/CGwacs/PreventFeedback"
 				preferredVisible: hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
 				invertSourceValue: true
 			}
@@ -28,13 +28,13 @@ Page {
 
 				//% "DC-coupled PV - feed in excess"
 				text: qsTrId("settings_ess_dc_coupled_pv")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/OvervoltageFeedIn"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/CGwacs/OvervoltageFeedIn"
 				preferredVisible: hub4Mode !== VenusOS.Ess_Hub4ModeState_Disabled
 					&& doNotFeedInvOvervoltage.valid
 
 				VeQuickItem {
 					id: doNotFeedInvOvervoltage
-					uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Hub4/DoNotFeedInOvervoltage" : ""
+					uid: Services.system.veBus.serviceUid ? Services.system.veBus.serviceUid + "/Hub4/DoNotFeedInOvervoltage" : ""
 				}
 			}
 
@@ -60,7 +60,7 @@ Page {
 				//% "Maximum feed-in"
 				text: qsTrId("settings_ess_max_feed_in")
 				preferredVisible: restrictFeedIn.visible && restrictFeedIn.checked
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxFeedInPower"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/CGwacs/MaxFeedInPower"
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				from: 0
 				to: 300000

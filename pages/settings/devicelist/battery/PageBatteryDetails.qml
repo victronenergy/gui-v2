@@ -39,7 +39,7 @@ Page {
 				text: qsTrId("batterydetails_minimum_cell_temperature")
 				model: QuantityObjectModel {
 					QuantityObject { object: details.minTemperatureCellId; decimals: details.minTemperatureCellId.decimals }
-					QuantityObject { object: details.minCellTemperature; unit: Global.systemSettings.temperatureUnit }
+					QuantityObject { object: details.minCellTemperature; unit: Services.settings.temperatureUnit }
 				}
 				preferredVisible: details.allowsMinimumCellTemperature
 			}
@@ -49,7 +49,7 @@ Page {
 				text: qsTrId("batterydetails_maximum_cell_temperature")
 				model: QuantityObjectModel {
 					QuantityObject { object: details.maxTemperatureCellId; decimals: details.maxTemperatureCellId.decimals }
-					QuantityObject { object: details.maxCellTemperature; unit: Global.systemSettings.temperatureUnit }
+					QuantityObject { object: details.maxCellTemperature; unit: Services.settings.temperatureUnit }
 				}
 				preferredVisible: details.allowsMaximumCellTemperature
 			}

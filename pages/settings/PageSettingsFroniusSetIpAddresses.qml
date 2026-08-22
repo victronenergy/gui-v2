@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	IpAddressListView {
-		addressesUid: Global.systemSettings.serviceUid + "/Settings/Fronius/IPAddresses"
+		addressesUid: Services.settings.serviceUid + "/Settings/Fronius/IPAddresses"
 	}
 }
 

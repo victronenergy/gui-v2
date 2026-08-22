@@ -22,7 +22,7 @@ Button {
 	KeyNavigationHighlight.margins: -(4 * Theme.geometry_button_border_width)
 
 	Binding {
-		target: Global.notifications ?? null
+		target: Services.notifications ?? null
 		property: "notificationButtonVisible"
 		value: root.visible
 	}

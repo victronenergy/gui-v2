@@ -10,8 +10,8 @@ import Victron.Gauges
 LevelsTab {
 	id: root
 
-	readonly property int twoGaugeWidth: Gauges.width(Global.environmentInputs.model.count, 4, Theme.geometry_screen_width)
-	readonly property int oneGaugeWidth: Gauges.width(Global.environmentInputs.model.count, 6, Theme.geometry_screen_width)
+	readonly property int twoGaugeWidth: Gauges.width(Services.temperature.model.count, 4, Theme.geometry_screen_width)
+	readonly property int oneGaugeWidth: Gauges.width(Services.temperature.model.count, 6, Theme.geometry_screen_width)
 
 	readonly property var _temperatureGaugeParameters: [
 		{ min: -20,     max: 60,    step: 10 },     // 0: Battery
@@ -29,7 +29,7 @@ LevelsTab {
 				: _temperatureGaugeParameters[temperatureType]
 	}
 
-	model: Global.environmentInputs.model
+	model: Services.temperature.model
 	delegate: EnvironmentGaugePanel {
 		width: root.orientation === ListView.Vertical
 			   ? ListView.view.width
@@ -40,10 +40,10 @@ LevelsTab {
 		animationEnabled: root.animationEnabled
 		minimumValue: Units.convert(root._gaugeParameters(temperatureType.value).min,
 				VenusOS.Units_Temperature_Celsius,
-				Global.systemSettings.temperatureUnit)
+				Services.settings.temperatureUnit)
 		maximumValue: Units.convert(root._gaugeParameters(temperatureType.value).max,
 				VenusOS.Units_Temperature_Celsius,
-				Global.systemSettings.temperatureUnit)
+				Services.settings.temperatureUnit)
 		stepSize: root._gaugeParameters(temperatureType.value).step
 		temperatureGaugeGradient: temperatureGradient
 		humidityGaugeGradient: humidityGradient

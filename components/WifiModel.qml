@@ -29,7 +29,7 @@ ListModel {
 	}
 
 	property VeQuickItem servicesItem: VeQuickItem {
-		uid: Global.venusPlatform.serviceUid + "/Network/Services"
+		uid: Services.platform.serviceUid + "/Network/Services"
 
 		// TODO ideally this would be an QAbstractListModel that updates itself progressively,
 		// instead of needing to reload the whole model.
@@ -37,12 +37,12 @@ ListModel {
 	}
 
 	property VeQuickItem scanItem: VeQuickItem{
-		uid: Global.venusPlatform.serviceUid +  "/Network/Wifi/Scan"
+		uid: Services.platform.serviceUid +  "/Network/Wifi/Scan"
 		onValueChanged: update()
 	}
 
 	property VeQuickItem accessPoint: VeQuickItem{
-		uid: Global.venusPlatform.serviceUid + "/Services/AccessPoint/Enabled"
+		uid: Services.platform.serviceUid + "/Services/AccessPoint/Enabled"
 		onValueChanged: update()
 	}
 

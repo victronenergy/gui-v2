@@ -103,7 +103,7 @@ ListItem {
 					QuantityObject { object: root.device; key: "voltage"; unit: VenusOS.Units_Volt_DC; defaultValue: "--" }
 					QuantityObject { object: root.device; key: "current"; unit: VenusOS.Units_Amp }
 					QuantityObject { object: root.device; key: "power"; unit: VenusOS.Units_Watt }
-					QuantityObject { object: root.device; key: "temperature"; unit: Global.systemSettings.temperatureUnit }
+					QuantityObject { object: root.device; key: "temperature"; unit: Services.settings.temperatureUnit }
 				}
 				primaryLabel.font: root.font
 				primaryLabel.color: Theme.color_listItem_secondaryText

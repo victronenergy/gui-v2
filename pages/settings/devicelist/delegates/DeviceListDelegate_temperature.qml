@@ -15,7 +15,7 @@ DeviceListDelegate {
 		// Show air quality data if CO2 is available, otherwise show temperature/humidity
 		QuantityObject {
 			object: co2.value !== undefined ? co2 : temperature
-			unit: co2.value !== undefined ? VenusOS.Units_PartsPerMillion : Global.systemSettings.temperatureUnit
+			unit: co2.value !== undefined ? VenusOS.Units_PartsPerMillion : Services.settings.temperatureUnit
 		}
 		QuantityObject {
 			object: co2.value !== undefined ? pm25 : humidity
@@ -32,7 +32,7 @@ DeviceListDelegate {
 		id: temperature
 		uid: root.device.serviceUid + "/Temperature"
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 
 	VeQuickItem {

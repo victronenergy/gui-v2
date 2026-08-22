@@ -11,7 +11,7 @@ Page {
 	id: root
 
 	readonly property string bindPrefix: BackendConnection.serviceUidForType("modem")
-	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Modem"
+	property string settingsBindPrefix: Services.settings.serviceUid + "/Settings/Modem"
 
 	VeQuickItem {
 		id: simStatus

@@ -60,7 +60,7 @@ FocusScope {
 			top: header.bottom
 		}
 		height: Theme.geometry_iochannel_control_height
-		suffix: Units.defaultUnitString(Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
+		suffix: Units.defaultUnitString(Services.settings.toPreferredUnit(root.switchableOutput.unitType))
 				|| root.switchableOutput.unitText
 		from: decimalConverter.intFrom
 		to: decimalConverter.intTo
@@ -84,14 +84,14 @@ FocusScope {
 			id: numericInputMin
 			uid: root.switchableOutput.uid + "/Settings/DimmingMin"
 			sourceUnit: Units.unitToVeUnit(root.switchableOutput.unitType)
-			displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
+			displayUnit: Units.unitToVeUnit(Services.settings.toPreferredUnit(root.switchableOutput.unitType))
 			onValueChanged: spinBox.reload()
 		}
 		VeQuickItem {
 			id: numericInputMax
 			uid: root.switchableOutput.uid + "/Settings/DimmingMax"
 			sourceUnit: Units.unitToVeUnit(root.switchableOutput.unitType)
-			displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
+			displayUnit: Units.unitToVeUnit(Services.settings.toPreferredUnit(root.switchableOutput.unitType))
 			onValueChanged: spinBox.reload()
 		}
 		VeQuickItem {
@@ -114,10 +114,10 @@ FocusScope {
 			decimals: root.switchableOutput.decimals
 			from: numericInputMin.valid
 				? numericInputMin.value
-				: Units.convert(0, root.switchableOutput.unitType, Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
+				: Units.convert(0, root.switchableOutput.unitType, Services.settings.toPreferredUnit(root.switchableOutput.unitType))
 			to: numericInputMax.valid
 				? numericInputMax.value
-				: Units.convert(100, root.switchableOutput.unitType, Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
+				: Units.convert(100, root.switchableOutput.unitType, Services.settings.toPreferredUnit(root.switchableOutput.unitType))
 			stepSize: numericInputStepSize.valid
 				? numericInputStepSize.value
 				: 1 // Unit conversion is not applied to stepSize.
@@ -134,7 +134,7 @@ FocusScope {
 			dataItem: VeQuickItem {
 				uid: root.switchableOutput.uid + "/Dimming"
 				sourceUnit: Units.unitToVeUnit(root.switchableOutput.unitType)
-				displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType))
+				displayUnit: Units.unitToVeUnit(Services.settings.toPreferredUnit(root.switchableOutput.unitType))
 				onValueChanged: spinBox.reload()
 			}
 			onTimeout: spinBox.reload()

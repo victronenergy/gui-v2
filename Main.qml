@@ -40,26 +40,10 @@ Window {
 
 	function rebuildUi() {
 		console.info("Main: UI rebuild required")
-		if (Global.mainView) {
-			Global.mainView.clearUi()
-		}
-		const requiresReloadData = dataManagerLoader.active && dataManagerLoader.connectionReady
-		if (requiresReloadData) {
-			// we haven't lost backend connection.
-			// we must be rebuilding UI due to demo mode change,
-			// gui plugin reload,
-			// or detected crash in localsettings/venus-platform.
-			// manually cycle the data manager loader.
-			console.info("Main: resetting data manager due to change requiring data reload")
-			dataManagerLoader.active = false
-		} else {
-			console.info("Main: data reload not required")
-		}
+		guiLoader.active = false
 		Global.reset()
 		gc()
-		if (requiresReloadData) {
-			dataManagerLoader.active = true
-		}
+		guiLoader.active = true
 		console.info("Main: UI rebuild started successfully")
 	}
 
@@ -105,24 +89,16 @@ Window {
 
 	Component.onCompleted: Global.main = root
 
-	Loader {
-		id: dataManagerLoader
-		readonly property bool connectionReady: Global.backendReady
-		onConnectionReadyChanged: {
-			if (connectionReady) {
+	Connections {
+		target: Services
+		function onReadyChanged() {
+			if (Services.ready) {
 				console.info("Main: data backend ready has changed to true")
-				active = true
-			} else if (active && !Global.needPageReload) {
+				guiLoader.active = true
+			} else if (!Global.needPageReload) {
 				console.info("Main: data backend ready has changed to false")
 				root.rebuildUi()
-				active = false
 			}
-		}
-
-		asynchronous: true
-		active: false
-		sourceComponent: Component {
-			DataManager { }
 		}
 	}
 
@@ -156,8 +132,8 @@ Window {
 		Keys.onPressed: function(event) {
 			// Show or hide the console if necessary
 			if ((Global.isGxDevice || Global.isDesktop)
-					&& Global.systemSettings
-					&& Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)) {
+					&& Services.settings
+					&& Services.settings.canAccess(VenusOS.User_AccessType_SuperUser)) {
 				if (event.key === Qt.Key_F1
 						&& (event.modifiers & Qt.AltModifier
 							|| event.modifiers & Qt.MetaModifier)) {
@@ -210,7 +186,6 @@ Window {
 
 		asynchronous: true
 		visible: !consoleLoader.active
-		active: Global.dataManagerLoaded
 		onActiveChanged: if (active) console.info("Main: data manager finished loading; now loading application content")
 		sourceComponent: ApplicationContent {
 			anchors.centerIn: parent

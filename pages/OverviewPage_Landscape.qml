@@ -294,11 +294,11 @@ FocusScope {
 
 		// Add AC-in widgets.
 		const acInputConfigs = [
-			{ input: Global.acInputs.input1, widgetType: VenusOS.OverviewWidget_Type_AcInputPriority },
-			{ input: Global.acInputs.input2, widgetType: VenusOS.OverviewWidget_Type_AcInputOther },
+			{ input: Services.acInputs.input1, widgetType: VenusOS.OverviewWidget_Type_AcInputPriority },
+			{ input: Services.acInputs.input2, widgetType: VenusOS.OverviewWidget_Type_AcInputOther },
 		]
-		if (Global.acInputs.isGridOrShore(Global.acInputs.input2)
-				&& !Global.acInputs.isGridOrShore(Global.acInputs.input1)) {
+		if (Services.acInputs.isGridOrShore(Services.acInputs.input2)
+				&& !Services.acInputs.isGridOrShore(Services.acInputs.input1)) {
 			// Prefer to show the Grid/Shore AC input first, so swap the display order if needed.
 			acInputConfigs[0].widgetType = VenusOS.OverviewWidget_Type_AcInputOther
 			acInputConfigs[1].widgetType = VenusOS.OverviewWidget_Type_AcInputPriority
@@ -322,18 +322,18 @@ FocusScope {
 
 		// Add DC widgets. Do this last so more boxes can be added per input type, if there is
 		// enough space to do so.
-		for (i = 0; i < Global.dcInputs.model.count; ++i) {
-			const dcInput = Global.dcInputs.model.deviceAt(i)
+		for (i = 0; i < Services.dcInputs.model.count; ++i) {
+			const dcInput = Services.dcInputs.model.deviceAt(i)
 			let dcMeterType = -1
-			if (widgetCandidates.length + Global.dcInputs.model.meterTypeCount <= 5) {
+			if (widgetCandidates.length + Services.dcInputs.model.meterTypeCount <= 5) {
 				// If we can create one widget per meter type and still fit them into the left hand
 				// side, then do that. Otherwise, group them into the same dcsource box. (This is
 				// only relevant for dcsource service types; alternator/fuelcell/dcgenset always
 				// have their own boxes.)
-				dcMeterType = Global.dcInputs.model.meterTypeAt(i)
+				dcMeterType = Services.dcInputs.model.meterTypeAt(i)
 			}
 
-			widgetType = Global.dcInputs.overviewWidgetTypeForService(dcInput.serviceType, dcMeterType)
+			widgetType = Services.dcInputs.overviewWidgetTypeForService(dcInput.serviceType, dcMeterType)
 			if (widgetType < 0) {
 				console.warn("Cannot find matching widget type for DC input:", dcInput.serviceUid)
 				continue
@@ -360,7 +360,7 @@ FocusScope {
 		if (layoutConditions.showAcLoads) {
 			widgets.push(acLoadsWidget)
 		}
-		if (Global.evChargers.model.count > 0) {
+		if (Services.evcs.model.count > 0) {
 			widgets.push(_createWidget(VenusOS.OverviewWidget_Type_Evcs))
 		}
 		if (layoutConditions.showEssentialLoads) {
@@ -396,7 +396,7 @@ FocusScope {
 
 		if (connectorWidget.endWidget === inverterChargerWidget) {
 			// Only the connection to the "preferred" AC input should be animated.
-			if (connectorWidget.startWidget.input !== Global.acInputs.highlightedInput) {
+			if (connectorWidget.startWidget.input !== Services.acInputs.highlightedInput) {
 				return VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
 
@@ -632,7 +632,7 @@ FocusScope {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: inverterChargerWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				visible: defaultVisible && !isNaN(Global.system.solar.acPower)
+				visible: defaultVisible && !isNaN(Services.system.solar.acPower)
 				expanded: root._expandLayout
 				frameAnimation: overviewPageRootAnimation
 				animateGeometry: root._animateGeometry
@@ -640,7 +640,7 @@ FocusScope {
 
 				// Energy flows to Inverter/Charger if there is any PV Inverter power (i.e. AC)
 				animationMode: root.isCurrentPage
-						&& Math.abs(Global.system.solar.acPower || 0) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+						&& Math.abs(Services.system.solar.acPower || 0) > Theme.geometry_overviewPage_connector_animationPowerThreshold
 							   ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 							   : VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
@@ -652,7 +652,7 @@ FocusScope {
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: batteryWidget
 				endLocation: VenusOS.WidgetConnector_Location_Left
-				visible: defaultVisible && !isNaN(Global.system.solar.dcPower)
+				visible: defaultVisible && !isNaN(Services.system.solar.dcPower)
 				expanded: root._expandLayout
 				frameAnimation: overviewPageRootAnimation
 				animateGeometry: root._animateGeometry
@@ -660,7 +660,7 @@ FocusScope {
 
 				// Energy flows to battery if there is any PV Charger power (i.e. DC, so solar is charging battery)
 				animationMode: root.isCurrentPage
-						&& Math.abs(Global.system.solar.dcPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+						&& Math.abs(Services.system.solar.dcPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold
 							   ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 							   : VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
@@ -683,8 +683,8 @@ FocusScope {
 		WidgetConnectorAnchor {
 			id: inverterLeftConnectorAnchor
 			location: VenusOS.WidgetConnector_Location_Left
-			visible: Global.acInputs.findValidSource() !== VenusOS.AcInputs_InputSource_NotAvailable
-					|| !isNaN(Global.system.solar.acPower)
+			visible: Services.acInputs.findValidSource() !== VenusOS.AcInputs_InputSource_NotAvailable
+					|| !isNaN(Services.system.solar.acPower)
 		}
 		WidgetConnectorAnchor {
 			id: inverterToAcLoadsAnchor
@@ -713,9 +713,9 @@ FocusScope {
 
 		// If load power is positive (i.e. consumed energy), energy flows to load.
 		animationMode: root.isCurrentPage
-				&& !isNaN(Global.system.load.ac.power)
-				&& Global.system.load.ac.power > 0
-				&& Math.abs(Global.system.load.ac.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+				&& !isNaN(Services.system.load.ac.power)
+				&& Services.system.load.ac.power > 0
+				&& Math.abs(Services.system.load.ac.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}
@@ -754,7 +754,7 @@ FocusScope {
 
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Left
-			visible: Global.dcInputs.model.count > 0 || Global.solarInputs.devices.count > 0
+			visible: Services.dcInputs.model.count > 0 || Services.solarInputs.devices.count > 0
 		}
 		WidgetConnectorAnchor {
 			location: VenusOS.WidgetConnector_Location_Top
@@ -819,9 +819,9 @@ FocusScope {
 
 			// If load power is positive (i.e. consumed energy), energy flows to load.
 			animationMode: root.isCurrentPage
-					&& !isNaN(Global.system.load.acOut.power)
-					&& Global.system.load.acOut.power > 0
-					&& Math.abs(Global.system.load.acOut.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+					&& !isNaN(Services.system.load.acOut.power)
+					&& Services.system.load.acOut.power > 0
+					&& Math.abs(Services.system.load.acOut.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
 						? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 						: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 		}
@@ -866,9 +866,9 @@ FocusScope {
 				// If load power is positive (i.e. consumed energy), energy flows to load.
 				// If load power is negative (i.e. devices generating power but not directly managed by GX), energy flows to battery.
 				animationMode: root.isCurrentPage
-								&& !isNaN(Global.system.dc.power)
-								&& (Math.abs(Global.system.dc.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold)
-							? (Global.system.dc.power > 0
+								&& !isNaN(Services.system.dc.power)
+								&& (Math.abs(Services.system.dc.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold)
+							? (Services.system.dc.power > 0
 								? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 								: VenusOS.WidgetConnector_AnimationMode_EndToStart)
 							: VenusOS.WidgetConnector_AnimationMode_NotAnimated
@@ -891,14 +891,14 @@ FocusScope {
 			// If splitting loads into (input) AC Loads and (output) Essential Loads:
 			//  - connect to AC Loads, if there are any EV chargers with /Position=1 (AC-In)
 			//  - connect to Essential Loads, if there are any EV chargers with /Position=0 (AC-Out)
-			readonly property bool connectToCombinedAcLoads: visible && !Global.system.showInputLoads
+			readonly property bool connectToCombinedAcLoads: visible && !Services.system.showInputLoads
 			readonly property bool connectToSplitAcLoads: visible
-					&& Global.system.showInputLoads                 // AC loads are split
-					&& Global.evChargers.acInputPositionCount > 0   // AC-in position is in use
+					&& Services.system.showInputLoads                 // AC loads are split
+					&& Services.evcs.acInputPositionCount > 0   // AC-in position is in use
 			readonly property bool connectToEssentialLoads: visible
-					&& Global.system.showInputLoads     // AC loads are split
-					&& Global.system.hasAcOutSystem     // Essential Loads should be visible
-					&& Global.evChargers.acOutputPositionCount > 0  // AC-out position is in use
+					&& Services.system.showInputLoads     // AC loads are split
+					&& Services.system.hasAcOutSystem     // Essential Loads should be visible
+					&& Services.evcs.acOutputPositionCount > 0  // AC-out position is in use
 
 			// When connecting the EVCS widget to the AC Loads and Essential Loads widgets, the
 			// connector line should not travel vertically in a straight line. Instead, move the
@@ -944,8 +944,8 @@ FocusScope {
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root.isCurrentPage
-						&& ( (evcsWidget.connectToCombinedAcLoads && Global.evChargers.power > Theme.geometry_overviewPage_connector_animationPowerThreshold)
-						  || (evcsWidget.connectToSplitAcLoads && Global.evChargers.acInputPositionPower > Theme.geometry_overviewPage_connector_animationPowerThreshold) )
+						&& ( (evcsWidget.connectToCombinedAcLoads && Services.evcs.power > Theme.geometry_overviewPage_connector_animationPowerThreshold)
+						  || (evcsWidget.connectToSplitAcLoads && Services.evcs.acInputPositionPower > Theme.geometry_overviewPage_connector_animationPowerThreshold) )
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
@@ -980,7 +980,7 @@ FocusScope {
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root.isCurrentPage
-						&& Global.evChargers.acOutputPositionPower > Theme.geometry_overviewPage_connector_animationPowerThreshold
+						&& Services.evcs.acOutputPositionPower > Theme.geometry_overviewPage_connector_animationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
@@ -989,6 +989,6 @@ FocusScope {
 
 	VeQuickItem {
 		id: inverterChargerPower
-		uid: Global.system.serviceUid + "/Dc/InverterCharger/Power"
+		uid: Services.system.serviceUid + "/Dc/InverterCharger/Power"
 	}
 }

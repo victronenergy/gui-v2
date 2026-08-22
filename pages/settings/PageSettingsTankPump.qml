@@ -9,7 +9,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	readonly property string settingsBindPrefix: Global.systemSettings.serviceUid
+	readonly property string settingsBindPrefix: Services.settings.serviceUid
 
 	// On D-Bus, the service is com.victronenergy.pump.startstop0
 	// On MQTT, there is only one pump service, so it is mqtt/pump/0

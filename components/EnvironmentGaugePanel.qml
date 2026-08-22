@@ -121,8 +121,8 @@ AbstractListItem {
 				name: root.hasTwoGauges ? "" : (root.device?.name ?? "")
 				iconSource: "qrc:/images/icon_temp_32.svg"
 				value: temperatureItem.valid ? Math.round(temperatureItem.value) : NaN
-				unit: Global.systemSettings.temperatureUnit
-				unitText: Units.defaultUnitString(Global.systemSettings.temperatureUnit)
+				unit: Services.settings.temperatureUnit
+				unitText: Units.defaultUnitString(Services.settings.temperatureUnit)
 				quantityFormatHints: Theme.screenSize === Theme.Portrait ? 0 : Units.CompactUnitFormat
 				gaugeHorizontalPadding: Theme.geometry_environmentGauge_gauge_horizontalPadding
 
@@ -186,6 +186,6 @@ AbstractListItem {
 		id: temperatureItem
 		uid: root.device ? root.device.serviceUid + "/Temperature" : ""
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 }

@@ -71,13 +71,13 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 		StatusBarButton {
 			id: notificationButton
 
-			enabled: Global.notifications?.statusBarNotificationIconVisible ?? false
+			enabled: Services.notifications?.statusBarNotificationIconVisible ?? false
 			visible: !breadcrumbs.visible && enabled
 			leftInset: Theme.geometry_statusBar_spacing
 			rightInset: Theme.geometry_statusBar_spacing / 2
 			bottomInset: Theme.geometry_statusBar_spacing
-			color: Global.notifications?.statusBarNotificationIconColor ?? "transparent"
-			icon.source: Global.notifications?.statusBarNotificationIconSource ?? ""
+			color: Services.notifications?.statusBarNotificationIconColor ?? "transparent"
+			icon.source: Services.notifications?.statusBarNotificationIconSource ?? ""
 
 			Layout.alignment: Qt.AlignTop
 			KeyNavigation.right: controlCardsButton
@@ -127,7 +127,7 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 			rightInset: Theme.geometry_statusBar_horizontalMargin
 			bottomInset: Theme.geometry_statusBar_spacing
 
-			visible: ((!root.pageStack.opened && Global.switches.groups.count > 0)
+			visible: ((!root.pageStack.opened && Services.switches.groups.count > 0)
 					|| auxCardsOpened) // allow cards to be closed if all switches are disconnected while opened
 			icon.source: controlCardsButton.buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? ""
 					: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"

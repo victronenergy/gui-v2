@@ -117,7 +117,7 @@ FocusScope {
 			GridLayout {
 				id: leftInputColumn
 
-				readonly property int widgetCount: (!!Global.acInputs.input1 ? 1 : 0) + (!!Global.acInputs.input2 ? 1 : 0)
+				readonly property int widgetCount: (!!Services.acInputs.input1 ? 1 : 0) + (!!Services.acInputs.input2 ? 1 : 0)
 
 				readonly property bool stretchHorizontally: root._stretchWidgetHorizontally(widgetCount, rightInputColumn.widgetCount)
 				readonly property int displayWidgetSize: root._widgetSizeForSectionColumnCount(widgetCount, stretchHorizontally)
@@ -129,8 +129,8 @@ FocusScope {
 						: root._widgetHeightForSize(displayWidgetSize)
 
 				// Prefer to show the Grid/Shore AC input first, so swap the display order if needed.
-				readonly property bool swapInputs: (Global.acInputs.isGridOrShore(Global.acInputs.input2)
-													&& !Global.acInputs.isGridOrShore(Global.acInputs.input1))
+				readonly property bool swapInputs: (Services.acInputs.isGridOrShore(Services.acInputs.input2)
+													&& !Services.acInputs.isGridOrShore(Services.acInputs.input1))
 
 				rowSpacing: Theme.geometry_overviewPage_widget_spacing
 				columns: 1
@@ -139,7 +139,7 @@ FocusScope {
 				Loader {
 					id: acInput1Loader
 
-					active: !!Global.acInputs.input1
+					active: !!Services.acInputs.input1
 					visible: active
 					Layout.fillWidth: true
 					Layout.fillHeight: true
@@ -147,7 +147,7 @@ FocusScope {
 					Layout.row: leftInputColumn.swapInputs ? 1 : 0
 
 					sourceComponent: AcInputWidget {
-						input: Global.acInputs.input1
+						input: Services.acInputs.input1
 						type: VenusOS.OverviewWidget_Type_AcInputPriority
 						size: leftInputColumn.displayWidgetSize
 						stretchHorizontally: leftInputColumn.stretchHorizontally
@@ -159,7 +159,7 @@ FocusScope {
 				Loader {
 					id: acInput2Loader
 
-					active: !!Global.acInputs.input2
+					active: !!Services.acInputs.input2
 					visible: active
 					Layout.fillWidth: true
 					Layout.fillHeight: true
@@ -167,7 +167,7 @@ FocusScope {
 					Layout.row: leftInputColumn.swapInputs ? 0 : 1
 
 					sourceComponent: AcInputWidget {
-						input: Global.acInputs.input2
+						input: Services.acInputs.input2
 						type: VenusOS.OverviewWidget_Type_AcInputOther
 						size: leftInputColumn.displayWidgetSize
 						stretchHorizontally: leftInputColumn.stretchHorizontally
@@ -234,7 +234,7 @@ FocusScope {
 						active: modelData.count > 0
 						visible: active
 						sourceComponent: DcInputWidget {
-							type: root.Global.dcInputs.overviewWidgetTypeForService(serviceType, modelData.commonMeterType)
+							type: root.Services.dcInputs.overviewWidgetTypeForService(serviceType, modelData.commonMeterType)
 							serviceType: modelData.serviceTypes[0] || ""
 							inputTypeFilter: modelData.commonMeterType
 							size: rightInputColumn.widgetSize
@@ -258,7 +258,7 @@ FocusScope {
 					active: rightInputColumn.combineDcSources
 					visible: active
 					sourceComponent: DcInputWidget {
-						type: root.Global.dcInputs.overviewWidgetTypeForService(serviceType, dcSourceModel.commonMeterType)
+						type: root.Services.dcInputs.overviewWidgetTypeForService(serviceType, dcSourceModel.commonMeterType)
 						serviceType: "dcsource"
 						inputTypeFilter: dcSourceModel.commonMeterType
 						size: rightInputColumn.widgetSize
@@ -281,7 +281,7 @@ FocusScope {
 						required property int meterType
 
 						sourceComponent: DcInputWidget {
-							type: root.Global.dcInputs.overviewWidgetTypeForService(serviceType, dcsourceWidgetLoader.meterType)
+							type: root.Services.dcInputs.overviewWidgetTypeForService(serviceType, dcsourceWidgetLoader.meterType)
 							serviceType: dcsourceWidgetLoader.device.serviceType
 							inputTypeFilter: dcsourceWidgetLoader.meterType
 							size: rightInputColumn.widgetSize
@@ -306,15 +306,15 @@ FocusScope {
 			OverviewEnergyIndicator {
 				// Prefer to monitor the power of the highlighted AC input, or otherwise any
 				// connected input.
-				readonly property AcInput monitoredAcInput: Global.acInputs.highlightedInput?.connected ? Global.acInputs.highlightedInput
-						: Global.acInputs.input1?.connected ? Global.acInputs.input1
-						: Global.acInputs.input2?.connected ? Global.acInputs.input2
+				readonly property AcInput monitoredAcInput: Services.acInputs.highlightedInput?.connected ? Services.acInputs.highlightedInput
+						: Services.acInputs.input1?.connected ? Services.acInputs.input1
+						: Services.acInputs.input2?.connected ? Services.acInputs.input2
 						: null
 				readonly property real acInputPower: monitoredAcInput?.power ?? NaN
 
 				// Shown when power from AC input or PV inverters is over the noise threshold.
 				opacity: Math.abs(acInputPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold
-						  || Math.abs(Global.system.solar.acPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
+						  || Math.abs(Services.system.solar.acPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
 
 				// Positive power means energy is flowing towards inverter/charger (downwards) and
 				// negative power means energy is flowing towards the input (upwards, only
@@ -329,8 +329,8 @@ FocusScope {
 			// Energy from DC inputs or PV chargers to battery.
 			OverviewEnergyIndicator {
 				// Shown when power from DC inputs or PV chargers is over the noise threshold.
-				opacity: Math.abs(Global.dcInputs.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
-						|| Math.abs(Global.system.solar.dcPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
+				opacity: Math.abs(Services.dcInputs.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+						|| Math.abs(Services.system.solar.dcPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
 
 				// Positive power means energy is flowing towards battery (downwards). It never
 				// flows in the opposite direction.
@@ -383,7 +383,7 @@ FocusScope {
 				opacity: (layoutConditions.showAcLoads
 						  || layoutConditions.showEssentialLoads
 						  || layoutConditions.showEvChargers)
-						 && Math.abs(Global.system.load.ac.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
+						 && Math.abs(Services.system.load.ac.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
 
 				// If load power is positive (i.e. consumed energy), energy flows to load (downwards).
 				animationMode: !root.animationEnabled || opacity === 0 ? VenusOS.WidgetConnector_AnimationMode_NotAnimated
@@ -395,13 +395,13 @@ FocusScope {
 			OverviewEnergyIndicator {
 				// Shown when DC loads is visible and its power is over the noise threshold.
 				opacity: layoutConditions.showDcLoads
-						 && Math.abs(Global.system.dc.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
+						 && Math.abs(Services.system.dc.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
 
 				// If load power is positive (i.e. consumed energy), energy flows to load (downwards).
 				// If load power is negative (i.e. devices generating power but not directly managed
 				// by GX), energy flows to battery (upwards).
 				animationMode: !root.animationEnabled || opacity === 0 ? VenusOS.WidgetConnector_AnimationMode_NotAnimated
-					: (Global.system.dc.power > 0
+					: (Services.system.dc.power > 0
 						? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 						: VenusOS.WidgetConnector_AnimationMode_EndToStart)
 				Layout.fillWidth: true

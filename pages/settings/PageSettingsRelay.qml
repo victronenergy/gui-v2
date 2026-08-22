@@ -31,7 +31,7 @@ Page {
 	IOChannelProxyModel {
 		id: systemRelayModel
 		sourceModel: VeQItemTableModel {
-			uids: [ Global.system.serviceUid + "/SwitchableOutput" ]
+			uids: [ Services.system.serviceUid + "/SwitchableOutput" ]
 			flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 		}
 		filterType: IOChannelProxyModel.ManualFunction
@@ -48,7 +48,7 @@ Page {
 					? qsTrId("settings_relay_function_relay1")
 					  //% "Function"
 					: qsTrId("settings_relay_function")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Relay/Function"
 				optionModel: [
 					//% "Disabled"
 					{ display: qsTrId("settings_relay_disabled"), value: VenusOS.SwitchableOutput_Function_Disabled },
@@ -76,7 +76,7 @@ Page {
 					? qsTrId("settings_relay_polarity_relay1")
 					  //% "Polarity"
 					: qsTrId("settings_relay_polarity")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/Polarity"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Relay/Polarity"
 				preferredVisible: [VenusOS.SwitchableOutput_Function_Alarm, VenusOS.SwitchableOutput_Function_Manual].indexOf(relayFunction.currentValue) >= 0
 				optionModel: [
 					//% "Normally open"
@@ -91,7 +91,7 @@ Page {
 
 				//% "Function (Relay 2)"
 				text: qsTrId("settings_relay_function_relay2")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Function"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Relay/1/Function"
 				preferredVisible: relay1State.seen
 				optionModel: [
 					//% "Disabled"
@@ -109,7 +109,7 @@ Page {
 				id: relay1PolaritySwitch
 				//% "Polarity (Relay 2)"
 				text: qsTrId("settings_relay_polarity_relay2")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Polarity"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Relay/1/Polarity"
 				preferredVisible: relay1Function.currentValue === VenusOS.SwitchableOutput_Function_Manual
 				optionModel: relayPolaritySwitch.optionModel
 			}
@@ -128,6 +128,6 @@ Page {
 
 	VeQuickItem {
 		id: relay1State
-		uid: Global.system.serviceUid + "/Relay/1/State"
+		uid: Services.system.serviceUid + "/Relay/1/State"
 	}
 }

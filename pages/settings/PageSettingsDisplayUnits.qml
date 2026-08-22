@@ -22,10 +22,10 @@ Page {
 					//% "Fahrenheit"
 					{ display: qsTrId("settings_units_fahrenheit"), value: VenusOS.Units_Temperature_Fahrenheit },
 				]
-				currentIndex: Global.systemSettings.temperatureUnit === VenusOS.Units_Temperature_Fahrenheit ? 1 : 0
+				currentIndex: Services.settings.temperatureUnit === VenusOS.Units_Temperature_Fahrenheit ? 1 : 0
 
 				onOptionClicked: function(index) {
-					Global.systemSettings.setTemperatureUnit(optionModel[index].value)
+					Services.settings.setTemperatureUnit(optionModel[index].value)
 				}
 			}
 
@@ -52,10 +52,10 @@ Page {
 					//% "Mixed (AC in Watts, DC in Amps)"
 					{ display: qsTrId("settings_units_mixed"), value: VenusOS.ElectricalPowerDisplay_Mixed },
 				]
-				currentIndex: Global.systemSettings.electricalPowerDisplay
+				currentIndex: Services.settings.electricalPowerDisplay
 
 				onOptionClicked: function(index) {
-					Global.systemSettings.setElectricalPowerDisplay(optionModel[index].value)
+					Services.settings.setElectricalPowerDisplay(optionModel[index].value)
 				}
 			}
 
@@ -69,7 +69,7 @@ Page {
 				//: Format of reported GPS data
 				//% "Format"
 				text: qsTrId("settings_gps_format")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gps/Format"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					//: Example of GPS data in the 'Degrees, Minutes, Seconds' format
@@ -88,7 +88,7 @@ Page {
 				//: Speed unit for reported GPS data
 				//% "Speed Unit"
 				text: qsTrId("settings_gps_speed_unit")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gps/SpeedUnit"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					//% "Kilometres per hour"

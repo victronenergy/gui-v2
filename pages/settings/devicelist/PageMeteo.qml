@@ -13,7 +13,7 @@ DevicePage {
 	id: root
 
 	property string bindPrefix
-	readonly property string settingsPrefix: Global.systemSettings.serviceUid + "/Settings/Service/meteo/" + device.deviceInstance
+	readonly property string settingsPrefix: Services.settings.serviceUid + "/Settings/Service/meteo/" + device.deviceInstance
 
 	serviceUid: bindPrefix
 

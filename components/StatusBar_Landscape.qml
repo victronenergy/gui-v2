@@ -108,7 +108,7 @@ FocusScope {
 		rightInset: Theme.geometry_statusBar_spacing
 		bottomInset: Theme.geometry_statusBar_spacing
 
-		visible: (!root.pageStack.opened && Global.switches.groups.count > 0)
+		visible: (!root.pageStack.opened && Services.switches.groups.count > 0)
 				|| auxCardsOpened // allow cards to be closed if all switches are disconnected while opened
 		icon.source: leftButton.buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? ""
 				: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
@@ -208,7 +208,7 @@ FocusScope {
 			VeQuickItem {
 				id: signalStrength
 
-				uid: Global.venusPlatform.serviceUid +  "/Network/Wifi/SignalStrength"
+				uid: Services.platform.serviceUid +  "/Network/Wifi/SignalStrength"
 			}
 		}
 
@@ -244,10 +244,10 @@ FocusScope {
 
 		// The notificationButton should always be shown, even when the page is not interactive
 		opacity: 1
-		visible: !breadcrumbs.visible && (Global.notifications?.statusBarNotificationIconVisible ?? false)
+		visible: !breadcrumbs.visible && (Services.notifications?.statusBarNotificationIconVisible ?? false)
 
-		color: Global.notifications?.statusBarNotificationIconColor ?? "transparent"
-		icon.source: Global.notifications?.statusBarNotificationIconSource ?? ""
+		color: Services.notifications?.statusBarNotificationIconColor ?? "transparent"
+		icon.source: Services.notifications?.statusBarNotificationIconSource ?? ""
 
 		onClicked: Global.mainView.goToNotificationsPage()
 		onActiveFocusChanged: {

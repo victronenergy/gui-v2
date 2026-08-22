@@ -19,13 +19,13 @@ Page {
 
 				text: CommonWords.firmware_version
 				secondaryText: FirmwareVersion.versionText(dataItem.value, "venus")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
+				dataItem.uid: Services.platform.serviceUid + "/Firmware/Installed/Version"
 			}
 
 			ListText {
 				//% "Build date/time"
 				text: qsTrId("settings_build_date_time")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
+				dataItem.uid: Services.platform.serviceUid + "/Firmware/Installed/Build"
 			}
 
 			ListFirmwareImageTypeInstalled { }

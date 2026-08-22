@@ -17,7 +17,7 @@ Column {
 
 	VeQuickItem {
 		id: centerService
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui2/BriefView/CenterService"
+		uid: Services.settings.serviceUid + "/Settings/Gui2/BriefView/CenterService"
 	}
 
 	VeQuickItem {
@@ -25,7 +25,7 @@ Column {
 		uid: {
 			if (root._useTemperature) {
 				const idInfo = BackendConnection.portableIdInfo(centerService.value)
-				const device = Global.environmentInputs.model.deviceForDeviceInstance(idInfo.instance)
+				const device = Services.temperature.model.deviceForDeviceInstance(idInfo.instance)
 				if (device) {
 					return device.serviceUid + "/Temperature"
 				}
@@ -33,7 +33,7 @@ Column {
 			return ""
 		}
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 
 	Row {
@@ -46,7 +46,7 @@ Column {
 		CP.ColorImage {
 			id: icon
 
-			source: root._useTemperature ? "qrc:/images/icon_temp_32.svg" : Global.system.battery.icon
+			source: root._useTemperature ? "qrc:/images/icon_temp_32.svg" : Services.system.battery.icon
 			color: Theme.color_font_primary
 		}
 
@@ -66,8 +66,8 @@ Column {
 		id: centerLabel
 		anchors.horizontalCenter: parent.horizontalCenter
 		width: parent.width - (2 * Theme.geometry_briefPage_centerGauge_centerText_horizontalSpacing)
-		unit: root._useTemperature ? Global.systemSettings.temperatureUnit : VenusOS.Units_Percentage
-		value: root._useTemperature ? (temperature.value ?? NaN) : Global.system.battery.stateOfCharge
+		unit: root._useTemperature ? Services.settings.temperatureUnit : VenusOS.Units_Percentage
+		value: root._useTemperature ? (temperature.value ?? NaN) : Services.system.battery.stateOfCharge
 		minimumPixelSize: Theme.font_briefPage_battery_percentage_minimumPixelSize
 		maximumPixelSize: Theme.font_briefPage_battery_percentage_maximumPixelSize
 	}
@@ -87,12 +87,12 @@ Column {
 					unitColor: Theme.color_briefPage_battery_unit_text_color
 					font.pixelSize: Theme.font_briefPage_battery_voltage_pixelSize
 					unit: VenusOS.Units_Volt_DC
-					value: Global.system.battery.voltage
+					value: Services.system.battery.voltage
 				}
 
 				ElectricalQuantityLabel {
 					sourceType: VenusOS.ElectricalQuantity_Source_Dc
-					dataObject: Global.system.battery
+					dataObject: Services.system.battery
 					valueColor: Theme.color_briefPage_battery_value_text_color
 					unitColor: Theme.color_briefPage_battery_unit_text_color
 					font.pixelSize: Theme.font_briefPage_battery_voltage_pixelSize
@@ -103,7 +103,7 @@ Column {
 				anchors.horizontalCenter: parent.horizontalCenter
 				font.pixelSize: Theme.font_briefPage_battery_timeToGo_pixelSize
 				color: Theme.color_briefPage_battery_value_text_color
-				text: Utils.formatBatteryTimeToGo(Global.system.battery.timeToGo, VenusOS.Battery_TimeToGo_LongFormat)
+				text: Utils.formatBatteryTimeToGo(Services.system.battery.timeToGo, VenusOS.Battery_TimeToGo_LongFormat)
 				visible: text.length > 0
 			}
 		}

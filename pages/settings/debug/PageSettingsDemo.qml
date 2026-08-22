@@ -46,7 +46,7 @@ Page {
 
 			ListSwitch {
 				text: "Toggle setting: /Settings/Alarm/Audible"
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/Audible"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Alarm/Audible"
 			}
 
 			ListRadioButtonGroup {
@@ -136,7 +136,7 @@ Page {
 
 			ListText {
 				text: "Text only, from dbus source"
-				dataItem.uid: Global.system.serviceUid + "/FirmwareBuild"
+				dataItem.uid: Services.system.serviceUid + "/FirmwareBuild"
 			}
 
 			ListQuantity {
@@ -173,7 +173,7 @@ Page {
 
 				VeQuickItem {
 					id: batterySoc
-					uid: Global.system.serviceUid + "/Dc/Battery/Soc"
+					uid: Services.system.serviceUid + "/Dc/Battery/Soc"
 				}
 			}
 

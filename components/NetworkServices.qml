@@ -27,11 +27,11 @@ VeQuickItem {
 	readonly property bool disconnected: networkState === "idle" || networkState === "failure"
 
 	property VeQuickItem setValueItem: VeQuickItem {
-		uid: Global.venusPlatform.serviceUid + "/Network/SetValue"
+		uid: Services.platform.serviceUid + "/Network/SetValue"
 	}
 
 	property VeQuickItem _hasBluetoothSupport: VeQuickItem {
-		uid: Global.venusPlatform.serviceUid + "/Network/HasBluetoothSupport"
+		uid: Services.platform.serviceUid + "/Network/HasBluetoothSupport"
 	}
 
 	property VeQuickItem _networkName: VeQuickItem {
@@ -99,7 +99,7 @@ VeQuickItem {
 		}
 	}
 
-	uid: Global.venusPlatform.serviceUid + "/Network/Services"
+	uid: Services.platform.serviceUid + "/Network/Services"
 
 	// Only handle changed value after component completion because otherwise <network> may not be set correctly.
 	onValueChanged: if (completed) parseJson()

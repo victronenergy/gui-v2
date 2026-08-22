@@ -14,7 +14,7 @@ DevicePage {
 	serviceUid: bindPrefix
 
 	function _systemDistanceUnit() {
-		switch (Global.systemSettings.speedUnit) {
+		switch (Services.settings.speedUnit) {
 		case VenusOS.Units_Speed_KilometresPerHour:
 			return VenusOS.Units_Kilometre
 		case VenusOS.Units_Speed_MetresPerSecond:
@@ -141,8 +141,8 @@ DevicePage {
 			text: qsTrId("ev_position")
 			secondaryText: latitude.valid && longitude.valid
 					? "%1, %2"
-						.arg(Global.systemSettings.formatLatitude(latitude.value))
-						.arg(Global.systemSettings.formatLongitude(longitude.value))
+						.arg(Services.settings.formatLatitude(latitude.value))
+						.arg(Services.settings.formatLongitude(longitude.value))
 					: "--"
 			preferredVisible: latitude.valid && longitude.valid
 		}

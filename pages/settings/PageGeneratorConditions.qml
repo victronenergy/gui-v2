@@ -48,7 +48,7 @@ Page {
 				VeQuickItem {
 					id: availableBatteryServices
 
-					uid: Global.system.serviceUid + "/AvailableBatteryMeasurements"
+					uid: Services.system.serviceUid + "/AvailableBatteryMeasurements"
 					onValueChanged: {
 						if (value === undefined) {
 							return

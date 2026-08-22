@@ -64,7 +64,7 @@ QtObject {
 
 		// Make sure notificationLayer is ready before reading the firmware state,
 		// otherwise Global.showToastNotification() call inside onValueChanged signal handler will fail.
-		uid: (Global.allPagesLoaded && !!Global.notificationLayer) ? Global.venusPlatform.serviceUid + "/Firmware/State" : ""
+		uid: (Global.allPagesLoaded && !!Global.notificationLayer) ? Services.platform.serviceUid + "/Firmware/State" : ""
 
 		onValueChanged: {
 			if (uid === "" || !valid) {
@@ -146,31 +146,31 @@ QtObject {
 
 	// online updates
 	property VeQuickItem _onlineCheckUpdate: VeQuickItem {
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Online/Check"
+		uid: Services.platform.serviceUid + "/Firmware/Online/Check"
 	}
 	property VeQuickItem _onlineVersion: VeQuickItem {
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableVersion"
+		uid: Services.platform.serviceUid + "/Firmware/Online/AvailableVersion"
 		onValidChanged: maybeFinishUpdateCheck(VenusOS.Firmware_UpdateType_Online, valid)
 	}
 	property VeQuickItem _onlineInstallUpdate: VeQuickItem {
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Online/Install"
+		uid: Services.platform.serviceUid + "/Firmware/Online/Install"
 	}
 
 	// offline updates
 	property VeQuickItem _offlineCheckUpdate: VeQuickItem {
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/Check"
+		uid: Services.platform.serviceUid + "/Firmware/Offline/Check"
 	}
 	property VeQuickItem _offlineVersion: VeQuickItem {
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/AvailableVersion"
+		uid: Services.platform.serviceUid + "/Firmware/Offline/AvailableVersion"
 		onValidChanged: maybeFinishUpdateCheck(VenusOS.Firmware_UpdateType_Offline, valid)
 	}
 	property VeQuickItem _offlineInstallUpdate: VeQuickItem {
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/Install"
+		uid: Services.platform.serviceUid + "/Firmware/Offline/Install"
 	}
 
 	// installed build
 	property VeQuickItem _firmwareInstalledBuild: VeQuickItem {
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
+		uid: Services.platform.serviceUid + "/Firmware/Installed/Build"
 		onValueChanged: {
 			if (Qt.platform.os == "wasm" && value != null && value.length > 0) {
 				if (Global.firmwareInstalledBuild.length > 0 &&

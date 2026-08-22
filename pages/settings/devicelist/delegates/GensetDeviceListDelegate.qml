@@ -24,7 +24,7 @@ DeviceListDelegate {
 	VeQuickItem {
 		id: statusCode
 		readonly property string statusText: valid
-				? Global.acInputs.gensetStatusCodeToText(value)
+				? Services.acInputs.gensetStatusCodeToText(value)
 				: CommonWords.not_connected
 		uid: root.device.serviceUid + "/StatusCode"
 	}

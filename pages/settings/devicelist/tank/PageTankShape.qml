@@ -14,7 +14,7 @@ Page {
 	property string bindPrefix
 
 	property var _editPointDialog
-	readonly property bool _canEditPoints: Global.systemSettings.canAccess(VenusOS.User_AccessType_Installer)
+	readonly property bool _canEditPoints: Services.settings.canAccess(VenusOS.User_AccessType_Installer)
 
 	VeQuickItem {
 		id: points

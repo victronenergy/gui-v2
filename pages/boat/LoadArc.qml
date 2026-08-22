@@ -19,7 +19,7 @@ Column {
 											: dcLoadGauge.active || acLoadGauge.active ? 1 // just one
 											: 0
 
-	readonly property bool showing3Phases: acLoadGauge.active && Global.system.load.ac.phases.count === 3
+	readonly property bool showing3Phases: acLoadGauge.active && Services.system.load.ac.phases.count === 3
 
 	width: Theme.geometry_briefPage_edgeGauge_width
 	on_RightGaugeCountChanged: pauseRightGaugeAnimations.restart()
@@ -50,7 +50,7 @@ Column {
 
 		width: Theme.geometry_briefPage_edgeGauge_width
 		height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
-		active: Global.system?.hasAcLoads && !motorDriveLoadGauge.active
+		active: Services.system?.hasAcLoads && !motorDriveLoadGauge.active
 
 		sourceComponent: SideMultiGauge {
 			readonly property var gaugeParams: Gauges.rightGaugeParameters(0, _rightGaugeCount, phaseModel.count > 1)
@@ -69,8 +69,8 @@ Column {
 			x: -root._gaugeArcMargin
 			animationEnabled: root.animationEnabled
 			valueType: VenusOS.Gauges_ValueType_RisingPercentage
-			phaseModel: Global.system.load.ac.phases
-			maximumValue: Global.acInputs.maximumAcCurrent
+			phaseModel: Services.system.load.ac.phases
+			maximumValue: Services.acInputs.maximumAcCurrent
 		}
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load AC load edge")
 	}
@@ -80,7 +80,7 @@ Column {
 
 		width: Theme.geometry_briefPage_edgeGauge_width
 		height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
-		active: !motorDriveLoadGauge.active && Global.system.dc.hasPower
+		active: !motorDriveLoadGauge.active && Services.system.dc.hasPower
 		sourceComponent: SideGauge {
 			readonly property var gaugeParams: Gauges.rightGaugeParameters(acLoadGauge.active ? 1 : 0, _rightGaugeCount, false)
 			// DC load gauge progresses in counter-clockwise direction (i.e. upwards).
@@ -98,8 +98,8 @@ Column {
 
 			ValueRange {
 				id: dcLoadsRange
-				value: root.visible ? Global.system.dc.power || 0 : 0
-				maximumValue: Global.system.dc.maximumPower
+				value: root.visible ? Services.system.dc.power || 0 : 0
+				maximumValue: Services.system.dc.maximumPower
 			}
 		}
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load DC load gauge")

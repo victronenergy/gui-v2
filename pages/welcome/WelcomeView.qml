@@ -44,7 +44,7 @@ Rectangle {
 			text: qsTrId("welcome_skip")
 			flat: true
 			color: Theme.color_ok
-			onClicked: Global.systemSettings.setOnboardingDone()
+			onClicked: Services.settings.setOnboardingDone()
 		}
 
 		ProgressBar {
@@ -143,7 +143,7 @@ Rectangle {
 			}
 			onNextClicked: {
 				if (stackView.depth === welcomePages.count) {
-					Global.systemSettings.setOnboardingDone()
+					Services.settings.setOnboardingDone()
 				} else {
 					stackView.push(welcomePages.objectAt(stackView.depth))
 				}

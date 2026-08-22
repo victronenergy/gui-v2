@@ -25,7 +25,7 @@ Item {
 	Boat.BatteryPercentage {
 		id: batteryPercentage
 
-		visible: (root.gps.valid || root.motorDrives.dcConsumption.quotient.valid) && !isNaN(Global.system.battery.stateOfCharge)
+		visible: (root.gps.valid || root.motorDrives.dcConsumption.quotient.valid) && !isNaN(Services.system.battery.stateOfCharge)
 		gps: root.gps
 		motorDrives: root.motorDrives
 		isShoreConnected: root.isShoreConnected

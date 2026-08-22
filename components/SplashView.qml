@@ -147,7 +147,7 @@ Rectangle {
 	SequentialAnimation {
 		id: initialFadeAnimation
 
-		running: Global.dataManagerLoaded && !welcomeLoader.active && Global.allPagesLoaded && UiConfig.showSplashAnimation
+		running: Services.ready && !welcomeLoader.active && Global.allPagesLoaded && UiConfig.showSplashAnimation
 		onRunningChanged: {
 			if (running) {
 				console.info("SplashView: application content pages have loaded, running initial fade animation")
@@ -377,7 +377,7 @@ Rectangle {
 	Loader {
 		id: welcomeLoader
 
-		active: Global.dataManagerLoaded && Global.systemSettings.needsOnboarding
+		active: Services.ready && Services.settings.needsOnboarding
 		anchors.fill: parent
 		sourceComponent: WelcomeView {
 			anchors.centerIn: parent

@@ -24,7 +24,7 @@ Page {
 
 				//% "System name"
 				text: qsTrId("settings_system_name")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SystemName"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/SystemSetup/SystemName"
 				writeAccessLevel: VenusOS.User_AccessType_User
 
 				optionModel: [
@@ -50,7 +50,7 @@ Page {
 				placeholderText: qsTrId("settings_system_enter_user_defined_name")
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: systemNameRadioButtons.currentIndex === systemNameRadioButtons.customValueIndex
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SystemName"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/SystemSetup/SystemName"
 			}
 
 			ListNavigation {
@@ -86,7 +86,7 @@ Page {
 
 				VeQuickItem {
 					id: systemType
-					uid: Global.system.serviceUid + "/SystemType"
+					uid: Services.system.serviceUid + "/SystemType"
 				}
 			}
 
@@ -106,7 +106,7 @@ Page {
 			}
 
 			ListSwitch {
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
 				//% "Display DC Loads"
 				text: qsTrId("settings_system_has_dc_system")
 			}

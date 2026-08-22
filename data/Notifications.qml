@@ -40,6 +40,4 @@ QtObject {
 			|| NotificationModel.unacknowledgedInfos > 0
 
 	property bool notificationButtonVisible
-
-	Component.onCompleted: Global.notifications = root
 }

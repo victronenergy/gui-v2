@@ -10,19 +10,19 @@ import Victron.VenusOS
 OverviewWidget {
 	id: root
 
-	readonly property bool _showPhases: Global.solarInputs.pvInverterDevices.count === 1
-			&& Global.solarInputs.devices.count === 0
-	readonly property bool _canShowGraph: Global.solarInputs.pvInverterDevices.count === 0
+	readonly property bool _showPhases: Services.solarInputs.pvInverterDevices.count === 1
+			&& Services.solarInputs.devices.count === 0
+	readonly property bool _canShowGraph: Services.solarInputs.pvInverterDevices.count === 0
 	readonly property bool _showGraph: _canShowGraph && root.size >= VenusOS.OverviewWidget_Size_M
 
 	onClicked: {
-		const singleDeviceOnly = (Global.solarInputs.devices.count + Global.solarInputs.pvInverterDevices.count) === 1
-		if (singleDeviceOnly && Global.solarInputs.devices.count === 1) {
+		const singleDeviceOnly = (Services.solarInputs.devices.count + Services.solarInputs.pvInverterDevices.count) === 1
+		if (singleDeviceOnly && Services.solarInputs.devices.count === 1) {
 			Global.pageManager.pushPage("/pages/solar/SolarDevicePage.qml",
-					{ "serviceUid": Global.solarInputs.devices.firstObject.serviceUid })
-		} else if (singleDeviceOnly && Global.solarInputs.pvInverterDevices.count === 1) {
+					{ "serviceUid": Services.solarInputs.devices.firstObject.serviceUid })
+		} else if (singleDeviceOnly && Services.solarInputs.pvInverterDevices.count === 1) {
 			Global.pageManager.pushPage("/pages/solar/PvInverterPage.qml",
-					{ "serviceUid": Global.solarInputs.pvInverterDevices.firstObject.serviceUid })
+					{ "serviceUid": Services.solarInputs.pvInverterDevices.firstObject.serviceUid })
 		} else {
 			Global.pageManager.pushPage("/pages/solar/SolarInputListPage.qml", { "title": root.title })
 		}
@@ -52,7 +52,7 @@ OverviewWidget {
 
 		OverviewElectricalQuantityLabel {
 			widgetSize: root.size
-			dataObject: Global.system.solar
+			dataObject: Services.system.solar
 			Layout.fillWidth: true
 			Layout.fillHeight: !root._showGraph // when graph is shown, allow it to expand to full height
 		}
@@ -92,7 +92,7 @@ OverviewWidget {
 
 			PvInverter {
 				id: pvInverter
-				serviceUid: Global.solarInputs.pvInverterDevices.firstObject?.serviceUid ?? ""
+				serviceUid: Services.solarInputs.pvInverterDevices.firstObject?.serviceUid ?? ""
 			}
 		}
 	}

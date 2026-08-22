@@ -9,7 +9,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	readonly property string cgwacsPath: Global.systemSettings.serviceUid + "/Settings/CGwacs"
+	readonly property string cgwacsPath: Services.settings.serviceUid + "/Settings/CGwacs"
 
 	VeQuickItem {
 		id: stateItem
@@ -38,7 +38,7 @@ Page {
 
 	VeQuickItem {
 		id: overruledShoreLimit
-		uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Hub4/L1/OverruledShoreLimit" : ""
+		uid: Services.system.veBus.serviceUid ? Services.system.veBus.serviceUid + "/Hub4/L1/OverruledShoreLimit" : ""
 	}
 
 	GradientListView {

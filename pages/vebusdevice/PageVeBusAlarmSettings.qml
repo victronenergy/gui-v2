@@ -9,7 +9,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	readonly property string bindPrefix: Global.systemSettings.serviceUid
+	readonly property string bindPrefix: Services.settings.serviceUid
 	property bool isMulti
 
 	readonly property var defaultOptionModel: [

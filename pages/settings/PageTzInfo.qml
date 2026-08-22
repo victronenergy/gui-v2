@@ -44,7 +44,7 @@ Page {
 
 		DateSelectorDialog {
 			onAccepted: {
-				Global.systemSettings.time.setValue(
+				Services.settings.time.setValue(
 					ClockTime.otherClockTime(
 						year,
 						month,
@@ -60,7 +60,7 @@ Page {
 
 		TimeSelectorDialog {
 			onAccepted: {
-				Global.systemSettings.time.setValue(
+				Services.settings.time.setValue(
 					ClockTime.otherClockTime(
 						ClockTime.year,
 						ClockTime.month,
@@ -77,7 +77,7 @@ Page {
 		repeat: true
 		triggeredOnStart: true
 		running: UiConfig.applicationVisible // even if !Global.timersEnabled
-		onTriggered: Global.systemSettings.time.getValue(true)
+		onTriggered: Services.settings.time.getValue(true)
 	}
 
 	GradientListView {
@@ -95,7 +95,7 @@ Page {
 				secondaryText: ClockTime.currentDate
 				preferredVisible: Qt.platform.os != "wasm"
 				writeAccessLevel: VenusOS.User_AccessType_User
-				readOnly: !Global.systemSettings.time.valid
+				readOnly: !Services.settings.time.valid
 				onClicked: root._openDateSelector()
 			}
 			ListButton {
@@ -103,7 +103,7 @@ Page {
 				secondaryText: ClockTime.currentTime
 				preferredVisible: Qt.platform.os != "wasm"
 				writeAccessLevel: VenusOS.User_AccessType_User
-				readOnly: !Global.systemSettings.time.valid
+				readOnly: !Services.settings.time.valid
 				onClicked: root._openTimeSelector()
 			}
 
@@ -127,7 +127,7 @@ Page {
 						setValue(region + "/" + city)
 					}
 
-					uid: Global.systemSettings.serviceUid + "/Settings/System/TimeZone"
+					uid: Services.settings.serviceUid + "/Settings/System/TimeZone"
 					onValueChanged: {
 						if (value !== undefined) {
 							const slash = value.indexOf('/')

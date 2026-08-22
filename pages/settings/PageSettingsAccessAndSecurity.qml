@@ -29,8 +29,8 @@ Page {
 		onKeyPressed: (key) => {
 			if (key === Qt.Key_Right) {
 				// change to super user mode if the right button is pressed for a while
-				if (Global.systemSettings.accessLevel.value !== VenusOS.User_AccessType_SuperUser && ++repeatCount > 60) {
-					Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_SuperUser)
+				if (Services.settings.accessLevel.value !== VenusOS.User_AccessType_SuperUser && ++repeatCount > 60) {
+					Services.settings.accessLevel.setValue(VenusOS.User_AccessType_SuperUser)
 					repeatCount = 0
 				}
 			} else if (key === Qt.Key_Up) {
@@ -40,7 +40,7 @@ Page {
 			} else if (key === Qt.Key_Down) {
 				if (downCount < 5) ++downCount;
 				if (upCount === 5 && downCount === 5) {
-					Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_Service)
+					Services.settings.accessLevel.setValue(VenusOS.User_AccessType_Service)
 					upCount = 0
 				}
 			}
@@ -51,8 +51,8 @@ Page {
 		running: root.pulledDown
 		interval: 5000
 		onTriggered: {
-			if (Global.systemSettings.accessLevel.value >= VenusOS.User_AccessType_Installer) {
-				Global.systemSettings.accessLevel.setValue(VenusOS.User_AccessType_SuperUser)
+			if (Services.settings.accessLevel.value >= VenusOS.User_AccessType_Installer) {
+				Services.settings.accessLevel.setValue(VenusOS.User_AccessType_SuperUser)
 			}
 		}
 	}
@@ -65,7 +65,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Access level"
 				text: qsTrId("settings_access_level")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/AccessLevel"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/System/AccessLevel"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					//% "User"
@@ -122,7 +122,7 @@ Page {
 
 				//% "Local network security profile"
 				text: qsTrId("settings_local_network_security_profile")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/System/SecurityProfile"
 				updateDataOnClick: false // handle option clicked manually.
 				popDestination: undefined
 				//% "Please select..."
@@ -206,7 +206,7 @@ Page {
 
 				VeQuickItem {
 					id: securityApi
-					uid: Global.venusPlatform.serviceUid + "/Security/Api"
+					uid: Services.platform.serviceUid + "/Security/Api"
 				}
 
 				Component {
@@ -284,7 +284,7 @@ Page {
 			ListSwitch {
 				//% "Enable SSH on LAN"
 				text: qsTrId("settings_enable_ssh_on_lan")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/SSHLocal"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/System/SSHLocal"
 				showAccessLevel: VenusOS.User_AccessType_SuperUser
 			}
 
@@ -293,7 +293,7 @@ Page {
 
 				//% "Remote support"
 				text: qsTrId("settings_remote_support")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupport"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/System/RemoteSupport"
 			}
 
 			ListText {
@@ -308,7 +308,7 @@ Page {
 
 				//% "Remote support IP and port"
 				text: qsTrId("settings_remote_ip_and_support")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/RemoteSupportIpAndPort"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/System/RemoteSupportIpAndPort"
 				preferredVisible: remoteSupportOnOff.checked
 			}
 
