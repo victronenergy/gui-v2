@@ -29,6 +29,8 @@ class Theme : public QObject
 	Q_PROPERTY(int geometry_screen_width READ geometry_screen_width WRITE setGeometry_screen_width NOTIFY geometry_screen_widthChanged FINAL)
 	Q_PROPERTY(int geometry_screen_height READ geometry_screen_height WRITE setGeometry_screen_height NOTIFY geometry_screen_heightChanged FINAL)
 	Q_PROPERTY(bool adjustingGeometry READ adjustingGeometry NOTIFY adjustingGeometryChanged FINAL)
+	Q_PROPERTY(int visualViewportBottom READ visualViewportBottom NOTIFY visualViewportBottomChanged FINAL)
+	Q_PROPERTY(bool virtualKeyboardOpened READ virtualKeyboardOpened NOTIFY virtualKeyboardOpenedChanged FINAL)
 
 public:
 	enum ScreenSize {
@@ -87,11 +89,22 @@ public:
 	void setGeometry_screen_height(int height);
 
 	Q_INVOKABLE Victron::VenusOS::Theme::StatusLevel getValueStatus(qreal value, Victron::VenusOS::Enums::Gauges_ValueType valueType) const;
-	Q_INVOKABLE bool windowIsLandscape() const;
 	Q_INVOKABLE bool objectHasQObjectParent(QObject *obj) const;
 
 	bool adjustingGeometry() const;
+	bool virtualKeyboardOpened() const;
 	QString applicationVersion() const;
+
+	// The y pos of the bottom of the visual viewport.
+	// - On GX, this is the top of the VKB.
+	// - On Wasm, this is window.visualViewport.offsetTop + window.visualViewport.height, which
+	//   should also be equivalent to the top of the VKB when it is visible.
+	int visualViewportBottom() const;
+
+	// Internal functions: used by JS Emscripten bridge.
+	void setWindowHeight(int height);
+	void setVisualViewportHeight(int height);
+	void setVisualViewportOffsetTop(int offsetTop);
 
 Q_SIGNALS:
 	void screenSizeChanged(Victron::VenusOS::Theme::ScreenSize screenSize);
@@ -104,9 +117,12 @@ Q_SIGNALS:
 	void geometry_screen_widthChanged();
 	void geometry_screen_heightChanged();
 	void adjustingGeometryChanged();
+	void visualViewportBottomChanged();
+	void virtualKeyboardOpenedChanged();
 
 protected:
 	void setAdjustingGeometry(bool adjusting);
+	void updateViewportAndKeyboardProperties();
 
 	ScreenSize m_screenSize = SevenInch;
 	ColorScheme m_colorScheme = Dark;
@@ -114,7 +130,12 @@ protected:
 	ForcedColorScheme m_forcedColorScheme = ForcedColorSchemeDefault;
 	int m_screenWidth = 1024;
 	int m_screenHeight = 600;
+	int m_visualViewportBottom = 0;
+	int m_windowHeight = 0;
+	int m_visualViewportHeight = 0;
+	int m_visualViewportOffsetTop = 0;
 	bool m_adjustingGeometry = false;
+	bool m_virtualKeyboardOpened = false;
 };
 
 }

@@ -11,172 +11,175 @@ import Victron.VenusOS
 	keyboard (not the Qt virtual keyboard, as defined by InputPanel.qml) to appear. When this
 	happens in landscape orientation, the view needs to move upwards or be scrolled upwards, so
 	that the focused field is not obscured by the native VKB.
-
-	Ideally this would only scroll the view up as much as is necessary to make space for the VKB,
-	but Qt.inputMethod does not provide the geometry of the native VKB (see QTBUG-128406). So, the
-	safest bet is to scroll enough to show the text field at the very top of the view, as the native
-	VKB may almost fill the entire screen on a mobile device in landscape orientation.
-
-	Two separate cases are handled:
-
-	- When a text field is focused within the Control Cards or Switch Pane view, the view is moved
-	upwards. (If the mouse is pressed outside of the text field container item, then the view's
-	original position is restored. Ideally this would also be done when the native VKB was closed
-	independently of the text field focus, but it is not possible to determine when this happens.)
-
-	- When a text field is focused within a flickable elsewhere in the UI, the flickable is scrolled
-	and space is added below it, if the text field would otherwise be obscured by the native VKB.
-	(The original scroll position is not restored  when the mouse is pressed outside of the of the
-	container, as the user may continue to scroll  through the view, and may choose to focus some
-	other text field without wanting to make the VKB disappear and re-appear again.)
 */
 Item {
 	id: root
 
-	property Flickable focusedFlickable
-	property real initialBottomMargin
-	property real initialCacheBuffer
+	property Item focusedItem
+	property Flickable focusedView
 
-	property Item focusedCardItem
+	property real _initialViewBottomMargin
+	property real _initialViewContentY
 
-	function acceptMouseEvent(item, itemMouseX, itemMouseY) {
-		if (!!focusedCardItem) {
-			const mappedPoint = focusedCardItem.mapFromItem(item, itemMouseX, itemMouseY)
-			if (!focusedCardItem.contains(mappedPoint)) {
-				// The screen was clicked outside of the text field. Remove focus from it, so that
-				// the VKB will close. Return true to swallow the mouse event.
-				focusedCardItem.focus = false
-				focusedCardItem = null
-				Global.mainView.cardsLoader.clearYOffset()
-				return true
+	function updateFocusItem(textField, view) {
+		if (!textField || !view) {
+			console.warn("update(): invalid item/view:", textField, view)
+			return
+		}
+
+		if (state === "") {
+			root._initialViewBottomMargin = view.bottomMargin
+			root._initialViewContentY = view.contentY
+		}
+
+		root.focusedView = view
+		root.focusedItem = textField
+
+		if (root.state === "") {
+			if (view.orientation === ListView.Vertical) {
+				root.state = "scrollVertically"
+			} else {
+				root.state = "scrollHorizontally"
 			}
 		}
-		return false
 	}
 
-	function setFlickable(newFlickable) {
-		// Restore the old flickable's original property values.
-		if (focusedFlickable) {
-			focusedFlickable.bottomMargin = initialBottomMargin
-			focusedFlickable.cacheBuffer = initialCacheBuffer
-			focusedFlickable = null
-		}
-		if (!newFlickable) {
-			return
-		}
-
-		initialBottomMargin = newFlickable.bottomMargin
-		initialCacheBuffer = newFlickable.cacheBuffer
-
-		// Increase the cache buffer, otherwise the contentY jumps when changing focus between two
-		// text fields that are far apart.
-		newFlickable.bottomMargin = 0
-		newFlickable.cacheBuffer = newFlickable.height * 2
-
-		focusedFlickable = newFlickable
+	function reset() {
+		// Note: do not clear focusedItem and focusedView as they may still be in use by the
+		// PropertyChanges.
+		root.state = ""
+		root._initialViewBottomMargin = 0
+		root._initialViewContentY = 0
 	}
 
-	function updateFocusItem(textField, textFieldContainer, flickable) {
-		// Whenever a text field is focused inside the flickable:
-		// 1. Increase the bottomMargin of the flickable if this is necessary to allow the text
-		//    field to be scrolled to the top of the viewport. (This ensures the native VKB does not
-		//    obscure the text field, providing the VKB is anchored to the bottom of the screen and
-		//    is not so high that it obscures almost the whole of the app UI.)
-		// 2. Scroll the text field into view with a contentY animation.
-		//
-		// As a flickable is scrolled and text fields lower down in the flickable receive focus, the
-		// bottomMargin is increased, as those fields will need more space below them to ensure the
-		// VKB is visible.
-		//
-		// Note the bottomMargin is always increased, and never decreased. Otherwise, if the user
-		// focuses a text field at the bottom of the flickable, then focuses another field higher up
-		// in the flickable, then scrolls down without changing focus and without closing the VKB,
-		// then the lower text field would no longer be visible, due to the shortened bottomMargin.
-		//
-		if (!textField || !textFieldContainer || !flickable) {
-			console.warn("updateFocusItem(): invalid item/container/flickable:", textField, textFieldContainer, flickable)
-			return
-		}
-
-		if (flickable != root.focusedFlickable) {
-			root.setFlickable(flickable)
-		}
-
-		// Find the position of the text field container within the flickable content item.
-		const textContainerContentY = textFieldContainer.mapToItem(flickable.contentItem, 0, 0).y
-
-		if (textContainerContentY + flickable.height > flickable.contentHeight) {
-			// Find the distance that would be scrolled to place the text container at the top
-			// of the content view.
-			const jumpDistance = textFieldContainer.mapToItem(flickable, 0, 0).y
-
-			// Set the bottomMargin to increase the scrollable height of the flickable. The
-			// bottomMargin is never decreased, even if a shorter margin is sufficient.
-			flickable.bottomMargin = Math.max(jumpDistance, flickable.bottomMargin)
-		}
-
-		flickable.contentY = textContainerContentY
+	function _distanceToScroll() {
+		const textFieldBottom = Global.main.y
+				+ Math.round(root.focusedItem.mapToItem(Global.main.contentItem, 0, root.focusedItem.height).y)
+				+ Theme.geometry_inputPanel_topMargin
+		return textFieldBottom - Theme.visualViewportBottom
 	}
+
+	// On Wasm on iOS, if the user clicks a text field within the VKB area, the VKB appears and the
+	// contentY is scrolled to the correct position as expected. However, if the user then enters
+	// some text, the HTML window's visualViewport auto-scrolls as if the VKB is not already open,
+	// which moves the entire application UI upwards. To fix this, we could move the main window y
+	// down by the window.visualViewport.offsetTop value, but this causes a visual stutter as the
+	// UI jump upwards on the viewport scroll then immediately downwards for the correction. A
+	// workaround that fixes this, surprisingly, is to re-click the text field after the initial
+	// contentY adjustment.
+	function _preventScrollOnIos() {
+		UiConfig.mouseClick(root.focusedItem)
+	}
+
+	// Similarly to InputPanel.qml states:
+	//
+	// - For vertical list views (e.g. general settings list views, or Switch Pane in portrait):
+	//   When a text field is focused, increase the view's bottomMargin to allow user to scroll to
+	//   see content that would otherwise be hidden by the VKB, and adjust the view contentY to
+	//   bring the field into view. Do not revert the contentY change when focus is lost, as the
+	//   user may have scrolled the view to a new preferred contentY. Also, we prefer to change the
+	//   bottomMargin rather than the view height, as changing the latter causes layout confusion
+	//   when the contentY is also changed.
+	//
+	// - For horizontal list views (e.g. Switch Pane in landscape): When a text field is focused,
+	//   scroll the view's contentY to force the field into view, and revert the contentY change
+	//   when focus is lost, else the user cannot scroll to remove it in a horizontal list view.
+	states: [
+		State {
+			name: "scrollVertically"
+
+			PropertyChanges {
+				target: root.focusedView
+				bottomMargin: root._initialViewBottomMargin
+					+ Math.max(0, Global.main.y + Global.main.height - Theme.visualViewportBottom)
+			}
+
+			// Theme.visualViewportBottom may change incrementally, so do not change the contentY
+			// until the bottomMargin is updated, otherwise it will scroll to the wrong position.
+			PropertyChanges {
+				target: viewVerticalScroller
+				enabled: true
+			}
+		},
+
+		State {
+			name: "scrollHorizontally"
+
+			PropertyChanges {
+				target: root.focusedView
+				contentY: root._initialViewContentY + Math.max(0, root._distanceToScroll())
+			}
+
+			StateChangeScript {
+				script: root._preventScrollOnIos()
+			}
+		}
+	]
 
 	Connections {
-		target: Global
+		id: viewVerticalScroller
 
-		// Called when a text field is pressed, before it receives focus.
-		function onAboutToFocusTextField(textField, textFieldContainer, viewToScroll) {
-			if (Global.currentDialog) {
-				// If the text field is in a dialog, do not auto-scroll, as this will automatically
-				// be done by the platform.
-				return
-			}
+		target: root.focusedView
+		enabled: false
 
-			if (viewToScroll === Global.mainView.cardsLoader) {
-				// The text field is in the Control Cards or Switch Pane view. Find the position of
-				// the text field container within the view, and move the MainView cardsLoader by
-				// this amount, below the status bar. Delay the call to cardsLoader.setYOffset()
-				// until the item actually has active focus, otherwise the native VKB doesn't show.
-				const textContainerY = textFieldContainer.mapToItem(viewToScroll, 0, 0).y
-				focusListener.cardLoaderOffset = -textContainerY + Theme.geometry_statusBar_height + Theme.geometry_page_content_verticalMargin
-				focusedCardItem = textField
-			} else {
-				// The text field is in a flickable in some other view. Delay the call to
-				// updateFocusItem() until the onReleased event, to avoid confused scrolling
-				// behavior when dragging over a text field within the view. Instead, record the
-				// parameters and call the function later when the item actually receives the focus.
-				focusListener.textField = textField
-				focusListener.textFieldContainer = textFieldContainer
-				focusListener.flickable = viewToScroll
+		function onBottomMarginChanged() {
+			const delta = root._distanceToScroll()
+			if (delta > 0) {
+				contentYAnimation.to = root._initialViewContentY + delta
+				verticalScrollAnimation.restart()
 			}
 		}
 	}
 
+	SequentialAnimation {
+		id: verticalScrollAnimation
+
+		NumberAnimation {
+			id: contentYAnimation
+
+			target: root.focusedView
+			property: "contentY"
+			duration: Global.animationEnabled ? Theme.animation_inputPanel_slide_duration : 0
+		}
+
+		ScriptAction {
+			script: root._preventScrollOnIos()
+		}
+	}
+
+	// Update the scroller when a text field is focused. We assume that a text field is focused if
+	// the platform has opened the virtual keyboard while any item is focused.
+	readonly property Item focusedInputCandidate: Theme.virtualKeyboardOpened ? Global.main.activeFocusItem : null
+	onFocusedInputCandidateChanged: {
+		if (focusedInputCandidate && focusedInputCandidate === focusListener.textField) {
+			// User focused an item that is a text field; auto-scroll the view if needed.
+			root.updateFocusItem(focusListener.textField, focusListener.viewToScroll)
+		} else {
+			// User focused an item that is not a text field; restore the values prior to the
+			// focused state.
+			root.reset()
+			focusListener.textField = null
+			focusListener.viewToScroll = null
+		}
+	}
+
+	// Listen for the aboutToFocusTextField() signal. This allows gui-v2 to auto-scroll the
+	// correct flickable when a text field in that flickable is focused.
 	Connections {
 		id: focusListener
 
 		property Item textField
-		property Item textFieldContainer
-		property Flickable flickable
+		property Flickable viewToScroll
 
-		property real cardLoaderOffset
+		target: Global
 
-		target: Global.main
+		// Auto-scrolling in dialogs is handled by ModalDialog, so don't handle it here.
+		enabled: !Global.dialogLayer.currentDialog
 
-		function onActiveFocusItemChanged() {
-			if (Global.main.activeFocusItem) {
-				if (Global.main.activeFocusItem === root.focusedCardItem) {
-					Global.mainView.cardsLoader.setYOffset(cardLoaderOffset, false)
-				} else if (Global.main.activeFocusItem === textField) {
-					updateFocusItem(textField, textFieldContainer, flickable)
-				}
-			}
-		}
-	}
-
-	Connections {
-		target: root.focusedFlickable || null
-		function onVisibleChanged() {
-			// When the flickable disappears (e.g. when its parent page is popped) then restore its
-			// original property values and stop tracking it.
-			root.setFlickable(null)
+		// Called when a text field is pressed, before it receives focus.
+		function onAboutToFocusTextField(textField, viewToScroll) {
+			focusListener.textField = textField
+			focusListener.viewToScroll = viewToScroll
 		}
 	}
 }

@@ -6,10 +6,14 @@
 
     <!--
       Set visual viewport size for mobile devices to the device size,
-      witch results in a scale of 1 and a 1:1 mapping between CSS pixels
+      which results in a scale of 1 and a 1:1 mapping between CSS pixels
       and Qt device independent pixels.
+
+      Set interactive-widget=resizes-visual so that when the virtual
+      keyboard opens, the visual viewport resizes, but the layout
+      viewport does not.
     -->
-    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, viewport-fit=cover"/>
+    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-visual"/>
 
     <title>Victron GUIv2</title>
     <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
@@ -67,6 +71,7 @@
           width: 100%;
           height: 100%;
           max-height: 100dvh;
+          max-height: 100lvh;
           margin: 0;
           padding: 0;
           display: flex;
@@ -571,6 +576,39 @@
             applySpinnerLayout();
             window.addEventListener('resize', applySpinnerLayout);
 
+            // Update gui-v2 Theme when the window's innerHeight changes.
+            window.addEventListener('resize', (e) => {
+                const mod = window._qtWasmModule;
+                if (mod && typeof mod.jsSetWindowInnerHeight === 'function') {
+                    mod.jsSetWindowInnerHeight(window.innerHeight);
+                }
+            });
+
+            // Update gui-v2 Theme when the window's visual viewport changes.
+            function signalQtViewportChange() {
+                const mod = window._qtWasmModule;
+                if (mod && typeof mod.jsSetVisualViewportHeight === 'function') {
+                    mod.jsSetVisualViewportHeight(Math.round(window.visualViewport.height));
+                }
+                if (mod && typeof mod.jsSetVisualViewportOffsetTop === 'function') {
+                    mod.jsSetVisualViewportOffsetTop(Math.round(window.visualViewport.offsetTop));
+                }
+            }
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener('resize', () => {
+                    signalQtViewportChange();
+
+                    // iOS Safari also reports a stale visualViewport.height immediately after the
+                    // keyboard is dismissed, so wait 100ms and report the viewport height again.
+                    setTimeout(() => {
+                        signalQtViewportChange();
+                    }, 100);
+                });
+                window.visualViewport.addEventListener('scroll', () => {
+                    signalQtViewportChange();
+                });
+            }
+
             try {
                 showUi(spinner);
                 loadingBar.width.baseVal.value = '0';
@@ -704,6 +742,12 @@
                     }
                 });
 
+                // Expose the Emscripten module instance so keyboard detection can call
+                // EMSCRIPTEN_BINDINGS functions (e.g. jsSetKeyboardHeight). Qt WASM does
+                // not create a global Module object; the instance returned by qtLoad() is
+                // the module with all exported functions on it.
+                window._qtWasmModule = instance;
+
                 // qtLoad() resolves after main() has run: QGuiApplication and the
                 // QML engine are set up and app.exec() has unwound back to the
                 // browser event loop. Asynchronous QML scene loading continues
@@ -715,6 +759,7 @@
                 if (window.wasmDebugEnabled) {
                     console.log(`[WASM Perf] Summary:\n` + perfLog.map(l => `  ${l}`).join('\n'));
                 }
+
             } catch (e) {
                 console.error(e);
                 console.error(e.stack);
@@ -886,6 +931,24 @@
                 if (document.hidden) flushOrphans('page hidden', 0);
             });
             window.addEventListener('pagehide', function() { flushOrphans('page hidden', 0); });
+        })();
+    </script>
+    <script type="text/javascript">
+        // Qt's WASM platform plugin (QWasmInputContext) opens the native VKB by calling focus() on
+        // a hidden <input data-qinputcontext> element. The browser responds to this by
+        // auto-scrolling the visual viewport when the VKB appears. However, it often auto-scrolls
+        // to the wrong position (particularly for text fields within dialogs), so set
+        // preventScroll=true here to disable the viewport auto-scroll and handle it in gui-v2
+        // instead. Note that the preventScroll setting works on Android Wasm, but appears to have
+        // no effect in iOS Wasm, so for the latter, we have a workaround that re-clicks the focused
+        // text field; see _preventScrollOnIos() in WasmVirtualKeyboardHandler.
+        (function() {
+            const origFocus = HTMLElement.prototype.focus;
+            HTMLElement.prototype.focus = function(options) {
+                if (this["data-qinputcontext"] !== undefined)
+                    options = Object.assign({}, options, { preventScroll: true });
+                return origFocus.call(this, options);
+            };
         })();
     </script>
   </body>

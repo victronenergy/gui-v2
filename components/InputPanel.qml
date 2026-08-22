@@ -24,29 +24,11 @@ QtVirtualKeyboard.InputPanel {
 
 	property real toContentY
 	property real toHeight
-
-	property real cardsYOffset
+	property real initialBottomMargin
 
 	readonly property string localeName: Language.currentLocaleName
 
 	readonly property bool requiresRotation: Global.main && Global.main.requiresRotation
-
-	function acceptMouseEvent(item, itemMouseX, itemMouseY) {
-		if (!Qt.inputMethod.visible || !item || !focusedItem) {
-			return false
-		}
-		const mappedPoint = focusedItem.mapFromItem(item, itemMouseX, itemMouseY)
-		if (!focusedItem.contains(mappedPoint)) {
-			// The screen was clicked outside of the text field. Remove focus from the text field,
-			// so that the VKB will close. Return true to swallow the mouse event.
-			focusedItem.focus = false
-			focusedItem = null
-			focusedView = null
-			return true
-		}
-		// The mouse was clicked within the text field, so allow it to receive the mouse event.
-		return false
-	}
 
 	visible: Qt.inputMethod.visible || yAnimator.running
 
@@ -77,94 +59,87 @@ QtVirtualKeyboard.InputPanel {
 
 	states: [
 		State {
-			name: "openedForFlickable"
-			when: Qt.inputMethod.visible
-				  && !!root.focusedView
-				  && root.focusedView !== Global.mainView.cardsLoader
+			name: "scrollVertically"
+			when: Qt.inputMethod.visible && !!root.focusedView && root.focusedView?.orientation === Qt.Vertical
+
+			PropertyChanges {
+				target: root.focusedView
+				bottomMargin: root.initialBottomMargin + root.height
+			}
+
+			// In case the user scrolls the view to a new contentY, do not revert the contentY
+			// change, so trigger it manually instead of via PropertyChanges. Theoretically
+			// restoreEntryValues=false should do the same thing, but the state changes become
+			// confused when toContentY changes.
+			StateChangeScript {
+				script: verticalScrollAnimation.start()
+			}
+		},
+		State {
+			name: "scrollHorizontally"
+			when: Qt.inputMethod.visible && !!root.focusedView && root.focusedView?.orientation !== Qt.Vertical
 
 			PropertyChanges {
 				target: root.focusedView
 				contentY: root.toContentY
-				height: root.toHeight
 			}
-		},
-		State {
-			name: "openedForCards"
-			when: Qt.inputMethod.visible
-				  && !!root.focusedView
-				  && root.focusedView === Global.mainView.cardsLoader
-
-			// No PropertyChanges, the Transitions will trigger the cardsLoader to slide up/down.
 		}
 	]
 
 	transitions: [
 		Transition {
+			enabled: Global.animationEnabled
+
 			NumberAnimation {
-				properties: "contentY,height"
+				properties: "contentY,bottomMargin"
 				duration: Theme.animation_inputPanel_slide_duration
 				easing.type: Easing.InOutQuad
-			}
-		},
-		Transition {
-			to: "openedForCards"
-			ScriptAction {
-				script: Global.mainView.cardsLoader.setYOffset(root.cardsYOffset, true)
-			}
-		},
-		Transition {
-			from: "openedForCards"
-			ScriptAction {
-				script: Global.mainView.cardsLoader.clearYOffset()
 			}
 		}
 	]
 
+	NumberAnimation {
+		id: verticalScrollAnimation
+
+		target: root.focusedView
+		property: "contentY"
+		to: root.toContentY
+		duration: Theme.animation_inputPanel_slide_duration
+		easing.type: Easing.InOutQuad
+	}
+
 	Connections {
 		target: Global
 
-		function onAboutToFocusTextField(textField, textFieldContainer, viewToScroll) {
-			if (!textField || !textFieldContainer || !viewToScroll) {
-				console.warn("onAboutToFocusTextField(): invalid item/container/viewToScroll:", textField, textFieldContainer, viewToScroll)
+		// Auto-scrolling in dialogs is handled by ModalDialog, so don't handle it here.
+		enabled: !Global.dialogLayer.currentDialog
+
+		function onAboutToFocusTextField(textField, viewToScroll) {
+			if (!textField || !viewToScroll) {
+				console.warn("onAboutToFocusTextField(): invalid item/viewToScroll:", textField, viewToScroll)
 				return
 			}
+
+			root.focusedItem = textField
+			root.focusedView = viewToScroll
+
 			const inputPanelY = Global.mainView.height - root.height
 
-			// Find the bottom of the text field's container item (e.g. the ListTextField) within
-			// the main view.
-			const textFieldVerticalMargin = textFieldContainer.height - textField.height
-			const textFieldBottom = textFieldContainer.height - textFieldVerticalMargin/2
-			const toWinY = textFieldContainer.mapToItem(Global.mainView, 0, textFieldBottom).y
+			// Find the bottom of the text field within the main view.
+			const toWinY = textField.mapToItem(Global.mainView, 0, textField.height).y
+					+ Theme.geometry_inputPanel_topMargin
 
 			// Find the distance between the top of the input panel and the bottom of the text
 			// field container.
 			const delta = toWinY - inputPanelY
 			if (delta < 0) {
 				// View does not need to be scrolled to see the VKB.
-				return
-			}
-
-			if (viewToScroll === Global.mainView.cardsLoader) {
-				// The text field is in the main cards view.
-				root.cardsYOffset = viewToScroll.y - delta
+				root.toContentY = viewToScroll.contentY
 			} else {
-				// The text field is in some other flickable.
-				// Scroll the flickable upwards to show the item above the vkb.
-				const flickable = viewToScroll
-				root.toContentY = flickable.contentY + delta
-
-				if (flickable.contentY + delta + flickable.height > flickable.contentHeight) {
-					// Item is too close to bottom of flickable, so it will still be hidden after
-					// scrolling upwards. Reduce the flickable height so that item can be seen.
-					root.toHeight = flickable.height - root.height
-				} else {
-					// No flickable height changes required.
-					root.toHeight = flickable.height
-				}
+				// Scroll the flickable upwards to show the item above the VKB.
+				root.toContentY = viewToScroll.contentY + delta
 			}
-
-			root.focusedItem = textField
-			root.focusedView = viewToScroll
+			root.initialBottomMargin = viewToScroll.bottomMargin
 		}
 	}
 

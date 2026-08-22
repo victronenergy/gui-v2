@@ -12,6 +12,7 @@
 #include <qqmlintegration.h>
 
 class QJSEngine;
+class QQuickItem;
 
 namespace Victron {
 namespace VenusOS {
@@ -51,6 +52,8 @@ public:
 
 	bool splashScreenVisible() const;
 	void setSplashScreenVisible(bool v);
+
+	Q_INVOKABLE void mouseClick(QQuickItem *item);
 
 Q_SIGNALS:
 	void animationEnabledChanged();

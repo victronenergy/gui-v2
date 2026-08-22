@@ -10,6 +10,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	readonly property alias flickableView: cardsView
 	readonly property int cardWidth: Theme.screenSize === Theme.Portrait
 		? Theme.geometry_screen_width - (2 * Theme.geometry_page_content_horizontalMargin)
 		: (cardsView.count > 2 ? Theme.geometry_controlCard_minimumWidth : Theme.geometry_controlCard_maximumWidth)

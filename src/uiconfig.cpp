@@ -1,6 +1,11 @@
 #include "uiconfig.h"
+#include "themeobjects.h"
 
+#include <QQuickWindow>
+#include <QQuickItem>
+#include <QGuiApplication>
 #include <QFile>
+#include <QMouseEvent>
 
 using namespace Victron::VenusOS;
 
@@ -74,7 +79,6 @@ void UiConfig::setNeedsWasmKeyboardHandler(bool needsWasmKeyboardHandler)
 	}
 }
 
-
 bool UiConfig::showSplashAnimation() const
 {
 	return m_showSplashAnimation;
@@ -88,7 +92,6 @@ void UiConfig::setShowSplashAnimation(bool showSplashAnimation)
 	}
 }
 
-
 bool UiConfig::splashScreenVisible() const
 {
 	return m_splashScreenVisible;
@@ -100,4 +103,29 @@ void UiConfig::setSplashScreenVisible(bool v)
 		m_splashScreenVisible = v;
 		Q_EMIT splashScreenVisibleChanged();
 	}
+}
+
+void UiConfig::mouseClick(QQuickItem *item)
+{
+	if (!item) {
+		return;
+	}
+	QPoint localPos(item->width() / 2, item->height() / 2);
+	QMouseEvent *pressEvent = new QMouseEvent(
+				QEvent::MouseButtonPress,
+				localPos,
+				item->mapToGlobal(localPos),
+				Qt::LeftButton,
+				Qt::LeftButton,
+				Qt::NoModifier);
+	QMouseEvent *releaseEvent = new QMouseEvent(
+				QEvent::MouseButtonRelease,
+				localPos,
+				item->mapToGlobal(localPos),
+				Qt::LeftButton,
+				Qt::LeftButton,
+				Qt::NoModifier);
+
+	QCoreApplication::postEvent(item, pressEvent);
+	QCoreApplication::postEvent(item, releaseEvent);
 }
