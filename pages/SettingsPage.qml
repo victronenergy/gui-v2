@@ -21,7 +21,6 @@ SwipeViewPage {
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/SettingsPage.qml"
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	focusPolicy: Qt.TabFocus
-	showTopGradient: Theme.screenSize === Theme.Portrait && !settingsListView.atYBeginning
 
 	function goToConnectivityPage(pageId) {
 		const properties = { title: Qt.binding(function() { return connectivityListItem.text }) }

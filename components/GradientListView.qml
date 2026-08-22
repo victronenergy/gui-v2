@@ -16,7 +16,16 @@ BaseListView {
 		bottomPadding: Theme.geometry_gradientList_bottomMargin
 	}
 
-	ViewGradient {
-		anchors.bottom: root.bottom
+	Binding {
+		when: root.parent?.__is_venus_gui_page__ === true
+		target: root.parent
+		property: "showTopGradient"
+		value: !root.atYBeginning
+	}
+	Binding {
+		when: root.parent?.__is_venus_gui_page__ === true
+		target: root.parent
+		property: "showBottomGradient"
+		value: !root.atYEnd
 	}
 }

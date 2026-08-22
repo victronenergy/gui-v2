@@ -15,6 +15,8 @@ Page {
 		: (cardsView.count > 2 ? Theme.geometry_controlCard_minimumWidth : Theme.geometry_controlCard_maximumWidth)
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsActive
+	showTopGradient: cardsView.orientation === Qt.Vertical && !cardsView.atYBeginning
+	showBottomGradient: cardsView.orientation === Qt.Vertical && !cardsView.atYEnd
 
 	//% "Controls"
 	title: qsTrId("control_cards_title")

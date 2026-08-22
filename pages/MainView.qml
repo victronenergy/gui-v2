@@ -229,18 +229,6 @@ FocusScope {
 				id: swipePageModel
 				view: swipeView
 			}
-
-			// For portrait: show top/bottom gradients when user has scrolled the view.
-			ViewGradient {
-				z: 1
-				visible: swipeView.currentItem?.showTopGradient ?? false
-				rotation: 180
-			}
-			ViewGradient {
-				z: 1
-				visible: swipeView.currentItem?.showBottomGradient ?? false
-				anchors.bottom: parent.bottom
-			}
 		}
 
 		NavBar {
@@ -473,6 +461,20 @@ FocusScope {
 			id: auxCardsComponent
 			AuxCardsPage {}
 		}
+	}
+
+	// Show top and bottom gradients when user has scrolled the view.
+	ViewGradient {
+		y: statusBar.height
+		visible: root.currentPage?.showTopGradient ?? false
+		rotation: 180
+	}
+	ViewGradient {
+		anchors {
+			bottom: parent.bottom
+			bottomMargin: pageStack.opened || cardsLoader.viewActive ? 0 : Theme.geometry_navigationBar_height
+		}
+		visible: root.currentPage?.showBottomGradient ?? false
 	}
 
 	StatusBar {
