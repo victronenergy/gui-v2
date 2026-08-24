@@ -85,6 +85,21 @@ If the test configuration sets `ExitWhenFinished`, gui-v2 exits when the tests a
 non-zero exit code if any test step failed. This applies whether or not `--ui-test-headless` is set.
 
 
+## Continuous integration
+
+The `.github/workflows/run-ui-tests.yml` workflow runs these tests on every pull request:
+
+* the `UI smoke test` job runs `smoke/mock-maximal` with `--ui-test-headless`, and fails if any
+  test step failed.
+* the `UI image comparison` job captures the images of the pull request and of the commit it is
+  based on, and compares the two image sets with `tools/uicompare` in headless mode. Differences do
+  not fail the job - a pull request may change the UI on purpose - but they are reported in the job
+  summary, and the images that differ are uploaded as a workflow artifact for review.
+
+To do the same comparison locally, use `tools/ui_capture_and_compare.py`, which builds two
+revisions and shows the differences in the UI Compare tool.
+
+
 ## UI test case API
 
 QML test files must extend the `UiTestCase` type from the `Victron.UiTest` module.

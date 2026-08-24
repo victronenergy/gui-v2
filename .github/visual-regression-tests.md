@@ -70,6 +70,8 @@ When the test configuration sets `ExitWhenFinished`, gui-v2 exits with a non-zer
 
 For changes that intentionally modify the UI appearance, update the baseline images after confirming the new captures are correct.
 
+`.github/workflows/run-ui-tests.yml` runs both halves of this on every pull request: a headless smoke test that fails if any test step failed, and an image comparison of the pull request against the commit it is based on. Image differences do not fail the workflow; they are reported in the job summary, and the images that differ are uploaded as a workflow artifact.
+
 ## Test configuration
 
 Each test is defined by a JSON file (e.g. `tests/ui/smoke/mock-maximal/mock-maximal.json`):

@@ -1,0 +1,82 @@
+# Installs the desktop build dependencies and the Qt version pinned by "scripts/.env", including
+# the QtMQTT module (which is not shipped by the Qt installer).
+#
+# Shared by the workflows that build gui-v2 or its tools for the linux desktop.
+
+name: Set up Qt for the desktop build
+description: Install the build dependencies and the Qt version specified in "scripts/.env".
+
+outputs:
+  qtdir:
+    description: The root directory of the installed Qt build.
+    value: ${{ steps.qt-dir.outputs.qtdir }}
+
+runs:
+  using: composite
+
+  steps:
+    - name: Set up environment variables from "scripts/.env" file
+      shell: bash
+      run: |
+        if [ -f "scripts/.env" ]; then
+            export $(grep -v '^#' "scripts/.env" | xargs)
+        else
+            echo "## scripts/.env file not found!"
+            exit 1
+        fi
+        echo "EMSCRIPTEN=$EMSCRIPTEN" >> $GITHUB_ENV
+        echo "QT_VERSION=$QT_VERSION" >> $GITHUB_ENV
+        echo "OUTPUTDIR=$OUTPUTDIR" >> $GITHUB_ENV
+
+    - name: Show fetched environment variables
+      shell: bash
+      run: |
+        echo "Loaded environment variables from \"scripts/.env\" file:"
+        echo "EMSCRIPTEN: ${{ env.EMSCRIPTEN }}"
+        echo "QT_VERSION: ${{ env.QT_VERSION }}"
+        echo "OUTPUTDIR: ${{ env.OUTPUTDIR }}"
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        sudo apt-get update -yq &&
+        sudo apt-get install -y  g++ build-essential mesa-common-dev libssl-dev \
+                                  wget libgl1-mesa-dev libxkbcommon-x11-0 libpulse-dev p7zip-full \
+                                  ninja-build dos2unix libegl1 libxcb-cursor0
+        sudo snap install yq || \
+          (echo "snap store unreachable, falling back to direct binary download" && \
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && \
+          sudo chmod +x /usr/local/bin/yq)
+
+    - name: Install Qt ${{ env.QT_VERSION }} linux desktop
+      uses: jurplel/install-qt-action@v4
+      with:
+        aqtversion: '==3.3.*'
+        version: "${{ env.QT_VERSION }}"
+        host: 'linux'
+        target: 'desktop'
+        arch: 'linux_gcc_64'
+        modules: 'qtwebsockets qt5compat qtshadertools'
+        dir: '${{ env.OUTPUTDIR }}'
+
+    - name: Report the Qt directory
+      id: qt-dir
+      shell: bash
+      run: echo "qtdir=${OUTPUTDIR}/Qt/${QT_VERSION}/gcc_64" >> "$GITHUB_OUTPUT"
+
+    - name: Install QtMQTT
+      shell: bash
+      # Build outside of the workspace, so that the clone does not show up as untracked content in
+      # the checked-out repository.
+      working-directory: ${{ runner.temp }}
+      run: |
+        echo installing QtMQTT
+        git clone https://github.com/qt/qtmqtt.git
+        cd qtmqtt
+        git checkout $QT_VERSION
+        mkdir build-qtmqtt && cd build-qtmqtt
+        export PATH=$PATH:${OUTPUTDIR}/Qt/Tools/CMake/bin
+        export QTDIR=${{ steps.qt-dir.outputs.qtdir }}
+        ${QTDIR}/bin/qt-configure-module ..
+        cmake --build . --parallel $(nproc)
+        cmake --install . --prefix ${QTDIR} --verbose
