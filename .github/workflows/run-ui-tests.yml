@@ -1,0 +1,184 @@
+# Runs the automated UI tests from "tests/ui" against the mock backend, on the desktop build.
+#
+# There are two jobs:
+#
+# * "ui-smoke-test" runs the UI test in headless mode, i.e. without saving or comparing any images.
+#   It fails if any UI test step fails, so it is a quick check that every screen can still be
+#   opened and rendered.
+#
+# * "ui-image-comparison" captures the UI of the pull request and of the commit it is based on, and
+#   compares the two image sets with "tools/uicompare". Differences do not fail the job, as a pull
+#   request may change the UI on purpose; instead they are reported in the job summary, and the
+#   images that differ are uploaded as an artifact for review.
+#
+# "ui-image-comparison" builds and sweeps gui-v2 twice, so it is by far the more expensive of the
+# two. To run it only on request instead of on every pull request, add a label condition to the
+# job, e.g. replace its "if" with:
+#   if: contains(github.event.pull_request.labels.*.name, 'ui-comparison')
+#
+# See ".github/visual-regression-tests.md" and "tests/ui/README.md" for more about the UI tests.
+
+name: run UI tests on the desktop build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      ui_test:
+        description: The UI test to run, as a directory relative to "tests/ui".
+        type: string
+        default: smoke/mock-maximal
+
+# These jobs are expensive, so do not keep running them for a superseded push.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+  # The UI test to run, as a directory relative to "tests/ui".
+  UI_TEST: ${{ inputs.ui_test || 'smoke/mock-maximal' }}
+  # The MSE error tolerance used when comparing two captured images. Rendering with
+  # QT_QPA_PLATFORM=offscreen is deterministic, so this only needs to be large enough to absorb
+  # incidental antialiasing differences, and small enough to still report a change to a single
+  # word of text.
+  ERROR_TOLERANCE: "0.1"
+
+jobs:
+  ui-smoke-test:
+    name: UI smoke test
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Set up Qt
+        id: qt
+        uses: ./.github/actions/setup-qt
+
+      - name: Build gui-v2
+        run: |
+          ${{ steps.qt.outputs.qtdir }}/bin/qt-cmake -G Ninja -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -S . -B build
+          cmake --build build --target venus-gui-v2 --parallel $(nproc)
+
+      - name: Run the UI smoke test
+        working-directory: build
+        # 'QT_QPA_PLATFORM=offscreen' is needed to run on the headless CI server.
+        # '--ui-test-headless' skips saving and comparing the captured images. gui-v2 exits with a
+        # non-zero code if any test step failed.
+        run: QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}" --ui-test-headless
+
+  ui-image-comparison:
+    name: UI image comparison
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+
+    steps:
+      # For a pull_request event this checks out the merge commit, i.e. the pull request as it
+      # would be once merged into the base branch.
+      - name: Checkout the pull request (candidate)
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Checkout the base of the pull request (baseline)
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          submodules: recursive
+          path: baseline
+
+      - name: Set up Qt
+        id: qt
+        uses: ./.github/actions/setup-qt
+
+      - name: Build gui-v2 (baseline)
+        run: |
+          ${{ steps.qt.outputs.qtdir }}/bin/qt-cmake -G Ninja -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -S baseline -B build-baseline
+          cmake --build build-baseline --target venus-gui-v2 --parallel $(nproc)
+
+      - name: Capture UI images (baseline)
+        working-directory: build-baseline
+        # A failing test step is reported by the "ui-smoke-test" job, so do not fail here; the
+        # images that were captured before the failure are still worth comparing.
+        run: |
+          QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}" \
+            || echo "::warning::The baseline UI test reported failures, so its image set may be incomplete."
+
+      - name: Build gui-v2 (candidate)
+        run: |
+          ${{ steps.qt.outputs.qtdir }}/bin/qt-cmake -G Ninja -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -S . -B build-candidate
+          cmake --build build-candidate --target venus-gui-v2 --parallel $(nproc)
+
+      - name: Capture UI images (candidate)
+        working-directory: build-candidate
+        run: |
+          QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}" \
+            || echo "::warning::The candidate UI test reported failures, so its image set may be incomplete."
+
+      - name: Build UI Compare
+        run: |
+          ${{ steps.qt.outputs.qtdir }}/bin/qt-cmake -G Ninja -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -S tools/uicompare -B build-uicompare
+          cmake --build build-uicompare --parallel $(nproc)
+
+      - name: Compare the baseline and candidate images
+        id: compare
+        working-directory: build-uicompare
+        # UI Compare reads the two image sets from these two directories, relative to its working
+        # directory. It exits with a non-zero code if the image sets are not equivalent, which is
+        # recorded here rather than failing the job.
+        run: |
+          mv ../build-baseline/image-captures image-captures-baseline
+          mv ../build-candidate/image-captures image-captures-candidate
+          set +e
+          ./bin/uicompare --headless \
+              --error-tolerance "${{env.ERROR_TOLERANCE}}" \
+              --output ui-comparison-results.json
+          status=$?
+          set -e
+          case "$status" in
+            0) echo "differences=false" >> "$GITHUB_OUTPUT" ;;
+            1) echo "differences=true" >> "$GITHUB_OUTPUT" ;;
+            *) echo "::error::UI Compare failed with exit code $status"; exit "$status" ;;
+          esac
+
+      - name: Report the comparison results
+        working-directory: build-uicompare
+        run: |
+          python3 "$GITHUB_WORKSPACE/.github/scripts/ui_comparison_summary.py" \
+              ui-comparison-results.json \
+              --baseline-label "${{ github.event.pull_request.base.sha }}" \
+              --candidate-label "${{ github.sha }}" \
+              --differences-dir image-differences \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ "${{ steps.compare.outputs.differences }}" = "true" ]; then
+            echo "::warning::The UI images differ from the base branch. See the job summary and the 'ui-image-differences' artifact."
+          fi
+
+      - name: Upload the comparison results
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: ui-comparison-results
+          path: build-uicompare/ui-comparison-results.json
+          if-no-files-found: warn
+
+      - name: Upload the images that differ
+        uses: actions/upload-artifact@v4
+        if: steps.compare.outputs.differences == 'true'
+        with:
+          name: ui-image-differences
+          path: build-uicompare/image-differences
+          if-no-files-found: warn
