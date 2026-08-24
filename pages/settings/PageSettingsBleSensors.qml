@@ -168,45 +168,14 @@ Page {
 						] : [])
 					}
 
-					ListButton {
-						//% "Pairing mode"
-						text: qsTrId("mqtt_devices_pairing_mode")
-						secondaryText: readOnly
-								  //: %1 = number of seconds remaining
-								  //% "Active \u2022 %1s remaining"
-								? qsTrId("mqtt_devices_pairing_active").arg(blePairingCountDown.secondsRemaining)
-								  //% "Activate"
-								: qsTrId("mqtt_devices_pairing_activate")
-						readOnly: blePairingCountDown.secondsRemaining > 0
+					ListPairingModeButton {
+						countDownUid: Global.venusPlatform.serviceUid + "/Tokens/Pairing/CountDown"
 						preferredVisible: blePairingEnable.valid && !!gatewayAccess.currentValue
-						writeAccessLevel: VenusOS.User_AccessType_User
-
 						onClicked: blePairingEnable.setValue("")
 
 						VeQuickItem {
 							id: blePairingEnable
 							uid: Global.venusPlatform.serviceUid + "/Tokens/Pairing/Enable"
-						}
-
-						VeQuickItem {
-							id: blePairingCountDown
-
-							property bool notificationShown
-							readonly property int secondsRemaining: value || 0
-
-							uid: Global.venusPlatform.serviceUid + "/Tokens/Pairing/CountDown"
-							onSecondsRemainingChanged: {
-								if (secondsRemaining > 0) {
-									if (!notificationShown) {
-										Global.showToastNotification(VenusOS.Notification_Info,
-												//% "Pairing mode enabled for %1 seconds"
-												qsTrId("mqtt_devices_pairing_enabled").arg(secondsRemaining), 5000)
-									}
-									notificationShown = true
-								} else {
-									notificationShown = false
-								}
-							}
 						}
 					}
 
@@ -217,17 +186,12 @@ Page {
 					}
 				}
 
-				delegate: ListButton {
+				delegate: ListUnpairButton {
 					required property var modelData
 					readonly property string tokenName: modelData["token_name"] ?? ""
 					readonly property var tokenNameParts: tokenName.split("/")
 
 					text: tokenNameParts[tokenNameParts.length - 1] ?? ""
-					//% "Unpair"
-					secondaryText: qsTrId("mqtt_devices_pairing_unpair")
-					writeAccessLevel: VenusOS.User_AccessType_User
-					buttonBorderColor: Theme.color_red
-					buttonBackgroundColor: Theme.color_darkRed
 					onClicked: {
 						Global.dialogLayer.open(bleUnpairDialogComponent, { tokenName: tokenName })
 					}
@@ -237,15 +201,10 @@ Page {
 			Component {
 				id: bleUnpairDialogComponent
 
-				ModalWarningDialog {
+				UnpairDialog {
 					required property string tokenName
 
-					//% "Unpairing %1"
-					title: qsTrId("mqtt_devices_unpairing_confirm_title").arg(tokenName.split("/").pop())
-
-					//% "This will disconnect the device and it will need to be paired again to reconnect."
-					description: qsTrId("mqtt_devices_unpairing_confirm_description")
-					dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+					name: tokenName.split("/").pop() ?? ""
 					onAccepted: {
 						bleTokenRemove.setValue(tokenName)
 					}
