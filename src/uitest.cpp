@@ -13,6 +13,8 @@
 #include <QLoggingCategory>
 #include <QQmlComponent>
 
+#include <iostream>
+
 #include "veutil/qt/ve_qitem.hpp"
 
 #include "uitest.h"
@@ -135,6 +137,16 @@ void UiTest::loadConfiguration(const UiTestConfiguration &conf)
 	setStatus(Ready);
 }
 
+void UiTest::setHeadless(bool headless)
+{
+	m_headless = headless;
+}
+
+bool UiTest::isHeadless() const
+{
+	return m_headless;
+}
+
 void UiTest::start()
 {
 	if (m_status != Ready) {
@@ -147,6 +159,14 @@ void UiTest::start()
 	ClockTime::create()->setClockTime(1);
 
 	qCInfo(venusGuiTest) << "Starting UI tests...";
+
+	if (m_headless) {
+		// No images are saved, so there is no image directory to prepare.
+		qCInfo(venusGuiTest) << "Headless mode: captured images will not be saved or compared.";
+		m_currentTestIndex = -1;
+		QTimer::singleShot(0, this, &UiTest::startNextTestCase);
+		return;
+	}
 
 	QDir imageDir(CaptureAndCompareStep::absoluteImagePath(QString()));
 	const QString imageDirPath = imageDir.absolutePath();
@@ -238,6 +258,17 @@ void UiTest::startNextTestCase()
 				.arg(durationText);
 		qCInfo(venusGuiTest) << qPrintable(resultText);
 		qCInfo(venusGuiTest) << "********************************************************";
+
+		if (m_headless) {
+			// Report the result on stdout/stderr as well, so that it is visible regardless of the
+			// logging configuration, e.g. when this is run as a smoke test from a CI pipeline.
+			const QString summaryText = QStringLiteral("UI test '%1' %2: %3")
+					.arg(m_relativeTestDir)
+					.arg(m_failCount > 0 ? QStringLiteral("FAILED") : QStringLiteral("PASSED"))
+					.arg(resultText);
+			std::ostream &stream = m_failCount > 0 ? std::cerr : std::cout;
+			stream << qPrintable(summaryText) << std::endl;
+		}
 
 		setStatus(Finished);
 		if (exitWhenFinished()) {

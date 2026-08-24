@@ -43,6 +43,16 @@ cmake -B build && cmake --build build
 
 The tool provides a side-by-side visual interface showing differences, with pass/fail status for each image based on a similarity threshold.
 
+### Headless smoke test
+
+Add `--ui-test-headless` to run a UI test without saving or comparing any images. Every screen is still navigated to and rendered, but the capture is discarded, and the result is printed to stdout (or stderr on failure):
+
+```bash
+QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test smoke/mock-maximal --ui-test-headless
+```
+
+When the test configuration sets `ExitWhenFinished`, gui-v2 exits with a non-zero code if any test step failed — with or without `--ui-test-headless`.
+
 ## Workflow for verifying changes
 
 1. **Before your change**: run the visual tests to capture a baseline set of images
