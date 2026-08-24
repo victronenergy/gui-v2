@@ -100,8 +100,8 @@ Page {
 			}
 
 			SectionHeader {
-				//% "Access tokens for paired devices"
-				text: qsTrId("mqtt_devices_pairing_access_tokens")
+				//% "Paired devices"
+				text: qsTrId("pairing_mqtt_paired_devices")
 				visible: mqttDevicesView.count > 0
 			}
 		}
