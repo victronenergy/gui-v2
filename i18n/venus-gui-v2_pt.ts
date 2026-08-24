@@ -1048,10 +1048,15 @@
       <source>Update build date/time</source>
       <translation>Data/hora da compilação da atualização</translation>
     </message>
+    <message id="settings_rssystem_inverters">
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="99"/>
+      <source>Inverters</source>
+      <translation>Inversores</translation>
+    </message>
     <message id="page_settings_fronius_inverters">
       <location filename="../../pages/settings/PageSettingsFronius.qml" line="30"/>
       <source>Inverters</source>
-      <translation>Inversores</translation>
+      <translation type="unfinished">Inversores</translation>
     </message>
     <message id="page_settings_fronius_find_pv_inverters">
       <location filename="../../pages/settings/PageSettingsFronius.qml" line="36"/>
@@ -4867,7 +4872,7 @@ Você quer continuar?</translation>
       <translation>Número de série</translation>
     </message>
     <message id="nav_settings">
-      <location filename="../../pages/SettingsPage.qml" line="18"/>
+      <location filename="../../pages/SettingsPage.qml" line="19"/>
       <source>Settings</source>
       <translation>Definições</translation>
     </message>
@@ -5052,7 +5057,7 @@ Você quer continuar?</translation>
       <translation>O gerador continuará a funcionar se uma condição de arranque automático for cumprida.</translation>
     </message>
     <message id="modaldialog_set">
-      <location filename="../../components/dialogs/ModalDialog.qml" line="43"/>
+      <location filename="../../components/dialogs/ModalDialog.qml" line="45"/>
       <source>Set</source>
       <translation>Definir</translation>
     </message>
@@ -6892,7 +6897,7 @@ Você quer continuar?</translation>
       <translation>Sem palavra-passe e a comunicação de rede não é encriptada</translation>
     </message>
     <message id="settings_security_profile_password_incorrect_length">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="28"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="21"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>A palavra-passe deve ter pelo menos 8 caracteres</translation>
     </message>
@@ -7417,42 +7422,42 @@ Você quer continuar?</translation>
       <translation>Ártico</translation>
     </message>
     <message id="settings_all_connected_devices">
-      <location filename="../../pages/SettingsPage.qml" line="40"/>
+      <location filename="../../pages/SettingsPage.qml" line="68"/>
       <source>All connected devices</source>
       <translation>Todos os dispositivos conectados</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="48"/>
+      <location filename="../../pages/SettingsPage.qml" line="76"/>
       <source>General</source>
       <translation type="unfinished">Geral</translation>
     </message>
     <message id="settings_connectivity">
-      <location filename="../../pages/SettingsPage.qml" line="59"/>
+      <location filename="../../pages/SettingsPage.qml" line="87"/>
       <source>Connectivity</source>
       <translation>Conectividade</translation>
     </message>
     <message id="settings_ethernet_wifi_bluetooth_vecan">
-      <location filename="../../pages/SettingsPage.qml" line="61"/>
+      <location filename="../../pages/SettingsPage.qml" line="89"/>
       <source>Ethernet, Wi-Fi, Bluetooth, VE.Can</source>
       <translation>Ethernet, Wi-Fi, Bluetooth, VE.Can</translation>
     </message>
     <message id="settings_vrm">
-      <location filename="../../pages/SettingsPage.qml" line="68"/>
+      <location filename="../../pages/SettingsPage.qml" line="96"/>
       <source>VRM</source>
       <translation>VRM</translation>
     </message>
     <message id="settings_remote_monitoring_portal">
-      <location filename="../../pages/SettingsPage.qml" line="70"/>
+      <location filename="../../pages/SettingsPage.qml" line="98"/>
       <source>Remote monitoring portal</source>
       <translation>Portal de monitoramento remoto</translation>
     </message>
     <message id="settings_advanced">
-      <location filename="../../pages/SettingsPage.qml" line="77"/>
+      <location filename="../../pages/SettingsPage.qml" line="105"/>
       <source>Advanced</source>
       <translation type="unfinished">Avançado</translation>
     </message>
     <message id="settings_integrations">
-      <location filename="../../pages/SettingsPage.qml" line="82"/>
+      <location filename="../../pages/SettingsPage.qml" line="110"/>
       <source>Integrations</source>
       <translation type="unfinished">Integrações</translation>
     </message>
@@ -7462,22 +7467,22 @@ Você quer continuar?</translation>
       <translation>Integrações</translation>
     </message>
     <message id="settings_acdcsystem_ess_dvcc_battery">
-      <location filename="../../pages/SettingsPage.qml" line="93"/>
+      <location filename="../../pages/SettingsPage.qml" line="121"/>
       <source>AC/DC system, ESS, DVCC, Battery...</source>
       <translation>Sistema CA/CC, ESS, DVCC, Bateria...</translation>
     </message>
     <message id="settings_debug_and_develop">
-      <location filename="../../pages/SettingsPage.qml" line="100"/>
+      <location filename="../../pages/SettingsPage.qml" line="128"/>
       <source>Debug &amp; Develop</source>
       <translation>Depuração e Desenvolvimento</translation>
     </message>
     <message id="settings_profilingtools_debugstatistics_appversion">
-      <location filename="../../pages/SettingsPage.qml" line="102"/>
+      <location filename="../../pages/SettingsPage.qml" line="130"/>
       <source>Profiling tools, debug statistics, app version...</source>
       <translation>Ferramentas de criação de perfil, estatísticas de depuração, versão do aplicativo...</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="91"/>
+      <location filename="../../pages/SettingsPage.qml" line="119"/>
       <source>System Setup</source>
       <translation>Configuração do Sistema</translation>
     </message>
@@ -7910,7 +7915,7 @@ Você quer continuar?</translation>
       <translation>Firmware instalado, dispositivo reiniciando</translation>
     </message>
     <message id="modaldialog_confirm">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="55"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="39"/>
       <source>Confirm</source>
       <translation>Confirmar</translation>
     </message>
@@ -8324,17 +8329,17 @@ Você quer continuar?</translation>
       <translation>Condição de sobrecarga do inversor</translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="57"/>
+      <location filename="../../ApplicationContent.qml" line="55"/>
       <source>Touch input on</source>
       <translation>Entrada tátil ativada</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="59"/>
+      <location filename="../../ApplicationContent.qml" line="57"/>
       <source>Touch input off</source>
       <translation>Entrada tátil desativada</translation>
     </message>
     <message id="application_content_touch_input_disabled">
-      <location filename="../../ApplicationContent.qml" line="73"/>
+      <location filename="../../ApplicationContent.qml" line="71"/>
       <source>Touch input disabled</source>
       <translation>Entrada tátil desativada</translation>
     </message>
@@ -8892,11 +8897,6 @@ Tenha em atenção que este menu apenas mostra medidores Carlo Gavazzi conectado
       <source>System alarms</source>
       <translation>Alarmes do sistema</translation>
     </message>
-    <message id="settings_rs_devices">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="99"/>
-      <source>RS devices</source>
-      <translation>Dispositivos RS</translation>
-    </message>
     <message id="rs_no_system_alarms">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="60"/>
       <source>No system alarms</source>
@@ -8957,7 +8957,7 @@ Com uma navegação simplificada e um visual renovado, tudo o que você adora ag
       <translation type="unfinished">Controles</translation>
     </message>
     <message id="controlcards_empty_title">
-      <location filename="../../pages/ControlCardsPage.qml" line="154"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="155"/>
       <source>Controls</source>
       <translation>Controles</translation>
     </message>
@@ -9502,12 +9502,12 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Entrada CA %1</translation>
     </message>
     <message id="settings_security_profile_change_password_description">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="85"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="69"/>
       <source>Please enter a new GX password:</source>
       <translation>Introduza uma nova palavra-passe do GX:</translation>
     </message>
     <message id="settings_security_profile_enter_new_password">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="100"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="84"/>
       <source>Enter new password</source>
       <translation>Introduzir nova palavra-passe</translation>
     </message>
@@ -9528,7 +9528,7 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Ative esta definição ao ter um sistema MultiPlus ou Quattro secundário alimentado pelo mesmo banco de baterias do sistema inversor/carregador principal. Quando esta definição está ativada, este sistema secundário usará os parâmetros CVL e DCL da BMS selecionada.</translation>
     </message>
     <message id="settings_access_control_display_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="50"/>
+      <location filename="../../pages/SettingsPage.qml" line="78"/>
       <source>Access control, Display, Firmware, Support</source>
       <translation>Controlo de acesso, Ecrã, Firmware, Suporte</translation>
     </message>
@@ -10182,7 +10182,7 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Ative o firmware Venus OS Large para usar Node-RED ou Signal-K</translation>
     </message>
     <message id="settings_relays_sensors_tanks">
-      <location filename="../../pages/SettingsPage.qml" line="84"/>
+      <location filename="../../pages/SettingsPage.qml" line="112"/>
       <source>Relays, Sensors, PV Inverters, Modbus, Node-RED</source>
       <translation>Relés, Sensores, Inversores FV, Modbus, Node-RED</translation>
     </message>
@@ -10617,17 +10617,17 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Apenas no VRM</translation>
     </message>
     <message id="control_cards_title">
-      <location filename="../../pages/ControlCardsPage.qml" line="20"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="21"/>
       <source>Controls</source>
       <translation type="unfinished">Controles</translation>
     </message>
     <message id="controlcards_empty_desc1">
-      <location filename="../../pages/ControlCardsPage.qml" line="156"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="157"/>
       <source>No compatible devices found</source>
       <translation>Nenhum dispositivo compatível encontrado</translation>
     </message>
     <message id="controlcards_empty_desc2">
-      <location filename="../../pages/ControlCardsPage.qml" line="158"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="159"/>
       <source>Connect devices that support this function</source>
       <translation>Conecte dispositivos que suportam esta função</translation>
     </message>
@@ -11246,7 +11246,7 @@ Por favor, atualize para o firmware mais recente para poder ajustar estas config
       <translation>A iniciar, pode demorar alguns segundos...</translation>
     </message>
     <message id="settings_security_profile_change_password_title">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="52"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="36"/>
       <source>Change the GX Password</source>
       <translation>Alterar a palavra-passe do GX</translation>
     </message>
@@ -11347,54 +11347,49 @@ Por favor, atualize para o firmware mais recente para poder ajustar estas config
       <source>Rescan for IP addresses</source>
       <translation>Procurar novamente por endereços IP</translation>
     </message>
-    <message id="mqtt_devices_ev_charging_station">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="16"/>
-      <source>EV Charging Station</source>
-      <translation>Estações de carregamento EV</translation>
-    </message>
     <message id="mqtt_devices_pairing_mode">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="55"/>
       <source>Pairing mode</source>
       <translation>Modo de Emparelhamento</translation>
     </message>
     <message id="mqtt_devices_pairing_active">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="55"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="59"/>
       <source>Active • %1s remaining</source>
       <extracomment>%1 = number of seconds remaining</extracomment>
       <translation>Ativo • %1s restantes</translation>
     </message>
     <message id="mqtt_devices_pairing_activate">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="61"/>
       <source>Activate</source>
       <translation>Ativar</translation>
     </message>
     <message id="mqtt_devices_pairing_enabled">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="85"/>
       <source>Pairing mode enabled for %1 seconds</source>
       <translation>Modo de emparelhamento ativado por %1 segundos</translation>
     </message>
     <message id="mqtt_devices_pairing_description">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="97"/>
       <source>Activate Pairing mode to allow a device to connect. Paired devices appear here, and will show in the Devices list when connected.</source>
       <translation>Ative o modo de emparelhamento para permitir que um dispositivo se conecte. Os dispositivos emparelhados aparecem aqui e serão apresentados na lista de Dispositivos quando conectados.</translation>
     </message>
     <message id="mqtt_devices_pairing_access_tokens">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="104"/>
       <source>Access tokens for paired devices</source>
       <translation>Tokens de acesso para dispositivos emparelhados</translation>
     </message>
     <message id="mqtt_devices_pairing_unpair">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="112"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="116"/>
       <source>Unpair</source>
       <translation>DESEMPARELHAR</translation>
     </message>
     <message id="mqtt_devices_unpairing_confirm_title">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="133"/>
       <source>Unpairing %1</source>
       <translation>Desemparelhar %1</translation>
     </message>
     <message id="mqtt_devices_unpairing_confirm_description">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="132"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="136"/>
       <source>This will disconnect the device and it will need to be paired again to reconnect.</source>
       <translation>Isto irá desconectar o dispositivo e ele terá de ser emparelhado novamente para se reconectar.</translation>
     </message>
@@ -11470,7 +11465,7 @@ Por favor, atualize para o firmware mais recente para poder ajustar estas config
       <translation>Valor máximo</translation>
     </message>
     <message id="aux_page_switches">
-      <location filename="../../pages/AuxCardsPage.qml" line="16"/>
+      <location filename="../../pages/AuxCardsPage.qml" line="18"/>
       <source>Switches</source>
       <extracomment>Name of the Switch Controls feature</extracomment>
       <translation>Interruptores</translation>

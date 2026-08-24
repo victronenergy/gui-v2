@@ -1048,10 +1048,15 @@
       <source>Update build date/time</source>
       <translation>更新构建日期/时间</translation>
     </message>
+    <message id="settings_rssystem_inverters">
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="99"/>
+      <source>Inverters</source>
+      <translation>逆变器</translation>
+    </message>
     <message id="page_settings_fronius_inverters">
       <location filename="../../pages/settings/PageSettingsFronius.qml" line="30"/>
       <source>Inverters</source>
-      <translation>逆变器</translation>
+      <translation type="unfinished">逆变器</translation>
     </message>
     <message id="page_settings_fronius_find_pv_inverters">
       <location filename="../../pages/settings/PageSettingsFronius.qml" line="36"/>
@@ -4866,7 +4871,7 @@ Do you want to continue?</source>
       <translation>序列号</translation>
     </message>
     <message id="nav_settings">
-      <location filename="../../pages/SettingsPage.qml" line="18"/>
+      <location filename="../../pages/SettingsPage.qml" line="19"/>
       <source>Settings</source>
       <translation>设置</translation>
     </message>
@@ -5051,7 +5056,7 @@ Do you want to continue?</source>
       <translation>如果满足自动启动条件，发电机将继续运行。</translation>
     </message>
     <message id="modaldialog_set">
-      <location filename="../../components/dialogs/ModalDialog.qml" line="43"/>
+      <location filename="../../components/dialogs/ModalDialog.qml" line="45"/>
       <source>Set</source>
       <translation>设置</translation>
     </message>
@@ -6891,7 +6896,7 @@ Do you want to continue?</source>
       <translation>无密码，网络通信未加密</translation>
     </message>
     <message id="settings_security_profile_password_incorrect_length">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="28"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="21"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>密码长度至少为 8 个字符</translation>
     </message>
@@ -7416,42 +7421,42 @@ Do you want to continue?</source>
       <translation>北极洲</translation>
     </message>
     <message id="settings_all_connected_devices">
-      <location filename="../../pages/SettingsPage.qml" line="40"/>
+      <location filename="../../pages/SettingsPage.qml" line="68"/>
       <source>All connected devices</source>
       <translation>所有连接设备</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="48"/>
+      <location filename="../../pages/SettingsPage.qml" line="76"/>
       <source>General</source>
       <translation type="unfinished">通用</translation>
     </message>
     <message id="settings_connectivity">
-      <location filename="../../pages/SettingsPage.qml" line="59"/>
+      <location filename="../../pages/SettingsPage.qml" line="87"/>
       <source>Connectivity</source>
       <translation>连接性</translation>
     </message>
     <message id="settings_ethernet_wifi_bluetooth_vecan">
-      <location filename="../../pages/SettingsPage.qml" line="61"/>
+      <location filename="../../pages/SettingsPage.qml" line="89"/>
       <source>Ethernet, Wi-Fi, Bluetooth, VE.Can</source>
       <translation>以太网、Wi-Fi、蓝牙、VE.Can</translation>
     </message>
     <message id="settings_vrm">
-      <location filename="../../pages/SettingsPage.qml" line="68"/>
+      <location filename="../../pages/SettingsPage.qml" line="96"/>
       <source>VRM</source>
       <translation>VRM</translation>
     </message>
     <message id="settings_remote_monitoring_portal">
-      <location filename="../../pages/SettingsPage.qml" line="70"/>
+      <location filename="../../pages/SettingsPage.qml" line="98"/>
       <source>Remote monitoring portal</source>
       <translation>远程监控门户</translation>
     </message>
     <message id="settings_advanced">
-      <location filename="../../pages/SettingsPage.qml" line="77"/>
+      <location filename="../../pages/SettingsPage.qml" line="105"/>
       <source>Advanced</source>
       <translation type="unfinished">高级</translation>
     </message>
     <message id="settings_integrations">
-      <location filename="../../pages/SettingsPage.qml" line="82"/>
+      <location filename="../../pages/SettingsPage.qml" line="110"/>
       <source>Integrations</source>
       <translation type="unfinished">集成</translation>
     </message>
@@ -7461,22 +7466,22 @@ Do you want to continue?</source>
       <translation>集成</translation>
     </message>
     <message id="settings_acdcsystem_ess_dvcc_battery">
-      <location filename="../../pages/SettingsPage.qml" line="93"/>
+      <location filename="../../pages/SettingsPage.qml" line="121"/>
       <source>AC/DC system, ESS, DVCC, Battery...</source>
       <translation>交流/直流系统、ESS、DVCC、电池...</translation>
     </message>
     <message id="settings_debug_and_develop">
-      <location filename="../../pages/SettingsPage.qml" line="100"/>
+      <location filename="../../pages/SettingsPage.qml" line="128"/>
       <source>Debug &amp; Develop</source>
       <translation>调试和开发</translation>
     </message>
     <message id="settings_profilingtools_debugstatistics_appversion">
-      <location filename="../../pages/SettingsPage.qml" line="102"/>
+      <location filename="../../pages/SettingsPage.qml" line="130"/>
       <source>Profiling tools, debug statistics, app version...</source>
       <translation>剖析工具、调试统计、应用程序版本...</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="91"/>
+      <location filename="../../pages/SettingsPage.qml" line="119"/>
       <source>System Setup</source>
       <translation>系统设置</translation>
     </message>
@@ -7909,7 +7914,7 @@ Do you want to continue?</source>
       <translation>固件已安装，设备正在重启</translation>
     </message>
     <message id="modaldialog_confirm">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="55"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="39"/>
       <source>Confirm</source>
       <translation>是的，退订</translation>
     </message>
@@ -8323,17 +8328,17 @@ Do you want to continue?</source>
       <translation>逆变器过载条件</translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="57"/>
+      <location filename="../../ApplicationContent.qml" line="55"/>
       <source>Touch input on</source>
       <translation>触摸输入打开</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="59"/>
+      <location filename="../../ApplicationContent.qml" line="57"/>
       <source>Touch input off</source>
       <translation>触摸输入关闭</translation>
     </message>
     <message id="application_content_touch_input_disabled">
-      <location filename="../../ApplicationContent.qml" line="73"/>
+      <location filename="../../ApplicationContent.qml" line="71"/>
       <source>Touch input disabled</source>
       <translation>触摸输入已禁用</translation>
     </message>
@@ -8890,11 +8895,6 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <source>System alarms</source>
       <translation>系统警报</translation>
     </message>
-    <message id="settings_rs_devices">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="99"/>
-      <source>RS devices</source>
-      <translation>RS 设备</translation>
-    </message>
     <message id="rs_no_system_alarms">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="60"/>
       <source>No system alarms</source>
@@ -8955,7 +8955,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation type="unfinished">控制</translation>
     </message>
     <message id="controlcards_empty_title">
-      <location filename="../../pages/ControlCardsPage.qml" line="154"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="155"/>
       <source>Controls</source>
       <translation>控制</translation>
     </message>
@@ -9500,12 +9500,12 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>交流输入 %1</translation>
     </message>
     <message id="settings_security_profile_change_password_description">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="85"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="69"/>
       <source>Please enter a new GX password:</source>
       <translation>请输入新的 GX 密码：</translation>
     </message>
     <message id="settings_security_profile_enter_new_password">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="100"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="84"/>
       <source>Enter new password</source>
       <translation>输入新密码</translation>
     </message>
@@ -9526,7 +9526,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>当主逆变器/充电器系统使用同一电池组为辅助 MultiPlus 或 Quattro 系统供电时，请启用此设置。 启用此设置后，此辅助系统将使用所选 BMS 的 CVL 和 DCL 参数。</translation>
     </message>
     <message id="settings_access_control_display_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="50"/>
+      <location filename="../../pages/SettingsPage.qml" line="78"/>
       <source>Access control, Display, Firmware, Support</source>
       <translation>访问控制，显示，固件，支持</translation>
     </message>
@@ -10180,7 +10180,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>启用 Venus OS Large 固件以使用 Node-RED 或 Signal-K</translation>
     </message>
     <message id="settings_relays_sensors_tanks">
-      <location filename="../../pages/SettingsPage.qml" line="84"/>
+      <location filename="../../pages/SettingsPage.qml" line="112"/>
       <source>Relays, Sensors, PV Inverters, Modbus, Node-RED</source>
       <translation>继电器、传感器、光伏逆变器、Modbus、Node-RED</translation>
     </message>
@@ -10615,17 +10615,17 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>仅在 VRM 上</translation>
     </message>
     <message id="control_cards_title">
-      <location filename="../../pages/ControlCardsPage.qml" line="20"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="21"/>
       <source>Controls</source>
       <translation type="unfinished">控制</translation>
     </message>
     <message id="controlcards_empty_desc1">
-      <location filename="../../pages/ControlCardsPage.qml" line="156"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="157"/>
       <source>No compatible devices found</source>
       <translation>未找到兼容设备</translation>
     </message>
     <message id="controlcards_empty_desc2">
-      <location filename="../../pages/ControlCardsPage.qml" line="158"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="159"/>
       <source>Connect devices that support this function</source>
       <translation>连接支持此功能的设备</translation>
     </message>
@@ -11244,7 +11244,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>正在启动，这可能需要几秒钟...</translation>
     </message>
     <message id="settings_security_profile_change_password_title">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="52"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="36"/>
       <source>Change the GX Password</source>
       <translation>更改 GX 密码</translation>
     </message>
@@ -11345,54 +11345,49 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <source>Rescan for IP addresses</source>
       <translation>重新扫描IP地址</translation>
     </message>
-    <message id="mqtt_devices_ev_charging_station">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="16"/>
-      <source>EV Charging Station</source>
-      <translation>电动汽车充电站</translation>
-    </message>
     <message id="mqtt_devices_pairing_mode">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="55"/>
       <source>Pairing mode</source>
       <translation>配对模式</translation>
     </message>
     <message id="mqtt_devices_pairing_active">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="55"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="59"/>
       <source>Active • %1s remaining</source>
       <extracomment>%1 = number of seconds remaining</extracomment>
       <translation>活动中 • 剩余%1秒</translation>
     </message>
     <message id="mqtt_devices_pairing_activate">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="61"/>
       <source>Activate</source>
       <translation>激活</translation>
     </message>
     <message id="mqtt_devices_pairing_enabled">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="85"/>
       <source>Pairing mode enabled for %1 seconds</source>
       <translation>配对模式已启用%1秒</translation>
     </message>
     <message id="mqtt_devices_pairing_description">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="97"/>
       <source>Activate Pairing mode to allow a device to connect. Paired devices appear here, and will show in the Devices list when connected.</source>
       <translation>激活配对模式以允许设备连接。已配对的设备将在此处显示，并在连接后显示在设备列表中。</translation>
     </message>
     <message id="mqtt_devices_pairing_access_tokens">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="104"/>
       <source>Access tokens for paired devices</source>
       <translation>已配对设备的访问令牌</translation>
     </message>
     <message id="mqtt_devices_pairing_unpair">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="112"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="116"/>
       <source>Unpair</source>
       <translation>取消配对</translation>
     </message>
     <message id="mqtt_devices_unpairing_confirm_title">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="133"/>
       <source>Unpairing %1</source>
       <translation>正在取消配对 %1</translation>
     </message>
     <message id="mqtt_devices_unpairing_confirm_description">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="132"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="136"/>
       <source>This will disconnect the device and it will need to be paired again to reconnect.</source>
       <translation>这将断开设备连接，若要重新连接，需要再次进行配对。</translation>
     </message>
@@ -11468,7 +11463,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>最大值</translation>
     </message>
     <message id="aux_page_switches">
-      <location filename="../../pages/AuxCardsPage.qml" line="16"/>
+      <location filename="../../pages/AuxCardsPage.qml" line="18"/>
       <source>Switches</source>
       <extracomment>Name of the Switch Controls feature</extracomment>
       <translation>开关</translation>

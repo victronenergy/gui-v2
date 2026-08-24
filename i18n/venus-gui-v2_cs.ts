@@ -1048,10 +1048,15 @@
       <source>Update build date/time</source>
       <translation>Datum a čas aktualizace</translation>
     </message>
+    <message id="settings_rssystem_inverters">
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="99"/>
+      <source>Inverters</source>
+      <translation>Měniče</translation>
+    </message>
     <message id="page_settings_fronius_inverters">
       <location filename="../../pages/settings/PageSettingsFronius.qml" line="30"/>
       <source>Inverters</source>
-      <translation>Měniče</translation>
+      <translation type="unfinished">Měniče</translation>
     </message>
     <message id="page_settings_fronius_find_pv_inverters">
       <location filename="../../pages/settings/PageSettingsFronius.qml" line="36"/>
@@ -4868,7 +4873,7 @@ Chcete pokračovat?</translation>
       <translation>Výrobní číslo</translation>
     </message>
     <message id="nav_settings">
-      <location filename="../../pages/SettingsPage.qml" line="18"/>
+      <location filename="../../pages/SettingsPage.qml" line="19"/>
       <source>Settings</source>
       <translation>Nastavení</translation>
     </message>
@@ -5053,7 +5058,7 @@ Chcete pokračovat?</translation>
       <translation>Generátor bude pokračovat v provozu, pokud je splněna podmínka automatického spuštění.</translation>
     </message>
     <message id="modaldialog_set">
-      <location filename="../../components/dialogs/ModalDialog.qml" line="43"/>
+      <location filename="../../components/dialogs/ModalDialog.qml" line="45"/>
       <source>Set</source>
       <translation>Nastavit</translation>
     </message>
@@ -6893,7 +6898,7 @@ Chcete pokračovat?</translation>
       <translation>Žádné heslo a síťová komunikace není šifrovaná.</translation>
     </message>
     <message id="settings_security_profile_password_incorrect_length">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="28"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="21"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>Heslo musí mít alespoň 8 znaků</translation>
     </message>
@@ -7418,42 +7423,42 @@ Chcete pokračovat?</translation>
       <translation>Arktida</translation>
     </message>
     <message id="settings_all_connected_devices">
-      <location filename="../../pages/SettingsPage.qml" line="40"/>
+      <location filename="../../pages/SettingsPage.qml" line="68"/>
       <source>All connected devices</source>
       <translation>Všechna připojená zařízení</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="48"/>
+      <location filename="../../pages/SettingsPage.qml" line="76"/>
       <source>General</source>
       <translation type="unfinished">Všeobecné</translation>
     </message>
     <message id="settings_connectivity">
-      <location filename="../../pages/SettingsPage.qml" line="59"/>
+      <location filename="../../pages/SettingsPage.qml" line="87"/>
       <source>Connectivity</source>
       <translation>Připojení</translation>
     </message>
     <message id="settings_ethernet_wifi_bluetooth_vecan">
-      <location filename="../../pages/SettingsPage.qml" line="61"/>
+      <location filename="../../pages/SettingsPage.qml" line="89"/>
       <source>Ethernet, Wi-Fi, Bluetooth, VE.Can</source>
       <translation>Ethernet, Wi-Fi, Bluetooth, VE.Can</translation>
     </message>
     <message id="settings_vrm">
-      <location filename="../../pages/SettingsPage.qml" line="68"/>
+      <location filename="../../pages/SettingsPage.qml" line="96"/>
       <source>VRM</source>
       <translation>VRM</translation>
     </message>
     <message id="settings_remote_monitoring_portal">
-      <location filename="../../pages/SettingsPage.qml" line="70"/>
+      <location filename="../../pages/SettingsPage.qml" line="98"/>
       <source>Remote monitoring portal</source>
       <translation>Portál pro vzdálené monitorování</translation>
     </message>
     <message id="settings_advanced">
-      <location filename="../../pages/SettingsPage.qml" line="77"/>
+      <location filename="../../pages/SettingsPage.qml" line="105"/>
       <source>Advanced</source>
       <translation type="unfinished">Pokročilé</translation>
     </message>
     <message id="settings_integrations">
-      <location filename="../../pages/SettingsPage.qml" line="82"/>
+      <location filename="../../pages/SettingsPage.qml" line="110"/>
       <source>Integrations</source>
       <translation type="unfinished">Integrace</translation>
     </message>
@@ -7463,22 +7468,22 @@ Chcete pokračovat?</translation>
       <translation>Integrace</translation>
     </message>
     <message id="settings_acdcsystem_ess_dvcc_battery">
-      <location filename="../../pages/SettingsPage.qml" line="93"/>
+      <location filename="../../pages/SettingsPage.qml" line="121"/>
       <source>AC/DC system, ESS, DVCC, Battery...</source>
       <translation>Systém AC/DC, ESS, DVCC, baterie...</translation>
     </message>
     <message id="settings_debug_and_develop">
-      <location filename="../../pages/SettingsPage.qml" line="100"/>
+      <location filename="../../pages/SettingsPage.qml" line="128"/>
       <source>Debug &amp; Develop</source>
       <translation>Ladění a vývoj</translation>
     </message>
     <message id="settings_profilingtools_debugstatistics_appversion">
-      <location filename="../../pages/SettingsPage.qml" line="102"/>
+      <location filename="../../pages/SettingsPage.qml" line="130"/>
       <source>Profiling tools, debug statistics, app version...</source>
       <translation>Nástroje pro profilování, statistiky ladění, verze aplikace...</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="91"/>
+      <location filename="../../pages/SettingsPage.qml" line="119"/>
       <source>System Setup</source>
       <translation>Nastavení systému</translation>
     </message>
@@ -7911,7 +7916,7 @@ Chcete pokračovat?</translation>
       <translation>Firmware nainstalován, zařízení se restartuje</translation>
     </message>
     <message id="modaldialog_confirm">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="55"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="39"/>
       <source>Confirm</source>
       <translation>Ano, odhlaste mě</translation>
     </message>
@@ -8325,17 +8330,17 @@ Chcete pokračovat?</translation>
       <translation>Stav přetížení měniče</translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="57"/>
+      <location filename="../../ApplicationContent.qml" line="55"/>
       <source>Touch input on</source>
       <translation>Dotykový vstup zapnut</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="59"/>
+      <location filename="../../ApplicationContent.qml" line="57"/>
       <source>Touch input off</source>
       <translation>Dotykový vstup vypnut</translation>
     </message>
     <message id="application_content_touch_input_disabled">
-      <location filename="../../ApplicationContent.qml" line="73"/>
+      <location filename="../../ApplicationContent.qml" line="71"/>
       <source>Touch input disabled</source>
       <translation>Dotykový vstup deaktivován</translation>
     </message>
@@ -8894,11 +8899,6 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <source>System alarms</source>
       <translation>Systémové alarmy</translation>
     </message>
-    <message id="settings_rs_devices">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="99"/>
-      <source>RS devices</source>
-      <translation>Zařízení RS</translation>
-    </message>
     <message id="rs_no_system_alarms">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="60"/>
       <source>No system alarms</source>
@@ -8959,7 +8959,7 @@ Díky zjednodušené navigaci a novému vzhledu je nyní vše, co máte rádi, j
       <translation type="unfinished">Ovládací prvky</translation>
     </message>
     <message id="controlcards_empty_title">
-      <location filename="../../pages/ControlCardsPage.qml" line="154"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="155"/>
       <source>Controls</source>
       <translation>Ovládací prvky</translation>
     </message>
@@ -9504,12 +9504,12 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>AC vstup %1</translation>
     </message>
     <message id="settings_security_profile_change_password_description">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="85"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="69"/>
       <source>Please enter a new GX password:</source>
       <translation>Zadejte nové heslo GX:</translation>
     </message>
     <message id="settings_security_profile_enter_new_password">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="100"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="84"/>
       <source>Enter new password</source>
       <translation>Zadejte nové heslo</translation>
     </message>
@@ -9530,7 +9530,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Povolte toto nastavení, pokud máte sekundární systém MultiPlus nebo Quattro napájený ze stejné bateriové banky jako hlavní střídač/nabíječ. Když je toto nastavení povoleno, tento sekundární systém bude používat parametry CVL a DCL vybraného BMS.</translation>
     </message>
     <message id="settings_access_control_display_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="50"/>
+      <location filename="../../pages/SettingsPage.qml" line="78"/>
       <source>Access control, Display, Firmware, Support</source>
       <translation>Řízení přístupu, Displej, Firmware, Podpora</translation>
     </message>
@@ -10184,7 +10184,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Povolte použití firmwaru Venus OS Large pro Node-RED nebo Signal-K</translation>
     </message>
     <message id="settings_relays_sensors_tanks">
-      <location filename="../../pages/SettingsPage.qml" line="84"/>
+      <location filename="../../pages/SettingsPage.qml" line="112"/>
       <source>Relays, Sensors, PV Inverters, Modbus, Node-RED</source>
       <translation>Relé, Snímače, FV střídače, Modbus, Node-RED</translation>
     </message>
@@ -10619,17 +10619,17 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Pouze na VRM</translation>
     </message>
     <message id="control_cards_title">
-      <location filename="../../pages/ControlCardsPage.qml" line="20"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="21"/>
       <source>Controls</source>
       <translation type="unfinished">Ovládací prvky</translation>
     </message>
     <message id="controlcards_empty_desc1">
-      <location filename="../../pages/ControlCardsPage.qml" line="156"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="157"/>
       <source>No compatible devices found</source>
       <translation>Nebyly nalezeny žádné kompatibilní zařízení</translation>
     </message>
     <message id="controlcards_empty_desc2">
-      <location filename="../../pages/ControlCardsPage.qml" line="158"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="159"/>
       <source>Connect devices that support this function</source>
       <translation>Připojte zařízení, která podporují tuto funkci</translation>
     </message>
@@ -11248,7 +11248,7 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <translation>Spouštění, může to trvat několik sekund...</translation>
     </message>
     <message id="settings_security_profile_change_password_title">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="52"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="36"/>
       <source>Change the GX Password</source>
       <translation>Změnit heslo GX</translation>
     </message>
@@ -11349,54 +11349,49 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <source>Rescan for IP addresses</source>
       <translation>Znovu vyhledat IP adresy</translation>
     </message>
-    <message id="mqtt_devices_ev_charging_station">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="16"/>
-      <source>EV Charging Station</source>
-      <translation>Nabíjecí stanice pro elektromobily</translation>
-    </message>
     <message id="mqtt_devices_pairing_mode">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="55"/>
       <source>Pairing mode</source>
       <translation>Režim párování</translation>
     </message>
     <message id="mqtt_devices_pairing_active">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="55"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="59"/>
       <source>Active • %1s remaining</source>
       <extracomment>%1 = number of seconds remaining</extracomment>
       <translation>Aktivní • zbývá %1s</translation>
     </message>
     <message id="mqtt_devices_pairing_activate">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="61"/>
       <source>Activate</source>
       <translation>Aktivovat</translation>
     </message>
     <message id="mqtt_devices_pairing_enabled">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="85"/>
       <source>Pairing mode enabled for %1 seconds</source>
       <translation>Režim párování povolen na %1 sekund</translation>
     </message>
     <message id="mqtt_devices_pairing_description">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="97"/>
       <source>Activate Pairing mode to allow a device to connect. Paired devices appear here, and will show in the Devices list when connected.</source>
       <translation>Aktivujte režim párování, aby se zařízení mohlo připojit. Spárovaná zařízení se zde zobrazí a po připojení se objeví v seznamu Zařízení.</translation>
     </message>
     <message id="mqtt_devices_pairing_access_tokens">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="104"/>
       <source>Access tokens for paired devices</source>
       <translation>Přístupové tokeny pro spárovaná zařízení</translation>
     </message>
     <message id="mqtt_devices_pairing_unpair">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="112"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="116"/>
       <source>Unpair</source>
       <translation>ZRUSHIT PÁROVÁNÍ</translation>
     </message>
     <message id="mqtt_devices_unpairing_confirm_title">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="133"/>
       <source>Unpairing %1</source>
       <translation>Zrušení párování %1</translation>
     </message>
     <message id="mqtt_devices_unpairing_confirm_description">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="132"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="136"/>
       <source>This will disconnect the device and it will need to be paired again to reconnect.</source>
       <translation>Tím se zařízení odpojí a bude nutné jej znovu spárovat pro opětovné připojení.</translation>
     </message>
@@ -11472,7 +11467,7 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <translation>Maximální hodnota</translation>
     </message>
     <message id="aux_page_switches">
-      <location filename="../../pages/AuxCardsPage.qml" line="16"/>
+      <location filename="../../pages/AuxCardsPage.qml" line="18"/>
       <source>Switches</source>
       <extracomment>Name of the Switch Controls feature</extracomment>
       <translation>Přepínače</translation>
