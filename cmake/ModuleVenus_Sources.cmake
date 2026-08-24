@@ -143,6 +143,10 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ViewGradient.qml
     components/WasmVirtualKeyboardHandler.qml
     components/WifiModel.qml
+    components/camper/CamperDomainCard.qml
+    components/camper/CamperFlowArrow.qml
+    components/camper/CamperOverviewScene.qml
+    components/camper/CamperOverviewView.qml
     components/controls/AutoToggleButton.qml
     components/controls/Button.qml
     components/controls/CaptionLabel.qml
@@ -428,6 +432,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsBoatPage.qml
     pages/settings/PageSettingsCanbus.qml
     pages/settings/PageSettingsCanOpenMotordrive.qml
+    pages/settings/PageSettingsCamper.qml
     pages/settings/PageSettingsCGwacs.qml
     pages/settings/PageSettingsCGwacsOverview.qml
     pages/settings/PageSettingsConnectivity.qml
@@ -800,6 +805,10 @@ set(VictronVenusOS_RESOURCES
     images/icon_system_32.svg
     images/icon_vrm_32.svg
     images/brief.svg
+    images/camper/camper_charging.svg
+    images/camper/camper_driving.svg
+    images/camper/camper_offgrid.svg
+    images/camper/camper_parking.svg
     images/color_wheel_rgb.png
     images/color_wheel_temperature.png
     images/controlcards-no-devices.svg
