@@ -13,7 +13,7 @@ import Victron.VenusOS
 CP.ColorImage {
 	required property AcInput input
 
-	visible: input && (input.power < 0 || Global.system.feedbackEnabled)
+	visible: input && (input.power < 0 || Services.system.feedbackEnabled)
 	source: !!input
 			? (input.power < 0 ? "qrc:/images/icon_to_grid.svg" : "qrc:/images/icon_from_grid.svg")
 			: ""

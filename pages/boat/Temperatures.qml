@@ -23,7 +23,7 @@ Row {
 
 	component Temperature: QuantityLabel {
 		font.pixelSize: Theme.font_boatPage_temperature_value_pixelSize
-		unit: Global.systemSettings.temperatureUnit
+		unit: Services.settings.temperatureUnit
 		unitText: Units.degreesSymbol
 		unitColor: Theme.color_font_primary
 		visible: !isNaN(value)
@@ -72,7 +72,7 @@ Row {
 		id: batteryTemperatureColumn
 		spacing: Theme.geometry_boatPage_temperature_temperatureColumn_spacing
 
-		visible: Global.system && Global.system.battery && !isNaN(Global.system.battery.temperature)
+		visible: Services.system && Services.system.battery && !isNaN(Services.system.battery.temperature)
 
 		ColumnHeader {
 			//% "Battery"
@@ -81,7 +81,7 @@ Row {
 
 		Temperature {
 			anchors.horizontalCenter: parent.horizontalCenter
-			value: Global.system && Global.system.battery ? Global.system.battery.temperature : NaN
+			value: Services.system && Services.system.battery ? Services.system.battery.temperature : NaN
 		}
 	}
 

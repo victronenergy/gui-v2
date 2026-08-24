@@ -9,7 +9,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	// The AC loads to be displayed, which should be one of Global.system.load.<ac|acIn|acOut>
+	// The AC loads to be displayed, which should be one of Services.system.load.<ac|acIn|acOut>
 	required property ObjectAcConnection measurements
 
 	// The model of devices to be displayed
@@ -66,8 +66,8 @@ Page {
 				QuantityTable {
 					id: phaseTable
 
-					readonly property string acInMeasurementsUid: Global.acInputs.highlightedInput?.measurementsUid ?? ""
-					readonly property string acInServiceType: Global.acInputs.highlightedInput?.serviceType ?? ""
+					readonly property string acInMeasurementsUid: Services.acInputs.highlightedInput?.measurementsUid ?? ""
+					readonly property string acInServiceType: Services.acInputs.highlightedInput?.serviceType ?? ""
 					readonly property string voltageKey: acInServiceType === "vebus" || acInServiceType === "acsystem" ? "V" : "Voltage"
 
 					anchors.top: loadSummary.bottom
@@ -136,7 +136,7 @@ Page {
 			// (as we want to remain consistent with the units we show, and we
 			// always display power in watts in the table above).
 			unitAmps: root.measurements.phaseCount <= 1 && !isNaN(current)
-				&& Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps
+				&& Services.settings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps
 
 			// Status depends on the service:
 			// - evcharger: /Status
@@ -144,7 +144,7 @@ Page {
 			// - other service types: no status
 			statusText: !device ? ""
 				: device.serviceType === "evcharger" ?
-					statusItem.valid ? Global.evChargers.chargerStatusToText(statusItem.value) : ""
+					statusItem.valid ? Services.evcs.chargerStatusToText(statusItem.value) : ""
 				: switchableOutputInfoLoader.item ? switchableOutputInfoLoader.item.statusText
 				: ""
 

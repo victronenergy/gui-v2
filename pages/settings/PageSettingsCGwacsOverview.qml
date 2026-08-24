@@ -14,16 +14,16 @@ Page {
 	}
 
 	function getMenuName(serviceType, l2ServiceType) {
-		let result = Global.acInputs.roleName(serviceType)
+		let result = Services.acInputs.roleName(serviceType)
 		if (l2ServiceType !== undefined && l2ServiceType.length > 0) {
-			result += " + " + Global.acInputs.roleName(l2ServiceType)
+			result += " + " + Services.acInputs.roleName(l2ServiceType)
 		}
 		return result
 	}
 
 	VeQuickItem {
 		id: deviceIds
-		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/DeviceIds"
+		uid: Services.settings.serviceUid + "/Settings/CGwacs/DeviceIds"
 	}
 
 	GradientListView {
@@ -40,7 +40,7 @@ Page {
 		}
 
 		delegate: ListNavigation {
-			readonly property string devicePath: Global.systemSettings.serviceUid + "/Settings/Devices/cgwacs_" + modelData
+			readonly property string devicePath: Services.settings.serviceUid + "/Settings/Devices/cgwacs_" + modelData
 
 			text: getDescription(customNameItem.value, modelData)
 			secondaryText: getMenuName(serviceType.value, l2ServiceType.value)

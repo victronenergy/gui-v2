@@ -129,7 +129,7 @@ VisibleItemModel {
 
 		//% "Allow using ethernet for internet access"
 		text: qsTrId("settings_tcpip_ethernet_gateway_enabled")
-		dataItem.uid: Global.venusPlatform.serviceUid + "/Network/Ethernet/GatewayEnabled"
+		dataItem.uid: Services.platform.serviceUid + "/Network/Ethernet/GatewayEnabled"
 		preferredVisible: !networkServices.wifi
 		writeAccessLevel: VenusOS.User_AccessType_User
 		valueTrue: true
@@ -192,7 +192,7 @@ VisibleItemModel {
 
 		VeQuickItem {
 			id: wifiGatewayEnabled
-			uid: networkServices.wifi ? Global.venusPlatform.serviceUid + "/Network/Wifi/GatewayEnabled" : ""
+			uid: networkServices.wifi ? Services.platform.serviceUid + "/Network/Wifi/GatewayEnabled" : ""
 		}
 	}
 
@@ -208,7 +208,7 @@ VisibleItemModel {
 	ListSwitch {
 		//% "Enable Link-local"
 		text: qsTrId("settings_tcpip_ethernet_linklocal_enabled")
-		dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/EthernetLinkLocal"
+		dataItem.uid: Services.settings.serviceUid + "/Settings/Services/EthernetLinkLocal"
 		preferredVisible: !networkServices.wifi
 		writeAccessLevel: VenusOS.User_AccessType_User
 	}
@@ -219,6 +219,6 @@ VisibleItemModel {
 		//% "Link-local IP address"
 		text: qsTrId("settings_tcpip_link_local")
 		preferredVisible: !networkServices.wifi
-		dataItem.uid: Global.venusPlatform.serviceUid + "/Network/Ethernet/LinkLocalIpAddress"
+		dataItem.uid: Services.platform.serviceUid + "/Network/Ethernet/LinkLocalIpAddress"
 	}
 }

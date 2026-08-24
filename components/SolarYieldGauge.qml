@@ -42,8 +42,8 @@ Item {
 				id: valueRange
 
 				// First gauge shows the current runtime power, other gauges show historical values.
-				value: model.index === 0 ? Global.system.solar.power : powerSampler.sampledAverages[model.index - 1]
-				maximumValue: Global.system.solar.maximumPower
+				value: model.index === 0 ? Services.system.solar.power : powerSampler.sampledAverages[model.index - 1]
+				maximumValue: Services.system.solar.maximumPower
 			}
 		}
 	}
@@ -60,7 +60,7 @@ Item {
 		repeat: true
 		interval: 30 * 1000
 		onTriggered: {
-			_activeSamples.push(Global.system.solar.power)
+			_activeSamples.push(Services.system.solar.power)
 			if (_activeSamples.length < 10) {
 				return
 			}

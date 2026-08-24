@@ -14,7 +14,7 @@ DeviceModel {
 	// [{'active_battery_service': 1,'current': 55,'id': com.victronenergy.battery.ttyO0,'instance': 256,'name': House battery,'power': 1337,'soc': 98.4,'state': 1,'timetogo': 38040,'voltage': 24.3}]
 	// Only 'id', 'name' and 'active_battery_service' are guaranteed to be present for each battery.
 	readonly property VeQuickItem _batteriesItem: VeQuickItem {
-		uid: Global.system.serviceUid + "/Batteries"
+		uid: Services.system.serviceUid + "/Batteries"
 		onValueChanged: {
 			if (!valid) {
 				root.deleteAllAndClear()
@@ -85,7 +85,7 @@ DeviceModel {
 		function setValueIfValid(propertyName, value) {
 			if (value !== undefined) {
 				if (propertyName === "temperature") {
-					value = Units.convert(value, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
+					value = Units.convert(value, VenusOS.Units_Temperature_Celsius, Services.settings.temperatureUnit)
 				}
 				battery[propertyName] = value
 			}

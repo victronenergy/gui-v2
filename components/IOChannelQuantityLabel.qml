@@ -10,7 +10,7 @@ QuantityLabel {
 	required property IOChannel ioChannel
 
 	valueText: quantityInfo.number
-	unit: Global.systemSettings.toPreferredUnit(ioChannel.unitType)
+	unit: Services.settings.toPreferredUnit(ioChannel.unitType)
 	unitText: quantityInfo.unitType === VenusOS.Units_None ? ioChannel.unitText : quantityInfo.unit
 	decimals: ioChannel.decimals
 	font.pixelSize: Theme.font_size_body2

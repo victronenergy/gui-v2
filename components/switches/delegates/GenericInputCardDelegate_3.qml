@@ -95,8 +95,8 @@ Item {
 				verticalCenter: parent.verticalCenter
 			}
 			ioChannel: root.genericInput
-			unit: Global.systemSettings.temperatureUnit
-			value: Units.convert(root.genericInput.value, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
+			unit: Services.settings.temperatureUnit
+			value: Units.convert(root.genericInput.value, VenusOS.Units_Temperature_Celsius, Services.settings.temperatureUnit)
 		}
 	}
 }

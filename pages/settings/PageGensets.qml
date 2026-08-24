@@ -10,12 +10,12 @@ Page {
 	id: root
 
 	GradientListView {
-		model: Global.generators.dcModel
+		model: Services.generators.dcModel
 		delegate: ListNavigation {
 			required property Device device
 
 			text: device.name
-			secondaryText: Global.acInputs.gensetStatusCodeToText(gensetStatus.value)
+			secondaryText: Services.acInputs.gensetStatusCodeToText(gensetStatus.value)
 
 			VeQuickItem {
 				id: gensetStatus

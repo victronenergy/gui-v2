@@ -92,8 +92,8 @@ ModalDialog {
 				checked: modelData.value === root.mode
 				writeAccessLevel: VenusOS.User_AccessType_User
 				text: root.showInverterModesOnly
-						? Global.inverterChargers.inverterModeToText(modelData.value)
-						: Global.inverterChargers.inverterChargerModeToText(modelData.value)
+						? Services.inverterChargers.inverterModeToText(modelData.value)
+						: Services.inverterChargers.inverterChargerModeToText(modelData.value)
 				onClicked: root.mode = modelData.value
 			}
 

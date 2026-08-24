@@ -20,15 +20,15 @@ ListRadioButtonGroup {
 		//% "Gallons (Imperial)"
 		{ display: qsTrId("components_volumeunit_gallons_imperial"), value: VenusOS.Units_Volume_GallonImperial },
 	]
-	currentIndex: Global.systemSettings.volumeUnit === VenusOS.Units_Volume_Litre
+	currentIndex: Services.settings.volumeUnit === VenusOS.Units_Volume_Litre
 			? 1
-			: Global.systemSettings.volumeUnit === VenusOS.Units_Volume_GallonUS
+			: Services.settings.volumeUnit === VenusOS.Units_Volume_GallonUS
 			  ? 2
-			  : Global.systemSettings.volumeUnit === VenusOS.Units_Volume_GallonImperial
+			  : Services.settings.volumeUnit === VenusOS.Units_Volume_GallonImperial
 				? 3
 				: 0
 
 	onOptionClicked: function(index) {
-		Global.systemSettings.setVolumeUnit(optionModel[index].value)
+		Services.settings.setVolumeUnit(optionModel[index].value)
 	}
 }

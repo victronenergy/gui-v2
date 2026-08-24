@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	property string service: BackendConnection.serviceUidFromName("com.victronenergy.modbusclient.tcp", 0)
-	property string settings: Global.systemSettings.serviceUid + "/Settings/ModbusClient/tcp"
+	property string settings: Services.settings.serviceUid + "/Settings/ModbusClient/tcp"
 
 	VeQuickItem {
 		id: scanItem

@@ -13,9 +13,10 @@ QtObject {
 	id: root
 
 	required property int inputIndex
-	readonly property string bindPrefix: Global.system.serviceUid + "/Ac/In/" + inputIndex
-	readonly property bool valid: deviceInstance >= 0 && serviceType.length && serviceName.length
+	required property string bindPrefix
+	required property string settingsServiceUid
 
+	readonly property bool valid: deviceInstance >= 0 && serviceType.length && serviceName.length
 	readonly property bool connected: !!_connected.value
 	readonly property int deviceInstance: _deviceInstance.valid ? _deviceInstance.value : -1
 	readonly property string serviceType: _serviceType.value || "" // e.g. "vebus"
@@ -51,10 +52,10 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _minimumCurrent: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/%1/Current/Min".arg(root.inputIndex)
+		uid: root.settingsServiceUid + "/Settings/Gui/Gauges/Ac/In/%1/Current/Min".arg(root.inputIndex)
 	}
 
 	readonly property VeQuickItem _maximumCurrent: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Ac/In/%1/Current/Max".arg(root.inputIndex)
+		uid: root.settingsServiceUid + "/Settings/Gui/Gauges/Ac/In/%1/Current/Max".arg(root.inputIndex)
 	}
 }

@@ -25,7 +25,7 @@ ListQuantityGroupNavigation {
 					: "statusText"
 			// If showing text, use Units_None, otherwise use the preferred unit.
 			unit: input.status === VenusOS.GenericInput_Status_On && input.textValue.length === 0
-					? Global.systemSettings.toPreferredUnit(input.unitType)
+					? Services.settings.toPreferredUnit(input.unitType)
 					: VenusOS.Units_None
 			decimals: input.decimals
 		}
@@ -48,7 +48,7 @@ ListQuantityGroupNavigation {
 		id: valueItem
 		uid: root.uid + "/Value"
 		sourceUnit: Units.unitToVeUnit(input.unitType)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(input.unitType))
+		displayUnit: Units.unitToVeUnit(Services.settings.toPreferredUnit(input.unitType))
 	}
 
 	GenericInput {

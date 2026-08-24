@@ -11,6 +11,9 @@ AbstractListItem {
 
 	required property Device device
 	required property bool animationEnabled
+	required property real minimumValue
+	required property real maximumValue
+	required property real stepSize
 	required property Gradient temperatureGaugeGradient
 	required property Gradient humidityGaugeGradient
 
@@ -118,17 +121,17 @@ AbstractListItem {
 				name: root.hasTwoGauges ? "" : (root.device?.name ?? "")
 				iconSource: "qrc:/images/icon_temp_32.svg"
 				value: temperatureItem.valid ? Math.round(temperatureItem.value) : NaN
-				unit: Global.systemSettings.temperatureUnit
-				unitText: Units.defaultUnitString(Global.systemSettings.temperatureUnit)
+				unit: Services.settings.temperatureUnit
+				unitText: Units.defaultUnitString(Services.settings.temperatureUnit)
 				quantityFormatHints: Theme.screenSize === Theme.Portrait ? 0 : Units.CompactUnitFormat
 				gaugeHorizontalPadding: Theme.geometry_environmentGauge_gauge_horizontalPadding
 
 				gauge: EnvironmentGauge {
 					orientation: Theme.screenSize === Theme.Portrait ? Qt.Horizontal : Qt.Vertical
 					value: temperatureItem.value ?? NaN
-					minimumValue: Global.environmentInputs.temperatureGaugeMinimum(temperatureType.value)
-					maximumValue: Global.environmentInputs.temperatureGaugeMaximum(temperatureType.value)
-					stepSize: Global.environmentInputs.temperatureGaugeStepSize(temperatureType.value)
+					minimumValue: root.minimumValue
+					maximumValue: root.maximumValue
+					stepSize: root.stepSize
 					highlightedValue: Theme.geometry_levelsPage_environment_temperatureGauge_highlightedValue
 					minimumValueColor: Theme.color_blue
 					maximumValueColor: Theme.color_red
@@ -172,12 +175,6 @@ AbstractListItem {
 				}
 			}
 		}
-
-		VeQuickItem {
-			id: temperatureType
-			readonly property int intValue: valid ? value : VenusOS.Temperature_DeviceType_Generic
-			uid: root.device ? root.device.serviceUid + "/TemperatureType" : ""
-		}
 	}
 
 	VeQuickItem {
@@ -189,6 +186,6 @@ AbstractListItem {
 		id: temperatureItem
 		uid: root.device ? root.device.serviceUid + "/Temperature" : ""
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 }

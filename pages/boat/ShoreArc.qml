@@ -12,7 +12,7 @@ Loader {
 
 	required property bool animationEnabled
 	required property bool isShoreConnected
-	readonly property var _shoreInput: isShoreConnected ? Global.acInputs.highlightedInput : null
+	readonly property var _shoreInput: isShoreConnected ? Services.acInputs.highlightedInput : null
 	readonly property int _leftGaugeCount: 1
 
 	objectName: "ShoreArc"

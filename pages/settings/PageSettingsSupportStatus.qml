@@ -158,55 +158,55 @@ Page {
 
 	VeQuickItem {
 		id: modelItem
-		uid: Global.venusPlatform.serviceUid + "/Device/Model"
+		uid: Services.platform.serviceUid + "/Device/Model"
 	}
 	VeQuickItem {
 		id: firmwareInstalledVersionItem
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
+		uid: Services.platform.serviceUid + "/Firmware/Installed/Version"
 	}
 	VeQuickItem {
 		id: largeImageSupportItem
-		uid: Global.venusPlatform.serviceUid + "/Firmware/LargeImageSupport"
+		uid: Services.platform.serviceUid + "/Firmware/LargeImageSupport"
 	}
 	VeQuickItem {
 		id: firmwareProgressItem
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Progress"
+		uid: Services.platform.serviceUid + "/Firmware/Progress"
 	}
 	VeQuickItem {
 		id: firmwareReleaseAvailableVersionItem
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Release/AvailableVersion"
+		uid: Services.platform.serviceUid + "/Firmware/Release/AvailableVersion"
 	}
 	VeQuickItem {
 		id: firmwareReleaseCheckItem
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Release/Check"
+		uid: Services.platform.serviceUid + "/Firmware/Release/Check"
 	}
 	VeQuickItem {
 		id: firmwareReleaseInstallItem
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Release/Install"
+		uid: Services.platform.serviceUid + "/Firmware/Release/Install"
 	}
 	VeQuickItem {
 		id: firmwareStateItem
-		uid: Global.venusPlatform.serviceUid + "/Firmware/State"
+		uid: Services.platform.serviceUid + "/Firmware/State"
 	}
 	VeQuickItem {
 		id: actionItem
-		uid: Global.venusPlatform.serviceUid + "/ModificationChecks/Action"
+		uid: Services.platform.serviceUid + "/ModificationChecks/Action"
 	}
 	VeQuickItem {
 		id: dataPartitionFreeSpaceItem
-		uid: Global.venusPlatform.serviceUid + "/ModificationChecks/DataPartitionFreeSpace"
+		uid: Services.platform.serviceUid + "/ModificationChecks/DataPartitionFreeSpace"
 	}
 	VeQuickItem {
 		id: sshKeyForRootPresentItem
-		uid: Global.venusPlatform.serviceUid + "/ModificationChecks/SshKeyForRootPresent"
+		uid: Services.platform.serviceUid + "/ModificationChecks/SshKeyForRootPresent"
 	}
 	VeQuickItem {
 		id: fsModifiedStateItem
-		uid: Global.venusPlatform.serviceUid + "/ModificationChecks/FsModifiedState"
+		uid: Services.platform.serviceUid + "/ModificationChecks/FsModifiedState"
 	}
 	VeQuickItem {
 		id: systemHooksStateItem
-		uid: Global.venusPlatform.serviceUid + "/ModificationChecks/SystemHooksState"
+		uid: Services.platform.serviceUid + "/ModificationChecks/SystemHooksState"
 	}
 
 	GradientListView {
@@ -230,7 +230,7 @@ Page {
 				// Value is missing on older devices, therefore do not use colors on that
 				//% "HQ serial number"
 				text: qsTrId("pagesettingssupportstate_hq_serial_number")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Device/HQSerialNumber"
+				dataItem.uid: Services.platform.serviceUid + "/Device/HQSerialNumber"
 				preferredVisible: dataItem.valid && dataItem.value != ""
 			}
 
@@ -280,7 +280,7 @@ Page {
 						onClosed: {
 							if (result === T.Dialog.Accepted) {
 								actionItem.setValue(VenusOS.ModificationChecks_Action_SystemHooksDisable)
-								Global.venusPlatform.reboot()
+								Services.platform.reboot()
 								Qt.callLater(Global.dialogLayer.open, rebootingDisableCustomStartupDialogComponent)
 							}
 						}
@@ -316,7 +316,7 @@ Page {
 						onClosed: {
 							if (result === T.Dialog.Accepted) {
 								actionItem.setValue(VenusOS.ModificationChecks_Action_SystemHooksEnable)
-								Global.venusPlatform.reboot()
+								Services.platform.reboot()
 								Qt.callLater(Global.dialogLayer.open, rebootingReenableCustomStartupDialogComponent)
 							}
 						}
@@ -452,7 +452,7 @@ Page {
 
 				VeQuickItem {
 					id: modbusTcpItem
-					uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+					uid: Services.settings.serviceUid + "/Settings/Services/Modbus"
 				}
 			}
 
@@ -466,7 +466,7 @@ Page {
 
 				VeQuickItem {
 					id: signalKItem
-					uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+					uid: Services.platform.serviceUid + "/Services/SignalK/Enabled"
 				}
 			}
 
@@ -483,7 +483,7 @@ Page {
 
 				VeQuickItem {
 					id: nodeRedItem
-					uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+					uid: Services.platform.serviceUid + "/Services/NodeRed/Mode"
 				}
 			}
 

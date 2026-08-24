@@ -12,11 +12,11 @@ Item {
 	property var userTokens: []
 
 	function setPlatformValue(path, value) {
-		MockManager.setValue(Global.venusPlatform.serviceUid + path, value)
+		MockManager.setValue(Services.platform.serviceUid + path, value)
 	}
 
 	function platformValue(path) {
-		return MockManager.value(Global.venusPlatform.serviceUid + path)
+		return MockManager.value(Services.platform.serviceUid + path)
 	}
 
 	function removeToken(tokenName) {
@@ -61,7 +61,7 @@ Item {
 
 	VeQuickItem {
 		id: pairingEnable
-		uid: Global.venusPlatform.serviceUid + "/Tokens/Pairing/Enable"
+		uid: Services.platform.serviceUid + "/Tokens/Pairing/Enable"
 		onValueChanged: {
 			if (value === "") {
 				tokenPairingCountDown.running = true
@@ -76,7 +76,7 @@ Item {
 
 	VeQuickItem {
 		id: pairingRemove
-		uid: Global.venusPlatform.serviceUid + "/Tokens/Remove"
+		uid: Services.platform.serviceUid + "/Tokens/Remove"
 		onValueChanged: root.removeToken(value)
 	}
 

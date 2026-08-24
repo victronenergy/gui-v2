@@ -37,14 +37,14 @@ DevicePage {
 			//% "Latitude"
 			text: qsTrId("settings_gps_latitude")
 			dataItem.uid: bindPrefix + "/Position/Latitude"
-			secondaryText: dataItem.valid ? Global.systemSettings.formatLatitude(dataItem.value) : "--"
+			secondaryText: dataItem.valid ? Services.settings.formatLatitude(dataItem.value) : "--"
 		}
 
 		ListText {
 			//% "Longitude"
 			text: qsTrId("settings_gps_longitude")
 			dataItem.uid: bindPrefix + "/Position/Longitude"
-			secondaryText: dataItem.valid ? Global.systemSettings.formatLongitude(dataItem.value) : "--"
+			secondaryText: dataItem.valid ? Services.settings.formatLongitude(dataItem.value) : "--"
 		}
 
 		ListText {
@@ -87,8 +87,8 @@ DevicePage {
 			text: qsTrId("settings_gps_altitude")
 			dataItem.uid: root.bindPrefix + "/Altitude"
 			dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Metre)
-			dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.altitudeUnit)
-			unit: Global.systemSettings.altitudeUnit
+			dataItem.displayUnit: Units.unitToVeUnit(Services.settings.altitudeUnit)
+			unit: Services.settings.altitudeUnit
 		}
 
 		ListText {
@@ -110,6 +110,6 @@ DevicePage {
 
 	VeQuickItem {
 		id: speedUnit
-		uid: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
+		uid: Services.settings.serviceUid + "/Settings/Gps/SpeedUnit"
 	}
 }

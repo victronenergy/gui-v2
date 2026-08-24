@@ -21,7 +21,7 @@ DevicePage {
 			//% "Aggregate"
 			text: qsTrId("pulsecounter_aggregate")
 			dataItem.uid: bindPrefix + "/Aggregate"
-			unit: Global.systemSettings.volumeUnit
+			unit: Services.settings.volumeUnit
 		}
 
 		ListNavigation {

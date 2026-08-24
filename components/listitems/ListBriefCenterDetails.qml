@@ -21,7 +21,7 @@ ListNavigation {
 	secondaryText: centerService.value ? customServiceDescription : activeBatteryName
 
 	onClicked: {
-		const deviceModel = Global.environmentInputs.model
+		const deviceModel = Services.temperature.model
 		let selectedIndex = centerService.value ? -1 : 0
 		//% "Active battery monitor"
 		let deviceOptionModel = [{ display: activeBatteryName, value: "", section: qsTrId("settings_briefview_center_active_battery_monitor") }]
@@ -47,11 +47,11 @@ ListNavigation {
 
 	VeQuickItem {
 		id: centerService
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui2/BriefView/CenterService"
+		uid: Services.settings.serviceUid + "/Settings/Gui2/BriefView/CenterService"
 		onValueChanged: {
 			const idInfo = BackendConnection.portableIdInfo(value)
 			if (idInfo.type === "temperature") {
-				const device = Global.environmentInputs.model.deviceForDeviceInstance(idInfo.instance)
+				const device = Services.temperature.model.deviceForDeviceInstance(idInfo.instance)
 				if (device) {
 					root.customServiceDescription = root._summaryText(device?.name, device?.deviceInstance)
 				}

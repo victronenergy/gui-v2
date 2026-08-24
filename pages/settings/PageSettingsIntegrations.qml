@@ -62,7 +62,7 @@ Page {
 
 				VeQuickItem {
 					id: hasBluetoothSupport
-					uid: Global.venusPlatform.serviceUid + "/Network/HasBluetoothSupport"
+					uid: Services.platform.serviceUid + "/Network/HasBluetoothSupport"
 				}
 			}
 
@@ -118,7 +118,7 @@ Page {
 
 				VeQuickItem {
 					id: relay0
-					uid: Global.system.serviceUid + "/SwitchableOutput/0/Name"
+					uid: Services.system.serviceUid + "/SwitchableOutput/0/Name"
 				}
 			}
 
@@ -202,7 +202,7 @@ Page {
 				VeQuickItem {
 					id: modbusServerEnabled
 
-					uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+					uid: Services.settings.serviceUid + "/Settings/Services/Modbus"
 				}
 			}
 
@@ -227,7 +227,7 @@ Page {
 
 				VeQuickItem {
 					id: signalkItem
-					uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+					uid: Services.platform.serviceUid + "/Services/SignalK/Enabled"
 				}
 			}
 
@@ -255,7 +255,7 @@ Page {
 
 				VeQuickItem {
 					id: nodeRedModeItem
-					uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+					uid: Services.platform.serviceUid + "/Services/NodeRed/Mode"
 				}
 			}
 

@@ -18,7 +18,7 @@ Page {
 			sourceModel: RuntimeDeviceModel
 			// If there are 2 or more dc gensets, don't list them individually, group them in the dc gensets menu.
 			// Any disconnected dc gensets will not be excluded.
-			excludedServiceTypes: Global.generators.multipleDcGensetsSupported ? ["dcgenset"] : []
+			excludedServiceTypes: Services.generators.multipleDcGensetsSupported ? ["dcgenset"] : []
 		}
 
 		delegate: ListItemLoader {
@@ -94,7 +94,7 @@ Page {
 					id: systemRelayModel
 
 					sourceModel: VeQItemTableModel {
-						uids: [ Global.system.serviceUid + "/SwitchableOutput" ]
+						uids: [ Services.system.serviceUid + "/SwitchableOutput" ]
 						flags: VeQItemTableModel.AddChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
 					}
 					filterType: IOChannelProxyModel.ManualFunction
@@ -104,7 +104,7 @@ Page {
 			ListNavigation {
 				id: multipleDcGensetsAvailable
 				text: CommonWords.dcGensets
-				preferredVisible: Global.generators.multipleDcGensetsSupported
+				preferredVisible: Services.generators.multipleDcGensetsSupported
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageDcGensets.qml", {"title": text})
 			}
 
@@ -117,7 +117,7 @@ Page {
 
 				VeQuickItem {
 					id: relay0
-					uid: Global.system.serviceUid + "/Relay/0/State"
+					uid: Services.system.serviceUid + "/Relay/0/State"
 				}
 			}
 
@@ -144,6 +144,6 @@ Page {
 
 	VeQuickItem {
 		id: relayFunction
-		uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
+		uid: Services.settings.serviceUid + "/Settings/Relay/Function"
 	}
 }

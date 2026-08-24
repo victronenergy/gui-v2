@@ -153,7 +153,7 @@ Page {
 	}
 
 	property string serialVebus
-	readonly property string serviceUid: (Global.venusPlatform.serviceUid + "/Vebus/Interface/" + serialVebus)
+	readonly property string serviceUid: (Services.platform.serviceUid + "/Vebus/Interface/" + serialVebus)
 
 	VeQuickItem {
 		id: _backupRestoreAction

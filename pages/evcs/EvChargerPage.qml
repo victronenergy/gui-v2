@@ -129,7 +129,7 @@ DevicePage {
 			text: qsTrId("evcs_charge_mode")
 			dataItem.uid: evCharger.serviceUid + "/Mode"
 			preferredVisible: dataItem.valid
-			optionModel: Global.evChargers.modeOptionModel
+			optionModel: Services.evcs.modeOptionModel
 			writeAccessLevel: VenusOS.User_AccessType_User
 		}
 

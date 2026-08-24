@@ -200,7 +200,7 @@ DevicePage {
 				id: batteryTemperature
 				uid: root.bindPrefix + "/Dc/0/Temperature"
 				sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-				displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+				displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 			}
 		}
 

@@ -9,11 +9,11 @@ import Victron.VenusOS
 Column {
 	id: root
 
-	readonly property bool useWatt: Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferWatts || Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_Mixed
+	readonly property bool useWatt: Services.settings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferWatts || Services.settings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_Mixed
 	readonly property int sourceUnit: root.useWatt ? VenusOS.Units_WattHourPerKilometre : VenusOS.Units_AmpHourPerKilometre
 	readonly property int displayUnit: {
 		if (root.useWatt) {
-			switch (Global.systemSettings.speedUnit) {
+			switch (Services.settings.speedUnit) {
 				case VenusOS.Units_Speed_MilesPerHour:
 					return VenusOS.Units_WattHourPerMile;
 				case VenusOS.Units_Speed_Knots:
@@ -24,7 +24,7 @@ Column {
 					return VenusOS.Units_WattHourPerKilometre;
 			}
 		} else {
-			switch (Global.systemSettings.speedUnit) {
+			switch (Services.settings.speedUnit) {
 				case VenusOS.Units_Speed_MilesPerHour:
 					return VenusOS.Units_AmpHourPerMile;
 				case VenusOS.Units_Speed_Knots:
@@ -41,7 +41,7 @@ Column {
 	VeQuickItem {
 		id: consumptionItem
 
-		uid: Global.system.serviceUid ? Global.system.serviceUid + "/MotorDrive/" + (root.useWatt ? "ConsumptionWhkm" : "ConsumptionAhkm") : ""
+		uid: Services.system.serviceUid ? Services.system.serviceUid + "/MotorDrive/" + (root.useWatt ? "ConsumptionWhkm" : "ConsumptionAhkm") : ""
 		sourceUnit: Units.unitToVeUnit(root.sourceUnit)
 		displayUnit: Units.unitToVeUnit(root.displayUnit)
 	}

@@ -46,9 +46,9 @@ Page {
 			ListText {
 				//% "Firmware build date/time"
 				text: qsTrId("settings_firmware_build_date_time")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/AvailableBuild"
+				dataItem.uid: Services.platform.serviceUid + "/Firmware/Offline/AvailableBuild"
 				preferredVisible: installUpdate.preferredVisible
-					&& Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
+					&& Services.settings.canAccess(VenusOS.User_AccessType_SuperUser)
 			}
 
 			ListMountStateButton {

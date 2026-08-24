@@ -16,14 +16,14 @@ ListModel {
 
 	function _loadDefaultGauges() {
 		let gauges = []
-		if (Global.tanks.totalTankCount === 0) {
+		if (Services.tanks.totalTankCount === 0) {
 			// There are no tanks, so there are no gauges to be shown.
 			return []
 		} else {
 			// Show the system battery, followed by gauges with aggregated tank levels for whichever
 			// tank types are available on the system.
 			gauges.push({ centerGaugeType: VenusOS.BriefView_CentralGauge_SystemBattery, value: "" })
-			for (const tankModel of Global.tanks.allTankModels) {
+			for (const tankModel of Services.tanks.allTankModels) {
 				if (tankModel.count > 0) {
 					gauges.push({ centerGaugeType: VenusOS.BriefView_CentralGauge_TankAggregate, value: tankModel.type })
 					if (gauges.length >= Theme.geometry_briefPage_centerGauge_maximumGaugeCount) {
@@ -38,7 +38,7 @@ ListModel {
 	// Rebuild the gauge model, based on the preferred gauges and the tanks available.
 	function _reset() {
 		let useDefaultGauges = false
-		let gauges = Global.systemSettings.briefView.centralGauges
+		let gauges = Services.settings.briefView.centralGauges
 		if (gauges.length === 0) {
 			gauges = _loadDefaultGauges()
 			useDefaultGauges = true
@@ -78,7 +78,7 @@ ListModel {
 
 	function _updateGauge(gaugeIndex, gauge) {
 		if (gaugeIndex >= 0 && gaugeIndex < count) {
-			const value = Global.systemSettings.briefView.unit.value === VenusOS.BriefView_Unit_Percentage
+			const value = Services.settings.briefView.unit.value === VenusOS.BriefView_Unit_Percentage
 						|| gauge.type === VenusOS.Tank_Type_Battery
 					? gauge.level
 					: gauge.remaining
@@ -97,7 +97,7 @@ ListModel {
 	readonly property VeQuickItem _batteriesItem: VeQuickItem {
 		property bool active
 
-		uid: active ? Global.system.serviceUid + "/Batteries" : ""
+		uid: active ? Services.system.serviceUid + "/Batteries" : ""
 	}
 
 	component GaugeSource : QtObject {
@@ -149,7 +149,7 @@ ListModel {
 			Component.onDestruction: canUpdate = false
 
 			Connections {
-				target: Global.systemSettings.briefView.unit
+				target: Services.settings.briefView.unit
 
 				function onValueChanged() {
 					Qt.callLater(updateGaugeModel)
@@ -195,8 +195,8 @@ ListModel {
 
 				GaugeSource {
 					type: VenusOS.Tank_Type_Battery
-					icon: Global.system.battery.icon
-					level: Global.system.battery.stateOfCharge
+					icon: Services.system.battery.icon
+					level: Services.system.battery.stateOfCharge
 				}
 			}
 
@@ -204,14 +204,14 @@ ListModel {
 				id: tankAggregateSource
 
 				GaugeSource {
-					readonly property TankModel _tankModel: Global.tanks.tankModel(type)
+					readonly property TankModel _tankModel: Services.tanks.tankModel(type)
 
 					type: parseInt(gaugeObject.modelData.value)
 					level: _tankModel.count === 0 ? NaN
 							: !isNaN(_tankModel.averageLevel) ? _tankModel.averageLevel
 							: (_tankModel.count === 0 || _tankModel.totalCapacity === 0) ? 0
 							: ((Math.min(_tankModel.totalRemaining / _tankModel.totalCapacity, 1.0) * 100))
-					remaining: Units.convert(_tankModel.totalRemaining, VenusOS.Units_Volume_CubicMetre, Global.systemSettings.volumeUnit)
+					remaining: Units.convert(_tankModel.totalRemaining, VenusOS.Units_Volume_CubicMetre, Services.settings.volumeUnit)
 				}
 			}
 
@@ -220,14 +220,14 @@ ListModel {
 
 				GaugeSource {
 					property Tank _device
-					readonly property int totalTankCount: Global.tanks.totalTankCount
+					readonly property int totalTankCount: Services.tanks.totalTankCount
 
 					function _updateTank() {
 						if (_device?.valid) {
 							return
 						}
 						const tankIdInfo = BackendConnection.portableIdInfo(gaugeObject.modelData.value)
-						for (const tankModel of Global.tanks.allTankModels) {
+						for (const tankModel of Services.tanks.allTankModels) {
 							const tank = tankModel.deviceForDeviceInstance(tankIdInfo.instance)
 							if (tank) {
 								_device = tank
@@ -239,7 +239,7 @@ ListModel {
 					name: _device?.name || ""
 					type: _device?.type ?? -1
 					level: _device?.level ?? NaN
-					remaining: Units.convert(_device?.remaining ?? NaN, VenusOS.Units_Volume_CubicMetre, Global.systemSettings.volumeUnit)
+					remaining: Units.convert(_device?.remaining ?? NaN, VenusOS.Units_Volume_CubicMetre, Services.settings.volumeUnit)
 
 					// Set tank on initialization, or when tanks are updated, in case the tank is
 					// disconnected and reconnected.
@@ -260,7 +260,7 @@ ListModel {
 	}
 
 	property Connections _tankCountConn: Connections {
-		target: Global.tanks
+		target: Services.tanks
 
 		function onTotalTankCountChanged() {
 			Qt.callLater(root._reset)
@@ -268,7 +268,7 @@ ListModel {
 	}
 
 	property Connections _centralGaugesConn: Connections {
-		target: Global.systemSettings.briefView
+		target: Services.settings.briefView
 
 		function onCentralGaugesChanged() {
 			Qt.callLater(root._reset)

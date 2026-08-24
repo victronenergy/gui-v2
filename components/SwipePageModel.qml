@@ -14,14 +14,11 @@ ObjectModel {
 		: [ briefPage, overviewPage, notificationsPage, settingsPage ]
 	readonly property bool showLevelsPage: levelsPageLoader.active && !!levelsPageLoader.item
 	readonly property bool showBoatPage: boatPageLoader.active && !!boatPageLoader.item
-	readonly property int tankCount: Global.tanks ? Global.tanks.totalTankCount : 0
-	readonly property int environmentInputCount: Global.environmentInputs ? Global.environmentInputs.model.count : 0
+	readonly property int tankCount: Services.tanks ? Services.tanks.totalTankCount : 0
+	readonly property int environmentInputCount: Services.temperature ? Services.temperature.model.count : 0
 
 	readonly property bool completed: _completed
-		&& Global.dataManagerLoaded
-		&& Global.systemSettings
-		&& Global.tanks
-		&& Global.environmentInputs
+		&& Services.ready
 		&& ((boatPageLoader.active && levelsPageLoader.active) ? pages.length === 6
 		  : boatPageLoader.active ? pages.length === 5
 		  : levelsPageLoader.active ? pages.length === 5
@@ -39,7 +36,7 @@ ObjectModel {
 
 		VeQuickItem {
 			id: showBoatPageItem
-			uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
+			uid: !!Services.settings ? Services.settings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
 		}
 	}
 

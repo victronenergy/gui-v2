@@ -59,7 +59,7 @@ Page {
 						// in the QuantityTable.
 						QuantityObject { unit: VenusOS.Units_Volt_DC; hidden: true }
 						QuantityObject { unit: VenusOS.Units_Amp; hidden: true }
-						QuantityObject { object: Global.system.dc; key: "power"; unit: VenusOS.Units_Watt }
+						QuantityObject { object: Services.system.dc; key: "power"; unit: VenusOS.Units_Watt }
 					}
 				}
 
@@ -113,8 +113,8 @@ Page {
 			// (as we want to remain consistent with the units we show, and we
 			// always display power in watts in the table above).
 			unitAmps: root.systemModel.count <= 1 && !isNaN(current)
-				&& (Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps
-				 || Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_Mixed)
+				&& (Services.settings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferAmps
+				 || Services.settings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_Mixed)
 
 			// Status depends on the service:
 			// - dcdc: /State

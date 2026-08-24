@@ -26,13 +26,13 @@ DeviceListDelegate {
 
 	VeQuickItem {
 		id: mode
-		readonly property string modeText: Global.evChargers.chargerModeToText(value)
+		readonly property string modeText: Services.evcs.chargerModeToText(value)
 		uid: root.device.serviceUid + "/Mode"
 	}
 
 	VeQuickItem {
 		id: status
-		readonly property string statusText: Global.evChargers.chargerStatusToText(value)
+		readonly property string statusText: Services.evcs.chargerStatusToText(value)
 		uid: root.device.serviceUid + "/Status"
 	}
 

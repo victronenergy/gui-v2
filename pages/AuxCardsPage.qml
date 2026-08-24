@@ -76,7 +76,7 @@ Page {
 		// ListView scroll behaviour.
 		highlightFollowsCurrentItem: false
 
-		model: SortedIOChannelGroupModel { sourceModel: Global.switches.groups }
+		model: SortedIOChannelGroupModel { sourceModel: Services.switches.groups }
 		delegate: IOChannelGroupCard {
 			width: Theme.screenSize === Theme.Portrait ? cardsView.width : implicitWidth
 			height: Theme.screenSize === Theme.Portrait ? implicitHeight : cardsView.height

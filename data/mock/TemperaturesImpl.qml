@@ -59,7 +59,7 @@ Item {
 
 	VeQuickItem {
 		id: autoSelectedTemperatureService
-		uid: Global.system.serviceUid + "/AutoSelectedTemperatureService"
+		uid: Services.system.serviceUid + "/AutoSelectedTemperatureService"
 	}
 
 	// Set system /AvailableTemperatureServices (type is object). Example value:
@@ -79,7 +79,7 @@ Item {
 			setValue(JSON.stringify(temperatureServices))
 		}
 
-		uid: Global.system.serviceUid + "/AvailableTemperatureServices"
+		uid: Services.system.serviceUid + "/AvailableTemperatureServices"
 	}
 
 	// Animate temperature service values.

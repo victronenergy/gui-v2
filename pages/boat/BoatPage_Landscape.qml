@@ -14,8 +14,8 @@ Boat.Background { // the blue shadows
 
 	motorDrives: motorDrives
 	gps: _gps
-	isShoreConnected: Global.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Shore
-	isBatteryCharging: Global.system.battery.mode === VenusOS.Battery_Mode_Charging
+	isShoreConnected: Services.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Shore
+	isBatteryCharging: Services.system.battery.mode === VenusOS.Battery_Mode_Charging
 
 	Boat.SlotLeftArc {
 		id: slotLeftArc
@@ -127,7 +127,7 @@ Boat.Background { // the blue shadows
 
 	VeQuickItem {
 		id: showTemperaturesItem
-		uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/ShowTemperatures" : ""
+		uid: !!Services.settings ? Services.settings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/ShowTemperatures" : ""
 	}
 
 	Boat.Temperatures {

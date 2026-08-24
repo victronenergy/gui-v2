@@ -9,6 +9,8 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	required property string platformServiceUid
+
 	readonly property string serviceUid: BackendConnection.serviceUidForType("settings")
 	readonly property bool needsOnboarding: _onboardingState.needsOnboarding
 			// The needsOnboarding setting can't be updated in ReadOnly mode, so never show onboarding in that case.
@@ -301,7 +303,7 @@ QtObject {
 	}
 
 	property VeQuickItem time: VeQuickItem {
-		uid: Global.venusPlatform.serviceUid + "/Device/Time"
+		uid: root.platformServiceUid + "/Device/Time"
 		onValueChanged: {
 			if (value !== undefined) {
 				ClockTime.clockTime = value
@@ -388,9 +390,6 @@ QtObject {
 				root.temperatureUnitSuffix = "°F"
 				break
 			default:
-				if (Global.dataManagerLoaded) {
-					console.warn("Cannot load temperature unit,", uid, "has unsupported value:", value, "default to celsius")
-				}
 				root.temperatureUnit = VenusOS.Units_Temperature_Celsius
 				root.temperatureUnitSuffix = "°C"
 				break
@@ -421,9 +420,6 @@ QtObject {
 				root.altitudeUnit = VenusOS.Units_Foot
 				break
 			default:
-				if (Global.dataManagerLoaded) {
-					console.warn("Cannot load altitude unit,", uid, "has unsupported value:", value, "default to metre")
-				}
 				root.altitudeUnit = VenusOS.Units_Metre
 				break
 			}
@@ -489,12 +485,10 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _gpsPositionFormat: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
+		uid: root.serviceUid + "/Settings/Gps/Format"
 	}
 
 	function reset() {
 		// no-op
 	}
-
-	Component.onCompleted: Global.systemSettings = root
 }

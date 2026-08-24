@@ -164,7 +164,7 @@ AbstractListItem {
 			font.pixelSize: Theme.font_levelsGauge_secondary
 			color: Theme.color_font_secondary
 			opacity: isNaN(root.totalCapacity) && isNaN(root.totalRemaining) ? 0.0 : 1.0
-			text: Units.getCapacityDisplayText(Global.systemSettings.volumeUnit, root.totalCapacity, root.totalRemaining)
+			text: Units.getCapacityDisplayText(Services.settings.volumeUnit, root.totalCapacity, root.totalRemaining)
 		}
 	}
 }

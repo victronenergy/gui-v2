@@ -86,20 +86,20 @@ Page {
 
 	VeQuickItem {
 		id: modelItem
-		uid: Global.venusPlatform.serviceUid + "/Device/Model"
+		uid: Services.platform.serviceUid + "/Device/Model"
 	}
 
 	VeQuickItem {
 		id: modbusTcpItem
-		uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+		uid: Services.settings.serviceUid + "/Settings/Services/Modbus"
 	}
 	VeQuickItem {
 		id: signalKItem
-		uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+		uid: Services.platform.serviceUid + "/Services/SignalK/Enabled"
 	}
 	VeQuickItem {
 		id: nodeRedItem
-		uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+		uid: Services.platform.serviceUid + "/Services/NodeRed/Mode"
 	}
 
 	GradientListView {
@@ -117,7 +117,7 @@ Page {
 
 				VeQuickItem {
 					id: firmwareVersion
-					uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
+					uid: Services.platform.serviceUid + "/Firmware/Installed/Version"
 				}
 			}
 
@@ -181,7 +181,7 @@ Page {
 
 				VeQuickItem {
 					id: languageDataItem
-					uid: Global.systemSettings.serviceUid + "/Settings/Gui/Language"
+					uid: Services.settings.serviceUid + "/Settings/Gui/Language"
 					onValueChanged: {
 						if (value !== undefined) {
 							languageModel.currentLanguage = Language.fromCode(value)
@@ -285,11 +285,11 @@ Page {
 
 				VeQuickItem {
 					id: fsModifiedStateItem
-					uid: Global.venusPlatform.serviceUid + "/ModificationChecks/FsModifiedState"
+					uid: Services.platform.serviceUid + "/ModificationChecks/FsModifiedState"
 				}
 				VeQuickItem {
 					id: systemHooksStateItem
-					uid: Global.venusPlatform.serviceUid + "/ModificationChecks/SystemHooksState"
+					uid: Services.platform.serviceUid + "/ModificationChecks/SystemHooksState"
 				}
 			}
 
@@ -297,7 +297,7 @@ Page {
 				topInset: Theme.geometry_listItem_itemSeparator_height
 				//% "Demo mode"
 				text: qsTrId("settings_demo_mode")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/DemoMode"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gui/DemoMode"
 				popDestination: undefined // don't pop page automatically.
 				updateDataOnClick: false // handle option clicked manually.
 				optionModel: [

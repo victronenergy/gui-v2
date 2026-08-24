@@ -25,7 +25,7 @@ ListButton {
 			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 			onClosed: {
 				if (result === T.Dialog.Accepted) {
-					Global.venusPlatform.reboot()
+					Services.platform.reboot()
 					Qt.callLater(Global.dialogLayer.open, rebootingDialogComponent)
 				}
 			}

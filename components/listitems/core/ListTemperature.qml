@@ -10,6 +10,6 @@ ListQuantity {
 	id: root
 
 	dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-	dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-	unit: Global.systemSettings.temperatureUnit
+	dataItem.displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
+	unit: Services.settings.temperatureUnit
 }

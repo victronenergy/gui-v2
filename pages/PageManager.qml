@@ -79,7 +79,7 @@ QtObject {
 	}
 
 	function goToStartPage() {
-		const config = Global.systemSettings.startPageConfiguration.startPageInfo
+		const config = Services.settings.startPageConfiguration.startPageInfo
 		const prevMainPage = navBar.getCurrentPage()
 
 		// Load the main page and its properties.
@@ -128,7 +128,7 @@ QtObject {
 			// - if there is no Start Page, or this is already the Start Page, then hide the stack
 			//   to reveal the main page below.
 			// - otherwise, go to the start page.
-			const config = Global.systemSettings.startPageConfiguration.startPageInfo
+			const config = Services.settings.startPageConfiguration.startPageInfo
 			if (!config || config.stack[config.stack.length - 1]?.page === pageStack.topPageUrl) {
 				_hiddenStackMainPage = navBar.getCurrentPage()
 				pageStack.hide()

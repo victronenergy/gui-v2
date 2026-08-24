@@ -12,11 +12,11 @@ ColumnLayout {
 
 	required property bool animationEnabled
 
-	readonly property AcInput generatorInput: Global.acInputs.input1?.source === VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input1
-			: Global.acInputs.input2?.source === VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input2
+	readonly property AcInput generatorInput: Services.acInputs.input1?.source === VenusOS.AcInputs_InputSource_Generator ? Services.acInputs.input1
+			: Services.acInputs.input2?.source === VenusOS.AcInputs_InputSource_Generator ? Services.acInputs.input2
 			: null
-	readonly property AcInput nonGeneratorInput: Global.acInputs.input1?.source !== VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input1
-			: Global.acInputs.input2?.source !== VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input2
+	readonly property AcInput nonGeneratorInput: Services.acInputs.input1?.source !== VenusOS.AcInputs_InputSource_Generator ? Services.acInputs.input1
+			: Services.acInputs.input2?.source !== VenusOS.AcInputs_InputSource_Generator ? Services.acInputs.input2
 			: null
 
 	spacing: Theme.geometry_sidePanel_spacing
@@ -24,9 +24,9 @@ ColumnLayout {
 	BriefSidePanelWidget {
 		title: CommonWords.solar
 		icon.source: "qrc:/images/solaryield.svg"
-		loadersActive: Global.solarInputs.devices.count > 0 // only show graph if there are solar inputs with history (i.e. not PV inverters)
-		visible: Global.solarInputs.inputCount > 0 // show if there are any solar inputs (PV chargers, PV inverters, etc.)
-		quantityLabel.dataObject: Global.system.solar
+		loadersActive: Services.solarInputs.devices.count > 0 // only show graph if there are solar inputs with history (i.e. not PV inverters)
+		visible: Services.solarInputs.inputCount > 0 // show if there are any solar inputs (PV chargers, PV inverters, etc.)
+		quantityLabel.dataObject: Services.system.solar
 		graph: SolarYieldGraph {}
 
 		Layout.fillWidth: true
@@ -36,9 +36,9 @@ ColumnLayout {
 	BriefSidePanelWidget {
 		id: generatorWidget
 
-		title: Global.generators.model.firstObject?.name ?? ""
+		title: Services.generators.model.firstObject?.name ?? ""
 		icon.source: "qrc:/images/generator.svg"
-		loadersActive: generatorInput && generatorInput.operational && Global.generators.model.firstObject
+		loadersActive: generatorInput && generatorInput.operational && Services.generators.model.firstObject
 		visible: loadersActive
 		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 		quantityLabel.dataObject: generatorInput
@@ -47,7 +47,7 @@ ColumnLayout {
 		graph: GeneratorIconLabel {
 			height: generatorWidget.quantityLabel.height
 			generator: Generator {
-				serviceUid: Global.generators.model.firstObject?.serviceUid ?? ""
+				serviceUid: Services.generators.model.firstObject?.serviceUid ?? ""
 			}
 		}
 		footer: ThreePhaseBarGauge {
@@ -74,8 +74,8 @@ ColumnLayout {
 	BriefSidePanelWidget {
 		id: acInputWidget
 
-		title: loadersActive ? Global.acInputs.sourceToText(nonGeneratorInput.source) : ""
-		icon.source: loadersActive ? Global.acInputs.sourceIcon(nonGeneratorInput.source) : ""
+		title: loadersActive ? Services.acInputs.sourceToText(nonGeneratorInput.source) : ""
+		icon.source: loadersActive ? Services.acInputs.sourceIcon(nonGeneratorInput.source) : ""
 		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 		quantityLabel.dataObject: nonGeneratorInput
 		quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
@@ -203,17 +203,17 @@ exported power v  0.4 |   /
 	}
 
 	BriefSidePanelWidget {
-		title: Global.dcInputs.model.count === 1
-				? VenusOS.dcMeter_typeToText(Global.dcInputs.model.firstMeterType)
+		title: Services.dcInputs.model.count === 1
+				? VenusOS.dcMeter_typeToText(Services.dcInputs.model.firstMeterType)
 				  //% "DC input"
 				: qsTrId("brief_dc_input")
-		icon.source: Global.dcInputs.model.count === 1
-				? VenusOS.dcMeter_iconForType(Global.dcInputs.model.firstMeterType)
+		icon.source: Services.dcInputs.model.count === 1
+				? VenusOS.dcMeter_iconForType(Services.dcInputs.model.firstMeterType)
 				: VenusOS.dcMeter_iconForMultipleTypes()
-		loadersActive: Global.dcInputs.model.count > 0
+		loadersActive: Services.dcInputs.model.count > 0
 		visible: loadersActive
 		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Dc
-		quantityLabel.dataObject: Global.dcInputs
+		quantityLabel.dataObject: Services.dcInputs
 		graph: LoadGraph {
 			animationEnabled: root.animationEnabled
 			threshold: 0    // no threshold needed for inputs
@@ -226,8 +226,8 @@ exported power v  0.4 |   /
 
 		ValueRange {
 			id: dcInputRange
-			value: root.visible ? Global.dcInputs.power : NaN
-			maximumValue: Global.dcInputs.maximumPower
+			value: root.visible ? Services.dcInputs.power : NaN
+			maximumValue: Services.dcInputs.maximumPower
 		}
 
 		Component {
@@ -254,8 +254,8 @@ exported power v  0.4 |   /
 		title: qsTrId("brief_ac_loads")
 		icon.source: "qrc:/images/acloads.svg"
 		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Ac
-		quantityLabel.dataObject: Global.system.load.ac
-		loadersActive: Global.system.hasAcLoads
+		quantityLabel.dataObject: Services.system.load.ac
+		loadersActive: Services.system.hasAcLoads
 		visible: loadersActive
 		graph: LoadGraph {
 			animationEnabled: root.animationEnabled
@@ -263,8 +263,8 @@ exported power v  0.4 |   /
 
 			AcPhasesCurrentRange {
 				id: acLoadGraphRange
-				phaseModel: root.visible ? Global.system.load.ac.phases : null
-				maximumCurrent: Global.system.load.maximumAcCurrent
+				phaseModel: root.visible ? Services.system.load.ac.phases : null
+				maximumCurrent: Services.acInputs.maximumAcCurrent
 			}
 		}
 		footer: ThreePhaseBarGauge {
@@ -272,8 +272,8 @@ exported power v  0.4 |   /
 			height: Theme.geometry_barGauge_vertical_width_large
 			orientation: Qt.Horizontal
 			valueType: VenusOS.Gauges_ValueType_RisingPercentage
-			phaseModel: root.visible ? Global.system.load.ac.phases : null
-			maximumValue: Global.system.load.maximumAcCurrent
+			phaseModel: root.visible ? Services.system.load.ac.phases : null
+			maximumValue: Services.acInputs.maximumAcCurrent
 			animationEnabled: root.animationEnabled
 		}
 
@@ -284,10 +284,10 @@ exported power v  0.4 |   /
 		//% "DC Loads"
 		title: qsTrId("brief_dc_loads")
 		icon.source: "qrc:/images/dcloads.svg"
-		loadersActive: Global.system.dc.hasPower
+		loadersActive: Services.system.dc.hasPower
 		visible: loadersActive
 		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Dc
-		quantityLabel.dataObject: Global.system.dc
+		quantityLabel.dataObject: Services.system.dc
 		graph: LoadGraph {
 			animationEnabled: root.animationEnabled
 			onNextValueRequested: addValue(dcLoadRange.valueAsRatio)
@@ -298,8 +298,8 @@ exported power v  0.4 |   /
 
 		ValueRange {
 			id: dcLoadRange
-			value: root.visible ? Global.system.dc.power : NaN
-			maximumValue: Global.system.dc.maximumPower
+			value: root.visible ? Services.system.dc.power : NaN
+			maximumValue: Services.system.dc.maximumPower
 		}
 
 		Component {

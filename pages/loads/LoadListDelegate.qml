@@ -86,7 +86,7 @@ ListItem {
 				primaryLabel.font: root.font
 				model: QuantityObjectModel {
 					filterType: QuantityObjectModel.HasValue
-					QuantityObject { object: root; key: "temperature"; unit: Global.systemSettings.temperatureUnit }
+					QuantityObject { object: root; key: "temperature"; unit: Services.settings.temperatureUnit }
 					QuantityObject { object: root; key: root._unitAmps ? "current" : "power"; unit: root._unitAmps ? VenusOS.Units_Amp : VenusOS.Units_Watt }
 				}
 				captionText: root._statusLabelText
@@ -123,7 +123,7 @@ ListItem {
 					visible: !isNaN(root.temperature)
 					title: CommonWords.temperature
 					value: root.temperature
-					unit: Global.systemSettings.temperatureUnit
+					unit: Services.settings.temperatureUnit
 
 					Layout.rightMargin: root.columnSpacing
 				}

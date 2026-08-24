@@ -10,7 +10,7 @@ import Victron.VenusOS
 AcWidget {
 	id: root
 
-	readonly property ObjectAcConnection measurements: Global.system.load.acOut
+	readonly property ObjectAcConnection measurements: Services.system.load.acOut
 
 	//% "Essential Loads"
 	title: qsTrId("overview_widget_essential_loads_title")
@@ -29,13 +29,13 @@ AcWidget {
 		widget: root
 		iconSource: "qrc:/images/icon_CL_24.svg"
 		gaugeValueType: VenusOS.Gauges_ValueType_RisingPercentage
-		gaugeMaximumValue: Global.system.load.maximumAcCurrent
+		gaugeMaximumValue: Services.acInputs.maximumAcCurrent
 	}
 
 	onClicked: {
 		Global.pageManager.pushPage("/pages/loads/AcLoadListPage.qml", {
 			title: root.title,
-			measurements: Global.system.load.acOut,
+			measurements: Services.system.load.acOut,
 			model: essentialLoadDevices
 		})
 	}

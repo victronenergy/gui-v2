@@ -12,7 +12,7 @@ ControlCard {
 	property string serviceUid
 
 	readonly property int writeAccessLevel: VenusOS.User_AccessType_Installer
-	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
+	readonly property bool userHasWriteAccess: Services.settings.canAccess(writeAccessLevel)
 
 	implicitHeight: contentLayout.y + contentLayout.implicitHeight
 	icon.source: "qrc:/images/icon_charging_station_24.svg"
@@ -20,7 +20,7 @@ ControlCard {
 	//: %1 = the EVCS name
 	//% "EVCS (%1)"
 	title.text: qsTrId("controlcard_evcs_title").arg(device.name)
-	status.text: Global.evChargers.chargerStatusToText(statusItem.value)
+	status.text: Services.evcs.chargerStatusToText(statusItem.value)
 
 	Device {
 		id: device
@@ -51,7 +51,7 @@ ControlCard {
 		ListButton {
 			id: modeListButton
 			text: CommonWords.mode
-			secondaryText: Global.evChargers.chargerModeToText(modeItem.value)
+			secondaryText: Services.evcs.chargerModeToText(modeItem.value)
 			flat: true
 			interactive: modeItem.valid
 			writeAccessLevel: VenusOS.User_AccessType_User

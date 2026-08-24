@@ -24,13 +24,13 @@ Page {
 	VeQuickItem {
 		id: hasAcOutLoadsItem
 
-		uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem"
+		uid: Services.settings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem"
 	}
 
 	VeQuickItem {
 		id: hasAcInLoadsItem
 
-		uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcInLoads"
+		uid: Services.settings.serviceUid + "/Settings/SystemSetup/HasAcInLoads"
 	}
 
 	GradientListView {
@@ -40,7 +40,7 @@ Page {
 
 				//% "AC input 1"
 				text: qsTrId("settings_system_ac_input_1")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput1"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/SystemSetup/AcInput1"
 				optionModel: root._acInputsModel
 			}
 
@@ -49,7 +49,7 @@ Page {
 
 				//% "AC input 2"
 				text: qsTrId("settings_system_ac_input_2")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput2"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/SystemSetup/AcInput2"
 				optionModel: root._acInputsModel
 			}
 
@@ -64,7 +64,7 @@ Page {
 						display: qsTrId("settings_system_ac_input_only"),
 						//% "The AC output of the Inverter/Charger is not used."
 						caption: qsTrId("settings_system_ac_input_only_description"),
-						readOnly: !Global.system.hasEss
+						readOnly: !Services.system.hasEss
 					},
 					{
 						//% "AC output only"
@@ -94,7 +94,7 @@ Page {
 					  //% "Monitor for shore disconnect"
 					: qsTrId("settings_system_monitor_for_shore_disconnect")
 				preferredVisible: root._isGrid || root._isShore
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Alarm/System/GridLost"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Alarm/System/GridLost"
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
 					{ display: CommonWords.enabled, value: 1 },

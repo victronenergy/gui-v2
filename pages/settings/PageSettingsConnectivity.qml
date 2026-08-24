@@ -60,7 +60,7 @@ Page {
 
 				VeQuickItem {
 					id: bluetooth
-					uid: Global.systemSettings.serviceUid + "/Settings/Services/Bluetooth"
+					uid: Services.settings.serviceUid + "/Settings/Services/Bluetooth"
 				}
 			}
 
@@ -109,7 +109,7 @@ Page {
 
 				VeQuickItem {
 					id: canInterfaces
-					uid: Global.venusPlatform.serviceUid + "/CanBus/Interfaces"
+					uid: Services.platform.serviceUid + "/CanBus/Interfaces"
 					// eg. value: [{"config":1,"interface":"can1","name":"BMS-Can port"},{"config":0,"interface":"can0","name":"VE.Can port"}]
 				}
 			}
@@ -117,7 +117,7 @@ Page {
 			ListSwitch {
 				//% "CAN-bus over TCP/IP (Debug)"
 				text: qsTrId("settings_services_canbus_over_tcpip_debug")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Socketcand"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Services/Socketcand"
 				showAccessLevel: VenusOS.User_AccessType_Service
 			}
 		}

@@ -64,9 +64,9 @@ ListQuantityGroupNavigation {
 			: dimmingItem.value // use the dimming value with unit conversion, not the unconverted output.dimming
 		readonly property int dataNumberUnit: isNaN(dataNumber) ? VenusOS.Units_None
 			: output.type === VenusOS.SwitchableOutput_Type_Dimmable ? VenusOS.Units_Percentage
-			: output.type === VenusOS.SwitchableOutput_Type_TemperatureSetpoint ? Global.systemSettings.temperatureUnit
-			: output.type === VenusOS.SwitchableOutput_Type_BasicSlider ? Global.systemSettings.toPreferredUnit(output.unitType)
-			: output.type === VenusOS.SwitchableOutput_Type_NumericInput ? Global.systemSettings.toPreferredUnit(output.unitType)
+			: output.type === VenusOS.SwitchableOutput_Type_TemperatureSetpoint ? Services.settings.temperatureUnit
+			: output.type === VenusOS.SwitchableOutput_Type_BasicSlider ? Services.settings.toPreferredUnit(output.unitType)
+			: output.type === VenusOS.SwitchableOutput_Type_NumericInput ? Services.settings.toPreferredUnit(output.unitType)
 			: VenusOS.Units_None
 
 		// The text data to show for this output, if dataNumber is not applicable.
@@ -121,7 +121,7 @@ ListQuantityGroupNavigation {
 		id: dimmingItem
 		uid: output.uid + "/Dimming"
 		sourceUnit: Units.unitToVeUnit(output.unitType)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(output.unitType))
+		displayUnit: Units.unitToVeUnit(Services.settings.toPreferredUnit(output.unitType))
 	}
 
 	VeQuickItem {

@@ -13,7 +13,7 @@ ListNavigation {
 	property string sensorId
 
 	readonly property string tempRelayPrefix: BackendConnection.serviceUidForType("temprelay") + "/Sensor/" + sensorId
-	readonly property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/TempSensorRelay/" + sensorId
+	readonly property string settingsBindPrefix: Services.settings.serviceUid + "/Settings/TempSensorRelay/" + sensorId
 
 	function getTitle() {
 		if (device.name) {
@@ -25,11 +25,11 @@ ListNavigation {
 			if (inputNumber === "") {
 				//: %1 = temperature sensor type
 				//% "%1 temperature sensor"
-				return qsTrId("settings_relay_title_type_only").arg(Global.environmentInputs.temperatureTypeToText(temperatureType.value))
+				return qsTrId("settings_relay_title_type_only").arg(VenusOS.temperature_typeToText(value))
 			} else {
 				//: %1 = temperature sensor type, %2 = input number of the sensor
 				//% "%1 temperature sensor (%2)"
-				return qsTrId("settings_relay_title_type_and_number").arg(Global.environmentInputs.temperatureTypeToText(temperatureType.value)).arg(inputNumber)
+				return qsTrId("settings_relay_title_type_and_number").arg(VenusOS.temperature_typeToText(value)).arg(inputNumber)
 			}
 		}
 
@@ -101,27 +101,27 @@ ListNavigation {
 		id: c0Set
 		uid: settingsBindPrefix + "/0/SetValue"
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 
 	VeQuickItem {
 		id: c1Set
 		uid: settingsBindPrefix + "/1/SetValue"
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 
 	VeQuickItem {
 		id: c0Clear
 		uid: settingsBindPrefix + "/0/ClearValue"
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 
 	VeQuickItem {
 		id: c1Clear
 		uid: settingsBindPrefix + "/1/ClearValue"
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 }

@@ -365,21 +365,21 @@ Item {
 	function setSystem(config) {
 		let i
 		if (config?.state !== undefined) {
-			MockManager.setValue(Global.system.serviceUid + "/SystemState/State", config.state)
+			MockManager.setValue(Services.system.serviceUid + "/SystemState/State", config.state)
 		}
 		if (config?.showInputLoads !== undefined) {
-			MockManager.setValue(Global.system.serviceUid + "/Ac/Grid/DeviceType", config.showInputLoads ? 0 : undefined)
-			MockManager.setValue(Global.systemSettings.serviceUid + "/Settings/CGwacs/RunWithoutGridMeter", config.showInputLoads ? 0 : 1)
+			MockManager.setValue(Services.system.serviceUid + "/Ac/Grid/DeviceType", config.showInputLoads ? 0 : undefined)
+			MockManager.setValue(Services.settings.serviceUid + "/Settings/CGwacs/RunWithoutGridMeter", config.showInputLoads ? 0 : 1)
 		}
 		if (config?.hasAcOutSystem !== undefined) {
-			MockManager.setValue(Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem", config.hasAcOutSystem ? 1 : 0)
+			MockManager.setValue(Services.settings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem", config.hasAcOutSystem ? 1 : 0)
 		}
 		const phaseCount = config?.ac ? (config.ac.phaseCount ?? 3) : 0
 
 		// Clear the Power/Current values for any phases beyond the requested phase count.
 		for (const path of ["/Ac/Consumption", "/Ac/ConsumptionOnInput", "/Ac/ConsumptionOnOutput"]) {
 			for (i = 0; i < 3; ++i) {
-				const phasePath = Global.system.serviceUid + path + "/L" + (i+1)
+				const phasePath = Services.system.serviceUid + path + "/L" + (i+1)
 				for (const phaseSubPath of ["/Power", "/Current"]) {
 					if (i >= phaseCount) {
 						MockManager.setValue(phasePath + phaseSubPath, undefined)
@@ -391,7 +391,7 @@ Item {
 		}
 
 		// Update the /NumberOfPhases for the system AC load totals.
-		for (const acObject of [Global.system.load.ac, Global.system.load.acIn, Global.system.load.acOut]) {
+		for (const acObject of [Services.system.load.ac, Services.system.load.acIn, Services.system.load.acOut]) {
 			acObject._phaseCount.setValue(0) // trigger reset of PhaseModel
 			acObject._phaseCount.setValue(phaseCount)
 		}
@@ -411,8 +411,8 @@ Item {
 	}
 
 	function setAcInputs(config) {
-		setAcInputInfo(Global.acInputs.input1Info, config ? config[0] : emptyAcInput)
-		setAcInputInfo(Global.acInputs.input2Info, config ? config[1] : emptyAcInput)
+		setAcInputInfo(Services.acInputs.input1Info, config ? config[0] : emptyAcInput)
+		setAcInputInfo(Services.acInputs.input2Info, config ? config[1] : emptyAcInput)
 	}
 
 	function setAcInputInfo(inputInfo, inputInfoConfig) {
@@ -441,7 +441,7 @@ Item {
 		}
 		inputInfo.serviceInfoChanged() // force AcInputs.qml to update the acInput object now, so phases can be set
 
-		const input = Global.acInputs["input" + (inputInfo.inputIndex + 1)]
+		const input = Services.acInputs["input" + (inputInfo.inputIndex + 1)]
 		if (input) {
 			// Set phase data
 			const objectAcConn = input._phaseMeasurements

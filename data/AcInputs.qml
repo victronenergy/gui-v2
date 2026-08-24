@@ -9,10 +9,14 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	required property string systemServiceUid
+	required property string settingsServiceUid
+
 	property AcInput input1
 	property AcInput input2
 	readonly property int activeInSource: _activeInSource.value ?? VenusOS.AcInputs_InputSource_NotAvailable
 	readonly property string activeInServiceType: _activeInServiceType.value || ""
+	readonly property real maximumAcCurrent: _maximumAcCurrent.valid ? _maximumAcCurrent.value : NaN
 
 	readonly property AcInput highlightedInput: {
 		if (_activeInSource.valid || _activeInServiceType.valid) {
@@ -53,19 +57,29 @@ QtObject {
 	// AC input metadata from com.victronenergy.system/Ac/In/<1|2>. There are always two inputs.
 	property AcInputSystemInfo input1Info: AcInputSystemInfo {
 		inputIndex: 0
+		bindPrefix: root.systemServiceUid + "/Ac/In/" + inputIndex
+		settingsServiceUid: root.settingsServiceUid
 		onServiceInfoChanged: input1 = root.resetInput(input1, input1Info)
 	}
 	property AcInputSystemInfo input2Info: AcInputSystemInfo {
 		inputIndex: 1
+		bindPrefix: root.systemServiceUid + "/Ac/In/" + inputIndex
+		settingsServiceUid: root.settingsServiceUid
 		onServiceInfoChanged: input2 = root.resetInput(input2, input2Info)
 	}
 
 	readonly property VeQuickItem _activeInSource: VeQuickItem {
-		uid: Global.system.serviceUid + "/Ac/ActiveIn/Source"
+		uid: root.systemServiceUid + "/Ac/ActiveIn/Source"
 	}
 
 	readonly property VeQuickItem _activeInServiceType: VeQuickItem {
-		uid: Global.system.serviceUid + "/Ac/ActiveIn/ServiceType"
+		uid: root.systemServiceUid + "/Ac/ActiveIn/ServiceType"
+	}
+
+	readonly property VeQuickItem _maximumAcCurrent: VeQuickItem {
+		uid: root.input1Info.connected ? root.settingsServiceUid + "/Settings/Gui/Gauges/Ac/AcIn1/Consumption/Current/Max"
+		   : root.input2Info.connected ? root.settingsServiceUid + "/Settings/Gui/Gauges/Ac/AcIn2/Consumption/Current/Max"
+		   : root.settingsServiceUid + "/Settings/Gui/Gauges/Ac/NoAcIn/Consumption/Current/Max"
 	}
 
 	readonly property Component _acInputComponent: Component {
@@ -196,6 +210,4 @@ QtObject {
 		const match = roles.find(function(r) { return r.role === role })
 		return match ? match.name : "--"
 	}
-
-	Component.onCompleted: Global.acInputs = root
 }

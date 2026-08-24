@@ -26,7 +26,7 @@ ModalDialog {
 
 			Repeater {
 				id: repeater
-				model: Global.systemSettings.ess.stateModel
+				model: Services.settings.ess.stateModel
 				delegate: SettingsColumn {
 					width: parent.width
 

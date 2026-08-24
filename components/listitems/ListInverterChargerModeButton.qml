@@ -14,8 +14,8 @@ ListButton {
 
 	text: CommonWords.mode
 	secondaryText: device.serviceType !== "inverter" || isInverterChargerItem.value === 1
-			? Global.inverterChargers.inverterChargerModeToText(modeItem.value)
-			: Global.inverterChargers.inverterModeToText(modeItem.value)
+			? Services.inverterChargers.inverterChargerModeToText(modeItem.value)
+			: Services.inverterChargers.inverterModeToText(modeItem.value)
 	interactive: modeAdjustable
 	writeAccessLevel: VenusOS.User_AccessType_User
 

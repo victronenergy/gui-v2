@@ -68,6 +68,4 @@ QtObject {
 			return ""
 		}
 	}
-
-	Component.onCompleted: Global.inverterChargers = root
 }

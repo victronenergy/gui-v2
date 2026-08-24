@@ -31,7 +31,7 @@ Page {
 
 				VeQuickItem {
 					id: dEssModeItem
-					uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/Mode"
+					uid: Services.settings.serviceUid + "/Settings/DynamicEss/Mode"
 				}
 			}
 

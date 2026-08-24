@@ -2,6 +2,7 @@ set (VictronVenusOS_QML_MODULE_SINGLETON_SOURCES # All qml singletons have to be
     components/CommonWords.qml
     components/FirmwareVersion.qml
     Global.qml
+    data/Services.qml
 )
 set_source_files_properties(${VictronVenusOS_QML_MODULE_SINGLETON_SOURCES} PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
@@ -317,7 +318,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/widgets/WidgetHeader.qml
 
     data/AcInputs.qml
-    data/DataManager.qml
     data/DcInputs.qml
     data/EnvironmentInputs.qml
     data/Ess.qml

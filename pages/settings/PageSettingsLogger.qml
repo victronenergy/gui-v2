@@ -43,7 +43,7 @@ Page {
 
 				//% "VRM Portal access level"
 				text: qsTrId("settings_logging_vrm_portal")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Network/VrmPortal"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Network/VrmPortal"
 				updateDataOnClick: false
 				updateCurrentIndexOnClick: false // track backend value, set only when confirmation dialog is accepted.
 				popDestination: undefined   // do not automatically pop page when value is selected
@@ -85,7 +85,7 @@ Page {
 				id: portalId
 				//% "VRM Portal ID"
 				text: qsTrId("settings_vrm_portal_id")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Device/UniqueId"
+				dataItem.uid: Services.platform.serviceUid + "/Device/UniqueId"
 			}
 
 			ListLink {
@@ -97,7 +97,7 @@ Page {
 
 				VeQuickItem {
 					id: productId
-					uid: Global.venusPlatform.serviceUid + "/Device/ProductId"
+					uid: Services.platform.serviceUid + "/Device/ProductId"
 				}
 			}
 
@@ -132,7 +132,7 @@ Page {
 					//% "1 day"
 					{ display: qsTrId("settings_1_day"), value: 86400 },
 				]
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/LogInterval"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Vrmlogger/LogInterval"
 				preferredVisible: vrmPortalMode.dataItem.valid && vrmPortalMode.dataItem.value > 0
 			}
 
@@ -141,12 +141,12 @@ Page {
 
 				//% "Use secure connection (HTTPS)"
 				text: qsTrId("settings_https_enabled")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/HttpsEnabled"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Vrmlogger/HttpsEnabled"
 				preferredVisible: securityProfile.value !== VenusOS.Security_Profile_Secured
 
 				VeQuickItem {
 					id: securityProfile
-					uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
+					uid: Services.settings.serviceUid + "/Settings/System/SecurityProfile"
 				}
 			}
 
@@ -178,16 +178,16 @@ Page {
 				 * supposed to run. In other words: when it has a value and is false, then there is a problem.
 				 */
 				property VeQuickItem mqttRealtimeConnected: VeQuickItem {
-					uid: Global.venusPlatform.serviceUid + "/Mqtt/Bridges/GXdbus/Connected"
+					uid: Services.platform.serviceUid + "/Mqtt/Bridges/GXdbus/Connected"
 				}
 				property VeQuickItem mqttRealtimeStatus: VeQuickItem {
-					uid: Global.venusPlatform.serviceUid + "/Mqtt/Bridges/GXdbus/ConnectionStatus"
+					uid: Services.platform.serviceUid + "/Mqtt/Bridges/GXdbus/ConnectionStatus"
 				}
 				property VeQuickItem mqttRpcConnected: VeQuickItem {
-					uid: Global.venusPlatform.serviceUid + "/Mqtt/Bridges/GXrpc/Connected"
+					uid: Services.platform.serviceUid + "/Mqtt/Bridges/GXrpc/Connected"
 				}
 				property VeQuickItem mqttRpcStatus: VeQuickItem {
-					uid: Global.venusPlatform.serviceUid + "/Mqtt/Bridges/GXrpc/ConnectionStatus"
+					uid: Services.platform.serviceUid + "/Mqtt/Bridges/GXrpc/ConnectionStatus"
 				}
 
 				readonly property bool anyError:
@@ -272,14 +272,14 @@ Page {
 			ListSwitch {
 				//% "Reboot device when no contact"
 				text: qsTrId("settings_no_contact_reboot")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Watchdog/VrmTimeout"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Watchdog/VrmTimeout"
 				updateDataOnClick: false
 				checked: dataItem.value !== 0
 				onClicked: dataItem.setValue(checked ? 0 : 3600)
 			}
 
 			ListTimeSelector {
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Watchdog/VrmTimeout"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Watchdog/VrmTimeout"
 				//% "No contact reset delay (hh:mm)"
 				text: qsTrId("settings_vrm_no_contact_reset_delay")
 				preferredVisible: !!dataItem.value && dataItem.value > 0

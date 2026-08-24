@@ -23,7 +23,7 @@ Page {
 	VeQuickItem {
 		id: _locations
 
-		uid: Global.systemSettings.serviceUid + "/Settings/Fronius/ModbusAlternates"
+		uid: Services.settings.serviceUid + "/Settings/Fronius/ModbusAlternates"
 		// eg: [[1501,1],[1502,2]]
 	}
 

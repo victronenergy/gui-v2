@@ -18,7 +18,7 @@ Page {
 
 		// Add tank aggregate options for all tank types on the system, or for the currently
 		// selected tank type, if one is selected.
-		for (tankModel of Global.tanks.allTankModels) {
+		for (tankModel of Services.tanks.allTankModels) {
 			if (tankModel.count > 0
 					|| (selectedCenterGaugeType === VenusOS.BriefView_CentralGauge_TankAggregate &&
 						parseInt(selectedCenterGaugeValue) === tankModel.type)) {
@@ -52,7 +52,7 @@ Page {
 
 		// Add individual tank options
 		let foundSelectedTank = false
-		for (tankModel of Global.tanks.allTankModels) {
+		for (tankModel of Services.tanks.allTankModels) {
 			for (let i = 0; i < tankModel.count; ++i) {
 				const tank = tankModel.deviceAt(i)
 				const portableId = BackendConnection.serviceUidToPortableId(tank.serviceUid, tank.deviceInstance)
@@ -139,14 +139,14 @@ Page {
 			id: levelDelegate
 
 			required property int index
-			readonly property var modelData: Global.systemSettings.briefView.centralGauges[index]
+			readonly property var modelData: Services.settings.briefView.centralGauges[index]
 			readonly property int centerGaugeType: modelData?.centerGaugeType ?? -1
 			readonly property var centerGaugeValue: modelData?.value ?? ""
 
 			readonly property Tank _device: {
 				if (centerGaugeType === VenusOS.BriefView_CentralGauge_TankId) {
 					const tankIdInfo = BackendConnection.portableIdInfo(levelDelegate.centerGaugeValue)
-					for (const tankModel of Global.tanks.allTankModels) {
+					for (const tankModel of Services.tanks.allTankModels) {
 						const tank = tankModel.deviceForDeviceInstance(tankIdInfo.instance)
 						if (tank) {
 							return tank
@@ -226,7 +226,7 @@ Page {
 					//% "Show percentages"
 					{ display: qsTrId("settings_briefview_unit_percentages"), value: VenusOS.BriefView_Unit_Percentage },
 				]
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/BriefView/Unit"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gui/BriefView/Unit"
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
@@ -259,14 +259,14 @@ Page {
 
 			VeQuickItem {
 				id: levelItem
-				uid: Global.systemSettings.serviceUid + "/Settings/Gui2/BriefView/Level/" + deviceOptionsPage.levelIndex
+				uid: Services.settings.serviceUid + "/Settings/Gui2/BriefView/Level/" + deviceOptionsPage.levelIndex
 			}
 		}
 	}
 
 	VeQuickItem {
 		id: activeBatteryService
-		uid: Global.system.serviceUid + "/ActiveBatteryService"
+		uid: Services.system.serviceUid + "/ActiveBatteryService"
 	}
 
 	VeQuickItem {
@@ -274,7 +274,7 @@ Page {
 
 		property var mapObject: ({})
 
-		uid: Global.system.serviceUid + "/AvailableBatteryServices"
+		uid: Services.system.serviceUid + "/AvailableBatteryServices"
 		onValueChanged: {
 			try {
 				mapObject = JSON.parse(value)
@@ -286,6 +286,6 @@ Page {
 
 	VeQuickItem {
 		id: batteriesItem
-		uid: Global.system.serviceUid + "/Batteries"
+		uid: Services.system.serviceUid + "/Batteries"
 	}
 }

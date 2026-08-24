@@ -11,7 +11,7 @@ OverviewWidget {
 	id: root
 
 	onClicked: {
-		if (Global.inverterChargers.deviceCount > 1) {
+		if (Services.inverterChargers.deviceCount > 1) {
 			Global.pageManager.pushPage("/pages/invertercharger/InverterChargerListPage.qml")
 		} else {
 			// Show page for chargers
@@ -22,7 +22,7 @@ OverviewWidget {
 						{ "bindPrefix": charger.serviceUid })
 			} else {
 				// Show page for inverter, vebus and acsystem services
-				const device = Global.inverterChargers.firstObject
+				const device = Services.inverterChargers.firstObject
 				Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml",
 						{ "serviceUid": device.serviceUid })
 			}
@@ -32,7 +32,7 @@ OverviewWidget {
 	//% "Inverter / Charger"
 	title: qsTrId("overview_widget_inverter_title")
 	type: VenusOS.OverviewWidget_Type_VeBusDevice
-	enabled: !!Global.inverterChargers.firstObject
+	enabled: !!Services.inverterChargers.firstObject
 	rightPadding: Theme.geometry_overviewPage_widget_sideGauge_margins
 
 	contentItem: Item {
@@ -53,7 +53,7 @@ OverviewWidget {
 			}
 
 			Label {
-				text: VenusOS.system_stateToText(Global.system.state)
+				text: VenusOS.system_stateToText(Services.system.state)
 				font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_medium
 				minimumPixelSize: Theme.font_overviewPage_widget_quantityLabel_small
 				fontSizeMode: Text.Fit
@@ -87,8 +87,8 @@ OverviewWidget {
 			}
 			sourceComponent: ThreePhaseBarGauge {
 				valueType: VenusOS.Gauges_ValueType_RisingPercentage
-				phaseModel: Global.system.load.ac.phases
-				maximumValue: Global.system.load.maximumAcCurrent
+				phaseModel: Services.system.load.ac.phases
+				maximumValue: Services.acInputs.maximumAcCurrent
 				animationEnabled: root.animationEnabled
 				inOverviewWidget: true
 			}

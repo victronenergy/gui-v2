@@ -45,6 +45,7 @@ if (${VENUS_GX_BUILD})
             ApplicationContent.qml
             FrameRateVisualizer.qml
             Global.qml
+            data/Services.qml
         DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/VenusOS)
     install(
         DIRECTORY
