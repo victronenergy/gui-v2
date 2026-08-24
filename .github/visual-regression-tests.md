@@ -30,18 +30,25 @@ By default, captured images are stored in `<working-directory>/image-captures/` 
 
 ### Comparing images
 
-The comparison tool lives in `tools/uicompare/`. It expects:
-- `tools/uicompare/image-captures-baseline/` — known-good reference images
-- `tools/uicompare/image-captures/` — newly captured candidate images
+The comparison tool lives in `tools/uicompare/`. It expects, relative to its working directory:
+- `image-captures-baseline/` — known-good reference images
+- `image-captures-candidate/` — newly captured candidate images
 
 ```bash
 # Build and run the comparison tool
-cd tools/uicompare
-cmake -B build && cmake --build build
-./build/bin/uicompare
+cmake -B build-uicompare -S tools/uicompare && cmake --build build-uicompare
+cd build-uicompare && ./bin/uicompare
 ```
 
 The tool provides a side-by-side visual interface showing differences, with pass/fail status for each image based on a similarity threshold.
+
+Run it with `--headless` to compare the image sets without showing the UI. In that mode it prints a summary, optionally writes the per-image results to a JSON file with `--output`, and exits with a non-zero code if the two image sets are not equivalent:
+
+```bash
+./bin/uicompare --headless --error-tolerance 10.0 --output ui-comparison-results.json
+```
+
+`tools/ui_capture_and_compare.py` automates the whole sequence: it builds a baseline and a candidate revision, captures an image set with each, and then runs the comparison tool.
 
 ### Headless smoke test
 
