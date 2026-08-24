@@ -107,6 +107,16 @@ navigation bar button and on the first settings list item:
 UI tests cannot press keys yet, so the test turns on key navigation and gives each item the
 focus directly. Like other test configurations, it needs an empty capture directory.
 
+### Headless smoke test
+
+Add `--ui-test-headless` to run a UI test without saving or comparing any images. Every screen is still navigated to and rendered, but the capture is discarded, and the result is printed to stdout (or stderr on failure):
+
+```bash
+QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test smoke/mock-maximal --ui-test-headless
+```
+
+When the test configuration sets `ExitWhenFinished`, gui-v2 exits with a non-zero code if any test step failed — with or without `--ui-test-headless`.
+
 ## Workflow for verifying changes
 
 1. **Before your change**: run the visual tests to capture a baseline set of images
