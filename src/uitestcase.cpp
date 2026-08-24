@@ -9,9 +9,11 @@
 #include <QCoreApplication>
 #include <QRegularExpression>
 #include <QTimer>
+#include <QUrl>
 
 #include <QQmlComponent>
 #include <QQmlEngine>
+#include <QQmlProperty>
 
 #include "uitestcase.h"
 #include "uitest.h"
@@ -28,16 +30,26 @@ bool itemMatchesProperties(QObject *item, const QVariantMap &params)
 		return false;
 	}
 	for (auto it = params.constBegin(); it != params.constEnd(); ++it) {
-		const QMetaObject *mo = item->metaObject();
-		const int propertyIndex = mo->indexOfProperty(it.key().toUtf8());
-		if (propertyIndex < 0) {
-			return false;
-		}
-		QMetaProperty property = mo->property(propertyIndex);
+		const QQmlProperty property(item, it.key());
 		if (!property.isValid()) {
 			return false;
 		}
-		if (property.read(item) != it.value()) {
+
+		const QVariant actualValue = property.read();
+		const QVariant expectedValue = it.value();
+		if (actualValue == expectedValue) {
+			continue;
+		}
+
+		const QUrl actualUrl = actualValue.toUrl();
+		const QUrl expectedUrl = expectedValue.toUrl();
+		if (actualUrl.isValid() && expectedUrl.isValid()) {
+			if (actualUrl == expectedUrl || actualUrl.toString() == expectedUrl.toString()) {
+				continue;
+			}
+		}
+
+		if (actualValue.toString() != expectedValue.toString()) {
 			return false;
 		}
 	}
@@ -330,7 +342,7 @@ QString UiTestCase::sanitizedImageName(const QString &imageName) const
 
 	// As a simple way to make a valid file name, normalize the string, then strip punctuation and
 	// whitespace.
-	static const QRegularExpression punctuationRegex("[!\"#$%&'()*+,-./:;<=>?@\[\\]^_`{|}~]");
+	static const QRegularExpression punctuationRegex(R"([!"#$%&'()*+,-./:;<=>?@\[\\\]^_`{|}~])");
 	static const QRegularExpression whitespaceRegex("\\s");
 
 	QString sanitized = imageName.normalized(QString::NormalizationForm_C)

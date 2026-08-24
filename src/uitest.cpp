@@ -12,10 +12,12 @@
 #include <QMetaObject>
 #include <QLoggingCategory>
 #include <QQmlComponent>
+#include <QQmlEngine>
 
 #include "veutil/qt/ve_qitem.hpp"
 
 #include "uitest.h"
+#include "uitestutils.h"
 #include "uitestcase.h"
 #include "backendconnection.h"
 #include "mockmanager.h"
@@ -23,6 +25,16 @@
 #include "clocktime.h"
 
 using namespace Victron::VenusOS;
+
+namespace {
+
+QString configurationFilePath(const QString &dirName)
+{
+	const QString confName = dirName.mid(dirName.lastIndexOf('/') + 1);
+	return QString(":/tests/ui/%1/%2.json").arg(dirName).arg(confName);
+}
+
+}
 
 UiTestConfiguration::UiTestConfiguration()
 {
@@ -38,8 +50,7 @@ void UiTestConfiguration::load(const QString &dirName)
 		qCFatal(venusGuiTest) << "Cannot load empty test configuration!";
 	}
 
-	const QString confName = dirName.mid(dirName.lastIndexOf('/') + 1);
-	const QString filePath = QString(":/tests/ui/%1/%2.json").arg(dirName).arg(confName);
+	const QString filePath = configurationFilePath(dirName);
 
 	QFile file(filePath);
 	if (!file.open(QFile::ReadOnly | QFile::Text)) {
@@ -57,6 +68,74 @@ void UiTestConfiguration::load(const QString &dirName)
 	m_settings = doc.object().toVariantMap();
 
 	qCInfo(venusGuiTest) << "Loaded test configuration:" << filePath;
+}
+
+bool UiTestConfiguration::exists(const QString &dirName)
+{
+	if (dirName.isEmpty()) {
+		return false;
+	}
+
+	return QFile::exists(configurationFilePath(dirName));
+}
+
+// Build an ad-hoc ui-test configuration that opens one target page via a statically resolved click route.
+void UiTestConfiguration::loadTargetPageNavigation(const QString &targetPage)
+{
+	if (targetPage.isEmpty()) {
+		qCFatal(venusGuiTest) << "Cannot load empty target page!";
+	}
+
+	const QString normalizedTargetPage = UiTestUtils::normalizePageUrl(targetPage);
+	if (normalizedTargetPage.isEmpty()) {
+		qCFatal(venusGuiTest) << "Invalid value for --ui-test:" << targetPage
+				<< "- not a known test configuration directory, and not a valid page path."
+				<< "Page paths must start with /pages/ and end with .qml"
+				<< "(e.g. /pages/settings/PageSettingsConnectivity.qml).";
+	}
+
+	QString entryNavText;
+	QList<UiTestUtils::RouteStep> resolvedSteps;
+	if (!UiTestUtils::resolveTargetRoute(normalizedTargetPage, &entryNavText, &resolvedSteps)) {
+		qCFatal(venusGuiTest) << "Unable to resolve navigation route to target page:" << normalizedTargetPage
+				<< "- the page may not be reachable from any root page."
+				<< "Root pages (e.g. SettingsPage.qml, OverviewPage.qml) cannot be targeted directly.";
+	}
+
+	// Serialize route steps as QVariantList of { type, values, expectedPage } maps for QML.
+	QVariantList routeSteps;
+	for (const UiTestUtils::RouteStep &step : resolvedSteps) {
+		QString typeName;
+		switch (step.identifier.type) {
+		case UiTestUtils::ClickIdentifier::Text: typeName = QStringLiteral("text"); break;
+		case UiTestUtils::ClickIdentifier::Title: typeName = QStringLiteral("title"); break;
+		case UiTestUtils::ClickIdentifier::IconSource: typeName = QStringLiteral("iconSource"); break;
+		case UiTestUtils::ClickIdentifier::ObjectName: typeName = QStringLiteral("objectName"); break;
+		}
+		routeSteps.append(QVariantMap{
+			{ QStringLiteral("type"), typeName },
+			{ QStringLiteral("values"), step.identifier.values },
+			{ QStringLiteral("expectedPage"), step.expectedPageUrl },
+		});
+	}
+
+	m_dirName = QStringLiteral("target-page");
+	m_settings = {
+		{ QStringLiteral("ExitWhenFinished"), true },
+		{ QStringLiteral("Logging"), QStringLiteral("info") },
+		{ QStringLiteral("TargetPage"), normalizedTargetPage },
+		{ QStringLiteral("RouteEntryLabel"), entryNavText },
+		{ QStringLiteral("RouteSteps"), routeSteps },
+		{ QStringLiteral("Tests"), QStringList{ QStringLiteral("tst_target_page.qml") } },
+		{ QStringLiteral("Steps"), QVariantMap{
+			{ QStringLiteral("WaitUntil"), QVariantMap{
+				{ QStringLiteral("DefaultTimeout"), 5000 },
+			}},
+		}},
+	};
+
+	qCInfo(venusGuiTest) << "Using single-page UI navigation mode for target page:" << normalizedTargetPage
+			<< "with" << routeSteps.count() << "route steps";
 }
 
 QString UiTestConfiguration::dirName() const
@@ -93,8 +172,15 @@ UiTest::UiTest(QObject *parent)
 
 void UiTest::loadConfiguration(const UiTestConfiguration &conf)
 {
+	setTargetPageWarningMonitoringEnabled(false);
+
 	m_settings = conf.settingsMap();
 	m_relativeTestDir = conf.dirName();
+	m_passCount = 0;
+	m_failCount = 0;
+	m_runtimeQmlErrorCount = 0;
+	m_elapsed = 0;
+	m_recordedQmlWarnings.clear();
 
 	// Read general configuration values.
 	const QVariant logLevel = settingValue("Logging");
@@ -147,6 +233,7 @@ void UiTest::start()
 	ClockTime::create()->setClockTime(1);
 
 	qCInfo(venusGuiTest) << "Starting UI tests...";
+	setTargetPageWarningMonitoringEnabled(isTargetPageMode());
 
 	QDir imageDir(CaptureAndCompareStep::absoluteImagePath(QString()));
 	const QString imageDirPath = imageDir.absolutePath();
@@ -188,9 +275,11 @@ void UiTest::startNextTestCase()
 	if (m_currentTestIndex < m_testFileNames.count()) {
 		const QString &testFileName = m_testFileNames.at(m_currentTestIndex);
 		UiTestCase *testCase = nullptr;
+		bool failedToLoad = false;
 		const QUrl url = QString("qrc:/qt/qml/Victron/UiTest/tests/ui/%1/%2").arg(m_relativeTestDir).arg(testFileName);
 		QQmlComponent component(qmlEngine(this), url, this);
 		if (component.isError()) {
+			failedToLoad = true;
 			qCWarning(venusGuiTest) << qPrintable(QStringLiteral("Failed to load test '%1', url: %2")
 					.arg(testFileName).arg(component.url().toString()));
 			for (const QQmlError &qmlError : component.errors()) {
@@ -204,10 +293,12 @@ void UiTest::startNextTestCase()
 			if (testObject) {
 				testCase = qobject_cast<UiTestCase*>(testObject);
 				if (!testCase) {
+					failedToLoad = true;
 					qCWarning(venusGuiTest) << qPrintable(QStringLiteral("Root type is not TestCase in '%1', url: %2")
 							.arg(testFileName).arg(component.url().toString()));
 				}
 			} else {
+				failedToLoad = true;
 				qCWarning(venusGuiTest) << qPrintable(QStringLiteral("Failed to create TestCase object for '%1', url: %2")
 						.arg(testFileName).arg(component.url().toString()));
 				for (const QQmlError &qmlError : component.errors()) {
@@ -219,6 +310,9 @@ void UiTest::startNextTestCase()
 			connect(testCase, &UiTestCase::finished, this, &UiTest::testCaseFinished);
 			testCase->start();
 		} else {
+			if (failedToLoad) {
+				++m_failCount;
+			}
 			qCInfo(venusGuiTest) << "Skipping to next test!";
 			QTimer::singleShot(0, this, &UiTest::startNextTestCase);
 		}
@@ -229,14 +323,16 @@ void UiTest::startNextTestCase()
 				: QStringLiteral("%1m %2s")
 					.arg(totalSeconds / 60)
 					.arg(totalSeconds < 60 ? totalSeconds : totalSeconds % 60);
-		qCInfo(venusGuiTest) << qPrintable(QStringLiteral("All tests finished: %1 steps passed, %2 steps failed, in %3")
+		qCInfo(venusGuiTest) << qPrintable(QStringLiteral("All tests finished: %1 steps passed, %2 steps failed, %3 runtime QML errors, in %4")
 				.arg(m_passCount)
 				.arg(m_failCount)
+				.arg(m_runtimeQmlErrorCount)
 				.arg(durationText));
 		qCInfo(venusGuiTest) << "********************************************************";
+		setTargetPageWarningMonitoringEnabled(false);
 		setStatus(Finished);
 		if (exitWhenFinished()) {
-			qApp->quit();
+			qApp->exit(UiTestUtils::exitCodeForFailures(m_failCount, m_runtimeQmlErrorCount));
 		}
 	}
 }
@@ -275,6 +371,41 @@ int UiTest::testCaseCount() const
 bool UiTest::exitWhenFinished() const
 {
 	return settingValue("ExitWhenFinished").toBool();
+}
+
+bool UiTest::isTargetPageMode() const
+{
+	return m_relativeTestDir == QStringLiteral("target-page")
+			&& m_settings.contains(QStringLiteral("TargetPage"));
+}
+
+void UiTest::setTargetPageWarningMonitoringEnabled(bool enabled)
+{
+	if (enabled) {
+		if (m_qmlWarningsConnection) {
+			return;
+		}
+		if (QQmlEngine *engine = qmlEngine(this)) {
+			m_qmlWarningsConnection = connect(engine, &QQmlEngine::warnings, this, &UiTest::onQmlWarnings);
+		}
+	} else if (m_qmlWarningsConnection) {
+		disconnect(m_qmlWarningsConnection);
+		m_qmlWarningsConnection = QMetaObject::Connection();
+	}
+}
+
+void UiTest::onQmlWarnings(const QList<QQmlError> &warnings)
+{
+	if (!isTargetPageMode()) {
+		return;
+	}
+
+	QStringList newWarnings;
+	m_runtimeQmlErrorCount += UiTestUtils::countNewRuntimeQmlWarnings(
+			warnings, &m_recordedQmlWarnings, &newWarnings);
+	for (const QString &warningText : newWarnings) {
+		qCWarning(venusGuiTest) << qPrintable(QStringLiteral("Target-page runtime QML error: %1").arg(warningText));
+	}
 }
 
 QVariant UiTest::settingValue(const QString &key, const QVariant &defaultValue) const
