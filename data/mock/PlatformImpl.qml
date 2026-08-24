@@ -10,6 +10,10 @@ Item {
 	id: root
 
 	property var userTokens: []
+	property var bleUserTokens: [
+		{ token_name: "ble_token/ble_gw/Living Room" },
+		{ token_name: "ble_token/ble_gw/Garage" },
+	]
 
 	function setPlatformValue(path, value) {
 		MockManager.setValue(Global.venusPlatform.serviceUid + path, value)
@@ -30,8 +34,23 @@ Item {
 		root.userTokens = temp
 	}
 
+	function removeBleToken(tokenName) {
+		let temp = root.bleUserTokens.slice()
+		for (let i = 0; i < temp.length; ++i) {
+			if (temp[i].token_name === tokenName) {
+				temp.splice(i, 1)
+				break
+			}
+		}
+		root.bleUserTokens = temp
+	}
+
 	onUserTokensChanged: {
 		setPlatformValue("/Tokens/Users", JSON.stringify(userTokens))
+	}
+
+	onBleUserTokensChanged: {
+		setPlatformValue("/BleTokens/Users", JSON.stringify(bleUserTokens))
 	}
 
 	// Set /Tokens/Users according to the available evcharger services.
@@ -78,6 +97,11 @@ Item {
 		id: pairingRemove
 		uid: Global.venusPlatform.serviceUid + "/Tokens/Remove"
 		onValueChanged: root.removeToken(value)
+	}
+
+	VeQuickItem {
+		uid: Global.venusPlatform.serviceUid + "/BleTokens/Remove"
+		onValueChanged: root.removeBleToken(value)
 	}
 
 	Timer {
