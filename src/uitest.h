@@ -6,7 +6,11 @@
 #ifndef VICTRON_GUIV2_UITEST_H
 #define VICTRON_GUIV2_UITEST_H
 
+#include <QList>
+#include <QMetaObject>
+#include <QSet>
 #include <QVariantMap>
+#include <QQmlError>
 #include <QQmlEngine>
 
 namespace Victron {
@@ -23,6 +27,8 @@ public:
 	// E.g. if dirName="smoke/mock-maximal", then this attempts to load a JSON file from
 	// qrc:tests/ui/smoke/mock-maximal/mock-maximal.json.
 	void load(const QString &dirName);
+	bool exists(const QString &dirName) const;
+	void loadTargetPageNavigation(const QString &targetPage);
 
 	bool isValid() const { return !dirName().isEmpty(); }
 	QString dirName() const;
@@ -83,7 +89,7 @@ public:
 	Status status() const;
 	int testCaseCount() const;
 
-	QVariant settingValue(const QString &key, const QVariant &defaultValue = QVariant()) const;
+	Q_INVOKABLE QVariant settingValue(const QString &key, const QVariant &defaultValue = QVariant()) const;
 
 	static UiTest* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
@@ -96,6 +102,9 @@ private:
 	void setStatus(Status status);
 	void startNextTestCase();
 	bool exitWhenFinished() const;
+	bool isTargetPageMode() const;
+	void setTargetPageWarningMonitoringEnabled(bool enabled);
+	void onQmlWarnings(const QList<QQmlError> &warnings);
 	void testCaseFinished(int passCount, int failCount, int elapsed);
 
 	QVariantMap m_settings;
@@ -104,8 +113,11 @@ private:
 	int m_currentTestIndex = -1;
 	int m_passCount = 0;
 	int m_failCount = 0;
+	int m_runtimeQmlErrorCount = 0;
 	int m_elapsed = 0;
 	Status m_status = NotConfigured;
+	QSet<QString> m_recordedQmlWarnings;
+	QMetaObject::Connection m_qmlWarningsConnection;
 };
 
 }

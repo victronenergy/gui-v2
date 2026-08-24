@@ -740,6 +740,12 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/uiconfig.cpp
     src/uitest.h
     src/uitest.cpp
+    src/uitestargutils.h
+    src/uitestargutils.cpp
+    src/uitestresultutils.h
+    src/uitestresultutils.cpp
+    src/uitestutils.h
+    src/uitestutils.cpp
     src/uitestcase.h
     src/uitestcase.cpp
     src/uiteststep.h
