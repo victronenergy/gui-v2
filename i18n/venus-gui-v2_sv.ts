@@ -1048,10 +1048,15 @@
       <source>Update build date/time</source>
       <translation>Uppdatera tillv. datum/tid</translation>
     </message>
+    <message id="settings_rssystem_inverters">
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="99"/>
+      <source>Inverters</source>
+      <translation>Växelriktare</translation>
+    </message>
     <message id="page_settings_fronius_inverters">
       <location filename="../../pages/settings/PageSettingsFronius.qml" line="30"/>
       <source>Inverters</source>
-      <translation>Växelriktare</translation>
+      <translation type="unfinished">Växelriktare</translation>
     </message>
     <message id="page_settings_fronius_find_pv_inverters">
       <location filename="../../pages/settings/PageSettingsFronius.qml" line="36"/>
@@ -4867,7 +4872,7 @@ Vill du fortsätta?</translation>
       <translation>Serienummer</translation>
     </message>
     <message id="nav_settings">
-      <location filename="../../pages/SettingsPage.qml" line="18"/>
+      <location filename="../../pages/SettingsPage.qml" line="19"/>
       <source>Settings</source>
       <translation>Inställningar</translation>
     </message>
@@ -5052,7 +5057,7 @@ Vill du fortsätta?</translation>
       <translation>Generatorn fortsätter att vara i drift om villkoren för autostart uppfylls.</translation>
     </message>
     <message id="modaldialog_set">
-      <location filename="../../components/dialogs/ModalDialog.qml" line="43"/>
+      <location filename="../../components/dialogs/ModalDialog.qml" line="45"/>
       <source>Set</source>
       <translation>Spara</translation>
     </message>
@@ -6892,7 +6897,7 @@ Vill du fortsätta?</translation>
       <translation>Inget lösenord och nätverkskommunikationen är inte krypterad</translation>
     </message>
     <message id="settings_security_profile_password_incorrect_length">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="28"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="21"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>Lösenordet måste innehålla minst 8 tecken</translation>
     </message>
@@ -7417,42 +7422,42 @@ Vill du fortsätta?</translation>
       <translation>Arktis</translation>
     </message>
     <message id="settings_all_connected_devices">
-      <location filename="../../pages/SettingsPage.qml" line="40"/>
+      <location filename="../../pages/SettingsPage.qml" line="68"/>
       <source>All connected devices</source>
       <translation>Alla anslutna enheter</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="48"/>
+      <location filename="../../pages/SettingsPage.qml" line="76"/>
       <source>General</source>
       <translation type="unfinished">Allmänt</translation>
     </message>
     <message id="settings_connectivity">
-      <location filename="../../pages/SettingsPage.qml" line="59"/>
+      <location filename="../../pages/SettingsPage.qml" line="87"/>
       <source>Connectivity</source>
       <translation>Anslutningsmöjligheter</translation>
     </message>
     <message id="settings_ethernet_wifi_bluetooth_vecan">
-      <location filename="../../pages/SettingsPage.qml" line="61"/>
+      <location filename="../../pages/SettingsPage.qml" line="89"/>
       <source>Ethernet, Wi-Fi, Bluetooth, VE.Can</source>
       <translation>Ethernet, WiFi, Bluetooth, VE.Can</translation>
     </message>
     <message id="settings_vrm">
-      <location filename="../../pages/SettingsPage.qml" line="68"/>
+      <location filename="../../pages/SettingsPage.qml" line="96"/>
       <source>VRM</source>
       <translation>VRM</translation>
     </message>
     <message id="settings_remote_monitoring_portal">
-      <location filename="../../pages/SettingsPage.qml" line="70"/>
+      <location filename="../../pages/SettingsPage.qml" line="98"/>
       <source>Remote monitoring portal</source>
       <translation>Fjärrövervakningsportal</translation>
     </message>
     <message id="settings_advanced">
-      <location filename="../../pages/SettingsPage.qml" line="77"/>
+      <location filename="../../pages/SettingsPage.qml" line="105"/>
       <source>Advanced</source>
       <translation type="unfinished">Avancerad</translation>
     </message>
     <message id="settings_integrations">
-      <location filename="../../pages/SettingsPage.qml" line="82"/>
+      <location filename="../../pages/SettingsPage.qml" line="110"/>
       <source>Integrations</source>
       <translation type="unfinished">Integrationer</translation>
     </message>
@@ -7462,22 +7467,22 @@ Vill du fortsätta?</translation>
       <translation>Integrationer</translation>
     </message>
     <message id="settings_acdcsystem_ess_dvcc_battery">
-      <location filename="../../pages/SettingsPage.qml" line="93"/>
+      <location filename="../../pages/SettingsPage.qml" line="121"/>
       <source>AC/DC system, ESS, DVCC, Battery...</source>
       <translation>AC/DC-system, ESS, DVCC, batteri...</translation>
     </message>
     <message id="settings_debug_and_develop">
-      <location filename="../../pages/SettingsPage.qml" line="100"/>
+      <location filename="../../pages/SettingsPage.qml" line="128"/>
       <source>Debug &amp; Develop</source>
       <translation>Felsökning och utveckling</translation>
     </message>
     <message id="settings_profilingtools_debugstatistics_appversion">
-      <location filename="../../pages/SettingsPage.qml" line="102"/>
+      <location filename="../../pages/SettingsPage.qml" line="130"/>
       <source>Profiling tools, debug statistics, app version...</source>
       <translation>Profileringsverktyg, felsökningsstatistik, appversion...</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="91"/>
+      <location filename="../../pages/SettingsPage.qml" line="119"/>
       <source>System Setup</source>
       <translation>Systeminstallation</translation>
     </message>
@@ -7910,7 +7915,7 @@ Vill du fortsätta?</translation>
       <translation>Fast programvara installerad, enheten startar om.</translation>
     </message>
     <message id="modaldialog_confirm">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="55"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="39"/>
       <source>Confirm</source>
       <translation>Bekräfta</translation>
     </message>
@@ -8324,17 +8329,17 @@ Vill du fortsätta?</translation>
       <translation>Överbelastningstillstånd växelriktare</translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="57"/>
+      <location filename="../../ApplicationContent.qml" line="55"/>
       <source>Touch input on</source>
       <translation>Touch-ingång på</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="59"/>
+      <location filename="../../ApplicationContent.qml" line="57"/>
       <source>Touch input off</source>
       <translation>Touch-ingång av</translation>
     </message>
     <message id="application_content_touch_input_disabled">
-      <location filename="../../ApplicationContent.qml" line="73"/>
+      <location filename="../../ApplicationContent.qml" line="71"/>
       <source>Touch input disabled</source>
       <translation>Touch-ingång inaktiv</translation>
     </message>
@@ -8891,11 +8896,6 @@ Observera att denna meny endast visar Carlo Gavazzi-mätare anslutna över RS485
       <source>System alarms</source>
       <translation>Systemlarm</translation>
     </message>
-    <message id="settings_rs_devices">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="99"/>
-      <source>RS devices</source>
-      <translation>RS-enheter</translation>
-    </message>
     <message id="rs_no_system_alarms">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="60"/>
       <source>No system alarms</source>
@@ -8956,7 +8956,7 @@ Med strömlinjeformad navigering och en fräsch look blir allting du älskar än
       <translation type="unfinished">Kontroller:</translation>
     </message>
     <message id="controlcards_empty_title">
-      <location filename="../../pages/ControlCardsPage.qml" line="154"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="155"/>
       <source>Controls</source>
       <translation>Kontroller:</translation>
     </message>
@@ -9501,12 +9501,12 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>AC-ingång %1</translation>
     </message>
     <message id="settings_security_profile_change_password_description">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="85"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="69"/>
       <source>Please enter a new GX password:</source>
       <translation>Ange ett nytt GX-lösenord</translation>
     </message>
     <message id="settings_security_profile_enter_new_password">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="100"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="84"/>
       <source>Enter new password</source>
       <translation>Ange nytt lösenord</translation>
     </message>
@@ -9527,7 +9527,7 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>Aktivera denna inställning när du har ett andra MultiPlus- eller Quattro-system som förses med ström från samma batteribank som det huvudsakliga växelriktar-/laddarsystemet. När denna inställning är aktiv använder det andra systemet CVL- och DCL-parametrarna för de valda BMS:erna,</translation>
     </message>
     <message id="settings_access_control_display_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="50"/>
+      <location filename="../../pages/SettingsPage.qml" line="78"/>
       <source>Access control, Display, Firmware, Support</source>
       <translation>Åtkomstkontroll, display, fast programvara, support</translation>
     </message>
@@ -10181,7 +10181,7 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>Aktivera Venus OS Large-firmware för att använda Node-RED eller Signal-K</translation>
     </message>
     <message id="settings_relays_sensors_tanks">
-      <location filename="../../pages/SettingsPage.qml" line="84"/>
+      <location filename="../../pages/SettingsPage.qml" line="112"/>
       <source>Relays, Sensors, PV Inverters, Modbus, Node-RED</source>
       <translation>Reläer, sensorer, solcellsväxelriktare, Modbus, Node-RED</translation>
     </message>
@@ -10616,17 +10616,17 @@ GX-enheten kan endast styra en ansluten generator och tar den med det lägsta VR
       <translation>Endast på VRM</translation>
     </message>
     <message id="control_cards_title">
-      <location filename="../../pages/ControlCardsPage.qml" line="20"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="21"/>
       <source>Controls</source>
       <translation type="unfinished">Kontroller:</translation>
     </message>
     <message id="controlcards_empty_desc1">
-      <location filename="../../pages/ControlCardsPage.qml" line="156"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="157"/>
       <source>No compatible devices found</source>
       <translation>Inga kompatibla enheter hittades</translation>
     </message>
     <message id="controlcards_empty_desc2">
-      <location filename="../../pages/ControlCardsPage.qml" line="158"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="159"/>
       <source>Connect devices that support this function</source>
       <translation>Anslut enheter som stöder denna funktion</translation>
     </message>
@@ -11245,7 +11245,7 @@ Uppdatera till den senaste firmwaren för att kunna justera dessa inställningar
       <translation>Startar, detta kan ta några sekunder...</translation>
     </message>
     <message id="settings_security_profile_change_password_title">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="52"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="36"/>
       <source>Change the GX Password</source>
       <translation>Ändra GX-lösenordet</translation>
     </message>
@@ -11346,54 +11346,49 @@ Uppdatera till den senaste firmwaren för att kunna justera dessa inställningar
       <source>Rescan for IP addresses</source>
       <translation>Sök igen efter IP-adresser</translation>
     </message>
-    <message id="mqtt_devices_ev_charging_station">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="16"/>
-      <source>EV Charging Station</source>
-      <translation>EV Charging Stations</translation>
-    </message>
     <message id="mqtt_devices_pairing_mode">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="55"/>
       <source>Pairing mode</source>
       <translation>Parningsläge</translation>
     </message>
     <message id="mqtt_devices_pairing_active">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="55"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="59"/>
       <source>Active • %1s remaining</source>
       <extracomment>%1 = number of seconds remaining</extracomment>
       <translation>Aktiv • %1 sekunder återstår</translation>
     </message>
     <message id="mqtt_devices_pairing_activate">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="61"/>
       <source>Activate</source>
       <translation>Aktivera</translation>
     </message>
     <message id="mqtt_devices_pairing_enabled">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="85"/>
       <source>Pairing mode enabled for %1 seconds</source>
       <translation>Parningsläge aktiverat i %1 sekunder</translation>
     </message>
     <message id="mqtt_devices_pairing_description">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="97"/>
       <source>Activate Pairing mode to allow a device to connect. Paired devices appear here, and will show in the Devices list when connected.</source>
       <translation>Aktivera parningsläge för att tillåta en enhet att ansluta. Parade enheter visas här och i enhetslistan när de är anslutna.</translation>
     </message>
     <message id="mqtt_devices_pairing_access_tokens">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="104"/>
       <source>Access tokens for paired devices</source>
       <translation>Åtkomsttoken för parade enheter</translation>
     </message>
     <message id="mqtt_devices_pairing_unpair">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="112"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="116"/>
       <source>Unpair</source>
       <translation>Koppla från</translation>
     </message>
     <message id="mqtt_devices_unpairing_confirm_title">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="133"/>
       <source>Unpairing %1</source>
       <translation>Kopplar från %1</translation>
     </message>
     <message id="mqtt_devices_unpairing_confirm_description">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="132"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="136"/>
       <source>This will disconnect the device and it will need to be paired again to reconnect.</source>
       <translation>Detta kommer att koppla från enheten och den måste paras ihop igen för att återansluta.</translation>
     </message>
@@ -11469,7 +11464,7 @@ Uppdatera till den senaste firmwaren för att kunna justera dessa inställningar
       <translation>Maximivärde</translation>
     </message>
     <message id="aux_page_switches">
-      <location filename="../../pages/AuxCardsPage.qml" line="16"/>
+      <location filename="../../pages/AuxCardsPage.qml" line="18"/>
       <source>Switches</source>
       <extracomment>Name of the Switch Controls feature</extracomment>
       <translation>Brytare</translation>

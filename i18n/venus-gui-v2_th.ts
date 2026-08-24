@@ -1048,10 +1048,15 @@
       <source>Update build date/time</source>
       <translation>อัปเดตวันที่/เวลาสร้าง</translation>
     </message>
+    <message id="settings_rssystem_inverters">
+      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="99"/>
+      <source>Inverters</source>
+      <translation>อินเวอร์เตอร์</translation>
+    </message>
     <message id="page_settings_fronius_inverters">
       <location filename="../../pages/settings/PageSettingsFronius.qml" line="30"/>
       <source>Inverters</source>
-      <translation>อินเวอร์เตอร์</translation>
+      <translation type="unfinished">อินเวอร์เตอร์</translation>
     </message>
     <message id="page_settings_fronius_find_pv_inverters">
       <location filename="../../pages/settings/PageSettingsFronius.qml" line="36"/>
@@ -4866,7 +4871,7 @@ Do you want to continue?</source>
       <translation>หมายเลขซีเรียล</translation>
     </message>
     <message id="nav_settings">
-      <location filename="../../pages/SettingsPage.qml" line="18"/>
+      <location filename="../../pages/SettingsPage.qml" line="19"/>
       <source>Settings</source>
       <translation>การตั้งค่า</translation>
     </message>
@@ -5051,7 +5056,7 @@ Do you want to continue?</source>
       <translation>เครื่องกำเนิดไฟฟ้าจะทำงานต่อไปหากตรงตามเงื่อนไขการสตาร์ทอัตโนมัติ</translation>
     </message>
     <message id="modaldialog_set">
-      <location filename="../../components/dialogs/ModalDialog.qml" line="43"/>
+      <location filename="../../components/dialogs/ModalDialog.qml" line="45"/>
       <source>Set</source>
       <translation>ชุด</translation>
     </message>
@@ -6891,7 +6896,7 @@ Do you want to continue?</source>
       <translation>ไม่มีรหัสผ่านและการสื่อสารเครือข่ายไม่ได้เข้ารหัส</translation>
     </message>
     <message id="settings_security_profile_password_incorrect_length">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="28"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="21"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation>รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร</translation>
     </message>
@@ -7416,42 +7421,42 @@ Do you want to continue?</source>
       <translation>อาร์กติก</translation>
     </message>
     <message id="settings_all_connected_devices">
-      <location filename="../../pages/SettingsPage.qml" line="40"/>
+      <location filename="../../pages/SettingsPage.qml" line="68"/>
       <source>All connected devices</source>
       <translation>อุปกรณ์ที่เชื่อมต่อทั้งหมด</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="48"/>
+      <location filename="../../pages/SettingsPage.qml" line="76"/>
       <source>General</source>
       <translation type="unfinished">ทั่วไป</translation>
     </message>
     <message id="settings_connectivity">
-      <location filename="../../pages/SettingsPage.qml" line="59"/>
+      <location filename="../../pages/SettingsPage.qml" line="87"/>
       <source>Connectivity</source>
       <translation>การเชื่อมต่อ</translation>
     </message>
     <message id="settings_ethernet_wifi_bluetooth_vecan">
-      <location filename="../../pages/SettingsPage.qml" line="61"/>
+      <location filename="../../pages/SettingsPage.qml" line="89"/>
       <source>Ethernet, Wi-Fi, Bluetooth, VE.Can</source>
       <translation>อีเทอร์เน็ต, Wi-Fi, บลูทูธ, VE.Can</translation>
     </message>
     <message id="settings_vrm">
-      <location filename="../../pages/SettingsPage.qml" line="68"/>
+      <location filename="../../pages/SettingsPage.qml" line="96"/>
       <source>VRM</source>
       <translation>วีอาร์เอ็ม</translation>
     </message>
     <message id="settings_remote_monitoring_portal">
-      <location filename="../../pages/SettingsPage.qml" line="70"/>
+      <location filename="../../pages/SettingsPage.qml" line="98"/>
       <source>Remote monitoring portal</source>
       <translation>พอร์ทัลการตรวจสอบระยะไกล</translation>
     </message>
     <message id="settings_advanced">
-      <location filename="../../pages/SettingsPage.qml" line="77"/>
+      <location filename="../../pages/SettingsPage.qml" line="105"/>
       <source>Advanced</source>
       <translation type="unfinished">ขั้นสูง</translation>
     </message>
     <message id="settings_integrations">
-      <location filename="../../pages/SettingsPage.qml" line="82"/>
+      <location filename="../../pages/SettingsPage.qml" line="110"/>
       <source>Integrations</source>
       <translation type="unfinished">การบูรณาการ</translation>
     </message>
@@ -7461,22 +7466,22 @@ Do you want to continue?</source>
       <translation>การบูรณาการ</translation>
     </message>
     <message id="settings_acdcsystem_ess_dvcc_battery">
-      <location filename="../../pages/SettingsPage.qml" line="93"/>
+      <location filename="../../pages/SettingsPage.qml" line="121"/>
       <source>AC/DC system, ESS, DVCC, Battery...</source>
       <translation>ระบบ AC/DC, ESS, DVCC, แบตเตอรี่...</translation>
     </message>
     <message id="settings_debug_and_develop">
-      <location filename="../../pages/SettingsPage.qml" line="100"/>
+      <location filename="../../pages/SettingsPage.qml" line="128"/>
       <source>Debug &amp; Develop</source>
       <translation>แก้ไขและพัฒนา</translation>
     </message>
     <message id="settings_profilingtools_debugstatistics_appversion">
-      <location filename="../../pages/SettingsPage.qml" line="102"/>
+      <location filename="../../pages/SettingsPage.qml" line="130"/>
       <source>Profiling tools, debug statistics, app version...</source>
       <translation>เครื่องมือสร้างโปรไฟล์ สถิติการดีบัก เวอร์ชันแอป...</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="91"/>
+      <location filename="../../pages/SettingsPage.qml" line="119"/>
       <source>System Setup</source>
       <translation>ติดตั้งระบบ</translation>
     </message>
@@ -7909,7 +7914,7 @@ Do you want to continue?</source>
       <translation>ติดตั้งเฟิร์มแวร์แล้ว กำลังรีบูตอุปกรณ์</translation>
     </message>
     <message id="modaldialog_confirm">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="55"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="39"/>
       <source>Confirm</source>
       <translation>ยืนยัน</translation>
     </message>
@@ -8323,17 +8328,17 @@ Do you want to continue?</source>
       <translation>สภาวะโอเวอร์โหลดอินเวอร์เตอร์</translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="57"/>
+      <location filename="../../ApplicationContent.qml" line="55"/>
       <source>Touch input on</source>
       <translation>สัมผัสอินพุตเปิด</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="59"/>
+      <location filename="../../ApplicationContent.qml" line="57"/>
       <source>Touch input off</source>
       <translation>ปิดอินพุตแบบสัมผัส</translation>
     </message>
     <message id="application_content_touch_input_disabled">
-      <location filename="../../ApplicationContent.qml" line="73"/>
+      <location filename="../../ApplicationContent.qml" line="71"/>
       <source>Touch input disabled</source>
       <translation>ปิดใช้งานการป้อนข้อมูลแบบสัมผัส</translation>
     </message>
@@ -8890,11 +8895,6 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <source>System alarms</source>
       <translation>ระบบแจ้งเตือน</translation>
     </message>
-    <message id="settings_rs_devices">
-      <location filename="../../pages/settings/devicelist/rs/PageRsSystem.qml" line="99"/>
-      <source>RS devices</source>
-      <translation>อุปกรณ์อาร์เอส</translation>
-    </message>
     <message id="rs_no_system_alarms">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemAlarms.qml" line="60"/>
       <source>No system alarms</source>
@@ -8955,7 +8955,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <translation type="unfinished">การควบคุม</translation>
     </message>
     <message id="controlcards_empty_title">
-      <location filename="../../pages/ControlCardsPage.qml" line="154"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="155"/>
       <source>Controls</source>
       <translation>การควบคุม</translation>
     </message>
@@ -9500,12 +9500,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>อินพุต AC %1</translation>
     </message>
     <message id="settings_security_profile_change_password_description">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="85"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="69"/>
       <source>Please enter a new GX password:</source>
       <translation>โปรดป้อนรหัสผ่าน GX ใหม่:</translation>
     </message>
     <message id="settings_security_profile_enter_new_password">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="100"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="84"/>
       <source>Enter new password</source>
       <translation>ป้อนรหัสผ่านใหม่</translation>
     </message>
@@ -9526,7 +9526,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>เปิดใช้งานการตั้งค่านี้เมื่อมีระบบ MultiPlus หรือ Quattro สำรองที่ใช้พลังงานจากแบตเตอรี่ชุดเดียวกันกับระบบอินเวอร์เตอร์/ชาร์จเจอร์หลัก เมื่อเปิดใช้งานการตั้งค่านี้ ระบบสำรองนี้จะใช้พารามิเตอร์ CVL และ DCL ของ BMS ที่เลือก</translation>
     </message>
     <message id="settings_access_control_display_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="50"/>
+      <location filename="../../pages/SettingsPage.qml" line="78"/>
       <source>Access control, Display, Firmware, Support</source>
       <translation>การควบคุมการเข้าถึง, จอแสดงผล, เฟิร์มแวร์, การสนับสนุน</translation>
     </message>
@@ -10180,7 +10180,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>เปิดใช้งานเฟิร์มแวร์ Venus OS Large เพื่อใช้งาน Node-RED หรือ Signal-K</translation>
     </message>
     <message id="settings_relays_sensors_tanks">
-      <location filename="../../pages/SettingsPage.qml" line="84"/>
+      <location filename="../../pages/SettingsPage.qml" line="112"/>
       <source>Relays, Sensors, PV Inverters, Modbus, Node-RED</source>
       <translation>รีเลย์, เซ็นเซอร์, อินเวอร์เตอร์ PV, Modbus, Node-RED</translation>
     </message>
@@ -10615,17 +10615,17 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>เฉพาะบน VRM</translation>
     </message>
     <message id="control_cards_title">
-      <location filename="../../pages/ControlCardsPage.qml" line="20"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="21"/>
       <source>Controls</source>
       <translation type="unfinished">การควบคุม</translation>
     </message>
     <message id="controlcards_empty_desc1">
-      <location filename="../../pages/ControlCardsPage.qml" line="156"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="157"/>
       <source>No compatible devices found</source>
       <translation>ไม่พบอุปกรณ์ที่รองรับ</translation>
     </message>
     <message id="controlcards_empty_desc2">
-      <location filename="../../pages/ControlCardsPage.qml" line="158"/>
+      <location filename="../../pages/ControlCardsPage.qml" line="159"/>
       <source>Connect devices that support this function</source>
       <translation>เชื่อมต่ออุปกรณ์ที่รองรับฟังก์ชันนี้</translation>
     </message>
@@ -11244,7 +11244,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>กำลังเริ่มต้น อาจใช้เวลาไม่กี่วินาที...</translation>
     </message>
     <message id="settings_security_profile_change_password_title">
-      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="52"/>
+      <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="36"/>
       <source>Change the GX Password</source>
       <translation>เปลี่ยนรหัสผ่าน GX</translation>
     </message>
@@ -11345,54 +11345,49 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <source>Rescan for IP addresses</source>
       <translation>สแกนหาที่อยู่ IP ใหม่</translation>
     </message>
-    <message id="mqtt_devices_ev_charging_station">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="16"/>
-      <source>EV Charging Station</source>
-      <translation>สถานีชาร์จ EV</translation>
-    </message>
     <message id="mqtt_devices_pairing_mode">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="51"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="55"/>
       <source>Pairing mode</source>
       <translation>โหมดการจับคู่</translation>
     </message>
     <message id="mqtt_devices_pairing_active">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="55"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="59"/>
       <source>Active • %1s remaining</source>
       <extracomment>%1 = number of seconds remaining</extracomment>
       <translation>ใช้งานอยู่ • เหลือ %1s</translation>
     </message>
     <message id="mqtt_devices_pairing_activate">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="57"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="61"/>
       <source>Activate</source>
       <translation>เปิดใช้งาน</translation>
     </message>
     <message id="mqtt_devices_pairing_enabled">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="81"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="85"/>
       <source>Pairing mode enabled for %1 seconds</source>
       <translation>เปิดใช้งานโหมดการจับคู่เป็นเวลา %1 วินาที</translation>
     </message>
     <message id="mqtt_devices_pairing_description">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="93"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="97"/>
       <source>Activate Pairing mode to allow a device to connect. Paired devices appear here, and will show in the Devices list when connected.</source>
       <translation>เปิดใช้งานโหมดการจับคู่เพื่ออนุญาตให้อุปกรณ์เชื่อมต่อ อุปกรณ์ที่จับคู่แล้วจะปรากฏที่นี่ และจะแสดงในรายการอุปกรณ์เมื่อเชื่อมต่อแล้ว</translation>
     </message>
     <message id="mqtt_devices_pairing_access_tokens">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="100"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="104"/>
       <source>Access tokens for paired devices</source>
       <translation>โทเค็นการเข้าถึงสำหรับอุปกรณ์ที่จับคู่แล้ว</translation>
     </message>
     <message id="mqtt_devices_pairing_unpair">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="112"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="116"/>
       <source>Unpair</source>
       <translation>เลิกจับคู่</translation>
     </message>
     <message id="mqtt_devices_unpairing_confirm_title">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="133"/>
       <source>Unpairing %1</source>
       <translation>กำลังเลิกจับคู่ %1</translation>
     </message>
     <message id="mqtt_devices_unpairing_confirm_description">
-      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="132"/>
+      <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="136"/>
       <source>This will disconnect the device and it will need to be paired again to reconnect.</source>
       <translation>การดำเนินการนี้จะตัดการเชื่อมต่ออุปกรณ์ และจะต้องจับคู่อีกครั้งเพื่อเชื่อมต่อใหม่</translation>
     </message>
@@ -11468,7 +11463,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>ค่าสูงสุด</translation>
     </message>
     <message id="aux_page_switches">
-      <location filename="../../pages/AuxCardsPage.qml" line="16"/>
+      <location filename="../../pages/AuxCardsPage.qml" line="18"/>
       <source>Switches</source>
       <extracomment>Name of the Switch Controls feature</extracomment>
       <translation>สวิตช์</translation>
