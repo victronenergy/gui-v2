@@ -219,6 +219,9 @@ void UiTest::startNextTestCase()
 			connect(testCase, &UiTestCase::finished, this, &UiTest::testCaseFinished);
 			testCase->start();
 		} else {
+			// The test case could not be loaded. Record this as a failure so that it is reported
+			// in the totals and in the exit code.
+			m_failCount++;
 			qCInfo(venusGuiTest) << "Skipping to next test!";
 			QTimer::singleShot(0, this, &UiTest::startNextTestCase);
 		}
@@ -229,14 +232,18 @@ void UiTest::startNextTestCase()
 				: QStringLiteral("%1m %2s")
 					.arg(totalSeconds / 60)
 					.arg(totalSeconds < 60 ? totalSeconds : totalSeconds % 60);
-		qCInfo(venusGuiTest) << qPrintable(QStringLiteral("All tests finished: %1 steps passed, %2 steps failed, in %3")
+		const QString resultText = QStringLiteral("All tests finished: %1 steps passed, %2 steps failed, in %3")
 				.arg(m_passCount)
 				.arg(m_failCount)
-				.arg(durationText));
+				.arg(durationText);
+		qCInfo(venusGuiTest) << qPrintable(resultText);
 		qCInfo(venusGuiTest) << "********************************************************";
+
 		setStatus(Finished);
 		if (exitWhenFinished()) {
-			qApp->quit();
+			// Exit with a non-zero code if any step failed, so that the caller (e.g. a CI job) can
+			// detect the failure.
+			qApp->exit(m_failCount > 0 ? 1 : 0);
 		}
 	}
 }
