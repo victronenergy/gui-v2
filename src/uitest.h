@@ -29,6 +29,10 @@ public:
 	const QVariantMap &settingsMap() const;
 	bool hasMockConfiguration() const;
 
+	// Returns true if the configuration sets Mock/TimersActive, i.e. the test requires the mock
+	// timers to be in a particular state.
+	bool hasMockTimersActive() const;
+
 private:
 	QVariantMap m_settings;
 	QString m_dirName;
