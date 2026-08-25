@@ -188,10 +188,14 @@ jobs:
 
       - name: Report the comparison results
         working-directory: build-uicompare
-        # python3-pil is used to build the "baseline | candidate | difference" composites. Install
-        # it from apt rather than pip: ubuntu-24.04 has an externally managed Python environment.
+        # Pillow is used to build the "baseline | candidate | difference" composites. Install it
+        # with pip, into whichever interpreter "python3" resolves to: earlier steps put a Python
+        # from the hosted toolcache ahead of the system one, so an apt-installed python3-pil is
+        # invisible here. Import it explicitly afterwards, so that a missing Pillow fails this step
+        # instead of silently producing an artifact with no composites in it.
         run: |
-          sudo apt-get install -y -qq python3-pil
+          python3 -m pip install --quiet --disable-pip-version-check pillow
+          python3 -c "import PIL; print('Pillow', PIL.__version__)"
           python3 "$GITHUB_WORKSPACE/.github/scripts/ui_comparison_summary.py" \
               ui-comparison-results.json \
               --baseline-label "${{ github.event.pull_request.base.sha }}" \
