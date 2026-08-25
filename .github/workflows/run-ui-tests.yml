@@ -188,13 +188,17 @@ jobs:
 
       - name: Report the comparison results
         working-directory: build-uicompare
+        # python3-pil is used to build the "baseline | candidate | difference" composites. Install
+        # it from apt rather than pip: ubuntu-24.04 has an externally managed Python environment.
         run: |
+          sudo apt-get install -y -qq python3-pil
           python3 "$GITHUB_WORKSPACE/.github/scripts/ui_comparison_summary.py" \
               ui-comparison-results.json \
               --baseline-label "${{ github.event.pull_request.base.sha }}" \
               --candidate-label "${{ github.sha }}" \
               --control-results ui-control-results.json \
               --differences-dir image-differences \
+              --above-noise-dir image-differences-above-noise \
             | tee -a "$GITHUB_STEP_SUMMARY"
           if [ "${{ steps.compare.outputs.differences }}" = "true" ]; then
             echo "::warning::The UI images differ from the base branch. See the job summary and the 'ui-image-differences' artifact."
@@ -210,7 +214,18 @@ jobs:
             build-uicompare/ui-control-results.json
           if-no-files-found: warn
 
-      - name: Upload the images that differ
+      # The screens worth a reviewer's time: those that differ by more than two sweeps of the
+      # unchanged baseline do. Usually a handful of files rather than hundreds.
+      - name: Upload the images that differ by more than the noise
+        uses: actions/upload-artifact@v4
+        if: steps.compare.outputs.differences == 'true'
+        with:
+          name: ui-image-differences-above-noise
+          path: build-uicompare/image-differences-above-noise
+          # Nothing above the noise floor is a good result, not a problem: produce no artifact.
+          if-no-files-found: ignore
+
+      - name: Upload every image that differs
         uses: actions/upload-artifact@v4
         if: steps.compare.outputs.differences == 'true'
         with:

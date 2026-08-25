@@ -23,6 +23,11 @@ import json
 import shutil
 import argparse
 
+try:
+    from PIL import Image, ImageChops, ImageDraw
+except ImportError:  # Pillow is optional; without it the composites are simply not produced.
+    Image = None
+
 # The maximum number of screens to list individually in the summary table.
 MAX_LISTED_DIFFERENCES = 50
 
@@ -56,36 +61,115 @@ def noise_floor(control):
     return len(differing), len(results), worst
 
 
-def sorted_differences(report):
+def significant_names(report, control):
+    '''Return the names of the differing screens that stand out from the same-build noise.
+
+    A screen is only worth a reviewer's time if it differs by more than two sweeps of one
+    unchanged build do. A screen that is missing from one set counts unless it was also missing
+    in the control, which would make that structural too.
+
+    With no control comparison there is nothing to calibrate against, so every difference counts.
+    '''
+    differing = [r for r in report.get('results', []) if r.get('status') != 'passed']
+    if control is None:
+        return {r['file_name'] for r in differing}
+
+    floor = noise_floor(control)[2]
+    control_structural = {
+        r['file_name'] for r in control.get('results', [])
+        if r.get('status') in ('no_baseline', 'no_candidate')
+    }
+    names = set()
+    for r in differing:
+        if r.get('status') == 'failed':
+            if r.get('mse', 0) > floor:
+                names.add(r['file_name'])
+        elif r['file_name'] not in control_structural:
+            names.add(r['file_name'])
+    return names
+
+
+def sorted_differences(report, control=None):
     '''Return the screens that are not identical, most interesting first.
 
-    Screens that are missing from one of the two sets come first, as they are a structural change
-    rather than a rendering difference; the rest are ordered by decreasing error.
+    Screens that stand out from the noise come first — those are the ones worth looking at. Within
+    each group, screens missing from one of the two sets come before rendering differences, and the
+    rest are ordered by decreasing error.
     '''
+    significant = significant_names(report, control)
     return sorted(
         (r for r in report.get('results', []) if r.get('status') != 'passed'),
-        key=lambda r: (r.get('status') == 'failed', -r.get('mse', 0)),
+        key=lambda r: (r['file_name'] not in significant,
+                       r.get('status') == 'failed',
+                       -r.get('mse', 0)),
     )
 
 
+# Panel labels for the side-by-side composite, in order.
+COMPOSITE_LABELS = ('baseline', 'candidate', 'difference')
+LABEL_HEIGHT = 18
+PANEL_GAP = 6
+
+
+def write_composite(baseline_path, candidate_path, destination):
+    '''Write a single "baseline | candidate | difference" image, so that a reviewer can see what
+    changed without opening and flicking between two files.
+
+    The difference panel shows the candidate dimmed, with every differing pixel painted red.
+    Returns True if the composite was written.
+    '''
+    if Image is None:
+        return False
+    if not (os.path.isfile(baseline_path) and os.path.isfile(candidate_path)):
+        return False
+
+    baseline = Image.open(baseline_path).convert('RGB')
+    candidate = Image.open(candidate_path).convert('RGB')
+    if baseline.size != candidate.size:
+        return False
+
+    # Paint the differing pixels red over a dimmed copy of the candidate.
+    difference = Image.eval(candidate.copy(), lambda v: 60 + v // 4)
+    mask = ImageChops.difference(baseline, candidate).convert('L').point(lambda v: 255 if v else 0)
+    difference.paste(Image.new('RGB', candidate.size, (255, 0, 0)), (0, 0), mask)
+
+    panels = (baseline, candidate, difference)
+    width = sum(p.width for p in panels) + PANEL_GAP * (len(panels) - 1)
+    composite = Image.new('RGB', (width, baseline.height + LABEL_HEIGHT), (255, 255, 255))
+    draw = ImageDraw.Draw(composite)
+    x = 0
+    for panel, label in zip(panels, COMPOSITE_LABELS):
+        composite.paste(panel, (x, LABEL_HEIGHT))
+        draw.text((x + 4, 4), label, fill=(0, 0, 0))
+        x += panel.width + PANEL_GAP
+
+    composite.save(destination)
+    return True
+
+
 def copy_difference_images(results, baseline_dir, candidate_dir, differences_dir):
-    '''Copy the baseline and candidate image of each differing screen into differences_dir.'''
+    '''Copy the baseline and candidate image of each differing screen into differences_dir, and
+    write a side-by-side composite of the two with the difference highlighted.'''
     for result in results:
         file_name = result['file_name']
+        name, extension = os.path.splitext(file_name)
+        os.makedirs(differences_dir, exist_ok=True)
         for source_dir, suffix in ((baseline_dir, 'baseline'), (candidate_dir, 'candidate')):
             source = os.path.join(source_dir, file_name)
             if not os.path.isfile(source):
                 continue
-            name, extension = os.path.splitext(file_name)
             destination = os.path.join(differences_dir, f'{name}-{suffix}{extension}')
-            os.makedirs(differences_dir, exist_ok=True)
             shutil.copyfile(source, destination)
+        write_composite(os.path.join(baseline_dir, file_name),
+                        os.path.join(candidate_dir, file_name),
+                        os.path.join(differences_dir, f'{name}-compare{extension}'))
 
 
 def markdown_summary(report, baseline_label, candidate_label, copied_count=None, control=None):
     '''Return a Markdown report of the comparison results.'''
     summary = report.get('summary', {})
-    differences = sorted_differences(report)
+    differences = sorted_differences(report, control)
+    significant = significant_names(report, control)
 
     lines = ['## UI image comparison', '']
     lines.append(
@@ -121,6 +205,30 @@ def markdown_summary(report, baseline_label, candidate_label, copied_count=None,
         'changed.'
     )
     lines.append('')
+    if control is not None:
+        lines.append(
+            f'**{len(significant)} of {len(differences)}** differing screens are larger than the '
+            'noise floor. Those are the ones worth reviewing; the rest cannot be told apart from '
+            'the run-to-run variation.'
+        )
+        lines.append('')
+    lines.append(
+        'Two artifacts hold the images, each screen as a `<screen>-compare.png` showing '
+        '**baseline | candidate | difference** side by side with the changed pixels in red, plus '
+        'the two originals:'
+    )
+    lines.append('')
+    lines.append(
+        '* `ui-image-differences-above-noise` - only the screens that stand out from the noise. '
+        'Start here.'
+    )
+    lines.append('* `ui-image-differences` - every differing screen, including the ones within the noise.')
+    lines.append('')
+    lines.append(
+        'GitHub does not render images embedded in a job summary, so they cannot be shown inline '
+        'here.'
+    )
+    lines.append('')
     control_worst = noise_floor(control)[2] if control is not None else None
     lines.append('| Screen | Status | Mean squared error |')
     lines.append('| --- | --- | ---: |')
@@ -131,7 +239,7 @@ def markdown_summary(report, baseline_label, candidate_label, copied_count=None,
         error = f'{mse:.2f}' if status == 'failed' else '-'
         # A difference no larger than the worst same-build difference cannot be told apart from
         # the noise, so say so rather than presenting it as a change.
-        if status == 'failed' and control_worst is not None and mse <= control_worst:
+        if control_worst is not None and result['file_name'] not in significant:
             error += ' (within noise)'
         lines.append(f'| {result["file_name"]} | {STATUS_LABELS.get(status, status)} | {error} |')
     if len(differences) > MAX_LISTED_DIFFERENCES:
@@ -159,6 +267,8 @@ if __name__ == '__main__':
     parser.add_argument('--baseline-dir', default='image-captures-baseline', help='The baseline image directory')
     parser.add_argument('--candidate-dir', default='image-captures-candidate', help='The candidate image directory')
     parser.add_argument('--differences-dir', help='If set, copy the images of each differing screen into this directory')
+    parser.add_argument('--above-noise-dir',
+                        help='If set, copy the images of only the screens that exceed the noise floor into this directory')
     parser.add_argument('--control-results',
                         help='The JSON results of comparing two same-build sweeps, used to report the noise floor')
     parser.add_argument('--max-differences', type=int, default=DEFAULT_MAX_COPIED_DIFFERENCES,
@@ -176,10 +286,17 @@ if __name__ == '__main__':
     copied_count = None
     if args.differences_dir:
         # Copy in the same order as they are listed, so that a truncated set is the most useful one.
-        differences = sorted_differences(report)[:max(args.max_differences, 0)]
+        differences = sorted_differences(report, control)[:max(args.max_differences, 0)]
         copied_count = len(differences)
         copy_difference_images(
             differences, args.baseline_dir, args.candidate_dir, args.differences_dir)
+
+    if args.above_noise_dir:
+        significant = significant_names(report, control)
+        worth_reviewing = [r for r in sorted_differences(report, control)
+                           if r['file_name'] in significant][:max(args.max_differences, 0)]
+        copy_difference_images(
+            worth_reviewing, args.baseline_dir, args.candidate_dir, args.above_noise_dir)
 
     print(markdown_summary(report, args.baseline_label, args.candidate_label, copied_count, control),
           end='')
