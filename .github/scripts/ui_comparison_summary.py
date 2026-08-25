@@ -25,7 +25,10 @@ import argparse
 
 try:
     from PIL import Image, ImageChops, ImageDraw
-except ImportError:  # Pillow is optional; without it the composites are simply not produced.
+except ImportError:
+    # Pillow is optional, but its absence must be visible: without it the artifacts contain the
+    # baseline and candidate images and no composite, which is easy to mistake for "nothing
+    # changed" rather than "the composite step did not run". markdown_summary() says so.
     Image = None
 
 # The maximum number of screens to list individually in the summary table.
@@ -229,6 +232,15 @@ def markdown_summary(report, baseline_label, candidate_label, copied_count=None,
         'here.'
     )
     lines.append('')
+    if Image is None:
+        lines.append(
+            '> [!WARNING]'
+        )
+        lines.append(
+            '> Pillow is not installed, so the `-compare.png` composites were **not** generated. '
+            'The artifacts hold the baseline and candidate images only.'
+        )
+        lines.append('')
     control_worst = noise_floor(control)[2] if control is not None else None
     lines.append('| Screen | Status | Mean squared error |')
     lines.append('| --- | --- | ---: |')
