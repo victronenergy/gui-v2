@@ -72,6 +72,8 @@ For changes that intentionally modify the UI appearance, update the baseline ima
 
 `.github/workflows/run-ui-tests.yml` runs both halves of this on every pull request: a headless smoke test that fails if any test step failed, and an image comparison of the pull request against the commit it is based on. Image differences do not fail the workflow; they are reported in the job summary, and the images that differ are uploaded as a workflow artifact.
 
+Captures are not perfectly reproducible, so the workflow also sweeps the baseline build twice and compares those two sweeps with each other. That same-build result is the measurement error of the real comparison, and the job summary reports it as a noise floor. Do the same locally before concluding that a difference is real: capture a control set from the unchanged code and compare it, rather than comparing a single pair of runs.
+
 ## Test configuration
 
 Each test is defined by a JSON file (e.g. `tests/ui/smoke/mock-maximal/mock-maximal.json`):

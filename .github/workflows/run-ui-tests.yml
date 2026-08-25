@@ -11,8 +11,13 @@
 #   request may change the UI on purpose; instead they are reported in the job summary, and the
 #   images that differ are uploaded as an artifact for review.
 #
-# "ui-image-comparison" builds and sweeps gui-v2 twice, so it is by far the more expensive of the
-# two. To run it only on request instead of on every pull request, add a label condition to the
+#   The baseline is swept twice, and the two baseline sweeps are compared with each other. Image
+#   captures are not perfectly reproducible, so that same-build comparison is the measurement error
+#   of the real one, and the job summary reports it alongside the result. Without it a difference
+#   count cannot be told apart from noise.
+#
+# "ui-image-comparison" builds gui-v2 twice and sweeps it three times, so it is by far the more
+# expensive of the two. To run it only on request instead of on every pull request, add a label condition to the
 # job, e.g. replace its "if" with:
 #   if: contains(github.event.pull_request.labels.*.name, 'ui-comparison')
 #
@@ -45,11 +50,14 @@ env:
   BUILD_TYPE: Release
   # The UI test to run, as a directory relative to "tests/ui".
   UI_TEST: ${{ inputs.ui_test || 'smoke/mock-maximal' }}
-  # The MSE error tolerance used when comparing two captured images. Rendering with
-  # QT_QPA_PLATFORM=offscreen is deterministic, so this only needs to be large enough to absorb
-  # incidental antialiasing differences, and small enough to still report a change to a single
-  # word of text.
-  ERROR_TOLERANCE: "0.1"
+  # The MSE error tolerance used when comparing two captured images. Measured on this sweep, from
+  # two runs of one unchanged build: 1153 of 1171 screens are pixel-identical, and the largest
+  # purely-cosmetic difference is 0.34 (antialiasing on rounded card edges). Real UI changes measure
+  # 26-120. 0.5 sits well clear of both.
+  # A handful of screens vary for reasons that are not rendering at all - the "Start page" setting
+  # resolves to a different value between runs - and no tolerance fixes those; that is what the
+  # control sweep below is for, and the job summary marks them as within the noise.
+  ERROR_TOLERANCE: "0.5"
 
 jobs:
   ui-smoke-test:
@@ -117,6 +125,15 @@ jobs:
           QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}" \
             || echo "::warning::The baseline UI test reported failures, so its image set may be incomplete."
 
+      - name: Capture UI images again (baseline control sweep)
+        working-directory: build-baseline
+        # A second sweep of the same build. Comparing it against the first measures how much the
+        # captures vary from run to run, with no code change involved.
+        run: |
+          mv image-captures ../image-captures-control
+          QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}" \
+            || echo "::warning::The baseline control sweep reported failures, so the noise floor may be understated."
+
       - name: Build gui-v2 (candidate)
         run: |
           ${{ steps.qt.outputs.qtdir }}/bin/qt-cmake -G Ninja -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -S . -B build-candidate
@@ -140,7 +157,22 @@ jobs:
         # directory. It exits with a non-zero code if the image sets are not equivalent, which is
         # recorded here rather than failing the job.
         run: |
-          mv ../build-baseline/image-captures image-captures-baseline
+          # First the control: the two sweeps of the unchanged baseline build.
+          mv ../image-captures-control image-captures-baseline
+          mv ../build-baseline/image-captures image-captures-candidate
+          set +e
+          ./bin/uicompare --headless \
+              --error-tolerance "${{env.ERROR_TOLERANCE}}" \
+              --output ui-control-results.json
+          control_status=$?
+          set -e
+          if [ "$control_status" -gt 1 ]; then
+            echo "::error::UI Compare failed on the control comparison with exit code $control_status"
+            exit "$control_status"
+          fi
+
+          # Then the real comparison: baseline against candidate.
+          rm -rf image-captures-candidate
           mv ../build-candidate/image-captures image-captures-candidate
           set +e
           ./bin/uicompare --headless \
@@ -161,6 +193,7 @@ jobs:
               ui-comparison-results.json \
               --baseline-label "${{ github.event.pull_request.base.sha }}" \
               --candidate-label "${{ github.sha }}" \
+              --control-results ui-control-results.json \
               --differences-dir image-differences \
             | tee -a "$GITHUB_STEP_SUMMARY"
           if [ "${{ steps.compare.outputs.differences }}" = "true" ]; then
@@ -172,7 +205,9 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: ui-comparison-results
-          path: build-uicompare/ui-comparison-results.json
+          path: |
+            build-uicompare/ui-comparison-results.json
+            build-uicompare/ui-control-results.json
           if-no-files-found: warn
 
       - name: Upload the images that differ

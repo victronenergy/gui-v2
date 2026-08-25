@@ -96,6 +96,12 @@ The `.github/workflows/run-ui-tests.yml` workflow runs these tests on every pull
   not fail the job - a pull request may change the UI on purpose - but they are reported in the job
   summary, and the images that differ are uploaded as a workflow artifact for review.
 
+  The job also sweeps the baseline build a second time and compares the two baseline sweeps with
+  each other. Image captures are not perfectly reproducible, so that same-build comparison is the
+  measurement error of the real one; the job summary reports it as a noise floor, and marks any
+  screen whose difference is no larger than it. A difference count on its own cannot be told apart
+  from noise, so do not read one without the noise floor beside it.
+
 To do the same comparison locally, use `tools/ui_capture_and_compare.py`, which builds two
 revisions and shows the differences in the UI Compare tool.
 
