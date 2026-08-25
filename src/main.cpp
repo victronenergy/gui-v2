@@ -359,8 +359,12 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 		Victron::VenusOS::MockManager *mockManager = Victron::VenusOS::MockManager::create();
 		if (parser.isSet(noMockTimers)) {
 			mockTimersEnabled = false;
+			mockManager->setTimersActive(mockTimersEnabled);
+		} else if (!uiTestConf.hasMockTimersActive()) {
+			// A UI test configuration that sets Mock/TimersActive has already applied it above.
+			// Do not overwrite it here, or the test runs with mock timers it asked to have off.
+			mockManager->setTimersActive(mockTimersEnabled);
 		}
-		mockManager->setTimersActive(mockTimersEnabled);
 
 		// Some UI tests specify a mock configuration, if the test is only designed to be run
 		// against that configuration. In that case, exit with an error if --mock-conf is also set,

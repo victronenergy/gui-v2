@@ -74,6 +74,11 @@ bool UiTestConfiguration::hasMockConfiguration() const
 	return m_settings.contains("Mock");
 }
 
+bool UiTestConfiguration::hasMockTimersActive() const
+{
+	return m_settings.value("Mock").toMap().value("TimersActive").isValid();
+}
+
 
 UiTest* UiTest::create(QQmlEngine *, QJSEngine *)
 {
