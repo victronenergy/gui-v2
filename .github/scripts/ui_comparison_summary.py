@@ -6,6 +6,11 @@
 '''
 Summarize the JSON results written by "uicompare --headless --output <file>".
 
+A raw difference count means nothing on its own, because two sweeps of the *same* build do not
+produce identical images. Pass --control-results with the comparison of two same-build sweeps and
+the summary reports that noise floor next to the result, and marks any screen whose difference is
+within the noise as not distinguishable from it.
+
 A Markdown summary is written to stdout, which the UI test workflow appends to the GitHub job
 summary. If --differences-dir is given, the baseline and candidate images of the screens that
 differ are also copied into that directory (the worst --max-differences of them), so that a CI job
@@ -25,12 +30,30 @@ MAX_LISTED_DIFFERENCES = 50
 # an uploaded artifact stays bounded when a change affects every screen.
 DEFAULT_MAX_COPIED_DIFFERENCES = 200
 
+# UI Compare's status values, and how they are reported here. "failed" is deliberately not
+# reported as a failure: this job does not fail on image differences, so calling a screen "failed"
+# reads as a broken screen when it only means the two images are not the same.
 STATUS_DESCRIPTIONS = [
     ('passed', 'Identical (within the error tolerance)'),
-    ('failed', 'Different'),
+    ('failed', 'Differs'),
     ('no_baseline', 'Only in the candidate'),
     ('no_candidate', 'Only in the baseline'),
 ]
+
+STATUS_LABELS = {
+    'passed': 'identical',
+    'failed': 'differs',
+    'no_baseline': 'only in candidate',
+    'no_candidate': 'only in baseline',
+}
+
+
+def noise_floor(control):
+    '''Return (differing screen count, total, worst MSE) for a same-build control comparison.'''
+    results = control.get('results', [])
+    differing = [r for r in results if r.get('status') != 'passed']
+    worst = max((r.get('mse', 0) for r in differing), default=0.0)
+    return len(differing), len(results), worst
 
 
 def sorted_differences(report):
@@ -59,7 +82,7 @@ def copy_difference_images(results, baseline_dir, candidate_dir, differences_dir
             shutil.copyfile(source, destination)
 
 
-def markdown_summary(report, baseline_label, candidate_label, copied_count=None):
+def markdown_summary(report, baseline_label, candidate_label, copied_count=None, control=None):
     '''Return a Markdown report of the comparison results.'''
     summary = report.get('summary', {})
     differences = sorted_differences(report)
@@ -71,6 +94,17 @@ def markdown_summary(report, baseline_label, candidate_label, copied_count=None)
         f'{report.get("error_tolerance", "?")}.'
     )
     lines.append('')
+
+    if control is not None:
+        control_count, control_total, control_worst = noise_floor(control)
+        lines.append(
+            f'**Noise floor:** two sweeps of the baseline build, with no code change between them, '
+            f'differed on **{control_count} of {control_total}** screens '
+            f'(worst MSE {control_worst:.2f}). Image captures are not perfectly reproducible, so '
+            'treat that as the measurement error of the numbers below: a result of the same order '
+            'is not evidence of a UI change.'
+        )
+        lines.append('')
     lines.append('| Result | Screens |')
     lines.append('| --- | ---: |')
     for key, description in STATUS_DESCRIPTIONS:
@@ -87,12 +121,19 @@ def markdown_summary(report, baseline_label, candidate_label, copied_count=None)
         'changed.'
     )
     lines.append('')
+    control_worst = noise_floor(control)[2] if control is not None else None
     lines.append('| Screen | Status | Mean squared error |')
     lines.append('| --- | --- | ---: |')
     for result in differences[:MAX_LISTED_DIFFERENCES]:
         # The error is only meaningful if both images were present and could be compared.
-        error = f'{result.get("mse", 0):.2f}' if result.get('status') == 'failed' else '-'
-        lines.append(f'| {result["file_name"]} | {result.get("status", "?")} | {error} |')
+        status = result.get('status', '?')
+        mse = result.get('mse', 0)
+        error = f'{mse:.2f}' if status == 'failed' else '-'
+        # A difference no larger than the worst same-build difference cannot be told apart from
+        # the noise, so say so rather than presenting it as a change.
+        if status == 'failed' and control_worst is not None and mse <= control_worst:
+            error += ' (within noise)'
+        lines.append(f'| {result["file_name"]} | {STATUS_LABELS.get(status, status)} | {error} |')
     if len(differences) > MAX_LISTED_DIFFERENCES:
         lines.append('')
         lines.append(f'...and {len(differences) - MAX_LISTED_DIFFERENCES} more.')
@@ -118,12 +159,19 @@ if __name__ == '__main__':
     parser.add_argument('--baseline-dir', default='image-captures-baseline', help='The baseline image directory')
     parser.add_argument('--candidate-dir', default='image-captures-candidate', help='The candidate image directory')
     parser.add_argument('--differences-dir', help='If set, copy the images of each differing screen into this directory')
+    parser.add_argument('--control-results',
+                        help='The JSON results of comparing two same-build sweeps, used to report the noise floor')
     parser.add_argument('--max-differences', type=int, default=DEFAULT_MAX_COPIED_DIFFERENCES,
                         help=f'The maximum number of screens to copy into --differences-dir. Default: {DEFAULT_MAX_COPIED_DIFFERENCES}')
     args = parser.parse_args()
 
     with open(args.results, encoding='utf-8') as results_file:
         report = json.load(results_file)
+
+    control = None
+    if args.control_results and os.path.isfile(args.control_results):
+        with open(args.control_results, encoding='utf-8') as control_file:
+            control = json.load(control_file)
 
     copied_count = None
     if args.differences_dir:
@@ -133,4 +181,5 @@ if __name__ == '__main__':
         copy_difference_images(
             differences, args.baseline_dir, args.candidate_dir, args.differences_dir)
 
-    print(markdown_summary(report, args.baseline_label, args.candidate_label, copied_count), end='')
+    print(markdown_summary(report, args.baseline_label, args.candidate_label, copied_count, control),
+          end='')
