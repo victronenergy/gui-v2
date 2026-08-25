@@ -234,7 +234,7 @@ FocusScope {
 						active: modelData.count > 0
 						visible: active
 						sourceComponent: DcInputWidget {
-							type: root.Global.dcInputs.overviewWidgetTypeForService(serviceType, modelData.commonMeterType)
+							type: Global.dcInputs.overviewWidgetTypeForService(serviceType, modelData.commonMeterType)
 							serviceType: modelData.serviceTypes[0] || ""
 							inputTypeFilter: modelData.commonMeterType
 							size: rightInputColumn.widgetSize
@@ -258,7 +258,7 @@ FocusScope {
 					active: rightInputColumn.combineDcSources
 					visible: active
 					sourceComponent: DcInputWidget {
-						type: root.Global.dcInputs.overviewWidgetTypeForService(serviceType, dcSourceModel.commonMeterType)
+						type: Global.dcInputs.overviewWidgetTypeForService(serviceType, dcSourceModel.commonMeterType)
 						serviceType: "dcsource"
 						inputTypeFilter: dcSourceModel.commonMeterType
 						size: rightInputColumn.widgetSize
@@ -281,7 +281,7 @@ FocusScope {
 						required property int meterType
 
 						sourceComponent: DcInputWidget {
-							type: root.Global.dcInputs.overviewWidgetTypeForService(serviceType, dcsourceWidgetLoader.meterType)
+							type: Global.dcInputs.overviewWidgetTypeForService(serviceType, dcsourceWidgetLoader.meterType)
 							serviceType: dcsourceWidgetLoader.device.serviceType
 							inputTypeFilter: dcsourceWidgetLoader.meterType
 							size: rightInputColumn.widgetSize
