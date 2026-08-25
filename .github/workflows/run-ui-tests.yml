@@ -119,11 +119,24 @@ jobs:
 
       - name: Capture UI images (baseline)
         working-directory: build-baseline
-        # A failing test step is reported by the "ui-smoke-test" job, so do not fail here; the
-        # images that were captured before the failure are still worth comparing.
+        # A failed test step is the smoke job's business, not this job's, so it only warns. A sweep
+        # that dies part way is different: it leaves a truncated image set that would silently turn
+        # every missing screen into a reported difference.
         run: |
-          QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}" \
-            || echo "::warning::The baseline UI test reported failures, so its image set may be incomplete."
+          set +e
+          QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}"
+          status=$?
+          set -e
+          case "$status" in
+            0) ;;
+            # gui-v2 exits 1 when test steps failed. The sweep still ran to the end, so the image
+            # set is complete and worth comparing; the failing steps are the smoke job's business.
+            1) echo "::warning::The baseline UI test reported step failures." ;;
+            # Anything else means it died part way (a segfault gives 139), so the image set is
+            # truncated and any comparison against it is meaningless. Do not carry on.
+            *) echo "::error::The baseline sweep terminated abnormally (exit $status); its image set is incomplete."
+               exit "$status" ;;
+          esac
 
       - name: Capture UI images again (baseline control sweep)
         working-directory: build-baseline
@@ -131,8 +144,20 @@ jobs:
         # captures vary from run to run, with no code change involved.
         run: |
           mv image-captures ../image-captures-control
-          QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}" \
-            || echo "::warning::The baseline control sweep reported failures, so the noise floor may be understated."
+          set +e
+          QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}"
+          status=$?
+          set -e
+          case "$status" in
+            0) ;;
+            # gui-v2 exits 1 when test steps failed. The sweep still ran to the end, so the image
+            # set is complete and worth comparing; the failing steps are the smoke job's business.
+            1) echo "::warning::The baseline control UI test reported step failures." ;;
+            # Anything else means it died part way (a segfault gives 139), so the image set is
+            # truncated and any comparison against it is meaningless. Do not carry on.
+            *) echo "::error::The baseline control sweep terminated abnormally (exit $status); its image set is incomplete."
+               exit "$status" ;;
+          esac
 
       - name: Build gui-v2 (candidate)
         run: |
@@ -142,8 +167,20 @@ jobs:
       - name: Capture UI images (candidate)
         working-directory: build-candidate
         run: |
-          QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}" \
-            || echo "::warning::The candidate UI test reported failures, so its image set may be incomplete."
+          set +e
+          QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}"
+          status=$?
+          set -e
+          case "$status" in
+            0) ;;
+            # gui-v2 exits 1 when test steps failed. The sweep still ran to the end, so the image
+            # set is complete and worth comparing; the failing steps are the smoke job's business.
+            1) echo "::warning::The candidate UI test reported step failures." ;;
+            # Anything else means it died part way (a segfault gives 139), so the image set is
+            # truncated and any comparison against it is meaningless. Do not carry on.
+            *) echo "::error::The candidate sweep terminated abnormally (exit $status); its image set is incomplete."
+               exit "$status" ;;
+          esac
 
       - name: Build UI Compare
         run: |
@@ -160,6 +197,20 @@ jobs:
           # First the control: the two sweeps of the unchanged baseline build.
           mv ../image-captures-control image-captures-baseline
           mv ../build-baseline/image-captures image-captures-candidate
+
+          # A sweep can also end early without a non-zero exit. The three sweeps visit the same
+          # screens, so a set that is materially shorter than the others did not finish, and every
+          # screen it is missing would be reported as a difference. Refuse to compare that.
+          baseline_count=$(find image-captures-baseline -name '*.png' | wc -l)
+          control_count=$(find image-captures-candidate -name '*.png' | wc -l)
+          candidate_count=$(find ../build-candidate/image-captures -name '*.png' | wc -l)
+          echo "Captured screens: baseline=$baseline_count control=$control_count candidate=$candidate_count"
+          lowest=$(printf '%s\n' "$baseline_count" "$control_count" "$candidate_count" | sort -n | head -n 1)
+          highest=$(printf '%s\n' "$baseline_count" "$control_count" "$candidate_count" | sort -n | tail -n 1)
+          if [ "$lowest" -lt $(( highest * 95 / 100 )) ]; then
+            echo "::error::A sweep is short ($lowest screens against $highest); one of them did not finish, so the comparison would be meaningless."
+            exit 1
+          fi
           set +e
           ./bin/uicompare --headless \
               --error-tolerance "${{env.ERROR_TOLERANCE}}" \
