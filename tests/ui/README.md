@@ -96,6 +96,12 @@ The `.github/workflows/run-ui-tests.yml` workflow runs these tests on every pull
   not fail the job - a pull request may change the UI on purpose - but they are reported in the job
   summary, and the images that differ are uploaded as a workflow artifact for review.
 
+  Two image artifacts are produced: `ui-image-differences-above-noise` holds only the screens that
+  differ by more than the noise floor (usually a handful), and `ui-image-differences` holds every
+  differing screen. Each screen appears as a `<screen>-compare.png` showing baseline, candidate and
+  the highlighted difference side by side, plus the two originals. GitHub strips images embedded in
+  a job summary, so they cannot be shown inline in the summary itself.
+
   The job also sweeps the baseline build a second time and compares the two baseline sweeps with
   each other. Image captures are not perfectly reproducible, so that same-build comparison is the
   measurement error of the real one; the job summary reports it as a noise floor, and marks any
