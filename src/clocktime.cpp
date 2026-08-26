@@ -4,10 +4,7 @@
 */
 
 #include "clocktime.h"
-
-#if !defined(VENUS_WEBASSEMBLY_BUILD)
 #include <QTimeZone>
-#endif
 
 using namespace Victron::VenusOS;
 
@@ -201,7 +198,7 @@ void ClockTime::updateTime(qint64 secsSinceEpoch)
 		return;
 	}
 
-	const QDateTime currentUtc = QDateTime::fromSecsSinceEpoch(secsSinceEpoch, Qt::UTC);
+	const QDateTime currentUtc = QDateTime::fromSecsSinceEpoch(secsSinceEpoch, QTimeZone::UTC);
 
 	if (m_systemTimeZone.compare(QStringLiteral("/UTC"), Qt::CaseInsensitive) == 0
 			|| m_systemTimeZone.compare(QStringLiteral("UTC"), Qt::CaseInsensitive) == 0) {
