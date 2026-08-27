@@ -3,6 +3,8 @@
 ** See LICENSE.txt for license information.
 */
 
+#include <QDir>
+
 #include "src/language.h"
 #include "src/logging.h"
 #include "src/backendconnection.h"
@@ -13,10 +15,7 @@
 #include "src/uitest.h"
 #include "src/frameratemodel.h"
 #include "src/screenblanker.h"
-
-#if VENUS_GX_BUILD
 #include "src/urlinterceptor.h"
-#endif
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 #include <emscripten/html5.h>
@@ -617,9 +616,13 @@ int main(int argc, char *argv[])
 	bool skipSplashScreen = false;
 
 	QQmlEngine engine;
-#if VENUS_GX_BUILD
-	engine.addUrlInterceptor(new Victron::VenusOS::UrlInterceptor());
-#endif
+	// If QML files are installed alongside the executable, load them from the
+	// filesystem instead of from compiled-in resources. This is always the case
+	// for GX builds, and also for desktop builds installed with an install prefix.
+	const QString victronQmlDir = QCoreApplication::applicationDirPath() + QStringLiteral("/Victron");
+	if (QDir(victronQmlDir).exists()) {
+		engine.addUrlInterceptor(new Victron::VenusOS::UrlInterceptor());
+	}
 	QZXing::registerQMLTypes();
 	QZXing::registerQMLImageProvider(engine);
 
