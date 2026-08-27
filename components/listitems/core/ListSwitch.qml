@@ -127,6 +127,19 @@ ListSetting {
 		}
 	}
 
+	background: ListSettingBackground {
+		color: root.flat ? "transparent" : Theme.color_listItem_background
+		indicatorColor: root.backgroundIndicatorColor
+
+		// If button item is disabled due to write permissions, allow click to fall through to here
+		// and show an error.
+		MouseArea {
+			anchors.fill: parent
+			enabled: !root.clickable
+			onClicked: root.checkWriteAccessLevel()
+		}
+	}
+
 	Keys.onSpacePressed: root.click()
 
 	VeQuickItem {
