@@ -127,6 +127,10 @@ ListSetting {
 		}
 	}
 
+	background: ListSettingAccessCheckBackground {
+		listItem: root
+	}
+
 	Keys.onSpacePressed: root.click()
 
 	VeQuickItem {
