@@ -73,5 +73,10 @@ ListSetting {
 		}
 	}
 
+	background: ListSettingAccessCheckBackground {
+		listItem: root
+		mouseArea.enabled: !root.clickable && !root.readOnly && !root.userHasWriteAccess
+	}
+
 	Keys.onSpacePressed: click()
 }
