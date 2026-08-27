@@ -766,11 +766,9 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/widgetconnectorpathupdater.cpp
 )
 
-if (VENUS_GX_BUILD)
-    list(APPEND VictronVenusOS_CPP_SOURCES
-        src/urlinterceptor.h
-        src/urlinterceptor.cpp)
-endif()
+list(APPEND VictronVenusOS_CPP_SOURCES
+    src/urlinterceptor.h
+    src/urlinterceptor.cpp)
 
 set(VictronVenusOS_RESOURCES
     fonts/Roboto-Regular.ttf
