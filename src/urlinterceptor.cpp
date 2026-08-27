@@ -29,7 +29,7 @@ QUrl UrlInterceptor::intercept(const QUrl &url, QQmlAbstractUrlInterceptor::Data
 	QString returnUrl(url.toString());
 
 	if (returnUrl.endsWith(".qml") && returnUrl.indexOf("qrc:/qt/qml/") == 0) {
-		returnUrl.replace("qrc:/qt/qml", QString("file://%1").arg(exeDir));
+		returnUrl.replace("qrc:/qt/qml", QUrl::fromLocalFile(exeDir).toString());
 	}
 
 	return QUrl(returnUrl);

@@ -6,10 +6,13 @@
 #include <QtQuickTest/quicktest.h>
 #include "backendconnection.h"
 
+#include "testutils.h"
+
 int main(int argc, char **argv)
 {
 	Victron::VenusOS::BackendConnectionTester backendConnectionTester;
 
 	QTEST_SET_MAIN_SOURCE_PATH
-	return quick_test_main_with_setup(argc, argv, "tst_backendconnection", "../tests/backendconnection/", &backendConnectionTester);
+	const QByteArray srcDir = resolveTestSourceDir("backendconnection", argv[0]).toLocal8Bit();
+	return quick_test_main_with_setup(argc, argv, "tst_backendconnection", srcDir.constData(), &backendConnectionTester);
 }
