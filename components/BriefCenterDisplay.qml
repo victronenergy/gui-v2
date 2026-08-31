@@ -15,6 +15,8 @@ Column {
 
 	readonly property bool _useTemperature: BackendConnection.portableIdInfo(centerService.value).type === "temperature"
 
+	visible: !centerService.valid || !(centerService.value === "none")
+
 	VeQuickItem {
 		id: centerService
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui2/BriefView/CenterService"
