@@ -4,7 +4,7 @@ Venus OS GUI v2 — Qt6/QML touch UI for Victron Energy GX devices and WebAssemb
 
 ## Code review
 
-When asked to review code, you **must** read and follow the complete checklist in [Code Review](.github/code-review.md) before producing your review. Work through every section of that document systematically.
+When asked to review code, you **must** immediately re-read the **entire** [Code Review](.github/code-review.md) document without skipping any sections, and **then** follow the process step-by-step to perform the review. Do not substitute your own ad-hoc review heuristics or skip sections you judge to be irrelevant — apply every section of the checklist systematically.
 
 ## Topic guides
 
@@ -37,6 +37,16 @@ cd build && ctest -R tst_units -V
 ```
 
 Desktop builds automatically enable unit tests. Use `-DRUN_UNIT_TESTS=ON` to run them as a post-build step.
+
+### Running tests on Windows (important for Copilot / headless environments)
+
+Qt routes `qDebug`/test output via `OutputDebugString` when it detects no interactive console on stderr. In headless or redirected environments (e.g. Copilot CLI subprocesses), test output will be silently lost. Set this environment variable before running tests:
+
+```powershell
+$env:QT_ASSUME_STDERR_HAS_CONSOLE = "1"
+```
+
+This tells Qt to write to stderr even without a detected console, making output capturable via normal redirection.
 
 ## Key conventions
 

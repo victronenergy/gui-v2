@@ -13,6 +13,7 @@
 #include "src/allservicesmodel.h"
 #include "src/mockmanager.h"
 #include "src/uitest.h"
+#include "src/uitestargutils.h"
 #include "src/frameratemodel.h"
 #include "src/screenblanker.h"
 #include "src/urlinterceptor.h"
@@ -227,6 +228,9 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	optionList << animationEnabled;
 
 
+	const QStringList args = QCoreApplication::arguments();
+	const QStringList normalizedArgs = Victron::VenusOS::UiTestArgUtils::normalizeUiTestArguments(args);
+
 	// parser.setUnknownOptionMode(QCommandLineParser::IgnoreUnknownOptions); did not work
 	// in Qt 6.8.3, so we manually filter the arguments.
 	// Build a set of all valid option names (including short and long forms)
@@ -239,11 +243,10 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 		}
 	}
 
-	// Filter arguments: skip unknown options and all their values
+	// Filter arguments: skip unknown options and all their values.
 	QStringList filteredArgs;
-	const QStringList args = QCoreApplication::arguments();
-	for (int i = 0; i < args.size(); ++i) {
-		const QString &arg = args.at(i);
+	for (int i = 0; i < normalizedArgs.size(); ++i) {
+		const QString &arg = normalizedArgs.at(i);
 		if (arg.startsWith('-')) {
 			QString optName = arg;
 			int eq = optName.indexOf('=');
@@ -251,7 +254,7 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 				optName = optName.left(eq);
 			if (!validOptions.contains(optName)) {
 				// Skip this unknown option and all following values until next option or end
-				while (i + 1 < args.size() && !args.at(i + 1).startsWith('-'))
+				while (i + 1 < normalizedArgs.size() && !normalizedArgs.at(i + 1).startsWith('-'))
 					++i;
 				continue;
 			}
@@ -261,13 +264,13 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 
 	// If the original command line arguments and the filtered arguments differ,
 	// print the original, filtered and removed arguments.
-	if (filteredArgs.size() != args.size()) {
+	if (filteredArgs.size() != normalizedArgs.size()) {
 		qWarning() << "Unknown command line arguments were filtered out!";
-		qInfo() << "|- Original:" << args.join(' ');
+		qInfo() << "|- Original:" << normalizedArgs.join(' ');
 		qInfo() << "|- Filtered:" << filteredArgs.join(' ');
 
-		QStringList removed, added;
-		for (const QString &arg : args) {
+		QStringList removed;
+		for (const QString &arg : normalizedArgs) {
 			if (!filteredArgs.contains(arg)) {
 				removed << arg;
 			}
@@ -279,9 +282,16 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 
 	// Load a UI test configuration if --ui-test is specified.
 	Victron::VenusOS::UiTestConfiguration uiTestConf;
-	const QString uiTestName = parser.value(uiTest);
+	QString uiTestName = parser.value(uiTest);
+	if (uiTestName.isEmpty()) {
+		uiTestName = Victron::VenusOS::UiTestArgUtils::parseUiTestValueFromArgs(normalizedArgs);
+	}
 	if (!uiTestName.isEmpty()) {
-		uiTestConf.load(uiTestName);
+		if (uiTestConf.exists(uiTestName)) {
+			uiTestConf.load(uiTestName);
+		} else {
+			uiTestConf.loadTargetPageNavigation(uiTestName);
+		}
 	}
 
 	// Load the specified --mock-conf option.
@@ -365,7 +375,7 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 		// against that configuration. In that case, exit with an error if --mock-conf is also set,
 		// as that may conflict with the configuration specified by the UI test.
 		if (!mockConfName.isEmpty() && uiTestConf.hasMockConfiguration()) {
-			qFatal() << "Error: --mock-conf was set but --ui-test" << parser.value(uiTest)
+			qFatal() << "Error: --mock-conf was set but --ui-test" << uiTestName
 					 << "already specifies a mock configuration:" << uiTestConf.dirName();
 		}
 

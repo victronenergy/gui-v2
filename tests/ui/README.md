@@ -8,6 +8,31 @@ For example, this runs the `smoke/mock-maximal` test when gui-v2 is loaded:
 ./bin/venus-gui-v2 --mock --ui-test smoke/mock-maximal
 ```
 
+If `--ui-test` does not match a UI test configuration directory, gui-v2 treats the value as a
+destination page and runs a lightweight route-finding test that programmatically clicks through
+menus until that page is reached. For example:
+
+```
+./bin/venus-gui-v2 --mock --ui-test /pages/settings/PageSettingsConnectivity.qml
+```
+
+The route is resolved statically at startup by scanning compiled QML resources for `pushPage()`
+calls in navigable list items and widgets. Pages reachable via `ListNavigation`,
+`ListQuantityGroupNavigation`, and overview widgets are supported. Navigation blocks with
+runtime-branching `pushPage()` calls (e.g. conditional if/else) have all branches represented
+in the graph; the test verifies at runtime that the expected page actually opened after each click.
+
+Pages that are only reachable via fully dynamic or computed URLs (e.g. plugin integration
+pages) cannot be statically resolved and will produce an error at startup.
+Device-list delegate pages (loaded dynamically by `DeviceListPage` via `ListItemLoader` with
+computed URLs and data-dependent labels) are also not statically resolvable.
+Pages whose destination URL is static but whose clickable label/identifier is fully dynamic
+(for example values loaded from runtime data with no static fallback text/icon/objectName)
+are currently not resolvable in target-page mode.
+In target-page mode, runtime QML errors (including binding/runtime JavaScript errors such as
+`ReferenceError`) are counted as test failures, and URL-only success is not enough: the test also
+requires a real page object to be present on the page stack.
+
 The `smoke/mock-maximal` test configuration specifies that the UI should also load the "maximal" mock configuration, so it is not necessary to set `--mock-conf maximal`.
 
 In comparison, the `smoke/generic-capture` test does not specify a mock configuration, because the test simply captures all available screens regardless of the backend:
@@ -151,4 +176,3 @@ Missing features:
 * `RecursivePageCapture` does not click list buttons or radio buttons. This is for the best at the moment, as some buttons have write effects that change the UI and then might result in capture failures, but it also means we can't easily test features where buttons are clicked to open dialogs.
 * `UiTestCase` should provide `keyPress` function for testing key navigation.
 * Other?
-

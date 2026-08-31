@@ -82,9 +82,11 @@ StackView {
 			_popAndDestroyAllPages(StackView.Immediate)
 		}
 
+		const pageUrl = typeof(obj) === "string" ? obj : ""
 		let objectOrUrl = typeof(obj) !== "string" ? obj
 			: obj.indexOf("qrc:") === 0 ? obj
 			: ".." + obj
+		let createdPageObject = null
 		if (typeof(obj) === "string") {
 			// pre-construct the object to make sure there are no errors
 			// to avoid messing up the page stack state.
@@ -93,25 +95,44 @@ StackView {
 				console.warn("Aborted attempt to push page with errors: " + obj + ": " + checkComponent.errorString())
 				return null
 			}
-			objectOrUrl = checkComponent.createObject(null, properties)
-			root._pageUrls.push(obj)
-			root._topPageUrl = obj
-		} else {
-			root._pageUrls.push("")
-			root._topPageUrl = ""
+			createdPageObject = checkComponent.createObject(null, properties)
+			if (!createdPageObject) {
+				console.warn("Aborted attempt to push page because createObject() failed: " + obj + ": " + checkComponent.errorString())
+				return null
+			}
+			objectOrUrl = createdPageObject
 		}
 
+		let pushedPage = null
 		if (root.state !== "opened") {
 			// When the stack is closed or hidden, push the first page without any animation and
 			// slide the stack into view.
-			const newPage = root.push(objectOrUrl, properties, StackView.Immediate)
+			pushedPage = root.push(objectOrUrl, properties, StackView.Immediate)
+			if (!pushedPage) {
+				if (createdPageObject && !Theme.objectHasQObjectParent(createdPageObject)) {
+					createdPageObject.destroy()
+				}
+				console.warn("Aborted attempt to push page because StackView rejected the page object: " + pageUrl)
+				return null
+			}
+			root._pageUrls.push(pageUrl)
+			root._topPageUrl = pageUrl
 			fakePushAnimation.duration = _animationDuration(operation)
 			root.state = "opened"
-			return newPage
 		} else {
 			// Otherwise, push the push onto the visible stack, possibly with an animation.
-			return root.push(objectOrUrl, properties, _adjustedStackOperation(operation))
+			pushedPage = root.push(objectOrUrl, properties, _adjustedStackOperation(operation))
+			if (!pushedPage) {
+				if (createdPageObject && !Theme.objectHasQObjectParent(createdPageObject)) {
+					createdPageObject.destroy()
+				}
+				console.warn("Aborted attempt to push page because StackView rejected the page object: " + pageUrl)
+				return null
+			}
+			root._pageUrls.push(pageUrl)
+			root._topPageUrl = pageUrl
 		}
+		return pushedPage
 	}
 
 	function popAllPages(operation) {
