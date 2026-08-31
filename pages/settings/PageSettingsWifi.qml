@@ -18,11 +18,15 @@ Page {
 		uid: Global.venusPlatform.serviceUid +  "/Network/Wifi/Scan"
 	}
 
+	WifiModel {
+		id: wifiModel
+	}
+
 	GradientListView {
 		id: settingsListView
 
-		model: WifiModel {
-			id: wifiModel
+		model: SortedWifiModel {
+			sourceModel: wifiModel
 		}
 
 		header: SettingsColumn {
@@ -205,14 +209,12 @@ Page {
 				visible: model.favorite
 			}
 
-			onClicked: Global.pageManager.pushPage(wifiPointComponent)
+			onClicked: Global.pageManager.pushPage(wifiPointComponent, { title: text, service: model.service })
 
 			Component {
 				id: wifiPointComponent
 
 				PageSettingsTcpIp {
-					title: accessPointDelegate.text
-					service: model.service
 					tech: "wifi"
 					ethernetNetworkServices: root.ethernetNetworkServices
 				}
