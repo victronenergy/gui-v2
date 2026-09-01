@@ -94,11 +94,8 @@ Each test is defined by a JSON file (e.g. `tests/ui/smoke/mock-maximal/mock-maxi
         "tst_overview.qml",
         "tst_settings.qml"
     ],
-    "Mock": {
-        "Configuration": ":/data/mock/conf/maximal.json",
-        "TimersActive": false,
-        "UIAnimations": 0
-    },
+    "MockConfiguration": ":/data/mock/conf/maximal.json",
+    "UIAnimations": 0,
     "Steps": {
         "CaptureAndCompare": {
             "ImageDir": "image-captures",
@@ -119,9 +116,9 @@ Key configuration fields:
 |-------|---------|
 | `ExitWhenFinished` | Exit the application when all tests complete |
 | `Tests` | List of QML test case files to execute in order |
-| `Mock.Configuration` | JSON file defining mock device/service data |
-| `Mock.TimersActive` | Whether mock timers animate values (false for stable captures) |
-| `Mock.UIAnimations` | UI animation duration override (0 disables animations for deterministic captures) |
+| `MockConfiguration` | JSON file defining mock device/service data |
+| `MockTimersActive` | Optional, default false. Mock timers are off during a UI test unless this is true |
+| `UIAnimations` | UI animation duration override (0 disables animations for deterministic captures) |
 | `Steps.CaptureAndCompare.ImageDir` | Output directory for captured images |
 | `Steps.CaptureAndCompare.StabilizationInterval` | Milliseconds between capture attempts while waiting for page stabilization |
 | `Steps.CaptureAndCompare.MaximumStabilizationCaptures` | Max retries waiting for a stable frame |
@@ -247,7 +244,7 @@ tests/ui/
 ## Important notes
 
 - **Animations must be disabled** (`UIAnimations: 0`) for deterministic captures
-- **Mock timers must be off** (`TimersActive: false`) to prevent animated data values from changing between captures
+- **Mock timers must be off** (the default; do not set `MockTimersActive`) to prevent animated data values from changing between captures
 - **Stabilization**: pages with asynchronous content (Repeaters, Loaders) may take multiple frames to stabilize. The system retries captures until the image is stable (consecutive captures are identical)
 - **RecursivePageCapture limitations**: it does not click buttons or radio buttons (only `ListNavigation` items), because buttons may have write side-effects that alter the UI state
 - **Debug logging**: set `"Logging": "debug"` in the test JSON to see detailed output when `findItem()` calls fail
