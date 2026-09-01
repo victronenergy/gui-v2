@@ -210,7 +210,10 @@ CaptureAndCompareStep::CaptureAndCompareStep(QObject *parent, QQuickWindow *wind
 QString CaptureAndCompareStep::summary() const
 {
 	QString s = QStringLiteral("%1: %2 (%3 frame swaps, %4ms to stabilize)")
-			.arg(UiTestStep::summary()).arg(m_filePrefix)
+			.arg(UiTest::create()->isHeadless()
+					? QStringLiteral("Capture") // the capture is not compared in headless mode
+					: UiTestStep::summary())
+			.arg(m_filePrefix)
 			.arg(m_frameSwapCount)
 			.arg(m_elapsedTimer.elapsed());
 	if (m_comparisonResult == ComparisonFailed) {
@@ -293,8 +296,15 @@ void CaptureAndCompareStep::finalize()
 	}
 	m_stabilizationTimerId = 0;
 
-	// Capture the current view.
+	// Capture the current view. The grab renders the scene, so it is done in headless mode as
+	// well, to verify that the screen can be rendered.
 	m_lastCapture = m_window->grabWindow().convertToFormat(QImage::Format_ARGB32);
+
+	if (UiTest::create()->isHeadless()) {
+		// In headless mode the capture is not saved or compared, so there is nothing left to do.
+		finish(true);
+		return;
+	}
 
 	// Prepare to save the captured image.
 	QString filePath = m_filePrefix;

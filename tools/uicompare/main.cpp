@@ -121,7 +121,14 @@ static int runHeadless(QCoreApplication *app, const QString &outputPath, qreal e
     });
 
     ImageComparator::instance()->start();
-    return app->exec();
+    const int exitCode = app->exec();
+    if (exitCode != 0) {
+        return exitCode;
+    }
+
+    // Report a non-zero exit code if any image differed or was missing from either set, so that
+    // the caller (e.g. a CI job) can detect that the two image sets are not equivalent.
+    return totals.failCount + totals.noBaselineCount + totals.noCandidateCount > 0 ? 1 : 0;
 }
 
 static int runGui(QGuiApplication *app, qreal errorTolerance)

@@ -51,6 +51,10 @@ Run with the `--headless` option to perform image comparisons without showing th
 
 In headless mode, you can also set `--output` with a file path, where the comparison results will be written in JSON format.
 
+Headless mode exits with a non-zero exit code if any image comparison failed, or if an image was
+missing from either the baseline or the candidate set. This allows the tool to be used from a script
+or a CI job.
+
 
 ## TODO
 

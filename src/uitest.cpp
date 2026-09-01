@@ -13,6 +13,8 @@
 #include <QLoggingCategory>
 #include <QQmlComponent>
 
+#include <iostream>
+
 #include "veutil/qt/ve_qitem.hpp"
 
 #include "uitest.h"
@@ -135,6 +137,16 @@ void UiTest::loadConfiguration(const UiTestConfiguration &conf)
 	setStatus(Ready);
 }
 
+void UiTest::setHeadless(bool headless)
+{
+	m_headless = headless;
+}
+
+bool UiTest::isHeadless() const
+{
+	return m_headless;
+}
+
 void UiTest::start()
 {
 	if (m_status != Ready) {
@@ -147,6 +159,14 @@ void UiTest::start()
 	ClockTime::create()->setClockTime(1);
 
 	qCInfo(venusGuiTest) << "Starting UI tests...";
+
+	if (m_headless) {
+		// No images are saved, so there is no image directory to prepare.
+		qCInfo(venusGuiTest) << "Headless mode: captured images will not be saved or compared.";
+		m_currentTestIndex = -1;
+		QTimer::singleShot(0, this, &UiTest::startNextTestCase);
+		return;
+	}
 
 	QDir imageDir(CaptureAndCompareStep::absoluteImagePath(QString()));
 	const QString imageDirPath = imageDir.absolutePath();
@@ -219,6 +239,9 @@ void UiTest::startNextTestCase()
 			connect(testCase, &UiTestCase::finished, this, &UiTest::testCaseFinished);
 			testCase->start();
 		} else {
+			// The test case could not be loaded. Record this as a failure so that it is reported
+			// in the totals and in the exit code.
+			m_failCount++;
 			qCInfo(venusGuiTest) << "Skipping to next test!";
 			QTimer::singleShot(0, this, &UiTest::startNextTestCase);
 		}
@@ -229,14 +252,29 @@ void UiTest::startNextTestCase()
 				: QStringLiteral("%1m %2s")
 					.arg(totalSeconds / 60)
 					.arg(totalSeconds < 60 ? totalSeconds : totalSeconds % 60);
-		qCInfo(venusGuiTest) << qPrintable(QStringLiteral("All tests finished: %1 steps passed, %2 steps failed, in %3")
+		const QString resultText = QStringLiteral("All tests finished: %1 steps passed, %2 steps failed, in %3")
 				.arg(m_passCount)
 				.arg(m_failCount)
-				.arg(durationText));
+				.arg(durationText);
+		qCInfo(venusGuiTest) << qPrintable(resultText);
 		qCInfo(venusGuiTest) << "********************************************************";
+
+		if (m_headless) {
+			// Report the result on stdout/stderr as well, so that it is visible regardless of the
+			// logging configuration, e.g. when this is run as a smoke test from a CI pipeline.
+			const QString summaryText = QStringLiteral("UI test '%1' %2: %3")
+					.arg(m_relativeTestDir)
+					.arg(m_failCount > 0 ? QStringLiteral("FAILED") : QStringLiteral("PASSED"))
+					.arg(resultText);
+			std::ostream &stream = m_failCount > 0 ? std::cerr : std::cout;
+			stream << qPrintable(summaryText) << std::endl;
+		}
+
 		setStatus(Finished);
 		if (exitWhenFinished()) {
-			qApp->quit();
+			// Exit with a non-zero code if any step failed, so that the caller (e.g. a CI job) can
+			// detect the failure.
+			qApp->exit(m_failCount > 0 ? 1 : 0);
 		}
 	}
 }
