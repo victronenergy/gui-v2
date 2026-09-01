@@ -25,7 +25,6 @@ public:
 	void setTimersActive(bool active);
 
 	bool loadConfiguration(const QString &fileName);
-	QString configurationFileName() const;
 
 	Q_INVOKABLE void setValue(const QString &uid, const QVariant &value);
 	Q_INVOKABLE QVariant value(const QString &uid) const;
@@ -33,6 +32,14 @@ public:
 	Q_INVOKABLE void removeValue(const QString &uid);
 	Q_INVOKABLE void removeServices(const QString &serviceType);
 	Q_INVOKABLE void dumpValues();
+
+	// Returns the uids of the values that the UI has requested from the mock backend, but for
+	// which the mock backend does not provide a value (i.e. the value is 'undefined' in QML).
+	Q_INVOKABLE QStringList missingValues() const;
+
+	// Logs the uids returned by missingValues(), one per line, between marker lines. Only logs;
+	// it does not change the mock backend in any way.
+	Q_INVOKABLE void dumpMissingValues() const;
 
 	static MockManager* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 
@@ -47,7 +54,6 @@ private:
 	void setPropertyValues(const QString &path, const QJsonObject &properties);
 	VeQItemMockProducer *producer() const;
 
-	QString m_confFileName;
 	bool m_timersActive = false;
 };
 

@@ -76,11 +76,8 @@ Each test is defined by a JSON file (e.g. `tests/ui/smoke/mock-maximal/mock-maxi
         "tst_overview.qml",
         "tst_settings.qml"
     ],
-    "Mock": {
-        "Configuration": ":/data/mock/conf/maximal.json",
-        "TimersActive": false,
-        "UIAnimations": 0
-    },
+    "MockConfiguration": ":/data/mock/conf/maximal.json",
+    "UIAnimations": 0,
     "Steps": {
         "CaptureAndCompare": {
             "ImageDir": "image-captures",
@@ -101,9 +98,8 @@ Key configuration fields:
 |-------|---------|
 | `ExitWhenFinished` | Exit the application when all tests complete |
 | `Tests` | List of QML test case files to execute in order |
-| `Mock.Configuration` | JSON file defining mock device/service data |
-| `Mock.TimersActive` | Whether mock timers animate values (false for stable captures) |
-| `Mock.UIAnimations` | UI animation duration override (0 disables animations for deterministic captures) |
+| `MockConfiguration` | JSON file defining mock device/service data (mock timers are always off during a UI test) |
+| `UIAnimations` | UI animation duration override (0 disables animations for deterministic captures) |
 | `Steps.CaptureAndCompare.ImageDir` | Output directory for captured images |
 | `Steps.CaptureAndCompare.StabilizationInterval` | Milliseconds between capture attempts while waiting for page stabilization |
 | `Steps.CaptureAndCompare.MaximumStabilizationCaptures` | Max retries waiting for a stable frame |

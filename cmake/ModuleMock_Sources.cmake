@@ -30,6 +30,8 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/switch-pane.json
     data/mock/conf/services/alternator.json
     data/mock/conf/services/ble-sensors.json
+    data/mock/conf/services/canbus-rvc.json
+    data/mock/conf/services/cgwacs-energy-meters.json
     data/mock/conf/services/dcgenset.json
     data/mock/conf/services/dcload-fridge.json
     data/mock/conf/services/dcsystem1.json
@@ -48,13 +50,14 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/services/ess.json
     data/mock/conf/services/ev.json
     data/mock/conf/services/evcharger1.json
+    data/mock/conf/services/fiamm-48tl.json
     data/mock/conf/services/fronius.json
-    data/mock/conf/services/generator.json
     data/mock/conf/services/gioextender.json
     data/mock/conf/services/gps.json
     data/mock/conf/services/inverter-rs.json
     data/mock/conf/services/lynxbms.json
     data/mock/conf/services/lynxparallel.json
+    data/mock/conf/services/meteo-imt.json
     data/mock/conf/services/meteo-solarsense.json
     data/mock/conf/services/modem.json
     data/mock/conf/services/motordrive.json
@@ -72,10 +75,11 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/services/orionxs-dcdc.json
     data/mock/conf/services/phoenix-smart-charger.json
     data/mock/conf/services/pulsemeter.json
-    data/mock/conf/services/pump.json
     data/mock/conf/services/pvinverter.json
     data/mock/conf/services/pylontech.json
     data/mock/conf/services/quattro-3phase-grid-genset.json
+    data/mock/conf/services/relays-generator.json
+    data/mock/conf/services/relays-tank-pump.json
     data/mock/conf/services/relays-temperature-and-manual.json
     data/mock/conf/services/ruuvi-fridge.json
     data/mock/conf/services/ruuvi-salon.json

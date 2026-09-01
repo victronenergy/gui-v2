@@ -10,10 +10,7 @@
         "tst_overview.qml",
         "tst_settings.qml"
     ],
-    "Mock": {
-        "Configuration": ":/data/mock/conf/maximal.json",
-        "TimersActive": false
-    },
+    "MockConfiguration": ":/data/mock/conf/maximal.json",
     "Steps": {
         "CaptureAndCompare": {
             "ImageDir": "image-captures",

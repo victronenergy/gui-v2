@@ -148,16 +148,12 @@ const QVariantMap &UiTestConfiguration::settingsMap() const
 	return m_settings;
 }
 
-bool UiTestConfiguration::hasMockConfiguration() const
+QString UiTestConfiguration::mockConfiguration() const
 {
-	return m_settings.contains("Mock");
+	// An empty value is not a configuration; treating it as one would suppress the default
+	// configuration and leave the mock backend with no values at all.
+	return m_settings.value("MockConfiguration").toString();
 }
-
-bool UiTestConfiguration::hasMockTimersActive() const
-{
-	return m_settings.value("Mock").toMap().value("TimersActive").isValid();
-}
-
 
 UiTest* UiTest::create(QQmlEngine *, QJSEngine *)
 {
@@ -191,26 +187,31 @@ void UiTest::loadConfiguration(const UiTestConfiguration &conf)
 
 	BackendConnection *backend = BackendConnection::create();
 	if (backend->type() == BackendConnection::MockSource) {
-		// Read 'Mock' configuration values.
 		MockManager *mockManager = MockManager::create();
-		const QVariantMap mockSettings = settingValue("Mock").toMap();
-		if (mockSettings.value("Configuration").isValid()) {
-			mockManager->loadConfiguration(mockSettings.value("Configuration").toString());
+		const QString mockConfiguration = conf.mockConfiguration();
+		if (!mockConfiguration.isEmpty() && !mockManager->loadConfiguration(mockConfiguration)) {
+			// Nothing else will load a configuration: main() skips the default because this test
+			// names one. Without this the test would run against an empty mock backend, and a
+			// capture sweep would happily photograph a thousand blank screens and report no
+			// failures.
+			qCFatal(venusGuiTest) << "UI test" << conf.dirName()
+					<< "specifies a mock configuration that could not be loaded:" << mockConfiguration;
 		}
-		if (mockSettings.value("TimersActive").isValid()) {
-			mockManager->setTimersActive(mockSettings.value("TimersActive").toBool());
-		}
+
+		// Mock timers are always off during a UI test: the mock data randomizers would otherwise
+		// change values between runs, and the image comparisons of captured screens would fail.
+		mockManager->setTimersActive(false);
 	}
 
 	// UI animations default off for deterministic visual captures. Honor an explicit
-	// Mock.UIAnimations opt-in so performance tests can measure motion. Do this after mock
+	// UIAnimations opt-in so performance tests can measure motion. Do this after mock
 	// configuration so the test JSON overrides setup-common.json. --animationEnabled alone
 	// does not override this backend setting.
 	if (backend->type() != BackendConnection::UnknownSource && VeQItems::getRoot()) {
 		if (VeQItem *uiAnimationsItem = VeQItems::getRoot()->itemGet(
 					backend->serviceUidForType("settings") + "/Settings/Gui2/UIAnimations")) {
-			const QVariant mockUiAnimations = settingValue("Mock").toMap().value("UIAnimations");
-			uiAnimationsItem->setValue(mockUiAnimations.isValid() ? mockUiAnimations.toInt() : 0);
+			const QVariant uiAnimations = settingValue("UIAnimations");
+			uiAnimationsItem->setValue(uiAnimations.isValid() ? uiAnimations.toInt() : 0);
 		}
 	}
 

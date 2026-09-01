@@ -12,6 +12,14 @@ UiTestCase {
 
 	window: Global.main
 
+	function cleanup() {
+		recursivePageCapture.reset()
+
+		// No steps have been added, so call goToNextTestFunction() instead of runSteps() to
+		// continue the testing.
+		goToNextTestFunction()
+	}
+
 	function test_control_cards() {
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableParent(
 				findItem(Global.mainView.statusBar, { "source": Qt.url("qrc:/images/icon_controls_off_32.svg") }))) } })

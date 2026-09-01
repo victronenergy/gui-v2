@@ -1,13 +1,17 @@
 {
     "files": [
+        ":/data/mock/conf/setup-common.json",
         ":/data/mock/conf/services/wind.json",
         ":/data/mock/conf/services/orionxs-dcdc.json",
         ":/data/mock/conf/services/pylontech.json",
         ":/data/mock/conf/services/multiple-dc-gensets.json",
-        ":/data/mock/conf/services/motordrive.json",
-        ":/data/mock/conf/setup-common.json"
+        ":/data/mock/conf/services/motordrive.json"
     ],
     "setup": {
+        "com.victronenergy.settings": {
+            "/Settings/Canbus/vecan0/Profile": 9,
+            "/Settings/Canbus/vecan1/Profile": 0
+        },
         "com.victronenergy.system": {
             "/Ac/HasAcLoads": 0,
             "/ActiveBatteryService": "com.victronenergy.battery/512"

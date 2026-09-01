@@ -99,16 +99,13 @@ The test configuration (`tests/ui/benchmark/overview/overview.json`) uses:
 ```json
 {
     "ExitWhenFinished": false,
-    "Mock": {
-        "Configuration": ":/data/mock/conf/maximal.json",
-        "TimersActive": false,
-        "UIAnimations": 1
-    }
+    "MockConfiguration": ":/data/mock/conf/maximal.json",
+    "UIAnimations": 1
 }
 ```
 
 Key settings:
-- **`TimersActive: false`** — Mock data timers are disabled so that label/value
+- Mock data timers are always disabled during a UI test, so that label/value
   updates do not cause rendering work unrelated to the animations being
   measured.
 - **`UIAnimations: 1`** — Opt-in so `/Settings/Gui2/UIAnimations` stays enabled

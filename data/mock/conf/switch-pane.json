@@ -1,10 +1,12 @@
 {
     "files": [
-        ":/data/mock/conf/services/switch-controls-tester.json",
-        ":/data/mock/conf/setup-common.json"
+        ":/data/mock/conf/setup-common.json",
+        ":/data/mock/conf/services/switch-controls-tester.json"
     ],
     "setup": {
         "com.victronenergy.settings": {
+            "/Settings/Canbus/vecan0/Profile": 1,
+            "/Settings/Canbus/vecan1/Profile": 0
         },
         "com.victronenergy.system": {
         }
