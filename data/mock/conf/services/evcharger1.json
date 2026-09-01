@@ -22,15 +22,15 @@
         "/ProductId": 49189,
         "/ProductName": "EV Charging Station",
         "/Role": "evcharger",
+        "/S2/0/Active": 0,
+        "/S2/0/RmSettings/MaxChargePower": 7360,
+        "/S2/0/RmSettings/RememberEvPhases": 1,
         "/Serial": "ABC123456",
         "/Session/Energy": 3.45,
         "/Session/Time": 8838.0,
         "/SetCurrent": 22,
         "/StartStop": 1,
-        "/Status": 2,
-        "/S2/0/RmSettings/MaxChargePower": 99999,
-        "/S2/0/RmSettings/RememberEvPhases": 0,
-        "/S2/0/Active": 0
+        "/Status": 2
     },
     "com.victronenergy.modbusclient.tcp": {
         "/Devices/evc_ABC123456/Enabled": 1,

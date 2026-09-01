@@ -1,11 +1,14 @@
 {
     "files": [
+        ":/data/mock/conf/setup-common.json",
         ":/data/mock/conf/services/pylontech.json",
-        ":/data/mock/conf/services/multiplus-split-phase.json",
-        ":/data/mock/conf/setup-common.json"
+        ":/data/mock/conf/services/relays-generator.json",
+        ":/data/mock/conf/services/multiplus-split-phase.json"
     ],
     "setup": {
         "com.victronenergy.settings": {
+            "/Settings/Canbus/vecan0/Profile": 1,
+            "/Settings/Canbus/vecan1/Profile": 0,
             "/Settings/SystemSetup/AcInput1": 1,
             "/Settings/SystemSetup/AcInput2": 0
         },

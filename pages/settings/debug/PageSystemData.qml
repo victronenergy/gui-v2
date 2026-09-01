@@ -66,7 +66,7 @@ Page {
 
 			ListQuantity {
 				text: "PV Charger"
-				value: data.pvCharger.power.value
+				value: data.pvCharger.power.valid ? data.pvCharger.power.value : NaN
 				unit: VenusOS.Units_Watt
 			}
 		}

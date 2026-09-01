@@ -21,6 +21,53 @@ venus-gui-v2 --mock --mock-conf barebones --ui-test smoke/generic-capture
 ```
 
 
+## Do not hide the window while a test run is in progress
+
+A minimised (or otherwise unmapped) window receives no frame callbacks, and Qt waits
+for a frame callback before rendering the next frame. Every QML animation therefore stops. For a
+test run this means the page transition in progress never finishes: `StackView.busy` stays true,
+`Global.mainView.animating` stays true, and the next `WaitUntil` on it times out. The run then
+fails at whatever page it happened to be on when the window was hidden, with no QML error and
+nothing wrong with the code under test.
+
+So: leave the window alone while a run is in progress. Minimising it part-way through is enough
+to fail the run.
+
+For unattended runs, where nobody can promise not to touch the window, use the offscreen
+platform. There is no window at all, so there is nothing to hide, and it still renders real
+screenshots via software rasterisation, so CaptureAndCompare works normally:
+
+```
+QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --mock --ui-test smoke/mock-maximal
+```
+
+Offscreen is a safe default: running `smoke/mock-maximal` offscreen and on a real X server gives
+the same 6198 steps, the same 0 failures, the same 1662 missing values and the same 1271 captures.
+
+The captured *images* are not interchangeable between the two, though. Every one of those 1271
+captures differs, on about 13% of its pixels - the content and layout are identical, and only the
+rasterisation of glyphs and edges changes. So a baseline captured offscreen will not compare clean
+against a run on a real display, and vice versa. Pick one platform for a given set of baselines
+and stay on it.
+
+Offscreen is also the more reproducible of the two: two offscreen runs of the same build produced
+byte-identical files for 1269 of the 1271 captures.
+
+Two things follow when reading a failed run:
+
+* If a run ends after far fewer steps than usual, suspect this before suspecting the change under
+  test. Offscreen, a healthy run of `smoke/generic-capture` on the `maximal` mock configuration
+  completes 4148 steps with 0 failures, and `smoke/mock-maximal` 6198. Repeated runs of an
+  unchanged configuration have scored anywhere between 7 and a full sweep purely from this. Re-run
+  before concluding anything, and re-run each arm at least twice when bisecting - this noise is
+  easily mistaken for a real result, and has already produced one confident but wrong bisect.
+* A single `Step timed out!` is normally followed by a cascade of `Callable returned false!` and
+  `mouseClick(): invalid item!` failures. That is one stall poisoning the rest of the test case,
+  not several distinct problems. Note also that `cleanup()` runs between test functions but not
+  between test *files*, so a stall in one test file can fail the file that follows it; check a
+  test on its own before blaming it.
+
+
 ## Tests directory structure
 
 UI tests are stored under `gui-v2/tests/ui`:
@@ -45,7 +92,12 @@ Tests are configured with a JSON file; see `smoke/mock-maximal` for an example. 
 
 * Tests - a list of QML test files
 * Logging - enable a venus.gui.test logging type - e.g. "debug", "info". The default level is "info".
-* Mock - when running in mock mode, sets the mock mode parameters
+* MockConfiguration - the mock configuration that the test requires, e.g.
+  ":/data/mock/conf/maximal.json". Set this only if the test is designed for one particular
+  configuration; if it is not set, the caller chooses the configuration with --mock-conf. It is an
+  error to pass --mock-conf for a test that names its own configuration.
+  Note that the mock timers are always turned off for a UI test, so that the mock data randomizers
+  cannot change values between runs and break the image comparisons.
 * Steps - contains configurations for UI test steps
   * For example, for the "CaptureAndCompare" step, if you set "ComparisonThreshold" to 0.1, then it will compare captured images with an error threshold of 0.1%.
 
@@ -65,6 +117,26 @@ The API follows QML TestCase conventions in that:
 * Data functions can be specified with a `_data` suffix
 * If `initTestCase()` and `cleanupTestCase()` are specified, they are run before and after all test functions
 * If `init()` and `cleanup()` are specified, they are run before and after each test function (and if data functions are specified, `init()` and `cleanup()` are run before each data-associated function invocation)
+
+**Give a test case a `cleanup()` that pops the page stack.** A test function does not always get to
+finish tidily: when a step fails, `UiTestStepGroup` does not run the `runSteps()` callback, so the
+rest of that function's steps - including anything that would have popped its pages - never run.
+`cleanup()` still runs, because it is a test function in its own right, so it is the place to
+guarantee that the next test function starts from a known state:
+
+```qml
+function cleanup() {
+    Global.pageManager.popAllPages(PageStack.Immediate)
+
+    // No steps have been added, so call goToNextTestFunction() instead of runSteps().
+    goToNextTestFunction()
+}
+```
+
+Pop with `PageStack.Immediate`: the default is animated, and a click is ignored while the page stack
+animates, so the next test function's first navigation would be swallowed. Without a `cleanup()`,
+one failed capture cost two failures instead of one - the next test function, which did not even use
+`RecursivePageCapture`, could not click the status bar because the abandoned pages were covering it.
 
 Typically to run a test, you add a series of steps, then call `runSteps()` to asynchronously execute the steps. For example:
 
@@ -124,6 +196,53 @@ The `gui-v2/src` directory contains the C++ API:
 * `uiteststep.h`: defines the test steps that can be executed in a test case
 
 
+## Checking which pages a test run reached
+
+Each `RecursivePageCapture` capture step logs the url of the page it captured, e.g.
+
+```
+[2: CaptureAndCompare: tst_all-Settings_Devices_1: Devices [url: /pages/settings/devicelist/DeviceListPage.qml]]
+```
+
+Comparing those urls against the pages that the UI can push shows which parts of the UI the backend
+data does not reach. For a mock backend, that is a list of gaps in the mock configurations:
+
+```
+# All pages that can be pushed by url
+grep -rhoE '"/pages/[A-Za-z0-9_/-]+\.qml"' --include=*.qml . | tr -d '"' | sort -u > all-pages.txt
+
+# All pages reached by the test runs
+grep -ho "url: [^]]*" *.log | sed 's/url: //' | sort -u > visited-pages.txt
+
+comm -23 all-pages.txt visited-pages.txt
+```
+
+**This is a starting point, not a coverage report.** It only sees pages that are pushed by url. A
+page is just as often pushed as a `Component`, and `PageStack.pushPage()` records an empty url for
+anything that is not a string, so such a page appears in neither list: it is not matched by the
+grep for `"/pages/....qml"`, and its capture step logs no `[url: ...]` at all. For example:
+
+```qml
+onClicked: Global.pageManager.pushPage(canBusComponent, { title: text, canbusProfile: canbusProfile })
+
+Component {
+    id: canBusComponent
+
+    PageSettingsCanbus { }
+}
+```
+
+Those pages *are* captured by the sweep - only the url bookkeeping cannot see them. In a
+`smoke/generic-capture` run against `maximal`, 345 of the 848 capture steps logged no url, 337 of
+them nested pages pushed this way (the rest are the main view's own screens, which are not on the
+page stack at all). So an empty `comm` output means "every page that is pushed by url was reached",
+which is a much weaker statement than "every page in the UI was reached". Read the missing entries
+it does report, but do not treat the empty case as proof of full coverage.
+
+See also the `--mock-coverage` option, described in `data/mock/conf/README.md`, which reports the
+individual values that the UI asked for but that the mock configuration does not provide.
+
+
 ## Other
 
 UI test logging is configured via the "venus.gui.test" logging category.
@@ -149,6 +268,7 @@ Open questions:
 
 Missing features:
 * `RecursivePageCapture` does not click list buttons or radio buttons. This is for the best at the moment, as some buttons have write effects that change the UI and then might result in capture failures, but it also means we can't easily test features where buttons are clicked to open dialogs.
+* `RecursivePageCapture` clicks the first clickable child of a list item, so it cannot navigate list items whose first clickable child does something else. For example, the `ListDevicePriority` items on the Opportunity Loads page have re-ordering buttons before the navigation area, so the pages they navigate to (`PageControllableLoadsBattery.qml`, `PageControllableLoadsEVCS.qml`, `PageControllableLoadsS2Rm.qml`) are not captured.
 * `UiTestCase` should provide `keyPress` function for testing key navigation.
 * Other?
 
