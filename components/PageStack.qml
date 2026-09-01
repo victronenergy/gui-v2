@@ -118,6 +118,9 @@ StackView {
 		if (!_canPopTo(null)) {
 			return
 		}
+		if (_closeHiddenStack()) {
+			return
+		}
 		fakePopAnimation.duration = _animationDuration(operation)
 		root.state = "closed"
 	}
@@ -136,6 +139,9 @@ StackView {
 
 		if (root.depth === 1) {
 			// When the last page is removed from the stack, move the stack out of view.
+			if (_closeHiddenStack()) {
+				return
+			}
 			fakePopAnimation.duration = _animationDuration(operation)
 			root.state = "closed"
 		} else {
@@ -160,6 +166,23 @@ StackView {
 		}
 		fakePopAnimation.duration = _animationDuration(StackView.PopTransition)
 		state = "hidden"
+		return true
+	}
+
+	/*
+		Closes a stack that is hidden, destroying its pages, and returns true if it did so.
+
+		A hidden stack keeps its pages, and the transition that destroys them only runs when leaving
+		the "opened" state, so it does not run for a hidden stack: without this the pages stay alive,
+		and pushPage() does not clear them either, as it only does that for a stack that is still
+		hidden. The next page pushed would then land on top of pages that were meant to be gone.
+	*/
+	function _closeHiddenStack() {
+		if (root.state !== "hidden") {
+			return false
+		}
+		_popAndDestroyAllPages(StackView.Immediate)
+		root.state = "closed"
 		return true
 	}
 
