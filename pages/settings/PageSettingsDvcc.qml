@@ -108,6 +108,12 @@ Page {
 
 				Instantiator {
 					id: temperatureServiceInstantiator
+
+					// Start with an empty model. Without this, the model defaults to 1, and a
+					// delegate is created with modelData set to the integer 0, which has no
+					// 'serviceUid' property.
+					model: []
+
 					delegate: Device {
 						serviceUid: modelData.serviceUid
 						onNameChanged: temperatureServiceRadioButtons.optionModel[modelData.optionIndex].display = name

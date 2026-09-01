@@ -27,9 +27,8 @@ VENUS_GUI_TEST_CAPTURE_DIR=~/my-captures ./bin/venus-gui-v2 --mock --ui-test smo
 ./bin/venus-gui-v2 --mock --ui-test /pages/settings/PageSettingsConnectivity.qml
 ./bin/venus-gui-v2 --mock --ui-test /pages/BriefSidePanel.qml
 
-# Capture one page, saved as tst_target_page-<TypeName>.png. Turn off mock
-# timers and animations so that repeated runs give the same image.
-./bin/venus-gui-v2 --mock --no-mock-timers --animation false --ui-test-capture --ui-test /pages/BriefPage.qml
+# Capture one page, saved as tst_target_page-<TypeName>.png.
+./bin/venus-gui-v2 --mock --ui-test-capture --ui-test /pages/BriefPage.qml
 
 # Portrait (desktop): apply WxH before target-page routes resolve and
 # before pages load. Width < height selects Theme.Portrait. The window
@@ -59,7 +58,7 @@ not torn down mid-slide. A second swap is not required: WaitUntil only polls wit
 and with UI animations disabled a static window may never swap again.
 With `--ui-test-capture`, target-page mode also saves one image of the shown page. It does not
 clear the image capture directory, so several runs (for example one per page) can save into one
-directory. It does not set `UIAnimations` to 0, so pass `--animation false` as well.
+directory. Mock timers are off and `UIAnimations` is 0, so repeated runs give the same image.
 
 By default, captured images are stored in `<working-directory>/image-captures/` (configurable in the test JSON).
 
@@ -101,11 +100,8 @@ Each test is defined by a JSON file (e.g. `tests/ui/smoke/mock-maximal/mock-maxi
         "tst_overview.qml",
         "tst_settings.qml"
     ],
-    "Mock": {
-        "Configuration": ":/data/mock/conf/maximal.json",
-        "TimersActive": false,
-        "UIAnimations": 0
-    },
+    "MockConfiguration": ":/data/mock/conf/maximal.json",
+    "UIAnimations": 0,
     "Steps": {
         "CaptureAndCompare": {
             "ImageDir": "image-captures",
@@ -126,9 +122,9 @@ Key configuration fields:
 |-------|---------|
 | `ExitWhenFinished` | Exit the application when all tests complete |
 | `Tests` | List of QML test case files to execute in order |
-| `Mock.Configuration` | JSON file defining mock device/service data |
-| `Mock.TimersActive` | Whether mock timers animate values (false for stable captures) |
-| `Mock.UIAnimations` | UI animation duration override (0 disables animations for deterministic captures) |
+| `MockConfiguration` | JSON file defining mock device/service data |
+| `MockTimersActive` | Optional, default false. Mock timers are off during a UI test unless this is true |
+| `UIAnimations` | UI animation duration override (0 disables animations for deterministic captures) |
 | `Steps.CaptureAndCompare.ImageDir` | Output directory for captured images |
 | `Steps.CaptureAndCompare.StabilizationInterval` | Milliseconds between capture attempts while waiting for page stabilization |
 | `Steps.CaptureAndCompare.MaximumStabilizationCaptures` | Max retries waiting for a stable frame |
@@ -253,8 +249,8 @@ tests/ui/
 
 ## Important notes
 
-- **Animations must be disabled** (`UIAnimations: 0`, or `--animation false` for `--ui-test-capture` runs) for deterministic captures
-- **Mock timers must be off** (`TimersActive: false`, or `--no-mock-timers` for `--ui-test-capture` runs) to prevent animated data values from changing between captures
+- **Animations must be disabled** (`UIAnimations: 0`) for deterministic captures
+- **Mock timers must be off** (the default; do not set `MockTimersActive`) to prevent animated data values from changing between captures
 - **Stabilization**: pages with asynchronous content (Repeaters, Loaders) may take multiple frames to stabilize. The system retries captures until the image is stable (consecutive captures are identical)
 - **RecursivePageCapture limitations**: it does not click buttons or radio buttons (only `ListNavigation` items), because buttons may have write side-effects that alter the UI state
 - **Debug logging**: set `"Logging": "debug"` in the test JSON to see detailed output when `findItem()` calls fail
