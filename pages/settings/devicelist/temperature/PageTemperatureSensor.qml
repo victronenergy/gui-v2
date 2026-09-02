@@ -43,6 +43,21 @@ DevicePage {
 			}
 		}
 
+		ListText {
+			readonly property string qualityLabel: Global.environmentInputs.airQualityToText(dataItem.value)
+			readonly property color qualityColor: Global.environmentInputs.airQualityToColor(dataItem.value, Theme.color_listItem_secondaryText)
+
+			//% "Air quality"
+			text: qsTrId("temperature_air_quality")
+			dataItem.uid: root.bindPrefix + "/IAQS"
+			preferredVisible: dataItem.valid
+			secondaryText: dataItem.valid
+					//% "%1/100 (%2)"
+					? qsTrId("temperature_air_quality_score").arg(dataItem.value).arg(qualityLabel)
+					: ""
+			secondaryTextColor: qualityColor
+		}
+
 		ListTemperature {
 			text: CommonWords.temperature
 			dataItem.uid: bindPrefix + "/Temperature"
