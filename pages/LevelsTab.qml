@@ -25,4 +25,9 @@ BaseListView {
 	orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
 	spacing: Theme.screenSize === Theme.Portrait ? Theme.geometry_levelsPage_gauge_spacing_tiny : Gauges.spacing(count)
 	currentIndex: 0
+
+	// If the gauges overflow beyond the view bounds, clip when the user may swipe into previous/
+	// next pages in the SwipeView, else the gauges are overlaid onto neighbouring pages.
+	clip: Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+			&& contentWidth > width
 }

@@ -170,15 +170,11 @@ FocusScope {
 			readonly property bool readyToLoad: swipePageModel.completed
 					&& Global.notifications && Global.notificationLayer // checked by onLoaded handler
 
-			// For the vertical anchors, use hardcoded margins instead of referring to the height
-			// of the StatusBar and NavBar, so that the SwipeView position does not jump when the
-			// StatusBar sizes to its internal content geometry or when the NavBar y position
-			// animates into view.
 			anchors {
 				top: parent.top
-				topMargin: Theme.geometry_statusBar_height
+				topMargin: Theme.geometry_statusBar_height // hardcoded, to avoid SwipeView jump when StatusBar sizes to internal content
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry_navigationBar_height
+				bottomMargin: Math.max(0, root.height - navBar.y)
 				left: parent.left
 				right: parent.right
 			}

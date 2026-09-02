@@ -27,6 +27,7 @@ QtObject {
 			&& (currentMainPage?.fullScreenWhenIdle || Global.keyNavigationEnabled)
 			&& root.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 			&& UiConfig.applicationVisible
+			&& !Global.mainView?.swipeView?.moving // don't enter idle mode while user is swiping between pages
 		interval: Theme.animation_page_idleResize_timeout
 		onTriggered: {
 			Global.main.keyNavigationTimeout()

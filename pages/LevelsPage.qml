@@ -22,10 +22,6 @@ SwipeViewPage {
 	iconSource: "qrc:/images/levels.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/LevelsPage.qml"
 
-	// Gauges may overflow into previous/next pages in the SwipeView, so clip the gauge ListView
-	// to the page bounds.
-	clip: tanksTab.contentWidth > tanksTab.width || environmentTab.contentWidth > environmentTab.width
-
 	onActiveFocusChanged: {
 		if (root.view.focusEdgeHint === Qt.TopEdge) {
 			tabBar.focus = true
