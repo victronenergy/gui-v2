@@ -49,7 +49,7 @@ Also, if --mock-conf is set, the --mock option is implied. For example, the abov
         - Networking: wifi, modem
         - ESS
         - Digital input, relays
-    - Temperature sensors: Ruuvi, generic
+    - Temperature sensors: Ruuvi (incl. Ruuvi Air quality), generic
     - Tanks: generic
     - Switches: GIO Extender and ES SmartSwitch
     - Pulsemeter, pump, meteo (SolarSense)
