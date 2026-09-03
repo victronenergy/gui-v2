@@ -71,25 +71,11 @@ Flow {
 				anchors.right: parent.right
 				width: parent.width - (phaseLabel.visible ? phaseLabel.width : 0)
 				height: parent.height
-				sourceComponent: Global.isGxDevice ? cheapGauge : prettyGauge
+				sourceComponent: barGaugeComponent
 			}
 
 			Component {
-				id: cheapGauge
-				CheapBarGauge {
-					foregroundColor: Theme.color_darkOk,phaseDelegate.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
-					backgroundColor: Theme.color_darkOk,phaseDelegate.feedingToGrid ? Theme.color_darkGreen
-							: root.inOverviewWidget && valueStatus === Theme.Ok ? Theme.color_darkishBlue
-							: Theme.statusColorValue(valueStatus, true)
-					valueType: root.valueType
-					value: valueRange.valueAsRatio
-					orientation: root.orientation
-					animationEnabled: root.animationEnabled
-				}
-			}
-
-			Component {
-				id: prettyGauge
+				id: barGaugeComponent
 				BarGauge {
 					foregroundColor: Theme.color_darkOk,phaseDelegate.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
 					backgroundColor: Theme.color_darkOk,phaseDelegate.feedingToGrid ? Theme.color_darkGreen
