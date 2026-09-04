@@ -220,7 +220,7 @@ exported power v  0.4 |   /
 			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
 			onNextValueRequested: addValue(dcInputRange.valueAsRatio)
 		}
-		footer: Global.isGxDevice ? cheapGaugeDcInput : prettyGaugeDcInput
+		footer: barGaugeDcInput
 
 		Layout.fillWidth: true
 
@@ -231,16 +231,7 @@ exported power v  0.4 |   /
 		}
 
 		Component {
-			id: cheapGaugeDcInput
-			CheapBarGauge {
-				orientation: Qt.Horizontal
-				value: dcInputRange.valueAsRatio
-				animationEnabled: root.animationEnabled
-			}
-		}
-
-		Component {
-			id : prettyGaugeDcInput
+			id: barGaugeDcInput
 			BarGauge {
 				orientation: Qt.Horizontal
 				value: dcInputRange.valueAsRatio
@@ -292,7 +283,7 @@ exported power v  0.4 |   /
 			animationEnabled: root.animationEnabled
 			onNextValueRequested: addValue(dcLoadRange.valueAsRatio)
 		}
-		footer: Global.isGxDevice ? cheapGaugeDcLoad : prettyGaugeDcLoad
+		footer: barGaugeDcLoad
 
 		Layout.fillWidth: true
 
@@ -303,17 +294,7 @@ exported power v  0.4 |   /
 		}
 
 		Component {
-			id: cheapGaugeDcLoad
-			CheapBarGauge {
-				orientation: Qt.Horizontal
-				valueType: VenusOS.Gauges_ValueType_RisingPercentage
-				value: dcLoadRange.valueAsRatio
-				animationEnabled: root.animationEnabled
-			}
-		}
-
-		Component {
-			id : prettyGaugeDcLoad
+			id: barGaugeDcLoad
 			BarGauge {
 				orientation: Qt.Horizontal
 				valueType: VenusOS.Gauges_ValueType_RisingPercentage
