@@ -141,7 +141,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/VeQItemFilteredServiceModel.qml
     components/ViewGradient.qml
     components/WasmVirtualKeyboardHandler.qml
-    components/WifiModel.qml
     components/controls/AutoToggleButton.qml
     components/controls/Button.qml
     components/controls/CaptionLabel.qml
@@ -748,6 +747,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/uiteststep.cpp
     src/units.h
     src/units.cpp
+    src/wifimodel.h
+    src/wifimodel.cpp
     src/screenblanker.h
     src/screenblanker.cpp
     src/solarinput.h
