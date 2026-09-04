@@ -239,6 +239,8 @@ void TrackerSolarInput::updateCurrent()
 	// Trackers do not have current values, so calculate it manually.
 	if (!qIsNaN(m_power) && !qIsNaN(m_voltage) && m_voltage != 0) {
 		setCurrent(m_power / m_voltage);
+	} else if (!qIsNaN(m_power) && m_power == 0) {
+		setCurrent(0);
 	} else {
 		setCurrent(qQNaN());
 	}
