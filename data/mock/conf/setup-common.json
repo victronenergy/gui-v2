@@ -4,8 +4,14 @@
         "/ScanProgress": null
     },
     "com.victronenergy.platform": {
+        "/CanBus/Interfaces": [
+            { "config": 0, "interface": "vecan0", "name": "VE.Can port 1" },
+            { "config": 3, "interface": "vecan1", "name": "VE.Can port 2" }
+        ],
         "/Device/Model": "Cerbo GX",
-        "/Device/Time": 1751358535
+        "/Device/Time": 1751358535,
+        "/ModificationChecks/FsModifiedState": 0,
+        "/ModificationChecks/SystemHooksState": 0
     },
     "com.victronenergy.settings": {
         "/Settings/Alarm/System/GridLost": 1,
@@ -28,7 +34,6 @@
         "/Settings/Network/VrmPortal": 0,
         "/Settings/Services/BleSensors": 1,
         "/Settings/Services/Bol": 1,
-        "/Settings/Services/Modbus": 0,
         "/Settings/Services/MqttLocal": 0,
         "/Settings/Services/MqttLocalInsecure": 0,
         "/Settings/Services/AccessPointPassword": "bad password",
@@ -39,7 +44,6 @@
         "/Settings/System/Units/Temperature": "celsius",
         "/Settings/System/VncLocal": 1,
         "/Settings/System/VolumeUnit": 1,
-        "/Settings/System/SecurityProfile": 0,
         "/Settings/SystemSetup/BatteryService": "default",
         "/Settings/SystemSetup/BmsInstance": -1,
         "/Settings/SystemSetup/MaxChargeCurrent": -1,

@@ -16,6 +16,24 @@ Also, if --mock-conf is set, the --mock option is implied. For example, the abov
     ./venus-gui-v2 --mock-conf multi-rs  # the --mock arg is optional, since --mock-conf is set
 
 
+## Finding the values a configuration does not provide
+
+To find out which values the UI asked for but the loaded configuration does not provide, add the
+--mock-coverage option. On exit, gui-v2 then prints every uid that the UI requested and that has no
+value in the mock backend; those values read as 'undefined' in QML:
+
+    ./venus-gui-v2 --mock-conf maximal --mock-coverage
+
+The dump is written when the application quits through its event loop, i.e. by closing the window
+or by a UI test finishing with "ExitWhenFinished". Killing the process with a signal (Ctrl-C, or
+`pkill`) prints nothing, so a run that appears to report no gaps may simply have been killed.
+
+Note also that a page may ask for paths that no real device publishes either - for example, the
+Lynx distributor page probes eight fuses on each of eight distributors, whatever the battery
+actually reports. Those are gaps in the page, not in the configuration, so filling them all in
+with `null` is not always the right answer.
+
+
 ## Available mock configurations
 
 - barebones
@@ -52,7 +70,11 @@ Also, if --mock-conf is set, the --mock option is implied. For example, the abov
     - Temperature sensors: Ruuvi, generic
     - Tanks: generic
     - Switches: GIO Extender and ES SmartSwitch
-    - Pulsemeter, pump, meteo (SolarSense)
+    - Pulsemeter, meteo (SolarSense and IMT)
+    - CAN-bus: VE.Can port 2 running VE.Can, VE.Can port 1 running RV-C
+    - Carlo Gavazzi energy meters (settings only)
+    - Batteries: also a FIAMM 48TL (for the 48TL diagnostics menu)
+    - Relay function: temperature
 
 - multi-rs (Multi RS inverter/charger)
     - Inverter/chargers: Multi RS with single Grid input, plus solar
@@ -60,17 +82,22 @@ Also, if --mock-conf is set, the --mock option is implied. For example, the abov
     - Loads: (AC output loads only, i.e. no Essential Loads)
         - Single EV charger
     - DC genset with startstop1 generator
+    - Relay function: tank pump, with the tank pump service
 
 - split-phase (MultiPlus II with split-phase setup)
     - Inverter/chargers: MultiPlus II with two phases, with /Ac/State/SplitPhaseL2Passthru=1
     - Pylontech battery
+    - Relay function: generator start/stop, with the generator start/stop service
+
+- dc-only (system without AC loads)
+    - Wind charger, Orion XS DC-DC, Pylontech battery, multiple DC gensets, motor drive
+    - CAN-bus: VE.Can port 1 running CANopen E-drive
 
 
 ## Future mock configurations
 
 - 1-phase shore + generator on vebus (no genset) - quattro-1phase-shore-generator.json
 - Grid energy meter (not on vebus) - em-grid.json
-- DC only system
 - Alarm notification on startup
 etc.
 
@@ -82,6 +109,14 @@ The data/mock/conf/services/*.json files specify sets of service values to be lo
 Each file provides a set of values for one or more related services. For example, quattro-1phase-shore-generator.json specifies a Quattro inverter/charger to be published under the com.victronenergy.vebus.ttyO1 service, as well as values for the inverter/charger backup/restore feature to be published under the com.victronenergy.platform service.
 
 While service configurations may be derived from the values on a real system, they may also be modified for testing/verification purposes, so should not be relied upon for final verification.
+
+Note that JSON has no 'undefined', so use `null` for a path that a real device does not publish. The
+mock backend then treats the value as unset, in the same way as an invalid D-Bus value. Do not use an
+empty object (`{}`) for this, as that is loaded as an actual (map) value, which the UI cannot display.
+
+setup-common.json holds the values that every configuration should have, and is listed first in each
+configuration's `files` list, so that a service configuration can override it. Such an override is
+intentional, but still prints the warning described below.
 
 If a service configuration overwrites values from another configuration, gui-v2 will print a warning, but otherwise does nothing to disallow it. So, for the services loaded by a mock configuration, ensure that:
 

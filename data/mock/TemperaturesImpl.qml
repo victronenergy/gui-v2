@@ -33,27 +33,66 @@ Item {
 			// uid includes path, e.g. "mock/com.victronenergy.vebus/257/Dc/0/Temperature"
 			required property string uid
 
+			// The id under which this service is currently listed in
+			// /AvailableTemperatureServices, or an empty string if it is not listed.
+			property string listedServiceId
+
+			// The name under which this service is currently listed, so that a later change to
+			// the name can be detected and the listing updated.
+			property string listedName
+
 			// Returns e.g. "com.victronenergy.vebus/257/Dc/0/Temperature"
 			function serviceIdWithPath() {
 				const path = uid.substring(uid.indexOf("/Dc"))
 				return BackendConnection.serviceUidToPortableId(serviceUid, deviceInstance) + path
 			}
 
+			// Adds this service to /AvailableTemperatureServices, or updates its entry if its id
+			// or name has changed.
+			//
+			// The service is only listed once it is valid and its name is known; before that, its
+			// device instance and name are not known yet, and it would be listed with an invalid
+			// device instance and an empty name.
+			function updateListing() {
+				const serviceId = valid && name.length > 0 ? serviceIdWithPath() : ""
+				if (serviceId === listedServiceId && name === listedName) {
+					return
+				}
+				// Only remove the previous listing if it was listed under a different id; if only
+				// the name changed, addService() below overwrites the entry under the same id.
+				if (listedServiceId.length > 0 && listedServiceId !== serviceId) {
+					availableTemperatureServices.removeServiceId(listedServiceId)
+				}
+				listedServiceId = serviceId
+				listedName = name
+				if (serviceId.length > 0) {
+					availableTemperatureServices.addService(serviceId, name)
+
+					// If the auto-selected temperature service is not set, and the settings
+					// indicate the system should select one by default, then set it to this
+					// service.
+					const canAutoSelect = root.settingsValue("/Settings/SystemSetup/TemperatureService") === "default"
+					if (canAutoSelect && !autoSelectedTemperatureService.valid) {
+						console.warn("Mock: auto-set temperature service to", serviceId, name)
+						autoSelectedTemperatureService.setValue(name)
+					}
+				}
+			}
+
 			serviceUid: uid.substring(0, uid.indexOf("/Dc/"))
+
+			onValidChanged: updateListing()
+			onNameChanged: updateListing()
+			// The listed id contains the device instance, and Device only emits validChanged when
+			// its validity actually flips, so a change from one non-negative instance to another
+			// is not covered by onValidChanged.
+			onDeviceInstanceChanged: updateListing()
 		}
 
-		onObjectAdded: (index, temperatureService) => {
-			// If the auto-selected temperature service is not set, and the settings indicate the system
-			// should select one by default, then set it to this service.
-			const canAutoSelect = root.settingsValue("/Settings/SystemSetup/TemperatureService") === "default"
-			if (canAutoSelect && !autoSelectedTemperatureService.valid) {
-				console.warn("Mock: auto-set temperature service to", temperatureService.serviceIdWithPath(), temperatureService.name)
-				autoSelectedTemperatureService.setValue(temperatureService.name)
-			}
-			availableTemperatureServices.addService(temperatureService)
-		}
 		onObjectRemoved: (index, temperatureService) => {
-			availableTemperatureServices.removeService(temperatureService)
+			if (temperatureService.listedServiceId.length > 0) {
+				availableTemperatureServices.removeServiceId(temperatureService.listedServiceId)
+			}
 		}
 	}
 
@@ -69,13 +108,13 @@ Item {
 
 		property var temperatureServices: {"default": "Automatic", "nosensor": "No sensor"}
 
-		function addService(temperatureService) {
-			temperatureServices[temperatureService.serviceIdWithPath()] = temperatureService.name
+		function addService(serviceId, name) {
+			temperatureServices[serviceId] = name
 			setValue(JSON.stringify(temperatureServices))
 		}
 
-		function removeService(temperatureService) {
-			delete temperatureServices[temperatureService.serviceIdWithPath()]
+		function removeServiceId(serviceId) {
+			delete temperatureServices[serviceId]
 			setValue(JSON.stringify(temperatureServices))
 		}
 

@@ -1,0 +1,34 @@
+{
+    "com.victronenergy.meteo.ttyUSB4": {
+        "/CellTemperature": 34.8,
+        "/Connected": 1,
+        "/CustomName": "",
+        "/DeviceInstance": 22,
+        "/DeviceName": "Si-RS485TC-T-Tm-ES",
+        "/Devices/0/DeviceInstance": 22,
+        "/Devices/0/ProductId": 45104,
+        "/ErrorCode": 0,
+        "/ExternalTemperature": 21.4,
+        "/ExternalTemperature2": null,
+        "/FirmwareVersion": null,
+        "/GenericInput": null,
+        "/HardwareVersion": null,
+        "/InstallationPower": null,
+        "/Irradiance": 642,
+        "/Mgmt/Connection": "/dev/ttyUSB4",
+        "/Mgmt/ProcessName": "dbus-imt-si-rs485tc",
+        "/Mgmt/ProcessVersion": "1.0.6",
+        "/ProductId": 45104,
+        "/ProductName": "IMT Si-RS485 Solar Irradiance Sensor",
+        "/Serial": "IMT-1234567",
+        "/Status": 0,
+        "/SwitchableOutput": null,
+        "/TodaysYield": null,
+        "/WindDirection": null,
+        "/WindSpeed": 3.2
+    },
+    "com.victronenergy.settings": {
+        "/Settings/Service/meteo/22/ExternalTemperatureSensor": "auto-detect",
+        "/Settings/Service/meteo/22/WindSpeedSensor": "auto-detect"
+    }
+}

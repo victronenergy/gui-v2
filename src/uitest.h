@@ -27,11 +27,13 @@ public:
 	bool isValid() const { return !dirName().isEmpty(); }
 	QString dirName() const;
 	const QVariantMap &settingsMap() const;
-	bool hasMockConfiguration() const;
 
-	// Returns true if the configuration sets Mock/TimersActive, i.e. the test requires the mock
-	// timers to be in a particular state.
-	bool hasMockTimersActive() const;
+	// Returns the mock configuration that this test requires, or an empty string if the test does
+	// not name one, in which case the caller chooses the mock configuration (or a backend other
+	// than the mock backend).
+	//
+	// The value is a resource path, i.e. it begins with ':'.
+	QString mockConfiguration() const;
 
 private:
 	QVariantMap m_settings;
@@ -49,10 +51,7 @@ private:
 			"tst_cards.qml",
 			"tst_overview.qml"
 		]
-		"Mock": {
-			"Configuration": "/data/mock/conf/maximal.json",
-			"TimersActive": false,
-		},
+		"MockConfiguration": ":/data/mock/conf/maximal.json",
 		"Steps": {
 			"CaptureAndCompare": {
 				"StabilizationInterval": 16,
