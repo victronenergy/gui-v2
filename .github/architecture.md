@@ -258,11 +258,15 @@ Three compile-time defines control platform-specific code:
 
 | Define | Condition | Characteristics |
 |--------|-----------|-----------------|
-| `VENUS_DESKTOP_BUILD` | Native architecture match | Mock data, tests enabled, loads QML from resources |
+| `VENUS_DESKTOP_BUILD` | Native architecture match | Mock data, tests enabled, loads QML from resources (or filesystem when installed) |
 | `VENUS_WEBASSEMBLY_BUILD` | Emscripten target | MQTT via WebSockets, no D-Bus, WASM VKB handling |
 | `VENUS_GX_BUILD` | ARM cross-compile | D-Bus backend, loads QML from filesystem (allows modding), hardware screen blanker |
 
-On GX builds, `UrlInterceptor` rewrites `qrc:/` paths to filesystem paths, allowing customers to edit QML files on-device without rebuilding.
+`UrlInterceptor` rewrites `qrc:/` QML paths to filesystem paths so that QML files can be edited without rebuilding. On GX builds this is always active; on desktop builds it activates automatically when the application has been installed (i.e. a `Victron/` directory exists next to the executable). When running directly from the build directory, QML is loaded from compiled-in resources as usual.
+
+### Desktop installation
+
+Desktop builds define `cmake install` rules so that `cmake --install` deploys the executable and QML source files. On Windows and macOS, `qt_generate_deploy_app_script()` runs as a post-install step to copy required Qt runtime libraries and QML modules alongside the executable. The MSVC compiler runtime is **not** included (`NO_COMPILER_RUNTIME`) because desktop installs are intended for developer machines that already have it.
 
 ## Mock system
 

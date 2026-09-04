@@ -11,8 +11,6 @@ qt_add_resources(VictronBoat "VictronBoat_large_resources"
     FILES ${VictronBoat_QML_MODULE_RESOURCES}
 )
 
-if (${VENUS_GX_BUILD})
-    qt_query_qml_module(VictronBoat QML_FILES module_qml_files QMLDIR module_qmldir)
-    install(DIRECTORY pages/boat/  DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Boat)
-    install(FILES ${module_qmldir} DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/Boat)
-endif()
+qt_query_qml_module(VictronBoat QML_FILES module_qml_files QMLDIR module_qmldir)
+install(DIRECTORY pages/boat/  DESTINATION ${VENUS_QML_INSTALL_DIR}/Victron/Boat)
+install(FILES ${module_qmldir} DESTINATION ${VENUS_QML_INSTALL_DIR}/Victron/Boat)
