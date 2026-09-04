@@ -10,6 +10,7 @@ Page {
 	id: root
 
 	readonly property string bleServiceUid: BackendConnection.serviceUidForType("ble")
+	property int encryptionKeySensorCount: 0
 
 	VeQItemSortTableModel {
 		id: sensors
@@ -73,8 +74,26 @@ Page {
 
 						devicePrefix: item.itemParent().uid
 						deviceName: item.value || ""
+
+						onKeyRequiredChanged: root.encryptionKeySensorCount++
+						Component.onCompleted: {
+							if (keyRequired) {
+								root.encryptionKeySensorCount++
+							}
+						}
+						Component.onDestruction: {
+							if (keyRequired) {
+								root.encryptionKeySensorCount--
+							}
+						}
 					}
 				}
+			}
+
+			PrimaryListLabel {
+				//% "Use VictronConnect over Bluetooth to add encryption keys automatically."
+				text: qsTrId("settings_ble_sensors_add_encryption_keys_via_victronconnect")
+				preferredVisible: enable.checked && root.encryptionKeySensorCount > 0
 			}
 		}
 	}
