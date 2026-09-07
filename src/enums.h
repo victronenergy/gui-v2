@@ -631,8 +631,14 @@ public:
 		IOChannel_ShowUI_Always = 0x1,
 		IOChannel_ShowUI_Local = 0x2,
 		IOChannel_ShowUI_Remote = 0x4,
+		IOChannel_ShowUI_Watch = 0x8,
 	};
 	Q_ENUM(IOChannel_ShowUI)
+
+	enum IOChannel_Capability {
+		IOChannel_Capability_Watch = 0x1,
+	};
+	Q_ENUM(IOChannel_Capability)
 
 	enum Notification_Type {
 		Notification_Warning,
