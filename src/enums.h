@@ -628,11 +628,23 @@ public:
 
 	enum IOChannel_ShowUI {
 		IOChannel_ShowUI_Off = 0x0,
-		IOChannel_ShowUI_Always = 0x1,
+		IOChannel_ShowUI_Controller = 0x1,
 		IOChannel_ShowUI_Local = 0x2,
 		IOChannel_ShowUI_Remote = 0x4,
+		IOChannel_ShowUI_Watch = 0x8,
+		IOChannel_ShowUI_All = IOChannel_ShowUI_Controller
+			| IOChannel_ShowUI_Local
+			| IOChannel_ShowUI_Remote
+			| IOChannel_ShowUI_Watch,
 	};
 	Q_ENUM(IOChannel_ShowUI)
+	Q_DECLARE_FLAGS(IOChannel_ShowUIFlag, IOChannel_ShowUI)
+
+	enum IOChannel_Capability {
+		IOChannel_Capability_None = 0x0,
+		IOChannel_Capability_Watch = 0x1,
+	};
+	Q_ENUM(IOChannel_Capability)
 
 	enum Notification_Type {
 		Notification_Warning,
@@ -1104,5 +1116,6 @@ public:
 }
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Victron::VenusOS::Enums::OnboardingStateFlag)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Victron::VenusOS::Enums::IOChannel_ShowUIFlag)
 
 #endif // VICTRON_VENUSOS_GUI_V2_ENUMS_H

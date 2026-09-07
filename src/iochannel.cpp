@@ -321,22 +321,19 @@ bool IOChannel::canShowUI(const QVariant &showUIValue) const
 		return true;
 	}
 
-	// Check the /ShowUIControl value:
+	// Check the /ShowUIInput or /ShowUIControl value:
 	// - Off = do not show
 	// - Local = show for local viewing only (i.e. on GX or Wasm local)
 	// - Remote = show for remote viewing only (i.e. on Wasm VRM)
 	const int intValue = showUIValue.toInt();
-	if (intValue == Enums::IOChannel_ShowUI_Off) {
+	const bool controller = intValue & Enums::IOChannel_ShowUI_Controller;
+	if (intValue == Enums::IOChannel_ShowUI_Off || !controller) {
 		return false;
 	}
 
 	const bool local = intValue & Enums::IOChannel_ShowUI_Local;
 	const bool remote = intValue & Enums::IOChannel_ShowUI_Remote;
-	if ((intValue & Enums::IOChannel_ShowUI_Always)
-			// Setting both local+remote flags is the same as setting the "always" flag, regardless
-			// of the VRM connection status. It's not possible to set both flags via the UI, but
-			// this might be set by a backend configuration.
-			|| (local && remote)) {
+	if (local && remote) {
 		return true;
 	}
 
