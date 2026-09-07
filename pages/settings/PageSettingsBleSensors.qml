@@ -32,13 +32,24 @@ Page {
 		filterFlags: VeQItemSortTableModel.FilterOffline
 	}
 
+	VeQItemSortTableModel {
+		id: deviceChildrenNameModel
+
+		model: VeQItemChildModel {
+			model: sensors
+			childId: "Name"
+		}
+		dynamicSortFilter: true
+		filterFlags: VeQItemSortTableModel.FilterInvalid
+	}
+
 	// Counts the number of devices that require an encryption key to be entered.
 	Instantiator {
 		id: devicesNeedingKeys
 
 		property int matchingDeviceCount
 
-		function _updatedevicesNeedingKeysCount() {
+		function _updateDevicesNeedingKeysCount() {
 			let total = 0
 			for (let i = 0; i < devicesNeedingKeys.count; ++i) {
 				const delegate = devicesNeedingKeys.objectAt(i)
@@ -49,24 +60,24 @@ Page {
 			matchingDeviceCount = total
 		}
 
-		model: sensors
+		model: deviceChildrenNameModel
 		delegate: QtObject {
-			id: sensorDeviceDelegate
+			id: deviceChildDelegate
 
-			required property string uid
+			required property VeQItem item // item for the "Name" subpath
 
 			readonly property bool needsKeyInput: enabledItem.value !== 1 && keyItem.seen
-			onNeedsKeyInputChanged: Qt.callLater(devicesNeedingKeys._updatedevicesNeedingKeysCount)
+			onNeedsKeyInputChanged: Qt.callLater(devicesNeedingKeys._updateDevicesNeedingKeysCount)
 
 			readonly property VeQuickItem enabledItem: VeQuickItem {
-				uid: sensorDeviceDelegate.uid + "/Enabled"
+				uid: deviceChildDelegate.item.itemParent().uid + "/Enabled"
 			}
 			readonly property VeQuickItem keyItem: VeQuickItem {
-				uid: sensorDeviceDelegate.uid + "/Key"
+				uid: deviceChildDelegate.item.itemParent().uid + "/Key"
 			}
 		}
-		onObjectAdded: Qt.callLater(devicesNeedingKeys._updatedevicesNeedingKeysCount)
-		onObjectRemoved: Qt.callLater(devicesNeedingKeys._updatedevicesNeedingKeysCount)
+		onObjectAdded: Qt.callLater(devicesNeedingKeys._updateDevicesNeedingKeysCount)
+		onObjectRemoved: Qt.callLater(devicesNeedingKeys._updateDevicesNeedingKeysCount)
 	}
 
 	GradientListView {
@@ -96,15 +107,7 @@ Page {
 
 				Repeater {
 					id: sensorRepeater
-					model: VeQItemSortTableModel {
-						model: VeQItemChildModel {
-							model: sensors
-							childId: "Name"
-						}
-						dynamicSortFilter: true
-						filterFlags: VeQItemSortTableModel.FilterInvalid
-					}
-
+					model: deviceChildrenNameModel
 					delegate: BleSensorDelegate {
 						required property VeQItem item
 
@@ -115,7 +118,7 @@ Page {
 			}
 
 			ListInfoLabel {
-				//% "Use VictronConnect over Bluetooth to add encryption keys automatically."
+				//% "Use VictronConnect app over Bluetooth to add encryption keys automatically."
 				text: qsTrId("settings_ble_sensors_add_encryption_keys_via_victronconnect")
 				preferredVisible: enable.checked && devicesNeedingKeys.matchingDeviceCount > 0
 			}
