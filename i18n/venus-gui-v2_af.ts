@@ -100,12 +100,12 @@
       <translation>Eksterne beheer</translation>
     </message>
     <message id="levels_page_tanks">
-      <location filename="../../pages/LevelsPage.qml" line="75"/>
+      <location filename="../../pages/LevelsPage.qml" line="71"/>
       <source>Tanks</source>
       <translation>Tenks</translation>
     </message>
     <message id="levels_page_environment">
-      <location filename="../../pages/LevelsPage.qml" line="77"/>
+      <location filename="../../pages/LevelsPage.qml" line="73"/>
       <source>Environment</source>
       <translation>Omgewing</translation>
     </message>
@@ -620,12 +620,12 @@
       <translation>Voer naam in</translation>
     </message>
     <message id="settings_continuous_scan">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="187"/>
       <source>Continuous scanning</source>
       <translation>Deurlopende skandering</translation>
     </message>
     <message id="settings_io_bluetooth_adapters">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="159"/>
       <source>Bluetooth adapters</source>
       <translation>Bluetooth koppelstukke</translation>
     </message>
@@ -3592,7 +3592,7 @@ Gebruik tensy dit deur die diensverskaffer verbied word.</translation>
       <translation>VSA (240 tot 30 Ohm)</translation>
     </message>
     <message id="settings_ble_bridge_access_custom">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="167"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="213"/>
       <source>Custom</source>
       <translation>Pasgemaak</translation>
     </message>
@@ -6561,7 +6561,7 @@ Wil jy voortgaan?</translation>
       <translation>Gebruik hierdie kieslys om die batterydata te definieer wat gewys word wanneer die Battery-ikoon op die Oorsig-bladsy geklik word. Dieselfde keuse is ook sigbaar op die VRM-portaal.</translation>
     </message>
     <message id="settings_continuous_scan_may_interfere">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="193"/>
       <source>Continuous scanning may interfere with Wi-Fi operation.</source>
       <translation>Deurlopende skandering kan inmeng met Wi-Fi-werking.</translation>
     </message>
@@ -11481,7 +11481,7 @@ Dateer asseblief op na die nuutste fermware om hierdie instellings te kan aanpas
       <translation>Stelsellading hoog, grafieke word versteek om SVE-lading te verminder</translation>
     </message>
     <message id="navbar_more">
-      <location filename="../../pages/MainView.qml" line="285"/>
+      <location filename="../../pages/MainView.qml" line="281"/>
       <source>More</source>
       <extracomment>Click to show more available items</extracomment>
       <translation>Meer</translation>
@@ -11941,27 +11941,27 @@ Dateer asseblief op na die nuutste fermware om hierdie instellings te kan aanpas
       <translation>Selmetingsfout</translation>
     </message>
     <message id="settings_ble_advanced">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="93"/>
       <source>Advanced</source>
       <translation type="unfinished">Gevorderd</translation>
     </message>
     <message id="settings_ble_sensors">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="52"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="100"/>
       <source>Sensors</source>
       <translation>Sensors</translation>
     </message>
     <message id="settings_ble_bridge_access">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="155"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="201"/>
       <source>BLE bridge access</source>
       <translation>BLE-brugtoegang</translation>
     </message>
     <message id="settings_ble_bridge_access_paired_only">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="210"/>
       <source>Paired devices only</source>
       <translation type="unfinished">Slegs gekoppelde toestelle</translation>
     </message>
     <message id="pairing_ble_paired_bridges">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="184"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="230"/>
       <source>Paired BLE bridges</source>
       <translation>Gekoppelde BLE-brûe</translation>
     </message>
@@ -11969,6 +11969,11 @@ Dateer asseblief op na die nuutste fermware om hierdie instellings te kan aanpas
       <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="73"/>
       <source>Paired devices</source>
       <translation>Gekoppelde toestelle</translation>
+    </message>
+    <message id="settings_ble_sensors_add_encryption_keys_via_victronconnect">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="122"/>
+      <source>Use VictronConnect app over Bluetooth to add encryption keys automatically.</source>
+      <translation>Gebruik die VictronConnect-toepassing oor Bluetooth om enkripsiesleutels outomaties by te voeg.</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>

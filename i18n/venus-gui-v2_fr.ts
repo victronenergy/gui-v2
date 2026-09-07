@@ -100,12 +100,12 @@
       <translation>Contrôle externe</translation>
     </message>
     <message id="levels_page_tanks">
-      <location filename="../../pages/LevelsPage.qml" line="75"/>
+      <location filename="../../pages/LevelsPage.qml" line="71"/>
       <source>Tanks</source>
       <translation>Réservoirs</translation>
     </message>
     <message id="levels_page_environment">
-      <location filename="../../pages/LevelsPage.qml" line="77"/>
+      <location filename="../../pages/LevelsPage.qml" line="73"/>
       <source>Environment</source>
       <translation>Environnement</translation>
     </message>
@@ -620,12 +620,12 @@
       <translation>Saisir le nom</translation>
     </message>
     <message id="settings_continuous_scan">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="187"/>
       <source>Continuous scanning</source>
       <translation>Scan en continu</translation>
     </message>
     <message id="settings_io_bluetooth_adapters">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="159"/>
       <source>Bluetooth adapters</source>
       <translation>Adaptateurs Bluetooth</translation>
     </message>
@@ -3592,7 +3592,7 @@ A utiliser sauf si le fournisseur d'électricité l'interdit.</translation>
       <translation>US (240 à 30 Ohm)</translation>
     </message>
     <message id="settings_ble_bridge_access_custom">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="167"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="213"/>
       <source>Custom</source>
       <translation>Personnaliser</translation>
     </message>
@@ -6561,7 +6561,7 @@ Voulez-vous continuer ?</translation>
       <translation>Ce menu permet de définir les données relatives à la batterie qui s'affichent lorsque l'on clique sur l'icône Batterie de la page Vue d'ensemble. La même sélection est également visible sur le portail VRM.</translation>
     </message>
     <message id="settings_continuous_scan_may_interfere">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="193"/>
       <source>Continuous scanning may interfere with Wi-Fi operation.</source>
       <translation>Le balayage continu peut interférer avec le fonctionnement du Wi-Fi.</translation>
     </message>
@@ -11481,7 +11481,7 @@ Veuillez effectuer la mise à jour vers la dernière version du micrologiciel po
       <translation>Charge système élevée, masquage des graphiques pour réduire la charge CPU</translation>
     </message>
     <message id="navbar_more">
-      <location filename="../../pages/MainView.qml" line="285"/>
+      <location filename="../../pages/MainView.qml" line="281"/>
       <source>More</source>
       <extracomment>Click to show more available items</extracomment>
       <translation>Plus</translation>
@@ -11941,27 +11941,27 @@ Veuillez effectuer la mise à jour vers la dernière version du micrologiciel po
       <translation>Défaut de mesure des cellules</translation>
     </message>
     <message id="settings_ble_advanced">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="93"/>
       <source>Advanced</source>
       <translation type="unfinished">Avancé</translation>
     </message>
     <message id="settings_ble_sensors">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="52"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="100"/>
       <source>Sensors</source>
       <translation>Capteurs</translation>
     </message>
     <message id="settings_ble_bridge_access">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="155"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="201"/>
       <source>BLE bridge access</source>
       <translation>Accès pont BLE</translation>
     </message>
     <message id="settings_ble_bridge_access_paired_only">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="210"/>
       <source>Paired devices only</source>
       <translation type="unfinished">Appareils couplés uniquement</translation>
     </message>
     <message id="pairing_ble_paired_bridges">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="184"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="230"/>
       <source>Paired BLE bridges</source>
       <translation>Ponts BLE appairés</translation>
     </message>
@@ -11969,6 +11969,11 @@ Veuillez effectuer la mise à jour vers la dernière version du micrologiciel po
       <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="73"/>
       <source>Paired devices</source>
       <translation>Appareils appairés</translation>
+    </message>
+    <message id="settings_ble_sensors_add_encryption_keys_via_victronconnect">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="122"/>
+      <source>Use VictronConnect app over Bluetooth to add encryption keys automatically.</source>
+      <translation>Utilisez l'application VictronConnect via Bluetooth pour ajouter automatiquement les clés de chiffrement.</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>

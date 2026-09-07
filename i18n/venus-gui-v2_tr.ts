@@ -100,12 +100,12 @@
       <translation>Extern kontrol</translation>
     </message>
     <message id="levels_page_tanks">
-      <location filename="../../pages/LevelsPage.qml" line="75"/>
+      <location filename="../../pages/LevelsPage.qml" line="71"/>
       <source>Tanks</source>
       <translation>Tanklar</translation>
     </message>
     <message id="levels_page_environment">
-      <location filename="../../pages/LevelsPage.qml" line="77"/>
+      <location filename="../../pages/LevelsPage.qml" line="73"/>
       <source>Environment</source>
       <translation>Çevre</translation>
     </message>
@@ -620,12 +620,12 @@
       <translation>İsim girin</translation>
     </message>
     <message id="settings_continuous_scan">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="187"/>
       <source>Continuous scanning</source>
       <translation>Sürekli tarama</translation>
     </message>
     <message id="settings_io_bluetooth_adapters">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="159"/>
       <source>Bluetooth adapters</source>
       <translation>Bluetooth adaptörleri</translation>
     </message>
@@ -3592,7 +3592,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>ABD (240-30 Ohm)</translation>
     </message>
     <message id="settings_ble_bridge_access_custom">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="167"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="213"/>
       <source>Custom</source>
       <translation>Özel</translation>
     </message>
@@ -6561,7 +6561,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Genel Bakış sayfasında Pil simgesine tıklandığında gösterilen pil verilerini tanımlamak için bu menüyü kullanın. Aynı seçim VRM Portalında da görülebilir.</translation>
     </message>
     <message id="settings_continuous_scan_may_interfere">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="193"/>
       <source>Continuous scanning may interfere with Wi-Fi operation.</source>
       <translation>Sürekli tarama Wi-Fi çalışmasını engelleyebilir.</translation>
     </message>
@@ -11480,7 +11480,7 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <translation>Sistem yükü yüksek, CPU yükünü azaltmak için grafikler gizleniyor</translation>
     </message>
     <message id="navbar_more">
-      <location filename="../../pages/MainView.qml" line="285"/>
+      <location filename="../../pages/MainView.qml" line="281"/>
       <source>More</source>
       <extracomment>Click to show more available items</extracomment>
       <translation>Daha Fazla</translation>
@@ -11940,27 +11940,27 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <translation>Hücre ölçümleri hatası</translation>
     </message>
     <message id="settings_ble_advanced">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="93"/>
       <source>Advanced</source>
       <translation type="unfinished">Gelişmiş</translation>
     </message>
     <message id="settings_ble_sensors">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="52"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="100"/>
       <source>Sensors</source>
       <translation>Sensörler</translation>
     </message>
     <message id="settings_ble_bridge_access">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="155"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="201"/>
       <source>BLE bridge access</source>
       <translation>BLE köprü erişimi</translation>
     </message>
     <message id="settings_ble_bridge_access_paired_only">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="210"/>
       <source>Paired devices only</source>
       <translation type="unfinished">Yalnızca eşleştirilmiş cihazlar</translation>
     </message>
     <message id="pairing_ble_paired_bridges">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="184"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="230"/>
       <source>Paired BLE bridges</source>
       <translation>Eşleştirilmiş BLE köprüleri</translation>
     </message>
@@ -11968,6 +11968,11 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="73"/>
       <source>Paired devices</source>
       <translation>Eşleştirilmiş cihazlar</translation>
+    </message>
+    <message id="settings_ble_sensors_add_encryption_keys_via_victronconnect">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="122"/>
+      <source>Use VictronConnect app over Bluetooth to add encryption keys automatically.</source>
+      <translation>Şifreleme anahtarlarını otomatik olarak eklemek için Bluetooth üzerinden VictronConnect uygulamasını kullanın.</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>

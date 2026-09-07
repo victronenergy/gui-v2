@@ -100,12 +100,12 @@
       <translation>Внешнее управление</translation>
     </message>
     <message id="levels_page_tanks">
-      <location filename="../../pages/LevelsPage.qml" line="75"/>
+      <location filename="../../pages/LevelsPage.qml" line="71"/>
       <source>Tanks</source>
       <translation>Резервуары</translation>
     </message>
     <message id="levels_page_environment">
-      <location filename="../../pages/LevelsPage.qml" line="77"/>
+      <location filename="../../pages/LevelsPage.qml" line="73"/>
       <source>Environment</source>
       <translation>Окружающая среда</translation>
     </message>
@@ -620,12 +620,12 @@
       <translation>Введите имя</translation>
     </message>
     <message id="settings_continuous_scan">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="187"/>
       <source>Continuous scanning</source>
       <translation>Непрерывное сканирование</translation>
     </message>
     <message id="settings_io_bluetooth_adapters">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="159"/>
       <source>Bluetooth adapters</source>
       <translation>Bluetooth-адаптеры</translation>
     </message>
@@ -3593,7 +3593,7 @@ Use unless prohibited by the utility provider.</source>
       <translation>США (240 - 30 Ом)</translation>
     </message>
     <message id="settings_ble_bridge_access_custom">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="167"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="213"/>
       <source>Custom</source>
       <translation>Настроить</translation>
     </message>
@@ -6562,7 +6562,7 @@ Do you want to continue?</source>
       <translation>Используйте это меню для определения данных о батарее, отображаемых при нажатии на значок батареи на странице обзора. Этот же выбор отображается и на портале VRM.</translation>
     </message>
     <message id="settings_continuous_scan_may_interfere">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="193"/>
       <source>Continuous scanning may interfere with Wi-Fi operation.</source>
       <translation>Непрерывное сканирование может помешать работе Wi-Fi.</translation>
     </message>
@@ -11483,7 +11483,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>Высокая нагрузка на систему, графики скрыты для снижения нагрузки на ЦП</translation>
     </message>
     <message id="navbar_more">
-      <location filename="../../pages/MainView.qml" line="285"/>
+      <location filename="../../pages/MainView.qml" line="281"/>
       <source>More</source>
       <extracomment>Click to show more available items</extracomment>
       <translation>Подробнее</translation>
@@ -11943,27 +11943,27 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>Ошибка измерения параметров ячеек</translation>
     </message>
     <message id="settings_ble_advanced">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="93"/>
       <source>Advanced</source>
       <translation type="unfinished">Продвинутый</translation>
     </message>
     <message id="settings_ble_sensors">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="52"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="100"/>
       <source>Sensors</source>
       <translation>Датчики</translation>
     </message>
     <message id="settings_ble_bridge_access">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="155"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="201"/>
       <source>BLE bridge access</source>
       <translation>Доступ к мосту BLE</translation>
     </message>
     <message id="settings_ble_bridge_access_paired_only">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="210"/>
       <source>Paired devices only</source>
       <translation type="unfinished">Только сопряженные устройства</translation>
     </message>
     <message id="pairing_ble_paired_bridges">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="184"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="230"/>
       <source>Paired BLE bridges</source>
       <translation>Сопряженные мосты BLE</translation>
     </message>
@@ -11971,6 +11971,11 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="73"/>
       <source>Paired devices</source>
       <translation>Сопряженные устройства</translation>
+    </message>
+    <message id="settings_ble_sensors_add_encryption_keys_via_victronconnect">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="122"/>
+      <source>Use VictronConnect app over Bluetooth to add encryption keys automatically.</source>
+      <translation>Используйте приложение VictronConnect через Bluetooth для автоматического добавления ключей шифрования.</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>

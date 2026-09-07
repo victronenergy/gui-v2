@@ -100,12 +100,12 @@
       <translation>Externe Steuerung</translation>
     </message>
     <message id="levels_page_tanks">
-      <location filename="../../pages/LevelsPage.qml" line="75"/>
+      <location filename="../../pages/LevelsPage.qml" line="71"/>
       <source>Tanks</source>
       <translation>Tanks</translation>
     </message>
     <message id="levels_page_environment">
-      <location filename="../../pages/LevelsPage.qml" line="77"/>
+      <location filename="../../pages/LevelsPage.qml" line="73"/>
       <source>Environment</source>
       <translation>Umgebung</translation>
     </message>
@@ -620,12 +620,12 @@
       <translation>Name eingeben</translation>
     </message>
     <message id="settings_continuous_scan">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="187"/>
       <source>Continuous scanning</source>
       <translation>Kontinuierliches Scannen</translation>
     </message>
     <message id="settings_io_bluetooth_adapters">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="113"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="159"/>
       <source>Bluetooth adapters</source>
       <translation>Bluetooth-Adapter</translation>
     </message>
@@ -3592,7 +3592,7 @@ Verwendung, sofern nicht vom Energieversorger untersagt.</translation>
       <translation>USA (240 bis 30 Ohm)</translation>
     </message>
     <message id="settings_ble_bridge_access_custom">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="167"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="213"/>
       <source>Custom</source>
       <translation>Benutzerdefiniert</translation>
     </message>
@@ -6561,7 +6561,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>Verwenden Sie dieses Menü, um die Batteriedaten festzulegen, die angezeigt werden, wenn Sie auf der Übersichtsseite auf das Batteriesymbol klicken. Die gleiche Auswahl ist auch auf dem VRM Portal sichtbar.</translation>
     </message>
     <message id="settings_continuous_scan_may_interfere">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="147"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="193"/>
       <source>Continuous scanning may interfere with Wi-Fi operation.</source>
       <translation>Kontinuierliches Scannen kann den Wi-Fi-Betrieb stören.</translation>
     </message>
@@ -11436,7 +11436,7 @@ Bitte aktualisieren Sie auf die neueste Firmware, um diese Einstellungen anpasse
     <message id="pagesettingsintegrations_eebus_devices">
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="53"/>
       <source>EEBUS Devices</source>
-      <translation>EEBus-Geräte</translation>
+      <translation>EEBUS-Geräte</translation>
     </message>
     <message id="rotate_device_prompt_text">
       <location filename="../../components/RotateDevicePrompt.qml" line="40"/>
@@ -11481,7 +11481,7 @@ Bitte aktualisieren Sie auf die neueste Firmware, um diese Einstellungen anpasse
       <translation>Systemlast hoch, Diagramme werden zur CPU-Entlastung ausgeblendet</translation>
     </message>
     <message id="navbar_more">
-      <location filename="../../pages/MainView.qml" line="285"/>
+      <location filename="../../pages/MainView.qml" line="281"/>
       <source>More</source>
       <extracomment>Click to show more available items</extracomment>
       <translation>More</translation>
@@ -11913,22 +11913,22 @@ Bitte aktualisieren Sie auf die neueste Firmware, um diese Einstellungen anpasse
     <message id="settings_ble_sensors_encryption_key_rejected">
       <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
       <source>The submitted encryption key is invalid.</source>
-      <translation>Der übermittelte Verschlüsselungsschlüssel ist ungültig.</translation>
+      <translation>Der übermittelte Schlüssel ist ungültig.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
       <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
       <source>Enter a 32-character key</source>
-      <translation>Geben Sie einen 32-stelligen Schlüssel ein</translation>
+      <translation>32-stelligen Schlüssel eingeben</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
       <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
-      <translation>Der Verschlüsselungsschlüssel muss aus 32 Hexadezimalzeichen bestehen.</translation>
+      <translation>Der Schlüssel muss aus 32 Hexadezimalzeichen bestehen.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
       <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
       <source>Encryption key</source>
-      <translation>Verschlüsselungsschlüssel</translation>
+      <translation>Schlüssel</translation>
     </message>
     <message id="batteryalarms_bms_cable">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="169"/>
@@ -11941,27 +11941,27 @@ Bitte aktualisieren Sie auf die neueste Firmware, um diese Einstellungen anpasse
       <translation>Zellmessungsfehler</translation>
     </message>
     <message id="settings_ble_advanced">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="45"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="93"/>
       <source>Advanced</source>
       <translation type="unfinished">Erweitert</translation>
     </message>
     <message id="settings_ble_sensors">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="52"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="100"/>
       <source>Sensors</source>
       <translation>Sensoren</translation>
     </message>
     <message id="settings_ble_bridge_access">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="155"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="201"/>
       <source>BLE bridge access</source>
       <translation>BLE-Bridge-Zugriff</translation>
     </message>
     <message id="settings_ble_bridge_access_paired_only">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="164"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="210"/>
       <source>Paired devices only</source>
       <translation type="unfinished">Nur gekoppelte Geräte</translation>
     </message>
     <message id="pairing_ble_paired_bridges">
-      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="184"/>
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="230"/>
       <source>Paired BLE bridges</source>
       <translation>Gekoppelte BLE-Bridges</translation>
     </message>
@@ -11969,6 +11969,11 @@ Bitte aktualisieren Sie auf die neueste Firmware, um diese Einstellungen anpasse
       <location filename="../../pages/settings/PageSettingsMqttDevices.qml" line="73"/>
       <source>Paired devices</source>
       <translation>Gekoppelte Geräte</translation>
+    </message>
+    <message id="settings_ble_sensors_add_encryption_keys_via_victronconnect">
+      <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="122"/>
+      <source>Use VictronConnect app over Bluetooth to add encryption keys automatically.</source>
+      <translation>Verwenden Sie die VictronConnect-App über Bluetooth, um Verschlüsselungsschlüssel automatisch hinzuzufügen.</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
