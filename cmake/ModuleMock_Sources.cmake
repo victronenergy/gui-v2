@@ -77,6 +77,7 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/services/pylontech.json
     data/mock/conf/services/quattro-3phase-grid-genset.json
     data/mock/conf/services/relays-temperature-and-manual.json
+    data/mock/conf/services/ruuvi-air.json
     data/mock/conf/services/ruuvi-fridge.json
     data/mock/conf/services/ruuvi-salon.json
     data/mock/conf/services/shelly.json
