@@ -22,7 +22,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ArcGaugeQuantityRow.qml
     components/AsymmetricRoundedRectangle.qml
     components/BarGauge.qml
-    components/BarGaugeBase.qml
     components/BaseListView.qml
     components/Breadcrumbs.qml
     components/BriefSidePanelWidget.qml
@@ -30,8 +29,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/CardViewLoader.qml
     components/CircularMultiGauge.qml
     components/CircularSingleGauge.qml
-    components/CheapBarGauge.qml
-    components/ClippingBarGauge.qml
     components/ColorPresetGrid.qml
     components/ColorSelector.qml
     components/ColorWheelModeButton.qml

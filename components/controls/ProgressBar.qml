@@ -6,76 +6,87 @@
 import QtQuick
 import QtQuick.Templates as T
 import Victron.VenusOS
-import QtQuick.Effects as Effects
 
+/*
+	A progress bar control.
+*/
 T.ProgressBar {
 	id: root
+
+	readonly property real _indeterminateHighlightWidth: availableWidth / 3
 
 	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
 			implicitContentWidth + leftPadding + rightPadding)
 	implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
 			implicitContentHeight + topPadding + bottomPadding)
 
+	// Draw our own rectangles instead of using BarGauge, so that the highlight width and position
+	// can be animated for indeterminate progress bars.
 	background: Rectangle {
+		x: root.leftPadding
+		y: root.topPadding + (root.availableHeight / 2) - (height / 2)
+		implicitWidth: Theme.geometry_control_width
 		implicitHeight: Theme.geometry_progressBar_height
-		implicitWidth: Theme.geometry_progressBar_height
+		width: root.availableWidth
+		height: implicitHeight
 		radius: Theme.geometry_progressBar_radius
 		color: Theme.color_darkOk
-	}
-
-	contentItem: Item {
-		implicitHeight: Theme.geometry_progressBar_height
-		implicitWidth: Theme.geometry_progressBar_height
 
 		Rectangle {
-			id: mask
-			layer.enabled: true
-			visible: false
-			height: parent.height
-			width: parent.width
+			id: highlightRect
+
+			width: root.indeterminate ? 0 : root.availableWidth * root.visualPosition
+			height: Theme.geometry_progressBar_height
+			color: Theme.color_ok
 			radius: Theme.geometry_progressBar_radius
-			color: "black"
-		}
 
-		Item {
-			id: container
-			width: parent.width   // can't use anchors here or the XAnimator breaks
-			height: parent.height // see QTBUG-118848
-			visible: false
-			layer.enabled: true
+			// For indeterminate progress bars, produce a visual effect where the bar looks as
+			// though it is entering and exiting the background area, by animating the highlight x
+			// and width at the same time.
+			SequentialAnimation {
+				running: root.indeterminate && UiConfig.applicationVisible && !ScreenBlanker.blanked
+				loops: Animation.Infinite
+				onStopped: {
+					highlightRect.x = 0
+					highlightRect.width = root.availableWidth * root.visualPosition
+				}
 
-			Rectangle {
-				id: highlightRect
-				readonly property bool isMirrored: root.position !== root.visualPosition
-				color: Theme.color_ok
-				height: container.height
-				width: root.indeterminate ? (container.width/3) : (container.width * root.position)
-				x: root.indeterminate
-					? (highlightRect.isMirrored ? container.width : -highlightRect.width)
-					: (highlightRect.isMirrored ? container.width - highlightRect.width : 0)
-				radius: Theme.geometry_progressBar_radius
+				NumberAnimation {
+					target: highlightRect
+					property: "width"
+					from: 0
+					to: root._indeterminateHighlightWidth
+					duration: Theme.animation_progressBar_duration / 2
+				}
 
-				XAnimator on x {
-					running: root.indeterminate
-					loops: Animation.Infinite
+				XAnimator {
+					target: highlightRect
+					to: root.availableWidth - root._indeterminateHighlightWidth
 					duration: Theme.animation_progressBar_duration
-					from: root.indeterminate
-						? (highlightRect.isMirrored ? container.width : -highlightRect.width)
-						: (highlightRect.isMirrored ? container.width - highlightRect.width : 0)
-					to: root.indeterminate
-						? (highlightRect.isMirrored ? -highlightRect.width : container.width)
-						: (highlightRect.isMirrored ? container.width - highlightRect.width : 0) // x only animates for indeterminate bars.
+				}
+
+				ParallelAnimation {
+					NumberAnimation {
+						target: highlightRect
+						property: "x"
+						to: root.availableWidth
+						duration: Theme.animation_progressBar_duration / 2
+					}
+
+					NumberAnimation {
+						target: highlightRect
+						property: "width"
+						to: 0
+						duration: Theme.animation_progressBar_duration / 2
+					}
+				}
+
+				PropertyAction {
+					target: highlightRect
+					property: "x"
+					value: 0
 				}
 			}
 		}
-
-		Effects.MultiEffect {
-			visible: true
-			anchors.fill: parent
-			maskEnabled: true
-			maskSource: mask
-			source: container
-		}
 	}
 }
-

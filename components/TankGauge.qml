@@ -7,20 +7,19 @@ import QtQuick
 import Victron.VenusOS
 import QtQuick.Controls.impl as CP
 
-ClippingBarGauge {
+BarGauge {
 	id: root
 
+	required property color separatorColor
 	property bool isGrouped: false
 	property bool expanded
 
 	radius: Theme.geometry_levelsPage_tankGauge_radius
-	surfaceColor: Theme.color_levelsPage_gauge_separatorBarColor
 
 	component BarSeparator : Rectangle {
 		width: root.orientation === Qt.Vertical ? parent.width : Theme.geometry_levelsGauge_separator_size
 		height: root.orientation === Qt.Vertical ? Theme.geometry_levelsGauge_separator_size : parent.height
-		color: root.surfaceColor
-		z: 5
+		color: root.separatorColor
 	}
 
 	BarSeparator {
@@ -46,7 +45,6 @@ ClippingBarGauge {
 		y: root.orientation === Qt.Vertical
 				? (root.height / 4 / 2) - (height / 2)
 				: (root.height / 2) - (height / 2)
-		z: 5
 
 		visible: !root.isGrouped
 				 && ((root.valueType === VenusOS.Gauges_ValueType_FallingPercentage && value <= 0.05)
