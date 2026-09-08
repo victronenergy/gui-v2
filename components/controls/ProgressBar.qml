@@ -13,16 +13,15 @@ import Victron.VenusOS
 T.ProgressBar {
 	id: root
 
+	readonly property real _indeterminateHighlightWidth: availableWidth / 3
+
 	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
 			implicitContentWidth + leftPadding + rightPadding)
 	implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
 			implicitContentHeight + topPadding + bottomPadding)
 
-	// Draw our own rectangles instead of using BarGauge, so that the highlight's position can be
-	// animated with an Animator on the render thread rather than a NumberAnimation on the main
-	// thread, as this control is commonly used when background operations are being processed.
-	// This also means the ends of the highlight are always rounded, unlike the BarGauge in the
-	// Slider implementation, where the progress edge is straight until it approaches the end.
+	// Draw our own rectangles instead of using BarGauge, so that the highlight width and position
+	// can be animated for indeterminate progress bars.
 	background: Rectangle {
 		x: root.leftPadding
 		y: root.topPadding + (root.availableHeight / 2) - (height / 2)
@@ -36,18 +35,57 @@ T.ProgressBar {
 		Rectangle {
 			id: highlightRect
 
-			width: root.indeterminate ? Theme.geometry_progressBar_highlight_width : root.availableWidth * root.visualPosition
+			width: root.indeterminate ? 0 : root.availableWidth * root.visualPosition
 			height: Theme.geometry_progressBar_height
 			color: Theme.color_ok
 			radius: Theme.geometry_progressBar_radius
 
-			XAnimator on x {
-				running: root.indeterminate
+			// For indeterminate progress bars, produce a visual effect where the bar looks as
+			// though it is entering and exiting the background area, by animating the highlight x
+			// and width at the same time.
+			SequentialAnimation {
+				running: root.indeterminate && UiConfig.applicationVisible && !ScreenBlanker.blanked
 				loops: Animation.Infinite
-				duration: Theme.animation_progressBar_duration
-				from: 0
-				to: root.availableWidth - highlightRect.width
-				onStopped: highlightRect.x = 0
+				onStopped: {
+					highlightRect.x = 0
+					highlightRect.width = root.availableWidth * root.visualPosition
+				}
+
+				NumberAnimation {
+					target: highlightRect
+					property: "width"
+					from: 0
+					to: root._indeterminateHighlightWidth
+					duration: Theme.animation_progressBar_duration / 2
+				}
+
+				XAnimator {
+					target: highlightRect
+					to: root.availableWidth - root._indeterminateHighlightWidth
+					duration: Theme.animation_progressBar_duration
+				}
+
+				ParallelAnimation {
+					NumberAnimation {
+						target: highlightRect
+						property: "x"
+						to: root.availableWidth
+						duration: Theme.animation_progressBar_duration / 2
+					}
+
+					NumberAnimation {
+						target: highlightRect
+						property: "width"
+						to: 0
+						duration: Theme.animation_progressBar_duration / 2
+					}
+				}
+
+				PropertyAction {
+					target: highlightRect
+					property: "x"
+					value: 0
+				}
 			}
 		}
 	}
