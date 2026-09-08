@@ -7,6 +7,7 @@
 #include "backendconnection.h"
 #include "alldevicesmodel.h"
 #include "enums.h"
+#include "language.h"
 
 #include <QQmlInfo>
 
@@ -16,6 +17,8 @@ IOChannel::IOChannel(Direction direction, QObject *parent)
 	: QObject(parent)
 	, m_direction(direction)
 {
+	// formattedName may include qtTrId("switchableoutput_gx_device_relays"); refresh on language change.
+	connect(Language::create(), &Language::currentLanguageChanged, this, &IOChannel::updateFormattedName);
 }
 
 void IOChannel::initialize(VeQItem *item)

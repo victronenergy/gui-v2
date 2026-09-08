@@ -7,6 +7,7 @@
 #include "allservicesmodel.h"
 #include "alldevicesmodel.h"
 #include "genericinput.h"
+#include "language.h"
 #include "switchableoutput.h"
 
 #include <QQmlInfo>
@@ -101,8 +102,12 @@ IOChannelGroup *IOChannelGroup::newDeviceGroup(const QString &serviceUid, QObjec
 	IOChannelGroup *group = new IOChannelGroup(parent, deviceGroupId(serviceUid));
 	const QString serviceType = BaseDevice::serviceTypeFromUid(serviceUid);
 	if (serviceType == QStringLiteral("system")) {
-		//% "GX device relays"
-		group->setName(qtTrId("gx_device_relays"));
+		const auto updateSystemGroupName = [group]() {
+			//% "GX device relays"
+			group->setName(qtTrId("gx_device_relays"));
+		};
+		updateSystemGroupName();
+		connect(Language::create(), &Language::currentLanguageChanged, group, updateSystemGroupName);
 	} else {
 		if (Device *device = AllDevicesModel::create()->findDevice(serviceUid)) {
 			group->initializeDevice(device);
