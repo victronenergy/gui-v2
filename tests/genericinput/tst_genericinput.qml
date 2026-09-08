@@ -643,6 +643,24 @@ TestCase {
 				textValue: qsTrId("generic_input_label_running"),
 			},
 			{
+				tag: "released-pressed-holding: released",
+				uid: "mock/com.victronenergy.test.a/GenericInput/0",
+				inputProperties: { "Value": 0, "Settings/Labels": ["/released", "/pressed", "/holding"] },
+				textValue: qsTrId("generic_input_label_released"),
+			},
+			{
+				tag: "released-pressed-holding: pressed",
+				uid: "mock/com.victronenergy.test.a/GenericInput/0",
+				inputProperties: { "Value": 1, "Settings/Labels": ["/released", "/pressed", "/holding"] },
+				textValue: qsTrId("generic_input_label_pressed"),
+			},
+			{
+				tag: "released-pressed-holding: holding",
+				uid: "mock/com.victronenergy.test.a/GenericInput/0",
+				inputProperties: { "Value": 2, "Settings/Labels": ["/released", "/pressed", "/holding"] },
+				textValue: qsTrId("generic_input_label_holding"),
+			},
+			{
 				tag: "custom label: option 0",
 				uid: "mock/com.victronenergy.test.a/GenericInput/0",
 				inputProperties: { "Value": 0, "Settings/Labels": ["off", "eco", "auto"] },
