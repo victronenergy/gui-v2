@@ -132,6 +132,7 @@ TextField {
 		_inputCancelled = true // flag to prevent validation from running when focus is lost
 		focus = false
 		_inputCancelled = false
+		_validateBeforeSaving = false
 	}
 
 	MouseArea {

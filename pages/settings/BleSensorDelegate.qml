@@ -22,10 +22,9 @@ import Victron.VenusOS
 	again brings the field back, focused and holding the stored key, so that it can be switched back
 	on with a single Enter.
 
-	A device whose stored key is already complete is enabled as soon as this delegate learns its
-	state, so that it comes up switched on rather than showing a key field for a key that is already
-	known. Note that this applies every time the delegate is created, not only at application
-	startup: a device switched off here is switched on again by the next visit to this page.
+	The enabled state is only ever written in response to the user acting on this page: switching a
+	device off, or submitting a key. Showing a device must not change it - a device switched off
+	here, or elsewhere (VictronConnect), stays off when the page is left and entered again.
 
 	A loader swaps between the two standard list items as the device's state changes, so neither
 	has to emulate the other. It must be a ListItemLoader rather than a plain Loader: a plain
@@ -67,34 +66,6 @@ ListItemLoader {
 		return requested
 	}
 
-	// Whether the initial state has been dealt with. Set as soon as the device's state is known,
-	// whether or not it led to the device being enabled, so that this remains a one-shot: without
-	// it, switching a device off would immediately re-enable it, as its stored key is still
-	// complete.
-	property bool initialStateApplied: false
-
-	// A stored key that is already complete is all that gates an encrypted device, so enable the
-	// device rather than presenting a key field for a key the user has no reason to re-enter.
-	// The stored key and the enabled state arrive asynchronously (and on dbus/mqtt not at all
-	// promptly), so this cannot simply run when the delegate is created; it is driven by the state
-	// changing instead, and runs on the first update in which the state is known.
-	function applyInitialState() {
-		if (initialStateApplied || !enabledItem.valid) {
-			// Already done, or the enabled state is not known yet.
-			return
-		}
-		if (!keyRequired || !keyItem.valid) {
-			// Either the key path has not been seen yet - the device may still turn out to be an
-			// encrypted one - or it has, but its stored key has not arrived. Note that an ordinary
-			// device therefore never settles here, which is harmless: it has no key to act on.
-			return
-		}
-		initialStateApplied = true
-		if (!deviceEnabled && keyIsComplete(storedKey)) {
-			enableWithKey(storedKey)
-		}
-	}
-
 	function keyIsComplete(key) {
 		return /^[0-9a-fA-F]{32}$/.test(key)
 	}
@@ -122,9 +93,6 @@ ListItemLoader {
 		// Only an encrypted device swaps in a key field to focus; an ordinary device keeps its
 		// switch, and moving the focus off it would be wrong.
 		focusKeyFieldOnLoad = keyRequired
-		// The user has made an explicit choice, which the initial-state handling must not undo if
-		// it has not run by now (it normally has, since the device was enabled to be switched off).
-		initialStateApplied = true
 		enabledItem.setValue(0)
 	}
 
@@ -140,11 +108,6 @@ ListItemLoader {
 	// an enabled encrypted one) show the enable switch.
 	sourceComponent: (keyRequired && !deviceEnabled) ? keyFieldComponent : switchComponent
 
-	Component.onCompleted: applyInitialState()
-	onStoredKeyChanged: applyInitialState()
-	onKeyRequiredChanged: applyInitialState()
-	onDeviceEnabledChanged: applyInitialState()
-
 	VeQuickItem {
 		id: enabledItem
 		uid: root.devicePrefix + "/Enabled"
@@ -158,11 +121,6 @@ ListItemLoader {
 	// back to 0 after it acknowledged our Enabled=1, without the user having disabled the device.
 	Connections {
 		target: enabledItem
-		// A device that arrives already disabled leaves deviceEnabled at false, so its arrival is
-		// only visible as the item becoming valid.
-		function onValidChanged() {
-			root.applyInitialState()
-		}
 		function onValueChanged() {
 			if (enabledItem.value === 1) {
 				if (enableAckTimer.running) {
@@ -345,19 +303,22 @@ ListItemLoader {
 
 					// TextValidationField submits on Enter and on focus loss, but only if the text
 					// has been edited since it was focused. Here an unedited key has to be
-					// submitted too: after a device is switched off, its field is refocused still
-					// holding the stored key, and re-submitting that key is how it gets switched
-					// back on. Marking the field as having something to save on focus, when it
-					// already holds a complete key, arms both of its submit paths at once.
-					// A Connections rather than an onActiveFocusChanged handler, which would
-					// override the one this type relies on for the submit itself.
-					Connections {
-						target: keyTextField
-						function onActiveFocusChanged() {
-							if (keyTextField.activeFocus && root.keyIsComplete(keyTextField.text)) {
-								keyTextField._validateBeforeSaving = true
-							}
-						}
+					// submittable too: after a device is switched off, its field comes back still
+					// holding the stored key, and re-submitting that key is how the device is
+					// switched back on. Marking the field as having something to save arms both of
+					// its submit paths, so it is done for the Enter keystroke and for nothing else.
+					// Arming it on focus instead - as this once did - arms the focus-loss path as
+					// well, and then merely leaving the page, which takes the focus away, submits
+					// the key and switches the device back on.
+					// The handler does not accept the event: Enter has to go on to reach the text
+					// field, whose accepted() is what actually performs the submit.
+					Keys.onReturnPressed: (event) => {
+						keyTextField._validateBeforeSaving = true
+						event.accepted = false
+					}
+					Keys.onEnterPressed: (event) => {
+						keyTextField._validateBeforeSaving = true
+						event.accepted = false
 					}
 
 					onInputValidated: keyField.saveInput()
