@@ -6,6 +6,7 @@
 #include "device.h"
 #include "allservicesmodel.h"
 #include "enums.h"
+#include "language.h"
 
 #include <QQmlInfo>
 
@@ -15,11 +16,13 @@ Device::Device(QObject *parent)
 	: BaseDevice(parent)
 {
 	connect(this, &Device::serviceUidChanged, this, &Device::initializeFromServiceUid);
+	connect(Language::create(), &Language::currentLanguageChanged, this, &Device::refreshName);
 }
 
 Device::Device(QObject *parent, VeQItem *serviceItem)
 	: BaseDevice(parent)
 {
+	connect(Language::create(), &Language::currentLanguageChanged, this, &Device::refreshName);
 	setServiceItem(serviceItem);
 }
 
@@ -134,7 +137,8 @@ void Device::refreshName()
 		setName(qtTrId("tank_description")
 				.arg(Enums::create()->tank_fluidTypeToText(static_cast<Enums::Tank_Type>(m_fluidType)))
 				.arg(deviceInstance()));
-	} else if (m_serviceItem->getState() != VeQItem::Offline
+	} else if (m_serviceItem
+			&& m_serviceItem->getState() != VeQItem::Offline
 			&& ((m_customNameItem && m_customNameItem->getState() == VeQItem::Offline) || customName().isEmpty())
 			&& m_productNameItem && m_productNameItem->getState() == VeQItem::Synchronized) {
 		setName(productName());
