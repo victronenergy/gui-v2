@@ -35,7 +35,7 @@ namespace VenusOS {
 
 	Here, GenericInput::value=1 and GenericInput::textValue="eco", as the label at index 1 is "eco".
 
-	If a label starts with a '/' character, this indicates it is a reserved keyboard for which
+	If a label starts with a '/' character, this indicates it is a reserved keyword for which
 	GenericInput will automatically provide a translated string.
 
 	PrimaryLabel
