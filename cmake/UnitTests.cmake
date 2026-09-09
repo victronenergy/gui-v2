@@ -70,7 +70,8 @@ endif()
 
 qt_import_qml_plugins(${TEST_NAME})
 
-add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME} WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+# Add source dir using -input so that tests can be run from shadow builds.
+add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME} -input ${CMAKE_CURRENT_SOURCE_DIR} WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 
 endmacro()
 
