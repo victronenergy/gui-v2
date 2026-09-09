@@ -57,6 +57,28 @@ OverviewWidget {
 		}
 	}
 
+	VeQuickItem {
+		id: firstAlternatorTemperature
+		uid: root.serviceType === "alternator" && inputDeviceModel.count === 1
+			? inputDeviceModel.firstObject.serviceUid + "/Dc/0/Temperature"
+			: ""
+	}
+
+	QuantityLabel {
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry_overviewPage_widget_content_topMargin
+			right: parent.right
+			rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
+		}
+		value: Units.convert(firstAlternatorTemperature.value, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
+		unit: Global.systemSettings.temperatureUnit
+		unitColor: Theme.color_overviewPage_widget_battery_font_secondary
+		font.pixelSize: root.secondaryFontSize
+		alignment: Qt.AlignRight
+		visible: serviceType === "alternator" && firstAlternatorTemperature.valid
+	}
+
 	DcMeterDeviceModel {
 		id: inputDeviceModel
 		serviceTypes: [ root.serviceType ]
