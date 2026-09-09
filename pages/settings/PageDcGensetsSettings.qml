@@ -57,7 +57,7 @@ Page {
 					return false
 				}
 
-				//% "Enabled DC Gensets"
+				//% "Enabled DC gensets"
 				text: qsTrId("page_dc_gensets_settings_enabled_dc_gensets")
 				dataItem.uid: "%1/MultipleGensets/GensetsEnabled".arg(root.startStopBindPrefix)
 				updateDataOnClick: false

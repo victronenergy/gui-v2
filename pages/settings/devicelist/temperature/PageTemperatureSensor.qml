@@ -90,7 +90,7 @@ DevicePage {
 		}
 
 		ListQuantity {
-			//% "NOx index"
+			//% "Nox index"
 			text: qsTrId("temperature_nox")
 			dataItem.uid: bindPrefix + "/NOX"
 			unit: VenusOS.Units_None

@@ -48,7 +48,7 @@ Page {
 			}
 
 			ListSwitch {
-				//% "Auto Accept"
+				//% "Auto accept"
 				text: qsTrId("eebus_device_auto_accept")
 				dataItem.uid: root.bindPrefix + "/AutoAccept"
 				interactive: false

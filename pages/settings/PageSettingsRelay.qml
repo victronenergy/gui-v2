@@ -12,15 +12,15 @@ Page {
 	function notifyRelayFunctionChange(relayFunction) {
 		switch (relayFunction) {
 		case VenusOS.SwitchableOutput_Function_GeneratorStartStop:
-			//% "The Genset can now be found in the devices list"
+			//% "The genset can now be found in the devices list"
 			Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_relay_genset_can_now_be_found"), 5000)
 			break
 		case VenusOS.SwitchableOutput_Function_Tank_Pump:
-			//% "The Tank Pump can now be found in the devices list"
+			//% "The tank pump can now be found in the devices list"
 			Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_relay_tank_pump_can_now_be_found"), 5000)
 			break
 		case VenusOS.SwitchableOutput_Function_Manual:
-			//% "The Relay can now be found in the devices list"
+			//% "The relay can now be found in the devices list"
 			Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_relay_manual_can_now_be_found"), 5000)
 			break
 		default:
@@ -44,7 +44,7 @@ Page {
 				id: relayFunction
 
 				text: relay1State.seen
-					  //% "Function (Relay 1)"
+					  //% "Function (relay 1)"
 					? qsTrId("settings_relay_function_relay1")
 					  //% "Function"
 					: qsTrId("settings_relay_function")
@@ -72,7 +72,7 @@ Page {
 			ListRadioButtonGroup {
 				id: relayPolaritySwitch
 				text: relay1State.seen
-					  //% "Polarity (Relay 1)"
+					  //% "Polarity (relay 1)"
 					? qsTrId("settings_relay_polarity_relay1")
 					  //% "Polarity"
 					: qsTrId("settings_relay_polarity")
@@ -89,7 +89,7 @@ Page {
 			ListRadioButtonGroup {
 				id: relay1Function
 
-				//% "Function (Relay 2)"
+				//% "Function (relay 2)"
 				text: qsTrId("settings_relay_function_relay2")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Function"
 				preferredVisible: relay1State.seen
@@ -107,7 +107,7 @@ Page {
 
 			ListRadioButtonGroup {
 				id: relay1PolaritySwitch
-				//% "Polarity (Relay 2)"
+				//% "Polarity (relay 2)"
 				text: qsTrId("settings_relay_polarity_relay2")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Polarity"
 				preferredVisible: relay1Function.currentValue === VenusOS.SwitchableOutput_Function_Manual

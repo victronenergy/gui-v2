@@ -127,7 +127,7 @@ Page {
 							id: disabledModel
 
 							PrimaryListLabel {
-								//% "No relay is configured to be activated by temperature. Go to the relay settings page located in the main settings menu and set the relay function to \"Temperature\"."
+								//% "No relay is configured to be activated by temperature. Go to the relay settings page located in the main settings menu and set the relay function to \"temperature\"."
 								text: qsTrId("settings_relay_no_temperature_relay")
 							}
 						}

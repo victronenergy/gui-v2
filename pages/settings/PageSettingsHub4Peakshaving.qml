@@ -96,7 +96,7 @@ Page {
 				}
 				caption: maxSystemAcInputCurrentSwitch.enabled
 							  ? ""
-								//% "To use this feature, Grid metering must be set to External meter, and an up to date ESS assistant must be installed."
+								//% "To use this feature, grid metering must be set to external meter, and an up to date ESS assistant must be installed."
 							  : qsTrId("settings_ess_limit_ac_import_restrictions")
 			}
 
@@ -129,7 +129,7 @@ Page {
 				}
 				caption: maxSystemAcExportCurrentSwitch.enabled
 							  ? ""
-								//% "Grid metering must be set to External meter to use this feature."
+								//% "Grid metering must be set to external meter to use this feature."
 							  : qsTrId("settings_ess_limit_ac_export_restrictions")
 			}
 

@@ -16,7 +16,7 @@ Page {
 				text: CommonWords.mode
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/Mode"
 				interactive: opportunityLoads.value !== 1
-				//% "Dynamic ESS cannot be enabled while Opportunity Loads is enabled. Disable Opportunity Loads first."
+				//% "Dynamic ESS cannot be enabled while opportunity loads is enabled. Disable opportunity loads first."
 				caption: interactive ? "" : qsTrId("settings_ess_disable_ol_first")
 				optionModel: [
 					{ display: CommonWords.off, value: 0 },

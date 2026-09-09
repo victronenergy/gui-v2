@@ -53,7 +53,7 @@ Page {
 			}
 
 			ListText {
-				//% "Main Switch"
+				//% "Main switch"
 				text: qsTrId("batterydiagnostics_main_switch")
 				dataItem.uid: root.bindPrefix + "/Diagnostics/IoStatus/MainSwitchClosed"
 				secondaryText: dataItem.value ? CommonWords.closed_status : CommonWords.open_status
@@ -67,20 +67,20 @@ Page {
 			}
 
 			ListText {
-				//% "Internal Fan"
+				//% "Internal fan"
 				text: qsTrId("batterydiagnostics_internal_fan")
 				dataItem.uid: root.bindPrefix + "/Diagnostics/IoStatus/InternalFanActive"
 				secondaryText: CommonWords.onOrOff(dataItem.value)
 			}
 
 			ListText {
-				//% "Warning Flags"
+				//% "Warning flags"
 				text: qsTrId("batterydiagnostics_warning_flags")
 				dataItem.uid: root.bindPrefix + "/Diagnostics/WarningFlags"
 			}
 
 			ListText {
-				//% "Alarm Flags"
+				//% "Alarm flags"
 				text: qsTrId("batterydiagnostics_alarm_flags")
 				dataItem.uid: root.bindPrefix + "/Diagnostics/AlarmFlags"
 			}

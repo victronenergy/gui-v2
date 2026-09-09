@@ -155,7 +155,7 @@ Page {
 			}
 
 			ListRadioButtonGroup {
-				//% "Phase Setting"
+				//% "Phase setting"
 				text: qsTrId("ac-in-setup-default_phase_setting")
 				dataItem.uid: root.bindPrefix + "/PhaseSetting"
 				preferredVisible: dataItem.valid

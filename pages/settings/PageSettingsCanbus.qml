@@ -102,10 +102,10 @@ Page {
 				preferredVisible: root._isVecan || root._isRvc
 				dataItem.uid: (root._isRvc ? root._rvcSettingsPrefix : root._vecanSettingsPrefix) + "/VenusUniqueId"
 				caption: root._isVecan
-					//% "Above selector sets which block of unique identity numbers to use for the NAME Unique Identity Numbers in the PGN 60928 NAME field. Change only when using multiple GX Devices in one VE.Can network."
+					//% "Above selector sets which block of unique identity numbers to use for the NAME unique identity numbers in the PGN 60928 NAME field. Change only when using multiple GX devices in one VE.Can network."
 					? qsTrId("settings_canbus_unique_id_vecan_description")
 					: root._isRvc
-						//% "Above selector sets which block of unique identity numbers to use for the Serial number in the DGN 60928 ADDRESS_CLAIM field. Change only when using multiple GX Devices in one RV-C network."
+						//% "Above selector sets which block of unique identity numbers to use for the serial number in the DGN 60928 ADDRESS_CLAIM field. Change only when using multiple GX devices in one RV-C network."
 						? qsTrId("settings_canbus_unique_id_rvc_description")
 						: ""
 				onSelectorAccepted: {
@@ -126,7 +126,7 @@ Page {
 					testDone = false
 				}
 
-				//% "Check Unique id numbers"
+				//% "Check unique id numbers"
 				text: qsTrId("settings_canbus_unique_id_choose")
 				preferredVisible: root._isVecan || root._isRvc
 				secondaryText: timer.running
@@ -137,7 +137,7 @@ Page {
 						//% "There is another device connected with this unique number, please select a new number."
 						return qsTrId("settings_canbus_unique_id_conflict")
 					} else if ((vecanSameUniqueNameUsed.value === 0 || rvcSameUniqueNameUsed.value === 0) && uniqueCheck.testDone) {
-						//% "OK: No other device is connected with this unique number."
+						//% "OK: no other device is connected with this unique number."
 						return qsTrId("settings_canbus_unique_id_ok")
 					} else {
 						return ""

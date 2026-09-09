@@ -41,7 +41,7 @@ Page {
 					Global.pageManager.popPage(root)
 				}
 
-				//% "VRM Portal access level"
+				//% "VRM portal access level"
 				text: qsTrId("settings_logging_vrm_portal")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Network/VrmPortal"
 				updateDataOnClick: false
@@ -73,7 +73,7 @@ Page {
 
 						//% "Are you sure?"
 						title: qsTrId("settings_vrm_portal_mode_confirm_title")
-						//% "Changing this setting to Read-only or Off will lock you out."
+						//% "Changing this setting to read-only or off will lock you out."
 						description: qsTrId("settings_vrm_portal_mode_confirm_description")
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
 						onAccepted: vrmPortalMode.setMode(mode)
@@ -83,7 +83,7 @@ Page {
 
 			ListText {
 				id: portalId
-				//% "VRM Portal ID"
+				//% "VRM portal ID"
 				text: qsTrId("settings_vrm_portal_id")
 				dataItem.uid: Global.venusPlatform.serviceUid + "/Device/UniqueId"
 			}
@@ -207,28 +207,28 @@ Page {
 					case 0:
 						return CommonWords.no_error
 					case 150:
-						//% "#150 Unexpected response text"
+						//% "#150 unexpected response text"
 						return qsTrId("settings_connection_error_150")
 					case 151:
-						//% "#151 Unexpected HTTP response"
+						//% "#151 unexpected HTTP response"
 						return qsTrId("settings_connection_error_151")
 					case 152:
-						//% "#152 Connection timeout"
+						//% "#152 connection timeout"
 						return qsTrId("settings_connection_error_152")
 					case 153:
-						//% "#153 Connection error"
+						//% "#153 connection error"
 						return qsTrId("settings_connection_error_153")
 					case 154:
 						//% "#154 DNS failure"
 						return qsTrId("settings_connection_error_154")
 					case 155:
-						//% "#155 Routing error"
+						//% "#155 routing error"
 						return qsTrId("settings_connection_error_155")
 					case 156:
 						//% "#156 VRM unavailable"
 						return qsTrId("settings_connection_error_156")
 					case 157:
-						//% "#159 Unknown error"
+						//% "#159 unknown error"
 						return qsTrId("settings_connection_error_157")
 					default:
 						return ""
@@ -256,7 +256,7 @@ Page {
 			}
 
 			ListText {
-				//% "Connection status (MQTT Real-time channel)"
+				//% "Connection status (MQTT real-time channel)"
 				text: qsTrId("settings_connection_error_realtime_channel")
 				secondaryText: connectionStatus.mqttRealtimeStatus.value || ''
 				preferredVisible: !connectionStatus.preferredVisible && connectionStatus.mqttRealtimeConnected.valid

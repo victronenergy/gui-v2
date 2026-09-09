@@ -32,7 +32,7 @@ Page {
 			}
 
 			ListLink {
-				//% "Victron Community"
+				//% "Victron community"
 				text: qsTrId("settings_support_links_community")
 				url: "https://ve3.nl/guidoc-community"
 			}

@@ -29,7 +29,7 @@ SettingsColumn {
 			case 0: return CommonWords.error
 			//% "Completed"
 			case 1: return qsTrId("cycle_history_completed")
-			//% "DC Disconnect"
+			//% "DC disconnect"
 			case 2: return qsTrId("cycle_history_dc_disconnect")
 			//% "Powered off"
 			case 3: return qsTrId("cycle_history_powered_off")

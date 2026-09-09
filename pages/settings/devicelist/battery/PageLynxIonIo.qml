@@ -14,7 +14,7 @@ Page {
 	GradientListView {
 		model: VisibleItemModel {
 			ListText {
-				//% "System Switch"
+				//% "System switch"
 				text: qsTrId("lynxionio_system_switch")
 				dataItem.uid: root.bindPrefix + "/SystemSwitch"
 				preferredVisible: dataItem.valid
@@ -42,7 +42,7 @@ Page {
 			}
 
 			ListText {
-				//% "Programmable Contact"
+				//% "Programmable contact"
 				text: qsTrId("lynxionio_programmable_contact")
 				dataItem.uid: root.bindPrefix + "/Io/ProgrammableContact"
 				preferredVisible: dataItem.valid

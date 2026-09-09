@@ -32,7 +32,7 @@ Page {
 			}
 
 			ListText {
-				//% "Source Address"
+				//% "Source address"
 				text: qsTrId("settings_rvc_source_address")
 				secondaryText: Utils.toHexFormat(dataItem.value)
 				dataItem.uid: root.bindPrefix + "/Nad"

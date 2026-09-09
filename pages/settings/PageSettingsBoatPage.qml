@@ -82,7 +82,7 @@ Page {
 			}
 
 			SectionHeader {
-				//% "Dual-Drive Configuration"
+				//% "Dual-Drive configuration"
 				text: qsTrId("pagesettingsboatpage_dual_drive_configuration")
 				preferredVisible: _motordriveClassAndVrmInstances.count >= 2
 			}
