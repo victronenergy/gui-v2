@@ -85,7 +85,7 @@ Page {
 			}
 
 			ListQuantityGroup {
-				//% "Installed / Available capacity"
+				//% "Installed / available capacity"
 				text: qsTrId("batterydetails_installed_available_capacity")
 				model: QuantityObjectModel {
 					QuantityObject { object: details.installedCapacity; unit: VenusOS.Units_AmpHour }

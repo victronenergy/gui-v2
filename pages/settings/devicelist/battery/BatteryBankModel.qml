@@ -17,15 +17,15 @@ VisibleItemModel {
 	}
 
 	ListRadioButtonGroup {
-		//% "Nominal Voltage"
+		//% "Nominal voltage"
 		text: qsTrId("batterysettingsbattery_nominal_voltage")
 		dataItem.uid: root.bindPrefix + "/Settings/Battery/NominalVoltage"
 		optionModel: [
-			//% "12 Volt"
+			//% "12 volt"
 			{ display: qsTrId("batterysettingsbattery_12_volt"), value: 12 },
-			//% "24 Volt"
+			//% "24 volt"
 			{ display: qsTrId("batterysettingsbattery_24_volt"), value: 24 },
-			//% "48 Volt"
+			//% "48 volt"
 			{ display: qsTrId("batterysettingsbattery_48_volt"), value: 48 },
 		]
 		preferredVisible: dataItem.valid

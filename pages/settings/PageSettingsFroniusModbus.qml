@@ -13,7 +13,7 @@ Page {
 	function _showRemoveDialog(locationData, port, address) {
 		Global.dialogLayer.open(removeLocationDialog, {
 			modbusLocation: locationData,
-			//% "Port: %1 (Unit %2)"
+			//% "Port: %1 (unit %2)"
 			description: qsTrId("page_settings_fronius_modbus_remove_location_description")
 					.arg(port)
 					.arg(address)
@@ -41,7 +41,7 @@ Page {
 			}
 
 			PrimaryListLabel {
-				//% "The default modbus port is 502 and the default unit ID is 126."
+				//% "The default Modbus port is 502 and the default unit ID is 126."
 				text: qsTrId("page_settings_fronius_modbus_locations_note")
 			}
 		}
@@ -58,7 +58,7 @@ Page {
 				root._showRemoveDialog(modelData, portNumber, unitAddress)
 			}
 
-			//% "Port/Unit ID %1"
+			//% "Port/unit ID %1"
 			text: qsTrId("page_settings_fronius_modbus_location_number").arg(locationNumber)
 			iconSource: "qrc:/images/icon_minus_32.svg"
 			iconColor: Theme.color_ok

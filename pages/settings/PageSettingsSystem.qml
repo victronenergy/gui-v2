@@ -71,9 +71,9 @@ Page {
 
 			ListNavigation {
 				topInset: Theme.geometry_listItem_itemSeparator_height
-				//% "AC System"
+				//% "AC system"
 				text: qsTrId("pagesettingssystem_ac_system")
-				//% "Inputs and Monitoring"
+				//% "Inputs and monitoring"
 				caption: qsTrId("pagesettingssystem_inputs_and_monitoring")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAcSystem.qml", { title: text })
 			}
@@ -98,7 +98,7 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Charge Control"
+				//% "Charge control"
 				text: qsTrId("settings_system_charge_control")
 				//% "Distributed Voltage and Current Control (DVCC)"
 				caption: qsTrId("pagesettingssystem_distributed_voltage_and_current_control")
@@ -107,7 +107,7 @@ Page {
 
 			ListSwitch {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
-				//% "Display DC Loads"
+				//% "Display DC loads"
 				text: qsTrId("settings_system_has_dc_system")
 			}
 

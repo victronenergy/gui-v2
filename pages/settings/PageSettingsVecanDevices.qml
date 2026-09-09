@@ -12,7 +12,7 @@ Page {
 
 	property string serviceUid
 
-	//% "VE.CAN devices"
+	//% "VE.Can devices"
 	title: qsTrId("settings_vecan_devices")
 
 	GradientListView {
@@ -39,7 +39,7 @@ Page {
 			text: "%1 [%2]".arg(customName.value || modelName.value).arg(""+uniqueNumber.value)
 
 			secondaryText: connected.valid && connected.value === 0 ? CommonWords.offline :
-				//% "VE.Can Instance# %1"
+				//% "VE.Can instance# %1"
 				qsTrId("settings_vecan_device_number").arg(deviceInstance.value)
 
 			onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsVecanDevice.qml",

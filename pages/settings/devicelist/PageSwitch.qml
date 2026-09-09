@@ -36,7 +36,7 @@ DevicePage {
 		}
 
 		ListQuantity {
-			//% "Module Voltage"
+			//% "Module voltage"
 			text: qsTrId("settings_module_voltage")
 			dataItem.uid: root.serviceUid + "/ModuleVoltage"
 			preferredVisible: dataItem.valid
