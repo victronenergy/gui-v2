@@ -470,10 +470,10 @@ TestCase {
 				outputProperties: { "Settings/Type": 0, "Name": "A", "Settings/Group": "test" },
 				deviceValues: {
 					"mock/com.victronenergy.test.a/ProductName": "Test product",
-					"mock/com.victronenergy.test.a/ProductName": "Test custom",
+					"mock/com.victronenergy.test.a/CustomName": "Test custom",
 					"mock/com.victronenergy.test.a/DeviceInstance": 1,
 				},
-				formattedName: "Test custom (1) | A",
+				formattedName: "Test custom | A",
 			},
 		]
 	}
@@ -492,6 +492,63 @@ TestCase {
 		output.uid = data.uid
 		compare(output.uid, data.uid)
 		compare(output.formattedName, data.formattedName)
+
+		// Clean up
+		output.uid = ""
+		MockManager.removeValue(data.uid)
+		if (data.deviceValues) {
+			for (propertyName in data.deviceValues) {
+				MockManager.removeValue(propertyName)
+			}
+		}
+	}
+
+	function test_formattedName_without_device_data() {
+		return [
+			{
+				tag: "no custom name, in group: use device product name",
+				uid: "mock/com.victronenergy.test.x/SwitchableOutput/0",
+				outputProperties: { "Settings/Type": 0, "Name": "X", "Settings/Group": "test" },
+				deviceValues: {
+					"mock/com.victronenergy.test.x/ProductName": "Test product",
+					"mock/com.victronenergy.test.x/DeviceInstance": 1,
+				},
+				formattedNameWithoutDevice: "X",
+				formattedNameWithDevice: "Test product (1) | X",
+			},
+
+			{
+				tag: "no custom name, in group: use device custom name",
+				uid: "mock/com.victronenergy.test.y/SwitchableOutput/0",
+				outputProperties: { "Settings/Type": 0, "Name": "Y", "Settings/Group": "test" },
+				deviceValues: {
+					"mock/com.victronenergy.test.y/ProductName": "Test product",
+					"mock/com.victronenergy.test.y/CustomName": "Test custom",
+					"mock/com.victronenergy.test.y/DeviceInstance": 1,
+				},
+				formattedNameWithoutDevice: "Y",
+				formattedNameWithDevice: "Test custom | Y",
+			},
+		]
+	}
+
+	function test_formattedName_without_device(data) {
+		let propertyName
+		compare(output.formattedName, "")
+
+		// Set the output properties first, and initialise the output, before the device is available.
+		setOutputProperties(data.uid, data.outputProperties)
+		output.uid = data.uid
+		compare(output.uid, data.uid)
+		compare(output.formattedName, data.formattedNameWithoutDevice)
+
+		// Now set the device properties and check the formatted name again.
+		if (data.deviceValues) {
+			for (propertyName in data.deviceValues) {
+				MockManager.setValue(propertyName, data.deviceValues[propertyName])
+			}
+		}
+		compare(output.formattedName, data.formattedNameWithDevice)
 
 		// Clean up
 		output.uid = ""
