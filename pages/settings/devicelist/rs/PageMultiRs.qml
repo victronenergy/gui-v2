@@ -201,7 +201,7 @@ DevicePage {
 			width: parent ? parent.width : 0
 
 			ListQuantity {
-				//% "Total PV Power"
+				//% "Total PV power"
 				text: qsTrId("settings_multirs_total_pv_power")
 				dataItem.uid: root.bindPrefix + "/Yield/Power"
 				unit: VenusOS.Units_Watt
