@@ -149,6 +149,7 @@ protected:
 	void updateDecimals();
 
 private:
+	void setDevice(BaseDevice *device);
 	void setStatus(const QVariant &variant);
 	void setType(const QVariant &variant);
 	void setValidTypes(const QVariant &variant);
@@ -173,6 +174,7 @@ protected:
 	QString m_group;
 	QString m_unitText;
 	Direction m_direction = Input;
+	QMetaObject::Connection m_deviceAddedConn;
 	int m_status = -1; // Default status is -1 (invalid)
 	int m_type = -1;
 	int m_unitType = Enums::Units_None;

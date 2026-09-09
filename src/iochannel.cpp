@@ -28,6 +28,15 @@ void IOChannel::initialize(VeQItem *item)
 	}
 	m_item = item;
 
+	if (m_deviceAddedConn) {
+		disconnect(m_deviceAddedConn);
+		m_deviceAddedConn = QMetaObject::Connection();
+	}
+	if (m_device) {
+		m_device->disconnect(this);
+		m_device.clear();
+	}
+
 	if (m_item) {
 		m_serviceUid = m_item->itemParent() // the /GenericInput or /SwitchableOutput parent
 				&& m_item->itemParent()->itemParent() // the root service item
@@ -37,11 +46,11 @@ void IOChannel::initialize(VeQItem *item)
 		// Set up BaseDevice member pointer, in order to update the formatted name when the device's
 		// product/custom name or device instance changes.
 		if (BaseDevice::serviceTypeFromUid(m_serviceUid) != QStringLiteral("system")) {
-			m_device = AllDevicesModel::create()->findDevice(m_serviceUid);
-			if (m_device) {
-				connect(m_device, &BaseDevice::productNameChanged, this, &IOChannel::updateFormattedName);
-				connect(m_device, &BaseDevice::customNameChanged, this, &IOChannel::updateFormattedName);
-				connect(m_device, &BaseDevice::deviceInstanceChanged, this, &IOChannel::updateFormattedName);
+			if (BaseDevice *device = AllDevicesModel::create()->findDevice(m_serviceUid)) {
+				setDevice(device);
+			} else {
+				m_deviceAddedConn = connect(AllDevicesModel::create(), &AllDevicesModel::deviceAdded,
+						this, &IOChannel::setDevice);
 			}
 		}
 
@@ -93,12 +102,6 @@ void IOChannel::initialize(VeQItem *item)
 	} else {
 		m_serviceUid.clear();
 
-		// Clear member pointers.
-		if (m_device) {
-			m_device->disconnect();
-			m_device.clear();
-		}
-
 		// Clear formatted name.
 		m_name.clear();
 		m_customName.clear();
@@ -116,6 +119,22 @@ void IOChannel::initialize(VeQItem *item)
 	emit channelIdChanged();
 	emit serviceUidChanged();
 	emit uidChanged();
+}
+
+void IOChannel::setDevice(BaseDevice *device)
+{
+	if (device && device->serviceUid() == m_serviceUid) {
+		if (m_deviceAddedConn) {
+			disconnect(m_deviceAddedConn);
+			m_deviceAddedConn = QMetaObject::Connection();
+		}
+		m_device = device;
+		connect(m_device, &BaseDevice::productNameChanged, this, &IOChannel::updateFormattedName);
+		connect(m_device, &BaseDevice::customNameChanged, this, &IOChannel::updateFormattedName);
+		connect(m_device, &BaseDevice::deviceInstanceChanged, this, &IOChannel::updateFormattedName);
+	}
+
+	updateFormattedName();
 }
 
 QString IOChannel::uid() const
@@ -329,6 +348,7 @@ bool IOChannel::canShowUI(const QVariant &showUIValue) const
 	// The VRM connection status doesn't match the local/remote visibility preference.
 	return false;
 }
+
 void IOChannel::updateFormattedName()
 {
 	QString newFormattedName;
@@ -348,7 +368,11 @@ void IOChannel::updateFormattedName()
 					? m_device->customName()
 					: QStringLiteral("%1 (%2)").arg(m_device->productName()).arg(m_device->deviceInstance());
 		}
-		newFormattedName = QStringLiteral("%1 | %2").arg(prefix).arg(m_name);
+		if (prefix.isEmpty()) {
+			newFormattedName = m_name;
+		} else {
+			newFormattedName = QStringLiteral("%1 | %2").arg(prefix).arg(m_name);
+		}
 	} else {
 		// When the channel is in the default group for the device, instead of in a named group,
 		// then the /Name can be used directly.
