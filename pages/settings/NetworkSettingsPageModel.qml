@@ -206,7 +206,7 @@ VisibleItemModel {
 	}
 
 	ListSwitch {
-		//% "Enable Link-local"
+		//% "Enable link-local"
 		text: qsTrId("settings_tcpip_ethernet_linklocal_enabled")
 		dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/EthernetLinkLocal"
 		preferredVisible: !networkServices.wifi

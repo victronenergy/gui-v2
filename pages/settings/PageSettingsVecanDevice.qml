@@ -37,7 +37,7 @@ Page {
 			}
 
 			ListSpinBox {
-				//% "VE.Can Device Instance"
+				//% "VE.Can device instance"
 				text: qsTrId("settings_vecan_device_instance")
 				dataItem.uid: root.bindPrefix + "/DeviceInstance"
 				enabled: status.dataItem.value === 1
@@ -49,7 +49,7 @@ Page {
 			}
 
 			ListText {
-				//% "Network Address"
+				//% "Network address"
 				text: qsTrId("settings_vecan_nad")
 				dataItem.uid: root.bindPrefix + "/Nad"
 			}

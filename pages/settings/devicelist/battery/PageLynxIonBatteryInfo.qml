@@ -68,7 +68,7 @@ Page {
 			}
 
 			SectionHeader {
-				//% "Battery Info"
+				//% "Battery info"
 				text: qsTrId("lynxionbatteryinfo_battery_info_section_header")
 			}
 
@@ -102,7 +102,7 @@ Page {
 			}
 
 			SectionHeader {
-				//% "Battery Measurements"
+				//% "Battery measurements"
 				text: qsTrId("lynxionbatteryinfo_battery_measurements_section_header")
 			}
 
@@ -127,7 +127,7 @@ Page {
 			}
 
 			SectionHeader {
-				//% "Cell Measurements"
+				//% "Cell measurements"
 				text: qsTrId("lynxionbatteryinfo_cell_measurements_section_header")
 			}
 

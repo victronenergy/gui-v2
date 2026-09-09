@@ -35,7 +35,7 @@ Page {
 			}
 
 			ListQuantity {
-				//% "Low Voltage Disconnect (always ignored)"
+				//% "Low voltage disconnect (always ignored)"
 				text: qsTrId("batteryparameters_low_voltage_disconnect_always_ignored")
 				dataItem.uid: root.bindPrefix + "/Info/BatteryLowVoltage"
 				preferredVisible: dataItem.valid
@@ -45,7 +45,7 @@ Page {
 
 			ListText {
 				//: Shows if the battery requests charging: yes or no
-				//% "Requests Charging"
+				//% "Requests charging"
 				text: qsTrId("batteryparameters_charge_request")
 				dataItem.uid: root.bindPrefix + "/Info/ChargeRequest"
 				preferredVisible: dataItem.valid

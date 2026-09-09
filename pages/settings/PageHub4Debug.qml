@@ -11,7 +11,7 @@ Page {
 
 	readonly property string batteryUid: batteryModel.firstObject?.serviceUid ?? ""
 
-	//% "Grid Setpoint"
+	//% "Grid setpoint"
 	title: qsTrId("settings_ess_debug_grid_setpoint")
 
 	FilteredDeviceModel {
