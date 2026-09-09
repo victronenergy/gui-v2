@@ -17,8 +17,17 @@ qt_add_executable(${TEST_NAME}
     ${TEST_QML}
 )
 
+# Allow test sources to #include "testutils.h" from the tests/ root.
+target_include_directories(${TEST_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/..")
+
+# Embed the build-tree QML source directory so tests can find their QML files
+# regardless of executable placement (multi-config subdirs, macOS bundles, etc.).
+target_compile_definitions(${TEST_NAME} PRIVATE
+    VENUS_TEST_BUILD_SOURCE_DIR="${CMAKE_BINARY_DIR}/tests/${DIR_NAME}")
+
+# On Windows Debug builds, use console (not win32) subsystem so test output is visible in the terminal.
 set_target_properties(${TEST_NAME} PROPERTIES
-    WIN32_EXECUTABLE TRUE
+    WIN32_EXECUTABLE $<IF:$<AND:$<BOOL:${WIN32}>,$<CONFIG:Debug>>,FALSE,TRUE>
     MACOSX_BUNDLE TRUE
 )
 
@@ -34,6 +43,16 @@ else()
         COMMAND ${CMAKE_COMMAND} -E copy
                     "${CMAKE_CURRENT_SOURCE_DIR}/${TEST_QML}"
                     "${CMAKE_BINARY_DIR}/tests/${DIR_NAME}/${TEST_QML}")
+endif()
+
+# On Windows Debug builds, install test executables next to venus-gui-v2 so they
+# share the deployed Qt runtime (DLLs, QML modules, etc.).
+# Also install each test's QML file into tests/<dir>/ so that Qt Quick Test can
+# find it (the compile-time source path won't exist on the install machine).
+if (WIN32)
+    install(TARGETS ${TEST_NAME} CONFIGURATIONS Debug DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/${TEST_QML}"
+            CONFIGURATIONS Debug DESTINATION ${CMAKE_INSTALL_BINDIR}/tests/${DIR_NAME})
 endif()
 
 target_link_libraries(${TEST_NAME} PRIVATE

@@ -37,24 +37,22 @@ else()
     target_link_libraries(VictronVenusOS PRIVATE Qt6::DBus)
 endif()
 
-if (${VENUS_GX_BUILD})
-    qt_query_qml_module(VictronVenusOS QML_FILES module_qml_files QMLDIR module_qmldir)
-    install(
-        FILES
-            ${module_qmldir}
-            ApplicationContent.qml
-            FrameRateVisualizer.qml
-            Global.qml
-        DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/VenusOS)
-    install(
-        DIRECTORY
-            components
-            data
-            pages
-        DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/VenusOS)
-    install(
-        FILES
-            ${PROJECT_SOURCE_DIR}/tools/gui-v2-plugin-compiler.py
-        DESTINATION ${CMAKE_INSTALL_BINDIR})
-endif()
+qt_query_qml_module(VictronVenusOS QML_FILES module_qml_files QMLDIR module_qmldir)
+install(
+    FILES
+        ${module_qmldir}
+        ApplicationContent.qml
+        FrameRateVisualizer.qml
+        Global.qml
+    DESTINATION ${VENUS_QML_INSTALL_DIR}/Victron/VenusOS)
+install(
+    DIRECTORY
+        components
+        data
+        pages
+    DESTINATION ${VENUS_QML_INSTALL_DIR}/Victron/VenusOS)
+install(
+    FILES
+        ${PROJECT_SOURCE_DIR}/tools/gui-v2-plugin-compiler.py
+    DESTINATION ${VENUS_QML_INSTALL_DIR})
 

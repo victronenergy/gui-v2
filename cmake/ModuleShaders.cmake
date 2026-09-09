@@ -15,8 +15,6 @@ qt6_add_shaders(VictronVenusOSShaders "venus-shaders"
     FILES ${VictronVenusOSShaders_QML_MODULE_SHADERS}
 )
 
-if (${VENUS_GX_BUILD})
-    qt_query_qml_module(VictronVenusOSShaders QML_FILES module_qml_files QMLDIR module_qmldir)
-    install(DIRECTORY components/shaders  DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/VenusOS/Shaders/components)
-    install(FILES ${module_qmldir} DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/VenusOS/Shaders)
-endif()
+qt_query_qml_module(VictronVenusOSShaders QML_FILES module_qml_files QMLDIR module_qmldir)
+install(DIRECTORY components/shaders  DESTINATION ${VENUS_QML_INSTALL_DIR}/Victron/VenusOS/Shaders/components)
+install(FILES ${module_qmldir} DESTINATION ${VENUS_QML_INSTALL_DIR}/Victron/VenusOS/Shaders)
