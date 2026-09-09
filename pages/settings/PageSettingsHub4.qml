@@ -18,7 +18,7 @@ Page {
 		id: noEssHeader
 
 		PrimaryListLabel {
-			//% "No ESS Assistant found"
+			//% "No ESS assistant found"
 			text: qsTrId("settings_ess_no_ess_assistant")
 		}
 	}
@@ -27,7 +27,7 @@ Page {
 		id: hasAcSystem
 
 		PrimaryListLabel {
-			//% "For Multi-RS and HS19 devices, ESS settings are available on the RS System product page."
+			//% "For Multi-RS and HS19 devices, ESS settings are available on the RS system product page."
 			text: qsTrId("settings_ess_rs_information")
 		}
 	}
@@ -61,7 +61,7 @@ Page {
 			optionModel: [
 				//% "External meter"
 				{ display: qsTrId("settings_ess_external_meter"), value: 0 },
-				//% "Inverter/Charger"
+				//% "Inverter/charger"
 				{ display: qsTrId("settings_ess_inverter_charger"), value: 1 },
 			]
 		}
@@ -117,7 +117,7 @@ Page {
 			onOptionClicked: function(index) {
 				const newValue = optionModel[index].value
 				if (newValue === VenusOS.Ess_Hub4ModeState_PhaseSplit) {
-					//% "Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).\n\nCAUTION: Use only if required by the utility provider."
+					//% "Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).\n\nCAUTION: use only if required by the utility provider."
 					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_ess_multiphase_split_notif"))
 				} else if (newValue === VenusOS.Ess_Hub4ModeState_PhaseCompensation ) {
 					//% "The total of all phases is intelligently regulated to achieve the grid setpoint (system efficiency is optimised).\n\nUse unless prohibited by the utility provider."

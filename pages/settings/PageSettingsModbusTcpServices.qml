@@ -27,7 +27,7 @@ Page {
 		model: serviceCount.value || 0
 
 		header: PrimaryListLabel {
-			//% "See the Settings → VRM → VRM device instances menu to change the Modbus-TCP unit IDs."
+			//% "See the settings → VRM → VRM device instances menu to change the Modbus-TCP unit IDs."
 			text: qsTrId("settings_modbus_tcp_unit_id_note")
 		}
 
@@ -38,7 +38,7 @@ Page {
 
 			text: device.name || root._shortServiceName(serviceName.value) || "--"
 			//: Modbus TCP service details. %1 = service name or uid, %2 = unit id
-			//% "%1 | Unit ID: %2"
+			//% "%1 | unit ID: %2"
 			caption: qsTrId("settings_modbus_unit_name_and_id")
 					.arg(root._shortServiceName(serviceName.value))
 					.arg(unitId.value)

@@ -62,7 +62,7 @@ Page {
 			}
 
 			PrimaryListLabel {
-				//% "Activate Pairing mode to allow a device to connect. Paired devices appear here, and will show in the Devices list when connected."
+				//% "Activate pairing mode to allow a device to connect. Paired devices appear here, and will show in the devices list when connected."
 				text: qsTrId("mqtt_devices_pairing_description")
 				visible: mqttDevicesView.count === 0
 				font.pixelSize: Theme.font_size_caption

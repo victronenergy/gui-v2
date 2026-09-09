@@ -64,7 +64,7 @@ DevicePage {
 					return qsTrId("devicelist_battery_going_to_run")
 				case VenusOS.Battery_State_Precharging:
 					//: Status is 'Pre-Charging'
-					//% "Pre-Charging"
+					//% "Pre-charging"
 					return qsTrId("devicelist_battery_pre_charging")
 				case VenusOS.Battery_State_ContactorCheck:
 					//: Status is 'Contactor check'
@@ -139,7 +139,7 @@ DevicePage {
 		}
 
 		ListQuantity {
-			//% "Total Capacity"
+			//% "Total capacity"
 			text: qsTrId("devicelist_battery_total_capacity")
 			dataItem.uid: root.bindPrefix + "/Capacity"
 			preferredVisible: root.isParallelBms
@@ -272,7 +272,7 @@ DevicePage {
 		}
 
 		ListNavigation {
-			//% "Individual Battery Info"
+			//% "Individual battery info"
 			text: qsTrId("battery_individual_info")
 			preferredVisible: batteryRequestId.valid
 			onClicked: {
@@ -442,7 +442,7 @@ DevicePage {
 		}
 
 		ListButton {
-			//% "Redetect Battery"
+			//% "Redetect battery"
 			text: qsTrId("battery_redetect_battery")
 			secondaryText: CommonWords.redetect
 			interactive: redetect.value === 0

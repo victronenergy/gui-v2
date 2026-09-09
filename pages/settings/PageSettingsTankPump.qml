@@ -34,7 +34,7 @@ Page {
 		id: disabledModel
 
 		PrimaryListLabel {
-			//% "Tank pump start/stop function is not enabled. Go to relay settings and set function to \"Tank pump\"."
+			//% "Tank pump start/stop function is not enabled. Go to relay settings and set function to \"tank pump\"."
 			text: qsTrId("settings_pump_function_not_enabled" )
 		}
 	}

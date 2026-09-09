@@ -26,7 +26,7 @@ Page {
 		}
 
 		if (modbusTcpItem.value !== 0){
-			//% "Modbus TCP Server"
+			//% "Modbus TCP server"
 			runningServices.push(qsTrId("pagesettingsgeneral_modificationchecks_modbus"))
 		}
 		if (signalKItem.valid && signalKItem.value !== 0) {
@@ -304,9 +304,9 @@ Page {
 					{ display: CommonWords.disabled, value: 0 },
 					//% "ESS demo"
 					{ display: qsTrId("page_settings_demo_ess"), value: 1 },
-					//% "Boat/Motorhome demo 1"
+					//% "Boat/motorhome demo 1"
 					{ display: qsTrId("page_settings_demo_1"), value: 2 },
-					//% "Boat/Motorhome demo 2"
+					//% "Boat/motorhome demo 2"
 					{ display: qsTrId("page_settings_demo_2"), value: 3 },
 				]
 

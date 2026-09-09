@@ -47,7 +47,7 @@ VisibleItemModel {
 	}
 
 	PrimaryListLabel {
-		//% "Note that changing the Low state-of-charge setting also changes the Time-to-go discharge floor setting in the battery menu."
+		//% "Note that changing the low state-of-charge setting also changes the time-to-go discharge floor setting in the battery menu."
 		text: qsTrId("batterysettingrelay_low_state_of_charge_setting_note")
 		preferredVisible: dischargeFloorLinkedToRelay.valid && dischargeFloorLinkedToRelay.value !== 0 && lowSoc.visible
 

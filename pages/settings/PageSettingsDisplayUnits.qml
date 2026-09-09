@@ -40,16 +40,16 @@ Page {
 				text: qsTrId("settings_units_energy")
 				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
-					//% "Power (Watts)"
+					//% "Power (watts)"
 					{ display: qsTrId("settings_units_watts"), value: VenusOS.ElectricalPowerDisplay_PreferWatts },
 					{
-						//% "Current (Amps)"
+						//% "Current (amps)"
 						display: qsTrId("settings_units_amps"),
 						value: VenusOS.ElectricalPowerDisplay_PreferAmps,
-						//% "Note: If current cannot be displayed (for example, when showing a total for combined AC and DC sources) then power will be shown instead."
+						//% "Note: if current cannot be displayed (for example, when showing a total for combined AC and DC sources) then power will be shown instead."
 						caption: qsTrId("settings_units_amps_exceptions"),
 					},
-					//% "Mixed (AC in Watts, DC in Amps)"
+					//% "Mixed (AC in watts, DC in amps)"
 					{ display: qsTrId("settings_units_mixed"), value: VenusOS.ElectricalPowerDisplay_Mixed },
 				]
 				currentIndex: Global.systemSettings.electricalPowerDisplay
@@ -86,7 +86,7 @@ Page {
 
 			ListRadioButtonGroup {
 				//: Speed unit for reported GPS data
-				//% "Speed Unit"
+				//% "Speed unit"
 				text: qsTrId("settings_gps_speed_unit")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gps/SpeedUnit"
 				writeAccessLevel: VenusOS.User_AccessType_User

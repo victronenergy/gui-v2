@@ -17,15 +17,15 @@ VisibleItemModel {
 	}
 
 	ListRadioButtonGroup {
-		//% "Nominal Voltage"
+		//% "Nominal voltage"
 		text: qsTrId("batterysettingsbattery_nominal_voltage")
 		dataItem.uid: root.bindPrefix + "/Settings/Battery/NominalVoltage"
 		optionModel: [
-			//% "12 Volt"
+			//% "12 volt"
 			{ display: qsTrId("batterysettingsbattery_12_volt"), value: 12 },
-			//% "24 Volt"
+			//% "24 volt"
 			{ display: qsTrId("batterysettingsbattery_24_volt"), value: 24 },
-			//% "48 Volt"
+			//% "48 volt"
 			{ display: qsTrId("batterysettingsbattery_48_volt"), value: 48 },
 		]
 		preferredVisible: dataItem.valid
@@ -111,7 +111,7 @@ VisibleItemModel {
 	}
 
 	PrimaryListLabel {
-		//% "Note that changing the Time-to-go discharge floor setting also changes the Low state-of-charge setting in the relay menu."
+		//% "Note that changing the time-to-go discharge floor setting also changes the low state-of-charge setting in the relay menu."
 		text: qsTrId("batterysettingsbattery_time_to_go_discharge_note")
 		preferredVisible: dischargeFloorLinkedToRelay.valid && dischargeFloorLinkedToRelay.value !== 0
 
