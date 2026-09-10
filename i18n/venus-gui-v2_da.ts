@@ -19,7 +19,7 @@
       <translation>Strømforsyning</translation>
     </message>
     <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
+      <location filename="../../src/genericinput.cpp" line="32"/>
       <source>Off</source>
       <translation>Fra</translation>
     </message>
@@ -59,7 +59,7 @@
       <translation>Stilling</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="173"/>
+      <location filename="../../src/genericinput.cpp" line="217"/>
       <source>Speed</source>
       <translation>Hastighed</translation>
     </message>
@@ -2582,12 +2582,12 @@ Brug, medmindre det er forbudt af forsyningsleverandøren.</translation>
       <translation type="unfinished">Alarm</translation>
     </message>
     <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
+      <location filename="../../src/genericinput.cpp" line="60"/>
       <source>Alarm</source>
       <translation>Alarm</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="181"/>
+      <location filename="../../src/genericinput.cpp" line="225"/>
       <source>Volume</source>
       <translation>Størrelse</translation>
     </message>
@@ -4567,7 +4567,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Fjern fejl</translation>
     </message>
     <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
+      <location filename="../../src/genericinput.cpp" line="52"/>
       <source>Closed</source>
       <translation>Lukket</translation>
     </message>
@@ -4775,7 +4775,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Model navn</translation>
     </message>
     <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
+      <location filename="../../src/genericinput.cpp" line="40"/>
       <source>No</source>
       <translation>Nej</translation>
     </message>
@@ -4800,12 +4800,12 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Offline</translation>
     </message>
     <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
+      <location filename="../../src/genericinput.cpp" line="56"/>
       <source>OK</source>
       <translation>OK</translation>
     </message>
     <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
+      <location filename="../../src/genericinput.cpp" line="36"/>
       <source>On</source>
       <translation>On</translation>
     </message>
@@ -4815,7 +4815,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Online</translation>
     </message>
     <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
+      <location filename="../../src/genericinput.cpp" line="48"/>
       <source>Open</source>
       <translation>Åben</translation>
     </message>
@@ -4862,14 +4862,14 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Fjerne</translation>
     </message>
     <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
+      <location filename="../../src/genericinput.cpp" line="68"/>
       <source>Running</source>
       <translation>Kører</translation>
     </message>
     <message id="common_words_scanning">
       <location filename="../../components/CommonWords.qml" line="506"/>
       <source>Scanning %1%</source>
-      <translation>Scanning %1</translation>
+      <translation>Scanning %1%</translation>
     </message>
     <message id="common_words_serial_number">
       <location filename="../../components/CommonWords.qml" line="509"/>
@@ -4944,12 +4944,12 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Stop efter betingelsen er opnået for</translation>
     </message>
     <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
+      <location filename="../../src/genericinput.cpp" line="64"/>
       <source>Stopped</source>
       <translation>Stoppet</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="177"/>
+      <location filename="../../src/genericinput.cpp" line="221"/>
       <source>Temperature</source>
       <translation>Temperatur</translation>
     </message>
@@ -5010,7 +5010,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Når advarsel er ryddet stop efter</translation>
     </message>
     <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
+      <location filename="../../src/genericinput.cpp" line="44"/>
       <source>Yes</source>
       <translation>Ja</translation>
     </message>
@@ -5823,7 +5823,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="134"/>
+      <location filename="../../src/device.cpp" line="137"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1 tank (%2)</translation>
@@ -5859,12 +5859,12 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Vandturbine</translation>
     </message>
     <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
+      <location filename="../../src/genericinput.cpp" line="24"/>
       <source>Low</source>
       <translation>Lav</translation>
     </message>
     <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
+      <location filename="../../src/genericinput.cpp" line="28"/>
       <source>High</source>
       <translation>Høj</translation>
     </message>
@@ -6316,8 +6316,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
     <message id="common_words_bms_control_info">
       <location filename="../../components/CommonWords.qml" line="111"/>
       <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
-      <translation>BMS styring er automatisk aktiveret når en BMS er tilstede. 
-Reset den hvis systemet er ændret eller der inge BMS er mere.</translation>
+      <translation>BMS styring er automatisk aktiveret når en BMS er tilstede. Reset den hvis systemet er ændret eller der ingen BMS er mere.</translation>
     </message>
     <message id="battery_bank_error">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="90"/>
@@ -8916,7 +8915,7 @@ Bemærk, at denne menu kun viser Carlo Gavazzi-målere, der er tilsluttet via RS
     <message id="welcome_skip">
       <location filename="../../pages/welcome/WelcomeView.qml" line="44"/>
       <source>Skip</source>
-      <translation>skip</translation>
+      <translation>Skip</translation>
     </message>
     <message id="welcome_landing_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="63"/>
@@ -9872,7 +9871,7 @@ GX-enheden kan kun styre én tilsluttet generator og tager den med det laveste V
       <translation>Relæet kan nu findes på listen over enheder</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
       <source>GX device relays</source>
       <translation>GX-enhedsrelæer</translation>
     </message>
@@ -11410,17 +11409,17 @@ Opdater til den nyeste firmware for at kunne justere disse indstillinger.</trans
       <translation>Fundne E-drev-ID'er</translation>
     </message>
     <message id="generic_input_label_released">
-      <location filename="../../src/genericinput.cpp" line="132"/>
+      <location filename="../../src/genericinput.cpp" line="72"/>
       <source>Released</source>
       <translation>Udløst</translation>
     </message>
     <message id="generic_input_label_pressed">
-      <location filename="../../src/genericinput.cpp" line="134"/>
+      <location filename="../../src/genericinput.cpp" line="76"/>
       <source>Pressed</source>
       <translation>Trykket</translation>
     </message>
     <message id="generic_input_label_holding">
-      <location filename="../../src/genericinput.cpp" line="136"/>
+      <location filename="../../src/genericinput.cpp" line="80"/>
       <source>Holding</source>
       <translation>Holder</translation>
     </message>
@@ -11620,7 +11619,7 @@ Opdater til den nyeste firmware for at kunne justere disse indstillinger.</trans
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="63"/>
       <source>Boot</source>
       <extracomment>Boot the system to a particular firmware version</extracomment>
-      <translation>Båd</translation>
+      <translation>Start</translation>
     </message>
     <message id="settings_tcpip_disable_ethernet_gateway">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
@@ -11912,22 +11911,22 @@ Opdater til den nyeste firmware for at kunne justere disse indstillinger.</trans
       <translation>Intern (EV-ladestation)</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_rejected">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="140"/>
       <source>The submitted encryption key is invalid.</source>
       <translation>Den indsendte krypteringsnøgle er ugyldig.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="218"/>
       <source>Enter a 32-character key</source>
       <translation>Indtast en 32-tegns nøgle</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="225"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
       <translation>Krypteringsnøglen skal bestå af 32 hexadecimale tegn.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="269"/>
       <source>Encryption key</source>
       <translation>Krypteringsnøgle</translation>
     </message>
@@ -12059,7 +12058,7 @@ Opdater til den nyeste firmware for at kunne justere disse indstillinger.</trans
       <translation type="unfinished">Batteri</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="342"/>
+      <location filename="../../src/iochannel.cpp" line="345"/>
       <source>GX device relays</source>
       <translation type="unfinished">GX-enhedsrelæer</translation>
     </message>

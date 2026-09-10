@@ -19,7 +19,7 @@
       <translation>Moc</translation>
     </message>
     <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
+      <location filename="../../src/genericinput.cpp" line="32"/>
       <source>Off</source>
       <translation>Wył.</translation>
     </message>
@@ -59,7 +59,7 @@
       <translation>Pozycja</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="173"/>
+      <location filename="../../src/genericinput.cpp" line="217"/>
       <source>Speed</source>
       <translation>Prędkość</translation>
     </message>
@@ -2582,12 +2582,12 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <translation type="unfinished">Alarm</translation>
     </message>
     <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
+      <location filename="../../src/genericinput.cpp" line="60"/>
       <source>Alarm</source>
       <translation>Alarm</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="181"/>
+      <location filename="../../src/genericinput.cpp" line="225"/>
       <source>Volume</source>
       <translation>Objętość</translation>
     </message>
@@ -4568,7 +4568,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Wyczyść błąd</translation>
     </message>
     <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
+      <location filename="../../src/genericinput.cpp" line="52"/>
       <source>Closed</source>
       <translation>Zamknięte</translation>
     </message>
@@ -4776,7 +4776,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Nazwa modelu</translation>
     </message>
     <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
+      <location filename="../../src/genericinput.cpp" line="40"/>
       <source>No</source>
       <translation>Nie</translation>
     </message>
@@ -4801,12 +4801,12 @@ Czy chcesz kontynuować?</translation>
       <translation>Offline</translation>
     </message>
     <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
+      <location filename="../../src/genericinput.cpp" line="56"/>
       <source>OK</source>
       <translation>OK</translation>
     </message>
     <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
+      <location filename="../../src/genericinput.cpp" line="36"/>
       <source>On</source>
       <translation>Wł.</translation>
     </message>
@@ -4816,7 +4816,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Online</translation>
     </message>
     <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
+      <location filename="../../src/genericinput.cpp" line="48"/>
       <source>Open</source>
       <translation>Otwórz</translation>
     </message>
@@ -4863,7 +4863,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Usuń</translation>
     </message>
     <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
+      <location filename="../../src/genericinput.cpp" line="68"/>
       <source>Running</source>
       <translation>W toku</translation>
     </message>
@@ -4945,12 +4945,12 @@ Czy chcesz kontynuować?</translation>
       <translation>Zatrzymaj po osiągnięciu warunku dla</translation>
     </message>
     <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
+      <location filename="../../src/genericinput.cpp" line="64"/>
       <source>Stopped</source>
       <translation>Zatrzymany</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="177"/>
+      <location filename="../../src/genericinput.cpp" line="221"/>
       <source>Temperature</source>
       <translation>Temperatura</translation>
     </message>
@@ -5011,7 +5011,7 @@ Czy chcesz kontynuować?</translation>
       <translation>Gdy ostrzeżenie zostanie skasowane, zatrzymaj po</translation>
     </message>
     <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
+      <location filename="../../src/genericinput.cpp" line="44"/>
       <source>Yes</source>
       <translation>Tak</translation>
     </message>
@@ -5824,7 +5824,7 @@ Czy chcesz kontynuować?</translation>
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="134"/>
+      <location filename="../../src/device.cpp" line="137"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1 zbiornik (%2)</translation>
@@ -5860,12 +5860,12 @@ Czy chcesz kontynuować?</translation>
       <translation>Generator wody</translation>
     </message>
     <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
+      <location filename="../../src/genericinput.cpp" line="24"/>
       <source>Low</source>
       <translation>Niski</translation>
     </message>
     <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
+      <location filename="../../src/genericinput.cpp" line="28"/>
       <source>High</source>
       <translation>High</translation>
     </message>
@@ -9873,7 +9873,7 @@ Urządzenie GX może sterować tylko jednym podłączonym agregatem i wybiera te
       <translation>Przekaźnik jest teraz dostępny na liście urządzeń</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
       <source>GX device relays</source>
       <translation>Przekaźniki urządzenia GX</translation>
     </message>
@@ -10672,7 +10672,7 @@ Urządzenie GX może sterować tylko jednym podłączonym agregatem i wybiera te
     <message id="switchable_output_disabled_tripped">
       <location filename="../../src/enums.cpp" line="698"/>
       <source>Disabled, tripped</source>
-      <translation>Wyłączone, wyłączone</translation>
+      <translation>Wyłączone, wyzwolone</translation>
     </message>
     <message id="switchable_output_disabled_overtemperature">
       <location filename="../../src/enums.cpp" line="701"/>
@@ -11411,17 +11411,17 @@ Zaktualizuj oprogramowanie do najnowszej wersji, aby móc dostosować te ustawie
       <translation>Wykryte identyfikatory napędów</translation>
     </message>
     <message id="generic_input_label_released">
-      <location filename="../../src/genericinput.cpp" line="132"/>
+      <location filename="../../src/genericinput.cpp" line="72"/>
       <source>Released</source>
       <translation>Zwolniony</translation>
     </message>
     <message id="generic_input_label_pressed">
-      <location filename="../../src/genericinput.cpp" line="134"/>
+      <location filename="../../src/genericinput.cpp" line="76"/>
       <source>Pressed</source>
       <translation>Wciśnięty</translation>
     </message>
     <message id="generic_input_label_holding">
-      <location filename="../../src/genericinput.cpp" line="136"/>
+      <location filename="../../src/genericinput.cpp" line="80"/>
       <source>Holding</source>
       <translation>Przytrzymany</translation>
     </message>
@@ -11584,7 +11584,7 @@ Zaktualizuj oprogramowanie do najnowszej wersji, aby móc dostosować te ustawie
     <message id="boat_page_consumption_label">
       <location filename="../../pages/boat/Consumption.qml" line="54"/>
       <source>Consumption</source>
-      <translation>Produkcja na własny użytek</translation>
+      <translation>Zużycie</translation>
     </message>
     <message id="boat_page_temperature_coolant_label">
       <location filename="../../pages/boat/Temperatures.qml" line="96"/>
@@ -11621,7 +11621,7 @@ Zaktualizuj oprogramowanie do najnowszej wersji, aby móc dostosować te ustawie
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="63"/>
       <source>Boot</source>
       <extracomment>Boot the system to a particular firmware version</extracomment>
-      <translation>łódź</translation>
+      <translation>Uruchom</translation>
     </message>
     <message id="settings_tcpip_disable_ethernet_gateway">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
@@ -11913,22 +11913,22 @@ Zaktualizuj oprogramowanie do najnowszej wersji, aby móc dostosować te ustawie
       <translation>Wewnętrzne (Stacja ładowania EV)</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_rejected">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="140"/>
       <source>The submitted encryption key is invalid.</source>
       <translation>Przesłany klucz szyfrowania jest nieprawidłowy.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="218"/>
       <source>Enter a 32-character key</source>
       <translation>Wprowadź klucz składający się z 32 znaków</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="225"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
       <translation>Klucz szyfrowania musi składać się z 32 znaków szesnastkowych.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="269"/>
       <source>Encryption key</source>
       <translation>Klucz Szyfrowania</translation>
     </message>
@@ -12060,7 +12060,7 @@ Zaktualizuj oprogramowanie do najnowszej wersji, aby móc dostosować te ustawie
       <translation type="unfinished">Akumulator</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="342"/>
+      <location filename="../../src/iochannel.cpp" line="345"/>
       <source>GX device relays</source>
       <translation type="unfinished">Przekaźniki urządzenia GX</translation>
     </message>

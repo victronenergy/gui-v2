@@ -19,7 +19,7 @@
       <translation>功率</translation>
     </message>
     <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
+      <location filename="../../src/genericinput.cpp" line="32"/>
       <source>Off</source>
       <translation>关</translation>
     </message>
@@ -59,7 +59,7 @@
       <translation>位置</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="173"/>
+      <location filename="../../src/genericinput.cpp" line="217"/>
       <source>Speed</source>
       <translation>速度</translation>
     </message>
@@ -2582,12 +2582,12 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">报警</translation>
     </message>
     <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
+      <location filename="../../src/genericinput.cpp" line="60"/>
       <source>Alarm</source>
       <translation>报警</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="181"/>
+      <location filename="../../src/genericinput.cpp" line="225"/>
       <source>Volume</source>
       <translation>容积</translation>
     </message>
@@ -4566,7 +4566,7 @@ Do you want to continue?</source>
       <translation>清除错误</translation>
     </message>
     <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
+      <location filename="../../src/genericinput.cpp" line="52"/>
       <source>Closed</source>
       <translation>已关闭</translation>
     </message>
@@ -4774,7 +4774,7 @@ Do you want to continue?</source>
       <translation>型号名称</translation>
     </message>
     <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
+      <location filename="../../src/genericinput.cpp" line="40"/>
       <source>No</source>
       <translation>不</translation>
     </message>
@@ -4799,12 +4799,12 @@ Do you want to continue?</source>
       <translation>离线</translation>
     </message>
     <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
+      <location filename="../../src/genericinput.cpp" line="56"/>
       <source>OK</source>
       <translation>正常</translation>
     </message>
     <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
+      <location filename="../../src/genericinput.cpp" line="36"/>
       <source>On</source>
       <translation>开</translation>
     </message>
@@ -4814,7 +4814,7 @@ Do you want to continue?</source>
       <translation>在线</translation>
     </message>
     <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
+      <location filename="../../src/genericinput.cpp" line="48"/>
       <source>Open</source>
       <translation>打开</translation>
     </message>
@@ -4861,7 +4861,7 @@ Do you want to continue?</source>
       <translation>删除</translation>
     </message>
     <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
+      <location filename="../../src/genericinput.cpp" line="68"/>
       <source>Running</source>
       <translation>运行</translation>
     </message>
@@ -4943,12 +4943,12 @@ Do you want to continue?</source>
       <translation>在达到条件后停止</translation>
     </message>
     <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
+      <location filename="../../src/genericinput.cpp" line="64"/>
       <source>Stopped</source>
       <translation>已停止</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="177"/>
+      <location filename="../../src/genericinput.cpp" line="221"/>
       <source>Temperature</source>
       <translation>温度</translation>
     </message>
@@ -5009,7 +5009,7 @@ Do you want to continue?</source>
       <translation>当警报清除，之后停止</translation>
     </message>
     <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
+      <location filename="../../src/genericinput.cpp" line="44"/>
       <source>Yes</source>
       <translation>是</translation>
     </message>
@@ -5822,7 +5822,7 @@ Do you want to continue?</source>
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="134"/>
+      <location filename="../../src/device.cpp" line="137"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1 箱 (%2)</translation>
@@ -5858,12 +5858,12 @@ Do you want to continue?</source>
       <translation>水力发电机</translation>
     </message>
     <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
+      <location filename="../../src/genericinput.cpp" line="24"/>
       <source>Low</source>
       <translation>低</translation>
     </message>
     <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
+      <location filename="../../src/genericinput.cpp" line="28"/>
       <source>High</source>
       <translation>高</translation>
     </message>
@@ -6345,7 +6345,7 @@ Do you want to continue?</source>
     <message id="devicelist_battery_system_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="155"/>
       <source>System voltage</source>
-      <translation>系统电压[V]。</translation>
+      <translation>系统电压[V]</translation>
     </message>
     <message id="devicelist_battery_number_of_bmses">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="169"/>
@@ -7077,7 +7077,7 @@ Do you want to continue?</source>
     <message id="settings_ess_use_this_option_for_peak_shaving">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="63"/>
       <source>Use this option for peak shaving.</source>
-      <translation>在剃须高峰期使用该选项。</translation>
+      <translation>使用此选项进行削峰。</translation>
     </message>
     <message id="settings_ess_use_this_option_for_peak_shaving_no_grid_meter">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="73"/>
@@ -8983,7 +8983,7 @@ With streamlined navigation and a fresh look, everything you love is now even ea
       <location filename="../../pages/welcome/WelcomeView.qml" line="118"/>
       <source>Access the link below to find out more about the Renewed UI.&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</source>
       <extracomment>%1 = link to URL with more information</extracomment>
-      <translation>访问以下链接，了解有关《用户界面更新指南》的更多信息。</translation>
+      <translation>访问以下链接，了解有关《用户界面更新指南》的更多信息。&lt;br /&gt;&lt;br /&gt;&lt;a href="%1"&gt;%1&lt;/a&gt;</translation>
     </message>
     <message id="welcome_more_text">
       <location filename="../../pages/welcome/WelcomeView.qml" line="120"/>
@@ -9564,7 +9564,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
     <message id="ess_active_soc_limit">
       <location filename="../../pages/controlcards/ESSCard.qml" line="91"/>
       <source>Active SOC Limit: %1%</source>
-      <translation>激活 SOC 限制：%1</translation>
+      <translation>激活 SOC 限制：%1%</translation>
     </message>
     <message id="settings_modbus_access_rights">
       <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="36"/>
@@ -9869,7 +9869,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>现在可以在设备列表中找到继电器</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
       <source>GX device relays</source>
       <translation>GX 设备继电器</translation>
     </message>
@@ -11407,17 +11407,17 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>已发现的电子驱动器 ID</translation>
     </message>
     <message id="generic_input_label_released">
-      <location filename="../../src/genericinput.cpp" line="132"/>
+      <location filename="../../src/genericinput.cpp" line="72"/>
       <source>Released</source>
       <translation>已释放</translation>
     </message>
     <message id="generic_input_label_pressed">
-      <location filename="../../src/genericinput.cpp" line="134"/>
+      <location filename="../../src/genericinput.cpp" line="76"/>
       <source>Pressed</source>
       <translation>已按下</translation>
     </message>
     <message id="generic_input_label_holding">
-      <location filename="../../src/genericinput.cpp" line="136"/>
+      <location filename="../../src/genericinput.cpp" line="80"/>
       <source>Holding</source>
       <translation>保持中</translation>
     </message>
@@ -11617,7 +11617,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="63"/>
       <source>Boot</source>
       <extracomment>Boot the system to a particular firmware version</extracomment>
-      <translation>船</translation>
+      <translation>启动</translation>
     </message>
     <message id="settings_tcpip_disable_ethernet_gateway">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
@@ -11849,7 +11849,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message id="page_controllable_loads_preferences_only_applies_when_using_optimized_with_battery_life">
       <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="51"/>
       <source>Only applies when using Optimized with BatteryLife. Opportunity Loads automatically resumes after a full charge.</source>
-      <translation>仅在使用 Optimized (带有 BatteryLife) 时适用。满电后“择机负载”将自动恢复。说明自动恢复”将自动恢复</translation>
+      <translation>仅在使用 Optimized (带有 BatteryLife) 时适用。满电后“择机负载”将自动恢复。</translation>
     </message>
     <message id="powerguard_consumption_l1_current_limit">
       <location filename="../../pages/settings/devicelist/ac-in/PowerGuardConsumptionSettings.qml" line="46"/>
@@ -11909,22 +11909,22 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>内部 (EV 充电站)</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_rejected">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="140"/>
       <source>The submitted encryption key is invalid.</source>
       <translation>提交的加密密钥无效。</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="218"/>
       <source>Enter a 32-character key</source>
       <translation>输入 32 字符密钥</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="225"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
       <translation>加密密钥必须为 32 位十六进制字符。</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="269"/>
       <source>Encryption key</source>
       <translation>加密密钥</translation>
     </message>
@@ -12056,7 +12056,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation type="unfinished">电池</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="342"/>
+      <location filename="../../src/iochannel.cpp" line="345"/>
       <source>GX device relays</source>
       <translation type="unfinished">GX 设备继电器</translation>
     </message>
@@ -13305,7 +13305,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="219"/>
       <source>Bus #1 dead</source>
-      <translation>1 号巴士死亡</translation>
+      <translation>总线 #1 故障</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="220"/>

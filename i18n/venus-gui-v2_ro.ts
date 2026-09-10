@@ -19,7 +19,7 @@
       <translation>Putere</translation>
     </message>
     <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
+      <location filename="../../src/genericinput.cpp" line="32"/>
       <source>Off</source>
       <translation>Oprit</translation>
     </message>
@@ -59,7 +59,7 @@
       <translation>Pozitie</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="173"/>
+      <location filename="../../src/genericinput.cpp" line="217"/>
       <source>Speed</source>
       <translation>Viteza</translation>
     </message>
@@ -2049,7 +2049,7 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
     <message id="settings_relay_no_temperature_relay">
       <location filename="../../pages/settings/PageSettingsRelayTempSensors.qml" line="131"/>
       <source>No relay is configured to be activated by temperature. Go to the relay settings page located in the main settings menu and set the relay function to "Temperature".</source>
-      <translation>Niciun releu nu este configurat pentru a fi activat de temperatură. Accesați pagina de setare a releului din meniul principal de setări și setați funcția releului la \”Temperatură\”.</translation>
+      <translation>Niciun releu nu este configurat pentru a fi activat de temperatură. Accesați pagina de setare a releului din meniul principal de setări și setați funcția releului la "Temperatură".</translation>
     </message>
     <message id="settings_firmware_version_switch_option">
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="51"/>
@@ -2182,7 +2182,7 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
     <message id="settings_pump_function_not_enabled">
       <location filename="../../pages/settings/PageSettingsTankPump.qml" line="38"/>
       <source>Tank pump start/stop function is not enabled. Go to relay settings and set function to "Tank pump".</source>
-      <translation>Funcția de pornire/oprire a pompei rezervorului nu este activată. Mergeți la setările releului și setați funcția la \”Pompă rezervor\”.</translation>
+      <translation>Funcția de pornire/oprire a pompei rezervorului nu este activată. Mergeți la setările releului și setați funcția la „Pompă rezervor”.</translation>
     </message>
     <message id="settings_pump_state">
       <location filename="../../pages/settings/PageSettingsTankPump.qml" line="47"/>
@@ -2582,12 +2582,12 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
       <translation type="unfinished">Alarma</translation>
     </message>
     <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
+      <location filename="../../src/genericinput.cpp" line="60"/>
       <source>Alarm</source>
       <translation>Alarma</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="181"/>
+      <location filename="../../src/genericinput.cpp" line="225"/>
       <source>Volume</source>
       <translation>Volum</translation>
     </message>
@@ -4491,7 +4491,7 @@ Doriți să continuați?</translation>
     <message id="common_words_ac_sensor">
       <location filename="../../components/CommonWords.qml" line="50"/>
       <source>AC Sensors</source>
-      <translation>Senzori curent alternativ  </translation>
+      <translation>Senzori curent alternativ</translation>
     </message>
     <message id="common_words_active">
       <location filename="../../components/CommonWords.qml" line="54"/>
@@ -4568,7 +4568,7 @@ Doriți să continuați?</translation>
       <translation>Sterge eraorea</translation>
     </message>
     <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
+      <location filename="../../src/genericinput.cpp" line="52"/>
       <source>Closed</source>
       <translation>Inchis</translation>
     </message>
@@ -4776,7 +4776,7 @@ Doriți să continuați?</translation>
       <translation>Nume model</translation>
     </message>
     <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
+      <location filename="../../src/genericinput.cpp" line="40"/>
       <source>No</source>
       <translation>Nu</translation>
     </message>
@@ -4801,12 +4801,12 @@ Doriți să continuați?</translation>
       <translation>Deconectat</translation>
     </message>
     <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
+      <location filename="../../src/genericinput.cpp" line="56"/>
       <source>OK</source>
       <translation>In regula</translation>
     </message>
     <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
+      <location filename="../../src/genericinput.cpp" line="36"/>
       <source>On</source>
       <translation>Pornit</translation>
     </message>
@@ -4816,7 +4816,7 @@ Doriți să continuați?</translation>
       <translation>Conectat</translation>
     </message>
     <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
+      <location filename="../../src/genericinput.cpp" line="48"/>
       <source>Open</source>
       <translation>Deschis</translation>
     </message>
@@ -4863,7 +4863,7 @@ Doriți să continuați?</translation>
       <translation>Elimina</translation>
     </message>
     <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
+      <location filename="../../src/genericinput.cpp" line="68"/>
       <source>Running</source>
       <translation>Functioneaza</translation>
     </message>
@@ -4945,12 +4945,12 @@ Doriți să continuați?</translation>
       <translation>Opreste cand conditia s-a indeplinit de</translation>
     </message>
     <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
+      <location filename="../../src/genericinput.cpp" line="64"/>
       <source>Stopped</source>
       <translation>Oprit</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="177"/>
+      <location filename="../../src/genericinput.cpp" line="221"/>
       <source>Temperature</source>
       <translation>Temperatura</translation>
     </message>
@@ -5011,7 +5011,7 @@ Doriți să continuați?</translation>
       <translation>Cand avertizarea este indepartata opreste dupa</translation>
     </message>
     <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
+      <location filename="../../src/genericinput.cpp" line="44"/>
       <source>Yes</source>
       <translation>Da</translation>
     </message>
@@ -5080,7 +5080,7 @@ Doriți să continuați?</translation>
     <message id="timeselectordialog_set_time">
       <location filename="../../components/dialogs/TimeSelectorDialog.qml" line="19"/>
       <source>Set time</source>
-      <translation>Setați ora </translation>
+      <translation>Setați ora</translation>
     </message>
     <message id="deviceinstanceswap_already_assigned">
       <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="86"/>
@@ -5333,7 +5333,7 @@ Doriți să continuați?</translation>
     <message id="cgwacs_battery_schedule_format_soc">
       <location filename="../../components/listitems/ListChargeSchedule.qml" line="73"/>
       <source>%1 %2 (%3 or %4%)</source>
-      <translation>%1 %2 (%3 sau %4)</translation>
+      <translation>%1 %2 (%3 sau %4%)</translation>
     </message>
     <message id="cgwacs_battery_schedule_name">
       <location filename="../../components/listitems/ListChargeSchedule.qml" line="79"/>
@@ -5824,7 +5824,7 @@ Doriți să continuați?</translation>
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="134"/>
+      <location filename="../../src/device.cpp" line="137"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1 rezervor (%2)</translation>
@@ -5860,12 +5860,12 @@ Doriți să continuați?</translation>
       <translation>Generator de apă</translation>
     </message>
     <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
+      <location filename="../../src/genericinput.cpp" line="24"/>
       <source>Low</source>
       <translation>Scazut</translation>
     </message>
     <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
+      <location filename="../../src/genericinput.cpp" line="28"/>
       <source>High</source>
       <translation>Ridicat</translation>
     </message>
@@ -6554,7 +6554,7 @@ Doriți să continuați?</translation>
     <message id="settings_generator_function_not_enabled">
       <location filename="../../pages/settings/PageRelayGenerator.qml" line="24"/>
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
-      <translation>Funcția de pornire/oprire a generatorului nu este activă, mergeți la setări releu și setați funcția la \„Pornirea/oprirea generatorului\”</translation>
+      <translation>Funcția de pornire/oprire a generatorului nu este activă, mergeți la setări releu și setați funcția la „Pornirea/oprirea generatorului”</translation>
     </message>
     <message id="settings_batteries_intro">
       <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="45"/>
@@ -9873,7 +9873,7 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <translation>Releul poate fi găsit acum în lista de dispozitive</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
       <source>GX device relays</source>
       <translation>Relee dispozitiv GX</translation>
     </message>
@@ -11411,17 +11411,17 @@ Vă rugăm să actualizați la cel mai recent firmware pentru a putea ajusta ace
       <translation>ID-uri unități E găsite</translation>
     </message>
     <message id="generic_input_label_released">
-      <location filename="../../src/genericinput.cpp" line="132"/>
+      <location filename="../../src/genericinput.cpp" line="72"/>
       <source>Released</source>
       <translation>Eliberat</translation>
     </message>
     <message id="generic_input_label_pressed">
-      <location filename="../../src/genericinput.cpp" line="134"/>
+      <location filename="../../src/genericinput.cpp" line="76"/>
       <source>Pressed</source>
       <translation>Apăsat</translation>
     </message>
     <message id="generic_input_label_holding">
-      <location filename="../../src/genericinput.cpp" line="136"/>
+      <location filename="../../src/genericinput.cpp" line="80"/>
       <source>Holding</source>
       <translation>Menținut</translation>
     </message>
@@ -11621,7 +11621,7 @@ Vă rugăm să actualizați la cel mai recent firmware pentru a putea ajusta ace
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="63"/>
       <source>Boot</source>
       <extracomment>Boot the system to a particular firmware version</extracomment>
-      <translation>barcă</translation>
+      <translation>Pornire</translation>
     </message>
     <message id="settings_tcpip_disable_ethernet_gateway">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
@@ -11913,22 +11913,22 @@ Vă rugăm să actualizați la cel mai recent firmware pentru a putea ajusta ace
       <translation>Intern (Stație de încărcare EV)</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_rejected">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="140"/>
       <source>The submitted encryption key is invalid.</source>
       <translation>Cheia de criptare trimisă este nevalidă.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="218"/>
       <source>Enter a 32-character key</source>
       <translation>Introduceți o cheie de 32 de caractere</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="225"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
       <translation>Cheia de criptare trebuie să aibă 32 de caractere hexazecimale.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="269"/>
       <source>Encryption key</source>
       <translation>Cheie de criptare</translation>
     </message>
@@ -12060,7 +12060,7 @@ Vă rugăm să actualizați la cel mai recent firmware pentru a putea ajusta ace
       <translation type="unfinished">Baterie</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="342"/>
+      <location filename="../../src/iochannel.cpp" line="345"/>
       <source>GX device relays</source>
       <translation type="unfinished">Relee dispozitiv GX</translation>
     </message>

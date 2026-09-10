@@ -19,7 +19,7 @@
       <translation>Güç</translation>
     </message>
     <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
+      <location filename="../../src/genericinput.cpp" line="32"/>
       <source>Off</source>
       <translation>Kapalı</translation>
     </message>
@@ -59,7 +59,7 @@
       <translation>Konum</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="173"/>
+      <location filename="../../src/genericinput.cpp" line="217"/>
       <source>Speed</source>
       <translation>Hız</translation>
     </message>
@@ -2582,12 +2582,12 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation type="unfinished">Alarm</translation>
     </message>
     <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
+      <location filename="../../src/genericinput.cpp" line="60"/>
       <source>Alarm</source>
       <translation>Alarm</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="181"/>
+      <location filename="../../src/genericinput.cpp" line="225"/>
       <source>Volume</source>
       <translation>Hacim</translation>
     </message>
@@ -4567,7 +4567,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Hatayı sil</translation>
     </message>
     <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
+      <location filename="../../src/genericinput.cpp" line="52"/>
       <source>Closed</source>
       <translation>Kapalı</translation>
     </message>
@@ -4775,7 +4775,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Model Adı</translation>
     </message>
     <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
+      <location filename="../../src/genericinput.cpp" line="40"/>
       <source>No</source>
       <translation>Hayır</translation>
     </message>
@@ -4800,12 +4800,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Çevrimdışı</translation>
     </message>
     <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
+      <location filename="../../src/genericinput.cpp" line="56"/>
       <source>OK</source>
       <translation>OK</translation>
     </message>
     <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
+      <location filename="../../src/genericinput.cpp" line="36"/>
       <source>On</source>
       <translation>Açık</translation>
     </message>
@@ -4815,7 +4815,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Online</translation>
     </message>
     <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
+      <location filename="../../src/genericinput.cpp" line="48"/>
       <source>Open</source>
       <translation>Açık</translation>
     </message>
@@ -4862,7 +4862,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Çıkar</translation>
     </message>
     <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
+      <location filename="../../src/genericinput.cpp" line="68"/>
       <source>Running</source>
       <translation>Çalışıyor</translation>
     </message>
@@ -4944,12 +4944,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Koşullara ulaşıldıktan sonra durdur</translation>
     </message>
     <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
+      <location filename="../../src/genericinput.cpp" line="64"/>
       <source>Stopped</source>
       <translation>Durduruldu</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="177"/>
+      <location filename="../../src/genericinput.cpp" line="221"/>
       <source>Temperature</source>
       <translation>Sıcaklık</translation>
     </message>
@@ -5010,7 +5010,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Uyarı şundan sonra kaybolduğunda durdur:</translation>
     </message>
     <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
+      <location filename="../../src/genericinput.cpp" line="44"/>
       <source>Yes</source>
       <translation>Evet</translation>
     </message>
@@ -5272,7 +5272,7 @@ Devam etmek istiyor musunuz?</translation>
       <location filename="../../components/Utils.js" line="270"/>
       <source>%1h %2m ago</source>
       <extracomment>Indicates an even happened some hours and minutes before now. %1 = number of hours in the past, %2 = number of minutes in the past</extracomment>
-      <translation>1 saat %2 dakika önce</translation>
+      <translation>%1 saat %2 dakika önce</translation>
     </message>
     <message id="cgwacs_battery_schedule_every_day">
       <location filename="../../components/listitems/ListChargeSchedule.qml" line="17"/>
@@ -5823,7 +5823,7 @@ Devam etmek istiyor musunuz?</translation>
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="134"/>
+      <location filename="../../src/device.cpp" line="137"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>1 tank (%2)</translation>
@@ -5859,12 +5859,12 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Su Jeneratör</translation>
     </message>
     <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
+      <location filename="../../src/genericinput.cpp" line="24"/>
       <source>Low</source>
       <translation>Düşük</translation>
     </message>
     <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
+      <location filename="../../src/genericinput.cpp" line="28"/>
       <source>High</source>
       <translation>Yüksek</translation>
     </message>
@@ -6676,7 +6676,7 @@ Devam etmek istiyor musunuz?</translation>
       <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="225"/>
       <source>%1 is set to %2</source>
       <extracomment>%1 = The name of the setting being updated %2 = the UI version that the system has switched to.</extracomment>
-      <translation>1, %2 olarak ayarlanmıştır</translation>
+      <translation>%1, %2 olarak ayarlanmıştır</translation>
     </message>
     <message id="pagesettingsgeneral_access_and_security">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="126"/>
@@ -7078,17 +7078,17 @@ Devam etmek istiyor musunuz?</translation>
     <message id="settings_ess_use_this_option_for_peak_shaving">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="63"/>
       <source>Use this option for peak shaving.</source>
-      <translation>Yoğun tıraş için bu seçeneği kullanın.</translation>
+      <translation>Peak Shaving için bu seçeneği kullanın.</translation>
     </message>
     <message id="settings_ess_use_this_option_for_peak_shaving_no_grid_meter">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="73"/>
       <source>The peak shaving threshold is set using the AC input current limit setting. See documentation for further information.</source>
-      <translation>Tepe tıraş eşiği, AC giriş akımı limit ayarı kullanılarak ayarlanır. Daha fazla bilgi için belgelere bakın.</translation>
+      <translation>Peak Shaving eşiği, AC giriş akımı limit ayarı kullanılarak ayarlanır. Daha fazla bilgi için belgelere bakın.</translation>
     </message>
     <message id="settings_ess_use_this_option_for_peak_shaving_with_grid_meter">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="76"/>
       <source>The peak shaving thresholds for import and export can be changed on this screen. See documentation for further information.</source>
-      <translation>İçe ve dışa aktarma için en yüksek tıraş eşikleri bu ekranda değiştirilebilir. Daha fazla bilgi için belgelere bakın.</translation>
+      <translation>İçe ve dışa aktarma için Peak Shaving eşikleri bu ekranda değiştirilebilir. Daha fazla bilgi için belgelere bakın.</translation>
     </message>
     <message id="settings_ess_limit_system_ac_import_current">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="86"/>
@@ -7563,7 +7563,7 @@ Devam etmek istiyor musunuz?</translation>
     <message id="vebus_device_update_firmware">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="138"/>
       <source>This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro.</source>
-      <translation>fBu özellik için ürün firmware sürümü 400 veya üstü gerekir. Multi/Quattro'nuzu güncellemek için kurulumcunuzla iletişime geçin.</translation>
+      <translation>Bu özellik için ürün firmware sürümü 400 veya üstü gerekir. Multi/Quattro'nuzu güncellemek için kurulumcunuzla iletişime geçin.</translation>
     </message>
     <message id="vebus_device_charger_not_ready">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="144"/>
@@ -8436,7 +8436,7 @@ Jeneratör otomatik başlatma koşulu nedeniyle çalışıyorsa otomatik başlat
     <message id="settings_security_warning_profile_configuration_order">
       <location filename="../../components/listitems/ListMqttAccessSwitch.qml" line="33"/>
       <source>A Security Profile must be configured before the network services can be enabled, see Settings - General</source>
-      <translation>Ağ hizmetlerinin etkinleştirilebilmesi için önce bir Güvenlik Profili yapılandırılmalıdır, bkz.</translation>
+      <translation>Ağ hizmetlerinin etkinleştirilebilmesi için önce bir Güvenlik Profili yapılandırılmalıdır, bkz. Ayarlar - Genel</translation>
     </message>
     <message id="reboot_button_press_ok_to_reboot">
       <location filename="../../components/listitems/ListRebootButton.qml" line="24"/>
@@ -8914,7 +8914,7 @@ Bu menünün sadece RS485 üzerinden bağlı Carlo Gavazzi sayaçlarını göste
     <message id="welcome_skip">
       <location filename="../../pages/welcome/WelcomeView.qml" line="44"/>
       <source>Skip</source>
-      <translation>atl</translation>
+      <translation>Atla</translation>
     </message>
     <message id="welcome_landing_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="63"/>
@@ -9870,7 +9870,7 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>Röle artık cihazlar listesinde bulunabilir</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
       <source>GX device relays</source>
       <translation>GX cihazı röleleri</translation>
     </message>
@@ -11408,17 +11408,17 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <translation>Bulunan E-sürücü kimlikleri</translation>
     </message>
     <message id="generic_input_label_released">
-      <location filename="../../src/genericinput.cpp" line="132"/>
+      <location filename="../../src/genericinput.cpp" line="72"/>
       <source>Released</source>
       <translation>Serbest</translation>
     </message>
     <message id="generic_input_label_pressed">
-      <location filename="../../src/genericinput.cpp" line="134"/>
+      <location filename="../../src/genericinput.cpp" line="76"/>
       <source>Pressed</source>
       <translation>Basılı</translation>
     </message>
     <message id="generic_input_label_holding">
-      <location filename="../../src/genericinput.cpp" line="136"/>
+      <location filename="../../src/genericinput.cpp" line="80"/>
       <source>Holding</source>
       <translation>Basılı tutuluyor</translation>
     </message>
@@ -11618,7 +11618,7 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="63"/>
       <source>Boot</source>
       <extracomment>Boot the system to a particular firmware version</extracomment>
-      <translation>tekne</translation>
+      <translation>Başlat</translation>
     </message>
     <message id="settings_tcpip_disable_ethernet_gateway">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
@@ -11910,22 +11910,22 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <translation>Dahili (EV Şarj İstasyonu)</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_rejected">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="140"/>
       <source>The submitted encryption key is invalid.</source>
       <translation>Gönderilen şifreleme anahtarı geçersiz.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="218"/>
       <source>Enter a 32-character key</source>
       <translation>32 karakterli bir anahtar girin</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="225"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
       <translation>Şifreleme anahtarı 32 onaltılık (hexadecimal) karakterden oluşmalıdır.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="269"/>
       <source>Encryption key</source>
       <translation>Şifreleme Anahtarı</translation>
     </message>
@@ -12057,7 +12057,7 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <translation type="unfinished">Akü</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="342"/>
+      <location filename="../../src/iochannel.cpp" line="345"/>
       <source>GX device relays</source>
       <translation type="unfinished">GX cihazı röleleri</translation>
     </message>
@@ -13306,7 +13306,7 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="219"/>
       <source>Bus #1 dead</source>
-      <translation>1 numaralı otobüs öldü.</translation>
+      <translation>Bus #1 arızalı</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="220"/>

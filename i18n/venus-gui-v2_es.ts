@@ -19,7 +19,7 @@
       <translation>Potencia</translation>
     </message>
     <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
+      <location filename="../../src/genericinput.cpp" line="32"/>
       <source>Off</source>
       <translation>Apagado</translation>
     </message>
@@ -59,7 +59,7 @@
       <translation>Posición</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="173"/>
+      <location filename="../../src/genericinput.cpp" line="217"/>
       <source>Speed</source>
       <translation>Velocidad</translation>
     </message>
@@ -2182,7 +2182,7 @@ Use unless prohibited by the utility provider.</source>
     <message id="settings_pump_function_not_enabled">
       <location filename="../../pages/settings/PageSettingsTankPump.qml" line="38"/>
       <source>Tank pump start/stop function is not enabled. Go to relay settings and set function to "Tank pump".</source>
-      <translation>La función de arranque/parada de la bomba del depósito no está habilitada. Vaya a los ajustes del relé y  ajuste la función a "Tank pump".</translation>
+      <translation>La función de arranque/parada de la bomba del depósito no está habilitada. Vaya a los ajustes del relé y ajuste la función a "Tank pump".</translation>
     </message>
     <message id="settings_pump_state">
       <location filename="../../pages/settings/PageSettingsTankPump.qml" line="47"/>
@@ -2582,12 +2582,12 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">Alarma</translation>
     </message>
     <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
+      <location filename="../../src/genericinput.cpp" line="60"/>
       <source>Alarm</source>
       <translation>Alarma</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="181"/>
+      <location filename="../../src/genericinput.cpp" line="225"/>
       <source>Volume</source>
       <translation>Volumen</translation>
     </message>
@@ -4049,7 +4049,8 @@ Do you want to continue?</source>
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="122"/>
       <source>Shore power will be used when available and the "Solar &amp; wind priority" option will be ignored.
 Do you want to continue?</source>
-      <translation>Se usará energía de la red cuando esté disponible y se ignorará la opción "Solar &amp; wind priority" (dar prioridad a la energía solar y eólica). ¿Quiere continuar?</translation>
+      <translation>Se usará energía de la red cuando esté disponible y se ignorará la opción "Solar &amp; wind priority" (dar prioridad a la energía solar y eólica).
+¿Quiere continuar?</translation>
     </message>
     <message id="ebus_device_use_shore_power_once">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="127"/>
@@ -4566,7 +4567,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Borrar error</translation>
     </message>
     <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
+      <location filename="../../src/genericinput.cpp" line="52"/>
       <source>Closed</source>
       <translation>Cerrado</translation>
     </message>
@@ -4774,7 +4775,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Nombre del modelo</translation>
     </message>
     <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
+      <location filename="../../src/genericinput.cpp" line="40"/>
       <source>No</source>
       <translation>No</translation>
     </message>
@@ -4799,12 +4800,12 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Fuera de línea</translation>
     </message>
     <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
+      <location filename="../../src/genericinput.cpp" line="56"/>
       <source>OK</source>
       <translation>OK</translation>
     </message>
     <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
+      <location filename="../../src/genericinput.cpp" line="36"/>
       <source>On</source>
       <translation>Encendido</translation>
     </message>
@@ -4814,7 +4815,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>En línea</translation>
     </message>
     <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
+      <location filename="../../src/genericinput.cpp" line="48"/>
       <source>Open</source>
       <translation>Abierto</translation>
     </message>
@@ -4861,7 +4862,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Eliminar</translation>
     </message>
     <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
+      <location filename="../../src/genericinput.cpp" line="68"/>
       <source>Running</source>
       <translation>En marcha</translation>
     </message>
@@ -4943,12 +4944,12 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Parar cuando la condición esté activa durante</translation>
     </message>
     <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
+      <location filename="../../src/genericinput.cpp" line="64"/>
       <source>Stopped</source>
       <translation>Parado</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="177"/>
+      <location filename="../../src/genericinput.cpp" line="221"/>
       <source>Temperature</source>
       <translation>Temperatura</translation>
     </message>
@@ -5009,7 +5010,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Al desaparecer aviso parar después de</translation>
     </message>
     <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
+      <location filename="../../src/genericinput.cpp" line="44"/>
       <source>Yes</source>
       <translation>Sí</translation>
     </message>
@@ -5265,7 +5266,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <location filename="../../components/Utils.js" line="263"/>
       <source>%1m ago</source>
       <extracomment>Indicates an even happened some minutes before now. %1 = the number of minutes in the past</extracomment>
-      <translation>hace %1m </translation>
+      <translation>hace %1m</translation>
     </message>
     <message id="utils_formatTimestamp_hours_min_ago">
       <location filename="../../components/Utils.js" line="270"/>
@@ -5696,7 +5697,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
     <message id="splash_view_mqtt5_error">
       <location filename="../../components/SplashView.qml" line="329"/>
       <source>MQTT protocol level 5 error</source>
-      <translation>Error de nivel 5 del protocolo MQTT </translation>
+      <translation>Error de nivel 5 del protocolo MQTT</translation>
     </message>
     <message id="common_words_silence_alarm">
       <location filename="../../components/CommonWords.qml" line="521"/>
@@ -5822,7 +5823,7 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="134"/>
+      <location filename="../../src/device.cpp" line="137"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1 depósito (%2)</translation>
@@ -5858,12 +5859,12 @@ Cuando se complete el proceso de carga, el sistema volverá al funcionamiento no
       <translation>Generador hidraulico</translation>
     </message>
     <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
+      <location filename="../../src/genericinput.cpp" line="24"/>
       <source>Low</source>
       <translation>Baja</translation>
     </message>
     <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
+      <location filename="../../src/genericinput.cpp" line="28"/>
       <source>High</source>
       <translation>Alto</translation>
     </message>
@@ -9870,7 +9871,7 @@ El dispositivo GX solo puede controlar un generador conectado y elige el que tie
       <translation>El relé ahora se puede encontrar en la lista de dispositivos</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
       <source>GX device relays</source>
       <translation>Relés del dispositivo GX</translation>
     </message>
@@ -11408,17 +11409,17 @@ Actualice al firmware más reciente para poder ajustar esta configuración.</tra
       <translation>IDs de accionamientos eléctricos descubiertos</translation>
     </message>
     <message id="generic_input_label_released">
-      <location filename="../../src/genericinput.cpp" line="132"/>
+      <location filename="../../src/genericinput.cpp" line="72"/>
       <source>Released</source>
       <translation>Soltado</translation>
     </message>
     <message id="generic_input_label_pressed">
-      <location filename="../../src/genericinput.cpp" line="134"/>
+      <location filename="../../src/genericinput.cpp" line="76"/>
       <source>Pressed</source>
       <translation>Pulsado</translation>
     </message>
     <message id="generic_input_label_holding">
-      <location filename="../../src/genericinput.cpp" line="136"/>
+      <location filename="../../src/genericinput.cpp" line="80"/>
       <source>Holding</source>
       <translation>Manteniendo</translation>
     </message>
@@ -11618,7 +11619,7 @@ Actualice al firmware más reciente para poder ajustar esta configuración.</tra
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="63"/>
       <source>Boot</source>
       <extracomment>Boot the system to a particular firmware version</extracomment>
-      <translation>barco</translation>
+      <translation>Iniciar</translation>
     </message>
     <message id="settings_tcpip_disable_ethernet_gateway">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
@@ -11910,22 +11911,22 @@ Actualice al firmware más reciente para poder ajustar esta configuración.</tra
       <translation>Interno (Estación de carga de VE)</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_rejected">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="140"/>
       <source>The submitted encryption key is invalid.</source>
       <translation>La clave de cifrado enviada no es válida.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="218"/>
       <source>Enter a 32-character key</source>
       <translation>Introduzca una clave de 32 caracteres</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="225"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
       <translation>La clave de cifrado debe tener 32 caracteres hexadecimales.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="269"/>
       <source>Encryption key</source>
       <translation>Clave de cifrado</translation>
     </message>
@@ -12057,7 +12058,7 @@ Actualice al firmware más reciente para poder ajustar esta configuración.</tra
       <translation type="unfinished">Batería</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="342"/>
+      <location filename="../../src/iochannel.cpp" line="345"/>
       <source>GX device relays</source>
       <translation type="unfinished">Relés del dispositivo GX</translation>
     </message>
