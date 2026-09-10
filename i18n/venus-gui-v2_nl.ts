@@ -19,7 +19,7 @@
       <translation>Vermogen</translation>
     </message>
     <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
+      <location filename="../../src/genericinput.cpp" line="32"/>
       <source>Off</source>
       <translation>Uit</translation>
     </message>
@@ -59,7 +59,7 @@
       <translation>Positie</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="173"/>
+      <location filename="../../src/genericinput.cpp" line="217"/>
       <source>Speed</source>
       <translation>Snelheid</translation>
     </message>
@@ -2582,12 +2582,12 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation type="unfinished">Alarm</translation>
     </message>
     <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
+      <location filename="../../src/genericinput.cpp" line="60"/>
       <source>Alarm</source>
       <translation>Alarm</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="181"/>
+      <location filename="../../src/genericinput.cpp" line="225"/>
       <source>Volume</source>
       <translation>Volume</translation>
     </message>
@@ -4564,7 +4564,7 @@ Do you want to continue?</source>
       <translation>Storing wissen</translation>
     </message>
     <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
+      <location filename="../../src/genericinput.cpp" line="52"/>
       <source>Closed</source>
       <translation>Gesloten</translation>
     </message>
@@ -4772,7 +4772,7 @@ Do you want to continue?</source>
       <translation>Modelnaam</translation>
     </message>
     <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
+      <location filename="../../src/genericinput.cpp" line="40"/>
       <source>No</source>
       <translation>Nee</translation>
     </message>
@@ -4797,12 +4797,12 @@ Do you want to continue?</source>
       <translation>Offline</translation>
     </message>
     <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
+      <location filename="../../src/genericinput.cpp" line="56"/>
       <source>OK</source>
       <translation>OK</translation>
     </message>
     <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
+      <location filename="../../src/genericinput.cpp" line="36"/>
       <source>On</source>
       <translation>Aan</translation>
     </message>
@@ -4812,7 +4812,7 @@ Do you want to continue?</source>
       <translation>Online</translation>
     </message>
     <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
+      <location filename="../../src/genericinput.cpp" line="48"/>
       <source>Open</source>
       <translation>Geopend</translation>
     </message>
@@ -4859,7 +4859,7 @@ Do you want to continue?</source>
       <translation>Verwijderen</translation>
     </message>
     <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
+      <location filename="../../src/genericinput.cpp" line="68"/>
       <source>Running</source>
       <translation>Loopt</translation>
     </message>
@@ -4941,12 +4941,12 @@ Do you want to continue?</source>
       <translation>Stop nadat de voorwaarde is bereikt voor</translation>
     </message>
     <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
+      <location filename="../../src/genericinput.cpp" line="64"/>
       <source>Stopped</source>
       <translation>Gestopt</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="177"/>
+      <location filename="../../src/genericinput.cpp" line="221"/>
       <source>Temperature</source>
       <translation>Temperatuur</translation>
     </message>
@@ -5007,7 +5007,7 @@ Do you want to continue?</source>
       <translation>Als melding is gewist, dan stoppen na</translation>
     </message>
     <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
+      <location filename="../../src/genericinput.cpp" line="44"/>
       <source>Yes</source>
       <translation>Ja</translation>
     </message>
@@ -5820,7 +5820,7 @@ Do you want to continue?</source>
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="134"/>
+      <location filename="../../src/device.cpp" line="137"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1 tank (%2)</translation>
@@ -5856,12 +5856,12 @@ Do you want to continue?</source>
       <translation>Water Generator</translation>
     </message>
     <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
+      <location filename="../../src/genericinput.cpp" line="24"/>
       <source>Low</source>
       <translation>Laag</translation>
     </message>
     <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
+      <location filename="../../src/genericinput.cpp" line="28"/>
       <source>High</source>
       <translation>Hoog</translation>
     </message>
@@ -6313,7 +6313,7 @@ Do you want to continue?</source>
     <message id="common_words_bms_control_info">
       <location filename="../../components/CommonWords.qml" line="111"/>
       <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
-      <translation>alsBMS-besturing wordt automatisch ingeschakeld als een  BMS aanwezig is. Reset het als de systeemconfiguratie is gewijzigd of als er geen BMS aanwezig is.</translation>
+      <translation>BMS-besturing wordt automatisch ingeschakeld als een BMS aanwezig is. Reset het als de systeemconfiguratie is gewijzigd of als er geen BMS aanwezig is.</translation>
     </message>
     <message id="battery_bank_error">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="90"/>
@@ -9870,7 +9870,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation>Het relais is nu te vinden in de apparatenlijst</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
       <source>GX device relays</source>
       <translation>GX apparaat relais</translation>
     </message>
@@ -10669,7 +10669,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
     <message id="switchable_output_disabled_tripped">
       <location filename="../../src/enums.cpp" line="698"/>
       <source>Disabled, tripped</source>
-      <translation>Uitgeschakeld, uitgeschakeld</translation>
+      <translation>Gedeactiveerd, uitgeschakeld</translation>
     </message>
     <message id="switchable_output_disabled_overtemperature">
       <location filename="../../src/enums.cpp" line="701"/>
@@ -11154,7 +11154,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <location filename="../../components/listitems/ListSpinBoxRange.qml" line="96"/>
       <source>to</source>
       <extracomment>Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')</extracomment>
-      <translation>Aan</translation>
+      <translation>tot</translation>
     </message>
     <message id="generic_input_value">
       <location filename="../../components/switches/delegates/GenericInputCardDelegate_1.qml" line="54"/>
@@ -11200,7 +11200,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
     <message id="page_microgrid_apply">
       <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="312"/>
       <source>Apply</source>
-      <translation>TOEPASSEN</translation>
+      <translation>Toepassen</translation>
     </message>
     <message id="page_settings_generator_warm_up_cool_down_unavailable_message">
       <location filename="../../pages/settings/PageSettingsGenerator.qml" line="60"/>
@@ -11375,7 +11375,7 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
     <message id="devices_pairing_unpair">
       <location filename="../../components/listitems/ListUnpairButton.qml" line="11"/>
       <source>Unpair</source>
-      <translation>ONTKOPPELEN</translation>
+      <translation>Ontkoppelen</translation>
     </message>
     <message id="unpairing_confirm_title">
       <location filename="../../components/dialogs/UnpairDialog.qml" line="13"/>
@@ -11408,17 +11408,17 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
       <translation>Gevonden E-drive ID's</translation>
     </message>
     <message id="generic_input_label_released">
-      <location filename="../../src/genericinput.cpp" line="132"/>
+      <location filename="../../src/genericinput.cpp" line="72"/>
       <source>Released</source>
       <translation>Losgelaten</translation>
     </message>
     <message id="generic_input_label_pressed">
-      <location filename="../../src/genericinput.cpp" line="134"/>
+      <location filename="../../src/genericinput.cpp" line="76"/>
       <source>Pressed</source>
       <translation>Ingedrukt</translation>
     </message>
     <message id="generic_input_label_holding">
-      <location filename="../../src/genericinput.cpp" line="136"/>
+      <location filename="../../src/genericinput.cpp" line="80"/>
       <source>Holding</source>
       <translation>Vasthouden</translation>
     </message>
@@ -11910,22 +11910,22 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
       <translation>Intern (EV-laadstation)</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_rejected">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="140"/>
       <source>The submitted encryption key is invalid.</source>
       <translation>De ingediende encryptiesleutel is ongeldig.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="218"/>
       <source>Enter a 32-character key</source>
       <translation>Voer een sleutel van 32 tekens in</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="225"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
       <translation>De encryptiesleutel moet bestaan uit 32 hexadecimale tekens.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="269"/>
       <source>Encryption key</source>
       <translation>Encryptiesleutel</translation>
     </message>
@@ -12057,7 +12057,7 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
       <translation type="unfinished">Accu</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="342"/>
+      <location filename="../../src/iochannel.cpp" line="345"/>
       <source>GX device relays</source>
       <translation type="unfinished">GX apparaat relais</translation>
     </message>

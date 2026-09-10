@@ -19,7 +19,7 @@
       <translation>Potenza</translation>
     </message>
     <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
+      <location filename="../../src/genericinput.cpp" line="32"/>
       <source>Off</source>
       <translation>Spento</translation>
     </message>
@@ -59,7 +59,7 @@
       <translation>Posizione</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="173"/>
+      <location filename="../../src/genericinput.cpp" line="217"/>
       <source>Speed</source>
       <translation>Velocità</translation>
     </message>
@@ -1492,7 +1492,7 @@ Se ciò non funziona, verificare la sim-card del cellulare, per assicurarsi di a
     <message id="page_settings_gsm_imei">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="286"/>
       <source>IMEI</source>
-      <translation>Il numero IMEI deve avere 15 caratteri di lunghezza.</translation>
+      <translation>IMEI</translation>
     </message>
     <message id="settings_ess_battery_life_self_consumption">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="15"/>
@@ -2049,7 +2049,7 @@ Utilizzare se non è vietato dal gestore della rete</translation>
     <message id="settings_relay_no_temperature_relay">
       <location filename="../../pages/settings/PageSettingsRelayTempSensors.qml" line="131"/>
       <source>No relay is configured to be activated by temperature. Go to the relay settings page located in the main settings menu and set the relay function to "Temperature".</source>
-      <translation>Nessun relè configurato per essere attivato dalla temperatura. Entrare nella pagina di impostazione del relè, sita nel menù delle impostazioni principali, e impostare la funzione relè su \“Temperatura\”</translation>
+      <translation>Nessun relè configurato per essere attivato dalla temperatura. Entrare nella pagina di impostazione del relè, sita nel menù delle impostazioni principali, e impostare la funzione relè su "Temperatura".</translation>
     </message>
     <message id="settings_firmware_version_switch_option">
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="51"/>
@@ -2077,7 +2077,7 @@ Utilizzare se non è vietato dal gestore della rete</translation>
     <message id="settings_firmware_switching_not_possible">
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="85"/>
       <source>Switching firmware version is not possible when auto update is set to "Check and update". Set auto update to "Disabled" or "Check only" to enable this option.</source>
-      <translation>Non è possibile cambiare la versione del firmware quando l'aggiornamento automatico è impostato su \”Verifica e aggiorna\”. Per attivare questa opzione, impostare l'aggiornamento automatico su "Disattivato" o "Solo verifica".</translation>
+      <translation>Non è possibile cambiare la versione del firmware quando l'aggiornamento automatico è impostato su "Verifica e aggiorna". Per attivare questa opzione, impostare l'aggiornamento automatico su "Disattivato" o "Solo verifica".</translation>
     </message>
     <message id="settings_firmware_backup_not_available">
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="102"/>
@@ -2582,12 +2582,12 @@ Utilizzare se non è vietato dal gestore della rete</translation>
       <translation type="unfinished">Allarme</translation>
     </message>
     <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
+      <location filename="../../src/genericinput.cpp" line="60"/>
       <source>Alarm</source>
       <translation>Allarme</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="181"/>
+      <location filename="../../src/genericinput.cpp" line="225"/>
       <source>Volume</source>
       <translation>Volume</translation>
     </message>
@@ -4042,13 +4042,15 @@ NOTE: L'aggiornamento potrebbe arrestare temporaneamente il sistema.</translatio
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="101"/>
       <source>The system will return to normal operation, prioritizing renewable energy.
 Do you want to continue?</source>
-      <translation>Il sistema tornerà a funzionare normalmente, dando priorità alle energie rinnovabili.Si desidera continuare?</translation>
+      <translation>Il sistema tornerà a funzionare normalmente, dando priorità alle energie rinnovabili.
+Si desidera continuare?</translation>
     </message>
     <message id="vebus_device_use_shore_power">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="122"/>
       <source>Shore power will be used when available and the "Solar &amp; wind priority" option will be ignored.
 Do you want to continue?</source>
-      <translation>L'alimentazione da banchina verrà utilizzata quando disponibile e l'opzione "Priorità solare ed eolico" verrà ignorata.Si desidera continuare?</translation>
+      <translation>L'alimentazione da banchina verrà utilizzata quando disponibile e l'opzione "Priorità solare ed eolico" verrà ignorata.
+Si desidera continuare?</translation>
     </message>
     <message id="ebus_device_use_shore_power_once">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="127"/>
@@ -4565,7 +4567,7 @@ Si desidera continuare?</translation>
       <translation>Errore di cancellazione</translation>
     </message>
     <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
+      <location filename="../../src/genericinput.cpp" line="52"/>
       <source>Closed</source>
       <translation>Chiuso</translation>
     </message>
@@ -4773,7 +4775,7 @@ Si desidera continuare?</translation>
       <translation>Nome Modello</translation>
     </message>
     <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
+      <location filename="../../src/genericinput.cpp" line="40"/>
       <source>No</source>
       <translation>No</translation>
     </message>
@@ -4798,12 +4800,12 @@ Si desidera continuare?</translation>
       <translation>Offline</translation>
     </message>
     <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
+      <location filename="../../src/genericinput.cpp" line="56"/>
       <source>OK</source>
       <translation>Ok</translation>
     </message>
     <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
+      <location filename="../../src/genericinput.cpp" line="36"/>
       <source>On</source>
       <translation>Acceso</translation>
     </message>
@@ -4813,7 +4815,7 @@ Si desidera continuare?</translation>
       <translation>Online</translation>
     </message>
     <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
+      <location filename="../../src/genericinput.cpp" line="48"/>
       <source>Open</source>
       <translation>Aperto</translation>
     </message>
@@ -4860,7 +4862,7 @@ Si desidera continuare?</translation>
       <translation>Rimuovi</translation>
     </message>
     <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
+      <location filename="../../src/genericinput.cpp" line="68"/>
       <source>Running</source>
       <translation>In funzionamento</translation>
     </message>
@@ -4942,12 +4944,12 @@ Si desidera continuare?</translation>
       <translation>Arrestare quando la condizione sia attiva per</translation>
     </message>
     <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
+      <location filename="../../src/genericinput.cpp" line="64"/>
       <source>Stopped</source>
       <translation>Arrestato</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="177"/>
+      <location filename="../../src/genericinput.cpp" line="221"/>
       <source>Temperature</source>
       <translation>Temperatura</translation>
     </message>
@@ -5008,7 +5010,7 @@ Si desidera continuare?</translation>
       <translation>Una volta cancellato l'avviso, arresta dopo</translation>
     </message>
     <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
+      <location filename="../../src/genericinput.cpp" line="44"/>
       <source>Yes</source>
       <translation>Sì</translation>
     </message>
@@ -5821,7 +5823,7 @@ Si desidera continuare?</translation>
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="134"/>
+      <location filename="../../src/device.cpp" line="137"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1 Serbatoio (%2)</translation>
@@ -5857,12 +5859,12 @@ Si desidera continuare?</translation>
       <translation>Generatore ad acqua</translation>
     </message>
     <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
+      <location filename="../../src/genericinput.cpp" line="24"/>
       <source>Low</source>
       <translation>Basso</translation>
     </message>
     <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
+      <location filename="../../src/genericinput.cpp" line="28"/>
       <source>High</source>
       <translation>Alto</translation>
     </message>
@@ -6920,7 +6922,8 @@ Si desidera continuare?</translation>
 • The network communication is encrypted
 • A secure connection with VRM is enabled
 • Insecure settings cannot be enabled</source>
-      <translation>• I servizi della rete locale sono protetti da password\n• La comunicazione di rete è criptata
+      <translation>• I servizi della rete locale sono protetti da password
+• La comunicazione di rete è criptata
 • È attiva una connessione sicura con il VRM
 • Non è possibile attivare impostazioni non sicure</translation>
     </message>
@@ -8924,7 +8927,9 @@ Notare che questo menu mostra solo i contatori Carlo Gavazzi collegati tramite R
       <source>We’re excited to introduce a completely redesigned interface that enhances both the usability and aesthetics of your GX.
 
 With streamlined navigation and a fresh look, everything you love is now even easier to access and more visually appealing.</source>
-      <translation>Siamo entusiasti di presentare un'interfaccia completamente ridisegnata che migliora sia l'usabilità che l'estetica del vostro GX. Grazie a una navigazione semplificata e a un nuovo aspetto, tutto ciò che amate è ora ancora più facile da raggiungere e più attraente dal punto di vista visivo.</translation>
+      <translation>Siamo entusiasti di presentare un'interfaccia completamente ridisegnata che migliora sia l'usabilità che l'estetica del vostro GX.
+
+Grazie a una navigazione semplificata e a un nuovo aspetto, tutto ciò che amate è ora ancora più facile da raggiungere e più attraente dal punto di vista visivo.</translation>
     </message>
     <message id="welcome_colors_title">
       <location filename="../../pages/welcome/WelcomeView.qml" line="73"/>
@@ -9866,7 +9871,7 @@ Il dispositivo GX può controllare un solo generatore collegato e considera quel
       <translation>Il relè è ora disponibile nell'elenco dei dispositivi</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
       <source>GX device relays</source>
       <translation>Relè del dispositivo GX</translation>
     </message>
@@ -11404,17 +11409,17 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
       <translation>ID azionamenti E rilevati</translation>
     </message>
     <message id="generic_input_label_released">
-      <location filename="../../src/genericinput.cpp" line="132"/>
+      <location filename="../../src/genericinput.cpp" line="72"/>
       <source>Released</source>
       <translation>Rilasciato</translation>
     </message>
     <message id="generic_input_label_pressed">
-      <location filename="../../src/genericinput.cpp" line="134"/>
+      <location filename="../../src/genericinput.cpp" line="76"/>
       <source>Pressed</source>
       <translation>Premuto</translation>
     </message>
     <message id="generic_input_label_holding">
-      <location filename="../../src/genericinput.cpp" line="136"/>
+      <location filename="../../src/genericinput.cpp" line="80"/>
       <source>Holding</source>
       <translation>In mantenimento</translation>
     </message>
@@ -11614,7 +11619,7 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="63"/>
       <source>Boot</source>
       <extracomment>Boot the system to a particular firmware version</extracomment>
-      <translation>imbarcazione</translation>
+      <translation>Avvia</translation>
     </message>
     <message id="settings_tcpip_disable_ethernet_gateway">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
@@ -11906,22 +11911,22 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
       <translation>Interna (Stazione di ricarica EV)</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_rejected">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="140"/>
       <source>The submitted encryption key is invalid.</source>
       <translation>La chiave di crittografia inviata non è valida.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="218"/>
       <source>Enter a 32-character key</source>
       <translation>Inserisci una chiave di 32 caratteri</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="225"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
       <translation>La chiave di crittografia deve contenere 32 caratteri esadecimali.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="269"/>
       <source>Encryption key</source>
       <translation>Chiave di crittografia</translation>
     </message>
@@ -12053,7 +12058,7 @@ Aggiornare all'ultima versione del firmware per poter regolare queste impostazio
       <translation type="unfinished">Batteria</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="342"/>
+      <location filename="../../src/iochannel.cpp" line="345"/>
       <source>GX device relays</source>
       <translation type="unfinished">Relè del dispositivo GX</translation>
     </message>

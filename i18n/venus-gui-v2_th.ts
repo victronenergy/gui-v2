@@ -19,7 +19,7 @@
       <translation>พลังงาน</translation>
     </message>
     <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
+      <location filename="../../src/genericinput.cpp" line="32"/>
       <source>Off</source>
       <translation>ปิด</translation>
     </message>
@@ -59,7 +59,7 @@
       <translation>ตำแหน่ง</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="173"/>
+      <location filename="../../src/genericinput.cpp" line="217"/>
       <source>Speed</source>
       <translation>ความเร็ว</translation>
     </message>
@@ -2582,12 +2582,12 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">เตือน</translation>
     </message>
     <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
+      <location filename="../../src/genericinput.cpp" line="60"/>
       <source>Alarm</source>
       <translation>เตือน</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="181"/>
+      <location filename="../../src/genericinput.cpp" line="225"/>
       <source>Volume</source>
       <translation>ปริมาณ</translation>
     </message>
@@ -4566,7 +4566,7 @@ Do you want to continue?</source>
       <translation>ล้างข้อผิดพลาด</translation>
     </message>
     <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
+      <location filename="../../src/genericinput.cpp" line="52"/>
       <source>Closed</source>
       <translation>ปิด</translation>
     </message>
@@ -4774,7 +4774,7 @@ Do you want to continue?</source>
       <translation>ชื่อรุ่น</translation>
     </message>
     <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
+      <location filename="../../src/genericinput.cpp" line="40"/>
       <source>No</source>
       <translation>ไม่</translation>
     </message>
@@ -4799,12 +4799,12 @@ Do you want to continue?</source>
       <translation>ออฟไลน์</translation>
     </message>
     <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
+      <location filename="../../src/genericinput.cpp" line="56"/>
       <source>OK</source>
       <translation>ตกลง</translation>
     </message>
     <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
+      <location filename="../../src/genericinput.cpp" line="36"/>
       <source>On</source>
       <translation>เปิด</translation>
     </message>
@@ -4814,7 +4814,7 @@ Do you want to continue?</source>
       <translation>ออนไลน์</translation>
     </message>
     <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
+      <location filename="../../src/genericinput.cpp" line="48"/>
       <source>Open</source>
       <translation>เปิด</translation>
     </message>
@@ -4861,7 +4861,7 @@ Do you want to continue?</source>
       <translation>ลบ</translation>
     </message>
     <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
+      <location filename="../../src/genericinput.cpp" line="68"/>
       <source>Running</source>
       <translation>ทำงาน</translation>
     </message>
@@ -4943,12 +4943,12 @@ Do you want to continue?</source>
       <translation>หยุดเมื่อถึงเงื่อนไขสำหรับ</translation>
     </message>
     <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
+      <location filename="../../src/genericinput.cpp" line="64"/>
       <source>Stopped</source>
       <translation>หยุด</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="177"/>
+      <location filename="../../src/genericinput.cpp" line="221"/>
       <source>Temperature</source>
       <translation>อุณหภูมิ</translation>
     </message>
@@ -5009,7 +5009,7 @@ Do you want to continue?</source>
       <translation>ให้หยุดหลังจากคำเตือนถูกลบออก</translation>
     </message>
     <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
+      <location filename="../../src/genericinput.cpp" line="44"/>
       <source>Yes</source>
       <translation>ใช่</translation>
     </message>
@@ -5721,7 +5721,7 @@ Do you want to continue?</source>
     <message id="utils_format_hours_min">
       <location filename="../../components/Utils.js" line="191"/>
       <source>%1h %2m</source>
-      <translation>%1d %2h</translation>
+      <translation>%1h %2m</translation>
     </message>
     <message id="utils_format_min_sec">
       <location filename="../../components/Utils.js" line="224"/>
@@ -5822,7 +5822,7 @@ Do you want to continue?</source>
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="134"/>
+      <location filename="../../src/device.cpp" line="137"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1 รถถัง (%2)</translation>
@@ -5858,12 +5858,12 @@ Do you want to continue?</source>
       <translation>เครื่องกำเนิดน้ำ</translation>
     </message>
     <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
+      <location filename="../../src/genericinput.cpp" line="24"/>
       <source>Low</source>
       <translation>ต่ำ</translation>
     </message>
     <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
+      <location filename="../../src/genericinput.cpp" line="28"/>
       <source>High</source>
       <translation>สูง</translation>
     </message>
@@ -7077,17 +7077,17 @@ Do you want to continue?</source>
     <message id="settings_ess_use_this_option_for_peak_shaving">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="63"/>
       <source>Use this option for peak shaving.</source>
-      <translation>ใช้ตัวเลือกนี้เพื่อการโกนสูงสุด</translation>
+      <translation>ใช้ตัวเลือกนี้สำหรับการใช้งานสูงสุด</translation>
     </message>
     <message id="settings_ess_use_this_option_for_peak_shaving_no_grid_meter">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="73"/>
       <source>The peak shaving threshold is set using the AC input current limit setting. See documentation for further information.</source>
-      <translation>เกณฑ์การโกนสูงสุดถูกกำหนดโดยใช้การตั้งค่าขีดจำกัดกระแสอินพุต AC ดูเอกสารประกอบสำหรับข้อมูลเพิ่มเติม</translation>
+      <translation>เกณฑ์การใช้งานสูงสุดถูกกำหนดโดยใช้การตั้งค่าขีดจำกัดกระแสอินพุต AC ดูเอกสารประกอบสำหรับข้อมูลเพิ่มเติม</translation>
     </message>
     <message id="settings_ess_use_this_option_for_peak_shaving_with_grid_meter">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="76"/>
       <source>The peak shaving thresholds for import and export can be changed on this screen. See documentation for further information.</source>
-      <translation>เกณฑ์การโกนสูงสุดสำหรับการนำเข้าและส่งออกสามารถเปลี่ยนแปลงได้บนหน้าจอนี้ ดูเอกสารประกอบสำหรับข้อมูลเพิ่มเติม</translation>
+      <translation>เกณฑ์การใช้งานสูงสุดสำหรับการนำเข้าและส่งออกสามารถเปลี่ยนแปลงได้บนหน้าจอนี้ ดูเอกสารประกอบสำหรับข้อมูลเพิ่มเติม</translation>
     </message>
     <message id="settings_ess_limit_system_ac_import_current">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="86"/>
@@ -9869,7 +9869,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ขณะนี้สามารถพบ Relay ได้ในรายการอุปกรณ์</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
       <source>GX device relays</source>
       <translation>รีเลย์ของอุปกรณ์ GX</translation>
     </message>
@@ -11407,17 +11407,17 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>ID ของ E-drive ที่พบ</translation>
     </message>
     <message id="generic_input_label_released">
-      <location filename="../../src/genericinput.cpp" line="132"/>
+      <location filename="../../src/genericinput.cpp" line="72"/>
       <source>Released</source>
       <translation>ปล่อยแล้ว</translation>
     </message>
     <message id="generic_input_label_pressed">
-      <location filename="../../src/genericinput.cpp" line="134"/>
+      <location filename="../../src/genericinput.cpp" line="76"/>
       <source>Pressed</source>
       <translation>กดอยู่</translation>
     </message>
     <message id="generic_input_label_holding">
-      <location filename="../../src/genericinput.cpp" line="136"/>
+      <location filename="../../src/genericinput.cpp" line="80"/>
       <source>Holding</source>
       <translation>กดค้างไว้</translation>
     </message>
@@ -11617,7 +11617,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="63"/>
       <source>Boot</source>
       <extracomment>Boot the system to a particular firmware version</extracomment>
-      <translation>เรือ</translation>
+      <translation>บูต</translation>
     </message>
     <message id="settings_tcpip_disable_ethernet_gateway">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
@@ -11849,7 +11849,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message id="page_controllable_loads_preferences_only_applies_when_using_optimized_with_battery_life">
       <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="51"/>
       <source>Only applies when using Optimized with BatteryLife. Opportunity Loads automatically resumes after a full charge.</source>
-      <translation>ใช้ได้เฉพาะเมื่อใช้ Optimized ร่วมกับ BatteryLife เท่านั้น Opportunity Loads จะกลับมาทำงานโดยอัตโนมัติหลังจากการชาร์จเต็มรูปแบบเต็มที่ชาร์จจนเต็มแล้ว</translation>
+      <translation>ใช้ได้เฉพาะเมื่อใช้ Optimized ร่วมกับ BatteryLife เท่านั้น Opportunity Loads จะกลับมาทำงานโดยอัตโนมัติหลังจากชาร์จเต็มแล้ว</translation>
     </message>
     <message id="powerguard_consumption_l1_current_limit">
       <location filename="../../pages/settings/devicelist/ac-in/PowerGuardConsumptionSettings.qml" line="46"/>
@@ -11909,22 +11909,22 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>ภายใน (สถานีชาร์จรถยนต์ไฟฟ้า)</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_rejected">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="140"/>
       <source>The submitted encryption key is invalid.</source>
       <translation>คีย์การเข้ารหัสที่ส่งมาไม่ถูกต้อง</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="218"/>
       <source>Enter a 32-character key</source>
       <translation>ป้อนคีย์ขนาด 32 ตัวอักษร</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="225"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
       <translation>คีย์การเข้ารหัสต้องเป็นตัวอักษรฐานสิบหกขนาด 32 ตัวอักษร</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="269"/>
       <source>Encryption key</source>
       <translation>คีย์การเข้ารหัสผ่านสำหรับการเข้ารหัส</translation>
     </message>
@@ -12056,7 +12056,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation type="unfinished">แบตเตอรี่</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="342"/>
+      <location filename="../../src/iochannel.cpp" line="345"/>
       <source>GX device relays</source>
       <translation type="unfinished">รีเลย์ของอุปกรณ์ GX</translation>
     </message>
@@ -13305,7 +13305,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="219"/>
       <source>Bus #1 dead</source>
-      <translation>รถบัสหมายเลข 1 เสีย</translation>
+      <translation>บัส #1 เสีย</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/genset_error.cpp" line="220"/>

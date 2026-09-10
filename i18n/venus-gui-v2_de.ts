@@ -19,7 +19,7 @@
       <translation>Leistung</translation>
     </message>
     <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
+      <location filename="../../src/genericinput.cpp" line="32"/>
       <source>Off</source>
       <translation>Aus</translation>
     </message>
@@ -59,7 +59,7 @@
       <translation>Position</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="173"/>
+      <location filename="../../src/genericinput.cpp" line="217"/>
       <source>Speed</source>
       <translation>Geschwindigkeit</translation>
     </message>
@@ -2582,12 +2582,12 @@ Verwendung, sofern nicht vom Energieversorger untersagt.</translation>
       <translation type="unfinished">Alarm</translation>
     </message>
     <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
+      <location filename="../../src/genericinput.cpp" line="60"/>
       <source>Alarm</source>
       <translation>Alarm</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="181"/>
+      <location filename="../../src/genericinput.cpp" line="225"/>
       <source>Volume</source>
       <translation>Volumen</translation>
     </message>
@@ -4567,7 +4567,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>Fehler löschen</translation>
     </message>
     <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
+      <location filename="../../src/genericinput.cpp" line="52"/>
       <source>Closed</source>
       <translation>Geschlossen</translation>
     </message>
@@ -4775,7 +4775,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>Modellname</translation>
     </message>
     <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
+      <location filename="../../src/genericinput.cpp" line="40"/>
       <source>No</source>
       <translation>Nein</translation>
     </message>
@@ -4800,12 +4800,12 @@ Möchtest Sie fortfahren?</translation>
       <translation>Offline</translation>
     </message>
     <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
+      <location filename="../../src/genericinput.cpp" line="56"/>
       <source>OK</source>
       <translation>Ok</translation>
     </message>
     <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
+      <location filename="../../src/genericinput.cpp" line="36"/>
       <source>On</source>
       <translation>Ein</translation>
     </message>
@@ -4815,7 +4815,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>Online</translation>
     </message>
     <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
+      <location filename="../../src/genericinput.cpp" line="48"/>
       <source>Open</source>
       <translation>Offen</translation>
     </message>
@@ -4862,7 +4862,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>Entfernen</translation>
     </message>
     <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
+      <location filename="../../src/genericinput.cpp" line="68"/>
       <source>Running</source>
       <translation>In Betrieb</translation>
     </message>
@@ -4944,12 +4944,12 @@ Möchtest Sie fortfahren?</translation>
       <translation>Stopp nachdem Beding. erreicht für</translation>
     </message>
     <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
+      <location filename="../../src/genericinput.cpp" line="64"/>
       <source>Stopped</source>
       <translation>Angehalten</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="177"/>
+      <location filename="../../src/genericinput.cpp" line="221"/>
       <source>Temperature</source>
       <translation>Temperatur</translation>
     </message>
@@ -5010,7 +5010,7 @@ Möchtest Sie fortfahren?</translation>
       <translation>Wenn Warnung gelöscht, Stopp nach</translation>
     </message>
     <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
+      <location filename="../../src/genericinput.cpp" line="44"/>
       <source>Yes</source>
       <translation>Ja</translation>
     </message>
@@ -5823,7 +5823,7 @@ Möchtest Sie fortfahren?</translation>
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="134"/>
+      <location filename="../../src/device.cpp" line="137"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1 Tank (%2)</translation>
@@ -5859,12 +5859,12 @@ Möchtest Sie fortfahren?</translation>
       <translation>Hydrogenerator</translation>
     </message>
     <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
+      <location filename="../../src/genericinput.cpp" line="24"/>
       <source>Low</source>
       <translation>Niedrig</translation>
     </message>
     <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
+      <location filename="../../src/genericinput.cpp" line="28"/>
       <source>High</source>
       <translation>Hoch</translation>
     </message>
@@ -7078,7 +7078,7 @@ Möchtest Sie fortfahren?</translation>
     <message id="settings_ess_use_this_option_for_peak_shaving">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="63"/>
       <source>Use this option for peak shaving.</source>
-      <translation>Verwenden Sie diese Option für die Spitzenrasur.</translation>
+      <translation>Verwenden Sie diese Option für die Lastspitzenkappung.</translation>
     </message>
     <message id="settings_ess_use_this_option_for_peak_shaving_no_grid_meter">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="73"/>
@@ -9871,7 +9871,7 @@ Das GX-Gerät kann nur ein angeschlossenes Genset steuern und nimmt dasjenige mi
       <translation>Das Relais befindet sich nun in der Geräteliste</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
       <source>GX device relays</source>
       <translation>GX-Geräterelais</translation>
     </message>
@@ -11409,17 +11409,17 @@ Bitte aktualisieren Sie auf die neueste Firmware, um diese Einstellungen anpasse
       <translation>Gefundene E-Antriebs-IDs</translation>
     </message>
     <message id="generic_input_label_released">
-      <location filename="../../src/genericinput.cpp" line="132"/>
+      <location filename="../../src/genericinput.cpp" line="72"/>
       <source>Released</source>
       <translation>Losgelassen</translation>
     </message>
     <message id="generic_input_label_pressed">
-      <location filename="../../src/genericinput.cpp" line="134"/>
+      <location filename="../../src/genericinput.cpp" line="76"/>
       <source>Pressed</source>
       <translation>Gedrückt</translation>
     </message>
     <message id="generic_input_label_holding">
-      <location filename="../../src/genericinput.cpp" line="136"/>
+      <location filename="../../src/genericinput.cpp" line="80"/>
       <source>Holding</source>
       <translation>Gehalten</translation>
     </message>
@@ -11619,7 +11619,7 @@ Bitte aktualisieren Sie auf die neueste Firmware, um diese Einstellungen anpasse
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="63"/>
       <source>Boot</source>
       <extracomment>Boot the system to a particular firmware version</extracomment>
-      <translation>Boot</translation>
+      <translation>Starten</translation>
     </message>
     <message id="settings_tcpip_disable_ethernet_gateway">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
@@ -11911,22 +11911,22 @@ Bitte aktualisieren Sie auf die neueste Firmware, um diese Einstellungen anpasse
       <translation>Intern (EV Charging Station)</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_rejected">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="140"/>
       <source>The submitted encryption key is invalid.</source>
       <translation>Der übermittelte Schlüssel ist ungültig.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="218"/>
       <source>Enter a 32-character key</source>
       <translation>32-stelligen Schlüssel eingeben</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="225"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
       <translation>Der Schlüssel muss aus 32 Hexadezimalzeichen bestehen.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="269"/>
       <source>Encryption key</source>
       <translation>Schlüssel</translation>
     </message>
@@ -12058,7 +12058,7 @@ Bitte aktualisieren Sie auf die neueste Firmware, um diese Einstellungen anpasse
       <translation type="unfinished">Batterie</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="342"/>
+      <location filename="../../src/iochannel.cpp" line="345"/>
       <source>GX device relays</source>
       <translation type="unfinished">GX-Geräterelais</translation>
     </message>

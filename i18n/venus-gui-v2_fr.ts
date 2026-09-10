@@ -19,7 +19,7 @@
       <translation>Puissance</translation>
     </message>
     <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
+      <location filename="../../src/genericinput.cpp" line="32"/>
       <source>Off</source>
       <translation>Off</translation>
     </message>
@@ -59,7 +59,7 @@
       <translation>Position</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="173"/>
+      <location filename="../../src/genericinput.cpp" line="217"/>
       <source>Speed</source>
       <translation>Vitesse</translation>
     </message>
@@ -2582,12 +2582,12 @@ A utiliser sauf si le fournisseur d'électricité l'interdit.</translation>
       <translation type="unfinished">Alarme</translation>
     </message>
     <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
+      <location filename="../../src/genericinput.cpp" line="60"/>
       <source>Alarm</source>
       <translation>Alarme</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="181"/>
+      <location filename="../../src/genericinput.cpp" line="225"/>
       <source>Volume</source>
       <translation>Volume</translation>
     </message>
@@ -4567,7 +4567,7 @@ Voulez-vous continuer ?</translation>
       <translation>Suprrimer erreur</translation>
     </message>
     <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
+      <location filename="../../src/genericinput.cpp" line="52"/>
       <source>Closed</source>
       <translation>Fermé</translation>
     </message>
@@ -4775,7 +4775,7 @@ Voulez-vous continuer ?</translation>
       <translation>Nom du modèle</translation>
     </message>
     <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
+      <location filename="../../src/genericinput.cpp" line="40"/>
       <source>No</source>
       <translation>Non</translation>
     </message>
@@ -4800,12 +4800,12 @@ Voulez-vous continuer ?</translation>
       <translation>Hors ligne</translation>
     </message>
     <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
+      <location filename="../../src/genericinput.cpp" line="56"/>
       <source>OK</source>
       <translation>OK</translation>
     </message>
     <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
+      <location filename="../../src/genericinput.cpp" line="36"/>
       <source>On</source>
       <translation>On</translation>
     </message>
@@ -4815,7 +4815,7 @@ Voulez-vous continuer ?</translation>
       <translation>En ligne</translation>
     </message>
     <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
+      <location filename="../../src/genericinput.cpp" line="48"/>
       <source>Open</source>
       <translation>Ouvert</translation>
     </message>
@@ -4862,7 +4862,7 @@ Voulez-vous continuer ?</translation>
       <translation>Supprimer</translation>
     </message>
     <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
+      <location filename="../../src/genericinput.cpp" line="68"/>
       <source>Running</source>
       <translation>En marche</translation>
     </message>
@@ -4944,12 +4944,12 @@ Voulez-vous continuer ?</translation>
       <translation>Arrêter si la condition est atteinte pendant</translation>
     </message>
     <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
+      <location filename="../../src/genericinput.cpp" line="64"/>
       <source>Stopped</source>
       <translation>Arrêté</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="177"/>
+      <location filename="../../src/genericinput.cpp" line="221"/>
       <source>Temperature</source>
       <translation>Température</translation>
     </message>
@@ -5010,7 +5010,7 @@ Voulez-vous continuer ?</translation>
       <translation>Si avertissement supprimé, arrêter au bout de</translation>
     </message>
     <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
+      <location filename="../../src/genericinput.cpp" line="44"/>
       <source>Yes</source>
       <translation>Oui</translation>
     </message>
@@ -5823,7 +5823,7 @@ Voulez-vous continuer ?</translation>
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="134"/>
+      <location filename="../../src/device.cpp" line="137"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1 réservoir (%2)</translation>
@@ -5859,12 +5859,12 @@ Voulez-vous continuer ?</translation>
       <translation>Turbine à eau</translation>
     </message>
     <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
+      <location filename="../../src/genericinput.cpp" line="24"/>
       <source>Low</source>
       <translation>Basse</translation>
     </message>
     <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
+      <location filename="../../src/genericinput.cpp" line="28"/>
       <source>High</source>
       <translation>Élevé(e)</translation>
     </message>
@@ -9871,7 +9871,7 @@ Le dispositif GX ne peut contrôler qu'un seul groupe électrogène connecté et
       <translation>Le relais se trouve désormais dans la liste des appareils</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
       <source>GX device relays</source>
       <translation>Relais de l'appareil GX</translation>
     </message>
@@ -11409,17 +11409,17 @@ Veuillez effectuer la mise à jour vers la dernière version du micrologiciel po
       <translation>ID d'entraînements détectés</translation>
     </message>
     <message id="generic_input_label_released">
-      <location filename="../../src/genericinput.cpp" line="132"/>
+      <location filename="../../src/genericinput.cpp" line="72"/>
       <source>Released</source>
       <translation>Relâché</translation>
     </message>
     <message id="generic_input_label_pressed">
-      <location filename="../../src/genericinput.cpp" line="134"/>
+      <location filename="../../src/genericinput.cpp" line="76"/>
       <source>Pressed</source>
       <translation>Enfoncé</translation>
     </message>
     <message id="generic_input_label_holding">
-      <location filename="../../src/genericinput.cpp" line="136"/>
+      <location filename="../../src/genericinput.cpp" line="80"/>
       <source>Holding</source>
       <translation>Maintenu</translation>
     </message>
@@ -11619,7 +11619,7 @@ Veuillez effectuer la mise à jour vers la dernière version du micrologiciel po
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="63"/>
       <source>Boot</source>
       <extracomment>Boot the system to a particular firmware version</extracomment>
-      <translation>Bateau</translation>
+      <translation>Démarrer</translation>
     </message>
     <message id="settings_tcpip_disable_ethernet_gateway">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
@@ -11911,22 +11911,22 @@ Veuillez effectuer la mise à jour vers la dernière version du micrologiciel po
       <translation>Interne (borne de recharge VE)</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_rejected">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="140"/>
       <source>The submitted encryption key is invalid.</source>
       <translation>La clé de chiffrement soumise n'est pas valide.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="218"/>
       <source>Enter a 32-character key</source>
       <translation>Saisissez une clé de 32 caractères</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="225"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
       <translation>La clé de chiffrement doit comporter 32 caractères hexadécimaux.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="269"/>
       <source>Encryption key</source>
       <translation>Clé de chiffrement</translation>
     </message>
@@ -12058,7 +12058,7 @@ Veuillez effectuer la mise à jour vers la dernière version du micrologiciel po
       <translation type="unfinished">Batterie</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="342"/>
+      <location filename="../../src/iochannel.cpp" line="345"/>
       <source>GX device relays</source>
       <translation type="unfinished">Relais de l'appareil GX</translation>
     </message>
@@ -13829,7 +13829,7 @@ Veuillez effectuer la mise à jour vers la dernière version du micrologiciel po
     <message>
       <location filename="../../pages/settings/tz/TzAmericaData.qml" line="11"/>
       <source>E. South America Standard Time</source>
-      <translation>Heure standard Est Amérique du  sud</translation>
+      <translation>Heure standard Est Amérique du sud</translation>
     </message>
     <message>
       <location filename="../../pages/settings/tz/TzAmericaData.qml" line="12"/>
@@ -14235,7 +14235,7 @@ Veuillez effectuer la mise à jour vers la dernière version du micrologiciel po
     <message>
       <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="12"/>
       <source>AUS Eastern Standard Time</source>
-      <translation>Heure standard AUS  de l'est</translation>
+      <translation>Heure standard AUS de l'est</translation>
     </message>
     <message>
       <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="13"/>
@@ -14245,7 +14245,7 @@ Veuillez effectuer la mise à jour vers la dernière version du micrologiciel po
     <message>
       <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="14"/>
       <source>AUS Central Standard Time</source>
-      <translation>Heure standard AUS  centrale</translation>
+      <translation>Heure standard AUS centrale</translation>
     </message>
     <message>
       <location filename="../../pages/settings/tz/TzAustraliaData.qml" line="15"/>

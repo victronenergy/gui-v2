@@ -19,7 +19,7 @@
       <translation>Krag</translation>
     </message>
     <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
+      <location filename="../../src/genericinput.cpp" line="32"/>
       <source>Off</source>
       <translation>Af</translation>
     </message>
@@ -59,7 +59,7 @@
       <translation>Posisie</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="173"/>
+      <location filename="../../src/genericinput.cpp" line="217"/>
       <source>Speed</source>
       <translation>Spoed</translation>
     </message>
@@ -1606,7 +1606,7 @@ Gebruik tensy dit deur die diensverskaffer verbied word.</translation>
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="267"/>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="48"/>
       <source>Peak shaving</source>
-      <translation type="unfinished">Piek skeer</translation>
+      <translation>Piekafvlakking</translation>
     </message>
     <message id="settings_ess_above_minimum_soc_only">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="53"/>
@@ -2582,12 +2582,12 @@ Gebruik tensy dit deur die diensverskaffer verbied word.</translation>
       <translation type="unfinished">Alarm</translation>
     </message>
     <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
+      <location filename="../../src/genericinput.cpp" line="60"/>
       <source>Alarm</source>
       <translation>Alarm</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="181"/>
+      <location filename="../../src/genericinput.cpp" line="225"/>
       <source>Volume</source>
       <translation>Volume</translation>
     </message>
@@ -4567,7 +4567,7 @@ Wil jy voortgaan?</translation>
       <translation>Vee fout uit</translation>
     </message>
     <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
+      <location filename="../../src/genericinput.cpp" line="52"/>
       <source>Closed</source>
       <translation>Gesluit</translation>
     </message>
@@ -4775,7 +4775,7 @@ Wil jy voortgaan?</translation>
       <translation>Model naam</translation>
     </message>
     <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
+      <location filename="../../src/genericinput.cpp" line="40"/>
       <source>No</source>
       <translation>Nee/geen/nie</translation>
     </message>
@@ -4800,12 +4800,12 @@ Wil jy voortgaan?</translation>
       <translation>Van lyn af</translation>
     </message>
     <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
+      <location filename="../../src/genericinput.cpp" line="56"/>
       <source>OK</source>
       <translation>Reg</translation>
     </message>
     <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
+      <location filename="../../src/genericinput.cpp" line="36"/>
       <source>On</source>
       <translation>Aan</translation>
     </message>
@@ -4815,7 +4815,7 @@ Wil jy voortgaan?</translation>
       <translation>Aanlyn</translation>
     </message>
     <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
+      <location filename="../../src/genericinput.cpp" line="48"/>
       <source>Open</source>
       <translation>Oop</translation>
     </message>
@@ -4862,7 +4862,7 @@ Wil jy voortgaan?</translation>
       <translation>Verwyder</translation>
     </message>
     <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
+      <location filename="../../src/genericinput.cpp" line="68"/>
       <source>Running</source>
       <translation>Hardloop</translation>
     </message>
@@ -4944,12 +4944,12 @@ Wil jy voortgaan?</translation>
       <translation>Stop nadat die toestand bereik is vir</translation>
     </message>
     <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
+      <location filename="../../src/genericinput.cpp" line="64"/>
       <source>Stopped</source>
       <translation>Gestop</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="177"/>
+      <location filename="../../src/genericinput.cpp" line="221"/>
       <source>Temperature</source>
       <translation>Temperatuur</translation>
     </message>
@@ -5010,7 +5010,7 @@ Wil jy voortgaan?</translation>
       <translation>Wanneer waarskuwing uitgevee is, stop daarna</translation>
     </message>
     <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
+      <location filename="../../src/genericinput.cpp" line="44"/>
       <source>Yes</source>
       <translation>Ja</translation>
     </message>
@@ -5116,7 +5116,7 @@ Wil jy voortgaan?</translation>
     <message id="deviceinstanceswap_timed_out">
       <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="117"/>
       <source>Cannot swap device instances: operation timed out.</source>
-      <translation type="unfinished">Kan nie toestelgevalle omruil nie: werking  tyd uit</translation>
+      <translation>Kan nie toestelgevalle omruil nie: werking tyd uit</translation>
     </message>
     <message id="deviceinstanceswap_active_on_reboot">
       <location filename="../../components/dialogs/VrmInstanceSwapDialog.qml" line="119"/>
@@ -5823,7 +5823,7 @@ Wil jy voortgaan?</translation>
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="134"/>
+      <location filename="../../src/device.cpp" line="137"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1 tenk (%2)</translation>
@@ -5859,12 +5859,12 @@ Wil jy voortgaan?</translation>
       <translation>Water kragopwekker</translation>
     </message>
     <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
+      <location filename="../../src/genericinput.cpp" line="24"/>
       <source>Low</source>
       <translation>Laag</translation>
     </message>
     <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
+      <location filename="../../src/genericinput.cpp" line="28"/>
       <source>High</source>
       <translation>Hoog</translation>
     </message>
@@ -6163,7 +6163,7 @@ Wil jy voortgaan?</translation>
     <message id="settings_ess_use_this_option_for_systems_no_peak_shaving">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="56"/>
       <source>Use this option in systems that do not perform peak shaving.</source>
-      <translation>Gebruik hierdie opsie in stelsels wat nie piek skeer verrig nie.</translation>
+      <translation>Gebruik hierdie opsie in stelsels wat nie piekafvlakking verrig nie.</translation>
     </message>
     <message id="list_generator_auto_start_switch_auto_start_functionality">
       <location filename="../../components/listitems/ListGeneratorAutoStartSwitch.qml" line="12"/>
@@ -7078,17 +7078,17 @@ Wil jy voortgaan?</translation>
     <message id="settings_ess_use_this_option_for_peak_shaving">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="63"/>
       <source>Use this option for peak shaving.</source>
-      <translation>Gebruik hierdie opsie vir  piek skeer</translation>
+      <translation>Gebruik hierdie opsie vir piekafvlakking.</translation>
     </message>
     <message id="settings_ess_use_this_option_for_peak_shaving_no_grid_meter">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="73"/>
       <source>The peak shaving threshold is set using the AC input current limit setting. See documentation for further information.</source>
-      <translation>Die piek skeer drempel word gestel deur die AC-insetstroomlimietinstelling te gebruik. Sien dokumentasie vir verdere inligting.</translation>
+      <translation>Die piekafvlakkingdrempel word gestel deur die AC-insetstroomlimietinstelling te gebruik. Sien dokumentasie vir verdere inligting.</translation>
     </message>
     <message id="settings_ess_use_this_option_for_peak_shaving_with_grid_meter">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="76"/>
       <source>The peak shaving thresholds for import and export can be changed on this screen. See documentation for further information.</source>
-      <translation>Die piekskeerdrempels vir invoer en uitvoer kan op hierdie skerm verander word. Sien dokumentasie vir verdere inligting.</translation>
+      <translation>Die piekafvlakkingdrempels vir invoer en uitvoer kan op hierdie skerm verander word. Sien dokumentasie vir verdere inligting.</translation>
     </message>
     <message id="settings_ess_limit_system_ac_import_current">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="86"/>
@@ -9871,7 +9871,7 @@ Die GX-toestel kan net een gekoppelde genset beheer en neem die een met die laag
       <translation>Die Relais kan nou in die toestellys gevind word</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
       <source>GX device relays</source>
       <translation>GX toestel relais</translation>
     </message>
@@ -11409,17 +11409,17 @@ Dateer asseblief op na die nuutste fermware om hierdie instellings te kan aanpas
       <translation>Ontdekte E-aandrywer-ID's</translation>
     </message>
     <message id="generic_input_label_released">
-      <location filename="../../src/genericinput.cpp" line="132"/>
+      <location filename="../../src/genericinput.cpp" line="72"/>
       <source>Released</source>
       <translation>Vrygestel</translation>
     </message>
     <message id="generic_input_label_pressed">
-      <location filename="../../src/genericinput.cpp" line="134"/>
+      <location filename="../../src/genericinput.cpp" line="76"/>
       <source>Pressed</source>
       <translation>Gedruk</translation>
     </message>
     <message id="generic_input_label_holding">
-      <location filename="../../src/genericinput.cpp" line="136"/>
+      <location filename="../../src/genericinput.cpp" line="80"/>
       <source>Holding</source>
       <translation>Hou in</translation>
     </message>
@@ -11911,22 +11911,22 @@ Dateer asseblief op na die nuutste fermware om hierdie instellings te kan aanpas
       <translation>Interne (EV-laaistasie)</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_rejected">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="140"/>
       <source>The submitted encryption key is invalid.</source>
       <translation>Die ingediende enkripsiesleutel is ongeldig.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="218"/>
       <source>Enter a 32-character key</source>
       <translation>Voer 'n 32-karakter sleutel in</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="225"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
       <translation>Die enkripsiesleutel moet 32 heksadesimale karakters wees.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="269"/>
       <source>Encryption key</source>
       <translation>Enkripsiesleutel</translation>
     </message>
@@ -12058,7 +12058,7 @@ Dateer asseblief op na die nuutste fermware om hierdie instellings te kan aanpas
       <translation type="unfinished">Battery</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="342"/>
+      <location filename="../../src/iochannel.cpp" line="345"/>
       <source>GX device relays</source>
       <translation type="unfinished">GX toestel relais</translation>
     </message>

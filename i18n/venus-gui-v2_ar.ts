@@ -19,7 +19,7 @@
       <translation>طاقة</translation>
     </message>
     <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
+      <location filename="../../src/genericinput.cpp" line="32"/>
       <source>Off</source>
       <translation>مطفأ</translation>
     </message>
@@ -59,7 +59,7 @@
       <translation>الموقع</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="173"/>
+      <location filename="../../src/genericinput.cpp" line="217"/>
       <source>Speed</source>
       <translation>السرعة</translation>
     </message>
@@ -1861,8 +1861,8 @@ Use unless prohibited by the utility provider.</source>
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="249"/>
       <source>Error message: 
 %1</source>
-      <translation>رسالة خطأ 
-%1/&gt;</translation>
+      <translation>رسالة خطأ:
+%1</translation>
     </message>
     <message id="settings_no_contact_reboot">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="274"/>
@@ -2582,12 +2582,12 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">إنذار</translation>
     </message>
     <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
+      <location filename="../../src/genericinput.cpp" line="60"/>
       <source>Alarm</source>
       <translation>إنذار</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="181"/>
+      <location filename="../../src/genericinput.cpp" line="225"/>
       <source>Volume</source>
       <translation>الحجم</translation>
     </message>
@@ -3997,7 +3997,7 @@ Use unless prohibited by the utility provider.</source>
     <message id="vebus_device_ac_sensor_x_y">
       <location filename="../../pages/vebusdevice/PageAcSensor.qml" line="19"/>
       <source>AC sensor %1 %2</source>
-      <translation>حساس مكيف الهواء  %1 %2</translation>
+      <translation>حساس مكيف الهواء %1 %2</translation>
     </message>
     <message id="vebus_mk3_new_version_available">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="37"/>
@@ -4053,8 +4053,8 @@ Do you want to continue?</source>
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="122"/>
       <source>Shore power will be used when available and the "Solar &amp; wind priority" option will be ignored.
 Do you want to continue?</source>
-      <translation>سيتم استخدام الطاقة البرية عند توفرها، وسيتم تجاهل الخيار 'الأولوية للطاقة الشمسية والرياح'. 
-هل ترغب في المتابعة</translation>
+      <translation>سيتم استخدام الطاقة البرية عند توفرها، وسيتم تجاهل الخيار 'الأولوية للطاقة الشمسية والرياح'.
+هل ترغب في المتابعة؟</translation>
     </message>
     <message id="ebus_device_use_shore_power_once">
       <location filename="../../pages/vebusdevice/PageVeBus.qml" line="127"/>
@@ -4216,7 +4216,7 @@ Do you want to continue?</source>
     <message id="vebus_veice_network_quality_counter">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="335"/>
       <source>Network quality counter Phase L%1, device %2 (%3)</source>
-      <translation>طور L لعداد جودة الشبكة%1، الجهاز  %2 (%3)</translation>
+      <translation>طور L لعداد جودة الشبكة%1، الجهاز %2 (%3)</translation>
     </message>
     <message id="vebus_device_error_8_11_report">
       <location filename="../../pages/vebusdevice/PageVeBusAlarms.qml" line="62"/>
@@ -4247,7 +4247,7 @@ Do you want to continue?</source>
     <message id="vebus_device_last_vebus_error_11_report">
       <location filename="../../pages/vebusdevice/PageVeBusError11Device.qml" line="33"/>
       <source>Last VE.Bus Error 11 report #%1</source>
-      <translation>آخر خطأ VE.Bus 11 تقرير رقم  #%1</translation>
+      <translation>آخر خطأ VE.Bus 11 تقرير رقم #%1</translation>
     </message>
     <message id="vebus_device_bf_safety_test_in_progress">
       <location filename="../../pages/vebusdevice/PageVeBusError11Device.qml" line="40"/>
@@ -4484,7 +4484,7 @@ Do you want to continue?</source>
       <location filename="../../components/CommonWords.qml" line="44"/>
       <source>AC Phase L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
-      <translation>طور التيار المناوب  L%1</translation>
+      <translation>طور التيار المناوب L%1</translation>
     </message>
     <message id="common_words_ac_sensor_x">
       <location filename="../../components/CommonWords.qml" line="47"/>
@@ -4571,7 +4571,7 @@ Do you want to continue?</source>
       <translation>محو الخطأ</translation>
     </message>
     <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
+      <location filename="../../src/genericinput.cpp" line="52"/>
       <source>Closed</source>
       <translation>مغلق</translation>
     </message>
@@ -4779,7 +4779,7 @@ Do you want to continue?</source>
       <translation>اسم الطراز</translation>
     </message>
     <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
+      <location filename="../../src/genericinput.cpp" line="40"/>
       <source>No</source>
       <translation>لا</translation>
     </message>
@@ -4804,12 +4804,12 @@ Do you want to continue?</source>
       <translation>خارج الخط</translation>
     </message>
     <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
+      <location filename="../../src/genericinput.cpp" line="56"/>
       <source>OK</source>
       <translation>صحيح</translation>
     </message>
     <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
+      <location filename="../../src/genericinput.cpp" line="36"/>
       <source>On</source>
       <translation>مشغل</translation>
     </message>
@@ -4819,7 +4819,7 @@ Do you want to continue?</source>
       <translation>على الخط</translation>
     </message>
     <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
+      <location filename="../../src/genericinput.cpp" line="48"/>
       <source>Open</source>
       <translation>مفتوح</translation>
     </message>
@@ -4866,7 +4866,7 @@ Do you want to continue?</source>
       <translation>إزالة</translation>
     </message>
     <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
+      <location filename="../../src/genericinput.cpp" line="68"/>
       <source>Running</source>
       <translation>مشغل</translation>
     </message>
@@ -4948,12 +4948,12 @@ Do you want to continue?</source>
       <translation>الإيقاف بعد ما يصل الشرط إلى</translation>
     </message>
     <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
+      <location filename="../../src/genericinput.cpp" line="64"/>
       <source>Stopped</source>
       <translation>متوقف</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="177"/>
+      <location filename="../../src/genericinput.cpp" line="221"/>
       <source>Temperature</source>
       <translation>الحرارة</translation>
     </message>
@@ -5014,7 +5014,7 @@ Do you want to continue?</source>
       <translation>عندما يختفي التنبيه توقف بعد</translation>
     </message>
     <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
+      <location filename="../../src/genericinput.cpp" line="44"/>
       <source>Yes</source>
       <translation>نعم</translation>
     </message>
@@ -5147,7 +5147,7 @@ Do you want to continue?</source>
       <location filename="../../components/FirmwareUpdate.qml" line="110"/>
       <source>Downloading and installing firmware %1...</source>
       <extracomment>%1 = firmware version</extracomment>
-      <translation>جارٍ تنزيل البرامج الثابتة وتثبيتها  %1...</translation>
+      <translation>جارٍ تنزيل البرامج الثابتة وتثبيتها %1...</translation>
     </message>
     <message id="settings_firmware_installing_firmware">
       <location filename="../../components/FirmwareUpdate.qml" line="117"/>
@@ -5827,7 +5827,7 @@ Do you want to continue?</source>
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="134"/>
+      <location filename="../../src/device.cpp" line="137"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1 خزان (%2)</translation>
@@ -5863,12 +5863,12 @@ Do you want to continue?</source>
       <translation>مولد باستخدام المياه</translation>
     </message>
     <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
+      <location filename="../../src/genericinput.cpp" line="24"/>
       <source>Low</source>
       <translation>منخفض</translation>
     </message>
     <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
+      <location filename="../../src/genericinput.cpp" line="28"/>
       <source>High</source>
       <translation>مرتفع</translation>
     </message>
@@ -6234,7 +6234,7 @@ Do you want to continue?</source>
     <message id="genset_controller_requires_helper_relay">
       <location filename="../../components/PageGensetModel.qml" line="66"/>
       <source>This genset controller requires a helper relay to be controlled but the helper relay is not configured. Please configure Relay 1 under Settings → Relay to "Connected genset helper relay".</source>
-      <translation>يتطلب جهاز التحكم في المولد الكهربائي هذا مرحل مساعد للتحكم فيه ولكن المرحل المساعد غير مهيأ. برجاء تكوين المرحل 1 من خلال الإعدادات - المرحل إلى / «المرحل المساعد للمولد الكهربائي المتصل/».</translation>
+      <translation>يتطلب جهاز التحكم في المولد الكهربائي هذا مرحل مساعد للتحكم فيه ولكن المرحل المساعد غير مهيأ. برجاء تكوين المرحل 1 من خلال الإعدادات → المرحل إلى «المرحل المساعد للمولد الكهربائي المتصل».</translation>
     </message>
     <message id="settings_page_relay_generator_run_time">
       <location filename="../../pages/settings/PageGenerator.qml" line="67"/>
@@ -7562,7 +7562,7 @@ Do you want to continue?</source>
     <message id="vebus_device_update_firmware">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="138"/>
       <source>This feature requires firmware version 400 or higher. Contact your installer to update your Multi/Quattro.</source>
-      <translation>تتطلب هذه الميزة الإصدار 400 من البرنامج الثابت أو إصدارًا أعلى.  اتصل بمسئول التثبيت لتحديث Multi/Quattro.</translation>
+      <translation>تتطلب هذه الميزة الإصدار 400 من البرنامج الثابت أو إصدارًا أعلى. اتصل بمسئول التثبيت لتحديث Multi/Quattro.</translation>
     </message>
     <message id="vebus_device_charger_not_ready">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="144"/>
@@ -9870,7 +9870,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>يمكن الآن العثور على المرحل في قائمة الأجهزة</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
       <source>GX device relays</source>
       <translation>مرحلات جهاز GX</translation>
     </message>
@@ -11408,17 +11408,17 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>معرفات المشغلات الإلكترونية المكتشفة</translation>
     </message>
     <message id="generic_input_label_released">
-      <location filename="../../src/genericinput.cpp" line="132"/>
+      <location filename="../../src/genericinput.cpp" line="72"/>
       <source>Released</source>
       <translation>مُحرر</translation>
     </message>
     <message id="generic_input_label_pressed">
-      <location filename="../../src/genericinput.cpp" line="134"/>
+      <location filename="../../src/genericinput.cpp" line="76"/>
       <source>Pressed</source>
       <translation>مضغوط</translation>
     </message>
     <message id="generic_input_label_holding">
-      <location filename="../../src/genericinput.cpp" line="136"/>
+      <location filename="../../src/genericinput.cpp" line="80"/>
       <source>Holding</source>
       <translation>قيد الضغط</translation>
     </message>
@@ -11618,7 +11618,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="63"/>
       <source>Boot</source>
       <extracomment>Boot the system to a particular firmware version</extracomment>
-      <translation>قارب</translation>
+      <translation>إقلاع</translation>
     </message>
     <message id="settings_tcpip_disable_ethernet_gateway">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
@@ -11910,22 +11910,22 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>داخلي (محطة شحن المركبات الكهربائية)</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_rejected">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="140"/>
       <source>The submitted encryption key is invalid.</source>
       <translation>مفتاح التشفير المقدم غير صالح.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="218"/>
       <source>Enter a 32-character key</source>
       <translation>أدخل مفتاحاً يتكون من 32 حرفاً</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="225"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
       <translation>يجب أن يتكون مفتاح التشفير من 32 حرفاً ست عشرياً.</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="269"/>
       <source>Encryption key</source>
       <translation>مفتاح التشفير</translation>
     </message>
@@ -12057,7 +12057,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation type="unfinished">بطارية</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="342"/>
+      <location filename="../../src/iochannel.cpp" line="345"/>
       <source>GX device relays</source>
       <translation type="unfinished">مرحلات جهاز GX</translation>
     </message>

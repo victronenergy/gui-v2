@@ -19,7 +19,7 @@
       <translation>電力</translation>
     </message>
     <message id="generic_input_label_off">
-      <location filename="../../src/genericinput.cpp" line="112"/>
+      <location filename="../../src/genericinput.cpp" line="32"/>
       <source>Off</source>
       <translation>オフ</translation>
     </message>
@@ -59,7 +59,7 @@
       <translation>ポジション</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
-      <location filename="../../src/genericinput.cpp" line="173"/>
+      <location filename="../../src/genericinput.cpp" line="217"/>
       <source>Speed</source>
       <translation>速度</translation>
     </message>
@@ -1035,7 +1035,7 @@
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="82"/>
       <source>Installing %1 %2%</source>
       <extracomment>Firmware update progress. %1 = firmware version, %2 = current update progress</extracomment>
-      <translation>%1 をインストール中 %2%%</translation>
+      <translation>%1 をインストール中 %2%</translation>
     </message>
     <message id="settings_firmware_online_installing">
       <location filename="../../pages/settings/PageSettingsFirmwareOnline.qml" line="86"/>
@@ -2582,12 +2582,12 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">アラーム</translation>
     </message>
     <message id="generic_input_label_alarm">
-      <location filename="../../src/genericinput.cpp" line="126"/>
+      <location filename="../../src/genericinput.cpp" line="60"/>
       <source>Alarm</source>
       <translation>アラーム</translation>
     </message>
     <message id="generic_input_primaryLabel_volume">
-      <location filename="../../src/genericinput.cpp" line="181"/>
+      <location filename="../../src/genericinput.cpp" line="225"/>
       <source>Volume</source>
       <translation>容量</translation>
     </message>
@@ -4566,7 +4566,7 @@ Do you want to continue?</source>
       <translation>エラーをクリア</translation>
     </message>
     <message id="generic_input_label_closed">
-      <location filename="../../src/genericinput.cpp" line="122"/>
+      <location filename="../../src/genericinput.cpp" line="52"/>
       <source>Closed</source>
       <translation>閉</translation>
     </message>
@@ -4774,7 +4774,7 @@ Do you want to continue?</source>
       <translation>モデル名</translation>
     </message>
     <message id="generic_input_label_no">
-      <location filename="../../src/genericinput.cpp" line="116"/>
+      <location filename="../../src/genericinput.cpp" line="40"/>
       <source>No</source>
       <translation>いいえ</translation>
     </message>
@@ -4799,12 +4799,12 @@ Do you want to continue?</source>
       <translation>オフライン</translation>
     </message>
     <message id="generic_input_label_ok">
-      <location filename="../../src/genericinput.cpp" line="124"/>
+      <location filename="../../src/genericinput.cpp" line="56"/>
       <source>OK</source>
       <translation>OK</translation>
     </message>
     <message id="generic_input_label_on">
-      <location filename="../../src/genericinput.cpp" line="114"/>
+      <location filename="../../src/genericinput.cpp" line="36"/>
       <source>On</source>
       <translation>オン</translation>
     </message>
@@ -4814,7 +4814,7 @@ Do you want to continue?</source>
       <translation>オンライン</translation>
     </message>
     <message id="generic_input_label_open">
-      <location filename="../../src/genericinput.cpp" line="120"/>
+      <location filename="../../src/genericinput.cpp" line="48"/>
       <source>Open</source>
       <translation>開く</translation>
     </message>
@@ -4861,7 +4861,7 @@ Do you want to continue?</source>
       <translation>削除</translation>
     </message>
     <message id="generic_input_label_running">
-      <location filename="../../src/genericinput.cpp" line="130"/>
+      <location filename="../../src/genericinput.cpp" line="68"/>
       <source>Running</source>
       <translation>実行中</translation>
     </message>
@@ -4943,12 +4943,12 @@ Do you want to continue?</source>
       <translation>条件到達後{期間}経過で停止</translation>
     </message>
     <message id="generic_input_label_stopped">
-      <location filename="../../src/genericinput.cpp" line="128"/>
+      <location filename="../../src/genericinput.cpp" line="64"/>
       <source>Stopped</source>
       <translation>停止</translation>
     </message>
     <message id="generic_input_primaryLabel_temperature">
-      <location filename="../../src/genericinput.cpp" line="177"/>
+      <location filename="../../src/genericinput.cpp" line="221"/>
       <source>Temperature</source>
       <translation>温度</translation>
     </message>
@@ -5009,7 +5009,7 @@ Do you want to continue?</source>
       <translation>警告解除後{期間}で停止</translation>
     </message>
     <message id="generic_input_label_yes">
-      <location filename="../../src/genericinput.cpp" line="118"/>
+      <location filename="../../src/genericinput.cpp" line="44"/>
       <source>Yes</source>
       <translation>はい</translation>
     </message>
@@ -5822,7 +5822,7 @@ Do you want to continue?</source>
     </message>
     <message id="tank_description">
       <location filename="../../data/common/TankDescription.qml" line="24"/>
-      <location filename="../../src/device.cpp" line="134"/>
+      <location filename="../../src/device.cpp" line="137"/>
       <source>%1 tank (%2)</source>
       <extracomment>Tank description. %1 = tank type (e.g. Fuel, Fresh water), %2 = tank device instance (a number)</extracomment>
       <translation>%1タンク (%2)</translation>
@@ -5858,12 +5858,12 @@ Do you want to continue?</source>
       <translation>水力発電機</translation>
     </message>
     <message id="generic_input_label_low">
-      <location filename="../../src/genericinput.cpp" line="108"/>
+      <location filename="../../src/genericinput.cpp" line="24"/>
       <source>Low</source>
       <translation>低</translation>
     </message>
     <message id="generic_input_label_high">
-      <location filename="../../src/genericinput.cpp" line="110"/>
+      <location filename="../../src/genericinput.cpp" line="28"/>
       <source>High</source>
       <translation>高</translation>
     </message>
@@ -9869,7 +9869,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>リレーがデバイスリストで見つかるようになりました</translation>
     </message>
     <message id="gx_device_relays">
-      <location filename="../../src/iochannelgroupmodel.cpp" line="105"/>
+      <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
       <source>GX device relays</source>
       <translation>GXデバイスリレー</translation>
     </message>
@@ -10354,7 +10354,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <location filename="../../components/CommonWords.qml" line="677"/>
       <source>Auto (%1)</source>
       <extracomment>%1 = status such as 'On' or 'Off'</extracomment>
-      <translation>自動 ({1})</translation>
+      <translation>自動 (%1)</translation>
     </message>
     <message id="switchableoutput_list_delegate_state_forced">
       <location filename="../../pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml" line="107"/>
@@ -11205,7 +11205,8 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <location filename="../../pages/settings/PageSettingsGenerator.qml" line="60"/>
       <source>Warm-up &amp; cool-down is unavailable with the current inverter/charger firmware. 
 Please update to the latest firmware to be able to adjust these settings.</source>
-      <translation>現在のインバーター/充電器ファームウェアでは、ウォームアップ＆クールダウンは利用できません。これらの設定を調整できるように、最新のファームウェアに更新してください。</translation>
+      <translation>現在のインバーター/充電器ファームウェアでは、ウォームアップ＆クールダウンは利用できません。
+これらの設定を調整できるように、最新のファームウェアに更新してください。</translation>
     </message>
     <message id="status_text_unknown">
       <location filename="../../src/enums.cpp" line="31"/>
@@ -11406,17 +11407,17 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>検出されたEドライブID</translation>
     </message>
     <message id="generic_input_label_released">
-      <location filename="../../src/genericinput.cpp" line="132"/>
+      <location filename="../../src/genericinput.cpp" line="72"/>
       <source>Released</source>
       <translation>オフ（未押下）</translation>
     </message>
     <message id="generic_input_label_pressed">
-      <location filename="../../src/genericinput.cpp" line="134"/>
+      <location filename="../../src/genericinput.cpp" line="76"/>
       <source>Pressed</source>
       <translation>オン（押下）</translation>
     </message>
     <message id="generic_input_label_holding">
-      <location filename="../../src/genericinput.cpp" line="136"/>
+      <location filename="../../src/genericinput.cpp" line="80"/>
       <source>Holding</source>
       <translation>長押し</translation>
     </message>
@@ -11616,7 +11617,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="63"/>
       <source>Boot</source>
       <extracomment>Boot the system to a particular firmware version</extracomment>
-      <translation>ボート</translation>
+      <translation>起動</translation>
     </message>
     <message id="settings_tcpip_disable_ethernet_gateway">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
@@ -11908,22 +11909,22 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>内部 (EV充電ステーション)</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_rejected">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="182"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="140"/>
       <source>The submitted encryption key is invalid.</source>
       <translation>送信された暗号化キーが無効です。</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_placeholder">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="260"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="218"/>
       <source>Enter a 32-character key</source>
       <translation>32文字のキーを入力してください</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key_invalid">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="267"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="225"/>
       <source>The encryption key must be 32 hexadecimal characters.</source>
       <translation>暗号化キーは32文字の16進数である必要があります。</translation>
     </message>
     <message id="settings_ble_sensors_encryption_key">
-      <location filename="../../pages/settings/BleSensorDelegate.qml" line="311"/>
+      <location filename="../../pages/settings/BleSensorDelegate.qml" line="269"/>
       <source>Encryption key</source>
       <translation>暗号化キー</translation>
     </message>
@@ -12055,7 +12056,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation type="unfinished">バッテリー</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="342"/>
+      <location filename="../../src/iochannel.cpp" line="345"/>
       <source>GX device relays</source>
       <translation type="unfinished">GXデバイスリレー</translation>
     </message>
