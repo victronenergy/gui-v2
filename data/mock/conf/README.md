@@ -119,3 +119,23 @@ to:
 
 You can also generate a JSON service configuration from a venus-docker simulation csv file, using `tools/simuluation_csv_to_json.py`.
 
+
+## Setting properties (min/max/defaultValue) on a value
+
+Normally, a path is set to a plain scalar value:
+
+```
+"/MicroGrid/DroopModeParameters/F0/Value": 50.50
+```
+
+If you also need to simulate additional item properties, such as "min", "max" or "defaultValue" (as
+reported by a real backend, e.g. via D-Bus or MQTT), give the path an object instead, with a "value"
+key for the value itself, and any other keys for the properties to set:
+
+```
+"/MicroGrid/DroopModeParameters/F0/Value": { "value": 50.50, "min": 45, "max": 65, "defaultValue": 50 }
+```
+
+The "value" key can be omitted if you only want to set properties without setting a value. Any
+property name understood by VeQuickItem/VeQItem can be used, not just "min"/"max"/"defaultValue".
+
