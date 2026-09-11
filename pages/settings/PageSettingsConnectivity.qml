@@ -67,7 +67,7 @@ Page {
 			ListNavigation {
 				id: mobileListItem
 
-				//% "Mobile Network"
+				//% "Mobile network"
 				text: qsTrId("pagesettingsconnectivity_mobile_network")
 				//% "No cellular modem connected"
 				secondaryText: simStatus.valid ? networkServices.mobileNetworkName : qsTrId("page_settings_no_cellular_modem_connected")
@@ -115,7 +115,7 @@ Page {
 			}
 
 			ListSwitch {
-				//% "CAN-bus over TCP/IP (Debug)"
+				//% "CAN-bus over TCP/IP (debug)"
 				text: qsTrId("settings_services_canbus_over_tcpip_debug")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Socketcand"
 				showAccessLevel: VenusOS.User_AccessType_Service

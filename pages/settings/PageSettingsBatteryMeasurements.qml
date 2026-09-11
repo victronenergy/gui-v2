@@ -41,7 +41,7 @@ Page {
 		id: batteryListView
 
 		header: PrimaryListLabel {
-			//% "Use this menu to define the battery data shown when clicking the Battery icon on the Overview page. The same selection is also visible on the VRM Portal."
+			//% "Use this menu to define the battery data shown when clicking the battery icon on the overview page. The same selection is also visible on the VRM portal."
 			text: qsTrId("settings_batteries_intro")
 		}
 
@@ -58,9 +58,9 @@ Page {
 				}
 				if (battery.channel != null) {
 					return battery.type === "battery"
-						  //% "%1 (Auxiliary measurement)"
+						  //% "%1 (auxiliary measurement)"
 						? qsTrId("settings_batteries_battery_auxiliary_measurement").arg(battery.name)
-						  //% "%1 (Output %2)"
+						  //% "%1 (output %2)"
 						: qsTrId("settings_batteries_battery_output").arg(battery.name).arg(battery.channel + 1);
 				}
 				return battery.name

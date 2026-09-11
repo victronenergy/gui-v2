@@ -70,7 +70,7 @@ Page {
 				optionModel: [
 					//% "User"
 					{ display: qsTrId("settings_access_user"), value: VenusOS.User_AccessType_User, promptPassword: true },
-					//% "User & Installer"
+					//% "User & installer"
 					{ display: qsTrId("settings_access_user_installer"), value: VenusOS.User_AccessType_Installer, promptPassword: true },
 					//% "Superuser"
 					{ display: qsTrId("settings_access_superuser"), value: VenusOS.User_AccessType_SuperUser, readOnly: true },
@@ -219,13 +219,13 @@ Page {
 						title: {
 							switch (securityProfile.pendingProfile) {
 							case VenusOS.Security_Profile_Secured:
-								//% "Select 'Secured' profile?"
+								//% "Select 'secured' profile?"
 								return qsTrId("settings_security_profile_secured_title")
 							case VenusOS.Security_Profile_Weak:
-								//% "Select 'Weak' profile?"
+								//% "Select 'weak' profile?"
 								return qsTrId("settings_security_profile_weak_title")
 							case VenusOS.Security_Profile_Unsecured:
-								//% "Select 'Unsecured' profile?"
+								//% "Select 'unsecured' profile?"
 								return qsTrId("settings_security_profile_unsecured_title")
 							default:
 								console.warn("Invalid pending profile")

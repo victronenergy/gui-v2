@@ -84,7 +84,7 @@ VisibleItemModel {
 	}
 
 	ListQuantityGroup {
-		//% "AC Totals"
+		//% "AC totals"
 		text: qsTrId("ac-in-modeldefault_ac_totals")
 		preferredVisible: root.phaseNumbers.length > 1
 
@@ -137,7 +137,7 @@ VisibleItemModel {
 			model: root.phaseNumbers
 			delegate: ListQuantity {
 				//: %1 = phase number (1-3)
-				//% "Reversed Energy L%1"
+				//% "Reversed energy L%1"
 				text: qsTrId("ac-in-modeldefault_energy_reverse_x").arg(modelData)
 				valueColor: Theme.color_quantityTable_quantityValue
 				unitColor: Theme.color_quantityTable_quantityUnit
@@ -156,7 +156,7 @@ VisibleItemModel {
 	}
 
 	ListText {
-		//% "Phase Sequence"
+		//% "Phase sequence"
 		text: qsTrId("ac-in-modeldefault_phase_sequence")
 		dataItem.uid: root.bindPrefix + "/PhaseSequence"
 		preferredVisible: dataItem.valid

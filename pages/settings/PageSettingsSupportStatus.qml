@@ -445,7 +445,7 @@ Page {
 
 			ListTextStatus {
 				id: modbusTcp
-				//% "Modbus TCP Server"
+				//% "Modbus TCP server"
 				text: qsTrId("pagesettingssupportstate_modbus_tcp_server")
 				secondaryText: modbusTcpItem.value ? CommonWords.enabled : CommonWords.disabled
 				alarmStatus: modbusTcpItem.value ? VenusOS.Alarm_Level_Warning : -1

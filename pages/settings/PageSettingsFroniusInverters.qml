@@ -22,7 +22,7 @@ Page {
 				   VeQItemTableModel.DontAddItem
 		}
 		header: PrimaryListLabel {
-			//% "Add a PV inverter by using the “Find PV Inverter” function or by entering an IP address manually on the previous page."
+			//% "Add a PV inverter by using the “find PV inverter” function or by entering an IP address manually on the previous page."
 			text: qsTrId("page_setting_fronius_inverters_add_a_pv_inverter")
 			preferredVisible: inverterListView.count === 0
 		}

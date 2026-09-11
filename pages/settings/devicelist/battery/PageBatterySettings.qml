@@ -97,7 +97,7 @@ Page {
 			}
 
 			ListSwitch {
-				//% "Bluetooth Enabled"
+				//% "Bluetooth enabled"
 				text: qsTrId("batterysettings_bluetooth_enabled")
 				dataItem.uid: root.bindPrefix + "/Settings/BluetoothMode"
 				preferredVisible: dataItem.valid

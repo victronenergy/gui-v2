@@ -20,7 +20,7 @@ PageGenerator {
 		id: disabledModel
 
 		PrimaryListLabel {
-			//% "Generator start/stop function is not enabled, go to relay settings and set function to \"Genset start/stop\""
+			//% "Generator start/stop function is not enabled, go to relay settings and set function to \"genset start/stop\""
 			text: qsTrId("settings_generator_function_not_enabled" )
 		}
 	}

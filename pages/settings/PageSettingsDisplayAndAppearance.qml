@@ -70,7 +70,7 @@ Page {
 			}
 
 			ListText {
-				//% "Remote Console appearance"
+				//% "Remote console appearance"
 				text: qsTrId("settings_remote_console_appearance")
 				//: %1 = "dark", "light" or "auto"
 				//: %2 = "VRM" or "app"
@@ -101,7 +101,7 @@ Page {
 			}
 
 			ListRadioButtonGroup {
-				//% "Remote Console appearance"
+				//% "Remote console appearance"
 				text: qsTrId("settings_remote_console_appearance")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/RemoteConsoleColorMode"
 				writeAccessLevel: VenusOS.User_AccessType_User
@@ -152,7 +152,7 @@ Page {
 
 			ListSwitch {
 				id: animationsEnabled
-				//% "UI Animations"
+				//% "UI animations"
 				text: qsTrId("settings_ui_animations")
 				//% "Disable to reduce CPU usage"
 				secondaryText: qsTrId("settings_ui_animations_description")
@@ -167,7 +167,7 @@ Page {
 				text: onScreenGuiv2Possible.value
 				//% "User interface"
 					  ? qsTrId("settings_display_onscreen_ui")
-						//% "User interface (Remote Console)"
+						//% "User interface (remote console)"
 					  : qsTrId("settings_display_remote_console_ui")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/RunningVersion"
 				writeAccessLevel: VenusOS.User_AccessType_User

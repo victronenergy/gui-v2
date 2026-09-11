@@ -26,7 +26,7 @@ Page {
 		}
 
 		if (modbusTcpItem.value !== 0){
-			//% "Modbus TCP Server"
+			//% "Modbus TCP server"
 			runningServices.push(qsTrId("pagesettingsgeneral_modificationchecks_modbus"))
 		}
 		if (signalKItem.valid && signalKItem.value !== 0) {
@@ -122,7 +122,7 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Access & Security"
+				//% "Access & security"
 				text: qsTrId("pagesettingsgeneral_access_and_security")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAccessAndSecurity.qml", {"title": text})
 			}
@@ -133,13 +133,13 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Display & Appearance"
+				//% "Display & appearance"
 				text: qsTrId("pagesettingsgeneral_display_and_appearance")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDisplayAndAppearance.qml", {"title": text})
 			}
 
 			ListNavigation {
-				//% "Alarms & Feedback"
+				//% "Alarms & feedback"
 				text: qsTrId("pagesettingsgeneral_alarms_and_feedback")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAlarmsAndFeedback.qml", {"title": text})
 			}
@@ -217,7 +217,7 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Date & Time"
+				//% "Date & time"
 				text: qsTrId("pagesettingsgeneral_date_and_time")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageTzInfo.qml", {"title": text})
 			}
@@ -304,9 +304,9 @@ Page {
 					{ display: CommonWords.disabled, value: 0 },
 					//% "ESS demo"
 					{ display: qsTrId("page_settings_demo_ess"), value: 1 },
-					//% "Boat/Motorhome demo 1"
+					//% "Boat/motorhome demo 1"
 					{ display: qsTrId("page_settings_demo_1"), value: 2 },
-					//% "Boat/Motorhome demo 2"
+					//% "Boat/motorhome demo 2"
 					{ display: qsTrId("page_settings_demo_2"), value: 3 },
 				]
 

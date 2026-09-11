@@ -66,8 +66,8 @@ Page {
 
 				onClicked: {
 					if (securityProfile.value === VenusOS.Security_Profile_Indeterminate) {
-						//% "Switching firmware version is not possible without \"Network Security Profile\" in "
-						//% "\"Settings / General\" being selected."
+						//% "Switching firmware version is not possible without \"network security profile\" in "
+						//% "\"settings / general\" being selected."
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_firmware_switching_not_possible_indeterminate_profile"), 10000)
 						return
 					}
@@ -81,7 +81,7 @@ Page {
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_firmware_rebooting_to").arg(backupVersionItem.value), 50000)
 						activateBackup.setValue(1)
 					} else {
-						//% "Switching firmware version is not possible when auto update is set to \"Check and update\". Set auto update to \"Disabled\" or \"Check only\" to enable this option."
+						//% "Switching firmware version is not possible when auto update is set to \"check and update\". Set auto update to \"disabled\" or \"check only\" to enable this option."
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_firmware_switching_not_possible"), 10000)
 					}
 				}

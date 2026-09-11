@@ -14,7 +14,7 @@ Page {
 
 		model: VisibleItemModel {
 			PrimaryListLabel {
-				//% "<b>CAUTION:</b> Read the manual before adjusting."
+				//% "<b>CAUTION:</b> read the manual before adjusting."
 				text: qsTrId("settings_dvcc_instructions")
 				preferredVisible: commonSettings.userHasWriteAccess
 			}
@@ -57,7 +57,7 @@ Page {
 			}
 
 			ListSwitchForced {
-				//% "SVS - Shared voltage sense"
+				//% "SVS - shared voltage sense"
 				text: qsTrId("settings_dvcc_shared_voltage_sense")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SharedVoltageSense"
 				preferredVisible: commonSettings.dvccActive
@@ -66,7 +66,7 @@ Page {
 			ListSwitchForced {
 				id: sharedTempSense
 
-				//% "STS - Shared temperature sense"
+				//% "STS - shared temperature sense"
 				text: qsTrId("settings_dvcc_shared_temp_sense")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SharedTemperatureSense"
 				preferredVisible: commonSettings.dvccActive
@@ -127,7 +127,7 @@ Page {
 			ListSwitch {
 				id: sharedCurrentSense
 
-				//% "SCS - Shared current sense"
+				//% "SCS - shared current sense"
 				text: qsTrId("settings_dvcc_shared_current_sense")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/BatteryCurrentSense"
 				preferredVisible: commonSettings.dvccActive

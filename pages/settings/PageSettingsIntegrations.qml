@@ -14,12 +14,12 @@ Page {
 
 		model: VisibleItemModel {
 			SettingsListHeader {
-				//% "Device Integrations"
+				//% "Device integrations"
 				text: qsTrId("pagesettingsintegrations_device_integrations")
 			}
 
 			ListNavigation {
-				//% "PV Inverters"
+				//% "PV inverters"
 				text: qsTrId("pagesettingsintegrations_pv_inverters")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFronius.qml", {"title": text})
 			}
@@ -31,31 +31,31 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Modbus Devices"
+				//% "Modbus devices"
 				text: qsTrId("pagesettingsintegrations_modbus_devices")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbus.qml", {"title": text})
 			}
 
 			ListNavigation {
-				//% "MQTT Devices"
+				//% "MQTT devices"
 				text: qsTrId("pagesettingsintegrations_mqtt_devices")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsMqttDevices.qml", {"title": text})
 			}
 
 			ListNavigation {
-				//% "Shelly Devices"
+				//% "Shelly devices"
 				text: qsTrId("pagesettingsintegrations_shelly_devices")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsShelly.qml", {"title": text})
 			}
 
 			ListNavigation {
-				//% "EEBUS Devices"
+				//% "EEBUS devices"
 				text: qsTrId("pagesettingsintegrations_eebus_devices")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsEebus.qml", {"title": text})
 			}
 
 			ListNavigation {
-				//% "Bluetooth Sensors"
+				//% "Bluetooth sensors"
 				text: qsTrId("pagesettingsintegrations_bluetooth_sensors")
 				preferredVisible: !!hasBluetoothSupport.value
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBleSensors.qml", {"title": text})
@@ -77,7 +77,7 @@ Page {
 			ListNavigation {
 				id: tankSensorsItem
 
-				//% "Tank and Temperature Sensors"
+				//% "Tank and temperature sensors"
 				text: qsTrId("pagesettingsintegrations_tank_and_temperature_sensors")
 				preferredVisible: analogModel.rowCount > 0
 				onClicked: Global.pageManager.pushPage(analogInputsComponent, {"title": text})
@@ -187,14 +187,14 @@ Page {
 			}
 
 			SettingsListHeader {
-				//% "Server Applications"
+				//% "Server applications"
 				text: qsTrId("pagesettingsintegrations_server_applications")
 			}
 
 			ListMqttAccessSwitch { }
 
 			ListNavigation {
-				//% "Modbus TCP Server"
+				//% "Modbus TCP server"
 				text: qsTrId("pagesettingsintegrations_modbus_tcp_server")
 				secondaryText: modbusServerEnabled.value ? CommonWords.enabled : CommonWords.disabled
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcp.qml", {"title": text}) // TODO - is this correct?
@@ -210,9 +210,9 @@ Page {
 				id: osLargeFeatures
 				readonly property bool largeEnabled: signalk.preferredVisible || nodeRed.preferredVisible
 				text: largeEnabled
-					//% "Venus OS Large Features"
+					//% "Venus OS large features"
 					? qsTrId("pagesettingsintegrations_venus_os_large_features")
-					//% "Enable the Venus OS Large firmware to use Node-RED or Signal-K"
+					//% "Enable the Venus OS large firmware to use Node-RED or Signal-K"
 					: qsTrId("pagesettingsintegrations_venus_os_enable_large_features")
 			}
 
@@ -260,14 +260,14 @@ Page {
 			}
 
 			ListLink {
-				//% "Venus OS Large Documentation"
+				//% "Venus OS large documentation"
 				text: qsTrId("settings_venusos_large_documentation")
 				url: "https://ve3.nl/vol"
 				preferredVisible: osLargeFeatures.largeEnabled
 			}
 
 			ListLink {
-				//% "Victron Community"
+				//% "Victron community"
 				text: qsTrId("settings_large_victron_community")
 				url: "https://community.victronenergy.com"
 				preferredVisible: osLargeFeatures.largeEnabled
@@ -276,7 +276,7 @@ Page {
 			SettingsListHeader {
 				id: guiPluginsHeader
 
-				//% "UI Plugins"
+				//% "UI plugins"
 				text: qsTrId("pagesettingsintegrations_ui_plugins")
 				preferredVisible: GuiPluginLoader.plugins.length > 0
 			}

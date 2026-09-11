@@ -69,7 +69,7 @@ Page {
 			}
 
 			ListLink {
-				//% "QR Code for pairing"
+				//% "QR code for pairing"
 				text: qsTrId("eebus_pairing_qr_code")
 				url: pairingQRCode.valid ? pairingQRCode.value : ""
 				caption: ""

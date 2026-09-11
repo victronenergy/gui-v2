@@ -55,7 +55,7 @@ Page {
 
 			ListNavigation {
 				topInset: Theme.geometry_listItem_itemSeparator_height
-				//% "Opportunity Loads"
+				//% "Opportunity loads"
 				text: qsTrId("pagesettingssystem_opportunity_loads")
 				//% "Automate controllable devices to maximize solar self-consumption"
 				caption: qsTrId("pagesettingssystem_automate_controllable_devices")
@@ -71,16 +71,16 @@ Page {
 
 			ListNavigation {
 				topInset: Theme.geometry_listItem_itemSeparator_height
-				//% "AC System"
+				//% "AC system"
 				text: qsTrId("pagesettingssystem_ac_system")
-				//% "Inputs and Monitoring"
+				//% "Inputs and monitoring"
 				caption: qsTrId("pagesettingssystem_inputs_and_monitoring")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAcSystem.qml", { title: text })
 			}
 
 			ListNavigation {
 				text: systemType.value === "Hub-4" ? systemType.value : CommonWords.ess
-				//% "Energy Storage System"
+				//% "Energy storage system"
 				caption: qsTrId("pagesettingssystem_energy_storage_System")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsHub4.qml", { title: text })
 
@@ -92,22 +92,22 @@ Page {
 
 			ListNavigation {
 				text: CommonWords.batteries
-				//% "Batteries and Battery Management Systems (BMS)"
+				//% "Batteries and battery management systems (BMS)"
 				caption: qsTrId("pagesettingssystem_batteries_and_bms")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBatteries.qml", { title: text })
 			}
 
 			ListNavigation {
-				//% "Charge Control"
+				//% "Charge control"
 				text: qsTrId("settings_system_charge_control")
-				//% "Distributed Voltage and Current Control (DVCC)"
+				//% "Distributed voltage and current control (DVCC)"
 				caption: qsTrId("pagesettingssystem_distributed_voltage_and_current_control")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDvcc.qml", { title: text })
 			}
 
 			ListSwitch {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
-				//% "Display DC Loads"
+				//% "Display DC loads"
 				text: qsTrId("settings_system_has_dc_system")
 			}
 

@@ -47,7 +47,7 @@ Page {
 			}
 
 			PrimaryListLabel {
-				//% "Only applies when using Optimized with BatteryLife. Opportunity Loads automatically resumes after a full charge."
+				//% "Only applies when using optimized with BatteryLife. Opportunity loads automatically resumes after a full charge."
 				text: qsTrId("page_controllable_loads_preferences_only_applies_when_using_optimized_with_battery_life")
 				preferredVisible: batteryLifeSupportSwitch.dataItem.valid
 			}

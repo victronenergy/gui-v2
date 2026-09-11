@@ -14,28 +14,28 @@ Page {
 	GradientListView {
 		model: VisibleItemModel {
 			ListQuantity {
-				//% "Charge Voltage Limit (CVL)"
+				//% "Charge voltage limit (CVL)"
 				text: qsTrId("batteryparameters_charge_voltage_limit_cvl")
 				dataItem.uid: root.bindPrefix + "/Info/MaxChargeVoltage"
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListQuantity {
-				//% "Charge Current Limit (CCL)"
+				//% "Charge current limit (CCL)"
 				text: qsTrId("batteryparameters_charge_current_limit_ccl")
 				dataItem.uid: root.bindPrefix + "/Info/MaxChargeCurrent"
 				unit: VenusOS.Units_Amp
 			}
 
 			ListQuantity {
-				//% "Discharge Current Limit (DCL)"
+				//% "Discharge current limit (DCL)"
 				text: qsTrId("batteryparameters_discharge_current_limit_dcl")
 				dataItem.uid: root.bindPrefix + "/Info/MaxDischargeCurrent"
 				unit: VenusOS.Units_Amp
 			}
 
 			ListQuantity {
-				//% "Low Voltage Disconnect (always ignored)"
+				//% "Low voltage disconnect (always ignored)"
 				text: qsTrId("batteryparameters_low_voltage_disconnect_always_ignored")
 				dataItem.uid: root.bindPrefix + "/Info/BatteryLowVoltage"
 				preferredVisible: dataItem.valid
@@ -45,7 +45,7 @@ Page {
 
 			ListText {
 				//: Shows if the battery requests charging: yes or no
-				//% "Requests Charging"
+				//% "Requests charging"
 				text: qsTrId("batteryparameters_charge_request")
 				dataItem.uid: root.bindPrefix + "/Info/ChargeRequest"
 				preferredVisible: dataItem.valid

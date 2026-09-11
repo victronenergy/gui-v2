@@ -164,7 +164,7 @@ Page {
 					var serviceInterval = parseInt(secondaryText, 10) * 60 * 60
 					dataItem.setValue(serviceInterval)
 					if (serviceInterval > 0) {
-						//% "Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer."
+						//% "Service time interval set to %1h. Use the 'reset service timer' button to reset the service timer."
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_run_time_and_service_service_time_interval").arg(secondaryText))
 					}
 					else {
