@@ -40,6 +40,14 @@ QJsonDocument loadJsonDocumentFromFile(const QString &fileName)
 	return doc;
 }
 
+// Store all parsed numbers as doubles. Otherwise, if a number can be floating-point but is written
+// without a decimal in the JSON, it will be stored as an int, and then veutil will prevent it from
+// being saved as a double in order to preserve the original type.
+QVariant jsonValueToVariant(const QJsonValue &jsonValue)
+{
+	return jsonValue.isDouble() ? jsonValue.toDouble() : jsonValue.toVariant();
+}
+
 }
 
 
@@ -82,6 +90,11 @@ void MockManager::setValue(const QString &uid, const QVariant &value)
 QVariant MockManager::value(const QString &uid) const
 {
 	return producer()->value(uid);
+}
+
+void MockManager::setProperty(const QString &uid, const QString &name, const QVariant &value)
+{
+	producer()->setProperty(uid, name, value);
 }
 
 void MockManager::removeValue(const QString &uid)
@@ -149,6 +162,14 @@ QString MockManager::configurationFileName() const
 			"/Settings/SystemSetup/AcInput2": 0,
 		}
 	}
+
+	A path value may also be given as an object, in order to set additional properties (such as
+	"min", "max" or "defaultValue") on the item, alongside (or instead of) its plain "value":
+	{
+		"com.victronenergy.vebus.ttyS2": {
+			"/MicroGrid/DroopModeParameters/F0/Value": { "value": 50.5, "min": 45, "max": 65, "defaultValue": 50 }
+		}
+	}
 */
 void MockManager::setServiceValues(const QJsonObject &object)
 {
@@ -157,16 +178,36 @@ void MockManager::setServiceValues(const QJsonObject &object)
 		const QJsonObject &paths =  serviceIterator.value().toObject();
 		for (auto valueIterator = paths.constBegin(); valueIterator != paths.constEnd(); ++valueIterator) {
 			const QString path = serviceUid + valueIterator.key();
+			const QJsonValue jsonValue = valueIterator.value();
+			if (jsonValue.isObject()) {
+				setPropertyValues(path, jsonValue.toObject());
+				continue;
+			}
 			if (value(path).isValid()) {
 				qInfo() << "Warning: changing value of" << path << "from" << value(path)
-						<< "to" << valueIterator.value().toVariant();
+						<< "to" << jsonValue.toVariant();
 			}
-			// Store all parsed numbers as doubles. Otherwise, if a number can be floating-point but
-			// is written without a decimal in the JSON, it will be stored as an int, and then
-			// veutil will prevent it from being saved as a double in order to preserve the original
-			// type.
-			const QJsonValue jsonValue = valueIterator.value();
-			setValue(path, jsonValue.isDouble() ? jsonValue.toDouble() : jsonValue.toVariant());
+			setValue(path, jsonValueToVariant(jsonValue));
+		}
+	}
+}
+
+/*
+	Sets the "value" (if present) and any other named properties (e.g. "min", "max", "defaultValue")
+	given in the object for the item at the given path.
+*/
+void MockManager::setPropertyValues(const QString &path, const QJsonObject &properties)
+{
+	for (auto propertyIterator = properties.constBegin(); propertyIterator != properties.constEnd(); ++propertyIterator) {
+		const QVariant propertyValue = jsonValueToVariant(propertyIterator.value());
+		if (propertyIterator.key() == QStringLiteral("value")) {
+			if (value(path).isValid()) {
+				qInfo() << "Warning: changing value of" << path << "from" << value(path)
+						<< "to" << propertyValue;
+			}
+			setValue(path, propertyValue);
+		} else {
+			setProperty(path, propertyIterator.key(), propertyValue);
 		}
 	}
 }
