@@ -32,9 +32,16 @@ Page {
 
 	component MicrogridListSpinBox: ListSpinBox {
 		property alias dataItemModified: parameterModified
+		property real customDefaultFrom: 0
+		property real customDefaultTo: Global.int32Max
+
+		readonly property bool _dataItemBoundsAreDefaults: dataItem.defaultMin === 0 && dataItem.defaultMax === Global.int32Max
 
 		textFormat: Text.RichText // for super/sub support
 		readOnly: !externalControl.valid || externalControl.value !== VenusOS.MicrogridExternalControl_Standalone
+
+		from: _dataItemBoundsAreDefaults ? customDefaultFrom : dataItem.min
+		to: _dataItemBoundsAreDefaults ? customDefaultTo : dataItem.max
 
 		decimals: 2
 		stepSize: 0.01
@@ -184,13 +191,14 @@ Page {
 
 				MicrogridListSpinBox {
 					id: f0
+
 					//% "Reference frequency (f<sub>0</sub>)"
 					text: qsTrId("page_microgrid_reference_frequency_f0")
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/F0/Value"
 					dataItemModified.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/F0/Modified"
 
-					from: 45
-					to: 65
+					customDefaultFrom: 45
+					customDefaultTo: 65
 					presets: root._generatePreset(5, value, from, to, stepSize * 10, decimals)
 
 					suffix: Units.defaultUnitString(VenusOS.Units_Hertz)
@@ -203,8 +211,8 @@ Page {
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/FPDroop/Value"
 					dataItemModified.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/FPDroop/Modified"
 
-					from: 1
-					to: 20
+					customDefaultFrom: 1
+					customDefaultTo: 20
 					presets: root._generatePreset(5, value, from, to, stepSize * 50, decimals)
 
 					suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
@@ -225,13 +233,14 @@ Page {
 
 				MicrogridListSpinBox {
 					id: u0
+
 					//% "Reference Voltage (U<sub>0</sub>)"
 					text: qsTrId("page_microgrid_reference_voltage")
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/U0/Value"
 					dataItemModified.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/U0/Modified"
 
-					from: 220
-					to: 270
+					customDefaultFrom: 220
+					customDefaultTo: 270
 					presets: root._generatePreset(5, value, from, to, stepSize * 500, decimals)
 
 					suffix: Units.defaultUnitString(VenusOS.Units_Volt_AC)
@@ -244,8 +253,8 @@ Page {
 					dataItem.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/UQDroop/Value"
 					dataItemModified.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/UQDroop/Modified"
 
-					from: 1
-					to: 20
+					customDefaultFrom: 1
+					customDefaultTo: 20
 					presets: root._generatePreset(5, value, from, to, stepSize * 50, decimals)
 
 					suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
