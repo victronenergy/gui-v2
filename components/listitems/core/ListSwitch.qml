@@ -42,15 +42,22 @@ ListSetting {
 
 	signal clicked
 
-	function click() {
+	function click(fromInternalSwitch) {
 		if (!root.checkWriteAccessLevel() || !root.clickable) {
 			return
 		}
 		if (root.updateDataOnClick) {
 			root.toggleDataValue()
 		}
-		// If checkable, update 'checked' value so that onCheckedChanged signal is fired.
+
+		// When checkable=true it means the 'checked' value should be set directly, overwriting any
+		// existing bindings.
 		if (checkable && !!_switchItem) {
+			if (!fromInternalSwitch) {
+				// If the click was triggered from outside the Switch (e.g. from the Space key
+				// event), toggle the Switch to update its state.
+				_switchItem.toggle()
+			}
 			checked = _switchItem.checked
 		}
 		root.clicked()
@@ -122,12 +129,12 @@ ListSetting {
 			focusPolicy: Qt.NoFocus
 			enabled: root.clickable
 
-			onClicked: root.click()
+			onClicked: root.click(true)
 			Component.onCompleted: root._switchItem = switchItem
 		}
 	}
 
-	Keys.onSpacePressed: root.click()
+	Keys.onSpacePressed: root.click(false)
 
 	VeQuickItem {
 		id: dataItem
