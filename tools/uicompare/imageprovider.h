@@ -6,12 +6,12 @@
 class ImageProvider : public QQuickImageProvider
 {
 public:
-    ImageProvider(const QString &baselineDirectory, const QString &candidateDirectory);
-    QImage requestImage(const QString &id, QSize *size, const QSize &requestedSize);
+	ImageProvider(const QString &baselineDirectory, const QString &candidateDirectory);
+	QImage requestImage(const QString &id, QSize *size, const QSize &requestedSize);
 
 private:
-    QString m_baselineDirectory;
-    QString m_candidateDirectory;
+	QString m_baselineDirectory;
+	QString m_candidateDirectory;
 };
 
 #endif // IMAGEPROVIDER_H
