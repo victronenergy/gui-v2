@@ -16,51 +16,51 @@ class ImageComparisonWorker;
 
 class ImageComparator : public QObject
 {
-    Q_OBJECT
-    QML_ELEMENT
-    QML_UNCREATABLE("Created in C++")
+	Q_OBJECT
+	QML_ELEMENT
+	QML_UNCREATABLE("Created in C++")
 
 public:
-    enum ResultStatus {
-        ResultPending,
-        ResultReady,
-        NoBaselineImage,
-        NoCandidateImage,
-    };
+	enum ResultStatus {
+		ResultPending,
+		ResultReady,
+		NoBaselineImage,
+		NoCandidateImage,
+	};
 
-    struct ComparisonResult
-    {
-        static constexpr qreal DefaultMse = 255.0 * 255.0 * 4.0; // Maximum error
-        QString errorMessage;
-        qreal mse = DefaultMse;
-        int status = ResultPending;
-    };
+	struct ComparisonResult
+	{
+		static constexpr qreal DefaultMse = 255.0 * 255.0 * 4.0; // Maximum error
+		QString errorMessage;
+		qreal mse = DefaultMse;
+		int status = ResultPending;
+	};
 
-    ~ImageComparator();
-    int fileCount() const { return m_fileCount; }
+	~ImageComparator();
+	int fileCount() const { return m_fileCount; }
 
-    Q_INVOKABLE void start();
+	Q_INVOKABLE void start();
 
-    // internal
-    void onDiscoveryComplete(const QStringList &filenames);
-    void onComparisonComplete(const QString &filename, const ImageComparator::ComparisonResult &result);
+	// internal
+	void onDiscoveryComplete(const QStringList &filenames);
+	void onComparisonComplete(const QString &filename, const ImageComparator::ComparisonResult &result);
 
-    static ImageComparator *instance();
+	static ImageComparator *instance();
 
 Q_SIGNALS:
-    void discoveryComplete(const QStringList &filenames);
-    void comparisonComplete(const QString &filename, const ImageComparator::ComparisonResult &result);
-    void allComparisonsComplete();
+	void discoveryComplete(const QStringList &filenames);
+	void comparisonComplete(const QString &filename, const ImageComparator::ComparisonResult &result);
+	void allComparisonsComplete();
 
 private:
-    friend class ImageDiscoveryWorker;
-    friend class ImageComparisonWorker;
-    explicit ImageComparator(QObject *parent = nullptr);
+	friend class ImageDiscoveryWorker;
+	friend class ImageComparisonWorker;
+	explicit ImageComparator(QObject *parent = nullptr);
 
-    QElapsedTimer m_comparisonTimer;
-    QThreadPool *m_threadPool = nullptr;
-    int m_comparedCount = 0;
-    int m_fileCount = 0;
+	QElapsedTimer m_comparisonTimer;
+	QThreadPool *m_threadPool = nullptr;
+	int m_comparedCount = 0;
+	int m_fileCount = 0;
 };
 
 #endif // IMAGECOMPARATOR_H
