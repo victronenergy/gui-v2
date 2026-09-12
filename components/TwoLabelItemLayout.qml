@@ -10,10 +10,17 @@ import Victron.VenusOS
 /*
 	Displays primary and caption labels, and a secondary item.
 
-	Normally the primary text and caption are on the left, and the secondary item on the right:
+	Normally the primary text and caption are on the left, and the secondary item on the right.
+	In portrait, the caption always spans the entire width of the layout, like this:
 
 	| Primary label   | Secondary item |
 	| Caption                          |
+
+	In landscape, unless alwaysStretchCaption=true, the caption only extends to the edge of the
+	secondary item:
+
+	| Primary label   |    Secondary   |
+	| Caption         |      item      |
 
 	If the primary text and secondary item do not fit on a single line, the primary text width is
 	reduced (with wrapping) down to a minimum width. After a certain point when the primary text
@@ -31,12 +38,13 @@ GridLayout {
 	required property string primaryText
 	required property Component secondaryComponent
 	property alias captionText: captionLabel.text
+	property bool alwaysStretchCaption
 	readonly property bool isMultiLine: captionLabel.text.length > 0 || primaryLabel.lineCount > 1 || _useColumnLayout
 
 	property alias primaryLabel: primaryLabel
 	property alias captionLabel: captionLabel
 
-	readonly property bool _useStretchedCaptionLayout: Theme.screenSize === Theme.Portrait && !_useColumnLayout
+	readonly property bool _useStretchedCaptionLayout: Theme.screenSize === Theme.Portrait ? !_useColumnLayout : alwaysStretchCaption
 	readonly property bool _useColumnLayout: Theme.geometry_listItem_primaryText_minimumWidth + Theme.geometry_listItem_content_spacing + secondaryItemLoader.implicitWidth > width
 
 	columns: _useColumnLayout ? 1 : 2
@@ -60,6 +68,7 @@ GridLayout {
 		id: secondaryItemLoader
 
 		sourceComponent: root.secondaryComponent
+		focus: true
 
 		Layout.alignment: root._useColumnLayout ? Qt.AlignLeft : Qt.AlignRight
 		Layout.rowSpan: captionLabel.text.length > 0 && (!root._useColumnLayout && !root._useStretchedCaptionLayout) ? 2 : 1

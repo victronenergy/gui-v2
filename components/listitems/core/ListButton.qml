@@ -34,7 +34,7 @@ ListSetting {
 
 	interactive: true
 
-	contentItem: Item {
+	contentItem: FocusScope {
 		implicitWidth: Theme.geometry_listItem_width
 		implicitHeight: contentLayout.isMultiLine ? contentLayout.implicitHeight : 0
 
@@ -54,7 +54,6 @@ ListSetting {
 				down: root.clickable && (pressed || checked)
 				enabled: root.clickable && !root.readOnly
 				flat: root.readOnly
-				focusPolicy: Qt.NoFocus
 				onClicked: root.click()
 
 				// TODO ideally Button.qml makes its color/backgroundColor/borderColor customisable in a

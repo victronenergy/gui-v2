@@ -56,51 +56,41 @@ ListSetting {
 	property var toSourceValue: undefined
 	property var fromSourceValue: undefined
 
-	// Remove padding around the edges, so that the internal Slider can expand its touch area.
-	topPadding: 0
-	bottomPadding: 0
-
 	interactive: (firstDataItem.uid === "" || firstDataItem.valid) &&
 				 (secondDataItem.uid === "" || secondDataItem.valid)
 
-	// Landscape layout:
-	// | Primary label | Slider (fill width) |
-	// | Caption                             |
-	//
-	// Portrait layout:
-	// | Primary label |
-	// | Slider        |
-	// | Caption       |
 	contentItem: FocusScope {
-		implicitHeight: gridLayout.implicitHeight
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: contentLayout.implicitHeight
 
-		GridLayout {
-			id: gridLayout
+		TwoLabelItemLayout {
+			id: contentLayout
 
+			anchors.verticalCenter: parent.verticalCenter
 			width: parent.width
-			columns: Theme.screenSize === Theme.Portrait ? 1 : 2
-			columnSpacing: 0
-			rowSpacing: 0 // not needed, as padding is added below the label
+			primaryText: root.text
+			primaryLabel.font: root.font
+			primaryLabel.textFormat: root.textFormat
+			captionText: root.caption
+			secondaryComponent: sliderComponent
+			alwaysStretchCaption: true
+		}
 
-			Label {
-				// Since the root top/bottomPadding is 0, need to add some padding here.
-				topPadding: Theme.geometry_listItem_content_verticalMargin
-				bottomPadding: Theme.screenSize === Theme.Portrait ? 0 : Theme.geometry_listItem_content_verticalMargin
-				text: root.text
-				textFormat: root.textFormat
-				font: root.font
-				wrapMode: Text.Wrap
-				verticalAlignment: Text.AlignVCenter
-
-				Layout.fillWidth: true
-			}
+		Component {
+			id: sliderComponent
 
 			RangeSlider {
 				id: sliderItem
 
+				readonly property real labelWidth: fontMetrics.columnWidth(VenusOS.Units_None)
+
+				width: Theme.screenSize === Theme.Portrait
+						? root.availableWidth
+						: root.availableWidth - root.spacing - Theme.geometry_listItem_primaryText_minimumWidth
+
 				// Make space for labels on either side.
-				leftInset: Theme.geometry_rangeSlider_labelWidth + Theme.geometry_slider_spacing
-				rightInset: Theme.geometry_rangeSlider_labelWidth + Theme.geometry_slider_spacing
+				leftInset: sliderItem.labelWidth + Theme.geometry_slider_spacing
+				rightInset: sliderItem.labelWidth + Theme.geometry_slider_spacing
 				leftPadding: leftInset
 				rightPadding: rightInset
 
@@ -114,10 +104,21 @@ ListSetting {
 				secondColor: root.secondColor
 				focus: true
 
-				// Expand the vertical touch area, to make it easier to click.
-				Layout.preferredHeight: implicitHeight + (2 * Theme.geometry_listItem_content_verticalMargin)
-				Layout.fillWidth: true
-				Layout.maximumWidth: Theme.screenSize === Theme.Portrait ? -1 : root.availableWidth * 2/3
+				Keys.onPressed: (event) => {
+					switch (event.key) {
+					case Qt.Key_Escape:
+					case Qt.Key_Return:
+					case Qt.Key_Enter:
+						if (activeFocus) {
+							// Remove focus to exit "edit" mode.
+							root.contentItem.focus = false
+							event.accepted = true
+							return
+						}
+						break
+					}
+					event.accepted = false
+				}
 
 				// Update data value when mouse is released, to avoid spamming data changes.
 				// If the value is linked to the backend, then update the backend value; otherwise,
@@ -150,7 +151,7 @@ ListSetting {
 				}
 
 				SecondaryListLabel {
-					width: Theme.geometry_rangeSlider_labelWidth
+					width: sliderItem.labelWidth
 					height: parent.height
 					wrapMode: Text.NoWrap
 					horizontalAlignment: Text.AlignRight
@@ -160,21 +161,18 @@ ListSetting {
 
 				SecondaryListLabel {
 					anchors.right: parent.right
-					width: Theme.geometry_rangeSlider_labelWidth
+					width: sliderItem.labelWidth
 					height: parent.height
 					wrapMode: Text.NoWrap
+					horizontalAlignment: Text.AlignLeft
 					verticalAlignment: Text.AlignVCenter
 					text: Units.formatNumber(sliderItem.second.value, root.decimals) + root.suffix
 				}
-			}
 
-			CaptionLabel {
-				text: root.caption
-				visible: text.length > 0
-
-				Layout.columnSpan: 2
-				Layout.maximumWidth: root.availableWidth
-				Layout.bottomMargin: Theme.geometry_listItem_content_verticalMargin
+				QuantityTableMetrics {
+					id: fontMetrics
+					font.pixelSize: Theme.font_listItem_secondary_size
+				}
 			}
 		}
 	}
@@ -182,18 +180,10 @@ ListSetting {
 	Keys.onPressed: (event) => {
 		switch (event.key) {
 		case Qt.Key_Space:
+			// Enter "edit" mode where arrow keys change the values.
 			contentItem.focus = true
 			event.accepted = true
 			return
-		case Qt.Key_Escape:
-		case Qt.Key_Return:
-		case Qt.Key_Enter:
-			if (contentItem.activeFocus) {
-				contentItem.focus = false
-				event.accepted = true
-				return
-			}
-			break
 		}
 		event.accepted = false
 	}

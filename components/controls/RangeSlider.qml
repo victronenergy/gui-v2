@@ -47,6 +47,7 @@ T.RangeSlider {
 		height: Theme.geometry_switch_indicator_width
 		source: "qrc:/images/switch_indicator.png"
 		color: root.firstColor
+		focus: true
 
 		SliderHandleHighlight {
 			handle: parent

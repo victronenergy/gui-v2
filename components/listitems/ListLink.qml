@@ -45,7 +45,7 @@ ListSetting {
 	// page or the QR code dialog, so there is no destructive behaviour involved.
 	writeAccessLevel: VenusOS.User_AccessType_User
 
-	contentItem: Item {
+	contentItem: FocusScope {
 		implicitWidth: Theme.geometry_listItem_width
 		implicitHeight: contentLayout.isMultiLine ? contentLayout.implicitHeight : 0
 
@@ -89,7 +89,6 @@ ListSetting {
 					text: qsTrId("listlink_show_qr_code")
 					down: root.clickable && (pressed || checked)
 					enabled: root.clickable
-					focusPolicy: Qt.NoFocus
 
 					onClicked: root.click()
 				}
@@ -122,6 +121,7 @@ ListSetting {
 			id: dialog
 
 			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_NoOptions
+			closePolicy: T.Popup.CloseOnEscape | T.Popup.CloseOnPressOutside
 			header: null
 			footer: null
 			backgroundColor: Theme.color_white // provide start contrast to QR code image

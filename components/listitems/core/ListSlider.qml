@@ -33,54 +33,38 @@ ListSetting {
 	property real stepSize: (to-from) / Theme.geometry_slider_steps
 	property real value: to > from && dataItem.valid ? dataItem.value : 0
 
-	// Remove padding around the edges, so that the internal Slider can expand its touch area.
-	leftPadding: 0
-	rightPadding: 0
-	topPadding: topInset
-	bottomPadding: bottomInset
-
 	interactive: (dataItem.uid === "" || dataItem.valid)
 
-	// Landscape layout:
-	// | Primary label | Slider (fill width) |
-	// | Caption                             |
-	//
-	// Portrait layout:
-	// | Primary label |
-	// | Slider        |
-	// | Caption       |
 	contentItem: FocusScope {
-		implicitHeight: gridLayout.implicitHeight
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: contentLayout.implicitHeight
 
-		GridLayout {
-			id: gridLayout
+		TwoLabelItemLayout {
+			id: contentLayout
 
+			anchors.verticalCenter: parent.verticalCenter
 			width: parent.width
-			columns: Theme.screenSize === Theme.Portrait ? 1 : 2
-			columnSpacing: 0
-			rowSpacing: 0 // not needed, as padding is added below the label
+			primaryText: root.text
+			primaryLabel.font: root.font
+			primaryLabel.textFormat: root.textFormat
+			captionText: root.caption
+			secondaryComponent: sliderComponent
+			alwaysStretchCaption: true
+		}
 
-			Label {
-				// Since the root padding is 0, need to add some padding here.
-				leftPadding: root.leftInset + root.horizontalContentPadding
-				topPadding: Theme.geometry_listItem_content_verticalMargin
-				bottomPadding: Theme.screenSize === Theme.Portrait ? 0 : Theme.geometry_listItem_content_verticalMargin
-
-				text: root.text
-				textFormat: root.textFormat
-				font: root.font
-				wrapMode: Text.Wrap
-				verticalAlignment: Text.AlignVCenter
-
-				Layout.fillWidth: true
-			}
+		Component {
+			id: sliderComponent
 
 			Slider {
 				id: sliderItem
 
+				width: Theme.screenSize === Theme.Portrait
+						? root.availableWidth
+						: root.availableWidth - root.spacing - Theme.geometry_listItem_primaryText_minimumWidth
+
 				// Make space for plus/minus buttons on either side.
-				leftInset: minusButton.width
-				rightInset: plusButton.width
+				leftInset: minusButton.width + Theme.geometry_listItem_content_spacing
+				rightInset: plusButton.width + Theme.geometry_listItem_content_spacing
 				leftPadding: leftInset
 				rightPadding: rightInset
 
@@ -92,6 +76,22 @@ ListSetting {
 				enabled: root.clickable
 				snapMode: Slider.SnapAlways
 				focus: true
+
+				Keys.onPressed: (event) => {
+					switch (event.key) {
+					case Qt.Key_Escape:
+					case Qt.Key_Return:
+					case Qt.Key_Enter:
+						if (activeFocus) {
+							// Remove focus to exit "edit" mode.
+							root.contentItem.focus = false
+							event.accepted = true
+							return
+						}
+						break
+					}
+					event.accepted = false
+				}
 
 				onPositionChanged: {
 					if (dataItem.uid.length > 0) {
@@ -105,11 +105,6 @@ ListSetting {
 					}
 				}
 
-				// Expand the vertical touch area, to make it easier to click.
-				Layout.preferredHeight: implicitHeight + (2 * Theme.geometry_listItem_content_verticalMargin)
-				Layout.fillWidth: true
-				Layout.maximumWidth: Theme.screenSize === Theme.Portrait ? -1 : root.availableWidth * 2/3
-
 				Button {
 					id: minusButton
 
@@ -119,12 +114,6 @@ ListSetting {
 					defaultBackgroundHeight: Theme.geometry_slider_button_size
 					topInset: (sliderItem.height - defaultBackgroundHeight) / 2
 					bottomInset: (sliderItem.height - defaultBackgroundHeight) / 2
-					leftInset: root.horizontalContentPadding
-							// In portrait, this stretches to the left edge, so add the page edge inset.
-							+ (Theme.screenSize === Theme.Portrait ? root.leftInset : 0)
-					leftPadding: leftInset
-					rightInset: Theme.geometry_slider_spacing
-					rightPadding: rightInset
 
 					icon.source: "qrc:/images/icon_minus.svg"
 					icon.color: root.clickable
@@ -149,10 +138,6 @@ ListSetting {
 					defaultBackgroundHeight: Theme.geometry_slider_button_size
 					topInset: (sliderItem.height - defaultBackgroundHeight) / 2
 					bottomInset: (sliderItem.height - defaultBackgroundHeight) / 2
-					leftInset: Theme.geometry_slider_spacing
-					leftPadding: leftInset
-					rightInset: root.horizontalContentPadding + root.rightInset
-					rightPadding: rightInset
 
 					icon.source: "qrc:/images/icon_plus.svg"
 					icon.color: sliderItem.enabled
@@ -167,29 +152,20 @@ ListSetting {
 					}
 				}
 			}
-
-			CaptionLabel {
-				text: root.caption
-				visible: text.length > 0
-
-				Layout.columnSpan: 2
-				Layout.maximumWidth: root.availableWidth
-				Layout.bottomMargin: Theme.geometry_listItem_content_verticalMargin
-			}
 		}
 	}
 
 	Keys.onPressed: (event) => {
 		switch (event.key) {
 		case Qt.Key_Space:
+			// Enter "edit" mode where left/right keys change the value.
 			contentItem.focus = true
 			event.accepted = true
 			return
-		case Qt.Key_Escape:
-		case Qt.Key_Return:
-		case Qt.Key_Enter:
+		case Qt.Key_Up:
+		case Qt.Key_Down:
 			if (contentItem.activeFocus) {
-				contentItem.focus = false
+				// Block navigation away from this item, until Esc/Enter is pressed.
 				event.accepted = true
 				return
 			}

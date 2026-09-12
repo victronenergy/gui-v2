@@ -137,7 +137,7 @@
     "geometry_valueIndicator_slider_handle_width": 8,
     "geometry_valueIndicator_slider_handle_border_width": 2,
 
-
+    "geometry_slider_width": 648,
     "geometry_slider_button_size": 32,
     "geometry_slider_spacing": 12,
     "geometry_slider_steps": 10,
@@ -551,9 +551,6 @@
     "geometry_batteryListPage_item_verticalSpacing": 2,
 
     "geometry_loadListPage_defaultColumnWidth": 128,
-
-    "geometry_rangeSlider_labelWidth": 80,
-
 
     "geometry_boatPage_shadow_width": 244,
     "geometry_boatPage_shadow_height": 87,
