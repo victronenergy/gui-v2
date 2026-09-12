@@ -43,6 +43,7 @@ GridLayout {
 
 	property alias primaryLabel: primaryLabel
 	property alias captionLabel: captionLabel
+	readonly property Item secondaryItem: secondaryItemLoader.item
 
 	readonly property bool _useStretchedCaptionLayout: Theme.screenSize === Theme.Portrait ? !_useColumnLayout : alwaysStretchCaption
 	readonly property bool _useColumnLayout: Theme.geometry_listItem_primaryText_minimumWidth + Theme.geometry_listItem_content_spacing + secondaryItemLoader.implicitWidth > width

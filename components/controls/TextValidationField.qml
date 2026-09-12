@@ -127,11 +127,12 @@ TextField {
 	Keys.onDownPressed: (event) => { event.accepted = root.activeFocus }
 
 	// When escape is pressed, revert to the original text.
-	Keys.onEscapePressed: {
+	Keys.onEscapePressed: (event) => {
 		text = _initialText
 		_inputCancelled = true // flag to prevent validation from running when focus is lost
 		focus = false
 		_inputCancelled = false
+		event.accepted = false
 	}
 
 	MouseArea {

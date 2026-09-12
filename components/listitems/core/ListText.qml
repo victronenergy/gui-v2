@@ -8,6 +8,9 @@ import Victron.VenusOS
 
 /*
 	A list setting item with additional secondary text.
+
+	Set dataItem.uid to load secondaryText from a backend value, or set secondaryText directly
+	to the preferred value.
 */
 ListSetting {
 	id: root

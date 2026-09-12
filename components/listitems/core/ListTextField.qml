@@ -48,94 +48,86 @@ ListSetting {
 		}
 	}
 
-	// Remove vertical padding, so that the text field does not stretch the height of the item.
-	topPadding: topInset
-	bottomPadding: bottomInset
-
 	interactive: (dataItem.uid === "" || dataItem.valid)
 
-	// Layout has 2 columns, 2 rows. The caption spans across both columns.
-	// | Primary label | Text field |
-	// | Caption                    |
-	contentItem: GridLayout {
+	contentItem: FocusScope {
+		implicitWidth: Theme.geometry_listItem_width
+		implicitHeight: contentLayout.isMultiLine ? contentLayout.implicitHeight : 0
+
 		function runValidation(mode) {
-			return textField.runValidation(mode)
-		}
-
-		function forceInputFocus() {
-			textField.forceInputFocus()
-		}
-
-		columns: 2
-		columnSpacing: root.spacing
-		rowSpacing: 0 // not needed, there is padding below the primary label already
-
-		Label {
-			// Since the root top/bottomPadding is 0, need to add some padding here.
-			topPadding: Theme.geometry_listItem_content_verticalMargin
-			bottomPadding: Theme.geometry_listItem_content_verticalMargin
-			text: root.text
-			textFormat: root.textFormat
-			font: root.font
-			wrapMode: Text.Wrap
-
-			Layout.fillWidth: true
-		}
-
-		TextValidationField {
-			id: textField
-
-			rightPadding: suffixLabel.text.length ? suffixLabel.implicitWidth : leftPadding
-			horizontalAlignment: root.suffix ? Text.AlignRight : Text.AlignHCenter
-			text: root.secondaryText
-			enabled: root.clickable
-			visible: root.clickable
-			echoMode: root.echoMode
-			inputMethodHints: root.inputMethodHints
-			placeholderText: root.placeholderText
-			maximumLength: root.maximumLength
-
-			flickable: root.flickable
-			validateInput: root.validateInput
-			validateOnFocusLost: root.validateOnFocusLost
-
-			onInputValidated: root.saveInput()
-			onTextEdited: root.secondaryText = text
-
-			Layout.minimumWidth: Theme.geometry_listItem_textField_minimumWidth
-			Layout.maximumWidth: Theme.geometry_listItem_textField_maximumWidth
-
-			Label {
-				id: suffixLabel
-
-				anchors {
-					right: parent.right
-					verticalCenter: parent.verticalCenter
-					alignWhenCentered: false
-				}
-				text: root.suffix
-				font: textField.font
-				color: Theme.color_font_secondary
-				rightPadding: textField.leftPadding
+			if (contentLayout.sourceComponent === editableComponent
+					&& !!contentLayout.secondaryItem) {
+				return contentLayout.secondaryItem.runValidation(mode)
+			} else {
+				return VenusOS.InputValidation_Result_Unknown
 			}
 		}
 
-		SecondaryListLabel {
-			text: secondaryText.length > 0 ? secondaryText + root.suffix : "--"
-			wrapMode: Text.Wrap
-			visible: !textField.visible
-			opacity: textField.echoMode === TextInput.Password ? 0 : 1
-
-			Layout.fillWidth: true
+		function forceInputFocus() {
+			if (contentLayout.secondaryComponent === editableComponent
+					&& !!contentLayout.secondaryItem) {
+				contentLayout.secondaryItem.forceInputFocus()
+			}
 		}
 
-		CaptionLabel {
-			text: root.caption
-			visible: text.length > 0
+		TwoLabelItemLayout {
+			id: contentLayout
 
-			Layout.columnSpan: 2
-			Layout.maximumWidth: root.availableWidth
-			Layout.bottomMargin: Theme.geometry_listItem_content_verticalMargin
+			anchors.verticalCenter: parent.verticalCenter
+			width: parent.width
+			primaryText: root.text
+			primaryLabel.font: root.font
+			primaryLabel.textFormat: root.textFormat
+			captionText: root.caption
+			secondaryComponent: root.clickable ? editableComponent : readOnlyComponent
+		}
+
+		Component {
+			id: editableComponent
+
+			TextValidationField {
+				width: Math.min(Theme.geometry_listItem_textField_maximumWidth,
+								Math.max(implicitWidth, Theme.geometry_listItem_textField_minimumWidth))
+				rightPadding: suffixLabel.text.length ? suffixLabel.implicitWidth : leftPadding
+				horizontalAlignment: root.suffix ? Text.AlignRight : Text.AlignHCenter
+				text: root.secondaryText
+				echoMode: root.echoMode
+				inputMethodHints: root.inputMethodHints
+				placeholderText: root.placeholderText
+				maximumLength: root.maximumLength
+
+				focus: true
+				flickable: root.flickable
+				validateInput: root.validateInput
+				validateOnFocusLost: root.validateOnFocusLost
+
+				onInputValidated: root.saveInput()
+				onTextEdited: root.secondaryText = text
+
+				Label {
+					id: suffixLabel
+
+					anchors {
+						right: parent.right
+						verticalCenter: parent.verticalCenter
+						alignWhenCentered: false
+					}
+					text: root.suffix
+					font: parent.font
+					color: Theme.color_font_secondary
+					rightPadding: parent.leftPadding
+				}
+			}
+		}
+
+		Component {
+			id: readOnlyComponent
+
+			SecondaryListLabel {
+				text: secondaryText.length > 0 ? secondaryText + root.suffix : "--"
+				wrapMode: Text.Wrap
+				opacity: root.echoMode === TextInput.Password ? 0 : 1
+			}
 		}
 	}
 
@@ -155,10 +147,25 @@ ListSetting {
 		}
 	}
 
-	Keys.onSpacePressed: {
-		if (root.checkWriteAccessLevel() && root.clickable && !!contentItem?.forceInputFocus) {
-			contentItem.forceInputFocus()
+	Keys.onPressed: (event) => {
+		switch (event.key) {
+		case Qt.Key_Space:
+			if (root.checkWriteAccessLevel() && root.clickable && !!contentItem?.forceInputFocus) {
+				contentItem.forceInputFocus()
+			}
+			event.accepted = true
+			return
+		case Qt.Key_Escape:
+		case Qt.Key_Return:
+		case Qt.Key_Enter:
+			if (contentItem.activeFocus) {
+				contentItem.focus = false
+				event.accepted = true
+				return
+			}
+			break
 		}
+		event.accepted = false
 	}
 
 	VeQuickItem {
