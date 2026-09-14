@@ -66,8 +66,8 @@ ControlCard {
 			id: chargeCurrentSpinBox
 
 			serviceUid: root.serviceUid
+			manualMode: modeItem.value === VenusOS.Evcs_Mode_Manual
 			flat: true
-			interactive: dataItem.valid && modeItem.value === VenusOS.Evcs_Mode_Manual
 		}
 
 		FlatListItemSeparator {
