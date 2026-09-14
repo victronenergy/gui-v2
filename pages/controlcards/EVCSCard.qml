@@ -67,7 +67,7 @@ ControlCard {
 
 			serviceUid: root.serviceUid
 			flat: true
-			interactive: dataItem.valid && modeItem.value === VenusOS.Evcs_Mode_Manual
+			interactive: modeItem.value === VenusOS.Evcs_Mode_Manual
 		}
 
 		FlatListItemSeparator {
