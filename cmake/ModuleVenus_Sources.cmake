@@ -214,6 +214,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListDevicePriority.qml
     components/listitems/ListDroopGraph.qml
     components/listitems/ListEvcsSetCurrentSpinBox.qml
+    components/listitems/ListEvcsStartStopButton.qml
     components/listitems/ListFirmwareCheckButton.qml
     components/listitems/ListFirmwareImageTypeInstalled.qml
     components/listitems/ListFirmwareVersion.qml

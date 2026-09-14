@@ -19,6 +19,20 @@ Item {
 
 			VeQuickItem { id: evcsMaxCurrent; uid: evcs.uid + "/MaxCurrent" }
 
+			VeQuickItem {
+				uid: evcs.uid + "/StartStop"
+				onValueChanged: {
+					if (valid && value === 1) {
+						MockManager.setValue(evcs.uid + "/IsStopAllowed", 0)
+						delayIsStopAllowedTimer.start()
+					}
+				}
+				property Timer delayIsStopAllowedTimer: Timer {
+					interval: 5000
+					onTriggered: MockManager.setValue(evcs.uid + "/IsStopAllowed", 1)
+				}
+			}
+
 			MockDataRandomizer {
 				active: Global.mainView && Global.mainView.mainViewVisible
 				onNotifyTotal: (totalPower) => { MockManager.setValue(uid + "/Ac/Power", totalPower) }
