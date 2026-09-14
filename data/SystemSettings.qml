@@ -410,6 +410,7 @@ QtObject {
 	property VeQuickItem _altitudeUnit: VeQuickItem {
 		readonly property string ve_metre: "meter"
 		readonly property string ve_foot: "foot"
+		readonly property string ve_empty: ""
 
 		uid: root.serviceUid + "/Settings/System/Units/Altitude"
 		onValueChanged: {
@@ -419,6 +420,9 @@ QtObject {
 				break
 			case ve_foot:
 				root.altitudeUnit = VenusOS.Units_Foot
+				break
+			case ve_empty:
+				root.altitudeUnit = VenusOS.Units_Metre
 				break
 			default:
 				if (Global.dataManagerLoaded) {
