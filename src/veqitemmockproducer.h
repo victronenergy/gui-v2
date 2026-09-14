@@ -39,6 +39,7 @@ public:
 
 	void setValue(const QString &uid, const QVariant &value);
 	QVariant value(const QString &uid) const;
+	void setProperty(const QString &uid, const QString &name, const QVariant &value);
 	void removeValue(const QString &uid);
 	void removeServices(const QString &serviceType);
 	void dumpValues();
