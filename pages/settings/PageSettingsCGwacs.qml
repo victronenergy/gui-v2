@@ -83,7 +83,7 @@ Page {
 			}
 
 			ListRadioButtonGroup {
-				//% "PV inverter on phase 2 Position"
+				//% "PV inverter on phase 2 position"
 				text: qsTrId("settings_cgwacs_pv_inverter_l2_position")
 				dataItem.uid: root.devicePath + "_S/Position"
 				preferredVisible: pvOnL2.checked

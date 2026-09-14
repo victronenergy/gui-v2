@@ -57,7 +57,7 @@ Page {
 
 					ModalWarningDialog {
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						//% "Disable Access Point"
+						//% "Disable access point"
 						title: qsTrId("settings_wifi_disable_ap")
 						//% "Are you sure that you want to disable the access point?"
 						description: qsTrId("settings_wifi_disable_ap_are_you_sure")
@@ -83,7 +83,7 @@ Page {
 					rowSpacing: Theme.geometry_listItem_content_verticalMargin // not needed, there is padding below the primary label already
 
 					Label {
-						//% "Access Point password"
+						//% "Access point password"
 						text: qsTrId("settings_wifi_access_point_password")
 						textFormat: accessPointPassword.textFormat
 						font: accessPointPassword.font

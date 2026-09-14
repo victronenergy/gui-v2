@@ -28,7 +28,7 @@ Page {
 			case 24: return qsTrId("mk2vsc_state_read_grid_info")
 			//% "Write settings info"
 			case 30: return qsTrId("mk2vsc_state_write_settings_info")
-			//% "Write Settings Data"
+			//% "Write settings data"
 			case 31: return qsTrId("mk2vsc_state_write_settings_data")
 			//% "Write assistants"
 			case 32: return qsTrId("mk2vsc_state_write_assistants")
