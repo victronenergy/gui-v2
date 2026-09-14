@@ -18,11 +18,15 @@ Page {
 		uid: Global.venusPlatform.serviceUid +  "/Network/Wifi/Scan"
 	}
 
+	WifiModel {
+		id: wifiModel
+	}
+
 	GradientListView {
 		id: settingsListView
 
-		model: WifiModel {
-			id: wifiModel
+		model: SortedWifiModel {
+			sourceModel: wifiModel
 		}
 
 		header: SettingsColumn {
