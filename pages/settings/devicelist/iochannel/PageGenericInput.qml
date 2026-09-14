@@ -42,7 +42,8 @@ Page {
 			}
 
 			ListIOChannelShowRadioButtonGroup {
-				dataItem.uid: genericInput.uid + "/Settings/ShowUIInput"
+				capabilitiesUid: "" // GenericInputs do not have a "/Capabilities" setting
+				showUiUid: genericInput.uid + "/Settings/ShowUIInput"
 			}
 
 			ListRadioButtonGroup {
