@@ -156,7 +156,7 @@ DevicePage {
 
 		ListEvcsSetCurrentSpinBox {
 			serviceUid: evCharger.serviceUid
-			text: CommonWords.charge_current
+			manualMode: chargeMode.dataItem.value === VenusOS.Evcs_Mode_Manual
 			preferredVisible: dataItem.valid && chargeMode.dataItem.value === VenusOS.Evcs_Mode_Manual
 		}
 
