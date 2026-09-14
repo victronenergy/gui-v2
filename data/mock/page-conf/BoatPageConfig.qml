@@ -102,6 +102,12 @@ Item {
 			name: "No GPS, no motordrives"
 		},
 		{
+			name: "No GPS, no motordrives, range, consumption",
+			consumptionWhkm: 150,
+			consumptionAhkm: 3,
+			range: 58,
+		},
+		{
 			name: "No GPS, no motordrives, shore power connected",
 			shorePowerConnected: true
 		},

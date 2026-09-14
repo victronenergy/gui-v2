@@ -9,6 +9,8 @@ import Victron.VenusOS
 Column {
 	id: root
 
+	required property MotorDrives motorDrives
+
 	readonly property bool useWatt: Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_PreferWatts || Global.systemSettings.electricalPowerDisplay === VenusOS.ElectricalPowerDisplay_Mixed
 	readonly property int sourceUnit: root.useWatt ? VenusOS.Units_WattHourPerKilometre : VenusOS.Units_AmpHourPerKilometre
 	readonly property int displayUnit: {
@@ -36,7 +38,7 @@ Column {
 			}
 		}
 	}
-	visible: consumptionItem.valid
+	visible: consumptionItem.valid && root.motorDrives.hasAny
 
 	VeQuickItem {
 		id: consumptionItem
