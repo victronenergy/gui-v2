@@ -421,7 +421,9 @@ QtObject {
 				root.altitudeUnit = VenusOS.Units_Foot
 				break
 			default:
-				if (Global.dataManagerLoaded) {
+				if (Global.dataManagerLoaded
+						// If altitude is just an empty string (rather than an unexpected value), skip the warning.
+						&& value !== "") {
 					console.warn("Cannot load altitude unit,", uid, "has unsupported value:", value, "default to metre")
 				}
 				root.altitudeUnit = VenusOS.Units_Metre
