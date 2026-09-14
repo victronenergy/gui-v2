@@ -10208,92 +10208,92 @@ Die GX-toestel kan net een gekoppelde genset beheer en neem die een met die laag
       <translation>Aktiewe modus</translation>
     </message>
     <message id="page_microgrid_hybrid_droop_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="169"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="176"/>
       <source>Hybrid droop parameters</source>
       <translation>Hibridiese droop parameters</translation>
     </message>
     <message id="page_microgrid_reference_active_power_p0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="175"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="182"/>
       <source>Reference active power (P&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Verwysings aktiewe krag (P&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_frequency_f0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="188"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="196"/>
       <source>Reference frequency (f&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Verwysings frekwensie (f&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_frequency_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="202"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="210"/>
       <source>Frequency droop slope (droop&lt;sub&gt;fP&lt;/sub&gt;)</source>
       <translation>Frekwensie droop helling (droop&lt;sub&gt;fP&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_reactive_power">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="216"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="224"/>
       <source>Reference reactive power (Q&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Verwysings reaktiewe krag (Q&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_voltage">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="229"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="238"/>
       <source>Reference Voltage (U&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Verwysings spanning (U&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_voltage_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="243"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="253"/>
       <source>Voltage droop slope (droop&lt;sub&gt;UQ&lt;/sub&gt;)</source>
       <translation>Spanning droop helling (droop&lt;sub&gt;UQ&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_minimum_and_maximum_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="256"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="266"/>
       <source>Minimum and maximum parameters</source>
       <translation>Minimum en maksimum parameters</translation>
     </message>
     <message id="page_microgrid_allowed_active_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="262"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="272"/>
       <source>Allowed active power range</source>
       <translation>Toegelate aktiewe krag reeks</translation>
     </message>
     <message id="page_microgrid_allowed_reactive_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="284"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="294"/>
       <source>Allowed reactive power range</source>
       <translation>Toegelate reaktiewe krag reeks</translation>
     </message>
     <message id="page_microgrid_p_q_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="337"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="347"/>
       <source>P-Q direct drive settings</source>
       <translation>P-Q direkte dryf instellings</translation>
     </message>
     <message id="page_microgrid_active_power_setpoint_p">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="342"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="352"/>
       <source>Active power setpoint (P)</source>
       <translation>Aktiewe krag stel punt (P)</translation>
     </message>
     <message id="page_microgrid_reactive_power_setpoint_q">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="349"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="359"/>
       <source>Reactive power setpoint (Q)</source>
       <translation>Reaktiewe krag stel punt (Q)</translation>
     </message>
     <message id="page_microgrid_allowed_frequency_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="356"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="366"/>
       <source>Allowed frequency range</source>
       <translation>Toegelate frekwensie reeks</translation>
     </message>
     <message id="page_microgrid_allowed_voltage_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="364"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="374"/>
       <source>Allowed voltage range</source>
       <translation>Toegelate spanning reeks</translation>
     </message>
     <message id="page_microgrid_v_f_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="381"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="391"/>
       <source>V-f direct drive settings</source>
       <translation>V-f direkte dryf instellings</translation>
     </message>
     <message id="page_microgrid_voltage_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="386"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="396"/>
       <source>Voltage setpoint (U)</source>
       <translation>Spanning stel punt (U)</translation>
     </message>
     <message id="page_microgrid_frequency_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="393"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="403"/>
       <source>Frequency setpoint (f)</source>
       <translation>Frekwensie stel punt (f)</translation>
     </message>
@@ -10490,7 +10490,7 @@ Die GX-toestel kan net een gekoppelde genset beheer en neem die een met die laag
       <translation>CANopen E-aandrywing (500 kbit/s)</translation>
     </message>
     <message id="page_microgrid_from_p1_to_p2">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="66"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="73"/>
       <source>%1%2 to %3%4</source>
       <extracomment>Describes a range from one quantity to another, e.g. "30W to 60W". The first argument is the first quantity, the second argument is the units of the first quantity, the third argument is the second quantity, the fourth argument is the units of the second quantity.</extracomment>
       <translation>%1%2 tot %3%4</translation>
@@ -10719,7 +10719,7 @@ Die GX-toestel kan net een gekoppelde genset beheer en neem die een met die laag
       <translation>Teiken laaivlak</translation>
     </message>
     <message id="boat_page_range_label">
-      <location filename="../../pages/boat/Range.qml" line="39"/>
+      <location filename="../../pages/boat/Range.qml" line="41"/>
       <source>Range</source>
       <translation>Reikafstand</translation>
     </message>
@@ -11194,12 +11194,12 @@ Die GX-toestel kan net een gekoppelde genset beheer en neem die een met die laag
       <translation>Inverteer</translation>
     </message>
     <message id="page_microgrid_apply_all_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="310"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="320"/>
       <source>Apply all parameters</source>
       <translation>Pas alle parameters toe</translation>
     </message>
     <message id="page_microgrid_apply">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="312"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="322"/>
       <source>Apply</source>
       <translation>Pas toe</translation>
     </message>
@@ -11580,7 +11580,7 @@ Dateer asseblief op na die nuutste fermware om hierdie instellings te kan aanpas
       <translation>Wys temperature</translation>
     </message>
     <message id="boat_page_consumption_label">
-      <location filename="../../pages/boat/Consumption.qml" line="54"/>
+      <location filename="../../pages/boat/Consumption.qml" line="56"/>
       <source>Consumption</source>
       <translation>Verbruik</translation>
     </message>
@@ -11619,7 +11619,7 @@ Dateer asseblief op na die nuutste fermware om hierdie instellings te kan aanpas
       <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="63"/>
       <source>Boot</source>
       <extracomment>Boot the system to a particular firmware version</extracomment>
-      <translation>Boot</translation>
+      <translation>Begin</translation>
     </message>
     <message id="settings_tcpip_disable_ethernet_gateway">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="153"/>
@@ -12058,7 +12058,7 @@ Dateer asseblief op na die nuutste fermware om hierdie instellings te kan aanpas
       <translation type="unfinished">Battery</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="345"/>
+      <location filename="../../src/iochannel.cpp" line="365"/>
       <source>GX device relays</source>
       <translation type="unfinished">GX toestel relais</translation>
     </message>

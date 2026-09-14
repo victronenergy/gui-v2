@@ -4162,7 +4162,7 @@ Devam etmek istiyor musunuz?</translation>
     <message id="vebus_device_restart_vebus_system">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="223"/>
       <source>Restart VE.Bus system</source>
-      <translation>Restart VE.Bus system</translation>
+      <translation>VE.Bus sistemini yeniden başlat</translation>
     </message>
     <message id="vebus_device_restarting">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="226"/>
@@ -10207,92 +10207,92 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>Aktif mod</translation>
     </message>
     <message id="page_microgrid_hybrid_droop_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="169"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="176"/>
       <source>Hybrid droop parameters</source>
       <translation>Hibrit droop parametreleri</translation>
     </message>
     <message id="page_microgrid_reference_active_power_p0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="175"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="182"/>
       <source>Reference active power (P&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referans aktif güç (P&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_frequency_f0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="188"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="196"/>
       <source>Reference frequency (f&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referans frekans (f&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_frequency_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="202"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="210"/>
       <source>Frequency droop slope (droop&lt;sub&gt;fP&lt;/sub&gt;)</source>
       <translation>Frekans droop eğimi (droop&lt;sub&gt;fP&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_reactive_power">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="216"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="224"/>
       <source>Reference reactive power (Q&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referans reaktif güç (Q&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_voltage">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="229"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="238"/>
       <source>Reference Voltage (U&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referans Voltaj (U&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_voltage_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="243"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="253"/>
       <source>Voltage droop slope (droop&lt;sub&gt;UQ&lt;/sub&gt;)</source>
       <translation>Voltaj droop eğimi (droop&lt;sub&gt;UQ&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_minimum_and_maximum_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="256"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="266"/>
       <source>Minimum and maximum parameters</source>
       <translation>Minimum ve maksimum parametreler</translation>
     </message>
     <message id="page_microgrid_allowed_active_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="262"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="272"/>
       <source>Allowed active power range</source>
       <translation>İzin verilen aktif güç aralığı</translation>
     </message>
     <message id="page_microgrid_allowed_reactive_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="284"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="294"/>
       <source>Allowed reactive power range</source>
       <translation>İzin verilen reaktif güç aralığı</translation>
     </message>
     <message id="page_microgrid_p_q_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="337"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="347"/>
       <source>P-Q direct drive settings</source>
       <translation>P-Q doğrudan sürüş ayarları</translation>
     </message>
     <message id="page_microgrid_active_power_setpoint_p">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="342"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="352"/>
       <source>Active power setpoint (P)</source>
       <translation>Aktif güç ayar noktası (P)</translation>
     </message>
     <message id="page_microgrid_reactive_power_setpoint_q">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="349"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="359"/>
       <source>Reactive power setpoint (Q)</source>
       <translation>Reaktif güç ayar noktası (Q)</translation>
     </message>
     <message id="page_microgrid_allowed_frequency_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="356"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="366"/>
       <source>Allowed frequency range</source>
       <translation>İzin verilen frekans aralığı</translation>
     </message>
     <message id="page_microgrid_allowed_voltage_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="364"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="374"/>
       <source>Allowed voltage range</source>
       <translation>İzin verilen voltaj aralığı</translation>
     </message>
     <message id="page_microgrid_v_f_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="381"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="391"/>
       <source>V-f direct drive settings</source>
       <translation>V-f doğrudan sürüş ayarları</translation>
     </message>
     <message id="page_microgrid_voltage_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="386"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="396"/>
       <source>Voltage setpoint (U)</source>
       <translation>Voltaj ayar noktası (U)</translation>
     </message>
     <message id="page_microgrid_frequency_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="393"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="403"/>
       <source>Frequency setpoint (f)</source>
       <translation>Frekans ayar noktası (f)</translation>
     </message>
@@ -10489,7 +10489,7 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>CANopen E-sürücü (500 kbit/s)</translation>
     </message>
     <message id="page_microgrid_from_p1_to_p2">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="66"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="73"/>
       <source>%1%2 to %3%4</source>
       <extracomment>Describes a range from one quantity to another, e.g. "30W to 60W". The first argument is the first quantity, the second argument is the units of the first quantity, the third argument is the second quantity, the fourth argument is the units of the second quantity.</extracomment>
       <translation>%1%2 - %3%4</translation>
@@ -10718,7 +10718,7 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>Hedef şarj durumu</translation>
     </message>
     <message id="boat_page_range_label">
-      <location filename="../../pages/boat/Range.qml" line="39"/>
+      <location filename="../../pages/boat/Range.qml" line="41"/>
       <source>Range</source>
       <translation>aralık</translation>
     </message>
@@ -11193,12 +11193,12 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>Ters çevir</translation>
     </message>
     <message id="page_microgrid_apply_all_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="310"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="320"/>
       <source>Apply all parameters</source>
       <translation>Tüm parametreleri uygula</translation>
     </message>
     <message id="page_microgrid_apply">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="312"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="322"/>
       <source>Apply</source>
       <translation>Uygula</translation>
     </message>
@@ -11579,7 +11579,7 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <translation>Sıcaklıkları göster</translation>
     </message>
     <message id="boat_page_consumption_label">
-      <location filename="../../pages/boat/Consumption.qml" line="54"/>
+      <location filename="../../pages/boat/Consumption.qml" line="56"/>
       <source>Consumption</source>
       <translation>Tüketim</translation>
     </message>
@@ -12057,7 +12057,7 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <translation type="unfinished">Akü</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="345"/>
+      <location filename="../../src/iochannel.cpp" line="365"/>
       <source>GX device relays</source>
       <translation type="unfinished">GX cihazı röleleri</translation>
     </message>
