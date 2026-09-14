@@ -74,13 +74,9 @@ ControlCard {
 			visible: chargeCurrentSpinBox.visible
 		}
 
-		ListSwitch {
-			width: parent.width
-			text: CommonWords.charging
+		ListEvcsStartStopButton {
+			serviceUid: root.serviceUid
 			flat: true
-			dataItem.uid: root.serviceUid + "/StartStop"
-			writeAccessLevel: VenusOS.User_AccessType_User
-			preferredVisible: dataItem.valid
 		}
 	}
 
