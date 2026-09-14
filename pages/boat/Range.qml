@@ -9,6 +9,8 @@ import Victron.VenusOS
 Column {
 	id: root
 
+	required property MotorDrives motorDrives
+
 	readonly property int displayUnit: {
 		switch (Global.systemSettings.speedUnit) {
 			case VenusOS.Units_Speed_MilesPerHour:
@@ -21,7 +23,7 @@ Column {
 				return VenusOS.Units_Kilometre;
 		}
 	}
-	visible: rangeItem.valid
+	visible: rangeItem.valid && root.motorDrives.hasAny
 
 	VeQuickItem {
 		id: rangeItem

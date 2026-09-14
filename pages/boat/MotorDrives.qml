@@ -43,6 +43,8 @@ QtObject {
 		serviceUid: root.right ? root.right.serviceUid : ""
 	}
 
+	readonly property bool hasAny: root.single || root.left || root.right
+
 	readonly property VeQuickItemsQuotient power: VeQuickItemsQuotient {
 		objectName: "overallPower"
 		numeratorUid: root._firstDevice ? BackendConnection.serviceUidForType("system") + "/MotorDrive/Power" : ""

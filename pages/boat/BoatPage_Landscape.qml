@@ -63,6 +63,7 @@ Boat.Background { // the blue shadows
 			topMargin: Theme.geometry_boatPage_range_topMargin
 			horizontalCenter: centerGauge.horizontalCenter
 		}
+		motorDrives: motorDrives
 	}
 
 	Boat.Consumption { // bottom right
@@ -74,6 +75,7 @@ Boat.Background { // the blue shadows
 			right: parent.right
 			rightMargin: Theme.geometry_boatPage_topRow_horizontalMargin
 		}
+		motorDrives: motorDrives
 	}
 
 	/*
