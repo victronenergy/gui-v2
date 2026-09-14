@@ -22,6 +22,13 @@ OverviewWidget {
 			: "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
 	readonly property bool _widgetOnlyPresentsDcGensets: root.serviceType === "dcgenset" && inputDeviceModel.commonMeterType !== -1
 
+	readonly property VeQuickItem _firstAlternatorTemperature: VeQuickItem {
+			uid: root.serviceType === "alternator" && inputDeviceModel.count === 1
+				 ? inputDeviceModel.firstObject.serviceUid + "/Dc/0/Temperature"
+				 : ""
+
+		}
+
 	title: VenusOS.dcMeter_typeToText(inputType)
 	enabled: true
 
@@ -55,6 +62,21 @@ OverviewWidget {
 			Global.pageManager.pushPage(root._widgetOnlyPresentsDcGensets && Global.generators.multipleDcGensetsSupported
 										? "/pages/settings/PageDcGensets.qml" : listPageComponent)
 		}
+	}
+
+	QuantityLabel {
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry_overviewPage_widget_content_topMargin
+			right: parent.right
+			rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
+		}
+		value: Units.convert(_firstAlternatorTemperature.value, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
+		unit: Global.systemSettings.temperatureUnit
+		unitColor: Theme.color_overviewPage_widget_battery_font_secondary
+		font.pixelSize: root.secondaryFontSize
+		alignment: Qt.AlignRight
+		visible: serviceType === "alternator" && _firstAlternatorTemperature.valid
 	}
 
 	DcMeterDeviceModel {
