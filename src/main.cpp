@@ -198,6 +198,13 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	parser.addOption(uiTest);
 	optionList << uiTest;
 
+	QCommandLineOption uiTestHeadless("ui-test-headless",
+		QGuiApplication::tr("Run the UI test specified by --ui-test without saving or comparing "
+			"images, and report the result on stdout/stderr. This provides a quick smoke test of "
+			"the UI."));
+	parser.addOption(uiTestHeadless);
+	optionList << uiTestHeadless;
+
 	QCommandLineOption noMockTimers("no-mock-timers",
 		QGuiApplication::tr("Set to disable mock timers on startup"));
 	parser.addOption(noMockTimers);
@@ -351,7 +358,11 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 
 	// Load the UI test configuration if --ui-test is specified.
 	if (uiTestConf.isValid()) {
-		Victron::VenusOS::UiTest::create()->loadConfiguration(uiTestConf);
+		Victron::VenusOS::UiTest *uiTest = Victron::VenusOS::UiTest::create();
+		uiTest->setHeadless(parser.isSet(uiTestHeadless));
+		uiTest->loadConfiguration(uiTestConf);
+	} else if (parser.isSet(uiTestHeadless)) {
+		qWarning() << "Ignoring --ui-test-headless as no UI test was specified with --ui-test";
 	}
 
 	// Set up the mock backend.

@@ -21,9 +21,11 @@ UiTestCase {
 	function cleanup() {
 		Global.pageManager.popAllPages()
 
-		// No steps have been added, so call goToNextTestFunction() instead of runSteps() to
-		// continue the testing.
-		goToNextTestFunction()
+		// popAllPages() is animated, and PageStack.pushPage() ignores a push while the page stack
+		// is animating. Wait for the pop to finish before the next test function runs, otherwise
+		// its first navigation is silently dropped and it runs against the wrong page.
+		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
+		runSteps()
 	}
 
 	function test_initial() {

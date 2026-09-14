@@ -1,0 +1,289 @@
+# Runs the automated UI tests from "tests/ui" against the mock backend, on the desktop build.
+#
+# There are two jobs:
+#
+# * "ui-smoke-test" runs the UI test in headless mode, i.e. without saving or comparing any images.
+#   It fails if any UI test step fails, so it is a quick check that every screen can still be
+#   opened and rendered.
+#
+# * "ui-image-comparison" captures the UI of the pull request and of the commit it is based on, and
+#   compares the two image sets with "tools/uicompare". Differences do not fail the job, as a pull
+#   request may change the UI on purpose; instead they are reported in the job summary, and the
+#   images that differ are uploaded as an artifact for review.
+#
+#   The baseline is swept twice, and the two baseline sweeps are compared with each other. Image
+#   captures are not perfectly reproducible, so that same-build comparison is the measurement error
+#   of the real one, and the job summary reports it alongside the result. Without it a difference
+#   count cannot be told apart from noise.
+#
+# "ui-image-comparison" builds gui-v2 twice and sweeps it three times, so it is by far the more
+# expensive of the two. To run it only on request instead of on every pull request, add a label condition to the
+# job, e.g. replace its "if" with:
+#   if: contains(github.event.pull_request.labels.*.name, 'ui-comparison')
+#
+# See ".github/visual-regression-tests.md" and "tests/ui/README.md" for more about the UI tests.
+
+name: run UI tests on the desktop build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      ui_test:
+        description: The UI test to run, as a directory relative to "tests/ui".
+        type: string
+        default: smoke/mock-maximal
+
+# These jobs are expensive, so do not keep running them for a superseded push.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+  # The UI test to run, as a directory relative to "tests/ui".
+  UI_TEST: ${{ inputs.ui_test || 'smoke/mock-maximal' }}
+  # The MSE error tolerance used when comparing two captured images. Measured on this sweep, from
+  # two runs of one unchanged build: 1153 of 1171 screens are pixel-identical, and the largest
+  # purely-cosmetic difference is 0.34 (antialiasing on rounded card edges). Real UI changes measure
+  # 26-120. 0.5 sits well clear of both.
+  # A handful of screens vary for reasons that are not rendering at all - the "Start page" setting
+  # resolves to a different value between runs - and no tolerance fixes those; that is what the
+  # control sweep below is for, and the job summary marks them as within the noise.
+  ERROR_TOLERANCE: "0.5"
+
+jobs:
+  ui-smoke-test:
+    name: UI smoke test
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Set up Qt
+        id: qt
+        uses: ./.github/actions/setup-qt
+
+      - name: Build gui-v2
+        run: |
+          ${{ steps.qt.outputs.qtdir }}/bin/qt-cmake -G Ninja -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -S . -B build
+          cmake --build build --target venus-gui-v2 --parallel $(nproc)
+
+      - name: Run the UI smoke test
+        working-directory: build
+        # 'QT_QPA_PLATFORM=offscreen' is needed to run on the headless CI server.
+        # '--ui-test-headless' skips saving and comparing the captured images. gui-v2 exits with a
+        # non-zero code if any test step failed.
+        run: QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}" --ui-test-headless
+
+  ui-image-comparison:
+    name: UI image comparison
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+
+    steps:
+      # For a pull_request event this checks out the merge commit, i.e. the pull request as it
+      # would be once merged into the base branch.
+      - name: Checkout the pull request (candidate)
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Checkout the base of the pull request (baseline)
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          submodules: recursive
+          path: baseline
+
+      - name: Set up Qt
+        id: qt
+        uses: ./.github/actions/setup-qt
+
+      - name: Build gui-v2 (baseline)
+        run: |
+          ${{ steps.qt.outputs.qtdir }}/bin/qt-cmake -G Ninja -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -S baseline -B build-baseline
+          cmake --build build-baseline --target venus-gui-v2 --parallel $(nproc)
+
+      - name: Capture UI images (baseline)
+        working-directory: build-baseline
+        # A failed test step is the smoke job's business, not this job's, so it only warns. A sweep
+        # that dies part way is different: it leaves a truncated image set that would silently turn
+        # every missing screen into a reported difference.
+        run: |
+          set +e
+          QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}"
+          status=$?
+          set -e
+          case "$status" in
+            0) ;;
+            # gui-v2 exits 1 when test steps failed. The sweep still ran to the end, so the image
+            # set is complete and worth comparing; the failing steps are the smoke job's business.
+            1) echo "::warning::The baseline UI test reported step failures." ;;
+            # Anything else means it died part way (a segfault gives 139), so the image set is
+            # truncated and any comparison against it is meaningless. Do not carry on.
+            *) echo "::error::The baseline sweep terminated abnormally (exit $status); its image set is incomplete."
+               exit "$status" ;;
+          esac
+
+      - name: Capture UI images again (baseline control sweep)
+        working-directory: build-baseline
+        # A second sweep of the same build. Comparing it against the first measures how much the
+        # captures vary from run to run, with no code change involved.
+        run: |
+          mv image-captures ../image-captures-control
+          set +e
+          QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}"
+          status=$?
+          set -e
+          case "$status" in
+            0) ;;
+            # gui-v2 exits 1 when test steps failed. The sweep still ran to the end, so the image
+            # set is complete and worth comparing; the failing steps are the smoke job's business.
+            1) echo "::warning::The baseline control UI test reported step failures." ;;
+            # Anything else means it died part way (a segfault gives 139), so the image set is
+            # truncated and any comparison against it is meaningless. Do not carry on.
+            *) echo "::error::The baseline control sweep terminated abnormally (exit $status); its image set is incomplete."
+               exit "$status" ;;
+          esac
+
+      - name: Build gui-v2 (candidate)
+        run: |
+          ${{ steps.qt.outputs.qtdir }}/bin/qt-cmake -G Ninja -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -S . -B build-candidate
+          cmake --build build-candidate --target venus-gui-v2 --parallel $(nproc)
+
+      - name: Capture UI images (candidate)
+        working-directory: build-candidate
+        run: |
+          set +e
+          QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test "${{env.UI_TEST}}"
+          status=$?
+          set -e
+          case "$status" in
+            0) ;;
+            # gui-v2 exits 1 when test steps failed. The sweep still ran to the end, so the image
+            # set is complete and worth comparing; the failing steps are the smoke job's business.
+            1) echo "::warning::The candidate UI test reported step failures." ;;
+            # Anything else means it died part way (a segfault gives 139), so the image set is
+            # truncated and any comparison against it is meaningless. Do not carry on.
+            *) echo "::error::The candidate sweep terminated abnormally (exit $status); its image set is incomplete."
+               exit "$status" ;;
+          esac
+
+      - name: Build UI Compare
+        run: |
+          ${{ steps.qt.outputs.qtdir }}/bin/qt-cmake -G Ninja -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -S tools/uicompare -B build-uicompare
+          cmake --build build-uicompare --parallel $(nproc)
+
+      - name: Compare the baseline and candidate images
+        id: compare
+        working-directory: build-uicompare
+        # UI Compare reads the two image sets from these two directories, relative to its working
+        # directory. It exits with a non-zero code if the image sets are not equivalent, which is
+        # recorded here rather than failing the job.
+        run: |
+          # First the control: the two sweeps of the unchanged baseline build.
+          mv ../image-captures-control image-captures-baseline
+          mv ../build-baseline/image-captures image-captures-candidate
+
+          # A sweep can also end early without a non-zero exit. The three sweeps visit the same
+          # screens, so a set that is materially shorter than the others did not finish, and every
+          # screen it is missing would be reported as a difference. Refuse to compare that.
+          baseline_count=$(find image-captures-baseline -name '*.png' | wc -l)
+          control_count=$(find image-captures-candidate -name '*.png' | wc -l)
+          candidate_count=$(find ../build-candidate/image-captures -name '*.png' | wc -l)
+          echo "Captured screens: baseline=$baseline_count control=$control_count candidate=$candidate_count"
+          lowest=$(printf '%s\n' "$baseline_count" "$control_count" "$candidate_count" | sort -n | head -n 1)
+          highest=$(printf '%s\n' "$baseline_count" "$control_count" "$candidate_count" | sort -n | tail -n 1)
+          if [ "$lowest" -lt $(( highest * 95 / 100 )) ]; then
+            echo "::error::A sweep is short ($lowest screens against $highest); one of them did not finish, so the comparison would be meaningless."
+            exit 1
+          fi
+          set +e
+          ./bin/uicompare --headless \
+              --error-tolerance "${{env.ERROR_TOLERANCE}}" \
+              --output ui-control-results.json
+          control_status=$?
+          set -e
+          if [ "$control_status" -gt 1 ]; then
+            echo "::error::UI Compare failed on the control comparison with exit code $control_status"
+            exit "$control_status"
+          fi
+
+          # Then the real comparison: baseline against candidate.
+          rm -rf image-captures-candidate
+          mv ../build-candidate/image-captures image-captures-candidate
+          set +e
+          ./bin/uicompare --headless \
+              --error-tolerance "${{env.ERROR_TOLERANCE}}" \
+              --output ui-comparison-results.json
+          status=$?
+          set -e
+          case "$status" in
+            0) echo "differences=false" >> "$GITHUB_OUTPUT" ;;
+            1) echo "differences=true" >> "$GITHUB_OUTPUT" ;;
+            *) echo "::error::UI Compare failed with exit code $status"; exit "$status" ;;
+          esac
+
+      - name: Report the comparison results
+        working-directory: build-uicompare
+        # Pillow is used to build the "baseline | candidate | difference" composites. Install it
+        # with pip, into whichever interpreter "python3" resolves to: earlier steps put a Python
+        # from the hosted toolcache ahead of the system one, so an apt-installed python3-pil is
+        # invisible here. Import it explicitly afterwards, so that a missing Pillow fails this step
+        # instead of silently producing an artifact with no composites in it.
+        run: |
+          python3 -m pip install --quiet --disable-pip-version-check pillow
+          python3 -c "import PIL; print('Pillow', PIL.__version__)"
+          python3 "$GITHUB_WORKSPACE/.github/scripts/ui_comparison_summary.py" \
+              ui-comparison-results.json \
+              --baseline-label "${{ github.event.pull_request.base.sha }}" \
+              --candidate-label "${{ github.sha }}" \
+              --control-results ui-control-results.json \
+              --differences-dir image-differences \
+              --above-noise-dir image-differences-above-noise \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          if [ "${{ steps.compare.outputs.differences }}" = "true" ]; then
+            echo "::warning::The UI images differ from the base branch. See the job summary and the 'ui-image-differences' artifact."
+          fi
+
+      - name: Upload the comparison results
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: ui-comparison-results
+          path: |
+            build-uicompare/ui-comparison-results.json
+            build-uicompare/ui-control-results.json
+          if-no-files-found: warn
+
+      # The screens worth a reviewer's time: those that differ by more than two sweeps of the
+      # unchanged baseline do. Usually a handful of files rather than hundreds.
+      - name: Upload the images that differ by more than the noise
+        uses: actions/upload-artifact@v4
+        if: steps.compare.outputs.differences == 'true'
+        with:
+          name: ui-image-differences-above-noise
+          path: build-uicompare/image-differences-above-noise
+          # Nothing above the noise floor is a good result, not a problem: produce no artifact.
+          if-no-files-found: ignore
+
+      - name: Upload every image that differs
+        uses: actions/upload-artifact@v4
+        if: steps.compare.outputs.differences == 'true'
+        with:
+          name: ui-image-differences
+          path: build-uicompare/image-differences
+          if-no-files-found: warn

@@ -30,18 +30,35 @@ By default, captured images are stored in `<working-directory>/image-captures/` 
 
 ### Comparing images
 
-The comparison tool lives in `tools/uicompare/`. It expects:
-- `tools/uicompare/image-captures-baseline/` — known-good reference images
-- `tools/uicompare/image-captures/` — newly captured candidate images
+The comparison tool lives in `tools/uicompare/`. It expects, relative to its working directory:
+- `image-captures-baseline/` — known-good reference images
+- `image-captures-candidate/` — newly captured candidate images
 
 ```bash
 # Build and run the comparison tool
-cd tools/uicompare
-cmake -B build && cmake --build build
-./build/bin/uicompare
+cmake -B build-uicompare -S tools/uicompare && cmake --build build-uicompare
+cd build-uicompare && ./bin/uicompare
 ```
 
 The tool provides a side-by-side visual interface showing differences, with pass/fail status for each image based on a similarity threshold.
+
+Run it with `--headless` to compare the image sets without showing the UI. In that mode it prints a summary, optionally writes the per-image results to a JSON file with `--output`, and exits with a non-zero code if the two image sets are not equivalent:
+
+```bash
+./bin/uicompare --headless --error-tolerance 10.0 --output ui-comparison-results.json
+```
+
+`tools/ui_capture_and_compare.py` automates the whole sequence: it builds a baseline and a candidate revision, captures an image set with each, and then runs the comparison tool.
+
+### Headless smoke test
+
+Add `--ui-test-headless` to run a UI test without saving or comparing any images. Every screen is still navigated to and rendered, but the capture is discarded, and the result is printed to stdout (or stderr on failure):
+
+```bash
+QT_QPA_PLATFORM=offscreen ./bin/venus-gui-v2 --ui-test smoke/mock-maximal --ui-test-headless
+```
+
+When the test configuration sets `ExitWhenFinished`, gui-v2 exits with a non-zero code if any test step failed — with or without `--ui-test-headless`.
 
 ## Workflow for verifying changes
 
@@ -52,6 +69,10 @@ The tool provides a side-by-side visual interface showing differences, with pass
 5. **Review**: confirm that only expected differences appear (e.g. your intentional UI change) and no unintended regressions
 
 For changes that intentionally modify the UI appearance, update the baseline images after confirming the new captures are correct.
+
+`.github/workflows/run-ui-tests.yml` runs both halves of this on every pull request: a headless smoke test that fails if any test step failed, and an image comparison of the pull request against the commit it is based on. Image differences do not fail the workflow; they are reported in the job summary, and the images that differ are uploaded as a workflow artifact.
+
+Captures are not perfectly reproducible, so the workflow also sweeps the baseline build twice and compares those two sweeps with each other. That same-build result is the measurement error of the real comparison, and the job summary reports it as a noise floor. Do the same locally before concluding that a difference is real: capture a control set from the unchanged code and compare it, rather than comparing a single pair of runs.
 
 ## Test configuration
 

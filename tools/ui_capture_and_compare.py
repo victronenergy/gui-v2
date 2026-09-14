@@ -54,6 +54,10 @@ The above command triggers a sequence as follows:
    c) Launches the UI Compare binary that was built
 
 If step 1) or 2) fails, step 3) is still run to restore the original repo state.
+
+The script exits with the exit code of UI Compare. In headless mode (--headless), UI Compare exits
+with a non-zero code if any image differed or was missing from either image set, so this script
+does the same.
 '''
 
 import os
@@ -85,17 +89,19 @@ def run_command(cmd, cwd=None, check=True, env=None):
 
 
 def start_and_wait(binary, cwd=None, args=None):
-    '''Starts a process and blocks until the process is finished.'''
+    '''Starts a process and blocks until the process is finished. Returns the exit code.'''
     args = args or []
     args.insert(0, binary)
     print(f'\n > {" ".join(args)}')
-    if not DRY_RUN:
-        if not os.path.exists(binary):
-            sys.exit(f'Error: binary not found at {binary}')
-        binary_process = subprocess.Popen(args, cwd=cwd)
-        result = binary_process.wait()
-        if result:
-            print(f'Error: binary {binary} exited with non-zero code: {result}')
+    if DRY_RUN:
+        return 0
+    if not os.path.exists(binary):
+        sys.exit(f'Error: binary not found at {binary}')
+    binary_process = subprocess.Popen(args, cwd=cwd)
+    result = binary_process.wait()
+    if result:
+        print(f'Error: binary {binary} exited with non-zero code: {result}', file=sys.stderr)
+    return result
 
 
 def is_git_tree_dirty():
@@ -193,7 +199,13 @@ def generate_images(build_dir, ui_test, mock_conf=None, offscreen=False):
         cmd.append('--mock')
         cmd.append(f'--mock-conf={mock_conf}')
     env = {**os.environ, 'QT_QPA_PLATFORM': 'offscreen'} if offscreen else None
-    run_command(cmd, cwd=build_dir, env=env)
+
+    # gui-v2 exits with a non-zero code if any test step failed. Do not abort here, as the images
+    # that were captured before the failure are still worth comparing; just report the failure.
+    result = run_command(cmd, cwd=build_dir, check=False, env=env)
+    if result is not None and result.returncode != 0:
+        print(f'Warning: {binary} reported test failures (exit code {result.returncode})',
+              file=sys.stderr)
 
 
 def copy_images_to_uicompare(baseline_dir, candidate_dir, uicompare_dir):
@@ -308,9 +320,13 @@ if __name__ == '__main__':
             uicompare_args.append(f'--output={args.output}')
         if args.error_tolerance is not None:
             uicompare_args.append(f'--error-tolerance={args.error_tolerance}')
-        start_and_wait(uicompare_binary, cwd=args.uicompare_dir, args=uicompare_args)
+        uicompare_result = start_and_wait(uicompare_binary, cwd=args.uicompare_dir, args=uicompare_args)
 
         print('\nDone!')
+
+        # In headless mode, UI Compare exits with a non-zero code if the two image sets are not
+        # equivalent. Pass that on to the caller (e.g. a CI job).
+        sys.exit(uicompare_result)
 
     except subprocess.CalledProcessError as e:
         print(f'\nError: command failed with exit code {e.returncode}', file=sys.stderr)
