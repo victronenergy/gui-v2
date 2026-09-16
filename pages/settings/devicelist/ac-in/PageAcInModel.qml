@@ -13,6 +13,29 @@ VisibleItemModel {
 	property int productId
 	property Page deviceSettingsPage
 
+	function _calculatePhaseNumbers() {
+		// Phase numbers are determined by /NrOfPhases or /Ac/Phase or /PhaseSetting, in that order.
+		// An exception to this rule is if NrOfPhases is 1 use /Ac/Phase if valid, and then
+		// /PhaseSetting if valid.
+		// If none are set, use all 3 phases and rely on phaseCountKnown to filter out invalid phases.
+
+		if (nrOfPhases.valid && nrOfPhases.value === 1) {
+			return phase.valid ? [ phase.value ]
+				: phaseSetting.valid ? [ phaseSetting.value ]
+				: [ 1 ]
+		}
+		if (nrOfPhases.valid) {
+			return Array.from({length: nrOfPhases.value}, (_, index) => index+1)
+		}
+		if (phase.valid) {
+			return [ phase.value ]
+		}
+		if (phaseSetting.valid) {
+			return [ phaseSetting.value ]
+		}
+		return [1,2,3]
+	}
+
 	readonly property VeQuickItem nrOfPhases: VeQuickItem {
 		uid: root.bindPrefix + "/NrOfPhases"
 	}
@@ -23,15 +46,17 @@ VisibleItemModel {
 		uid: root.bindPrefix + "/Ac/Phase"
 	}
 
-	// Phase numbers are determined by /NrOfPhases or /Ac/Phase, in that order. If neither are set,
-	// use all 3 phases and rely on phaseCountKnown to filter out invalid phases.
-	readonly property var phaseNumbers: nrOfPhases.valid ? Array.from({length: nrOfPhases.value}, (_, index) => index+1)
-			: phase.valid ? [ phase.value ]
-			: [1,2,3]   // default to 3 phases, and use phaseCountKnown to filter out invalid phases
+	// The phase set by the device to report measurements, if the /NrOfPhases and /Ac/Phase is not
+	// valid use this value to assign a specific phase.
+	readonly property VeQuickItem phaseSetting: VeQuickItem {
+		uid: root.bindPrefix + "/PhaseSetting"
+	}
+
+	readonly property var phaseNumbers: root._calculatePhaseNumbers()
 
 	// If the number of phases is not known, show each phase depending on whether there is valid
 	// data for that phase.
-	readonly property bool phaseCountKnown: phase.valid || nrOfPhases.valid
+	readonly property bool phaseCountKnown: phase.valid || nrOfPhases.valid || phaseSetting.valid
 
 	ListText {
 		text: CommonWords.status
