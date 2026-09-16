@@ -13,6 +13,8 @@ VisibleItemModel {
 	property int productId
 	property Page deviceSettingsPage
 
+	readonly property bool _usePhaseSetting: nrOfPhases.valid && nrOfPhases.value === 1 && !phase.valid && phaseSetting.valid
+
 	readonly property VeQuickItem nrOfPhases: VeQuickItem {
 		uid: root.bindPrefix + "/NrOfPhases"
 	}
@@ -23,15 +25,25 @@ VisibleItemModel {
 		uid: root.bindPrefix + "/Ac/Phase"
 	}
 
-	// Phase numbers are determined by /NrOfPhases or /Ac/Phase, in that order. If neither are set,
-	// use all 3 phases and rely on phaseCountKnown to filter out invalid phases.
-	readonly property var phaseNumbers: nrOfPhases.valid ? Array.from({length: nrOfPhases.value}, (_, index) => index+1)
+	// The phase set by the device to report measurements, if the /NrOfPhases and /Ac/Phase is not
+	// valid use this value to assign a specific phase.
+	readonly property VeQuickItem phaseSetting: VeQuickItem {
+		uid: root.bindPrefix + "/PhaseSetting"
+	}
+
+	// Phase numbers are loosely determined by /NrOfPhases or /Ac/Phase or /PhaseSetting,
+	// in that order, there is an exception when /NrOfPhases is 1, and there is no /Ac/Phase value
+	// then use the PhaseSetting value if it exists.
+	// If none are set, use all 3 phases and rely on phaseCountKnown to filter out invalid phases.
+	readonly property var phaseNumbers: _usePhaseSetting ? [ phaseSetting.value ]
+			: nrOfPhases.valid ? Array.from({length: nrOfPhases.value}, (_, index) => index+1)
 			: phase.valid ? [ phase.value ]
+			: phaseSetting.valid ? [ phaseSetting.value ]
 			: [1,2,3]   // default to 3 phases, and use phaseCountKnown to filter out invalid phases
 
 	// If the number of phases is not known, show each phase depending on whether there is valid
 	// data for that phase.
-	readonly property bool phaseCountKnown: phase.valid || nrOfPhases.valid
+	readonly property bool phaseCountKnown: phase.valid || nrOfPhases.valid || phaseSetting.valid
 
 	ListText {
 		text: CommonWords.status
