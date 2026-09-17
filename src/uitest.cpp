@@ -196,12 +196,15 @@ void UiTest::loadConfiguration(const UiTestConfiguration &conf)
 		}
 	}
 
-	// Disable UI animations for tests. Do this after any mock values have been applied, to override
-	// any value set by a mock configuration.
+	// UI animations default off for deterministic visual captures. Honor an explicit
+	// Mock.UIAnimations opt-in so performance tests can measure motion. Do this after mock
+	// configuration so the test JSON overrides setup-common.json. --animationEnabled alone
+	// does not override this backend setting.
 	if (backend->type() != BackendConnection::UnknownSource && VeQItems::getRoot()) {
 		if (VeQItem *uiAnimationsItem = VeQItems::getRoot()->itemGet(
 					backend->serviceUidForType("settings") + "/Settings/Gui2/UIAnimations")) {
-			uiAnimationsItem->setValue(0);
+			const QVariant mockUiAnimations = settingValue("Mock").toMap().value("UIAnimations");
+			uiAnimationsItem->setValue(mockUiAnimations.isValid() ? mockUiAnimations.toInt() : 0);
 		}
 	}
 

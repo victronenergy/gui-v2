@@ -77,6 +77,12 @@ Tests are configured with a JSON file; see `smoke/mock-maximal` for an example. 
 * Tests - a list of QML test files
 * Logging - enable a venus.gui.test logging type - e.g. "debug", "info". The default level is "info".
 * Mock - when running in mock mode, sets the mock mode parameters
+  * `Configuration` — mock JSON to load
+  * `TimersActive` — whether mock data timers run
+  * `UIAnimations` — optional. UI tests force `/Settings/Gui2/UIAnimations` to 0
+    unless this is set (use `1` for animation performance tests). Visual
+    captures should omit it or set `0`. `--animationEnabled` does not override
+    the backend setting.
 * Steps - contains configurations for UI test steps
   * For example, for the "CaptureAndCompare" step, if you set "ComparisonThreshold" to 0.1, then it will compare captured images with an error threshold of 0.1%.
 

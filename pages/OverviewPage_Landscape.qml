@@ -591,6 +591,7 @@ FocusScope {
 	FrameAnimation {
 		id: overviewPageRootAnimation
 
+		objectName: "overviewConnectorAnimation"
 		paused: cpuInfo.overLimit
 		running: root.animationEnabled
 		property real previousElapsed
