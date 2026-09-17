@@ -61,8 +61,26 @@ The current access level is stored at `Settings/System/AccessLevel` and exposed 
 
 Each `ListSetting` item has two access-level properties:
 
-- **`showAccessLevel`** (default: `User`) — minimum level required to **see** the item. If the user's level is below this, the item is hidden entirely (`effectiveVisible` becomes false).
+- **`showAccessLevel`** (default: `User`) — minimum level required to **see** the item. For SuperUser/Service rows this also drives the colored left-edge stripe.
 - **`writeAccessLevel`** (default: `Installer`) — minimum level required to **modify** the setting. If the user's level is below this, the item is visible but not clickable, and attempting to interact shows a toast notification: "Setting locked for access level".
+
+Where `showAccessLevel` is set depends on the model:
+
+**`DelegateComponentModel` rows:** set `showAccessLevel` on the `DelegateComponent`. The model includes a row only when that entry's `DelegateComponent.effectiveVisible` is true. By default that is `preferredVisible` combined with `canAccess(showAccessLevel)` on the `DelegateComponent` (the same rule as `SystemSettings.canAccess`). `DelegateComponentModel` does not read the inner list item. `ListSetting` copies `showAccessLevel` from the injected `delegateComponent` for the SuperUser stripe; do not set it again on the list item. An inner-only `showAccessLevel` does not filter the row and does not hide it.
+
+```qml
+DelegateComponent {
+    showAccessLevel: VenusOS.User_AccessType_SuperUser
+    ListText {
+        text: "Serial number"
+        dataItem.uid: device.serviceUid + "/Serial"
+    }
+}
+```
+
+A page may bind `DelegateComponent.effectiveVisible` to a different expression when the default access formula is not enough.
+
+**Non-DCM rows** (`SettingsColumn`, list headers, `RadioButtonListPage`, and other views where `delegateComponent` is unset): set `showAccessLevel` on the `ListSetting`. `effectiveVisible` is `preferredVisible && userHasReadAccess`, so the constructed row collapses for users below that level.
 
 ### Visual indicator
 
@@ -165,44 +183,54 @@ These demonstrate the pattern: combine a core list item type with domain-specifi
 
 ## Typical settings page structure
 
-The typical settings page is a Page which contains a GradientListView whose item model is a VisibleItemModel (which ensures that settings are only visible if the user meets the required access level), which itself contains a variety of controls to display or set values in the backend.
+The typical settings page is a Page which contains a GradientListView whose item model is a `DelegateComponentModel`. Each entry is a `DelegateComponent` which wraps a single list item in a component scope — delegates are only instantiated on demand when they scroll into the viewport, significantly improving page load performance. The model includes a row only when `DelegateComponent.effectiveVisible` is true (`preferredVisible` plus access level by default).
 
 ```qml
 Page {
     title: "Device Settings"
 
     GradientListView {
-        model: VisibleItemModel {
-            ListNavigation {
-                text: "General"
-                onClicked: Global.pageManager.pushPage("/path/to/GeneralSettingsPage.qml")
+        model: DelegateComponentModel {
+            DelegateComponent {
+                ListNavigation {
+                    text: "General"
+                    onClicked: Global.pageManager.pushPage("/path/to/GeneralSettingsPage.qml")
+                }
             }
 
-            ListSwitch {
-                text: "Enable monitoring"
-                dataItem.uid: device.serviceUid + "/Settings/MonitoringEnabled"
+            DelegateComponent {
+                ListSwitch {
+                    text: "Enable monitoring"
+                    dataItem.uid: device.serviceUid + "/Settings/MonitoringEnabled"
+                }
             }
 
-            ListSpinBox {
-                text: "Update interval"
-                suffix: "s"
-                dataItem.uid: device.serviceUid + "/Settings/UpdateInterval"
+            DelegateComponent {
+                ListSpinBox {
+                    text: "Update interval"
+                    suffix: "s"
+                    dataItem.uid: device.serviceUid + "/Settings/UpdateInterval"
+                }
             }
 
-            ListRadioButtonGroup {
-                text: "Mode"
-                dataItem.uid: device.serviceUid + "/Mode"
-                optionModel: [
-                    { display: CommonWords.off, value: 0 },
-                    { display: CommonWords.on, value: 1 },
-                ]
-                writeAccessLevel: VenusOS.User_AccessType_Installer
+            DelegateComponent {
+                ListRadioButtonGroup {
+                    text: "Mode"
+                    dataItem.uid: device.serviceUid + "/Mode"
+                    optionModel: [
+                        { display: CommonWords.off, value: 0 },
+                        { display: CommonWords.on, value: 1 },
+                    ]
+                    writeAccessLevel: VenusOS.User_AccessType_Installer
+                }
             }
 
-            ListText {
-                text: "Serial number"
-                dataItem.uid: device.serviceUid + "/Serial"
+            DelegateComponent {
                 showAccessLevel: VenusOS.User_AccessType_SuperUser
+                ListText {
+                    text: "Serial number"
+                    dataItem.uid: device.serviceUid + "/Serial"
+                }
             }
         }
     }
@@ -213,9 +241,9 @@ Page {
 
 - Always use `ListSetting`-derived types from `components/listitems/core/` — do not create ad-hoc settings rows
 - Bind `dataItem.uid` to connect UI to backend data — avoid manual value management where possible
-- Set appropriate `showAccessLevel` and `writeAccessLevel` for each item
+- Set `writeAccessLevel` on the list item. Set `showAccessLevel` on the `DelegateComponent` to omit the row at the current access level; `ListSetting` copies it for the SuperUser stripe. Do not rely on inner `showAccessLevel` alone to filter the model.
 - Check `dataItem.valid` / use the default `interactive` binding to handle disconnected states gracefully
-- Use `GradientListView` (a `BaseListView` subclass) with a `VisibleItemModel` for settings page content
+- Use `GradientListView` (a `BaseListView` subclass) with a `DelegateComponentModel` for settings page content — wrap each item in a `DelegateComponent`
 - Respect the interaction rules: never disable the item itself, always call `checkWriteAccessLevel()` before writes
 - Items that only display data (no user writes) should use `ListText` or `ListQuantity`
 - Items that navigate to sub-pages should use `ListNavigation` — it does not require write access to click

@@ -331,14 +331,22 @@ Page {
     title: "My Settings"
 
     GradientListView {
-        model: VisibleItemModel {
-            ListNavigation { text: "Sub-page"; onClicked: Global.pageManager.pushPage(subPageComponent) }
-            ListSwitch { text: "Enable feature"; dataItem.uid: settingsUid + "/Path/To/Setting" }
-            ListSpinBox { text: "Max value"; dataItem.uid: settingsUid + "/Path/To/Value" }
+        model: DelegateComponentModel {
+            DelegateComponent {
+                ListNavigation { text: "Sub-page"; onClicked: Global.pageManager.pushPage(subPageComponent) }
+            }
+            DelegateComponent {
+                ListSwitch { text: "Enable feature"; dataItem.uid: settingsUid + "/Path/To/Setting" }
+            }
+            DelegateComponent {
+                ListSpinBox { text: "Max value"; dataItem.uid: settingsUid + "/Path/To/Value" }
+            }
         }
     }
 }
 ```
+
+Access-level hiding of a DCM row is `DelegateComponent.showAccessLevel` (the model filters `DelegateComponent.effectiveVisible`). Set it on the `DelegateComponent`, not only on the list item. Non-DCM `ListSetting` rows (`delegateComponent` unset) still use their own `showAccessLevel`; see [Device Settings](.github/device-settings.md).
 
 ### Conditional UI based on backend data
 

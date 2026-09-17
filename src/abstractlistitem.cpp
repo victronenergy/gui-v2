@@ -1,4 +1,5 @@
 #include "abstractlistitem.h"
+#include "delegatecomponentmodel.h"
 
 AbstractListItem::AbstractListItem(QQuickItem *parent)
 	: QQuickControl(parent)
@@ -29,5 +30,18 @@ void AbstractListItem::setEffectiveVisible(bool effectiveVisible)
 	if (m_effectiveVisible != effectiveVisible) {
 		m_effectiveVisible = effectiveVisible;
 		Q_EMIT effectiveVisibleChanged();
+	}
+}
+
+Victron::VenusOS::DelegateComponent *AbstractListItem::delegateComponent() const
+{
+	return m_delegateComponent;
+}
+
+void AbstractListItem::setDelegateComponent(Victron::VenusOS::DelegateComponent *delegateComponent)
+{
+	if (m_delegateComponent != delegateComponent) {
+		m_delegateComponent = delegateComponent;
+		Q_EMIT delegateComponentChanged();
 	}
 }
