@@ -21,7 +21,7 @@ Item {
 
 			MockDataRandomizer {
 				active: Global.mainView && Global.mainView.mainViewVisible
-				onNotifyTotal: (totalPower) => { MockManager.setValue(uid + "/Ac/Power", totalPower) }
+				totalTargetUid: evcs.uid + "/Ac/Power"
 
 				VeQuickItem { uid: evcs.uid + "/Ac/L1/Power" }
 				VeQuickItem { uid: evcs.uid + "/Ac/L2/Power" }
