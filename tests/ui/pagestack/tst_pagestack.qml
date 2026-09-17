@@ -1,0 +1,264 @@
+/*
+** Copyright (C) 2026 Victron Energy B.V.
+** See LICENSE.txt for license information.
+*/
+
+import QtQuick
+import Victron.VenusOS
+import Victron.UiTest
+
+/*
+	Tests the navigation contract of the page stack.
+
+	These do not care whether a page is built synchronously or asynchronously.
+	They care that the stack ends up in the state the user asked for: if the user
+	leaves while a page is being opened, that page must not turn up afterwards.
+
+	This matters because building a page is slow - on a GX device the median page
+	takes over 100ms to instantiate and the worst over 700ms - so there is real
+	pressure to build them off the main thread. Doing that without cancelling a
+	push that has been superseded makes a page appear on top of wherever the user
+	navigated to instead, some time after they left.
+*/
+UiTestCase {
+	id: root
+
+	// A page that is slow to build, so that a push of it is unlikely to complete
+	// within a single event loop iteration.
+	readonly property string slowPageUrl: "/pages/settings/devicelist/battery/PageBatterySettings.qml"
+	readonly property string otherPageUrl: "/pages/settings/PageSettingsDisplayAndAppearance.qml"
+
+	window: Global.main
+
+	// Counts event loop turns, to tell whether the UI is still running.
+	property int _ticks
+
+	property Timer ticker: Timer {
+		interval: 16
+		repeat: true
+		onTriggered: root._ticks++
+	}
+
+	function initTestCase() {
+		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !!findItem(Global.mainView, { text: "Settings" }) } })
+		runSteps()
+	}
+
+	function init() {
+		// Start each test with the page stack closed.
+		addStep(UiTestStep.Invoke, { callable: ()=> { Global.pageManager.popPage(null, PageStack.Immediate); return true } })
+		addStep(UiTestStep.WaitUntil, { callable: ()=> { return _stackIsClosed() } })
+		runSteps()
+	}
+
+	function _stackIsClosed() {
+		const stack = Global.pageManager.pageStack
+		return !Global.mainView.animating && !stack.opened && stack.depth === 0
+	}
+
+	/*
+		The UI must keep running while a page is being opened.
+
+		Building a page takes over 100ms for the median page and over 700ms for the
+		worst on a GX device. If that is done in one go on the UI thread, the whole
+		application stops for that long: no timer fires, no animation advances and no
+		press is handled. So a timer must still be firing while the page is opened.
+	*/
+	function test_uiKeepsRunningWhileAPageIsOpened() {
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				root._ticks = 0
+				root.ticker.start()
+				Global.pageManager.pushPage(root.slowPageUrl)
+				return true
+			},
+			message: "Open %1".arg(root.slowPageUrl),
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.animating && Global.pageManager.pageStack.topPageUrl === root.slowPageUrl
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				root.ticker.stop()
+				console.warn("Event loop turns while the page was opened: " + root._ticks)
+				return root._ticks > 0
+			},
+			message: "The UI kept running while the page was opened",
+		})
+		runSteps()
+	}
+
+	/*
+		Opening a page must put that page on the stack.
+	*/
+	function test_pushOpensThePage() {
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.pageManager.pushPage(root.slowPageUrl); return true },
+			message: "Open %1".arg(root.slowPageUrl),
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.animating && Global.pageManager.pageStack.topPageUrl === root.slowPageUrl
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { return Global.pageManager.pageStack.depth === 1 },
+			message: "The opened page is the only page on the stack",
+		})
+		runSteps()
+	}
+
+	/*
+		Leaving while a page is being opened must not leave that page behind.
+
+		Regression test: with the page built asynchronously and no cancellation of
+		the in-flight build, the page is pushed once it finishes, re-opening the
+		page stack that the user has already closed.
+	*/
+	function test_pushSupersededByLeavingDoesNotOpen() {
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				Global.pageManager.pushPage(root.slowPageUrl)
+				// Leave again straight away, without giving the page a chance to open.
+				Global.pageManager.popPage(null, PageStack.Immediate)
+				return true
+			},
+			message: "Open %1 and immediately leave".arg(root.slowPageUrl),
+		})
+		// Give any in-flight build ample time to complete and push itself.
+		addStep(UiTestStep.Wait, { timeout: 3000 })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { return _stackIsClosed() },
+			message: "The page stack is still closed",
+		})
+		runSteps()
+	}
+
+	/*
+		Swiping to another main page while a page is being opened must not leave that
+		page behind either.
+
+		While the page stack is closed the user can leave without touching the stack
+		at all, just by swiping between the main pages, so the stack cannot rely on
+		being told.
+	*/
+	function test_pushSupersededBySwipingAwayDoesNotOpen() {
+		const startIndex = Global.mainView.swipeView.currentIndex
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				Global.pageManager.pushPage(root.slowPageUrl)
+				Global.mainView.swipeView.setCurrentIndex(startIndex === 0 ? 1 : startIndex - 1)
+				return true
+			},
+			message: "Open %1 and immediately swipe to another main page".arg(root.slowPageUrl),
+		})
+		addStep(UiTestStep.Wait, { timeout: 3000 })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { return _stackIsClosed() },
+			message: "The page stack is still closed",
+		})
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.mainView.swipeView.setCurrentIndex(startIndex); return true },
+			message: "Swipe back",
+		})
+		runSteps()
+	}
+
+	/*
+		Leaving while a page is being opened must not make the stack ignore what the
+		user does next.
+
+		Abandoning the build has to happen when the user leaves, not when the build
+		eventually finishes. Otherwise the stack counts as busy for the rest of the
+		build and silently drops the next thing the user asks for on the page they
+		moved to, which on a GX device is most of a second.
+	*/
+	function test_leavingDuringAnOpenDoesNotBlockTheNextOne() {
+		const startIndex = Global.mainView.swipeView.currentIndex
+		// Separate steps, because these are separate things the user does: leaving and
+		// then pressing something on the page they moved to.
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.pageManager.pushPage(root.slowPageUrl); return true },
+			message: "Open %1".arg(root.slowPageUrl),
+		})
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.mainView.swipeView.setCurrentIndex(startIndex === 0 ? 1 : startIndex - 1); return true },
+			message: "Swipe to another main page while it is still being built",
+		})
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.pageManager.pushPage(root.otherPageUrl); return true },
+			message: "Open %1 from the page moved to".arg(root.otherPageUrl),
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.animating && Global.pageManager.pageStack.topPageUrl === root.otherPageUrl
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				return Global.pageManager.pageStack.depth === 1
+						&& Global.pageManager.pageStack.topPageUrl === root.otherPageUrl
+			},
+			message: "The second page opened, and the abandoned one did not",
+		})
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.pageManager.popPage(null, PageStack.Immediate); return true },
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> { return _stackIsClosed() } })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.mainView.swipeView.setCurrentIndex(startIndex); return true },
+			message: "Swipe back",
+		})
+		runSteps()
+	}
+
+	/*
+		A page opened from the ready callback of another page must open too.
+
+		MainView.goToConnectivityPage() is the one caller that needs the page it just
+		asked for: it opens the connectivity page and then tells that page to open one
+		of its own sub-pages. That second request is made from inside the completion of
+		the first, which is the awkward moment for a stack that only builds one page at
+		a time.
+	*/
+	function test_pageOpenedFromAReadyCallbackOpens() {
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.mainView.goToConnectivityPage("wifi"); return true },
+			message: "Go to the Wi-Fi page via the connectivity page",
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.animating
+					&& Global.pageManager.pageStack.topPageUrl === "/pages/settings/PageSettingsWifi.qml"
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { return Global.pageManager.pageStack.depth === 2 },
+			message: "Both the connectivity page and the Wi-Fi page are on the stack",
+		})
+		runSteps()
+	}
+
+	/*
+		Opening a second page while the first is still being opened must not leave
+		both on the stack, nor leave the wrong one on top.
+	*/
+	function test_pushSupersededByAnotherPush() {
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				Global.pageManager.pushPage(root.slowPageUrl)
+				Global.pageManager.pushPage(root.otherPageUrl)
+				return true
+			},
+			message: "Open two pages in the same turn",
+		})
+		addStep(UiTestStep.Wait, { timeout: 3000 })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				const stack = Global.pageManager.pageStack
+				// Whichever push wins, the stack must be consistent: the page on top
+				// must be the url the stack reports, and there must be no page that
+				// arrived after the one on top.
+				return stack.depth > 0
+						&& !!stack.currentPage
+						&& stack.topPageUrl === (stack.depth === 2 ? root.otherPageUrl : root.slowPageUrl)
+			},
+			message: "The stack and its reported top page url agree",
+		})
+		runSteps()
+	}
+}
