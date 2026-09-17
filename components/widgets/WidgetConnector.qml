@@ -24,6 +24,9 @@ Item {
 	property alias expanded: connectorPath.expanded
 	property bool animateGeometry
 	required property bool animationEnabled
+	// User/system animation preference, excluding navigation pauses. Electron delegates stay
+	// alive while page transitions temporarily set animationEnabled to false.
+	readonly property bool animationsConfigured: Global.animationEnabled
 	readonly property bool defaultVisible: startWidget.visible && endWidget.visible && _initialized
 
 	required property FrameAnimation frameAnimation
@@ -63,7 +66,7 @@ Item {
 		// Sets the distance between electrons (i.e. how often to spawn a new electron)
 		// Use a min value to ensure at least one electron is shown for short connectors
 		const electronTravelDistance = Math.max(Theme.geometry_overviewPage_connector_electron_interval, _electronTravelDistance)
-		const modelCount = animationEnabled
+		const modelCount = animationsConfigured
 			? Math.floor(electronTravelDistance / Theme.geometry_overviewPage_connector_electron_interval)
 			: 1 // show just one arrow, if animations are disabled.
 
@@ -89,6 +92,7 @@ Item {
 
 	visible: defaultVisible
 	on_AnimatedChanged: Qt.callLater(_resetDistance)
+	onAnimationsConfiguredChanged: Qt.callLater(_resetDistance)
 
 	// When electronsParent is set, all electrons render in a separate container above all paths,
 	// so this z ordering only affects stacking of path shapes within the paths container.
@@ -234,9 +238,9 @@ Item {
 				delegate: Image {
 					// The opacity is owned by pathUpdater, which starts the electron faded
 					// out and fades it in and out at the ends of the path.
-					source: animationEnabled ? "qrc:/images/electron.svg" : "qrc:/images/electron_arrow.svg"
+					source: root.animationsConfigured ? "qrc:/images/electron.svg" : "qrc:/images/electron_arrow.svg"
 					visible: root.animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated
-					rotation: animationEnabled ? 0.0 : pathUpdater.angleForArrow(pathUpdater.progress, pathUpdater.startToEnd)
+					rotation: root.animationsConfigured ? 0.0 : pathUpdater.angleForArrow(pathUpdater.progress, pathUpdater.startToEnd)
 
 					Component.onCompleted: pathUpdater.add(this)
 					Component.onDestruction: pathUpdater.remove(this)
@@ -263,7 +267,7 @@ Item {
 		property real normalizedElapsed: 1000 * root.frameAnimation.animationElapsed / pathUpdater.duration
 		readonly property real loopedElapsed: normalizedElapsed - Math.trunc(normalizedElapsed)
 		readonly property bool startToEnd: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
-		progress: root.animationEnabled ? (startToEnd ? loopedElapsed : 1.0 - loopedElapsed) : 0.515
+		progress: root.animationsConfigured ? (startToEnd ? loopedElapsed : 1.0 - loopedElapsed) : 0.515
 
 		animationMode: root.animationMode
 		fadeDuration: Theme.animation_overviewPage_connector_fade_duration
