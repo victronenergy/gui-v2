@@ -169,9 +169,9 @@ Main.qml (Window)
 ### PageManager
 
 `PageManager.qml` orchestrates navigation:
-- `pushPage(url, properties)` — push a sub-page onto the PageStack
+- `pushPage(obj, properties, operation, readyCallback)` — push a URL, Component, or already-constructed page onto the PageStack. URL and Component pages are built asynchronously and the call returns null; pass `readyCallback` to receive the page once it is on the stack (not called if the push is abandoned)
 - `popPage()` / `popAllPages()` — navigate back
-- `goToStartPage()` — navigate to user-configured start page
+- `goToStartPage()` — navigate to the user-configured start page (a main swipe page plus at most one PageStack page; only `stack[0]` is pushed)
 - Manages idle mode transitions (hide NavBar, full-screen page)
 
 ### PageStack
@@ -179,6 +179,8 @@ Main.qml (Window)
 `components/PageStack.qml` (extends StackView) handles drill-down navigation with slide animations. Used for:
 - Overview widget drill-downs (e.g. clicking Battery widget → battery detail page)
 - Settings sub-pages (e.g. Settings → Display → Brightness)
+
+URL pages are compiled with `Qt.createComponent(..., Asynchronous)` and then incubated; Component-valued pages are incubated the same way. Only one page is in flight: leaving the origin discards it, and a push while another is being built is ignored. `MainView.allowPageAnimations` is false while `pageStack.animating` (wanted build or slide) or `pageStack.incubating` (including abandoned incubators) so Overview/Brief gauges and electrons pause and do not starve leftover incubation on GX. Abandoned incubators do not set `animating`, so they do not block the next `pushPage()`. Press ripples do not use that flag. `PageStack.animationDuration` uses `Global.animationEnabled`, not `allowPageAnimations`, so that pause does not collapse the stack's own slide to 0 ms.
 
 ### SwipeViewPage
 
@@ -209,7 +211,7 @@ components/
 All pages must extend `components/Page.qml` (a FocusScope):
 - `title: string` — displayed in StatusBar breadcrumbs
 - `isCurrentPage: bool` — true when this page is visible
-- `animationEnabled: bool` — tracks whether animations should run
+- `animationEnabled: bool` — content animations (gauges, electrons); follows `MainView.allowPageAnimations` and `isCurrentPage`. Press feedback does not use this.
 - `topLeftButton` / `topRightButton` — configure StatusBar buttons
 - `tryPop: function` — optional guard called before page is popped
 

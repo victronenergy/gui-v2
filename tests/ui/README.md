@@ -53,7 +53,7 @@ venus-gui-v2 --mock --mock-conf barebones --ui-test smoke/generic-capture
 UI tests are stored under `gui-v2/tests/ui`:
 
 * `gui-v2/tests/ui/smoke` - "smoke tests", i.e. those run as a quick sanity check on the UI
-* `gui-v2/tests/ui/<feature>` - feature test that verifies some feature in more detail
+* `gui-v2/tests/ui/<feature>` - feature test that verifies some feature in more detail (e.g. `pagestack` for the async push/abandon/readyCallback contract)
 
 Each test is specified by a JSON configuration file, and one or more QML test files. The JSON file must have the same name as the test directory.
 
@@ -116,7 +116,9 @@ UiTestCase {
 }
 ```
 
-Here, `test_overview` clicks the "Overview" button in the bottom navigation bar, waits until the stack view has animated the Overview page into view, then captures the overview page as an image named "overview". The `CaptureAndCompare` step compares the captured image against the "overview" image for the test, if one has been saved from a previous run.
+Here, `test_overview` clicks the "Overview" button in the bottom navigation bar, waits until navigation has settled, then captures the overview page as an image named "overview". The `CaptureAndCompare` step compares the captured image against the "overview" image for the test, if one has been saved from a previous run.
+
+`Global.mainView.animating` is true while a PageStack page is still being compiled or incubated, not only while a slide is running. After clicking a `ListNavigation` item, wait until `!Global.mainView.animating` **and** `currentPage` is no longer the page you clicked from: during the build, `pageStack.currentPage` is null until the stack is fully opened, so `MainView.currentPage` stays on the origin. Do not treat `listView.parent` as the page (`ListView.parent` is the content item).
 
 NOTE: `runSteps()` is an asynchronous call. If you have any code after that call, that code will be executed before the steps have even started! If you need to run some code after the steps have completed, pass a callback to `runSteps()` instead.
 

@@ -90,6 +90,9 @@ QtObject {
 				message: "Click menu: %1".arg(subMenuText),
 			})
 			const fromPage = Global.mainView.currentPage
+			// pushPage is async: animating covers compile/incubate as well as the
+			// slide. currentPage stays on fromPage until the stack is fully opened
+			// (pageStack.currentPage is null until then). Do not use listView.parent.
 			testCase.addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating && !!Global.mainView.currentPage && Global.mainView.currentPage !== fromPage } })
 			testCase.runSteps(_captureNext, [imageNameSequence, subMenuText])
 		} else {

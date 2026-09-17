@@ -27,14 +27,16 @@ FocusScope {
 	property bool mainViewVisible: UiConfig.applicationVisible && !UiConfig.splashScreenVisible
 	onMainViewVisibleChanged: if (mainViewVisible) console.info("MainView: UI loaded and visible")
 
-	// To reduce the animation load, disable page animations when the PageStack is transitioning
-	// between pages, or when flicking between the main pages. Note that animations are still
-	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
-	// when the user drags slowly between pages.
+	// Pause gauges/electrons while the stack is sliding or incubating a page
+	// (including abandoned incubators), and while flicking between main pages.
+	// Qt incubates only in leftover frame time; those animations can fill the
+	// gui thread budget so the new page never appears. Press feedback does not
+	// use this flag. Keep animations on during a slow drag.
 	readonly property bool allowPageAnimations: Global.animationEnabled
-									   && mainViewVisible
-									   && !pageStack.animating && (!swipeView || !swipeView.flicking)
-									   && !Theme.adjustingGeometry
+			&& mainViewVisible
+			&& !pageStack.animating && !pageStack.incubating
+			&& (!swipeView || !swipeView.flicking)
+			&& !Theme.adjustingGeometry
 
 	// True if any of the view animations are running.
 	readonly property bool animating: pageStack.animating || swipeView?.flicking || swipeView?.moving

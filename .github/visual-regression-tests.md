@@ -232,6 +232,7 @@ tests/ui/
 - **Mock timers must be off** (`TimersActive: false`) to prevent animated data values from changing between captures
 - **Stabilization**: pages with asynchronous content (Repeaters, Loaders) may take multiple frames to stabilize. The system retries captures until the image is stable (consecutive captures are identical)
 - **RecursivePageCapture limitations**: it does not click buttons or radio buttons (only `ListNavigation` items), because buttons may have write side-effects that alter the UI state
+- **Async page pushes**: after each `ListNavigation` click, RecursivePageCapture waits until `!Global.mainView.animating` and `currentPage` is no longer the page that was clicked from. `animating` includes PageStack compilation/incubation, not only the slide. During the build, `pageStack.currentPage` is null until the stack is fully opened, so `MainView.currentPage` stays on the origin. Do not use `listView.parent` as the page (`ListView.parent` is the content item).
 - **Debug logging**: set `"Logging": "debug"` in the test JSON to see detailed output when `findItem()` calls fail
 
 ## C++ infrastructure
