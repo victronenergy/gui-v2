@@ -76,7 +76,7 @@ UiTestCase {
 		} })
 		for (let i = 0; i < pageUrls.length; ++i) {
 			const url = pageUrls[i]
-			addStep(UiTestStep.Invoke, { callable: ()=> { root._measurePage(pass, url); return true } })
+			addStep(UiTestStep.Invoke, { callable: ()=> { return root._measurePage(pass, url) } })
 			addStep(UiTestStep.Wait, { timeout: root._teardownWait })
 		}
 		addStep(UiTestStep.Invoke, { callable: ()=> {
@@ -95,13 +95,15 @@ UiTestCase {
 			// and that instance destroyed, before the timed loop starts.
 			addStep(UiTestStep.Invoke, { callable: ()=> {
 				const warm = component.createObject(root)
-				if (warm) {
-					warm.destroy()
+				if (!warm) {
+					console.warn("COMPBENCH-FAIL\t" + name + "\twarm-up createObject returned null")
+					return false
 				}
+				warm.destroy()
 				return true
 			} })
 			addStep(UiTestStep.Wait, { timeout: root._teardownWait })
-			addStep(UiTestStep.Invoke, { callable: ()=> { root._benchComponent(name, component); return true } })
+			addStep(UiTestStep.Invoke, { callable: ()=> { return root._benchComponent(name, component) } })
 			addStep(UiTestStep.Wait, { timeout: root._teardownWait })
 		}
 	}
@@ -136,7 +138,14 @@ UiTestCase {
 	Component { id: listItemComponent; ListItem {} }
 	Component { id: listSettingComponent; ListSetting { text: "abc" } }
 	Component { id: listNavigationComponent; ListNavigation { text: "abc" } }
-	Component { id: settingsListNavigationComponent; SettingsListNavigation { text: "abc" } }
+	Component {
+		id: settingsListNavigationComponent
+		SettingsPage.SettingsListNavigation {
+			text: "abc"
+			pageSource: "/pages/settings/PageSettingsGeneral.qml"
+			pageIconSource: "qrc:/images/icon_general_32.svg"
+		}
+	}
 	Component { id: listSwitchComponent; ListSwitch { text: "abc" } }
 	Component { id: listQuantityComponent; ListQuantity { text: "abc" } }
 	Component { id: listRadioButtonGroupComponent; ListRadioButtonGroup { text: "abc" } }
@@ -146,37 +155,93 @@ UiTestCase {
 		const objects = []
 		const t0 = Date.now()
 		for (let i = 0; i < N; ++i) {
-			objects.push(component.createObject(root))
+			const object = component.createObject(root)
+			if (!object) {
+				console.warn("COMPBENCH-FAIL\t" + name + "\tcreateObject returned null")
+				for (let j = 0; j < objects.length; ++j) {
+					objects[j].destroy()
+				}
+				return false
+			}
+			objects.push(object)
 		}
 		const t1 = Date.now()
 		console.warn("COMPBENCH\t" + ((t1 - t0) / N).toFixed(3) + "\t" + name)
 		for (let i = 0; i < objects.length; ++i) {
-			if (objects[i]) {
-				objects[i].destroy()
-			}
+			objects[i].destroy()
 		}
+		return true
 	}
 
 	property int _totalCompile
 	property int _totalCreate
 	property int _measured
 
+	FilteredDeviceModel {
+		id: benchAcLoadDevices
+		serviceTypes: ["acload", "evcharger", "heatpump"]
+	}
+	FilteredDeviceModel {
+		id: benchDcSystemLoads
+		serviceTypes: ["dcsystem"]
+	}
+	FilteredDeviceModel {
+		id: benchDcNonSystemLoads
+	}
+
+	function _uid(serviceName) {
+		return BackendConnection.uidPrefix() + "/" + serviceName
+	}
+
+	function _pageProperties(url) {
+		switch (url) {
+		case "/pages/settings/devicelist/battery/PageBattery.qml":
+		case "/pages/settings/devicelist/battery/PageBatterySettings.qml":
+			return { bindPrefix: _uid("com.victronenergy.battery.ttyUSB1") }
+		case "/pages/settings/devicelist/ac-in/PageAcIn.qml":
+			return { bindPrefix: _uid("com.victronenergy.pvinverter.socketcan_vecan0_vi0_uc451502") }
+		case "/pages/vebusdevice/PageVeBus.qml":
+			return { bindPrefix: _uid("com.victronenergy.vebus.ttyS2") }
+		case "/pages/solar/SolarDevicePage.qml":
+			return { serviceUid: _uid("com.victronenergy.solarcharger.ttyO0") }
+		case "/pages/evcs/EvChargerPage.qml":
+			return { bindPrefix: _uid("com.victronenergy.evcharger.evc_ABC123456") }
+		case "/pages/settings/devicelist/inverter/PageInverter.qml":
+			return { bindPrefix: _uid("com.victronenergy.inverter.socketcan_can0_vi0_uc87197") }
+		case "/pages/loads/AcLoadListPage.qml":
+			return {
+				measurements: Global.system.load.ac,
+				model: benchAcLoadDevices
+			}
+		case "/pages/loads/DcLoadListPage.qml":
+			return {
+				systemModel: benchDcSystemLoads,
+				nonSystemModel: benchDcNonSystemLoads
+			}
+		default:
+			return {}
+		}
+	}
+
 	function _measurePage(pass, url) {
 		const t0 = Date.now()
 		const component = Qt.createComponent("qrc:/qt/qml/Victron/VenusOS" + url)
 		const t1 = Date.now()
 		if (component.status !== Component.Ready) {
-			console.warn("PAGEBENCH-SKIP\t" + url + "\t" + component.errorString())
-			return
+			console.warn("PAGEBENCH-FAIL\t" + url + "\t" + component.errorString())
+			return false
 		}
-		const page = component.createObject(null, {})
+		const page = component.createObject(null, _pageProperties(url))
 		const t2 = Date.now()
+		if (!page) {
+			console.warn("PAGEBENCH-FAIL\t" + url + "\tcreateObject returned null")
+			return false
+		}
 		console.warn("PAGEBENCH\t" + pass + "\t" + (t1 - t0) + "\t" + (t2 - t1) + "\t" + url)
 		root._totalCompile += t1 - t0
 		root._totalCreate += t2 - t1
 		root._measured++
-		if (page) {
-			page.destroy()
-		}
+		page.destroy()
+		return true
 	}
 }

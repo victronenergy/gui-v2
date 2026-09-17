@@ -111,8 +111,10 @@ Key settings:
 - **`TimersActive: false`** — Mock data timers are disabled so that label/value
   updates do not cause rendering work unrelated to the animations being
   measured.
-- **`UIAnimations: 1`** — Animations are enabled so the electron flow arrows
-  run continuously, driving the render loop.
+- **`UIAnimations: 1`** — Opt-in so `/Settings/Gui2/UIAnimations` stays enabled
+  after mock load. UI tests force that setting to 0 unless this key is present;
+  `--animationEnabled` alone does not override it. The overview test asserts
+  that animations are actually running before it holds for capture.
 - **`ExitWhenFinished: false`** — The application stays alive after the test
   completes (allowing the script to control the run duration via process
   termination).
@@ -134,20 +136,21 @@ transition to complete, then holds for 30 seconds while the animations run.
 | Metric | Meaning |
 |--------|---------|
 | `sync_ms` | CPU time spent synchronising the QML scene graph with the render thread |
-| `render_ms` | GPU time spent drawing the frame |
+| `render_ms` | CPU-side elapsed render work/submission. This is **not** a GPU timestamp; Qt 6.8.3 reports GPU timestamps separately when available. |
 | `swap_ms` | Time waiting for buffer swap (vsync) |
-| `total_ms` | Sum of sync + render + swap |
-| `fps_avg` | `1000 / total_avg` — effective frame rate |
+| `total_ms` | Sum of sync + render + swap. Stage work only — it omits time between render-loop invocations, including GUI-thread stalls. |
+| `stage_sum_fps` | `1000 / total_avg`. **Not measured display FPS.** Do not treat it as panel refresh rate. |
 
 On desktop hardware the GPU render time is typically <1 ms and the CPU sync
 time dominates (~14 ms).  The optimisations target embedded GX hardware where
 the GPU is the bottleneck.
 
 Key metrics to watch:
-- **Total p95 / p99** — steady-state frame time under load
+- **Total p95 / p99** — steady-state stage time under load
 - **Total max** — worst-case stall (affects perceived smoothness)
-- **Frame count** — fewer frames with equal fps may indicate the render loop
-  skips unnecessary repaints (a positive sign)
+- **Frame count** — fewer frames with similar stage times may indicate the
+  render loop skips unnecessary repaints (a positive sign). This is not a
+  substitute for presentation-interval / heartbeat-gap measurement.
 
 ## Typical comparison workflow
 
@@ -175,9 +178,11 @@ python scripts/benchmark-overview.py compare -a baseline.csv -b feature.csv
 
 `--ui-test benchmark/pages` measures how long pages take to construct, which is
 what determines the delay between pressing a settings entry or an Overview
-widget and the page appearing.  `PageStack.pushPage()` compiles and instantiates
-the whole page synchronously before the push transition starts, so this time is
-a hard freeze of the UI.
+widget and the page appearing.  `PageStack.pushPage()` still compiles a URL
+page with synchronous `Qt.createComponent()` on first use; instantiation is
+then incubated asynchronously, so the rest of the UI can run while the user
+waits.  Construction time is therefore input-to-ready latency, not necessarily
+a hard freeze of the whole application.
 
 ```bash
 ./venus-gui-v2 --mock --skip-splash --ui-test benchmark/pages
@@ -189,7 +194,7 @@ It emits three kinds of line on stderr:
 |------|---------|
 | `PAGEBENCH <pass> <compile> <instantiate> <url>` | Per page, in ms. The `cold` pass includes QML compilation; the `warm` pass is instantiation only, since Qt caches the compiled unit. |
 | `PAGEBENCH-TOTAL <pass> <pages> <compile> <instantiate>` | Totals for the pass. |
-| `COMPBENCH <ms> <type>` | Average construction cost of one instance of a list item type. Settings pages are built almost entirely out of these, so this is where a page's instantiation time goes. The types are declared as Components in the test, so this measures constructing one, not compiling it. |
+| `COMPBENCH <ms> <type>` | Average construction cost of one instance of a list item type. Settings pages are built almost entirely out of these, so this is where a page's instantiation time goes. The types are declared as Components in the test, so this measures constructing one, not compiling it. `SettingsListNavigation` is the production inline type `SettingsPage.SettingsListNavigation`. A null `createObject()` fails the sample rather than recording it. |
 
 The page list is deliberately a small, representative sample — the Overview
 widget drilldowns plus the most-used settings pages — rather than every page in
