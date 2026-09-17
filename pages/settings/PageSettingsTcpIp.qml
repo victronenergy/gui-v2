@@ -15,7 +15,7 @@ Page {
 
 	GradientListView {
 		id: settingsListView
-		model: networkServices.ready ? connectedModel : disconnectedModel
+		model: networkServices.networkState !== "idle" && networkServices.networkState !== "" ? connectedModel : disconnectedModel
 	}
 
 	VisibleItemModel {
