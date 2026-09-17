@@ -33,7 +33,7 @@ FocusScope {
 	// when the user drags slowly between pages.
 	readonly property bool allowPageAnimations: Global.animationEnabled
 									   && mainViewVisible
-									   && !pageStack.animating && (!swipeView || !swipeView.flicking)
+									   && !pageStack.transitioning && (!swipeView || !swipeView.flicking)
 									   && !Theme.adjustingGeometry
 
 	// True if any of the view animations are running.
