@@ -25,12 +25,10 @@ Page {
 		trackerIndex: 0
 		trackerCount: solarDevice.trackerCount
 	}
-
 	VeQuickItem {
 		id: overallYieldToday
 		uid: root.serviceUid + "/History/Daily/0/Yield"
 	}
-
 	VeQuickItem {
 		id: stateItem
 		uid: solarDevice.serviceUid + "/State"
@@ -125,53 +123,62 @@ Page {
 			}
 		}
 
-		model: VisibleItemModel {
-			ListQuantityGroup {
-				text: CommonWords.battery
-				model: QuantityObjectModel {
-					QuantityObject { object: batteryVoltage; unit: VenusOS.Units_Volt_DC }
-					QuantityObject { object: batteryCurrent; unit: VenusOS.Units_Amp }
-				}
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListQuantityGroup {
+					text: CommonWords.battery
+					model: QuantityObjectModel {
+						QuantityObject { object: batteryVoltage; unit: VenusOS.Units_Volt_DC }
+						QuantityObject { object: batteryCurrent; unit: VenusOS.Units_Amp }
+					}
 
-				VeQuickItem {
-					id: batteryVoltage
-					uid: solarDevice.serviceUid + "/Dc/0/Voltage"
-				}
+					VeQuickItem {
+						id: batteryVoltage
+						uid: solarDevice.serviceUid + "/Dc/0/Voltage"
+					}
 
-				VeQuickItem {
-					id: batteryCurrent
-					uid: solarDevice.serviceUid + "/Dc/0/Current"
-				}
+					VeQuickItem {
+						id: batteryCurrent
+						uid: solarDevice.serviceUid + "/Dc/0/Current"
+					}
 
-			}
-
-			ListRelayState {
-				dataItem.uid: solarDevice.serviceUid + "/Relay/0/State"
-			}
-
-			ListText {
-				text: CommonWords.error
-				dataItem.uid: solarDevice.serviceUid + "/ErrorCode"
-				secondaryText: ChargerError.description(dataItem.value)
-			}
-
-			ListNavigation {
-				text: CommonWords.history
-				preferredVisible: daysAvailable.valid && daysAvailable.value > 0
-				onClicked: {
-					Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
-							{ "serviceUid": solarDevice.serviceUid })
-				}
-
-				VeQuickItem {
-					id: daysAvailable
-					uid: solarDevice.serviceUid + "/History/Overall/DaysAvailable"
 				}
 			}
 
-			ListNavigation {
-				id: productPageLink
+			DelegateComponent {
+				ListRelayState {
+					dataItem.uid: solarDevice.serviceUid + "/Relay/0/State"
+				}
+			}
 
+			DelegateComponent {
+				ListText {
+					text: CommonWords.error
+					dataItem.uid: solarDevice.serviceUid + "/ErrorCode"
+					secondaryText: ChargerError.description(dataItem.value)
+				}
+			}
+
+			DelegateComponent {
+				id: daysAvailableDC
+				dataItem: VeQuickItem { uid: solarDevice.serviceUid + "/History/Overall/DaysAvailable" }
+				preferredVisible: daysAvailableDC.dataItem.valid && daysAvailableDC.dataItem.value > 0
+				ListNavigation {
+					text: CommonWords.history
+					onClicked: {
+						Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
+								{ "serviceUid": solarDevice.serviceUid })
+					}
+
+					VeQuickItem {
+						id: daysAvailable
+						uid: solarDevice.serviceUid + "/History/Overall/DaysAvailable"
+					}
+				}
+			}
+
+			DelegateComponent {
+				id: productPageLinkDC
 				readonly property string pageUrl: {
 					const serviceType = BackendConnection.serviceTypeFromUid(solarDevice.serviceUid)
 					if (serviceType === "solarcharger") {
@@ -184,11 +191,12 @@ Page {
 						return ""
 					}
 				}
-
-				text: CommonWords.product_page
-				preferredVisible: pageUrl.length > 0
-				onClicked: {
-					Global.pageManager.pushPage(pageUrl, { title: text, bindPrefix: solarDevice.serviceUid })
+				preferredVisible: productPageLinkDC.pageUrl.length > 0
+				ListNavigation {
+					text: CommonWords.product_page
+					onClicked: {
+						Global.pageManager.pushPage(productPageLinkDC.pageUrl, { title: text, bindPrefix: solarDevice.serviceUid })
+					}
 				}
 			}
 		}

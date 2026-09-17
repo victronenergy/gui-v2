@@ -11,6 +11,31 @@ SettingsColumn {
 
 	required property string bindPrefix
 
+	VeQuickItem {
+		id: nrOfDeepDischargesItem
+		uid: root.bindPrefix + "/History/Cumulative/User/NrOfDeepDischarges"
+	}
+	VeQuickItem {
+		id: nrOfPowerupsItem
+		uid: root.bindPrefix + "/History/Cumulative/User/NrOfPowerups"
+	}
+	VeQuickItem {
+		id: cyclesCompletedItem
+		uid: root.bindPrefix + "/History/Cumulative/User/CyclesCompleted"
+	}
+	VeQuickItem {
+		id: cyclesStartedItem
+		uid: root.bindPrefix + "/History/Cumulative/User/CyclesStarted"
+	}
+	VeQuickItem {
+		id: chargedAhItem
+		uid: root.bindPrefix + "/History/Cumulative/User/ChargedAh"
+	}
+	VeQuickItem {
+		id: operationTimeItem
+		uid: root.bindPrefix + "/History/Cumulative/User/OperationTime"
+	}
+
 	preferredVisible: overallHistory.preferredVisible || chargeCycleHistory.preferredVisible
 
 	ListNavigation {
@@ -28,52 +53,65 @@ SettingsColumn {
 			model: overallHistoryModel
 		}
 
-		VisibleItemModel {
+		DelegateComponentModel {
 			id: overallHistoryModel
 
-			ListText {
-				//% "Operation time"
-				text: qsTrId("alternator_wakespeed_operation_time")
-				secondaryText: Utils.secondsToString(dataItem.value, true)
-				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/OperationTime"
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				preferredVisible: operationTimeItem.valid
+
+				ListText {
+					//% "Operation time"
+					text: qsTrId("alternator_wakespeed_operation_time")
+					secondaryText: Utils.secondsToString(dataItem.value, true)
+					dataItem.uid: root.bindPrefix + "/History/Cumulative/User/OperationTime"
+				}
 			}
 
-			ListQuantity {
-				//% "Charged Ah"
-				text: qsTrId("alternator_wakespeed_charged_ah")
-				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/ChargedAh"
-				unit: VenusOS.Units_AmpHour
-				decimals: 0
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				preferredVisible: chargedAhItem.valid
+				ListQuantity {
+					//% "Charged Ah"
+					text: qsTrId("alternator_wakespeed_charged_ah")
+					dataItem.uid: root.bindPrefix + "/History/Cumulative/User/ChargedAh"
+					unit: VenusOS.Units_AmpHour
+					decimals: 0
+				}
 			}
 
-			ListText {
-				//% "Cycles started"
-				text: qsTrId("alternator_wakespeed_cycles_started")
-				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesStarted"
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				preferredVisible: cyclesStartedItem.valid
+				ListText {
+					//% "Cycles started"
+					text: qsTrId("alternator_wakespeed_cycles_started")
+					dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesStarted"
+				}
 			}
 
-			ListText {
-				//% "Cycles completed"
-				text: qsTrId("alternator_wakespeed_cycles_completed")
-				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesCompleted"
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				preferredVisible: cyclesCompletedItem.valid
+				ListText {
+					//% "Cycles completed"
+					text: qsTrId("alternator_wakespeed_cycles_completed")
+					dataItem.uid: root.bindPrefix + "/History/Cumulative/User/CyclesCompleted"
+				}
 			}
 
-			ListText {
-				//% "Number of power-ups"
-				text: qsTrId("alternator_wakespeed_nr_of_power_ups")
-				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfPowerups"
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				preferredVisible: nrOfPowerupsItem.valid
+				ListText {
+					//% "Number of power-ups"
+					text: qsTrId("alternator_wakespeed_nr_of_power_ups")
+					dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfPowerups"
+				}
 			}
 
-			ListText {
-				//% "Number of deep discharges"
-				text: qsTrId("alternator_wakespeed_nr_of_deep_discharges")
-				dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfDeepDischarges"
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				preferredVisible: nrOfDeepDischargesItem.valid
+				ListText {
+					//% "Number of deep discharges"
+					text: qsTrId("alternator_wakespeed_nr_of_deep_discharges")
+					dataItem.uid: root.bindPrefix + "/History/Cumulative/User/NrOfDeepDischarges"
+				}
 			}
 		}
 

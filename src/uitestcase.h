@@ -73,6 +73,10 @@ public:
 	// Looks in the object tree of the given sourceObject, and returns the first child object (or
 	// the given object, if it matches) with the specified property values, and the given typeName
 	// (if specified).
+	//
+	// QObject::children() is not enough for ListView/Repeater: DelegateComponentModel delegates
+	// and Repeater items are visual children (QQuickItem::childItems()) without being QObject
+	// children of that view. Those visual children are searched as well.
 	Q_INVOKABLE QObject *findObject(
 			QObject *sourceObject,
 			const QVariantMap &params,

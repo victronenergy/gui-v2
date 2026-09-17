@@ -93,12 +93,18 @@ StackView {
 
 		'obj' is either a page url or an already-constructed page object.
 
-		A page pushed by url is built asynchronously. Building one is slow: on a
-		Cerbo GX the median page takes 329ms to instantiate and the worst 691ms,
-		and building it synchronously blocked the UI thread for that long, so
-		the whole application stopped responding until the page was ready. Building
-		it a piece at a time between frames instead leaves the application running
-		while the user waits, and the page is pushed once it is complete.
+		A page pushed by url is built asynchronously. Building one is slow: before the
+		port to DelegateComponentModel the median page took 329ms to instantiate on a
+		Cerbo GX and the worst 691ms, and building it synchronously blocked the UI
+		thread for that long, so the whole application stopped responding until the
+		page was ready. Building it a piece at a time between frames instead leaves
+		the application running while the user waits, and the page is pushed once it
+		is complete.
+
+		Lazy delegate construction has since cut those figures to a 195ms median and
+		481ms worst, so the block this avoids is smaller than it was — but it is
+		still far more than a frame, and it is the pages that are slowest to build
+		that the user is most likely to notice.
 
 		Note that the Qt.createComponent() call is still synchronous, so the first
 		time a given page is opened the UI does still block while the page is

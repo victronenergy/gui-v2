@@ -15,63 +15,77 @@ Page {
 		id: lastError
 		uid: root.modbustcpServiceUid + "/LastError/Message"
 	}
-
 	VeQuickItem {
 		id: timestamp
 		uid: root.modbustcpServiceUid + "/LastError/Timestamp"
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListSwitch {
-				id: enableModbusTcp
+		model: DelegateComponentModel {
+			DelegateComponent {
+				id: enableModbusTcpDC
+				dataItem: VeQuickItem { uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus" }
+				property bool checked: dataItem.value === 1
+				ListSwitch {
+					id: enableModbusTcp
 
-				//% "Enable Modbus TCP Server"
-				text: qsTrId("settings_modbus_enable_modbus_tcp")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+					//% "Enable Modbus TCP Server"
+					text: qsTrId("settings_modbus_enable_modbus_tcp")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+				}
 			}
 
-			ListRadioButtonGroup {
-				//% "Access permissions"
-				text: qsTrId("settings_modbus_access_rights")
-				preferredVisible: enableModbusTcp.checked
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/ModbusServer/ReadWrite"
-				optionModel: [
-					//% "Write allowed"
-					{ display: qsTrId("settings_modbus_access_readwrite"), value: 1 },
-					//% "Read only"
-					{ display: qsTrId("settings_modbus_access_readonly"), value: 0 },
-				]
+			DelegateComponent {
+				preferredVisible: enableModbusTcpDC.checked
+				ListRadioButtonGroup {
+					//% "Access permissions"
+					text: qsTrId("settings_modbus_access_rights")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/ModbusServer/ReadWrite"
+					optionModel: [
+						//% "Write allowed"
+						{ display: qsTrId("settings_modbus_access_readwrite"), value: 1 },
+						//% "Read only"
+						{ display: qsTrId("settings_modbus_access_readonly"), value: 0 },
+					]
+				}
 			}
 
-			ListNavigation {
-				//% "Available services"
-				text: qsTrId("settings_modbus_available_services")
-				preferredVisible: enableModbusTcp.checked
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcpServices.qml", { title: text })
+			DelegateComponent {
+				preferredVisible: enableModbusTcpDC.checked
+				ListNavigation {
+					//% "Available services"
+					text: qsTrId("settings_modbus_available_services")
+					onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusTcpServices.qml", { title: text })
+				}
 			}
 
-			PrimaryListLabel {
-				//% "No errors reported"
-				text: lastError.valid ? lastError.value : qsTrId("settings_modbus_no_errors")
-				preferredVisible: enableModbusTcp.checked
-				horizontalAlignment: Text.AlignHCenter
+			DelegateComponent {
+				preferredVisible: enableModbusTcpDC.checked
+				PrimaryListLabel {
+					//% "No errors reported"
+					text: lastError.valid ? lastError.value : qsTrId("settings_modbus_no_errors")
+					horizontalAlignment: Text.AlignHCenter
+				}
 			}
 
-			ListText {
-				//% "Time of last error"
-				text: qsTrId("settings_modbus_time_of_last_error")
-				secondaryText: timestamp.valid ? Qt.formatDateTime(new Date(timestamp.value * 1000), "yyyy-MM-dd hh:mm:ss") : ""
-				preferredVisible: enableModbusTcp.checked && lastError.valid
+			DelegateComponent {
+				preferredVisible: enableModbusTcpDC.checked && lastError.valid
+				ListText {
+					//% "Time of last error"
+					text: qsTrId("settings_modbus_time_of_last_error")
+					secondaryText: timestamp.valid ? Qt.formatDateTime(new Date(timestamp.value * 1000), "yyyy-MM-dd hh:mm:ss") : ""
+				}
 			}
 
-			ListButton {
-				text: CommonWords.clear_error_action
-				secondaryText: CommonWords.clear_action
-				preferredVisible: enableModbusTcp.checked && lastError.valid
-				onClicked: {
-					lastError.setValue(undefined)
-					timestamp.setValue(undefined)
+			DelegateComponent {
+				preferredVisible: enableModbusTcpDC.checked && lastError.valid
+				ListButton {
+					text: CommonWords.clear_error_action
+					secondaryText: CommonWords.clear_action
+					onClicked: {
+						lastError.setValue(undefined)
+						timestamp.setValue(undefined)
+					}
 				}
 			}
 		}

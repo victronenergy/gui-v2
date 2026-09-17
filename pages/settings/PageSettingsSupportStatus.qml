@@ -20,9 +20,9 @@ Page {
 	readonly property bool isModified: fsModifiedStateItem.value === VenusOS.ModificationChecks_FsModifiedState_Modified
 		|| (systemHooksStateItem.valid && (systemHooksStateItem.value & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtStartup))
 	readonly property bool isRaspberry: modelItem.valid && modelItem.value.indexOf("Raspberry") !== -1
-	readonly property bool isIntegrationRunning: modbusTcpItem.value !== 0
-		|| (signalKItem.valid && signalKItem.value !== 0)
-		|| (nodeRedItem.valid && nodeRedItem.value !== VenusOS.NodeRed_Mode_Disabled)
+	readonly property bool isIntegrationRunning: modbusTcpServiceItem.value !== 0
+		|| (signalKServiceItem.valid && signalKServiceItem.value !== 0)
+		|| (nodeRedServiceItem.valid && nodeRedServiceItem.value !== VenusOS.NodeRed_Mode_Disabled)
 
 	function getSupportStateText() {
 		if (isModified || isIntegrationRunning) {
@@ -155,7 +155,10 @@ Page {
 			return qsTrId("pagesettingssupportstate_firmware_unknown")
 		}
 	}
-
+	VeQuickItem {
+		id: hQSerialNumberItem
+		uid: Global.venusPlatform.serviceUid + "/Device/HQSerialNumber"
+	}
 	VeQuickItem {
 		id: modelItem
 		uid: Global.venusPlatform.serviceUid + "/Device/Model"
@@ -208,299 +211,356 @@ Page {
 		id: systemHooksStateItem
 		uid: Global.venusPlatform.serviceUid + "/ModificationChecks/SystemHooksState"
 	}
+	VeQuickItem {
+		id: modbusTcpServiceItem
+		uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+	}
+	VeQuickItem {
+		id: signalKServiceItem
+		uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+	}
+	VeQuickItem {
+		id: nodeRedServiceItem
+		uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+	}
 
 	GradientListView {
-		model: VisibleItemModel {
+		model: DelegateComponentModel {
 
-			ListTextStatus {
-				//% "Support status"
-				text: qsTrId("pagesettingssupportstate_support_status")
-				secondaryText: getSupportStateText()
-				alarmStatus: getSupportState()
+			DelegateComponent {
+				ListTextStatus {
+					//% "Support status"
+					text: qsTrId("pagesettingssupportstate_support_status")
+					secondaryText: getSupportStateText()
+					alarmStatus: getSupportState()
+				}
 			}
 
-			ListTextStatus {
-				//% "Device model"
-				text: qsTrId("pagesettingssupportstate_device_model")
-				secondaryText: modelItem.value || ""
-				alarmStatus: isRaspberry ? VenusOS.Alarm_Level_Alarm : -1
+			DelegateComponent {
+				ListTextStatus {
+					//% "Device model"
+					text: qsTrId("pagesettingssupportstate_device_model")
+					secondaryText: modelItem.value || ""
+					alarmStatus: isRaspberry ? VenusOS.Alarm_Level_Alarm : -1
+				}
 			}
 
-			ListText {
-				// Value is missing on older devices, therefore do not use colors on that
-				//% "HQ serial number"
-				text: qsTrId("pagesettingssupportstate_hq_serial_number")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Device/HQSerialNumber"
-				preferredVisible: dataItem.valid && dataItem.value != ""
+			DelegateComponent {
+				dataItem: VeQuickItem { uid: Global.venusPlatform.serviceUid + "/Device/HQSerialNumber" }
+				preferredVisible: hQSerialNumberItem.valid && dataItem.value != ""
+				ListText {
+					// Value is missing on older devices, therefore do not use colors on that
+					//% "HQ serial number"
+					text: qsTrId("pagesettingssupportstate_hq_serial_number")
+					dataItem.uid: Global.venusPlatform.serviceUid + "/Device/HQSerialNumber"
+				}
 			}
 
-			ListTextStatus {
-				id: dataPartitionFreeSpace
-				//% "Data partition free space"
-				text: qsTrId("pagesettingssupportstate_data_free_space")
-				secondaryText: scaleBytes(dataPartitionFreeSpaceItem.value)
-				alarmStatus: dataPartitionFreeSpaceItem.value < 1024 * 1024 * 10 ? VenusOS.Alarm_Level_Alarm : -1
+			DelegateComponent {
+				ListTextStatus {
+					id: dataPartitionFreeSpace
+					//% "Data partition free space"
+					text: qsTrId("pagesettingssupportstate_data_free_space")
+					secondaryText: scaleBytes(dataPartitionFreeSpaceItem.value)
+					alarmStatus: dataPartitionFreeSpaceItem.value < 1024 * 1024 * 10 ? VenusOS.Alarm_Level_Alarm : -1
+				}
 			}
 
-			ListText {
-				//% "User SSH key present"
-				text: qsTrId("pagesettingssupportstate_user_ssh_key_present")
-				secondaryText: sshKeyForRootPresentItem.value === 1 ? qsTrId("common_words_yes") : qsTrId("common_words_no")
+			DelegateComponent {
+				ListText {
+					//% "User SSH key present"
+					text: qsTrId("pagesettingssupportstate_user_ssh_key_present")
+					secondaryText: sshKeyForRootPresentItem.value === 1 ? qsTrId("common_words_yes") : qsTrId("common_words_no")
+				}
 			}
 
-			SettingsListHeader {
-				//% "Modifications"
-				text: qsTrId("pagesettingssupportstate_modifications")
+			DelegateComponent {
+				SettingsListHeader {
+					//% "Modifications"
+					text: qsTrId("pagesettingssupportstate_modifications")
+				}
 			}
 
-			ListTextStatus {
-				//% "Custom startup scripts"
-				text: qsTrId("pagesettingssupportstate_custom_startup_scripts")
-				secondaryText: getSystemHooksState()
-				alarmStatus: systemHooksState < 4 ? -1 : systemHooksState < 16 ? VenusOS.Alarm_Level_Warning : VenusOS.Alarm_Level_Alarm
+			DelegateComponent {
+				ListTextStatus {
+					//% "Custom startup scripts"
+					text: qsTrId("pagesettingssupportstate_custom_startup_scripts")
+					secondaryText: getSystemHooksState()
+					alarmStatus: systemHooksState < 4 ? -1 : systemHooksState < 16 ? VenusOS.Alarm_Level_Warning : VenusOS.Alarm_Level_Alarm
+				}
 			}
 
-			ListButton {
-				//% "Disable custom startup scripts"
-				text: qsTrId("pagesettingssupportstate_disable_custom_startup_scripts")
-				//% "Disable and reboot now"
-				secondaryText: qsTrId("pagesettingssupportstate_disable_and_reboot_now")
+			DelegateComponent {
 				preferredVisible: (systemHooksState & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtStartup)
-				onClicked: Global.dialogLayer.open(confirmDisableCustomStartupDialogComponent)
+				ListButton {
+					//% "Disable custom startup scripts"
+					text: qsTrId("pagesettingssupportstate_disable_custom_startup_scripts")
+					//% "Disable and reboot now"
+					secondaryText: qsTrId("pagesettingssupportstate_disable_and_reboot_now")
+					onClicked: Global.dialogLayer.open(confirmDisableCustomStartupDialogComponent)
 
-				Component {
-					id: confirmDisableCustomStartupDialogComponent
+					Component {
+						id: confirmDisableCustomStartupDialogComponent
 
-					ModalWarningDialog {
-						//% "Disable custom startup scripts"
-						title: qsTrId("pagesettingssupportstate_disable_custom_startup_scripts")
-						//% "Press 'OK' to disable custom startup scripts and reboot"
-						description: qsTrId("pagesettingssupportstate_disable_custom_startup_scripts_description")
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						onClosed: {
-							if (result === T.Dialog.Accepted) {
-								actionItem.setValue(VenusOS.ModificationChecks_Action_SystemHooksDisable)
-								Global.venusPlatform.reboot()
-								Qt.callLater(Global.dialogLayer.open, rebootingDisableCustomStartupDialogComponent)
-							}
-						}
-					}
-				}
-
-				Component {
-					id: rebootingDisableCustomStartupDialogComponent
-
-					ModalRebootingDialog { }
-				}
-			}
-
-			ListButton {
-				//% "Re-enable custom startup scripts"
-				text: qsTrId("pagesettingssupportstate_re_enable_custom_startup_scripts")
-				//% "Re-enable and reboot now"
-				secondaryText: qsTrId("pagesettingssupportstate_re_enable_and_reboot_now")
-				preferredVisible: !(systemHooksState & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtStartup)
-					&& ((systemHooksState & VenusOS.ModificationChecks_SystemHooksState_RcLocalDisabled)
-						|| (systemHooksState & VenusOS.ModificationChecks_SystemHooksState_RcSLocalDisabled))
-				onClicked: Global.dialogLayer.open(confirmReenableCustomStartupDialogComponent)
-
-				Component {
-					id: confirmReenableCustomStartupDialogComponent
-
-					ModalWarningDialog {
-						//% "Re-enable custom startup scripts"
-						title: qsTrId("pagesettingssupportstate_reenable_and_reboot_now")
-						//% "Press 'OK' to re-enable custom startup scripts and reboot"
-						description: qsTrId("pagesettingssupportstate_press_ok_to_reenable_and_reboot")
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						onClosed: {
-							if (result === T.Dialog.Accepted) {
-								actionItem.setValue(VenusOS.ModificationChecks_Action_SystemHooksEnable)
-								Global.venusPlatform.reboot()
-								Qt.callLater(Global.dialogLayer.open, rebootingReenableCustomStartupDialogComponent)
-							}
-						}
-					}
-				}
-
-				Component {
-					id: rebootingReenableCustomStartupDialogComponent
-
-					ModalRebootingDialog { }
-				}
-			}
-
-			ListTextStatus {
-				//% "Operating system partition status"
-				text: qsTrId("pagesettingssupportstate_operating_system_partition_status")
-				secondaryText: getFsModifiedStateText()
-				alarmStatus: getFsModifiedState()
-			}
-
-			SettingsListHeader {
-				//% "Firmware"
-				text: qsTrId("pagesettingssupportstate_firmware")
-			}
-
-			ListText {
-				//% "Installed firmware version"
-				text: qsTrId("pagesettingssupportstate_installed_firmware_version")
-				secondaryText: FirmwareVersion.versionText(firmwareInstalledVersionItem.value, "venus")
-			}
-
-			ListFirmwareImageTypeInstalled {
-				//% "Installed image type"
-				text: qsTrId("pagesettingssupportstate_installed_image_type")
-			}
-
-			ListTextStatus {
-				//% "Latest official firmware version installed?"
-				text: qsTrId("pagesettingssupportstate_latest_official_firmware_installed")
-				secondaryText: getLatestReleaseFirmwareInstalled()
-				alarmStatus: !isLatestReleaseFirmwareInstalled ? VenusOS.Alarm_Level_Alarm : -1
-			}
-
-			ListButton {
-				//% "Update the firmware to fix the modified state"
-				text: qsTrId("pagesettingssupportstate_update_firmware_to_fix_modified_state")
-				secondaryText: {
-					if (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
-						if (firmwareProgressItem.value) {
-							//: Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update progress
-							//% "Updating %1 %2%"
-							return qsTrId("pagesettingssupportstate_updating_progress").arg(Global.firmwareUpdate.onlineAvailableVersion).arg(firmwareProgressItem.value)
-						} else {
-							//: %1 = firmware version
-							//% "Updating %1..."
-							return qsTrId("pagesettingssupportstate_updating").arg(Global.firmwareUpdate.onlineAvailableVersion)
-						}
-					} else {
-						if (firmwareReleaseAvailableVersionItem.valid) {
-							return CommonWords.update_to_version.arg(firmwareReleaseAvailableVersionItem.value)
-						} else {
-							//: Update the firmware version
-							//% "Update"
-							return qsTrId("pagesettingssupportstate_update")
-						}
-					}
-				}
-
-				interactive: !Global.firmwareUpdate.busy
-				writeAccessLevel: VenusOS.User_AccessType_User
-				onClicked: Global.dialogLayer.open(confirmUpdateDialogComponent)
-
-				Component {
-					id: confirmUpdateDialogComponent
-
-					ModalWarningDialog {
-						//% "Update the firmware to fix the modified state"
-						title: qsTrId("pagesettingssupportstate_update_firmware_to_fix_modified_state")
-						//% "This will download and update rootfs with the latest official firmware.<br>Internet connectivity is required.<br>Press 'OK' to continue."
-						description: qsTrId("pagesettingssupportstate_update_firmware_to_fix_modified_state_description")
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						onClosed: {
-							if (result === T.Dialog.Accepted) {
-								if ((systemHooksState & VenusOS.ModificationChecks_SystemHooksState_RcLocal)
-									|| (systemHooksState & VenusOS.ModificationChecks_SystemHooksState_RcSLocal)) {
-									// If custom startup scripts are enabled, ask the user to disable them first
-									Qt.callLater(Global.dialogLayer.open, confirmRefreshDisableStartupScriptsDialog)
-								} else {
-									// Start the firmware re-install
-									firmwareReleaseInstallItem.setValue(1)
+						ModalWarningDialog {
+							//% "Disable custom startup scripts"
+							title: qsTrId("pagesettingssupportstate_disable_custom_startup_scripts")
+							//% "Press 'OK' to disable custom startup scripts and reboot"
+							description: qsTrId("pagesettingssupportstate_disable_custom_startup_scripts_description")
+							dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+							onClosed: {
+								if (result === T.Dialog.Accepted) {
+									actionItem.setValue(VenusOS.ModificationChecks_Action_SystemHooksDisable)
+									Global.venusPlatform.reboot()
+									Qt.callLater(Global.dialogLayer.open, rebootingDisableCustomStartupDialogComponent)
 								}
 							}
 						}
 					}
+
+					Component {
+						id: rebootingDisableCustomStartupDialogComponent
+
+						ModalRebootingDialog { }
+					}
 				}
+			}
 
-				Component {
-					id: confirmRefreshDisableStartupScriptsDialog
+			DelegateComponent {
+				preferredVisible: !(systemHooksState & VenusOS.ModificationChecks_SystemHooksState_HookLoadedAtStartup)
+					&& ((systemHooksState & VenusOS.ModificationChecks_SystemHooksState_RcLocalDisabled)
+						|| (systemHooksState & VenusOS.ModificationChecks_SystemHooksState_RcSLocalDisabled))
+				ListButton {
+					//% "Re-enable custom startup scripts"
+					text: qsTrId("pagesettingssupportstate_re_enable_custom_startup_scripts")
+					//% "Re-enable and reboot now"
+					secondaryText: qsTrId("pagesettingssupportstate_re_enable_and_reboot_now")
+					onClicked: Global.dialogLayer.open(confirmReenableCustomStartupDialogComponent)
 
-					ModalWarningDialog {
-						//% "Custom startup scripts"
-						title: qsTrId("pagesettingssupportstate_custom_startup_scripts")
-						//% "Disable also custom startup scripts?"
-						description: qsTrId("pagesettingssupportstate_disable_also_custom_startup_scripts")
-						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						//% "Yes"
-						acceptText: qsTrId("common_words_yes")
-						//% "No"
-						rejectText: qsTrId("common_words_no")
-						onClosed: {
-							if (result === T.Dialog.Accepted) {
-								actionItem.setValue(VenusOS.ModificationChecks_Action_SystemHooksDisable)
+					Component {
+						id: confirmReenableCustomStartupDialogComponent
+
+						ModalWarningDialog {
+							//% "Re-enable custom startup scripts"
+							title: qsTrId("pagesettingssupportstate_reenable_and_reboot_now")
+							//% "Press 'OK' to re-enable custom startup scripts and reboot"
+							description: qsTrId("pagesettingssupportstate_press_ok_to_reenable_and_reboot")
+							dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+							onClosed: {
+								if (result === T.Dialog.Accepted) {
+									actionItem.setValue(VenusOS.ModificationChecks_Action_SystemHooksEnable)
+									Global.venusPlatform.reboot()
+									Qt.callLater(Global.dialogLayer.open, rebootingReenableCustomStartupDialogComponent)
+								}
 							}
+						}
+					}
 
-							// Start the firmware re-install
-							firmwareReleaseInstallItem.setValue(1)
+					Component {
+						id: rebootingReenableCustomStartupDialogComponent
+
+						ModalRebootingDialog { }
+					}
+				}
+			}
+
+			DelegateComponent {
+				ListTextStatus {
+					//% "Operating system partition status"
+					text: qsTrId("pagesettingssupportstate_operating_system_partition_status")
+					secondaryText: getFsModifiedStateText()
+					alarmStatus: getFsModifiedState()
+				}
+			}
+
+			DelegateComponent {
+				SettingsListHeader {
+					//% "Firmware"
+					text: qsTrId("pagesettingssupportstate_firmware")
+				}
+			}
+
+			DelegateComponent {
+				ListText {
+					//% "Installed firmware version"
+					text: qsTrId("pagesettingssupportstate_installed_firmware_version")
+					secondaryText: FirmwareVersion.versionText(firmwareInstalledVersionItem.value, "venus")
+				}
+			}
+
+			DelegateComponent {
+				ListFirmwareImageTypeInstalled {
+					//% "Installed image type"
+					text: qsTrId("pagesettingssupportstate_installed_image_type")
+				}
+			}
+
+			DelegateComponent {
+				ListTextStatus {
+					//% "Latest official firmware version installed?"
+					text: qsTrId("pagesettingssupportstate_latest_official_firmware_installed")
+					secondaryText: getLatestReleaseFirmwareInstalled()
+					alarmStatus: !isLatestReleaseFirmwareInstalled ? VenusOS.Alarm_Level_Alarm : -1
+				}
+			}
+
+			DelegateComponent {
+				ListButton {
+					//% "Update the firmware to fix the modified state"
+					text: qsTrId("pagesettingssupportstate_update_firmware_to_fix_modified_state")
+					secondaryText: {
+						if (Global.firmwareUpdate.state === FirmwareUpdater.DownloadingAndInstalling) {
+							if (firmwareProgressItem.value) {
+								//: Firmware update firmwareProgressItem. %1 = firmware version, %2 = current update progress
+								//% "Updating %1 %2%"
+								return qsTrId("pagesettingssupportstate_updating_progress").arg(Global.firmwareUpdate.onlineAvailableVersion).arg(firmwareProgressItem.value)
+							} else {
+								//: %1 = firmware version
+								//% "Updating %1..."
+								return qsTrId("pagesettingssupportstate_updating").arg(Global.firmwareUpdate.onlineAvailableVersion)
+							}
+						} else {
+							if (firmwareReleaseAvailableVersionItem.valid) {
+								return CommonWords.update_to_version.arg(firmwareReleaseAvailableVersionItem.value)
+							} else {
+								//: Update the firmware version
+								//% "Update"
+								return qsTrId("pagesettingssupportstate_update")
+							}
+						}
+					}
+
+					interactive: !Global.firmwareUpdate.busy
+					writeAccessLevel: VenusOS.User_AccessType_User
+					onClicked: Global.dialogLayer.open(confirmUpdateDialogComponent)
+
+					Component {
+						id: confirmUpdateDialogComponent
+
+						ModalWarningDialog {
+							//% "Update the firmware to fix the modified state"
+							title: qsTrId("pagesettingssupportstate_update_firmware_to_fix_modified_state")
+							//% "This will download and update rootfs with the latest official firmware.<br>Internet connectivity is required.<br>Press 'OK' to continue."
+							description: qsTrId("pagesettingssupportstate_update_firmware_to_fix_modified_state_description")
+							dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+							onClosed: {
+								if (result === T.Dialog.Accepted) {
+									if ((systemHooksState & VenusOS.ModificationChecks_SystemHooksState_RcLocal)
+										|| (systemHooksState & VenusOS.ModificationChecks_SystemHooksState_RcSLocal)) {
+										// If custom startup scripts are enabled, ask the user to disable them first
+										Qt.callLater(Global.dialogLayer.open, confirmRefreshDisableStartupScriptsDialog)
+									} else {
+										// Start the firmware re-install
+										firmwareReleaseInstallItem.setValue(1)
+									}
+								}
+							}
+						}
+					}
+
+					Component {
+						id: confirmRefreshDisableStartupScriptsDialog
+
+						ModalWarningDialog {
+							//% "Custom startup scripts"
+							title: qsTrId("pagesettingssupportstate_custom_startup_scripts")
+							//% "Disable also custom startup scripts?"
+							description: qsTrId("pagesettingssupportstate_disable_also_custom_startup_scripts")
+							dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
+							//% "Yes"
+							acceptText: qsTrId("common_words_yes")
+							//% "No"
+							rejectText: qsTrId("common_words_no")
+							onClosed: {
+								if (result === T.Dialog.Accepted) {
+									actionItem.setValue(VenusOS.ModificationChecks_Action_SystemHooksDisable)
+								}
+
+								// Start the firmware re-install
+								firmwareReleaseInstallItem.setValue(1)
+							}
 						}
 					}
 				}
 			}
 
-			SettingsListHeader {
-				//% "Integrations"
-				text: qsTrId("pagesettingssupportstate_integrations")
-			}
-
-			ListTextStatus {
-				id: modbusTcp
-				//% "Modbus TCP Server"
-				text: qsTrId("pagesettingssupportstate_modbus_tcp_server")
-				secondaryText: modbusTcpItem.value ? CommonWords.enabled : CommonWords.disabled
-				alarmStatus: modbusTcpItem.value ? VenusOS.Alarm_Level_Warning : -1
-
-				VeQuickItem {
-					id: modbusTcpItem
-					uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+			DelegateComponent {
+				SettingsListHeader {
+					//% "Integrations"
+					text: qsTrId("pagesettingssupportstate_integrations")
 				}
 			}
 
-			ListTextStatus {
-				id: signalK
-				//% "Signal K"
-				text: qsTrId("pagesettingssupportstate_signal_k")
-				secondaryText: signalKItem.valid && signalKItem.value ? CommonWords.enabled : CommonWords.disabled
-				alarmStatus: signalKItem.valid && signalKItem.value ? VenusOS.Alarm_Level_Warning : -1
-				preferredVisible: signalKItem.valid
+			DelegateComponent {
+				ListTextStatus {
+					id: modbusTcp
+					//% "Modbus TCP Server"
+					text: qsTrId("pagesettingssupportstate_modbus_tcp_server")
+					secondaryText: modbusTcpItem.value ? CommonWords.enabled : CommonWords.disabled
+					alarmStatus: modbusTcpItem.value ? VenusOS.Alarm_Level_Warning : -1
 
-				VeQuickItem {
-					id: signalKItem
-					uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+					VeQuickItem {
+						id: modbusTcpItem
+						uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+					}
 				}
 			}
 
-			ListTextStatus {
-				id: nodeRed
-				//% "Node-RED"
-				text: qsTrId("pagesettingssupportstate_node_red")
-				secondaryText: nodeRedItem.valid && nodeRedItem.value === VenusOS.NodeRed_Mode_Disabled
-					? CommonWords.disabled : nodeRedItem.value === VenusOS.NodeRed_Mode_Enabled
-						//% "Enabled (safe mode)"
-						? CommonWords.enabled : qsTrId("settings_large_enabled_safe_mode")
-				alarmStatus: nodeRedItem.valid && nodeRedItem.value !== VenusOS.NodeRed_Mode_Disabled ? VenusOS.Alarm_Level_Warning : -1
-				preferredVisible: nodeRedItem.valid
+			DelegateComponent {
+				id: signalKItemDC
+				dataItem: VeQuickItem { uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled" }
+				preferredVisible: signalKItemDC.dataItem.valid
+				ListTextStatus {
+					id: signalK
+					//% "Signal K"
+					text: qsTrId("pagesettingssupportstate_signal_k")
+					secondaryText: signalKItem.valid && signalKItem.value ? CommonWords.enabled : CommonWords.disabled
+					alarmStatus: signalKItem.valid && signalKItem.value ? VenusOS.Alarm_Level_Warning : -1
 
-				VeQuickItem {
-					id: nodeRedItem
-					uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+					VeQuickItem {
+						id: signalKItem
+						uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+					}
 				}
 			}
 
-			PrimaryListLabel {
-				id: warningDescriptionLabel
-				//% "Items with a warning icon are supported and provided by Victron Energy, but using them incorrectly can affect system stability. In case of troubleshooting, disable those first."
-				text: qsTrId("pagesettingssupportstate_items_with_warning_icon_description")
-				color: Theme.color_font_secondary
-				leftPadding: warningIcon.x + warningIcon.width + warningIcon.x/2
+			DelegateComponent {
+				id: nodeRedItemDC
+				dataItem: VeQuickItem { uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode" }
+				preferredVisible: nodeRedItemDC.dataItem.valid
+				ListTextStatus {
+					id: nodeRed
+					//% "Node-RED"
+					text: qsTrId("pagesettingssupportstate_node_red")
+					secondaryText: nodeRedItem.valid && nodeRedItem.value === VenusOS.NodeRed_Mode_Disabled
+						? CommonWords.disabled : nodeRedItem.value === VenusOS.NodeRed_Mode_Enabled
+							//% "Enabled (safe mode)"
+							? CommonWords.enabled : qsTrId("settings_large_enabled_safe_mode")
+					alarmStatus: nodeRedItem.valid && nodeRedItem.value !== VenusOS.NodeRed_Mode_Disabled ? VenusOS.Alarm_Level_Warning : -1
 
-				CP.IconImage {
-					id: warningIcon
+					VeQuickItem {
+						id: nodeRedItem
+						uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+					}
+				}
+			}
 
-					x: Theme.geometry_listItem_content_horizontalMargin
-					y: warningDescriptionLabel.topPadding
-					source: "qrc:/images/icon_warning_32.svg"
-					color: Theme.color_warning
+			DelegateComponent {
+				PrimaryListLabel {
+					id: warningDescriptionLabel
+					//% "Items with a warning icon are supported and provided by Victron Energy, but using them incorrectly can affect system stability. In case of troubleshooting, disable those first."
+					text: qsTrId("pagesettingssupportstate_items_with_warning_icon_description")
+					color: Theme.color_font_secondary
+					leftPadding: warningIcon.x + warningIcon.width + warningIcon.x/2
+
+					CP.IconImage {
+						id: warningIcon
+
+						x: Theme.geometry_listItem_content_horizontalMargin
+						y: warningDescriptionLabel.topPadding
+						source: "qrc:/images/icon_warning_32.svg"
+						color: Theme.color_warning
+					}
 				}
 			}
 		}

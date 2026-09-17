@@ -38,94 +38,111 @@ Page {
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
+		model: DelegateComponentModel {
 
-			ListRadioButtonGroup {
-				id: relayFunction
+			DelegateComponent {
+				id: relayFunctionDC
+				dataItem: VeQuickItem { uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function" }
+				property var currentValue: dataItem.valid ? dataItem.value : undefined
+				ListRadioButtonGroup {
+					id: relayFunction
 
-				text: relay1State.seen
-					  //% "Function (Relay 1)"
-					? qsTrId("settings_relay_function_relay1")
-					  //% "Function"
-					: qsTrId("settings_relay_function")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
-				optionModel: [
-					//% "Disabled"
-					{ display: qsTrId("settings_relay_disabled"), value: VenusOS.SwitchableOutput_Function_Disabled },
-					//% "Alarm relay"
-					{ display: qsTrId("settings_relay_alarm_relay"), value: VenusOS.SwitchableOutput_Function_Alarm },
-					//% "Genset start/stop"
-					{ display: qsTrId("settings_relay_genset_start_stop"), value: VenusOS.SwitchableOutput_Function_GeneratorStartStop },
-					//% "Connected genset helper relay"
-					{ display: qsTrId("settings_relay_genset_helper_relay"), value: VenusOS.SwitchableOutput_Function_GensetHelperRelay },
-					//% "Tank pump"
-					{ display: qsTrId("settings_relay_tank_pump"), value: VenusOS.SwitchableOutput_Function_Tank_Pump },
-					//% "Manual"
-					{ display: qsTrId("settings_relay_manual"), value: VenusOS.SwitchableOutput_Function_Manual },
-					{ display: CommonWords.temperature, value: VenusOS.SwitchableOutput_Function_Temperature },
-				]
-				onOptionClicked: function(index) {
-					root.notifyRelayFunctionChange(optionModel[index].value)
+					text: relay1State.seen
+						  //% "Function (Relay 1)"
+						? qsTrId("settings_relay_function_relay1")
+						  //% "Function"
+						: qsTrId("settings_relay_function")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
+					optionModel: [
+						//% "Disabled"
+						{ display: qsTrId("settings_relay_disabled"), value: VenusOS.SwitchableOutput_Function_Disabled },
+						//% "Alarm relay"
+						{ display: qsTrId("settings_relay_alarm_relay"), value: VenusOS.SwitchableOutput_Function_Alarm },
+						//% "Genset start/stop"
+						{ display: qsTrId("settings_relay_genset_start_stop"), value: VenusOS.SwitchableOutput_Function_GeneratorStartStop },
+						//% "Connected genset helper relay"
+						{ display: qsTrId("settings_relay_genset_helper_relay"), value: VenusOS.SwitchableOutput_Function_GensetHelperRelay },
+						//% "Tank pump"
+						{ display: qsTrId("settings_relay_tank_pump"), value: VenusOS.SwitchableOutput_Function_Tank_Pump },
+						//% "Manual"
+						{ display: qsTrId("settings_relay_manual"), value: VenusOS.SwitchableOutput_Function_Manual },
+						{ display: CommonWords.temperature, value: VenusOS.SwitchableOutput_Function_Temperature },
+					]
+					onOptionClicked: function(index) {
+						root.notifyRelayFunctionChange(optionModel[index].value)
+					}
 				}
 			}
 
-			ListRadioButtonGroup {
-				id: relayPolaritySwitch
-				text: relay1State.seen
-					  //% "Polarity (Relay 1)"
-					? qsTrId("settings_relay_polarity_relay1")
-					  //% "Polarity"
-					: qsTrId("settings_relay_polarity")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/Polarity"
-				preferredVisible: [VenusOS.SwitchableOutput_Function_Alarm, VenusOS.SwitchableOutput_Function_Manual].indexOf(relayFunction.currentValue) >= 0
-				optionModel: [
+			DelegateComponent {
+				id: relayPolaritySwitchDC
+				property var optionModel: [
 					//% "Normally open"
 					{ display: qsTrId("settings_relay_normally_open"), value: 0 },
 					//% "Normally closed"
 					{ display: qsTrId("settings_relay_normally_closed"), value: 1 },
 				]
-			}
-
-			ListRadioButtonGroup {
-				id: relay1Function
-
-				//% "Function (Relay 2)"
-				text: qsTrId("settings_relay_function_relay2")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Function"
-				preferredVisible: relay1State.seen
-				optionModel: [
-					//% "Disabled"
-					{ display: qsTrId("settings_relay_disabled"), value: VenusOS.SwitchableOutput_Function_Disabled },
-					//% "Manual"
-					{ display: qsTrId("settings_relay_manual"), value: VenusOS.SwitchableOutput_Function_Manual },
-					{ display: CommonWords.temperature, value: VenusOS.SwitchableOutput_Function_Temperature },
-				]
-				onOptionClicked: function(index) {
-					root.notifyRelayFunctionChange(optionModel[index].value)
+				preferredVisible: [VenusOS.SwitchableOutput_Function_Alarm, VenusOS.SwitchableOutput_Function_Manual].indexOf(relayFunctionDC.currentValue) >= 0
+				ListRadioButtonGroup {
+					id: relayPolaritySwitch
+					text: relay1State.seen
+						  //% "Polarity (Relay 1)"
+						? qsTrId("settings_relay_polarity_relay1")
+						  //% "Polarity"
+						: qsTrId("settings_relay_polarity")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/Polarity"
+					optionModel: relayPolaritySwitchDC.optionModel
 				}
 			}
 
-			ListRadioButtonGroup {
-				id: relay1PolaritySwitch
-				//% "Polarity (Relay 2)"
-				text: qsTrId("settings_relay_polarity_relay2")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Polarity"
-				preferredVisible: relay1Function.currentValue === VenusOS.SwitchableOutput_Function_Manual
-				optionModel: relayPolaritySwitch.optionModel
+			DelegateComponent {
+				id: relay1FunctionDC
+				dataItem: VeQuickItem { uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Function" }
+				property var currentValue: dataItem.valid ? dataItem.value : undefined
+				preferredVisible: relay1State.seen
+				ListRadioButtonGroup {
+					id: relay1Function
+
+					//% "Function (Relay 2)"
+					text: qsTrId("settings_relay_function_relay2")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Function"
+					optionModel: [
+						//% "Disabled"
+						{ display: qsTrId("settings_relay_disabled"), value: VenusOS.SwitchableOutput_Function_Disabled },
+						//% "Manual"
+						{ display: qsTrId("settings_relay_manual"), value: VenusOS.SwitchableOutput_Function_Manual },
+						{ display: CommonWords.temperature, value: VenusOS.SwitchableOutput_Function_Temperature },
+					]
+					onOptionClicked: function(index) {
+						root.notifyRelayFunctionChange(optionModel[index].value)
+					}
+				}
 			}
 
-			ListNavigation {
-				//% "Temperature control rules"
-				text: qsTrId("settings_relay_temp_control_rules")
-				preferredVisible: relayFunction.currentValue === VenusOS.SwitchableOutput_Function_Temperature
-					|| relay1Function.currentValue === VenusOS.SwitchableOutput_Function_Temperature
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsRelayTempSensors.qml", { title: text })
+			DelegateComponent {
+				preferredVisible: relay1FunctionDC.currentValue === VenusOS.SwitchableOutput_Function_Manual
+				ListRadioButtonGroup {
+					id: relay1PolaritySwitch
+					//% "Polarity (Relay 2)"
+					text: qsTrId("settings_relay_polarity_relay2")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Polarity"
+					optionModel: relayPolaritySwitchDC.optionModel
+				}
+			}
+
+			DelegateComponent {
+				preferredVisible: relayFunctionDC.currentValue === VenusOS.SwitchableOutput_Function_Temperature
+					|| relay1FunctionDC.currentValue === VenusOS.SwitchableOutput_Function_Temperature
+				ListNavigation {
+					//% "Temperature control rules"
+					text: qsTrId("settings_relay_temp_control_rules")
+					onClicked: {
+						Global.pageManager.pushPage("/pages/settings/PageSettingsRelayTempSensors.qml", { title: text })
+					}
 				}
 			}
 		}
 	}
-
 	VeQuickItem {
 		id: relay1State
 		uid: Global.system.serviceUid + "/Relay/1/State"

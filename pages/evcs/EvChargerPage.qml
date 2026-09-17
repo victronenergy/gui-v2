@@ -13,7 +13,20 @@ DevicePage {
 	id: root
 
 	required property string bindPrefix
-	readonly property bool energyMeterMode: !chargeMode.dataItem.valid
+	readonly property bool energyMeterMode: !chargeModeDC.dataItem.valid
+
+	VeQuickItem {
+		id: startStopItem
+		uid: evCharger.serviceUid + "/StartStop"
+	}
+	VeQuickItem {
+		id: enabledItem
+		uid: evCharger.serviceUid + "/GxAutoMode/Enabled"
+	}
+	VeQuickItem {
+		id: modeItem
+		uid: evCharger.serviceUid + "/Mode"
+	}
 
 	serviceUid: bindPrefix
 
@@ -122,76 +135,95 @@ DevicePage {
 		}
 	}
 
-	settingsModel: VisibleItemModel {
-		ListRadioButtonGroup {
-			id: chargeMode
-			//% "Charge mode"
-			text: qsTrId("evcs_charge_mode")
-			dataItem.uid: evCharger.serviceUid + "/Mode"
-			preferredVisible: dataItem.valid
-			optionModel: Global.evChargers.modeOptionModel
-			writeAccessLevel: VenusOS.User_AccessType_User
-		}
-
-		ListText {
-			//% "Auto mode source"
-			text: qsTrId("evcs_auto_mode_source")
-			readonly property string externalSourceName: (gxAutoModeSource.value ?? "")
-					//% "GX device"
-					|| qsTrId("gx_device")
-			//: %1 = source string from /GxAutoMode/Source, or "GX device" when not available
-			//% "External (%1)"
-			secondaryText: dataItem.value === 1
-						   ? qsTrId("evcs_auto_mode_source_external_with_source").arg(externalSourceName)
-						   //% "Internal (EV Charging Station)"
-						   : qsTrId("evcs_auto_mode_source_evcs_internal")
-			dataItem.uid: evCharger.serviceUid + "/GxAutoMode/Enabled"
-			preferredVisible: dataItem.valid && chargeMode.dataItem.value === VenusOS.Evcs_Mode_Auto
-
-			VeQuickItem {
-				id: gxAutoModeSource
-				uid: evCharger.serviceUid + "/GxAutoMode/Source"
+	settingsModel: DelegateComponentModel {
+		DelegateComponent {
+			id: chargeModeDC
+			dataItem: VeQuickItem { uid: evCharger.serviceUid + "/Mode" }
+			preferredVisible: modeItem.valid
+			ListRadioButtonGroup {
+				id: chargeMode
+				//% "Charge mode"
+				text: qsTrId("evcs_charge_mode")
+				dataItem.uid: evCharger.serviceUid + "/Mode"
+				optionModel: Global.evChargers.modeOptionModel
+				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 		}
 
-		ListEvcsSetCurrentSpinBox {
-			serviceUid: evCharger.serviceUid
-			text: CommonWords.charge_current
-			preferredVisible: dataItem.valid && chargeMode.dataItem.value === VenusOS.Evcs_Mode_Manual
-		}
+		DelegateComponent {
+			preferredVisible: enabledItem.valid && chargeModeDC.dataItem.value === VenusOS.Evcs_Mode_Auto
+			ListText {
+				//% "Auto mode source"
+				text: qsTrId("evcs_auto_mode_source")
+				readonly property string externalSourceName: (gxAutoModeSource.value ?? "")
+						//% "GX device"
+						|| qsTrId("gx_device")
+				//: %1 = source string from /GxAutoMode/Source, or "GX device" when not available
+				//% "External (%1)"
+				secondaryText: dataItem.value === 1
+							   ? qsTrId("evcs_auto_mode_source_external_with_source").arg(externalSourceName)
+							   //% "Internal (EV Charging Station)"
+							   : qsTrId("evcs_auto_mode_source_evcs_internal")
+				dataItem.uid: evCharger.serviceUid + "/GxAutoMode/Enabled"
 
-		ListSwitch {
-			//% "Enable charging"
-			text: qsTrId("evcs_enable_charging")
-			dataItem.uid: evCharger.serviceUid + "/StartStop"
-			preferredVisible: dataItem.valid
-			writeAccessLevel: VenusOS.User_AccessType_User
-		}
-
-		PowerGuardConsumptionSettings {
-			bindPrefix: root.bindPrefix
-		}
-
-		PowerGuardProductionSettings {
-			bindPrefix: root.bindPrefix
-		}
-
-		ListNavigation {
-			text: CommonWords.setup
-			preferredVisible: !root.energyMeterMode || allowedRoles.valid
-			onClicked: {
-				if (root.energyMeterMode) {
-					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
-							{ "title": text, "bindPrefix": evCharger.serviceUid, "deviceSettingsPage": root })
-				} else {
-					Global.pageManager.pushPage("/pages/evcs/EvChargerSetupPage.qml",
-							{ "title": text, "bindPrefix": evCharger.serviceUid })
+				VeQuickItem {
+					id: gxAutoModeSource
+					uid: evCharger.serviceUid + "/GxAutoMode/Source"
 				}
 			}
+		}
 
-			VeQuickItem {
-				id: allowedRoles
-				uid: evCharger.serviceUid + "/AllowedRoles"
+		DelegateComponent {
+			dataItem: VeQuickItem { uid: evCharger.serviceUid + "/SetCurrent" }
+			preferredVisible: dataItem.valid && chargeModeDC.dataItem.value === VenusOS.Evcs_Mode_Manual
+			ListEvcsSetCurrentSpinBox {
+				serviceUid: evCharger.serviceUid
+				text: CommonWords.charge_current
+			}
+		}
+
+		DelegateComponent {
+			preferredVisible: startStopItem.valid
+			ListSwitch {
+				//% "Enable charging"
+				text: qsTrId("evcs_enable_charging")
+				dataItem.uid: evCharger.serviceUid + "/StartStop"
+				writeAccessLevel: VenusOS.User_AccessType_User
+			}
+		}
+
+		DelegateComponent {
+			PowerGuardConsumptionSettings {
+				bindPrefix: root.bindPrefix
+			}
+		}
+
+		DelegateComponent {
+			PowerGuardProductionSettings {
+				bindPrefix: root.bindPrefix
+			}
+		}
+
+		DelegateComponent {
+			id: allowedRolesDC
+			dataItem: VeQuickItem { uid: evCharger.serviceUid + "/AllowedRoles" }
+			preferredVisible: !root.energyMeterMode || allowedRolesDC.dataItem.valid
+			ListNavigation {
+				text: CommonWords.setup
+				onClicked: {
+					if (root.energyMeterMode) {
+						Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
+								{ "title": text, "bindPrefix": evCharger.serviceUid, "deviceSettingsPage": root })
+					} else {
+						Global.pageManager.pushPage("/pages/evcs/EvChargerSetupPage.qml",
+								{ "title": text, "bindPrefix": evCharger.serviceUid })
+					}
+				}
+
+				VeQuickItem {
+					id: allowedRoles
+					uid: evCharger.serviceUid + "/AllowedRoles"
+				}
 			}
 		}
 	}

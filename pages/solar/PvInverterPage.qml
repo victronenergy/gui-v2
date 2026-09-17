@@ -11,6 +11,15 @@ Page {
 
 	required property string serviceUid
 
+	VeQuickItem {
+		id: powerLimitItem
+		uid: pvInverter.serviceUid + "/Ac/PowerLimit"
+	}
+	VeQuickItem {
+		id: positionItem
+		uid: pvInverter.serviceUid + "/Position"
+	}
+
 	title: pvInverter.name
 
 	PvInverter {
@@ -79,38 +88,48 @@ Page {
 			}
 		}
 
-		model: VisibleItemModel {
-			ListPvInverterPositionRadioButtonGroup {
-				dataItem.uid: pvInverter.serviceUid + "/Position"
-				preferredVisible: (!positionIsAdjustable.valid || positionIsAdjustable.value === 1) ? dataItem.valid : false
+		model: DelegateComponentModel {
+			DelegateComponent {
+				id: positionIsAdjustableDC
+				dataItem: VeQuickItem { uid: pvInverter.serviceUid + "/PositionIsAdjustable" }
+				preferredVisible: (!positionIsAdjustableDC.dataItem.valid || positionIsAdjustableDC.dataItem.value === 1) ? positionItem.valid : false
+				ListPvInverterPositionRadioButtonGroup {
+					dataItem.uid: pvInverter.serviceUid + "/Position"
 
-				// Datapoint will exist in VM-3P75CT energy meters, but usually will not exist.
-				// In cases where the data point does not exist, assume position IS adjustable.
-				// Value will be zero if the position setting is not adjustable via gui-v2.
-				VeQuickItem {
-					id: positionIsAdjustable
-					uid: pvInverter.serviceUid + "/PositionIsAdjustable"
+					// Datapoint will exist in VM-3P75CT energy meters, but usually will not exist.
+					// In cases where the data point does not exist, assume position IS adjustable.
+					// Value will be zero if the position setting is not adjustable via gui-v2.
+					VeQuickItem {
+						id: positionIsAdjustable
+						uid: pvInverter.serviceUid + "/PositionIsAdjustable"
+					}
 				}
 			}
 
-			ListQuantity {
-				text: CommonWords.dynamic_power_limit
-				unit: VenusOS.Units_Watt
-				dataItem.uid: pvInverter.serviceUid + "/Ac/PowerLimit"
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				preferredVisible: powerLimitItem.valid
+				ListQuantity {
+					text: CommonWords.dynamic_power_limit
+					unit: VenusOS.Units_Watt
+					dataItem.uid: pvInverter.serviceUid + "/Ac/PowerLimit"
+				}
 			}
 
-			ListAcInError {
-				text: CommonWords.error
-				bindPrefix: pvInverter.serviceUid
-				secondaryTextColor: pvInverter.errorCode > 0 ? Theme.color_critical : Theme.color_font_secondary
+			DelegateComponent {
+				ListAcInError {
+					text: CommonWords.error
+					bindPrefix: pvInverter.serviceUid
+					secondaryTextColor: pvInverter.errorCode > 0 ? Theme.color_critical : Theme.color_font_secondary
+				}
 			}
 
-			ListNavigation {
-				text: CommonWords.product_page
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml",
-							{ title: text, bindPrefix: pvInverter.serviceUid })
+			DelegateComponent {
+				ListNavigation {
+					text: CommonWords.product_page
+					onClicked: {
+						Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml",
+								{ title: text, bindPrefix: pvInverter.serviceUid })
+					}
 				}
 			}
 		}
