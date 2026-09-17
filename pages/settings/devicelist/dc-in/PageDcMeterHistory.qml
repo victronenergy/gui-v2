@@ -18,106 +18,142 @@ Page {
 		id: hasStarterVoltage
 		uid: root.bindPrefix + "/Settings/HasStarterVoltage"
 	}
-
 	VeQuickItem {
 		id: hasTemperature
 		uid: root.bindPrefix + "/Settings/HasTemperature"
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListQuantity {
-				text: CommonWords.minimum_voltage
-				dataItem.uid: root.bindPrefix + "/History/MinimumVoltage"
+		model: DelegateComponentModel {
+			DelegateComponent {
+				dataItem: VeQuickItem { uid: root.bindPrefix + "/History/MinimumVoltage" }
 				preferredVisible: dataItem.valid
-				unit: VenusOS.Units_Volt_DC
+				ListQuantity {
+					text: CommonWords.minimum_voltage
+					dataItem.uid: root.bindPrefix + "/History/MinimumVoltage"
+					unit: VenusOS.Units_Volt_DC
+				}
 			}
 
-			ListQuantity {
-				text: CommonWords.maximum_voltage
-				dataItem.uid: root.bindPrefix + "/History/MaximumVoltage"
+			DelegateComponent {
+				dataItem: VeQuickItem { uid: root.bindPrefix + "/History/MaximumVoltage" }
 				preferredVisible: dataItem.valid
-				unit: VenusOS.Units_Volt_DC
+				ListQuantity {
+					text: CommonWords.maximum_voltage
+					dataItem.uid: root.bindPrefix + "/History/MaximumVoltage"
+					unit: VenusOS.Units_Volt_DC
+				}
 			}
 
-			ListText {
-				text: CommonWords.low_voltage_alarms
-				dataItem.uid: root.bindPrefix + "/History/LowVoltageAlarms"
+			DelegateComponent {
+				dataItem: VeQuickItem { uid: root.bindPrefix + "/History/LowVoltageAlarms" }
 				preferredVisible: dataItem.valid
+				ListText {
+					text: CommonWords.low_voltage_alarms
+					dataItem.uid: root.bindPrefix + "/History/LowVoltageAlarms"
+				}
 			}
 
-			ListText {
-				text: CommonWords.high_voltage_alarms
-				dataItem.uid: root.bindPrefix + "/History/HighVoltageAlarms"
+			DelegateComponent {
+				dataItem: VeQuickItem { uid: root.bindPrefix + "/History/HighVoltageAlarms" }
 				preferredVisible: dataItem.valid
+				ListText {
+					text: CommonWords.high_voltage_alarms
+					dataItem.uid: root.bindPrefix + "/History/HighVoltageAlarms"
+				}
 			}
 
-			ListText {
-				//% "Low aux voltage alarms"
-				text: qsTrId("dcmeter_history_low_aux_voltage_alarms")
-				dataItem.uid: visible ? root.bindPrefix + "/History/LowStarterVoltageAlarms" : ""
+			DelegateComponent {
 				preferredVisible: root.showStarterVoltage
+				ListText {
+					//% "Low aux voltage alarms"
+					text: qsTrId("dcmeter_history_low_aux_voltage_alarms")
+					dataItem.uid: visible ? root.bindPrefix + "/History/LowStarterVoltageAlarms" : ""
+				}
 			}
 
-			ListText {
-				//% "High aux voltage alarms"
-				text: qsTrId("dcmeter_history_high_aux_voltage_alarms")
-				dataItem.uid: visible ? root.bindPrefix + "/History/HighStarterVoltageAlarms" : ""
+			DelegateComponent {
 				preferredVisible: root.showStarterVoltage
+				ListText {
+					//% "High aux voltage alarms"
+					text: qsTrId("dcmeter_history_high_aux_voltage_alarms")
+					dataItem.uid: visible ? root.bindPrefix + "/History/HighStarterVoltageAlarms" : ""
+				}
 			}
 
-			ListQuantity {
-				//% "Minimum aux voltage"
-				text: qsTrId("dcmeter_history_minimum_aux_voltage")
-				dataItem.uid: visible ? root.bindPrefix + "/History/MinimumStarterVoltage" : ""
+			DelegateComponent {
 				preferredVisible: root.showStarterVoltage
-				unit: VenusOS.Units_Volt_DC
+				ListQuantity {
+					//% "Minimum aux voltage"
+					text: qsTrId("dcmeter_history_minimum_aux_voltage")
+					dataItem.uid: visible ? root.bindPrefix + "/History/MinimumStarterVoltage" : ""
+					unit: VenusOS.Units_Volt_DC
+				}
 			}
 
-			ListQuantity {
-				//% "Maximum aux voltage"
-				text: qsTrId("dcmeter_history_maximum_aux_voltage")
-				dataItem.uid: visible ? root.bindPrefix + "/History/MaximumStarterVoltage" : ""
+			DelegateComponent {
 				preferredVisible: root.showStarterVoltage
-				unit: VenusOS.Units_Volt_DC
+				ListQuantity {
+					//% "Maximum aux voltage"
+					text: qsTrId("dcmeter_history_maximum_aux_voltage")
+					dataItem.uid: visible ? root.bindPrefix + "/History/MaximumStarterVoltage" : ""
+					unit: VenusOS.Units_Volt_DC
+				}
 			}
 
-			ListTemperature {
-				text: CommonWords.minimum_temperature
+			DelegateComponent {
 				preferredVisible: showTemperature
-				dataItem.uid: root.bindPrefix + "/History/MinimumTemperature"
+				ListTemperature {
+					text: CommonWords.minimum_temperature
+					dataItem.uid: root.bindPrefix + "/History/MinimumTemperature"
+				}
 			}
 
-			ListTemperature {
-				text: CommonWords.maximum_temperature
+			DelegateComponent {
 				preferredVisible: showTemperature
-				dataItem.uid: root.bindPrefix + "/History/MaximumTemperature"
+				ListTemperature {
+					text: CommonWords.maximum_temperature
+					dataItem.uid: root.bindPrefix + "/History/MaximumTemperature"
+				}
 			}
 
-			ListQuantity {
-				//% "Produced energy"
-				text: qsTrId("dcmeter_history_produced_energy")
-				dataItem.uid: root.bindPrefix + "/History/EnergyOut"
+			DelegateComponent {
+				dataItem: VeQuickItem { uid: root.bindPrefix + "/History/EnergyOut" }
 				preferredVisible: dataItem.valid
-				unit: VenusOS.Units_Energy_KiloWattHour
+				ListQuantity {
+					//% "Produced energy"
+					text: qsTrId("dcmeter_history_produced_energy")
+					dataItem.uid: root.bindPrefix + "/History/EnergyOut"
+					unit: VenusOS.Units_Energy_KiloWattHour
+				}
 			}
 
-			ListQuantity {
-				//% "Consumed energy"
-				text: qsTrId("dcmeter_history_consumed_energy")
-				dataItem.uid: root.bindPrefix + "/History/EnergyIn"
+			DelegateComponent {
+				dataItem: VeQuickItem { uid: root.bindPrefix + "/History/EnergyIn" }
 				preferredVisible: dataItem.valid
-				unit: VenusOS.Units_Energy_KiloWattHour
+				ListQuantity {
+					//% "Consumed energy"
+					text: qsTrId("dcmeter_history_consumed_energy")
+					dataItem.uid: root.bindPrefix + "/History/EnergyIn"
+					unit: VenusOS.Units_Energy_KiloWattHour
+				}
 			}
 
-			ListInfoLabel {
-				text: CommonWords.reset_history_on_the_monitor_itself
-				visible: !clearHistory.visible
+			DelegateComponent {
+				ListInfoLabel {
+					text: CommonWords.reset_history_on_the_monitor_itself
+					visible: !clearHistoryDC.clearHistoryVisible
+				}
 			}
 
-			ListClearHistoryButton {
-				id: clearHistory
-				bindPrefix: root.bindPrefix
+			DelegateComponent {
+				id: clearHistoryDC
+				dataItem: VeQuickItem { uid: root.bindPrefix + "/History/CanBeCleared" }
+				property VeQuickItem connectedItem: VeQuickItem { uid: root.bindPrefix + "/Connected" }
+				property bool clearHistoryVisible: connectedItem.value === 1 && dataItem.value === 1
+				ListClearHistoryButton {
+					bindPrefix: root.bindPrefix
+				}
 			}
 		}
 	}

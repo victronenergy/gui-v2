@@ -10,7 +10,7 @@ Page {
 	id: root
 
 	GradientListView {
-		model: VisibleItemModel {
+		model: DelegateComponentModel {
 
 		}
 	}

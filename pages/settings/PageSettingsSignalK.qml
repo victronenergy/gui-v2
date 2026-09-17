@@ -10,20 +10,27 @@ Page {
 	id: root
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListSwitch {
-				id: signalk
+		model: DelegateComponentModel {
+			DelegateComponent {
+				id: signalkDC
+				dataItem: VeQuickItem { uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled" }
+				property bool checked: dataItem.value === 1
+				ListSwitch {
+					id: signalk
 
-				//% "Signal K"
-				text: qsTrId("settings_large_signal_k")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+					//% "Signal K"
+					text: qsTrId("settings_large_signal_k")
+					dataItem.uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+				}
 			}
 
-			ListLink {
-				//% "Access Signal K"
-				text: qsTrId("settings_large_access_signal_k")
-				url: BackendConnection.signalKUrl
-				preferredVisible: signalk.checked
+			DelegateComponent {
+				preferredVisible: signalkDC.checked
+				ListLink {
+					//% "Access Signal K"
+					text: qsTrId("settings_large_access_signal_k")
+					url: BackendConnection.signalKUrl
+				}
 			}
 		}
 	}

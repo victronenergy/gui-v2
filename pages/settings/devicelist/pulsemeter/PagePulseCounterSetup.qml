@@ -13,33 +13,41 @@ Page {
 	property int inputNumber
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListVolumeUnitRadioButtonGroup {}
-
-			ListSwitch {
-				//% "Inverted"
-				text: qsTrId("pulsecounter_setup_inverted")
-				dataItem.uid: root.bindPrefix + "/Settings/InvertTranslation"
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListVolumeUnitRadioButtonGroup {}
 			}
 
-			ListSpinBox {
-				//% "Multiplier"
-				text: qsTrId("pulsecounter_setup_multiplier")
-				dataItem.uid: root.bindPrefix + "/Settings/Multiplier"
-				decimals: 6
-				stepSize: Math.pow(10, -decimals)
+			DelegateComponent {
+				ListSwitch {
+					//% "Inverted"
+					text: qsTrId("pulsecounter_setup_inverted")
+					dataItem.uid: root.bindPrefix + "/Settings/InvertTranslation"
+				}
 			}
 
-			ListButton {
-				//% "Reset counter"
-				text: qsTrId("pulsecounter_setup_reset_counter")
-				secondaryText: itemCount.value || 0
-				onClicked: itemCount.setValue(0)
-				interactive: itemCount.valid
+			DelegateComponent {
+				ListSpinBox {
+					//% "Multiplier"
+					text: qsTrId("pulsecounter_setup_multiplier")
+					dataItem.uid: root.bindPrefix + "/Settings/Multiplier"
+					decimals: 6
+					stepSize: Math.pow(10, -decimals)
+				}
+			}
 
-				VeQuickItem {
-					id: itemCount
-					uid: root.bindPrefix + "/Count"
+			DelegateComponent {
+				ListButton {
+					//% "Reset counter"
+					text: qsTrId("pulsecounter_setup_reset_counter")
+					secondaryText: itemCount.value || 0
+					onClicked: itemCount.setValue(0)
+					interactive: itemCount.valid
+
+					VeQuickItem {
+						id: itemCount
+						uid: root.bindPrefix + "/Count"
+					}
 				}
 			}
 		}
