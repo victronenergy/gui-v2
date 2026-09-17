@@ -105,7 +105,7 @@ Page {
 					//% "Above selector sets which block of unique identity numbers to use for the NAME Unique Identity Numbers in the PGN 60928 NAME field. Change only when using multiple GX Devices in one VE.Can network."
 					? qsTrId("settings_canbus_unique_id_vecan_description")
 					: root._isRvc
-						//% "Above selector sets which block of unique identity numbers to use for the Serial number in the DGN 60928 ADDRESS_CLAIM field. Change only when using multiple GX Devices in one RV-C network."
+						//% "Above selector sets which block of unique identity numbers to use for the serial number in the DGN 60928 ADDRESS_CLAIM field. Change only when using multiple GX Devices in one RV-C network."
 						? qsTrId("settings_canbus_unique_id_rvc_description")
 						: ""
 				onSelectorAccepted: {
@@ -126,7 +126,7 @@ Page {
 					testDone = false
 				}
 
-				//% "Check Unique id numbers"
+				//% "Check unique id numbers"
 				text: qsTrId("settings_canbus_unique_id_choose")
 				preferredVisible: root._isVecan || root._isRvc
 				secondaryText: timer.running

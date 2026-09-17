@@ -51,7 +51,7 @@ Page {
 				Global.dialogLayer.open(removeDeviceDialog, {
 					modbusDevice: modelData,
 					//: %1=protocol, %2=IP address, %3=port number, %4=unit number
-					//% "%1 %2:%3 (Unit %4)"
+					//% "%1 %2:%3 (unit %4)"
 					description: qsTrId("settings_modbus_remove_description")
 							.arg(protocol)
 							.arg(ipAddress)
