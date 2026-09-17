@@ -10,6 +10,12 @@
 #include <QQmlEngine>
 #include <QtQuickTemplates2/private/qquickcontrol_p.h>
 
+namespace Victron {
+namespace VenusOS {
+class DelegateComponent;
+}
+}
+
 /*
 	A base Control type for items in a list.
 */
@@ -17,8 +23,10 @@ class AbstractListItem : public QQuickControl
 {
 	Q_OBJECT
 	QML_ELEMENT
+	Q_MOC_INCLUDE("delegatecomponentmodel.h")
 	Q_PROPERTY(bool preferredVisible READ preferredVisible WRITE setPreferredVisible NOTIFY preferredVisibleChanged FINAL)
 	Q_PROPERTY(bool effectiveVisible READ effectiveVisible WRITE setEffectiveVisible NOTIFY effectiveVisibleChanged FINAL)
+	Q_PROPERTY(Victron::VenusOS::DelegateComponent *delegateComponent READ delegateComponent WRITE setDelegateComponent NOTIFY delegateComponentChanged FINAL)
 
 public:
 	AbstractListItem(QQuickItem *parent = nullptr);
@@ -34,13 +42,20 @@ public:
 	bool effectiveVisible() const;
 	void setEffectiveVisible(bool effectiveVisible);
 
+	// Set by DelegateComponentModel before completeCreate() so ListSetting can copy
+	// showAccessLevel from the model entry. Null when the item is not created by that model.
+	Victron::VenusOS::DelegateComponent *delegateComponent() const;
+	void setDelegateComponent(Victron::VenusOS::DelegateComponent *delegateComponent);
+
 Q_SIGNALS:
 	void preferredVisibleChanged();
 	void effectiveVisibleChanged();
+	void delegateComponentChanged();
 
 private:
 	bool m_preferredVisible = true;
 	bool m_effectiveVisible = true;
+	Victron::VenusOS::DelegateComponent *m_delegateComponent = nullptr;
 };
 
 #endif // VICTRON_GUIV2_ABSTRACTLISTITEM_H

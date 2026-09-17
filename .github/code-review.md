@@ -280,7 +280,7 @@ See [Device Settings](.github/device-settings.md) for the access level system.
 
 2.p.ii. **writeAccessLevel propagation**: Settings delegates (e.g., `ListSwitch`, `ListSpinBox`) inherit `writeAccessLevel` from the page or parent. Verify that new settings pages pass the correct `writeAccessLevel` to their children, and that custom controls check `userHasWriteAccess` before allowing writes.
 
-2.p.iii. **Visibility vs interactivity**: Some settings should be visible but read-only at lower access levels, while others should be hidden entirely. Verify the correct strategy is used: `writeAccessLevel` controls editability, while `allowed` or `preferredVisible` controls visibility. Using the wrong mechanism can leak information about unavailable features or silently prevent configuration.
+2.p.iii. **Visibility vs interactivity**: Some settings should be visible but read-only at lower access levels, while others should be hidden entirely. Verify the correct strategy is used: `writeAccessLevel` controls editability. For `DelegateComponentModel` pages, hiding a row entirely requires `DelegateComponent.effectiveVisible` (by default `preferredVisible` and `showAccessLevel` vs the current access level). `ListSetting.showAccessLevel` / `effectiveVisible` only collapse an already-instantiated row; they do not filter the model. Using the wrong mechanism can leak information about unavailable features or silently prevent configuration.
 
 ### 2.q. Mock data synchronization
 

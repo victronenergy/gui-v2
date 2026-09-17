@@ -652,6 +652,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/aggregatedevicemodel.cpp
     src/aggregatetankmodel.h
     src/aggregatetankmodel.cpp
+    src/delegatecomponentmodel.h
+    src/delegatecomponentmodel.cpp
     src/visibleitemmodel.h
     src/visibleitemmodel.cpp
     src/baseautotoggleswitch.h

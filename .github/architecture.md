@@ -331,14 +331,22 @@ Page {
     title: "My Settings"
 
     GradientListView {
-        model: VisibleItemModel {
-            ListNavigation { text: "Sub-page"; onClicked: Global.pageManager.pushPage(subPageComponent) }
-            ListSwitch { text: "Enable feature"; dataItem.uid: settingsUid + "/Path/To/Setting" }
-            ListSpinBox { text: "Max value"; dataItem.uid: settingsUid + "/Path/To/Value" }
+        model: DelegateComponentModel {
+            DelegateComponent {
+                ListNavigation { text: "Sub-page"; onClicked: Global.pageManager.pushPage(subPageComponent) }
+            }
+            DelegateComponent {
+                ListSwitch { text: "Enable feature"; dataItem.uid: settingsUid + "/Path/To/Setting" }
+            }
+            DelegateComponent {
+                ListSpinBox { text: "Max value"; dataItem.uid: settingsUid + "/Path/To/Value" }
+            }
         }
     }
 }
 ```
+
+Access-level hiding of a row is `DelegateComponent.showAccessLevel` (the model filters `DelegateComponent.effectiveVisible`). `ListSetting.showAccessLevel` alone does not filter the model; see [Device Settings](.github/device-settings.md).
 
 ### Conditional UI based on backend data
 
