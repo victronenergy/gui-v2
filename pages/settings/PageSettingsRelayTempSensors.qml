@@ -97,38 +97,50 @@ Page {
 							   ? tempRelayModel
 							   : disabledModel
 
-						VisibleItemModel {
+						DelegateComponentModel {
 							id: tempRelayModel
 
-							ListSwitch {
-								id: functionEnabledSwitch
+							DelegateComponent {
+								id: functionEnabledDelegate
+								dataItem: VeQuickItem { uid: relayDelegate.tempRelayPrefix + "/Enabled" }
+								property bool functionEnabled: dataItem.value === true || dataItem.value === 1
 
-								//% "Relay activation on temperature"
-								text: qsTrId("settings_relay_activate_on_temp")
-								dataItem.uid: relayDelegate.tempRelayPrefix + "/Enabled"
+								ListSwitch {
+									id: functionEnabledSwitch
+
+									//% "Relay activation on temperature"
+									text: qsTrId("settings_relay_activate_on_temp")
+									dataItem.uid: relayDelegate.tempRelayPrefix + "/Enabled"
+								}
 							}
 
-							TemperatureRelaySettings {
-								relayNumber: 0
-								sensorId: relayDelegate.sensorId
-								relayActivateOnTemperature: functionEnabledSwitch.checked
-								hasInvalidRelayTempConfig: _hasInvalidRelayTempConfig(relayValue)
+							DelegateComponent {
+								TemperatureRelaySettings {
+									relayNumber: 0
+									sensorId: relayDelegate.sensorId
+									relayActivateOnTemperature: functionEnabledDelegate.functionEnabled
+									hasInvalidRelayTempConfig: _hasInvalidRelayTempConfig(relayValue)
+								}
 							}
 
-							TemperatureRelaySettings {
-								relayNumber: 1
-								sensorId: relayDelegate.sensorId
-								relayActivateOnTemperature: functionEnabledSwitch.checked
-								hasInvalidRelayTempConfig: _hasInvalidRelayTempConfig(relayValue)
+							DelegateComponent {
+								TemperatureRelaySettings {
+									relayNumber: 1
+									sensorId: relayDelegate.sensorId
+									relayActivateOnTemperature: functionEnabledDelegate.functionEnabled
+									hasInvalidRelayTempConfig: _hasInvalidRelayTempConfig(relayValue)
+								}
 							}
 						}
 
-						VisibleItemModel {
+						DelegateComponentModel {
 							id: disabledModel
 
-							PrimaryListLabel {
-								//% "No relay is configured to be activated by temperature. Go to the relay settings page located in the main settings menu and set the relay function to \"Temperature\"."
-								text: qsTrId("settings_relay_no_temperature_relay")
+							DelegateComponent {
+								PrimaryListLabel {
+									//% "No relay is configured to be activated by temperature. Go to the relay settings page located in the main settings menu and set the relay function to \"Temperature\"."
+									text: qsTrId("settings_relay_no_temperature_relay")
+								}
 							}
 						}
 					}

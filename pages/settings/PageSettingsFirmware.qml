@@ -12,45 +12,57 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: VisibleItemModel {
+		model: DelegateComponentModel {
 
-			ListText {
-				id: remotePort
+			DelegateComponent {
+				ListText {
+					id: remotePort
 
-				text: CommonWords.firmware_version
-				secondaryText: FirmwareVersion.versionText(dataItem.value, "venus")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
-			}
-
-			ListText {
-				//% "Build date/time"
-				text: qsTrId("settings_build_date_time")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
-			}
-
-			ListFirmwareImageTypeInstalled { }
-
-			ListNavigation {
-				//% "Online updates"
-				text: qsTrId("settings_online_updates")
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOnline.qml", { title: text })
+					text: CommonWords.firmware_version
+					secondaryText: FirmwareVersion.versionText(dataItem.value, "venus")
+					dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
 				}
 			}
 
-			ListNavigation {
-				//% "Install firmware from SD/USB"
-				text: qsTrId("settings_install_firmware_from_sd_usb")
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOffline.qml", { title: text })
+			DelegateComponent {
+				ListText {
+					//% "Build date/time"
+					text: qsTrId("settings_build_date_time")
+					dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
 				}
 			}
 
-			ListNavigation {
-				//% "Stored backup firmware"
-				text: qsTrId("settings_stored_backup_firmware")
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageSettingsRootfsSelect.qml", { title: text })
+			DelegateComponent {
+				ListFirmwareImageTypeInstalled { }
+			}
+
+			DelegateComponent {
+				ListNavigation {
+					//% "Online updates"
+					text: qsTrId("settings_online_updates")
+					onClicked: {
+						Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOnline.qml", { title: text })
+					}
+				}
+			}
+
+			DelegateComponent {
+				ListNavigation {
+					//% "Install firmware from SD/USB"
+					text: qsTrId("settings_install_firmware_from_sd_usb")
+					onClicked: {
+						Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOffline.qml", { title: text })
+					}
+				}
+			}
+
+			DelegateComponent {
+				ListNavigation {
+					//% "Stored backup firmware"
+					text: qsTrId("settings_stored_backup_firmware")
+					onClicked: {
+						Global.pageManager.pushPage("/pages/settings/PageSettingsRootfsSelect.qml", { title: text })
+					}
 				}
 			}
 		}

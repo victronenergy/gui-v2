@@ -18,19 +18,23 @@ Page {
 	]
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListRadioButtonGroup {
-				//% "Wind speed sensor"
-				text: qsTrId("page_meteo_settings_wind_speed_sensor")
-				dataItem.uid: meteoSettingsPrefix + "/WindSpeedSensor"
-				optionModel: root.optionModel
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListRadioButtonGroup {
+					//% "Wind speed sensor"
+					text: qsTrId("page_meteo_settings_wind_speed_sensor")
+					dataItem.uid: meteoSettingsPrefix + "/WindSpeedSensor"
+					optionModel: root.optionModel
+				}
 			}
 
-			ListRadioButtonGroup {
-				//% "External temperature sensor"
-				text: qsTrId("page_meteo_settings_external_temperature_sensor")
-				dataItem.uid: meteoSettingsPrefix + "/ExternalTemperatureSensor"
-				optionModel: root.optionModel
+			DelegateComponent {
+				ListRadioButtonGroup {
+					//% "External temperature sensor"
+					text: qsTrId("page_meteo_settings_external_temperature_sensor")
+					dataItem.uid: meteoSettingsPrefix + "/ExternalTemperatureSensor"
+					optionModel: root.optionModel
+				}
 			}
 		}
 	}

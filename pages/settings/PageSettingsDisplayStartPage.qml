@@ -23,54 +23,57 @@ Page {
 		}
 		return options
 	}
-
 	VeQuickItem {
 		id: startPageName
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPageName"
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListNavigation {
-				id: startPageNavigation
-				//% "Start page"
-				text: qsTrId("settings_startpage_name")
-				secondaryText: {
-					const options = Global.systemSettings.startPageConfiguration.options
-					let optionText = ""
-					for (let i = 0; i < options.length; ++i) {
-						if (options[i].value === startPageName.value) {
-							optionText = options[i].display
-							break
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListNavigation {
+					id: startPageNavigation
+					//% "Start page"
+					text: qsTrId("settings_startpage_name")
+					secondaryText: {
+						const options = Global.systemSettings.startPageConfiguration.options
+						let optionText = ""
+						for (let i = 0; i < options.length; ++i) {
+							if (options[i].value === startPageName.value) {
+								optionText = options[i].display
+								break
+							}
+						}
+						if (optionText.length) {
+							return optionText
+						} else if (Global.systemSettings.startPageConfiguration.autoSelect) {
+							return CommonWords.auto
+						} else {
+							//% "None"
+							return qsTrId("settings_startpage_none")
 						}
 					}
-					if (optionText.length) {
-						return optionText
-					} else if (Global.systemSettings.startPageConfiguration.autoSelect) {
-						return CommonWords.auto
-					} else {
-						//% "None"
-						return qsTrId("settings_startpage_none")
+
+					//% "Go to this page when the application starts."
+					caption: qsTrId("settings_startpage_description")
+
+					onClicked: {
+						Global.pageManager.pushPage(startPageOptionsComponent, { title: text })
 					}
-				}
-
-				//% "Go to this page when the application starts."
-				caption: qsTrId("settings_startpage_description")
-
-				onClicked: {
-					Global.pageManager.pushPage(startPageOptionsComponent, { title: text })
 				}
 			}
 
-			ListRadioButtonGroup {
-				id: startPageTimeout
-				//% "Timeout"
-				text: qsTrId("settings_startpage_timeout")
-				optionModel: root._timeoutOptions()
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPageTimeout"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				//% "Revert to the start page when the application is inactive."
-				caption: qsTrId("settings_startpage_timeout_description")
+			DelegateComponent {
+				ListRadioButtonGroup {
+					id: startPageTimeout
+					//% "Timeout"
+					text: qsTrId("settings_startpage_timeout")
+					optionModel: root._timeoutOptions()
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPageTimeout"
+					writeAccessLevel: VenusOS.User_AccessType_User
+					//% "Revert to the start page when the application is inactive."
+					caption: qsTrId("settings_startpage_timeout_description")
+				}
 			}
 		}
 	}
@@ -86,39 +89,45 @@ Page {
 
 		Page {
 			GradientListView {
-				model: VisibleItemModel {
-					ListSwitch {
-						id: startPageMode
-						text: CommonWords.auto
-						dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPage"
-						writeAccessLevel: VenusOS.User_AccessType_User
-						invertSourceValue: true
-						//% "After one minute of inactivity, select the current page as the start page, if it is in this list."
-						caption: qsTrId("settings_startpage_auto_description")
-						onClicked: {
-							popTimer.stop()
-							if (checked) {
-								// Clear the selected start page to indicate that it should now be
-								// auto-selected instead.
-								startPageName.setValue("")
+				model: DelegateComponentModel {
+					DelegateComponent {
+						id: startPageModeDC
+						dataItem: VeQuickItem { uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPage" }
+						ListSwitch {
+							id: startPageMode
+							text: CommonWords.auto
+							dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPage"
+							writeAccessLevel: VenusOS.User_AccessType_User
+							invertSourceValue: true
+							//% "After one minute of inactivity, select the current page as the start page, if it is in this list."
+							caption: qsTrId("settings_startpage_auto_description")
+							onClicked: {
+								popTimer.stop()
+								if (checked) {
+									// Clear the selected start page to indicate that it should now be
+									// auto-selected instead.
+									startPageName.setValue("")
+								}
 							}
 						}
 					}
 
-					SettingsColumn {
-						width: parent ? parent.width : 0
+					DelegateComponent {
+						SettingsColumn {
+							width: parent ? parent.width : 0
 
-						Repeater {
-							model: Global.systemSettings.startPageConfiguration.options
-							delegate: ListRadioButton {
-								checked: modelData.value === startPageName.value
-								text: modelData.display
-								writeAccessLevel: VenusOS.User_AccessType_User
-								onClicked: {
-									popTimer.stop()
-									startPageName.setValue(modelData.value)
-									startPageMode.dataItem.setValue(VenusOS.StartPage_Mode_UserSelect)  // disable auto-select switch
-									popTimer.start()
+							Repeater {
+								model: Global.systemSettings.startPageConfiguration.options
+								delegate: ListRadioButton {
+									checked: modelData.value === startPageName.value
+									text: modelData.display
+									writeAccessLevel: VenusOS.User_AccessType_User
+									onClicked: {
+										popTimer.stop()
+										startPageName.setValue(modelData.value)
+										startPageModeDC.dataItem.setValue(VenusOS.StartPage_Mode_UserSelect) // disable auto-select switch
+										popTimer.start()
+									}
 								}
 							}
 						}

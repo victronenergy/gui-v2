@@ -12,60 +12,82 @@ Page {
 	property string bindPrefix
 
 	GradientListView {
-		model: VisibleItemModel {
+		model: DelegateComponentModel {
 
-			ListText {
-				id: status
-				text: CommonWords.status
-				secondaryText: CommonWords.onlineOrOffline(dataItem.value)
-				dataItem.uid: root.bindPrefix + "/Connected"
+			DelegateComponent {
+				id: statusDC
+				dataItem: VeQuickItem { uid: root.bindPrefix + "/Connected" }
+				ListText {
+					id: status
+					text: CommonWords.status
+					secondaryText: CommonWords.onlineOrOffline(dataItem.value)
+					dataItem.uid: root.bindPrefix + "/Connected"
+				}
 			}
 
-			ListText {
-				text: CommonWords.model_name
-				dataItem.uid: root.bindPrefix + "/ModelName"
+			DelegateComponent {
+				ListText {
+					text: CommonWords.model_name
+					dataItem.uid: root.bindPrefix + "/ModelName"
+				}
 			}
 
-			ListText {
-				text: CommonWords.custom_name
-				dataItem.uid: root.bindPrefix + "/CustomName"
+			DelegateComponent {
+				ListText {
+					text: CommonWords.custom_name
+					dataItem.uid: root.bindPrefix + "/CustomName"
+				}
 			}
 
-			PrimaryListLabel {
-				//% "Careful, for ESS systems, as well as systems with a managed battery, the CAN-bus device instance must remain configured to 0. See GX manual for more information."
-				text: qsTrId("settings_vecan_instance_zero_warning")
+			DelegateComponent {
+				PrimaryListLabel {
+					//% "Careful, for ESS systems, as well as systems with a managed battery, the CAN-bus device instance must remain configured to 0. See GX manual for more information."
+					text: qsTrId("settings_vecan_instance_zero_warning")
+				}
 			}
 
-			ListSpinBox {
-				//% "VE.Can Device Instance"
-				text: qsTrId("settings_vecan_device_instance")
-				dataItem.uid: root.bindPrefix + "/DeviceInstance"
-				enabled: status.dataItem.value === 1
+			DelegateComponent {
+				ListSpinBox {
+					//% "VE.Can Device Instance"
+					text: qsTrId("settings_vecan_device_instance")
+					dataItem.uid: root.bindPrefix + "/DeviceInstance"
+					enabled: statusDC.dataItem.value === 1
+				}
 			}
 
-			ListText {
-				text: CommonWords.manufacturer
-				dataItem.uid: root.bindPrefix + "/Manufacturer"
+			DelegateComponent {
+				ListText {
+					text: CommonWords.manufacturer
+					dataItem.uid: root.bindPrefix + "/Manufacturer"
+				}
 			}
 
-			ListText {
-				//% "Network Address"
-				text: qsTrId("settings_vecan_nad")
-				dataItem.uid: root.bindPrefix + "/Nad"
+			DelegateComponent {
+				ListText {
+					//% "Network Address"
+					text: qsTrId("settings_vecan_nad")
+					dataItem.uid: root.bindPrefix + "/Nad"
+				}
 			}
 
-			ListFirmwareVersion {
-				bindPrefix: root.bindPrefix
+			DelegateComponent {
+				ListFirmwareVersion {
+					bindPrefix: root.bindPrefix
+				}
 			}
 
-			ListText {
-				text: CommonWords.serial_number
-				dataItem.uid: root.bindPrefix + "/Serial"
+			DelegateComponent {
+				ListText {
+					text: CommonWords.serial_number
+					dataItem.uid: root.bindPrefix + "/Serial"
+				}
 			}
 
-			ListText {
-				text: CommonWords.unique_identity_number
-				dataItem.uid: root.bindPrefix + "/N2kUniqueNumber"
+			DelegateComponent {
+				ListText {
+					text: CommonWords.unique_identity_number
+					dataItem.uid: root.bindPrefix + "/N2kUniqueNumber"
+				}
 			}
 		}
 	}

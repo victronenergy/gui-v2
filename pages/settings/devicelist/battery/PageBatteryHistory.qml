@@ -13,177 +13,228 @@ Page {
 	required property BatteryHistory history
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListQuantity {
-				//% "Deepest discharge"
-				text: qsTrId("batteryalarms_deepest_discharge")
+		model: DelegateComponentModel {
+			DelegateComponent {
 				preferredVisible: root.history.allowsDeepestDischarge
-				unit: VenusOS.Units_AmpHour
-				value: preferredVisible ? root.history.deepestDischarge.value : NaN
+				ListQuantity {
+					//% "Deepest discharge"
+					text: qsTrId("batteryalarms_deepest_discharge")
+					unit: VenusOS.Units_AmpHour
+					value: preferredVisible ? root.history.deepestDischarge.value : NaN
+				}
 			}
 
-			ListQuantity {
-				//% "Last discharge"
-				text: qsTrId("batteryhistory_last_discharge")
+			DelegateComponent {
 				preferredVisible: root.history.allowsLastDischarge
-				unit: VenusOS.Units_AmpHour
-				value: preferredVisible ? root.history.lastDischarge.value : NaN
+				ListQuantity {
+					//% "Last discharge"
+					text: qsTrId("batteryhistory_last_discharge")
+					unit: VenusOS.Units_AmpHour
+					value: preferredVisible ? root.history.lastDischarge.value : NaN
+				}
 			}
 
-			ListQuantity {
-				//% "Average discharge"
-				text: qsTrId("batteryhistory_average_discharge")
+			DelegateComponent {
 				preferredVisible: root.history.allowsAverageDischarge
-				unit: VenusOS.Units_AmpHour
-				value: preferredVisible ? root.history.averageDischarge.value : NaN
+				ListQuantity {
+					//% "Average discharge"
+					text: qsTrId("batteryhistory_average_discharge")
+					unit: VenusOS.Units_AmpHour
+					value: preferredVisible ? root.history.averageDischarge.value : NaN
+				}
 			}
 
-			ListText {
-				//% "Total charge cycles"
-				text: qsTrId("batteryhistory_total_charge_cycles")
+			DelegateComponent {
 				preferredVisible: root.history.allowsChargeCycles
-				secondaryText: preferredVisible ? root.history.chargeCycles.value : ""
+				ListText {
+					//% "Total charge cycles"
+					text: qsTrId("batteryhistory_total_charge_cycles")
+					secondaryText: preferredVisible ? root.history.chargeCycles.value : ""
+				}
 			}
 
-			ListText {
-				//% "Number of full discharges"
-				text: qsTrId("batteryhistory_number_of_full_discharges")
+			DelegateComponent {
 				preferredVisible: root.history.allowsFullDischarges
-				secondaryText: preferredVisible ? root.history.fullDischarges.value : ""
+				ListText {
+					//% "Number of full discharges"
+					text: qsTrId("batteryhistory_number_of_full_discharges")
+					secondaryText: preferredVisible ? root.history.fullDischarges.value : ""
+				}
 			}
 
-			ListQuantity {
-				//% "Cumulative Ah drawn"
-				text: qsTrId("batteryhistory_cumulative_ah_drawn")
+			DelegateComponent {
 				preferredVisible: root.history.allowsTotalAhDrawn
-				unit: VenusOS.Units_AmpHour
-				value: preferredVisible ? root.history.totalAhDrawn.value : NaN
+				ListQuantity {
+					//% "Cumulative Ah drawn"
+					text: qsTrId("batteryhistory_cumulative_ah_drawn")
+					unit: VenusOS.Units_AmpHour
+					value: preferredVisible ? root.history.totalAhDrawn.value : NaN
+				}
 			}
 
-			ListQuantity {
-				text: CommonWords.minimum_voltage
+			DelegateComponent {
 				preferredVisible: root.history.allowsMinimumVoltage
-				unit: VenusOS.Units_Volt_DC
-				value: preferredVisible ? root.history.minimumVoltage.value : NaN
+				ListQuantity {
+					text: CommonWords.minimum_voltage
+					unit: VenusOS.Units_Volt_DC
+					value: preferredVisible ? root.history.minimumVoltage.value : NaN
+				}
 			}
 
-			ListQuantity {
-				text: CommonWords.maximum_voltage
+			DelegateComponent {
 				preferredVisible: root.history.allowsMaximumVoltage
-				unit: VenusOS.Units_Volt_DC
-				value: preferredVisible ? root.history.maximumVoltage.value : NaN
+				ListQuantity {
+					text: CommonWords.maximum_voltage
+					unit: VenusOS.Units_Volt_DC
+					value: preferredVisible ? root.history.maximumVoltage.value : NaN
+				}
 			}
 
-			ListQuantity {
-				//% "Minimum cell voltage"
-				text: qsTrId("batteryhistory_minimum_cell_voltage")
+			DelegateComponent {
 				preferredVisible: root.history.allowsMinimumCellVoltage
-				unit: VenusOS.Units_Volt_DC
-				value: preferredVisible ? root.history.minimumCellVoltage.value : NaN
-				decimals: 3
+				ListQuantity {
+					//% "Minimum cell voltage"
+					text: qsTrId("batteryhistory_minimum_cell_voltage")
+					unit: VenusOS.Units_Volt_DC
+					value: preferredVisible ? root.history.minimumCellVoltage.value : NaN
+					decimals: 3
+				}
 			}
 
-			ListQuantity {
-				//% "Maximum cell voltage"
-				text: qsTrId("batteryhistory_maximum_cell_voltage")
+			DelegateComponent {
 				preferredVisible: root.history.allowsMaximumCellVoltage
-				unit: VenusOS.Units_Volt_DC
-				value: preferredVisible ? root.history.maximumCellVoltage.value : NaN
-				decimals: 3
+				ListQuantity {
+					//% "Maximum cell voltage"
+					text: qsTrId("batteryhistory_maximum_cell_voltage")
+					unit: VenusOS.Units_Volt_DC
+					value: preferredVisible ? root.history.maximumCellVoltage.value : NaN
+					decimals: 3
+				}
 			}
 
-			ListText {
-				//% "Time since last full charge"
-				text: qsTrId("batteryhistory_time_since_last_full_charge")
+			DelegateComponent {
 				preferredVisible: root.history.allowsTimeSinceLastFullCharge
-				secondaryText: preferredVisible ? Utils.secondsToString(root.history.timeSinceLastFullCharge.value) : ""
+				ListText {
+					//% "Time since last full charge"
+					text: qsTrId("batteryhistory_time_since_last_full_charge")
+					secondaryText: preferredVisible ? Utils.secondsToString(root.history.timeSinceLastFullCharge.value) : ""
+				}
 			}
 
-			ListText {
-				//% "Synchronisation count"
-				text: qsTrId("batteryhistory_synchronisation_count")
+			DelegateComponent {
 				preferredVisible: root.history.allowsAutomaticSyncs
-				secondaryText: preferredVisible ? root.history.automaticSyncs.value : ""
+				ListText {
+					//% "Synchronisation count"
+					text: qsTrId("batteryhistory_synchronisation_count")
+					secondaryText: preferredVisible ? root.history.automaticSyncs.value : ""
+				}
 			}
 
-			ListText {
-				text: CommonWords.low_voltage_alarms
+			DelegateComponent {
 				preferredVisible: root.history.allowsLowVoltageAlarms
-				secondaryText: preferredVisible ? root.history.lowVoltageAlarms.value : ""
+				ListText {
+					text: CommonWords.low_voltage_alarms
+					secondaryText: preferredVisible ? root.history.lowVoltageAlarms.value : ""
+				}
 			}
 
-			ListText {
-				text: CommonWords.high_voltage_alarms
+			DelegateComponent {
 				preferredVisible: root.history.allowsHighVoltageAlarms
-				secondaryText: preferredVisible ? root.history.highVoltageAlarms.value : ""
+				ListText {
+					text: CommonWords.high_voltage_alarms
+					secondaryText: preferredVisible ? root.history.highVoltageAlarms.value : ""
+				}
 			}
 
-			ListText {
-				//% "Low starter battery voltage alarms"
-				text: qsTrId("batteryhistory_low_starter_bat_voltage_alarms")
+			DelegateComponent {
 				preferredVisible: root.history.allowsLowStarterVoltageAlarms
-				secondaryText: preferredVisible ? root.history.lowStarterVoltageAlarms.value : ""
+				ListText {
+					//% "Low starter battery voltage alarms"
+					text: qsTrId("batteryhistory_low_starter_bat_voltage_alarms")
+					secondaryText: preferredVisible ? root.history.lowStarterVoltageAlarms.value : ""
+				}
 			}
 
-			ListText {
-				//% "High starter battery voltage alarms"
-				text: qsTrId("batteryhistory_high_starter_bat_voltage_alarms")
+			DelegateComponent {
 				preferredVisible: root.history.allowsHighStarterVoltageAlarms
-				secondaryText: preferredVisible ? root.history.highStarterVoltageAlarms.value : ""
+				ListText {
+					//% "High starter battery voltage alarms"
+					text: qsTrId("batteryhistory_high_starter_bat_voltage_alarms")
+					secondaryText: preferredVisible ? root.history.highStarterVoltageAlarms.value : ""
+				}
 			}
 
-			ListQuantity {
-				//% "Minimum starter battery voltage"
-				text: qsTrId("batteryhistory_minimum_starter_bat_voltage")
+			DelegateComponent {
 				preferredVisible: root.history.allowsMinimumStarterVoltage
-				value: preferredVisible ? root.history.minimumStarterVoltage.value : NaN
-				unit: VenusOS.Units_Volt_DC
+				ListQuantity {
+					//% "Minimum starter battery voltage"
+					text: qsTrId("batteryhistory_minimum_starter_bat_voltage")
+					value: preferredVisible ? root.history.minimumStarterVoltage.value : NaN
+					unit: VenusOS.Units_Volt_DC
+				}
 			}
 
-			ListQuantity {
-				//% "Maximum starter battery voltage"
-				text: qsTrId("batteryhistory_maximum_starter_bat_voltage")
+			DelegateComponent {
 				preferredVisible: root.history.allowsMaximumStarterVoltage
-				value: preferredVisible ? root.history.maximumStarterVoltage.value : NaN
-				unit: VenusOS.Units_Volt_DC
+				ListQuantity {
+					//% "Maximum starter battery voltage"
+					text: qsTrId("batteryhistory_maximum_starter_bat_voltage")
+					value: preferredVisible ? root.history.maximumStarterVoltage.value : NaN
+					unit: VenusOS.Units_Volt_DC
+				}
 			}
 
-			ListTemperature {
-				text: CommonWords.minimum_temperature
+			DelegateComponent {
 				preferredVisible: root.history.allowsMinimumTemperature
-				value: preferredVisible ? root.history.minimumTemperature.value : NaN
+				ListTemperature {
+					text: CommonWords.minimum_temperature
+					value: preferredVisible ? root.history.minimumTemperature.value : NaN
+				}
 			}
 
-			ListTemperature {
-				text: CommonWords.maximum_temperature
+			DelegateComponent {
 				preferredVisible: root.history.allowsMaximumTemperature
-				value: preferredVisible ? root.history.maximumTemperature.value : NaN
+				ListTemperature {
+					text: CommonWords.maximum_temperature
+					value: preferredVisible ? root.history.maximumTemperature.value : NaN
+				}
 			}
 
-			ListQuantity {
-				//% "Discharged energy"
-				text: qsTrId("batteryhistory_discharged_energy")
+			DelegateComponent {
 				preferredVisible: root.history.allowsDischargedEnergy
-				unit: VenusOS.Units_Energy_KiloWattHour
-				value: preferredVisible ? root.history.dischargedEnergy.value : NaN
+				ListQuantity {
+					//% "Discharged energy"
+					text: qsTrId("batteryhistory_discharged_energy")
+					unit: VenusOS.Units_Energy_KiloWattHour
+					value: preferredVisible ? root.history.dischargedEnergy.value : NaN
+				}
 			}
 
-			ListQuantity {
-				//% "Charged energy"
-				text: qsTrId("batteryhistory_charged_energy")
+			DelegateComponent {
 				preferredVisible: root.history.allowsChargedEnergy
-				unit: VenusOS.Units_Energy_KiloWattHour
-				value: preferredVisible ? root.history.chargedEnergy.value : NaN
+				ListQuantity {
+					//% "Charged energy"
+					text: qsTrId("batteryhistory_charged_energy")
+					unit: VenusOS.Units_Energy_KiloWattHour
+					value: preferredVisible ? root.history.chargedEnergy.value : NaN
+				}
 			}
 
-			ListInfoLabel {
-				text: CommonWords.reset_history_on_the_monitor_itself
-				visible: !clearHistory.visible
+			DelegateComponent {
+				ListInfoLabel {
+					text: CommonWords.reset_history_on_the_monitor_itself
+					visible: !clearHistoryDC.clearHistoryVisible
+				}
 			}
 
-			ListClearHistoryButton {
-				id: clearHistory
-				bindPrefix: root.bindPrefix
+			DelegateComponent {
+				id: clearHistoryDC
+				dataItem: VeQuickItem { uid: root.bindPrefix + "/History/CanBeCleared" }
+				property VeQuickItem connectedItem: VeQuickItem { uid: root.bindPrefix + "/Connected" }
+				property bool clearHistoryVisible: connectedItem.value === 1 && dataItem.value === 1
+				ListClearHistoryButton {
+					bindPrefix: root.bindPrefix
+				}
 			}
 		}
 	}
