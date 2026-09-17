@@ -1,0 +1,461 @@
+# Settings-row instantiate cost
+
+Temporarily committed only!
+
+## Decided
+
+These five are the work. Everything below this section is research /
+documentation and is **outdated** as a plan.
+
+Timing note (applies to 1, 2, 4, 5, and CheapSwitch animation):
+
+- **During `createObject()`** includes child construction, the first
+  binding pass, **and `Component.onCompleted`**. That function does not
+  return until those have run. Work done here is on the path that
+  blocks the page from appearing. Do not use `onCompleted` as “later”.
+- **After `createObject()` returns** (`Qt.callLater`, a 0 ms Timer) is
+  off that function, so COMPBENCH and row-build get cheaper. If every
+  row schedules that, the same work still runs before/during the first
+  frame. Use this for objects that must already exist before the user
+  interacts (see PressEffect).
+- **On first use** is only for work the user will not feel: connecting
+  ToastModel, creating a secondary/caption label when its string
+  becomes non-empty. Do **not** instantiate on first press / first
+  toggle. Building a shader or animator under the finger makes the
+  control feel late.
+
+1. **Do not create secondary and caption when they are empty.**
+   Use a Loader or some other mechanism so `ThreeLabelLayout` does not
+   instantiate those labels unless they are needed. `visible: false` is
+   not enough: the objects still exist. This is the same cost in
+   ListNavigation and ListSwitch (they share `ThreeLabelLayout`). If a
+   binding later fills the text, create the label then (first use of
+   that string, not `onCompleted`).
+
+2. **Do not connect to ToastModel during `createObject()`.**
+   `ListSetting` currently creates a `Connections` on ToastModel with
+   three handlers, on every settings row, for a toast that almost never
+   fires. There is no Notification-model connection on the row; do not
+   add one. `onCompleted` still runs inside `createObject()` — that is
+   not a delay.
+
+   When / how:
+   - **Preferred:** connect only inside `checkWriteAccessLevel()` when
+     it actually shows a toast. Listen until that toast is dismissed /
+     closed / removed, then disconnect and clear `root.toast`. Common
+     case: zero Connections objects.
+   - **Acceptable if preferred is awkward:** `Qt.callLater` (or a 0 ms
+     Timer) to create the Connections after `createObject()` returns.
+     Still creates one per row; only moves the cost off the function
+     that builds the row. Do not do this on every row if the preferred
+     path works.
+
+3. **Write a replacement `CheapSwitch` and measure taking it into use
+   in `ListSwitch`.** Replace `T.Switch` (Control + groove + PNG knob +
+   Behavior). Include padding / inset / touch-area support equivalent
+   to the current switch. Keep `checked` / `clickable` / space-key
+   behaviour. Do not assume it is a win: COMPBENCH ListSwitch with
+   CheapSwitch vs current Switch, including the padding case. Do not
+   create a `Behavior`/`XAnimator` during `createObject()`. If the
+   knob should still slide, create that animator after
+   `createObject()` returns so the first toggle does not hitch. Or
+   omit the animation.
+
+4. **Do not instantiate `PressEffect` during `createObject()`.**
+   Every `ListNavigation` (via `ListNavigationBase` → `ListPressArea` →
+   `PressArea`) builds a `PressEffect` now: shader item plus press and
+   release animations. It never runs until a press. Keep the MouseArea
+   (clicks and key-equivalent still need it). `onCompleted` is not a
+   delay here either.
+
+   Do **not** create it on first press. The create cost would sit on
+   the press itself and feel like a dead control.
+
+   When / how:
+   - **Preferred:** one shared `PressEffect` owned by the list (or
+     page), reused for whichever row is pressed. Rows stay cheap;
+     the effect already exists before a press.
+   - **Otherwise:** `Qt.callLater` (or a 0 ms Timer) after
+     `createObject()` returns, so the per-row effect exists before
+     anyone can press. First frame may pay; the press must not.
+   - **Also measure:** omit the ripple entirely.
+
+   COMPBENCH: current vs delayed-create vs omitted vs shared. Keep
+   a change only if createObject moves and a press still feels
+   immediate.
+
+5. **ListQuantity: do not create its caption unless it has text.**
+   ListQuantity does **not** use `ThreeLabelLayout`. Decision 1 does
+   not touch it. It has its own `GridLayout` + title `Label` +
+   `QuantityLabel` (value Label + unit Label + `QuantityInfo`) + a
+   `CaptionLabel` that is always built with `visible: text.length > 0`.
+
+   COMPBENCH ListQuantity is ~11.2 ms (`text` only). ListSetting is
+   ~3.8 of that. The rest is the quantity row. Product QML has ~104
+   `ListQuantity {` and **none** set `caption`. That CaptionLabel is
+   ~1.3 ms of dead weight on every quantity row.
+
+   Same rule as 1: not `visible: false`; omit the object until
+   `caption` is non-empty (first use of that string, not
+   `onCompleted`). Do not fold ListQuantity into ThreeLabelLayout
+   (right-hand side is a quantity, not a string). Do not spend this
+   step on GridLayout, QuantityInfo, or rewriting QuantityLabel.
+
+   Toast delay (2) already applies; it is a ListSetting. CheapSwitch
+   and PressEffect do not.
+
+---
+
+## Research / documentation (outdated)
+
+The remainder of this file is background (COMPBENCH numbers, usage
+counts, earlier suggestions). It is **not** the plan. Do not treat
+numbered suggestions below as work to do unless they are one of the
+five decisions above.
+
+Goal that the research was aiming at: cut **createObject time** of the
+rows that make up settings pages (`ListNavigation`, `ListSwitch`,
+`ListQuantity`, `ListRadioButtonGroup`). COMPBENCH already times that:
+construction plus the first binding pass.
+
+pushPage() building the page in the background does **not** make this
+cheaper. It only means the user is not frozen. The page still cannot
+appear until the visible rows exist.
+
+---
+
+## What COMPBENCH already says (Cerbo, RelWithDebInfo, mock)
+
+ms per createObject, N=100, empty-ish instances (`text: "abc"` only):
+
+| Type                     | ms    |
+|--------------------------|-------|
+| Item                     | 0.10  |
+| VeQuickItem              | 0.15  |
+| Label                    | 1.31  |
+| ListItem                 | 2.30  |
+| ListSetting              | 3.79  |
+| ThreeLabelLayout         | 4.18  |
+| ListQuantity             | 11.16 |
+| ListNavigation           | 12.56 |
+| ListSwitch               | 12.79 |
+| SettingsListNavigation   | 13.84 |
+| ListRadioButtonGroup     | 14.34 |
+
+Notes:
+
+- This was with ThreeLabelLayout **without** GridLayout. ListNavigation
+  was still 12.56 ms, same as the older ~12.5 ms figure. Taking
+  GridLayout out of ThreeLabelLayout did not move the row. Do not spend
+  another round on that.
+- ListItem is already a QQuickControl (`AbstractListItem`). An empty
+  control + background is 2.3 ms. That is the floor unless the row
+  stops being a Control.
+- ListSetting adds ~1.5 ms on top of ListItem (access flags, extra
+  background, ToastModel Connections).
+- ListNavigation is ListSetting + ~9 ms. That 9 ms is the prize:
+  ThreeLabelLayout (~4.2 ms = three Labels) plus chevron, press overlay,
+  and an extra Item wrapper.
+- ListSwitch is the same ballpark because it is ListSetting + labels +
+  a full Switch control (another Control, groove Rectangle, Image).
+- ListQuantity is ListSetting + GridLayout + Label + QuantityLabel
+  (QuantityInfo + Row + two Labels).
+- VeQuickItem is cheap (0.15 ms). Do not hunt subscriptions as the
+  12 ms.
+
+---
+
+## How many of each (product QML, no tests/examples)
+
+Counts are `Type {` object literals plus `delegate: Type` (one
+declaration, N rows at runtime). Not a live tree dump.
+
+**ListSwitch family: 105 static + 4 Repeater delegates**
+
+| Type                         | Static `{` | As `delegate:` |
+|------------------------------|------------|----------------|
+| ListSwitch                   | 100        | 4              |
+| ListSwitchForced             | 3          | 0              |
+| ListGeneratorAutoStartSwitch | 2          | 0              |
+| **family**                   | **105**    | **4**          |
+
+Not rare. About 100 declared switches in settings/device pages, plus a
+few Repeaters (Modbus discovered, Shelly device, integrations, DC
+gensets) that multiply at runtime.
+
+**ListNavigation family: 320 static + ~28 Repeater delegates**
+
+Derived = QML types whose root is `ListNavigation` (or
+`ListRadioButtonGroup`, which itself is a ListNavigation).
+
+| Type                                      | Static `{` | As `delegate:` |
+|-------------------------------------------|------------|----------------|
+| ListNavigation                            | 179        | 20             |
+| ListRadioButtonGroup                      | 111        | 3              |
+| List*RadioButtonGroup wrappers            | 15         | 0              |
+| GeneratorCondition                        | 6          | 0              |
+| ListBriefCenterDetails                    | 1          | 0              |
+| PageVeBusError11Menu                      | 1          | 0              |
+| ListChargeSchedule                        | 0          | 2              |
+| ListTemperatureRelay                      | 0          | 1              |
+| ListAlarmLevelRadioButtonGroup            | 0          | 2              |
+| **family**                                | **320**    | **28**         |
+
+ListNavigation (+ radio groups, which *are* ListNavigation) is the
+volume: ~3× ListSwitch in source, and most of the Repeater lists
+(wifi, shelly, fronius, vecan, device pages, …) are navigation rows.
+
+`SettingsListNavigation` (7 on the Settings root) is **not** in that
+family. It extends `ListNavigationBase` and has its own contentItem
+(icon + ThreeLabelLayout + chevron). Same label/chevron cost, different
+type.
+
+A 15-row page of ListNavigation is ~190 ms of row create if every row
+is built. DCM already avoids building off-screen rows. Remaining work
+is: make the rows that **are** built cheaper. ListSwitch is common
+enough that a cheaper Switch still pays, but the Loader/omit-empty-
+labels and delayed Toast work should hit ListNavigation first.
+
+---
+
+## What is actually constructed for a typical ListNavigation
+
+`ListItem` (Control)
+  background: `ListSettingBackground` (Rectangle + indicator Rectangle)
+  `ListPressArea` (MouseArea + PressEffect)
+  contentItem: Item
+    `ThreeLabelLayout` (GridLayout)
+      Label (primary) — always
+      SecondaryListLabel — always created, often empty
+      CaptionLabel — always created, often empty
+    ColorImage (chevron)
+
+Plus, on every ListSetting: `Connections` to ToastModel with three JS
+handlers, and `userHasWriteAccess` / `userHasReadAccess` /
+`backgroundIndicatorColor` bindings.
+
+COMPBENCH ListNavigation only sets `text: "abc"`. Secondary and caption
+are still **created**. `visible: text.length > 0` does not skip
+construction. Label is 1.3 ms. Two unused labels are ~2.6 ms of the
+4.2 ms ThreeLabelLayout, on the common case (title only).
+
+First binding pass that is wasted on that common case:
+
+- GridLayout columns/rowSpan/fillWidth for three children
+- `_mainTextWouldWrap` reads `primaryLabel.implicitWidth` and
+  `secondaryLabel.implicitWidth` (forces text layout on the empty
+  secondary too)
+- Control implicitWidth/Height from background + content + padding
+- Theme.geometry_* / Theme.color_* on almost every numeric/color
+- `Global.systemSettings.canAccess(...)` twice
+- ColorImage source + color
+
+ListSwitch also runs Switch’s implicit size, groove color, indicator
+x, and a Behavior (disabled, but the object exists).
+
+ListRadioButtonGroup is ListNavigation plus a `currentIndex` binding
+that **loops the option model** at create, plus another VeQuickItem.
+
+---
+
+## Suggestions (outdated — see Decided at top)
+
+Earlier ordered list. Superseded by the three decisions. Kept for
+context. Each item was meant to add a COMPBENCH line, not a story.
+
+### 1. Do not create the secondary and caption labels unless they have text
+
+**Why:** Label is 1.3 ms. Most settings rows are a title and a chevron
+or a title and a value. Caption is rare. COMPBENCH’s ListNavigation
+pays for three labels and only uses one.
+
+**How:** not `visible: false`. The object still exists. Either:
+
+- a Loader whose sourceComponent is empty until `secondaryText` /
+  `caption` is non-empty, or
+- two extra Delegate-style components that are simply omitted from
+  ThreeLabelLayout / ListQuantity when the string is empty at create
+  (and created later if a binding fills them in).
+
+Loader has its own cost. Measure
+`ThreeLabelLayout { primaryText: "abc" }` vs the same with
+`secondaryText` and `caption` set, vs a one-Label stub.
+
+**Expected:** ~2–3 ms off ListNavigation/ListSwitch/ListQuantity if
+Loader is cheaper than a Label. If Loader is not cheaper, stop.
+
+**Risk:** first time a binding fills caption after create, there is a
+hitch. Rare for settings rows (text is usually a literal or a binding
+that is already known). Portrait wrap logic that looks at secondary
+width must still work when secondary is missing.
+
+This is the highest-leverage cheap change. GridLayout was not.
+
+### 2. Split COMPBENCH so we stop guessing
+
+Add variants, same N=100 harness:
+
+- ListNavigation, text only (already)
+- ListNavigation, text + secondaryText
+- ListNavigation without ColorImage (iconSource empty / visible false
+  is not enough if the Image still exists — omit it)
+- ListNavigationBase with an empty contentItem
+- ListSetting with the Toast Connections removed (temporary)
+- ListSwitch with Switch replaced by a 20x20 Rectangle
+- ThreeLabelLayout with one Label vs three
+- Label vs Text (QtQuick Text, not Controls Label)
+
+Until those lines exist, do not rewrite AbstractListItem.
+
+### 3. Stop using a Controls Switch in ListSwitch
+
+**Why:** ListSwitch ≈ ListNavigation (12.8 vs 12.6). The extra is not
+VeQuickItem. It is `T.Switch`: another Control, background, Image,
+Behavior.
+
+**How:** two Rectangles (groove + knob) or a colored Image, click via
+the existing ListPressArea / space key. Keep `checked` / `clickable`
+semantics. No `Behavior on x` at create; animate only after first
+toggle if needed.
+
+**Expected:** several ms per switch row. ~105 declared ListSwitch
+rows, plus a few Repeaters. Worth doing after the ListNavigation
+label/Toast cuts, not instead of them.
+
+**Risk:** touch target, disabled colors, key handling. Needs a visual
+check and the same click/space/access-level rules as ListSetting.
+
+### 4. Take PressEffect off the create path
+
+`ListPressArea` is MouseArea + PressEffect on every ListNavigation.
+PressEffect is for the ripple. It is not needed to *create* the row.
+
+**How:** create the effect on first press, or share one effect at the
+list level. Measure ListNavigation with ListPressArea vs MouseArea
+only vs no press overlay.
+
+**Expected:** maybe ~0.5–2 ms. Measure before keeping.
+
+### 5. Drop the extra Item around ThreeLabelLayout
+
+ListNavigation and ListSwitch wrap labels in `contentItem: Item { ... }`.
+Control already has a contentItem. Put ThreeLabelLayout (and the
+chevron/switch) in as the contentItem directly, or make ThreeLabelLayout
+the contentItem and anchor the chevron to the Control.
+
+**Expected:** small (one Item is 0.1 ms) plus fewer parent/width
+bindings. Do it only while touching that file.
+
+### 6. ListSetting Toast Connections
+
+Every ListSetting creates `Connections` on ToastModel with three
+handlers, for a toast that almost never fires.
+
+**How:** one helper (C++ or a singleton) that maps toast id → item, or
+connect only inside `checkWriteAccessLevel()` when a toast is shown
+and disconnect on close.
+
+**Expected:** part of the 1.5 ms ListItem→ListSetting gap. Measure a
+ListSetting with Connections commented out.
+
+**Risk:** none if dismiss/close still clears `root.toast`.
+
+### 7. ListQuantity: one layout, fewer Labels
+
+ListQuantity does not use ThreeLabelLayout. It uses another GridLayout,
+a Label, a QuantityLabel (Row + two Labels + QuantityInfo), and a
+CaptionLabel. That is four Labels + GridLayout + QuantityInfo for a
+row that is usually “title | 12.3 V”.
+
+**How:**
+
+- skip caption object when caption is empty (same as §1)
+- QuantityLabel as two Text items in C++, or one formatted string if
+  unit color/size difference can be dropped on GX
+- do not run QuantityInfo formatting until `dataItem.valid`
+
+**Expected:** ListQuantity 11 ms should be able to approach ListSetting
++ two Labels (~3.8 + 2.6 = ~6.5) if the extra GridLayout and
+QuantityInfo are the rest.
+
+### 8. ListRadioButtonGroup currentIndex loop
+
+`currentIndex` is a JS loop over `optionModel` at create, even if the
+page never opens the options. Fine for 4 items; not fine for long
+lists, and it still runs on every group.
+
+**How:** compute index in C++ or only when the options page opens /
+when `dataItem.value` changes, not as a binding that walks the model
+during createObject.
+
+**Expected:** small per row unless the model is large. Cheap to do.
+Does not fix the 12 ms ListNavigation base it inherits.
+
+### 9. `_mainTextWouldWrap` text-layout tax
+
+ThreeLabelLayout always does:
+
+    ceil(primary.implicitWidth) + ceil(secondary.implicitWidth) >= width - spacing
+
+That forces a full text layout of both labels at create, including
+when secondary is empty, and again when width is set from the parent.
+
+**How:** skip the secondary implicitWidth when secondary is empty;
+skip the whole check when not Portrait.
+
+**Expected:** first-binding only; maybe a fraction of a ms, but it is
+on every row. Do it with §1.
+
+### 10. Flatten the type stack only after §1–3
+
+ListNavigation is ListItem → ListSetting → ListNavigationBase →
+ListNavigation. Each QML type is a context. Merging Base into
+ListNavigation would break the “don’t construct then discard
+contentItem” split (that already saved ~10 ms). Do not undo that.
+
+If §1–3 do not get ListNavigation under ~8 ms, the next step is a
+**C++ row** (QQuickItem, two QQuickText, optional icon), not more QML
+wrappers. qmltc on Label/ThreeLabelLayout/ListItem is the middle
+option; it has never been measured on GX.
+
+### 11. Do not do these
+
+- Remove GridLayout again as the main bet. Already measured: no
+  ListNavigation change.
+- Per-label Loader without COMPBENCH. Loader can lose to Label.
+- `visible: false` instead of not creating. Construction still happens.
+- Turning off backend updates during create. VeQuickItem is 0.15 ms.
+- Caching every closed page. Wrong problem, stale data.
+- Replacing Control with Item in one giant rewrite before the
+  breakdown in §2. ListItem at 2.3 ms is not the 9 ms gap.
+
+---
+
+## How to know it worked
+
+Same COMPBENCH on Cerbo RelWithDebInfo (or Release if quoting
+shipping numbers). Success is:
+
+- ListNavigation text-only well under 12.5 ms (target: **< 8 ms**,
+  stretch **~ ListSetting + 1 Label + chevron ≈ 6–7 ms**)
+- ListSwitch in the same band as ListNavigation
+- ListQuantity clearly below 11 ms
+- Warm PAGEBENCH median down (was 250 ms on the mixed 19-page set;
+  only believe a drop if the same binary still has seq 1 harness)
+
+Do not use overview FPS or pushPage-async as evidence. Those do not
+measure row create.
+
+---
+
+## Suggested sequence (outdated — see Decided at top)
+
+Old order. Ignore except as history.
+
+1. COMPBENCH variants (§2) — one commit, no product change.
+2. Omit empty secondary/caption (§1, §9) — one commit, measure.
+3. Switch → simple toggle (§3) — one commit, measure + visual.
+4. Toast Connections and PressEffect (§4, §6) only if §2 showed them.
+5. ListQuantity slim-down (§7) and radio currentIndex (§8).
+6. Stop. If ListNavigation is still ~12 ms, discuss C++ row / qmltc;
+   do not nibble GridLayout and wrappers.
