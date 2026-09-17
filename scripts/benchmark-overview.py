@@ -34,7 +34,11 @@ def _ensure_utf8_stdout():
 
 
 def parse_timing_lines(lines):
-    """Parse QSG_RENDER_TIMING output lines into frame records."""
+    """Parse QSG_RENDER_TIMING output lines into frame records.
+
+    Qt's render field is CPU-side elapsed render work/submission, not a GPU
+    timestamp. The summed stage times omit gaps between render-loop invocations.
+    """
     results = []
     # Qt 6 render timing format variants:
     #   "qt.scenegraph.time.renderloop: ..., sync=1.23, render=4.56, swap=0.78, ..."
@@ -100,7 +104,9 @@ def compute_stats(records):
         'total_p95': percentile(total, 95),
         'total_p99': percentile(total, 99),
         'total_max': max(total),
-        'fps_avg': 1000.0 / avg(total) if avg(total) > 0 else 0,
+        # Inverse of mean stage-sum, not measured display FPS. Omits time
+        # between render-loop invocations (including GUI-thread stalls).
+        'stage_sum_fps': 1000.0 / avg(total) if avg(total) > 0 else 0,
     }
 
 
@@ -213,7 +219,7 @@ def cmd_capture(args):
     print(f"  Total avg:  {stats['total_avg']:.2f} ms")
     print(f"  Total p95:  {stats['total_p95']:.2f} ms")
     print(f"  Total max:  {stats['total_max']:.2f} ms")
-    print(f"  FPS avg:    {stats['fps_avg']:.1f}")
+    print(f"  Stage-sum FPS: {stats['stage_sum_fps']:.1f}  (not display FPS; omits inter-frame gaps)")
     print()
 
 
@@ -273,7 +279,7 @@ def cmd_compare(args):
         ('Total p95 (ms)',  'total_p95',  'total_p95',  True),
         ('Total p99 (ms)',  'total_p99',  'total_p99',  True),
         ('Total max (ms)',  'total_max',  'total_max',  True),
-        ('FPS avg',         'fps_avg',    'fps_avg',    False),  # higher is better
+        ('Stage-sum FPS',   'stage_sum_fps', 'stage_sum_fps', False),  # higher is better; not display FPS
     ]
 
     for label, ka, kb, lower_is_better in metrics:
