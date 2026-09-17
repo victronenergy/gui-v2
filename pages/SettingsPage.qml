@@ -31,29 +31,61 @@ SwipeViewPage {
 		}
 	}
 
-	component SettingsListNavigation : ListNavigation {
+	component SettingsListNavigation : ListNavigationBase {
+		id: settingsNav
+
 		property string pageIconSource
 		property string pageSource
 
-		// Push the ListNavigation content to the right to make space for the icon. We wouldn't do
-		// this if SettingsListNavigation was a standalone reusable type, as the leftPadding could
-		// no longer be customised to shift the mainIcon, but this is an inline component and we
-		// know its leftPadding is never adjusted further.
-		leftPadding: leftInset + horizontalContentPadding + mainIcon.width + horizontalContentPadding
 		topPadding: topInset + Theme.geometry_settingsListNavigation_verticalPadding
 		bottomPadding: bottomInset + Theme.geometry_settingsListNavigation_verticalPadding
 		onClicked: Global.pageManager.pushPage(pageSource, { title: Qt.binding(function() { return text }) })
 
-		CP.ColorImage {
-			id: mainIcon
+		contentItem: Item {
+			implicitWidth: Theme.geometry_listItem_width
+			implicitHeight: labelLayout.implicitHeight
 
-			anchors {
-				verticalCenter: parent.contentItem.verticalCenter
-				left: parent.left
-				leftMargin: parent.leftInset + parent.horizontalContentPadding
+			CP.ColorImage {
+				id: mainIcon
+
+				anchors {
+					verticalCenter: parent.verticalCenter
+					left: parent.left
+				}
+				source: settingsNav.pageIconSource
+				color: Theme.color_font_primary
 			}
-			source: parent.pageIconSource
-			color: Theme.color_font_primary
+
+			ThreeLabelLayout {
+				id: labelLayout
+
+				anchors {
+					verticalCenter: parent.verticalCenter
+					left: settingsNav.pageIconSource.length > 0 ? mainIcon.right : parent.left
+					leftMargin: settingsNav.pageIconSource.length > 0 ? settingsNav.horizontalContentPadding : 0
+					right: arrowIcon.left
+					rightMargin: settingsNav.spacing
+				}
+				primaryText: settingsNav.text
+				primaryLabel.font: settingsNav.font
+				primaryLabel.textFormat: settingsNav.textFormat
+				secondaryText: settingsNav.secondaryText
+				secondaryLabel.color: settingsNav.secondaryTextColor
+				captionText: settingsNav.caption
+				stretchSecondaryText: true
+			}
+
+			CP.ColorImage {
+				id: arrowIcon
+
+				anchors {
+					right: parent.right
+					verticalCenter: parent.verticalCenter
+				}
+				source: "qrc:/images/icon_chevron_right_32.svg"
+				color: Theme.color_listItem_forwardIcon
+				visible: settingsNav.interactive
+			}
 		}
 	}
 
