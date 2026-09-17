@@ -20,7 +20,9 @@ Loader {
 	property bool viewActive: false
 
 	readonly property int _animationDuration: animationEnabled ? Theme.animation_controlCards_slide_duration : 1
+	readonly property bool _readyToShow: viewActive && status === Loader.Ready
 
+	asynchronous: true
 	active: viewActive
 	onActiveChanged: if (active) active = viewActive // remove binding
 	opacity: 0.0
@@ -28,7 +30,7 @@ Loader {
 
 	SequentialAnimation {
 		id: inAnimation
-		running: root.viewActive
+		running: root._readyToShow
 
 		ParallelAnimation {
 			YAnimator {
@@ -72,7 +74,7 @@ Loader {
 
 	SequentialAnimation {
 		id: outAnimation
-		running: root.active && !root.viewActive
+		running: root.active && !root.viewActive && root.status === Loader.Ready
 
 		ParallelAnimation {
 			YAnimator {
