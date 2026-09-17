@@ -66,7 +66,7 @@ UiTestCase {
 		return item ? findClickableChild(item) : null
 	}
 
-	// Find a clickable item matching any route-step candidate value.
+	// Side-effect-free: do not scroll or forceLayout. Used from WaitUntil.
 	function _findClickTarget(parent, step) {
 		const candidates = (step.values && step.values.length > 0) ? step.values : []
 		for (let i = 0; i < candidates.length; ++i) {
@@ -76,6 +76,68 @@ UiTestCase {
 			}
 		}
 		return null
+	}
+
+	function _currentPageListView() {
+		const page = Global.mainView ? Global.mainView.currentPage : null
+		return page ? findObject(page, {}, "BaseListView") : null
+	}
+
+	function _currentPageListViewHasDelegate() {
+		const listView = _currentPageListView()
+		return !!(listView && listView.count > 0 && listView.itemAtIndex(0))
+	}
+
+	function _itemMatchesStep(item, step, value) {
+		if (!item)
+			return false
+		if (step.type === "text")
+			return (item.text ?? "").toString() === value
+		if (step.type === "title")
+			return (item.title ?? "").toString() === value
+		if (step.type === "objectName")
+			return (item.objectName ?? "").toString() === value
+		if (step.type === "iconSource") {
+			const source = item.icon && item.icon.source !== undefined
+				? item.icon.source.toString()
+				: ""
+			return source.indexOf(value) >= 0
+		}
+		return false
+	}
+
+	// Off-screen DelegateComponentModel rows are not built until they have been in view.
+	// Only the current page's BaseListView is scrolled, and only when clicking, not while waiting.
+	function _findClickTargetInCurrentPageListView(step) {
+		const listView = _currentPageListView()
+		if (!listView)
+			return null
+		const candidates = (step.values && step.values.length > 0) ? step.values : []
+		for (let i = 0; i < listView.count; ++i) {
+			let item = listView.itemAtIndex(i)
+			if (!item) {
+				listView.positionViewAtIndex(i, ListView.Contain)
+				if (listView.forceLayout)
+					listView.forceLayout()
+				item = listView.itemAtIndex(i)
+			}
+			if (!item)
+				continue
+			for (let j = 0; j < candidates.length; ++j) {
+				if (!_itemMatchesStep(item, step, candidates[j]))
+					continue
+				const clickable = findClickableChild(item) || _findClickableFromItemOrAncestors(item)
+				if (clickable)
+					return { clickable: clickable, matchedValue: candidates[j] }
+			}
+		}
+		return null
+	}
+
+	function _resolveClickTarget(step) {
+		return _findClickTarget(Global.mainView.currentPage, step)
+			|| _findClickTarget(Global.mainView, step)
+			|| _findClickTargetInCurrentPageListView(step)
 	}
 
 	// Recursively find an item whose icon.source matches the given value.
@@ -226,32 +288,41 @@ UiTestCase {
 		}
 
 		const step = routeSteps[index]
-		const target = _findClickTarget(Global.mainView.currentPage, step)
+		const candidates = (step.values && step.values.length > 0)
+			? step.values.join(" | ")
+			: "<none>"
+
+		// DCM rows are created on ListView polish, after !animating. Do not scroll here:
+		// WaitUntil polls every 16ms and must not mutate other pages' lists.
+		addStep(UiTestStep.WaitUntil, {
+			callable: ()=> !!_findClickTarget(Global.mainView.currentPage, step)
+				|| !!_findClickTarget(Global.mainView, step)
+				|| _currentPageListViewHasDelegate(),
+			message: "Waiting for route click target: %1 (type: %2)".arg(candidates).arg(step.type),
+		})
+		runSteps(_clickResolvedTarget, [index])
+	}
+
+	function _clickResolvedTarget(index) {
+		const step = routeSteps[index]
+		const candidates = (step.values && step.values.length > 0)
+			? step.values.join(" | ")
+			: "<none>"
+		const target = _resolveClickTarget(step)
 		if (!target) {
-			// Fall back to searching the full mainView (for StatusBar buttons, etc.)
-			const fallbackTarget = _findClickTarget(Global.mainView, step)
-			if (!fallbackTarget) {
-				const candidates = (step.values && step.values.length > 0)
-					? step.values.join(" | ")
-					: "<none>"
-				addStep(UiTestStep.Abort, {
-					passed: false,
-					message: "Unable to find route click target: %1 (type: %2)"
-						.arg(candidates).arg(step.type),
-				})
-				runSteps()
-				return
-			}
-			addStep(UiTestStep.Invoke, {
-				callable: ()=> { return mouseClick(fallbackTarget.clickable) },
-				message: "Click %1: %2".arg(step.type).arg(fallbackTarget.matchedValue),
+			addStep(UiTestStep.Abort, {
+				passed: false,
+				message: "Unable to find route click target: %1 (type: %2)"
+					.arg(candidates).arg(step.type),
 			})
-		} else {
-			addStep(UiTestStep.Invoke, {
-				callable: ()=> { return mouseClick(target.clickable) },
-				message: "Click %1: %2".arg(step.type).arg(target.matchedValue),
-			})
+			runSteps()
+			return
 		}
+
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { return mouseClick(target.clickable) },
+			message: "Click %1: %2".arg(step.type).arg(target.matchedValue),
+		})
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
 
 		// Verify we landed on the expected intermediate page.
