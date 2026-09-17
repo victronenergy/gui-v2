@@ -27,18 +27,25 @@ FocusScope {
 	property bool mainViewVisible: UiConfig.applicationVisible && !UiConfig.splashScreenVisible
 	onMainViewVisibleChanged: if (mainViewVisible) console.info("MainView: UI loaded and visible")
 
-	// To reduce the animation load, disable page animations when the PageStack is transitioning
-	// between pages, or when flicking between the main pages. Note that animations are still
-	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
-	// when the user drags slowly between pages.
+	// Disable page animations while the PageStack is transitioning or building a page, while
+	// a Control/Switch overlay is incubating, or while flicking between the main pages.
+	// On GX hardware, Brief/Overview animations consume the frame budget and starve Qt's
+	// asynchronous incubator, so a tree that would take a few hundred milliseconds to build
+	// instead takes several seconds. Pausing those animations while incubating is what makes
+	// the overlays and drill-downs appear in time. Animations are still allowed when dragging
+	// between the main pages, as it looks odd if they stop abruptly when the user drags slowly.
 	readonly property bool allowPageAnimations: Global.animationEnabled
 									   && mainViewVisible
-									   && !pageStack.transitioning && (!swipeView || !swipeView.flicking)
+									   && !pageStack.animating
+									   && !cardsLoader.incubating
+									   && !(swipeView?.currentItem?.overlayIncubating ?? false)
+									   && (!swipeView || !swipeView.flicking)
 									   && !Theme.adjustingGeometry
 
 	// True if any of the view animations are running.
 	readonly property bool animating: pageStack.animating || swipeView?.flicking || swipeView?.moving
 				|| navBarStartupAnim.running
+				|| cardsLoader.animationRunning || cardsLoader.incubating
 
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
 	// and Settings).

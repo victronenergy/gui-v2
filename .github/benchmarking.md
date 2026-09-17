@@ -184,6 +184,11 @@ then incubated asynchronously, so the rest of the UI can run while the user
 waits.  Construction time is therefore input-to-ready latency, not necessarily
 a hard freeze of the whole application.
 
+On GX hardware, Brief/Overview animations starve the QML incubator if they keep
+running while a page is built. Production pauses those animations
+(`MainView.allowPageAnimations`) for the duration of the build. The benchmark
+creates pages detached from the page stack, so it is not affected by that.
+
 ```bash
 ./venus-gui-v2 --mock --skip-splash --ui-test benchmark/pages
 ```
@@ -241,9 +246,10 @@ once before a series of runs is the trap: the first run compiles and repopulates
 it, the rest do not, and a median over the series lands between the endpoints
 and means nothing in particular.
 
-Either way this is what blocks the UI when a page is first opened:
-`PageStack.pushPage()` builds the page with an incubator, but compiles it with
-`Qt.createComponent()` first, which for a local url compiles synchronously.
+Either way this is what the user waits for when a page is first opened:
+`PageStack.pushPage()` compiles with asynchronous `Qt.createComponent()` and
+builds the page with an incubator. On GX, production pauses Brief/Overview
+animations while that is in flight so the incubator is not starved.
 
 A page's instantiation cost tracks the number of items its model builds, not the
 number of rows the user can see on it: `PageAcIn` declares a single row of its

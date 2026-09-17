@@ -14,8 +14,9 @@ Item {
 	required property bool showSidePanel
 	required property GaugeModel gaugeModel
 	readonly property bool graphsOpened: root.state === "panelOpened"
+	readonly property bool overlayIncubating: sidePanel.active && sidePanel.status !== Loader.Ready
 
-	property int topRightButton: sidePanel.active && state !== "panelOpening"
+	property int topRightButton: root.showSidePanel
 			? VenusOS.StatusBar_RightButton_SidePanelActive
 			: VenusOS.StatusBar_RightButton_SidePanelInactive
 
@@ -32,7 +33,7 @@ Item {
 		initializeTransition.enabled = animate
 		state = "initialized"
 		if (showSidePanel) {
-			state = "panelOpening"
+			_activateSidePanel()
 		}
 	}
 
@@ -40,11 +41,20 @@ Item {
 		root.state = "initialized"
 	}
 
+	function _activateSidePanel() {
+		sidePanel.active = true
+		if (sidePanel.status === Loader.Ready) {
+			state = "panelOpening"
+		}
+	}
+
 	onShowSidePanelChanged: {
 		if (showSidePanel && state === "initialized") {
-			state = "panelOpening"
+			_activateSidePanel()
 		} else if (!showSidePanel && state === "panelOpened") {
 			state = "initialized"
+		} else if (!showSidePanel && state === "initialized" && sidePanel.status !== Loader.Ready) {
+			sidePanel.active = false
 		}
 	}
 
@@ -366,16 +376,28 @@ Item {
 		sourceComponent: BriefSidePanel {
 			width: Theme.geometry_briefPage_sidePanel_width
 			height: Math.max(root._unexpandedHeight, implicitHeight)
-			animationEnabled: root.animationEnabled
+			// Keep inner animations off until the tree exists; they starve incubation.
+			animationEnabled: false
 		}
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load side panel")
+		onLoaded: {
+			if (item) {
+				item.animationEnabled = Qt.binding(function() {
+					return root.animationEnabled && root.showSidePanel
+				})
+			}
+			if (root.showSidePanel && root.state === "initialized") {
+				root.state = "panelOpening"
+			}
+		}
 
-		// the brief monitor panel has animations which mess with the asynchronous heuristic
-		// and cause the object hierarchy to take multiple seconds to load.
-		asynchronous: false
+		// Incubate off the first frame, then start the slide when onLoaded fires.
+		asynchronous: true
 
-		// hidden by default.
+		// Keep the tree after the first open so later opens only slide. Hide it from the
+		// scene graph while closed so the graphs do not keep costing CPU.
 		active: false
+		visible: root.showSidePanel || opacity > 0
 		x: root.width
 		opacity: 0.0
 	}
@@ -470,7 +492,6 @@ Item {
 					properties: "_gaugeArcOpacity,_gaugeLabelOpacity"
 					duration: root.animationEnabled ? Theme.animation_briefPage_sidePanel_slide_duration : 1
 				}
-				ScriptAction { script: sidePanel.active = false }
 			}
 		}
 	]
