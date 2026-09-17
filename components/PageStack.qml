@@ -106,13 +106,11 @@ StackView {
 		still far more than a frame, and it is the pages that are slowest to build
 		that the user is most likely to notice.
 
-		Note that the Qt.createComponent() call is still synchronous, so the first
-		time a given page is opened the UI does still block while the page is
-		loaded, and compiled if it has to be. On a GX device that is a median of
-		86ms and a worst measured case of 309ms with Qt's on-disk bytecode cache
-		empty, and 21ms and 124ms with it populated; a real device sits between the
-		two, as the cache is per source file rather than per page. Either way only
-		the first open of a page in a given run pays it.
+		Qt.createComponent() is asynchronous, so the first open of a page no longer
+		blocks the UI while the file is loaded and compiled. Cached components may
+		become ready immediately; only then is incubation started. Component-valued
+		pages (option lists, device pages) are incubated the same way. Already-
+		constructed Page objects are still pushed immediately.
 
 		If the user leaves before the page is ready, the page is discarded rather than
 		appearing on top of wherever they went instead. Only one page is being waited
@@ -136,35 +134,83 @@ StackView {
 			_popAndDestroyAllPages(StackView.Immediate)
 		}
 
-		const pageUrl = typeof(obj) === "string" ? obj : ""
-
-		if (typeof(obj) !== "string") {
-			const page = _pushItem(obj, properties, operation)
-			if (!page) {
-				console.warn("Aborted attempt to push page because StackView rejected the page object: " + pageUrl)
-				return null
-			}
-			root._pageUrls.push(pageUrl)
-			root._topPageUrl = pageUrl
-			if (readyCallback) {
-				readyCallback(page)
-			}
-			return page
+		if (typeof(obj) === "string") {
+			_pushFromUrl(obj, properties, operation, readyCallback)
+			return null
 		}
-
-		// Compile the page first, to make sure there are no errors, to avoid messing up the page
-		// stack state. Qt caches the compiled unit, so this is only slow the first time.
-		const component = Qt.createComponent(obj.indexOf("qrc:") === 0 ? obj : ".." + obj)
-		if (component.status !== Component.Ready) {
-			console.warn("Aborted attempt to push page with errors: " + obj + ": " + component.errorString())
+		if (_isComponent(obj)) {
+			_pushFromComponent(obj, "", properties, operation, readyCallback)
 			return null
 		}
 
+		const page = _pushItem(obj, properties, operation)
+		if (!page) {
+			console.warn("Aborted attempt to push page because StackView rejected the page object")
+			return null
+		}
+		root._pageUrls.push("")
+		root._topPageUrl = ""
+		if (readyCallback) {
+			readyCallback(page)
+		}
+		return page
+	}
+
+	function _isComponent(obj) {
+		return !!obj && typeof obj.incubateObject === "function"
+	}
+
+	function _pushFromUrl(url, properties, operation, readyCallback) {
+		const component = Qt.createComponent(url.indexOf("qrc:") === 0 ? url : ".." + url, Component.Asynchronous)
+		if (component.status === Component.Error) {
+			console.warn("Aborted attempt to push page with errors: " + url + ": " + component.errorString())
+			return
+		}
+		_loadThenIncubate(component, url, properties, operation, readyCallback)
+	}
+
+	function _pushFromComponent(component, pageUrl, properties, operation, readyCallback) {
+		if (component.status === Component.Error) {
+			console.warn("Aborted attempt to push page with errors: " + pageUrl + ": " + component.errorString())
+			return
+		}
+		_loadThenIncubate(component, pageUrl, properties, operation, readyCallback)
+	}
+
+	function _loadThenIncubate(component, pageUrl, properties, operation, readyCallback) {
+		root._pendingOrigin = Global.mainView ? Global.mainView.currentPage : null
+		if (component.status === Component.Ready) {
+			_incubateAndPush(component, pageUrl, properties, operation, readyCallback)
+			return
+		}
+
+		root._pendingBuild = component
+		component.statusChanged.connect(function() {
+			if (root._pendingBuild !== component) {
+				return
+			}
+			if (component.status === Component.Error) {
+				root._pendingBuild = null
+				root._pendingOrigin = null
+				console.warn("Aborted attempt to push page with errors: " + pageUrl + ": " + component.errorString())
+				return
+			}
+			if (component.status === Component.Ready) {
+				_incubateAndPush(component, pageUrl, properties, operation, readyCallback)
+			}
+		})
+	}
+
+	function _incubateAndPush(component, pageUrl, properties, operation, readyCallback) {
 		// incubateObject() returns null if given an undefined properties argument.
 		const incubator = component.incubateObject(null, properties || {}, Qt.Asynchronous)
 		if (!incubator) {
-			console.warn("Aborted attempt to push page: " + obj + ": could not start building it")
-			return null
+			if (root._pendingBuild === component) {
+				root._pendingBuild = null
+				root._pendingOrigin = null
+			}
+			console.warn("Aborted attempt to push page: " + pageUrl + ": could not start building it")
+			return
 		}
 		root._pendingBuild = incubator
 
@@ -172,7 +218,6 @@ StackView {
 		// also swipe to another main page, which does not touch the stack at all. So
 		// remember the page this was asked from; leaving it abandons the build, see
 		// the _shownPage handler below.
-		root._pendingOrigin = Global.mainView ? Global.mainView.currentPage : null
 		const origin = root._pendingOrigin
 
 		const finish = function() {
@@ -181,7 +226,7 @@ StackView {
 				root._pendingBuild = null
 			}
 			if (incubator.status !== Component.Ready) {
-				console.warn("Aborted attempt to push page with errors: " + obj)
+				console.warn("Aborted attempt to push page with errors: " + pageUrl)
 				return
 			}
 			// The origin is checked again here as a backstop, in case the page being
@@ -199,8 +244,8 @@ StackView {
 				console.warn("Aborted attempt to push page because StackView rejected the page object: " + pageUrl)
 				return
 			}
-			root._pageUrls.push(obj)
-			root._topPageUrl = obj
+			root._pageUrls.push(pageUrl)
+			root._topPageUrl = pageUrl
 			if (readyCallback) {
 				readyCallback(page)
 			}
@@ -216,7 +261,6 @@ StackView {
 			// A page small enough to be built within the first slice is already done.
 			finish()
 		}
-		return null
 	}
 
 	function _pushItem(page, properties, operation) {
@@ -258,11 +302,13 @@ StackView {
 	// a stack that is going away. Forcing completion blocks, but this only happens
 	// while the UI is being torn down, where a hitch does not matter.
 	Component.onDestruction: {
-		const incubator = root._pendingBuild
-		if (incubator) {
+		const pending = root._pendingBuild
+		if (pending) {
 			root._pendingBuild = null
 			root._pendingOrigin = null
-			incubator.forceCompletion()
+			if (typeof pending.forceCompletion === "function") {
+				pending.forceCompletion()
+			}
 		}
 	}
 

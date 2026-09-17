@@ -261,4 +261,63 @@ UiTestCase {
 		})
 		runSteps()
 	}
+
+	function _componentForPageUrl(url) {
+		const qrcUrl = url.indexOf("qrc:") === 0 ? url : "qrc:/qt/qml/Victron/VenusOS" + url
+		return Qt.createComponent(qrcUrl)
+	}
+
+	/*
+		A Component-valued page (option lists, device pages) must be incubated, not
+		pushed through StackView's synchronous incubator.
+	*/
+	function test_componentPushOpensThePage() {
+		const component = _componentForPageUrl(root.otherPageUrl)
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				if (!component || component.status === Component.Error) {
+					console.warn("Could not compile page component: " + (component ? component.errorString() : "null"))
+					return false
+				}
+				Global.pageManager.pushPage(component)
+				return true
+			},
+			message: "Open %1 as a Component".arg(root.otherPageUrl),
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			const stack = Global.pageManager.pageStack
+			return !Global.mainView.animating && stack.opened && !!stack.currentPage
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { return Global.pageManager.pageStack.depth === 1 },
+			message: "The opened component page is the only page on the stack",
+		})
+		runSteps()
+	}
+
+	/*
+		Leaving while a Component-valued page is being incubated must not leave
+		that page behind.
+	*/
+	function test_componentPushSupersededByLeavingDoesNotOpen() {
+		const component = _componentForPageUrl(root.slowPageUrl)
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				if (!component || component.status === Component.Error) {
+					console.warn("Could not compile page component: " + (component ? component.errorString() : "null"))
+					return false
+				}
+				Global.pageManager.pushPage(component)
+				Global.pageManager.popPage(null, PageStack.Immediate)
+				return true
+			},
+			message: "Open %1 as a Component and immediately leave".arg(root.slowPageUrl),
+		})
+		addStep(UiTestStep.Wait, { timeout: 3000 })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { return _stackIsClosed() },
+			message: "The page stack is still closed",
+		})
+		runSteps()
+	}
 }
