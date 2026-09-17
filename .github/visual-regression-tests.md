@@ -22,9 +22,19 @@ The visual regression test system works by:
 
 # Override the capture output directory
 VENUS_GUI_TEST_CAPTURE_DIR=~/my-captures ./bin/venus-gui-v2 --mock --ui-test smoke/mock-maximal
+
+# Runtime route test for one destination page (no full smoke crawl)
+./bin/venus-gui-v2 --mock --ui-test /pages/settings/PageSettingsConnectivity.qml
 ```
 
 The `--mock` flag starts the application with the mock backend (no real hardware needed). The `--ui-test <path>` flag specifies the test configuration to run, relative to `tests/ui/`.
+If `<path>` is not a known UI test configuration, it is treated as a destination page URL/path and
+gui-v2 runs a lightweight click-route test to that page.
+This target-page mode only supports routes where each click step has at least one statically
+resolvable identifier (label/icon/objectName); purely data-driven labels without static fallback
+are not currently resolvable.
+For target-page mode, runtime QML errors (for example `ReferenceError` in bindings) are treated
+as failures, and completion requires a valid page object on the stack, not only a matching URL.
 
 By default, captured images are stored in `<working-directory>/image-captures/` (configurable in the test JSON).
 
