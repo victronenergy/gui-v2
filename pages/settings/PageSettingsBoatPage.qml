@@ -19,12 +19,10 @@ Page {
 	readonly property FilteredDeviceModel _motorDrives: FilteredDeviceModel {
 		serviceTypes: ["motordrive"]
 	}
-
 	VeQuickItem {
 		id: leftDeviceInstanceItem
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/MultiDrive/Left/DeviceInstance"
 	}
-
 	VeQuickItem {
 		id: rightDeviceInstanceItem
 		uid: Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/MultiDrive/Right/DeviceInstance"
@@ -67,40 +65,50 @@ Page {
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListSwitch {
-				text: CommonWords.enabled
-				dataItem.uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
-				writeAccessLevel: VenusOS.User_AccessType_User
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListSwitch {
+					text: CommonWords.enabled
+					dataItem.uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
+					writeAccessLevel: VenusOS.User_AccessType_User
+				}
 			}
 
-			ListSwitch {
-				//% "Show temperatures"
-				text: qsTrId("pagesettingsboatpage_show_temperatures")
-				dataItem.uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/ShowTemperatures" : ""
-				writeAccessLevel: VenusOS.User_AccessType_User
+			DelegateComponent {
+				ListSwitch {
+					//% "Show temperatures"
+					text: qsTrId("pagesettingsboatpage_show_temperatures")
+					dataItem.uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/ShowTemperatures" : ""
+					writeAccessLevel: VenusOS.User_AccessType_User
+				}
 			}
 
-			SectionHeader {
-				//% "Dual-Drive Configuration"
-				text: qsTrId("pagesettingsboatpage_dual_drive_configuration")
+			DelegateComponent {
 				preferredVisible: _motordriveClassAndVrmInstances.count >= 2
+				SectionHeader {
+					//% "Dual-Drive Configuration"
+					text: qsTrId("pagesettingsboatpage_dual_drive_configuration")
+				}
 			}
 
-			ListRadioButtonGroup {
-				//% "Left E-drive"
-				text: qsTrId("pagesettingsboatpage_multi_drive_left")
-				dataItem.uid: leftDeviceInstanceItem.uid
-				optionModel: getOptions('left')
+			DelegateComponent {
 				preferredVisible: _motordriveClassAndVrmInstances.count >= 2
+				ListRadioButtonGroup {
+					//% "Left E-drive"
+					text: qsTrId("pagesettingsboatpage_multi_drive_left")
+					dataItem.uid: leftDeviceInstanceItem.uid
+					optionModel: getOptions('left')
+				}
 			}
 
-			ListRadioButtonGroup {
-				//% "Right E-drive"
-				text: qsTrId("pagesettingsboatpage_multi_drive_right")
-				dataItem.uid: rightDeviceInstanceItem.uid
-				optionModel: getOptions('right')
+			DelegateComponent {
 				preferredVisible: _motordriveClassAndVrmInstances.count >= 2
+				ListRadioButtonGroup {
+					//% "Right E-drive"
+					text: qsTrId("pagesettingsboatpage_multi_drive_right")
+					dataItem.uid: rightDeviceInstanceItem.uid
+					optionModel: getOptions('right')
+				}
 			}
 		}
 	}

@@ -20,174 +20,206 @@ Page {
 
 		uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/State" : ""
 	}
-
 	VeQuickItem {
 		id: historicalData
 		uid: root.settingsBindPrefix + "/AccumulatedDaily"
 	}
-
 	VeQuickItem {
 		id: accumulatedTotalItem
 
 		uid: settingsBindPrefix + "/AccumulatedTotal"
 	}
-
 	VeQuickItem {
 		id: gensetOperatingHours
 
 		uid: root.gensetBindPrefix ? gensetBindPrefix + "/Engine/OperatingHours" : ""
 	}
 
+	VeQuickItem {
+		id: veQuickItem
+		uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/ServiceCounter" : ""
+	}
+	VeQuickItem {
+		id: veQuickItem2
+		uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/NextTestRun" : ""
+	}
+	VeQuickItem {
+		id: accumulatedTotalOffsetItem
+		uid: settingsBindPrefix + "/AccumulatedTotalOffset"
+	}
+
 	GradientListView {
 		id: settingsListView
 
-		model: VisibleItemModel {
+		model: DelegateComponentModel {
 
-			ListText {
-				//% "Total run time"
-				text: qsTrId("page_settings_run_time_and_service_total_run_time")
+			DelegateComponent {
 				preferredVisible: gensetOperatingHours.valid
-				secondaryText: Math.round(accumulatedTotalItem.value / 60 / 60) + "h"
-			}
-
-			ListQuantityField {
-				//% "Generator total run time (hours)"
-				text: qsTrId("page_settings_run_time_and_service_generator_total_run_time")
-				value: Math.round(accumulatedTotalItem.value / 60 / 60) - Math.round(dataItem.value / 60 / 60)
-				unit: VenusOS.Units_Time_Hour
-				dataItem.uid: settingsBindPrefix + "/AccumulatedTotalOffset"
-				interactive: dataItem.valid && state.value === 0
-				preferredVisible: dataItem.valid && gensetBindPrefix === ""
-				maximumLength: 6
-				saveInput: function() {
-					dataItem.setValue(accumulatedTotalItem.value - parseInt(secondaryText, 10) * 60 * 60)
+				ListText {
+					//% "Total run time"
+					text: qsTrId("page_settings_run_time_and_service_total_run_time")
+					secondaryText: Math.round(accumulatedTotalItem.value / 60 / 60) + "h"
 				}
 			}
 
-			ListNavigation {
-				//% "Daily run time"
-				text: qsTrId("settings_page_run_time_and_service_daily_run_time")
-				onClicked: Global.pageManager.pushPage(dailyRunTimePage, { title: text })
+			DelegateComponent {
+				preferredVisible: accumulatedTotalOffsetItem.valid && gensetBindPrefix === ""
+				ListQuantityField {
+					//% "Generator total run time (hours)"
+					text: qsTrId("page_settings_run_time_and_service_generator_total_run_time")
+					value: Math.round(accumulatedTotalItem.value / 60 / 60) - Math.round(dataItem.value / 60 / 60)
+					unit: VenusOS.Units_Time_Hour
+					dataItem.uid: settingsBindPrefix + "/AccumulatedTotalOffset"
+					interactive: dataItem.valid && state.value === 0
+					maximumLength: 6
+					saveInput: function() {
+						dataItem.setValue(accumulatedTotalItem.value - parseInt(secondaryText, 10) * 60 * 60)
+					}
+				}
+			}
 
-				Component {
-					id: dailyRunTimePage
+			DelegateComponent {
+				ListNavigation {
+					//% "Daily run time"
+					text: qsTrId("settings_page_run_time_and_service_daily_run_time")
+					onClicked: Global.pageManager.pushPage(dailyRunTimePage, { title: text })
 
-					Page {
-						GradientListView {
-							model: _dates
-							delegate: ListText {
-								text: Qt.formatDate(new Date(parseInt(_dates[index]) * 1000), "dd-MM-yyyy") // TODO: locale-specific date format?
-								secondaryText: Utils.secondsToString(JSON.parse(historicalData.value)[_dates[index]], false)
+					Component {
+						id: dailyRunTimePage
+
+						Page {
+							GradientListView {
+								model: _dates
+								delegate: ListText {
+									text: Qt.formatDate(new Date(parseInt(_dates[index]) * 1000), "dd-MM-yyyy") // TODO: locale-specific date format?
+									secondaryText: Utils.secondsToString(JSON.parse(historicalData.value)[_dates[index]], false)
+								}
 							}
 						}
 					}
 				}
 			}
 
-			ListButton {
-				//% "Reset daily run time counters"
-				text: qsTrId("page_settings_run_time_and_service_reset_daily_run_time_counters")
-				secondaryText: CommonWords.reset
-				writeAccessLevel: VenusOS.User_AccessType_User
-				onClicked: {
-					if (state.value === 0) {
-						var now = new Date()
-						var today = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()))
-						var todayInSeconds = today.getTime() / 1000
-						resetDaily.setValue('{"%1" : 0}'.arg(todayInSeconds.toString()))
-						//% "The daily runtime counter has been reset"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_run_time_and_service_runtime_counter_reset"))
-					} else if (state.value === 1) {
-						//% "It is not possible to modify the counters while the generator is running"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_run_time_and_service_runtime_counter_cant_reset_while_running"))
-					}
-				}
-
-				VeQuickItem {
-					id: resetDaily
-
-					uid: settingsBindPrefix + "/AccumulatedDaily"
-				}
-			}
-
-			ListText {
-				id: nextTestRun
-				//% "Time to next test run"
-				text: qsTrId("settings_page_run_time_and_service_time_to_next_test_run")
-				secondaryText: ""
-				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/NextTestRun" : ""
-				preferredVisible: dataItem.valid && dataItem.value > 0
-
-				Timer {
-					running: parent.preferredVisible && Global.timersEnabled
-					repeat: true
-					interval: 1000
-					onTriggered: {
-						var now = new Date().getTime() / 1000
-						var remainingTime = parent.dataItem.value - now
-						if (remainingTime > 0) {
-							parent.secondaryText = Utils.secondsToString(remainingTime, false)
-							return
+			DelegateComponent {
+				ListButton {
+					//% "Reset daily run time counters"
+					text: qsTrId("page_settings_run_time_and_service_reset_daily_run_time_counters")
+					secondaryText: CommonWords.reset
+					writeAccessLevel: VenusOS.User_AccessType_User
+					onClicked: {
+						if (state.value === 0) {
+							var now = new Date()
+							var today = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()))
+							var todayInSeconds = today.getTime() / 1000
+							resetDaily.setValue('{"%1" : 0}'.arg(todayInSeconds.toString()))
+							//% "The daily runtime counter has been reset"
+							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_run_time_and_service_runtime_counter_reset"))
+						} else if (state.value === 1) {
+							//% "It is not possible to modify the counters while the generator is running"
+							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_run_time_and_service_runtime_counter_cant_reset_while_running"))
 						}
-						//% "Running now"
-						parent.secondaryText = qsTrId("settings_page_run_time_and_service_running_now")
+					}
+
+					VeQuickItem {
+						id: resetDaily
+
+						uid: settingsBindPrefix + "/AccumulatedDaily"
 					}
 				}
 			}
 
-			ListText {
-				//% "Accumulated running time since last test run"
-				text: qsTrId("settings_page_run_time_and_service_accumulated_running_time")
-				showAccessLevel: VenusOS.User_AccessType_Service
-				preferredVisible: nextTestRun.preferredVisible
-				secondaryText: Utils.secondsToString(dataItem.value, false)
-				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/TestRunIntervalRuntime" : ""
-			}
+			DelegateComponent {
+				id: nextTestRunDC
+				dataItem: VeQuickItem { uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/NextTestRun" : "" }
+				preferredVisible: veQuickItem2.valid && dataItem.value > 0
+				ListText {
+					id: nextTestRun
+					//% "Time to next test run"
+					text: qsTrId("settings_page_run_time_and_service_time_to_next_test_run")
+					secondaryText: ""
+					dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/NextTestRun" : ""
 
-			ListText {
-				//% "Runtime until service"
-				text: qsTrId("settings_page_run_time_and_service_time_to_service")
-				dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/ServiceCounter" : ""
-				secondaryText: Math.round(dataItem.value / 60 / 60) + "h"
-				preferredVisible: dataItem.valid
-			}
-
-			ListQuantityField {
-				id: serviceInterval
-
-				//% "Generator service interval (hours)"
-				text: qsTrId("page_settings_generator_service_interval")
-				value: Math.round(dataItem.value / 60 / 60)
-				unit: VenusOS.Units_Time_Hour
-				dataItem.uid: settingsBindPrefix + "/ServiceInterval"
-				saveInput: function() {
-					var serviceInterval = parseInt(secondaryText, 10) * 60 * 60
-					dataItem.setValue(serviceInterval)
-					if (serviceInterval > 0) {
-						//% "Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer."
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_run_time_and_service_service_time_interval").arg(secondaryText))
-					}
-					else {
-						//% "Service timer disabled."
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_run_time_and_service_service_time_disabled"))
+					Timer {
+						running: parent.preferredVisible && Global.timersEnabled
+						repeat: true
+						interval: 1000
+						onTriggered: {
+							var now = new Date().getTime() / 1000
+							var remainingTime = parent.dataItem.value - now
+							if (remainingTime > 0) {
+								parent.secondaryText = Utils.secondsToString(remainingTime, false)
+								return
+							}
+							//% "Running now"
+							parent.secondaryText = qsTrId("settings_page_run_time_and_service_running_now")
+						}
 					}
 				}
 			}
 
-			ListButton {
-				//% "Reset service timer"
-				text: qsTrId("page_settings_run_time_and_service_reset_service_timer")
-				secondaryText: CommonWords.reset
-				preferredVisible: serviceReset.valid
-				onClicked: {
-					serviceReset.setValue(1)
-					//% "The service timer has been reset"
-					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_run_time_and_service_service_timer_has_been_reset"))
+			DelegateComponent {
+				preferredVisible: nextTestRunDC.preferredVisible
+				ListText {
+					//% "Accumulated running time since last test run"
+					text: qsTrId("settings_page_run_time_and_service_accumulated_running_time")
+					showAccessLevel: VenusOS.User_AccessType_Service
+					secondaryText: Utils.secondsToString(dataItem.value, false)
+					dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/TestRunIntervalRuntime" : ""
 				}
+			}
 
-				VeQuickItem {
-					id: serviceReset
-					uid: root.startStopBindPrefix ? startStopBindPrefix + "/ServiceCounterReset" : ""
+			DelegateComponent {
+				preferredVisible: veQuickItem.valid
+				ListText {
+					//% "Runtime until service"
+					text: qsTrId("settings_page_run_time_and_service_time_to_service")
+					dataItem.uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/ServiceCounter" : ""
+					secondaryText: Math.round(dataItem.value / 60 / 60) + "h"
+				}
+			}
+
+			DelegateComponent {
+				ListQuantityField {
+					id: serviceInterval
+
+					//% "Generator service interval (hours)"
+					text: qsTrId("page_settings_generator_service_interval")
+					value: Math.round(dataItem.value / 60 / 60)
+					unit: VenusOS.Units_Time_Hour
+					dataItem.uid: settingsBindPrefix + "/ServiceInterval"
+					saveInput: function() {
+						var serviceInterval = parseInt(secondaryText, 10) * 60 * 60
+						dataItem.setValue(serviceInterval)
+						if (serviceInterval > 0) {
+							//% "Service time interval set to %1h. Use the 'Reset service timer' button to reset the service timer."
+							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_run_time_and_service_service_time_interval").arg(secondaryText))
+						}
+						else {
+							//% "Service timer disabled."
+							Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_run_time_and_service_service_time_disabled"))
+						}
+					}
+				}
+			}
+
+			DelegateComponent {
+				id: serviceResetDC
+				dataItem: VeQuickItem { uid: root.startStopBindPrefix ? startStopBindPrefix + "/ServiceCounterReset" : "" }
+				preferredVisible: serviceResetDC.dataItem.valid
+				ListButton {
+					//% "Reset service timer"
+					text: qsTrId("page_settings_run_time_and_service_reset_service_timer")
+					secondaryText: CommonWords.reset
+					onClicked: {
+						serviceReset.setValue(1)
+						//% "The service timer has been reset"
+						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("page_settings_run_time_and_service_service_timer_has_been_reset"))
+					}
+
+					VeQuickItem {
+						id: serviceReset
+						uid: root.startStopBindPrefix ? startStopBindPrefix + "/ServiceCounterReset" : ""
+					}
 				}
 			}
 		}
