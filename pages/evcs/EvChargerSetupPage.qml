@@ -11,24 +11,35 @@ Page {
 
 	required property string bindPrefix
 
+	VeQuickItem {
+		id: enableDisplayItem
+		uid: root.bindPrefix + "/EnableDisplay"
+	}
+
 	GradientListView {
-		model: VisibleItemModel {
-			ListAcInPositionRadioButtonGroup {
-				bindPrefix: root.bindPrefix
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListAcInPositionRadioButtonGroup {
+					bindPrefix: root.bindPrefix
+				}
 			}
 
-			ListSwitch {
-				//% "Autostart"
-				text: qsTrId("evcs_autostart")
-				dataItem.uid: root.bindPrefix + "/AutoStart"
+			DelegateComponent {
+				ListSwitch {
+					//% "Autostart"
+					text: qsTrId("evcs_autostart")
+					dataItem.uid: root.bindPrefix + "/AutoStart"
+				}
 			}
 
-			ListSwitch {
-				//% "Lock charger display"
-				text: qsTrId("evcs_lock_charger_display")
-				dataItem.uid: root.bindPrefix + "/EnableDisplay"
-				invertSourceValue: true
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				preferredVisible: enableDisplayItem.valid
+				ListSwitch {
+					//% "Lock charger display"
+					text: qsTrId("evcs_lock_charger_display")
+					dataItem.uid: root.bindPrefix + "/EnableDisplay"
+					invertSourceValue: true
+				}
 			}
 		}
 	}

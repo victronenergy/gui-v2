@@ -31,7 +31,6 @@ Page {
 			batteryListView.model = Object.keys(jsonObject)
 		}
 	}
-
 	VeQuickItem {
 		id: activeBatteryService
 		uid: Global.system.serviceUid + "/ActiveBatteryService"
@@ -81,29 +80,38 @@ Page {
 
 				Page {
 					GradientListView {
-						model: VisibleItemModel {
-							ListText {
-								text: root._visibleText
-								//% "Active battery monitor"
-								secondaryText: qsTrId("settings_batteries_active_battery_monitor")
+						model: DelegateComponentModel {
+							DelegateComponent {
 								preferredVisible: batteryMenuItem.activeBattery
+								ListText {
+									text: root._visibleText
+									//% "Active battery monitor"
+									secondaryText: qsTrId("settings_batteries_active_battery_monitor")
+								}
 							}
 
-							ListSwitch {
-								text: root._visibleText
+							DelegateComponent {
 								preferredVisible: !batteryMenuItem.activeBattery
-								dataItem.uid: batteryEnabled.uid
-								writeAccessLevel: VenusOS.User_AccessType_User
+								ListSwitch {
+									text: root._visibleText
+									dataItem.uid: batteryEnabled.uid
+									writeAccessLevel: VenusOS.User_AccessType_User
+								}
 							}
 
-							ListTextField {
-								//% "Name"
-								text: qsTrId("settings_batteries_name")
-								//% "Enter name"
-								placeholderText: qsTrId("settings_batteries_enter_name")
-								dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
+							DelegateComponent {
+								dataItem: VeQuickItem {
+									uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
+								}
 								preferredVisible: dataItem.valid
-								maximumLength: 32
+								ListTextField {
+									//% "Name"
+									text: qsTrId("settings_batteries_name")
+									//% "Enter name"
+									placeholderText: qsTrId("settings_batteries_enter_name")
+									dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
+									maximumLength: 32
+								}
 							}
 						}
 					}

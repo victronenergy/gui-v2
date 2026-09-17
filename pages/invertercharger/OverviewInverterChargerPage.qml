@@ -20,154 +20,171 @@ Page {
 		serviceUid: root.serviceUid
 	}
 
+	AcInputSettingsModel {
+		id: inputSettingsModel
+		serviceUid: root.serviceUid
+	}
 	VeQuickItem {
 		id: dcCurrent
 
 		uid: root.serviceUid + "/Dc/0/Current"
 	}
-
 	VeQuickItem {
 		id: dcPower
 
 		uid: root.serviceUid + "/Dc/0/Power"
 	}
-
 	VeQuickItem {
 		id: dcVoltage
 
 		uid: root.serviceUid + "/Dc/0/Voltage"
 	}
-
 	VeQuickItem {
 		id: stateOfCharge
 
 		uid: root.serviceUid + "/Soc"
 	}
-
 	VeQuickItem {
 		id: isInverterChargerItem
 		uid: root.serviceUid + "/IsInverterCharger"
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListInverterChargerModeButton {
-				serviceUid: root.serviceUid
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListInverterChargerModeButton {
+					serviceUid: root.serviceUid
+				}
 			}
 
-			ListText {
-				text: CommonWords.state
-				secondaryText: VenusOS.system_stateToText(dataItem.value)
-				dataItem.uid: root.serviceUid + "/State"
+			DelegateComponent {
+				ListText {
+					text: CommonWords.state
+					secondaryText: VenusOS.system_stateToText(dataItem.value)
+					dataItem.uid: root.serviceUid + "/State"
+				}
 			}
 
-			SettingsColumn {
-				width: parent ? parent.width : 0
+			DelegateComponent {
 				preferredVisible: inputSettingsModel.count > 0
+				SettingsColumn {
+					width: parent ? parent.width : 0
 
-				Repeater {
-					model: AcInputSettingsModel {
-						id: inputSettingsModel
-						serviceUid: root.serviceUid
-					}
-					delegate: ListCurrentLimitButton {
-						required property AcInputSettings inputSettings
+					Repeater {
+						model: inputSettingsModel
+						delegate: ListCurrentLimitButton {
+							required property AcInputSettings inputSettings
 
-						serviceUid: root.serviceUid
-						inputNumber: inputSettings.inputNumber
-						inputType: inputSettings.inputType
-					}
-				}
-			}
-
-			ListItemLoader {
-				width: parent ? parent.width : 0
-				sourceComponent: root.serviceType === "inverter" ? inverterAcOutQuantityGroup
-						: root.serviceType === "vebus" ? veBusAcIODisplay
-						: root.serviceType === "acsystem" ? rsSystemAcIODisplay
-						: null
-
-				Component {
-					id: inverterAcOutQuantityGroup
-					InverterAcOutSettings {
-						bindPrefix: root.serviceUid
-					}
-				}
-
-				Component {
-					id: veBusAcIODisplay
-					VeBusAcIODisplay {
-						serviceUid: root.serviceUid
-					}
-				}
-
-				Component {
-					id: rsSystemAcIODisplay
-					RsSystemAcIODisplay {
-						serviceUid: root.serviceUid
+							serviceUid: root.serviceUid
+							inputNumber: inputSettings.inputNumber
+							inputType: inputSettings.inputType
+						}
 					}
 				}
 			}
 
-			ListActiveAcInput {
-				bindPrefix: root.serviceUid
+			DelegateComponent {
+				ListItemLoader {
+					width: parent ? parent.width : 0
+					sourceComponent: root.serviceType === "inverter" ? inverterAcOutQuantityGroup
+							: root.serviceType === "vebus" ? veBusAcIODisplay
+							: root.serviceType === "acsystem" ? rsSystemAcIODisplay
+							: null
+
+					Component {
+						id: inverterAcOutQuantityGroup
+						InverterAcOutSettings {
+							bindPrefix: root.serviceUid
+						}
+					}
+
+					Component {
+						id: veBusAcIODisplay
+						VeBusAcIODisplay {
+							serviceUid: root.serviceUid
+						}
+					}
+
+					Component {
+						id: rsSystemAcIODisplay
+						RsSystemAcIODisplay {
+							serviceUid: root.serviceUid
+						}
+					}
+				}
+			}
+
+			DelegateComponent {
 				preferredVisible: root.serviceType !== "inverter"
-			}
-
-			ListQuantityGroup {
-				text: CommonWords.dc
-				model: QuantityObjectModel {
-					// Power is only shown for non-inverter services.
-					QuantityObject { object: root.serviceType !== "inverter" ? dcPower : null; unit: VenusOS.Units_Watt }
-
-					QuantityObject { object: dcVoltage; unit: VenusOS.Units_Volt_DC }
-					QuantityObject { object: dcCurrent; unit: VenusOS.Units_Amp }
-
-					// SOC is shown for non-inverter services, or inverter services with IsInverterCharger=1.
-					QuantityObject { object: root.serviceType !== "inverter" || isInverterChargerItem.value === 1 ? socObject : null }
-				}
-
-				QtObject {
-					id: socObject
-					readonly property string value: CommonWords.soc_with_prefix.arg(stateOfCharge.valid ? Units.getCombinedDisplayText(VenusOS.Units_Percentage, stateOfCharge.value) : "--")
+				ListActiveAcInput {
+					bindPrefix: root.serviceUid
 				}
 			}
 
-			ListNavigation {
-				text: CommonWords.ess
-				preferredVisible: root.serviceType === "acsystem"
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemEss.qml",
-							{ "title": text, "bindPrefix": root.serviceUid })
-				}
-			}
+			DelegateComponent {
+				ListQuantityGroup {
+					text: CommonWords.dc
+					model: QuantityObjectModel {
+						// Power is only shown for non-inverter services.
+						QuantityObject { object: root.serviceType !== "inverter" ? dcPower : null; unit: VenusOS.Units_Watt }
 
-			ListNavigation {
-				text: qsTrId("vebus_device_page_microgrid_parameters")
-				preferredVisible: mode.valid
-				onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageMicrogrid.qml", { "bindPrefix": root.serviceUid })
+						QuantityObject { object: dcVoltage; unit: VenusOS.Units_Volt_DC }
+						QuantityObject { object: dcCurrent; unit: VenusOS.Units_Amp }
 
-				VeQuickItem {
-					id: mode
-					uid: root.serviceUid + "/MicroGrid/Mode"
-				}
-			}
-
-			ListNavigation {
-				text: CommonWords.product_page
-				onClicked: {
-					let pageUrl = ""
-					if (root.serviceType === "inverter") {
-						pageUrl = "/pages/settings/devicelist/inverter/PageInverter.qml"
-					} else if (root.serviceType === "vebus") {
-						pageUrl = "/pages/vebusdevice/PageVeBus.qml"
-					} else if (root.serviceType === "acsystem") {
-						pageUrl = "/pages/settings/devicelist/rs/PageRsSystem.qml"
-					} else {
-						console.warn("Unsupported service:", root.serviceUid)
-						return
+						// SOC is shown for non-inverter services, or inverter services with IsInverterCharger=1.
+						QuantityObject { object: root.serviceType !== "inverter" || isInverterChargerItem.value === 1 ? socObject : null }
 					}
-					Global.pageManager.pushPage(pageUrl, { title: text, bindPrefix: root.serviceUid })
+
+					QtObject {
+						id: socObject
+						readonly property string value: CommonWords.soc_with_prefix.arg(stateOfCharge.valid ? Units.getCombinedDisplayText(VenusOS.Units_Percentage, stateOfCharge.value) : "--")
+					}
+				}
+			}
+
+			DelegateComponent {
+				preferredVisible: root.serviceType === "acsystem"
+				ListNavigation {
+					text: CommonWords.ess
+					onClicked: {
+						Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemEss.qml",
+								{ "title": text, "bindPrefix": root.serviceUid })
+					}
+				}
+			}
+
+			DelegateComponent {
+				id: modeDC
+				dataItem: VeQuickItem { uid: root.serviceUid + "/MicroGrid/Mode" }
+				preferredVisible: modeDC.dataItem.valid
+				ListNavigation {
+					text: qsTrId("vebus_device_page_microgrid_parameters")
+					onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageMicrogrid.qml", { "bindPrefix": root.serviceUid })
+
+					VeQuickItem {
+						id: mode
+						uid: root.serviceUid + "/MicroGrid/Mode"
+					}
+				}
+			}
+
+			DelegateComponent {
+				ListNavigation {
+					text: CommonWords.product_page
+					onClicked: {
+						let pageUrl = ""
+						if (root.serviceType === "inverter") {
+							pageUrl = "/pages/settings/devicelist/inverter/PageInverter.qml"
+						} else if (root.serviceType === "vebus") {
+							pageUrl = "/pages/vebusdevice/PageVeBus.qml"
+						} else if (root.serviceType === "acsystem") {
+							pageUrl = "/pages/settings/devicelist/rs/PageRsSystem.qml"
+						} else {
+							console.warn("Unsupported service:", root.serviceUid)
+							return
+						}
+						Global.pageManager.pushPage(pageUrl, { title: text, bindPrefix: root.serviceUid })
+					}
 				}
 			}
 		}

@@ -14,112 +14,158 @@ DevicePage {
 
 	property string bindPrefix
 
+	VeQuickItem {
+		id: nrOfOutputs
+		uid: root.bindPrefix + "/NrOfOutputs"
+	}
+	VeQuickItem {
+		id: highVoltageItem
+		uid: root.bindPrefix + "/Alarms/HighVoltage"
+	}
+	VeQuickItem {
+		id: lowVoltageItem
+		uid: root.bindPrefix + "/Alarms/LowVoltage"
+	}
+	VeQuickItem {
+		id: iItem
+		uid: root.bindPrefix + "/Ac/In/L1/I"
+	}
+	VeQuickItem {
+		id: temperatureItem
+		uid: root.bindPrefix + "/Dc/0/Temperature"
+	}
+	VeQuickItem {
+		id: currentLimitItem
+		uid: root.bindPrefix + "/Ac/In/CurrentLimit"
+	}
+	VeQuickItem {
+		id: modeItem
+		uid: root.bindPrefix + "/Mode"
+	}
+
 	serviceUid: bindPrefix
 
-	settingsModel: VisibleItemModel {
-		ListSwitch {
-			text: CommonWords.switch_mode
-			dataItem.uid: root.bindPrefix + "/Mode"
-			valueTrue: 1
-			valueFalse: 4
-			preferredVisible: dataItem.valid
-			writeAccessLevel: VenusOS.User_AccessType_User
-		}
-
-		ListText {
-			text: CommonWords.state
-			secondaryText: VenusOS.system_stateToText(dataItem.value)
-			dataItem.uid: root.bindPrefix + "/State"
-		}
-
-		ListSpinBox {
-			text: CommonWords.input_current_limit
-			writeAccessLevel: VenusOS.User_AccessType_User
-			preferredVisible: dataItem.valid
-			dataItem.uid: root.bindPrefix + "/Ac/In/CurrentLimit"
-			suffix: Units.defaultUnitString(VenusOS.Units_Amp)
-			stepSize: 0.1
-			decimals: 1
-		}
-
-		SettingsColumn {
-			width: parent ? parent.width : 0
-			preferredVisible: outputRepeater.count > 0
-
-			VeQuickItem {
-				id: nrOfOutputs
-				uid: root.bindPrefix + "/NrOfOutputs"
+	settingsModel: DelegateComponentModel {
+		DelegateComponent {
+			preferredVisible: modeItem.valid
+			ListSwitch {
+				text: CommonWords.switch_mode
+				dataItem.uid: root.bindPrefix + "/Mode"
+				valueTrue: 1
+				valueFalse: 4
+				writeAccessLevel: VenusOS.User_AccessType_User
 			}
+		}
 
-			Repeater {
-				id: outputRepeater
-				model: nrOfOutputs.value || 1
-				delegate: ListQuantityGroup {
-					id: phaseDelegate
+		DelegateComponent {
+			ListText {
+				text: CommonWords.state
+				secondaryText: VenusOS.system_stateToText(dataItem.value)
+				dataItem.uid: root.bindPrefix + "/State"
+			}
+		}
 
-					required property int index
-					readonly property string bindPrefix: `${root.bindPrefix}/Dc/${index}`
+		DelegateComponent {
+			preferredVisible: currentLimitItem.valid
+			ListSpinBox {
+				text: CommonWords.input_current_limit
+				writeAccessLevel: VenusOS.User_AccessType_User
+				dataItem.uid: root.bindPrefix + "/Ac/In/CurrentLimit"
+				suffix: Units.defaultUnitString(VenusOS.Units_Amp)
+				stepSize: 0.1
+				decimals: 1
+			}
+		}
 
-					//: %1 = battery number
-					//% "Battery %1"
-					text: qsTrId("settings_accharger_battery").arg(index + 1)
-					model: QuantityObjectModel {
-						QuantityObject { object: dcVoltage; unit: VenusOS.Units_Volt_DC }
-						QuantityObject { object: dcCurrent; unit: VenusOS.Units_Amp }
-					}
+		DelegateComponent {
+			// Always visible: the repeater falls back to a single output when /NrOfOutputs is not
+			// published, so that a charger that only publishes /Dc/0/Voltage and /Dc/0/Current
+			// still shows its battery voltage and current.
+			SettingsColumn {
+				width: parent ? parent.width : 0
 
-					VeQuickItem {
-						id: dcVoltage
-						uid: phaseDelegate.bindPrefix + "/Voltage"
-					}
+				Repeater {
+					id: outputRepeater
+					model: nrOfOutputs.value || 1
+					delegate: ListQuantityGroup {
+						id: phaseDelegate
 
-					VeQuickItem {
-						id: dcCurrent
-						uid: phaseDelegate.bindPrefix + "/Current"
+						required property int index
+						readonly property string bindPrefix: `${root.bindPrefix}/Dc/${index}`
+
+						//: %1 = battery number
+						//% "Battery %1"
+						text: qsTrId("settings_accharger_battery").arg(index + 1)
+						model: QuantityObjectModel {
+							QuantityObject { object: dcVoltage; unit: VenusOS.Units_Volt_DC }
+							QuantityObject { object: dcCurrent; unit: VenusOS.Units_Amp }
+						}
+
+						VeQuickItem {
+							id: dcVoltage
+							uid: phaseDelegate.bindPrefix + "/Voltage"
+						}
+
+						VeQuickItem {
+							id: dcCurrent
+							uid: phaseDelegate.bindPrefix + "/Current"
+						}
 					}
 				}
 			}
 		}
 
-		ListTemperature {
-			text: CommonWords.battery_temperature
-			dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
-			preferredVisible: dataItem.valid
+		DelegateComponent {
+			preferredVisible: temperatureItem.valid
+			ListTemperature {
+				text: CommonWords.battery_temperature
+				dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
+			}
 		}
 
-		ListQuantity {
-			//% "AC current"
-			text: qsTrId("settings_accharger_current")
-			unit: VenusOS.Units_Amp
-			dataItem.uid: root.bindPrefix + "/Ac/In/L1/I"
-			preferredVisible: dataItem.valid
+		DelegateComponent {
+			preferredVisible: iItem.valid
+			ListQuantity {
+				//% "AC current"
+				text: qsTrId("settings_accharger_current")
+				unit: VenusOS.Units_Amp
+				dataItem.uid: root.bindPrefix + "/Ac/In/L1/I"
+			}
 		}
 
-		ListAlarm {
-			//% "Low battery voltage alarm"
-			text: qsTrId("settings_accharger_low_battery_voltage_alarm")
-			dataItem.uid: root.bindPrefix + "/Alarms/LowVoltage"
-			preferredVisible: dataItem.valid
+		DelegateComponent {
+			preferredVisible: lowVoltageItem.valid
+			ListAlarm {
+				//% "Low battery voltage alarm"
+				text: qsTrId("settings_accharger_low_battery_voltage_alarm")
+				dataItem.uid: root.bindPrefix + "/Alarms/LowVoltage"
+			}
 		}
 
-		ListAlarm {
-			id: highBatteryAlarm
+		DelegateComponent {
+			preferredVisible: highVoltageItem.valid
+			ListAlarm {
+				id: highBatteryAlarm
 
-			//% "High battery voltage alarm"
-			text: qsTrId("settings_accharger_high_battery_voltage_alarm")
-			dataItem.uid: root.bindPrefix + "/Alarms/HighVoltage"
-			preferredVisible: dataItem.valid
+				//% "High battery voltage alarm"
+				text: qsTrId("settings_accharger_high_battery_voltage_alarm")
+				dataItem.uid: root.bindPrefix + "/Alarms/HighVoltage"
+			}
 		}
 
-		ListText {
-			text: CommonWords.error
-			dataItem.uid: root.bindPrefix + "/ErrorCode"
-			secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
+		DelegateComponent {
+			ListText {
+				text: CommonWords.error
+				dataItem.uid: root.bindPrefix + "/ErrorCode"
+				secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
+			}
 		}
 
-		// This is the master´s relay state
-		ListRelayState {
-			dataItem.uid: root.bindPrefix + "/Relay/0/State"
+		DelegateComponent {
+			// This is the master´s relay state
+			ListRelayState {
+				dataItem.uid: root.bindPrefix + "/Relay/0/State"
+			}
 		}
 	}
 }

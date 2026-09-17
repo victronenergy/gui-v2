@@ -85,17 +85,14 @@ ListNavigation {
 		id: itemDay
 		uid: root._scheduleSource + "/Day"
 	}
-
 	VeQuickItem {
 		id: startTime
 		uid: root._scheduleSource + "/Start"
 	}
-
 	VeQuickItem {
 		id: duration
 		uid: root._scheduleSource + "/Duration"
 	}
-
 	VeQuickItem {
 		id: socLimit
 		uid: root._scheduleSource + "/Soc"
@@ -108,70 +105,84 @@ ListNavigation {
 			id: scheduledOptionsPage
 
 			GradientListView {
-				model: VisibleItemModel {
-					ListSwitch {
-						id: itemEnabled
+				model: DelegateComponentModel {
+					DelegateComponent {
+						id: itemEnabledDC
+						property bool checked: itemDay.valid && itemDay.value >= 0
+						ListSwitch {
+							id: itemEnabled
 
-						text: CommonWords.enabled
-						checked: itemDay.valid && itemDay.value >= 0
-						checkable: true
-						writeAccessLevel: VenusOS.User_AccessType_User
-						onCheckedChanged: {
-							if (checked ^ itemDay.value >= 0) {
-								itemDay.setValue(toggleDay(itemDay.value))
+							text: CommonWords.enabled
+							checked: itemDay.valid && itemDay.value >= 0
+							checkable: true
+							writeAccessLevel: VenusOS.User_AccessType_User
+							onCheckedChanged: {
+								if (checked ^ itemDay.value >= 0) {
+									itemDay.setValue(toggleDay(itemDay.value))
+								}
 							}
 						}
 					}
 
-					ListRadioButtonGroup {
-						//% "Day"
-						text: qsTrId("cgwacs_battery_schedule_day")
-						dataItem.uid: root._scheduleSource + "/Day"
-						preferredVisible: itemEnabled.checked
-						//% "Not set"
-						defaultSecondaryText: qsTrId("cgwacs_battery_schedule_day_not_set")
-						optionModel: root._dayModel
+					DelegateComponent {
+						preferredVisible: itemEnabledDC.checked
+						ListRadioButtonGroup {
+							//% "Day"
+							text: qsTrId("cgwacs_battery_schedule_day")
+							dataItem.uid: root._scheduleSource + "/Day"
+							//% "Not set"
+							defaultSecondaryText: qsTrId("cgwacs_battery_schedule_day_not_set")
+							optionModel: root._dayModel
+						}
 					}
 
-					ListTimeSelector {
-						text: CommonWords.start_time
-						dataItem.uid: root._scheduleSource + "/Start"
-						preferredVisible: itemEnabled.checked
+					DelegateComponent {
+						preferredVisible: itemEnabledDC.checked
+						ListTimeSelector {
+							text: CommonWords.start_time
+							dataItem.uid: root._scheduleSource + "/Start"
+						}
 					}
 
-					ListTimeSelector {
-						//% "Duration"
-						text: qsTrId("cgwacs_battery_schedule_duration")
-						secondaryText: dataItem.value > 0 ? Utils.secondsToString(dataItem.value) : "--"
-						dataItem.uid: root._scheduleSource + "/Duration"
-						preferredVisible: itemEnabled.checked
-						maximumHour: 9999
+					DelegateComponent {
+						preferredVisible: itemEnabledDC.checked
+						ListTimeSelector {
+							//% "Duration"
+							text: qsTrId("cgwacs_battery_schedule_duration")
+							secondaryText: dataItem.value > 0 ? Utils.secondsToString(dataItem.value) : "--"
+							dataItem.uid: root._scheduleSource + "/Duration"
+							maximumHour: 9999
+						}
 					}
 
-					ListSpinBox {
-						id: socLimitSpinBox
+					DelegateComponent {
+						preferredVisible: itemEnabledDC.checked
+						ListSpinBox {
+							id: socLimitSpinBox
 
-						//% "SOC limit"
-						text: qsTrId("cgwacs_battery_schedule_soc_limit")
-						preferredVisible: itemEnabled.checked
-						dataItem.uid: root._scheduleSource + "/Soc"
-						suffix: "%"
-						from: 5
-						to: 100
-						stepSize: 5
+							//% "SOC limit"
+							text: qsTrId("cgwacs_battery_schedule_soc_limit")
+							dataItem.uid: root._scheduleSource + "/Soc"
+							suffix: "%"
+							from: 5
+							to: 100
+							stepSize: 5
+						}
 					}
 
-					ListRadioButtonGroup {
-						//% "Self-consumption above limit"
-						text: qsTrId("cgwacs_battery_schedule_self_consumption_above_limit")
-						dataItem.uid: root._scheduleSource + "/AllowDischarge"
-						preferredVisible: itemEnabled.checked && socLimit.value < 100
-						optionModel: [
-							//% "PV"
-							{ display: qsTrId("cgwacs_battery_schedule_pv"), value: 0 },
-							//% "PV & Battery"
-							{ display: qsTrId("cgwacs_battery_schedule_pv_and_battery"), value: 1 }
-						]
+					DelegateComponent {
+						preferredVisible: itemEnabledDC.checked && socLimit.value < 100
+						ListRadioButtonGroup {
+							//% "Self-consumption above limit"
+							text: qsTrId("cgwacs_battery_schedule_self_consumption_above_limit")
+							dataItem.uid: root._scheduleSource + "/AllowDischarge"
+							optionModel: [
+								//% "PV"
+								{ display: qsTrId("cgwacs_battery_schedule_pv"), value: 0 },
+								//% "PV & Battery"
+								{ display: qsTrId("cgwacs_battery_schedule_pv_and_battery"), value: 1 }
+							]
+						}
 					}
 				}
 			}

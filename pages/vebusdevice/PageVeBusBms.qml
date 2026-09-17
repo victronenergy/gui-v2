@@ -13,25 +13,32 @@ Page {
 	property int bmsType
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListText {
-				text: CommonWords.allow_to_charge
-				secondaryText: CommonWords.yesOrNo(dataItem.value)
-				dataItem.uid: bindPrefix + "/Bms/AllowToCharge"
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListText {
+					text: CommonWords.allow_to_charge
+					secondaryText: CommonWords.yesOrNo(dataItem.value)
+					dataItem.uid: bindPrefix + "/Bms/AllowToCharge"
+				}
 			}
 
-			ListText {
-				text: CommonWords.allow_to_discharge
-				secondaryText: CommonWords.yesOrNo(dataItem.value)
-				dataItem.uid: bindPrefix + "/Bms/AllowToDischarge"
+			DelegateComponent {
+				ListText {
+					text: CommonWords.allow_to_discharge
+					secondaryText: CommonWords.yesOrNo(dataItem.value)
+					dataItem.uid: bindPrefix + "/Bms/AllowToDischarge"
+				}
 			}
 
-			ListText {
-				//% "BMS Error"
-				text: qsTrId("vebus_device_bms_error")
-				secondaryText: CommonWords.yesOrNo(dataItem.value)
-				dataItem.uid: bindPrefix + "/Bms/Error"
+			DelegateComponent {
+				dataItem: VeQuickItem { uid: bindPrefix + "/Bms/Error" }
 				preferredVisible: dataItem.value === VenusOS.VeBusDevice_Bms_Type_VeBus
+				ListText {
+					//% "BMS Error"
+					text: qsTrId("vebus_device_bms_error")
+					secondaryText: CommonWords.yesOrNo(dataItem.value)
+					dataItem.uid: bindPrefix + "/Bms/Error"
+				}
 			}
 		}
 	}

@@ -11,80 +11,137 @@ Page {
 
 	required property string bindPrefix
 
+	VeQuickItem {
+		id: startsItem
+		uid: root.bindPrefix + "/Engine/Starts"
+	}
+	VeQuickItem {
+		id: starterVoltageItem
+		uid: root.bindPrefix + "/StarterVoltage"
+	}
+	VeQuickItem {
+		id: heatsinkTemperatureItem
+		uid: root.bindPrefix + "/HeatsinkTemperature"
+	}
+	VeQuickItem {
+		id: windingTemperatureItem
+		uid: root.bindPrefix + "/Engine/WindingTemperature"
+	}
+	VeQuickItem {
+		id: exhaustTemperatureItem
+		uid: root.bindPrefix + "/Engine/ExhaustTemperature"
+	}
+	VeQuickItem {
+		id: coolantTemperatureItem
+		uid: root.bindPrefix + "/Engine/CoolantTemperature"
+	}
+	VeQuickItem {
+		id: oilTemperatureItem
+		uid: root.bindPrefix + "/Engine/OilTemperature"
+	}
+	VeQuickItem {
+		id: oilPressureItem
+		uid: root.bindPrefix + "/Engine/OilPressure"
+	}
+	VeQuickItem {
+		id: loadItem
+		uid: root.bindPrefix + "/Engine/Load"
+	}
+
 	GradientListView {
-		model: VisibleItemModel {
-			ListQuantity {
-				text: CommonWords.speed
-				dataItem.uid: root.bindPrefix + "/Engine/Speed"
-				unit: VenusOS.Units_RevolutionsPerMinute
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListQuantity {
+					text: CommonWords.speed
+					dataItem.uid: root.bindPrefix + "/Engine/Speed"
+					unit: VenusOS.Units_RevolutionsPerMinute
+				}
 			}
 
-			ListQuantity {
-				//% "Load"
-				text: qsTrId("page-engine_load")
-				dataItem.uid: root.bindPrefix + "/Engine/Load"
-				preferredVisible: dataItem.valid
-				unit: VenusOS.Units_Percentage
+			DelegateComponent {
+				preferredVisible: loadItem.valid
+				ListQuantity {
+					//% "Load"
+					text: qsTrId("page-engine_load")
+					dataItem.uid: root.bindPrefix + "/Engine/Load"
+					unit: VenusOS.Units_Percentage
+				}
 			}
 
-			ListQuantity {
-				//% "Oil pressure"
-				text: qsTrId("page-engine_oil_pressure")
-				dataItem.uid: root.bindPrefix + "/Engine/OilPressure"
-				preferredVisible: dataItem.valid
-				unit: VenusOS.Units_Kilopascal
+			DelegateComponent {
+				preferredVisible: oilPressureItem.valid
+				ListQuantity {
+					//% "Oil pressure"
+					text: qsTrId("page-engine_oil_pressure")
+					dataItem.uid: root.bindPrefix + "/Engine/OilPressure"
+					unit: VenusOS.Units_Kilopascal
+				}
 			}
 
-			ListTemperature {
-				//% "Oil temperature"
-				text: qsTrId("page-engine_oil_temperature")
-				preferredVisible: dataItem.valid
-				dataItem.uid: root.bindPrefix + "/Engine/OilTemperature"
-				decimals: 0
+			DelegateComponent {
+				preferredVisible: oilTemperatureItem.valid
+				ListTemperature {
+					//% "Oil temperature"
+					text: qsTrId("page-engine_oil_temperature")
+					dataItem.uid: root.bindPrefix + "/Engine/OilTemperature"
+					decimals: 0
+				}
 			}
 
-			ListTemperature {
-				//% "Coolant temperature"
-				text: qsTrId("page-engine_coolant_temperature")
-				preferredVisible: dataItem.valid
-				dataItem.uid: root.bindPrefix + "/Engine/CoolantTemperature"
-				decimals: 0
+			DelegateComponent {
+				preferredVisible: coolantTemperatureItem.valid
+				ListTemperature {
+					//% "Coolant temperature"
+					text: qsTrId("page-engine_coolant_temperature")
+					dataItem.uid: root.bindPrefix + "/Engine/CoolantTemperature"
+					decimals: 0
+				}
 			}
 
-			ListTemperature {
-				//% "Exhaust temperature"
-				text: qsTrId("page-engine_exhaust_temperature")
-				preferredVisible: dataItem.valid
-				dataItem.uid: root.bindPrefix + "/Engine/ExhaustTemperature"
+			DelegateComponent {
+				preferredVisible: exhaustTemperatureItem.valid
+				ListTemperature {
+					//% "Exhaust temperature"
+					text: qsTrId("page-engine_exhaust_temperature")
+					dataItem.uid: root.bindPrefix + "/Engine/ExhaustTemperature"
+				}
 			}
 
-			ListTemperature {
-				//% "Winding temperature"
-				text: qsTrId("page-engine_winding_temperature")
-				preferredVisible: dataItem.valid
-				dataItem.uid: root.bindPrefix + "/Engine/WindingTemperature"
+			DelegateComponent {
+				preferredVisible: windingTemperatureItem.valid
+				ListTemperature {
+					//% "Winding temperature"
+					text: qsTrId("page-engine_winding_temperature")
+					dataItem.uid: root.bindPrefix + "/Engine/WindingTemperature"
+				}
 			}
 
-			ListTemperature {
-				//% "Heatsink temperature"
-				text: qsTrId("genset_heatsink_temperature")
-				dataItem.uid: root.bindPrefix + "/HeatsinkTemperature"
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				preferredVisible: heatsinkTemperatureItem.valid
+				ListTemperature {
+					//% "Heatsink temperature"
+					text: qsTrId("genset_heatsink_temperature")
+					dataItem.uid: root.bindPrefix + "/HeatsinkTemperature"
+				}
 			}
 
-			ListQuantity {
-				//% "Starter battery voltage"
-				text: qsTrId("page-engine_starter_battery_voltage")
-				dataItem.uid: root.bindPrefix + "/StarterVoltage"
-				preferredVisible: dataItem.valid
-				unit: VenusOS.Units_Volt_DC
+			DelegateComponent {
+				preferredVisible: starterVoltageItem.valid
+				ListQuantity {
+					//% "Starter battery voltage"
+					text: qsTrId("page-engine_starter_battery_voltage")
+					dataItem.uid: root.bindPrefix + "/StarterVoltage"
+					unit: VenusOS.Units_Volt_DC
+				}
 			}
 
-			ListText {
-				//% "Number of starts"
-				text: qsTrId("page-engine_number_of_starts")
-				dataItem.uid: root.bindPrefix + "/Engine/Starts"
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				preferredVisible: startsItem.valid
+				ListText {
+					//% "Number of starts"
+					text: qsTrId("page-engine_number_of_starts")
+					dataItem.uid: root.bindPrefix + "/Engine/Starts"
+				}
 			}
 		}
 	}

@@ -16,11 +16,13 @@ DevicePage {
 
 	serviceUid: bindPrefix
 
-	settingsModel: VisibleItemModel {
-		ListText {
-			//% "Unsupported device found"
-			text: qsTrId("devicelist_unsupporteddevices_found")
-			dataItem.uid: root.bindPrefix + "/Reason"
+	settingsModel: DelegateComponentModel {
+		DelegateComponent {
+			ListText {
+				//% "Unsupported device found"
+				text: qsTrId("devicelist_unsupporteddevices_found")
+				dataItem.uid: root.bindPrefix + "/Reason"
+			}
 		}
 	}
 }
