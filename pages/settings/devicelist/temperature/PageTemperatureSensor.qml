@@ -43,6 +43,54 @@ DevicePage {
 			}
 		}
 
+		ListText {
+			//% "Air quality"
+			text: qsTrId("temperature_air_quality")
+			dataItem.uid: root.bindPrefix + "/IAQS"
+			preferredVisible: dataItem.valid
+			secondaryText: dataItem.valid
+					//% "%1/100 (%2)"
+					? qsTrId("temperature_air_quality_score").arg(dataItem.value).arg(qualityLabel)
+					: ""
+			secondaryTextColor: qualityColor
+
+			readonly property string qualityLabel: {
+				if (!dataItem.valid) {
+					return ""
+				}
+				if (dataItem.value > 90) {
+					//% "Excellent"
+					return qsTrId("temperature_air_quality_excellent")
+				}
+				if (dataItem.value > 80) {
+					//% "Good"
+					return qsTrId("temperature_air_quality_good")
+				}
+				if (dataItem.value > 50) {
+					//% "Fair"
+					return qsTrId("temperature_air_quality_fair")
+				}
+				if (dataItem.value >= 10) {
+					//% "Poor"
+					return qsTrId("temperature_air_quality_poor")
+				}
+				//% "Very poor"
+				return qsTrId("temperature_air_quality_very_poor")
+			}
+			readonly property color qualityColor: {
+				if (!dataItem.valid) {
+					return Theme.color_listItem_secondaryText
+				}
+				if (dataItem.value > 80) {
+					return Theme.color_green
+				}
+				if (dataItem.value > 50) {
+					return Theme.color_orange
+				}
+				return Theme.color_red
+			}
+		}
+
 		ListTemperature {
 			text: CommonWords.temperature
 			dataItem.uid: bindPrefix + "/Temperature"
