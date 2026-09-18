@@ -48,7 +48,7 @@ ListSetting {
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat
 			secondaryText: root.secondaryText
-			secondaryLabel.color: root.secondaryTextColor
+			secondaryLabelColor: root.secondaryTextColor
 			captionText: root.caption
 			stretchSecondaryText: true
 		}

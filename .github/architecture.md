@@ -230,6 +230,10 @@ Core types (in `components/listitems/core/`):
 
 Many list items have a `dataItem.uid` property to bind directly to a VeQuickItem path.
 
+`TwoLabelQuantityRowLayout` creates its nullable `captionLabel` only while `captionText`
+is non-empty. Bind the text through `captionText`, rather than dereferencing a label
+that may not exist.
+
 ### Overview widgets
 
 The Overview page displays an energy flow diagram with `OverviewWidget` components from `components/widgets/`:

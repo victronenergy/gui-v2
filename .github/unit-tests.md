@@ -237,6 +237,12 @@ TestCase {
 - Complex multi-page navigation flows → use UI smoke tests instead
 - Third-party library behavior → trust Qt's own test suite
 
+### Quantity caption lifetimes
+
+`tests/quantitycaption/` checks `TwoLabelQuantityRowLayout` caption creation, text updates,
+removal and recreation, including initial non-empty captions and all three screen layouts.
+These are object-lifetime and binding checks; rendered appearance still needs visual captures.
+
 ### Naming conventions
 
 - Directory: feature name in lowercase (e.g. `filtereddevicemodel`, `solarinputmodel`)
