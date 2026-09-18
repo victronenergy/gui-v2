@@ -18,6 +18,7 @@ set(VictronMock_QML_MODULE_SOURCES
     data/mock/TemperaturesImpl.qml
     data/mock/page-conf/BoatPageConfig.qml
     data/mock/page-conf/BriefAndOverviewPageConfig.qml
+    data/mock/page-conf/CamperPageConfig.qml
     data/mock/page-conf/LevelsPageConfig.qml
 )
 
