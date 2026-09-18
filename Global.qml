@@ -24,6 +24,7 @@ QtObject {
 	readonly property string quantityFontFamily: _quantityFontLoader.name
 	property var dialogLayer
 	property var notificationLayer
+	property var pressEffect
 	property bool displayCpuUsage
 	readonly property bool animationEnabled: (systemSettings?.animationEnabled ?? true) && UiConfig.animationEnabled && UiConfig.applicationVisible && !ScreenBlanker.blanked
 	readonly property bool timersEnabled: UiConfig.applicationVisible && !ScreenBlanker.blanked
@@ -78,6 +79,7 @@ QtObject {
 		firmwareUpdate = null
 		dialogLayer = null
 		notificationLayer = null
+		pressEffect = null
 
 		acInputs = null
 		dcInputs = null
