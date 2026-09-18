@@ -10,6 +10,7 @@ QtObject {
 	id: root
 
 	readonly property string serviceUid: BackendConnection.serviceUidForType("platform")
+	readonly property bool isContainer: _isContainer.value === true
 
 	function reboot() {
 		_reboot.setValue(true)
@@ -17,6 +18,10 @@ QtObject {
 
 	property VeQuickItem _reboot: VeQuickItem {
 		 uid: Global.venusPlatform.serviceUid + "/Device/Reboot"
+	}
+
+	property VeQuickItem _isContainer: VeQuickItem {
+		uid: Global.venusPlatform.serviceUid + "/Device/IsContainer"
 	}
 
 	Component.onCompleted: Global.venusPlatform = root
