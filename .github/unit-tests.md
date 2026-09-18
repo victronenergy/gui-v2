@@ -243,6 +243,15 @@ TestCase {
 removal and recreation, including initial non-empty captions and all three screen layouts.
 These are object-lifetime and binding checks; rendered appearance still needs visual captures.
 
+### Native content compatibility
+
+`tests/nativecontent/` checks the `QuantityLabel` native construction path: public property
+overrides, inherited fonts, live theme changes, and geometry parity with the former QML
+Row/Label content. The reference rows cover multiple font sizes, alignments, padding, and
+fractional quantity baselines. These are compatibility checks for our C++ property setup,
+not Qt renderer tests. Run `ctest -R tst_nativecontent -V`; still use visual regression
+captures for rendered appearance.
+
 ### Naming conventions
 
 - Directory: feature name in lowercase (e.g. `filtereddevicemodel`, `solarinputmodel`)

@@ -234,6 +234,22 @@ Many list items have a `dataItem.uid` property to bind directly to a VeQuickItem
 is non-empty. Bind the text through `captionText`, rather than dereferencing a label
 that may not exist.
 
+### Native quantity content
+
+`QuantityLabel.qml` retains its QML-facing properties, theme bindings, and language-dependent
+font bindings, but constructs its visual children in C++. `NativeQuantityLabel` creates the
+`QQuickRow` and two `QQuickLabel` children directly. The existing `QuantityInfo` remains in QML,
+including its aliases and overridable value/unit text. Native forwarding properties expose the
+unit font, independent colors, text, and row padding. Only font size and weight follow the unit
+font onto the value label; the value keeps `Global.quantityFontFamily`. Qt's row and baseline
+anchors retain padding, implicit-size, alignment, and small-font subpixel behavior.
+
+This is content-only: enclosing Controls, access checks, keyboard navigation, press handling,
+and list-item chrome remain unchanged. It uses private Quick and QuickTemplates2 APIs; Qt
+upgrades require rerunning `tst_nativecontent` and the visual regression tests. No QML type
+compiler is involved. Private Quick headers may pull scene-graph/OpenGL declarations, so the
+GX SDK still needs matching GLES3 development headers rather than a Qt feature workaround.
+
 ### Overview widgets
 
 The Overview page displays an energy flow diagram with `OverviewWidget` components from `components/widgets/`:
