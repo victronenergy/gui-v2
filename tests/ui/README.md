@@ -55,6 +55,63 @@ Image captures are stored in the directory specified by the test JSON configurat
 VENUS_GUI_TEST_CAPTURE_DIR=~/tests/ui/image-captures ./bin/venus-gui-v2 --mock --ui-test smoke/mock-maximal
 ```
 
+
+## Headless mode
+
+Add `--ui-test-headless` to run a test without saving or comparing any images:
+
+```
+./bin/venus-gui-v2 --ui-test smoke/mock-maximal --ui-test-headless
+```
+
+Each screen is still navigated to and rendered, but the capture is discarded instead of being
+written to the image capture directory, so no image capture directory is needed. When the test
+finishes, the result is printed to stdout (or stderr, if any step failed) regardless of the
+configured logging level:
+
+```
+UI test 'smoke/mock-maximal' PASSED: All tests finished: 1170 steps passed, 0 steps failed, in 5m 12s
+```
+
+This makes the UI test usable as a quick smoke test of the UI, for example from a CI job.
+
+Note that this is unrelated to the QPA platform: use `QT_QPA_PLATFORM=offscreen` to run gui-v2 on a
+machine without a display, with or without `--ui-test-headless`.
+
+
+## Exit code
+
+If the test configuration sets `ExitWhenFinished`, gui-v2 exits when the tests are finished, with a
+non-zero exit code if any test step failed. This applies whether or not `--ui-test-headless` is set.
+
+
+## Continuous integration
+
+The `.github/workflows/run-ui-tests.yml` workflow runs these tests on every pull request:
+
+* the `UI smoke test` job runs `smoke/mock-maximal` with `--ui-test-headless`, and fails if any
+  test step failed.
+* the `UI image comparison` job captures the images of the pull request and of the commit it is
+  based on, and compares the two image sets with `tools/uicompare` in headless mode. Differences do
+  not fail the job - a pull request may change the UI on purpose - but they are reported in the job
+  summary, and the images that differ are uploaded as a workflow artifact for review.
+
+  Two image artifacts are produced: `ui-image-differences-above-noise` holds only the screens that
+  differ by more than the noise floor (usually a handful), and `ui-image-differences` holds every
+  differing screen. Each screen appears as a `<screen>-compare.png` showing baseline, candidate and
+  the highlighted difference side by side, plus the two originals. GitHub strips images embedded in
+  a job summary, so they cannot be shown inline in the summary itself.
+
+  The job also sweeps the baseline build a second time and compares the two baseline sweeps with
+  each other. Image captures are not perfectly reproducible, so that same-build comparison is the
+  measurement error of the real one; the job summary reports it as a noise floor, and marks any
+  screen whose difference is no larger than it. A difference count on its own cannot be told apart
+  from noise, so do not read one without the noise floor beside it.
+
+To do the same comparison locally, use `tools/ui_capture_and_compare.py`, which builds two
+revisions and shows the differences in the UI Compare tool.
+
+
 ## UI test case API
 
 QML test files must extend the `UiTestCase` type from the `Victron.UiTest` module.
