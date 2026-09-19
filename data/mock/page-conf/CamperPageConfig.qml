@@ -13,62 +13,125 @@ Item {
 
 	readonly property var configs: [
 		{
-			name: "Parking",
+			name: "Driving (solar and generator), alternator active",
+			alternatorActive: true,
+			generatorPresent: true,
+			generatorActive: false,
+			shorePowerConnected: false,
+			solarPresent: true,
+			solarActive: false,
+			acLoad: false,
+			dcLoad: true,
+		},
+		{
+			name: "Driving (solar only), alternator active",
+			alternatorActive: true,
+			generatorPresent: false,
+			generatorActive: false,
+			shorePowerConnected: false,
+			solarPresent: true,
+			solarActive: false,
+			acLoad: false,
+			dcLoad: true,
+		},
+		{
+			name: "Driving (generator only), alternator active",
+			alternatorActive: true,
+			generatorPresent: true,
+			generatorActive: false,
+			shorePowerConnected: false,
+			solarPresent: false,
+			solarActive: false,
+			acLoad: false,
+			dcLoad: true,
+		},
+		{
+			name: "Off Grid (solar and generator), generator active",
+			alternatorActive: false,
+			generatorPresent: true,
+			generatorActive: true,
+			shorePowerConnected: false,
+			solarPresent: true,
+			solarActive: false,
+			acLoad: true,
+			dcLoad: false,
+		},
+		{
+			name: "Off Grid (solar and generator), generator and solar active",
+			alternatorActive: false,
+			generatorPresent: true,
+			generatorActive: true,
+			shorePowerConnected: false,
+			solarPresent: true,
+			solarActive: true,
+			acLoad: true,
+			dcLoad: true,
+		},
+		{
+			name: "Off Grid (solar and generator), nothing active",
 			alternatorActive: false,
 			generatorPresent: true,
 			generatorActive: false,
 			shorePowerConnected: false,
 			solarPresent: true,
 			solarActive: false,
+			acLoad: false,
+			dcLoad: false,
 		},
 		{
-			name: "Parking, with solar",
+			name: "Parking (solar and generator), nothing active",
 			alternatorActive: false,
+			generatorPresent: true,
 			generatorActive: false,
 			shorePowerConnected: false,
-			solarActive: true,
+			solarPresent: true,
+			solarActive: false,
+			acLoad: false,
+			dcLoad: false,
 		},
 		{
-			name: "Charging",
+			name: "Parking (solar and generator), solar active",
 			alternatorActive: false,
+			generatorPresent: true,
+			generatorActive: false,
+			shorePowerConnected: false,
+			solarPresent: true,
+			solarActive: true,
+			acLoad: false,
+			dcLoad: true,
+		},
+		{
+			name: "Charging (solar and generator), shore active",
+			alternatorActive: false,
+			generatorPresent: true,
+			generatorActive: false,
 			shorePowerConnected: true,
-			generatorActive: false,
+			solarPresent: true,
 			solarActive: false,
+			acLoad: true,
+			dcLoad: true,
 		},
 		{
-			name: "Driving",
-			alternatorActive: true,
-			shorePowerConnected: false,
-			generatorActive: false,
-			solarActive: false,
-		},
-		{
-			name: "Driving, with solar",
-			alternatorActive: true,
-			shorePowerConnected: false,
-			generatorActive: false,
-			solarActive: true,
-		},
-		{
-			name: "Off Grid",
+			name: "Charging (solar only), shore active",
 			alternatorActive: false,
-			shorePowerConnected: false,
-			generatorActive: true,
-			solarActive: false,
-		},
-		{
-			name: "Off Grid, with solar",
-			alternatorActive: false,
-			shorePowerConnected: false,
-			generatorActive: true,
-			solarActive: true,
-		},
-		{
-			name: "Off Grid, discharging",
-			alternatorActive: false,
-			shorePowerConnected: false,
+			generatorPresent: false,
 			generatorActive: false,
+			shorePowerConnected: true,
+			solarPresent: true,
 			solarActive: false,
+			acLoad: true,
+			dcLoad: true,
+		},
+		{
+			name: "Charging (generator only ), shore active",
+			alternatorActive: false,
+			generatorPresent: true,
+			generatorActive: false,
+			shorePowerConnected: true,
+			solarPresent: false,
+			solarActive: false,
+			acLoad: true,
+			dcLoad: true,
 		},
 	]
 
@@ -81,70 +144,58 @@ Item {
 		if (!config) return
 
 		// Remove set values
-		MockManager.setValue(Global.system.serviceUid + "/Ac/In/1/Source", VenusOS.AcInputs_InputSource_Shore)
-		MockManager.setValue(Global.system.serviceUid + "/Ac/ActiveIn/Source", VenusOS.AcInputs_InputSource_Shore)
+		MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/AcPower", config.acLoad ? Math.random() * 1000 : 0)
+		MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/DcPower", config.dcLoad ? Math.random() * 500 : 0)
+		MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/BatteryPower", 1000)
 
 		// Add new services if needed
 		let deviceInstance
 		let serviceUid
 		if (config.shorePowerConnected) {
-			MockManager.setValue(Global.system.serviceUid + "/Ac/In/1/Source", VenusOS.AcInputs_InputSource_Shore)
-			MockManager.setValue(Global.system.serviceUid + "/Ac/ActiveIn/Source", VenusOS.AcInputs_InputSource_Shore)
-			MockManager.setValue(MockManager.value(Global.system.serviceUid + "/Ac/In/1/ServiceName") + "/Ac/NumberOfPhases", 1)
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/Shore", 1)
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/ShorePower", Math.random() * 2000)
 		} else {
-			MockManager.setValue(Global.system.serviceUid + "/Ac/In/1/Source", VenusOS.AcInputs_InputSource_NotAvailable)
-			MockManager.setValue(Global.system.serviceUid + "/Ac/ActiveIn/Source", VenusOS.AcInputs_InputSource_NotAvailable)
-			MockManager.setValue(MockManager.value(Global.system.serviceUid + "/Ac/In/1/ServiceName") + "/Ac/NumberOfPhases", 0)
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/Shore", 0)
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/ShorePower", 0)
 		}
-		if (config.generatorActive) {
-			MockManager.setValue(Global.system.serviceUid + "/Settings/MonitorMode", -1)
-			MockManager.setValue(Global.system.serviceUid + "/Dc/0/Power",  Math.random() * 500)
-			MockManager.setValue(Global.system.serviceUid + "/Dc/0/Voltage", Math.random() * 50)
-			MockManager.setValue(Global.system.serviceUid + "/Dc/0/Current", Math.random() * 10)
-			MockManager.setValue(Global.system.serviceUid + "/Dc/In/P", Math.random() * 500)
-			MockManager.setValue(Global.system.serviceUid + "/Dc/In/V", Math.random() * 50)
-			MockManager.setValue(Global.system.serviceUid + "/Dc/In/I", Math.random() * 10)
+		if (config.generatorPresent) {
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/Generator", 1)
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/GeneratorPower", 0)
 		} else {
-			MockManager.setValue(Global.system.serviceUid + "/Settings/MonitorMode", 0)
-			MockManager.setValue(Global.system.serviceUid + "/Dc/0/Power",  0)
-			MockManager.setValue(Global.system.serviceUid + "/Dc/0/Voltage", 0)
-			MockManager.setValue(Global.system.serviceUid + "/Dc/0/Current", 0)
-			MockManager.setValue(Global.system.serviceUid + "/Dc/In/P", 0)
-			MockManager.setValue(Global.system.serviceUid + "/Dc/In/V", 0)
-			MockManager.setValue(Global.system.serviceUid + "/Dc/In/I", 0)
-		}
-		if (config.generatorActive) {
-		} else {
-		}
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/Generator", 0)
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/GeneratorPower", 0)
 
+		}
+		if (config.generatorActive) {
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/GeneratorPower", Math.random() * 2000)
+		} else {
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/GeneratorPower", 0)
+		}
+		if (config.alternatorActive) {
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/AlternatorPower", Math.random() * 2000)
+
+		} else {
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/AlternatorPower", 0)
+
+		}
+		if (config.solarPresent) {
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/Solar", 1)
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/SolarPower", 0)
+
+		} else {
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/Solar", 0)
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/SolarPower", 0)
+
+		}
+		if (config.solarActive) {
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/SolarPower", Math.random() * 2000)
+
+		} else {
+			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/SolarPower", 0)
+
+		}
 		return config.name
 	}
 
-	function createDevice(serviceType, deviceInstance, properties) {
-		const serviceUid = "mock/com.victronenergy.%1.mock_camper_config_%2".arg(serviceType).arg(deviceInstance)
-		for (const path in properties) {
-			MockManager.setValue(serviceUid + path, properties[path])
-		}
-		MockManager.setValue(serviceUid + "/DeviceInstance", deviceInstance)
-		const productName = properties["/ProductName"] ?? serviceType + " " + deviceInstance
-		MockManager.setValue(serviceUid + "/ProductName", productName)
-		return serviceUid
-	}
-
 	objectName: "CamperPageConfig"
-
-	// FilteredServiceModel {
-	// 	id: gpsServices
-	// 	serviceTypes: ["gps"]
-	// }
-
-	// FilteredServiceModel {
-	// 	id: motorDriveServices
-	// 	serviceTypes: ["motordrive"]
-	// }
-
-	FilteredDeviceModel {
-		id: dcInputModel
-		serviceTypes: ["alternator", "fuelcell", "dcsource", "dcgenset"]
-	}
 }
