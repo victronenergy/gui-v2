@@ -1,0 +1,42 @@
+{
+    "com.victronenergy.settings": {
+        "/Settings/Canbus/vecan0/Profile": 6,
+        "/Settings/Rvc/vecan0/ReverseCurrent": 0,
+        "/Settings/Rvc/vecan0/VenusUniqueId": 1
+    },
+    "com.victronenergy.rvc.vecan0": {
+        "/Alarms/SameUniqueNameUsed": 0,
+        "/Devices/0000A5010B21/ChargerInstance": 1,
+        "/Devices/0000A5010B21/DcSource/0/Instance": 1,
+        "/Devices/0000A5010B21/DcSource/0/Priority": 100,
+        "/Devices/0000A5010B21/DcSource/1/Instance": null,
+        "/Devices/0000A5010B21/DcSource/1/Priority": null,
+        "/Devices/0000A5010B21/DcSource/2/Instance": null,
+        "/Devices/0000A5010B21/DcSource/2/Priority": null,
+        "/Devices/0000A5010B21/FirmwareVersion": "v1.04",
+        "/Devices/0000A5010B21/InverterInstance": null,
+        "/Devices/0000A5010B21/Line/0/Instance": null,
+        "/Devices/0000A5010B21/Line/1/Instance": null,
+        "/Devices/0000A5010B21/Manufacturer": 358,
+        "/Devices/0000A5010B21/ManufacturerName": "Victron Energy",
+        "/Devices/0000A5010B21/Mgmt/Connection": null,
+        "/Devices/0000A5010B21/Mgmt/ProcessName": null,
+        "/Devices/0000A5010B21/ModelName": "Cerbo GX",
+        "/Devices/0000A5010B21/Nad": 66,
+        "/Devices/0000A5010B21/RvcUniqueNumber": 68171,
+        "/Devices/0000A5010B21/Serial": "HQ2242ABCDE",
+        "/Devices/0000A5010B21/TankInstance": null,
+        "/Devices/0000A5010B21/VrmInstance": 0,
+        "/Devices/0000B7020C34/FirmwareVersion": "v2.11",
+        "/Devices/0000B7020C34/Manufacturer": 141,
+        "/Devices/0000B7020C34/ManufacturerName": "Dometic",
+        "/Devices/0000B7020C34/Mgmt/Connection": null,
+        "/Devices/0000B7020C34/Mgmt/ProcessName": null,
+        "/Devices/0000B7020C34/ModelName": "RV-C air conditioner",
+        "/Devices/0000B7020C34/Nad": 128,
+        "/Devices/0000B7020C34/RvcUniqueNumber": 51764,
+        "/Devices/0000B7020C34/Serial": "AC-9912345",
+        "/Devices/0000B7020C34/VrmInstance": null,
+        "/Identifier": "vecan0"
+    }
+}

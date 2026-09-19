@@ -125,14 +125,8 @@ bool MockManager::loadConfiguration(const QString &fileName)
 	}
 
 	setServiceValues(object.value(QStringLiteral("setup")).toObject());
-	m_confFileName = fileName;
 
 	return true;
-}
-
-QString MockManager::configurationFileName() const
-{
-	return m_confFileName;
 }
 
 /*
@@ -176,6 +170,28 @@ void MockManager::dumpValues()
 	qInfo() << "--- Begin value dump ---";
 	producer()->dumpValues();
 	qInfo() << "--- End value dump ---";
+}
+
+QStringList MockManager::missingValues() const
+{
+	return producer()->missingValueUids();
+}
+
+/*
+	Prints the uids of all values that the UI has requested but that are not provided by the
+	currently loaded mock configuration.
+
+	Every uid printed here is a value that reads as 'undefined' in QML, so this is the list of
+	gaps to be filled in the mock service configurations under data/mock/conf/services.
+*/
+void MockManager::dumpMissingValues() const
+{
+	const QStringList uids = missingValues();
+	qInfo() << "--- Begin missing value dump ---";
+	for (const QString &uid : uids) {
+		qInfo().noquote() << uid;
+	}
+	qInfo() << "--- End missing value dump:" << uids.count() << "missing values ---";
 }
 
 VeQItemMockProducer *MockManager::producer() const

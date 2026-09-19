@@ -1,0 +1,25 @@
+{
+    "com.victronenergy.settings": {
+        "/Settings/CGwacs/DeviceIds": "B1234567,C7654321",
+
+        "/Settings/Devices/cgwacs_B1234567/ClassAndVrmInstance": "grid:31",
+        "/Settings/Devices/cgwacs_B1234567/CustomName": "",
+        "/Settings/Devices/cgwacs_B1234567/IsMultiphase": 0,
+        "/Settings/Devices/cgwacs_B1234567/L2/ServiceType": "",
+        "/Settings/Devices/cgwacs_B1234567/Position": 0,
+        "/Settings/Devices/cgwacs_B1234567/ServiceType": "grid",
+        "/Settings/Devices/cgwacs_B1234567/SupportMultiphase": 1,
+        "/Settings/Devices/cgwacs_B1234567_S/Enabled": 1,
+        "/Settings/Devices/cgwacs_B1234567_S/Position": 0,
+
+        "/Settings/Devices/cgwacs_C7654321/ClassAndVrmInstance": "pvinverter:32",
+        "/Settings/Devices/cgwacs_C7654321/CustomName": "Roof PV meter",
+        "/Settings/Devices/cgwacs_C7654321/IsMultiphase": 1,
+        "/Settings/Devices/cgwacs_C7654321/L2/ServiceType": "",
+        "/Settings/Devices/cgwacs_C7654321/Position": 1,
+        "/Settings/Devices/cgwacs_C7654321/ServiceType": "pvinverter",
+        "/Settings/Devices/cgwacs_C7654321/SupportMultiphase": 1,
+        "/Settings/Devices/cgwacs_C7654321_S/Enabled": 0,
+        "/Settings/Devices/cgwacs_C7654321_S/Position": 0
+    }
+}

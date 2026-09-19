@@ -19,7 +19,20 @@ UiTestCase {
 	}
 
 	function cleanup() {
-		Global.pageManager.popAllPages()
+		// Pop any pages that this test function left open, so that the next one starts from the
+		// same state. A test function does not always get to finish tidily: when a step fails the
+		// rest of its steps are abandoned, and any pages it had pushed by then stay on the stack,
+		// where the next test function would click into them and fail for reasons of its own.
+		//
+		// Pop without a transition, because a click is ignored while the page stack animates.
+		Global.pageManager.popAllPages(PageStack.Immediate)
+		if (Global.pageManager.pageStack.depth > 0) {
+			// A pop is refused while the stack animates, and a page can refuse one from tryPop().
+			// Say so, rather than letting the next test function fail somewhere unrelated.
+			console.warn("cleanup(): the page stack still holds",
+					Global.pageManager.pageStack.depth, "page(s); the next test function starts on",
+					"the previous one's page.")
+		}
 
 		// No steps have been added, so call goToNextTestFunction() instead of runSteps() to
 		// continue the testing.
@@ -86,8 +99,20 @@ UiTestCase {
 	}
 
 	function test_drilldown(data) {
-		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableChild(findItem(Global.mainView.currentPage, data.widgetValues))) } })
-		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
+		const depthBeforeClick = Global.pageManager.pageStack.depth
+		addStep(UiTestStep.Invoke, { callable: ()=> {
+			return mouseClick(findClickableChild(findItem(Global.mainView.currentPage, data.widgetValues)))
+		} })
+		// Wait for the widget's page to be pushed onto the stack. If it is not pushed, this step
+		// fails, rather than the test continuing on to capture the overview page itself.
+		//
+		// Wait for the stack to have grown, and not merely to be open: a page that an earlier test
+		// function failed to pop leaves it open already, and this step would then pass without the
+		// click having done anything, letting the capture run against that stale page.
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			const pageStack = Global.pageManager.pageStack
+			return !Global.mainView.animating && pageStack.opened && pageStack.depth > depthBeforeClick
+		} })
 		runSteps(recursivePageCapture.start)
 	}
 

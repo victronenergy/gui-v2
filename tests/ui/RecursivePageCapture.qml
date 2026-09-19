@@ -15,13 +15,21 @@ QtObject {
 	// The test case that is running this recursive capture.
 	required property UiTestCase testCase
 
-	// A map of { viewObject: navigationItem } containing the last list navigation item clicked in
-	// each view (which may be a nested view).
-	property var lastClickedViewItems: ({})
+	// The last list navigation item clicked in each view (which may be a nested view), keyed by the
+	// view object.
+	//
+	// These are Maps, and not plain objects, because a plain object keys on the *string* form of
+	// the view, and repeatedly deleting and re-adding such keys hits a crash in Qt 6.8.3's QML
+	// engine: at 255 redundant internal-class transitions QV4 rebuilds the class but reuses the
+	// property index it computed before the rebuild, and writes through a null memberData
+	// (QTBUG-147153, fixed upstream by qtdeclarative 624e90bb5, not in any released 6.8/6.9/6.10).
+	// A sweep churns these keys hundreds of times per run, which segfaulted roughly one run in
+	// four. A Map keys on object identity and never takes that path.
+	property var lastClickedViewItems: new Map()
 
-	// A map of { viewObject: int } containing a count of the screens captured within this view.
-	// E.g. if this view can be scrolled down, the number will be > 1.
-	property var pageCaptureCounts: ({})
+	// A count of the screens captured within each view, keyed by the page object. E.g. if this view
+	// can be scrolled down, the number will be > 1. A Map, for the reason above.
+	property var pageCaptureCounts: new Map()
 
 	// The function to be called when all pages have been captured.
 	// Note: make sure this callback calls runSteps(), otherwise any following test cases will not
@@ -41,11 +49,25 @@ QtObject {
 	*/
 	function start(doneCallback) {
 		if (root._busy) {
-			console.assert(false, "Cannot start while another recursive capture is in progress!")
-			return
+			// The previous capture did not finish, most likely because one of its steps failed: a
+			// failed step group skips the runSteps() callback chain and goes straight to the next
+			// test function. Warn, but continue, so that a single failure does not stop every
+			// following recursive capture in this test case.
+			//
+			// Continuing is only safe because the pages of the abandoned capture are gone by now:
+			// popping them is the test case's cleanup() function's job. It cannot be done here, as
+			// this capture may legitimately be starting from a page that the test just pushed.
+			console.warn("Previous recursive capture did not finish; restarting at page stack depth",
+					Global.pageManager.pageStack.depth)
 		}
 		root._busy = true
 		root.doneCallback = doneCallback
+
+		// Clear the state from any previous run, so that this run neither keeps the pages and views
+		// of the last one alive nor consults their entries.
+		root.pageCaptureCounts = new Map()
+		root.lastClickedViewItems = new Map()
+
 		_captureNext([])
 	}
 
@@ -59,7 +81,7 @@ QtObject {
 
 		// First, capture all screens within this list view.
 		const canCapturePage = _canCaptureCurrentPage()
-		if (canCapturePage && pageCaptureCounts[Global.mainView.currentPage] === undefined) {
+		if (canCapturePage && !pageCaptureCounts.has(Global.mainView.currentPage)) {
 			// No screens have been captured yet for this page. Call _captureNextScreen() to grab
 			// all screens for this page, and that function will call _captureNext() again when the
 			// screen captures are completed.
@@ -103,12 +125,15 @@ QtObject {
 			} else {
 				// Pop to the previous page.
 				if (canCapturePage) {
-					// If the page was captured, clear the page counter, as a future page may have
-					// the same pageCaptureCounts key if it is of the same QML type and is loaded
-					// into the same memory location.
-					// Also update the name sequence since the page will be popped.
-					delete pageCaptureCounts[Global.mainView.currentPage]
+					// If the page was captured, forget its counter: the page is about to be popped
+					// and destroyed, and nothing should keep a reference to it. Also update the
+					// name sequence, since the page will be popped.
+					pageCaptureCounts.delete(Global.mainView.currentPage)
 					imageNameSequence.pop()
+				}
+				// Forget the clicked-item record for this page's view, for the same reason.
+				if (listView) {
+					lastClickedViewItems.delete(listView)
 				}
 				testCase.addStep(UiTestStep.Invoke, {
 					callable: ()=> { Global.pageManager.popPage() },
@@ -137,23 +162,24 @@ QtObject {
 	*/
 	function _captureNextScreen(imageNameSequence) {
 		const listView = testCase.findObject(Global.mainView.currentPage, {}, "BaseListView")
-		const isFirstCapture = pageCaptureCounts[Global.mainView.currentPage] === undefined
+		const isFirstCapture = !pageCaptureCounts.has(Global.mainView.currentPage)
 		if (isFirstCapture) {
-			pageCaptureCounts[Global.mainView.currentPage] = 0
+			pageCaptureCounts.set(Global.mainView.currentPage, 0)
 		}
 
-		pageCaptureCounts[Global.mainView.currentPage] += 1
+		pageCaptureCounts.set(Global.mainView.currentPage,
+				pageCaptureCounts.get(Global.mainView.currentPage) + 1)
 		const captureImageName = "%1%2_%3"
 				.arg(root.capturePrefix)
 				.arg(imageNameSequence.join('_'))
-				.arg(pageCaptureCounts[Global.mainView.currentPage])
+				.arg(pageCaptureCounts.get(Global.mainView.currentPage))
 				.substring(0, 252) // limit to 255 char limit, minus 3 for png file extension.
 
 		if (listView) {
 			// Capture the current screen of the ListView.
 			testCase.addStep(UiTestStep.CaptureAndCompare, {
 				imageName: captureImageName,
-				message: Global.mainView.currentPage.title,
+				message: _pageDescription(),
 			})
 			testCase.addStep(UiTestStep.Invoke, {
 				// If more screens are expected, return the result of pageDown() so that this returns
@@ -173,7 +199,7 @@ QtObject {
 			// There is no ListView on this page. Capture the screen and return to _captureNext().
 			testCase.addStep(UiTestStep.CaptureAndCompare, {
 				imageName: captureImageName,
-				message: Global.mainView.currentPage.title + "(no sub-pages found here)",
+				message: _pageDescription() + " (no sub-pages found here)",
 			})
 			runSteps(_captureNext, [imageNameSequence])
 		}
@@ -189,7 +215,7 @@ QtObject {
 		track the last clicked item and look for the next one from there.
 	*/
 	function _yieldNextClickableItem(listView) {
-		let searchParams = { lastClickedItem: lastClickedViewItems[listView] }
+		let searchParams = { lastClickedItem: lastClickedViewItems.get(listView) }
 
 		// Search the header for a clickable item
 		if (listView.headerItem) {
@@ -214,7 +240,7 @@ QtObject {
 			searchParams = _findNextClickableItem(listView.footerItem, searchParams)
 		}
 
-		lastClickedViewItems[listView] = searchParams.nextClickableItem
+		lastClickedViewItems.set(listView, searchParams.nextClickableItem)
 		return searchParams.nextClickableItem
 	}
 
@@ -278,6 +304,15 @@ QtObject {
 			}
 		}
 		return searchParams
+	}
+
+	/*
+		Returns a description of the current page, including its url.
+	*/
+	function _pageDescription() {
+		const title = Global.mainView.currentPage?.title ?? ""
+		const url = Global.pageManager.pageStack.topPageUrl
+		return url ? "%1 [url: %2]".arg(title).arg(url) : title
 	}
 
 	function _atListEnd(listView) {
