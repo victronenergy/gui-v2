@@ -18,6 +18,7 @@ Item {
 	readonly property int _inputSourceGenerator: 2
 	readonly property int _inputSourceShore: 3
 
+	property int colorScheme: 0
 	property int activeInputSource: _inputSourceNotAvailable
 	property real activeInputPower: NaN
 	property real solarDcPower: NaN
@@ -74,7 +75,7 @@ Item {
 			: _scenario === scenarioParking ? qsTrId("camper_scenario_parking")
 			//: "Off-grid"
 			: qsTrId("camper_scenario_offgrid")
-	//% "Solar PV"
+	//% "PV"
 	readonly property string _solarTitle: qsTrId("camper_card_solar_pv")
 	//% "Generator"
 	readonly property string _generatorTitle: qsTrId("camper_card_generator")
@@ -82,9 +83,9 @@ Item {
 	readonly property string _batteryTitle: qsTrId("camper_card_battery")
 	//% "Alternator"
 	readonly property string _alternatorTitle: qsTrId("camper_card_alternator")
-	//% "DC Loads"
+	//% "DC"
 	readonly property string _dcLoadsTitle: qsTrId("camper_card_dc_loads")
-	//% "AC Loads"
+	//% "AC"
 	readonly property string _acLoadsTitle: qsTrId("camper_card_ac_loads")
 
 	function _sumPowerValues(values) {
@@ -100,6 +101,8 @@ Item {
 
 	CamperOverviewScene {
 		anchors.fill: parent
+
+		colorScheme: root.colorScheme
 		scenario: root._scenario
 		scenarioText: root._scenarioText
 		gridShoreTitle: root._gridShoreTitle

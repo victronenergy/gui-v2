@@ -142,6 +142,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ViewGradient.qml
     components/WasmVirtualKeyboardHandler.qml
     components/WifiModel.qml
+    components/camper/CamperBattery.qml
+    components/camper/CamperDevice.qml
     components/camper/CamperDomainCard.qml
     components/camper/CamperFlowArrow.qml
     components/camper/CamperOverviewScene.qml
@@ -807,10 +809,15 @@ set(VictronVenusOS_RESOURCES
     images/icon_system_32.svg
     images/icon_vrm_32.svg
     images/brief.svg
-    images/camper/camper_charging.svg
-    images/camper/camper_driving.svg
-    images/camper/camper_offgrid.svg
-    images/camper/camper_parking.svg
+    images/camper/camper_charging_light.svg
+    images/camper/camper_driving_light.svg
+    images/camper/camper_offgrid_light.svg
+    images/camper/camper_parking_light.svg
+    images/camper/camper_charging_dark.svg
+    images/camper/camper_driving_dark.svg
+    images/camper/camper_offgrid_dark.svg
+    images/camper/camper_parking_dark.svg
+    images/camper/camper_victron.svg
     images/color_wheel_rgb.png
     images/color_wheel_temperature.png
     images/controlcards-no-devices.svg

@@ -25,6 +25,7 @@ Page {
 
 	CamperOverviewView {
 		anchors.fill: parent
+		colorScheme: Theme.colorScheme === Theme.Light ? 0 : 1
 		activeInputSource: root._inputSourceOrNotAvailable(_activeInputSourceItem)
 		activeInputPower: root._finiteOrNaN(_activeInputPowerItem)
 		solarDcPower: root._finiteOrNaN(_solarDcPowerItem)

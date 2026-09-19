@@ -12,33 +12,24 @@ Item {
 	property string title
 	property real value: NaN
 	property bool active: false
-	property bool warning: false
 	property bool alarm: false
 	property string valueOverride: ""
 	property string unitOverride: ""
 
-	readonly property color _cardColor: alarm ? "#FFE9DF"
-			: warning ? "#FFF3E6"
-			: active ? "#C5DBF8"
-			: "#FFFFFF"
-	readonly property color _cardBorderColor: alarm ? "#E86A3D"
-			: warning ? "#E99B44"
-			: active ? "#2F70D8"
-			: "#DCE3EB"
-	readonly property color _primaryTextColor: alarm ? "#B14824"
-			: warning ? "#8F5A20"
-			: "#6D757F"
-	readonly property color _secondaryTextColor: _primaryTextColor
-	readonly property real _borderWidth: active || warning || alarm ? 2
-			: 1
+	property int colorScheme: 0
+
+	readonly property var _cardColor: colorScheme === 0 ? [ "#F8F9FA", "#CCE5FF", "#FBD2C5" ] : [ "#121518", "#002A54", "#561400" ]
+	readonly property var _cardBorderColor: colorScheme === 0 ? [ "#E6E6E6", "#005FBE", "#E84A1A" ] : [ "#121518", "#3395FF", "#E84A1A" ]
+	readonly property color _primaryTextColor: colorScheme === 0  ? "#343A40" : "#DEE2E6"
+	readonly property color _secondaryTextColor: colorScheme === 0  ? "#495057" : "#ADB5BD"
 	readonly property real _radius: Math.max(10, Math.round(height * 0.19))
 	readonly property real _iconSize: Math.max(12, Math.round(height * 0.23))
 	readonly property real _hMargin: Math.max(10, Math.round(width * 0.10))
 	readonly property real _vMargin: Math.max(7, Math.round(height * 0.11))
 	readonly property real _unitSpacing: 4
-	readonly property int _titleFontSize: Math.max(14, Math.round(height * 0.25))
-	readonly property int _valueFontSize: Math.max(28, Math.round(height * 0.40))
-	readonly property bool _iconNeedsBacking: !active && !warning && !alarm
+	readonly property int _titleFontSize: Math.max(14, Math.round(height * 0.3))
+	readonly property int _valueFontSize: Math.max(16, Math.round(height * 0.35))
+	readonly property bool _iconNeedsBacking: !active && !alarm
 
 	readonly property var _formattedValue: _formatPower(value, valueOverride, unitOverride)
 
@@ -82,9 +73,13 @@ Item {
 		id: card
 
 		anchors.fill: parent
-		color: root._cardColor
-		border.width: root._borderWidth
-		border.color: root._cardBorderColor
+		color: root.alarm ? root._cardColor[2]
+			: root.active ? root._cardColor[1]
+			: root._cardColor[0]
+		border.width: 1
+		border.color: root.alarm ? root._cardBorderColor[2]
+			: root.active ? root._cardBorderColor[1]
+			: root._cardBorderColor[0]
 		radius: root._radius
 
 		Column {
@@ -126,7 +121,7 @@ Item {
 					width: parent.width - root._iconSize - parent.spacing
 					anchors.verticalCenter: parent.verticalCenter
 					text: root.title
-					color: root._primaryTextColor
+					color: root._secondaryTextColor
 					font.bold: true
 					font.pixelSize: root._titleFontSize
 					elide: Text.ElideRight
@@ -158,8 +153,8 @@ Item {
 						baseline: valueText.baseline
 					}
 					text: root._formattedValue.unitText
-					color: root._secondaryTextColor
-					font.pixelSize: root._titleFontSize
+					color: root._primaryTextColor
+					font.pixelSize: root._valueFontSize
 					visible: text.length > 0
 				}
 			}
