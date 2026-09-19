@@ -21,7 +21,9 @@ int get_cpu_usage(unsigned long long &previousBusy, unsigned long long &previous
 	}
 
 	unsigned long long user, nice, system, idleTotal, busyTotal;
-	fscanf(file, "cpu %llu %llu %llu %llu", &user, &nice, &system, &idleTotal);
+	if (fscanf(file, "cpu %llu %llu %llu %llu", &user, &nice, &system, &idleTotal) != 4) {
+		qWarning() << "cpu cmd did not return all details";
+	};
 	busyTotal = user + nice + system;
 	fclose(file);
 
