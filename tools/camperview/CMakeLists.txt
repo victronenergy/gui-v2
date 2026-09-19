@@ -13,6 +13,8 @@ set(GUIV2_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../..")
 set(CAMPER_SHARED_QML_DIR "${GUIV2_ROOT_DIR}/components/camper")
 
 set(CAMPER_SHARED_QML_FILES
+	"${CAMPER_SHARED_QML_DIR}/CamperBattery.qml"
+	"${CAMPER_SHARED_QML_DIR}/CamperDevice.qml"
 	"${CAMPER_SHARED_QML_DIR}/CamperDomainCard.qml"
 	"${CAMPER_SHARED_QML_DIR}/CamperFlowArrow.qml"
 	"${CAMPER_SHARED_QML_DIR}/CamperOverviewScene.qml"
@@ -24,10 +26,15 @@ foreach(qml_file IN LISTS CAMPER_SHARED_QML_FILES)
 endforeach()
 
 set(CAMPER_IMAGE_FILES
-	"${GUIV2_ROOT_DIR}/images/camper/camper_charging.svg"
-	"${GUIV2_ROOT_DIR}/images/camper/camper_driving.svg"
-	"${GUIV2_ROOT_DIR}/images/camper/camper_offgrid.svg"
-	"${GUIV2_ROOT_DIR}/images/camper/camper_parking.svg"
+	"${GUIV2_ROOT_DIR}/images/camper/camper_device.svg"
+	"${GUIV2_ROOT_DIR}/images/camper/camper_charging_light.svg"
+	"${GUIV2_ROOT_DIR}/images/camper/camper_driving_light.svg"
+	"${GUIV2_ROOT_DIR}/images/camper/camper_offgrid_light.svg"
+	"${GUIV2_ROOT_DIR}/images/camper/camper_parking_light.svg"
+	"${GUIV2_ROOT_DIR}/images/camper/camper_charging_dark.svg"
+	"${GUIV2_ROOT_DIR}/images/camper/camper_driving_dark.svg"
+	"${GUIV2_ROOT_DIR}/images/camper/camper_offgrid_dark.svg"
+	"${GUIV2_ROOT_DIR}/images/camper/camper_parking_dark.svg"
 	"${GUIV2_ROOT_DIR}/images/shore.svg"
 	"${GUIV2_ROOT_DIR}/images/grid.svg"
 	"${GUIV2_ROOT_DIR}/images/solaryield.svg"
