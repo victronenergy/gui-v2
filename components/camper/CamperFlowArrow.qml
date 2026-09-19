@@ -15,11 +15,14 @@ Item {
 	property real turnX: NaN
 	property real turnY: NaN
 	property bool horizontalFirst: true
-	property color strokeColor: "#2F70D8"
+	property color strokeColor: lightColor
 	property real strokeWidth: 2
-	property real headLength: 8
-	property real headWidth: 6
+	property real headLength: 6
+	property real headWidth: 12
 	property real cornerRadius: 12
+
+	readonly property color darkColor: "#66B0FF"
+	readonly property color lightColor: "#005FBE"
 
 	function _isFiniteNumber(value) {
 		return typeof value === "number" && isFinite(value)
@@ -113,7 +116,7 @@ Item {
 					continue
 				}
 
-				const radius = Math.min(root.cornerRadius, len1 * 0.45, len2 * 0.45)
+				const radius = Math.min(root.cornerRadius, len1 * 0.75, len2 * 0.75)
 				const beforeX = current.x - (dx1 / len1) * radius
 				const beforeY = current.y - (dy1 / len1) * radius
 				const afterX = current.x + (dx2 / len2) * radius
@@ -138,9 +141,8 @@ Item {
 			context.fillStyle = root.strokeColor
 			context.moveTo(tip.x, tip.y)
 			context.lineTo(leftX, leftY)
+			context.moveTo(tip.x, tip.y)
 			context.lineTo(rightX, rightY)
-			context.closePath()
-			context.fill()
 			context.stroke()
 		}
 
