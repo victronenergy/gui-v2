@@ -102,6 +102,7 @@
 
     "geometry_progressBar_height": 8,
     "geometry_progressBar_radius": 8,
+    "geometry_progressBar_highlight_width": 32,
 
     "geometry_radioButton_indicator_width": 24,
     "geometry_radioButton_indicator_dot_width": 16,

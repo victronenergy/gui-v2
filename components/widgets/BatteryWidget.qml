@@ -61,13 +61,18 @@ OverviewWidget {
 	type: VenusOS.OverviewWidget_Type_Battery
 	enabled: batteries.valid
 
-	background: Rectangle {
+	background: BarGauge {
+		id: batteryGauge
+
 		implicitWidth: Theme.geometry_overviewPage_widget_centerWidgetWidth
 		implicitHeight: Theme.geometry_overviewPage_widget_compact_l_height
-		border.width: enabled ? Theme.geometry_overviewPage_widget_border_width : 0
-		border.color: Theme.color_overviewPage_widget_border
-		color: Theme.color_overviewPage_widget_background
+		foregroundColor: Theme.color_overviewPage_widget_battery_background
+		backgroundColor: Theme.color_overviewPage_widget_background
+		borderWidth: enabled ? Theme.geometry_overviewPage_widget_border_width : 0
+		borderColor: Theme.color_overviewPage_widget_border
 		radius: Theme.geometry_overviewPage_widget_radius
+		animationEnabled: root.animationEnabled // Note: don't use _animationReady here.
+		value: root._normalizedStateOfCharge / 100
 
 		PressArea {
 			radius: parent.radius
@@ -75,65 +80,53 @@ OverviewWidget {
 			onClicked: root.clicked()
 		}
 
-		BarGauge {
-			id: animationRect
+		Item {
+			id: animationClip
 
 			anchors {
-				fill: parent
-				margins: parent.border.width
+				horizontalCenter: parent.horizontalCenter
+				bottom: parent.bottom
+				bottomMargin: batteryGauge.borderWidth
 			}
+			width: batteryGauge.width - (2 * batteryGauge.borderWidth)
+			height: (batteryGauge.height - (2 * batteryGauge.borderWidth)) * batteryGauge.animatedValue
+			visible: Global.system.battery.mode === VenusOS.Battery_Mode_Charging && root._animationReady
+			clip: true
 
-			animationEnabled: root.animationEnabled // Note: don't use _animationReady here.
-			value: _normalizedStateOfCharge/100
-			backgroundColor: Theme.color_overviewPage_widget_background
-			foregroundColor: Theme.color_overviewPage_widget_battery_background
-			radius: parent.radius - parent.border.width
+			SequentialAnimation {
+				property bool startAnimation: root._animationReady
+				onStartAnimationChanged: if (startAnimation) start()
+				onStopped: if (startAnimation) start()
 
-			Item {
-				id: animationClip
-
-				width: parent.width
-				height: parent.height * (animationRect.value)
-				anchors.bottom: parent.bottom
-				visible: Global.system.battery.mode === VenusOS.Battery_Mode_Charging && root._animationReady
-				clip: true
-				z: 6 // greater than the explicit z-order specified in BarGauge.
-
-				SequentialAnimation {
-					property bool startAnimation: root._animationReady
-					onStartAnimationChanged: if (startAnimation) start()
-					onStopped: if (startAnimation) start()
-
-					YAnimator {
-						target: gradient
-						from: animationClip.height
-						to: -gradient.height
-						duration: Theme.animation_overviewPage_widget_battery_animation_duration
-						easing.type: Easing.OutQuad
-					}
-
-					PauseAnimation {
-						duration: Theme.animation_overviewPage_widget_battery_animation_pause_duration
-					}
+				YAnimator {
+					target: gradient
+					from: animationClip.height
+					to: -gradient.height
+					duration: Theme.animation_overviewPage_widget_battery_animation_duration
+					easing.type: Easing.OutQuad
 				}
 
-				Rectangle {
-					id: gradient
-					width: parent.width
-					height: Theme.geometry_overviewPage_widget_battery_gradient_height
-					gradient: Gradient {
-						GradientStop {
-							position: 0.0
-							color: Qt.rgba(1,1,1,0.3)
-						}
-						GradientStop {
-							position: 0.3
-							color: Qt.rgba(1,1,1,0.15)
-						}
-						GradientStop {
-							position: 1.0
-							color: Qt.rgba(1,1,1,0.0)
-						}
+				PauseAnimation {
+					duration: Theme.animation_overviewPage_widget_battery_animation_pause_duration
+				}
+			}
+
+			Rectangle {
+				id: gradient
+				width: parent.width
+				height: Theme.geometry_overviewPage_widget_battery_gradient_height
+				gradient: Gradient {
+					GradientStop {
+						position: 0.0
+						color: Qt.rgba(1,1,1,0.3)
+					}
+					GradientStop {
+						position: 0.3
+						color: Qt.rgba(1,1,1,0.15)
+					}
+					GradientStop {
+						position: 1.0
+						color: Qt.rgba(1,1,1,0.0)
 					}
 				}
 			}
