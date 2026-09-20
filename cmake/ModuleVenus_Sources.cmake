@@ -142,6 +142,12 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ViewGradient.qml
     components/WasmVirtualKeyboardHandler.qml
     components/WifiModel.qml
+    components/camper/CamperBattery.qml
+    components/camper/CamperDevice.qml
+    components/camper/CamperDomainCard.qml
+    components/camper/CamperFlowArrow.qml
+    components/camper/CamperOverviewScene.qml
+    components/camper/CamperOverviewView.qml
     components/controls/AutoToggleButton.qml
     components/controls/Button.qml
     components/controls/CaptionLabel.qml
@@ -430,6 +436,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsBoatPage.qml
     pages/settings/PageSettingsCanbus.qml
     pages/settings/PageSettingsCanOpenMotordrive.qml
+    pages/settings/PageSettingsCamper.qml
     pages/settings/PageSettingsCGwacs.qml
     pages/settings/PageSettingsCGwacsOverview.qml
     pages/settings/PageSettingsConnectivity.qml
@@ -742,6 +749,12 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/uiconfig.cpp
     src/uitest.h
     src/uitest.cpp
+    src/uitestargutils.h
+    src/uitestargutils.cpp
+    src/uitestresultutils.h
+    src/uitestresultutils.cpp
+    src/uitestutils.h
+    src/uitestutils.cpp
     src/uitestcase.h
     src/uitestcase.cpp
     src/uiteststep.h
@@ -766,11 +779,9 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/widgetconnectorpathupdater.cpp
 )
 
-if (VENUS_GX_BUILD)
-    list(APPEND VictronVenusOS_CPP_SOURCES
-        src/urlinterceptor.h
-        src/urlinterceptor.cpp)
-endif()
+list(APPEND VictronVenusOS_CPP_SOURCES
+    src/urlinterceptor.h
+    src/urlinterceptor.cpp)
 
 set(VictronVenusOS_RESOURCES
     fonts/Roboto-Regular.ttf
@@ -798,6 +809,15 @@ set(VictronVenusOS_RESOURCES
     images/icon_system_32.svg
     images/icon_vrm_32.svg
     images/brief.svg
+    images/camper/camper_charging_light.svg
+    images/camper/camper_driving_light.svg
+    images/camper/camper_offgrid_light.svg
+    images/camper/camper_parking_light.svg
+    images/camper/camper_charging_dark.svg
+    images/camper/camper_driving_dark.svg
+    images/camper/camper_offgrid_dark.svg
+    images/camper/camper_parking_dark.svg
+    images/camper/camper_victron.svg
     images/color_wheel_rgb.png
     images/color_wheel_temperature.png
     images/controlcards-no-devices.svg
