@@ -16,6 +16,9 @@
 #include <QVector>
 #include <QPointer>
 #include <QMap>
+#include <QVariant>
+#include <QVariantMap>
+#include <QJsonObject>
 
 #include <QTimer>
 
@@ -78,10 +81,21 @@ public:
 	QVector<GuiPlugin> plugins() const;
 	Q_INVOKABLE GuiPlugin plugin(const QString &name) const;
 
+	// Per-plugin UI lifecycle state (enable/disable + settings). Separate from
+	// Venus "applications" enable (symlink under /data/apps/enabled/). Missing
+	// entries fail-open as enabled so stock installs keep working.
+	Q_INVOKABLE bool isPluginEnabled(const QString &name) const;
+	Q_INVOKABLE void setPluginEnabled(const QString &name, bool enabled);
+	Q_INVOKABLE QVariant pluginSetting(const QString &name, const QString &key,
+			const QVariant &defaultValue = QVariant()) const;
+	Q_INVOKABLE void setPluginSetting(const QString &name, const QString &key, const QVariant &value);
+	Q_INVOKABLE QVariantMap pluginSettings(const QString &name) const;
+
 Q_SIGNALS:
 	void busyChanged();
 	void pluginsJsonChanged();
 	void pluginsChanged();
+	void pluginUiStateChanged(const QString &name);
 
 private:
 	void timeoutMqttPluginPaths();
@@ -96,8 +110,15 @@ private:
 	bool loadPluginData(const GuiPlugin &plugin);
 	void unloadPluginData(bool clearCache);
 	bool installPluginTranslatorForLanguage(const QString &pluginName, QLocale::Language language);
+	void loadPluginUiState();
+	void savePluginUiState() const;
+	QString pluginUiStatePath() const;
+	QJsonObject pluginUiStateObject(const QString &name) const;
+	void setPluginUiStateObject(const QString &name, const QJsonObject &obj);
+
 	QString m_pluginsJson;
 	QVector<GuiPlugin> m_plugins;
+	QJsonObject m_pluginUiState;
 	QHash<QString, QHash<QLocale::Language, QTranslator*> > m_pluginTranslators;
 	QHash<QString, QPointer<QTranslator> > m_currentTranslators;
 	QFileSystemWatcher *m_enabledAppsDirWatcher = nullptr;
@@ -137,6 +158,14 @@ There are currently 5 supported types of integrations:
 		  existing quick action pane views (i.e. either a
 		  controls card, or a switches card).
 
+UI lifecycle (GuiPluginLoader::isPluginEnabled / pluginSetting):
+	Venus "applications" still gate install via /data/apps/enabled
+	symlinks. Separately, gui-v2 persists per-plugin enable and
+	settings in gui-v2-plugin-ui-state.json (GX) or
+	plugin-ui-state.json next to the desktop binary. Missing entries
+	fail-open as enabled. Disabled plugins
+	remain listed under UI Plugins but their type 2–5 integrations
+	are omitted from chrome models.
 All five integration types are supported.
 */
 class GuiPluginIntegration

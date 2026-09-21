@@ -13,6 +13,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QFileSystemWatcher>
 #include <QCryptographicHash>
 #include <QVersionNumber>
@@ -97,6 +98,21 @@ namespace {
 		return QStringList();
 #endif
 	}
+
+	QString pluginUiStateFilePath()
+	{
+#if defined(VENUS_GX_BUILD)
+		// Durable on GX next to applications tree; survives gui-v2 restarts.
+		// Keep out of */gui-v2/*.json so readFromFilesystem never treats it as a plugin.
+		return QStringLiteral("/data/apps/gui-v2-plugin-ui-state.json");
+#elif defined(VENUS_DESKTOP_BUILD)
+		// Sibling of plugins/, not inside it (plugins/*.json are plugin payloads).
+		return QCoreApplication::applicationDirPath() + QStringLiteral("/plugin-ui-state.json");
+#else
+		// WASM / other: in-memory only unless a path is later provided.
+		return QString();
+#endif
+	}
 }
 
 GuiPluginLoader* GuiPluginLoader::create(QQmlEngine *engine, QJSEngine *)
@@ -111,6 +127,8 @@ GuiPluginLoader* GuiPluginLoader::create(QQmlEngine *engine, QJSEngine *)
 GuiPluginLoader::GuiPluginLoader(QObject *parent)
 	: QObject(parent), m_invokeOnceTimer(this), m_timeoutTimer(this)
 {
+	loadPluginUiState();
+
 	Language *languageSingleton = Language::create();
 	connect(languageSingleton, &Language::currentLanguageChanged,
 		this, [this, languageSingleton] {
@@ -212,6 +230,122 @@ GuiPlugin GuiPluginLoader::plugin(const QString &name) const
 	}
 
 	return GuiPlugin();
+}
+
+QString GuiPluginLoader::pluginUiStatePath() const
+{
+	return pluginUiStateFilePath();
+}
+
+void GuiPluginLoader::loadPluginUiState()
+{
+	m_pluginUiState = QJsonObject();
+	const QString path = pluginUiStatePath();
+	if (path.isEmpty()) {
+		return;
+	}
+	QFile f(path);
+	if (!f.exists()) {
+		return;
+	}
+	if (!f.open(QIODevice::ReadOnly)) {
+		qCWarning(venusGui) << "Unable to read plugin UI state from" << path << f.errorString();
+		return;
+	}
+	const QJsonDocument doc = QJsonDocument::fromJson(f.readAll());
+	if (!doc.isObject()) {
+		qCWarning(venusGui) << "Invalid plugin UI state JSON in" << path;
+		return;
+	}
+	m_pluginUiState = doc.object();
+}
+
+void GuiPluginLoader::savePluginUiState() const
+{
+	const QString path = pluginUiStatePath();
+	if (path.isEmpty()) {
+		return;
+	}
+	QFileInfo info(path);
+	if (!info.dir().exists() && !QDir().mkpath(info.dir().absolutePath())) {
+		qCWarning(venusGui) << "Unable to create directory for plugin UI state:" << info.dir().absolutePath();
+		return;
+	}
+	QFile f(path);
+	if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+		qCWarning(venusGui) << "Unable to write plugin UI state to" << path << f.errorString();
+		return;
+	}
+	f.write(QJsonDocument(m_pluginUiState).toJson(QJsonDocument::Indented));
+}
+
+QJsonObject GuiPluginLoader::pluginUiStateObject(const QString &name) const
+{
+	return m_pluginUiState.value(name).toObject();
+}
+
+void GuiPluginLoader::setPluginUiStateObject(const QString &name, const QJsonObject &obj)
+{
+	if (name.isEmpty()) {
+		return;
+	}
+	m_pluginUiState.insert(name, obj);
+	savePluginUiState();
+	Q_EMIT pluginUiStateChanged(name);
+}
+
+bool GuiPluginLoader::isPluginEnabled(const QString &name) const
+{
+	const QJsonObject obj = pluginUiStateObject(name);
+	if (!obj.contains(QStringLiteral("enabled"))) {
+		return true; // fail-open
+	}
+	return obj.value(QStringLiteral("enabled")).toBool(true);
+}
+
+void GuiPluginLoader::setPluginEnabled(const QString &name, bool enabled)
+{
+	if (name.isEmpty()) {
+		return;
+	}
+	QJsonObject obj = pluginUiStateObject(name);
+	if (obj.contains(QStringLiteral("enabled"))
+			&& obj.value(QStringLiteral("enabled")).toBool(true) == enabled) {
+		return;
+	}
+	obj.insert(QStringLiteral("enabled"), enabled);
+	setPluginUiStateObject(name, obj);
+}
+
+QVariant GuiPluginLoader::pluginSetting(const QString &name, const QString &key,
+		const QVariant &defaultValue) const
+{
+	const QJsonObject settings = pluginUiStateObject(name).value(QStringLiteral("settings")).toObject();
+	if (!settings.contains(key)) {
+		return defaultValue;
+	}
+	return settings.value(key).toVariant();
+}
+
+void GuiPluginLoader::setPluginSetting(const QString &name, const QString &key, const QVariant &value)
+{
+	if (name.isEmpty() || key.isEmpty()) {
+		return;
+	}
+	QJsonObject obj = pluginUiStateObject(name);
+	QJsonObject settings = obj.value(QStringLiteral("settings")).toObject();
+	const QJsonValue next = QJsonValue::fromVariant(value);
+	if (settings.value(key) == next) {
+		return;
+	}
+	settings.insert(key, next);
+	obj.insert(QStringLiteral("settings"), settings);
+	setPluginUiStateObject(name, obj);
+}
+
+QVariantMap GuiPluginLoader::pluginSettings(const QString &name) const
+{
+	return pluginUiStateObject(name).value(QStringLiteral("settings")).toObject().toVariantMap();
 }
 
 void GuiPluginLoader::timeoutMqttPluginPaths()
@@ -573,6 +707,11 @@ void GuiPluginLoader::readFromFilesystem(const QString &path)
 
 	QStringList plugins;
 	for (const QString &file : files) {
+		// Never treat lifecycle state files as plugins.
+		if (file == QLatin1String("ui-state.json")
+				|| file == QLatin1String("plugin-ui-state.json")) {
+			continue;
+		}
 		QFile f(pluginsDir.absoluteFilePath(file));
 		if (f.open(QIODevice::ReadOnly)) {
 			const QString plugin = QString::fromUtf8(f.readAll());
@@ -1131,6 +1270,8 @@ GuiPluginIntegrationModel::GuiPluginIntegrationModel(QObject *parent)
 	GuiPluginLoader *singleton = GuiPluginLoader::create();
 	connect(singleton, &GuiPluginLoader::pluginsChanged,
 		this, &GuiPluginIntegrationModel::updateIntegrations);
+	connect(singleton, &GuiPluginLoader::pluginUiStateChanged,
+		this, &GuiPluginIntegrationModel::updateIntegrations);
 }
 
 int GuiPluginIntegrationModel::count() const
@@ -1218,6 +1359,11 @@ void GuiPluginIntegrationModel::updateIntegrations()
 	GuiPluginLoader *singleton = GuiPluginLoader::create();
 	const QVector<GuiPlugin> plugins = singleton->plugins();
 	for (const GuiPlugin &p : plugins) {
+		if (!singleton->isPluginEnabled(p.name())) {
+			// Still listed under Settings > Integrations > UI Plugins, but
+			// chrome integrations (types 2–5) stay hidden while disabled.
+			continue;
+		}
 		const QVector<GuiPluginIntegration> integrations = p.integrations();
 		for (const GuiPluginIntegration &i : integrations) {
 			if ((m_type == GuiPluginLoader::InvalidIntegrationType || i.type() == m_type)

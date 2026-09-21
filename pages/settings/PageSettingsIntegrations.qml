@@ -286,12 +286,14 @@ Page {
 				preferredVisible: guiPluginsHeader.preferredVisible
 				Repeater {
 					model: GuiPluginModel { id: pluginModel }
-					delegate: ListNavigation {
-						id: switchNavigationItem
+					delegate: SettingsColumn {
+						id: pluginColumn
 
 						required property string name
 						required property color color
 						required property var integrations
+						width: parent ? parent.width : 0
+
 						readonly property var pluginSettingsPageIntegration: {
 							if (integrations !== null && integrations.length > 0) {
 								for (let i = 0; i < integrations.length; ++i) {
@@ -302,42 +304,59 @@ Page {
 							}
 							return null
 						}
-						readonly property var integrationTypes: {
-							var types = []
+						readonly property string integrationSummary: {
+							var parts = []
 							if (integrations !== null && integrations.length > 0) {
 								for (let i = 0; i < integrations.length; ++i) {
 									var t = integrations[i].type
-									if (types.indexOf(t) === -1)
-										types.push(t)
+									if (t === GuiPluginLoader.DeviceListSettingsPage)
+										//% "Integrates with the device list"
+										parts.push(qsTrId("pagesettingsintegrations_uiplugin_integrates_with_devicelist"))
+									else if (t === GuiPluginLoader.NavigationPage)
+										//% "Navigation page"
+										parts.push(qsTrId("pagesettingsintegrations_uiplugin_navigation_page"))
+									else if (t === GuiPluginLoader.QuickAccessPane)
+										//% "Quick access pane"
+										parts.push(qsTrId("pagesettingsintegrations_uiplugin_quick_access_pane"))
+									else if (t === GuiPluginLoader.QuickAccessPaneCard)
+										//% "Quick access card"
+										parts.push(qsTrId("pagesettingsintegrations_uiplugin_quick_access_card"))
 								}
 							}
-							return types
-						}
-
-						text: switchNavigationItem.name
-						secondaryText: {
-							var parts = []
-							if (integrationTypes.indexOf(GuiPluginLoader.DeviceListSettingsPage) >= 0)
-								//% "Integrates with the device list"
-								parts.push(qsTrId("pagesettingsintegrations_uiplugin_integrates_with_devicelist"))
-							if (integrationTypes.indexOf(GuiPluginLoader.NavigationPage) >= 0)
-								//% "Navigation page"
-								parts.push(qsTrId("pagesettingsintegrations_uiplugin_navigation_page"))
-							if (integrationTypes.indexOf(GuiPluginLoader.QuickAccessPane) >= 0)
-								//% "Quick access pane"
-								parts.push(qsTrId("pagesettingsintegrations_uiplugin_quick_access_pane"))
-							if (integrationTypes.indexOf(GuiPluginLoader.QuickAccessPaneCard) >= 0)
-								//% "Quick access card"
-								parts.push(qsTrId("pagesettingsintegrations_uiplugin_quick_access_card"))
 							return parts.join(", ")
 						}
-						indicatorColor: switchNavigationItem.color
-						interactive: switchNavigationItem.pluginSettingsPageIntegration !== null
 
-						onClicked: {
-							const url = switchNavigationItem.pluginSettingsPageIntegration?.url ?? ""
-							if (url) {
-								Global.pageManager.pushPage(url, { title: text })
+						Connections {
+							target: GuiPluginLoader
+							function onPluginUiStateChanged(changedName) {
+								if (changedName === pluginColumn.name) {
+									pluginEnableSwitch.checked = GuiPluginLoader.isPluginEnabled(pluginColumn.name)
+								}
+							}
+						}
+
+						ListSwitch {
+							id: pluginEnableSwitch
+							text: pluginColumn.name
+							checked: GuiPluginLoader.isPluginEnabled(pluginColumn.name)
+							secondaryText: checked
+								? pluginColumn.integrationSummary
+								: CommonWords.disabled
+							onClicked: GuiPluginLoader.setPluginEnabled(pluginColumn.name, !checked)
+						}
+
+						ListNavigation {
+							preferredVisible: pluginColumn.pluginSettingsPageIntegration !== null
+							text: pluginColumn.name
+							//% "Settings"
+							secondaryText: qsTrId("pagesettingsintegrations_uiplugin_settings")
+							indicatorColor: pluginColumn.color
+
+							onClicked: {
+								const url = pluginColumn.pluginSettingsPageIntegration?.url ?? ""
+								if (url) {
+									Global.pageManager.pushPage(url, { title: text })
+								}
 							}
 						}
 					}
