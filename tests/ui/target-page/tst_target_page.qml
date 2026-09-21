@@ -14,6 +14,23 @@ UiTestCase {
 	property string targetPageUrl: ""
 	property string routeEntryLabel: ""
 	property var routeSteps: []
+	property int _settledPolls: 0
+	property int _presentedAfterSettled: 0
+	property bool _capturingLastPush: false
+
+	// Count presented frames after the last slide settles so we do not quit
+	// before the destination page has actually been shown.
+	Connections {
+		target: root.window
+		enabled: root._capturingLastPush
+		function onFrameSwapped() {
+			if (!_pushHasSettled(root.targetPageUrl)) {
+				root._presentedAfterSettled = 0
+				return
+			}
+			root._presentedAfterSettled += 1
+		}
+	}
 
 	function _hasValidCurrentPage(expectedPageUrl) {
 		const pageStack = Global.pageManager.pageStack
@@ -23,6 +40,40 @@ UiTestCase {
 			return false
 		const page = pageStack.currentPage
 		return !!page && page.__is_venus_gui_page__ === true
+	}
+
+	// currentPage / topPageUrl are only set once the stack reports opened, which is the
+	// ScriptAction at the end of the slide-in. That is not enough: _pendingBuild is
+	// cleared before the transition starts, so !animating can be true for a poll in
+	// between, and qApp->exit() on that tick tears the window down mid-slide.
+	function _stackPushIdle() {
+		const pageStack = Global.pageManager.pageStack
+		return !!pageStack
+			&& !Global.mainView.animating
+			&& !pageStack.animating
+			&& pageStack.opened
+			&& Math.abs(pageStack.x) < 1
+	}
+
+	function _pushHasSettled(expectedPageUrl) {
+		if (!_stackPushIdle())
+			return false
+		if (!expectedPageUrl)
+			return true
+		return _hasValidCurrentPage(expectedPageUrl)
+	}
+
+	function _pushHasSettledForTwoPolls(expectedPageUrl) {
+		if (!_pushHasSettled(expectedPageUrl)) {
+			root._settledPolls = 0
+			root._presentedAfterSettled = 0
+			return false
+		}
+		if (root._capturingLastPush) {
+			return root._presentedAfterSettled >= 2
+		}
+		root._settledPolls += 1
+		return root._settledPolls >= 2
 	}
 
 	// Convert QVariantList route steps into a plain JS array of { type, values, expectedPage } objects.
@@ -256,11 +307,12 @@ UiTestCase {
 		runSteps(callback)
 	}
 
-	// Confirm the navigation route ended on the requested page URL.
+	// Confirm the navigation route ended on the requested page URL, after the slide-in has finished.
 	function _verifyTargetPageOpen() {
+		root._settledPolls = 0
 		addStep(UiTestStep.WaitUntil, {
-			callable: ()=> _hasValidCurrentPage(targetPageUrl),
-			message: "Waiting for target page to appear on stack: %1".arg(targetPageUrl),
+			callable: ()=> _pushHasSettledForTwoPolls(targetPageUrl),
+			message: "Waiting for target page transition to finish: %1".arg(targetPageUrl),
 		})
 		addStep(UiTestStep.Invoke, {
 			callable: ()=> {
@@ -271,6 +323,10 @@ UiTestCase {
 				}
 				if (!_hasValidCurrentPage(targetPageUrl)) {
 					throw new Error("Target page URL is set but no valid page object is on the stack: %1"
+						.arg(targetPageUrl))
+				}
+				if (Global.mainView.animating || Global.pageManager.pageStack.animating) {
+					throw new Error("Target page '%1' was reached before the page transition finished."
 						.arg(targetPageUrl))
 				}
 				return true
@@ -319,13 +375,26 @@ UiTestCase {
 			return
 		}
 
+		const isLastStep = index === routeSteps.length - 1
 		addStep(UiTestStep.Invoke, {
-			callable: ()=> { return mouseClick(target.clickable) },
+			callable: ()=> {
+				if (isLastStep && !root._capturingLastPush) {
+					root._capturingLastPush = true
+				}
+				return mouseClick(target.clickable)
+			},
 			message: "Click %1: %2".arg(step.type).arg(target.matchedValue),
 		})
-		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
+		root._settledPolls = 0
+		root._presentedAfterSettled = 0
+		addStep(UiTestStep.WaitUntil, {
+			callable: ()=> _pushHasSettledForTwoPolls(step.expectedPage),
+			message: step.expectedPage
+				? "Waiting for page transition to finish: %1".arg(step.expectedPage)
+				: "Waiting for page transition to finish",
+		})
 
-		// Verify we landed on the expected intermediate page.
+		// Confirm the URL after the slide has actually finished, not when currentPage first updates.
 		if (step.expectedPage && step.expectedPage.length > 0) {
 			const expectedPage = step.expectedPage
 			const stepIndex = index + 1
@@ -338,6 +407,10 @@ UiTestCase {
 					}
 					if (!_hasValidCurrentPage(expectedPage)) {
 						throw new Error("Navigation step %1 reached URL '%2' but no valid page object was pushed."
+							.arg(stepIndex).arg(expectedPage))
+					}
+					if (Global.mainView.animating || Global.pageManager.pageStack.animating) {
+						throw new Error("Navigation step %1 reached '%2' before the page transition finished."
 							.arg(stepIndex).arg(expectedPage))
 					}
 					return true

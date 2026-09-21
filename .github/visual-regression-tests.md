@@ -38,6 +38,9 @@ rows can be clicked. Off-screen rows are created by scrolling the current page's
 when clicking, not while waiting.
 For target-page mode, runtime QML errors (for example `ReferenceError` in bindings) are treated
 as failures, and completion requires a valid page object on the stack, not only a matching URL.
+The last `pushPage()` must also finish its stack transition (`PageStack.animating` false and
+`opened` true, held for a following poll) before the test exits, so the destination page is not
+torn down mid-slide.
 
 By default, captured images are stored in `<working-directory>/image-captures/` (configurable in the test JSON).
 
