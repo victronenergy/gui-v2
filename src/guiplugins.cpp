@@ -128,6 +128,7 @@ GuiPluginLoader::GuiPluginLoader(QObject *parent)
 	: QObject(parent), m_invokeOnceTimer(this), m_timeoutTimer(this)
 {
 	loadPluginUiState();
+	watchPluginUiStateFile();
 
 	Language *languageSingleton = Language::create();
 	connect(languageSingleton, &Language::currentLanguageChanged,
@@ -277,6 +278,80 @@ void GuiPluginLoader::savePluginUiState() const
 		return;
 	}
 	f.write(QJsonDocument(m_pluginUiState).toJson(QJsonDocument::Indented));
+}
+
+void GuiPluginLoader::watchPluginUiStateFile()
+{
+	const QString path = pluginUiStatePath();
+	if (path.isEmpty()) {
+		return;
+	}
+	// Ensure the file exists so QFileSystemWatcher can attach.
+	if (!QFile::exists(path)) {
+		savePluginUiState();
+	}
+	if (!m_pluginUiStateWatcher) {
+		m_pluginUiStateWatcher = new QFileSystemWatcher(this);
+		connect(m_pluginUiStateWatcher, &QFileSystemWatcher::fileChanged,
+			this, [this](const QString &changedPath) {
+				reloadPluginUiStateFromDisk();
+				// Editors that replace the file drop the watch; re-add.
+				if (m_pluginUiStateWatcher && QFile::exists(changedPath)
+						&& !m_pluginUiStateWatcher->files().contains(changedPath)) {
+					m_pluginUiStateWatcher->addPath(changedPath);
+				}
+			});
+	}
+	if (!m_pluginUiStateWatcher->files().contains(path)) {
+		m_pluginUiStateWatcher->addPath(path);
+	}
+}
+
+void GuiPluginLoader::reloadPluginUiStateFromDisk()
+{
+	const QString path = pluginUiStatePath();
+	if (path.isEmpty()) {
+		return;
+	}
+	QFile f(path);
+	if (!f.exists() || !f.open(QIODevice::ReadOnly)) {
+		return;
+	}
+	const QJsonDocument doc = QJsonDocument::fromJson(f.readAll());
+	if (!doc.isObject()) {
+		return;
+	}
+	const QJsonObject next = doc.object();
+	QSet<QString> names;
+	const QStringList oldKeys = m_pluginUiState.keys();
+	const QStringList newKeys = next.keys();
+	for (const QString &k : oldKeys) {
+		names.insert(k);
+	}
+	for (const QString &k : newKeys) {
+		names.insert(k);
+	}
+
+	QStringList enabledChanged;
+	for (const QString &name : names) {
+		const bool before = isPluginEnabled(name);
+		// Temporarily consider next state's enabled flag
+		const QJsonObject obj = next.value(name).toObject();
+		const bool after = !obj.contains(QStringLiteral("enabled"))
+			? true
+			: obj.value(QStringLiteral("enabled")).toBool(true);
+		if (before != after) {
+			enabledChanged.append(name);
+		}
+	}
+
+	m_pluginUiState = next;
+	for (const QString &name : enabledChanged) {
+		Q_EMIT pluginEnabledChanged(name);
+	}
+	for (const QString &name : names) {
+		Q_EMIT pluginUiStateChanged(name);
+	}
 }
 
 QJsonObject GuiPluginLoader::pluginUiStateObject(const QString &name) const
@@ -1277,8 +1352,14 @@ GuiPluginIntegrationModel::GuiPluginIntegrationModel(QObject *parent)
 	GuiPluginLoader *singleton = GuiPluginLoader::create();
 	connect(singleton, &GuiPluginLoader::pluginsChanged,
 		this, &GuiPluginIntegrationModel::updateIntegrations);
+	// NavigationPage delegates stay alive across enable toggles; QML filters
+	// them from the swipe/nav list. Other chrome types still rebuild here.
 	connect(singleton, &GuiPluginLoader::pluginEnabledChanged,
-		this, &GuiPluginIntegrationModel::updateIntegrations);
+		this, [this](const QString &) {
+			if (m_type != GuiPluginLoader::NavigationPage) {
+				updateIntegrations();
+			}
+		});
 }
 
 int GuiPluginIntegrationModel::count() const
@@ -1366,9 +1447,12 @@ void GuiPluginIntegrationModel::updateIntegrations()
 	GuiPluginLoader *singleton = GuiPluginLoader::create();
 	const QVector<GuiPlugin> plugins = singleton->plugins();
 	for (const GuiPlugin &p : plugins) {
-		if (!singleton->isPluginEnabled(p.name())) {
-			// Still listed under Settings > Integrations > UI Plugins, but
-			// chrome integrations (types 2–5) stay hidden while disabled.
+		const bool enabled = singleton->isPluginEnabled(p.name());
+		if (!enabled && m_type != GuiPluginLoader::NavigationPage) {
+			// Hide type 2/4/5 chrome while disabled. NavigationPage stays in the
+			// model so SwipeView delegates are not destroyed/recreated (that
+			// desyncs NavBar vs SwipeView indices); QML filters them out of
+			// the active pages list instead.
 			continue;
 		}
 		const QVector<GuiPluginIntegration> integrations = p.integrations();

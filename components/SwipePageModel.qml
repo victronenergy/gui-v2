@@ -7,14 +7,25 @@ ObjectModel {
 	id: root
 
 	required property SwipeView view
+	// Bump when plugin enable flips so `pages` re-filters without destroying delegates.
+	property int pluginEnableRevision: 0
+
 	readonly property list<SwipeViewPage> pages: {
+		void pluginEnableRevision
 		var p = []
 		if (showBoatPage) p.push(boatPageLoader.item)
 		p.push(briefPage)
 		p.push(overviewPage)
 		for (var i = 0; i < pluginNavRepeater.count; i++) {
 			var loader = pluginNavRepeater.itemAt(i)
-			if (loader && loader.item) p.push(loader.item)
+			if (!loader || !loader.item) {
+				continue
+			}
+			// Disabled nav plugins stay loaded but drop out of the swipe/nav list.
+			if (!GuiPluginLoader.isPluginEnabled(loader.pluginName)) {
+				continue
+			}
+			p.push(loader.item)
 		}
 		if (showLevelsPage) p.push(levelsPageLoader.item)
 		p.push(notificationsPage)
@@ -80,6 +91,13 @@ ObjectModel {
 		type: GuiPluginLoader.NavigationPage
 	}
 
+	Connections {
+		target: GuiPluginLoader
+		function onPluginEnabledChanged(name) {
+			root.pluginEnableRevision++
+		}
+	}
+
 	Item {
 		id: pluginPagesContainer
 		visible: false
@@ -97,6 +115,7 @@ ObjectModel {
 				required property url icon
 				required property url url
 
+				// Keep delegates alive across enable toggles; `pages` filters by enabled.
 				active: true
 				sourceComponent: SwipeViewPage {
 					id: pluginSwipePage
