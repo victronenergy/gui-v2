@@ -60,8 +60,9 @@ product ID `0x106` (Skylla-i 24/100).
 ### NavigationExample (Type 3)
 
 Adds a new page to the main nav bar with a brick icon showing a
-2x2 tile grid (battery, solar, water, fake water pump toggle).
-Requires gui-v2 v1.3.11+.
+configurable tile grid (battery, solar, propane, water, pump, DC).
+Includes a settings page for enable/disable and 2×3 vs 3×2 layout.
+Requires gui-v2 with plugin UI lifecycle support.
 
 ### QuickAccessExample (Type 4)
 

@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Victron.VenusOS
 
-Page {
+FocusScope {
 	id: root
 
 	focus: true
@@ -35,11 +35,27 @@ Page {
 	readonly property color tileBorder: Theme.color_overviewPage_widget_border
 	readonly property real tileBorderWidth: Theme.geometry_overviewPage_widget_border_width || 2
 	readonly property real tileRadius: Theme.geometry_overviewPage_widget_radius || 8
+	readonly property string pluginName: "NavigationExample"
+	property int uiStateRevision: 0
+	readonly property int gridColumns: {
+		const _rev = uiStateRevision
+		const cols = Number(GuiPluginLoader.pluginSetting(pluginName, "gridColumns", 3))
+		return cols === 2 ? 2 : 3
+	}
+
+	Connections {
+		target: GuiPluginLoader
+		function onPluginUiStateChanged(name) {
+			if (name === root.pluginName) {
+				root.uiStateRevision++
+			}
+		}
+	}
 
 	GridLayout {
 		anchors.fill: parent
 		anchors.margins: 12
-		columns: 3
+		columns: root.gridColumns
 		columnSpacing: 8
 		rowSpacing: 8
 
