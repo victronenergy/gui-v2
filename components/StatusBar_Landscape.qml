@@ -184,9 +184,13 @@ FocusScope {
 				readonly property bool paneOpened: Global.mainView.cardsActive
 						&& Global.mainView.cardsLoader.sourceComponent === _paneComponent
 				readonly property bool shouldHide: (Global.mainView?.cardsActive ?? false) && !paneOpened
+				readonly property bool interactiveChrome:
+						Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 
 				activeFocusOnTab: true
-				opacity: shouldHide ? 0 : 1
+				// Include idle fade from StatusBarButton — a bare `shouldHide ? 0 : 1`
+				// overrode that and left the icon stuck visible in idle mode.
+				opacity: (shouldHide || !interactiveChrome) ? 0 : 1
 				bottomInset: Theme.geometry_statusBar_spacing
 				icon.cache: false
 				icon.source: (paneOpened && String(pluginIconActive).length > 0)
