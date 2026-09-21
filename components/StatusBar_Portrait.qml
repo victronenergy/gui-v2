@@ -165,8 +165,10 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 		Repeater {
 			id: pluginPaneButtons
 
-			readonly property bool hasPluginPanes: !root.pageStack.opened && pluginQuickAccessModelPortrait.count > 0
-			model: pluginQuickAccessModelPortrait
+			readonly property bool hasPluginPanes: Global.pluginChromeReady
+					&& !root.pageStack.opened
+					&& pluginQuickAccessModelPortrait.count > 0
+			model: Global.pluginChromeReady ? pluginQuickAccessModelPortrait : null
 
 			delegate: StatusBarButton {
 				id: pluginPaneButtonPortrait

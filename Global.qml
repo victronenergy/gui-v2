@@ -45,6 +45,10 @@ QtObject {
 	property var venusPlatform
 	property bool dataManagerLoaded
 	property bool allPagesLoaded
+	// Plugin status-bar / nav chrome: wait for boot, but fail-open so a stuck
+	// allPagesLoaded never hides plugin UI forever (e.g. after ~8s of data).
+	readonly property bool pluginChromeReady: allPagesLoaded || _pluginChromeFallback
+	property bool _pluginChromeFallback: false
 	property bool boatPageActive
 
 	property string firmwareInstalledBuild // don't clear this on UI reload.  it needs to survive reconnection.
@@ -94,8 +98,23 @@ QtObject {
 
 		// The last thing we do is set the splash screen visible.
 		allPagesLoaded = false
+		_pluginChromeFallback = false
 		UiConfig.splashScreenVisible = true
 	}
+
+	onAllPagesLoadedChanged: {
+		if (allPagesLoaded) {
+			_pluginChromeFallback = false
+		}
+	}
+
+	onDataManagerLoadedChanged: {
+		if (!dataManagerLoaded) {
+			_pluginChromeFallback = false
+		}
+	}
+
+	// Timer lives in MainView (QtObject cannot host Timer children).
 
 	readonly property FontLoader _defaultFontLoader: FontLoader {
 		source: Language.fontFileUrl

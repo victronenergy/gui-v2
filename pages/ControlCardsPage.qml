@@ -34,6 +34,8 @@ Page {
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
+		footerPositioning: ListView.InlineFooter
+		headerPositioning: ListView.InlineHeader
 
 		// When using key navigation to scroll through the control cards, use a velocity that
 		// roughly matches the velocity produced by AuxCardsPage scrollToControl() when it scrolls
@@ -120,6 +122,36 @@ Page {
 				wheel.accepted = true
 			}
 		}
+
+		// Plugin type-5 Controls cards — ListView footer so they scroll horizontally
+		// with built-in cards (a sibling Row below cardsView is off-screen in landscape).
+		footer: Item {
+			visible: pluginControlCards.count > 0
+			implicitWidth: pluginControlCardsRow.implicitWidth
+			width: implicitWidth
+			height: Theme.screenSize === Theme.Portrait
+				? pluginControlCardsRow.implicitHeight
+				: cardsView.height
+
+			Row {
+				id: pluginControlCardsRow
+				spacing: Theme.geometry_controlCardsPage_spacing
+
+				Repeater {
+					model: pluginControlCards
+
+					delegate: Loader {
+						required property int index
+						required property url url
+						required property string pluginName
+
+						width: root.cardWidth
+						height: Theme.screenSize === Theme.Portrait ? implicitHeight : cardsView.height
+						source: url
+					}
+				}
+			}
+		}
 	}
 
 	FilteredDeviceModel {
@@ -142,38 +174,10 @@ Page {
 		}
 	}
 
-	// Plugin QuickAccessPaneCard (type 5, cardType=ControlsCard) injected
-	// after built-in control cards.
 	GuiPluginIntegrationModel {
 		id: pluginControlCards
 		type: GuiPluginLoader.QuickAccessPaneCard
 		cardType: GuiPluginLoader.ControlsCard
-	}
-
-	Row {
-		id: pluginControlCardsRow
-
-		anchors {
-			left: cardsView.left
-			top: cardsView.bottom
-			topMargin: pluginControlCards.count > 0 ? Theme.geometry_controlCardsPage_spacing : 0
-		}
-		spacing: Theme.geometry_controlCardsPage_spacing
-		visible: pluginControlCards.count > 0
-
-		Repeater {
-			model: pluginControlCards
-
-			delegate: Loader {
-				required property int index
-				required property url url
-				required property string pluginName
-
-				width: root.cardWidth
-				height: Theme.screenSize === Theme.Portrait ? implicitHeight : cardsView.height
-				source: url
-			}
-		}
 	}
 
 	Loader {

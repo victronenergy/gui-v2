@@ -29,6 +29,13 @@ FocusScope {
 	property bool mainViewVisible: UiConfig.applicationVisible && !UiConfig.splashScreenVisible
 	onMainViewVisibleChanged: if (mainViewVisible) console.info("MainView: UI loaded and visible")
 
+	// Fail-open for plugin chrome if allPagesLoaded never arrives.
+	Timer {
+		interval: 8000
+		running: Global.dataManagerLoaded && !Global.allPagesLoaded
+		onTriggered: Global._pluginChromeFallback = true
+	}
+
 	// To reduce the animation load, disable page animations when the PageStack is transitioning
 	// between pages, or when flicking between the main pages. Note that animations are still
 	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
