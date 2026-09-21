@@ -163,7 +163,9 @@ FocusScope {
 		id: pluginPaneButtons
 
 		anchors.left: auxButton.right
-		visible: !root.pageStack.opened && pluginQuickAccessModel.count > 0
+		visible: Global.pluginChromeReady
+				&& !root.pageStack.opened
+				&& pluginQuickAccessModel.count > 0
 
 		Repeater {
 			id: pluginRepeater

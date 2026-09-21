@@ -87,7 +87,8 @@ ObjectModel {
 
 		Repeater {
 			id: pluginNavRepeater
-			model: pluginNavIntegrations
+			// Defer nav icons until boot chrome is ready (fail-open via Global.pluginChromeReady).
+			model: Global.pluginChromeReady ? pluginNavIntegrations : null
 
 			delegate: Loader {
 				id: pluginPageDelegate
@@ -97,7 +98,7 @@ ObjectModel {
 				required property url icon
 				required property url url
 
-				active: true
+				active: Global.pluginChromeReady
 				sourceComponent: SwipeViewPage {
 					id: pluginSwipePage
 					view: root.view

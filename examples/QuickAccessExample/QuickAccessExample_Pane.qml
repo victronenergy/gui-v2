@@ -2,10 +2,9 @@ import QtQuick
 import QtQuick.Layouts
 import Victron.VenusOS
 
-Page {
+FocusScope {
 	id: root
 
-	title: "Quick Access"
 	focus: true
 	focusPolicy: Qt.TabFocus
 	property bool fakePumpOn: false
