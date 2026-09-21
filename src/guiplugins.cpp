@@ -314,7 +314,10 @@ void GuiPluginLoader::setPluginEnabled(const QString &name, bool enabled)
 		return;
 	}
 	obj.insert(QStringLiteral("enabled"), enabled);
-	setPluginUiStateObject(name, obj);
+	m_pluginUiState.insert(name, obj);
+	savePluginUiState();
+	Q_EMIT pluginEnabledChanged(name);
+	Q_EMIT pluginUiStateChanged(name);
 }
 
 QVariant GuiPluginLoader::pluginSetting(const QString &name, const QString &key,
@@ -340,7 +343,11 @@ void GuiPluginLoader::setPluginSetting(const QString &name, const QString &key, 
 	}
 	settings.insert(key, next);
 	obj.insert(QStringLiteral("settings"), settings);
-	setPluginUiStateObject(name, obj);
+	// Settings-only: notify pages, but do not emit pluginEnabledChanged (would
+	// reset GuiPluginIntegrationModel and scramble nav indices).
+	m_pluginUiState.insert(name, obj);
+	savePluginUiState();
+	Q_EMIT pluginUiStateChanged(name);
 }
 
 QVariantMap GuiPluginLoader::pluginSettings(const QString &name) const
@@ -1270,7 +1277,7 @@ GuiPluginIntegrationModel::GuiPluginIntegrationModel(QObject *parent)
 	GuiPluginLoader *singleton = GuiPluginLoader::create();
 	connect(singleton, &GuiPluginLoader::pluginsChanged,
 		this, &GuiPluginIntegrationModel::updateIntegrations);
-	connect(singleton, &GuiPluginLoader::pluginUiStateChanged,
+	connect(singleton, &GuiPluginLoader::pluginEnabledChanged,
 		this, &GuiPluginIntegrationModel::updateIntegrations);
 }
 

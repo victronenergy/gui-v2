@@ -163,7 +163,7 @@ FocusScope {
 		id: pluginPaneButtons
 
 		anchors.left: auxButton.right
-		visible: Global.pluginChromeReady
+		visible: Global.allPagesLoaded
 				&& !root.pageStack.opened
 				&& pluginQuickAccessModel.count > 0
 

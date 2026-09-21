@@ -95,7 +95,11 @@ Q_SIGNALS:
 	void busyChanged();
 	void pluginsJsonChanged();
 	void pluginsChanged();
+	// Fired for enable and settings writes; QML pages may listen.
 	void pluginUiStateChanged(const QString &name);
+	// Fired only when enable flips — chrome models must not reset on settings writes
+	// (that reshuffles SwipeView/NavBar indices mid-session).
+	void pluginEnabledChanged(const QString &name);
 
 private:
 	void timeoutMqttPluginPaths();
