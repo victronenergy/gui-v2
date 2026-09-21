@@ -16,6 +16,7 @@
 #include <QVector>
 #include <QPointer>
 #include <QMap>
+#include <QSet>
 #include <QVariant>
 #include <QVariantMap>
 #include <QJsonObject>
@@ -116,6 +117,8 @@ private:
 	bool installPluginTranslatorForLanguage(const QString &pluginName, QLocale::Language language);
 	void loadPluginUiState();
 	void savePluginUiState() const;
+	void reloadPluginUiStateFromDisk();
+	void watchPluginUiStateFile();
 	QString pluginUiStatePath() const;
 	QJsonObject pluginUiStateObject(const QString &name) const;
 	void setPluginUiStateObject(const QString &name, const QJsonObject &obj);
@@ -123,6 +126,7 @@ private:
 	QString m_pluginsJson;
 	QVector<GuiPlugin> m_plugins;
 	QJsonObject m_pluginUiState;
+	QFileSystemWatcher *m_pluginUiStateWatcher = nullptr;
 	QHash<QString, QHash<QLocale::Language, QTranslator*> > m_pluginTranslators;
 	QHash<QString, QPointer<QTranslator> > m_currentTranslators;
 	QFileSystemWatcher *m_enabledAppsDirWatcher = nullptr;
