@@ -649,6 +649,42 @@ public:
 	};
 	Q_ENUM(Storage_MountState)
 
+	// com.victronenergy.storage /Volumes and /Allocations wire values.
+	enum Storage_VolumeLifecycle {
+		Storage_Lifecycle_Transient,
+		Storage_Lifecycle_System,
+		Storage_Lifecycle_AdoptedPersistent,
+		Storage_Lifecycle_ForeignManaged
+	};
+	Q_ENUM(Storage_VolumeLifecycle)
+
+	enum Storage_VolumeState {
+		Storage_VolumeState_Absent,
+		Storage_VolumeState_Available,
+		Storage_VolumeState_Active,
+		Storage_VolumeState_Quiescing,
+		Storage_VolumeState_Lost,
+		Storage_VolumeState_Error,
+		Storage_VolumeState_Recovering
+	};
+	Q_ENUM(Storage_VolumeState)
+
+	enum Storage_AllocationState {
+		Storage_Allocation_Unavailable,
+		Storage_Allocation_Ready,
+		Storage_Allocation_Quiescing,
+		Storage_Allocation_Lost,
+		Storage_Allocation_Error
+	};
+	Q_ENUM(Storage_AllocationState)
+
+	enum Storage_PressureState {
+		Storage_Pressure_Normal,
+		Storage_Pressure_Low,
+		Storage_Pressure_Critical
+	};
+	Q_ENUM(Storage_PressureState)
+
 	enum CanBusProfile_Type {
 		CanBusProfile_Disabled,
 		CanBusProfile_Vecan,
