@@ -46,6 +46,7 @@ QtObject {
 	property var venusPlatform
 	property bool dataManagerLoaded
 	property bool allPagesLoaded
+	property bool pagePreloadComplete
 	property bool boatPageActive
 
 	property string firmwareInstalledBuild // don't clear this on UI reload.  it needs to survive reconnection.
@@ -96,6 +97,7 @@ QtObject {
 
 		// The last thing we do is set the splash screen visible.
 		allPagesLoaded = false
+		pagePreloadComplete = false
 		UiConfig.splashScreenVisible = true
 	}
 

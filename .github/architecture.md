@@ -110,8 +110,9 @@ Global.venusPlatform     → VenusPlatform.qml
 
 // State
 Global.backendReady      → true when BackendConnection is Ready
-Global.dataManagerLoaded → true when all data sources initialized
-Global.allPagesLoaded    → true when swipe view pages are loaded
+Global.dataManagerLoaded  → true when all data sources initialized
+Global.allPagesLoaded     → true when swipe view pages are loaded
+Global.pagePreloadComplete → true when splash PagePreloader has compiled drill-down/overlay types
 ```
 
 ## Data manager
@@ -142,8 +143,14 @@ Main.qml (Window)
   ├─ Global.dataManagerLoaded = true
   ├─ ApplicationContent.qml loads
   │   └─ MainView.qml loads SwipeView pages
-  └─ Global.allPagesLoaded = true → Splash screen hidden, ApplicationContent displayed
+  ├─ Global.allPagesLoaded = true
+  ├─ PagePreloader compiles overview drill-down and overlay page types
+  └─ Global.pagePreloadComplete = true → Splash screen hidden (when the splash animation is shown)
 ```
+
+`PagePreloader` compiles (does not instantiate) the Overview widget drill-down pages and the Brief side panel / Control / Switch overlay pages while the splash GIF is playing. First open of those pages then skips QML compilation. It runs only while the splash animation is visible, and UI tests skip it so that `benchmark/pages` still measures cold compile. Wasm and `--skip-splash` hide the splash without waiting.
+
+On GX hardware, Brief and Overview animations consume the frame budget and starve Qt's asynchronous incubator. `MainView.allowPageAnimations` is therefore false while a PageStack page is being built, while `CardViewLoader` is incubating, or while the Brief side panel Loader is incubating. The animations resume when the tree is ready and the slide starts.
 
 ### UI navigation structure
 
