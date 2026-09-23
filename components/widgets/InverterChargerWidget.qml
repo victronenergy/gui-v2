@@ -90,6 +90,7 @@ OverviewWidget {
 				phaseModel: Global.system.load.ac.phases
 				maximumValue: Global.system.load.maximumAcCurrent
 				animationEnabled: root.animationEnabled
+						&& !Global.isGxDevice // reduce Overview animations on GX
 				inOverviewWidget: true
 			}
 		}
