@@ -6,21 +6,23 @@
 import QtQuick
 import QtQuick.Templates as T
 import Victron.VenusOS
-import QtQuick.Effects as Effects
 
+/*
+	A slider control with an optional handle.
+
+	Note: only horizontal sliders are supported at present.
+*/
 T.Slider {
 	id: root
 
 	property color grooveColor: enabled ? Theme.color_darkOk : Theme.color_background_disabled
 	property color highlightColor: enabled ? Theme.color_ok : Theme.color_switch_groove_disabled
 	property bool showHandle: true
-	property bool animationEnabled: Global.animationEnabled
-	property Item maskSource: sourceItem
 
 	implicitWidth: Math.max(implicitBackgroundWidth, implicitHandleWidth) + leftInset + rightInset
 	implicitHeight: Math.max(implicitBackgroundHeight, implicitHandleHeight) + topInset + bottomInset
 
-	background: Rectangle {
+	background: BarGauge {
 		x: root.leftPadding
 		y: root.topPadding + (root.availableHeight / 2) - (height / 2)
 		implicitWidth: Theme.geometry_slider_groove_width
@@ -28,64 +30,11 @@ T.Slider {
 		width: root.availableWidth
 		height: implicitHeight
 		radius: Theme.geometry_slider_groove_radius
-		color: root.grooveColor
-
-		Rectangle {
-			id: maskRect
-			layer.enabled: true
-			visible: false
-			width: parent.width
-			height: parent.height
-			radius: parent.radius
-			color: "black" // opacity mask, not visible.
-		}
-
-		Item {
-			id: sourceItem
-			visible: false
-			width: parent.width
-			height: parent.height
-
-			Rectangle {
-				id: highlightRect
-
-				width: parent.width
-				height: parent.height
-				color: root.highlightColor
-				x: nextX
-
-				// don't use a behavior on x
-				// otherwise there can be a "jump" we receive receive two value updates in close succession.
-				readonly property real nextX: root.mirrored ? (sourceItem.parent.width - width*root.visualPosition)
-					: (-sourceItem.parent.width + width*root.visualPosition)
-
-				onNextXChanged: {
-					if (!anim.running && root.animationEnabled) {
-						anim.from = highlightRect.x
-						// do a little dance to break any x binding...
-						highlightRect.x = 0
-						highlightRect.x = anim.from
-						anim.to = highlightRect.nextX
-						anim.start()
-					}
-				}
-
-				XAnimator {
-					id: anim
-					target: highlightRect
-					easing.type: Easing.InOutQuad
-					duration: Theme.animation_briefPage_sidePanel_sliderValueChange_duration
-				}
-			}
-		}
-
-		Effects.MultiEffect {
-			visible: true
-			anchors.fill: parent
-			maskEnabled: true
-			maskSource: maskRect
-			source: sourceItem
-		}
+		foregroundColor: root.highlightColor
+		backgroundColor: root.grooveColor
+		orientation: Qt.Horizontal // we have no vertical sliders at present
+		animationEnabled: false // jump immediately to selected value
+		value: root.visualPosition
 	}
 
 	handle: Image {
