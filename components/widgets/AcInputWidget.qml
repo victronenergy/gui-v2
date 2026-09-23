@@ -55,6 +55,7 @@ AcWidget {
 				maximumValue: root.inputInfo?.maximumCurrent ?? NaN
 				inputMode: true
 				animationEnabled: root.animationEnabled
+						&& !Global.isGxDevice // reduce Overview animations on GX
 				inOverviewWidget: true
 			}
 		}

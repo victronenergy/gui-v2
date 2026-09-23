@@ -220,7 +220,11 @@ exported power v  0.4 |   /
 			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
 			onNextValueRequested: addValue(dcInputRange.valueAsRatio)
 		}
-		footer: Global.isGxDevice ? cheapGaugeDcInput : prettyGaugeDcInput
+		footer: CheapBarGauge {
+			orientation: Qt.Horizontal
+			value: dcInputRange.valueAsRatio
+			animationEnabled: root.animationEnabled
+		}
 
 		Layout.fillWidth: true
 
@@ -228,24 +232,6 @@ exported power v  0.4 |   /
 			id: dcInputRange
 			value: root.visible ? Global.dcInputs.power : NaN
 			maximumValue: Global.dcInputs.maximumPower
-		}
-
-		Component {
-			id: cheapGaugeDcInput
-			CheapBarGauge {
-				orientation: Qt.Horizontal
-				value: dcInputRange.valueAsRatio
-				animationEnabled: root.animationEnabled
-			}
-		}
-
-		Component {
-			id : prettyGaugeDcInput
-			BarGauge {
-				orientation: Qt.Horizontal
-				value: dcInputRange.valueAsRatio
-				animationEnabled: root.animationEnabled
-			}
 		}
 	}
 
@@ -292,7 +278,12 @@ exported power v  0.4 |   /
 			animationEnabled: root.animationEnabled
 			onNextValueRequested: addValue(dcLoadRange.valueAsRatio)
 		}
-		footer: Global.isGxDevice ? cheapGaugeDcLoad : prettyGaugeDcLoad
+		footer: CheapBarGauge {
+			orientation: Qt.Horizontal
+			valueType: VenusOS.Gauges_ValueType_RisingPercentage
+			value: dcLoadRange.valueAsRatio
+			animationEnabled: root.animationEnabled
+		}
 
 		Layout.fillWidth: true
 
@@ -300,26 +291,6 @@ exported power v  0.4 |   /
 			id: dcLoadRange
 			value: root.visible ? Global.system.dc.power : NaN
 			maximumValue: Global.system.dc.maximumPower
-		}
-
-		Component {
-			id: cheapGaugeDcLoad
-			CheapBarGauge {
-				orientation: Qt.Horizontal
-				valueType: VenusOS.Gauges_ValueType_RisingPercentage
-				value: dcLoadRange.valueAsRatio
-				animationEnabled: root.animationEnabled
-			}
-		}
-
-		Component {
-			id : prettyGaugeDcLoad
-			BarGauge {
-				orientation: Qt.Horizontal
-				valueType: VenusOS.Gauges_ValueType_RisingPercentage
-				value: dcLoadRange.valueAsRatio
-				animationEnabled: root.animationEnabled
-			}
 		}
 	}
 }
