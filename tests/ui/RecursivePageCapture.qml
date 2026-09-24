@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.UiTest
 
 /*
 	Recursively steps through a list of items and runs a capture+compare on each resulting screen.
@@ -41,12 +42,24 @@ QtObject {
 	*/
 	function start(doneCallback) {
 		if (root._busy) {
-			console.assert(false, "Cannot start while another recursive capture is in progress!")
+			// Stale _busy (failed WaitUntil). Fail this step, then continue.
+			testCase.addStep(UiTestStep.Abort, {
+				passed: false,
+				message: "Cannot start while another recursive capture is in progress",
+			})
+			testCase.runSteps()
 			return
 		}
 		root._busy = true
 		root.doneCallback = doneCallback
 		_captureNext([])
+	}
+
+	// Failed WaitUntil leaves _busy set; later start() would hang without this.
+	function reset() {
+		root._busy = false
+		lastClickedViewItems = ({})
+		pageCaptureCounts = ({})
 	}
 
 	/*
@@ -90,9 +103,7 @@ QtObject {
 				message: "Click menu: %1".arg(subMenuText),
 			})
 			const fromPage = Global.mainView.currentPage
-			// pushPage is async: animating covers compile/incubate as well as the
-			// slide. currentPage stays on fromPage until the stack is fully opened
-			// (pageStack.currentPage is null until then). Do not use listView.parent.
+			// Wait for compile/incubate/slide. currentPage is unchanged until opened.
 			testCase.addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating && !!Global.mainView.currentPage && Global.mainView.currentPage !== fromPage } })
 			testCase.runSteps(_captureNext, [imageNameSequence, subMenuText])
 		} else {

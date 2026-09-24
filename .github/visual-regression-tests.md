@@ -103,7 +103,7 @@ Key configuration fields:
 | `Tests` | List of QML test case files to execute in order |
 | `Mock.Configuration` | JSON file defining mock device/service data |
 | `Mock.TimersActive` | Whether mock timers animate values (false for stable captures) |
-| `Mock.UIAnimations` | UI animation duration override (0 disables animations for deterministic captures) |
+| `Mock.UIAnimations` | UI animation duration override. Default/omit `0` for deterministic captures. Set `1` for animation benchmarks and the pagestack contract suite (slide vs discard). |
 | `Steps.CaptureAndCompare.ImageDir` | Output directory for captured images |
 | `Steps.CaptureAndCompare.StabilizationInterval` | Milliseconds between capture attempts while waiting for page stabilization |
 | `Steps.CaptureAndCompare.MaximumStabilizationCaptures` | Max retries waiting for a stable frame |
@@ -232,6 +232,7 @@ tests/ui/
 - **Mock timers must be off** (`TimersActive: false`) to prevent animated data values from changing between captures
 - **Stabilization**: pages with asynchronous content (Repeaters, Loaders) may take multiple frames to stabilize. The system retries captures until the image is stable (consecutive captures are identical)
 - **RecursivePageCapture limitations**: it does not click buttons or radio buttons (only `ListNavigation` items), because buttons may have write side-effects that alter the UI state
+- **Stale `_busy`**: if `start()` is called while a previous walk left `_busy` set, it records a failing `Abort` step and `runSteps()`. A failed step ends that group (remaining queued steps are discarded) and then calls `goToNextTestFunction()`, so later `test_*` functions still run. This is not in the middle of `_captureNext` — that walk already stopped without `doneCallback`. Silently advancing would skip the capture while the suite still reported success.
 - **Async page pushes**: after each `ListNavigation` click, RecursivePageCapture waits until `!Global.mainView.animating` and `currentPage` is no longer the page that was clicked from. `animating` includes PageStack compilation/incubation, not only the slide. During the build, `pageStack.currentPage` is null until the stack is fully opened, so `MainView.currentPage` stays on the origin. Do not use `listView.parent` as the page (`ListView.parent` is the content item).
 - **Debug logging**: set `"Logging": "debug"` in the test JSON to see detailed output when `findItem()` calls fail
 

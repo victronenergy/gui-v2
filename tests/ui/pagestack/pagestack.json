@@ -6,6 +6,6 @@
     "Mock": {
         "Configuration": ":/data/mock/conf/maximal.json",
         "TimersActive": false,
-        "UIAnimations": 0
+        "UIAnimations": 1
     }
 }

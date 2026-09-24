@@ -13,19 +13,13 @@ StackView {
 	readonly property bool opened: _fullyOpened
 	readonly property Page currentPage: opened ? currentItem : null
 
-	// Do not use MainView.allowPageAnimations: that is false while this stack is
-	// animating, which would zero the slide as soon as the transition starts.
+	// Not MainView.allowPageAnimations: that is false during this slide.
 	readonly property int animationDuration: Global.animationEnabled ? Theme.animation_page_slide_duration : 0
-	// True while navigation is in flight and the stack has not settled: a page is
-	// transitioning, or the page that was asked for is still being built. Anything
-	// waiting for a navigation to complete must wait for this, not just for the
-	// transitions, otherwise it acts on the page it was already on. Abandoned
-	// incubators are not included: they must not block the user's next push.
+	// True while a transition is running or the requested page is still building.
+	// Abandoned incubators are omitted so they do not block the next push.
 	readonly property bool animating: transitioning || !!_pendingBuild
 
-	// True only while a transition is running. Going back is allowed while a page is
-	// being built - that is how the user cancels it - so the back path tests this
-	// rather than 'animating'.
+	// True only while a transition is running. Back uses this, not animating.
 	readonly property bool transitioning: busy || fakePushTransition.running || fakePopTransition.running
 
 	// The file url of the top page on the stack. Undefined if depth=0 or not opened, or an empty
@@ -34,20 +28,14 @@ StackView {
 
 	property var _pageUrls: []
 
-	// The incubator of the page currently being built, if any, and the page that was
-	// being shown when it was asked for. Cleared when the page is no longer wanted,
-	// which is how a build that has been superseded is discarded.
+	// Incubator (or compiling Component) of the page being built, plus origin.
 	property var _pendingBuild
 	property Page _pendingOrigin
-	// Incubators that were abandoned but cannot be aborted. finish() removes them when
-	// they complete; teardown force-completes any that are still running.
+	// Abandoned incubators that cannot be aborted. finish() or teardown clears them.
 	property var _abandonedIncubators: []
-	// True while any page incubator is still running, including ones that were
-	// abandoned. Content animations pause on this so they do not starve leftover
-	// incubation on GX. Does not block pushPage(); that uses animating.
+	// Includes abandoned incubators so content animations do not starve them on GX.
 	readonly property bool incubating: !!_pendingBuild || _abandonedIncubators.length > 0
-	// Component created by Qt.createComponent() while that URL is still compiling.
-	// Destroyed if the compile is abandoned, so the load is cancelled.
+	// Owned compiling Component; destroyed if the compile is abandoned.
 	property var _pendingOwnedComponent
 	property var _pendingCompileHandler
 	property Page _poppedPage
@@ -90,13 +78,7 @@ StackView {
 				easing.type: Easing.InOutQuad
 			}
 			ScriptAction {
-				script: {
-					// Clean up the page object that was created on push.
-					if (root._poppedPage && !Theme.objectHasQObjectParent(root._poppedPage)) {
-						root._poppedPage.destroy()
-					}
-					root._poppedPage = null
-				}
+				script: root._finishPoppedPage()
 			}
 		}
 	}
@@ -106,29 +88,14 @@ StackView {
 
 		'obj' is a page url, a Component, or an already-constructed page object.
 
-		A page pushed by url is built asynchronously. Building one is slow, and we
-		don't want to block the UI thread for that long. Building
-		it a piece at a time between frames instead leaves the application running
-		while the user waits, and the page is pushed once it is complete.
+		URL and Component pages are built asynchronously so construction does
+		not block the UI. Already-constructed Page objects are pushed immediately.
 
-		Qt.createComponent() is asynchronous, so the first open of a page no longer
-		blocks the UI while the file is loaded and compiled. Cached components may
-		become ready immediately; only then is incubation started. Component-valued
-		pages (option lists, device pages) are incubated the same way. Already-
-		constructed Page objects are still pushed immediately.
+		Leaving before the page is ready discards it. A push while another is
+		being built is ignored. Incubators cannot be aborted.
 
-		If the user leaves before the page is ready, the page is discarded rather than
-		appearing on top of wherever they went instead. Only one page is being waited
-		for at a time; a push made while another page is being built is ignored, as it
-		was previously ignored because the UI was blocked. An owned Component that is
-		still compiling is destroyed, which cancels the load. An incubator cannot be
-		aborted, so more than one page can still be under construction if the user
-		repeatedly starts and abandons opening pages after compilation has finished.
-
-		Because the page does not exist yet when this returns, a page object is
-		returned only when one was pushed synchronously, i.e. when 'obj' is already a
-		page object. Pass 'readyCallback' to be given the page once it is on the
-		stack; it is not called if the page was discarded or could not be built.
+		Returns the page only for a synchronous push. Pass 'readyCallback' to
+		receive it once it is on the stack (not called if discarded or failed).
 	*/
 	function pushPage(obj, properties, operation, readyCallback) {
 		if (root.animating) {
@@ -238,10 +205,7 @@ StackView {
 		root._pendingOwnedComponent = null
 		root._pendingCompileHandler = null
 
-		// Going back is not the only way to leave: while the stack is closed the user can
-		// also swipe to another main page, which does not touch the stack at all. So
-		// remember the page this was asked from; leaving it abandons the build, see
-		// the _shownPage handler below.
+		// Remember the origin page; leaving it abandons the build.
 		const origin = root._pendingOrigin
 		let finished = false
 
@@ -263,29 +227,22 @@ StackView {
 				_releaseOwnedComponent(component, owned)
 				return
 			}
-			// The origin is checked again here as a backstop, in case the page being
-			// shown changed without MainView::currentPage ever reporting it.
+			// Origin may have changed without MainView.currentPage reporting it.
 			if (!stillPending || (Global.mainView && Global.mainView.currentPage !== origin)) {
-				// The user left while this page was being built, so it is no longer wanted.
-				// Do not destroy a page that StackView already parented (finish ran twice).
-				if (incubator.object && !Theme.objectHasQObjectParent(incubator.object)) {
-					incubator.object.destroy()
-				}
+				// No longer wanted. Do not destroy a page StackView already parented.
+				_discardIncubatedPage(incubator.object)
 				_releaseOwnedComponent(component, owned)
 				return
 			}
 			const page = _pushItem(incubator.object, properties, operation)
 			if (!page) {
-				if (incubator.object && !Theme.objectHasQObjectParent(incubator.object)) {
-					incubator.object.destroy()
-				}
+				_discardIncubatedPage(incubator.object)
 				console.warn("Aborted attempt to push page because StackView rejected the page object: " + pageUrl)
 				_releaseOwnedComponent(component, owned)
 				return
 			}
 			root._pageUrls.push(pageUrl)
 			root._topPageUrl = pageUrl
-			// The page no longer depends on the Component after _pushItem.
 			// Release before readyCallback so a throw cannot leak it.
 			_releaseOwnedComponent(component, owned)
 			if (readyCallback) {
@@ -300,7 +257,7 @@ StackView {
 				}
 			}
 		} else {
-			// A page small enough to be built within the first slice is already done.
+			// A page built in the first slice is already done.
 			finish()
 		}
 	}
@@ -340,16 +297,21 @@ StackView {
 		}
 	}
 
-	// Abandons the page currently being built, if any, so that it is discarded instead
-	// of being pushed when it is ready.
-	//
-	// An owned Component that is still compiling is destroyed, which cancels the load.
-	// An incubator cannot be aborted: the work continues in the background and its
-	// result is destroyed on completion, so a user who repeatedly starts and abandons
-	// opening pages after compilation has finished can have more than one incubation
-	// running at once. Those incubators are tracked until finish() or until the stack
-	// is destroyed, so teardown can force-complete them instead of leaving a closure
-	// that dereferences a dead root.
+	// Call only when Ready. aboutToBeDiscarded must not run while nested
+	// AsynchronousIfNested delegates are still Loading.
+	function _discardIncubatedPage(page) {
+		if (!page || Theme.objectHasQObjectParent(page)) {
+			return
+		}
+		if (page.aboutToBeDiscarded) {
+			page.aboutToBeDiscarded()
+		}
+		page.destroy()
+	}
+
+	// Discard the in-flight page instead of pushing it. Destroying a compiling
+	// Component cancels the load; incubators cannot be aborted, so they are
+	// tracked until finish() or teardown force-completes them.
 	function _abandonPendingBuild() {
 		const pending = root._pendingBuild
 		const owned = root._pendingOwnedComponent
@@ -366,22 +328,9 @@ StackView {
 		}
 	}
 
-	// A build in flight holds a closure that dereferences root unconditionally. The
-	// stack can be destroyed before that closure runs: Main.qml's rebuildUi() drops
-	// guiLoader on a backend connection loss, a demo-mode change or a plugin reload,
-	// and popAllPages() cannot be relied on to have abandoned the build first because
-	// _canPopTo() lets the current page veto the pop.
-	//
-	// Clear _pendingBuild and take the abandoned list before forcing completion, so
-	// finish() takes its "no longer wanted" branch and destroys the built page instead
-	// of pushing it onto a stack that is going away. Abandoned incubators are included:
-	// they are no longer in _pendingBuild, but their finish closures still dereference
-	// root. Forcing completion blocks, but this only happens while the UI is being torn
-	// down, where a hitch does not matter.
-	//
-	// A Component that is still compiling has no forceCompletion(). Disconnect its
-	// statusChanged handler and destroy it if we created it, so the handler cannot
-	// run after this object is gone.
+	// finish() closures dereference root. Clear pending/abandoned first so
+	// forceCompletion() destroys the page instead of pushing it. Compiling
+	// Components have no forceCompletion(); disconnect and destroy those.
 	Component.onDestruction: {
 		const pending = root._pendingBuild
 		const owned = root._pendingOwnedComponent
@@ -401,19 +350,54 @@ StackView {
 		}
 	}
 
-	// Abandon the page being built as soon as the user leaves the page they asked for
-	// it from, rather than only noticing once it is ready. Otherwise the stack counts
-	// as busy for the rest of the build and silently drops whatever the user asks for
-	// on the page they moved to, and a user who left and came back would be given the
-	// page they had already abandoned.
-	//
-	// This arrives at the end of the turn in which the user left rather than during
-	// it, because MainView::currentPage is itself a binding.
+	// Abandon as soon as the user leaves the origin. currentPage updates
+	// at end of turn because it is a binding.
 	readonly property Page _shownPage: Global.mainView ? Global.mainView.currentPage : null
 	on_ShownPageChanged: {
 		if (root._pendingBuild && root._shownPage !== root._pendingOrigin) {
 			root._abandonPendingBuild()
 		}
+	}
+
+	function _discardPagesUntil(toPage, skipPage) {
+		for (let i = root.depth - 1; i >= 0; --i) {
+			const item = root.get(i, StackView.DontLoad)
+			if (item === toPage) {
+				break
+			}
+			if (item && item !== skipPage && item.aboutToBeDiscarded) {
+				item.aboutToBeDiscarded()
+			}
+		}
+	}
+
+	// Emit aboutToBeDiscarded once, after the slide, so the page stays
+	// visible during the transition and destroy does not emit twice.
+	function _finishPoppedPage() {
+		const page = root._poppedPage
+		if (!page) {
+			return
+		}
+		root._poppedPage = null
+		if (page.aboutToBeDiscarded) {
+			page.aboutToBeDiscarded()
+		}
+		if (!Theme.objectHasQObjectParent(page)) {
+			page.destroy()
+		}
+	}
+
+	// UI teardown. popAllPages() can be vetoed, and a hidden stack never
+	// runs the close transition. Stops in-flight slides; ignores tryPop.
+	function destroyAllPages() {
+		if (fakePushSequence.running) {
+			fakePushSequence.stop()
+		}
+		if (fakePopSequence.running) {
+			fakePopSequence.stop()
+		}
+		_popAndDestroyAllPages(StackView.Immediate)
+		root._fullyOpened = false
 	}
 
 	function popAllPages(operation) {
@@ -435,17 +419,28 @@ StackView {
 			return
 		}
 		_abandonPendingBuild()
+		// No-target pop is one page. _discardPagesUntil(undefined) would
+		// notify pages that stay on the stack.
+		const discardToPage = toPage === undefined && root.depth > 1
+			? root.get(root.depth - 2, StackView.DontLoad)
+			: toPage
 		root._pageUrls.pop()
 		root._topPageUrl = root._pageUrls[root._pageUrls.length-1]
 
 		if (root.depth === 1) {
 			// When the last page is removed from the stack, move the stack out of view.
+			// Keep contents through the close slide; notify after it.
 			fakePopAnimation.duration = _animationDuration(operation)
 			root.state = "closed"
 		} else {
-			// Pop and delay destruction of the popped page until the animation completes,
-			// otherwise the page disappears immediately.
-			_poppedPage = root.pop(toPage, _adjustedStackOperation(operation))
+			// Off-screen pages may be destroyed by pop(); notify those now.
+			// The visible page is notified in popExit (or immediately).
+			_discardPagesUntil(discardToPage, root.currentItem)
+			const adjusted = _adjustedStackOperation(operation)
+			_poppedPage = root.pop(toPage, adjusted)
+			if (adjusted === StackView.Immediate) {
+				_finishPoppedPage()
+			}
 		}
 	}
 
@@ -470,6 +465,8 @@ StackView {
 
 	function _popAndDestroyAllPages(operation) {
 		_abandonPendingBuild()
+		_finishPoppedPage()
+		_discardPagesUntil(null)
 		root._pageUrls = []
 		root._topPageUrl = undefined
 
@@ -529,6 +526,8 @@ StackView {
 			to: "opened"
 
 			SequentialAnimation {
+				id: fakePushSequence
+
 				NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
 					id: fakePushAnimation
 
@@ -546,6 +545,8 @@ StackView {
 			from: "opened"
 
 			SequentialAnimation {
+				id: fakePopSequence
+
 				ScriptAction {
 					script: root._fullyOpened = false
 				}

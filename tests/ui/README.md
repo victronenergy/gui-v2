@@ -76,9 +76,10 @@ Tests are configured with a JSON file; see `smoke/mock-maximal` for an example. 
   * `Configuration` — mock JSON to load
   * `TimersActive` — whether mock data timers run
   * `UIAnimations` — optional. UI tests force `/Settings/Gui2/UIAnimations` to 0
-    unless this is set (use `1` for animation performance tests). Visual
-    captures should omit it or set `0`. `--animationEnabled` does not override
-    the backend setting.
+    unless this is set. Use `1` for animation performance tests and the
+    pagestack navigation-contract suite (those tests assert slide vs discard
+    ordering). Visual captures should omit it or set `0`. `--animationEnabled`
+    does not override the backend setting.
 * Steps - contains configurations for UI test steps
   * For example, for the "CaptureAndCompare" step, if you set "ComparisonThreshold" to 0.1, then it will compare captured images with an error threshold of 0.1%.
 
@@ -149,6 +150,10 @@ UiTestCase {
     }
 }
 ```
+
+If `start()` is called while `_busy` is still set (a previous walk never
+reached `doneCallback`), it records a failing `Abort` step and continues
+to the next test function. That does not stop the whole suite.
 
 ## Test infrastructure API
 

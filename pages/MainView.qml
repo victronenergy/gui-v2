@@ -27,11 +27,8 @@ FocusScope {
 	property bool mainViewVisible: UiConfig.applicationVisible && !UiConfig.splashScreenVisible
 	onMainViewVisibleChanged: if (mainViewVisible) console.info("MainView: UI loaded and visible")
 
-	// Pause gauges/electrons while the stack is sliding or incubating a page
-	// (including abandoned incubators), and while flicking between main pages.
-	// Qt incubates only in leftover frame time; those animations can fill the
-	// gui thread budget so the new page never appears. Press feedback does not
-	// use this flag. Keep animations on during a slow drag.
+	// Pause gauges/electrons during stack slide/incubation and flicking so
+	// they do not starve incubation on GX. Not used for press feedback.
 	readonly property bool allowPageAnimations: Global.animationEnabled
 			&& mainViewVisible
 			&& !pageStack.animating && !pageStack.incubating
@@ -72,8 +69,30 @@ FocusScope {
 	}
 
 	function clearUi() {
+		// Snapshot NavBar.pages; Repeater.setModel during teardown asserts.
+		if (navBar.pages && navBar.pages.length) {
+			const snapshot = []
+			for (let i = 0; i < navBar.pages.length; ++i) {
+				snapshot.push(navBar.pages[i])
+			}
+			navBar.pages = snapshot
+		}
+		// Pages first. Abandon PageStack work so drain cannot complete a push.
+		pageStack._abandonPendingBuild()
+		const view = swipeView
+		if (view) {
+			for (let i = 0; i < view.count; ++i) {
+				const page = view.itemAt(i)
+				if (page && page.aboutToBeDiscarded) {
+					page.aboutToBeDiscarded()
+				}
+			}
+		}
+		// Forced teardown: popAllPages() can be vetoed or skip a hidden stack.
+		pageStack.destroyAllPages()
+		// Remaining non-page views (NavBar Instantiators, cards, …).
+		Global.detachDelegateModels(root)
 		swipeViewLoader.active = false
-		pageStack.popAllPages(StackView.Immediate)
 		_loadedPages = 0
 	}
 

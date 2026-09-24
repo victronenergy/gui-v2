@@ -18,22 +18,23 @@ import Victron.UiTest
 	and incubated asynchronously instead of freezing the UI. Doing that without
 	cancelling a push that has been superseded makes a page appear on top of
 	wherever the user navigated to instead, some time after they left.
+
+	pagestack.json sets UIAnimations to 1. Close/pop tests assert that
+	aboutToBeDiscarded does not run during the slide; with animations off
+	those checks never see an in-progress transition.
 */
 UiTestCase {
 	id: root
 
-	// A page that is slow to build, so that a push of it is unlikely to complete
-	// within a single event loop iteration. Avoid PageBatterySettings: destroying it
-	// hits QTBUG-123496 (ObjectModelMonitor/QQmlDelegateModel objectRef underflow).
-	readonly property string slowPageUrl: "/pages/settings/devicelist/DeviceListPage.qml"
+	// Slow to build, so a push is unlikely to finish in one event-loop turn.
+	readonly property string slowPageUrl: "/pages/settings/devicelist/battery/PageBatterySettings.qml"
 	readonly property string otherPageUrl: "/pages/settings/PageSettingsDisplayAndAppearance.qml"
 
 	window: Global.main
 
-	// Event-loop turns while a page is still being built. Do not use
-	// pageStack.animating: that is also true during the slide, so a
-	// synchronous push would still score ticks after construction.
+	// Turns with a page still building. Not pageStack.animating (also true during the slide).
 	property int _ticks
+	property int _discardCount
 	property var _rebuildPageComponent
 
 	property Timer ticker: Timer {
@@ -93,10 +94,7 @@ UiTestCase {
 					console.warn("Page component was not Ready; incubation would not be guaranteed")
 					return false
 				}
-				// Keep the Component alive until rebuildUi() has destroyed the
-				// old PageStack. pushPage() does not take ownership of a
-				// caller-supplied Component, and rebuildUi() unloads the UI
-				// only after this Invoke returns.
+				// Keep the Component alive across rebuildUi(); pushPage() does not own it.
 				root._rebuildPageComponent = component
 				Global.pageManager.pushPage(component)
 				Global.pageManager.popPage(null, PageStack.Immediate)
@@ -182,6 +180,171 @@ UiTestCase {
 	}
 
 	/*
+		Rebuilding immediately after an async page opens must not assert.
+
+		The page incubator being Ready does not mean nested AsynchronousIfNested
+		Repeaters are. rebuildUi() used to detach ListView/Instantiator models
+		before those nested incubators were drained, which is
+		QQmlDelegateModelItem::releaseObject() objectRef > 0.
+	*/
+	function test_rebuildImmediatelyAfterPageOpensDoesNotAssert() {
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				Global.pageManager.pushPage(root.slowPageUrl)
+				return true
+			},
+			message: "Open %1".arg(root.slowPageUrl),
+		})
+		addStep(UiTestStep.WaitUntil, {
+			callable: ()=> {
+				return !Global.pageManager.pageStack._pendingBuild
+						&& Global.pageManager.pageStack.topPageUrl === root.slowPageUrl
+			},
+			message: "Wait until the page incubator is Ready",
+		})
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				Global.main.rebuildUi()
+				return true
+			},
+			message: "Rebuild the UI before nested Repeaters may have finished",
+		})
+		addStep(UiTestStep.WaitUntil, {
+			timeout: 20000,
+			callable: ()=> {
+				if (UiConfig.splashScreenVisible) {
+					Global.main.skipSplashScreen()
+				}
+				return !!Global.mainView
+						&& Global.allPagesLoaded
+						&& !Global.mainView.animating
+						&& !!findItem(Global.mainView, { text: "Settings" })
+			},
+			message: "Wait for the UI to come back after rebuildUi()",
+		})
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { return _stackIsClosed() },
+			message: "The rebuilt page stack is closed",
+		})
+		runSteps()
+	}
+
+	/*
+		Rebuilding must tear down stack pages even when tryPop vetoes
+		popAllPages(). Otherwise aboutToBeDiscarded is skipped and
+		clearUi() detaches models before nested incubators are drained.
+	*/
+	function test_rebuildDestroysStackPagesEvenWhenTryPopVetoes() {
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.pageManager.pushPage(root.slowPageUrl); return true },
+			message: "Open %1".arg(root.slowPageUrl),
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.animating && Global.pageManager.pageStack.topPageUrl === root.slowPageUrl
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				const page = Global.pageManager.pageStack.currentPage
+				if (!page) {
+					console.warn("No current page to veto popAllPages()")
+					return false
+				}
+				page.tryPop = function() { return false }
+				root._discardCount = 0
+				page.aboutToBeDiscarded.connect(function() { root._discardCount++ })
+				Global.pageManager.pageStack.popAllPages(PageStack.Immediate)
+				if (Global.pageManager.pageStack.depth !== 1) {
+					console.warn("tryPop did not keep the page on the stack; depth="
+							+ Global.pageManager.pageStack.depth)
+					return false
+				}
+				Global.main.rebuildUi()
+				return root._discardCount === 1
+			},
+			message: "tryPop vetoes popAllPages(); rebuild still discards the page once",
+		})
+		addStep(UiTestStep.WaitUntil, {
+			timeout: 20000,
+			callable: ()=> {
+				if (UiConfig.splashScreenVisible) {
+					Global.main.skipSplashScreen()
+				}
+				return !!Global.mainView
+						&& Global.allPagesLoaded
+						&& !Global.mainView.animating
+						&& !!findItem(Global.mainView, { text: "Settings" })
+			},
+			message: "Wait for the UI to come back after rebuildUi()",
+		})
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { return _stackIsClosed() },
+			message: "The rebuilt page stack is closed",
+		})
+		runSteps()
+	}
+
+	/*
+		Rebuilding must tear down a hidden stack. hide() does not pop, and
+		popAllPages() only closes via the from:"opened" transition, which
+		does not run from the hidden state.
+	*/
+	function test_rebuildDestroysHiddenStackPages() {
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.pageManager.pushPage(root.slowPageUrl); return true },
+			message: "Open %1".arg(root.slowPageUrl),
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.animating && Global.pageManager.pageStack.topPageUrl === root.slowPageUrl
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				const page = Global.pageManager.pageStack.currentItem
+				if (!page) {
+					console.warn("No stack page to hide")
+					return false
+				}
+				root._discardCount = 0
+				page.aboutToBeDiscarded.connect(function() { root._discardCount++ })
+				return Global.pageManager.pageStack.hide()
+			},
+			message: "Hide the stack without popping its pages",
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			const stack = Global.pageManager.pageStack
+			return !stack.transitioning && stack.state === "hidden" && stack.depth === 1 && !stack.opened
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				if (root._discardCount !== 0) {
+					console.warn("Hidden stack discarded pages before rebuild; count=" + root._discardCount)
+					return false
+				}
+				Global.main.rebuildUi()
+				return root._discardCount === 1
+			},
+			message: "Rebuild discards the hidden stack page once",
+		})
+		addStep(UiTestStep.WaitUntil, {
+			timeout: 20000,
+			callable: ()=> {
+				if (UiConfig.splashScreenVisible) {
+					Global.main.skipSplashScreen()
+				}
+				return !!Global.mainView
+						&& Global.allPagesLoaded
+						&& !Global.mainView.animating
+						&& !!findItem(Global.mainView, { text: "Settings" })
+			},
+			message: "Wait for the UI to come back after rebuildUi()",
+		})
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { return _stackIsClosed() },
+			message: "The rebuilt page stack is closed",
+		})
+		runSteps()
+	}
+
+	/*
 		The UI must keep running while a page is being built.
 
 		If a page is built in one go on the UI thread, the whole application
@@ -228,6 +391,160 @@ UiTestCase {
 		addStep(UiTestStep.Invoke, {
 			callable: ()=> { return Global.pageManager.pageStack.depth === 1 },
 			message: "The opened page is the only page on the stack",
+		})
+		runSteps()
+	}
+
+	/*
+		Popping one page must not empty the page that is revealed.
+
+		popPage() with no target used to pass undefined into _discardPagesUntil(),
+		which never matches a stack item, so aboutToBeDiscarded ran on every page
+		including the one that stays. That nulls its ListView/Instantiator models.
+	*/
+	function test_popOnePageDoesNotEmptyTheRevealedPage() {
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.pageManager.pushPage(root.slowPageUrl); return true },
+			message: "Open %1".arg(root.slowPageUrl),
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.animating && Global.pageManager.pageStack.topPageUrl === root.slowPageUrl
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				return !!findItem(Global.pageManager.pageStack.currentPage, { text: "Battery bank" })
+			},
+			message: "The first page has list content",
+		})
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.pageManager.pushPage(root.otherPageUrl); return true },
+			message: "Open %1 on top".arg(root.otherPageUrl),
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.animating && Global.pageManager.pageStack.topPageUrl === root.otherPageUrl
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				Global.pageManager.popPage(undefined, PageStack.Immediate)
+				return true
+			},
+			message: "Pop the top page only",
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.animating && Global.pageManager.pageStack.topPageUrl === root.slowPageUrl
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				return Global.pageManager.pageStack.depth === 1
+						&& !!findItem(Global.pageManager.pageStack.currentPage, { text: "Battery bank" })
+			},
+			message: "The revealed page still has its list content",
+		})
+		runSteps()
+	}
+
+	/*
+		Closing the stack must not blank the visible page during the slide.
+
+		aboutToBeDiscarded nulls ListView models. Emitting it before the close
+		animation, and again in _popAndDestroyAllPages(), made the page empty
+		while it slid out and fired the signal twice.
+	*/
+	function test_closingTheStackDoesNotBlankThePageBeforeTeardown() {
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.pageManager.pushPage(root.slowPageUrl); return true },
+			message: "Open %1".arg(root.slowPageUrl),
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.animating && Global.pageManager.pageStack.topPageUrl === root.slowPageUrl
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				const page = Global.pageManager.pageStack.currentPage
+				if (!page || !findItem(page, { text: "Battery bank" })) {
+					console.warn("Opened page had no list content")
+					return false
+				}
+				root._discardCount = 0
+				page.aboutToBeDiscarded.connect(function() { root._discardCount++ })
+				Global.pageManager.popAllPages()
+				if (page.aboutToBeDiscarded && (Global.pageManager.pageStack.opened
+						|| Global.pageManager.pageStack.transitioning)) {
+					if (root._discardCount !== 0) {
+						console.warn("aboutToBeDiscarded ran before the close slide finished")
+						return false
+					}
+					if (!findItem(page, { text: "Battery bank" })) {
+						console.warn("Visible page was emptied before the close slide finished")
+						return false
+					}
+				}
+				return true
+			},
+			message: "Close the stack without discarding during the slide",
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> { return _stackIsClosed() } })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				if (root._discardCount !== 1) {
+					console.warn("aboutToBeDiscarded count was " + root._discardCount)
+					return false
+				}
+				return true
+			},
+			message: "The page was discarded once, after the close animation",
+		})
+		runSteps()
+	}
+
+	/*
+		Popping the last page is the same close animation as popAllPages().
+		Discarding before that slide blanks the page; discarding again at
+		teardown fires aboutToBeDiscarded twice.
+	*/
+	function test_poppingTheLastPageDoesNotBlankItBeforeTeardown() {
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { Global.pageManager.pushPage(root.slowPageUrl); return true },
+			message: "Open %1".arg(root.slowPageUrl),
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.animating && Global.pageManager.pageStack.topPageUrl === root.slowPageUrl
+		} })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				const page = Global.pageManager.pageStack.currentPage
+				if (!page || !findItem(page, { text: "Battery bank" })) {
+					console.warn("Opened page had no list content")
+					return false
+				}
+				root._discardCount = 0
+				page.aboutToBeDiscarded.connect(function() { root._discardCount++ })
+				Global.pageManager.popPage()
+				if (Global.pageManager.pageStack.opened
+						|| Global.pageManager.pageStack.transitioning) {
+					if (root._discardCount !== 0) {
+						console.warn("aboutToBeDiscarded ran before the close slide finished")
+						return false
+					}
+					if (!findItem(page, { text: "Battery bank" })) {
+						console.warn("Visible page was emptied before the close slide finished")
+						return false
+					}
+				}
+				return true
+			},
+			message: "Pop the last page without discarding during the slide",
+		})
+		addStep(UiTestStep.WaitUntil, { callable: ()=> { return _stackIsClosed() } })
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> {
+				if (root._discardCount !== 1) {
+					console.warn("aboutToBeDiscarded count was " + root._discardCount)
+					return false
+				}
+				return true
+			},
+			message: "The last page was discarded once, after the close animation",
 		})
 		runSteps()
 	}
@@ -299,8 +616,7 @@ UiTestCase {
 	*/
 	function test_leavingDuringAnOpenDoesNotBlockTheNextOne() {
 		const startIndex = Global.mainView.swipeView.currentIndex
-		// Separate steps, because these are separate things the user does: leaving and
-		// then pressing something on the page they moved to.
+		// Separate steps: leave, then press something on the page they moved to.
 		addStep(UiTestStep.Invoke, {
 			callable: ()=> { Global.pageManager.pushPage(root.slowPageUrl); return true },
 			message: "Open %1".arg(root.slowPageUrl),
@@ -404,9 +720,8 @@ UiTestCase {
 				const stack = Global.pageManager.pageStack
 				const top = stack.topPageUrl
 				const depth = stack.depth
-				// A push while another is still building is ignored, so the slow
-				// page is alone. If the first finished in the same turn, the
-				// second may also open and sit on top.
+				// A push while another is building is ignored. If the first
+				// finished in the same turn, the second may sit on top.
 				if (depth === 1 && top === root.slowPageUrl) {
 					return true
 				}

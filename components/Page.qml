@@ -27,6 +27,15 @@ FocusScope {
 	// Takes one argument: the page to which the stack will be popped (null if popping all pages)
 	property var tryPop
 
+	// Emitted just before removal while the page is still complete. Not when
+	// only deactivated, or while the page incubator is still Loading.
+	signal aboutToBeDiscarded()
+	onAboutToBeDiscarded: {
+		// Drain this page's nested incubators, then detach DelegateModel views.
+		FastUtils.drainIncubators(root)
+		Global.detachDelegateModels(root)
+	}
+
 	readonly property bool __is_venus_gui_page__: true
 
 	implicitWidth: Theme.geometry_screen_width
