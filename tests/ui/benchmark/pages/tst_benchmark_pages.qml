@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 import Victron.UiTest
 
@@ -118,26 +119,60 @@ UiTestCase {
 	// these one-line sources costs far more than constructing the object does,
 	// and would be charged to every type equally.
 	readonly property var benchTypes: [
-		["Item",                   itemComponent],
-		["Label",                  labelComponent],
-		["VeQuickItem",            veQuickItemComponent],
-		["ThreeLabelLayout",       threeLabelLayoutComponent],
-		["ListItem",               listItemComponent],
-		["ListSetting",            listSettingComponent],
-		["ListNavigation",         listNavigationComponent],
-		["SettingsListNavigation", settingsListNavigationComponent],
-		["ListSwitch",             listSwitchComponent],
-		["ListQuantity",           listQuantityComponent],
-		["ListRadioButtonGroup",   listRadioButtonGroupComponent],
+		["Item",                     itemComponent],
+		["Label",                    labelComponent],
+		["Text",                     textComponent],
+		["VeQuickItem",              veQuickItemComponent],
+		["QuantityLabel",            quantityLabelComponent],
+		["ColorImage",               colorImageComponent],
+		["Image",                    imageComponent],
+		["ThreeLabelLayout",         threeLabelLayoutComponent],
+		["ThreeLabelLayout+secondary", threeLabelSecondaryComponent],
+		["ListItem",                 listItemComponent],
+		["ListSetting",              listSettingComponent],
+		["ListNavigation",           listNavigationComponent],
+		["ListNavigation+secondary", listNavigationSecondaryComponent],
+		["SettingsListNavigation",   settingsListNavigationComponent],
+		["ListSwitch",               listSwitchComponent],
+		["ListQuantity",             listQuantityComponent],
+		["ListRadioButtonGroup",     listRadioButtonGroupComponent],
+		["ListRadioButtonGroup-8",   listRadioButtonGroup8Component],
 	]
 
 	Component { id: itemComponent; Item {} }
 	Component { id: labelComponent; Label { text: "abc" } }
+	Component { id: textComponent; Text { text: "abc" } }
 	Component { id: veQuickItemComponent; VeQuickItem {} }
+	Component { id: quantityLabelComponent; QuantityLabel {} }
+	Component {
+		id: colorImageComponent
+		CP.ColorImage {
+			source: "qrc:/images/icon_chevron_right_32.svg"
+			color: Theme.color_listItem_forwardIcon
+		}
+	}
+	Component {
+		id: imageComponent
+		Image { source: "qrc:/images/icon_chevron_right_32.svg" }
+	}
 	Component { id: threeLabelLayoutComponent; ThreeLabelLayout { primaryText: "abc" } }
+	Component {
+		id: threeLabelSecondaryComponent
+		ThreeLabelLayout {
+			primaryText: "abc"
+			secondaryText: "xyz"
+		}
+	}
 	Component { id: listItemComponent; ListItem {} }
 	Component { id: listSettingComponent; ListSetting { text: "abc" } }
 	Component { id: listNavigationComponent; ListNavigation { text: "abc" } }
+	Component {
+		id: listNavigationSecondaryComponent
+		ListNavigation {
+			text: "abc"
+			secondaryText: "xyz"
+		}
+	}
 	Component {
 		id: settingsListNavigationComponent
 		SettingsPage.SettingsListNavigation {
@@ -149,6 +184,22 @@ UiTestCase {
 	Component { id: listSwitchComponent; ListSwitch { text: "abc" } }
 	Component { id: listQuantityComponent; ListQuantity { text: "abc" } }
 	Component { id: listRadioButtonGroupComponent; ListRadioButtonGroup { text: "abc" } }
+	Component {
+		id: listRadioButtonGroup8Component
+		ListRadioButtonGroup {
+			text: "abc"
+			optionModel: [
+				{ display: "a", value: 0 },
+				{ display: "b", value: 1 },
+				{ display: "c", value: 2 },
+				{ display: "d", value: 3 },
+				{ display: "e", value: 4 },
+				{ display: "f", value: 5 },
+				{ display: "g", value: 6 },
+				{ display: "h", value: 7 }
+			]
+		}
+	}
 
 	function _benchComponent(name, component) {
 		const N = 100

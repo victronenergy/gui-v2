@@ -6,62 +6,26 @@
 import QtQuick
 import Victron.VenusOS
 
-Item {
+NativeQuantityLabel {
 	id: root
 
 	property alias value: quantityInfo.value
 	property alias unit: quantityInfo.unitType
 	readonly property alias quantityInfo: quantityInfo
-	property alias font: unitLabel.font
-	property alias valueColor: valueLabel.color
-	property alias unitColor: unitLabel.color
-	property alias valueText: valueLabel.text
-	property alias unitText: unitLabel.text
-	property int alignment: Qt.AlignHCenter | Qt.AlignVCenter
 	property alias decimals: quantityInfo.decimals
 	property alias formatHints: quantityInfo.formatHints
-	property alias leftPadding: digitRow.leftPadding
-	property alias rightPadding: digitRow.rightPadding
 
-	implicitWidth: digitRow.width
-	implicitHeight: digitRow.height
+	valueFontFamily: Global.quantityFontFamily
+	baselineRoundingPixelSize: Theme.font_size_body1
+	_digitRow.spacing: Theme.geometry_quantityLabel_spacing
+	valueColor: Theme.color_font_primary
+	valueText: quantityInfo.number
+	font.family: Global.fontFamily
+	font.pixelSize: Theme.font_size_body1
+	unitText: quantityInfo.unit
+	unitColor: Theme.color_font_secondary
 
 	QuantityInfo {
 		id: quantityInfo
-	}
-
-	Row {
-		id: digitRow
-
-		anchors {
-			verticalCenter: root.alignment & Qt.AlignVCenter ? parent.verticalCenter : undefined
-			horizontalCenter: root.alignment & Qt.AlignHCenter ? parent.horizontalCenter : undefined
-			left: root.alignment & Qt.AlignLeft ? parent.left : undefined
-			right: root.alignment & Qt.AlignRight ? parent.right : undefined
-			bottom: root.alignment & Qt.AlignBottom ? parent.bottom : undefined
-		}
-
-		spacing: Theme.geometry_quantityLabel_spacing
-
-		Label {
-			id: valueLabel
-
-			color: Theme.color_font_primary
-			text: quantityInfo.number
-			font.pixelSize: root.font.pixelSize
-			font.weight: root.font.weight
-			font.family: Global.quantityFontFamily
-		}
-
-		Label {
-			id: unitLabel
-
-			// At smaller font sizes, allow the unit to be vertically aligned at a sub-pixel value,
-			// else it is noticeably misaligned by less than 1 pixel.
-			anchors.baseline: valueLabel.baseline
-			anchors.alignWhenCentered: font.pixelSize >= Theme.font_size_body1
-			text: quantityInfo.unit
-			color: Theme.color_font_secondary
-		}
 	}
 }
