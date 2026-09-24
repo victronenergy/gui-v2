@@ -29,6 +29,18 @@ OverviewWidget {
 		}
 	}
 
+	// Only meaningful in microgrid
+	readonly property bool allowBlackStart: Global.system.veBus.allowBlackStart
+
+	readonly property bool _showBlackStartStatus: Global.system.state === VenusOS.System_State_Inverting
+			&& veBusMode.value === VenusOS.InverterCharger_Mode_On
+
+	VeQuickItem {
+		id: veBusMode
+
+		uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Mode" : ""
+	}
+
 	//% "Inverter / Charger"
 	title: qsTrId("overview_widget_inverter_title")
 	type: VenusOS.OverviewWidget_Type_VeBusDevice
@@ -63,6 +75,20 @@ OverviewWidget {
 
 				Layout.fillWidth: true
 				Layout.fillHeight: true // push reason text to bottom of layout
+			}
+
+			Label {
+				visible: root._showBlackStartStatus
+				text: root.allowBlackStart
+						//% "Blackstart allowed"
+						? qsTrId("overview_widget_inverter_blackstart_allowed")
+						//% "Blackstart not allowed"
+						: qsTrId("overview_widget_inverter_blackstart_not_allowed")
+				wrapMode: Text.WordWrap
+				color: Theme.color_font_secondary
+				font.pixelSize: root.secondaryFontSize
+
+				Layout.fillWidth: true
 			}
 
 			Label {

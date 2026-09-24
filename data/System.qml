@@ -85,10 +85,14 @@ QtObject {
 	}
 
 	readonly property QtObject veBus: QtObject {
+		id: veBusRoot
+
 		readonly property string serviceUid: BackendConnection.serviceUidFromName(_serviceName.value || "", _deviceInstance.value || 0)
+		readonly property bool allowBlackStart: _allowBlackStart.valid && _allowBlackStart.value === 1
 
 		readonly property VeQuickItem _serviceName: VeQuickItem { uid: root.serviceUid + "/VebusService" }
 		readonly property VeQuickItem _deviceInstance: VeQuickItem { uid: root.serviceUid + "/VebusInstance" }
+		readonly property VeQuickItem _allowBlackStart: VeQuickItem { uid: veBusRoot.serviceUid + "/MicroGrid/AllowBlackStart" }
 	}
 
 	readonly property VeQuickItem _systemState: VeQuickItem {

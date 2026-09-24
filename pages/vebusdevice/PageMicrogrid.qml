@@ -30,6 +30,12 @@ Page {
 		secondaryText: VenusOS.microgridModeToText(mode.value, externalControl.value)
 	}
 
+	component AllowBlackStartListText: ListText {
+		//% "Allow blackstart"
+		text: qsTrId("page_microgrid_allow_blackstart")
+		secondaryText: CommonWords.yesOrNo(allowBlackStart.value)
+	}
+
 	component MicrogridListSpinBox: ListSpinBox {
 		property alias dataItemModified: parameterModified
 		property real customDefaultFrom: 0
@@ -140,6 +146,7 @@ Page {
 									|| q0Range.dataItemModifiedTo.value === 1)
 
 				MicrogridModeListText {}
+				AllowBlackStartListText {}
 
 				/* Chart feature is hidden, pending review. See issue #3099.
 				ListDroopGraph {
@@ -341,6 +348,7 @@ Page {
 			VisibleItemModel {
 
 				MicrogridModeListText {}
+				AllowBlackStartListText {}
 
 				SettingsListHeader {
 					//% "P-Q direct drive settings"
@@ -385,6 +393,7 @@ Page {
 			VisibleItemModel {
 
 				MicrogridModeListText {}
+				AllowBlackStartListText {}
 
 				SettingsListHeader {
 					//% "V-f direct drive settings"
@@ -428,6 +437,12 @@ Page {
 					Global.showToastNotification(VenusOS.Notification_Warning, VenusOS.microgrid_errorToText(value), 10000)
 				}
 			}
+		}
+
+		VeQuickItem {
+			id: allowBlackStart
+
+			uid: root.bindPrefix + "/MicroGrid/AllowBlackStart"
 		}
 	}
 }
