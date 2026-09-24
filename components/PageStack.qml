@@ -18,12 +18,17 @@ StackView {
 	// transitioning, or the page that was asked for is still being built. Anything
 	// waiting for a navigation to complete must wait for this, not just for the
 	// transitions, otherwise it acts on the page it was already on.
+	//
+	// MainView.allowPageAnimations is false while this is true. On GX hardware,
+	// Brief/Overview animations consume the frame budget and starve Qt's incubator,
+	// so a page that would take a few hundred milliseconds to build instead takes
+	// several seconds. Pausing those animations while the page is built (and while
+	// it then slides in) is what makes asynchronous pushPage() finish in time.
 	readonly property bool animating: transitioning || !!_pendingBuild
 
 	// True only while a transition is running. Going back is allowed while a page is
 	// being built - that is how the user cancels it - so the back path tests this
-	// rather than 'animating'. This is also what page animations should be disabled
-	// for: a page being built is not a reason to stop animating what is on screen.
+	// rather than 'animating'.
 	readonly property bool transitioning: busy || fakePushTransition.running || fakePopTransition.running
 
 	// The file url of the top page on the stack. Undefined if depth=0 or not opened, or an empty

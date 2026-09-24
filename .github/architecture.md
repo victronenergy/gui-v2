@@ -145,6 +145,8 @@ Main.qml (Window)
   └─ Global.allPagesLoaded = true → Splash screen hidden, ApplicationContent displayed
 ```
 
+On GX hardware, Brief and Overview animations consume the frame budget and starve Qt's asynchronous incubator. `MainView.allowPageAnimations` is therefore false while a PageStack page is being built, while `CardViewLoader` is incubating, or while the Brief side panel Loader is incubating. The animations resume when the tree is ready and the slide starts.
+
 ### UI navigation structure
 
 ```
@@ -179,6 +181,8 @@ Main.qml (Window)
 `components/PageStack.qml` (extends StackView) handles drill-down navigation with slide animations. Used for:
 - Overview widget drill-downs (e.g. clicking Battery widget → battery detail page)
 - Settings sub-pages (e.g. Settings → Display → Brightness)
+
+A URL page is compiled with `Qt.createComponent(..., Component.Asynchronous)` and instantiated with `incubateObject(..., Qt.Asynchronous)`. The page is pushed when that finishes. `MainView.allowPageAnimations` is false while the build is in flight so incubation is not starved by Brief/Overview animations.
 
 ### SwipeViewPage
 

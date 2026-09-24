@@ -31,6 +31,9 @@ SwipeViewPage {
 		root.showSidePanel = !root.showSidePanel
 	}
 
+	// Forwarded from BriefPage_Landscape while the side panel Loader is incubating.
+	readonly property bool overlayIncubating: pageLoader.item?.overlayIncubating ?? false
+
 	GaugeModel {
 		id: centralGaugeModel
 	}
