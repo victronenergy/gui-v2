@@ -19,6 +19,10 @@ FocusScope {
 		Component.onCompleted: Global.mainView = mainView
 	}
 
+	PagePreloader {
+		active: Global.allPagesLoaded && UiConfig.splashScreenVisible && UiConfig.showSplashAnimation
+	}
+
 	Component {
 		id: pressEffectComponent
 		PressEffect {}

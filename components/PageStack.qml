@@ -13,7 +13,11 @@ StackView {
 	readonly property bool opened: _fullyOpened
 	readonly property Page currentPage: opened ? currentItem : null
 
-	readonly property int animationDuration: Global.mainView && Global.mainView.allowPageAnimations ? Theme.animation_page_slide_duration : 0
+	// Do not use MainView.allowPageAnimations here. That flag is false while this stack is
+	// transitioning (it disables in-page animations to reduce load). Binding the slide
+	// duration to it makes the first drill-down duration 0: the Immediate push can set
+	// StackView.busy, transitioning becomes true, and the fake x-slide is skipped.
+	readonly property int animationDuration: Global.animationEnabled ? Theme.animation_page_slide_duration : 0
 	// True while navigation is in flight and the stack has not settled: a page is
 	// transitioning, or the page that was asked for is still being built. Anything
 	// waiting for a navigation to complete must wait for this, not just for the
@@ -266,12 +270,14 @@ StackView {
 	function _pushItem(page, properties, operation) {
 		if (root.state !== "opened") {
 			// When the stack is closed or hidden, push the first page without any animation and
-			// slide the stack into view.
+			// slide the stack into view. Sample the duration before push(): an Immediate push
+			// may set StackView.busy, which used to zero animationDuration via allowPageAnimations.
+			const slideDuration = _animationDuration(operation)
 			const newPage = root.push(page, properties, StackView.Immediate)
 			if (!newPage) {
 				return null
 			}
-			fakePushAnimation.duration = _animationDuration(operation)
+			fakePushAnimation.duration = slideDuration
 			root.state = "opened"
 			return newPage
 		}
