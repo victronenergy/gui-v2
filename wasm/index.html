@@ -16,13 +16,33 @@
     <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-visual"/>
 
     <title>Victron GUIv2</title>
+    <!--
+      Run as a standalone app (no browser chrome) when added to the home
+      screen. The manifest requests this too, but iOS before 16.4 only
+      honours the metas.
+    -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Victron GUIv2">
+    <!--
+      Opaque status bar tinted with the theme-color below. iOS chooses a
+      readable text colour for it, which a translucent bar (always white
+      text) would not do on the light scheme.
+    -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
     <link rel="manifest" href="icons/manifest.json">
     <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#1f2535">
     <meta name="msapplication-TileColor" content="#1f2535">
-    <meta name="theme-color" content="#1f2535">
+    <!--
+      Match the page background so the status bar and browser toolbar blend
+      with the splash and application background in each colour scheme.
+    -->
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#E6E5E1" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000">
     <style>
       /* Make the html body cover the entire (visual) viewport with no scroll bars. */
       html, body {
@@ -73,7 +93,19 @@
           max-height: 100dvh;
           max-height: 100lvh;
           margin: 0;
+          /*
+            With viewport-fit=cover the layout viewport extends under the
+            status bar, notch and home indicator (e.g. iOS home-screen web
+            apps). Reserve those regions as padding on the outer box so the
+            application is laid out inside the safe area in every orientation;
+            the body background fills the strips. The 0px fallbacks keep
+            engines without safe-area variables unaffected.
+          */
           padding: 0;
+          padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+                   env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+          /* The padding must eat into the 100% box, not grow it, or the page would scroll. */
+          box-sizing: border-box;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -82,9 +114,10 @@
           left: 0;
         }
         #wrapper-inner {
-          width: calc(100% - env(safe-area-inset-left) - env(safe-area-inset-right));
+          /* Sized against the outer content area, which already excludes the safe-area insets. */
+          width: 100%;
           max-width: 1024px;
-          max-height: calc(100% - env(safe-area-inset-bottom));
+          max-height: 100%;
           aspect-ratio: 1024/600;
           position: relative;
           text-align: center;
@@ -192,6 +225,13 @@
               const scheme = params.get('colorScheme').toLowerCase();
               if (scheme === 'dark' || scheme === 'light') {
                   document.documentElement.setAttribute('data-forced-scheme', scheme);
+                  // The theme-color metas above follow the OS preference; make the
+                  // status bar and browser toolbar follow the forced scheme instead.
+                  const colour = scheme === 'dark' ? '#000000' : '#E6E5E1';
+                  document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
+                      meta.removeAttribute('media');
+                      meta.setAttribute('content', colour);
+                  });
               }
           }
       })();
@@ -585,13 +625,25 @@
             });
 
             // Update gui-v2 Theme when the window's visual viewport changes.
+            //
+            // The values are page-relative (pageTop, not offsetTop: #wrapper-outer is
+            // fixed, so Qt's screen origin, measured from <body>, grows with any layout
+            // viewport scroll and only the page-relative position stays consistent).
+            // That is the space the QML keyboard handlers work in: the screen origin
+            // is the container's offset from <body>, and WasmVirtualKeyboardHandler/
+            // ModalDialog add that window position (Global.main.y) to item coordinates
+            // before comparing with Theme.visualViewportBottom. Making the offset
+            // relative to #screen would subtract the container offset twice.
             function signalQtViewportChange() {
                 const mod = window._qtWasmModule;
-                if (mod && typeof mod.jsSetVisualViewportHeight === 'function') {
+                if (!mod || !window.visualViewport) {
+                    return;
+                }
+                if (typeof mod.jsSetVisualViewportHeight === 'function') {
                     mod.jsSetVisualViewportHeight(Math.round(window.visualViewport.height));
                 }
-                if (mod && typeof mod.jsSetVisualViewportOffsetTop === 'function') {
-                    mod.jsSetVisualViewportOffsetTop(Math.round(window.visualViewport.offsetTop));
+                if (typeof mod.jsSetVisualViewportOffsetTop === 'function') {
+                    mod.jsSetVisualViewportOffsetTop(Math.round(window.visualViewport.pageTop));
                 }
             }
             if (window.visualViewport) {
@@ -747,6 +799,9 @@
                 // not create a global Module object; the instance returned by qtLoad() is
                 // the module with all exported functions on it.
                 window._qtWasmModule = instance;
+                // Report the viewport relative to the container as soon as the module
+                // is reachable, so the keyboard logic starts from correct values.
+                signalQtViewportChange();
 
                 // qtLoad() resolves after main() has run: QGuiApplication and the
                 // QML engine are set up and app.exec() has unwound back to the

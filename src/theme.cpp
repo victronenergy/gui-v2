@@ -33,7 +33,8 @@ EM_JS(int, getVisualViewportHeight, (), {
 });
 
 EM_JS(int, getVisualViewportOffsetTop, (), {
-	return window.visualViewport ? window.visualViewport.offsetTop : 0;
+	// Page-relative (pageTop), like visualViewportBottom's consumers (see theme.h).
+	return window.visualViewport ? window.visualViewport.pageTop : 0;
 });
 
 #endif
