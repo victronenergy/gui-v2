@@ -97,8 +97,9 @@ public:
 
 	// The y pos of the bottom of the visual viewport.
 	// - On GX, this is the top of the VKB.
-	// - On Wasm, this is window.visualViewport.offsetTop + window.visualViewport.height, which
-	//   should also be equivalent to the top of the VKB when it is visible.
+	// - On Wasm, this is window.visualViewport.offsetTop + window.visualViewport.height,
+	//   expressed relative to the Qt container element (which may be inset from the page
+	//   origin), which should also be equivalent to the top of the VKB when it is visible.
 	int visualViewportBottom() const;
 
 	// Internal functions: used by JS Emscripten bridge.

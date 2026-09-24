@@ -33,7 +33,16 @@ EM_JS(int, getVisualViewportHeight, (), {
 });
 
 EM_JS(int, getVisualViewportOffsetTop, (), {
-	return window.visualViewport ? window.visualViewport.offsetTop : 0;
+	if (!window.visualViewport) {
+		return 0;
+	}
+	// Qt window coordinates are relative to the container element (stored on the
+	// module by qtloader.js), which may be inset from the page origin, e.g. by the
+	// safe-area padding in the HTML shell. Report the offset relative to the container.
+	const containers = Module.qtContainerElements;
+	const container = containers && containers.length ? containers[0] : null;
+	const containerTop = container ? container.getBoundingClientRect().top : 0;
+	return Math.round(window.visualViewport.offsetTop - containerTop);
 });
 
 #endif
