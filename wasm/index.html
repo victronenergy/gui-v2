@@ -679,7 +679,14 @@
 
                 loadingBarText.textContent = 'Instantiating...';
 
-                let defaultMqttArg = (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt'
+                // Build /websocket-mqtt relative to whatever path prefix this page
+                // was actually served under, not the site root - direct access has
+                // no prefix, but a reverse proxy (e.g. Home Assistant Ingress) serves
+                // this same page under a per-app path prefix, and the nginx location
+                // this needs to reach only exists on this app's own origin, at
+                // <that prefix>/websocket-mqtt, not at the proxy's own root.
+                let pathPrefix = document.location.pathname.split('/gui-v2/')[0];
+                let defaultMqttArg = (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + pathPrefix + '/websocket-mqtt'
                 let argumentList = needsDefaultArgs ? ['--mqtt', defaultMqttArg] : [];
                 if (searchParams.has('mock')) {
                     argumentList.push('--mock');
