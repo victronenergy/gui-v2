@@ -7,11 +7,31 @@ ObjectModel {
 	id: root
 
 	required property SwipeView view
-	readonly property list<SwipeViewPage> pages
-		: showBoatPage && showLevelsPage ? [ boatPageLoader.item, briefPage, overviewPage, levelsPageLoader.item, notificationsPage, settingsPage ]
-		: showBoatPage ? [ boatPageLoader.item, briefPage, overviewPage, notificationsPage, settingsPage ]
-		: showLevelsPage ? [ briefPage, overviewPage, levelsPageLoader.item, notificationsPage, settingsPage ]
-		: [ briefPage, overviewPage, notificationsPage, settingsPage ]
+	// Bump when plugin enable flips so `pages` re-filters without destroying delegates.
+	property int pluginEnableRevision: 0
+
+	readonly property list<SwipeViewPage> pages: {
+		void pluginEnableRevision
+		var p = []
+		if (showBoatPage) p.push(boatPageLoader.item)
+		p.push(briefPage)
+		p.push(overviewPage)
+		for (var i = 0; i < pluginNavRepeater.count; i++) {
+			var loader = pluginNavRepeater.itemAt(i)
+			if (!loader || !loader.item) {
+				continue
+			}
+			// Disabled nav plugins stay loaded but drop out of the swipe/nav list.
+			if (!GuiPluginLoader.isPluginEnabled(loader.pluginName)) {
+				continue
+			}
+			p.push(loader.item)
+		}
+		if (showLevelsPage) p.push(levelsPageLoader.item)
+		p.push(notificationsPage)
+		p.push(settingsPage)
+		return p
+	}
 	readonly property bool showLevelsPage: levelsPageLoader.active && !!levelsPageLoader.item
 	readonly property bool showBoatPage: boatPageLoader.active && !!boatPageLoader.item
 	readonly property int tankCount: Global.tanks ? Global.tanks.totalTankCount : 0
@@ -22,10 +42,7 @@ ObjectModel {
 		&& Global.systemSettings
 		&& Global.tanks
 		&& Global.environmentInputs
-		&& ((boatPageLoader.active && levelsPageLoader.active) ? pages.length === 6
-		  : boatPageLoader.active ? pages.length === 5
-		  : levelsPageLoader.active ? pages.length === 5
-		  : pages.length === 4)
+		&& pages.length >= 4
 
 	property bool _completed: false
 
@@ -62,6 +79,69 @@ ObjectModel {
 	OverviewPage {
 		id: overviewPage
 		view: root.view
+	}
+
+	// Plugin NavigationPage (type 3) support.
+	// Queries all loaded plugins for type 3 integrations and dynamically
+	// creates a SwipeViewPage for each one, inserted between Overview and
+	// Levels in the nav bar.  Each plugin JSON specifies icon, url, and an
+	// optional title (falls back to the plugin name when omitted).
+	GuiPluginIntegrationModel {
+		id: pluginNavIntegrations
+		type: GuiPluginLoader.NavigationPage
+	}
+
+	Connections {
+		target: GuiPluginLoader
+		function onPluginEnabledChanged(name) {
+			root.pluginEnableRevision++
+		}
+	}
+
+	Item {
+		id: pluginPagesContainer
+		visible: false
+		width: 0; height: 0
+
+		Repeater {
+			id: pluginNavRepeater
+			model: pluginNavIntegrations
+
+			delegate: Loader {
+				id: pluginPageDelegate
+				required property int index
+				required property string pluginName
+				required property string title
+				required property url icon
+				required property url url
+
+				// Keep delegates alive across enable toggles; `pages` filters by enabled.
+				active: true
+				sourceComponent: SwipeViewPage {
+					id: pluginSwipePage
+					view: root.view
+					topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
+					title: pluginPageDelegate.title !== ""
+						? pluginPageDelegate.title
+						: pluginPageDelegate.pluginName
+					iconSource: pluginPageDelegate.icon
+					url: pluginPageDelegate.url
+					focusPolicy: Qt.TabFocus
+
+					onActiveFocusChanged: {
+						if (activeFocus && Global.keyNavigationEnabled && pluginContentLoader.item) {
+							pluginContentLoader.item.forceActiveFocus()
+						}
+					}
+
+					Loader {
+						id: pluginContentLoader
+						anchors.fill: parent
+						source: pluginPageDelegate.url
+					}
+				}
+			}
+		}
 	}
 
 	Loader {

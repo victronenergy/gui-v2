@@ -18,6 +18,8 @@ FocusScope {
 	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready && cardsLoader.item ? cardsLoader.item
 			: (pageStack.currentPage ?? swipeView?.currentItem ?? null)
 	readonly property alias cardsLoader: cardsLoader
+	readonly property alias controlCardsComponent: _controlCardsComponent
+	readonly property alias auxCardsComponent: _auxCardsComponent
 
 	readonly property bool notificationButtonsEnabled: (currentPage?.url?.endsWith("NotificationsPage.qml") ?? false)
 			&& (Global.notifications?.silenceAlarmVisible ?? false)
@@ -26,6 +28,64 @@ FocusScope {
 
 	property bool mainViewVisible: UiConfig.applicationVisible && !UiConfig.splashScreenVisible
 	onMainViewVisibleChanged: if (mainViewVisible) console.info("MainView: UI loaded and visible")
+
+	// Pin the visible main page by URL so enable/disable (which reshuffles the
+	// swipe page list) can re-align NavBar and SwipeView to the same page.
+	property url _pinnedMainPageUrl
+
+	function resyncMainPageSelection() {
+		if (!swipeView || !navBar || !swipePageModel) {
+			return
+		}
+		const pages = swipePageModel.pages
+		if (!pages || pages.length === 0) {
+			return
+		}
+
+		let want = ""
+		if (swipeView.currentItem && swipeView.currentItem.url) {
+			want = String(swipeView.currentItem.url)
+		} else if (_pinnedMainPageUrl) {
+			want = String(_pinnedMainPageUrl)
+		}
+
+		let idx = -1
+		if (want.length > 0) {
+			for (let i = 0; i < pages.length; ++i) {
+				if (String(pages[i].url) === want) {
+					idx = i
+					break
+				}
+			}
+		}
+		if (idx < 0) {
+			// Current page was a disabled plugin (or otherwise gone) — land on Overview/Brief.
+			for (let i = 0; i < pages.length; ++i) {
+				const u = String(pages[i].url)
+				if (u.endsWith("OverviewPage.qml") || u.endsWith("BriefPage.qml")) {
+					idx = i
+					break
+				}
+			}
+			if (idx < 0) {
+				idx = Math.min(navBar.currentIndex, pages.length - 1)
+			}
+		}
+
+		navBar.setCurrentIndex(idx)
+		swipeView.setCurrentIndex(idx)
+		if (pages[idx] && pages[idx].url) {
+			_pinnedMainPageUrl = pages[idx].url
+		}
+	}
+
+	Connections {
+		target: GuiPluginLoader
+		function onPluginEnabledChanged(name) {
+			Qt.callLater(root.resyncMainPageSelection)
+		}
+	}
+
 
 	// To reduce the animation load, disable page animations when the PageStack is transitioning
 	// between pages, or when flicking between the main pages. Note that animations are still
@@ -216,6 +276,10 @@ FocusScope {
 					onMovingChanged: {
 						if (!moving) {
 							navBar.setCurrentIndex(currentIndex)
+							const page = currentItem
+							if (page && page.url) {
+								root._pinnedMainPageUrl = page.url
+							}
 						}
 					}
 				}
@@ -255,6 +319,10 @@ FocusScope {
 			onCurrentIndexChanged: {
 				if (swipeView) {
 					swipeView.setCurrentIndex(currentIndex)
+				}
+				const page = pages[currentIndex]
+				if (page && page.url) {
+					root._pinnedMainPageUrl = page.url
 				}
 			}
 
@@ -461,12 +529,12 @@ FocusScope {
 		KeyNavigation.up: statusBar
 
 		Component {
-			id: controlCardsComponent
+			id: _controlCardsComponent
 			ControlCardsPage {}
 		}
 
 		Component {
-			id: auxCardsComponent
+			id: _auxCardsComponent
 			AuxCardsPage {}
 		}
 	}
@@ -479,8 +547,8 @@ FocusScope {
 		opacity: 0.0
 		pageStack: root._pageStack
 
-		onControlCardsActivated: cardsLoader.show(controlCardsComponent)
-		onAuxCardsActivated: cardsLoader.show(auxCardsComponent)
+		onControlCardsActivated: cardsLoader.show(_controlCardsComponent)
+		onAuxCardsActivated: cardsLoader.show(_auxCardsComponent)
 		onCardsDeactivated: cardsLoader.hide()
 		onSidePanelToggled: root.currentPage.toggleSidePanel()
 
