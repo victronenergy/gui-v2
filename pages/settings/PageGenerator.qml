@@ -29,7 +29,6 @@ Page {
 		id: _generatorState
 		uid: root.startStopBindPrefix + "/State"
 	}
-
 	VeQuickItem {
 		id: historicalData
 		uid: root.settingsBindPrefix + "/AccumulatedDaily"
@@ -46,70 +45,85 @@ Page {
 		}
 	}
 
-	VisibleItemModel {
+	DelegateComponentModel {
 		id: startStopModel
 
-		ListSwitch {
-			//% "Autostart functionality"
-			text: qsTrId("settings_page_relay_generator_auto_start_enabled")
-			dataItem.uid: root.startStopBindPrefix + "/AutoStartEnabled"
+		DelegateComponent {
 			preferredVisible: root.startStopBindPrefix === root.generator0ServiceUid
+
+			ListSwitch {
+				//% "Autostart functionality"
+				text: qsTrId("settings_page_relay_generator_auto_start_enabled")
+				dataItem.uid: root.startStopBindPrefix + "/AutoStartEnabled"
+			}
 		}
 
-		ListGeneratorManualControlButton {
-			id: manualControl
+		DelegateComponent {
 			preferredVisible: root.startStopBindPrefix === root.generator0ServiceUid
-			generatorUid: root.startStopBindPrefix
+			ListGeneratorManualControlButton {
+				id: manualControl
+				generatorUid: root.startStopBindPrefix
+			}
 		}
 
-		ListText {
-			//% "Current run time"
-			text: qsTrId("settings_page_relay_generator_run_time")
-			secondaryText: dataItem.valid ? Utils.secondsToString(dataItem.value, false) : "0"
-			dataItem.uid: root.startStopBindPrefix + "/Runtime"
+		DelegateComponent {
 			preferredVisible: generatorState.value >= 1 && generatorState.value <= 3 // Running, Warm-up, Cool-down
-		}
-
-		ListText {
-			id: state
-
-			text: CommonWords.state
-			preferredVisible: root.startStopBindPrefix === root.generator0ServiceUid
-			secondaryText: activeCondition.isAutoStarted && generatorState.value === VenusOS.Generators_State_Running
-						   ? CommonWords.autostarted_dot_running_by.arg(Global.generators.runningByText(activeCondition.value))
-						   : Global.generators.stateAndCondition(generatorState.value, activeCondition.value)
-
-			VeQuickItem {
-				id: activeCondition
-
-				readonly property bool isAutoStarted: valid && Global.generators.isAutoStarted(value)
-
-				uid: root.startStopBindPrefix + "/RunningByConditionCode"
+			ListText {
+				//% "Current run time"
+				text: qsTrId("settings_page_relay_generator_run_time")
+				secondaryText: dataItem.valid ? Utils.secondsToString(dataItem.value, false) : "0"
+				dataItem.uid: root.startStopBindPrefix + "/Runtime"
 			}
 		}
 
-		ListGeneratorError {
+		DelegateComponent {
 			preferredVisible: root.startStopBindPrefix === root.generator0ServiceUid
-			dataItem.uid: root.startStopBindPrefix + "/Error"
-		}
+			ListText {
+				id: state
 
-		ListNavigation {
-			text: CommonWords.settings
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
-					{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+				text: CommonWords.state
+				secondaryText: activeCondition.isAutoStarted && generatorState.value === VenusOS.Generators_State_Running
+							   ? CommonWords.autostarted_dot_running_by.arg(Global.generators.runningByText(activeCondition.value))
+							   : Global.generators.stateAndCondition(generatorState.value, activeCondition.value)
+
+				VeQuickItem {
+					id: activeCondition
+
+					readonly property bool isAutoStarted: valid && Global.generators.isAutoStarted(value)
+
+					uid: root.startStopBindPrefix + "/RunningByConditionCode"
+				}
 			}
 		}
 
-		ListNavigation {
-			//% "Run time and service"
-			text: qsTrId("page_settings_generator_run_time_and_service")
-			onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
-													{
-														title: text,
-														settingsBindPrefix: root.settingsBindPrefix,
-														startStopBindPrefix: root.startStopBindPrefix
-													})
+		DelegateComponent {
+			preferredVisible: root.startStopBindPrefix === root.generator0ServiceUid
+			ListGeneratorError {
+				dataItem.uid: root.startStopBindPrefix + "/Error"
+			}
+		}
+
+		DelegateComponent {
+			ListNavigation {
+				text: CommonWords.settings
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/PageSettingsGenerator.qml",
+						{ title: text, settingsBindPrefix: root.settingsBindPrefix, startStopBindPrefix: root.startStopBindPrefix })
+				}
+			}
+		}
+
+		DelegateComponent {
+			ListNavigation {
+				//% "Run time and service"
+				text: qsTrId("page_settings_generator_run_time_and_service")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageGeneratorRuntimeService.qml",
+														{
+															title: text,
+															settingsBindPrefix: root.settingsBindPrefix,
+															startStopBindPrefix: root.startStopBindPrefix
+														})
+			}
 		}
 	}
 }

@@ -14,63 +14,96 @@ DevicePage {
 
 	property string bindPrefix
 
+	VeQuickItem {
+		id: stateItem
+		uid: root.bindPrefix + "/Alarms/High/State"
+	}
+	VeQuickItem {
+		id: stateItem2
+		uid: root.bindPrefix + "/Alarms/Low/State"
+	}
+	VeQuickItem {
+		id: batteryVoltageItem
+		uid: root.bindPrefix + "/BatteryVoltage"
+	}
+	VeQuickItem {
+		id: temperatureItem
+		uid: root.bindPrefix + "/Temperature"
+	}
+
 	title: tankDescription.description
 	serviceUid: bindPrefix
 
-	settingsModel: VisibleItemModel {
-		ListText {
-			text: CommonWords.status
-			dataItem.uid: root.bindPrefix + "/Status"
-			secondaryText: Global.tanks.statusToText(dataItem.value)
+	settingsModel: DelegateComponentModel {
+		DelegateComponent {
+			ListText {
+				text: CommonWords.status
+				dataItem.uid: root.bindPrefix + "/Status"
+				secondaryText: Global.tanks.statusToText(dataItem.value)
+			}
 		}
 
-		ListQuantity {
-			//% "Level"
-			text: qsTrId("devicelist_tanksensor_level")
-			dataItem.uid: root.bindPrefix + "/Level"
-			unit: VenusOS.Units_Percentage
+		DelegateComponent {
+			ListQuantity {
+				//% "Level"
+				text: qsTrId("devicelist_tanksensor_level")
+				dataItem.uid: root.bindPrefix + "/Level"
+				unit: VenusOS.Units_Percentage
+			}
 		}
 
-		ListQuantity {
-			//% "Remaining"
-			text: qsTrId("devicelist_tanksensor_remaining")
-			dataItem.uid: root.bindPrefix + "/Remaining"
-			dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Volume_CubicMetre)
-			dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.volumeUnit)
-			unit: Global.systemSettings.volumeUnit
+		DelegateComponent {
+			ListQuantity {
+				//% "Remaining"
+				text: qsTrId("devicelist_tanksensor_remaining")
+				dataItem.uid: root.bindPrefix + "/Remaining"
+				dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Volume_CubicMetre)
+				dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.volumeUnit)
+				unit: Global.systemSettings.volumeUnit
+			}
 		}
 
-		ListTemperature {
-			text: CommonWords.temperature
-			dataItem.uid: root.bindPrefix + "/Temperature"
-			preferredVisible: dataItem.valid
+		DelegateComponent {
+			preferredVisible: temperatureItem.valid
+			ListTemperature {
+				text: CommonWords.temperature
+				dataItem.uid: root.bindPrefix + "/Temperature"
+			}
 		}
 
-		ListQuantity {
-			//% "Sensor battery"
-			text: qsTrId("devicelist_tanksensor_sensor_battery")
-			dataItem.uid: root.bindPrefix + "/BatteryVoltage"
-			unit: VenusOS.Units_Volt_DC
-			preferredVisible: dataItem.valid
+		DelegateComponent {
+			preferredVisible: batteryVoltageItem.valid
+			ListQuantity {
+				//% "Sensor battery"
+				text: qsTrId("devicelist_tanksensor_sensor_battery")
+				dataItem.uid: root.bindPrefix + "/BatteryVoltage"
+				unit: VenusOS.Units_Volt_DC
+			}
 		}
 
-		ListAlarm {
-			text: CommonWords.low_level_alarm
-			dataItem.uid: root.bindPrefix + "/Alarms/Low/State"
-			preferredVisible: dataItem.valid
+		DelegateComponent {
+			preferredVisible: stateItem2.valid
+			ListAlarm {
+				text: CommonWords.low_level_alarm
+				dataItem.uid: root.bindPrefix + "/Alarms/Low/State"
+			}
 		}
 
-		ListAlarm {
-			text: CommonWords.high_level_alarm
-			dataItem.uid: root.bindPrefix + "/Alarms/High/State"
-			preferredVisible: dataItem.valid
+		DelegateComponent {
+			preferredVisible: stateItem.valid
+			ListAlarm {
+				text: CommonWords.high_level_alarm
+				dataItem.uid: root.bindPrefix + "/Alarms/High/State"
+			}
 		}
 
-		ListNavigation {
-			text: CommonWords.setup
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankSetup.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
+		DelegateComponent {
+			ListNavigation {
+				text: CommonWords.setup
+				onClicked: {
+					Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankSetup.qml",
+							{ "title": text, "bindPrefix": root.bindPrefix })
+				}
 			}
 		}
 	}

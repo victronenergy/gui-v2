@@ -15,50 +15,62 @@ Page {
 	title: device?.name || ""
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListText {
-				//% "Genset status"
-				text: qsTrId("page-dc-genset-genset_status")
-				secondaryText: Global.acInputs.gensetStatusCodeToText(gensetStatus.value)
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListText {
+					//% "Genset status"
+					text: qsTrId("page-dc-genset-genset_status")
+					secondaryText: Global.acInputs.gensetStatusCodeToText(gensetStatus.value)
 
-				VeQuickItem {
-					id: gensetStatus
-					uid: root.bindPrefix + "/StatusCode"
+					VeQuickItem {
+						id: gensetStatus
+						uid: root.bindPrefix + "/StatusCode"
+					}
 				}
 			}
 
-			ListGeneratorError {
-				dataItem.uid: root.bindPrefix + "/ErrorCode"
-			}
-
-			ListText {
-				//% "Remote start mode"
-				text: qsTrId("page-dc-genset-remote_start_mode")
-				dataItem.uid: root.bindPrefix + "/RemoteStartModeEnabled"
-				secondaryText: CommonWords.enabledOrDisabled(dataItem.value)
-			}
-
-			ListDcOutputQuantityGroup {
-				bindPrefix: root.bindPrefix
-			}
-
-			ListNavigation {
-				text: CommonWords.engine
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageEngine.qml",
-												{
-													title: text,
-													bindPrefix: root.bindPrefix
-												})
+			DelegateComponent {
+				ListGeneratorError {
+					dataItem.uid: root.bindPrefix + "/ErrorCode"
 				}
 			}
 
-			ListNavigation {
-				text: CommonWords.device_info_title
-				onClicked: {
-					Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml", {
-						serviceUid: root.bindPrefix
-					})
+			DelegateComponent {
+				ListText {
+					//% "Remote start mode"
+					text: qsTrId("page-dc-genset-remote_start_mode")
+					dataItem.uid: root.bindPrefix + "/RemoteStartModeEnabled"
+					secondaryText: CommonWords.enabledOrDisabled(dataItem.value)
+				}
+			}
+
+			DelegateComponent {
+				ListDcOutputQuantityGroup {
+					bindPrefix: root.bindPrefix
+				}
+			}
+
+			DelegateComponent {
+				ListNavigation {
+					text: CommonWords.engine
+					onClicked: {
+						Global.pageManager.pushPage("/pages/settings/PageEngine.qml",
+													{
+														title: text,
+														bindPrefix: root.bindPrefix
+													})
+					}
+				}
+			}
+
+			DelegateComponent {
+				ListNavigation {
+					text: CommonWords.device_info_title
+					onClicked: {
+						Global.pageManager.pushPage("/pages/settings/PageDeviceInfo.qml", {
+							serviceUid: root.bindPrefix
+						})
+					}
 				}
 			}
 		}

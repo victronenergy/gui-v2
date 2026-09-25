@@ -15,76 +15,116 @@ Page {
 	// Additional settings to be loaded.
 	property Component extraDeviceInfo
 
+	VeQuickItem {
+		id: deviceNameItem
+		uid: root.serviceUid + "/DeviceName"
+		invalidate: false
+	}
+	VeQuickItem {
+		id: serialItem
+		uid: root.serviceUid + "/Serial"
+		invalidate: false
+	}
+	VeQuickItem {
+		id: hardwareVersionItem
+		uid: root.serviceUid + "/HardwareVersion"
+		invalidate: false
+	}
+	VeQuickItem {
+		id: customNameItem
+		uid: root.serviceUid + "/CustomName"
+		invalidate: false
+	}
+
 	title: CommonWords.device_info_title
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListText {
-				//% "Connection"
-				text: qsTrId("settings_deviceinfo_connection")
-				dataItem.uid: root.serviceUid + "/Mgmt/Connection"
-				dataItem.invalidate: false
+		model: DelegateComponentModel {
+			DelegateComponent {
+				ListText {
+					//% "Connection"
+					text: qsTrId("settings_deviceinfo_connection")
+					dataItem.uid: root.serviceUid + "/Mgmt/Connection"
+					dataItem.invalidate: false
+				}
 			}
 
-			ListText {
-				//% "Product"
-				text: qsTrId("settings_deviceinfo_product")
-				dataItem.uid: root.serviceUid + "/ProductName"
-				dataItem.invalidate: false
+			DelegateComponent {
+				ListText {
+					//% "Product"
+					text: qsTrId("settings_deviceinfo_product")
+					dataItem.uid: root.serviceUid + "/ProductName"
+					dataItem.invalidate: false
+				}
 			}
 
-			ListTextField {
-				//% "Name"
-				text: qsTrId("settings_deviceinfo_name")
-				dataItem.uid: root.serviceUid + "/CustomName"
-				dataItem.invalidate: false
-				maximumLength: 32
+			DelegateComponent {
+				preferredVisible: customNameItem.valid
+				ListTextField {
+					//% "Name"
+					text: qsTrId("settings_deviceinfo_name")
+					dataItem.uid: root.serviceUid + "/CustomName"
+					dataItem.invalidate: false
+					maximumLength: 32
+					placeholderText: CommonWords.custom_name
+					writeAccessLevel: VenusOS.User_AccessType_User
+				}
+			}
+
+			DelegateComponent {
+				ListText {
+					//% "Product ID"
+					text: qsTrId("settings_deviceinfo_product_id")
+					secondaryText: Utils.toHexFormat(dataItem.value)
+					dataItem.uid: root.serviceUid + "/ProductId"
+					dataItem.invalidate: false
+				}
+			}
+
+			DelegateComponent {
+				dataItem: VeQuickItem { uid: root.serviceUid + "/FirmwareVersion"; invalidate: false }
 				preferredVisible: dataItem.valid
-				placeholderText: CommonWords.custom_name
-				writeAccessLevel: VenusOS.User_AccessType_User
+				ListFirmwareVersion {
+					bindPrefix: root.serviceUid
+					dataItem.invalidate: false
+				}
 			}
 
-			ListText {
-				//% "Product ID"
-				text: qsTrId("settings_deviceinfo_product_id")
-				secondaryText: Utils.toHexFormat(dataItem.value)
-				dataItem.uid: root.serviceUid + "/ProductId"
-				dataItem.invalidate: false
+			DelegateComponent {
+				preferredVisible: hardwareVersionItem.valid
+				ListText {
+					//% "Hardware version"
+					text: qsTrId("settings_deviceinfo_hardware_version")
+					dataItem.uid: root.serviceUid + "/HardwareVersion"
+					dataItem.invalidate: false
+				}
 			}
 
-			ListFirmwareVersion {
-				bindPrefix: root.serviceUid
-				dataItem.invalidate: false
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				ListText {
+					text: CommonWords.vrm_instance
+					dataItem.uid: root.serviceUid + "/DeviceInstance"
+					dataItem.invalidate: false
+				}
 			}
 
-			ListText {
-				//% "Hardware version"
-				text: qsTrId("settings_deviceinfo_hardware_version")
-				dataItem.uid: root.serviceUid + "/HardwareVersion"
-				dataItem.invalidate: false
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				preferredVisible: serialItem.valid
+				ListText {
+					text: CommonWords.serial_number
+					dataItem.uid: root.serviceUid + "/Serial"
+					dataItem.invalidate: false
+				}
 			}
 
-			ListText {
-				text: CommonWords.vrm_instance
-				dataItem.uid: root.serviceUid + "/DeviceInstance"
-				dataItem.invalidate: false
-			}
-
-			ListText {
-				text: CommonWords.serial_number
-				dataItem.uid: root.serviceUid + "/Serial"
-				dataItem.invalidate: false
-				preferredVisible: dataItem.valid
-			}
-
-			ListText {
-				//% "Device name"
-				text: qsTrId("settings_deviceinfo_device_name")
-				dataItem.uid: root.serviceUid + "/DeviceName"
-				dataItem.invalidate: false
-				preferredVisible: dataItem.valid
+			DelegateComponent {
+				preferredVisible: deviceNameItem.valid
+				ListText {
+					//% "Device name"
+					text: qsTrId("settings_deviceinfo_device_name")
+					dataItem.uid: root.serviceUid + "/DeviceName"
+					dataItem.invalidate: false
+				}
 			}
 		}
 

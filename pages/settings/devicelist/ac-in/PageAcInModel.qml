@@ -6,35 +6,12 @@
 import QtQuick
 import Victron.VenusOS
 
-VisibleItemModel {
+DelegateComponentModel {
 	id: root
 
 	property string bindPrefix
 	property int productId
 	property Page deviceSettingsPage
-
-	function _calculatePhaseNumbers() {
-		// Phase numbers are determined by /NrOfPhases or /Ac/Phase or /PhaseSetting, in that order.
-		// An exception to this rule is if NrOfPhases is 1 use /Ac/Phase if valid, and then
-		// /PhaseSetting if valid.
-		// If none are set, use all 3 phases and rely on phaseCountKnown to filter out invalid phases.
-
-		if (nrOfPhases.valid && nrOfPhases.value === 1) {
-			return phase.valid ? [ phase.value ]
-				: phaseSetting.valid ? [ phaseSetting.value ]
-				: [ 1 ]
-		}
-		if (nrOfPhases.valid) {
-			return Array.from({length: nrOfPhases.value}, (_, index) => index+1)
-		}
-		if (phase.valid) {
-			return [ phase.value ]
-		}
-		if (phaseSetting.valid) {
-			return [ phaseSetting.value ]
-		}
-		return [1,2,3]
-	}
 
 	readonly property VeQuickItem nrOfPhases: VeQuickItem {
 		uid: root.bindPrefix + "/NrOfPhases"
@@ -46,178 +23,207 @@ VisibleItemModel {
 		uid: root.bindPrefix + "/Ac/Phase"
 	}
 
-	// The phase set by the device to report measurements, if the /NrOfPhases and /Ac/Phase is not
-	// valid use this value to assign a specific phase.
-	readonly property VeQuickItem phaseSetting: VeQuickItem {
-		uid: root.bindPrefix + "/PhaseSetting"
-	}
-
-	readonly property var phaseNumbers: root._calculatePhaseNumbers()
+	// Phase numbers are determined by /NrOfPhases or /Ac/Phase, in that order. If neither are set,
+	// use all 3 phases and rely on phaseCountKnown to filter out invalid phases.
+	readonly property var phaseNumbers: nrOfPhases.valid ? Array.from({length: nrOfPhases.value}, (_, index) => index+1)
+			: phase.valid ? [ phase.value ]
+			: [1,2,3]   // default to 3 phases, and use phaseCountKnown to filter out invalid phases
 
 	// If the number of phases is not known, show each phase depending on whether there is valid
 	// data for that phase.
-	readonly property bool phaseCountKnown: phase.valid || nrOfPhases.valid || phaseSetting.valid
+	readonly property bool phaseCountKnown: phase.valid || nrOfPhases.valid
 
-	ListText {
-		text: CommonWords.status
-		dataItem.uid: root.bindPrefix + "/StatusCode"
-		preferredVisible: dataItem.valid && !(role.value === "pvinverter" && dataItem.value === 99)  // hide status code when not supported (pvinverters only)
-		secondaryText: VenusOS.pvInverter_statusCodeToText(dataItem.value)
+	readonly property VeQuickItem roleItem: VeQuickItem {
+		uid: root.bindPrefix + "/Role"
 	}
 
-	ListAcInError {
-		bindPrefix: root.bindPrefix
+	DelegateComponent {
+		dataItem: VeQuickItem { uid: root.bindPrefix + "/StatusCode" }
+		preferredVisible: dataItem.valid && !(roleItem.value === "pvinverter" && dataItem.value === 99)  // hide status code when not supported (pvinverters only)
+		ListText {
+			text: CommonWords.status
+			dataItem.uid: root.bindPrefix + "/StatusCode"
+			secondaryText: VenusOS.pvInverter_statusCodeToText(dataItem.value)
+		}
 	}
 
-	SettingsColumn {
-		width: parent ? parent.width : 0
+	DelegateComponent {
+		ListAcInError {
+			bindPrefix: root.bindPrefix
+		}
+	}
+
+	DelegateComponent {
 		preferredVisible: root.phaseNumbers.length > 0
+		SettingsColumn {
+			width: parent ? parent.width : 0
 
-		Repeater {
-			model: root.phaseNumbers
-			delegate: ListQuantityGroup {
-				preferredVisible: root.phaseCountKnown || (phaseVoltage.valid || phaseCurrent.valid ||
-												  phasePower.valid || phasePowerFactor.valid)
-				text: CommonWords.ac_phase_x.arg(modelData)
-				model: QuantityObjectModel {
-					filterType: QuantityObjectModel.HasValue
+			Repeater {
+				model: root.phaseNumbers
+				delegate: ListQuantityGroup {
+					preferredVisible: root.phaseCountKnown || (phaseVoltage.valid || phaseCurrent.valid ||
+													  phasePower.valid || phasePowerFactor.valid)
+					text: CommonWords.ac_phase_x.arg(modelData)
+					model: QuantityObjectModel {
+						filterType: QuantityObjectModel.HasValue
 
-					QuantityObject { object: phaseVoltage; unit: VenusOS.Units_Volt_AC; defaultValue: "--" }
-					QuantityObject { object: phaseCurrent; unit: VenusOS.Units_Amp; defaultValue: "--" }
-					QuantityObject { object: phasePower; unit: VenusOS.Units_Watt; defaultValue: "--" }
-					QuantityObject { object: phasePowerFactor; unit: VenusOS.Units_PowerFactor }
-				}
+						QuantityObject { object: phaseVoltage; unit: VenusOS.Units_Volt_AC; defaultValue: "--" }
+						QuantityObject { object: phaseCurrent; unit: VenusOS.Units_Amp; defaultValue: "--" }
+						QuantityObject { object: phasePower; unit: VenusOS.Units_Watt; defaultValue: "--" }
+						QuantityObject { object: phasePowerFactor; unit: VenusOS.Units_PowerFactor }
+					}
 
-				VeQuickItem {
-					id: phaseVoltage
-					uid: root.bindPrefix + "/Ac/L" + modelData + "/Voltage"
-				}
-				VeQuickItem {
-					id: phaseCurrent
-					uid: root.bindPrefix + "/Ac/L" + modelData + "/Current"
-				}
-				VeQuickItem {
-					id: phasePower
-					uid: root.bindPrefix + "/Ac/L" + modelData + "/Power"
-				}
-				VeQuickItem {
-					id: phasePowerFactor
-					uid: root.bindPrefix + "/Ac/L" + modelData + "/PowerFactor"
+					VeQuickItem {
+						id: phaseVoltage
+						uid: root.bindPrefix + "/Ac/L" + modelData + "/Voltage"
+					}
+					VeQuickItem {
+						id: phaseCurrent
+						uid: root.bindPrefix + "/Ac/L" + modelData + "/Current"
+					}
+					VeQuickItem {
+						id: phasePower
+						uid: root.bindPrefix + "/Ac/L" + modelData + "/Power"
+					}
+					VeQuickItem {
+						id: phasePowerFactor
+						uid: root.bindPrefix + "/Ac/L" + modelData + "/PowerFactor"
+					}
 				}
 			}
 		}
 	}
 
-	ListQuantityGroup {
-		//% "AC totals"
-		text: qsTrId("ac-in-modeldefault_ac_totals")
+	DelegateComponent {
 		preferredVisible: root.phaseNumbers.length > 1
+		ListQuantityGroup {
+			//% "AC totals"
+			text: qsTrId("ac-in-modeldefault_ac_totals")
 
-		model: QuantityObjectModel {
-			QuantityObject { object: totalPower; unit: VenusOS.Units_Watt }
-			QuantityObject { object: totalEnergy; unit: VenusOS.Units_Energy_KiloWattHour; defaultValue: "--" }
-			QuantityObject { object: totalEnergyReverse; unit: VenusOS.Units_Energy_KiloWattHour; defaultValue: "--" }
-		}
+			model: QuantityObjectModel {
+				QuantityObject { object: totalPower; unit: VenusOS.Units_Watt }
+				QuantityObject { object: totalEnergy; unit: VenusOS.Units_Energy_KiloWattHour; defaultValue: "--" }
+				QuantityObject { object: totalEnergyReverse; unit: VenusOS.Units_Energy_KiloWattHour; defaultValue: "--" }
+			}
 
-		VeQuickItem {
-			id: totalPower
-			uid: root.bindPrefix + "/Ac/Power"
-		}
+			VeQuickItem {
+				id: totalPower
+				uid: root.bindPrefix + "/Ac/Power"
+			}
 
-		VeQuickItem {
-			id: totalEnergy
-			uid: root.bindPrefix + "/Ac/Energy/Forward"
-		}
+			VeQuickItem {
+				id: totalEnergy
+				uid: root.bindPrefix + "/Ac/Energy/Forward"
+			}
 
-		VeQuickItem {
-			id: totalEnergyReverse
-			uid: root.bindPrefix + "/Ac/Energy/Reverse"
-		}
-	}
-
-	SettingsColumn {
-		width: parent ? parent.width : 0
-		preferredVisible: root.phaseNumbers.length > 0
-
-		Repeater {
-			model: root.phaseNumbers
-			delegate: ListQuantity {
-				//: %1 = phase number (1-3)
-				//% "Energy L%1"
-				text: qsTrId("ac-in-modeldefault_energy_x").arg(modelData)
-				valueColor: Theme.color_quantityTable_quantityValue
-				unitColor: Theme.color_quantityTable_quantityUnit
-				dataItem.uid: "%1/Ac/L%2/Energy/Forward".arg(root.bindPrefix).arg(modelData)
-				unit: VenusOS.Units_Energy_KiloWattHour
-				preferredVisible: root.phaseCountKnown || dataItem.valid
+			VeQuickItem {
+				id: totalEnergyReverse
+				uid: root.bindPrefix + "/Ac/Energy/Reverse"
 			}
 		}
 	}
 
-	SettingsColumn {
-		width: parent ? parent.width : 0
+	DelegateComponent {
 		preferredVisible: root.phaseNumbers.length > 0
+		SettingsColumn {
+			width: parent ? parent.width : 0
 
-		Repeater {
-			model: root.phaseNumbers
-			delegate: ListQuantity {
-				//: %1 = phase number (1-3)
-				//% "Reversed energy L%1"
-				text: qsTrId("ac-in-modeldefault_energy_reverse_x").arg(modelData)
-				valueColor: Theme.color_quantityTable_quantityValue
-				unitColor: Theme.color_quantityTable_quantityUnit
-				dataItem.uid: "%1/Ac/L%2/Energy/Reverse".arg(root.bindPrefix).arg(modelData)
-				unit: VenusOS.Units_Energy_KiloWattHour
-				preferredVisible: root.phaseCountKnown || dataItem.valid
+			Repeater {
+				model: root.phaseNumbers
+				delegate: ListQuantity {
+					//: %1 = phase number (1-3)
+					//% "Energy L%1"
+					text: qsTrId("ac-in-modeldefault_energy_x").arg(modelData)
+					valueColor: Theme.color_quantityTable_quantityValue
+					unitColor: Theme.color_quantityTable_quantityUnit
+					dataItem.uid: "%1/Ac/L%2/Energy/Forward".arg(root.bindPrefix).arg(modelData)
+					unit: VenusOS.Units_Energy_KiloWattHour
+					preferredVisible: root.phaseCountKnown || dataItem.valid
+				}
 			}
 		}
 	}
 
-	ListQuantity {
-		text: CommonWords.dynamic_power_limit
-		unit: VenusOS.Units_Watt
-		dataItem.uid: root.bindPrefix + "/Ac/PowerLimit"
+	DelegateComponent {
+		preferredVisible: root.phaseNumbers.length > 0
+		SettingsColumn {
+			width: parent ? parent.width : 0
+
+			Repeater {
+				model: root.phaseNumbers
+				delegate: ListQuantity {
+					//: %1 = phase number (1-3)
+					//% "Reversed energy L%1"
+					text: qsTrId("ac-in-modeldefault_energy_reverse_x").arg(modelData)
+					valueColor: Theme.color_quantityTable_quantityValue
+					unitColor: Theme.color_quantityTable_quantityUnit
+					dataItem.uid: "%1/Ac/L%2/Energy/Reverse".arg(root.bindPrefix).arg(modelData)
+					unit: VenusOS.Units_Energy_KiloWattHour
+					preferredVisible: root.phaseCountKnown || dataItem.valid
+				}
+			}
+		}
+	}
+
+	DelegateComponent {
+		dataItem: VeQuickItem { uid: root.bindPrefix + "/Ac/PowerLimit" }
 		preferredVisible: dataItem.valid
+		ListQuantity {
+			text: CommonWords.dynamic_power_limit
+			unit: VenusOS.Units_Watt
+			dataItem.uid: root.bindPrefix + "/Ac/PowerLimit"
+		}
 	}
 
-	ListText {
-		//% "Phase sequence"
-		text: qsTrId("ac-in-modeldefault_phase_sequence")
-		dataItem.uid: root.bindPrefix + "/PhaseSequence"
+	DelegateComponent {
+		dataItem: VeQuickItem { uid: root.bindPrefix + "/PhaseSequence" }
 		preferredVisible: dataItem.valid
-		secondaryText: dataItem.value === 1
-				  //: Phase sequence L1-L3-L2
-				  //% "L1-L3-L2"
-				? qsTrId("ac-in-modeldefault_phase_sequence_l3_first")
-				  //: Phase sequence L1-L2-L3
-				  //% "L1-L2-L3"
-				: qsTrId("ac-in-modeldefault_phase_sequence_ordered")
-	}
-
-	ListNavigation {
-		text: CommonWords.setup
-		preferredVisible: allowedRoles.valid
-		onClicked: {
-			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
-					{ "title": text, "bindPrefix": root.bindPrefix, "deviceSettingsPage": root.deviceSettingsPage })
-		}
-
-		VeQuickItem {
-			id: allowedRoles
-			uid: root.bindPrefix + "/AllowedRoles"
-		}
-
-		VeQuickItem {
-			id: role
-			uid: root.bindPrefix + "/Role"
+		ListText {
+			//% "Phase sequence"
+			text: qsTrId("ac-in-modeldefault_phase_sequence")
+			dataItem.uid: root.bindPrefix + "/PhaseSequence"
+			secondaryText: dataItem.value === 1
+					  //: Phase sequence L1-L3-L2
+					  //% "L1-L3-L2"
+					? qsTrId("ac-in-modeldefault_phase_sequence_l3_first")
+					  //: Phase sequence L1-L2-L3
+					  //% "L1-L2-L3"
+					: qsTrId("ac-in-modeldefault_phase_sequence_ordered")
 		}
 	}
 
-	PowerGuardConsumptionSettings {
-		bindPrefix: root.bindPrefix
+	DelegateComponent {
+		id: allowedRolesDC
+		dataItem: VeQuickItem { uid: root.bindPrefix + "/AllowedRoles" }
+		preferredVisible: allowedRolesDC.dataItem.valid
+		ListNavigation {
+			text: CommonWords.setup
+			onClicked: {
+				Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcInSetup.qml",
+						{ "title": text, "bindPrefix": root.bindPrefix, "deviceSettingsPage": root.deviceSettingsPage })
+			}
+
+			VeQuickItem {
+				id: allowedRoles
+				uid: root.bindPrefix + "/AllowedRoles"
+			}
+
+			VeQuickItem {
+				id: role
+				uid: root.bindPrefix + "/Role"
+			}
+		}
 	}
 
-	PowerGuardProductionSettings {
-		bindPrefix: root.bindPrefix
+	DelegateComponent {
+		PowerGuardConsumptionSettings {
+			bindPrefix: root.bindPrefix
+		}
+	}
+
+	DelegateComponent {
+		PowerGuardProductionSettings {
+			bindPrefix: root.bindPrefix
+		}
 	}
 }

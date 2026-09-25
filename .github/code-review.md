@@ -280,7 +280,7 @@ See [Device Settings](.github/device-settings.md) for the access level system.
 
 2.p.ii. **writeAccessLevel propagation**: Settings delegates (e.g., `ListSwitch`, `ListSpinBox`) inherit `writeAccessLevel` from the page or parent. Verify that new settings pages pass the correct `writeAccessLevel` to their children, and that custom controls check `userHasWriteAccess` before allowing writes.
 
-2.p.iii. **Visibility vs interactivity**: Some settings should be visible but read-only at lower access levels, while others should be hidden entirely. Verify the correct strategy is used: `writeAccessLevel` controls editability, while `allowed` or `preferredVisible` controls visibility. Using the wrong mechanism can leak information about unavailable features or silently prevent configuration.
+2.p.iii. **Visibility vs interactivity**: Some settings should be visible but read-only at lower access levels, while others should be hidden entirely. Verify the correct strategy is used: `writeAccessLevel` controls editability. For `DelegateComponentModel` pages, hiding a row entirely requires `DelegateComponent.effectiveVisible` (by default `preferredVisible` and `showAccessLevel` vs the current access level). An inner-only `ListSetting.showAccessLevel` neither filters nor collapses a DCM row — `ListSetting.effectiveVisible` ignores `userHasReadAccess` whenever `delegateComponent` is set — and must be hoisted to the `DelegateComponent`. Non-DCM rows (`delegateComponent` unset) still collapse via `ListSetting.showAccessLevel`. Using the wrong mechanism can leak information about unavailable features or silently prevent configuration.
 
 ### 2.q. Mock data synchronization
 
@@ -415,6 +415,8 @@ These apply when a change introduces a performance optimisation that trades off 
 4.b.iv. **Auto usage**: Use `auto` when the type is obvious from the right-hand side (e.g., `auto it = map.find(key)`). Don't use `auto` when it obscures the type.
 
 4.b.v. **License header**: Every new source file (`.cpp`, `.h`, `.qml`) must include the standard Victron copyright header at the top: `/*\n** Copyright (C) <year> Victron Energy B.V.\n** See LICENSE.txt for license information.\n*/`. Use the current year for new files. Do not omit the header or substitute a different license.
+
+4.b.vi. **Commit messages**: Wrap both the subject and the message body at 72 characters. The subject must be a single line of at most 72 characters. Every body line must be at most 72 characters. Unwrapped subjects or body paragraphs are not allowed.
 
 ### 4.c. Documentation
 
