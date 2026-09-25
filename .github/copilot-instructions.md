@@ -61,3 +61,4 @@ This tells Qt to write to stderr even without a detected console, making output 
 - **Enums**: All enums defined in C++ (`src/enums.h`) and accessed in QML as `VenusOS.EnumName_Value`.
 - **Key navigation**: All interactive elements must be keyboard-navigable. Set `focusPolicy: Qt.TabFocus` and `KeyNavigationHighlight.active: activeFocus`. See [Key Navigation](.github/key-navigation.md).
 - **Portrait + Landscape**: All features must work in both orientations. Use `Theme.screenSize === Theme.Portrait` for layout branching and `Theme.geometry_*` for dimensions. See [Layout Modes](.github/layout-modes.md).
+- **Commit messages**: It is a requirement to wrap the subject at 72 characters and the message body at 72 characters. The subject is a single line of at most 72 characters. Wrap every body line at 72; unwrapped paragraphs are not allowed. This applies to `git commit`, `git commit --amend`, and rewritten messages. See [Code Review](.github/code-review.md) 4.b.vi.
