@@ -4,6 +4,7 @@
 */
 
 #include "wifimodel.h"
+#include "allservicesmodel.h"
 #include "backendconnection.h"
 
 #include <veutil/qt/ve_qitem.hpp>
@@ -27,15 +28,53 @@ static inline bool isConnected(const QString &state)
 WifiModel::WifiModel(QObject *parent)
 	: QAbstractListModel(parent)
 {
-	const QString serviceUid = BackendConnection::create()->serviceUidForType(QStringLiteral("platform"));
+	AllServicesModel *allServicesModel = AllServicesModel::create();
+	connect(allServicesModel, &AllServicesModel::serviceAdded,
+			this, &WifiModel::serviceAdded);
+	connect(allServicesModel, &AllServicesModel::serviceAboutToBeRemoved,
+			this, &WifiModel::serviceAboutToBeRemoved);
 
-	m_servicesItem = VeQItems::getRoot()->itemGetOrCreate(serviceUid + QStringLiteral("/Network/Services"));
-	m_scanItem = VeQItems::getRoot()->itemGetOrCreate(serviceUid + QStringLiteral("/Network/Wifi/Scan"));
-	m_accessPointItem = VeQItems::getRoot()->itemGetOrCreate(serviceUid + QStringLiteral("/Services/AccessPoint/Enabled"));
+	const QString platformUid = BackendConnection::create()->serviceUidForType(QStringLiteral("platform"));
+	setPlatformItem(allServicesModel->itemAt(allServicesModel->indexOf(platformUid)));
+}
 
-	m_servicesItem->getValueAndChanges(this, &WifiModel::update, VeQItem::DoFetch, Qt::QueuedConnection);
-	m_scanItem->getValueAndChanges(this, &WifiModel::update, VeQItem::DoFetch, Qt::QueuedConnection);
-	m_accessPointItem->getValueAndChanges(this, &WifiModel::update, VeQItem::DoFetch, Qt::QueuedConnection);
+void WifiModel::serviceAdded(VeQItem *serviceItem)
+{
+	if (serviceItem->uniqueId() == BackendConnection::create()->serviceUidForType(QStringLiteral("platform"))) {
+		setPlatformItem(serviceItem);
+	}
+}
+
+void WifiModel::serviceAboutToBeRemoved(VeQItem *serviceItem)
+{
+	if (serviceItem->uniqueId() == BackendConnection::create()->serviceUidForType(QStringLiteral("platform"))) {
+		setPlatformItem(nullptr);
+	}
+}
+
+void WifiModel::setPlatformItem(VeQItem *platformItem)
+{
+	for (VeQItem *item : { m_servicesItem.data(), m_scanItem.data(), m_accessPointItem.data() }) {
+		if (item) {
+			item->disconnect(this);
+		}
+	}
+	m_servicesItem.clear();
+	m_scanItem.clear();
+	m_accessPointItem.clear();
+
+	if (platformItem) {
+		m_servicesItem = platformItem->itemGetOrCreate(QStringLiteral("Network/Services"));
+		m_scanItem = platformItem->itemGetOrCreate(QStringLiteral("Network/Wifi/Scan"));
+		m_accessPointItem = platformItem->itemGetOrCreate(QStringLiteral("Services/AccessPoint/Enabled"));
+
+		m_servicesItem->getValueAndChanges(this, &WifiModel::update, VeQItem::DoFetch, Qt::QueuedConnection);
+		m_scanItem->getValueAndChanges(this, &WifiModel::update, VeQItem::DoFetch, Qt::QueuedConnection);
+		m_accessPointItem->getValueAndChanges(this, &WifiModel::update, VeQItem::DoFetch, Qt::QueuedConnection);
+	}
+
+	// Clear the model if the service was removed, or refresh it with the new items.
+	update();
 }
 
 bool WifiModel::valid() const

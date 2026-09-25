@@ -26,6 +26,12 @@ TestCase {
 		sourceModel: model
 	}
 
+	Component {
+		id: wifiModelComponent
+
+		WifiModel {}
+	}
+
 	SignalSpy {
 		id: rowsInsertedSpy
 		target: model
@@ -370,5 +376,81 @@ TestCase {
 		wifis["Network C"].State = "idle"
 		setWifis(wifis)
 		trySortedNames(",Network C,Network D,Network B,Network A")
+	}
+
+	function test_platformServiceRemoved() {
+		compare(model.rowCount(), Object.keys(defaultWifis()).length)
+
+		// When the platform service is removed, the model is cleared.
+		MockManager.removeValue(platformUid)
+		tryCompare(model, "valid", false)
+		compare(model.rowCount(), 0)
+		compare(sortedModel.rowCount(), 0)
+		compare(model.connectedNetworkName, qsTrId("wifimodel_disconnected"))
+	}
+
+	function test_platformServiceReAdded() {
+		MockManager.removeValue(platformUid)
+		tryCompare(model, "valid", false)
+		compare(model.rowCount(), 0)
+
+		// When the platform service is added again, the model is rebound to the new service.
+		setupNetwork()
+		compare(model.connectedNetworkName, "Network C")
+		trySortedNames("Network C,,Network D,Network B,Network A")
+
+		// Changes to the new service are reflected in the model.
+		let wifis = defaultWifis()
+		wifis["Network E"] = wifiNetwork("wifi_e", "idle", 70, false)
+		setWifis(wifis)
+		tryVerify(() => findRow("Network E") >= 0)
+
+		MockManager.setValue(accessPointUid, 1)
+		wifis["Network C"].State = "idle"
+		setWifis(wifis)
+		tryCompare(model, "connectedNetworkName", qsTrId("wifimodel_disconnected_ap_on"))
+	}
+
+	function test_platformServiceRemovedRepeatedly() {
+		for (let i = 0; i < 3; ++i) {
+			MockManager.removeValue(platformUid)
+			tryCompare(model, "valid", false)
+			compare(model.rowCount(), 0)
+
+			setupNetwork()
+			compare(model.connectedNetworkName, "Network C")
+		}
+	}
+
+	function test_createdWithExistingPlatformService() {
+		// A model created after the platform service exists binds to it immediately.
+		const newModel = createTemporaryObject(wifiModelComponent, root)
+		verify(newModel)
+		tryCompare(newModel, "valid", true)
+		tryCompare(newModel, "connectedNetworkName", "Network C")
+		compare(newModel.rowCount(), Object.keys(defaultWifis()).length)
+	}
+
+	function test_createdWithoutPlatformService() {
+		MockManager.removeValue(platformUid)
+		tryCompare(model, "valid", false)
+
+		// A model created before the platform service exists binds to it once it is added.
+		const newModel = createTemporaryObject(wifiModelComponent, root)
+		verify(newModel)
+		wait(50)
+		compare(newModel.valid, false)
+		compare(newModel.rowCount(), 0)
+		compare(newModel.connectedNetworkName, qsTrId("wifimodel_disconnected"))
+
+		setupNetwork()
+		tryCompare(newModel, "valid", true)
+		tryCompare(newModel, "connectedNetworkName", "Network C")
+		compare(newModel.rowCount(), Object.keys(defaultWifis()).length)
+
+		// It is cleared again when the service is removed.
+		MockManager.removeValue(platformUid)
+		tryCompare(newModel, "valid", false)
+		compare(newModel.rowCount(), 0)
 	}
 }

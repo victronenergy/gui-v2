@@ -71,6 +71,9 @@ private:
 		bool favorite = false;
 	};
 
+	void serviceAdded(VeQItem *serviceItem);
+	void serviceAboutToBeRemoved(VeQItem *serviceItem);
+	void setPlatformItem(VeQItem *platformItem);
 	void update();
 	void updateConnectedNetworkName();
 
