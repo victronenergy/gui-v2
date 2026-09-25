@@ -133,6 +133,7 @@ TestCase {
 	}
 
 	function cleanup() {
+		WifiTestTranslator.prefix = ""
 		MockManager.setValue(servicesUid, null)
 		MockManager.setValue(scanUid, null)
 		MockManager.setValue(accessPointUid, null)
@@ -210,6 +211,41 @@ TestCase {
 
 		MockManager.setValue(accessPointUid, 0)
 		tryCompare(model, "connectedNetworkName", qsTrId("wifimodel_disconnected_ap_off"))
+	}
+
+	function test_languageChanged_data() {
+		return [
+			{ tag: "AP off", state: "idle", accessPoint: 0, id: "wifimodel_disconnected_ap_off" },
+			{ tag: "AP on", state: "idle", accessPoint: 1, id: "wifimodel_disconnected_ap_on" },
+			{ tag: "AP invalid", state: "idle", accessPoint: null, id: "wifimodel_disconnected" },
+			{ tag: "connected", state: "ready", accessPoint: 0, network: "Network A" },
+		]
+	}
+
+	function test_languageChanged(data) {
+		MockManager.setValue(accessPointUid, data.accessPoint)
+		setWifis({ "Network A": wifiNetwork("wifi_a", data.state, 50, false) })
+		const originalName = data.network || qsTrId(data.id)
+		tryCompare(model, "connectedNetworkName", originalName)
+
+		// Installing a new translation catalogue alone does not update the name.
+		WifiTestTranslator.prefix = "[Translated] "
+		const translatedName = data.network || qsTrId(data.id)
+		if (!data.network) {
+			verify(translatedName !== originalName)
+		}
+		wait(50)
+		compare(model.connectedNetworkName, originalName)
+
+		// The name is updated when the current language changes. A connected network name
+		// is not translated, so it is unchanged.
+		Language.currentLanguageChanged()
+		tryCompare(model, "connectedNetworkName", translatedName)
+
+		// Changing back to the original language restores the original name.
+		WifiTestTranslator.prefix = ""
+		Language.currentLanguageChanged()
+		tryCompare(model, "connectedNetworkName", originalName)
 	}
 
 	function test_addNetwork() {

@@ -6,6 +6,7 @@
 #include "wifimodel.h"
 #include "allservicesmodel.h"
 #include "backendconnection.h"
+#include "language.h"
 
 #include <veutil/qt/ve_qitem.hpp>
 
@@ -36,6 +37,8 @@ WifiModel::WifiModel(QObject *parent)
 
 	const QString platformUid = BackendConnection::create()->serviceUidForType(QStringLiteral("platform"));
 	setPlatformItem(allServicesModel->itemAt(allServicesModel->indexOf(platformUid)));
+
+	connect(Language::create(), &Language::currentLanguageChanged, this, &WifiModel::updateConnectedNetworkName);
 }
 
 void WifiModel::serviceAdded(VeQItem *serviceItem)
