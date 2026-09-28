@@ -14,6 +14,14 @@ The `Theme.screenSize` property (type `Theme.ScreenSize`) determines the current
 
 The value is set automatically in `Main.qml` based on window dimensions (width < height → Portrait) and platform (WASM defaults to SevenInch in landscape).
 
+On desktop, `--resolution WxH` sets `Theme.screenSize` and the window size before target-page route resolution and before `Main.qml` loads, so `*_Portrait` / `*_Landscape` types resolve against the requested orientation and layout Loaders pick the matching components on first construction. Width < height selects `Theme.Portrait`. Mid-run resize/reorientation is not supported when this flag is used. Example:
+
+```
+./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test /pages/BriefSidePanel.qml
+```
+
+Target-page mode (`--ui-test /pages/OverviewPage_Portrait.qml`, and the same for other `*_Portrait` / `*_Landscape` types) only resolves the layout implementation that `Theme.screenSize` actually instantiates. Targeting the inactive orientation is rejected as unresolvable.
+
 ## Geometry system
 
 Each screen size has its own geometry JSON file:

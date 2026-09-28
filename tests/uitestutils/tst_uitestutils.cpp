@@ -128,6 +128,20 @@ public:
 		return Victron::VenusOS::UiTestUtils::parseUiTestValueFromArgs(arguments);
 	}
 
+	Q_INVOKABLE QVariantMap parseResolution(const QString &value) const
+	{
+		int width = 0;
+		int height = 0;
+		QString error;
+		const bool ok = Victron::VenusOS::UiTestUtils::parseResolution(value, &width, &height, &error);
+		return QVariantMap{
+			{ QStringLiteral("ok"), ok },
+			{ QStringLiteral("width"), width },
+			{ QStringLiteral("height"), height },
+			{ QStringLiteral("error"), error },
+		};
+	}
+
 	Q_INVOKABLE QVariantMap countRuntimeWarningTexts(
 			const QStringList &warningTexts,
 			const QStringList &alreadyRecorded = QStringList()) const

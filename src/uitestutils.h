@@ -64,6 +64,10 @@ bool resolveTargetRoute(const QString &targetPageUrl, QString *entryNavText,
 QStringList normalizeUiTestArguments(const QStringList &arguments);
 QString parseUiTestValueFromArgs(const QStringList &arguments);
 
+// Parse a "WxH" window resolution (for example "480x800"). Returns false and
+// sets errorMessage when the value is empty, malformed, or not a positive size.
+bool parseResolution(const QString &value, int *width, int *height, QString *errorMessage = nullptr);
+
 int countNewRuntimeWarningTexts(
 		const QStringList &warningTexts,
 		QSet<QString> *recordedWarnings,
