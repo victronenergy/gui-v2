@@ -100,6 +100,12 @@ public:
 	// Sanitizes a string so that it can be used as part of the file name for an image.
 	Q_INVOKABLE QString sanitizedImageName(const QString &imageName) const;
 
+	// Captures the test window immediately and saves it as <ImageDir>/<imageName>.png.
+	// Unlike CaptureAndCompare, this does not wait for the scene to stabilize.
+	// Not used by current tests; kept so a developer can temporarily dump per-frame images
+	// when debugging a specific issue.
+	Q_INVOKABLE bool grabImage(const QString &imageName);
+
 Q_SIGNALS:
 	void nameChanged();
 	void windowChanged();

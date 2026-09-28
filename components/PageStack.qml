@@ -13,7 +13,13 @@ StackView {
 	readonly property bool opened: _fullyOpened
 	readonly property Page currentPage: opened ? currentItem : null
 
-	readonly property int animationDuration: Global.mainView && Global.mainView.allowPageAnimations ? Theme.animation_page_slide_duration : 0
+	// Use Global.animationEnabled, not MainView.allowPageAnimations.
+	// allowPageAnimations is false while this stack is busy, which made the
+	// first drill-down slide duration 0.
+	readonly property int animationDuration: Global.animationEnabled ? Theme.animation_page_slide_duration : 0
+	// First-page slide-in duration. Set before push(), so a busy stack cannot
+	// set it to 0.
+	readonly property int fakePushDuration: fakePushAnimation.duration
 	readonly property bool animating: busy || fakePushTransition.running || fakePopTransition.running
 
 	// The file url of the top page on the stack. Undefined if depth=0 or not opened, or an empty
@@ -105,8 +111,10 @@ StackView {
 
 		let pushedPage = null
 		if (root.state !== "opened") {
-			// When the stack is closed or hidden, push the first page without any animation and
-			// slide the stack into view.
+			// Closed or hidden: push the page immediately, then slide the stack in.
+			// Set the duration before push(). An Immediate push can mark the stack
+			// busy, which used to set the duration to 0.
+			const slideDuration = _animationDuration(operation)
 			pushedPage = root.push(objectOrUrl, properties, StackView.Immediate)
 			if (!pushedPage) {
 				if (createdPageObject && !Theme.objectHasQObjectParent(createdPageObject)) {
@@ -117,7 +125,7 @@ StackView {
 			}
 			root._pageUrls.push(pageUrl)
 			root._topPageUrl = pageUrl
-			fakePushAnimation.duration = _animationDuration(operation)
+			fakePushAnimation.duration = slideDuration
 			root.state = "opened"
 		} else {
 			// Otherwise, push the push onto the visible stack, possibly with an animation.
