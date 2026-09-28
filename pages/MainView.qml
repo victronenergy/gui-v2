@@ -131,7 +131,12 @@ FocusScope {
 				 && Global.systemSettings.startPageConfiguration.startPageTimeout > 0
 				 && !Global.applicationActive
 		interval: Global.systemSettings.startPageConfiguration.startPageTimeout * 1000
-		onTriggered: pageManager.goToStartPage()
+		onTriggered: {
+			if (cardsActive) {
+				cardsLoader.hide()
+			}
+			pageManager.goToStartPage()
+		}
 	}
 
 	// Auto-select the start page when the application becomes inactive, if configured to do so.
@@ -216,6 +221,15 @@ FocusScope {
 					onMovingChanged: {
 						if (!moving) {
 							navBar.setCurrentIndex(currentIndex)
+						}
+					}
+
+					// When the page model changes, the view currentIndex resets to 0. This may
+					// happen on startup if the Boat/Levels availability is not known until after
+					// the main UI is loaded, so go to the Start Page to avoid confusion.
+					onCountChanged: {
+						if (Global.allPagesLoaded && count === swipePageModel.pages.length) {
+							pageManager.goToStartPage()
 						}
 					}
 				}
