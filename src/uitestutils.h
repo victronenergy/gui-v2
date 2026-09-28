@@ -37,8 +37,14 @@ struct RouteEdge
 
 struct RouteStep
 {
+	enum VerifyMode {
+		StackPage, // the click pushes a PageStack page; verify topPageUrl
+		ShownType, // the click constructs/shows a QML type; verify the type is in the tree
+	};
+
 	ClickIdentifier identifier;
-	QString expectedPageUrl; // the page that should open after this click
+	QString expectedPageUrl; // the page or type URL that should be shown after this click
+	VerifyMode verifyMode = StackPage;
 };
 
 // Convert supported page URL/path forms into canonical "/pages/...qml", or return empty if invalid.
@@ -47,9 +53,11 @@ QString normalizePageUrl(const QString &raw);
 // Scan QML pages and build source->destination edges with the trigger identifier used to click that edge.
 QHash<QString, QList<RouteEdge>> buildPageGraph();
 
-// Find a deterministic click path from a known root page to the target page and return
-// the steps (identifier + expected destination) for each hop. Returns false if the target
-// page is a root page itself (not reachable via pushPage), or if no route can be found.
+// Find a deterministic click path that constructs and shows the target QML type.
+// Swipe-view root pages need only a nav-bar click (empty extra steps). Overlay types
+// (StatusBar icons / Loaders) and LevelsPage tabs use static identifiers and
+// ShownType verification. PageStack destinations use the pushPage() graph from
+// Settings/Overview. Returns false if no static route can be found.
 bool resolveTargetRoute(const QString &targetPageUrl, QString *entryNavText,
 		QList<RouteStep> *routeSteps);
 
