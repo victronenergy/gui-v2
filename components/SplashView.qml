@@ -23,6 +23,9 @@ Rectangle {
 
 	function hideSplashView() {
 		console.info("SplashView: UI ready; hiding splash view")
+		if (!Global.pagePreloadComplete) {
+			Global.pagePreloadComplete = true
+		}
 		UiConfig.splashScreenVisible = false
 		// reset the state variables we animated.
 		logoIcon.opacity = 1.0
@@ -30,6 +33,37 @@ Rectangle {
 		extraInfoColumn.nextOpacity = 1.0
 		loadingProgress.opacity = 1.0
 		loadingProgress.visible = true
+	}
+
+	function _tryFadeOut() {
+		if (fadeOutAnim.running || !UiConfig.splashScreenVisible) {
+			return
+		}
+		if (!animatedLogo.paused) {
+			return
+		}
+		if (!Global.pagePreloadComplete) {
+			console.info("SplashView: waiting for page preload before fade out")
+			return
+		}
+		fadeOutAnim.start()
+	}
+
+	readonly property bool pagePreloadComplete: Global.pagePreloadComplete
+	onPagePreloadCompleteChanged: {
+		if (pagePreloadComplete) {
+			console.info("SplashView: page preload complete")
+			root._tryFadeOut()
+		}
+	}
+
+	Timer {
+		interval: 16000
+		running: animatedLogo.paused && !Global.pagePreloadComplete && UiConfig.splashScreenVisible
+		onTriggered: {
+			console.warn("SplashView: page preload wait timed out")
+			Global.pagePreloadComplete = true
+		}
 	}
 
 	OpacityAnimator on opacity {
@@ -67,7 +101,7 @@ Rectangle {
 		onPausedChanged: {
 			if (paused) {
 				console.info("SplashView: finished gauge gif animation")
-				fadeOutAnim.start()
+				root._tryFadeOut()
 			}
 		}
 
