@@ -18,7 +18,10 @@ On desktop, `--resolution WxH` sets `Theme.screenSize` and the window size befor
 
 ```
 ./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test /pages/BriefSidePanel.qml
+./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test portrait
 ```
+
+The `portrait` UI test checks Brief's inline side panel (no StatusBar button) and that control cards and the switch pane still open from the StatusBar with a vertical list.
 
 Target-page mode (`--ui-test /pages/OverviewPage_Portrait.qml`, and the same for other `*_Portrait` / `*_Landscape` types) only resolves the layout implementation that `Theme.screenSize` actually instantiates. Targeting the inactive orientation is rejected as unresolvable.
 

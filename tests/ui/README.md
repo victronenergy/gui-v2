@@ -23,6 +23,12 @@ dedicated test configuration. For example:
 # are resolved, and the window size before the UI loads. Width < height
 # selects Theme.Portrait. Mid-run resize is not supported.
 ./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test /pages/BriefSidePanel.qml
+./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test /pages/ControlCardsPage.qml
+./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test /pages/AuxCardsPage.qml
+
+# Portrait overlay assumptions (inline Brief side panel; cards still open
+# from the StatusBar and use a vertical list):
+./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test portrait
 ```
 
 The route is resolved statically at startup:
@@ -85,6 +91,7 @@ venus-gui-v2 --mock --mock-conf barebones --ui-test smoke/generic-capture
 UI tests are stored under `gui-v2/tests/ui`:
 
 * `gui-v2/tests/ui/smoke` - "smoke tests", i.e. those run as a quick sanity check on the UI
+* `gui-v2/tests/ui/portrait` - portrait overlay checks; launch with `--resolution 480x800`
 * `gui-v2/tests/ui/<feature>` - feature test that verifies some feature in more detail
 
 Each test is specified by a JSON configuration file, and one or more QML test files. The JSON file must have the same name as the test directory.

@@ -1,0 +1,16 @@
+{
+    "ExitWhenFinished": true,
+    "Logging": "info",
+    "Tests": [
+        "tst_overlays.qml"
+    ],
+    "Mock": {
+        "Configuration": ":/data/mock/conf/maximal.json",
+        "TimersActive": false
+    },
+    "Steps": {
+        "WaitUntil": {
+            "DefaultTimeout": 5000
+        }
+    }
+}
