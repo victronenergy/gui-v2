@@ -134,6 +134,9 @@ void UiTestConfiguration::loadTargetPageNavigation(const QString &targetPage)
 			{ QStringLiteral("WaitUntil"), QVariantMap{
 				{ QStringLiteral("DefaultTimeout"), 5000 },
 			}},
+			{ QStringLiteral("CaptureAndCompare"), QVariantMap{
+				{ QStringLiteral("ImageDir"), QStringLiteral("image-captures") },
+			}},
 		}},
 	};
 
