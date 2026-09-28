@@ -92,15 +92,19 @@ Page {
 						text: CommonWords.auto
 						dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPage"
 						writeAccessLevel: VenusOS.User_AccessType_User
-						invertSourceValue: true
+						checked: dataItem.value === VenusOS.StartPage_Mode_AutoSelect
+						updateDataOnClick: false
 						//% "After one minute of inactivity, select the current page as the start page, if it is in this list."
 						caption: qsTrId("settings_startpage_auto_description")
 						onClicked: {
 							popTimer.stop()
-							if (checked) {
+							if (dataItem.value === VenusOS.StartPage_Mode_AutoSelect) {
+								dataItem.setValue(VenusOS.StartPage_Mode_UserSelect)
+							} else {
 								// Clear the selected start page to indicate that it should now be
 								// auto-selected instead.
 								startPageName.setValue("")
+								dataItem.setValue(VenusOS.StartPage_Mode_AutoSelect)
 							}
 						}
 					}
