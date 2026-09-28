@@ -31,6 +31,7 @@ VENUS_GUI_TEST_CAPTURE_DIR=~/my-captures ./bin/venus-gui-v2 --mock --ui-test smo
 # before pages load. Width < height selects Theme.Portrait. The window
 # size is fixed for that process.
 ./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test /pages/BriefSidePanel.qml
+./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test smoke/mock-maximal
 ```
 
 The `--mock` flag starts the application with the mock backend (no real hardware needed). The `--ui-test <path>` flag specifies the test configuration to run, relative to `tests/ui/`.

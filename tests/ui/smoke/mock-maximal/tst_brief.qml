@@ -25,8 +25,27 @@ UiTestCase {
 
 	function test_sidePanel() {
 		if (Theme.screenSize === Theme.Portrait) {
-			// There is no side panel in the portrait layout.
-			goToNextTestFunction()
+			// Portrait loads BriefSidePanel with the page. There is no
+			// StatusBar button to open or close it.
+			addStep(UiTestStep.WaitUntil, {
+				callable: ()=> {
+					const page = root.findObject(Global.mainView, {}, "BriefPage_Portrait")
+					const panel = root.findObject(Global.mainView, {}, "BriefSidePanel")
+					return !!page && page.visible !== false && !!panel && panel.visible !== false
+				},
+				message: "Waiting for inline BriefSidePanel",
+			})
+			addStep(UiTestStep.Invoke, {
+				callable: ()=> {
+					if (findItem(Global.mainView.statusBar, { "source": Qt.url("qrc:/images/icon_sidepanel_off_32.svg") })
+							|| findItem(Global.mainView.statusBar, { "source": Qt.url("qrc:/images/icon_sidepanel_on_32.svg") })) {
+						throw new Error("Portrait Brief must not show a StatusBar side-panel button")
+					}
+					return true
+				},
+				message: "Portrait BriefSidePanel is inline; no StatusBar side-panel icon",
+			})
+			runSteps()
 			return
 		}
 
