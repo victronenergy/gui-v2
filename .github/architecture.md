@@ -176,7 +176,7 @@ Main.qml (Window)
 
 ### PageStack
 
-`components/PageStack.qml` (extends StackView) handles drill-down navigation with slide animations. Used for:
+`components/PageStack.qml` (extends StackView) handles drill-down navigation with slide animations. `animationDuration` follows `Global.animationEnabled`, not `MainView.allowPageAnimations` (the latter is false while the stack is busy, which would skip the first fake x-slide). Used for:
 - Overview widget drill-downs (e.g. clicking Battery widget → battery detail page)
 - Settings sub-pages (e.g. Settings → Display → Brightness)
 

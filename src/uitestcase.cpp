@@ -3,10 +3,12 @@
 ** See LICENSE.txt for license information.
 */
 
-#include <QMetaObject>
-#include <QMetaMethod>
-#include <QMouseEvent>
 #include <QCoreApplication>
+#include <QImage>
+#include <QMetaMethod>
+#include <QMetaObject>
+#include <QMouseEvent>
+#include <QQuickWindow>
 #include <QRegularExpression>
 #include <QTimer>
 #include <QUrl>
@@ -15,10 +17,11 @@
 #include <QQmlEngine>
 #include <QQmlProperty>
 
-#include "uitestcase.h"
-#include "uitest.h"
-#include "uiconfig.h"
 #include "logging.h"
+#include "uiconfig.h"
+#include "uitest.h"
+#include "uitestcase.h"
+#include "uiteststep.h"
 
 using namespace Victron::VenusOS;
 
@@ -330,6 +333,38 @@ bool UiTestCase::mouseClick(QQuickItem *item)
 	}
 
 	UiConfig::create()->mouseClick(item);
+	return true;
+}
+
+bool UiTestCase::grabImage(const QString &imageName)
+{
+	if (!m_window) {
+		qCWarning(venusGuiTest) << "grabImage(): window is not set";
+		return false;
+	}
+	if (imageName.isEmpty()) {
+		qCWarning(venusGuiTest) << "grabImage(): image name is empty";
+		return false;
+	}
+
+	const QString captureFileName = CaptureAndCompareStep::absoluteImagePath(
+			imageName + QStringLiteral(".png"));
+	if (captureFileName.isEmpty()) {
+		qCWarning(venusGuiTest) << "grabImage(): cannot determine capture path for" << imageName;
+		return false;
+	}
+
+	const QImage capture = m_window->grabWindow().convertToFormat(QImage::Format_ARGB32);
+	if (capture.isNull()) {
+		qCWarning(venusGuiTest) << "grabImage(): grabWindow() returned a null image";
+		return false;
+	}
+	if (!capture.save(captureFileName)) {
+		qCWarning(venusGuiTest) << "grabImage(): failed to save" << captureFileName;
+		return false;
+	}
+
+	qCInfo(venusGuiTest) << "grabImage(): saved" << captureFileName;
 	return true;
 }
 

@@ -48,7 +48,11 @@ resolvable identifier (label/icon/objectName); purely data-driven labels without
 are not currently resolvable.
 For target-page mode, runtime QML errors (for example `ReferenceError` in bindings) are treated
 as failures. Completion requires the target type to be constructed and shown, not only a
-matching PageStack URL.
+matching PageStack URL. When the route is a PageStack push, the last `pushPage()` must also
+finish its stack transition (`PageStack.animating` false, `opened` true, and the stack at
+x=0) and present that settled frame once before the test exits, so the destination page is
+not torn down mid-slide. A second swap is not required: WaitUntil only polls with a timer,
+and with UI animations disabled a static window may never swap again.
 
 By default, captured images are stored in `<working-directory>/image-captures/` (configurable in the test JSON).
 
