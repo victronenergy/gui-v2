@@ -19,7 +19,7 @@ ColumnLayout {
 	//% "VRM online logging"
 	readonly property string vrmConsumerName: qsTrId("pagesettingsstorage_consumer_vrm")
 	readonly property var storageConsumers: [
-		{ serviceType: "logger", name: root.vrmConsumerName },
+		{ name: root.vrmConsumerName, ext4: true, vfat: true },
 	]
 
 	Layout.fillWidth: true
@@ -50,26 +50,9 @@ ColumnLayout {
 		delegate: RowLayout {
 			id: consumerRow
 			required property var modelData
-			readonly property string serviceUid: BackendConnection.serviceUidForType(modelData.serviceType)
 
 			Layout.fillWidth: true
 			spacing: Theme.geometry_modalDialog_content_spacing
-
-			VeQuickItem {
-				id: supportedFilesystems
-				uid: consumerRow.serviceUid ? (consumerRow.serviceUid + "/Storage/SupportedFilesystems") : ""
-			}
-
-			function supports(filesystem) {
-				if (!supportedFilesystems.valid) {
-					return false
-				}
-				try {
-					return JSON.parse(supportedFilesystems.value || "[]").indexOf(filesystem) !== -1
-				} catch (error) {
-					return false
-				}
-			}
 
 			Label {
 				text: consumerRow.modelData.name
@@ -86,7 +69,7 @@ ColumnLayout {
 				source: "qrc:/images/icon_checkmark_32.svg"
 				color: Theme.color_green
 				// Preserve the cell even when unsupported so columns never shift.
-				opacity: consumerRow.supports("ext4") ? 1 : 0
+				opacity: consumerRow.modelData.ext4 ? 1 : 0
 			}
 			CP.ColorImage {
 				Layout.preferredWidth: Theme.geometry_modalDialog_content_spacing * 4
@@ -97,7 +80,7 @@ ColumnLayout {
 				fillMode: Image.PreserveAspectFit
 				source: "qrc:/images/icon_checkmark_32.svg"
 				color: Theme.color_green
-				opacity: consumerRow.supports("vfat") ? 1 : 0
+				opacity: consumerRow.modelData.vfat ? 1 : 0
 			}
 		}
 	}

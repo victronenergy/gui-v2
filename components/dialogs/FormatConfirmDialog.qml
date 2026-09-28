@@ -66,8 +66,14 @@ ModalDialog {
 		onValidChanged: {
 			// A successful format creates a new filesystem UUID, so the old
 			// /Volumes/<N> trigger disappears instead of resetting in place.
-			if (root.requestSent && !valid) {
-				root.completeFormat()
+			// Do not consult LastOperationError here: it belongs to the old
+			// volume and may contain an unrelated consumer-allocation failure.
+			// Once this write was acknowledged, removal of the old identity is
+			// the successful completion signal for FormatAndAdopt.
+			if (root.requestSent && root.triggerAcknowledged && !valid) {
+				root.formatting = false
+				root.formatFinished()
+				root.accept()
 			}
 		}
 	}
@@ -197,11 +203,14 @@ ModalDialog {
 				text: qsTrId("formatconfirmdialog_button")
 				color: Theme.color_red
 				flat: false
+				visible: !root.formatting
 				Layout.fillWidth: true
 				Layout.fillHeight: true
 				enabled: !root.formatting
 				onClicked: {
 					root.failure = ""
+					root.requestSent = false
+					root.triggerAcknowledged = false
 					root.formatting = true
 					root.formatStarted("Admin/FormatAndAdopt")
 					formatTimer.start()
