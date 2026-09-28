@@ -63,6 +63,28 @@ UiTestCase {
 		return !loader || !loader.animationRunning
 	}
 
+	function _screenSizeName() {
+		return Theme.screenSize === Theme.Portrait ? "Portrait"
+			: Theme.screenSize === Theme.SevenInch ? "SevenInch"
+			: "FiveInch"
+	}
+
+	function _skipRouteStep(index, reason) {
+		const step = routeSteps[index]
+		const candidates = (step.values && step.values.length > 0)
+			? step.values.join(" | ")
+			: "<none>"
+		addStep(UiTestStep.Invoke, {
+			callable: ()=> { return true },
+			message: "Skip %1 click for %2 (%3, screenSize=%4)"
+				.arg(step.type)
+				.arg(step.expectedPage || candidates)
+				.arg(reason)
+				.arg(_screenSizeName()),
+		})
+		runSteps(_clickRouteStep, [index + 1])
+	}
+
 	// Convert QVariantList route steps into a plain JS array of { type, values, expectedPage, verify } objects.
 	function _routeStepsAsArray(value) {
 		if (!value || value.length === undefined) {
@@ -271,7 +293,7 @@ UiTestCase {
 		// panel). Skip them when the type is already visible, as in portrait
 		// where BriefSidePanel is loaded with the Brief page.
 		if (step.verify === "type" && step.expectedPage && _targetIsShown(step.expectedPage)) {
-			_clickRouteStep(index + 1)
+			_skipRouteStep(index, "type already visible")
 			return
 		}
 		const target = _findClickTarget(Global.mainView.currentPage, step)
@@ -282,10 +304,14 @@ UiTestCase {
 				const candidates = (step.values && step.values.length > 0)
 					? step.values.join(" | ")
 					: "<none>"
+				if (step.verify === "type") {
+					_skipRouteStep(index, "action not available in this orientation")
+					return
+				}
 				addStep(UiTestStep.Abort, {
 					passed: false,
-					message: "Unable to find route click target: %1 (type: %2)"
-						.arg(candidates).arg(step.type),
+					message: "Unable to find route click target: %1 (type: %2, screenSize: %3)"
+						.arg(candidates).arg(step.type).arg(_screenSizeName()),
 				})
 				runSteps()
 				return

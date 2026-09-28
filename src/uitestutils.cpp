@@ -1347,6 +1347,44 @@ QString parseUiTestValueFromArgs(const QStringList &arguments)
 	return QString();
 }
 
+bool parseResolution(const QString &value, int *width, int *height, QString *errorMessage)
+{
+	const auto setError = [errorMessage](const QString &message) {
+		if (errorMessage) {
+			*errorMessage = message;
+		}
+	};
+
+	if (!width || !height) {
+		setError(QStringLiteral("Width and height outputs are required"));
+		return false;
+	}
+
+	*width = 0;
+	*height = 0;
+
+	const QString trimmed = value.trimmed();
+	static const QRegularExpression pattern(QStringLiteral("^(\\d+)[xX](\\d+)$"));
+	const QRegularExpressionMatch match = pattern.match(trimmed);
+	if (!match.hasMatch()) {
+		setError(QStringLiteral("Expected WxH (for example 480x800)"));
+		return false;
+	}
+
+	bool widthOk = false;
+	bool heightOk = false;
+	const int parsedWidth = match.captured(1).toInt(&widthOk);
+	const int parsedHeight = match.captured(2).toInt(&heightOk);
+	if (!widthOk || !heightOk || parsedWidth <= 0 || parsedHeight <= 0) {
+		setError(QStringLiteral("Width and height must be positive integers"));
+		return false;
+	}
+
+	*width = parsedWidth;
+	*height = parsedHeight;
+	return true;
+}
+
 int countNewRuntimeWarningTexts(
 		const QStringList &warningTexts,
 		QSet<QString> *recordedWarnings,
