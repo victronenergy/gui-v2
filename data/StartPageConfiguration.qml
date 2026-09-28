@@ -189,8 +189,14 @@ QtObject {
 		uid: root.systemSettingsUid + "/Settings/Gui2/StartPageName"
 		onValueChanged: {
 			if (valid && value !== "") {
-				root._startPageNameConfig = valid && value !== "" ? JSON.parse(_startPageName.value) : null
+				try {
+					root._startPageNameConfig = JSON.parse(_startPageName.value)
+					return
+				} catch (e) {
+					console.warn("Unable to parse start page name:", _startPageName.value, "exception:", e)
+				}
 			}
+			root._startPageNameConfig = null
 		}
 	}
 
