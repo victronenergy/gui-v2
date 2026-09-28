@@ -105,6 +105,8 @@ public:
 				{ QStringLiteral("type"), typeName },
 				{ QStringLiteral("values"), step.identifier.values },
 				{ QStringLiteral("expectedPage"), step.expectedPageUrl },
+				{ QStringLiteral("verify"), step.verifyMode == Victron::VenusOS::UiTestUtils::RouteStep::ShownType
+						? QStringLiteral("type") : QStringLiteral("stack") },
 			});
 			if (step.identifier.type == Victron::VenusOS::UiTestUtils::ClickIdentifier::Text
 					&& !step.identifier.values.isEmpty()) {

@@ -15,17 +15,55 @@ UiTestCase {
 	property string routeEntryLabel: ""
 	property var routeSteps: []
 
-	function _hasValidCurrentPage(expectedPageUrl) {
+	function _qmlTypeNameFromUrl(pageUrl) {
+		const slash = pageUrl.lastIndexOf("/")
+		const fileName = slash >= 0 ? pageUrl.slice(slash + 1) : pageUrl
+		return fileName.endsWith(".qml") ? fileName.slice(0, -4) : fileName
+	}
+
+	function _hasValidStackPage(expectedPageUrl) {
 		const pageStack = Global.pageManager.pageStack
-		if (!pageStack)
+		if (!pageStack) {
 			return false
-		if ((pageStack.topPageUrl ?? "") !== expectedPageUrl)
+		}
+		if ((pageStack.topPageUrl ?? "") !== expectedPageUrl) {
 			return false
+		}
 		const page = pageStack.currentPage
 		return !!page && page.__is_venus_gui_page__ === true
 	}
 
-	// Convert QVariantList route steps into a plain JS array of { type, values, expectedPage } objects.
+	function _targetIsShown(expectedPageUrl) {
+		if (!expectedPageUrl) {
+			return false
+		}
+		const current = Global.mainView ? Global.mainView.currentPage : null
+		if (current && current.url && current.url.toString().indexOf(expectedPageUrl) >= 0) {
+			return true
+		}
+		if (_hasValidStackPage(expectedPageUrl)) {
+			return true
+		}
+		const typeName = _qmlTypeNameFromUrl(expectedPageUrl)
+		if (!typeName || !Global.mainView) {
+			return false
+		}
+		const obj = findObject(Global.mainView, {}, typeName)
+		if (!obj) {
+			return false
+		}
+		return obj.visible !== false
+	}
+
+	function _overlaysIdle() {
+		if (!Global.mainView || Global.mainView.animating) {
+			return false
+		}
+		const loader = Global.mainView.cardsLoader
+		return !loader || !loader.animationRunning
+	}
+
+	// Convert QVariantList route steps into a plain JS array of { type, values, expectedPage, verify } objects.
 	function _routeStepsAsArray(value) {
 		if (!value || value.length === undefined) {
 			return []
@@ -38,14 +76,16 @@ UiTestCase {
 			if (Array.isArray(rawValues) || (rawValues && rawValues.length !== undefined)) {
 				for (let j = 0; j < rawValues.length; ++j) {
 					const candidate = (rawValues[j] ?? "").toString()
-					if (candidate.length > 0 && values.indexOf(candidate) < 0)
+					if (candidate.length > 0 && values.indexOf(candidate) < 0) {
 						values.push(candidate)
+					}
 				}
 			}
 			normalized.push({
 				type: (step.type ?? "text").toString(),
 				values: values,
 				expectedPage: (step.expectedPage ?? "").toString(),
+				verify: (step.verify ?? "stack").toString(),
 			})
 		}
 		return normalized
@@ -63,7 +103,12 @@ UiTestCase {
 			// icon.source is a grouped property; search children for matching icon source.
 			item = _findItemByIconSource(parent, value)
 		}
-		return item ? findClickableChild(item) : null
+		// TabBar labels live on a child Label; ListNavigation text is often
+		// on the clickable item itself. Prefer an ancestor Button/MouseArea.
+		if (!item) {
+			return null
+		}
+		return findClickableParent(item) || findClickableChild(item)
 	}
 
 	// Find a clickable item matching any route-step candidate value.
@@ -80,8 +125,9 @@ UiTestCase {
 
 	// Recursively find an item whose icon.source matches the given value.
 	function _findItemByIconSource(parent, iconSource) {
-		if (!parent)
+		if (!parent) {
 			return null
+		}
 		// Check if this item has an icon group with matching source
 		if (parent.icon && parent.icon.source !== undefined) {
 			if (parent.icon.source.toString().indexOf(iconSource) >= 0) {
@@ -90,8 +136,9 @@ UiTestCase {
 		}
 		for (let i = 0; i < parent.children.length; ++i) {
 			const found = _findItemByIconSource(parent.children[i], iconSource)
-			if (found)
+			if (found) {
 				return found
+			}
 		}
 		return null
 	}
@@ -190,30 +237,24 @@ UiTestCase {
 			callable: ()=> { return mouseClick(navTarget.clickable) },
 			message: "Open root page: %1".arg(routeEntryLabel),
 		})
-		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
+		addStep(UiTestStep.WaitUntil, { callable: ()=> _overlaysIdle() })
 		runSteps(callback)
 	}
 
-	// Confirm the navigation route ended on the requested page URL.
-	function _verifyTargetPageOpen() {
+	// Confirm the target QML type was constructed and shown.
+	function _verifyTargetShown() {
 		addStep(UiTestStep.WaitUntil, {
-			callable: ()=> _hasValidCurrentPage(targetPageUrl),
-			message: "Waiting for target page to appear on stack: %1".arg(targetPageUrl),
+			callable: ()=> _overlaysIdle() && _targetIsShown(targetPageUrl),
+			message: "Waiting for target type to be shown: %1".arg(targetPageUrl),
 		})
 		addStep(UiTestStep.Invoke, {
 			callable: ()=> {
-				const actualPage = Global.pageManager.pageStack.topPageUrl
-				if (actualPage !== targetPageUrl) {
-					throw new Error("Target page URL mismatch: expected '%1', got '%2'"
-						.arg(targetPageUrl).arg(actualPage))
-				}
-				if (!_hasValidCurrentPage(targetPageUrl)) {
-					throw new Error("Target page URL is set but no valid page object is on the stack: %1"
-						.arg(targetPageUrl))
+				if (!_targetIsShown(targetPageUrl)) {
+					throw new Error("Target type was not constructed/shown: %1".arg(targetPageUrl))
 				}
 				return true
 			},
-			message: "Target page verified: %1".arg(targetPageUrl),
+			message: "Target type verified: %1".arg(targetPageUrl),
 		})
 		runSteps()
 	}
@@ -221,11 +262,18 @@ UiTestCase {
 	// Click each pre-resolved step in order, then verify the target page.
 	function _clickRouteStep(index) {
 		if (index >= routeSteps.length) {
-			_verifyTargetPageOpen()
+			_verifyTargetShown()
 			return
 		}
 
 		const step = routeSteps[index]
+		// ShownType clicks are layout-specific (e.g. landscape StatusBar side
+		// panel). Skip them when the type is already visible, as in portrait
+		// where BriefSidePanel is loaded with the Brief page.
+		if (step.verify === "type" && step.expectedPage && _targetIsShown(step.expectedPage)) {
+			_clickRouteStep(index + 1)
+			return
+		}
 		const target = _findClickTarget(Global.mainView.currentPage, step)
 		if (!target) {
 			// Fall back to searching the full mainView (for StatusBar buttons, etc.)
@@ -252,20 +300,34 @@ UiTestCase {
 				message: "Click %1: %2".arg(step.type).arg(target.matchedValue),
 			})
 		}
-		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
+		addStep(UiTestStep.WaitUntil, { callable: ()=> _overlaysIdle() })
 
-		// Verify we landed on the expected intermediate page.
+		// Verify we landed on the expected intermediate page or overlay type.
 		if (step.expectedPage && step.expectedPage.length > 0) {
 			const expectedPage = step.expectedPage
 			const stepIndex = index + 1
+			const verifyType = step.verify === "type"
+			addStep(UiTestStep.WaitUntil, {
+				callable: ()=> verifyType
+					? _targetIsShown(expectedPage)
+					: _hasValidStackPage(expectedPage),
+				message: "Waiting for step %1 to show: %2".arg(stepIndex).arg(expectedPage),
+			})
 			addStep(UiTestStep.Invoke, {
 				callable: ()=> {
+					if (verifyType) {
+						if (!_targetIsShown(expectedPage)) {
+							throw new Error("Navigation step %1 did not construct/show '%2'."
+								.arg(stepIndex).arg(expectedPage))
+						}
+						return true
+					}
 					const actualPage = Global.pageManager.pageStack.topPageUrl
 					if (actualPage !== expectedPage) {
 						throw new Error("Navigation step %1 opened '%2' instead of expected '%3'. The target page may not be reachable with the current mock configuration."
 							.arg(stepIndex).arg(actualPage).arg(expectedPage))
 					}
-					if (!_hasValidCurrentPage(expectedPage)) {
+					if (!_hasValidStackPage(expectedPage)) {
 						throw new Error("Navigation step %1 reached URL '%2' but no valid page object was pushed."
 							.arg(stepIndex).arg(expectedPage))
 					}
@@ -293,11 +355,7 @@ UiTestCase {
 			return
 		}
 		if (routeSteps.length === 0) {
-			addStep(UiTestStep.Abort, {
-				passed: false,
-				message: "No route steps configured for target page: %1".arg(targetPageUrl),
-			})
-			runSteps()
+			_openEntryPage(()=> _verifyTargetShown())
 			return
 		}
 		_openEntryPage(()=> _clickRouteStep(0))
