@@ -15,8 +15,9 @@ Page {
 
 	// The vrm-cache StorageVolume selected via PageSettingsLoggerStorage.qml, resolved live from
 	// com.victronenergy.storage's /Volumes tree so "Storage volume" below can show its nickname and
-	// tell "present" apart from "selected but currently missing" (v5 S16 "Missing required volume").
+	// show the active /data fallback while the preferred external volume is unavailable.
 	property string _selectedStorageVolumeUid: ""
+	property string _selectedStorageVolumeName: ""
 
 	// Whether Storage Manager has anything adopted at all - gates whether "Storage volume"
 	// below is navigable. With nothing adopted there is no picker to open: logging always
@@ -26,6 +27,7 @@ Page {
 
 	function _recomputeSelectedStorageVolumeUid() {
 		let found = ""
+		let foundName = ""
 		let anyAdopted = false
 		for (let i = 0; i < selectedVolumeRepeater.count; ++i) {
 			const row = selectedVolumeRepeater.itemAt(i)
@@ -35,17 +37,23 @@ Page {
 			if (row.lifecycle === VenusOS.Storage_Lifecycle_AdoptedPersistent) {
 				anyAdopted = true
 			}
-			if (row.volumeId === root.selectedStorageVolumeId) {
+			if (row.volumeId === root.selectedStorageVolumeId && row.isPresent) {
 				found = row.volumeUid
+				foundName = row.nickname || row.label
 			}
 		}
 		root._selectedStorageVolumeUid = found
+		root._selectedStorageVolumeName = foundName
 		root._hasManagedStorageVolume = anyAdopted
 	}
 
 	VeQuickItem {
 		id: storageVolumeIdSetting
 		uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/StorageVolumeId"
+	}
+	VeQuickItem {
+		id: bufferLocation
+		uid: root.loggerServiceUid + "/Buffer/Location"
 	}
 
 	property VeQItemSortTableModel _storageVolumes: VeQItemSortTableModel {
@@ -71,27 +79,38 @@ Page {
 			readonly property string volumeUid: model.item.itemParent().uid
 			readonly property string volumeId: model.item.value
 			readonly property int lifecycle: lifecycleItem.value
+			readonly property int state: stateItem.value
+			readonly property bool isPresent: state === VenusOS.Storage_VolumeState_Available
+					|| state === VenusOS.Storage_VolumeState_Active
+			readonly property string nickname: nicknameItem.value || ""
+			readonly property string label: labelItem.value || ""
 
 			onVolumeIdChanged: root._recomputeSelectedStorageVolumeUid()
 			onLifecycleChanged: root._recomputeSelectedStorageVolumeUid()
+			onIsPresentChanged: root._recomputeSelectedStorageVolumeUid()
+			onNicknameChanged: root._recomputeSelectedStorageVolumeUid()
+			onLabelChanged: root._recomputeSelectedStorageVolumeUid()
 			Component.onCompleted: root._recomputeSelectedStorageVolumeUid()
 
 			VeQuickItem {
 				id: lifecycleItem
 				uid: volumeUid + "/Lifecycle"
 			}
+			VeQuickItem {
+				id: stateItem
+				uid: volumeUid + "/State"
+			}
+			VeQuickItem {
+				id: nicknameItem
+				uid: volumeUid + "/Nickname"
+			}
+			VeQuickItem {
+				id: labelItem
+				uid: volumeUid + "/Label"
+			}
 		}
 
 		onCountChanged: root._recomputeSelectedStorageVolumeUid()
-	}
-
-	VeQuickItem {
-		id: selectedStorageVolumeLabel
-		uid: root._selectedStorageVolumeUid + "/Label"
-	}
-	VeQuickItem {
-		id: selectedStorageVolumeNickname
-		uid: root._selectedStorageVolumeUid + "/Nickname"
 	}
 
 	function timeAgo(timestamp) {
@@ -372,17 +391,16 @@ Page {
 				//% "Storage volume"
 				text: qsTrId("settings_vrm_storage_volume")
 				secondaryText: {
-					if (!root.selectedStorageVolumeId) {
+					// The setting is a retained preference. Buffer/Location is the
+					// authoritative active location: 2 means external storage.
+					if (bufferLocation.value !== 2) {
 						//% "System (/data)"
 						return qsTrId("settings_logger_storage_none")
 					}
 					if (!root._selectedStorageVolumeUid) {
-						//% "Waiting for storage"
-						return qsTrId("settings_vrm_storage_volume_waiting")
+						return qsTrId("settings_logger_storage_none")
 					}
-					return selectedStorageVolumeNickname.value
-							|| selectedStorageVolumeLabel.value
-							|| root.selectedStorageVolumeId
+					return root._selectedStorageVolumeName || root.selectedStorageVolumeId
 				}
 				// Nothing to pick until Storage Manager has adopted a volume - a plain
 				// "System /data" fact then, not a dead-end "Not set >" picker.

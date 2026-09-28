@@ -29,12 +29,17 @@ Page {
 	id: root
 
 	readonly property string storageServiceUid: BackendConnection.serviceUidForType("storage")
+	readonly property string loggerServiceUid: BackendConnection.serviceUidForType("logger")
 	readonly property string currentVolumeId: storageVolumeIdSetting.value || ""
 
 	VeQuickItem {
 		id: storageVolumeIdSetting
 
 		uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/StorageVolumeId"
+	}
+	VeQuickItem {
+		id: bufferLocation
+		uid: root.loggerServiceUid + "/Buffer/Location"
 	}
 
 	property VeQItemSortTableModel volumes: VeQItemSortTableModel {
@@ -127,7 +132,9 @@ Page {
 				text: qsTrId("settings_logger_storage_none")
 				//% "%1 free"
 				secondaryText: qsTrId("settings_logger_storage_free").arg(dataPartitionFreeSpaceText)
-				checked: !root.currentVolumeId
+				// Keep the external UUID as a preference while absent, but show
+				// where VRM is actually writing. 2 means external storage.
+				checked: bufferLocation.value !== 2
 				writeAccessLevel: VenusOS.User_AccessType_User
 				onClicked: {
 					storageVolumeIdSetting.setValue("")
@@ -181,7 +188,7 @@ Page {
 			indicatorColor: root.volumeIsShared(volumeId) ? Theme.color_orange : Theme.color_green
 			//% "%1 free"
 			secondaryText: qsTrId("settings_logger_storage_free").arg(freeSpaceText)
-			checked: volumeId === root.currentVolumeId
+			checked: bufferLocation.value === 2 && volumeId === root.currentVolumeId
 			writeAccessLevel: VenusOS.User_AccessType_User
 
 			readonly property string freeSpaceText: Utils.qtyToString(free.value,
