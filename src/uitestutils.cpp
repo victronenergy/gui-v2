@@ -5,6 +5,8 @@
 
 #include "uitestutils.h"
 
+#include "themeobjects.h"
+
 #include <QDir>
 #include <QDirIterator>
 #include <QFile>
@@ -47,10 +49,16 @@ QString normalizePageUrl(const QString &raw)
 
 	static const QString qrcPrefix = QStringLiteral("qrc:/qt/qml/Victron/VenusOS");
 	static const QString resourcePrefix = QStringLiteral(":/qt/qml/Victron/VenusOS");
+	static const QString boatQrcPrefix = QStringLiteral("qrc:/qt/qml/Victron/Boat");
+	static const QString boatResourcePrefix = QStringLiteral(":/qt/qml/Victron/Boat");
 	if (page.startsWith(qrcPrefix)) {
 		page = page.mid(qrcPrefix.length());
 	} else if (page.startsWith(resourcePrefix)) {
 		page = page.mid(resourcePrefix.length());
+	} else if (page.startsWith(boatQrcPrefix)) {
+		page = QStringLiteral("/pages/boat") + page.mid(boatQrcPrefix.length());
+	} else if (page.startsWith(boatResourcePrefix)) {
+		page = QStringLiteral("/pages/boat") + page.mid(boatResourcePrefix.length());
 	} else if (const int pagesIndex = page.indexOf(QStringLiteral("/pages/")); pagesIndex >= 0) {
 		page = page.mid(pagesIndex);
 	}
@@ -61,15 +69,18 @@ QString normalizePageUrl(const QString &raw)
 		} else if (page.endsWith(QStringLiteral(".qml")) && !page.contains('/')) {
 			// Bare filename: search compiled QML resources for a unique match.
 			const QString pagesRoot = QStringLiteral(":/qt/qml/Victron/VenusOS/pages");
+			const QString boatRoot = QStringLiteral(":/qt/qml/Victron/Boat");
 			QStringList matches;
 			QDirIterator it(pagesRoot, QStringList() << page, QDir::Files, QDirIterator::Subdirectories);
 			while (it.hasNext()) {
-				QString match = it.next();
-				match = match.mid(pagesRoot.length()); // strip resource prefix, keep /subdir/File.qml
-				matches.append(match);
+				matches.append(QStringLiteral("/pages") + it.next().mid(pagesRoot.length()));
+			}
+			QDirIterator boatIt(boatRoot, QStringList() << page, QDir::Files, QDirIterator::Subdirectories);
+			while (boatIt.hasNext()) {
+				matches.append(QStringLiteral("/pages/boat/") + QFileInfo(boatIt.next()).fileName());
 			}
 			if (matches.size() == 1) {
-				page = QStringLiteral("/pages") + matches.first();
+				page = matches.first();
 			} else {
 				// Ambiguous or not found; reject the bare filename.
 				return QString();
@@ -371,6 +382,631 @@ QHash<QString, ComponentNavigationBehavior> scanExternalComponents(const QHash<Q
 	return behaviors;
 }
 
+QString rootTypeName(const QString &content)
+{
+	const QStringList lines = content.split('\n');
+	bool inBlockComment = false;
+	for (const QString &line : lines) {
+		const QString trimmed = line.trimmed();
+		if (inBlockComment) {
+			if (trimmed.contains(QStringLiteral("*/"))) {
+				inBlockComment = false;
+			}
+			continue;
+		}
+		if (trimmed.startsWith(QStringLiteral("/*"))) {
+			inBlockComment = !trimmed.contains(QStringLiteral("*/"));
+			continue;
+		}
+		if (trimmed.startsWith(QStringLiteral("//"))
+				|| trimmed.startsWith(QStringLiteral("import "))
+				|| trimmed.startsWith(QStringLiteral("pragma "))
+				|| trimmed.isEmpty()) {
+			continue;
+		}
+		static const QRegularExpression re(R"REGEX(^([A-Za-z_][A-Za-z0-9_.]*)\s*\{)REGEX");
+		if (const QRegularExpressionMatch match = re.match(trimmed); match.hasMatch()) {
+			return match.captured(1);
+		}
+		return QString();
+	}
+	return QString();
+}
+
+QString extractTitleFromContent(const QString &content, const QHash<QString, QString> &commonWordsLabels)
+{
+	static const QRegularExpression sourceTextRe(R"REGEX(^\s*//%\s*"([^"]+)")REGEX");
+	static const QRegularExpression titleAssignRe(R"REGEX(^\s*title\s*:\s*(.+)$)REGEX");
+
+	QString pendingSourceText;
+	int depth = 0;
+	bool passedRoot = false;
+	const QStringList lines = content.split('\n');
+	for (const QString &line : lines) {
+		if (!passedRoot) {
+			if (line.contains('{')) {
+				passedRoot = true;
+				depth = countChar(line, '{') - countChar(line, '}');
+			}
+			continue;
+		}
+		depth += countChar(line, '{') - countChar(line, '}');
+		if (const QRegularExpressionMatch sourceMatch = sourceTextRe.match(line); sourceMatch.hasMatch()) {
+			pendingSourceText = sourceMatch.captured(1).trimmed();
+		}
+		if (depth == 1) {
+			if (const QRegularExpressionMatch titleMatch = titleAssignRe.match(line); titleMatch.hasMatch()) {
+				const QStringList labels = resolveLabelExpressionCandidates(
+						titleMatch.captured(1).trimmed(), pendingSourceText, commonWordsLabels);
+				if (!labels.isEmpty()) {
+					return labels.first();
+				}
+			}
+		}
+		if (depth <= 0) {
+			break;
+		}
+	}
+	return QString();
+}
+
+QList<RootRoute> scanSwipeRootPages(const QHash<QString, QString> &commonWordsLabels)
+{
+	QList<RootRoute> roots;
+	const QStringList resourceRoots = {
+		QStringLiteral(":/qt/qml/Victron/VenusOS/pages"),
+		QStringLiteral(":/qt/qml/Victron/Boat"),
+	};
+	for (const QString &pagesRoot : resourceRoots) {
+		QDirIterator it(pagesRoot, QStringList() << QStringLiteral("*.qml"), QDir::Files);
+		while (it.hasNext()) {
+			const QString filePath = it.next();
+			QFile file(filePath);
+			if (!file.open(QFile::ReadOnly | QFile::Text)) {
+				continue;
+			}
+			const QString content = QString::fromUtf8(file.readAll());
+			if (rootTypeName(content) != QStringLiteral("SwipeViewPage")) {
+				continue;
+			}
+			const QString url = normalizePageUrl(filePath);
+			const QString title = extractTitleFromContent(content, commonWordsLabels);
+			if (url.isEmpty() || title.isEmpty()) {
+				continue;
+			}
+			roots.append(RootRoute{ url, title });
+		}
+	}
+	return roots;
+}
+
+void parseStatusBarActivations(const QString &filePath, QHash<QString, ClickIdentifier> *signalToClick)
+{
+	QFile file(filePath);
+	if (!file.open(QFile::ReadOnly | QFile::Text)) {
+		return;
+	}
+
+	static const QRegularExpression svgRe(R"REGEX("([^"]+\.svg)")REGEX");
+	static const QRegularExpression signalRe(
+			R"REGEX(\b(controlCardsActivated|auxCardsActivated|sidePanelToggled)\s*\()REGEX");
+
+	const QStringList lines = QString::fromUtf8(file.readAll()).split('\n');
+	bool inButton = false;
+	int depth = 0;
+	QStringList icons;
+	QStringList emittedSignals;
+
+	const auto flushButton = [&]() {
+		if (emittedSignals.isEmpty() || icons.isEmpty()) {
+			return;
+		}
+		QStringList offIcons;
+		QStringList otherIcons;
+		for (const QString &icon : icons) {
+			if (icon.contains(QStringLiteral("_off_"))) {
+				offIcons.append(icon);
+			} else if (!icon.contains(QStringLiteral("_on_"))
+					&& !icon.contains(QStringLiteral("icon_back_"))
+					&& !icon.contains(QStringLiteral("icon_plus"))
+					&& !icon.contains(QStringLiteral("icon_refresh"))) {
+				otherIcons.append(icon);
+			}
+		}
+		const QStringList preferred = !offIcons.isEmpty() ? offIcons : otherIcons;
+		if (preferred.isEmpty()) {
+			return;
+		}
+		for (const QString &signalName : emittedSignals) {
+			ClickIdentifier &identifier = (*signalToClick)[signalName];
+			identifier.type = ClickIdentifier::IconSource;
+			for (const QString &icon : preferred) {
+				appendUniqueNonEmpty(&identifier.values, icon);
+			}
+		}
+	};
+
+	for (const QString &line : lines) {
+		if (!inButton) {
+			if (!line.contains(QStringLiteral("StatusBarButton"))) {
+				continue;
+			}
+			inButton = true;
+			depth = countChar(line, '{') - countChar(line, '}');
+			icons.clear();
+			emittedSignals.clear();
+			if (depth <= 0) {
+				inButton = false;
+			}
+			continue;
+		}
+
+		depth += countChar(line, '{') - countChar(line, '}');
+		QRegularExpressionMatchIterator svgMatches = svgRe.globalMatch(line);
+		while (svgMatches.hasNext()) {
+			appendUniqueNonEmpty(&icons, svgMatches.next().captured(1));
+		}
+		QRegularExpressionMatchIterator signalMatches = signalRe.globalMatch(line);
+		while (signalMatches.hasNext()) {
+			appendUniqueNonEmpty(&emittedSignals, signalMatches.next().captured(1));
+		}
+		if (depth <= 0) {
+			flushButton();
+			inButton = false;
+		}
+	}
+}
+
+QHash<QString, ClickIdentifier> scanStatusBarActivations()
+{
+	QHash<QString, ClickIdentifier> signalToClick;
+	parseStatusBarActivations(
+			QStringLiteral(":/qt/qml/Victron/VenusOS/components/StatusBar_Landscape.qml"),
+			&signalToClick);
+	parseStatusBarActivations(
+			QStringLiteral(":/qt/qml/Victron/VenusOS/components/StatusBar_Portrait.qml"),
+			&signalToClick);
+	return signalToClick;
+}
+
+struct ShownTypeRoute
+{
+	QString typeUrl;
+	QString entryNavText;
+	QList<RouteStep> extraClicks;
+};
+
+QString uniquePageUrlForTypeName(const QHash<QString, QStringList> &qmlFilesByTypeName, const QString &typeName)
+{
+	const QStringList files = qmlFilesByTypeName.value(typeName);
+	if (files.size() != 1) {
+		return QString();
+	}
+	return normalizePageUrl(files.first());
+}
+
+bool isPortraitLayout()
+{
+	return ThemeSingleton::create()->screenSize() == Theme::Portrait;
+}
+
+// Layout loaders pick one of a *_Portrait / *_Landscape pair from
+// Theme.screenSize (see .github/layout-modes.md). The inactive file is not
+// instantiated, so it must not get a shown-type route.
+bool isActiveOrientationType(const QString &typeName, bool portraitLayout)
+{
+	if (typeName.endsWith(QStringLiteral("_Portrait"))) {
+		return portraitLayout;
+	}
+	if (typeName.endsWith(QStringLiteral("_Landscape"))) {
+		return !portraitLayout;
+	}
+	return true;
+}
+
+// True when the TypeName { block has a property-level visible: binding
+// that is not unconditionally true. Nested children's visible: lines are
+// ignored. Used to skip constructed-but-hidden types, except LevelsPage
+// tab children which get an explicit TabBar click.
+bool instantiationHasConditionalVisible(const QStringList &lines, int startIndex)
+{
+	static const QRegularExpression visibleRe(R"REGEX(^\s*visible\s*:)REGEX");
+	static const QRegularExpression visibleTrueRe(R"REGEX(^\s*visible\s*:\s*true\b)REGEX");
+
+	int depth = 0;
+	for (int i = startIndex; i < lines.size(); ++i) {
+		const QString &line = lines.at(i);
+		if (i > startIndex && depth == 1 && visibleRe.match(line).hasMatch()) {
+			return !visibleTrueRe.match(line).hasMatch();
+		}
+		depth += countChar(line, '{') - countChar(line, '}');
+		if (depth <= 0) {
+			break;
+		}
+	}
+	return false;
+}
+
+// LevelsPage TabBar model labels from //% source text, in model order.
+QStringList parseLevelsTabBarLabels(const QStringList &lines)
+{
+	static const QRegularExpression tabBarStartRe(R"REGEX(^\s*TabBar\s*\{)REGEX");
+	static const QRegularExpression sourceTextRe(R"REGEX(^\s*//%\s*"([^"]+)")REGEX");
+
+	QStringList labels;
+	bool inTabBar = false;
+	int depth = 0;
+	for (const QString &line : lines) {
+		if (!inTabBar) {
+			if (tabBarStartRe.match(line).hasMatch()) {
+				inTabBar = true;
+				depth = countChar(line, '{') - countChar(line, '}');
+			}
+			continue;
+		}
+		if (const QRegularExpressionMatch match = sourceTextRe.match(line); match.hasMatch()) {
+			labels.append(match.captured(1).trimmed());
+		}
+		depth += countChar(line, '{') - countChar(line, '}');
+		if (depth <= 0) {
+			break;
+		}
+	}
+	return labels;
+}
+
+// visible: tabBar.currentIndex === N on the TypeName { block, or -1.
+int levelsTabVisibleIndex(const QStringList &lines, int startIndex)
+{
+	static const QRegularExpression indexRe(
+			R"REGEX(^\s*visible\s*:\s*tabBar\.currentIndex\s*===\s*(\d+)\b)REGEX");
+
+	int depth = 0;
+	for (int i = startIndex; i < lines.size(); ++i) {
+		const QString &line = lines.at(i);
+		if (i > startIndex && depth == 1) {
+			if (const QRegularExpressionMatch match = indexRe.match(line); match.hasMatch()) {
+				return match.captured(1).toInt();
+			}
+		}
+		depth += countChar(line, '{') - countChar(line, '}');
+		if (depth <= 0) {
+			break;
+		}
+	}
+	return -1;
+}
+
+QList<ShownTypeRoute> scanShownTypeRoutes(const QList<RootRoute> &swipeRoots)
+{
+	QHash<QString, QStringList> qmlFilesByTypeName;
+	QDirIterator fileIt(
+			QStringLiteral(":/qt/qml/Victron/VenusOS/pages"),
+			QStringList() << QStringLiteral("*.qml"),
+			QDir::Files,
+			QDirIterator::Subdirectories);
+	while (fileIt.hasNext()) {
+		const QString path = fileIt.next();
+		qmlFilesByTypeName[QFileInfo(path).baseName()].append(path);
+	}
+
+	QHash<QString, QStringList> typeToContainerTypes;
+	QSet<QString> onDemandTypes;
+	QSet<QString> typesWithToggleSidePanel;
+	QHash<QString, QString> mainViewComponentIdToType;
+	QHash<QString, QString> mainViewSignalToComponentId;
+	QHash<QString, ClickIdentifier> tabActivationByType;
+
+	static const QRegularExpression sourceComponentRe(
+			R"REGEX(^\s*sourceComponent\s*:\s*([A-Z][A-Za-z0-9_]*))REGEX");
+	static const QRegularExpression loaderStartRe(R"REGEX(\bLoader\s*\{)REGEX");
+	static const QRegularExpression componentStartRe(R"REGEX(^\s*Component\s*\{)REGEX");
+	static const QRegularExpression componentIdRe(R"REGEX(^\s*id\s*:\s*([A-Za-z_][A-Za-z0-9_]*))REGEX");
+	static const QRegularExpression typeBraceRe(R"REGEX(^\s*([A-Z][A-Za-z0-9_]*)\s*\{)REGEX");
+	static const QRegularExpression cardsShowRe(
+			R"REGEX(on([A-Za-z]+)\s*:\s*cardsLoader\.show\((\w+)\))REGEX");
+	static const QRegularExpression toggleSidePanelRe(R"REGEX(\btoggleSidePanel\s*\()REGEX");
+
+	const bool portraitLayout = isPortraitLayout();
+	const auto recordInstantiation = [&](const QString &typeName, const QString &containerType) {
+		if (typeName.isEmpty() || containerType.isEmpty() || typeName == containerType) {
+			return;
+		}
+		// Skip the inactive orientation's layout type, and types that only
+		// appear inside that file. Recording both Component branches of
+		// `sourceComponent: Theme.screenSize === Theme.Portrait ? ...`
+		// would give the unused type a zero-click route that times out.
+		if (!isActiveOrientationType(typeName, portraitLayout)
+				|| !isActiveOrientationType(containerType, portraitLayout)) {
+			return;
+		}
+		QStringList &containers = typeToContainerTypes[typeName];
+		if (!containers.contains(containerType)) {
+			containers.append(containerType);
+		}
+	};
+
+	QDirIterator pageIt(
+			QStringLiteral(":/qt/qml/Victron/VenusOS/pages"),
+			QStringList() << QStringLiteral("*.qml"),
+			QDir::Files,
+			QDirIterator::Subdirectories);
+	while (pageIt.hasNext()) {
+		const QString filePath = pageIt.next();
+		QFile file(filePath);
+		if (!file.open(QFile::ReadOnly | QFile::Text)) {
+			continue;
+		}
+		const QString containerType = QFileInfo(filePath).baseName();
+		const QString content = QString::fromUtf8(file.readAll());
+		const QStringList lines = content.split('\n');
+		const bool isMainView = containerType == QStringLiteral("MainView");
+		if (toggleSidePanelRe.match(content).hasMatch()) {
+			typesWithToggleSidePanel.insert(containerType);
+		}
+
+		// Record inline page types, but not constructed-and-hidden children
+		// unless LevelsPage tab activation is known (Tanks / Environment).
+		const QStringList levelsTabLabels = containerType == QStringLiteral("LevelsPage")
+				? parseLevelsTabBarLabels(lines)
+				: QStringList();
+		static const QRegularExpression typeStartRe(
+				R"REGEX(^\s*([A-Z][A-Za-z0-9_]*)\s*\{)REGEX");
+		for (int i = 0; i < lines.size(); ++i) {
+			const QString &line = lines.at(i);
+			if (const QRegularExpressionMatch typeMatch = typeStartRe.match(line); typeMatch.hasMatch()) {
+				const QString typeName = typeMatch.captured(1);
+				if (!qmlFilesByTypeName.contains(typeName)) {
+					continue;
+				}
+				const int tabIndex = levelsTabLabels.isEmpty()
+						? -1
+						: levelsTabVisibleIndex(lines, i);
+				if (tabIndex >= 0 && tabIndex < levelsTabLabels.size()) {
+					recordInstantiation(typeName, containerType);
+					tabActivationByType.insert(typeName, ClickIdentifier{
+						ClickIdentifier::Text,
+						QStringList{ levelsTabLabels.at(tabIndex) },
+					});
+					continue;
+				}
+				if (!instantiationHasConditionalVisible(lines, i)) {
+					recordInstantiation(typeName, containerType);
+				}
+			}
+		}
+
+		QRegularExpressionMatchIterator showMatches = cardsShowRe.globalMatch(content);
+		while (showMatches.hasNext()) {
+			const QRegularExpressionMatch match = showMatches.next();
+			QString signalName = match.captured(1);
+			if (!signalName.isEmpty()) {
+				signalName[0] = signalName[0].toLower();
+			}
+			mainViewSignalToComponentId.insert(signalName, match.captured(2));
+		}
+
+		bool inLoader = false;
+		bool inComponent = false;
+		int depth = 0;
+		QString loaderType;
+		bool loaderActiveFalse = false;
+		QString componentId;
+		QString componentType;
+
+		// active: false may be on the Loader opening line (`Loader { active: false`).
+		// Body lines stay line-anchored so a nested property cannot mark the Loader inactive.
+		static const QRegularExpression activeFalseRe(R"REGEX(^\s*active\s*:\s*false\b)REGEX");
+		static const QRegularExpression activeFalseOnOpenRe(R"REGEX(\bactive\s*:\s*false\b)REGEX");
+		const auto noteLoaderLine = [&](const QString &loaderLine, bool openingLine) {
+			if (const QRegularExpressionMatch typeMatch = sourceComponentRe.match(loaderLine); typeMatch.hasMatch()) {
+				loaderType = typeMatch.captured(1);
+			}
+			const QRegularExpression &activeRe = openingLine ? activeFalseOnOpenRe : activeFalseRe;
+			if (activeRe.match(loaderLine).hasMatch()) {
+				loaderActiveFalse = true;
+			}
+		};
+		const auto finishLoader = [&]() {
+			if (!loaderType.isEmpty()) {
+				recordInstantiation(loaderType, containerType);
+				if (loaderActiveFalse
+						&& isActiveOrientationType(loaderType, portraitLayout)
+						&& isActiveOrientationType(containerType, portraitLayout)) {
+					onDemandTypes.insert(loaderType);
+				}
+			}
+			inLoader = false;
+		};
+
+		for (const QString &line : lines) {
+			if (!inLoader && !inComponent) {
+				if (loaderStartRe.match(line).hasMatch()) {
+					inLoader = true;
+					depth = countChar(line, '{') - countChar(line, '}');
+					loaderType.clear();
+					loaderActiveFalse = false;
+					noteLoaderLine(line, true);
+					if (depth <= 0) {
+						finishLoader();
+					}
+				} else if (componentStartRe.match(line).hasMatch()) {
+					inComponent = true;
+					depth = countChar(line, '{') - countChar(line, '}');
+					componentId.clear();
+					componentType.clear();
+				} else {
+					continue;
+				}
+				if (depth <= 0) {
+					inLoader = false;
+					inComponent = false;
+				}
+				continue;
+			}
+
+			depth += countChar(line, '{') - countChar(line, '}');
+			if (inLoader) {
+				noteLoaderLine(line, false);
+				if (depth <= 0) {
+					finishLoader();
+				}
+			} else if (inComponent) {
+				if (componentId.isEmpty()) {
+					if (const QRegularExpressionMatch idMatch = componentIdRe.match(line); idMatch.hasMatch()) {
+						componentId = idMatch.captured(1);
+					}
+				}
+				if (componentType.isEmpty()) {
+					if (const QRegularExpressionMatch typeMatch = typeBraceRe.match(line); typeMatch.hasMatch()) {
+						componentType = typeMatch.captured(1);
+					}
+				}
+				if (depth <= 0) {
+					if (!componentType.isEmpty()) {
+						recordInstantiation(componentType, containerType);
+						if (isMainView && !componentId.isEmpty()) {
+							mainViewComponentIdToType.insert(componentId, componentType);
+						}
+					}
+					inComponent = false;
+				}
+			}
+		}
+	}
+
+	QHash<QString, QString> swipeRootByUrl;
+	QHash<QString, RootRoute> swipeRootByType;
+	for (const RootRoute &root : swipeRoots) {
+		swipeRootByUrl.insert(root.rootPageUrl, root.entryNavText);
+		const QString typeName = QFileInfo(root.rootPageUrl).baseName();
+		swipeRootByType.insert(typeName, root);
+	}
+
+	QString briefEntry;
+	for (const RootRoute &root : swipeRoots) {
+		if (root.rootPageUrl.endsWith(QStringLiteral("/BriefPage.qml"))) {
+			briefEntry = root.entryNavText;
+			break;
+		}
+	}
+	if (briefEntry.isEmpty() && !swipeRoots.isEmpty()) {
+		briefEntry = swipeRoots.first().entryNavText;
+	}
+
+	const QHash<QString, ClickIdentifier> signalToClick = scanStatusBarActivations();
+	QList<ShownTypeRoute> routes;
+	QSet<QString> seenUrls;
+
+	const auto appendRoute = [&](const ShownTypeRoute &route) {
+		if (route.typeUrl.isEmpty() || route.entryNavText.isEmpty() || seenUrls.contains(route.typeUrl)) {
+			return;
+		}
+		seenUrls.insert(route.typeUrl);
+		routes.append(route);
+	};
+
+	for (auto it = mainViewSignalToComponentId.cbegin(); it != mainViewSignalToComponentId.cend(); ++it) {
+		const QString typeName = mainViewComponentIdToType.value(it.value());
+		const QString typeUrl = uniquePageUrlForTypeName(qmlFilesByTypeName, typeName);
+		const ClickIdentifier identifier = signalToClick.value(it.key());
+		if (typeUrl.isEmpty() || identifier.values.isEmpty() || briefEntry.isEmpty()) {
+			continue;
+		}
+		appendRoute(ShownTypeRoute{
+			typeUrl,
+			briefEntry,
+			QList<RouteStep>{ RouteStep{ identifier, typeUrl, RouteStep::ShownType } },
+		});
+	}
+
+	const auto findSwipeRoot = [&](const QString &typeName) -> RootRoute {
+		QSet<QString> visited;
+		QQueue<QString> queue;
+		queue.enqueue(typeName);
+		while (!queue.isEmpty()) {
+			const QString current = queue.dequeue();
+			if (visited.contains(current)) {
+				continue;
+			}
+			visited.insert(current);
+			if (swipeRootByType.contains(current)) {
+				return swipeRootByType.value(current);
+			}
+			for (const QString &container : typeToContainerTypes.value(current)) {
+				if (!visited.contains(container)) {
+					queue.enqueue(container);
+				}
+			}
+		}
+		return RootRoute{};
+	};
+
+	const auto chainHasToggleSidePanel = [&](const QString &typeName) {
+		QSet<QString> visited;
+		QQueue<QString> queue;
+		queue.enqueue(typeName);
+		while (!queue.isEmpty()) {
+			const QString current = queue.dequeue();
+			if (visited.contains(current)) {
+				continue;
+			}
+			visited.insert(current);
+			if (typesWithToggleSidePanel.contains(current)) {
+				return true;
+			}
+			for (const QString &container : typeToContainerTypes.value(current)) {
+				if (!visited.contains(container)) {
+					queue.enqueue(container);
+				}
+			}
+		}
+		return false;
+	};
+
+	for (auto it = typeToContainerTypes.cbegin(); it != typeToContainerTypes.cend(); ++it) {
+		const QString typeName = it.key();
+		const QString typeUrl = uniquePageUrlForTypeName(qmlFilesByTypeName, typeName);
+		if (typeUrl.isEmpty() || swipeRootByUrl.contains(typeUrl)) {
+			continue;
+		}
+
+		const RootRoute host = findSwipeRoot(typeName);
+		if (host.rootPageUrl.isEmpty()) {
+			continue;
+		}
+
+		QList<RouteStep> extraClicks;
+		if (tabActivationByType.contains(typeName)) {
+			extraClicks.append(RouteStep{
+				tabActivationByType.value(typeName),
+				typeUrl,
+				RouteStep::ShownType,
+			});
+		} else if (onDemandTypes.contains(typeName)) {
+			if (!chainHasToggleSidePanel(typeName)) {
+				continue;
+			}
+			const ClickIdentifier identifier = signalToClick.value(QStringLiteral("sidePanelToggled"));
+			if (identifier.values.isEmpty()) {
+				continue;
+			}
+			extraClicks.append(RouteStep{ identifier, typeUrl, RouteStep::ShownType });
+		}
+
+		// LevelsTab is the shared base of TanksTab/EnvironmentTab, not a
+		// navigable view. A zero-click route would match whichever tab
+		// instance findObject hits first.
+		if (extraClicks.isEmpty() && typeName == QStringLiteral("LevelsTab")) {
+			continue;
+		}
+
+		appendRoute(ShownTypeRoute{ typeUrl, host.entryNavText, extraClicks });
+	}
+
+	return routes;
+}
+
 } // anonymous namespace
 
 QHash<QString, QList<RouteEdge>> buildPageGraph()
@@ -577,24 +1213,37 @@ QHash<QString, QList<RouteEdge>> buildPageGraph()
 bool resolveTargetRoute(const QString &targetPageUrl, QString *entryNavText,
 		QList<RouteStep> *routeSteps)
 {
-	static const QList<RootRoute> roots = {
+	if (!entryNavText || !routeSteps) {
+		return false;
+	}
+	entryNavText->clear();
+	routeSteps->clear();
+
+	const QHash<QString, QString> commonWordsLabels = parseCommonWordsLabels();
+	const QList<RootRoute> swipeRoots = scanSwipeRootPages(commonWordsLabels);
+	for (const RootRoute &root : swipeRoots) {
+		if (targetPageUrl == root.rootPageUrl) {
+			*entryNavText = root.entryNavText;
+			return true;
+		}
+	}
+
+	const QList<RootRoute> pushPageRoots = {
 		{
 			QStringLiteral("/pages/SettingsPage.qml"),
 			QStringLiteral("Settings"),
 		},
 		{
-			QStringLiteral("/pages/OverviewPage_Landscape.qml"),
-			QStringLiteral("Overview"),
-		},
-		{
-			QStringLiteral("/pages/OverviewPage_Portrait.qml"),
+			isPortraitLayout()
+				? QStringLiteral("/pages/OverviewPage_Portrait.qml")
+				: QStringLiteral("/pages/OverviewPage_Landscape.qml"),
 			QStringLiteral("Overview"),
 		},
 	};
 
 	const QHash<QString, QList<RouteEdge>> graph = buildPageGraph();
 
-	for (const RootRoute &root : roots) {
+	for (const RootRoute &root : pushPageRoots) {
 		if (targetPageUrl == root.rootPageUrl) {
 			continue;
 		}
@@ -656,6 +1305,16 @@ bool resolveTargetRoute(const QString &targetPageUrl, QString *entryNavText,
 		for (auto it = reversedSteps.crbegin(); it != reversedSteps.crend(); ++it) {
 			routeSteps->append(*it);
 		}
+		return true;
+	}
+
+	const QList<ShownTypeRoute> shownTypes = scanShownTypeRoutes(swipeRoots);
+	for (const ShownTypeRoute &shown : shownTypes) {
+		if (shown.typeUrl != targetPageUrl) {
+			continue;
+		}
+		*entryNavText = shown.entryNavText;
+		*routeSteps = shown.extraClicks;
 		return true;
 	}
 
