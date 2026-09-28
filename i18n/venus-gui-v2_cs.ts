@@ -6,7 +6,7 @@
     <message id="page_switchable_output_switch_mode_disabled">
       <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="55"/>
       <source>Disabled</source>
-      <translation>Deaktivováno</translation>
+      <translation>Zakázáno</translation>
     </message>
     <message id="common_words_inverter_overload">
       <location filename="../../components/CommonWords.qml" line="305"/>
@@ -46,7 +46,7 @@
     <message id="switchable_output_function_manual">
       <location filename="../../src/enums.cpp" line="617"/>
       <source>Manual</source>
-      <translation>Manuální</translation>
+      <translation>Ruční</translation>
     </message>
     <message id="pagesettingsboatpage_none">
       <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="35"/>
@@ -350,11 +350,6 @@
       <source>AC output</source>
       <translation type="unfinished">AC výstup</translation>
     </message>
-    <message id="page_generator_ac_load_use_ac_load">
-      <location filename="../../pages/settings/PageGeneratorAcLoad.qml" line="25"/>
-      <source>Use AC Load to start/stop</source>
-      <translation>Použít AC zátěž pro start/stop</translation>
-    </message>
     <message id="page_generator_ac_load_measurement">
       <location filename="../../pages/settings/PageGeneratorAcLoad.qml" line="31"/>
       <source>Measurement</source>
@@ -556,8 +551,8 @@
     </message>
     <message id="settings_ess_debug_grid_setpoint">
       <location filename="../../pages/settings/PageHub4Debug.qml" line="15"/>
-      <source>Grid Setpoint</source>
-      <translation>Hodnota síťového odběru</translation>
+      <source>Grid setpoint</source>
+      <translation type="unfinished">Hodnota síťového odběru</translation>
     </message>
     <message id="settings_ess_debug_ac_in_setpoint">
       <location filename="../../pages/settings/PageHub4Debug.qml" line="48"/>
@@ -583,31 +578,6 @@
       <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="17"/>
       <source>Hidden</source>
       <translation>Schovaný</translation>
-    </message>
-    <message id="settings_batteries_battery_auxiliary_measurement">
-      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="62"/>
-      <source>%1 (Auxiliary measurement)</source>
-      <translation>%1 (Pomocné měření)</translation>
-    </message>
-    <message id="settings_batteries_battery_output">
-      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="64"/>
-      <source>%1 (Output %2)</source>
-      <translation>%1 (Výstup %2)</translation>
-    </message>
-    <message id="settings_batteries_active_battery_monitor">
-      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="88"/>
-      <source>Active battery monitor</source>
-      <translation type="unfinished">Aktivní monitor baterie</translation>
-    </message>
-    <message id="settings_batteries_name">
-      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="101"/>
-      <source>Name</source>
-      <translation type="unfinished">Název</translation>
-    </message>
-    <message id="settings_batteries_enter_name">
-      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="103"/>
-      <source>Enter name</source>
-      <translation type="unfinished">Zadejte jméno</translation>
     </message>
     <message id="settings_briefview_center_active_battery_monitor">
       <location filename="../../components/listitems/ListBriefCenterDetails.qml" line="27"/>
@@ -659,11 +629,6 @@
       <source>PV inverter on phase 2</source>
       <translation>FV invertor na fázi 2</translation>
     </message>
-    <message id="settings_cgwacs_pv_inverter_l2_position">
-      <location filename="../../pages/settings/PageSettingsCGwacs.qml" line="87"/>
-      <source>PV inverter on phase 2 Position</source>
-      <translation>FV invertor na pozici fáze 2</translation>
-    </message>
     <message id="settings_canbus_profile">
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="46"/>
       <source>CAN-bus profile</source>
@@ -672,7 +637,7 @@
     <message id="settings_disabled">
       <location filename="../../pages/settings/CanbusProfile.qml" line="31"/>
       <source>Disabled</source>
-      <translation type="unfinished">Deaktivováno</translation>
+      <translation type="unfinished">Zakázáno</translation>
     </message>
     <message id="settings_canbus_vecan_and_can_bus_bms">
       <location filename="../../pages/settings/CanbusProfile.qml" line="42"/>
@@ -718,16 +683,6 @@
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="106"/>
       <source>Above selector sets which block of unique identity numbers to use for the NAME Unique Identity Numbers in the PGN 60928 NAME field. Change only when using multiple GX Devices in one VE.Can network.</source>
       <translation>Výše uvedený selektor nastavuje, který blok jedinečných identifikačních čísel se má použít pro jedinečná identifikační čísla NAME v poli PGN 60928 NAME. Změňte pouze při použití více zařízení GX v jedné síti VE.Can.</translation>
-    </message>
-    <message id="settings_canbus_unique_id_rvc_description">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="109"/>
-      <source>Above selector sets which block of unique identity numbers to use for the Serial number in the DGN 60928 ADDRESS_CLAIM field. Change only when using multiple GX Devices in one RV-C network.</source>
-      <translation>Výše uvedený selektor nastavuje, který blok jedinečných identifikačních čísel se má použít pro sériové číslo v poli DGN 60928 ADDRESS_CLAIM. Změňte pouze při použití více zařízení GX v jedné síti RV-C.</translation>
-    </message>
-    <message id="settings_canbus_unique_id_choose">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="130"/>
-      <source>Check Unique id numbers</source>
-      <translation>Zkontrolovat unikátní identifikační čísla</translation>
     </message>
     <message id="settings_canbus_unique_id_conflict">
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="138"/>
@@ -816,16 +771,6 @@
       <source>Electrical power display</source>
       <translation>Zobrazení elektrického výkonu</translation>
     </message>
-    <message id="settings_units_watts">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="44"/>
-      <source>Power (Watts)</source>
-      <translation>Výkon (ve wattech)</translation>
-    </message>
-    <message id="settings_units_amps">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="47"/>
-      <source>Current (Amps)</source>
-      <translation>Proud (ampéry)</translation>
-    </message>
     <message id="settings_briefview_level">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="176"/>
       <source>Level %1</source>
@@ -881,11 +826,6 @@
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="120"/>
       <source>Used sensor</source>
       <translation>Použitý senzor</translation>
-    </message>
-    <message id="settings_dvcc_shared_current_sense">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="131"/>
-      <source>SCS - Shared current sense</source>
-      <translation>SCS – sdílený snímač proudu</translation>
     </message>
     <message id="settings_dvcc_scs_status">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="138"/>
@@ -1308,7 +1248,7 @@
     <message id="page_settings_run_time_and_service_reset_service_timer">
       <location filename="../../pages/settings/PageGeneratorRuntimeService.qml" line="179"/>
       <source>Reset service timer</source>
-      <translation>Resetování servisního časovače</translation>
+      <translation>Resetovat servisní časovač</translation>
     </message>
     <message id="components_volumeunit_volume">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="35"/>
@@ -1339,12 +1279,6 @@
       <source>52° 20.693 N, 5° 13.205 E</source>
       <extracomment>Example of GPS data in the 'Degrees Minutes' format</extracomment>
       <translation>52° 20.693 N, 5° 13.205 E</translation>
-    </message>
-    <message id="settings_gps_speed_unit">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="90"/>
-      <source>Speed Unit</source>
-      <extracomment>Speed unit for reported GPS data</extracomment>
-      <translation>Jednotka rychlosti</translation>
     </message>
     <message id="settings_gps_format_mph">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="99"/>
@@ -1487,7 +1421,7 @@ Pokud to nefunguje, zkontrolujte kartu SIM v telefonu a ujistěte se, že na ní
     <message id="page_settings_gsm_user_name">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="271"/>
       <source>User name</source>
-      <translation>Jméno uživatele</translation>
+      <translation>Uživatelské jméno</translation>
     </message>
     <message id="page_settings_gsm_imei">
       <location filename="../../pages/settings/PageSettingsGsm.qml" line="286"/>
@@ -1514,11 +1448,6 @@ Pokud to nefunguje, zkontrolujte kartu SIM v telefonu a ujistěte se, že na ní
       <source>External meter</source>
       <translation>Externí měření</translation>
     </message>
-    <message id="settings_ess_inverter_charger">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="65"/>
-      <source>Inverter/Charger</source>
-      <translation>Měnič/nabíječ</translation>
-    </message>
     <message id="settings_ess_multiphase_regulation">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="106"/>
       <source>Multiphase regulation</source>
@@ -1533,15 +1462,6 @@ Pokud to nefunguje, zkontrolujte kartu SIM v telefonu a ujistěte se, že na ní
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="115"/>
       <source>Individual phase</source>
       <translation>Individuální měření fází</translation>
-    </message>
-    <message id="settings_ess_multiphase_split_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="121"/>
-      <source>Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).
-
-CAUTION: Use only if required by the utility provider.</source>
-      <translation>Každá fáze je regulována tak, aby individuálně dosáhla žádané hodnoty sítě (účinnost systému se snižuje).
-
-UPOZORNĚNÍ: Používejte pouze v případě, že to vyžaduje dodavatel elektrické energie.</translation>
     </message>
     <message id="settings_ess_multiphase_total_notif">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="124"/>
@@ -1565,7 +1485,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
     <message id="settings_ess_battery_life_sustain">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="177"/>
       <source>Sustain</source>
-      <translation type="unfinished">Udržování</translation>
+      <translation type="unfinished">Sustain</translation>
     </message>
     <message id="settings_ess_battery_life_recharge">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="179"/>
@@ -1590,7 +1510,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
     <message id="settings_ess_dynamic">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="315"/>
       <source>Dynamic ESS</source>
-      <translation type="unfinished">Dynamické ESS</translation>
+      <translation type="unfinished">Dynamic ESS</translation>
     </message>
     <message id="settings_rs_ess_min_soc">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="40"/>
@@ -1631,7 +1551,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
     <message id="ev_charging_state_sustain">
       <location filename="../../pages/ev/EvPage.qml" line="88"/>
       <source>Sustain</source>
-      <translation>Udržování</translation>
+      <translation>Sustain</translation>
     </message>
     <message id="system_state_recharge">
       <location filename="../../src/enums.cpp" line="808"/>
@@ -1979,47 +1899,15 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Available services</source>
       <translation>Dostupné služby</translation>
     </message>
-    <message id="settings_relay_function_relay1">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="48"/>
-      <source>Function (Relay 1)</source>
-      <translation>Funkce (relé 1)</translation>
-    </message>
     <message id="page_switchable_output_function">
       <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="113"/>
       <source>Function</source>
       <translation>Funkce</translation>
     </message>
-    <message id="settings_relay_function">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="50"/>
-      <source>Function</source>
-      <translation type="unfinished">Funkce</translation>
-    </message>
-    <message id="settings_relay_disabled">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="54"/>
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="98"/>
-      <source>Disabled</source>
-      <translation type="unfinished">Deaktivováno</translation>
-    </message>
     <message id="settings_relay_alarm_relay">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="56"/>
       <source>Alarm relay</source>
       <translation>Alarmové relé</translation>
-    </message>
-    <message id="settings_relay_tank_pump">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="62"/>
-      <source>Tank pump</source>
-      <translation type="unfinished">Čerpadlo nádrže</translation>
-    </message>
-    <message id="settings_relay_manual">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="64"/>
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="100"/>
-      <source>Manual</source>
-      <translation type="unfinished">Manuální</translation>
-    </message>
-    <message id="settings_relay_polarity">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="78"/>
-      <source>Polarity</source>
-      <translation type="unfinished">Polarita</translation>
     </message>
     <message id="settings_relay_normally_open">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="83"/>
@@ -2030,11 +1918,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="85"/>
       <source>Normally closed</source>
       <translation>Normálně sepnuto</translation>
-    </message>
-    <message id="settings_relay_function_relay2">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="93"/>
-      <source>Function (Relay 2)</source>
-      <translation>Funkce (relé 2)</translation>
     </message>
     <message id="settings_relay_temp_control_rules">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="119"/>
@@ -2084,15 +1967,10 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Backup firmware not available</source>
       <translation>Záložní firmware není k dispozici</translation>
     </message>
-    <message id="settings_services_canbus_over_tcpip_debug">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="119"/>
-      <source>CAN-bus over TCP/IP (Debug)</source>
-      <translation>CAN-bus přes TCP/IP (ladění)</translation>
-    </message>
     <message id="settings_system_shore_power">
       <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="21"/>
       <source>Shore power</source>
-      <translation>Napájení ze sítě</translation>
+      <translation>Napájení z pobřežní přípojky</translation>
     </message>
     <message id="settings_system_name_vehicle">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="19"/>
@@ -2123,6 +2001,11 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="48"/>
       <source>User-defined name</source>
       <translation>Název definovaný uživatelem</translation>
+    </message>
+    <message id="settings_system_grid">
+      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="18"/>
+      <source>Grid</source>
+      <translation type="unfinished">Síť</translation>
     </message>
     <message id="settings_system_ac_input_1">
       <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="42"/>
@@ -2269,7 +2152,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
     <message id="settings_tcpip_manual">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="106"/>
       <source>Manual</source>
-      <translation type="unfinished">Manuální</translation>
+      <translation type="unfinished">Ruční</translation>
     </message>
     <message id="settings_tcpip_off">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="108"/>
@@ -2305,16 +2188,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="36"/>
       <source>Careful, for ESS systems, as well as systems with a managed battery, the CAN-bus device instance must remain configured to 0. See GX manual for more information.</source>
       <translation>Pozor, pro systémy ESS a systémy se spravovanou baterií musí instance zařízení CAN-bus zůstat nakonfigurována na 0. Další informace naleznete v návodu zařízení GX.</translation>
-    </message>
-    <message id="settings_vecan_nad">
-      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="53"/>
-      <source>Network Address</source>
-      <translation>Síťová adresa</translation>
-    </message>
-    <message id="settings_vecan_devices">
-      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="16"/>
-      <source>VE.CAN devices</source>
-      <translation>Zařízení VE.CAN</translation>
     </message>
     <message id="settings_wifi_no_access_points">
       <location filename="../../pages/settings/PageSettingsWifi.qml" line="181"/>
@@ -2541,7 +2414,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
     <message id="common_words_reset">
       <location filename="../../components/CommonWords.qml" line="486"/>
       <source>Reset</source>
-      <translation>Reset</translation>
+      <translation>Resetovat</translation>
     </message>
     <message id="solarcharger_load">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="233"/>
@@ -2642,25 +2515,15 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Lower electricity rates during off-peak hours or if you want to ensure that your EV is fully charged and ready to go at a specific time.</source>
       <translation>Nižší sazby za elektřinu v době mimo špičku nebo pokud chcete mít jistotu, že bude váš elektromobil v určitou dobu plně nabitý a připravený k jízdě.</translation>
     </message>
-    <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="165"/>
-      <source>Enable charging</source>
-      <translation>Povolit nabíjení</translation>
-    </message>
     <message id="evcs_lock_charger_display">
       <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="28"/>
       <source>Lock charger display</source>
       <translation>Zámek displeje nabíječky</translation>
     </message>
-    <message id="settings_rvc_source_address">
-      <location filename="../../pages/settings/PageSettingsRvcDevice.qml" line="36"/>
-      <source>Source Address</source>
-      <translation>Adresa zdroje</translation>
-    </message>
     <message id="settings_rvc_configuration">
       <location filename="../../pages/settings/PageSettingsRvcDevice.qml" line="65"/>
       <source>Configuration</source>
-      <translation>Nastavení</translation>
+      <translation>Konfigurace</translation>
     </message>
     <message id="settings_rvc_line_instance_num">
       <location filename="../../pages/settings/PageSettingsRvcDeviceConfiguration.qml" line="19"/>
@@ -2760,7 +2623,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
     <message id="batterysettingrelay_manual_control">
       <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="35"/>
       <source>Manual control</source>
-      <translation type="unfinished">Ruční řízení</translation>
+      <translation type="unfinished">Ruční ovládání</translation>
     </message>
     <message id="batterysettingrelay_fuse_blown">
       <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="122"/>
@@ -2770,7 +2633,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
     <message id="common_words_manual_control">
       <location filename="../../components/CommonWords.qml" line="348"/>
       <source>Manual control</source>
-      <translation>Ruční řízení</translation>
+      <translation>Ruční ovládání</translation>
     </message>
     <message id="batterysettingrelay_always_open_dont_use_the_relay">
       <location filename="../../pages/settings/devicelist/battery/BatterySettingsRelayModel.qml" line="37"/>
@@ -2798,30 +2661,10 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <extracomment>Indicates no alarm is set</extracomment>
       <translation type="unfinished">Žádný</translation>
     </message>
-    <message id="batterydiagnostics_main_switch">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="57"/>
-      <source>Main Switch</source>
-      <translation>Hlavní spínač</translation>
-    </message>
     <message id="batterydiagnostics_heater">
       <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="64"/>
       <source>Heater</source>
       <translation>Ohřev</translation>
-    </message>
-    <message id="batterydiagnostics_internal_fan">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="71"/>
-      <source>Internal Fan</source>
-      <translation>Vnitřní ventilátor</translation>
-    </message>
-    <message id="batterydiagnostics_warning_flags">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="78"/>
-      <source>Warning Flags</source>
-      <translation>Varovací ikony</translation>
-    </message>
-    <message id="batterydiagnostics_alarm_flags">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="84"/>
-      <source>Alarm Flags</source>
-      <translation>Alarmové ikony</translation>
     </message>
     <message id="common_words_switch">
       <location filename="../../components/CommonWords.qml" line="581"/>
@@ -2851,12 +2694,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Going to run</source>
       <extracomment>Status is 'Going to run'</extracomment>
       <translation>Uvedení do chodu</translation>
-    </message>
-    <message id="devicelist_battery_pre_charging">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="68"/>
-      <source>Pre-Charging</source>
-      <extracomment>Status is 'Pre-Charging'</extracomment>
-      <translation>Předběžné nabíjení</translation>
     </message>
     <message id="devicelist_battery_contactor_check">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="72"/>
@@ -2954,11 +2791,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>IO</source>
       <translation>IO</translation>
     </message>
-    <message id="battery_settings_system">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="406"/>
-      <source>System</source>
-      <translation type="unfinished">Systém</translation>
-    </message>
     <message id="pagesettingsgeneral_system">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="109"/>
       <source>System</source>
@@ -2968,11 +2800,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="421"/>
       <source>Parameters</source>
       <translation>Parametry</translation>
-    </message>
-    <message id="battery_redetect_battery">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="446"/>
-      <source>Redetect Battery</source>
-      <translation>Opakovat detekci baterie</translation>
     </message>
     <message id="battery_redetecting_the_battery_note">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="454"/>
@@ -3037,12 +2864,12 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
     <message id="batteryalarms_low_charge_temperature">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="127"/>
       <source>Low charge temperature</source>
-      <translation>Teplota nízkého stavu nabití</translation>
+      <translation>Nízká teplota při nabíjení</translation>
     </message>
     <message id="batteryalarms_high_charge_temperature">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="134"/>
       <source>High charge temperature</source>
-      <translation>Teplota vysokého stavu nabití</translation>
+      <translation>Vysoká teplota při nabíjení</translation>
     </message>
     <message id="batteryalarms_internal_failure">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="141"/>
@@ -3105,11 +2932,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="79"/>
       <source>Number of modules blocking charge / discharge</source>
       <translation>Počet modulů blokujících nabíjení / vybíjení</translation>
-    </message>
-    <message id="batterydetails_installed_available_capacity">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="89"/>
-      <source>Installed / Available capacity</source>
-      <translation>Instalovaná / dostupná kapacita</translation>
     </message>
     <message id="batteryalarms_deepest_discharge">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="19"/>
@@ -3201,11 +3023,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Discharge Current Limit (DCL)</source>
       <translation>Limit vybíjecího proudu (DCL)</translation>
     </message>
-    <message id="batteryparameters_low_voltage_disconnect_always_ignored">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryParameters.qml" line="39"/>
-      <source>Low Voltage Disconnect (always ignored)</source>
-      <translation>Odpojení při nízkém napětí (vždy ignorováno)</translation>
-    </message>
     <message id="batterysettings_battery_bank">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="46"/>
       <source>Battery bank</source>
@@ -3230,31 +3047,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="87"/>
       <source>Restore factory defaults?</source>
       <translation>Obnovení továrního nastavení?</translation>
-    </message>
-    <message id="batterysettings_bluetooth_enabled">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="101"/>
-      <source>Bluetooth Enabled</source>
-      <translation>Bluetooth povoleno</translation>
-    </message>
-    <message id="batterysettingsbattery_nominal_voltage">
-      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="21"/>
-      <source>Nominal Voltage</source>
-      <translation>Jmenovité napětí</translation>
-    </message>
-    <message id="batterysettingsbattery_12_volt">
-      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="25"/>
-      <source>12 Volt</source>
-      <translation>12 V</translation>
-    </message>
-    <message id="batterysettingsbattery_24_volt">
-      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="27"/>
-      <source>24 Volt</source>
-      <translation>24 voltů</translation>
-    </message>
-    <message id="batterysettingsbattery_48_volt">
-      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="29"/>
-      <source>48 Volt</source>
-      <translation>48 voltů</translation>
     </message>
     <message id="devicelist_tanksetup_capacity">
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="18"/>
@@ -3346,11 +3138,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
         <numerusform>%n pojistka(y) vyhořela(y)</numerusform>
       </translation>
     </message>
-    <message id="lynxdistributor_no_information_available">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxDistributorList.qml" line="84"/>
-      <source>No information available, see previous page for Distributor status.</source>
-      <translation>Nejsou k dispozici žádné informace, stav rozvaděče viz předchozí strana.</translation>
-    </message>
     <message id="lynxdistributor_fuse_name">
       <location filename="../../pages/settings/devicelist/battery/PageLynxDistributorList.qml" line="91"/>
       <source>Fuse %1</source>
@@ -3392,20 +3179,10 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>4th last error</source>
       <translation type="unfinished">4. poslední chyba</translation>
     </message>
-    <message id="lynxionio_system_switch">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="18"/>
-      <source>System Switch</source>
-      <translation>Spuštění systému</translation>
-    </message>
     <message id="lynxionio_external_relay">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="38"/>
       <source>External relay</source>
       <translation>Externí relé</translation>
-    </message>
-    <message id="lynxionio_programmable_contact">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="46"/>
-      <source>Programmable Contact</source>
-      <translation>Nastavitelný kontakt</translation>
     </message>
     <message id="common_words_batteries">
       <location filename="../../components/CommonWords.qml" line="61"/>
@@ -3440,7 +3217,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
     <message id="lynxionsystem_balancer_balancing">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="110"/>
       <source>Balancing</source>
-      <translation type="unfinished">Vyrovnávání</translation>
+      <translation type="unfinished">Balancování</translation>
     </message>
     <message id="lynxionsystem_balancer_imbalance">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="113"/>
@@ -3455,7 +3232,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
     <message id="battery_status_balancing">
       <location filename="../../src/enums.cpp" line="91"/>
       <source>Balancing</source>
-      <translation>Vyrovnávání</translation>
+      <translation>Balancování</translation>
     </message>
     <message id="page-dc-gensets-output">
       <location filename="../../pages/settings/PageDcGensets.qml" line="52"/>
@@ -3581,16 +3358,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="44"/>
       <source>Standard</source>
       <translation>Tovární nastavení</translation>
-    </message>
-    <message id="devicelist_tanksetup_european_(0_to_180_ohm)">
-      <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="49"/>
-      <source>European (0 to 180 Ohm)</source>
-      <translation>Evropský (0 až 180 Ohmů)</translation>
-    </message>
-    <message id="devicelist_tanksetup_us_(240_to_30_ohm)">
-      <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="51"/>
-      <source>US (240 to 30 Ohm)</source>
-      <translation>US (240 až 30 Ohmů)</translation>
     </message>
     <message id="settings_ble_bridge_access_custom">
       <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="213"/>
@@ -3784,30 +3551,20 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <extracomment>%1 = the error number</extracomment>
       <translation>Žádná chyba (%1)</translation>
     </message>
-    <message id="ac-in-modeldefault_ac_totals">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="88"/>
-      <source>AC Totals</source>
-      <translation>AC celkem</translation>
-    </message>
     <message id="ac-in-modeldefault_energy_x">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="122"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="147"/>
       <source>Energy L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
       <translation>Energie L%1</translation>
     </message>
-    <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="160"/>
-      <source>Phase Sequence</source>
-      <translation>Pořadí fází</translation>
-    </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="166"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="191"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="169"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="194"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L1-L2-L3</translation>
@@ -3889,7 +3646,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
     <message id="page_meteo_irradiance">
       <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="42"/>
       <source>Irradiance</source>
-      <translation>Ozáření</translation>
+      <translation>Intenzita slunečního záření</translation>
     </message>
     <message id="page_meteo_cell_temperature">
       <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="51"/>
@@ -3949,7 +3706,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
     <message id="pulsecounter_setup_reset_counter">
       <location filename="../../pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml" line="35"/>
       <source>Reset counter</source>
-      <translation>Reset počítání</translation>
+      <translation>Resetovat čítač</translation>
     </message>
     <message id="generic_input_status_sensor_battery_low">
       <location filename="../../src/enums.cpp" line="539"/>
@@ -3980,11 +3737,6 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="63"/>
       <source>Sensor voltage</source>
       <translation>Napětí snímače</translation>
-    </message>
-    <message id="settings_multirs_total_pv_power">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="205"/>
-      <source>Total PV Power</source>
-      <translation>Celkový FV výkon</translation>
     </message>
     <message id="common_words_product_page">
       <location filename="../../components/CommonWords.qml" line="466"/>
@@ -4100,7 +3852,7 @@ Chcete pokračovat?</translation>
     <message id="vebus_device_warning">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="102"/>
       <source>Warning: Activating equalization in an ESS system with solar chargers can cause charging the battery at high voltage with a too high current.</source>
-      <translation>Varování: Aktivace vyrovnávání v systému ESS zahrnujícím solární nabíječky může způsobit nabíjení baterie při vysokém napětí a příliš vysokým proudem.</translation>
+      <translation>Upozornění: Aktivace vyrovnávání v systému ESS se solárními regulátory může způsobit nabíjení baterie vysokým napětím a příliš vysokým proudem.</translation>
     </message>
     <message id="vebus_device_switch_to_float">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="106"/>
@@ -4465,7 +4217,7 @@ Chcete pokračovat?</translation>
     <message id="common_words_ac_load">
       <location filename="../../components/CommonWords.qml" line="34"/>
       <source>AC load</source>
-      <translation>AC zatěž</translation>
+      <translation>AC zátěž</translation>
     </message>
     <message id="common_words_ac_out">
       <location filename="../../components/CommonWords.qml" line="37"/>
@@ -4544,7 +4296,7 @@ Chcete pokračovat?</translation>
     <message id="common_words_battery_current">
       <location filename="../../components/CommonWords.qml" line="99"/>
       <source>Battery current</source>
-      <translation>proud baterie</translation>
+      <translation>Proud baterie</translation>
     </message>
     <message id="common_words_battery_voltage">
       <location filename="../../components/CommonWords.qml" line="105"/>
@@ -4565,7 +4317,7 @@ Chcete pokračovat?</translation>
       <location filename="../../components/CommonWords.qml" line="144"/>
       <source>Clear error</source>
       <extracomment>Action to clear an error state</extracomment>
-      <translation>Zrušení chyby</translation>
+      <translation>Vymazat chybu</translation>
     </message>
     <message id="generic_input_label_closed">
       <location filename="../../src/genericinput.cpp" line="52"/>
@@ -4618,12 +4370,12 @@ Chcete pokračovat?</translation>
     <message id="common_words_enable">
       <location filename="../../components/CommonWords.qml" line="202"/>
       <source>Enable</source>
-      <translation>Aktivovat</translation>
+      <translation>Povolit</translation>
     </message>
     <message id="common_words_enabled">
       <location filename="../../components/CommonWords.qml" line="205"/>
       <source>Enabled</source>
-      <translation>Aktivováno</translation>
+      <translation>Povoleno</translation>
     </message>
     <message id="common_words_energy">
       <location filename="../../components/CommonWords.qml" line="212"/>
@@ -4875,7 +4627,7 @@ Chcete pokračovat?</translation>
     <message id="common_words_serial_number">
       <location filename="../../components/CommonWords.qml" line="509"/>
       <source>Serial number</source>
-      <translation>Výrobní číslo</translation>
+      <translation>Sériové číslo</translation>
     </message>
     <message id="nav_settings">
       <location filename="../../pages/SettingsPage.qml" line="19"/>
@@ -5024,7 +4776,7 @@ Chcete pokračovat?</translation>
       <location filename="../../components/CommonWords.qml" line="655"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
-      <translation>Výnos</translation>
+      <translation>Výroba</translation>
     </message>
     <message id="dateselectordialog_set_date">
       <location filename="../../components/dialogs/DateSelectorDialog.qml" line="17"/>
@@ -5227,7 +4979,7 @@ Chcete pokračovat?</translation>
       <translation>Neupravená voda</translation>
     </message>
     <message id="listItem_no_access">
-      <location filename="../../components/listitems/core/ListSetting.qml" line="78"/>
+      <location filename="../../components/listitems/core/ListSetting.qml" line="79"/>
       <source>Setting locked for access level</source>
       <translation>Nastavení uzamčené úrovně přístupu</translation>
     </message>
@@ -5556,13 +5308,13 @@ Chcete pokračovat?</translation>
       <location filename="../../components/SolarDetailBox.qml" line="114"/>
       <source>Bulk</source>
       <extracomment>Battery: time spent in 'Bulk' mode</extracomment>
-      <translation type="unfinished">Rychlé nabíjení (bulk)</translation>
+      <translation type="unfinished">Bulk</translation>
     </message>
     <message id="charger_history_box_float">
       <location filename="../../components/SolarDetailBox.qml" line="128"/>
       <source>Float</source>
       <extracomment>Battery: time spent in 'Float' mode</extracomment>
-      <translation type="unfinished">Udržování</translation>
+      <translation type="unfinished">Float</translation>
     </message>
     <message id="charger_history_hr">
       <location filename="../../components/SolarDetailBox.qml" line="194"/>
@@ -5573,7 +5325,7 @@ Chcete pokračovat?</translation>
     <message id="solarchargers_state_bulk">
       <location filename="../../src/enums.cpp" line="462"/>
       <source>Bulk</source>
-      <translation>Rychlé nabíjení (bulk)</translation>
+      <translation>Bulk</translation>
     </message>
     <message id="charger_history_box_abs">
       <location filename="../../components/SolarDetailBox.qml" line="121"/>
@@ -5584,7 +5336,7 @@ Chcete pokračovat?</translation>
     <message id="solarchargers_state_float">
       <location filename="../../src/enums.cpp" line="468"/>
       <source>Float</source>
-      <translation>Udržování</translation>
+      <translation>Float</translation>
     </message>
     <message id="timeselector_hr">
       <location filename="../../components/TimeSelector.qml" line="46"/>
@@ -5703,7 +5455,7 @@ Chcete pokračovat?</translation>
     <message id="common_words_silence_alarm">
       <location filename="../../components/CommonWords.qml" line="521"/>
       <source>Silence alarm</source>
-      <translation>Vypnutí alarmu</translation>
+      <translation>Ztišit alarm</translation>
     </message>
     <message id="vebus_device_page_total_power">
       <location filename="../../components/ThreePhaseQuantityTable.qml" line="53"/>
@@ -5837,7 +5589,7 @@ Chcete pokračovat?</translation>
     <message id="dcMeter_alternator">
       <location filename="../../src/enums.cpp" line="225"/>
       <source>Alternator</source>
-      <translation>Generátor</translation>
+      <translation>Alternátor</translation>
     </message>
     <message id="dcMeter_dc_system">
       <location filename="../../src/enums.cpp" line="234"/>
@@ -6000,12 +5752,12 @@ Chcete pokračovat?</translation>
     <message id="solarchargers_state_absorption">
       <location filename="../../src/enums.cpp" line="465"/>
       <source>Absorption</source>
-      <translation>Absorpce</translation>
+      <translation>Absorption</translation>
     </message>
     <message id="solarchargers_state_storage">
       <location filename="../../src/enums.cpp" line="471"/>
       <source>Storage</source>
-      <translation>Skladování</translation>
+      <translation>Storage</translation>
     </message>
     <message id="solarchargers_state_equalize">
       <location filename="../../src/enums.cpp" line="474"/>
@@ -6015,7 +5767,7 @@ Chcete pokračovat?</translation>
     <message id="switchable_output_disabled">
       <location filename="../../src/enums.cpp" line="695"/>
       <source>Disabled</source>
-      <translation type="unfinished">Deaktivováno</translation>
+      <translation type="unfinished">Zakázáno</translation>
     </message>
     <message id="switchable_output_externalcontrol">
       <location filename="../../src/enums.cpp" line="716"/>
@@ -6115,7 +5867,7 @@ Chcete pokračovat?</translation>
     <message id="settings_rs_ess_dess">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="97"/>
       <source>Dynamic ESS</source>
-      <translation>Dynamické ESS</translation>
+      <translation>Dynamic ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
       <location filename="../../data/SystemSettings.qml" line="163"/>
@@ -6155,11 +5907,6 @@ Chcete pokračovat?</translation>
       <location filename="../../pages/solar/PageSolarCharger.qml" line="311"/>
       <source>Short circuit alarm</source>
       <translation>Alarm zkratu</translation>
-    </message>
-    <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
-      <source>Disable Access Point</source>
-      <translation>Deaktivovat přístupový bod</translation>
     </message>
     <message id="settings_ess_use_this_option_for_systems_no_peak_shaving">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="56"/>
@@ -6215,13 +5962,13 @@ Chcete pokračovat?</translation>
       <location filename="../../pages/controlcards/InverterChargerCard.qml" line="24"/>
       <source>Inverter (%1)</source>
       <extracomment>%1 = the inverter name</extracomment>
-      <translation>Invertor (%1)</translation>
+      <translation>Měnič (%1)</translation>
     </message>
     <message id="controlcard_inverter_charger">
       <location filename="../../pages/controlcards/InverterChargerCard.qml" line="27"/>
       <source>Inverter / Charger (%1)</source>
       <extracomment>%1 = the inverter/charger name</extracomment>
-      <translation>Střídač / nabíječka (%1)</translation>
+      <translation>Měnič/nabíječ (%1)</translation>
     </message>
     <message id="settings_page_debug_quit_application">
       <location filename="../../pages/settings/debug/PageDebug.qml" line="24"/>
@@ -6312,7 +6059,7 @@ Chcete pokračovat?</translation>
     <message id="genset_charge_current_limit">
       <location filename="../../components/PageGensetModel.qml" line="320"/>
       <source>Charge current limit</source>
-      <translation>Omezení nabíjecího proudu</translation>
+      <translation>Limit nabíjecího proudu</translation>
     </message>
     <message id="common_words_bms_control_info">
       <location filename="../../components/CommonWords.qml" line="111"/>
@@ -6339,15 +6086,10 @@ Chcete pokračovat?</translation>
       <source>Invalid battery configuration</source>
       <translation>Nesprávná konfigurace baterie</translation>
     </message>
-    <message id="devicelist_battery_total_capacity">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="143"/>
-      <source>Total Capacity</source>
-      <translation>Celková kapacita</translation>
-    </message>
     <message id="devicelist_battery_system_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="155"/>
       <source>System voltage</source>
-      <translation>Systémové napětí [V]</translation>
+      <translation>Systémové napětí</translation>
     </message>
     <message id="devicelist_battery_number_of_bmses">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="169"/>
@@ -6357,7 +6099,7 @@ Chcete pokračovat?</translation>
     <message id="batteryalarms_high_cell_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="31"/>
       <source>High cell voltage</source>
-      <translation>Vysoké napětí článků</translation>
+      <translation>Vysoké napětí článku</translation>
     </message>
     <message id="batteryalarms_high_current">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryAlarms.qml" line="45"/>
@@ -6392,7 +6134,7 @@ Chcete pokračovat?</translation>
     <message id="lynxionsystem_balancing">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="92"/>
       <source>Balancing</source>
-      <translation type="unfinished">Vyrovnávání</translation>
+      <translation type="unfinished">Balancování</translation>
     </message>
     <message id="lynxionsystem_balancer_status">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="100"/>
@@ -6409,20 +6151,10 @@ Chcete pokračovat?</translation>
       <source>Imbalance</source>
       <translation>Nerovnováha</translation>
     </message>
-    <message id="alternator_temperature">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="33"/>
-      <source>Alternator Temperature</source>
-      <translation>Teplota alternátoru</translation>
-    </message>
     <message id="alternator_wakespeed_utilization">
       <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="76"/>
       <source>Utilization</source>
       <translation>Využití</translation>
-    </message>
-    <message id="engine_temperature">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="99"/>
-      <source>Engine Temperature</source>
-      <translation>Teplota motoru</translation>
     </message>
     <message id="alternator_wakespeed_operation_time">
       <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="36"/>
@@ -6478,7 +6210,7 @@ Chcete pokračovat?</translation>
     <message id="page_meteo_daily_yield">
       <location filename="../../pages/settings/devicelist/PageMeteo.qml" line="107"/>
       <source>Today's yield</source>
-      <translation>Dnešní výnos</translation>
+      <translation>Dnešní výroba</translation>
     </message>
     <message id="devicelist_tanksetup_sensor_value_when_full">
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="69"/>
@@ -6555,11 +6287,6 @@ Chcete pokračovat?</translation>
       <location filename="../../pages/settings/PageRelayGenerator.qml" line="24"/>
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <translation>Funkce start/stop generátoru není povolena, přejděte do nastavení relé a nastavte funkci na "Genset start/stop".</translation>
-    </message>
-    <message id="settings_batteries_intro">
-      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="45"/>
-      <source>Use this menu to define the battery data shown when clicking the Battery icon on the Overview page. The same selection is also visible on the VRM Portal.</source>
-      <translation>Pomocí této nabídky můžete definovat údaje o baterii, které se zobrazí po kliknutí na ikonu Baterie na stránce Přehled. Stejný výběr je viditelný také na portálu VRM.</translation>
     </message>
     <message id="settings_continuous_scan_may_interfere">
       <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="193"/>
@@ -6644,7 +6371,7 @@ Chcete pokračovat?</translation>
     <message id="settings_display_remote_console_ui">
       <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="171"/>
       <source>User interface (Remote Console)</source>
-      <translation>Uživatelské rozhraní (vzdálená konzola)</translation>
+      <translation>Uživatelské rozhraní (Vzdálená konzole)</translation>
     </message>
     <message id="settings_display_classic_ui">
       <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="178"/>
@@ -6851,11 +6578,6 @@ Chcete pokračovat?</translation>
       <location filename="../../pages/settings/PageSettingsFroniusInverter.qml" line="73"/>
       <source>This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation.</source>
       <translation>Tento fotovoltaický střídač podporuje omezení výkonu. Pokud toto nastavení narušuje normální provoz, zakažte jej.</translation>
-    </message>
-    <message id="page_setting_fronius_inverters_add_a_pv_inverter">
-      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="26"/>
-      <source>Add a PV inverter by using the “Find PV Inverter” function or by entering an IP address manually on the previous page.</source>
-      <translation>Přidejte fotovoltaický střídač pomocí funkce "Najít fotovoltaický střídač" nebo ručním zadáním IP adresy na předchozí stránce.</translation>
     </message>
     <message id="settings_local_network_security_profile">
       <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="124"/>
@@ -7066,11 +6788,6 @@ Chcete pokračovat?</translation>
       <source>Note: If current cannot be displayed (for example, when showing a total for combined AC and DC sources) then power will be shown instead.</source>
       <translation>Poznámka: Pokud nelze zobrazit proud (například při zobrazení součtu pro kombinované zdroje střídavého a stejnosměrného proudu), zobrazí se místo toho výkon.</translation>
     </message>
-    <message id="settings_ess_rs_information">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="31"/>
-      <source>For Multi-RS and HS19 devices, ESS settings are available on the RS System product page.</source>
-      <translation>U zařízení Multi-RS a HS19 jsou nastavení ESS k dispozici na stránce produktu RS System.</translation>
-    </message>
     <message id="settings_ess_always">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="60"/>
       <source>Always</source>
@@ -7146,35 +6863,15 @@ Chcete pokračovat?</translation>
       <source>Active (%1)</source>
       <translation>Aktivní (%1)</translation>
     </message>
-    <message id="pagesettingsintegrations_pv_inverters">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="23"/>
-      <source>PV Inverters</source>
-      <translation>FV měniče</translation>
-    </message>
     <message id="pagesettingsintegrations_energy_meters">
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="29"/>
       <source>Energy meters via RS485</source>
       <translation>Měřiče energie přes RS485</translation>
     </message>
-    <message id="pagesettingsintegrations_modbus_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="35"/>
-      <source>Modbus Devices</source>
-      <translation>Zařízení Modbus</translation>
-    </message>
-    <message id="pagesettingsintegrations_bluetooth_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="59"/>
-      <source>Bluetooth Sensors</source>
-      <translation>Bluetooth senzory</translation>
-    </message>
     <message id="pagesettingsintegrations_physical_io">
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="71"/>
       <source>Physical I/O</source>
       <translation>Fyzický vstup/výstup</translation>
-    </message>
-    <message id="pagesettingsintegrations_tank_and_temperature_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="81"/>
-      <source>Tank and Temperature Sensors</source>
-      <translation>Senzory nádrže a teploty</translation>
     </message>
     <message id="pagesettingsintegrations_relays">
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="115"/>
@@ -7185,26 +6882,6 @@ Chcete pokračovat?</translation>
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="129"/>
       <source>Digital I/O</source>
       <translation>Digitální I/O</translation>
-    </message>
-    <message id="pagesettingsintegrations_server_applications">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="191"/>
-      <source>Server Applications</source>
-      <translation>Serverové aplikace</translation>
-    </message>
-    <message id="settings_large_victron_community">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="271"/>
-      <source>Victron Community</source>
-      <translation type="unfinished">Komunita Victron</translation>
-    </message>
-    <message id="pagesettingssupportstate_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="449"/>
-      <source>Modbus TCP Server</source>
-      <translation>Server Modbus TCP</translation>
-    </message>
-    <message id="pagesettingsintegrations_venus_os_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="214"/>
-      <source>Venus OS Large Features</source>
-      <translation>Funkce zařízení Venus OS Large</translation>
     </message>
     <message id="page_settings_nodered_factory_reset">
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="31"/>
@@ -7257,11 +6934,6 @@ Chcete pokračovat?</translation>
       <source>Connection status (HTTP channel)</source>
       <translation>Stav připojení (kanál HTTP)</translation>
     </message>
-    <message id="settings_connection_error_realtime_channel">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="260"/>
-      <source>Connection status (MQTT Real-time channel)</source>
-      <translation>Stav připojení (kanál MQTT v reálném čase)</translation>
-    </message>
     <message id="settings_connection_error_rpc_channel">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="267"/>
       <source>Connection status (MQTT RPC channel)</source>
@@ -7277,30 +6949,10 @@ Chcete pokračovat?</translation>
       <source>Connected genset helper relay</source>
       <translation>Připojené pomocné relé elektrocentrály</translation>
     </message>
-    <message id="settings_relay_genset_can_now_be_found">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="16"/>
-      <source>The Genset can now be found in the devices list</source>
-      <translation>Elektrocentrálu nyní najdete v seznamu zařízení.</translation>
-    </message>
-    <message id="settings_relay_tank_pump_can_now_be_found">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="20"/>
-      <source>The Tank Pump can now be found in the devices list</source>
-      <translation>Čerpadlo v nádrži lze nyní nalézt v seznamu zařízení.</translation>
-    </message>
     <message id="settings_relay_no_temperature_sensors">
       <location filename="../../pages/settings/PageSettingsRelayTempSensors.qml" line="39"/>
       <source>No temperature sensors have been added yet.</source>
       <translation>Zatím nebyla přidána žádná teplotní čidla.</translation>
-    </message>
-    <message id="settings_firmware_switching_not_possible_indeterminate_profile">
-      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="71"/>
-      <source>Switching firmware version is not possible without "Network Security Profile" in "Settings / General" being selected.</source>
-      <translation>Přepnutí verze firmwaru není možné, pokud není vybrán "Network Security Profile" v "Settings / General".</translation>
-    </message>
-    <message id="pagesettingsconnectivity_mobile_network">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="71"/>
-      <source>Mobile Network</source>
-      <translation>Mobilní síť</translation>
     </message>
     <message id="settings_system_name_boat">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="21"/>
@@ -7312,16 +6964,6 @@ Chcete pokračovat?</translation>
       <source>Automatic</source>
       <translation type="unfinished">Automatický</translation>
     </message>
-    <message id="pagesettingssystem_ac_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="75"/>
-      <source>AC System</source>
-      <translation>Systém střídavého proudu</translation>
-    </message>
-    <message id="pagesettingssystem_inputs_and_monitoring">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="77"/>
-      <source>Inputs and Monitoring</source>
-      <translation>Vstupy a monitorování</translation>
-    </message>
     <message id="pagesettingssystem_energy_storage_System">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="84"/>
       <source>Energy Storage System</source>
@@ -7332,20 +6974,10 @@ Chcete pokračovat?</translation>
       <source>Batteries and Battery Management Systems (BMS)</source>
       <translation>Baterie a systémy správy baterií (BMS)</translation>
     </message>
-    <message id="settings_system_charge_control">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="102"/>
-      <source>Charge Control</source>
-      <translation>Řízení nabíjení</translation>
-    </message>
     <message id="pagesettingssystem_distributed_voltage_and_current_control">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="104"/>
       <source>Distributed Voltage and Current Control (DVCC)</source>
       <translation>Distribuované řízení napětí a proudu (DVCC)</translation>
-    </message>
-    <message id="settings_system_grid">
-      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="18"/>
-      <source>Grid</source>
-      <translation type="unfinished">Síť</translation>
     </message>
     <message id="settings_system_ac_position">
       <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="58"/>
@@ -7357,35 +6989,15 @@ Chcete pokračovat?</translation>
       <source>AC input only</source>
       <translation>Pouze vstup AC</translation>
     </message>
-    <message id="settings_system_ac_input_only_description">
-      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="66"/>
-      <source>The AC output of the Inverter/Charger is not used.</source>
-      <translation>Střídavý výstup měniče/nabíječky se nepoužívá.</translation>
-    </message>
     <message id="settings_system_ac_output_only">
       <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="71"/>
       <source>AC output only</source>
       <translation>Pouze střídavý výstup</translation>
     </message>
-    <message id="settings_system_ac_output_only_description">
-      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="73"/>
-      <source>All AC loads are on the output of the Inverter/Charger.</source>
-      <translation>Všechny střídavé zátěže jsou na výstupu měniče/nabíječky.</translation>
-    </message>
     <message id="settings_system_ac_input_and_output">
       <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="77"/>
       <source>AC input &amp; output</source>
       <translation>Vstup a výstup střídavého proudu</translation>
-    </message>
-    <message id="settings_system_ac_input_and_output_description">
-      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="79"/>
-      <source>The system will automatically display loads on the input of the Inverter/Charger if a grid meter is present. Loads on the output are always displayed.</source>
-      <translation>Systém automaticky zobrazí zatížení na vstupu měniče/ nabíječky, pokud je k dispozici síťový elektroměr. Zatížení na výstupu se zobrazuje vždy.</translation>
-    </message>
-    <message id="settings_system_has_dc_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="111"/>
-      <source>Display DC Loads</source>
-      <translation>Zobrazení stejnosměrného zatížení</translation>
     </message>
     <message id="settings_system_battery_measurements">
       <location filename="../../pages/settings/PageSettingsBatteries.qml" line="63"/>
@@ -7401,16 +7013,6 @@ Chcete pokračovat?</translation>
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="20"/>
       <source>Wired</source>
       <translation>Drátové připojení</translation>
-    </message>
-    <message id="settings_vecan_device_instance">
-      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="41"/>
-      <source>VE.Can Device Instance</source>
-      <translation>Instance zařízení VE.Can</translation>
-    </message>
-    <message id="settings_vecan_device_number">
-      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="43"/>
-      <source>VE.Can Instance# %1</source>
-      <translation>Instance VE.Can# %1</translation>
     </message>
     <message id="settings_tz_antarctica">
       <location filename="../../pages/settings/PageTzInfo.qml" line="232"/>
@@ -7495,7 +7097,7 @@ Chcete pokračovat?</translation>
     <message id="solarcharger_not_supported">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="67"/>
       <source>Unfortunately the connected MPPT Solar Charger is not compatible.</source>
-      <translation>Připojená solární nabíječka MPPT bohužel není kompatibilní.</translation>
+      <translation>Připojený solární regulátor MPPT bohužel není kompatibilní.</translation>
     </message>
     <message id="solarcharger_not_supported_reason_70_15">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="71"/>
@@ -7505,7 +7107,7 @@ Chcete pokračovat?</translation>
     <message id="solarcharger_not_supported_reason_version">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="74"/>
       <source>The firmware version in the MPPT Solar Charger must be v1.09 or later. Contact Victron Service for update instructions and files.</source>
-      <translation>Verze firmwaru solární nabíječky MPPT musí být v1.09 nebo novější. Pokyny k aktualizaci a soubory získáte od servisní služby Victron.</translation>
+      <translation>Verze firmwaru solárního regulátoru MPPT musí být v1.09 nebo novější. Pokyny k aktualizaci a soubory získáte od servisu Victron.</translation>
     </message>
     <message id="solarcharger_pv">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="102"/>
@@ -7516,29 +7118,34 @@ Chcete pokračovat?</translation>
     <message id="solarcharger_total_power">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="127"/>
       <source>Total PV power</source>
-      <translation>Celkový FV výkon</translation>
+      <translation type="unfinished">Celkový FV výkon</translation>
     </message>
     <message id="solarcharger_total_yield">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="211"/>
       <source>Total yield</source>
       <extracomment>Solar charger total yield</extracomment>
-      <translation type="unfinished">Celkový výnos</translation>
+      <translation type="unfinished">Celková výroba</translation>
     </message>
     <message id="solarcharger_system_yield">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="220"/>
       <source>System yield</source>
       <extracomment>Solar charger system yield</extracomment>
-      <translation type="unfinished">Systémový výnos</translation>
+      <translation type="unfinished">Výroba systému</translation>
+    </message>
+    <message id="settings_multirs_total_pv_power">
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="205"/>
+      <source>Total PV power</source>
+      <translation>Celkový FV výkon</translation>
     </message>
     <message id="settings_multirs_total_yield">
       <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="64"/>
       <source>Total yield</source>
-      <translation>Celkový výnos</translation>
+      <translation>Celková výroba</translation>
     </message>
     <message id="settings_multirs_system_yield">
       <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="72"/>
       <source>System yield</source>
-      <translation>Systémový výnos</translation>
+      <translation>Výroba systému</translation>
     </message>
     <message id="charger_alarms_high_temperature_alarm">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="309"/>
@@ -7579,7 +7186,7 @@ Chcete pokračovat?</translation>
     <message id="vebus_device_restart_vebus_system_restart_confirmation_description">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="239"/>
       <source>Restarting the VE.Bus system will reset any inverter on the bus, and result in a loss of power to their outputs.</source>
-      <translation>Restartování systému VE.Bus vynuluje všechny střídače na sběrnici a způsobí ztrátu napájení jejich výstupů.</translation>
+      <translation>Restartování systému VE.Bus resetuje všechny měniče na sběrnici a způsobí ztrátu napájení jejich výstupů.</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
       <location filename="../../components/CommonWords.qml" line="662"/>
@@ -7649,7 +7256,7 @@ Chcete pokračovat?</translation>
     <message id="common_words_disabled">
       <location filename="../../components/CommonWords.qml" line="190"/>
       <source>Disabled</source>
-      <translation type="unfinished">Deaktivováno</translation>
+      <translation type="unfinished">Zakázáno</translation>
     </message>
     <message id="common_words_discharging">
       <location filename="../../components/CommonWords.qml" line="193"/>
@@ -7717,7 +7324,7 @@ Chcete pokračovat?</translation>
     <message id="common_words_manual">
       <location filename="../../components/CommonWords.qml" line="345"/>
       <source>Manual</source>
-      <translation type="unfinished">Manuální</translation>
+      <translation type="unfinished">Ruční</translation>
     </message>
     <message id="common_words_manual_stop">
       <location filename="../../components/CommonWords.qml" line="354"/>
@@ -7880,7 +7487,7 @@ Chcete pokračovat?</translation>
       <location filename="../../components/CommonWords.qml" line="659"/>
       <source>Yield Today</source>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
-      <translation>Výnos dnes</translation>
+      <translation>Dnešní výroba</translation>
     </message>
     <message id="common_words_format_error">
       <location filename="../../components/CommonWords.qml" line="709"/>
@@ -7928,7 +7535,7 @@ Chcete pokračovat?</translation>
     <message id="cgwacs_battery_schedule_duration">
       <location filename="../../components/listitems/ListChargeSchedule.qml" line="144"/>
       <source>Duration</source>
-      <translation>Doba trvání &lt;wbr&gt;(hh:mm)</translation>
+      <translation>Doba trvání (hh:mm)</translation>
     </message>
     <message id="settings_relay_deactivation_value">
       <location filename="../../components/TemperatureRelaySettings.qml" line="86"/>
@@ -8030,7 +7637,7 @@ Chcete pokračovat?</translation>
     <message id="digitalinputs_type_disabled">
       <location filename="../../src/enums.cpp" line="305"/>
       <source>Disabled</source>
-      <translation type="unfinished">Deaktivováno</translation>
+      <translation type="unfinished">Zakázáno</translation>
     </message>
     <message id="digitalinputs_type_bilgepump">
       <location filename="../../src/enums.cpp" line="314"/>
@@ -8172,7 +7779,7 @@ Chcete pokračovat?</translation>
     <message id="switchable_output_function_disabled">
       <location filename="../../src/enums.cpp" line="608"/>
       <source>Disabled</source>
-      <translation type="unfinished">Deaktivováno</translation>
+      <translation type="unfinished">Zakázáno</translation>
     </message>
     <message id="switchable_output_function_alarm">
       <location filename="../../src/enums.cpp" line="611"/>
@@ -8222,7 +7829,7 @@ Chcete pokračovat?</translation>
     <message id="system_state_sustain">
       <location filename="../../src/enums.cpp" line="773"/>
       <source>Sustain</source>
-      <translation type="unfinished">Udržování</translation>
+      <translation type="unfinished">Sustain</translation>
     </message>
     <message id="system_state_wakeup">
       <location filename="../../src/enums.cpp" line="777"/>
@@ -8242,7 +7849,7 @@ Chcete pokračovat?</translation>
     <message id="system_state_system_sustain">
       <location filename="../../src/enums.cpp" line="805"/>
       <source>Sustain</source>
-      <translation type="unfinished">Udržování</translation>
+      <translation type="unfinished">Sustain</translation>
     </message>
     <message id="system_state_scheduledcharge">
       <location filename="../../src/enums.cpp" line="811"/>
@@ -8252,7 +7859,7 @@ Chcete pokračovat?</translation>
     <message id="system_state_dynamic_ess">
       <location filename="../../src/enums.cpp" line="814"/>
       <source>Dynamic ESS</source>
-      <translation type="unfinished">Dynamické ESS</translation>
+      <translation type="unfinished">Dynamic ESS</translation>
     </message>
     <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -8330,17 +7937,17 @@ Chcete pokračovat?</translation>
       <translation>Stav přetížení měniče</translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="55"/>
+      <location filename="../../ApplicationContent.qml" line="71"/>
       <source>Touch input on</source>
       <translation>Dotykový vstup zapnut</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="57"/>
+      <location filename="../../ApplicationContent.qml" line="73"/>
       <source>Touch input off</source>
       <translation>Dotykový vstup vypnut</translation>
     </message>
     <message id="application_content_touch_input_disabled">
-      <location filename="../../ApplicationContent.qml" line="71"/>
+      <location filename="../../ApplicationContent.qml" line="87"/>
       <source>Touch input disabled</source>
       <translation>Dotykový vstup deaktivován</translation>
     </message>
@@ -8418,6 +8025,12 @@ Pokud je generátor v současné době spuštěn na základě podmínky autostar
       <source>Input</source>
       <extracomment>Configure channel to use "input" direction</extracomment>
       <translation>Vstup</translation>
+    </message>
+    <message id="settings_switch_channel_output">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="87"/>
+      <source>Output</source>
+      <extracomment>Configure channel to use "output" direction</extracomment>
+      <translation type="unfinished">Výstup</translation>
     </message>
     <message id="inverter_mode_not_adjustable">
       <location filename="../../components/listitems/ListInverterChargerModeButton.qml" line="43"/>
@@ -8568,11 +8181,6 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="26"/>
       <source>Reset all range values to zero</source>
       <translation>Vynulování všech hodnot rozsahu na nulu</translation>
-    </message>
-    <message id="settings_minmax_reset_range_values">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="37"/>
-      <source>Reset Range Values</source>
-      <translation>Obnovení hodnot rozsahu</translation>
     </message>
     <message id="settings_minmax_reset_are_you_sure">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="39"/>
@@ -8823,11 +8431,6 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <extracomment>%1 = cycle number</extracomment>
       <translation>Cyklus %1</translation>
     </message>
-    <message id="cycle_history_dc_disconnect">
-      <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="33"/>
-      <source>DC Disconnect</source>
-      <translation>Odpojení stejnosměrného proudu</translation>
-    </message>
     <message id="cycle_history_powered_off">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="35"/>
       <source>Powered off</source>
@@ -9056,12 +8659,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <source>Other</source>
       <translation>Jiné</translation>
     </message>
-    <message id="ac-in-modeldefault_energy_reverse_x">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="141"/>
-      <source>Reversed Energy L%1</source>
-      <extracomment>%1 = phase number (1-3)</extracomment>
-      <translation>Obrácená energie L%1</translation>
-    </message>
     <message id="settings_minmax_boat_page">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="181"/>
       <source>Boat page</source>
@@ -9087,21 +8684,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <source>%1 changed to alternator service</source>
       <translation>%1 změněno na servis alternátoru</translation>
     </message>
-    <message id="settings_minmax_gauge_display">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="186"/>
-      <source>Gauge Display</source>
-      <translation>Zobrazení měřidel</translation>
-    </message>
-    <message id="settings_minmax_speed">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="192"/>
-      <source>Speed</source>
-      <translation type="unfinished">Rychlost</translation>
-    </message>
-    <message id="settings_minmax_max_speed">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="208"/>
-      <source>Max Speed</source>
-      <translation>Maximální rychlost</translation>
-    </message>
     <message id="settings_minmax_max_rpm">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="220"/>
       <source>Max RPM</source>
@@ -9111,17 +8693,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="33"/>
       <source>Module state</source>
       <translation>Stav modulu</translation>
-    </message>
-    <message id="settings_module_voltage">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="40"/>
-      <source>Module Voltage</source>
-      <translation>Napětí modulu</translation>
-    </message>
-    <message id="settings_switch_channel_output">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="87"/>
-      <source>Output</source>
-      <extracomment>Configure channel to use "output" direction</extracomment>
-      <translation type="unfinished">Výstup</translation>
     </message>
     <message id="page_generic_input_group">
       <location filename="../../components/listitems/ListIOChannelGroupField.qml" line="11"/>
@@ -9197,11 +8768,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="30"/>
       <source>Write settings info</source>
       <translation>Zápis informací o nastavení</translation>
-    </message>
-    <message id="mk2vsc_state_write_settings_data">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="32"/>
-      <source>Write Settings Data</source>
-      <translation>Zápis dat nastavení</translation>
     </message>
     <message id="mk2vsc_state_write_assistants">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="34"/>
@@ -9475,12 +9041,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <source>Note: Backup files are VE.Bus firmware version specific and can only be used to restore settings on products with matching firmware versions</source>
       <translation>Poznámka: Záložní soubory jsou specifické pro verzi firmwaru VE.Bus a lze je použít pouze k obnovení nastavení produktů s odpovídající verzí firmwaru.</translation>
     </message>
-    <message id="batteryparameters_charge_request">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryParameters.qml" line="49"/>
-      <source>Requests Charging</source>
-      <extracomment>Shows if the battery requests charging: yes or no</extracomment>
-      <translation>Žádosti o nabíjení</translation>
-    </message>
     <message id="settings_security_profile_change_password">
       <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="185"/>
       <source>Change password</source>
@@ -9512,12 +9072,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="84"/>
       <source>Enter new password</source>
       <translation>Zadejte nové heslo</translation>
-    </message>
-    <message id="settings_modbus_unit_name_and_id">
-      <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="42"/>
-      <source>%1 | Unit ID: %2</source>
-      <extracomment>Modbus TCP service details. %1 = service name or uid, %2 = unit id</extracomment>
-      <translation>%1 | ID jednotky: %2</translation>
     </message>
     <message id="settings_dvcc_control_mk3_usb_inverter_charger_system">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="233"/>
@@ -9592,7 +9146,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
     </message>
     <message id="pagesettingsgeneral_modificationchecks_modbus">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="30"/>
-      <source>Modbus TCP Server</source>
+      <source>Modbus TCP server</source>
       <translation type="unfinished">Server Modbus TCP</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_signalk">
@@ -9737,38 +9291,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <source>BatteryLife state</source>
       <translation>Stav BatteryLife</translation>
     </message>
-    <message id="pagesettingsintegrations_device_integrations">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="18"/>
-      <source>Device Integrations</source>
-      <translation>Integrace zařízení</translation>
-    </message>
-    <message id="pagesettingsintegrations_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="198"/>
-      <source>Modbus TCP Server</source>
-      <translation type="unfinished">Server Modbus TCP</translation>
-    </message>
-    <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="223"/>
-      <location filename="../../pages/settings/PageSettingsSignalK.qml" line="18"/>
-      <source>Signal K</source>
-      <translation type="unfinished">Server Signál K</translation>
-    </message>
-    <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="238"/>
-      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="17"/>
-      <source>Node-RED</source>
-      <translation type="unfinished">Server Node-RED</translation>
-    </message>
-    <message id="settings_venusos_large_documentation">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="264"/>
-      <source>Venus OS Large Documentation</source>
-      <translation>Dokumentace Venus OS Large</translation>
-    </message>
-    <message id="settings_modbus_enable_modbus_tcp">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="30"/>
-      <source>Enable Modbus TCP Server</source>
-      <translation>Povolit Modbus TCP Server</translation>
-    </message>
     <message id="pagesettingsconnectivity_bluetooth_for_victronconnect_app">
       <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="54"/>
       <source>Bluetooth (for VictronConnect App)</source>
@@ -9857,20 +9379,10 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <source>Litres</source>
       <translation>Litry</translation>
     </message>
-    <message id="settings_ui_animations">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="156"/>
-      <source>UI Animations</source>
-      <translation>UI animace</translation>
-    </message>
     <message id="settings_ui_animations_description">
       <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="158"/>
       <source>Disable to reduce CPU usage</source>
       <translation>Zakázáním snížíte využití CPU</translation>
-    </message>
-    <message id="settings_relay_manual_can_now_be_found">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="24"/>
-      <source>The Relay can now be found in the devices list</source>
-      <translation>Relé nyní najdete v seznamu zařízení.</translation>
     </message>
     <message id="gx_device_relays">
       <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
@@ -9901,7 +9413,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="74"/>
       <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="105"/>
       <source>Remote Console appearance</source>
-      <translation>Vzhled vzdálené konzole</translation>
+      <translation>Vzhled Vzdálené konzole</translation>
     </message>
     <message id="settings_remote_console_forced">
       <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="78"/>
@@ -9984,20 +9496,10 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <source>Access Signal K</source>
       <translation>Přístup k Signal K</translation>
     </message>
-    <message id="pagesettingsintegrations_shelly_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="47"/>
-      <source>Shelly Devices</source>
-      <translation>Zařízení Shelly</translation>
-    </message>
     <message id="settings_large_access_node_red">
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="56"/>
       <source>Access Node-RED</source>
       <translation>Přístup k Node-RED</translation>
-    </message>
-    <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
-      <source>Access Point password</source>
-      <translation>Heslo přístupového bodu</translation>
     </message>
     <message id="dcMeter_dccharger">
       <location filename="../../src/enums.cpp" line="231"/>
@@ -10042,7 +9544,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
     <message id="dcMeter_solar_charger">
       <location filename="../../src/enums.cpp" line="264"/>
       <source>Solar charger</source>
-      <translation>Solární nabíječka</translation>
+      <translation>Solární regulátor</translation>
     </message>
     <message id="dcMeter_water_heater">
       <location filename="../../src/enums.cpp" line="270"/>
@@ -10111,20 +9613,10 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <source>Status: %1</source>
       <translation>Stav: %1</translation>
     </message>
-    <message id="settings_relay_polarity_relay1">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="76"/>
-      <source>Polarity (Relay 1)</source>
-      <translation>Polarita (Relé 1)</translation>
-    </message>
     <message id="page_switchable_output_polarity">
       <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
       <source>Polarity</source>
       <translation>Polarita</translation>
-    </message>
-    <message id="settings_relay_polarity_relay2">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="111"/>
-      <source>Polarity (Relay 2)</source>
-      <translation>Polarita (Relé 2)</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
       <location filename="../../pages/settings/PageSettingsWifi.qml" line="107"/>
@@ -10210,99 +9702,94 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Aktivní režim</translation>
     </message>
     <message id="page_microgrid_hybrid_droop_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="169"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="176"/>
       <source>Hybrid droop parameters</source>
       <translation>Parametry hybridní kompenzace poklesu</translation>
     </message>
     <message id="page_microgrid_reference_active_power_p0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="175"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="182"/>
       <source>Reference active power (P&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referenční činný výkon (P&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_frequency_f0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="188"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="196"/>
       <source>Reference frequency (f&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referenční frekvence (f&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_frequency_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="202"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="210"/>
       <source>Frequency droop slope (droop&lt;sub&gt;fP&lt;/sub&gt;)</source>
       <translation>Sklon frekvenční kompenzace poklesu (droop&lt;sub&gt;fP&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_reactive_power">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="216"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="224"/>
       <source>Reference reactive power (Q&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referenční jalový výkon (Q&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_voltage">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="229"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="238"/>
       <source>Reference Voltage (U&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referenční napětí (U&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_voltage_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="243"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="253"/>
       <source>Voltage droop slope (droop&lt;sub&gt;UQ&lt;/sub&gt;)</source>
       <translation>Sklon napěťové kompenzace poklesu (droop&lt;sub&gt;UQ&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_minimum_and_maximum_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="256"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="266"/>
       <source>Minimum and maximum parameters</source>
       <translation>Minimální a maximální parametry</translation>
     </message>
     <message id="page_microgrid_allowed_active_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="262"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="272"/>
       <source>Allowed active power range</source>
       <translation>Povolený rozsah činného výkonu</translation>
     </message>
     <message id="page_microgrid_allowed_reactive_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="284"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="294"/>
       <source>Allowed reactive power range</source>
       <translation>Povolený rozsah jalového výkonu</translation>
     </message>
     <message id="page_microgrid_p_q_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="337"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="347"/>
       <source>P-Q direct drive settings</source>
       <translation>Nastavení P-Q přímého řízení</translation>
     </message>
     <message id="page_microgrid_active_power_setpoint_p">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="342"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="352"/>
       <source>Active power setpoint (P)</source>
       <translation>Žádaná hodnota činného výkonu (P)</translation>
     </message>
     <message id="page_microgrid_reactive_power_setpoint_q">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="349"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="359"/>
       <source>Reactive power setpoint (Q)</source>
       <translation>Žádaná hodnota jalového výkonu (Q)</translation>
     </message>
     <message id="page_microgrid_allowed_frequency_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="356"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="366"/>
       <source>Allowed frequency range</source>
       <translation>Povolený rozsah frekvence</translation>
     </message>
     <message id="page_microgrid_allowed_voltage_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="364"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="374"/>
       <source>Allowed voltage range</source>
       <translation>Povolený rozsah napětí</translation>
     </message>
     <message id="page_microgrid_v_f_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="381"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="391"/>
       <source>V-f direct drive settings</source>
       <translation>Nastavení V-f přímého řízení</translation>
     </message>
     <message id="page_microgrid_voltage_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="386"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="396"/>
       <source>Voltage setpoint (U)</source>
       <translation>Žádaná hodnota napětí (U)</translation>
     </message>
     <message id="page_microgrid_frequency_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="393"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="403"/>
       <source>Frequency setpoint (f)</source>
       <translation>Žádaná hodnota frekvence (f)</translation>
-    </message>
-    <message id="pagesettingsintegrations_ui_plugins">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="280"/>
-      <source>UI Plugins</source>
-      <translation>Zásuvné moduly uživatelského rozhraní</translation>
     </message>
     <message id="temperature_short_circuited">
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="32"/>
@@ -10394,18 +9881,18 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <location filename="../../pages/NotificationsPage.qml" line="45"/>
       <source>Active Notifications</source>
       <extracomment>List section header, for the section which contains current/active notifications</extracomment>
-      <translation>Aktivní upozornění</translation>
+      <translation>Aktivní oznámení</translation>
     </message>
     <message id="notifications_page_inactive_notifications">
       <location filename="../../pages/NotificationsPage.qml" line="49"/>
       <source>Inactive Notifications</source>
       <extracomment>List section header, for the section which contains inactive (but unseen) notifications</extracomment>
-      <translation>Neaktivní upozornění</translation>
+      <translation>Neaktivní oznámení</translation>
     </message>
     <message id="notifications_no_active_notifications">
       <location filename="../../pages/NotificationsPage.qml" line="107"/>
       <source>No active notifications</source>
-      <translation>Žádná aktivní upozornění</translation>
+      <translation>Žádná aktivní oznámení</translation>
     </message>
     <message id="switchable_output_rgb_color_wheel">
       <location filename="../../src/enums.cpp" line="588"/>
@@ -10455,16 +9942,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <source>Add</source>
       <translation>Přidat</translation>
     </message>
-    <message id="page_settings_fronius_modbus_location_number">
-      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="62"/>
-      <source>Port/Unit ID %1</source>
-      <translation>Port/ID jednotky %1</translation>
-    </message>
-    <message id="page_settings_fronius_modbus_remove_location_description">
-      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="17"/>
-      <source>Port: %1 (Unit %2)</source>
-      <translation>Port: %1 (Jednotka %2)</translation>
-    </message>
     <message id="page_settings_fronius_modbus_remove_location">
       <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="95"/>
       <source>Remove Modbus port and unit ID?</source>
@@ -10492,7 +9969,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>CANopen E-drive (500 kbit/s)</translation>
     </message>
     <message id="page_microgrid_from_p1_to_p2">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="66"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="73"/>
       <source>%1%2 to %3%4</source>
       <extracomment>Describes a range from one quantity to another, e.g. "30W to 60W". The first argument is the first quantity, the second argument is the units of the first quantity, the third argument is the second quantity, the fourth argument is the units of the second quantity.</extracomment>
       <translation>%1%2 až %3%4</translation>
@@ -10603,11 +10080,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <source>Output limit max</source>
       <translation>Maximální limit výstupu</translation>
     </message>
-    <message id="ac-in-setup-default_phase_setting">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="159"/>
-      <source>Phase Setting</source>
-      <translation>Nastavení fáze</translation>
-    </message>
     <message id="iochannel_showui_local">
       <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="20"/>
       <source>Only local</source>
@@ -10658,11 +10130,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <location filename="../../components/FirmwareUpdate.qml" line="252"/>
       <source>Firmware check timed out</source>
       <translation>Časový limit kontroly firmwaru vypršel</translation>
-    </message>
-    <message id="settings_units_mixed">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="53"/>
-      <source>Mixed (AC in Watts, DC in Amps)</source>
-      <translation>Smíšené (AC ve Wattech, DC v Ampérech)</translation>
     </message>
     <message id="switchable_output_overtemperature_tripped">
       <location filename="../../src/enums.cpp" line="683"/>
@@ -10721,7 +10188,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Cílový stav nabití</translation>
     </message>
     <message id="boat_page_range_label">
-      <location filename="../../pages/boat/Range.qml" line="39"/>
+      <location filename="../../pages/boat/Range.qml" line="41"/>
       <source>Range</source>
       <translation>dojezd</translation>
     </message>
@@ -10775,11 +10242,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <source>Number of phases</source>
       <translation>Počet fází</translation>
     </message>
-    <message id="battery_individual_info">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="276"/>
-      <source>Individual Battery Info</source>
-      <translation>Informace o jednotlivých bateriích</translation>
-    </message>
     <message id="lynxionbatteryinfo_battery_number_with_serial">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="38"/>
       <source>Battery #%1 [%2]</source>
@@ -10792,11 +10254,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <extracomment>%1 = battery number</extracomment>
       <translation>Baterie č. %1</translation>
     </message>
-    <message id="lynxionbatteryinfo_battery_info_section_header">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="72"/>
-      <source>Battery Info</source>
-      <translation>Informace o baterii</translation>
-    </message>
     <message id="lynxionsystem_capacity">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="84"/>
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="18"/>
@@ -10805,13 +10262,8 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
     </message>
     <message id="lynxionbatteryinfo_battery_measurements_section_header">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="106"/>
-      <source>Battery Measurements</source>
-      <translation>Měření na baterii</translation>
-    </message>
-    <message id="lynxionbatteryinfo_cell_measurements_section_header">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="131"/>
-      <source>Cell Measurements</source>
-      <translation>Měření článků</translation>
+      <source>Battery measurements</source>
+      <translation type="unfinished">Měření na baterii</translation>
     </message>
     <message id="lynxionbatteryinfo_cell_number">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="157"/>
@@ -10821,17 +10273,17 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
     <message id="settings_ess_grid_meter_required">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="71"/>
       <source>Grid meter required</source>
-      <translation>Je vyžadován měřič sítě</translation>
+      <translation>Je vyžadován elektroměr sítě</translation>
     </message>
     <message id="settings_ess_grid_meter_required_caption">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="80"/>
       <source>A grid meter must be present for ESS operation. If not available, the system will switch to pass-through.</source>
-      <translation>Pro provoz ESS je nutný měřič sítě. Pokud není k dispozici, systém se přepne do režimu průchodu.</translation>
+      <translation>Pro provoz ESS je nutný elektroměr sítě. Pokud není k dispozici, systém se přepne do režimu průchodu.</translation>
     </message>
     <message id="settings_ess_grid_meter_optional_caption">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="86"/>
       <source>The system will use a grid meter when present, but fall back to internal measurements if the connection to the grid meter is lost.</source>
-      <translation>Systém použije měřič sítě, pokud je k dispozici, ale v případě ztráty připojení k měřiči sítě se vrátí k interním měřením.</translation>
+      <translation>Systém použije elektroměr sítě, pokud je k dispozici, ale při ztrátě připojení k elektroměru sítě přejde na interní měření.</translation>
     </message>
     <message id="settings_tcpip_ethernet_gateway_enabled">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="131"/>
@@ -10948,11 +10400,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <source>E-drive with VRM instance #%1</source>
       <translation>E-pohon s VRM instancí #%1</translation>
     </message>
-    <message id="pagesettingsboatpage_dual_drive_configuration">
-      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="86"/>
-      <source>Dual-Drive Configuration</source>
-      <translation>Konfigurace s dvojitým pohonem</translation>
-    </message>
     <message id="pagesettingsboatpage_multi_drive_left">
       <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="92"/>
       <source>Left E-drive</source>
@@ -10962,11 +10409,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="100"/>
       <source>Right E-drive</source>
       <translation>Pravý E-pohon</translation>
-    </message>
-    <message id="settings_tcpip_ethernet_linklocal_enabled">
-      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="210"/>
-      <source>Enable Link-local</source>
-      <translation>Povolit Link-local</translation>
     </message>
     <message id="switchable_output_running_over_temperature">
       <location filename="../../src/enums.cpp" line="643"/>
@@ -11165,11 +10607,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <extracomment>Refers to the current value of the input.</extracomment>
       <translation>Hodnota</translation>
     </message>
-    <message id="pagecontrollableloads_devices_and_priorities">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="41"/>
-      <source>Devices and Priorities</source>
-      <translation>Zařízení a priority</translation>
-    </message>
     <message id="pagecontrollableloads_acload_expected_power_consumption">
       <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="19"/>
       <source>Expected power consumption</source>
@@ -11196,12 +10633,12 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Invertovat</translation>
     </message>
     <message id="page_microgrid_apply_all_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="310"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="320"/>
       <source>Apply all parameters</source>
       <translation>Použít všechny parametry</translation>
     </message>
     <message id="page_microgrid_apply">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="312"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="322"/>
       <source>Apply</source>
       <translation>Použít</translation>
     </message>
@@ -11252,12 +10689,6 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <source>Change the GX Password</source>
       <translation>Změnit heslo GX</translation>
     </message>
-    <message id="settings_modbus_remove_description">
-      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="55"/>
-      <source>%1 %2:%3 (Unit %4)</source>
-      <extracomment>%1=protocol, %2=IP address, %3=port number, %4=unit number</extracomment>
-      <translation>%1 %2:%3 (Jednotka %4)</translation>
-    </message>
     <message id="settings_switch_channel_configuration">
       <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="49"/>
       <source>Channel configuration</source>
@@ -11284,25 +10715,10 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <source>Add IP address</source>
       <translation>Přidat IP adresu</translation>
     </message>
-    <message id="pagesettingsintegrations_mqtt_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="41"/>
-      <source>MQTT Devices</source>
-      <translation>Zařízení MQTT</translation>
-    </message>
-    <message id="pagecontrollableloads_disable_dess_first">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="30"/>
-      <source>Opportunity loads cannot be enabled while Dynamic ESS is running. Disable Dynamic ESS first.</source>
-      <translation>Náběhové zátěže nelze povolit, zatímco běží Dynamické ESS. Nejprve zakažte Dynamické ESS.</translation>
-    </message>
     <message id="eebus_local_ski">
       <location filename="../../pages/settings/PageSettingsEebus.qml" line="66"/>
       <source>Local SKI</source>
       <translation>Místní SKI</translation>
-    </message>
-    <message id="eebus_pairing_qr_code">
-      <location filename="../../pages/settings/PageSettingsEebus.qml" line="73"/>
-      <source>QR Code for pairing</source>
-      <translation>QR kód pro párování</translation>
     </message>
     <message id="eebus_trusted">
       <location filename="../../pages/settings/PageSettingsEebus.qml" line="100"/>
@@ -11329,20 +10745,10 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <source>SKI</source>
       <translation>SKI</translation>
     </message>
-    <message id="eebus_device_auto_accept">
-      <location filename="../../pages/settings/PageSettingsEebusDevice.qml" line="52"/>
-      <source>Auto Accept</source>
-      <translation>Automatické přijetí</translation>
-    </message>
     <message id="page_settings_fronius_modbus_add_title">
       <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="36"/>
       <source>Add port and unit ID</source>
       <translation>Přidat port a ID jednotky</translation>
-    </message>
-    <message id="page_settings_fronius_modbus_locations_note">
-      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="45"/>
-      <source>The default modbus port is 502 and the default unit ID is 126.</source>
-      <translation>Výchozí port Modbus je 502 a výchozí ID jednotky je 126.</translation>
     </message>
     <message id="settings_fronius_rescan_for_ip_addresses">
       <location filename="../../pages/settings/PageSettingsFroniusShowIpAddresses.qml" line="21"/>
@@ -11434,11 +10840,6 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <location filename="../../components/PageGensetModel.qml" line="211"/>
       <source>Re-enable remote start mode</source>
       <translation>Znovu povolit režim vzdáleného spuštění</translation>
-    </message>
-    <message id="pagesettingsintegrations_eebus_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="53"/>
-      <source>EEBUS Devices</source>
-      <translation>Zařízení EEBus</translation>
     </message>
     <message id="rotate_device_prompt_text">
       <location filename="../../components/RotateDevicePrompt.qml" line="40"/>
@@ -11582,7 +10983,7 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <translation>Zobrazit teploty</translation>
     </message>
     <message id="boat_page_consumption_label">
-      <location filename="../../pages/boat/Consumption.qml" line="54"/>
+      <location filename="../../pages/boat/Consumption.qml" line="56"/>
       <source>Consumption</source>
       <translation>Spotřeba</translation>
     </message>
@@ -11646,7 +11047,7 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
     <message id="vebus_device_restart">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="228"/>
       <source>Restart</source>
-      <translation>Restart</translation>
+      <translation>Restartovat</translation>
     </message>
     <message id="common_words_check_now">
       <location filename="../../components/CommonWords.qml" line="136"/>
@@ -11658,7 +11059,7 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <location filename="../../components/CommonWords.qml" line="140"/>
       <source>Clear</source>
       <extracomment>Trigger an action that clears a value</extracomment>
-      <translation>Přehledně</translation>
+      <translation>Vymazat</translation>
     </message>
     <message id="common_words_redetect">
       <location filename="../../components/CommonWords.qml" line="479"/>
@@ -11774,31 +11175,6 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="65"/>
       <source>Input mode</source>
       <translation>Vstupní režim</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_follow_state">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="73"/>
-      <source>Sensor | Outputs → Follow state</source>
-      <translation>Senzor | Výstupy → Sledovat stav</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_follow_position">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="75"/>
-      <source>Switch | Outputs → Follow position</source>
-      <translation>Spínač | Výstupy → Sledovat polohu</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_toggle_on_change">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="77"/>
-      <source>Switch | Outputs → Toggle on change</source>
-      <translation>Spínač | Výstupy → Přepnout při změně</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_toggle_on_press">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="79"/>
-      <source>Button | Outputs → Toggle on press</source>
-      <translation>Tlačítko | Výstupy → Přepnout při stisknutí</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_toggle_and_dim">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
-      <source>Button | Outputs → Toggle and dim</source>
-      <translation>Tlačítko | Výstupy → Přepnout a stmívat</translation>
     </message>
     <message id="pagesettingssystem_automate_controllable_devices">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="61"/>
@@ -11977,6 +11353,630 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <source>Use VictronConnect app over Bluetooth to add encryption keys automatically.</source>
       <translation>Pro automatické přidání šifrovacích klíčů použijte aplikaci VictronConnect přes Bluetooth.</translation>
     </message>
+    <message id="ac-in-modeldefault_ac_totals">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="113"/>
+      <source>AC totals</source>
+      <translation>AC celkem</translation>
+    </message>
+    <message id="ac-in-modeldefault_energy_reverse_x">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="166"/>
+      <source>Reversed energy L%1</source>
+      <extracomment>%1 = phase number (1-3)</extracomment>
+      <translation>Obrácená energie L%1</translation>
+    </message>
+    <message id="ac-in-modeldefault_phase_sequence">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="185"/>
+      <source>Phase sequence</source>
+      <translation>Fázová sekvence</translation>
+    </message>
+    <message id="ac-in-setup-default_phase_setting">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="159"/>
+      <source>Phase setting</source>
+      <translation>Nastavení fáze</translation>
+    </message>
+    <message id="batterydiagnostics_main_switch">
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="57"/>
+      <source>Main switch</source>
+      <translation>Hlavní spínač</translation>
+    </message>
+    <message id="batterydiagnostics_internal_fan">
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="71"/>
+      <source>Internal fan</source>
+      <translation>Vnitřní ventilátor</translation>
+    </message>
+    <message id="batterydiagnostics_warning_flags">
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="78"/>
+      <source>Warning flags</source>
+      <translation>Varovací ikony</translation>
+    </message>
+    <message id="batterydiagnostics_alarm_flags">
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="84"/>
+      <source>Alarm flags</source>
+      <translation>Alarmové ikony</translation>
+    </message>
+    <message id="devicelist_battery_pre_charging">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="68"/>
+      <source>Pre-charging</source>
+      <extracomment>Status is 'Pre-Charging'</extracomment>
+      <translation>Předběžné nabíjení</translation>
+    </message>
+    <message id="devicelist_battery_total_capacity">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="143"/>
+      <source>Total capacity</source>
+      <translation>Celková kapacita</translation>
+    </message>
+    <message id="battery_individual_info">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="276"/>
+      <source>Individual battery info</source>
+      <translation>Informace o jednotlivých bateriích</translation>
+    </message>
+    <message id="battery_settings_system">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="406"/>
+      <source>System</source>
+      <translation type="unfinished">Systém</translation>
+    </message>
+    <message id="battery_redetect_battery">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="446"/>
+      <source>Redetect battery</source>
+      <translation>Opakovat detekci baterie</translation>
+    </message>
+    <message id="batterydetails_installed_available_capacity">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="89"/>
+      <source>Installed / available capacity</source>
+      <translation>Instalovaná / dostupná kapacita</translation>
+    </message>
+    <message id="batteryparameters_low_voltage_disconnect_always_ignored">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryParameters.qml" line="39"/>
+      <source>Low voltage disconnect (always ignored)</source>
+      <translation>Odpojení při nízkém napětí (vždy ignorováno)</translation>
+    </message>
+    <message id="batteryparameters_charge_request">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryParameters.qml" line="49"/>
+      <source>Requests charging</source>
+      <extracomment>Shows if the battery requests charging: yes or no</extracomment>
+      <translation>Žádosti o nabíjení</translation>
+    </message>
+    <message id="batterysettings_bluetooth_enabled">
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="101"/>
+      <source>Bluetooth enabled</source>
+      <translation>Bluetooth povoleno</translation>
+    </message>
+    <message id="batterysettingsbattery_nominal_voltage">
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="21"/>
+      <source>Nominal voltage</source>
+      <translation>Jmenovité napětí</translation>
+    </message>
+    <message id="batterysettingsbattery_12_volt">
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="25"/>
+      <source>12 volt</source>
+      <translation>12 V</translation>
+    </message>
+    <message id="batterysettingsbattery_24_volt">
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="27"/>
+      <source>24 volt</source>
+      <translation>24 voltů</translation>
+    </message>
+    <message id="batterysettingsbattery_48_volt">
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="29"/>
+      <source>48 volt</source>
+      <translation>48 voltů</translation>
+    </message>
+    <message id="lynxdistributor_no_information_available">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxDistributorList.qml" line="84"/>
+      <source>No information available, see previous page for distributor status.</source>
+      <translation>Nejsou k dispozici žádné informace, stav rozvaděče viz předchozí strana.</translation>
+    </message>
+    <message id="lynxionio_system_switch">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="18"/>
+      <source>System switch</source>
+      <translation>Spuštění systému</translation>
+    </message>
+    <message id="lynxionio_programmable_contact">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="46"/>
+      <source>Programmable contact</source>
+      <translation>Nastavitelný kontakt</translation>
+    </message>
+    <message id="lynxionbatteryinfo_battery_info_section_header">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="72"/>
+      <source>Battery info</source>
+      <translation>Informace o baterii</translation>
+    </message>
+    <message id="lynxionbatteryinfo_cell_measurements_section_header">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="131"/>
+      <source>Cell measurements</source>
+      <translation>Měření článků</translation>
+    </message>
+    <message id="alternator_temperature">
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="33"/>
+      <source>Alternator temperature</source>
+      <translation>Teplota alternátoru</translation>
+    </message>
+    <message id="engine_temperature">
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="99"/>
+      <source>Engine temperature</source>
+      <translation>Teplota motoru</translation>
+    </message>
+    <message id="devicelist_tanksetup_european_(0_to_180_ohm)">
+      <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="49"/>
+      <source>European (0 to 180 ohm)</source>
+      <translation>Evropský (0 až 180 Ohmů)</translation>
+    </message>
+    <message id="devicelist_tanksetup_us_(240_to_30_ohm)">
+      <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="51"/>
+      <source>US (240 to 30 ohm)</source>
+      <translation>US (240 až 30 Ohmů)</translation>
+    </message>
+    <message id="page_generator_ac_load_use_ac_load">
+      <location filename="../../pages/settings/PageGeneratorAcLoad.qml" line="25"/>
+      <source>Use AC load to start/stop</source>
+      <translation>Použít AC zátěž pro start/stop</translation>
+    </message>
+    <message id="settings_batteries_intro">
+      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="45"/>
+      <source>Use this menu to define the battery data shown when clicking the battery icon on the Overview page. The same selection is also visible on the VRM Portal.</source>
+      <translation>Pomocí této nabídky můžete definovat údaje o baterii, které se zobrazí po kliknutí na ikonu Baterie na stránce Přehled. Stejný výběr je viditelný také na portálu VRM.</translation>
+    </message>
+    <message id="settings_batteries_battery_auxiliary_measurement">
+      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="62"/>
+      <source>%1 (auxiliary measurement)</source>
+      <translation>%1 (Pomocné měření)</translation>
+    </message>
+    <message id="settings_batteries_battery_output">
+      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="64"/>
+      <source>%1 (output %2)</source>
+      <translation>%1 (Výstup %2)</translation>
+    </message>
+    <message id="settings_batteries_active_battery_monitor">
+      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="88"/>
+      <source>Active battery monitor</source>
+      <translation type="unfinished">Aktivní monitor baterie</translation>
+    </message>
+    <message id="settings_batteries_name">
+      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="101"/>
+      <source>Name</source>
+      <translation type="unfinished">Název</translation>
+    </message>
+    <message id="settings_batteries_enter_name">
+      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="103"/>
+      <source>Enter name</source>
+      <translation type="unfinished">Zadejte jméno</translation>
+    </message>
+    <message id="settings_canbus_unique_id_rvc_description">
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="109"/>
+      <source>Above selector sets which block of unique identity numbers to use for the serial number in the DGN 60928 ADDRESS_CLAIM field. Change only when using multiple GX Devices in one RV-C network.</source>
+      <translation>Výše uvedený selektor nastavuje, který blok jedinečných identifikačních čísel se má použít pro sériové číslo v poli DGN 60928 ADDRESS_CLAIM. Změňte pouze při použití více zařízení GX v jedné síti RV-C.</translation>
+    </message>
+    <message id="settings_canbus_unique_id_choose">
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="130"/>
+      <source>Check unique id numbers</source>
+      <translation>Zkontrolovat unikátní identifikační čísla</translation>
+    </message>
+    <message id="settings_cgwacs_pv_inverter_l2_position">
+      <location filename="../../pages/settings/PageSettingsCGwacs.qml" line="87"/>
+      <source>PV inverter on phase 2 position</source>
+      <translation>FV invertor na pozici fáze 2</translation>
+    </message>
+    <message id="settings_ui_animations">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="156"/>
+      <source>UI animations</source>
+      <translation>UI animace</translation>
+    </message>
+    <message id="settings_units_watts">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="44"/>
+      <source>Power (watts)</source>
+      <translation>Výkon (ve wattech)</translation>
+    </message>
+    <message id="settings_units_amps">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="47"/>
+      <source>Current (amps)</source>
+      <translation>Proud (ampéry)</translation>
+    </message>
+    <message id="settings_dvcc_shared_current_sense">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="131"/>
+      <source>SCS - Shared Current Sense</source>
+      <translation>SCS – sdílený snímač proudu</translation>
+    </message>
+    <message id="page_setting_fronius_inverters_add_a_pv_inverter">
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="26"/>
+      <source>Add a PV inverter by using the “Find PV inverter” function or by entering an IP address manually on the previous page.</source>
+      <translation>Přidejte fotovoltaický střídač pomocí funkce "Najít fotovoltaický střídač" nebo ručním zadáním IP adresy na předchozí stránce.</translation>
+    </message>
+    <message id="pagesettingssupportstate_modbus_tcp_server">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="449"/>
+      <source>Modbus TCP server</source>
+      <translation>Server Modbus TCP</translation>
+    </message>
+    <message id="settings_units_mixed">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="53"/>
+      <source>Mixed (AC in watts, DC in amps)</source>
+      <translation>Smíšené (AC ve Wattech, DC v Ampérech)</translation>
+    </message>
+    <message id="settings_gps_speed_unit">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="90"/>
+      <source>Speed unit</source>
+      <extracomment>Speed unit for reported GPS data</extracomment>
+      <translation>Jednotka rychlosti</translation>
+    </message>
+    <message id="settings_ess_rs_information">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="31"/>
+      <source>For Multi-RS and HS19 devices, ESS settings are available on the RS system product page.</source>
+      <translation>U zařízení Multi-RS a HS19 jsou nastavení ESS k dispozici na stránce produktu RS System.</translation>
+    </message>
+    <message id="settings_ess_inverter_charger">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="65"/>
+      <source>Inverter/charger</source>
+      <translation>Měnič / nabíječka</translation>
+    </message>
+    <message id="settings_ess_multiphase_split_notif">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="121"/>
+      <source>Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).
+
+CAUTION: use only if required by the utility provider.</source>
+      <translation>Každá fáze je regulována tak, aby individuálně dosáhla žádané hodnoty sítě (účinnost systému se snižuje).
+
+UPOZORNĚNÍ: Používejte pouze v případě, že to vyžaduje dodavatel elektrické energie.</translation>
+    </message>
+    <message id="pagesettingsintegrations_device_integrations">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="18"/>
+      <source>Device integrations</source>
+      <translation>Integrace zařízení</translation>
+    </message>
+    <message id="pagesettingsintegrations_pv_inverters">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="23"/>
+      <source>PV inverters</source>
+      <translation>FV měniče</translation>
+    </message>
+    <message id="pagesettingsintegrations_modbus_devices">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="35"/>
+      <source>Modbus devices</source>
+      <translation>Zařízení Modbus</translation>
+    </message>
+    <message id="pagesettingsintegrations_mqtt_devices">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="41"/>
+      <source>MQTT devices</source>
+      <translation>Zařízení MQTT</translation>
+    </message>
+    <message id="pagesettingsintegrations_shelly_devices">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="47"/>
+      <source>Shelly devices</source>
+      <translation>Zařízení Shelly</translation>
+    </message>
+    <message id="pagesettingsintegrations_eebus_devices">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="53"/>
+      <source>EEBUS devices</source>
+      <translation>Zařízení EEBus</translation>
+    </message>
+    <message id="pagesettingsintegrations_bluetooth_sensors">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="59"/>
+      <source>Bluetooth sensors</source>
+      <translation>Bluetooth senzory</translation>
+    </message>
+    <message id="pagesettingsintegrations_tank_and_temperature_sensors">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="81"/>
+      <source>Tank and temperature sensors</source>
+      <translation>Senzory nádrže a teploty</translation>
+    </message>
+    <message id="pagesettingsintegrations_server_applications">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="191"/>
+      <source>Server applications</source>
+      <translation>Serverové aplikace</translation>
+    </message>
+    <message id="pagesettingsintegrations_modbus_tcp_server">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="198"/>
+      <source>Modbus TCP server</source>
+      <translation type="unfinished">Server Modbus TCP</translation>
+    </message>
+    <message id="pagesettingsintegrations_venus_os_large_features">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="214"/>
+      <source>Venus OS Large features</source>
+      <translation>Funkce zařízení Venus OS Large</translation>
+    </message>
+    <message id="settings_large_signal_k">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsSignalK.qml" line="18"/>
+      <source>Signal K</source>
+      <translation type="unfinished">Server Signál K</translation>
+    </message>
+    <message id="settings_large_node_red">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="238"/>
+      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="17"/>
+      <source>Node-RED</source>
+      <translation type="unfinished">Server Node-RED</translation>
+    </message>
+    <message id="settings_venusos_large_documentation">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="264"/>
+      <source>Venus OS Large documentation</source>
+      <translation>Dokumentace Venus OS Large</translation>
+    </message>
+    <message id="settings_large_victron_community">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="271"/>
+      <source>Victron Community</source>
+      <translation type="unfinished">Komunita Victron</translation>
+    </message>
+    <message id="pagesettingsintegrations_ui_plugins">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="280"/>
+      <source>UI plugins</source>
+      <translation>Zásuvné moduly uživatelského rozhraní</translation>
+    </message>
+    <message id="settings_connection_error_realtime_channel">
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="260"/>
+      <source>Connection status (MQTT real-time channel)</source>
+      <translation>Stav připojení (kanál MQTT v reálném čase)</translation>
+    </message>
+    <message id="settings_modbus_enable_modbus_tcp">
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="30"/>
+      <source>Enable Modbus TCP server</source>
+      <translation>Povolit Modbus TCP Server</translation>
+    </message>
+    <message id="settings_relay_manual_can_now_be_found">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="24"/>
+      <source>The Relay menu can now be found in the Devices list</source>
+      <translation>Nabídku Relé nyní najdete v seznamu Zařízení</translation>
+    </message>
+    <message id="settings_relay_function_relay1">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="48"/>
+      <source>Function (relay 1)</source>
+      <translation>Funkce (relé 1)</translation>
+    </message>
+    <message id="settings_relay_function">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="50"/>
+      <source>Function</source>
+      <translation type="unfinished">Funkce</translation>
+    </message>
+    <message id="settings_relay_disabled">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="54"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="98"/>
+      <source>Disabled</source>
+      <translation type="unfinished">Zakázáno</translation>
+    </message>
+    <message id="settings_relay_tank_pump">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="62"/>
+      <source>Tank pump</source>
+      <translation type="unfinished">Čerpadlo nádrže</translation>
+    </message>
+    <message id="settings_relay_manual">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="100"/>
+      <source>Manual</source>
+      <translation type="unfinished">Ruční</translation>
+    </message>
+    <message id="settings_relay_polarity_relay1">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="76"/>
+      <source>Polarity (relay 1)</source>
+      <translation>Polarita (Relé 1)</translation>
+    </message>
+    <message id="settings_relay_polarity">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="78"/>
+      <source>Polarity</source>
+      <translation type="unfinished">Polarita</translation>
+    </message>
+    <message id="settings_relay_polarity_relay2">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="111"/>
+      <source>Polarity (relay 2)</source>
+      <translation>Polarita (Relé 2)</translation>
+    </message>
+    <message id="settings_relay_genset_can_now_be_found">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="16"/>
+      <source>The Genset menu can now be found in the Devices list</source>
+      <translation>Nabídku Generátor nyní najdete v seznamu Zařízení</translation>
+    </message>
+    <message id="settings_relay_tank_pump_can_now_be_found">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="20"/>
+      <source>The Tank Pump menu can now be found in the Devices list</source>
+      <translation>Nabídku Čerpadlo nádrže nyní najdete v seznamu Zařízení</translation>
+    </message>
+    <message id="settings_relay_function_relay2">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="93"/>
+      <source>Function (relay 2)</source>
+      <translation>Funkce (relé 2)</translation>
+    </message>
+    <message id="settings_firmware_switching_not_possible_indeterminate_profile">
+      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="71"/>
+      <source>Switching firmware version is not possible without "Local network security profile" in "Settings / General" being selected.</source>
+      <translation>Přepnutí verze firmwaru není možné bez výběru položky „Bezpečnostní profil místní sítě“ v „Nastavení / Obecné“.</translation>
+    </message>
+    <message id="settings_rvc_source_address">
+      <location filename="../../pages/settings/PageSettingsRvcDevice.qml" line="36"/>
+      <source>Source address</source>
+      <translation>Adresa zdroje</translation>
+    </message>
+    <message id="pagesettingsconnectivity_mobile_network">
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="71"/>
+      <source>Mobile network</source>
+      <translation>Mobilní síť</translation>
+    </message>
+    <message id="settings_services_canbus_over_tcpip_debug">
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="119"/>
+      <source>CAN-bus over TCP/IP (debug)</source>
+      <translation>CAN-bus přes TCP/IP (ladění)</translation>
+    </message>
+    <message id="pagesettingssystem_ac_system">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="75"/>
+      <source>AC system</source>
+      <translation>Systém střídavého proudu</translation>
+    </message>
+    <message id="pagesettingssystem_inputs_and_monitoring">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="77"/>
+      <source>Inputs and monitoring</source>
+      <translation>Vstupy a monitorování</translation>
+    </message>
+    <message id="settings_system_charge_control">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="102"/>
+      <source>Charge control</source>
+      <translation>Řízení nabíjení</translation>
+    </message>
+    <message id="settings_system_ac_input_only_description">
+      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="66"/>
+      <source>The AC output of the inverter/charger is not used.</source>
+      <translation>Střídavý výstup měniče/nabíječky se nepoužívá.</translation>
+    </message>
+    <message id="settings_system_ac_output_only_description">
+      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="73"/>
+      <source>All AC loads are on the output of the inverter/charger.</source>
+      <translation>Všechny střídavé zátěže jsou na výstupu měniče/nabíječky.</translation>
+    </message>
+    <message id="settings_system_ac_input_and_output_description">
+      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="79"/>
+      <source>The system will automatically display loads on the input of the inverter/charger if a grid meter is present. Loads on the output are always displayed.</source>
+      <translation>Systém automaticky zobrazí zatížení na vstupu měniče/ nabíječky, pokud je k dispozici síťový elektroměr. Zatížení na výstupu se zobrazuje vždy.</translation>
+    </message>
+    <message id="settings_system_has_dc_system">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="111"/>
+      <source>Display DC loads</source>
+      <translation>Zobrazení stejnosměrného zatížení</translation>
+    </message>
+    <message id="settings_tcpip_ethernet_linklocal_enabled">
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="210"/>
+      <source>Enable link-local</source>
+      <translation>Povolit Link-local</translation>
+    </message>
+    <message id="settings_vecan_device_instance">
+      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="41"/>
+      <source>VE.Can device instance</source>
+      <translation>Instance zařízení VE.Can</translation>
+    </message>
+    <message id="settings_vecan_nad">
+      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="53"/>
+      <source>Network address</source>
+      <translation>Síťová adresa</translation>
+    </message>
+    <message id="settings_vecan_devices">
+      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="16"/>
+      <source>VE.Can devices</source>
+      <translation>Zařízení VE.CAN</translation>
+    </message>
+    <message id="settings_vecan_device_number">
+      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="43"/>
+      <source>VE.Can instance# %1</source>
+      <translation>Instance VE.Can# %1</translation>
+    </message>
+    <message id="settings_wifi_access_point_password">
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
+      <source>Access point password</source>
+      <translation>Heslo přístupového bodu</translation>
+    </message>
+    <message id="settings_wifi_disable_ap">
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
+      <source>Disable access point</source>
+      <translation>Deaktivovat přístupový bod</translation>
+    </message>
+    <message id="settings_minmax_reset_range_values">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="37"/>
+      <source>Reset range values</source>
+      <translation>Obnovení hodnot rozsahu</translation>
+    </message>
+    <message id="settings_minmax_gauge_display">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="186"/>
+      <source>Gauge display</source>
+      <translation>Zobrazení měřidel</translation>
+    </message>
+    <message id="settings_minmax_speed">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="192"/>
+      <source>Speed</source>
+      <translation type="unfinished">Rychlost</translation>
+    </message>
+    <message id="settings_minmax_max_speed">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="208"/>
+      <source>Max speed</source>
+      <translation>Maximální rychlost</translation>
+    </message>
+    <message id="settings_modbus_remove_description">
+      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="55"/>
+      <source>%1 %2:%3 (unit %4)</source>
+      <extracomment>%1=protocol, %2=IP address, %3=port number, %4=unit number</extracomment>
+      <translation>%1 %2:%3 (Jednotka %4)</translation>
+    </message>
+    <message id="settings_modbus_unit_name_and_id">
+      <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="42"/>
+      <source>%1 | unit ID: %2</source>
+      <extracomment>Modbus TCP service details. %1 = service name or uid, %2 = unit id</extracomment>
+      <translation>%1 | ID jednotky: %2</translation>
+    </message>
+    <message id="settings_module_voltage">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="40"/>
+      <source>Module voltage</source>
+      <translation>Napětí modulu</translation>
+    </message>
+    <message id="cycle_history_dc_disconnect">
+      <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="33"/>
+      <source>DC disconnect</source>
+      <translation>Odpojení stejnosměrného proudu</translation>
+    </message>
+    <message id="mk2vsc_state_write_settings_data">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="32"/>
+      <source>Write settings data</source>
+      <translation>Zápis dat nastavení</translation>
+    </message>
+    <message id="evcs_start_stop">
+      <location filename="../../components/listitems/ListEvcsStartStopButton.qml" line="15"/>
+      <source>Start/Stop</source>
+      <translation>Spuštění/zastavení</translation>
+    </message>
+    <message id="pagecontrollableloads_disable_dess_first">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="30"/>
+      <source>Opportunity Loads cannot be enabled while Dynamic ESS is running. Disable Dynamic ESS first.</source>
+      <translation>Náběhové zátěže nelze povolit, zatímco běží Dynamické ESS. Nejprve zakažte Dynamické ESS.</translation>
+    </message>
+    <message id="pagecontrollableloads_devices_and_priorities">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="41"/>
+      <source>Devices and priorities</source>
+      <translation>Zařízení a priority</translation>
+    </message>
+    <message id="pagesettingsboatpage_dual_drive_configuration">
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="86"/>
+      <source>Dual-Drive configuration</source>
+      <translation>Konfigurace s dvojitým pohonem</translation>
+    </message>
+    <message id="eebus_pairing_qr_code">
+      <location filename="../../pages/settings/PageSettingsEebus.qml" line="73"/>
+      <source>QR code for pairing</source>
+      <translation>QR kód pro párování</translation>
+    </message>
+    <message id="eebus_device_auto_accept">
+      <location filename="../../pages/settings/PageSettingsEebusDevice.qml" line="52"/>
+      <source>Auto accept</source>
+      <translation>Automatické přijetí</translation>
+    </message>
+    <message id="page_settings_fronius_modbus_remove_location_description">
+      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="17"/>
+      <source>Port: %1 (unit %2)</source>
+      <translation>Port: %1 (Jednotka %2)</translation>
+    </message>
+    <message id="page_settings_fronius_modbus_locations_note">
+      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="45"/>
+      <source>The default Modbus port is 502 and the default unit ID is 126.</source>
+      <translation>Výchozí port Modbus je 502 a výchozí ID jednotky je 126.</translation>
+    </message>
+    <message id="page_settings_fronius_modbus_location_number">
+      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="62"/>
+      <source>Port/unit ID %1</source>
+      <translation>Port/ID jednotky %1</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_follow_state">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="73"/>
+      <source>Sensor | Outputs → follow state</source>
+      <translation>Senzor | Výstupy → Sledovat stav</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_follow_position">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="75"/>
+      <source>Switch | Outputs → follow position</source>
+      <translation>Spínač | Výstupy → Sledovat polohu</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_on_change">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="77"/>
+      <source>Switch | Outputs → toggle on change</source>
+      <translation>Spínač | Výstupy → Přepnout při změně</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_on_press">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="79"/>
+      <source>Button | Outputs → toggle on press</source>
+      <translation>Tlačítko | Výstupy → Přepnout při stisknutí</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_and_dim">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
+      <source>Button | Outputs → toggle and dim</source>
+      <translation>Tlačítko | Výstupy → Přepnout a stmívat</translation>
+    </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
@@ -12032,12 +12032,12 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
     <message id="inverter_total_yield">
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="76"/>
       <source>Total yield</source>
-      <translation type="unfinished">Celkový výnos</translation>
+      <translation type="unfinished">Celková výroba</translation>
     </message>
     <message id="inverter_system_yield">
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="84"/>
       <source>System yield</source>
-      <translation type="unfinished">Systémový výnos</translation>
+      <translation type="unfinished">Výroba systému</translation>
     </message>
     <message id="vebus_device_alarm_only">
       <location filename="../../pages/vebusdevice/PageVeBusAlarmSettings.qml" line="18"/>
@@ -12060,7 +12060,7 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <translation type="unfinished">Baterie</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="345"/>
+      <location filename="../../src/iochannel.cpp" line="365"/>
       <source>GX device relays</source>
       <translation type="unfinished">Relé zařízení GX</translation>
     </message>
@@ -12254,7 +12254,7 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
     <message>
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="124"/>
       <source>High cell voltage</source>
-      <translation>Vysoké napětí článků</translation>
+      <translation>Vysoké napětí článku</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/bms_error.cpp" line="127"/>
@@ -13785,7 +13785,7 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <location filename="../../src/main.cpp" line="226"/>
       <source>enabled</source>
       <comment>Animation enabled value</comment>
-      <translation>Aktivováno</translation>
+      <translation>Povoleno</translation>
     </message>
   </context>
   <context>
@@ -14691,7 +14691,7 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="190"/>
       <source>Alternator high voltage offset</source>
-      <translation>Posunutí vysokého napětí alternátoru</translation>
+      <translation>Velká odchylka napětí alternátoru</translation>
     </message>
     <message>
       <location filename="../../src/veutil/src/qt/alternator_error.cpp" line="193"/>

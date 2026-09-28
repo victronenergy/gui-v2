@@ -350,11 +350,6 @@
       <source>AC output</source>
       <translation type="unfinished">AC Çıkışı</translation>
     </message>
-    <message id="page_generator_ac_load_use_ac_load">
-      <location filename="../../pages/settings/PageGeneratorAcLoad.qml" line="25"/>
-      <source>Use AC Load to start/stop</source>
-      <translation>Başlatmak/durdurmak için AC Yükünü kullanın</translation>
-    </message>
     <message id="page_generator_ac_load_measurement">
       <location filename="../../pages/settings/PageGeneratorAcLoad.qml" line="31"/>
       <source>Measurement</source>
@@ -556,8 +551,8 @@
     </message>
     <message id="settings_ess_debug_grid_setpoint">
       <location filename="../../pages/settings/PageHub4Debug.qml" line="15"/>
-      <source>Grid Setpoint</source>
-      <translation>Grid Setpoint</translation>
+      <source>Grid setpoint</source>
+      <translation type="unfinished">Grid Setpoint</translation>
     </message>
     <message id="settings_ess_debug_ac_in_setpoint">
       <location filename="../../pages/settings/PageHub4Debug.qml" line="48"/>
@@ -583,31 +578,6 @@
       <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="17"/>
       <source>Hidden</source>
       <translation>Gizli</translation>
-    </message>
-    <message id="settings_batteries_battery_auxiliary_measurement">
-      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="62"/>
-      <source>%1 (Auxiliary measurement)</source>
-      <translation>%1 (Aux ölçüm)</translation>
-    </message>
-    <message id="settings_batteries_battery_output">
-      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="64"/>
-      <source>%1 (Output %2)</source>
-      <translation>%1 (Çıkış %2)</translation>
-    </message>
-    <message id="settings_batteries_active_battery_monitor">
-      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="88"/>
-      <source>Active battery monitor</source>
-      <translation type="unfinished">Aktif akü monitör</translation>
-    </message>
-    <message id="settings_batteries_name">
-      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="101"/>
-      <source>Name</source>
-      <translation type="unfinished">İsim</translation>
-    </message>
-    <message id="settings_batteries_enter_name">
-      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="103"/>
-      <source>Enter name</source>
-      <translation type="unfinished">İsim girin</translation>
     </message>
     <message id="settings_briefview_center_active_battery_monitor">
       <location filename="../../components/listitems/ListBriefCenterDetails.qml" line="27"/>
@@ -658,11 +628,6 @@
       <location filename="../../pages/settings/PageSettingsCGwacs.qml" line="77"/>
       <source>PV inverter on phase 2</source>
       <translation>Faz 2'deki PV invertörü</translation>
-    </message>
-    <message id="settings_cgwacs_pv_inverter_l2_position">
-      <location filename="../../pages/settings/PageSettingsCGwacs.qml" line="87"/>
-      <source>PV inverter on phase 2 Position</source>
-      <translation>Faz 2'deki PV invertörü Konum</translation>
     </message>
     <message id="settings_canbus_profile">
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="46"/>
@@ -718,16 +683,6 @@
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="106"/>
       <source>Above selector sets which block of unique identity numbers to use for the NAME Unique Identity Numbers in the PGN 60928 NAME field. Change only when using multiple GX Devices in one VE.Can network.</source>
       <translation>Yukarıdaki seçici PGN 60928 NAME alanındaki NAME Benzersiz Kimlik Numaraları için hangi benzersiz kimlik numarası bloğunun kullanılacağını ayarlar. Sadece bir VE.Can ağında birden fazla GX Cihazı kullanırken değiştirin.</translation>
-    </message>
-    <message id="settings_canbus_unique_id_rvc_description">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="109"/>
-      <source>Above selector sets which block of unique identity numbers to use for the Serial number in the DGN 60928 ADDRESS_CLAIM field. Change only when using multiple GX Devices in one RV-C network.</source>
-      <translation>Yukarıdaki seçici, DGN 60928 ADDRESS_CLAIM alanındaki Seri numarası için hangi benzersiz kimlik numarası bloğunun kullanılacağını belirler. Yalnızca bir RV-C ağında birden fazla GX Cihazı kullanırken değiştirin.</translation>
-    </message>
-    <message id="settings_canbus_unique_id_choose">
-      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="130"/>
-      <source>Check Unique id numbers</source>
-      <translation>Benzersiz kimlik numaralarını kontrol et</translation>
     </message>
     <message id="settings_canbus_unique_id_conflict">
       <location filename="../../pages/settings/PageSettingsCanbus.qml" line="138"/>
@@ -816,16 +771,6 @@
       <source>Electrical power display</source>
       <translation>Elektrik gücü göstergesi</translation>
     </message>
-    <message id="settings_units_watts">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="44"/>
-      <source>Power (Watts)</source>
-      <translation>Güç (Watt)</translation>
-    </message>
-    <message id="settings_units_amps">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="47"/>
-      <source>Current (Amps)</source>
-      <translation>Akım (Amper)</translation>
-    </message>
     <message id="settings_briefview_level">
       <location filename="../../pages/settings/PageSettingsDisplayBrief.qml" line="176"/>
       <source>Level %1</source>
@@ -881,11 +826,6 @@
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="120"/>
       <source>Used sensor</source>
       <translation>Kullanılmış sensör</translation>
-    </message>
-    <message id="settings_dvcc_shared_current_sense">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="131"/>
-      <source>SCS - Shared current sense</source>
-      <translation>SCS - Paylaşılan akım sensörü</translation>
     </message>
     <message id="settings_dvcc_scs_status">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="138"/>
@@ -1340,12 +1280,6 @@
       <extracomment>Example of GPS data in the 'Degrees Minutes' format</extracomment>
       <translation>52° 20,693 K, 5° 13,205 D</translation>
     </message>
-    <message id="settings_gps_speed_unit">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="90"/>
-      <source>Speed Unit</source>
-      <extracomment>Speed unit for reported GPS data</extracomment>
-      <translation>Hız Birimi</translation>
-    </message>
     <message id="settings_gps_format_mph">
       <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="99"/>
       <source>Miles per hour</source>
@@ -1514,11 +1448,6 @@ Bu işlem işe yaramazsa sim kartı bir telefona takarak veri indirmek için yet
       <source>External meter</source>
       <translation>Harici Meter</translation>
     </message>
-    <message id="settings_ess_inverter_charger">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="65"/>
-      <source>Inverter/Charger</source>
-      <translation>İnvertör/Şarj cihazı</translation>
-    </message>
     <message id="settings_ess_multiphase_regulation">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="106"/>
       <source>Multiphase regulation</source>
@@ -1533,15 +1462,6 @@ Bu işlem işe yaramazsa sim kartı bir telefona takarak veri indirmek için yet
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="115"/>
       <source>Individual phase</source>
       <translation>Tek faz</translation>
-    </message>
-    <message id="settings_ess_multiphase_split_notif">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="121"/>
-      <source>Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).
-
-CAUTION: Use only if required by the utility provider.</source>
-      <translation>Her faz ayrı ayrı şebeke ayar noktasına ulaşmak için düzenlenir (sistem verimliliği azalır).
-
-DİKKAT: Yalnızca hizmet sağlayıcı tarafından isteniyorsa kullanın.</translation>
     </message>
     <message id="settings_ess_multiphase_total_notif">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="124"/>
@@ -1979,47 +1899,15 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <source>Available services</source>
       <translation>Kullanılabilir servisler</translation>
     </message>
-    <message id="settings_relay_function_relay1">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="48"/>
-      <source>Function (Relay 1)</source>
-      <translation>Fonksiyon (Röle 1)</translation>
-    </message>
     <message id="page_switchable_output_function">
       <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="113"/>
       <source>Function</source>
       <translation>Fonksiyon</translation>
     </message>
-    <message id="settings_relay_function">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="50"/>
-      <source>Function</source>
-      <translation type="unfinished">Fonksiyon</translation>
-    </message>
-    <message id="settings_relay_disabled">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="54"/>
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="98"/>
-      <source>Disabled</source>
-      <translation type="unfinished">Devre dışı</translation>
-    </message>
     <message id="settings_relay_alarm_relay">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="56"/>
       <source>Alarm relay</source>
       <translation>Alarm rölesi</translation>
-    </message>
-    <message id="settings_relay_tank_pump">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="62"/>
-      <source>Tank pump</source>
-      <translation type="unfinished">Tank pompası</translation>
-    </message>
-    <message id="settings_relay_manual">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="64"/>
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="100"/>
-      <source>Manual</source>
-      <translation type="unfinished">Manuel</translation>
-    </message>
-    <message id="settings_relay_polarity">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="78"/>
-      <source>Polarity</source>
-      <translation type="unfinished">Polarite</translation>
     </message>
     <message id="settings_relay_normally_open">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="83"/>
@@ -2030,11 +1918,6 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="85"/>
       <source>Normally closed</source>
       <translation>Normalde kapalı</translation>
-    </message>
-    <message id="settings_relay_function_relay2">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="93"/>
-      <source>Function (Relay 2)</source>
-      <translation>Fonksiyon (Röle 2)</translation>
     </message>
     <message id="settings_relay_temp_control_rules">
       <location filename="../../pages/settings/PageSettingsRelay.qml" line="119"/>
@@ -2084,11 +1967,6 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <source>Backup firmware not available</source>
       <translation>Yedek firmware mevcut değil</translation>
     </message>
-    <message id="settings_services_canbus_over_tcpip_debug">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="119"/>
-      <source>CAN-bus over TCP/IP (Debug)</source>
-      <translation>TCP/IP üzerinden CAN-bus (Hata Ayıklama)</translation>
-    </message>
     <message id="settings_system_shore_power">
       <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="21"/>
       <source>Shore power</source>
@@ -2123,6 +2001,11 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="48"/>
       <source>User-defined name</source>
       <translation>Kullanıcı tanımlı ad</translation>
+    </message>
+    <message id="settings_system_grid">
+      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="18"/>
+      <source>Grid</source>
+      <translation type="unfinished">Şebeke</translation>
     </message>
     <message id="settings_system_ac_input_1">
       <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="42"/>
@@ -2305,16 +2188,6 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="36"/>
       <source>Careful, for ESS systems, as well as systems with a managed battery, the CAN-bus device instance must remain configured to 0. See GX manual for more information.</source>
       <translation>ESS sistemlerinde, yönetimli akülü sistemlerde olduğu gibi CAN veri yolu cihazı örneğinin 0'a ayarlı olarak kalması gerektiğine dikkat edin. Daha fazla bilgi için GX kılavuzuna bakın.</translation>
-    </message>
-    <message id="settings_vecan_nad">
-      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="53"/>
-      <source>Network Address</source>
-      <translation>Ağ Adresi</translation>
-    </message>
-    <message id="settings_vecan_devices">
-      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="16"/>
-      <source>VE.CAN devices</source>
-      <translation>VE.CAN cihazları</translation>
     </message>
     <message id="settings_wifi_no_access_points">
       <location filename="../../pages/settings/PageSettingsWifi.qml" line="181"/>
@@ -2642,20 +2515,10 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <source>Lower electricity rates during off-peak hours or if you want to ensure that your EV is fully charged and ready to go at a specific time.</source>
       <translation>Yoğun olmayan saatlerde daha düşük elektrik ücretleri veya elektrikli aracınızın belirli bir zamanda tamamen şarj olmasını ve kullanıma hazır olmasını sağlamak istiyorsanız.</translation>
     </message>
-    <message id="evcs_enable_charging">
-      <location filename="../../pages/evcs/EvChargerPage.qml" line="165"/>
-      <source>Enable charging</source>
-      <translation>Şarjı etkinleştir</translation>
-    </message>
     <message id="evcs_lock_charger_display">
       <location filename="../../pages/evcs/EvChargerSetupPage.qml" line="28"/>
       <source>Lock charger display</source>
       <translation>Şarj cihazı ekranını kilitle</translation>
-    </message>
-    <message id="settings_rvc_source_address">
-      <location filename="../../pages/settings/PageSettingsRvcDevice.qml" line="36"/>
-      <source>Source Address</source>
-      <translation>Kaynak adresi</translation>
     </message>
     <message id="settings_rvc_configuration">
       <location filename="../../pages/settings/PageSettingsRvcDevice.qml" line="65"/>
@@ -2798,30 +2661,10 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <extracomment>Indicates no alarm is set</extracomment>
       <translation type="unfinished">Yok</translation>
     </message>
-    <message id="batterydiagnostics_main_switch">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="57"/>
-      <source>Main Switch</source>
-      <translation>Ana Anahtar</translation>
-    </message>
     <message id="batterydiagnostics_heater">
       <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="64"/>
       <source>Heater</source>
       <translation>Isıtıcı</translation>
-    </message>
-    <message id="batterydiagnostics_internal_fan">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="71"/>
-      <source>Internal Fan</source>
-      <translation>Intern Fan</translation>
-    </message>
-    <message id="batterydiagnostics_warning_flags">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="78"/>
-      <source>Warning Flags</source>
-      <translation>Uyarı Bayrakları</translation>
-    </message>
-    <message id="batterydiagnostics_alarm_flags">
-      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="84"/>
-      <source>Alarm Flags</source>
-      <translation>Alarm Bayrakları</translation>
     </message>
     <message id="common_words_switch">
       <location filename="../../components/CommonWords.qml" line="581"/>
@@ -2851,12 +2694,6 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <source>Going to run</source>
       <extracomment>Status is 'Going to run'</extracomment>
       <translation>Çalışacak</translation>
-    </message>
-    <message id="devicelist_battery_pre_charging">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="68"/>
-      <source>Pre-Charging</source>
-      <extracomment>Status is 'Pre-Charging'</extracomment>
-      <translation>Ön-şarj oluyor</translation>
     </message>
     <message id="devicelist_battery_contactor_check">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="72"/>
@@ -2954,11 +2791,6 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <source>IO</source>
       <translation>IO</translation>
     </message>
-    <message id="battery_settings_system">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="406"/>
-      <source>System</source>
-      <translation type="unfinished">Sistem</translation>
-    </message>
     <message id="pagesettingsgeneral_system">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="109"/>
       <source>System</source>
@@ -2968,11 +2800,6 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="421"/>
       <source>Parameters</source>
       <translation>Parametreler</translation>
-    </message>
-    <message id="battery_redetect_battery">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="446"/>
-      <source>Redetect Battery</source>
-      <translation>Aküyü Yeniden Algıla</translation>
     </message>
     <message id="battery_redetecting_the_battery_note">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="454"/>
@@ -3106,11 +2933,6 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <source>Number of modules blocking charge / discharge</source>
       <translation>Şarj/deşarjı engelleyen modül sayısı</translation>
     </message>
-    <message id="batterydetails_installed_available_capacity">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="89"/>
-      <source>Installed / Available capacity</source>
-      <translation>Kurulu / Kullanılabilir kapasite</translation>
-    </message>
     <message id="batteryalarms_deepest_discharge">
       <location filename="../../pages/settings/devicelist/battery/PageBatteryHistory.qml" line="19"/>
       <source>Deepest discharge</source>
@@ -3201,11 +3023,6 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <source>Discharge Current Limit (DCL)</source>
       <translation>Deşarj Akımı Limiti (DCL)</translation>
     </message>
-    <message id="batteryparameters_low_voltage_disconnect_always_ignored">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryParameters.qml" line="39"/>
-      <source>Low Voltage Disconnect (always ignored)</source>
-      <translation>Düşük Voltaj Bağlantı Kesme (her zaman yoksayılır)</translation>
-    </message>
     <message id="batterysettings_battery_bank">
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="46"/>
       <source>Battery bank</source>
@@ -3230,31 +3047,6 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="87"/>
       <source>Restore factory defaults?</source>
       <translation>Fabrika varsayılanlarını geri yükle?</translation>
-    </message>
-    <message id="batterysettings_bluetooth_enabled">
-      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="101"/>
-      <source>Bluetooth Enabled</source>
-      <translation>Bluetooth devrede</translation>
-    </message>
-    <message id="batterysettingsbattery_nominal_voltage">
-      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="21"/>
-      <source>Nominal Voltage</source>
-      <translation>Nomial Voltaj</translation>
-    </message>
-    <message id="batterysettingsbattery_12_volt">
-      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="25"/>
-      <source>12 Volt</source>
-      <translation>12 Volt</translation>
-    </message>
-    <message id="batterysettingsbattery_24_volt">
-      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="27"/>
-      <source>24 Volt</source>
-      <translation>24 Volt</translation>
-    </message>
-    <message id="batterysettingsbattery_48_volt">
-      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="29"/>
-      <source>48 Volt</source>
-      <translation>48 Volt</translation>
     </message>
     <message id="devicelist_tanksetup_capacity">
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="18"/>
@@ -3345,11 +3137,6 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
 Çoğul: %n sigorta atmış</numerusform>
       </translation>
     </message>
-    <message id="lynxdistributor_no_information_available">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxDistributorList.qml" line="84"/>
-      <source>No information available, see previous page for Distributor status.</source>
-      <translation>Bilgi yok, Distribütör durumu için önceki sayfaya bakın.</translation>
-    </message>
     <message id="lynxdistributor_fuse_name">
       <location filename="../../pages/settings/devicelist/battery/PageLynxDistributorList.qml" line="91"/>
       <source>Fuse %1</source>
@@ -3391,20 +3178,10 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <source>4th last error</source>
       <translation type="unfinished">Dördüncü son hata</translation>
     </message>
-    <message id="lynxionio_system_switch">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="18"/>
-      <source>System Switch</source>
-      <translation>Sistem Anahtarı</translation>
-    </message>
     <message id="lynxionio_external_relay">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="38"/>
       <source>External relay</source>
       <translation>Extern röle</translation>
-    </message>
-    <message id="lynxionio_programmable_contact">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="46"/>
-      <source>Programmable Contact</source>
-      <translation>Programlanabilir Kontakt</translation>
     </message>
     <message id="common_words_batteries">
       <location filename="../../components/CommonWords.qml" line="61"/>
@@ -3580,16 +3357,6 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="44"/>
       <source>Standard</source>
       <translation>Varsayılan</translation>
-    </message>
-    <message id="devicelist_tanksetup_european_(0_to_180_ohm)">
-      <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="49"/>
-      <source>European (0 to 180 Ohm)</source>
-      <translation>Avrupa (0-180 Ohm)</translation>
-    </message>
-    <message id="devicelist_tanksetup_us_(240_to_30_ohm)">
-      <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="51"/>
-      <source>US (240 to 30 Ohm)</source>
-      <translation>ABD (240-30 Ohm)</translation>
     </message>
     <message id="settings_ble_bridge_access_custom">
       <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="213"/>
@@ -3783,30 +3550,20 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <extracomment>%1 = the error number</extracomment>
       <translation>Hata yok (%1)</translation>
     </message>
-    <message id="ac-in-modeldefault_ac_totals">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="88"/>
-      <source>AC Totals</source>
-      <translation>AC Toplam</translation>
-    </message>
     <message id="ac-in-modeldefault_energy_x">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="122"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="147"/>
       <source>Energy L%1</source>
       <extracomment>%1 = phase number (1-3)</extracomment>
       <translation>Enerji L%1</translation>
     </message>
-    <message id="ac-in-modeldefault_phase_sequence">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="160"/>
-      <source>Phase Sequence</source>
-      <translation>Faz Sırası</translation>
-    </message>
     <message id="ac-in-modeldefault_phase_sequence_l3_first">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="166"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="191"/>
       <source>L1-L3-L2</source>
       <extracomment>Phase sequence L1-L3-L2</extracomment>
       <translation>L1-L3-L2</translation>
     </message>
     <message id="ac-in-modeldefault_phase_sequence_ordered">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="169"/>
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="194"/>
       <source>L1-L2-L3</source>
       <extracomment>Phase sequence L1-L2-L3</extracomment>
       <translation>L1-L2-L3</translation>
@@ -3979,11 +3736,6 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml" line="63"/>
       <source>Sensor voltage</source>
       <translation>Sensör voltajı</translation>
-    </message>
-    <message id="settings_multirs_total_pv_power">
-      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="205"/>
-      <source>Total PV Power</source>
-      <translation>Toplam PV gücü</translation>
     </message>
     <message id="common_words_product_page">
       <location filename="../../components/CommonWords.qml" line="466"/>
@@ -4162,7 +3914,7 @@ Devam etmek istiyor musunuz?</translation>
     <message id="vebus_device_restart_vebus_system">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="223"/>
       <source>Restart VE.Bus system</source>
-      <translation>Restart VE.Bus system</translation>
+      <translation>VE.Bus sistemini yeniden başlat</translation>
     </message>
     <message id="vebus_device_restarting">
       <location filename="../../pages/vebusdevice/PageVeBusAdvanced.qml" line="226"/>
@@ -5226,7 +4978,7 @@ Devam etmek istiyor musunuz?</translation>
       <translation>Ham Su</translation>
     </message>
     <message id="listItem_no_access">
-      <location filename="../../components/listitems/core/ListSetting.qml" line="78"/>
+      <location filename="../../components/listitems/core/ListSetting.qml" line="79"/>
       <source>Setting locked for access level</source>
       <translation>Erişim seviyesi için kilitli ayarı</translation>
     </message>
@@ -6155,11 +5907,6 @@ Devam etmek istiyor musunuz?</translation>
       <source>Short circuit alarm</source>
       <translation>Kısa devre alarmı</translation>
     </message>
-    <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
-      <source>Disable Access Point</source>
-      <translation>Access Point Devre Dışı Bırak</translation>
-    </message>
     <message id="settings_ess_use_this_option_for_systems_no_peak_shaving">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="56"/>
       <source>Use this option in systems that do not perform peak shaving.</source>
@@ -6338,11 +6085,6 @@ Devam etmek istiyor musunuz?</translation>
       <source>Invalid battery configuration</source>
       <translation>Geçersiz pil yapılandırması</translation>
     </message>
-    <message id="devicelist_battery_total_capacity">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="143"/>
-      <source>Total Capacity</source>
-      <translation>Toplam Kapasite</translation>
-    </message>
     <message id="devicelist_battery_system_voltage">
       <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="155"/>
       <source>System voltage</source>
@@ -6408,20 +6150,10 @@ Devam etmek istiyor musunuz?</translation>
       <source>Imbalance</source>
       <translation>Balans dengesiz</translation>
     </message>
-    <message id="alternator_temperature">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="33"/>
-      <source>Alternator Temperature</source>
-      <translation>Alternatör Sıcaklığı</translation>
-    </message>
     <message id="alternator_wakespeed_utilization">
       <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="76"/>
       <source>Utilization</source>
       <translation>Kullanım</translation>
-    </message>
-    <message id="engine_temperature">
-      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="99"/>
-      <source>Engine Temperature</source>
-      <translation>Motor Sıcaklığı</translation>
     </message>
     <message id="alternator_wakespeed_operation_time">
       <location filename="../../pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml" line="36"/>
@@ -6554,11 +6286,6 @@ Devam etmek istiyor musunuz?</translation>
       <location filename="../../pages/settings/PageRelayGenerator.qml" line="24"/>
       <source>Generator start/stop function is not enabled, go to relay settings and set function to "Genset start/stop"</source>
       <translation>Jeneratör başlat/durdur işlevi etkin değil, röle ayarlarına gidin ve işlevi "Jeneratör başlat/durdur" olarak ayarlayın</translation>
-    </message>
-    <message id="settings_batteries_intro">
-      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="45"/>
-      <source>Use this menu to define the battery data shown when clicking the Battery icon on the Overview page. The same selection is also visible on the VRM Portal.</source>
-      <translation>Genel Bakış sayfasında Pil simgesine tıklandığında gösterilen pil verilerini tanımlamak için bu menüyü kullanın. Aynı seçim VRM Portalında da görülebilir.</translation>
     </message>
     <message id="settings_continuous_scan_may_interfere">
       <location filename="../../pages/settings/PageSettingsBleSensors.qml" line="193"/>
@@ -6851,11 +6578,6 @@ Devam etmek istiyor musunuz?</translation>
       <source>This PV inverter has support for power limiting. Disable this setting if it interferes with normal operation.</source>
       <translation>Bu PV inverter güç sınırlama desteğine sahiptir. Normal çalışmayı engelliyorsa bu ayarı devre dışı bırakın.</translation>
     </message>
-    <message id="page_setting_fronius_inverters_add_a_pv_inverter">
-      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="26"/>
-      <source>Add a PV inverter by using the “Find PV Inverter” function or by entering an IP address manually on the previous page.</source>
-      <translation>“FV İnvertör Bul” işlevini kullanarak veya önceki sayfada manuel olarak bir IP adresi girerek bir FV invertör ekleyin.</translation>
-    </message>
     <message id="settings_local_network_security_profile">
       <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="124"/>
       <source>Local network security profile</source>
@@ -7065,11 +6787,6 @@ Devam etmek istiyor musunuz?</translation>
       <source>Note: If current cannot be displayed (for example, when showing a total for combined AC and DC sources) then power will be shown instead.</source>
       <translation>Not: Akım gösterilemiyorsa (örneğin, birleşik AC ve DC kaynakları için toplam gösterilirken), bunun yerine güç gösterilecektir.</translation>
     </message>
-    <message id="settings_ess_rs_information">
-      <location filename="../../pages/settings/PageSettingsHub4.qml" line="31"/>
-      <source>For Multi-RS and HS19 devices, ESS settings are available on the RS System product page.</source>
-      <translation>Multi-RS ve HS19 cihazları için ESS ayarları RS Sistemi ürün sayfasında mevcuttur.</translation>
-    </message>
     <message id="settings_ess_always">
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="60"/>
       <source>Always</source>
@@ -7145,35 +6862,15 @@ Devam etmek istiyor musunuz?</translation>
       <source>Active (%1)</source>
       <translation>Active (%1)</translation>
     </message>
-    <message id="pagesettingsintegrations_pv_inverters">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="23"/>
-      <source>PV Inverters</source>
-      <translation>PV İnvetörleri</translation>
-    </message>
     <message id="pagesettingsintegrations_energy_meters">
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="29"/>
       <source>Energy meters via RS485</source>
       <translation>RS485 üzerinden enerji sayaçları</translation>
     </message>
-    <message id="pagesettingsintegrations_modbus_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="35"/>
-      <source>Modbus Devices</source>
-      <translation>Modbus Cihazları</translation>
-    </message>
-    <message id="pagesettingsintegrations_bluetooth_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="59"/>
-      <source>Bluetooth Sensors</source>
-      <translation>Bluetooth sensörleri</translation>
-    </message>
     <message id="pagesettingsintegrations_physical_io">
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="71"/>
       <source>Physical I/O</source>
       <translation>Fiziksel G/Ç</translation>
-    </message>
-    <message id="pagesettingsintegrations_tank_and_temperature_sensors">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="81"/>
-      <source>Tank and Temperature Sensors</source>
-      <translation>Tank ve Sıcaklık Sensörleri</translation>
     </message>
     <message id="pagesettingsintegrations_relays">
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="115"/>
@@ -7184,26 +6881,6 @@ Devam etmek istiyor musunuz?</translation>
       <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="129"/>
       <source>Digital I/O</source>
       <translation>Dijital G/Ç</translation>
-    </message>
-    <message id="pagesettingsintegrations_server_applications">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="191"/>
-      <source>Server Applications</source>
-      <translation>Sunucu Uygulamaları</translation>
-    </message>
-    <message id="settings_large_victron_community">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="271"/>
-      <source>Victron Community</source>
-      <translation type="unfinished">Victron community</translation>
-    </message>
-    <message id="pagesettingssupportstate_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="449"/>
-      <source>Modbus TCP Server</source>
-      <translation>Modbus TCP Sunucusu</translation>
-    </message>
-    <message id="pagesettingsintegrations_venus_os_large_features">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="214"/>
-      <source>Venus OS Large Features</source>
-      <translation>Venus OS Büyük özellikler</translation>
     </message>
     <message id="page_settings_nodered_factory_reset">
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="31"/>
@@ -7256,11 +6933,6 @@ Devam etmek istiyor musunuz?</translation>
       <source>Connection status (HTTP channel)</source>
       <translation>Bağlantı durumu (HTTP kanalı)</translation>
     </message>
-    <message id="settings_connection_error_realtime_channel">
-      <location filename="../../pages/settings/PageSettingsLogger.qml" line="260"/>
-      <source>Connection status (MQTT Real-time channel)</source>
-      <translation>Bağlantı durumu (MQTT Gerçek zamanlı kanal)</translation>
-    </message>
     <message id="settings_connection_error_rpc_channel">
       <location filename="../../pages/settings/PageSettingsLogger.qml" line="267"/>
       <source>Connection status (MQTT RPC channel)</source>
@@ -7276,30 +6948,10 @@ Devam etmek istiyor musunuz?</translation>
       <source>Connected genset helper relay</source>
       <translation>Bağlı jeneratör yardımcı rölesi</translation>
     </message>
-    <message id="settings_relay_genset_can_now_be_found">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="16"/>
-      <source>The Genset can now be found in the devices list</source>
-      <translation>Jeneratör artık cihazlar listesinde bulunabilir</translation>
-    </message>
-    <message id="settings_relay_tank_pump_can_now_be_found">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="20"/>
-      <source>The Tank Pump can now be found in the devices list</source>
-      <translation>Tank Pompası artık cihazlar listesinde bulunabilir</translation>
-    </message>
     <message id="settings_relay_no_temperature_sensors">
       <location filename="../../pages/settings/PageSettingsRelayTempSensors.qml" line="39"/>
       <source>No temperature sensors have been added yet.</source>
       <translation>Henüz sıcaklık sensörü eklenmedi.</translation>
-    </message>
-    <message id="settings_firmware_switching_not_possible_indeterminate_profile">
-      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="71"/>
-      <source>Switching firmware version is not possible without "Network Security Profile" in "Settings / General" being selected.</source>
-      <translation>"Ayarlar / Genel" bölümündeki "Ağ Güvenlik Profili" seçilmeden ürün yazılımı sürümünü değiştirmek mümkün değildir.</translation>
-    </message>
-    <message id="pagesettingsconnectivity_mobile_network">
-      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="71"/>
-      <source>Mobile Network</source>
-      <translation>Mobil Ağ</translation>
     </message>
     <message id="settings_system_name_boat">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="21"/>
@@ -7311,16 +6963,6 @@ Devam etmek istiyor musunuz?</translation>
       <source>Automatic</source>
       <translation type="unfinished">Otomatik</translation>
     </message>
-    <message id="pagesettingssystem_ac_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="75"/>
-      <source>AC System</source>
-      <translation>AC Sistemi</translation>
-    </message>
-    <message id="pagesettingssystem_inputs_and_monitoring">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="77"/>
-      <source>Inputs and Monitoring</source>
-      <translation>Girişler ve İzleme</translation>
-    </message>
     <message id="pagesettingssystem_energy_storage_System">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="84"/>
       <source>Energy Storage System</source>
@@ -7331,20 +6973,10 @@ Devam etmek istiyor musunuz?</translation>
       <source>Batteries and Battery Management Systems (BMS)</source>
       <translation>Aküler ve Akü Yönetim Sistemi (BMS)</translation>
     </message>
-    <message id="settings_system_charge_control">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="102"/>
-      <source>Charge Control</source>
-      <translation>Şarj kontrolü</translation>
-    </message>
     <message id="pagesettingssystem_distributed_voltage_and_current_control">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="104"/>
       <source>Distributed Voltage and Current Control (DVCC)</source>
       <translation>Dağıtılmış Gerilim ve Akım Kontrolü (DVCC)</translation>
-    </message>
-    <message id="settings_system_grid">
-      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="18"/>
-      <source>Grid</source>
-      <translation type="unfinished">Şebeke</translation>
     </message>
     <message id="settings_system_ac_position">
       <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="58"/>
@@ -7356,35 +6988,15 @@ Devam etmek istiyor musunuz?</translation>
       <source>AC input only</source>
       <translation>Yalnızca AC girişi</translation>
     </message>
-    <message id="settings_system_ac_input_only_description">
-      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="66"/>
-      <source>The AC output of the Inverter/Charger is not used.</source>
-      <translation>İnvertör/Şarj Cihazının AC çıkışı kullanılmaz.</translation>
-    </message>
     <message id="settings_system_ac_output_only">
       <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="71"/>
       <source>AC output only</source>
       <translation>Yalnızca AC çıkışı</translation>
     </message>
-    <message id="settings_system_ac_output_only_description">
-      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="73"/>
-      <source>All AC loads are on the output of the Inverter/Charger.</source>
-      <translation>Tüm AC yükleri İnvertör/Şarj Cihazının çıkışındadır.</translation>
-    </message>
     <message id="settings_system_ac_input_and_output">
       <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="77"/>
       <source>AC input &amp; output</source>
       <translation>AC giriş ve çıkış</translation>
-    </message>
-    <message id="settings_system_ac_input_and_output_description">
-      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="79"/>
-      <source>The system will automatically display loads on the input of the Inverter/Charger if a grid meter is present. Loads on the output are always displayed.</source>
-      <translation>Bir şebeke ölçer mevcutsa sistem otomatik olarak İnvertör/Şarj Cihazının girişindeki yükleri gösterecektir. Çıkıştaki yükler her zaman görüntülenir.</translation>
-    </message>
-    <message id="settings_system_has_dc_system">
-      <location filename="../../pages/settings/PageSettingsSystem.qml" line="111"/>
-      <source>Display DC Loads</source>
-      <translation>Ekran DC Yükleri</translation>
     </message>
     <message id="settings_system_battery_measurements">
       <location filename="../../pages/settings/PageSettingsBatteries.qml" line="63"/>
@@ -7400,16 +7012,6 @@ Devam etmek istiyor musunuz?</translation>
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="20"/>
       <source>Wired</source>
       <translation>kablolu</translation>
-    </message>
-    <message id="settings_vecan_device_instance">
-      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="41"/>
-      <source>VE.Can Device Instance</source>
-      <translation>Ve.CAN Örneği</translation>
-    </message>
-    <message id="settings_vecan_device_number">
-      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="43"/>
-      <source>VE.Can Instance# %1</source>
-      <translation>VE.Can Örneği# %1</translation>
     </message>
     <message id="settings_tz_antarctica">
       <location filename="../../pages/settings/PageTzInfo.qml" line="232"/>
@@ -7515,7 +7117,7 @@ Devam etmek istiyor musunuz?</translation>
     <message id="solarcharger_total_power">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="127"/>
       <source>Total PV power</source>
-      <translation>Toplam pv gücü</translation>
+      <translation type="unfinished">Toplam pv gücü</translation>
     </message>
     <message id="solarcharger_total_yield">
       <location filename="../../pages/solar/PageSolarCharger.qml" line="211"/>
@@ -7528,6 +7130,11 @@ Devam etmek istiyor musunuz?</translation>
       <source>System yield</source>
       <extracomment>Solar charger system yield</extracomment>
       <translation type="unfinished">Sistem verimi</translation>
+    </message>
+    <message id="settings_multirs_total_pv_power">
+      <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="205"/>
+      <source>Total PV power</source>
+      <translation>Toplam pv gücü</translation>
     </message>
     <message id="settings_multirs_total_yield">
       <location filename="../../pages/settings/devicelist/rs/PageMultiRs.qml" line="64"/>
@@ -8329,17 +7936,17 @@ Devam etmek istiyor musunuz?</translation>
       <translation>İnvertör aşırı yük durumu</translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="55"/>
+      <location filename="../../ApplicationContent.qml" line="71"/>
       <source>Touch input on</source>
       <translation>Dokunmatik giriş açık</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="57"/>
+      <location filename="../../ApplicationContent.qml" line="73"/>
       <source>Touch input off</source>
       <translation>Dokunmatik giriş kapalı</translation>
     </message>
     <message id="application_content_touch_input_disabled">
-      <location filename="../../ApplicationContent.qml" line="71"/>
+      <location filename="../../ApplicationContent.qml" line="87"/>
       <source>Touch input disabled</source>
       <translation>Dokunma Girişi devre dışı</translation>
     </message>
@@ -8417,6 +8024,12 @@ Jeneratör otomatik başlatma koşulu nedeniyle çalışıyorsa otomatik başlat
       <source>Input</source>
       <extracomment>Configure channel to use "input" direction</extracomment>
       <translation>Giriş</translation>
+    </message>
+    <message id="settings_switch_channel_output">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="87"/>
+      <source>Output</source>
+      <extracomment>Configure channel to use "output" direction</extracomment>
+      <translation type="unfinished">Çıkış</translation>
     </message>
     <message id="inverter_mode_not_adjustable">
       <location filename="../../components/listitems/ListInverterChargerModeButton.qml" line="43"/>
@@ -8567,11 +8180,6 @@ Bu menünün sadece RS485 üzerinden bağlı Carlo Gavazzi sayaçlarını göste
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="26"/>
       <source>Reset all range values to zero</source>
       <translation>Tüm aralık değerlerini sıfıra sıfırla</translation>
-    </message>
-    <message id="settings_minmax_reset_range_values">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="37"/>
-      <source>Reset Range Values</source>
-      <translation>Aralık Değerlerini Sıfırla</translation>
     </message>
     <message id="settings_minmax_reset_are_you_sure">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="39"/>
@@ -8820,11 +8428,6 @@ Bu menünün sadece RS485 üzerinden bağlı Carlo Gavazzi sayaçlarını göste
       <extracomment>%1 = cycle number</extracomment>
       <translation>% 1 döngüsü</translation>
     </message>
-    <message id="cycle_history_dc_disconnect">
-      <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="33"/>
-      <source>DC Disconnect</source>
-      <translation>DC Bağlantı Kesme</translation>
-    </message>
     <message id="cycle_history_powered_off">
       <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="35"/>
       <source>Powered off</source>
@@ -9053,12 +8656,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <source>Other</source>
       <translation>Diğer</translation>
     </message>
-    <message id="ac-in-modeldefault_energy_reverse_x">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="141"/>
-      <source>Reversed Energy L%1</source>
-      <extracomment>%1 = phase number (1-3)</extracomment>
-      <translation>Tersine Çevrilmiş Enerji L%1</translation>
-    </message>
     <message id="settings_minmax_boat_page">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="181"/>
       <source>Boat page</source>
@@ -9084,21 +8681,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <source>%1 changed to alternator service</source>
       <translation>%1 alternatör hizmetine dönüştürüldü</translation>
     </message>
-    <message id="settings_minmax_gauge_display">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="186"/>
-      <source>Gauge Display</source>
-      <translation>Gösterge Ekranı</translation>
-    </message>
-    <message id="settings_minmax_speed">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="192"/>
-      <source>Speed</source>
-      <translation type="unfinished">Hız</translation>
-    </message>
-    <message id="settings_minmax_max_speed">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="208"/>
-      <source>Max Speed</source>
-      <translation>Maks. Hız</translation>
-    </message>
     <message id="settings_minmax_max_rpm">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="220"/>
       <source>Max RPM</source>
@@ -9108,17 +8690,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="33"/>
       <source>Module state</source>
       <translation>Modül durumu</translation>
-    </message>
-    <message id="settings_module_voltage">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="40"/>
-      <source>Module Voltage</source>
-      <translation>Modül Gerilimi</translation>
-    </message>
-    <message id="settings_switch_channel_output">
-      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="87"/>
-      <source>Output</source>
-      <extracomment>Configure channel to use "output" direction</extracomment>
-      <translation type="unfinished">Çıkış</translation>
     </message>
     <message id="page_generic_input_group">
       <location filename="../../components/listitems/ListIOChannelGroupField.qml" line="11"/>
@@ -9194,11 +8765,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="30"/>
       <source>Write settings info</source>
       <translation>Ayar bilgilerini yaz</translation>
-    </message>
-    <message id="mk2vsc_state_write_settings_data">
-      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="32"/>
-      <source>Write Settings Data</source>
-      <translation>Ayar Verilerini yaz</translation>
     </message>
     <message id="mk2vsc_state_write_assistants">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="34"/>
@@ -9472,12 +9038,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <source>Note: Backup files are VE.Bus firmware version specific and can only be used to restore settings on products with matching firmware versions</source>
       <translation>Not: Yedekleme dosyaları VE.Bus ürün yazılımı sürümüne özeldir ve yalnızca eşleşen ürün yazılımı sürümlerine sahip ürünlerdeki ayarları geri yüklemek için kullanılabilir</translation>
     </message>
-    <message id="batteryparameters_charge_request">
-      <location filename="../../pages/settings/devicelist/battery/PageBatteryParameters.qml" line="49"/>
-      <source>Requests Charging</source>
-      <extracomment>Shows if the battery requests charging: yes or no</extracomment>
-      <translation>Şarj Talepleri</translation>
-    </message>
     <message id="settings_security_profile_change_password">
       <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="185"/>
       <source>Change password</source>
@@ -9509,12 +9069,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <location filename="../../components/dialogs/SecurityProfilePasswordDialog.qml" line="84"/>
       <source>Enter new password</source>
       <translation>Yeni parolayı girin</translation>
-    </message>
-    <message id="settings_modbus_unit_name_and_id">
-      <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="42"/>
-      <source>%1 | Unit ID: %2</source>
-      <extracomment>Modbus TCP service details. %1 = service name or uid, %2 = unit id</extracomment>
-      <translation>%1 | Ünite kimliği: %2</translation>
     </message>
     <message id="settings_dvcc_control_mk3_usb_inverter_charger_system">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="233"/>
@@ -9589,7 +9143,7 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
     </message>
     <message id="pagesettingsgeneral_modificationchecks_modbus">
       <location filename="../../pages/settings/PageSettingsGeneral.qml" line="30"/>
-      <source>Modbus TCP Server</source>
+      <source>Modbus TCP server</source>
       <translation type="unfinished">Modbus TCP Sunucusu</translation>
     </message>
     <message id="pagesettingsgeneral_modificationchecks_signalk">
@@ -9734,38 +9288,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <source>BatteryLife state</source>
       <translation>BatteryLife durumu</translation>
     </message>
-    <message id="pagesettingsintegrations_device_integrations">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="18"/>
-      <source>Device Integrations</source>
-      <translation>Cihaz Entegrasyonları</translation>
-    </message>
-    <message id="pagesettingsintegrations_modbus_tcp_server">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="198"/>
-      <source>Modbus TCP Server</source>
-      <translation type="unfinished">Modbus TCP Sunucusu</translation>
-    </message>
-    <message id="settings_large_signal_k">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="223"/>
-      <location filename="../../pages/settings/PageSettingsSignalK.qml" line="18"/>
-      <source>Signal K</source>
-      <translation type="unfinished">Signal K</translation>
-    </message>
-    <message id="settings_large_node_red">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="238"/>
-      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="17"/>
-      <source>Node-RED</source>
-      <translation type="unfinished">Node-RED</translation>
-    </message>
-    <message id="settings_venusos_large_documentation">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="264"/>
-      <source>Venus OS Large Documentation</source>
-      <translation>Venus OS Large Belgeleri</translation>
-    </message>
-    <message id="settings_modbus_enable_modbus_tcp">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="30"/>
-      <source>Enable Modbus TCP Server</source>
-      <translation>Modbus TCP Sunucusunu Etkinleştir</translation>
-    </message>
     <message id="pagesettingsconnectivity_bluetooth_for_victronconnect_app">
       <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="54"/>
       <source>Bluetooth (for VictronConnect App)</source>
@@ -9854,20 +9376,10 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <source>Litres</source>
       <translation>Litre</translation>
     </message>
-    <message id="settings_ui_animations">
-      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="156"/>
-      <source>UI Animations</source>
-      <translation>UI Animasyonları</translation>
-    </message>
     <message id="settings_ui_animations_description">
       <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="158"/>
       <source>Disable to reduce CPU usage</source>
       <translation>CPU kullanımını azaltmak için devre dışı bırakın</translation>
-    </message>
-    <message id="settings_relay_manual_can_now_be_found">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="24"/>
-      <source>The Relay can now be found in the devices list</source>
-      <translation>Röle artık cihazlar listesinde bulunabilir</translation>
     </message>
     <message id="gx_device_relays">
       <location filename="../../src/iochannelgroupmodel.cpp" line="107"/>
@@ -9981,20 +9493,10 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <source>Access Signal K</source>
       <translation>Signal K'ye eriş</translation>
     </message>
-    <message id="pagesettingsintegrations_shelly_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="47"/>
-      <source>Shelly Devices</source>
-      <translation>Shelly Cihazları</translation>
-    </message>
     <message id="settings_large_access_node_red">
       <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="56"/>
       <source>Access Node-RED</source>
       <translation>Node-RED'e eriş</translation>
-    </message>
-    <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
-      <source>Access Point password</source>
-      <translation>Erişim Noktası parolası</translation>
     </message>
     <message id="dcMeter_dccharger">
       <location filename="../../src/enums.cpp" line="231"/>
@@ -10108,20 +9610,10 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <source>Status: %1</source>
       <translation>Durum: %1</translation>
     </message>
-    <message id="settings_relay_polarity_relay1">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="76"/>
-      <source>Polarity (Relay 1)</source>
-      <translation>Polarite (Röle 1)</translation>
-    </message>
     <message id="page_switchable_output_polarity">
       <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
       <source>Polarity</source>
       <translation>Polarite</translation>
-    </message>
-    <message id="settings_relay_polarity_relay2">
-      <location filename="../../pages/settings/PageSettingsRelay.qml" line="111"/>
-      <source>Polarity (Relay 2)</source>
-      <translation>Polarite (Röle 2)</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
       <location filename="../../pages/settings/PageSettingsWifi.qml" line="107"/>
@@ -10207,99 +9699,94 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>Aktif mod</translation>
     </message>
     <message id="page_microgrid_hybrid_droop_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="169"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="176"/>
       <source>Hybrid droop parameters</source>
       <translation>Hibrit droop parametreleri</translation>
     </message>
     <message id="page_microgrid_reference_active_power_p0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="175"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="182"/>
       <source>Reference active power (P&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referans aktif güç (P&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_frequency_f0">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="188"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="196"/>
       <source>Reference frequency (f&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referans frekans (f&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_frequency_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="202"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="210"/>
       <source>Frequency droop slope (droop&lt;sub&gt;fP&lt;/sub&gt;)</source>
       <translation>Frekans droop eğimi (droop&lt;sub&gt;fP&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_reactive_power">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="216"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="224"/>
       <source>Reference reactive power (Q&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referans reaktif güç (Q&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_reference_voltage">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="229"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="238"/>
       <source>Reference Voltage (U&lt;sub&gt;0&lt;/sub&gt;)</source>
       <translation>Referans Voltaj (U&lt;sub&gt;0&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_voltage_droop_slope">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="243"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="253"/>
       <source>Voltage droop slope (droop&lt;sub&gt;UQ&lt;/sub&gt;)</source>
       <translation>Voltaj droop eğimi (droop&lt;sub&gt;UQ&lt;/sub&gt;)</translation>
     </message>
     <message id="page_microgrid_minimum_and_maximum_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="256"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="266"/>
       <source>Minimum and maximum parameters</source>
       <translation>Minimum ve maksimum parametreler</translation>
     </message>
     <message id="page_microgrid_allowed_active_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="262"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="272"/>
       <source>Allowed active power range</source>
       <translation>İzin verilen aktif güç aralığı</translation>
     </message>
     <message id="page_microgrid_allowed_reactive_power_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="284"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="294"/>
       <source>Allowed reactive power range</source>
       <translation>İzin verilen reaktif güç aralığı</translation>
     </message>
     <message id="page_microgrid_p_q_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="337"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="347"/>
       <source>P-Q direct drive settings</source>
       <translation>P-Q doğrudan sürüş ayarları</translation>
     </message>
     <message id="page_microgrid_active_power_setpoint_p">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="342"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="352"/>
       <source>Active power setpoint (P)</source>
       <translation>Aktif güç ayar noktası (P)</translation>
     </message>
     <message id="page_microgrid_reactive_power_setpoint_q">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="349"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="359"/>
       <source>Reactive power setpoint (Q)</source>
       <translation>Reaktif güç ayar noktası (Q)</translation>
     </message>
     <message id="page_microgrid_allowed_frequency_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="356"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="366"/>
       <source>Allowed frequency range</source>
       <translation>İzin verilen frekans aralığı</translation>
     </message>
     <message id="page_microgrid_allowed_voltage_range">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="364"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="374"/>
       <source>Allowed voltage range</source>
       <translation>İzin verilen voltaj aralığı</translation>
     </message>
     <message id="page_microgrid_v_f_direct_drive_settings">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="381"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="391"/>
       <source>V-f direct drive settings</source>
       <translation>V-f doğrudan sürüş ayarları</translation>
     </message>
     <message id="page_microgrid_voltage_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="386"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="396"/>
       <source>Voltage setpoint (U)</source>
       <translation>Voltaj ayar noktası (U)</translation>
     </message>
     <message id="page_microgrid_frequency_setpoint">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="393"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="403"/>
       <source>Frequency setpoint (f)</source>
       <translation>Frekans ayar noktası (f)</translation>
-    </message>
-    <message id="pagesettingsintegrations_ui_plugins">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="280"/>
-      <source>UI Plugins</source>
-      <translation>UI Eklentileri</translation>
     </message>
     <message id="temperature_short_circuited">
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="32"/>
@@ -10452,16 +9939,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <source>Add</source>
       <translation>Ekle</translation>
     </message>
-    <message id="page_settings_fronius_modbus_location_number">
-      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="62"/>
-      <source>Port/Unit ID %1</source>
-      <translation>Port/Birim ID %1</translation>
-    </message>
-    <message id="page_settings_fronius_modbus_remove_location_description">
-      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="17"/>
-      <source>Port: %1 (Unit %2)</source>
-      <translation>Port: %1 (Birim %2)</translation>
-    </message>
     <message id="page_settings_fronius_modbus_remove_location">
       <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="95"/>
       <source>Remove Modbus port and unit ID?</source>
@@ -10489,7 +9966,7 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>CANopen E-sürücü (500 kbit/s)</translation>
     </message>
     <message id="page_microgrid_from_p1_to_p2">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="66"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="73"/>
       <source>%1%2 to %3%4</source>
       <extracomment>Describes a range from one quantity to another, e.g. "30W to 60W". The first argument is the first quantity, the second argument is the units of the first quantity, the third argument is the second quantity, the fourth argument is the units of the second quantity.</extracomment>
       <translation>%1%2 - %3%4</translation>
@@ -10600,11 +10077,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <source>Output limit max</source>
       <translation>Çıkış limiti maks.</translation>
     </message>
-    <message id="ac-in-setup-default_phase_setting">
-      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="159"/>
-      <source>Phase Setting</source>
-      <translation>Faz Ayarı</translation>
-    </message>
     <message id="iochannel_showui_local">
       <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="20"/>
       <source>Only local</source>
@@ -10655,11 +10127,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <location filename="../../components/FirmwareUpdate.qml" line="252"/>
       <source>Firmware check timed out</source>
       <translation>Ürün yazılımı kontrolü zaman aşımına uğradı</translation>
-    </message>
-    <message id="settings_units_mixed">
-      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="53"/>
-      <source>Mixed (AC in Watts, DC in Amps)</source>
-      <translation>Karışık (AC Watt cinsinden, DC Amper cinsinden)</translation>
     </message>
     <message id="switchable_output_overtemperature_tripped">
       <location filename="../../src/enums.cpp" line="683"/>
@@ -10718,7 +10185,7 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>Hedef şarj durumu</translation>
     </message>
     <message id="boat_page_range_label">
-      <location filename="../../pages/boat/Range.qml" line="39"/>
+      <location filename="../../pages/boat/Range.qml" line="41"/>
       <source>Range</source>
       <translation>aralık</translation>
     </message>
@@ -10772,11 +10239,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <source>Number of phases</source>
       <translation>Faz sayısı</translation>
     </message>
-    <message id="battery_individual_info">
-      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="276"/>
-      <source>Individual Battery Info</source>
-      <translation>Bireysel akü bilgileri</translation>
-    </message>
     <message id="lynxionbatteryinfo_battery_number_with_serial">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="38"/>
       <source>Battery #%1 [%2]</source>
@@ -10789,11 +10251,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <extracomment>%1 = battery number</extracomment>
       <translation>Akü #%1</translation>
     </message>
-    <message id="lynxionbatteryinfo_battery_info_section_header">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="72"/>
-      <source>Battery Info</source>
-      <translation>Akü Bilgisi</translation>
-    </message>
     <message id="lynxionsystem_capacity">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="84"/>
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonSystem.qml" line="18"/>
@@ -10802,13 +10259,8 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
     </message>
     <message id="lynxionbatteryinfo_battery_measurements_section_header">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="106"/>
-      <source>Battery Measurements</source>
-      <translation>Akü ölçümleri</translation>
-    </message>
-    <message id="lynxionbatteryinfo_cell_measurements_section_header">
-      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="131"/>
-      <source>Cell Measurements</source>
-      <translation>Hücre Ölçümleri</translation>
+      <source>Battery measurements</source>
+      <translation type="unfinished">Akü ölçümleri</translation>
     </message>
     <message id="lynxionbatteryinfo_cell_number">
       <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="157"/>
@@ -10945,11 +10397,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <source>E-drive with VRM instance #%1</source>
       <translation>VRM örneği #%1 olan E-sürüş</translation>
     </message>
-    <message id="pagesettingsboatpage_dual_drive_configuration">
-      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="86"/>
-      <source>Dual-Drive Configuration</source>
-      <translation>Çift Sürücü Konfigürasyonu</translation>
-    </message>
     <message id="pagesettingsboatpage_multi_drive_left">
       <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="92"/>
       <source>Left E-drive</source>
@@ -10959,11 +10406,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="100"/>
       <source>Right E-drive</source>
       <translation>Sağ E-sürüş</translation>
-    </message>
-    <message id="settings_tcpip_ethernet_linklocal_enabled">
-      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="210"/>
-      <source>Enable Link-local</source>
-      <translation>Yerel Bağlantıyı Etkinleştir</translation>
     </message>
     <message id="switchable_output_running_over_temperature">
       <location filename="../../src/enums.cpp" line="643"/>
@@ -11162,11 +10604,6 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <extracomment>Refers to the current value of the input.</extracomment>
       <translation>Değer</translation>
     </message>
-    <message id="pagecontrollableloads_devices_and_priorities">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="41"/>
-      <source>Devices and Priorities</source>
-      <translation>Cihazlar ve Öncelikler</translation>
-    </message>
     <message id="pagecontrollableloads_acload_expected_power_consumption">
       <location filename="../../pages/settings/PageControllableLoadsS2Rm.qml" line="19"/>
       <source>Expected power consumption</source>
@@ -11193,12 +10630,12 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>Ters çevir</translation>
     </message>
     <message id="page_microgrid_apply_all_parameters">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="310"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="320"/>
       <source>Apply all parameters</source>
       <translation>Tüm parametreleri uygula</translation>
     </message>
     <message id="page_microgrid_apply">
-      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="312"/>
+      <location filename="../../pages/vebusdevice/PageMicrogrid.qml" line="322"/>
       <source>Apply</source>
       <translation>Uygula</translation>
     </message>
@@ -11249,12 +10686,6 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <source>Change the GX Password</source>
       <translation>GX Şifresini Değiştir</translation>
     </message>
-    <message id="settings_modbus_remove_description">
-      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="55"/>
-      <source>%1 %2:%3 (Unit %4)</source>
-      <extracomment>%1=protocol, %2=IP address, %3=port number, %4=unit number</extracomment>
-      <translation>%1 %2:%3 (Birim %4)</translation>
-    </message>
     <message id="settings_switch_channel_configuration">
       <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="49"/>
       <source>Channel configuration</source>
@@ -11281,25 +10712,10 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <source>Add IP address</source>
       <translation>IP adresi ekle</translation>
     </message>
-    <message id="pagesettingsintegrations_mqtt_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="41"/>
-      <source>MQTT Devices</source>
-      <translation>MQTT Cihazları</translation>
-    </message>
-    <message id="pagecontrollableloads_disable_dess_first">
-      <location filename="../../pages/settings/PageControllableLoads.qml" line="30"/>
-      <source>Opportunity loads cannot be enabled while Dynamic ESS is running. Disable Dynamic ESS first.</source>
-      <translation>Dinamik ESS çalışırken Fırsat yükleri etkinleştirilemez. Önce Dinamik ESS'yi devre dışı bırakın.</translation>
-    </message>
     <message id="eebus_local_ski">
       <location filename="../../pages/settings/PageSettingsEebus.qml" line="66"/>
       <source>Local SKI</source>
       <translation>Yerel SKI</translation>
-    </message>
-    <message id="eebus_pairing_qr_code">
-      <location filename="../../pages/settings/PageSettingsEebus.qml" line="73"/>
-      <source>QR Code for pairing</source>
-      <translation>Eşleştirme için QR Kodu</translation>
     </message>
     <message id="eebus_trusted">
       <location filename="../../pages/settings/PageSettingsEebus.qml" line="100"/>
@@ -11326,20 +10742,10 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <source>SKI</source>
       <translation>SKI</translation>
     </message>
-    <message id="eebus_device_auto_accept">
-      <location filename="../../pages/settings/PageSettingsEebusDevice.qml" line="52"/>
-      <source>Auto Accept</source>
-      <translation>Otomatik Kabul Et</translation>
-    </message>
     <message id="page_settings_fronius_modbus_add_title">
       <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="36"/>
       <source>Add port and unit ID</source>
       <translation>Port ve birim kimliği ekle</translation>
-    </message>
-    <message id="page_settings_fronius_modbus_locations_note">
-      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="45"/>
-      <source>The default modbus port is 502 and the default unit ID is 126.</source>
-      <translation>Varsayılan modbus portu 502, varsayılan birim kimliği ise 126'dır.</translation>
     </message>
     <message id="settings_fronius_rescan_for_ip_addresses">
       <location filename="../../pages/settings/PageSettingsFroniusShowIpAddresses.qml" line="21"/>
@@ -11431,11 +10837,6 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <location filename="../../components/PageGensetModel.qml" line="211"/>
       <source>Re-enable remote start mode</source>
       <translation>Uzaktan başlatma modunu yeniden etkinleştir</translation>
-    </message>
-    <message id="pagesettingsintegrations_eebus_devices">
-      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="53"/>
-      <source>EEBUS Devices</source>
-      <translation>EEBus Cihazları</translation>
     </message>
     <message id="rotate_device_prompt_text">
       <location filename="../../components/RotateDevicePrompt.qml" line="40"/>
@@ -11579,7 +10980,7 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <translation>Sıcaklıkları göster</translation>
     </message>
     <message id="boat_page_consumption_label">
-      <location filename="../../pages/boat/Consumption.qml" line="54"/>
+      <location filename="../../pages/boat/Consumption.qml" line="56"/>
       <source>Consumption</source>
       <translation>Tüketim</translation>
     </message>
@@ -11772,31 +11173,6 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <source>Input mode</source>
       <translation>Giriş modu</translation>
     </message>
-    <message id="iochannel_digital_input_mode_follow_state">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="73"/>
-      <source>Sensor | Outputs → Follow state</source>
-      <translation>Sensör | Çıkışlar → Durumu takip et</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_follow_position">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="75"/>
-      <source>Switch | Outputs → Follow position</source>
-      <translation>Anahtar | Çıkışlar → Konumu takip et</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_toggle_on_change">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="77"/>
-      <source>Switch | Outputs → Toggle on change</source>
-      <translation>Anahtar | Çıkışlar → Değişiklikte aç/kapat</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_toggle_on_press">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="79"/>
-      <source>Button | Outputs → Toggle on press</source>
-      <translation>Düğme | Çıkışlar → Basıldığında aç/kapat</translation>
-    </message>
-    <message id="iochannel_digital_input_mode_toggle_and_dim">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
-      <source>Button | Outputs → Toggle and dim</source>
-      <translation>Düğme | Çıkışlar → Aç/kapat ve karart</translation>
-    </message>
     <message id="pagesettingssystem_automate_controllable_devices">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="61"/>
       <source>Automate controllable devices to maximize solar self-consumption</source>
@@ -11974,6 +11350,630 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <source>Use VictronConnect app over Bluetooth to add encryption keys automatically.</source>
       <translation>Şifreleme anahtarlarını otomatik olarak eklemek için Bluetooth üzerinden VictronConnect uygulamasını kullanın.</translation>
     </message>
+    <message id="ac-in-modeldefault_ac_totals">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="113"/>
+      <source>AC totals</source>
+      <translation>AC Toplam</translation>
+    </message>
+    <message id="ac-in-modeldefault_energy_reverse_x">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="166"/>
+      <source>Reversed energy L%1</source>
+      <extracomment>%1 = phase number (1-3)</extracomment>
+      <translation>Tersine Çevrilmiş Enerji L%1</translation>
+    </message>
+    <message id="ac-in-modeldefault_phase_sequence">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInModel.qml" line="185"/>
+      <source>Phase sequence</source>
+      <translation>Faz Sırası</translation>
+    </message>
+    <message id="ac-in-setup-default_phase_setting">
+      <location filename="../../pages/settings/devicelist/ac-in/PageAcInSetup.qml" line="159"/>
+      <source>Phase setting</source>
+      <translation>Faz Ayarı</translation>
+    </message>
+    <message id="batterydiagnostics_main_switch">
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="57"/>
+      <source>Main switch</source>
+      <translation>Ana Anahtar</translation>
+    </message>
+    <message id="batterydiagnostics_internal_fan">
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="71"/>
+      <source>Internal fan</source>
+      <translation>Intern Fan</translation>
+    </message>
+    <message id="batterydiagnostics_warning_flags">
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="78"/>
+      <source>Warning flags</source>
+      <translation>Uyarı Bayrakları</translation>
+    </message>
+    <message id="batterydiagnostics_alarm_flags">
+      <location filename="../../pages/settings/devicelist/battery/Page48TlDiagnostics.qml" line="84"/>
+      <source>Alarm flags</source>
+      <translation>Alarm Bayrakları</translation>
+    </message>
+    <message id="devicelist_battery_pre_charging">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="68"/>
+      <source>Pre-charging</source>
+      <extracomment>Status is 'Pre-Charging'</extracomment>
+      <translation>Ön şarj oluyor</translation>
+    </message>
+    <message id="devicelist_battery_total_capacity">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="143"/>
+      <source>Total capacity</source>
+      <translation>Toplam Kapasite</translation>
+    </message>
+    <message id="battery_individual_info">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="276"/>
+      <source>Individual battery info</source>
+      <translation>Bireysel akü bilgileri</translation>
+    </message>
+    <message id="battery_settings_system">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="406"/>
+      <source>System</source>
+      <translation type="unfinished">Sistem</translation>
+    </message>
+    <message id="battery_redetect_battery">
+      <location filename="../../pages/settings/devicelist/battery/PageBattery.qml" line="446"/>
+      <source>Redetect battery</source>
+      <translation>Aküyü Yeniden Algıla</translation>
+    </message>
+    <message id="batterydetails_installed_available_capacity">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryDetails.qml" line="89"/>
+      <source>Installed / available capacity</source>
+      <translation>Kurulu / Kullanılabilir kapasite</translation>
+    </message>
+    <message id="batteryparameters_low_voltage_disconnect_always_ignored">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryParameters.qml" line="39"/>
+      <source>Low voltage disconnect (always ignored)</source>
+      <translation>Düşük Voltaj Bağlantı Kesme (her zaman yoksayılır)</translation>
+    </message>
+    <message id="batteryparameters_charge_request">
+      <location filename="../../pages/settings/devicelist/battery/PageBatteryParameters.qml" line="49"/>
+      <source>Requests charging</source>
+      <extracomment>Shows if the battery requests charging: yes or no</extracomment>
+      <translation>Şarj Talepleri</translation>
+    </message>
+    <message id="batterysettings_bluetooth_enabled">
+      <location filename="../../pages/settings/devicelist/battery/PageBatterySettings.qml" line="101"/>
+      <source>Bluetooth enabled</source>
+      <translation>Bluetooth devrede</translation>
+    </message>
+    <message id="batterysettingsbattery_nominal_voltage">
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="21"/>
+      <source>Nominal voltage</source>
+      <translation>Nomial Voltaj</translation>
+    </message>
+    <message id="batterysettingsbattery_12_volt">
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="25"/>
+      <source>12 volt</source>
+      <translation>12 Volt</translation>
+    </message>
+    <message id="batterysettingsbattery_24_volt">
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="27"/>
+      <source>24 volt</source>
+      <translation>24 Volt</translation>
+    </message>
+    <message id="batterysettingsbattery_48_volt">
+      <location filename="../../pages/settings/devicelist/battery/BatteryBankModel.qml" line="29"/>
+      <source>48 volt</source>
+      <translation>48 Volt</translation>
+    </message>
+    <message id="lynxdistributor_no_information_available">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxDistributorList.qml" line="84"/>
+      <source>No information available, see previous page for distributor status.</source>
+      <translation>Bilgi yok, Distribütör durumu için önceki sayfaya bakın.</translation>
+    </message>
+    <message id="lynxionio_system_switch">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="18"/>
+      <source>System switch</source>
+      <translation>Sistem Anahtarı</translation>
+    </message>
+    <message id="lynxionio_programmable_contact">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonIo.qml" line="46"/>
+      <source>Programmable contact</source>
+      <translation>Programlanabilir Kontakt</translation>
+    </message>
+    <message id="lynxionbatteryinfo_battery_info_section_header">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="72"/>
+      <source>Battery info</source>
+      <translation>Akü Bilgisi</translation>
+    </message>
+    <message id="lynxionbatteryinfo_cell_measurements_section_header">
+      <location filename="../../pages/settings/devicelist/battery/PageLynxIonBatteryInfo.qml" line="131"/>
+      <source>Cell measurements</source>
+      <translation>Hücre Ölçümleri</translation>
+    </message>
+    <message id="alternator_temperature">
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="33"/>
+      <source>Alternator temperature</source>
+      <translation>Alternatör Sıcaklığı</translation>
+    </message>
+    <message id="engine_temperature">
+      <location filename="../../pages/settings/devicelist/dc-in/PageAlternatorModel.qml" line="99"/>
+      <source>Engine temperature</source>
+      <translation>Motor Sıcaklığı</translation>
+    </message>
+    <message id="devicelist_tanksetup_european_(0_to_180_ohm)">
+      <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="49"/>
+      <source>European (0 to 180 ohm)</source>
+      <translation>Avrupa (0-180 Ohm)</translation>
+    </message>
+    <message id="devicelist_tanksetup_us_(240_to_30_ohm)">
+      <location filename="../../pages/settings/devicelist/tank/PageTankSetup.qml" line="51"/>
+      <source>US (240 to 30 ohm)</source>
+      <translation>ABD (240-30 Ohm)</translation>
+    </message>
+    <message id="page_generator_ac_load_use_ac_load">
+      <location filename="../../pages/settings/PageGeneratorAcLoad.qml" line="25"/>
+      <source>Use AC load to start/stop</source>
+      <translation>Başlatmak/durdurmak için AC Yükünü kullanın</translation>
+    </message>
+    <message id="settings_batteries_intro">
+      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="45"/>
+      <source>Use this menu to define the battery data shown when clicking the battery icon on the Overview page. The same selection is also visible on the VRM Portal.</source>
+      <translation>Genel Bakış sayfasında Pil simgesine tıklandığında gösterilen pil verilerini tanımlamak için bu menüyü kullanın. Aynı seçim VRM Portalında da görülebilir.</translation>
+    </message>
+    <message id="settings_batteries_battery_auxiliary_measurement">
+      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="62"/>
+      <source>%1 (auxiliary measurement)</source>
+      <translation>%1 (Yardımcı ölçüm)</translation>
+    </message>
+    <message id="settings_batteries_battery_output">
+      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="64"/>
+      <source>%1 (output %2)</source>
+      <translation>%1 (Çıkış %2)</translation>
+    </message>
+    <message id="settings_batteries_active_battery_monitor">
+      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="88"/>
+      <source>Active battery monitor</source>
+      <translation type="unfinished">Aktif akü monitör</translation>
+    </message>
+    <message id="settings_batteries_name">
+      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="101"/>
+      <source>Name</source>
+      <translation type="unfinished">İsim</translation>
+    </message>
+    <message id="settings_batteries_enter_name">
+      <location filename="../../pages/settings/PageSettingsBatteryMeasurements.qml" line="103"/>
+      <source>Enter name</source>
+      <translation type="unfinished">İsim girin</translation>
+    </message>
+    <message id="settings_canbus_unique_id_rvc_description">
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="109"/>
+      <source>Above selector sets which block of unique identity numbers to use for the serial number in the DGN 60928 ADDRESS_CLAIM field. Change only when using multiple GX Devices in one RV-C network.</source>
+      <translation>Yukarıdaki seçici, DGN 60928 ADDRESS_CLAIM alanındaki Seri numarası için hangi benzersiz kimlik numarası bloğunun kullanılacağını belirler. Yalnızca bir RV-C ağında birden fazla GX Cihazı kullanırken değiştirin.</translation>
+    </message>
+    <message id="settings_canbus_unique_id_choose">
+      <location filename="../../pages/settings/PageSettingsCanbus.qml" line="130"/>
+      <source>Check unique id numbers</source>
+      <translation>Benzersiz kimlik numaralarını kontrol et</translation>
+    </message>
+    <message id="settings_cgwacs_pv_inverter_l2_position">
+      <location filename="../../pages/settings/PageSettingsCGwacs.qml" line="87"/>
+      <source>PV inverter on phase 2 position</source>
+      <translation>Faz 2'deki PV invertörü Konum</translation>
+    </message>
+    <message id="settings_ui_animations">
+      <location filename="../../pages/settings/PageSettingsDisplayAndAppearance.qml" line="156"/>
+      <source>UI animations</source>
+      <translation>UI Animasyonları</translation>
+    </message>
+    <message id="settings_units_watts">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="44"/>
+      <source>Power (watts)</source>
+      <translation>Güç (Watt)</translation>
+    </message>
+    <message id="settings_units_amps">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="47"/>
+      <source>Current (amps)</source>
+      <translation>Akım (Amper)</translation>
+    </message>
+    <message id="settings_dvcc_shared_current_sense">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="131"/>
+      <source>SCS - Shared Current Sense</source>
+      <translation>SCS - Paylaşılan akım sensörü</translation>
+    </message>
+    <message id="page_setting_fronius_inverters_add_a_pv_inverter">
+      <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="26"/>
+      <source>Add a PV inverter by using the “Find PV inverter” function or by entering an IP address manually on the previous page.</source>
+      <translation>“FV İnvertör Bul” işlevini kullanarak veya önceki sayfada manuel olarak bir IP adresi girerek bir FV invertör ekleyin.</translation>
+    </message>
+    <message id="pagesettingssupportstate_modbus_tcp_server">
+      <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="449"/>
+      <source>Modbus TCP server</source>
+      <translation>Modbus TCP Sunucusu</translation>
+    </message>
+    <message id="settings_units_mixed">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="53"/>
+      <source>Mixed (AC in watts, DC in amps)</source>
+      <translation>Karışık (AC Watt cinsinden, DC Amper cinsinden)</translation>
+    </message>
+    <message id="settings_gps_speed_unit">
+      <location filename="../../pages/settings/PageSettingsDisplayUnits.qml" line="90"/>
+      <source>Speed unit</source>
+      <extracomment>Speed unit for reported GPS data</extracomment>
+      <translation>Hız Birimi</translation>
+    </message>
+    <message id="settings_ess_rs_information">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="31"/>
+      <source>For Multi-RS and HS19 devices, ESS settings are available on the RS system product page.</source>
+      <translation>Multi-RS ve HS19 cihazları için ESS ayarları RS Sistemi ürün sayfasında mevcuttur.</translation>
+    </message>
+    <message id="settings_ess_inverter_charger">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="65"/>
+      <source>Inverter/charger</source>
+      <translation>İnvertör/Şarj cihazı</translation>
+    </message>
+    <message id="settings_ess_multiphase_split_notif">
+      <location filename="../../pages/settings/PageSettingsHub4.qml" line="121"/>
+      <source>Each phase is regulated to individually achieve the grid setpoint (system efficiency is decreased).
+
+CAUTION: use only if required by the utility provider.</source>
+      <translation>Her faz ayrı ayrı şebeke ayar noktasına ulaşmak için düzenlenir (sistem verimliliği azalır).
+
+DİKKAT: Yalnızca hizmet sağlayıcı tarafından isteniyorsa kullanın.</translation>
+    </message>
+    <message id="pagesettingsintegrations_device_integrations">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="18"/>
+      <source>Device integrations</source>
+      <translation>Cihaz Entegrasyonları</translation>
+    </message>
+    <message id="pagesettingsintegrations_pv_inverters">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="23"/>
+      <source>PV inverters</source>
+      <translation>PV İnvetörleri</translation>
+    </message>
+    <message id="pagesettingsintegrations_modbus_devices">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="35"/>
+      <source>Modbus devices</source>
+      <translation>Modbus Cihazları</translation>
+    </message>
+    <message id="pagesettingsintegrations_mqtt_devices">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="41"/>
+      <source>MQTT devices</source>
+      <translation>MQTT Cihazları</translation>
+    </message>
+    <message id="pagesettingsintegrations_shelly_devices">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="47"/>
+      <source>Shelly devices</source>
+      <translation>Shelly Cihazları</translation>
+    </message>
+    <message id="pagesettingsintegrations_eebus_devices">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="53"/>
+      <source>EEBUS devices</source>
+      <translation>EEBus Cihazları</translation>
+    </message>
+    <message id="pagesettingsintegrations_bluetooth_sensors">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="59"/>
+      <source>Bluetooth sensors</source>
+      <translation>Bluetooth sensörleri</translation>
+    </message>
+    <message id="pagesettingsintegrations_tank_and_temperature_sensors">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="81"/>
+      <source>Tank and temperature sensors</source>
+      <translation>Tank ve Sıcaklık Sensörleri</translation>
+    </message>
+    <message id="pagesettingsintegrations_server_applications">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="191"/>
+      <source>Server applications</source>
+      <translation>Sunucu Uygulamaları</translation>
+    </message>
+    <message id="pagesettingsintegrations_modbus_tcp_server">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="198"/>
+      <source>Modbus TCP server</source>
+      <translation type="unfinished">Modbus TCP Sunucusu</translation>
+    </message>
+    <message id="pagesettingsintegrations_venus_os_large_features">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="214"/>
+      <source>Venus OS Large features</source>
+      <translation>Venus OS Büyük özellikler</translation>
+    </message>
+    <message id="settings_large_signal_k">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsSignalK.qml" line="18"/>
+      <source>Signal K</source>
+      <translation type="unfinished">Signal K</translation>
+    </message>
+    <message id="settings_large_node_red">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="238"/>
+      <location filename="../../pages/settings/PageSettingsNodeRed.qml" line="17"/>
+      <source>Node-RED</source>
+      <translation type="unfinished">Node-RED</translation>
+    </message>
+    <message id="settings_venusos_large_documentation">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="264"/>
+      <source>Venus OS Large documentation</source>
+      <translation>Venus OS Large Belgeleri</translation>
+    </message>
+    <message id="settings_large_victron_community">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="271"/>
+      <source>Victron Community</source>
+      <translation type="unfinished">Victron community</translation>
+    </message>
+    <message id="pagesettingsintegrations_ui_plugins">
+      <location filename="../../pages/settings/PageSettingsIntegrations.qml" line="280"/>
+      <source>UI plugins</source>
+      <translation>UI Eklentileri</translation>
+    </message>
+    <message id="settings_connection_error_realtime_channel">
+      <location filename="../../pages/settings/PageSettingsLogger.qml" line="260"/>
+      <source>Connection status (MQTT real-time channel)</source>
+      <translation>Bağlantı durumu (MQTT Gerçek zamanlı kanal)</translation>
+    </message>
+    <message id="settings_modbus_enable_modbus_tcp">
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="30"/>
+      <source>Enable Modbus TCP server</source>
+      <translation>Modbus TCP Sunucusunu Etkinleştir</translation>
+    </message>
+    <message id="settings_relay_manual_can_now_be_found">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="24"/>
+      <source>The Relay menu can now be found in the Devices list</source>
+      <translation>Röle menüsü artık Cihazlar listesinde bulunabilir</translation>
+    </message>
+    <message id="settings_relay_function_relay1">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="48"/>
+      <source>Function (relay 1)</source>
+      <translation>Fonksiyon (Röle 1)</translation>
+    </message>
+    <message id="settings_relay_function">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="50"/>
+      <source>Function</source>
+      <translation type="unfinished">Fonksiyon</translation>
+    </message>
+    <message id="settings_relay_disabled">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="54"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="98"/>
+      <source>Disabled</source>
+      <translation type="unfinished">Devre dışı</translation>
+    </message>
+    <message id="settings_relay_tank_pump">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="62"/>
+      <source>Tank pump</source>
+      <translation type="unfinished">Tank pompası</translation>
+    </message>
+    <message id="settings_relay_manual">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="64"/>
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="100"/>
+      <source>Manual</source>
+      <translation type="unfinished">Manuel</translation>
+    </message>
+    <message id="settings_relay_polarity_relay1">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="76"/>
+      <source>Polarity (relay 1)</source>
+      <translation>Polarite (Röle 1)</translation>
+    </message>
+    <message id="settings_relay_polarity">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="78"/>
+      <source>Polarity</source>
+      <translation type="unfinished">Polarite</translation>
+    </message>
+    <message id="settings_relay_polarity_relay2">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="111"/>
+      <source>Polarity (relay 2)</source>
+      <translation>Polarite (Röle 2)</translation>
+    </message>
+    <message id="settings_relay_genset_can_now_be_found">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="16"/>
+      <source>The Genset menu can now be found in the Devices list</source>
+      <translation>Jeneratör menüsü artık Cihazlar listesinde bulunabilir</translation>
+    </message>
+    <message id="settings_relay_tank_pump_can_now_be_found">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="20"/>
+      <source>The Tank Pump menu can now be found in the Devices list</source>
+      <translation>Depo Pompası menüsü artık Cihazlar listesinde bulunabilir</translation>
+    </message>
+    <message id="settings_relay_function_relay2">
+      <location filename="../../pages/settings/PageSettingsRelay.qml" line="93"/>
+      <source>Function (relay 2)</source>
+      <translation>Fonksiyon (Röle 2)</translation>
+    </message>
+    <message id="settings_firmware_switching_not_possible_indeterminate_profile">
+      <location filename="../../pages/settings/PageSettingsRootfsSelect.qml" line="71"/>
+      <source>Switching firmware version is not possible without "Local network security profile" in "Settings / General" being selected.</source>
+      <translation>"Ayarlar / Genel" altındaki "Yerel ağ güvenlik profili" seçilmeden donanım yazılımı sürümünü değiştirmek mümkün değildir.</translation>
+    </message>
+    <message id="settings_rvc_source_address">
+      <location filename="../../pages/settings/PageSettingsRvcDevice.qml" line="36"/>
+      <source>Source address</source>
+      <translation>Kaynak adresi</translation>
+    </message>
+    <message id="pagesettingsconnectivity_mobile_network">
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="71"/>
+      <source>Mobile network</source>
+      <translation>Mobil Ağ</translation>
+    </message>
+    <message id="settings_services_canbus_over_tcpip_debug">
+      <location filename="../../pages/settings/PageSettingsConnectivity.qml" line="119"/>
+      <source>CAN-bus over TCP/IP (debug)</source>
+      <translation>TCP/IP üzerinden CAN-bus (Hata Ayıklama)</translation>
+    </message>
+    <message id="pagesettingssystem_ac_system">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="75"/>
+      <source>AC system</source>
+      <translation>AC Sistemi</translation>
+    </message>
+    <message id="pagesettingssystem_inputs_and_monitoring">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="77"/>
+      <source>Inputs and monitoring</source>
+      <translation>Girişler ve İzleme</translation>
+    </message>
+    <message id="settings_system_charge_control">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="102"/>
+      <source>Charge control</source>
+      <translation>Şarj kontrolü</translation>
+    </message>
+    <message id="settings_system_ac_input_only_description">
+      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="66"/>
+      <source>The AC output of the inverter/charger is not used.</source>
+      <translation>İnvertör/Şarj Cihazının AC çıkışı kullanılmaz.</translation>
+    </message>
+    <message id="settings_system_ac_output_only_description">
+      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="73"/>
+      <source>All AC loads are on the output of the inverter/charger.</source>
+      <translation>Tüm AC yükleri İnvertör/Şarj Cihazının çıkışındadır.</translation>
+    </message>
+    <message id="settings_system_ac_input_and_output_description">
+      <location filename="../../pages/settings/PageSettingsAcSystem.qml" line="79"/>
+      <source>The system will automatically display loads on the input of the inverter/charger if a grid meter is present. Loads on the output are always displayed.</source>
+      <translation>Bir şebeke ölçer mevcutsa sistem otomatik olarak İnvertör/Şarj Cihazının girişindeki yükleri gösterecektir. Çıkıştaki yükler her zaman görüntülenir.</translation>
+    </message>
+    <message id="settings_system_has_dc_system">
+      <location filename="../../pages/settings/PageSettingsSystem.qml" line="111"/>
+      <source>Display DC loads</source>
+      <translation>Ekran DC Yükleri</translation>
+    </message>
+    <message id="settings_tcpip_ethernet_linklocal_enabled">
+      <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="210"/>
+      <source>Enable link-local</source>
+      <translation>Yerel Bağlantıyı Etkinleştir</translation>
+    </message>
+    <message id="settings_vecan_device_instance">
+      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="41"/>
+      <source>VE.Can device instance</source>
+      <translation>Ve.CAN Örneği</translation>
+    </message>
+    <message id="settings_vecan_nad">
+      <location filename="../../pages/settings/PageSettingsVecanDevice.qml" line="53"/>
+      <source>Network address</source>
+      <translation>Ağ Adresi</translation>
+    </message>
+    <message id="settings_vecan_devices">
+      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="16"/>
+      <source>VE.Can devices</source>
+      <translation>VE.CAN cihazları</translation>
+    </message>
+    <message id="settings_vecan_device_number">
+      <location filename="../../pages/settings/PageSettingsVecanDevices.qml" line="43"/>
+      <source>VE.Can instance# %1</source>
+      <translation>VE.Can Örneği# %1</translation>
+    </message>
+    <message id="settings_wifi_access_point_password">
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
+      <source>Access point password</source>
+      <translation>Erişim Noktası parolası</translation>
+    </message>
+    <message id="settings_wifi_disable_ap">
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
+      <source>Disable access point</source>
+      <translation>Access Point Devre Dışı Bırak</translation>
+    </message>
+    <message id="settings_minmax_reset_range_values">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="37"/>
+      <source>Reset range values</source>
+      <translation>Aralık Değerlerini Sıfırla</translation>
+    </message>
+    <message id="settings_minmax_gauge_display">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="186"/>
+      <source>Gauge display</source>
+      <translation>Gösterge Ekranı</translation>
+    </message>
+    <message id="settings_minmax_speed">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="192"/>
+      <source>Speed</source>
+      <translation type="unfinished">Hız</translation>
+    </message>
+    <message id="settings_minmax_max_speed">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="208"/>
+      <source>Max speed</source>
+      <translation>Maks. Hız</translation>
+    </message>
+    <message id="settings_modbus_remove_description">
+      <location filename="../../pages/settings/PageSettingsModbusDevices.qml" line="55"/>
+      <source>%1 %2:%3 (unit %4)</source>
+      <extracomment>%1=protocol, %2=IP address, %3=port number, %4=unit number</extracomment>
+      <translation>%1 %2:%3 (Birim %4)</translation>
+    </message>
+    <message id="settings_modbus_unit_name_and_id">
+      <location filename="../../pages/settings/PageSettingsModbusTcpServices.qml" line="42"/>
+      <source>%1 | unit ID: %2</source>
+      <extracomment>Modbus TCP service details. %1 = service name or uid, %2 = unit id</extracomment>
+      <translation>%1 | Ünite kimliği: %2</translation>
+    </message>
+    <message id="settings_module_voltage">
+      <location filename="../../pages/settings/devicelist/PageSwitch.qml" line="40"/>
+      <source>Module voltage</source>
+      <translation>Modül Gerilimi</translation>
+    </message>
+    <message id="cycle_history_dc_disconnect">
+      <location filename="../../pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml" line="33"/>
+      <source>DC disconnect</source>
+      <translation>DC Bağlantı Kesme</translation>
+    </message>
+    <message id="mk2vsc_state_write_settings_data">
+      <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="32"/>
+      <source>Write settings data</source>
+      <translation>Ayar Verilerini yaz</translation>
+    </message>
+    <message id="evcs_start_stop">
+      <location filename="../../components/listitems/ListEvcsStartStopButton.qml" line="15"/>
+      <source>Start/Stop</source>
+      <translation>Başlat/Durdur</translation>
+    </message>
+    <message id="pagecontrollableloads_disable_dess_first">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="30"/>
+      <source>Opportunity Loads cannot be enabled while Dynamic ESS is running. Disable Dynamic ESS first.</source>
+      <translation>Dinamik ESS çalışırken Fırsat yükleri etkinleştirilemez. Önce Dinamik ESS'yi devre dışı bırakın.</translation>
+    </message>
+    <message id="pagecontrollableloads_devices_and_priorities">
+      <location filename="../../pages/settings/PageControllableLoads.qml" line="41"/>
+      <source>Devices and priorities</source>
+      <translation>Cihazlar ve Öncelikler</translation>
+    </message>
+    <message id="pagesettingsboatpage_dual_drive_configuration">
+      <location filename="../../pages/settings/PageSettingsBoatPage.qml" line="86"/>
+      <source>Dual-Drive configuration</source>
+      <translation>Çift Sürücü Konfigürasyonu</translation>
+    </message>
+    <message id="eebus_pairing_qr_code">
+      <location filename="../../pages/settings/PageSettingsEebus.qml" line="73"/>
+      <source>QR code for pairing</source>
+      <translation>Eşleştirme için QR Kodu</translation>
+    </message>
+    <message id="eebus_device_auto_accept">
+      <location filename="../../pages/settings/PageSettingsEebusDevice.qml" line="52"/>
+      <source>Auto accept</source>
+      <translation>Otomatik Kabul Et</translation>
+    </message>
+    <message id="page_settings_fronius_modbus_remove_location_description">
+      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="17"/>
+      <source>Port: %1 (unit %2)</source>
+      <translation>Port: %1 (Birim %2)</translation>
+    </message>
+    <message id="page_settings_fronius_modbus_locations_note">
+      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="45"/>
+      <source>The default Modbus port is 502 and the default unit ID is 126.</source>
+      <translation>Varsayılan modbus portu 502, varsayılan birim kimliği ise 126'dır.</translation>
+    </message>
+    <message id="page_settings_fronius_modbus_location_number">
+      <location filename="../../pages/settings/PageSettingsFroniusModbus.qml" line="62"/>
+      <source>Port/unit ID %1</source>
+      <translation>Port/Birim ID %1</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_follow_state">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="73"/>
+      <source>Sensor | Outputs → follow state</source>
+      <translation>Sensör | Çıkışlar → Durumu takip et</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_follow_position">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="75"/>
+      <source>Switch | Outputs → follow position</source>
+      <translation>Anahtar | Çıkışlar → Konumu takip et</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_on_change">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="77"/>
+      <source>Switch | Outputs → toggle on change</source>
+      <translation>Anahtar | Çıkışlar → Değişiklikte aç/kapat</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_on_press">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="79"/>
+      <source>Button | Outputs → toggle on press</source>
+      <translation>Düğme | Çıkışlar → Basıldığında aç/kapat</translation>
+    </message>
+    <message id="iochannel_digital_input_mode_toggle_and_dim">
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
+      <source>Button | Outputs → toggle and dim</source>
+      <translation>Düğme | Çıkışlar → Aç/kapat ve karart</translation>
+    </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
@@ -12057,7 +12057,7 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <translation type="unfinished">Akü</translation>
     </message>
     <message id="switchableoutput_gx_device_relays">
-      <location filename="../../src/iochannel.cpp" line="345"/>
+      <location filename="../../src/iochannel.cpp" line="365"/>
       <source>GX device relays</source>
       <translation type="unfinished">GX cihazı röleleri</translation>
     </message>
