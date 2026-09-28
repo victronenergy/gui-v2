@@ -1,0 +1,12 @@
+{
+    "files": [
+        ":/data/mock/conf/services/smartshunt-battery.json",
+        ":/data/mock/conf/services/mppt1.json",
+        ":/data/mock/conf/setup-common.json"
+    ],
+    "setup": {
+        "com.victronenergy.system": {
+            "/ActiveBatteryService": "com.victronenergy.battery/289"
+        }
+    }
+}

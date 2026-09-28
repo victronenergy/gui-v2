@@ -65,6 +65,10 @@ Also, if --mock-conf is set, the --mock option is implied. For example, the abov
     - Inverter/chargers: MultiPlus II with two phases, with /Ac/State/SplitPhaseL2Passthru=1
     - Pylontech battery
 
+- starter-battery (SmartShunt with starter battery voltage)
+    - Active battery monitor is a SmartShunt with a valid starter battery voltage on /Dc/1/Voltage
+    - Solar: single MPPT
+
 
 ## Future mock configurations
 
