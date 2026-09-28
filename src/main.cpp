@@ -34,6 +34,7 @@
 #include <QQuickWindow>
 #include <QCommandLineParser>
 #include <QQuickItem>
+#include <QSize>
 #include <QStyleHints>
 
 #include <QtDebug>
@@ -42,6 +43,9 @@
 #include "QZXing.h"
 
 namespace {
+
+int forcedWindowWidth = 0;
+int forcedWindowHeight = 0;
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 EM_BOOL visibilitychange_callback(int /* eventType */, const EmscriptenVisibilityChangeEvent *e, void *userData)
@@ -66,6 +70,46 @@ QString calculateMqttAddressFromPortalId(const QString &portalId)
 	}
 	const QString shardStr = shard > 0 ? QStringLiteral("%1").arg(shard % 128) : QString();
 	return calculateMqttAddressFromShard(shardStr);
+}
+
+void applyForcedResolution(const QString &resolutionValue)
+{
+	int width = 0;
+	int height = 0;
+	QString error;
+	if (!Victron::VenusOS::UiTestUtils::parseResolution(resolutionValue, &width, &height, &error)) {
+		qFatal("Invalid --resolution '%s': %s", qPrintable(resolutionValue), qPrintable(error));
+	}
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	qWarning() << "--resolution is ignored on WebAssembly";
+#elif !defined(VENUS_DESKTOP_BUILD)
+	qWarning() << "--resolution is only supported in desktop builds";
+#else
+	// Theme.screenSize is read by loadTargetPageNavigation() to select
+	// *_Portrait vs *_Landscape routes, and by Main.qml layout Loaders.
+	// Apply it here, before those run. Do not change this later: mid-run
+	// resize/reorientation is not supported.
+	Victron::VenusOS::ThemeSingleton *theme = Victron::VenusOS::ThemeSingleton::create();
+	constexpr int sevenInchMinimumWidth = 1024;
+	if (width < height) {
+		theme->setScreenSize(Victron::VenusOS::Theme::Portrait);
+	} else if (width >= sevenInchMinimumWidth) {
+		theme->setScreenSize(Victron::VenusOS::Theme::SevenInch);
+	} else {
+		theme->setScreenSize(Victron::VenusOS::Theme::FiveInch);
+	}
+	theme->setGeometry_screen_width(width);
+	theme->setGeometry_screen_height(height);
+	forcedWindowWidth = width;
+	forcedWindowHeight = height;
+	const char *screenSizeName = theme->screenSize() == Victron::VenusOS::Theme::Portrait
+			? "Portrait"
+			: theme->screenSize() == Victron::VenusOS::Theme::SevenInch
+				? "SevenInch"
+				: "FiveInch";
+	qInfo().nospace() << "Using --resolution " << width << "x" << height
+			<< " (Theme.screenSize=" << screenSizeName << ")";
+#endif
 }
 
 void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
@@ -227,6 +271,12 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	parser.addOption(animationEnabled);
 	optionList << animationEnabled;
 
+	QCommandLineOption resolution("resolution",
+		QGuiApplication::tr("Window resolution as WxH, applied before the UI loads."),
+		QGuiApplication::tr("WxH", "Window width and height"));
+	parser.addOption(resolution);
+	optionList << resolution;
+
 
 	const QStringList args = QCoreApplication::arguments();
 	const QStringList normalizedArgs = Victron::VenusOS::UiTestUtils::normalizeUiTestArguments(args);
@@ -279,6 +329,10 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	}
 
 	parser.process(filteredArgs);
+
+	if (parser.isSet(resolution)) {
+		applyForcedResolution(parser.value(resolution));
+	}
 
 	// Load a UI test configuration if --ui-test is specified.
 	Victron::VenusOS::UiTestConfiguration uiTestConf;
@@ -722,6 +776,10 @@ int main(int argc, char *argv[])
 #endif
 
 	window->setProperty("scaleFactor", scaleFactor);
+	if (forcedWindowWidth > 0 && forcedWindowHeight > 0) {
+		window->setMinimumSize(QSize(forcedWindowWidth, forcedWindowHeight));
+		window->setMaximumSize(QSize(forcedWindowWidth, forcedWindowHeight));
+	}
 	if (desktop) {
 		window->setProperty("isDesktop", true);
 		window->show();

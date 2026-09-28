@@ -26,6 +26,11 @@ VENUS_GUI_TEST_CAPTURE_DIR=~/my-captures ./bin/venus-gui-v2 --mock --ui-test smo
 # Runtime route test for one QML type (no full smoke crawl)
 ./bin/venus-gui-v2 --mock --ui-test /pages/settings/PageSettingsConnectivity.qml
 ./bin/venus-gui-v2 --mock --ui-test /pages/BriefSidePanel.qml
+
+# Portrait (desktop): apply WxH before target-page routes resolve and
+# before pages load. Width < height selects Theme.Portrait. The window
+# size is fixed for that process.
+./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test /pages/BriefSidePanel.qml
 ```
 
 The `--mock` flag starts the application with the mock backend (no real hardware needed). The `--ui-test <path>` flag specifies the test configuration to run, relative to `tests/ui/`.

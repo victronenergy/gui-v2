@@ -18,6 +18,11 @@ dedicated test configuration. For example:
 ./bin/venus-gui-v2 --mock --ui-test /pages/settings/PageSettingsConnectivity.qml
 ./bin/venus-gui-v2 --mock --ui-test /pages/BriefPage.qml
 ./bin/venus-gui-v2 --mock --ui-test /pages/BriefSidePanel.qml
+
+# Same tests in portrait: set Theme.screenSize before target-page routes
+# are resolved, and the window size before the UI loads. Width < height
+# selects Theme.Portrait. Mid-run resize is not supported.
+./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test /pages/BriefSidePanel.qml
 ```
 
 The route is resolved statically at startup:
@@ -27,9 +32,11 @@ The route is resolved statically at startup:
   /pages/boat/BoatPage.qml` still uses that canonical path.
 * Overlay types such as the Brief side panel or control cards are opened by clicking the
   matching StatusBar icon after the host swipe page is shown. Identifiers come from static
-  `icon.source` values, not runtime probing. If a ShownType step's expected type is already
-  visible (for example BriefSidePanel, which portrait loads with the Brief page), the click
-  is skipped.
+  `icon.source` values, not runtime probing. Portrait BriefSidePanel is inline, so that
+  route has no StatusBar click. A ShownType click whose target is missing is skipped only
+  when the type is not already shown; the final check then fails. If the type is already
+  shown but the click target is missing, the route fails instead of passing without
+  exercising the control. An already-selected Levels tab is still clicked.
 * `*_Portrait.qml` / `*_Landscape.qml` layout implementations are mutually exclusive.
   Target-page mode only resolves the variant for the current `Theme.screenSize`; the other
   orientation is rejected as unresolvable rather than timing out after a zero-click route.
@@ -37,7 +44,7 @@ The route is resolved statically at startup:
   but skips instantiations whose own `visible:` binding is not unconditionally
   true, except LevelsPage tab children. TanksTab and EnvironmentTab are opened
   by clicking the TabBar labels (`Tanks`, `Environment`) after the Levels swipe
-  page. If that tab is already selected, the click is skipped. Other
+  page. If that tab is already selected, the click still runs. Other
   constructed-but-hidden children remain unresolvable rather than a zero-click
   timeout. Loader `sourceComponent` / `Component` wrappers still provide
   orientation layouts and explicit overlays.

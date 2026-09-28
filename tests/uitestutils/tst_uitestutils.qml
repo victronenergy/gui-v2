@@ -147,6 +147,30 @@ TestCase {
 		compare(UiTestUtilsHelper.parseUiTestValueFromArgs(normalized), "smoke/mock-maximal")
 	}
 
+	function test_parseResolution_valid() {
+		const portrait = UiTestUtilsHelper.parseResolution("480x800")
+		compare(portrait.ok, true)
+		compare(portrait.width, 480)
+		compare(portrait.height, 800)
+		compare(portrait.error, "")
+
+		const landscape = UiTestUtilsHelper.parseResolution("1024X600")
+		compare(landscape.ok, true)
+		compare(landscape.width, 1024)
+		compare(landscape.height, 600)
+	}
+
+	function test_parseResolution_invalid() {
+		const cases = ["", "480", "480x", "x800", "480 x 800", "0x800", "-1x800"]
+		for (let i = 0; i < cases.length; ++i) {
+			const parsed = UiTestUtilsHelper.parseResolution(cases[i])
+			compare(parsed.ok, false, "Expected invalid resolution: " + cases[i])
+			compare(parsed.width, 0)
+			compare(parsed.height, 0)
+			verify(parsed.error.length > 0)
+		}
+	}
+
 	// --- buildPageGraph tests ---
 
 	function test_buildPageGraph_nonEmpty() {
@@ -311,8 +335,8 @@ TestCase {
 
 	function test_resolveTargetRoute_levelsTabTypes() {
 		// LevelsPage TabBar labels switch TanksTab / EnvironmentTab.
-		// currentIndex is runtime (prefer an enabled tab); the click is
-		// skipped later if the type is already visible.
+		// currentIndex is runtime (prefer an enabled tab). The click still
+		// runs if that tab is already selected.
 		const tanks = UiTestUtilsHelper.resolveTargetRoute("/pages/TanksTab.qml")
 		verify(tanks.success, "TanksTab should resolve via the Levels TabBar")
 		compare(tanks.entryNavText, "Levels")
