@@ -14,6 +14,12 @@ ObjectModel {
 		: [ briefPage, overviewPage, notificationsPage, settingsPage ]
 	readonly property bool showLevelsPage: levelsPageLoader.active && !!levelsPageLoader.item
 	readonly property bool showBoatPage: boatPageLoader.active && !!boatPageLoader.item
+	readonly property bool overlayIncubating: briefPage.overlayIncubating
+			|| overviewPage.overlayIncubating
+			|| notificationsPage.overlayIncubating
+			|| settingsPage.overlayIncubating
+			|| (boatPageLoader.item?.overlayIncubating ?? false)
+			|| (levelsPageLoader.item?.overlayIncubating ?? false)
 	readonly property int tankCount: Global.tanks ? Global.tanks.totalTankCount : 0
 	readonly property int environmentInputCount: Global.environmentInputs ? Global.environmentInputs.model.count : 0
 

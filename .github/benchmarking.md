@@ -178,11 +178,10 @@ python scripts/benchmark-overview.py compare -a baseline.csv -b feature.csv
 
 `--ui-test benchmark/pages` measures how long pages take to construct, which is
 what determines the delay between pressing a settings entry or an Overview
-widget and the page appearing.  `PageStack.pushPage()` still compiles a URL
-page with synchronous `Qt.createComponent()` on first use; instantiation is
-then incubated asynchronously, so the rest of the UI can run while the user
-waits.  Construction time is therefore input-to-ready latency, not necessarily
-a hard freeze of the whole application.
+widget and the page appearing.  `PageStack.pushPage()` compiles a URL page
+with synchronous `Qt.createComponent()` and instantiates it with
+`createObject()` on the GUI thread, so first open is a hard freeze.
+Construction time is therefore that freeze, from input to the page existing.
 
 ```bash
 ./venus-gui-v2 --mock --skip-splash --ui-test benchmark/pages
@@ -242,8 +241,9 @@ it, the rest do not, and a median over the series lands between the endpoints
 and means nothing in particular.
 
 Either way this is what blocks the UI when a page is first opened:
-`PageStack.pushPage()` builds the page with an incubator, but compiles it with
-`Qt.createComponent()` first, which for a local url compiles synchronously.
+`PageStack.pushPage()` uses synchronous `Qt.createComponent()` and
+`createObject()`, which for a local url compiles and instantiates on the GUI
+thread.
 
 A page's instantiation cost tracks the number of items its model builds, not the
 number of rows the user can see on it: `PageAcIn` declares a single row of its

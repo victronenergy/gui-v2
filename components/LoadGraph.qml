@@ -20,7 +20,11 @@ Item {
 	property color horizontalGradientColor1: Theme.screenSize === Theme.Portrait ? Theme.color_background_secondary : Theme.color_briefPage_background
 	property color horizontalGradientColor2: "transparent"
 	property bool zeroCentered
-	property alias animationEnabled: graphAnimation.running
+	// animationEnabled selects the slide vs the 1s fallback timer; it does not
+	// pause sampling. samplingEnabled gates both so a hidden retained graph
+	// does not keep mutating its model.
+	property bool samplingEnabled: true
+	property bool animationEnabled: true
 
 	signal nextValueRequested()
 
@@ -37,7 +41,8 @@ Item {
 
 	Timer {
 		id: pausedAnimationTimer
-		running: !root.animationEnabled // even if !Global.timersEnabled, to avoid discontinuities
+		// even if !Global.timersEnabled, to avoid discontinuities while shown
+		running: root.samplingEnabled && !root.animationEnabled
 		repeat: true
 		interval: Theme.geometry_briefPage_sidePanel_loadGraph_intervalMs
 		onTriggered: {
@@ -49,6 +54,7 @@ Item {
 
 	SequentialAnimation {
 		id: graphAnimation
+		running: root.samplingEnabled && root.animationEnabled
 
 		loops: Animation.Infinite
 

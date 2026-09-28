@@ -145,6 +145,10 @@ Main.qml (Window)
   └─ Global.allPagesLoaded = true → Splash screen hidden, ApplicationContent displayed
 ```
 
+On GX hardware, Brief and Overview animations consume the frame budget and starve Qt's asynchronous incubator. `MainView.allowPageAnimations` is therefore false while `CardViewLoader` is incubating or while any swipe-page overlay is incubating (including the Brief side panel after the user has navigated to Overview). The animations resume when the tree is ready and the slide starts. `CardViewLoader` keeps incubating until in-view card delegates exist; a poll timeout must not start the slide while that content is still missing or Loading. The SwipeView stays visible until `CardViewLoader.shown` is true (after the in-slide finishes); hiding it as soon as `viewActive` becomes true would blank the current page while the overlay is still at opacity 0. If the card overlay is dismissed before a load finishes (the first open, or a later different card component), the Loader is deactivated so incubation does not continue in the background; the tree is kept only after content is ready. The StatusBar shows the active controls icon while control cards are `viewActive`, even before `Loader.item` exists, so a second tap cancels the pending open instead of calling `show()` again. Opening a different card pane while the close animation is still running is deferred until that animation finishes, so replacing `sourceComponent` cannot abort the out-slide before SwipeView/NavBar opacity is restored. The Brief side panel is also kept after the first open; `LoadGraph.samplingEnabled` is false while the panel is closed, because `animationEnabled` false starts a one-second fallback sampler rather than pausing the graphs.
+
+This pause does not apply to PageStack drill-downs. `pushPage()` still uses synchronous `Qt.createComponent()` and `createObject()` on the GUI thread; `allowPageAnimations` becomes false only after that construction, when `pageStack.animating` is true for the slide.
+
 ### UI navigation structure
 
 ```
@@ -179,6 +183,8 @@ Main.qml (Window)
 `components/PageStack.qml` (extends StackView) handles drill-down navigation with slide animations. Used for:
 - Overview widget drill-downs (e.g. clicking Battery widget → battery detail page)
 - Settings sub-pages (e.g. Settings → Display → Brightness)
+
+`pushPage()` compiles the URL with synchronous `Qt.createComponent()` and instantiates with `createObject()` before updating stack state. That construction freezes the GUI thread; it is not an asynchronous incubator wait.
 
 ### SwipeViewPage
 

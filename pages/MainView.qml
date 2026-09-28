@@ -15,6 +15,11 @@ FocusScope {
 
 	readonly property color backgroundColor: !!currentPage ? currentPage.backgroundColor : Theme.color_page_background
 	readonly property bool cardsActive: cardsLoader.viewActive
+	// True while control cards are requested, including async incubation before
+	// Loader.item exists. StatusBar uses this so the controls icon can cancel
+	// a pending open; currentPage stays on the swipe page until the Loader is Ready.
+	readonly property bool controlCardsActive: cardsActive
+			&& cardsLoader.sourceComponent === controlCardsComponent
 	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready && cardsLoader.item ? cardsLoader.item
 			: (pageStack.currentPage ?? swipeView?.currentItem ?? null)
 	readonly property alias cardsLoader: cardsLoader
@@ -27,18 +32,34 @@ FocusScope {
 	property bool mainViewVisible: UiConfig.applicationVisible && !UiConfig.splashScreenVisible
 	onMainViewVisibleChanged: if (mainViewVisible) console.info("MainView: UI loaded and visible")
 
-	// To reduce the animation load, disable page animations when the PageStack is transitioning
-	// between pages, or when flicking between the main pages. Note that animations are still
-	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
-	// when the user drags slowly between pages.
+	// Disable page animations while the PageStack is sliding (after
+	// synchronous construction), while a Control/Switch overlay or any
+	// swipe-page overlay (e.g. the Brief side panel) is incubating, or
+	// while flicking between the main pages. On GX hardware, Brief/Overview
+	// animations consume the frame budget and starve Qt's asynchronous
+	// incubator, so a tree that would take a few hundred milliseconds to
+	// build instead takes several seconds. Pausing those animations while
+	// incubating is what makes the overlays appear in time. The Brief
+	// loader stays active if the user swipes to Overview before it is
+	// ready, so this must include non-current swipe pages. PageStack.pushPage()
+	// still builds pages with synchronous createComponent()/createObject();
+	// this flag does not cover that freeze. Animations are still allowed
+	// when dragging between the main pages, as it looks odd if they stop
+	// abruptly when the user drags slowly.
 	readonly property bool allowPageAnimations: Global.animationEnabled
 									   && mainViewVisible
-									   && !pageStack.animating && (!swipeView || !swipeView.flicking)
+									   && !pageStack.animating
+									   && !cardsLoader.incubating
+									   && !swipePageModel.overlayIncubating
+									   && (!swipeView || !swipeView.flicking)
 									   && !Theme.adjustingGeometry
 
 	// True if any of the view animations are running.
 	readonly property bool animating: pageStack.animating || swipeView?.flicking || swipeView?.moving
 				|| navBarStartupAnim.running
+				|| cardsLoader.animationRunning || cardsLoader.incubating
+				|| swipePageModel.overlayIncubating
+				|| (swipeView?.currentItem?.overlayAnimating ?? false)
 
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
 	// and Settings).
@@ -180,8 +201,7 @@ FocusScope {
 			}
 			active: false
 			sourceComponent: swipeViewComponent
-			visible: swipeView && swipeView.ready && !pageStack.opened
-					 && !(root.cardsActive && !cardsLoader.animationRunning)
+			visible: swipeView && swipeView.ready && !pageStack.opened && !cardsLoader.shown
 			onLoaded: {
 				// If there is an active alarm, the notifications page will be shown; otherwise, show the
 				// application start page, if set.
@@ -427,15 +447,6 @@ FocusScope {
 
 	CardViewLoader {
 		id: cardsLoader
-
-		function show(viewComponent) {
-			sourceComponent = viewComponent
-			viewActive = true
-		}
-
-		function hide() {
-			viewActive = false
-		}
 
 		anchors {
 			left: parent.left

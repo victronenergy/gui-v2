@@ -52,6 +52,9 @@ FocusScope {
 		id: leftButton
 
 		readonly property int buttonType: {
+			if (Global.mainView.controlCardsActive) {
+				return VenusOS.StatusBar_LeftButton_ControlsActive
+			}
 			const customButton = Global.mainView.currentPage?.topLeftButton ?? VenusOS.StatusBar_LeftButton_None
 			if (customButton === VenusOS.StatusBar_LeftButton_None && pageStack.opened) {
 				return VenusOS.StatusBar_LeftButton_Back
