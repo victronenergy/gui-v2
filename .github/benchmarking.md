@@ -178,11 +178,15 @@ python scripts/benchmark-overview.py compare -a baseline.csv -b feature.csv
 
 `--ui-test benchmark/pages` measures how long pages take to construct, which is
 what determines the delay between pressing a settings entry or an Overview
-widget and the page appearing.  `PageStack.pushPage()` still compiles a URL
-page with synchronous `Qt.createComponent()` on first use; instantiation is
-then incubated asynchronously, so the rest of the UI can run while the user
-waits.  Construction time is therefore input-to-ready latency, not necessarily
-a hard freeze of the whole application.
+widget and the page appearing.  `PageStack.pushPage()` compiles a URL page with
+synchronous `Qt.createComponent()` and instantiates it with `createObject()`
+(see `components/PageStack.qml`).  Both calls run on the GUI thread and block
+until they return; construction is a hard freeze, not an asynchronous
+`incubateObject()` wait.  The fake x-slide starts only after the page exists.
+Normal app startup also compiles the Overview drill-down and overlay pages
+during the splash screen (`PagePreloader`); that step is skipped when UI tests
+are configured (`skipCompile`), so this benchmark still measures cold compile.
+Do not opt `PagePreloader` into compile for this benchmark.
 
 ```bash
 ./venus-gui-v2 --mock --skip-splash --ui-test benchmark/pages
@@ -241,9 +245,16 @@ once before a series of runs is the trap: the first run compiles and repopulates
 it, the rest do not, and a median over the series lands between the endpoints
 and means nothing in particular.
 
-Either way this is what blocks the UI when a page is first opened:
-`PageStack.pushPage()` builds the page with an incubator, but compiles it with
-`Qt.createComponent()` first, which for a local url compiles synchronously.
+Either way this is what the user waits for when a page is first opened:
+`PageStack.pushPage()` compiles with synchronous `Qt.createComponent()` and
+instantiates with `createObject()` on the GUI thread. That blocks the GUI
+thread (a hard freeze) until the page exists; it does not use
+`incubateObject()`. The fake x-slide runs afterwards.
+`MainView.allowPageAnimations` does not pause Brief/Overview animations during
+that construction; it is false only while the stack is transitioning or the
+SwipeView is flicking. The splash `PagePreloader` compiles Overview drill-downs
+ahead of time, except during UI tests. Isolated unit tests may inject URLs and
+opt into compile; that does not change this benchmark's skip.
 
 A page's instantiation cost tracks the number of items its model builds, not the
 number of rows the user can see on it: `PageAcIn` declares a single row of its
