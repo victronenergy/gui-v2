@@ -61,6 +61,15 @@ QtObject {
 		"/pages/settings/devicelist/dc-in/PageAlternator.qml",
 		"/pages/settings/devicelist/dc-in/PageDcMeter.qml",
 		"/pages/settings/PageDcGensets.qml",
+
+		// First-level Settings pages (SettingsPage destinations).
+		"/pages/settings/devicelist/DeviceListPage.qml",
+		"/pages/settings/PageSettingsGeneral.qml",
+		"/pages/settings/PageSettingsConnectivity.qml",
+		"/pages/settings/PageSettingsLogger.qml",
+		"/pages/settings/PageSettingsIntegrations.qml",
+		"/pages/settings/PageSettingsSystem.qml",
+		"/pages/settings/debug/PageDebug.qml",
 	]
 
 	property int timeoutMs: 15000
