@@ -31,6 +31,22 @@ SwipeViewPage {
 		root.showSidePanel = !root.showSidePanel
 	}
 
+	function closeGraphs() {
+		// Landscape treats showSidePanel as the source of truth for the icon,
+		// visibility, and inner animations. Clear it here so the CPU guard
+		// uses the same close path as the StatusBar button. Portrait still
+		// closes via its own closeGraphs().
+		root.showSidePanel = false
+		if (pageLoader.item?.closeGraphs) {
+			pageLoader.item.closeGraphs()
+		}
+	}
+
+	// Forwarded from BriefPage_Landscape while the side panel Loader is incubating
+	// or sliding open/closed.
+	overlayIncubating: pageLoader.item?.overlayIncubating ?? false
+	overlayAnimating: pageLoader.item?.overlayAnimating ?? false
+
 	GaugeModel {
 		id: centralGaugeModel
 	}
@@ -43,7 +59,7 @@ SwipeViewPage {
 			if (overLimit) {
 				//% "System load high, hiding graphs to reduce CPU load"
 				Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("brief_close_graphs_high_cpu"))
-				pageLoader.item.closeGraphs()
+				root.closeGraphs()
 			}
 		}
 	}

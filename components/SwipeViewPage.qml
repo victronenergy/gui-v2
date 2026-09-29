@@ -19,6 +19,11 @@ Page {
 	required property SwipeView view
 	property bool showTopGradient
 	property bool showBottomGradient
+	// MainView pauses page animations while any swipe page is incubating an
+	// overlay, not only the current item. Brief sets this while the side panel
+	// Loader is incubating.
+	property bool overlayIncubating: false
+	property bool overlayAnimating: false
 
 	// Allow animations if this is the current page, or when dragging between pages
 	animationEnabled: defaultAnimationEnabled && visible

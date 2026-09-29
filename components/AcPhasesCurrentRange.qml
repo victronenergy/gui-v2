@@ -33,8 +33,17 @@ QtObject {
 				}
 				let total = 0
 				for (let i = 0; i < root._phaseObjects.count; ++i) {
-					const c = i === index ? current : root._phaseObjects.objectAt(i).current
-					total += (c || 0)
+					if (i === index) {
+						total += (current || 0)
+						continue
+					}
+					const obj = root._phaseObjects.objectAt(i)
+					if (!obj) {
+						// Async incubation can run this callLater before every
+						// Instantiator delegate exists.
+						return
+					}
+					total += (obj.current || 0)
 				}
 				_valueRange.value = total / root._phaseObjects.count
 			}

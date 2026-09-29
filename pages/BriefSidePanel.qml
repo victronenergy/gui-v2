@@ -11,6 +11,7 @@ ColumnLayout {
 	id: root
 
 	required property bool animationEnabled
+	property bool samplingEnabled: true
 
 	readonly property AcInput generatorInput: Global.acInputs.input1?.source === VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input1
 			: Global.acInputs.input2?.source === VenusOS.AcInputs_InputSource_Generator ? Global.acInputs.input2
@@ -144,6 +145,7 @@ exported power v  0.4 |   /
 			}
 
 			animationEnabled: root.animationEnabled
+			samplingEnabled: root.samplingEnabled
 			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
 			belowThresholdFillColor: _graphShowsFeedIn ? Theme.color_green : Theme.color_blue
 			initialModelValue: _graphShowsFeedIn ? 0.5 : 0
@@ -216,6 +218,7 @@ exported power v  0.4 |   /
 		quantityLabel.dataObject: Global.dcInputs
 		graph: LoadGraph {
 			animationEnabled: root.animationEnabled
+			samplingEnabled: root.samplingEnabled
 			threshold: 0    // no threshold needed for inputs
 			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
 			onNextValueRequested: addValue(dcInputRange.valueAsRatio)
@@ -259,6 +262,7 @@ exported power v  0.4 |   /
 		visible: loadersActive
 		graph: LoadGraph {
 			animationEnabled: root.animationEnabled
+			samplingEnabled: root.samplingEnabled
 			onNextValueRequested: addValue(acLoadGraphRange.averagePhaseCurrentAsRatio)
 
 			AcPhasesCurrentRange {
@@ -290,6 +294,7 @@ exported power v  0.4 |   /
 		quantityLabel.dataObject: Global.system.dc
 		graph: LoadGraph {
 			animationEnabled: root.animationEnabled
+			samplingEnabled: root.samplingEnabled
 			onNextValueRequested: addValue(dcLoadRange.valueAsRatio)
 		}
 		footer: Global.isGxDevice ? cheapGaugeDcLoad : prettyGaugeDcLoad

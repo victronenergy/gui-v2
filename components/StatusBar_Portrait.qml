@@ -88,7 +88,8 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 		StatusBarButton {
 			id: controlCardsButton
 
-			readonly property int buttonType: Global.mainView.currentPage?.topLeftButton ?? VenusOS.StatusBar_LeftButton_None
+			readonly property int buttonType: Global.mainView.controlCardsActive ? VenusOS.StatusBar_LeftButton_ControlsActive
+				: (Global.mainView.currentPage?.topLeftButton ?? VenusOS.StatusBar_LeftButton_None)
 
 			leftInset: Theme.geometry_statusBar_spacing / 2
 			rightInset: Theme.geometry_statusBar_spacing / 2

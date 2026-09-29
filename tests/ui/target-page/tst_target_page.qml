@@ -59,8 +59,8 @@ UiTestCase {
 		if (!Global.mainView || Global.mainView.animating) {
 			return false
 		}
-		const loader = Global.mainView.cardsLoader
-		return !loader || !loader.animationRunning
+		const page = Global.mainView.currentPage
+		return !(page && (page.overlayIncubating || page.overlayAnimating))
 	}
 
 	function _screenSizeName() {

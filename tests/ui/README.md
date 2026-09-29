@@ -27,7 +27,9 @@ dedicated test configuration. For example:
 ./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test /pages/AuxCardsPage.qml
 
 # Portrait overlay assumptions (inline Brief side panel; cards still open
-# from the StatusBar and use a vertical list):
+# from the StatusBar and use a vertical list). Also closes during first-load
+# incubation and opens the switch pane while the control-cards close
+# animation is running:
 ./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test portrait
 ```
 
