@@ -72,12 +72,26 @@ Theme::Theme(QObject *parent) : QObject(parent)
 	// Register JavaScript listener for dynamic updates
 	mql.call<void>("addEventListener", std::string("change"), emscripten::val::module_property("jsSystemColorSchemeChanged"));
 #else
-	const QSizeF physicalScreenSize = QGuiApplication::primaryScreen()->physicalSize();
-	const int screenDiagonalMm = static_cast<int>(sqrt((physicalScreenSize.width() * physicalScreenSize.width())
-		+ (physicalScreenSize.height() * physicalScreenSize.height())));
-	setScreenSize((round(screenDiagonalMm / 10 / 2.5) == 7)
-		? Victron::VenusOS::Theme::SevenInch
-		: Victron::VenusOS::Theme::FiveInch);
+	QScreen *primaryScreen = QGuiApplication::primaryScreen();
+	const QSize screenResolution = primaryScreen->size();
+
+	// Physical diagonal size alone doesn't determine resolution: more than one
+	// common panel resolution shares a ~7" diagonal (e.g. the official Raspberry
+	// Pi touchscreen is 800x480, not the usual 1024x600). Prefer a direct match
+	// against the actual native resolution so those panels get a 1:1 (unscaled)
+	// layout instead of being scaled down from the wrong design resolution.
+	if (screenResolution == QSize(800, 480)) {
+		setScreenSize(Victron::VenusOS::Theme::FiveInch);
+	} else if (screenResolution == QSize(1024, 600)) {
+		setScreenSize(Victron::VenusOS::Theme::SevenInch);
+	} else {
+		const QSizeF physicalScreenSize = primaryScreen->physicalSize();
+		const int screenDiagonalMm = static_cast<int>(sqrt((physicalScreenSize.width() * physicalScreenSize.width())
+			+ (physicalScreenSize.height() * physicalScreenSize.height())));
+		setScreenSize((round(screenDiagonalMm / 10 / 2.5) == 7)
+			? Victron::VenusOS::Theme::SevenInch
+			: Victron::VenusOS::Theme::FiveInch);
+	}
 
 	if (QInputMethod *inputMethod = QGuiApplication::inputMethod()) {
 		connect(inputMethod, &QInputMethod::keyboardRectangleChanged, this, &Theme::updateViewportAndKeyboardProperties);
