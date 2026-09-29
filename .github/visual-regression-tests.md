@@ -34,6 +34,10 @@ VENUS_GUI_TEST_CAPTURE_DIR=~/my-captures ./bin/venus-gui-v2 --mock --ui-test smo
 ./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test portrait
 ```
 
+The `portrait` test (and landscape `tst_cards.qml`) also close the control cards
+while the first load is incubating, and open the switch pane while the
+control-cards close animation is still running.
+
 The `--mock` flag starts the application with the mock backend (no real hardware needed). The `--ui-test <path>` flag specifies the test configuration to run, relative to `tests/ui/`.
 If `<path>` is not a known UI test configuration, it is treated as a destination QML type and
 gui-v2 clicks the statically-identified UI needed to construct and show that type (nav bar,
