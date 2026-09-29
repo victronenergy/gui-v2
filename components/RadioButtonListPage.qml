@@ -17,14 +17,22 @@ Page {
 
 	property int currentIndex
 	property bool updateCurrentIndexOnClick: true
+	property bool updateDataOnClick: true
 	property var popDestination: null
 	property var validatePassword
+	property string dataUid
 
 	property alias header: optionsListView.header
 	property alias footer: optionsListView.footer
 
 	signal optionClicked(index: int, value : var)
 	signal aboutToPop()
+
+	onOptionClicked: (index, value) => {
+		if (root.updateDataOnClick && dataItem.uid.length > 0) {
+			dataItem.setValue(value)
+		}
+	}
 
 	onIsCurrentPageChanged: {
 		if (!isCurrentPage) {
@@ -161,6 +169,11 @@ Page {
 		ButtonGroup {
 			id: radioButtonGroup
 		}
+	}
+
+	VeQuickItem {
+		id: dataItem
+		uid: root.dataUid
 	}
 
 	Timer {

@@ -55,40 +55,43 @@ ListNavigation {
 
 	interactive: (dataItem.uid === "" || dataItem.valid)
 
+	// Forward RadioButtonListPage.optionClicked (index, value) to this item's optionClicked(index).
+	// Connect to this method rather than a JS closure so Qt drops the connection if this row is
+	// destroyed while the page is still open.
+	function _forwardOptionClicked(index, value) {
+		root.optionClicked(index)
+	}
+
 	onClicked: {
 		// Open the options page if the user has write access; otherwise, show the toast error.
 		if (root.checkWriteAccessLevel()) {
-			Global.pageManager.pushPage(optionsPageComponent, { title: Qt.binding(function() { return root.text }) })
+			// Create RadioButtonListPage from a file URL, not from a Component nested in this row.
+			// A nested Component's QQmlContext is this list item; if DelegateComponentModel
+			// releases the row while the page is open, the page freezes even though it is parented
+			// to PageStack. Translatable fields use Qt.binding so a language change updates them
+			// while this row still exists; dataUid owns write-back so clicks do not close over root.
+			const page = Global.pageManager.pushPage("/components/RadioButtonListPage.qml", {
+				title: Qt.binding(function() { return root.text }),
+				header: root.optionHeader,
+				footer: root.optionFooter,
+				optionModel: Qt.binding(function() { return root.optionModel }),
+				currentIndex: root.currentIndex,
+				updateCurrentIndexOnClick: root.updateCurrentIndexOnClick,
+				updateDataOnClick: root.updateDataOnClick,
+				popDestination: root.popDestination,
+				showAccessLevel: root.showAccessLevel,
+				writeAccessLevel: root.writeAccessLevel,
+				validatePassword: root.validatePassword,
+				dataUid: root.updateDataOnClick ? dataItem.uid : "",
+			})
+			if (page) {
+				page.optionClicked.connect(root._forwardOptionClicked)
+				page.aboutToPop.connect(root.aboutToPop)
+			}
 		}
 	}
 
 	VeQuickItem {
 		id: dataItem
-	}
-
-	Component {
-		id: optionsPageComponent
-
-		RadioButtonListPage {
-			header: root.optionHeader
-			footer: root.optionFooter
-			optionModel: root.optionModel
-			currentIndex: root.currentIndex
-			updateCurrentIndexOnClick: root.updateCurrentIndexOnClick
-			popDestination: root.popDestination
-			showAccessLevel: root.showAccessLevel
-			writeAccessLevel: root.writeAccessLevel
-			validatePassword: root.validatePassword
-
-			onOptionClicked: (index, value) => {
-				if (root.updateDataOnClick && dataItem.uid.length > 0) {
-					dataItem.setValue(value)
-				}
-				root.optionClicked(index)
-			}
-			onAboutToPop: {
-				root.aboutToPop()
-			}
-		}
 	}
 }
