@@ -25,6 +25,18 @@ Page {
 				]
 			}
 
+			ListNavigation {
+				//% "Flows"
+				text: qsTrId("settings_nodered_flows")
+				preferredVisible: flowListItem.valid
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsNodeRedFlows.qml", {"title": text })
+
+				VeQuickItem {
+					id: flowListItem
+					uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Flows/List"
+				}
+			}
+
 			ListButton {
 				id: resetButton
 				//% "Node-RED factory reset"

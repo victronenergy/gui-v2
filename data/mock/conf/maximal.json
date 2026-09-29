@@ -70,6 +70,7 @@
             "/LastError/Message": "ERROR \"Error processing function code 3, unit id 100, start address 808, quantity 19, src ::ffff:192.168.20.77: Error finding service with device type system at device instance 0\" "
         },
         "com.victronenergy.platform": {
+            "/Services/NodeRed/Flows/List": "[{\"enabled\":true,\"id\":\"de710832a415f877\",\"label\":\"Weather station to temperature sensor\"},{\"enabled\":false,\"id\":\"a1b2c3d4e5f60718\",\"label\":\"Generator start\"}]",
             "/Services/NodeRed/Mode": 1,
             "/Services/SignalK/Enabled": 1
         },
