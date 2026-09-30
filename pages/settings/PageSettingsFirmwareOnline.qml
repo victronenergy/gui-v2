@@ -9,6 +9,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
+	readonly property bool _updateAvailable: !!Global.firmwareUpdate.onlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
+
 	GradientListView {
 		id: settingsListView
 
@@ -24,7 +26,7 @@ Page {
 					//% "Check only"
 					{ display: qsTrId("settings_firmware_check_only"), value: VenusOS.Firmware_AutoUpdate_CheckOnly },
 					//% "Check and update"
-					{ display: qsTrId("settings_firmware_check_and_update"), value: VenusOS.Firmware_AutoUpdate_CheckAndUpdate }
+					{ display: qsTrId("settings_firmware_check_and_update"), value: VenusOS.Firmware_AutoUpdate_CheckAndUpdate, readOnly: Services.platform.isContainer }
 				]
 			}
 
@@ -49,7 +51,7 @@ Page {
 			ListRadioButtonGroup {
 				text: CommonWords.image_type
 				dataItem.uid: Services.settings.serviceUid + "/Settings/System/ImageType"
-				preferredVisible: largeImageSupport.value === 1
+				preferredVisible: largeImageSupport.value === 1 && !Services.platform.isContainer
 				optionModel: [
 					{ display: CommonWords.firmware_type_normal, value: FirmwareUpdater.ImageTypeNormal },
 					{ display: CommonWords.firmware_type_large, value: FirmwareUpdater.ImageTypeLarge },
@@ -68,8 +70,6 @@ Page {
 			}
 
 			ListButton {
-				id: installUpdate
-
 				//% "Update available"
 				text: qsTrId("settings_firmware_update_available")
 				secondaryText: {
@@ -89,7 +89,7 @@ Page {
 
 				interactive: !Global.firmwareUpdate.busy
 				writeAccessLevel: VenusOS.User_AccessType_User
-				preferredVisible: !!Global.firmwareUpdate.onlineAvailableVersion && !Global.firmwareUpdate.checkingForUpdate
+				preferredVisible: root._updateAvailable && !Services.platform.isContainer
 				onClicked: {
 					Global.firmwareUpdate.installUpdate(VenusOS.Firmware_UpdateType_Online)
 				}
@@ -100,11 +100,18 @@ Page {
 				}
 			}
 
+			ListInfoLabel {
+				//: %1 = firmware version
+				//% "%1 is available. To update, pull the new container image."
+				text: qsTrId("settings_firmware_container_update_available").arg(Global.firmwareUpdate.onlineAvailableVersion)
+				preferredVisible: root._updateAvailable && Services.platform.isContainer
+			}
+
 			ListText {
 				//% "Update build date/time"
 				text: qsTrId("settings_firmware_update_build_date_time")
 				dataItem.uid: Services.platform.serviceUid + "/Firmware/Online/AvailableBuild"
-				preferredVisible: installUpdate.preferredVisible
+				preferredVisible: root._updateAvailable
 					&& Services.settings.canAccess(VenusOS.User_AccessType_SuperUser)
 			}
 		}
