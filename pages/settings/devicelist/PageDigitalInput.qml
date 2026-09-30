@@ -53,13 +53,14 @@ DevicePage {
 								//% "Inverted"
 								text: qsTrId("digitalinput_inverted")
 								dataItem.uid: root.bindPrefix + "/Settings/InvertTranslation"
+								preferredVisible: dataItem.valid
 							}
 
 							ListSwitch {
 								//% "Invert alarm logic"
 								text: qsTrId("digitalinput_invert_alarm_logic")
 								dataItem.uid: root.bindPrefix + "/Settings/InvertAlarm"
-								preferredVisible: alarmSwitch.checked
+								preferredVisible: alarmSwitch.checked && dataItem.valid
 							}
 						}
 					}
