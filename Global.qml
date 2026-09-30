@@ -44,6 +44,7 @@ QtObject {
 	property var tanks
 
 	property var venusPlatform
+	property bool venusInContainer // don't clear this on UI reload. it cannot change while running.
 	property bool dataManagerLoaded
 	property bool allPagesLoaded
 	property bool boatPageActive

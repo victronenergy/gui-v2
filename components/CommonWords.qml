@@ -616,6 +616,9 @@ QtObject {
 	//% "Unknown"
 	readonly property string unknown_status: qsTrId("common_words_unknown_status")
 
+	//% "Unavailable - running in container"
+	readonly property string unavailable_running_in_container: qsTrId("common_words_unavailable_running_in_container")
+
 	//% "Value must be greater than start value"
 	readonly property string value_must_be_greater_than_start_value: qsTrId("common_words_value_must_be_greater_than_start_value")
 

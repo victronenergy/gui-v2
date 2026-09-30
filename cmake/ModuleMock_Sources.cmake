@@ -23,6 +23,7 @@ set(VictronMock_QML_MODULE_SOURCES
 
 SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/barebones.json
+    data/mock/conf/container.json
     data/mock/conf/dc-only.json
     data/mock/conf/maximal.json
     data/mock/conf/multi-rs.json
@@ -98,6 +99,7 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/services/temperature-freezer.json
     data/mock/conf/services/temperature-watertank.json
     data/mock/conf/services/unsupported.json
+    data/mock/conf/services/vecan-ports.json
     data/mock/conf/services/wind.json
     data/mock/conf/setup-common.json
     data/mock/conf/setup-essential-loads.json
