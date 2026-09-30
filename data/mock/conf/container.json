@@ -1,0 +1,14 @@
+{
+    "files": [
+        ":/data/mock/conf/setup-common.json"
+    ],
+    "setup": {
+        "com.victronenergy.platform": {
+            "/Device/IsContainer": 1
+        },
+        "com.victronenergy.settings": {
+            "/Settings/Canbus/vecan0/Profile": 1,
+            "/Settings/Canbus/vecan1/Profile": 0
+        }
+    }
+}
