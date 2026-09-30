@@ -655,6 +655,9 @@
             }
             if (window.visualViewport) {
                 window.visualViewport.addEventListener('resize', () => {
+                    // Orientation and inset changes may resize #wrapper-inner without a
+                    // window resize event; keep the spinner SVG viewBox in step with it.
+                    applySpinnerLayout();
                     signalQtViewportChange();
 
                     // iOS Safari also reports a stale visualViewport.height immediately after the
@@ -666,6 +669,28 @@
                 window.visualViewport.addEventListener('scroll', () => {
                     signalQtViewportChange();
                 });
+            }
+
+            // Qt (6.8) only re-reads the size and position of its container on window
+            // and visualViewport 'resize' events; it never observes the container itself.
+            // When the safe-area insets settle after a rotation resize event, #screen is
+            // resized through the padding alone and Qt keeps the window, canvas and
+            // touch-clipping rectangle from the intermediate layout. Forward container
+            // resizes as a window resize so Qt re-syncs. Qt's handler only touches the
+            // canvas inside #screen, so this does not re-trigger the observer.
+            if (window.ResizeObserver) {
+                let lastScreenSize = '';
+                new ResizeObserver(() => {
+                    const rect = screen.getBoundingClientRect();
+                    const size = Math.round(rect.width) + 'x' + Math.round(rect.height);
+                    if (size === lastScreenSize) {
+                        return;
+                    }
+                    lastScreenSize = size;
+                    if (window._qtWasmModule) {
+                        window.dispatchEvent(new Event('resize'));
+                    }
+                }).observe(screen);
             }
 
             try {
