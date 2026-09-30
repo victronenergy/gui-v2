@@ -653,11 +653,52 @@
                     mod.jsSetVisualViewportOffsetTop(Math.round(window.visualViewport.offsetTop - containerTop));
                 }
             }
+            // iOS home-screen web apps (seen on iOS 27): rotating landscape -> portrait
+            // re-frames the web view below the status bar (innerHeight shrinks by the
+            // status bar height, env(safe-area-inset-top) drops to 0) and leaves the
+            // document scrolled by that height: body's client rect sits at -59px while
+            // window.scrollY reports 0 and visualViewport.offsetTop reports 59. The fixed
+            // wrapper is still painted at the visual viewport, so the page looks right,
+            // but hit-testing uses the shifted rects: touches on the bottom bar miss the
+            // Qt canvas and every other touch lands 59px low. Scroll back to the origin
+            // when this state is seen and no keyboard is open (the keyboard legitimately
+            // offsets the visual viewport, and the QML side relies on that value).
+            function resetStuckViewportOffset() {
+                const vv = window.visualViewport;
+                if (!vv) {
+                    return;
+                }
+                const keyboardOpen = (window.innerHeight - vv.height) > 150;
+                if (keyboardOpen) {
+                    return;
+                }
+                const bodyTop = document.body.getBoundingClientRect().top;
+                if (Math.abs(vv.offsetTop) < 1 && Math.abs(vv.offsetLeft) < 1 && bodyTop > -1) {
+                    return;
+                }
+                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+                signalQtViewportChange();
+            }
+            // The re-framing settles over a few frames, so re-check a little later too.
+            function scheduleViewportOffsetReset() {
+                resetStuckViewportOffset();
+                setTimeout(resetStuckViewportOffset, 150);
+                setTimeout(resetStuckViewportOffset, 600);
+            }
+            window.addEventListener('resize', scheduleViewportOffsetReset);
+            window.addEventListener('orientationchange', scheduleViewportOffsetReset);
+            if (window.screen && window.screen.orientation) {
+                window.screen.orientation.addEventListener('change', scheduleViewportOffsetReset);
+            }
+
             if (window.visualViewport) {
                 window.visualViewport.addEventListener('resize', () => {
                     // Orientation and inset changes may resize #wrapper-inner without a
                     // window resize event; keep the spinner SVG viewBox in step with it.
                     applySpinnerLayout();
+                    scheduleViewportOffsetReset();
                     signalQtViewportChange();
 
                     // iOS Safari also reports a stale visualViewport.height immediately after the
