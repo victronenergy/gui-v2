@@ -1,0 +1,11 @@
+{
+    "files": [
+        ":/data/mock/conf/services/vecan-ports.json",
+        ":/data/mock/conf/setup-common.json"
+    ],
+    "setup": {
+        "com.victronenergy.platform": {
+            "/Device/IsContainer": 1
+        }
+    }
+}
