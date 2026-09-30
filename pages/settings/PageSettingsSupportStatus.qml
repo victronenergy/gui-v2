@@ -358,6 +358,7 @@ Page {
 				text: qsTrId("pagesettingssupportstate_latest_official_firmware_installed")
 				secondaryText: getLatestReleaseFirmwareInstalled()
 				alarmStatus: !isLatestReleaseFirmwareInstalled ? VenusOS.Alarm_Level_Alarm : -1
+				preferredVisible: !Services.platform.isContainer
 			}
 
 			ListButton {
@@ -387,6 +388,7 @@ Page {
 
 				interactive: !Global.firmwareUpdate.busy
 				writeAccessLevel: VenusOS.User_AccessType_User
+				preferredVisible: !Services.platform.isContainer
 				onClicked: Global.dialogLayer.open(confirmUpdateDialogComponent)
 
 				Component {
