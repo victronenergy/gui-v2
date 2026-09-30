@@ -249,8 +249,9 @@
     </script>
   </head>
   <body onload="init()">
-    <img id="device-frame" src="device-frame.svg">
     <div id="wrapper-outer">
+      <!-- Inside #wrapper-outer so it paints above the wrapper's background and below #wrapper-inner. -->
+      <img id="device-frame" src="device-frame.svg">
       <div id="wrapper-inner">
         <figure id="qtspinner">
           <svg width="100%" height="100%" viewBox="0 0 1024 600" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
