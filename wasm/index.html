@@ -109,9 +109,18 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          position: absolute;
+          /*
+            Fixed (not absolute) and with an explicit background colour: iOS 26+
+            home-screen web apps lay a Liquid Glass blur over the top edge of
+            the page unless WebKit finds a fixed or sticky, full-width box with
+            a plain background colour there (LocalFrameView::fixedContainerEdges).
+            Then the status bar takes that colour and the blur is skipped.
+            The body never scrolls, so fixed and absolute lay out identically.
+          */
+          position: fixed;
           top: 0;
           left: 0;
+          background-color: #000000;
         }
         #wrapper-inner {
           /* Sized against the outer content area, which already excludes the safe-area insets. */
@@ -171,6 +180,9 @@
           background: #E6E5E1;
           color: #64635F;
         }
+        #wrapper-outer {
+          background-color: #E6E5E1;
+        }
         #loading-bar-text {
           color: #64635F !important;
         }
@@ -190,6 +202,9 @@
           background: #000 !important;
           color: #969591 !important;
       }
+      html[data-forced-scheme="dark"] #wrapper-outer {
+          background-color: #000000 !important;
+      }
       html[data-forced-scheme="dark"] #loading-bar-text {
           color: #969591 !important;
       }
@@ -207,6 +222,9 @@
       html[data-forced-scheme="light"] #wrapper-inner {
           background: #E6E5E1 !important;
           color: #64635F !important;
+      }
+      html[data-forced-scheme="light"] #wrapper-outer {
+          background-color: #E6E5E1 !important;
       }
       html[data-forced-scheme="light"] #loading-bar-text {
           color: #64635F !important;
