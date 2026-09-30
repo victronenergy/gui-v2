@@ -623,6 +623,9 @@ QtObject {
 	//% "Unknown"
 	readonly property string unknown_status: qsTrId("common_words_unknown_status")
 
+	//% "Unavailable - running in container"
+	readonly property string unavailable_running_in_container: qsTrId("common_words_unavailable_running_in_container")
+
 	//% "Unsupported"
 	readonly property string unsupported: qsTrId("common_words_unsupported")
 
