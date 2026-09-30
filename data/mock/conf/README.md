@@ -33,6 +33,9 @@ Note also that a page may ask for paths that no real device publishes either - f
     - Only contains settings and system services, with minimal settings
     - Useful for testing new/custom services during development; just add the services that you need.
 
+- container
+    - As barebones, with /Device/IsContainer set, for the container-specific settings pages
+
 - maximal (as many services as possible)
     - Inverter/chargers:
         - Quattro with 3-phase Grid (feed-in) + Genset, prefers renewable energy
