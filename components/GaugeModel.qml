@@ -250,11 +250,15 @@ ListModel {
 		}
 
 		onObjectAdded: (index, gaugeObject) => {
-			gaugeObject.canUpdate = true
-			Qt.callLater(gaugeObject.updateGaugeModel)
+			if (gaugeObject) {
+				gaugeObject.canUpdate = true
+				Qt.callLater(gaugeObject.updateGaugeModel)
+			}
 		}
 		onObjectRemoved: (index, gaugeObject) => {
-			gaugeObject.canUpdate = false
+			if (gaugeObject) {
+				gaugeObject.canUpdate = false
+			}
 		}
 
 	}
