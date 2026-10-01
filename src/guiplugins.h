@@ -16,6 +16,10 @@
 #include <QVector>
 #include <QPointer>
 #include <QMap>
+#include <QSet>
+#include <QVariant>
+#include <QVariantMap>
+#include <QJsonObject>
 
 #include <QTimer>
 
@@ -78,10 +82,25 @@ public:
 	QVector<GuiPlugin> plugins() const;
 	Q_INVOKABLE GuiPlugin plugin(const QString &name) const;
 
+	// Per-plugin UI lifecycle state (enable/disable + settings). Separate from
+	// Venus "applications" enable (symlink under /data/apps/enabled/). Missing
+	// entries fail-open as enabled so stock installs keep working.
+	Q_INVOKABLE bool isPluginEnabled(const QString &name) const;
+	Q_INVOKABLE void setPluginEnabled(const QString &name, bool enabled);
+	Q_INVOKABLE QVariant pluginSetting(const QString &name, const QString &key,
+			const QVariant &defaultValue = QVariant()) const;
+	Q_INVOKABLE void setPluginSetting(const QString &name, const QString &key, const QVariant &value);
+	Q_INVOKABLE QVariantMap pluginSettings(const QString &name) const;
+
 Q_SIGNALS:
 	void busyChanged();
 	void pluginsJsonChanged();
 	void pluginsChanged();
+	// Fired for enable and settings writes; QML pages may listen.
+	void pluginUiStateChanged(const QString &name);
+	// Fired only when enable flips — chrome models must not reset on settings writes
+	// (that reshuffles SwipeView/NavBar indices mid-session).
+	void pluginEnabledChanged(const QString &name);
 
 private:
 	void timeoutMqttPluginPaths();
@@ -96,8 +115,18 @@ private:
 	bool loadPluginData(const GuiPlugin &plugin);
 	void unloadPluginData(bool clearCache);
 	bool installPluginTranslatorForLanguage(const QString &pluginName, QLocale::Language language);
+	void loadPluginUiState();
+	void savePluginUiState() const;
+	void reloadPluginUiStateFromDisk();
+	void watchPluginUiStateFile();
+	QString pluginUiStatePath() const;
+	QJsonObject pluginUiStateObject(const QString &name) const;
+	void setPluginUiStateObject(const QString &name, const QJsonObject &obj);
+
 	QString m_pluginsJson;
 	QVector<GuiPlugin> m_plugins;
+	QJsonObject m_pluginUiState;
+	QFileSystemWatcher *m_pluginUiStateWatcher = nullptr;
 	QHash<QString, QHash<QLocale::Language, QTranslator*> > m_pluginTranslators;
 	QHash<QString, QPointer<QTranslator> > m_currentTranslators;
 	QFileSystemWatcher *m_enabledAppsDirWatcher = nullptr;
@@ -137,8 +166,15 @@ There are currently 5 supported types of integrations:
 		  existing quick action pane views (i.e. either a
 		  controls card, or a switches card).
 
-** TODO: actually support 3/4/5. **
-In the prototype, only type 1 and 2 are supported.
+UI lifecycle (GuiPluginLoader::isPluginEnabled / pluginSetting):
+	Venus "applications" still gate install via /data/apps/enabled
+	symlinks. Separately, gui-v2 persists per-plugin enable and
+	settings in gui-v2-plugin-ui-state.json (GX) or
+	plugin-ui-state.json next to the desktop binary. Missing entries
+	fail-open as enabled. Disabled plugins
+	remain listed under UI Plugins but their type 2–5 integrations
+	are omitted from chrome models.
+All five integration types are supported.
 */
 class GuiPluginIntegration
 {
@@ -151,6 +187,7 @@ class GuiPluginIntegration
 
 	// valid for navigation page and quick access pane integrations
 	Q_PROPERTY(QUrl icon READ icon)
+	Q_PROPERTY(QUrl iconActive READ iconActive)
 
 	// valid for device list settings page integrations only
 	Q_PROPERTY(QString title READ title)
@@ -164,6 +201,7 @@ public:
 	QString title() const { return m_title; }
 	QString productId() const { return m_productId; }
 	QUrl icon() const { return m_icon; }
+	QUrl iconActive() const { return m_iconActive; }
 	QUrl url() const { return m_url; }
 	GuiPluginLoader::IntegrationType type() const { return m_type; }
 	GuiPluginLoader::QuickAccessPaneCardType cardType() const { return m_cardType; }
@@ -174,6 +212,7 @@ private:
 	QString m_title;
 	QString m_productId;
 	QUrl m_icon;
+	QUrl m_iconActive;
 	QUrl m_url;
 	GuiPluginLoader::IntegrationType m_type = GuiPluginLoader::InvalidIntegrationType;
 	GuiPluginLoader::QuickAccessPaneCardType m_cardType = GuiPluginLoader::InvalidCardType;
@@ -274,7 +313,7 @@ class GuiPluginIntegrationModel : public QAbstractListModel, public QQmlParserSt
 	// filtering
 	Q_PROPERTY(GuiPluginLoader::IntegrationType type READ type WRITE setType NOTIFY typeChanged)
 	Q_PROPERTY(QString productId READ productId WRITE setProductId NOTIFY productIdChanged)
-	// TODO: add filtering for cardType also.
+	Q_PROPERTY(GuiPluginLoader::QuickAccessPaneCardType cardType READ cardType WRITE setCardType NOTIFY cardTypeChanged)
 
 public:
 	enum RoleNames {
@@ -284,6 +323,7 @@ public:
 		TitleRole,
 		ProductIdRole,
 		IconRole,
+		IconActiveRole,
 		UrlRole,
 		TypeRole,
 		CardTypeRole
@@ -301,11 +341,14 @@ public:
 	void setType(GuiPluginLoader::IntegrationType t);
 	QString productId() const;
 	void setProductId(const QString &productId);
+	GuiPluginLoader::QuickAccessPaneCardType cardType() const;
+	void setCardType(GuiPluginLoader::QuickAccessPaneCardType ct);
 
 Q_SIGNALS:
 	void countChanged();
 	void typeChanged();
 	void productIdChanged();
+	void cardTypeChanged();
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
@@ -319,6 +362,7 @@ private:
 	QVector<GuiPluginIntegration> m_integrations;
 	QString m_productId;
 	GuiPluginLoader::IntegrationType m_type = GuiPluginLoader::InvalidIntegrationType;
+	GuiPluginLoader::QuickAccessPaneCardType m_cardType = GuiPluginLoader::InvalidCardType;
 	bool m_complete = false;
 };
 

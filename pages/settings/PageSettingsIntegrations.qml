@@ -286,12 +286,14 @@ Page {
 				preferredVisible: guiPluginsHeader.preferredVisible
 				Repeater {
 					model: GuiPluginModel { id: pluginModel }
-					delegate: ListNavigation {
-						id: switchNavigationItem
+					delegate: SettingsColumn {
+						id: pluginColumn
 
 						required property string name
 						required property color color
 						required property var integrations
+						width: parent ? parent.width : 0
+
 						readonly property var pluginSettingsPageIntegration: {
 							if (integrations !== null && integrations.length > 0) {
 								for (let i = 0; i < integrations.length; ++i) {
@@ -302,29 +304,59 @@ Page {
 							}
 							return null
 						}
-						readonly property bool hasDeviceListIntegration: {
+						readonly property string integrationSummary: {
+							var parts = []
 							if (integrations !== null && integrations.length > 0) {
 								for (let i = 0; i < integrations.length; ++i) {
-									if (integrations[i].type === GuiPluginLoader.DeviceListSettingsPage) {
-										return true
-									}
+									var t = integrations[i].type
+									if (t === GuiPluginLoader.DeviceListSettingsPage)
+										//% "Integrates with the device list"
+										parts.push(qsTrId("pagesettingsintegrations_uiplugin_integrates_with_devicelist"))
+									else if (t === GuiPluginLoader.NavigationPage)
+										//% "Navigation page"
+										parts.push(qsTrId("pagesettingsintegrations_uiplugin_navigation_page"))
+									else if (t === GuiPluginLoader.QuickAccessPane)
+										//% "Quick access pane"
+										parts.push(qsTrId("pagesettingsintegrations_uiplugin_quick_access_pane"))
+									else if (t === GuiPluginLoader.QuickAccessPaneCard)
+										//% "Quick access card"
+										parts.push(qsTrId("pagesettingsintegrations_uiplugin_quick_access_card"))
 								}
 							}
-							return false
+							return parts.join(", ")
 						}
 
-						text: switchNavigationItem.name
-						secondaryText: hasDeviceListIntegration
-							   //% "Integrates with the device list"
-							? qsTrId("pagesettingsintegrations_uiplugin_integrates_with_devicelist")
-							: ""
-						indicatorColor: switchNavigationItem.color
-						interactive: switchNavigationItem.pluginSettingsPageIntegration !== null
+						Connections {
+							target: GuiPluginLoader
+							function onPluginUiStateChanged(changedName) {
+								if (changedName === pluginColumn.name) {
+									pluginEnableSwitch.checked = GuiPluginLoader.isPluginEnabled(pluginColumn.name)
+								}
+							}
+						}
 
-						onClicked: {
-							const url = switchNavigationItem.pluginSettingsPageIntegration?.url ?? ""
-							if (url) {
-								Global.pageManager.pushPage(url, { title: text })
+						ListSwitch {
+							id: pluginEnableSwitch
+							text: pluginColumn.name
+							checked: GuiPluginLoader.isPluginEnabled(pluginColumn.name)
+							secondaryText: checked
+								? pluginColumn.integrationSummary
+								: CommonWords.disabled
+							onClicked: GuiPluginLoader.setPluginEnabled(pluginColumn.name, !checked)
+						}
+
+						ListNavigation {
+							preferredVisible: pluginColumn.pluginSettingsPageIntegration !== null
+							text: pluginColumn.name
+							//% "Settings"
+							secondaryText: qsTrId("pagesettingsintegrations_uiplugin_settings")
+							indicatorColor: pluginColumn.color
+
+							onClicked: {
+								const url = pluginColumn.pluginSettingsPageIntegration?.url ?? ""
+								if (url) {
+									Global.pageManager.pushPage(url, { title: text })
+								}
 							}
 						}
 					}

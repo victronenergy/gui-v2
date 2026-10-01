@@ -13,6 +13,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QFileSystemWatcher>
 #include <QCryptographicHash>
 #include <QVersionNumber>
@@ -97,6 +98,21 @@ namespace {
 		return QStringList();
 #endif
 	}
+
+	QString pluginUiStateFilePath()
+	{
+#if defined(VENUS_GX_BUILD)
+		// Durable on GX next to applications tree; survives gui-v2 restarts.
+		// Keep out of */gui-v2/*.json so readFromFilesystem never treats it as a plugin.
+		return QStringLiteral("/data/apps/gui-v2-plugin-ui-state.json");
+#elif defined(VENUS_DESKTOP_BUILD)
+		// Sibling of plugins/, not inside it (plugins/*.json are plugin payloads).
+		return QCoreApplication::applicationDirPath() + QStringLiteral("/plugin-ui-state.json");
+#else
+		// WASM / other: in-memory only unless a path is later provided.
+		return QString();
+#endif
+	}
 }
 
 GuiPluginLoader* GuiPluginLoader::create(QQmlEngine *engine, QJSEngine *)
@@ -111,6 +127,9 @@ GuiPluginLoader* GuiPluginLoader::create(QQmlEngine *engine, QJSEngine *)
 GuiPluginLoader::GuiPluginLoader(QObject *parent)
 	: QObject(parent), m_invokeOnceTimer(this), m_timeoutTimer(this)
 {
+	loadPluginUiState();
+	watchPluginUiStateFile();
+
 	Language *languageSingleton = Language::create();
 	connect(languageSingleton, &Language::currentLanguageChanged,
 		this, [this, languageSingleton] {
@@ -212,6 +231,203 @@ GuiPlugin GuiPluginLoader::plugin(const QString &name) const
 	}
 
 	return GuiPlugin();
+}
+
+QString GuiPluginLoader::pluginUiStatePath() const
+{
+	return pluginUiStateFilePath();
+}
+
+void GuiPluginLoader::loadPluginUiState()
+{
+	m_pluginUiState = QJsonObject();
+	const QString path = pluginUiStatePath();
+	if (path.isEmpty()) {
+		return;
+	}
+	QFile f(path);
+	if (!f.exists()) {
+		return;
+	}
+	if (!f.open(QIODevice::ReadOnly)) {
+		qCWarning(venusGui) << "Unable to read plugin UI state from" << path << f.errorString();
+		return;
+	}
+	const QJsonDocument doc = QJsonDocument::fromJson(f.readAll());
+	if (!doc.isObject()) {
+		qCWarning(venusGui) << "Invalid plugin UI state JSON in" << path;
+		return;
+	}
+	m_pluginUiState = doc.object();
+}
+
+void GuiPluginLoader::savePluginUiState() const
+{
+	const QString path = pluginUiStatePath();
+	if (path.isEmpty()) {
+		return;
+	}
+	QFileInfo info(path);
+	if (!info.dir().exists() && !QDir().mkpath(info.dir().absolutePath())) {
+		qCWarning(venusGui) << "Unable to create directory for plugin UI state:" << info.dir().absolutePath();
+		return;
+	}
+	QFile f(path);
+	if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+		qCWarning(venusGui) << "Unable to write plugin UI state to" << path << f.errorString();
+		return;
+	}
+	f.write(QJsonDocument(m_pluginUiState).toJson(QJsonDocument::Indented));
+}
+
+void GuiPluginLoader::watchPluginUiStateFile()
+{
+	const QString path = pluginUiStatePath();
+	if (path.isEmpty()) {
+		return;
+	}
+	// Ensure the file exists so QFileSystemWatcher can attach.
+	if (!QFile::exists(path)) {
+		savePluginUiState();
+	}
+	if (!m_pluginUiStateWatcher) {
+		m_pluginUiStateWatcher = new QFileSystemWatcher(this);
+		connect(m_pluginUiStateWatcher, &QFileSystemWatcher::fileChanged,
+			this, [this](const QString &changedPath) {
+				reloadPluginUiStateFromDisk();
+				// Editors that replace the file drop the watch; re-add.
+				if (m_pluginUiStateWatcher && QFile::exists(changedPath)
+						&& !m_pluginUiStateWatcher->files().contains(changedPath)) {
+					m_pluginUiStateWatcher->addPath(changedPath);
+				}
+			});
+	}
+	if (!m_pluginUiStateWatcher->files().contains(path)) {
+		m_pluginUiStateWatcher->addPath(path);
+	}
+}
+
+void GuiPluginLoader::reloadPluginUiStateFromDisk()
+{
+	const QString path = pluginUiStatePath();
+	if (path.isEmpty()) {
+		return;
+	}
+	QFile f(path);
+	if (!f.exists() || !f.open(QIODevice::ReadOnly)) {
+		return;
+	}
+	const QJsonDocument doc = QJsonDocument::fromJson(f.readAll());
+	if (!doc.isObject()) {
+		return;
+	}
+	const QJsonObject next = doc.object();
+	QSet<QString> names;
+	const QStringList oldKeys = m_pluginUiState.keys();
+	const QStringList newKeys = next.keys();
+	for (const QString &k : oldKeys) {
+		names.insert(k);
+	}
+	for (const QString &k : newKeys) {
+		names.insert(k);
+	}
+
+	QStringList enabledChanged;
+	for (const QString &name : names) {
+		const bool before = isPluginEnabled(name);
+		// Temporarily consider next state's enabled flag
+		const QJsonObject obj = next.value(name).toObject();
+		const bool after = !obj.contains(QStringLiteral("enabled"))
+			? true
+			: obj.value(QStringLiteral("enabled")).toBool(true);
+		if (before != after) {
+			enabledChanged.append(name);
+		}
+	}
+
+	m_pluginUiState = next;
+	for (const QString &name : enabledChanged) {
+		Q_EMIT pluginEnabledChanged(name);
+	}
+	for (const QString &name : names) {
+		Q_EMIT pluginUiStateChanged(name);
+	}
+}
+
+QJsonObject GuiPluginLoader::pluginUiStateObject(const QString &name) const
+{
+	return m_pluginUiState.value(name).toObject();
+}
+
+void GuiPluginLoader::setPluginUiStateObject(const QString &name, const QJsonObject &obj)
+{
+	if (name.isEmpty()) {
+		return;
+	}
+	m_pluginUiState.insert(name, obj);
+	savePluginUiState();
+	Q_EMIT pluginUiStateChanged(name);
+}
+
+bool GuiPluginLoader::isPluginEnabled(const QString &name) const
+{
+	const QJsonObject obj = pluginUiStateObject(name);
+	if (!obj.contains(QStringLiteral("enabled"))) {
+		return true; // fail-open
+	}
+	return obj.value(QStringLiteral("enabled")).toBool(true);
+}
+
+void GuiPluginLoader::setPluginEnabled(const QString &name, bool enabled)
+{
+	if (name.isEmpty()) {
+		return;
+	}
+	QJsonObject obj = pluginUiStateObject(name);
+	if (obj.contains(QStringLiteral("enabled"))
+			&& obj.value(QStringLiteral("enabled")).toBool(true) == enabled) {
+		return;
+	}
+	obj.insert(QStringLiteral("enabled"), enabled);
+	m_pluginUiState.insert(name, obj);
+	savePluginUiState();
+	Q_EMIT pluginEnabledChanged(name);
+	Q_EMIT pluginUiStateChanged(name);
+}
+
+QVariant GuiPluginLoader::pluginSetting(const QString &name, const QString &key,
+		const QVariant &defaultValue) const
+{
+	const QJsonObject settings = pluginUiStateObject(name).value(QStringLiteral("settings")).toObject();
+	if (!settings.contains(key)) {
+		return defaultValue;
+	}
+	return settings.value(key).toVariant();
+}
+
+void GuiPluginLoader::setPluginSetting(const QString &name, const QString &key, const QVariant &value)
+{
+	if (name.isEmpty() || key.isEmpty()) {
+		return;
+	}
+	QJsonObject obj = pluginUiStateObject(name);
+	QJsonObject settings = obj.value(QStringLiteral("settings")).toObject();
+	const QJsonValue next = QJsonValue::fromVariant(value);
+	if (settings.value(key) == next) {
+		return;
+	}
+	settings.insert(key, next);
+	obj.insert(QStringLiteral("settings"), settings);
+	// Settings-only: notify pages, but do not emit pluginEnabledChanged (would
+	// reset GuiPluginIntegrationModel and scramble nav indices).
+	m_pluginUiState.insert(name, obj);
+	savePluginUiState();
+	Q_EMIT pluginUiStateChanged(name);
+}
+
+QVariantMap GuiPluginLoader::pluginSettings(const QString &name) const
+{
+	return pluginUiStateObject(name).value(QStringLiteral("settings")).toObject().toVariantMap();
 }
 
 void GuiPluginLoader::timeoutMqttPluginPaths()
@@ -573,6 +789,11 @@ void GuiPluginLoader::readFromFilesystem(const QString &path)
 
 	QStringList plugins;
 	for (const QString &file : files) {
+		// Never treat lifecycle state files as plugins.
+		if (file == QLatin1String("ui-state.json")
+				|| file == QLatin1String("plugin-ui-state.json")) {
+			continue;
+		}
 		QFile f(pluginsDir.absoluteFilePath(file));
 		if (f.open(QIODevice::ReadOnly)) {
 			const QString plugin = QString::fromUtf8(f.readAll());
@@ -708,6 +929,7 @@ void GuiPluginLoader::populatePlugins()
 			const QString integrationProductId = integration.value(QStringLiteral("productId")).toString();
 			const QString integrationTitle = integration.value(QStringLiteral("title")).toString();
 			const QString integrationIcon = integration.value(QStringLiteral("icon")).toString();
+			const QString integrationIconActive = integration.value(QStringLiteral("iconActive")).toString();
 			const int integrationCardType = integration.value(QStringLiteral("cardType")).toInt(0);
 
 			const bool invalidType = integrationType == GuiPluginLoader::InvalidIntegrationType
@@ -743,6 +965,10 @@ void GuiPluginLoader::populatePlugins()
 				pi.m_title = integrationTitle;
 			} else if (integrationType == GuiPluginLoader::NavigationPage || integrationType == GuiPluginLoader::QuickAccessPane) {
 				pi.m_icon = QUrl(integrationIcon);
+				if (!integrationIconActive.isEmpty()) {
+					pi.m_iconActive = QUrl(integrationIconActive);
+				}
+				pi.m_title = integrationTitle;
 			} else if (integrationType == GuiPluginLoader::QuickAccessPaneCard) {
 				pi.m_cardType = static_cast<GuiPluginLoader::QuickAccessPaneCardType>(integrationCardType);
 			}
@@ -1126,6 +1352,14 @@ GuiPluginIntegrationModel::GuiPluginIntegrationModel(QObject *parent)
 	GuiPluginLoader *singleton = GuiPluginLoader::create();
 	connect(singleton, &GuiPluginLoader::pluginsChanged,
 		this, &GuiPluginIntegrationModel::updateIntegrations);
+	// NavigationPage delegates stay alive across enable toggles; QML filters
+	// them from the swipe/nav list. Other chrome types still rebuild here.
+	connect(singleton, &GuiPluginLoader::pluginEnabledChanged,
+		this, [this](const QString &) {
+			if (m_type != GuiPluginLoader::NavigationPage) {
+				updateIntegrations();
+			}
+		});
 }
 
 int GuiPluginIntegrationModel::count() const
@@ -1154,6 +1388,8 @@ QVariant GuiPluginIntegrationModel::data(const QModelIndex &index, int role) con
 		return QVariant(m_integrations.at(row).productId());
 	case IconRole:
 		return QVariant(m_integrations.at(row).icon());
+	case IconActiveRole:
+		return QVariant(m_integrations.at(row).iconActive());
 	case UrlRole:
 		return QVariant(m_integrations.at(row).url());
 	case TypeRole:
@@ -1179,6 +1415,7 @@ QHash<int, QByteArray> GuiPluginIntegrationModel::roleNames() const
 		{ TitleRole, "title" },
 		{ ProductIdRole, "productId" },
 		{ IconRole, "icon" },
+		{ IconActiveRole, "iconActive" },
 		{ UrlRole, "url" },
 		{ TypeRole, "type" },
 		{ CardTypeRole, "cardType" }
@@ -1210,10 +1447,19 @@ void GuiPluginIntegrationModel::updateIntegrations()
 	GuiPluginLoader *singleton = GuiPluginLoader::create();
 	const QVector<GuiPlugin> plugins = singleton->plugins();
 	for (const GuiPlugin &p : plugins) {
+		const bool enabled = singleton->isPluginEnabled(p.name());
+		if (!enabled && m_type != GuiPluginLoader::NavigationPage) {
+			// Hide type 2/4/5 chrome while disabled. NavigationPage stays in the
+			// model so SwipeView delegates are not destroyed/recreated (that
+			// desyncs NavBar vs SwipeView indices); QML filters them out of
+			// the active pages list instead.
+			continue;
+		}
 		const QVector<GuiPluginIntegration> integrations = p.integrations();
 		for (const GuiPluginIntegration &i : integrations) {
 			if ((m_type == GuiPluginLoader::InvalidIntegrationType || i.type() == m_type)
-					&& (m_productId.isEmpty() || i.productId().compare(m_productId, Qt::CaseInsensitive) == 0)) {
+					&& (m_productId.isEmpty() || i.productId().compare(m_productId, Qt::CaseInsensitive) == 0)
+					&& (m_cardType == GuiPluginLoader::InvalidCardType || i.cardType() == m_cardType)) {
 				data.append(i);
 			}
 		}
@@ -1258,6 +1504,20 @@ void GuiPluginIntegrationModel::setProductId(const QString &id)
 	if (m_productId != id) {
 		m_productId = id;
 		Q_EMIT productIdChanged();
+		updateIntegrations();
+	}
+}
+
+GuiPluginLoader::QuickAccessPaneCardType GuiPluginIntegrationModel::cardType() const
+{
+	return m_cardType;
+}
+
+void GuiPluginIntegrationModel::setCardType(GuiPluginLoader::QuickAccessPaneCardType ct)
+{
+	if (m_cardType != ct) {
+		m_cardType = ct;
+		Q_EMIT cardTypeChanged();
 		updateIntegrations();
 	}
 }
