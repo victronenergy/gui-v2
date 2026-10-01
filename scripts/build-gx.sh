@@ -23,8 +23,13 @@ fi
 
 
 # Parse command-line arguments
+TARGET_ARCH="${GUIV2_GX_ARCH:-32}"
 while [[ $# -gt 0 ]]; do
     case "${1}" in
+		-a|--arch)
+			TARGET_ARCH="${2}"
+			shift 2
+			;;
         # do not delete build files
         -P|--preserve)
             PRESERVE=1
@@ -38,6 +43,7 @@ while [[ $# -gt 0 ]]; do
         -h|--help)
             echo "Usage: ${0} [options]"
             echo "Options:"
+			echo "  -a, --arch       Target architecture: 32 or 64 (default: ${TARGET_ARCH})"
             echo "  -P, --preserve   Do not delete build files"
             echo "  -H, --host       IP(s) or hostname(s) of the GX device for direct upload, comma separated"
             echo "                   Example:"
@@ -55,9 +61,24 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+case "${TARGET_ARCH}" in
+	32|arm|arm32)
+		TARGET_ARCH="32"
+		SDK_ENV="/opt/venus/scarthgap-arm-cortexa8hf-neon/environment-setup-cortexa8hf-neon-ve-linux-gnueabi"
+		;;
+	64|arm64|aarch64)
+		TARGET_ARCH="64"
+		SDK_ENV="/opt/venus/scarthgap-aarch64-cortexa53/environment-setup-cortexa53-ve-linux"
+		;;
+	*)
+		echo "ERROR: Unsupported architecture '${TARGET_ARCH}'. Use 32 or 64."
+		exit 1
+		;;
+esac
 
-if [ ! -f "/opt/venus/current/environment-setup-cortexa8hf-neon-ve-linux-gnueabi" ]; then
+if [ ! -f "${SDK_ENV}" ]; then
     echo "ERROR: Venus OS SDK was not found."
+	echo "Expected: ${SDK_ENV}"
     echo "Execute \"./build-gx-install-requirements.sh\" once or visit this link for how to install and use the SDK: https://github.com/victronenergy/venus/wiki/howto-install-and-use-the-sdk"
     exit 1
 fi
@@ -70,16 +91,17 @@ echo "Changed to parent directory: $(pwd)"
 
 # Use /tmp for build/staging directories on WSL to avoid clock skew on DrvFs mounts
 if [[ -n "${IS_WSL}" ]]; then
-    BUILD_DIR="/tmp/victronenergy/$(basename "${BASE_DIR}")/build-gx"
-    FILES_DIR="${BASE_DIR}/build-gx_files_to_copy"
+    BUILD_DIR="/tmp/victronenergy/$(basename "${BASE_DIR}")/build-gx-${TARGET_ARCH}"
+    FILES_DIR="${BASE_DIR}/build-gx-${TARGET_ARCH}_files_to_copy"
     echo "WSL detected: using ${BUILD_DIR} to avoid clock skew"
 else
-    BUILD_DIR="${BASE_DIR}/build-gx"
-    FILES_DIR="${BASE_DIR}/build-gx_files_to_copy"
+    BUILD_DIR="${BASE_DIR}/build-gx-${TARGET_ARCH}"
+    FILES_DIR="${BASE_DIR}/build-gx-${TARGET_ARCH}_files_to_copy"
 fi
 
 # Source the SDK environment
-. /opt/venus/current/environment-setup-cortexa8hf-neon-ve-linux-gnueabi
+. "${SDK_ENV}"
+echo "Building ${TARGET_ARCH}-bit GUIv2 with ${SDK_ENV}"
 
 # Checkout the branch you want to build, if not already on it
 # git checkout -b main origin/main

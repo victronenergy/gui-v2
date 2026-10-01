@@ -46,7 +46,8 @@
         "/Settings/SystemSetup/MaxChargeVoltage": 0,
         "/Settings/SystemSetup/SharedTemperatureSense": 1,
         "/Settings/SystemSetup/SharedVoltageSense": 3,
-        "/Settings/SystemSetup/TemperatureService": "default"
+        "/Settings/SystemSetup/TemperatureService": "default",
+        "/Settings/Vrmlogger/StorageVolumeId": "uuid:10d38048-f7c0-436e-a773-bfb7336ea298"
     },
     "com.victronenergy.system": {
         "/Control/BatteryCurrentSense": 0
