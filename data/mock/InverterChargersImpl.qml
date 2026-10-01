@@ -10,10 +10,10 @@ Item {
 	id: root
 
 	function setSystemValue(path, value) {
-		MockManager.setValue("com.victronenergy.system" + path, value)
+		MockManager.setValue(Global.system.serviceUid + path, value)
 	}
 	function systemValue(path) {
-		return MockManager.value("com.victronenergy.system" + path)
+		return MockManager.value(Global.system.serviceUid + path)
 	}
 
 	FilteredDeviceModel {
@@ -66,7 +66,7 @@ Item {
 				root.setSystemValue("/VebusInstance", device.deviceInstance)
 			} else {
 				root.setSystemValue("/VebusService", "")
-				root.setSystemValue("/VebusService", undefined)
+				root.setSystemValue("/VebusInstance", undefined)
 			}
 		}
 	}
@@ -191,13 +191,17 @@ Item {
 
 			MockDataRandomizer {
 				active: Global.mainView && Global.mainView.mainViewVisible
-				onNotifyUpdate: (index, value) => {
-					const voltage = MockManager.value(inverterCharger.uid + "/Ac/Out/L%1/V".arg(index + 1))
-					if (voltage > 0) {
-						MockManager.setValue(inverterCharger.uid + "/Ac/L%1/I".arg(index + 1), value / voltage)
-					}
-				}
-				onNotifyTotal: (totalPower) => { MockManager.setValue(uid + "/Ac/Out/P", totalPower) }
+				totalTargetUid: inverterCharger.uid + "/Ac/Out/P"
+				derivedTargetUids: [
+					inverterCharger.uid + "/Ac/L1/I",
+					inverterCharger.uid + "/Ac/L2/I",
+					inverterCharger.uid + "/Ac/L3/I"
+				]
+				derivedDivisorUids: [
+					inverterCharger.uid + "/Ac/Out/L1/V",
+					inverterCharger.uid + "/Ac/Out/L2/V",
+					inverterCharger.uid + "/Ac/Out/L3/V"
+				]
 
 				VeQuickItem { uid: inverterCharger.uid + "/Ac/Out/L1/P" }
 				VeQuickItem { uid: inverterCharger.uid + "/Ac/Out/L2/P" }

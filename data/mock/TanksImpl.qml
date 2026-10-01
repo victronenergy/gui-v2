@@ -53,20 +53,12 @@ Item {
 
 			// If this is the first tank, then every 10 seconds, change it to/from an error state.
 			// (This may not be the first tank in the Levels page due to the sort order there.)
-			Timer {
-				readonly property int tankCount: tankObjects.count
-
-				running: MockManager.timersActive && tank.index === 0
+			MockDataToggler {
+				active: MockManager.timersActive && tank.index === 0
+				valueA: VenusOS.Tank_Status_Ok
+				valueB: VenusOS.Tank_Status_Error
 				interval: 10000
-				repeat: true
-				onTriggered: {
-					status.setValue(status.value === VenusOS.Tank_Status_Ok ? VenusOS.Tank_Status_Error : VenusOS.Tank_Status_Ok)
-				}
-				onTankCountChanged: {
-					if (MockManager.timersActive && tank.index === 0) {
-						restart()
-					}
-				}
+				dataItems: [status]
 			}
 		}
 	}
