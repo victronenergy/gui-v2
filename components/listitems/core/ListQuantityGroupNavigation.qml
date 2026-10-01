@@ -61,7 +61,7 @@ ListSetting {
 			model: root.quantityModel
 			primaryLabel.textFormat: root.textFormat
 			primaryLabel.font: root.font
-			captionLabel.text: root.caption
+			captionText: root.caption
 			tableMode: root.tableMode
 			forceColumnLayout: root.forceColumnLayout
 		}

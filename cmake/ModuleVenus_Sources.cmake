@@ -731,6 +731,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/qmlobject.cpp
     src/quantityinfo.h
     src/quantityinfo.cpp
+    src/nativequantitylabel.h
+    src/nativequantitylabel.cpp
     src/quantityobject.h
     src/quantityobject.cpp
     src/quantityobjectmodel.h
