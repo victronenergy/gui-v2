@@ -40,8 +40,10 @@ QtObject {
 
 	property string _hiddenStackMainPage
 
-	function pushPage(obj, properties, operation = PageStack.PushTransition) {
-		return pageStack.pushPage(obj, properties, operation)
+	// A page pushed by url does not exist yet when this returns; see PageStack::pushPage().
+	// Pass 'readyCallback' if you need the page itself.
+	function pushPage(obj, properties, operation = PageStack.PushTransition, readyCallback = undefined) {
+		return pageStack.pushPage(obj, properties, operation, readyCallback)
 	}
 
 	function popPage(toPage, operation = PageStack.PopTransition) {
@@ -95,24 +97,27 @@ QtObject {
 		}
 
 		// If the stack is already showing the correct page, there's nothing more to do.
+		// Start pages are at most one stack page (see StartPageConfiguration); a second
+		// pushPage() would be ignored while the first is still being built.
 		const configStackPages = config.stack || []
+		if (configStackPages.length > 1) {
+			console.warn("Start page stack has", configStackPages.length, "pages; only the first is used")
+		}
 		if (configStackPages.length > 0
-				&& configStackPages[configStackPages.length - 1].page === pageStack.topPageUrl) {
+				&& configStackPages[0].page === pageStack.topPageUrl) {
 			return
 		}
 
 		if (configStackPages.length > 0) {
 			// The config contains a stack page (i.e. a drilldown or settings sub-page like the
-			// Battery List page.
+			// Battery List page).
 			if (pageStack.depth > 0) {
 				// We are currently on a stack page, and need to show the configured stack page.
-				// Pop all current stack pages before pushing the configured pages onto the stack.
+				// Pop all current stack pages before pushing the configured page onto the stack.
 				popAllPages(StackView.Immediate)
 			}
-			for (let i = 0; i < configStackPages.length; ++i) {
-				if (configStackPages[i].page) {
-					pushPage(configStackPages[i].page, configStackPages[i].properties || {})
-				}
+			if (configStackPages[0].page) {
+				pushPage(configStackPages[0].page, configStackPages[0].properties || {})
 			}
 		} else if (pageStack.depth > 0) {
 			// There are no config stack pages, but we are currently on a stack page. Hide the stack
@@ -130,7 +135,7 @@ QtObject {
 			//   to reveal the main page below.
 			// - otherwise, go to the start page.
 			const config = Global.systemSettings.startPageConfiguration.startPageInfo
-			if (!config || config.stack[config.stack.length - 1]?.page === pageStack.topPageUrl) {
+			if (!config || config.stack?.[0]?.page === pageStack.topPageUrl) {
 				_hiddenStackMainPage = navBar.getCurrentPage()
 				pageStack.hide()
 			} else {

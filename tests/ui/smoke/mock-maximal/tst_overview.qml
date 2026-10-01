@@ -19,6 +19,7 @@ UiTestCase {
 	}
 
 	function cleanup() {
+		recursivePageCapture.reset()
 		Global.pageManager.popAllPages()
 
 		// No steps have been added, so call goToNextTestFunction() instead of runSteps() to

@@ -6,6 +6,14 @@
 #include "fastutils.h"
 
 #include <QFontMetricsF>
+#include <QGuiApplication>
+#include <QQmlEngine>
+#include <QQmlIncubator>
+#include <QQuickItem>
+#include <QQuickWindow>
+
+#include <private/qqmlengine_p.h>
+#include <private/qqmlincubator_p.h>
 
 namespace Victron {
 namespace VenusOS {
@@ -95,6 +103,107 @@ int FastUtils::fittedPixelSize(const QString &text, const qreal maxWidth, int mi
 		}
 	}
 	return minPixelSize;
+}
+
+namespace {
+
+bool inSubtree(const QObject *obj, const QObject *root)
+{
+	if (!obj || !root) {
+		return false;
+	}
+	for (const QObject *p = obj; p; p = p->parent()) {
+		if (p == root) {
+			return true;
+		}
+	}
+	if (const auto *item = qobject_cast<const QQuickItem *>(obj)) {
+		for (const QQuickItem *p = item->parentItem(); p; p = p->parentItem()) {
+			if (p == root) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool incubatorBelongsTo(const QQmlIncubatorPrivate *incubator, const QObject *root)
+{
+	if (inSubtree(incubator->result, root)) {
+		return true;
+	}
+	for (QQmlRefPointer<QQmlContextData> ctx = incubator->rootContext; ctx; ctx = ctx->parent()) {
+		if (inSubtree(ctx->contextObject(), root)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool hasIncubationFor(QObject *root)
+{
+	QQmlEngine *engine = qmlEngine(root);
+	if (!engine) {
+		return false;
+	}
+	QQmlEnginePrivate *ep = QQmlEnginePrivate::get(engine);
+	for (QQmlEnginePrivate::Incubator *inc : ep->incubatorList) {
+		if (incubatorBelongsTo(static_cast<const QQmlIncubatorPrivate *>(inc), root)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+QQmlIncubationController *incubationControllerFor(QObject *object)
+{
+	QQuickWindow *window = qobject_cast<QQuickWindow *>(object);
+	if (!window) {
+		if (auto *item = qobject_cast<QQuickItem *>(object)) {
+			window = item->window();
+		}
+	}
+	if (!window) {
+		const QWindowList windows = QGuiApplication::allWindows();
+		for (QWindow *w : windows) {
+			window = qobject_cast<QQuickWindow *>(w);
+			if (window) {
+				break;
+			}
+		}
+	}
+	return window ? window->incubationController() : nullptr;
+}
+
+}
+
+void FastUtils::drainIncubators(QObject *object) const
+{
+	if (!object) {
+		return;
+	}
+
+	QQmlIncubationController *controller = incubationControllerFor(object);
+
+	// Complete nested incubators for this object. incubateFor() is a GUI-thread
+	// hitch (no event loop). Loop on this subtree, not incubatingObjectCount();
+	// that is window-wide. Do not cap and detach anyway.
+	while (hasIncubationFor(object)) {
+		if (!controller || controller->incubatingObjectCount() == 0) {
+			break;
+		}
+		controller->incubateFor(16);
+	}
+}
+
+QObject *FastUtils::containingPage(QObject *object) const
+{
+	for (QObject *p = object; p; p = p->parent()) {
+		if (p->property("__is_venus_gui_page__").toBool()) {
+			return p;
+		}
+	}
+	return nullptr;
 }
 
 FastUtils* FastUtils::create(QQmlEngine *, QJSEngine *)

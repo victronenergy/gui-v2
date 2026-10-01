@@ -169,9 +169,9 @@ Main.qml (Window)
 ### PageManager
 
 `PageManager.qml` orchestrates navigation:
-- `pushPage(url, properties)` — push a sub-page onto the PageStack
+- `pushPage(obj, properties, operation, readyCallback)` — push a URL, Component, or already-constructed page onto the PageStack. URL and Component pages are built asynchronously and the call returns null; pass `readyCallback` to receive the page once it is on the stack (not called if the push is abandoned)
 - `popPage()` / `popAllPages()` — navigate back
-- `goToStartPage()` — navigate to user-configured start page
+- `goToStartPage()` — navigate to the user-configured start page (a main swipe page plus at most one PageStack page; only `stack[0]` is pushed)
 - Manages idle mode transitions (hide NavBar, full-screen page)
 
 ### PageStack
@@ -179,6 +179,26 @@ Main.qml (Window)
 `components/PageStack.qml` (extends StackView) handles drill-down navigation with slide animations. Used for:
 - Overview widget drill-downs (e.g. clicking Battery widget → battery detail page)
 - Settings sub-pages (e.g. Settings → Display → Brightness)
+
+URL pages are compiled with `Qt.createComponent(..., Asynchronous)` and then incubated; Component-valued pages are incubated the same way. Only one page is in flight: leaving the origin discards it, and a push while another is being built is ignored. `MainView.allowPageAnimations` is false while `pageStack.animating` (wanted build or slide) or `pageStack.incubating` (including abandoned incubators) so Overview/Brief gauges and electrons pause and do not starve leftover incubation on GX. Abandoned incubators do not set `animating`, so they do not block the next `pushPage()`. Press ripples do not use that flag. `PageStack.animationDuration` uses `Global.animationEnabled`, not `allowPageAnimations`, so that pause does not collapse the stack's own slide to 0 ms.
+
+When a drill-down page is actually removed, PageStack emits `Page.aboutToBeDiscarded` while the page is still fully constructed. UI destruction calls `destroyAllPages()` rather than `popAllPages()`, so `tryPop` and a hidden stack cannot skip that signal. Do not emit it before a close or pop transition: that nulls ListView/Instantiator models and the visible page goes blank while it slides out. Emit it once at teardown after the transition (`_popAndDestroyAllPages` when closing the stack, popExit when popping in-stack). Do not emit it again on destroy. The page incubator being Ready does not mean nested `AsynchronousIfNested` Repeaters are; `FastUtils.drainIncubators()` incubates until incubators for that object are finished (not a window-wide pass cap that can return while this page is still Loading). Then `Global.detachDelegateModels()` walks the page so ListViews and Instantiators set `model: null` while they are still complete (`BaseListView` and `ObjectModelMonitor` also do this themselves). Instantiator has no QML `parent`; `ObjectModelMonitor` uses `FastUtils.containingPage()` (QObject parent walk) to connect to that signal. Do not assign `Repeater.model` there: `QQuickRepeater::setModel` during nested `AsynchronousIfNested` creation is `QQmlDelegateModelItem::releaseObject()` `objectRef > 0`. That race is not limited to teardown: incubation is window-global, so a live Repeater anywhere (e.g. LevelsPage `TabBar` / `SegmentedButtonRow`) that writes `model` while PageStack is incubating a page uses `AsynchronousIfNested`, and a second `setModel` asserts. `SegmentedButtonRow` does not alias `Repeater.model`; it assigns the Repeater only when the button count changes, and delegates read labels/enabled from the row's `model` property. Do not bind `Repeater.model` to a JS array that is allocated on every re-evaluation. Do not emit `aboutToBeDiscarded` when a page is only deactivated under another stack page, or while a page incubator is still Loading. Abandoned incubators are force-completed to Ready, then discarded with `aboutToBeDiscarded`. NavBar Repeaters are not inside a Page; `MainView.clearUi()` snapshots `navBar.pages` so tearing down the swipe view cannot change the Repeater's integer model.
+
+### UI rebuild
+
+`Main.rebuildUi()` tears down and recreates the UI (demo mode, plugin reload, backend reconnect, localsettings/platform crash recovery). Views must be destroyed while data objects are still valid; destroying DataManager or nulling `Global.acInputs` (etc.) first leaves ListViews/Instantiators/Repeaters bound to dying models and can double-release `QQmlDelegateModel` items. NavBar Repeaters are not inside a Page; they must be detached before the swipe view goes away.
+
+Order:
+1. Abandon in-flight PageStack incubation (`_abandonPendingBuild`) so a later drain cannot complete `_pendingBuild` into a push
+2. `MainView.clearUi()` — snapshot NavBar.pages; emit `aboutToBeDiscarded` on swipe pages (drain then detach those pages); `PageStack.destroyAllPages()` (not `popAllPages()`: `tryPop` can veto, and a hidden stack never runs the `from: "opened"` close transition that calls `_popAndDestroyAllPages()`); detach remaining non-page views; deactivate the swipe loader
+3. `FastUtils.drainIncubators(guiLoader.item)` then `Global.detachDelegateModels(guiLoader.item)` — leftovers on ApplicationContent (dialogs, notifications, …)
+4. `Global.dataManagerLoaded = false` — drop ApplicationContent
+5. Wait until `guiLoader.item` is gone if the Loader does not clear it in the same turn
+6. Deactivate DataManager if it was active
+7. `Global.reset()` — null Global pointers, show splash
+8. Reactivate DataManager if it was active and the backend is still ready (demo/plugin/crash recovery). Sample `connectionReady` here, not at rebuild start: `guiLoader` unloads asynchronously, so a reconnect or disconnect during unload would otherwise leave DataManager stuck off or turn it back on after a disconnect.
+
+If `rebuildUi()` is called again while a rebuild is already in progress (waiting for `guiLoader` to unload, or bouncing DataManager), ignore it. Finish samples live `connectionReady`, so a disconnect, reconnect, plugin, demo-mode, or settings/platform trigger during that window does not need a second teardown.
 
 ### SwipeViewPage
 
@@ -209,9 +229,10 @@ components/
 All pages must extend `components/Page.qml` (a FocusScope):
 - `title: string` — displayed in StatusBar breadcrumbs
 - `isCurrentPage: bool` — true when this page is visible
-- `animationEnabled: bool` — tracks whether animations should run
+- `animationEnabled: bool` — content animations (gauges, electrons); follows `MainView.allowPageAnimations` and `isCurrentPage`. Press feedback does not use this.
 - `topLeftButton` / `topRightButton` — configure StatusBar buttons
 - `tryPop: function` — optional guard called before page is popped
+- `aboutToBeDiscarded` — signal emitted once while the page is still alive, after any close/pop transition and immediately before it is removed from the stack or swipe view (not when merely deactivated under another page, not before the slide, and not while the page incubator is still Loading). `Page` responds by draining nested incubators then calling `Global.detachDelegateModels()`.
 
 The `__is_venus_gui_page__` readonly property allows child components to detect they are inside a Page.
 

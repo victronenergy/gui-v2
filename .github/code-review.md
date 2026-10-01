@@ -416,6 +416,8 @@ These apply when a change introduces a performance optimisation that trades off 
 
 4.b.v. **License header**: Every new source file (`.cpp`, `.h`, `.qml`) must include the standard Victron copyright header at the top: `/*\n** Copyright (C) <year> Victron Energy B.V.\n** See LICENSE.txt for license information.\n*/`. Use the current year for new files. Do not omit the header or substitute a different license.
 
+4.b.vi. **Commit messages**: Wrap both the subject and the message body at 72 characters. The subject must be a single line of at most 72 characters. Every body line must be at most 72 characters. Unwrapped subjects or body paragraphs are not allowed.
+
 ### 4.c. Documentation
 
 4.c.i. **Public API documentation**: Public C++ methods exposed to QML should have brief doc comments explaining purpose, preconditions, and thread-safety requirements.

@@ -27,14 +27,13 @@ FocusScope {
 	property bool mainViewVisible: UiConfig.applicationVisible && !UiConfig.splashScreenVisible
 	onMainViewVisibleChanged: if (mainViewVisible) console.info("MainView: UI loaded and visible")
 
-	// To reduce the animation load, disable page animations when the PageStack is transitioning
-	// between pages, or when flicking between the main pages. Note that animations are still
-	// allowed when dragging between the main pages, as it looks odd if animations stop abruptly
-	// when the user drags slowly between pages.
+	// Pause gauges/electrons during stack slide/incubation and flicking so
+	// they do not starve incubation on GX. Not used for press feedback.
 	readonly property bool allowPageAnimations: Global.animationEnabled
-									   && mainViewVisible
-									   && !pageStack.animating && (!swipeView || !swipeView.flicking)
-									   && !Theme.adjustingGeometry
+			&& mainViewVisible
+			&& !pageStack.animating && !pageStack.incubating
+			&& (!swipeView || !swipeView.flicking)
+			&& !Theme.adjustingGeometry
 
 	// True if any of the view animations are running.
 	readonly property bool animating: pageStack.animating || swipeView?.flicking || swipeView?.moving
@@ -70,8 +69,30 @@ FocusScope {
 	}
 
 	function clearUi() {
+		// Snapshot NavBar.pages; Repeater.setModel during teardown asserts.
+		if (navBar.pages && navBar.pages.length) {
+			const snapshot = []
+			for (let i = 0; i < navBar.pages.length; ++i) {
+				snapshot.push(navBar.pages[i])
+			}
+			navBar.pages = snapshot
+		}
+		// Pages first. Abandon PageStack work so drain cannot complete a push.
+		pageStack._abandonPendingBuild()
+		const view = swipeView
+		if (view) {
+			for (let i = 0; i < view.count; ++i) {
+				const page = view.itemAt(i)
+				if (page && page.aboutToBeDiscarded) {
+					page.aboutToBeDiscarded()
+				}
+			}
+		}
+		// Forced teardown: popAllPages() can be vetoed or skip a hidden stack.
+		pageStack.destroyAllPages()
+		// Remaining non-page views (NavBar Instantiators, cards, …).
+		Global.detachDelegateModels(root)
 		swipeViewLoader.active = false
-		pageStack.popAllPages(StackView.Immediate)
 		_loadedPages = 0
 	}
 

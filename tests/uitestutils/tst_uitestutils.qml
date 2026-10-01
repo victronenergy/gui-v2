@@ -372,8 +372,17 @@ TestCase {
 
 		const pushed = stack.pushPage("/pages/not-a-real-page.qml", {})
 		compare(pushed, null)
+		// Wait for the async Error path to clear pending state.
+		tryVerify(function() {
+			return !stack._pendingBuild
+					&& !stack._pendingOwnedComponent
+					&& !stack._pendingCompileHandler
+					&& !stack._pendingOrigin
+		}, 5000, "Failed async create should clear pending compile state")
 		compare(stack._pageUrls.length, 0)
 		verify(stack._topPageUrl === undefined)
+		compare(stack.depth, 0)
+		compare(stack.incubating, false)
 		stack.destroy()
 	}
 

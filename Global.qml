@@ -5,6 +5,7 @@
 
 pragma Singleton
 
+import QtQml
 import QtQuick
 import Victron.VenusOS
 
@@ -68,8 +69,29 @@ QtObject {
 		return ToastModel.add(type, text, autoCloseInterval)
 	}
 
+	// Null ListView/Instantiator models while they are still complete.
+	// Do not assign Repeater.model: setModel during nested incubation asserts.
+	function detachDelegateModels(obj) {
+		if (!obj) {
+			return
+		}
+		if (obj instanceof Loader && obj.item) {
+			detachDelegateModels(obj.item)
+		}
+		const data = obj.data
+		if (data) {
+			for (let i = 0; i < data.length; ++i) {
+				detachDelegateModels(data[i])
+			}
+		}
+		if (obj instanceof Instantiator
+				|| obj instanceof ListView || obj instanceof GridView || obj instanceof PathView) {
+			obj.model = null
+		}
+	}
+
 	function reset() {
-		// unload the gui.
+		// ApplicationContent must already be gone so views are not bound here.
 		dataManagerLoaded = false
 
 		// note: we don't reset `main

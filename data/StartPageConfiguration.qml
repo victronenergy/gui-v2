@@ -82,6 +82,8 @@ QtObject {
 		}
 	}
 
+	// Start page JSON: { main: { page, properties }, stack: [...] }.
+	// stack is empty or one drill-down; goToStartPage() pushes only stack[0].
 	function _jsonStringForType(startPageType) {
 		switch (startPageType) {
 		case VenusOS.StartPage_Type_Boat:

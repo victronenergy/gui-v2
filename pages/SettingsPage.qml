@@ -25,10 +25,8 @@ SwipeViewPage {
 
 	function goToConnectivityPage(pageId) {
 		const properties = { title: Qt.binding(function() { return connectivityListItem.text }) }
-		const page = Global.pageManager.pushPage(connectivityListItem.pageSource, properties, PageStack.Immediate)
-		if (page) {
-			page.goToPage(pageId)
-		}
+		Global.pageManager.pushPage(connectivityListItem.pageSource, properties,
+				PageStack.Immediate, (page) => page.goToPage(pageId))
 	}
 
 	component SettingsListNavigation : ListNavigation {
