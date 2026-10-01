@@ -35,6 +35,12 @@ In target-page mode, runtime QML errors (including binding/runtime JavaScript er
 `ReferenceError`) are counted as test failures, and URL-only success is not enough: the test also
 requires a real page object to be present on the page stack.
 
+Pages that use `DelegateComponentModel` only instantiate list rows that have been in view.
+`findItem()` / `findObject()` therefore search `QQuickItem` visual children as well as
+`QObject` children. Target-page mode waits until `findItem()` succeeds or the current
+page's `BaseListView` has created a delegate, then may `positionViewAtIndex()` on that
+list only, to build an off-screen row before clicking.
+
 The `smoke/mock-maximal` test configuration specifies that the UI should also load the "maximal" mock configuration, so it is not necessary to set `--mock-conf maximal`.
 
 In comparison, the `smoke/generic-capture` test does not specify a mock configuration, because the test simply captures all available screens regardless of the backend:

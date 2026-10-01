@@ -3,7 +3,6 @@
 ** See LICENSE.txt for license information.
 */
 
-
 import QtQuick
 import Victron.VenusOS
 
@@ -154,15 +153,125 @@ Page {
 
 	property string serialVebus
 	readonly property string serviceUid: (Global.venusPlatform.serviceUid + "/Vebus/Interface/" + serialVebus)
+	property string backupFileName
+	property string fileToRestore
+	property string fileNameToRestore
+	property string fileToDelete
+	property string fileNameToDelete
 
 	VeQuickItem {
 		id: _backupRestoreAction
 		uid: root.serviceUid + "/Action"
 	}
-
 	VeQuickItem {
 		id: _backupRestoreFile
 		uid: root.serviceUid + "/File"
+	}
+	VeQuickItem {
+		id: _availableBackups
+		uid: root.serviceUid + "/AvailableBackups"
+		onValueChanged: {
+			_availableBackupsModel.clear()
+			if ((value === undefined) || (value === "")) {
+				// no backups available
+				updateMergedBackupsModel()
+				return
+			}
+			let baseNameList = parse_json(value)
+			if (baseNameList == undefined || baseNameList.length == 0) {
+				return
+			}
+			for (let baseName of baseNameList) {
+				_availableBackupsModel.append({display: baseName, value: baseName})
+			}
+			updateMergedBackupsModel()
+		}
+	}
+	VeQuickItem {
+		id: _incompatibleBackups
+		uid: root.serviceUid + "/FirmwareIncompatibleBackups"
+		onValueChanged: {
+			_incompatibleBackupsModel.clear()
+			if ((value === undefined) || (value === "")) {
+				// no backups available
+				updateMergedBackupsModel()
+				return
+			}
+			let baseNameList = parse_json(value)
+			if (baseNameList == undefined || baseNameList.length == 0) {
+				return
+			}
+			for (let baseName of baseNameList) {
+				//% "Incompatible"
+				_incompatibleBackupsModel.append({display: baseName + " (" + qsTrId("incompatible") + ")", value: baseName})
+			}
+			updateMergedBackupsModel()
+		}
+	}
+	VeQuickItem {
+		id: _backupRestoreInfo
+		uid: root.serviceUid + "/Info"
+	}
+	VeQuickItem {
+		id: _backupRestoreError
+		uid: root.serviceUid + "/Error"
+		onValueChanged: {
+			if (valid && value !== 0) {
+				Global.showToastNotification(VenusOS.Notification_Warning, get_mk2vsc_error(value), 10000)
+				_backupRestoreError.setValue(0) // Prevent from showing again when page re-opens
+			}
+
+		}
+	}
+	VeQuickItem {
+		id: _backupRestoreNotify
+		uid: root.serviceUid + "/Notify"
+		onValueChanged: {
+			if (valid && value !== 0) {
+				if (value >= 100) {
+					Global.showToastNotification(VenusOS.Notification_Warning, get_vebus_backup_notification(value), 10000)
+				} else {
+					Global.showToastNotification(VenusOS.Notification_Info, get_vebus_backup_notification(value), 10000)
+				}
+				_backupRestoreNotify.setValue(0) // Prevent from showing again when page re-opens
+			}
+		}
+	}
+	VeQuickItem {
+		id: _backupRestorePasswordInput
+		uid: root.serviceUid + "/Password/Input"
+	}
+	VeQuickItem {
+		id: _backupRestorePasswordAccessLevel
+		uid: root.serviceUid + "/Password/AccessLevel"
+	}
+	VeQuickItem {
+		id: _backupRestoreCancelUserInput
+		uid: root.serviceUid + "/Password/CancelUserInput"
+	}
+	VeQuickItem {
+		id: _backupRestorePasswordUserInputPending
+		uid: root.serviceUid + "/Password/UserInputPending"
+		onValueChanged: {
+			if (valid && value > 0) {
+				Global.showToastNotification(VenusOS.Notification_Info,
+					//% "VE.Bus settings password required"
+					qsTrId("vebus_settings_password_required"),
+					10000)
+			}
+		}
+	}
+	VeQuickItem {
+		id: _actionDoneReloadPage
+		uid: root.serviceUid + "/Action"
+		onValueChanged: {
+			if (valid) {
+				if (value === 0) {
+					// When done "reset" the page to initial state
+					resetPageToInitialState()
+				}
+			}
+		}
 	}
 
 	ListModel {
@@ -189,290 +298,205 @@ Page {
 			_mergedBackupsModel.append(_incompatibleBackupsModel.get(j))
 		}
 	}
-
-	VeQuickItem {
-		id: _availableBackups
-		uid: root.serviceUid + "/AvailableBackups"
-		onValueChanged: {
-			_availableBackupsModel.clear()
-			if ((value === undefined) || (value === "")) {
-				// no backups available
-				updateMergedBackupsModel()
-				return
-			}
-			let baseNameList = parse_json(value)
-			if (baseNameList == undefined || baseNameList.length == 0) {
-				return
-			}
-			for (let baseName of baseNameList) {
-				_availableBackupsModel.append({display: baseName, value: baseName})
-			}
-			updateMergedBackupsModel()
-		}
-	}
-
-	VeQuickItem {
-		id: _incompatibleBackups
-		uid: root.serviceUid + "/FirmwareIncompatibleBackups"
-		onValueChanged: {
-			_incompatibleBackupsModel.clear()
-			if ((value === undefined) || (value === "")) {
-				// no backups available
-				updateMergedBackupsModel()
-				return
-			}
-			let baseNameList = parse_json(value)
-			if (baseNameList == undefined || baseNameList.length == 0) {
-				return
-			}
-			for (let baseName of baseNameList) {
-				//% "Incompatible"
-				_incompatibleBackupsModel.append({display: baseName + " (" + qsTrId("incompatible") + ")", value: baseName})
-			}
-			updateMergedBackupsModel()
-		}
-	}
-
-	VeQuickItem {
-		id: _backupRestoreInfo
-		uid: root.serviceUid + "/Info"
-	}
-
-	VeQuickItem {
-		id: _backupRestoreError
-		uid: root.serviceUid + "/Error"
-		onValueChanged: {
-			if (valid && value !== 0) {
-				Global.showToastNotification(VenusOS.Notification_Warning, get_mk2vsc_error(value), 10000)
-				_backupRestoreError.setValue(0) // Prevent from showing again when page re-opens
-			}
-
-		}
-	}
-
-	VeQuickItem {
-		id: _backupRestoreNotify
-		uid: root.serviceUid + "/Notify"
-		onValueChanged: {
-			if (valid && value !== 0) {
-				if (value >= 100) {
-					Global.showToastNotification(VenusOS.Notification_Warning, get_vebus_backup_notification(value), 10000)
-				} else {
-					Global.showToastNotification(VenusOS.Notification_Info, get_vebus_backup_notification(value), 10000)
-				}
-				_backupRestoreNotify.setValue(0) // Prevent from showing again when page re-opens
-			}
-		}
-	}
-
-	VeQuickItem {
-		id: _backupRestorePasswordInput
-		uid: root.serviceUid + "/Password/Input"
-	}
-
-	VeQuickItem {
-		id: _backupRestorePasswordAccessLevel
-		uid: root.serviceUid + "/Password/AccessLevel"
-	}
-
-	VeQuickItem {
-		id: _backupRestoreCancelUserInput
-		uid: root.serviceUid + "/Password/CancelUserInput"
-	}
-
-	VeQuickItem {
-		id: _backupRestorePasswordUserInputPending
-		uid: root.serviceUid + "/Password/UserInputPending"
-		onValueChanged: {
-			if (valid && value > 0) {
-				Global.showToastNotification(VenusOS.Notification_Info,
-					//% "VE.Bus settings password required"
-					qsTrId("vebus_settings_password_required"),
-					10000)
-			}
-		}
-	}
-
 	function resetPageToInitialState()
 	{
-		_backupButton.backupFileName = ""
-		_restoreButton.fileNameToRestore = ""
-		_restoreButton.fileToRestore = ""
-		_deleteButton.fileToDelete = ""
-		_deleteButton.fileNameToDelete = ""
+		backupFileName = ""
+		fileNameToRestore = ""
+		fileToRestore = ""
+		fileToDelete = ""
+		fileNameToDelete = ""
 	}
-
-	VeQuickItem {
-		id: _actionDoneReloadPage
-		uid: root.serviceUid + "/Action"
-		onValueChanged: {
-			if (valid) {
-				if (value === 0) {
-					// When done "reset" the page to initial state
-					resetPageToInitialState()
-				}
-			}
-		}
-	}
-
 	GradientListView {
-		model: VisibleItemModel {
-			ListTextField {
-				id: _backupNameInput
-				//% "Backup name"
-				text: qsTrId("backup_name")
+		model: DelegateComponentModel {
+			DelegateComponent {
+				id: _backupNameInputDC
+				// Only the action term gates the model entry. The backupFileName term
+				// stays on the ListTextField, as it was before the port: saveInput()
+				// sets root.backupFileName and then writes secondaryText, so gating the
+				// DelegateComponent on it would destroy the field midway through its own
+				// commit. Hiding the row leaves it in the model with zero height, which
+				// is what VisibleItemModel did.
 				preferredVisible: _backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Backup
-						&& !_backupButton.backupFileName
-				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
-				//% "Enter backup name"
-				placeholderText: qsTrId("vebus_backup_backup_name")
-				validateInput: function() {
-					if (secondaryText.trim() === "") {
-						//% "File name cannot be empty"
-						return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("backup_name_empty"))
-					} else if (!secondaryText.match(/^[\w\-\.]+$/)) {
-						// check for invalid characters in the name
-						// [\w\-\.]: allows word characters (a-z, A-Z, 0-9, and _), dash -, and dot .
-						//% "Invalid file name. Avoid using special characters"
-						return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("backup_name_invalid"))
-					} else {
-						return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+				ListTextField {
+					id: _backupNameInput
+
+					preferredVisible: !root.backupFileName
+					//% "Backup name"
+					text: qsTrId("backup_name")
+					interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+					//% "Enter backup name"
+					placeholderText: qsTrId("vebus_backup_backup_name")
+					validateInput: function() {
+						if (secondaryText.trim() === "") {
+							//% "File name cannot be empty"
+							return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("backup_name_empty"))
+						} else if (!secondaryText.match(/^[\w\-\.]+$/)) {
+							// check for invalid characters in the name
+							// [\w\-\.]: allows word characters (a-z, A-Z, 0-9, and _), dash -, and dot .
+							//% "Invalid file name. Avoid using special characters"
+							return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("backup_name_invalid"))
+						} else {
+							return Utils.validationResult(VenusOS.InputValidation_Result_OK)
+						}
+					}
+					saveInput: function() {
+						root.backupFileName = secondaryText
+						secondaryText = ""
 					}
 				}
-				saveInput: function() {
-					_backupButton.backupFileName = secondaryText
-					secondaryText = ""
+			}
+			DelegateComponent {
+				preferredVisible: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_Backup || root.backupFileName.length > 0
+				ListButton {
+					id: _backupButton
+					//% "Backup - %1"
+					text: qsTrId("vebus_backup_with_name").arg(root.backupFileName || _backupRestoreFile.value || "")
+					secondaryText: (
+						(_backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Backup) ? CommonWords.start_action
+						//% "Backing up..."
+						: qsTrId("vebus_backup_backing_up") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
+					)
+					interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+					onClicked: {
+						_backupRestoreFile.setValue(root.backupFileName)
+						_backupRestoreAction.setValue(VenusOS.VeBusDevice_Backup_Restore_Action_Backup)
+						root.backupFileName = ""
+					}
 				}
 			}
-			ListButton {
-				id: _backupButton
-				property string backupFileName
-				//% "Backup - %1"
-				text: qsTrId("vebus_backup_with_name").arg(backupFileName || _backupRestoreFile.value || "")
-				secondaryText: (
-					(_backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Backup) ? CommonWords.start_action
-					//% "Backing up..."
-					: qsTrId("vebus_backup_backing_up") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
-				)
-				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
-				preferredVisible: !_backupNameInput.visible
-				onClicked: {
-					_backupRestoreFile.setValue(backupFileName)
-					_backupRestoreAction.setValue(VenusOS.VeBusDevice_Backup_Restore_Action_Backup)
-					backupFileName = ""
-				}
-			}
-			ListRadioButtonGroup {
-				id: _restoreOptionsList
-				//% "Restore"
-				text: qsTrId("vebus_backup_restore")
-				optionModel: _availableBackupsModel
-				//% "Select backup file to restore"
-				secondaryText: qsTrId("vebus_backup_select_backup_file_to_restore")
-				updateDataOnClick: false
-				popDestination: root
+			DelegateComponent {
+				id: _restoreOptionsListDC
+				// Note: the '!root.fileToRestore' term is deliberately applied to the
+				// ListRadioButtonGroup below, and not here. The group declares its options sub-page
+				// as a Component inside this delegate, and it is the sub-page that assigns
+				// root.fileToRestore. Filtering the delegate out of the model at that moment would
+				// destroy the delegate, and with it invalidate the context of the sub-page that is
+				// still open and closing itself. Hiding the list item instead gives the same result
+				// (the item is zero-height and invisible) without destroying it.
 				preferredVisible: _backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Restore
-						&& !_restoreButton.fileToRestore
-				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
-				onOptionClicked: function(index) {
-					_restoreButton.fileNameToRestore = _availableBackupsModel.get(index).display
-					_restoreButton.fileToRestore = _availableBackupsModel.get(index).value
+				ListRadioButtonGroup {
+					id: _restoreOptionsList
+					//% "Restore"
+					text: qsTrId("vebus_backup_restore")
+					optionModel: _availableBackupsModel
+					//% "Select backup file to restore"
+					secondaryText: qsTrId("vebus_backup_select_backup_file_to_restore")
+					updateDataOnClick: false
+					popDestination: root
+					preferredVisible: !root.fileToRestore
+					interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+					onOptionClicked: function(index) {
+						root.fileNameToRestore = _availableBackupsModel.get(index).display
+						root.fileToRestore = _availableBackupsModel.get(index).value
+					}
 				}
 			}
-			ListButton {
-				id: _restoreButton
-				property string fileToRestore
-				property string fileNameToRestore
-				//% "Restore - %1"
-				text: qsTrId("vebus_backup_restore_name").arg(fileNameToRestore || _backupRestoreFile.value || "")
-				secondaryText: (
-					(_backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Restore) ? CommonWords.start_action
-					//% "Restoring..."
-					: qsTrId("vebus_backup_restoring") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
-				)
-				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
-				preferredVisible: !_restoreOptionsList.preferredVisible
-				onClicked: {
-					_backupRestoreFile.setValue(fileToRestore)
-					_backupRestoreAction.setValue(VenusOS.VeBusDevice_Backup_Restore_Action_Restore)
-					fileToRestore = ""
+			DelegateComponent {
+				preferredVisible: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_Restore || root.fileToRestore.length > 0
+				ListButton {
+					id: _restoreButton
+					//% "Restore - %1"
+					text: qsTrId("vebus_backup_restore_name").arg(root.fileNameToRestore || _backupRestoreFile.value || "")
+					secondaryText: (
+						(_backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Restore) ? CommonWords.start_action
+						//% "Restoring..."
+						: qsTrId("vebus_backup_restoring") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
+					)
+					interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+					onClicked: {
+						_backupRestoreFile.setValue(root.fileToRestore)
+						_backupRestoreAction.setValue(VenusOS.VeBusDevice_Backup_Restore_Action_Restore)
+						root.fileToRestore = ""
+					}
 				}
 			}
-			ListRadioButtonGroup {
-				id: _deleteOptionsList
-				//% "Delete backup"
-				text: qsTrId("vebus_backup_delete_backup")
-				optionModel: _mergedBackupsModel
-				//% "Select backup file to delete"
-				secondaryText: qsTrId("vebus_backup_select_backup_file_to_delete")
-				updateDataOnClick: false
-				popDestination: root
+			DelegateComponent {
+				id: _deleteOptionsListDC
+				// Note: '!root.fileToDelete' is applied to the ListRadioButtonGroup below rather
+				// than here, for the same reason as for the restore options list above.
 				preferredVisible: _backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Delete
-						&& !_deleteButton.fileToDelete
-				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
-				onOptionClicked: function(index) {
-					_deleteButton.fileNameToDelete = _mergedBackupsModel.get(index).display
-					_deleteButton.fileToDelete = _mergedBackupsModel.get(index).value
+				ListRadioButtonGroup {
+					id: _deleteOptionsList
+					//% "Delete backup"
+					text: qsTrId("vebus_backup_delete_backup")
+					optionModel: _mergedBackupsModel
+					//% "Select backup file to delete"
+					secondaryText: qsTrId("vebus_backup_select_backup_file_to_delete")
+					updateDataOnClick: false
+					popDestination: root
+					preferredVisible: !root.fileToDelete
+					interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+					onOptionClicked: function(index) {
+						root.fileNameToDelete = _mergedBackupsModel.get(index).display
+						root.fileToDelete = _mergedBackupsModel.get(index).value
+					}
 				}
 			}
-			ListButton {
-				id: _deleteButton
-				property string fileToDelete
-				property string fileNameToDelete
-				//% "Delete - %1"
-				text: qsTrId("vebus_backup_delete_named_backup").arg(fileNameToDelete || _backupRestoreFile.value || "")
-				secondaryText: (
-					//% "Delete"
-					(_backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Delete)? qsTrId("vebus_backup_delete")
-					//% "Deleting..."
-					: qsTrId("vebus_backup_deleting") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
-				)
-				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
-				preferredVisible: !_deleteOptionsList.preferredVisible
-				onClicked: {
-					_backupRestoreFile.setValue(fileToDelete)
-					_backupRestoreAction.setValue(VenusOS.VeBusDevice_Backup_Restore_Action_Delete)
-					fileToDelete = ""
+			DelegateComponent {
+				preferredVisible: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_Delete || root.fileToDelete.length > 0
+				ListButton {
+					id: _deleteButton
+					//% "Delete - %1"
+					text: qsTrId("vebus_backup_delete_named_backup").arg(root.fileNameToDelete || _backupRestoreFile.value || "")
+					secondaryText: (
+						//% "Delete"
+						(_backupRestoreAction.value != VenusOS.VeBusDevice_Backup_Restore_Action_Delete)? qsTrId("vebus_backup_delete")
+						//% "Deleting..."
+						: qsTrId("vebus_backup_deleting") + (_backupRestoreInfo.valid? " " + get_mk2vsc_state(_backupRestoreInfo.value): "")
+					)
+					interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+					onClicked: {
+						_backupRestoreFile.setValue(root.fileToDelete)
+						_backupRestoreAction.setValue(VenusOS.VeBusDevice_Backup_Restore_Action_Delete)
+						root.fileToDelete = ""
+					}
 				}
 			}
-			ListButton {
-				id: _cancelButton
-				//% "Cancel actions"
-				text: qsTrId("vebus_backup_cancel_actions")
-				secondaryText: CommonWords.cancel
-				interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
-				preferredVisible: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None && (!_deleteOptionsList.preferredVisible  ||
-								  !_restoreOptionsList.preferredVisible || !_backupNameInput.preferredVisible)
-				onClicked: {
-					resetPageToInitialState()
+			DelegateComponent {
+				preferredVisible: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+						&& (root.backupFileName.length > 0 || root.fileToRestore.length > 0 || root.fileToDelete.length > 0)
+				ListButton {
+					id: _cancelButton
+					//% "Cancel actions"
+					text: qsTrId("vebus_backup_cancel_actions")
+					secondaryText: CommonWords.cancel
+					interactive: _backupRestoreAction.value == VenusOS.VeBusDevice_Backup_Restore_Action_None
+					onClicked: {
+						resetPageToInitialState()
+					}
 				}
 			}
-			ListTextField {
-				//% "VE.Bus settings access password"
-				text: qsTrId("vebus_settings_access_password")
+			DelegateComponent {
 				preferredVisible: _backupRestorePasswordUserInputPending.value === 1
-				//% "Enter VE.Bus password for access level %1"
-				placeholderText: qsTrId("vebus_settings_enter_password").arg(_backupRestorePasswordAccessLevel.value)
-				saveInput: function() {
-					_backupRestorePasswordInput.setValue(secondaryText)
-					secondaryText = ""
+				ListTextField {
+					//% "VE.Bus settings access password"
+					text: qsTrId("vebus_settings_access_password")
+					//% "Enter VE.Bus password for access level %1"
+					placeholderText: qsTrId("vebus_settings_enter_password").arg(_backupRestorePasswordAccessLevel.value)
+					saveInput: function() {
+						_backupRestorePasswordInput.setValue(secondaryText)
+						secondaryText = ""
+					}
 				}
 			}
-			ListButton {
-				id: _passwordEntryCancelButton
-				//% "Cancel password entry"
-				text: qsTrId("vebus_backup_cancel_password_entry")
-				secondaryText: CommonWords.cancel
+			DelegateComponent {
 				preferredVisible: _backupRestorePasswordUserInputPending.value === 1
-				onClicked: {
-					_backupRestoreCancelUserInput.setValue(1)
+				ListButton {
+					id: _passwordEntryCancelButton
+					//% "Cancel password entry"
+					text: qsTrId("vebus_backup_cancel_password_entry")
+					secondaryText: CommonWords.cancel
+					onClicked: {
+						_backupRestoreCancelUserInput.setValue(1)
+					}
 				}
 			}
 
-
-			PrimaryListLabel {
-				//% "Note: Backup files are VE.Bus firmware version specific and can only be used to restore settings on products with matching firmware versions"
-				text: qsTrId("vebus_backup_firmware_version_specific_message")
+			DelegateComponent {
+				PrimaryListLabel {
+					//% "Note: Backup files are VE.Bus firmware version specific and can only be used to restore settings on products with matching firmware versions"
+					text: qsTrId("vebus_backup_firmware_version_specific_message")
+				}
 			}
 		}
 	}

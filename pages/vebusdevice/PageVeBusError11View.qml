@@ -18,23 +18,27 @@ Page {
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
+		model: DelegateComponentModel {
 
-			PrimaryListLabel {
-				//% "VE.Bus Error 11 reporting requires minimum VE.Bus firmware version 454."
-				text: qsTrId("vebus_error_11_reporting_requires_v454")
+			DelegateComponent {
 				preferredVisible: !firstCode.seen
+				PrimaryListLabel {
+					//% "VE.Bus Error 11 reporting requires minimum VE.Bus firmware version 454."
+					text: qsTrId("vebus_error_11_reporting_requires_v454")
+				}
 			}
 
-			SettingsColumn {
-				width: parent ? parent.width : 0
+			DelegateComponent {
+				SettingsColumn {
+					width: parent ? parent.width : 0
 
-				Repeater {
-					model: 18
+					Repeater {
+						model: 18
 
-					PageVeBusError11Menu {
-						bindPrefix: root.bindPrefix
-						_index: index
+						PageVeBusError11Menu {
+							bindPrefix: root.bindPrefix
+							_index: index
+						}
 					}
 				}
 			}

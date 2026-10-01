@@ -427,6 +427,7 @@ QObject *UiTestCase::doFindObject(QObject *sourceObject, const QVariantMap &para
 			  .arg(children.count() > 0 ? QStringLiteral("(%3 children)").arg(children.count()) : QString()));
 	}
 
+	const int nextIndent = loggingIndent >= 0 ? loggingIndent + 4 : -1;
 	for (QObject *child : children) {
 		if (loggingIndent >= 0) {
 			qCDebug(venusGuiTest) << qPrintable(indentation) << "Child:" << child;
@@ -434,24 +435,28 @@ QObject *UiTestCase::doFindObject(QObject *sourceObject, const QVariantMap &para
 		if (itemMatchesPropertiesAndType(child, params, typeName)) {
 			return child;
 		}
-		const QMetaType metaType = child->metaObject()->metaType();
-		QQuickItem *childItem = qobject_cast<QQuickItem*>(child);
-		if (childItem && metaType.name() == QStringLiteral("QQuickRepeater") && childItem->parentItem()) {
-			// Repeater items are not found by QObject::children(). Instead, we need to look
-			// through the QQuickItem::children() of the Repeater's parentItem, as the Repeater
-			// items are parented to the Repeater's parent.
-			if (loggingIndent >= 0) {
-				qCDebug(venusGuiTest) << qPrintable(QStringLiteral("%1 Search children of Repeater: %2...")
-									  .arg(indentation).arg(QDebug::toString(childItem->parentItem())));
-			}
-			const QList<QQuickItem *> repeaterChildren = childItem->parentItem()->childItems();
-			for (QQuickItem *repeaterChild : repeaterChildren) {
-				if (QObject *matchedChild = doFindObject(repeaterChild, params, typeName, loggingIndent >= 0 ? loggingIndent + 4 : -1)) {
-					return matchedChild;
-				}
-			}
-		} else if (QObject *matchedChild = doFindObject(child, params, typeName, loggingIndent >= 0 ? loggingIndent + 4 : -1)) {
+		if (QObject *matchedChild = doFindObject(child, params, typeName, nextIndent)) {
 			return matchedChild;
+		}
+	}
+
+	// ListView delegates (DelegateComponentModel) and Repeater items are parented visually to a
+	// content item / the repeater parent, without being QObject children of that item.
+	if (QQuickItem *item = qobject_cast<QQuickItem *>(sourceObject)) {
+		const QList<QQuickItem *> visualChildren = item->childItems();
+		for (QQuickItem *visualChild : visualChildren) {
+			if (visualChild->parent() == sourceObject) {
+				continue; // already searched via QObject::children()
+			}
+			if (loggingIndent >= 0) {
+				qCDebug(venusGuiTest) << qPrintable(indentation) << "Visual child:" << visualChild;
+			}
+			if (itemMatchesPropertiesAndType(visualChild, params, typeName)) {
+				return visualChild;
+			}
+			if (QObject *matchedChild = doFindObject(visualChild, params, typeName, nextIndent)) {
+				return matchedChild;
+			}
 		}
 	}
 

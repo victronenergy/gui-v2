@@ -25,7 +25,16 @@ ModalDialog {
 	property string fromErrorText
 	property string toErrorText
 
+	// Optional backend uid. When set, accept writes this uid so the dialog does not need the
+	// opener (e.g. a virtualized ListSpinBox) to still exist.
+	property string dataUid
+
 	property var customIncrease: null
+
+	VeQuickItem {
+		id: dataItem
+		uid: root.dataUid
+	}
 
 	function _presetIndexForValue(v) {
 		const epsilon = 0.0001
@@ -46,6 +55,12 @@ ModalDialog {
 	onAboutToShow: {
 		if (presets.length) {
 			presetsRow.currentIndex = root._presetIndexForValue(value)
+		}
+	}
+
+	onAccepted: {
+		if (dataItem.uid.length > 0) {
+			dataItem.setValue(root.value)
 		}
 	}
 

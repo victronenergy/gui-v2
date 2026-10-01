@@ -13,7 +13,23 @@ Item {
 	anchors.fill: parent
 
 	function open(dialogComponent, properties) {
-		currentDialog = dialogComponent.createObject(root, properties)
+		let object
+		if (typeof dialogComponent === "string") {
+			const url = dialogComponent.indexOf("qrc:") === 0 ? dialogComponent : ".." + dialogComponent
+			const component = Qt.createComponent(url)
+			if (component.status !== Component.Ready) {
+				console.warn("DialogLayer: failed to load dialog: " + dialogComponent + ": " + component.errorString())
+				return null
+			}
+			object = component.createObject(root, properties || {})
+		} else {
+			object = dialogComponent.createObject(root, properties)
+		}
+		if (!object) {
+			console.warn("DialogLayer: failed to create dialog object")
+			return null
+		}
+		currentDialog = object
 		currentDialog.closed.connect(function() {
 			if (currentDialog) {
 				currentDialog.destroy()

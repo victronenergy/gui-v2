@@ -81,116 +81,124 @@ Page {
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
-			SettingsListHeader {
-				//: Local date and time settings
-				//% "Local"
-				text: qsTrId("settings_tz_local")
+		model: DelegateComponentModel {
+			DelegateComponent {
+				SettingsListHeader {
+					//: Local date and time settings
+					//% "Local"
+					text: qsTrId("settings_tz_local")
+				}
 			}
 
-			// Qt for WebAssembly doesn't support timezones, so we can't display the device-local
-			// date/time there, as we don't know what they are.
-			ListButton {
-				text: CommonWords.locale_date
-				secondaryText: ClockTime.currentDate
+			DelegateComponent {
 				preferredVisible: Qt.platform.os != "wasm"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				readOnly: !Global.systemSettings.time.valid
-				onClicked: root._openDateSelector()
+				// Qt for WebAssembly doesn't support timezones, so we can't display the device-local
+				// date/time there, as we don't know what they are.
+				ListButton {
+					text: CommonWords.locale_date
+					secondaryText: ClockTime.currentDate
+					writeAccessLevel: VenusOS.User_AccessType_User
+					readOnly: !Global.systemSettings.time.valid
+					onClicked: root._openDateSelector()
+				}
 			}
-			ListButton {
-				text: CommonWords.locale_time
-				secondaryText: ClockTime.currentTime
+			DelegateComponent {
 				preferredVisible: Qt.platform.os != "wasm"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				readOnly: !Global.systemSettings.time.valid
-				onClicked: root._openTimeSelector()
+				ListButton {
+					text: CommonWords.locale_time
+					secondaryText: ClockTime.currentTime
+					writeAccessLevel: VenusOS.User_AccessType_User
+					readOnly: !Global.systemSettings.time.valid
+					onClicked: root._openTimeSelector()
+				}
 			}
 
-			ListNavigation {
-				//% "Time zone"
-				text: qsTrId("settings_tz_time_zone")
-				secondaryText: root._findTimeZoneName(tzData.region, tzData.city)
-				writeAccessLevel: VenusOS.User_AccessType_User
+			DelegateComponent {
+				ListNavigation {
+					//% "Time zone"
+					text: qsTrId("settings_tz_time_zone")
+					secondaryText: root._findTimeZoneName(tzData.region, tzData.city)
+					writeAccessLevel: VenusOS.User_AccessType_User
 
-				onClicked: Global.pageManager.pushPage(pageTzMenuComponent, { title: text })
+					onClicked: Global.pageManager.pushPage(pageTzMenuComponent, { title: text })
 
-				VeQuickItem {
-					id: tzData
+					VeQuickItem {
+						id: tzData
 
-					property string city
-					property string region
+						property string city
+						property string region
 
-					function saveTimeZone(region, city) {
-						tzData.city = city
-						tzData.region = region
-						setValue(region + "/" + city)
-					}
+						function saveTimeZone(region, city) {
+							tzData.city = city
+							tzData.region = region
+							setValue(region + "/" + city)
+						}
 
-					uid: Global.systemSettings.serviceUid + "/Settings/System/TimeZone"
-					onValueChanged: {
-						if (value !== undefined) {
-							const slash = value.indexOf('/')
-							if (slash >= 0) {
-								region = value.substring(0, slash)
-								city = value.substring(slash + 1)
+						uid: Global.systemSettings.serviceUid + "/Settings/System/TimeZone"
+						onValueChanged: {
+							if (value !== undefined) {
+								const slash = value.indexOf('/')
+								if (slash >= 0) {
+									region = value.substring(0, slash)
+									city = value.substring(slash + 1)
+								}
 							}
 						}
 					}
-				}
 
-				Component {
-					id: pageTzMenuComponent
+					Component {
+						id: pageTzMenuComponent
 
-					Page {
-						GradientListView {
-							id: tzListView
+						Page {
+							GradientListView {
+								id: tzListView
 
-							header: SettingsColumn {
-								width: parent.width
+								header: SettingsColumn {
+									width: parent.width
 
-								ListSwitch {
-									text: CommonWords.locale_utc
-									writeAccessLevel: VenusOS.User_AccessType_User
-									checked: tzData.city === text
-									onClicked: {
-										if (!checked) {
-											tzData.saveTimeZone("", text)
-											popTimer.start()
-										}
-									}
-
-								}
-								Timer {
-									id: popTimer
-
-									interval: Theme.animation_settings_radioButtonPage_autoClose_duration
-									onTriggered: if (!!Global.pageManager) Global.pageManager.popPage(root)
-								}
-							}
-
-							model: root._timeZoneModels
-
-							delegate: ListRadioButtonGroup {
-								text: modelData.name
-								optionModel: modelData
-								secondaryText: ""
-								writeAccessLevel: VenusOS.User_AccessType_User
-								updateDataOnClick: false
-								popDestination: root
-								currentIndex: {
-									if (tzData.region === modelData.region) {
-										for (let i = 0; i < modelData.count; ++i) {
-											if (modelData.get(i).city === tzData.city) {
-												return i
+									ListSwitch {
+										text: CommonWords.locale_utc
+										writeAccessLevel: VenusOS.User_AccessType_User
+										checked: tzData.city === text
+										onClicked: {
+											if (!checked) {
+												tzData.saveTimeZone("", text)
+												popTimer.start()
 											}
 										}
+
 									}
-									return -1
+									Timer {
+										id: popTimer
+
+										interval: Theme.animation_settings_radioButtonPage_autoClose_duration
+										onTriggered: if (!!Global.pageManager) Global.pageManager.popPage(root)
+									}
 								}
 
-								onOptionClicked: function(index) {
-									tzData.saveTimeZone(modelData.region, modelData.get(index).city)
+								model: root._timeZoneModels
+
+								delegate: ListRadioButtonGroup {
+									text: modelData.name
+									optionModel: modelData
+									secondaryText: ""
+									writeAccessLevel: VenusOS.User_AccessType_User
+									updateDataOnClick: false
+									popDestination: root
+									currentIndex: {
+										if (tzData.region === modelData.region) {
+											for (let i = 0; i < modelData.count; ++i) {
+												if (modelData.get(i).city === tzData.city) {
+													return i
+												}
+											}
+										}
+										return -1
+									}
+
+									onOptionClicked: function(index) {
+										tzData.saveTimeZone(modelData.region, modelData.get(index).city)
+									}
 								}
 							}
 						}
@@ -198,18 +206,24 @@ Page {
 				}
 			}
 
-			SettingsListHeader {
-				text: CommonWords.locale_utc
+			DelegateComponent {
+				SettingsListHeader {
+					text: CommonWords.locale_utc
+				}
 			}
 
-			ListText {
-				text: CommonWords.locale_date
-				secondaryText: ClockTime.currentDateToUtc
+			DelegateComponent {
+				ListText {
+					text: CommonWords.locale_date
+					secondaryText: ClockTime.currentDateToUtc
+				}
 			}
 
-			ListText {
-				text: CommonWords.locale_time
-				secondaryText: ClockTime.currentTimeToUtc
+			DelegateComponent {
+				ListText {
+					text: CommonWords.locale_time
+					secondaryText: ClockTime.currentTimeToUtc
+				}
 			}
 		}
 	}

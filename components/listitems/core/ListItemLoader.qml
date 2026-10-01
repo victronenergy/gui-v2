@@ -12,8 +12,10 @@ import Victron.VenusOS
 	See AbstractListItem for information regarding preferredVisible and effectiveVisible.
 */
 Loader {
+	property var delegateComponent
 	property bool preferredVisible: active
-	readonly property bool effectiveVisible: preferredVisible && status === Loader.Ready
+	readonly property bool effectiveVisible: (delegateComponent ? delegateComponent.effectiveVisible && preferredVisible : preferredVisible)
+			&& status === Loader.Ready
 
 	// Allow item to receive focus within its focus scope.
 	focus: true

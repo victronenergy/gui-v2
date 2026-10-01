@@ -43,7 +43,9 @@ ListItem {
 	property string text
 	property string caption
 
-	property int showAccessLevel: VenusOS.User_AccessType_User
+	property int showAccessLevel: root.delegateComponent
+			? root.delegateComponent.showAccessLevel
+			: VenusOS.User_AccessType_User
 	property int writeAccessLevel: VenusOS.User_AccessType_Installer
 	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
 	readonly property bool userHasReadAccess: Global.systemSettings.canAccess(showAccessLevel)
@@ -109,8 +111,12 @@ ListItem {
 		root._toastConnected = false
 	}
 
-	// Hide the item when it should not be visible according to preferredVisible and read access.
-	effectiveVisible: preferredVisible && userHasReadAccess
+	// With a DelegateComponent, the model already applied access-level membership. Still honour
+	// this item's preferredVisible. Without a DelegateComponent (SettingsColumn, headers, etc.),
+	// keep the VisibleItemModel formula.
+	effectiveVisible: root.delegateComponent
+		? root.delegateComponent.effectiveVisible && preferredVisible
+		: (preferredVisible && userHasReadAccess)
 
 	background: ListSettingBackground {
 		color: root.flat ? "transparent" : Theme.color_listItem_background

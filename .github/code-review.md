@@ -174,6 +174,8 @@ For every function or property setter:
 
 2.g.vi. **Resource cleanup on all exit paths**: If a function acquires a resource (starts a timer, registers a callback, allocates memory), verify that ALL exit paths — including early returns, error branches, and exceptions — release or account for that resource.
 
+2.g.vii. **Overlays opened from virtualized list items**: `DelegateComponentModel` (and `ListView`) destroy a row when it scrolls out of view or `preferredVisible` becomes false. A `Component {}` nested in that row has the row as its `QQmlContext`. Pages and dialogs created from it keep that context even when parented to `PageStack` or `DialogLayer`, so bindings, clicks, and accept/write handlers freeze if the row dies while the overlay is still open. Check that pushed pages and dialogs are created from a **file URL** (or from a `Component` that lives on the page/model, not the row). Translatable display fields (title, option labels, suffix, error text) must be passed with `Qt.binding(...)` so a runtime language change updates them while the opener row still exists — a copied string will not retranslate. Write-back must use a uid/`VeQuickItem` on the overlay, not `root` on the list item; those `Qt.binding` expressions go inert if the row is later destroyed, and must not be the write path. `ListRadioButtonGroup` and `ListSpinBox` already follow this (`RadioButtonListPage` / `NumberSelectorDialog` by URL). Custom confirmation pages must still hoist their `Component` to page or model scope. Do not "fix" this by retaining the list item in the model (`keepAlive` or similar): that fights virtualization and is easy to forget at call sites. This is important to check because the failure is easy to miss in review (the overlay looks correctly parented) and only reproduces when the opener row is hidden or recycled while the overlay is open.
+
 ### 2.h. Enable/disable and reconfiguration cycles
 
 2.h.i. **Disable must clear all side effects**: When a component is deactivated (`active = false`, timer stopped, config cleared), ALL outputs and registrations produced while active must be cleaned up. Stale values left in caches, models, or backend paths after deactivation are bugs.
@@ -280,7 +282,7 @@ See [Device Settings](.github/device-settings.md) for the access level system.
 
 2.p.ii. **writeAccessLevel propagation**: Settings delegates (e.g., `ListSwitch`, `ListSpinBox`) inherit `writeAccessLevel` from the page or parent. Verify that new settings pages pass the correct `writeAccessLevel` to their children, and that custom controls check `userHasWriteAccess` before allowing writes.
 
-2.p.iii. **Visibility vs interactivity**: Some settings should be visible but read-only at lower access levels, while others should be hidden entirely. Verify the correct strategy is used: `writeAccessLevel` controls editability, while `allowed` or `preferredVisible` controls visibility. Using the wrong mechanism can leak information about unavailable features or silently prevent configuration.
+2.p.iii. **Visibility vs interactivity**: Some settings should be visible but read-only at lower access levels, while others should be hidden entirely. Verify the correct strategy is used: `writeAccessLevel` controls editability. For `DelegateComponentModel` pages, hiding a row entirely requires `DelegateComponent.effectiveVisible` (by default `preferredVisible` and `showAccessLevel` vs the current access level). An inner-only `ListSetting.showAccessLevel` neither filters nor collapses a DCM row — `ListSetting.effectiveVisible` ignores `userHasReadAccess` whenever `delegateComponent` is set — and must be hoisted to the `DelegateComponent`. Non-DCM rows (`delegateComponent` unset) still collapse via `ListSetting.showAccessLevel`. Using the wrong mechanism can leak information about unavailable features or silently prevent configuration.
 
 ### 2.q. Mock data synchronization
 
@@ -415,6 +417,8 @@ These apply when a change introduces a performance optimisation that trades off 
 4.b.iv. **Auto usage**: Use `auto` when the type is obvious from the right-hand side (e.g., `auto it = map.find(key)`). Don't use `auto` when it obscures the type.
 
 4.b.v. **License header**: Every new source file (`.cpp`, `.h`, `.qml`) must include the standard Victron copyright header at the top: `/*\n** Copyright (C) <year> Victron Energy B.V.\n** See LICENSE.txt for license information.\n*/`. Use the current year for new files. Do not omit the header or substitute a different license.
+
+4.b.vi. **Commit messages**: Wrap both the subject and the message body at 72 characters. The subject must be a single line of at most 72 characters. Every body line must be at most 72 characters. Unwrapped subjects or body paragraphs are not allowed.
 
 ### 4.c. Documentation
 

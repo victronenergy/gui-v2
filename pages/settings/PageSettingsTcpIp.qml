@@ -18,16 +18,18 @@ Page {
 		model: networkServices.ready ? connectedModel : disconnectedModel
 	}
 
-	VisibleItemModel {
+	DelegateComponentModel {
 		id: disconnectedModel
 
-		ListText {
-			text: CommonWords.state
-			secondaryText: networkServices.wifi
-					 //% "Connection lost"
-					? qsTrId("settings_tcpip_connection_lost")
-					 //% "Unplugged"
-					: qsTrId("settings_tcpip_connection_unplugged")
+		DelegateComponent {
+			ListText {
+				text: CommonWords.state
+				secondaryText: networkServices.wifi
+						 //% "Connection lost"
+						? qsTrId("settings_tcpip_connection_lost")
+						 //% "Unplugged"
+						: qsTrId("settings_tcpip_connection_unplugged")
+			}
 		}
 	}
 

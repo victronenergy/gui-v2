@@ -18,39 +18,49 @@ Page {
 
 		model: hasBluetoothSupport.value ? bluetoothAvailable : bluetoothUnavailable
 
-		VisibleItemModel {
+		DelegateComponentModel {
 			id: bluetoothUnavailable
 
-			PrimaryListLabel {
-				//% "Connect a compatible Bluetooth USB dongle to enable Bluetooth connectivity."
-				text: qsTrId("settings_bluetooth_unavailable_message")
+			DelegateComponent {
+				PrimaryListLabel {
+					//% "Connect a compatible Bluetooth USB dongle to enable Bluetooth connectivity."
+					text: qsTrId("settings_bluetooth_unavailable_message")
+				}
 			}
 		}
 
-		VisibleItemModel {
+		DelegateComponentModel {
 			id: bluetoothAvailable
 
-			ListSwitch {
-				id: bluetoothEnabled
+			DelegateComponent {
+				id: bluetoothEnabledDelegate
+				dataItem: VeQuickItem { uid: Global.systemSettings.serviceUid + "/Settings/Services/Bluetooth" }
+				property bool checked: dataItem.value === 1
 
-				text: CommonWords.enabled
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Bluetooth"
+				ListSwitch {
+					id: bluetoothEnabled
+
+					text: CommonWords.enabled
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Bluetooth"
+				}
 			}
 
-			ListTextField {
-				//% "Pincode"
-				text: qsTrId("settings_pincode")
-				preferredVisible: bluetoothEnabled.checked
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Ble/Service/Pincode"
-				writeAccessLevel: VenusOS.User_AccessType_User
-				maximumLength: 6
-				inputMethodHints: Qt.ImhDigitsOnly
-				saveInput: function() {
-					dataItem.setValue(secondaryText)
-					Global.showToastNotification(VenusOS.Notification_Info,
-						   //% "It might be necessary to remove existing pairing information before connecting."
-						   qsTrId("settings_bluetooth_remove_existing_pairing_info"),
-						   10000)
+			DelegateComponent {
+				preferredVisible: bluetoothEnabledDelegate.checked
+				ListTextField {
+					//% "Pincode"
+					text: qsTrId("settings_pincode")
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Ble/Service/Pincode"
+					writeAccessLevel: VenusOS.User_AccessType_User
+					maximumLength: 6
+					inputMethodHints: Qt.ImhDigitsOnly
+					saveInput: function() {
+						dataItem.setValue(secondaryText)
+						Global.showToastNotification(VenusOS.Notification_Info,
+							   //% "It might be necessary to remove existing pairing information before connecting."
+							   qsTrId("settings_bluetooth_remove_existing_pairing_info"),
+							   10000)
+					}
 				}
 			}
 		}

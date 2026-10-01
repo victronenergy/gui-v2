@@ -81,46 +81,57 @@ Page {
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListSwitch {
-				id: enable
-				text: CommonWords.enable
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/BleSensors"
+		model: DelegateComponentModel {
+			DelegateComponent {
+				id: enableDC
+				dataItem: VeQuickItem { uid: Global.systemSettings.serviceUid + "/Settings/Services/BleSensors" }
+				readonly property bool checked: dataItem.value === 1
+				ListSwitch {
+					text: CommonWords.enable
+					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/BleSensors"
+				}
 			}
 
-			ListNavigation {
-				//% "Advanced"
-				text: qsTrId("settings_ble_advanced")
-				preferredVisible: enable.checked
-				onClicked: Global.pageManager.pushPage(advancedPageComponent, {"title": text})
+			DelegateComponent {
+				preferredVisible: enableDC.checked
+				ListNavigation {
+					//% "Advanced"
+					text: qsTrId("settings_ble_advanced")
+					onClicked: Global.pageManager.pushPage(advancedPageComponent, {"title": text})
+				}
 			}
 
-			SectionHeader {
-				//% "Sensors"
-				text: qsTrId("settings_ble_sensors")
-				preferredVisible: enable.checked && sensorRepeater.count > 0
+			DelegateComponent {
+				preferredVisible: enableDC.checked && deviceChildrenNameModel.rowCount > 0
+				SectionHeader {
+					//% "Sensors"
+					text: qsTrId("settings_ble_sensors")
+				}
 			}
 
-			SettingsColumn {
-				width: parent ? parent.width : 0
-				preferredVisible: enable.checked && sensorRepeater.count > 0
+			DelegateComponent {
+				preferredVisible: enableDC.checked && deviceChildrenNameModel.rowCount > 0
+				SettingsColumn {
+					width: parent ? parent.width : 0
 
-				Repeater {
-					id: sensorRepeater
-					model: deviceChildrenNameModel
-					delegate: BleSensorDelegate {
-						required property VeQItem item
+					Repeater {
+						model: deviceChildrenNameModel
+						delegate: BleSensorDelegate {
+							required property VeQItem item
 
-						devicePrefix: item.itemParent().uid
-						deviceName: item.value || ""
+							devicePrefix: item.itemParent().uid
+							deviceName: item.value || ""
+						}
 					}
 				}
 			}
 
-			ListInfoLabel {
-				//% "Use VictronConnect app over Bluetooth to add encryption keys automatically."
-				text: qsTrId("settings_ble_sensors_add_encryption_keys_via_victronconnect")
-				preferredVisible: enable.checked && devicesNeedingKeys.matchingDeviceCount > 0
+			DelegateComponent {
+				preferredVisible: enableDC.checked && devicesNeedingKeys.matchingDeviceCount > 0
+				ListInfoLabel {
+					//% "Use VictronConnect app over Bluetooth to add encryption keys automatically."
+					text: qsTrId("settings_ble_sensors_add_encryption_keys_via_victronconnect")
+				}
 			}
 		}
 	}

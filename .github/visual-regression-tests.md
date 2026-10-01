@@ -33,6 +33,9 @@ gui-v2 runs a lightweight click-route test to that page.
 This target-page mode only supports routes where each click step has at least one statically
 resolvable identifier (label/icon/objectName); purely data-driven labels without static fallback
 are not currently resolvable.
+`findItem()` also searches `QQuickItem` visual children so in-view `DelegateComponentModel`
+rows can be clicked. Off-screen rows are created by scrolling the current page's `BaseListView`
+when clicking, not while waiting.
 For target-page mode, runtime QML errors (for example `ReferenceError` in bindings) are treated
 as failures, and completion requires a valid page object on the stack, not only a matching URL.
 

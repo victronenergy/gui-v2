@@ -17,7 +17,6 @@ Page {
 
 		uid: root.service + "/Scan"
 	}
-
 	VeQuickItem {
 		id: scanProgressItem
 
@@ -25,20 +24,25 @@ Page {
 	}
 
 	GradientListView {
-		model: VisibleItemModel {
-			ListButton {
-				//% "Scan for E-drives"
-				text: qsTrId("page_settings_canopenmotordrive_scan_for_motor_drives")
-				secondaryText: scanItem.value ? CommonWords.scanning.arg(Math.round(scanProgressItem.value || 0)) : CommonWords.scan_action
-				onClicked: scanItem.setValue(!scanItem.value)
+		model: DelegateComponentModel {
+			DelegateComponent {
+				property bool userHasWriteAccess: Global.systemSettings.canAccess(VenusOS.User_AccessType_Installer)
 				preferredVisible: userHasWriteAccess
+				ListButton {
+					//% "Scan for E-drives"
+					text: qsTrId("page_settings_canopenmotordrive_scan_for_motor_drives")
+					secondaryText: scanItem.value ? CommonWords.scanning.arg(Math.round(scanProgressItem.value || 0)) : CommonWords.scan_action
+					onClicked: scanItem.setValue(!scanItem.value)
+				}
 			}
 
-			ListText {
-				//% "Discovered E-drive IDs"
-				text: qsTrId("page_settings_canopenmotordrive_discovered_motor_drive_ids")
-				dataItem.uid: root.service + "/DiscoveredNodes"
-				dataItem.invalidate: false
+			DelegateComponent {
+				ListText {
+					//% "Discovered E-drive IDs"
+					text: qsTrId("page_settings_canopenmotordrive_discovered_motor_drive_ids")
+					dataItem.uid: root.service + "/DiscoveredNodes"
+					dataItem.invalidate: false
+				}
 			}
 		}
 	}
