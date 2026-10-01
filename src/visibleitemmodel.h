@@ -69,10 +69,11 @@ public:
 Q_SIGNALS:
 	void sourceModelChanged();
 
+private Q_SLOTS:
+	void effectiveVisibleChanged();
+
 private:
 	Q_DISABLE_COPY(VisibleItemModel)
-
-	Q_INVOKABLE void effectiveVisibleChanged();
 };
 
 } /* VenusOS */
