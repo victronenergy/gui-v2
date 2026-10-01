@@ -29,6 +29,22 @@ DevicePage {
 			dataItem.uid: root.bindPrefix + "/State"
 		}
 
+	   ListNavigation {
+			   //% "Why is the charger off?"
+			   text: qsTrId("solarcharger_why_charger_off")
+			   preferredVisible: deviceOffReason.valid && deviceOffReason.value !== 0
+
+			   onClicked: {
+					   Global.pageManager.pushPage("/pages/settings/devicelist/DeviceOffReason.qml",
+									   { "title": text, "bindPrefix": root.bindPrefix })
+			   }
+
+			   VeQuickItem {
+					   id: deviceOffReason
+					   uid: root.bindPrefix + "/DeviceOffReason"
+			   }
+	   }
+
 		InverterAcOutSettings {
 			bindPrefix: root.bindPrefix
 		}
