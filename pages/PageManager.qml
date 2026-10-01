@@ -94,6 +94,9 @@ QtObject {
 			}
 		}
 
+		// Reset the NavBar modified state to indicate that the UI is on the initial page.
+		navBar.modified = false
+
 		// If the stack is already showing the correct page, there's nothing more to do.
 		const configStackPages = config.stack || []
 		if (configStackPages.length > 0

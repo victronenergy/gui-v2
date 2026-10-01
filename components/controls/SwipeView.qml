@@ -13,8 +13,8 @@ T.SwipeView {
 	required property bool animationEnabled
 	readonly property alias flicking: listView.flicking
 	readonly property alias dragging: listView.dragging
+	readonly property bool userMoving: flicking || dragging
 	readonly property bool moving: listView.moving || scrollingTimer.running
-
 	property int focusEdgeHint
 
 	function pageInView(pageXStart, pageWidth, threshold) {
