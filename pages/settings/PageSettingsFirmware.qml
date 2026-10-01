@@ -33,25 +33,49 @@ Page {
 			ListNavigation {
 				//% "Online updates"
 				text: qsTrId("settings_online_updates")
+				preferredVisible: onlineCheck.valid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOnline.qml", { title: text })
+				}
+
+				VeQuickItem {
+					id: onlineCheck
+					uid: Global.venusPlatform.serviceUid + "/Firmware/Online/Check"
 				}
 			}
 
 			ListNavigation {
 				//% "Install firmware from SD/USB"
 				text: qsTrId("settings_install_firmware_from_sd_usb")
+				preferredVisible: offlineCheck.valid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOffline.qml", { title: text })
+				}
+
+				VeQuickItem {
+					id: offlineCheck
+					uid: Global.venusPlatform.serviceUid + "/Firmware/Offline/Check"
 				}
 			}
 
 			ListNavigation {
 				//% "Stored backup firmware"
 				text: qsTrId("settings_stored_backup_firmware")
+				preferredVisible: backupActivate.valid
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsRootfsSelect.qml", { title: text })
 				}
+
+				VeQuickItem {
+					id: backupActivate
+					uid: Global.venusPlatform.serviceUid + "/Firmware/Backup/Activate"
+				}
+			}
+
+			ListInfoLabel {
+				//% "Running in a container. Update by pulling a new image and recreating the container. See the deployment documentation for details."
+				text: qsTrId("settings_firmware_container_update")
+				preferredVisible: Global.venusPlatform.isContainer
 			}
 		}
 	}

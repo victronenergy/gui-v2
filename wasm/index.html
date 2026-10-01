@@ -679,7 +679,13 @@
 
                 loadingBarText.textContent = 'Instantiating...';
 
-                let defaultMqttArg = (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + '/websocket-mqtt'
+                // Home Assistant Ingress adds a per-app prefix before /gui-v2/.
+                // Direct access may not include /gui-v2/, so default to the root.
+                const guiPathIndex = document.location.pathname.indexOf('/gui-v2/');
+                const pathPrefix = guiPathIndex === -1
+                    ? ''
+                    : document.location.pathname.slice(0, guiPathIndex);
+                const defaultMqttArg = (location.protocol === 'https:' ? 'wss://' : 'ws://') + document.location.host + pathPrefix + '/websocket-mqtt';
                 let argumentList = needsDefaultArgs ? ['--mqtt', defaultMqttArg] : [];
                 if (searchParams.has('mock')) {
                     argumentList.push('--mock');
