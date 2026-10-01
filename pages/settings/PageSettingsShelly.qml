@@ -80,6 +80,20 @@ Page {
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Shelly"
 			}
 
+			ListSwitch {
+				//% "Automatic device discovery"
+				text: qsTrId("settings_shelly_autoscan")
+				dataItem.uid: root.serviceUid + "/AutoScan"
+				preferredVisible: shellyServiceEnabled.value === 1
+			}
+
+			ListNavigation {
+				//% "Add IP address manually"
+				text: qsTrId("page_settings_shelly_add_ip_address_manually")
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsShellySetIpAddresses.qml", {"title": text, bindPrefix: root.serviceUid})
+				preferredVisible: shellyServiceEnabled.value === 1
+			}
+
 			ListButton {
 				//% "Refresh devices"
 				text: qsTrId("settings_shelly_refresh_devices")
@@ -93,13 +107,6 @@ Page {
 					id: refreshItem
 					uid: root.serviceUid + "/Refresh"
 				}
-			}
-
-			ListNavigation {
-				//% "Add IP address manually"
-				text: qsTrId("page_settings_shelly_add_ip_address_manually")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsShellySetIpAddresses.qml", {"title": text, bindPrefix: root.serviceUid})
-				preferredVisible: shellyServiceEnabled.value === 1
 			}
 
 			SectionHeader {
