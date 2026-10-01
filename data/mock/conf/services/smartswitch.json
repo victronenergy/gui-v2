@@ -91,7 +91,8 @@
         "/SwitchableOutput/3/State": 0,
         "/SwitchableOutput/3/Status": 9,
         "/SwitchableOutput/3/Temperature": 29.693782806396484,
-        "/SwitchableOutput/3/Voltage": 24.200000762939453
+        "/SwitchableOutput/3/Voltage": 24.200000762939453,
+        "/SwitchableOutput/Capabilities": 1
     },
     "com.victronenergy.vecan.vecan1": {
         "/Alarms/SameUniqueNameUsed": 0,

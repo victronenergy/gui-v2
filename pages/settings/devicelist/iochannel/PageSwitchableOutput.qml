@@ -134,7 +134,8 @@ Page {
 			}
 
 			ListIOChannelShowRadioButtonGroup {
-				dataItem.uid: switchableOutput.uid + "/Settings/ShowUIControl"
+				capabilitiesUid: switchableOutput.serviceUid + "/SwitchableOutput/Capabilities"
+				showUiUid: switchableOutput.uid + "/Settings/ShowUIControl"
 				interactive: _writeable
 			}
 
