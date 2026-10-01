@@ -23,18 +23,32 @@ The visual regression test system works by:
 # Override the capture output directory
 VENUS_GUI_TEST_CAPTURE_DIR=~/my-captures ./bin/venus-gui-v2 --mock --ui-test smoke/mock-maximal
 
-# Runtime route test for one destination page (no full smoke crawl)
+# Runtime route test for one QML type (no full smoke crawl)
 ./bin/venus-gui-v2 --mock --ui-test /pages/settings/PageSettingsConnectivity.qml
+./bin/venus-gui-v2 --mock --ui-test /pages/BriefSidePanel.qml
+
+# Portrait (desktop): apply WxH before target-page routes resolve and
+# before pages load. Width < height selects Theme.Portrait. The window
+# size is fixed for that process.
+./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test /pages/BriefSidePanel.qml
+./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test portrait
 ```
 
 The `--mock` flag starts the application with the mock backend (no real hardware needed). The `--ui-test <path>` flag specifies the test configuration to run, relative to `tests/ui/`.
-If `<path>` is not a known UI test configuration, it is treated as a destination page URL/path and
-gui-v2 runs a lightweight click-route test to that page.
+If `<path>` is not a known UI test configuration, it is treated as a destination QML type and
+gui-v2 clicks the statically-identified UI needed to construct and show that type (nav bar,
+list items, or StatusBar icons). Swipe-view roots (including Boat from the Victron.Boat
+module, via `--ui-test /pages/boat/BoatPage.qml`) and overlay types such as the Brief side
+panel are supported; they are not required to be PageStack `pushPage()` destinations.
+Conditional children that are constructed but hidden are unresolvable rather than a
+zero-click route that times out, except LevelsPage tabs: `--ui-test /pages/EnvironmentTab.qml`
+(and TanksTab) clicks the TabBar label after opening Levels.
 This target-page mode only supports routes where each click step has at least one statically
 resolvable identifier (label/icon/objectName); purely data-driven labels without static fallback
 are not currently resolvable.
 For target-page mode, runtime QML errors (for example `ReferenceError` in bindings) are treated
-as failures, and completion requires a valid page object on the stack, not only a matching URL.
+as failures. Completion requires the target type to be constructed and shown, not only a
+matching PageStack URL.
 
 By default, captured images are stored in `<working-directory>/image-captures/` (configurable in the test JSON).
 

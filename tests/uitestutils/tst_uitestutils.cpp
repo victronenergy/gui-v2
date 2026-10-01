@@ -105,6 +105,8 @@ public:
 				{ QStringLiteral("type"), typeName },
 				{ QStringLiteral("values"), step.identifier.values },
 				{ QStringLiteral("expectedPage"), step.expectedPageUrl },
+				{ QStringLiteral("verify"), step.verifyMode == Victron::VenusOS::UiTestUtils::RouteStep::ShownType
+						? QStringLiteral("type") : QStringLiteral("stack") },
 			});
 			if (step.identifier.type == Victron::VenusOS::UiTestUtils::ClickIdentifier::Text
 					&& !step.identifier.values.isEmpty()) {
@@ -124,6 +126,20 @@ public:
 	Q_INVOKABLE QString parseUiTestValueFromArgs(const QStringList &arguments) const
 	{
 		return Victron::VenusOS::UiTestUtils::parseUiTestValueFromArgs(arguments);
+	}
+
+	Q_INVOKABLE QVariantMap parseResolution(const QString &value) const
+	{
+		int width = 0;
+		int height = 0;
+		QString error;
+		const bool ok = Victron::VenusOS::UiTestUtils::parseResolution(value, &width, &height, &error);
+		return QVariantMap{
+			{ QStringLiteral("ok"), ok },
+			{ QStringLiteral("width"), width },
+			{ QStringLiteral("height"), height },
+			{ QStringLiteral("error"), error },
+		};
 	}
 
 	Q_INVOKABLE QVariantMap countRuntimeWarningTexts(

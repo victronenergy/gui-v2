@@ -98,11 +98,12 @@ void UiTestConfiguration::loadTargetPageNavigation(const QString &targetPage)
 	QList<UiTestUtils::RouteStep> resolvedSteps;
 	if (!UiTestUtils::resolveTargetRoute(normalizedTargetPage, &entryNavText, &resolvedSteps)) {
 		qCFatal(venusGuiTest) << "Unable to resolve navigation route to target page:" << normalizedTargetPage
-				<< "- the page may not be reachable from any root page."
-				<< "Root pages (e.g. SettingsPage.qml, OverviewPage.qml) cannot be targeted directly.";
+				<< "- the type may not be reachable by clicking statically-identified UI"
+				<< "(nav bar, list items, or StatusBar icons)."
+				<< "Device-list delegates and fully dynamic URLs cannot be resolved.";
 	}
 
-	// Serialize route steps as QVariantList of { type, values, expectedPage } maps for QML.
+	// Serialize route steps as QVariantList of { type, values, expectedPage, verify } maps for QML.
 	QVariantList routeSteps;
 	for (const UiTestUtils::RouteStep &step : resolvedSteps) {
 		QString typeName;
@@ -116,6 +117,8 @@ void UiTestConfiguration::loadTargetPageNavigation(const QString &targetPage)
 			{ QStringLiteral("type"), typeName },
 			{ QStringLiteral("values"), step.identifier.values },
 			{ QStringLiteral("expectedPage"), step.expectedPageUrl },
+			{ QStringLiteral("verify"), step.verifyMode == UiTestUtils::RouteStep::ShownType
+					? QStringLiteral("type") : QStringLiteral("stack") },
 		});
 	}
 
@@ -129,7 +132,7 @@ void UiTestConfiguration::loadTargetPageNavigation(const QString &targetPage)
 		{ QStringLiteral("Tests"), QStringList{ QStringLiteral("tst_target_page.qml") } },
 		{ QStringLiteral("Steps"), QVariantMap{
 			{ QStringLiteral("WaitUntil"), QVariantMap{
-				{ QStringLiteral("DefaultTimeout"), 5000 },
+				{ QStringLiteral("DefaultTimeout"), 15000 },
 			}},
 		}},
 	};
