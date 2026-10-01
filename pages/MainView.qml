@@ -216,20 +216,34 @@ FocusScope {
 					focus: true
 					contentChildren: swipePageModel.pages
 
-					// Update the NavBar currentIndex when the view is swiped. Use onMovingChanged
-					// instead of onCurrentIndexChanged to avoid triggering this on initialization.
-					onMovingChanged: {
-						if (!moving) {
-							navBar.setCurrentIndex(currentIndex)
+					// Update the NavBar currentIndex when the view is swiped. Use onUserMovingChanged
+					// instead of onCurrentIndexChanged to avoid triggering this on initialization or
+					// when the swipe model is rebuilt.
+					onUserMovingChanged: {
+						if (!userMoving) {
+							navBar.setCurrentIndex(currentIndex, true)
 						}
 					}
 
 					// When the page model changes, the view currentIndex resets to 0. This may
 					// happen on startup if the Boat/Levels availability is not known until after
-					// the main UI is loaded, so go to the Start Page to avoid confusion.
+					// the main UI is loaded; in that case, go to the Start Page to avoid confusion.
+					// Or, if the model resets later on and the user has navigated elsewhere, then
+					// restore the selected main page, instead of closing the stack/cards and/or
+					// going to another page and disrupting the user selection.
 					onCountChanged: {
 						if (Global.allPagesLoaded && count === swipePageModel.pages.length) {
-							pageManager.goToStartPage()
+							if (pageStack.opened || cardsLoader.viewActive || navBar.userModified) {
+								navBar.restoreCurrentPage()
+
+								// If a new page was inserted after the restored page (e.g. Overview
+								// is shown, and Levels is inserted) then the current index does not
+								// change and NavBar onCurrentIndexChanged does not fire, so force-
+								// a sync with the swipeView so that the view shows the right page.
+								swipeView.setCurrentIndex(navBar.currentIndex)
+							} else {
+								pageManager.goToStartPage()
+							}
 						}
 					}
 				}
