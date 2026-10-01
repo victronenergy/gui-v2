@@ -112,11 +112,64 @@ Page {
 		model: shellyServiceEnabled.value === 1 ? sortedShellyDeviceModel : null
 		delegate: ListNavigation {
 			text: sortValue
+			//% "Unreachable"
+			secondaryText: reachableItem.value !== 1 ? qsTrId("settings_shelly_unreachable")
+					//% "Enabled"
+					: enabledChannelsModel.rowCount > 0 ? qsTrId("settings_shelly_enabled")
+					: ""
+			secondaryTextColor: reachableItem.value === 1 && enabledChannelsModel.rowCount > 0
+					? Theme.color_dimGreen : Theme.color_listItem_secondaryText
+			preferredVisible: supportedItem.value === 1
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageSettingsShellyDevice.qml", {
 					deviceUid: (buddy?.itemParent()?.uid ?? ""),
 					title: text,
 				})
+			}
+
+			VeQuickItem {
+				id: reachableItem
+				uid: (buddy?.itemParent()?.uid ?? "") + "/Reachable"
+			}
+			VeQuickItem {
+				id: supportedItem
+				uid: (buddy?.itemParent()?.uid ?? "") + "/Supported"
+			}
+			VeQItemSortTableModel {
+				id: enabledChannelsModel
+				dynamicSortFilter: true
+				filterFlags: VeQItemSortTableModel.FilterInvalid
+				filterRole: VeQItemTableModel.UniqueIdRole
+				filterRegExp: "Enabled"
+				model: VeQItemTableModel {
+				uids: [ (buddy?.itemParent()?.uid ?? "") ]
+					flags: VeQItemTableModel.AddAllChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
+				}
+			}
+		}
+		footer: SettingsColumn {
+			width: parent?.width ?? 0
+
+			SectionHeader {
+				leftPadding: Theme.geometry_listItem_content_horizontalMargin
+				//% "Unsupported"
+				text: qsTrId("settings_shelly_unsupported_devices")
+				opacity: shellyListView.count > 0 ? (shellyServiceEnabled.value === 1) : 0 // set opacity instead of visible to avoid binding loop
+			}
+
+			Repeater {
+				model: sortedShellyDeviceModel
+
+				delegate: ListText {
+					text: sortValue
+					preferredVisible: unsupportedItem.valid && unsupportedItem.value !== 1
+					interactive: false
+
+					VeQuickItem {
+						id: unsupportedItem
+						uid: (buddy?.itemParent()?.uid ?? "") + "/Supported"
+					}
+				}
 			}
 		}
 	}
