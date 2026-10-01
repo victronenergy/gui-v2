@@ -87,6 +87,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/OverviewLayoutConditions.qml
     components/Page.qml
     components/PageGensetModel.qml
+    components/PagePreloader.qml
     components/PageStack.qml
     components/VeQuickItemsQuotient.qml
     components/ProgressArc.qml

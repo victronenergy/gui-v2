@@ -110,8 +110,9 @@ Global.venusPlatform     → VenusPlatform.qml
 
 // State
 Global.backendReady      → true when BackendConnection is Ready
-Global.dataManagerLoaded → true when all data sources initialized
-Global.allPagesLoaded    → true when swipe view pages are loaded
+Global.dataManagerLoaded  → true when all data sources initialized
+Global.allPagesLoaded     → true when swipe view pages are loaded
+Global.pagePreloadComplete → true when splash PagePreloader has finished (fail-open splash gate, not compile-success)
 ```
 
 ## Data manager
@@ -142,8 +143,14 @@ Main.qml (Window)
   ├─ Global.dataManagerLoaded = true
   ├─ ApplicationContent.qml loads
   │   └─ MainView.qml loads SwipeView pages
-  └─ Global.allPagesLoaded = true → Splash screen hidden, ApplicationContent displayed
+  ├─ Global.allPagesLoaded = true
+  ├─ PagePreloader compiles overview drill-down and overlay page types
+  └─ Global.pagePreloadComplete = true → Splash screen hidden (when the splash animation is shown)
 ```
+
+`PagePreloader` compiles (does not instantiate) the Overview widget drill-down pages, the Brief side panel / Control / Switch overlay pages, and the first-level Settings pages while the splash GIF is playing. First open of those pages then skips QML compilation. It runs only while the splash animation is visible. UI tests skip it by default (`skipCompile` when `UiTest` is configured) so that `benchmark/pages` still measures cold compile. Isolated unit tests inject a short URL list and override `skipCompile`, `timeoutMs`, and `compileOnActive` to cover compile, bad URLs, and timeout without enabling preload for other UI tests. Wasm and `--skip-splash` hide the splash without waiting. Splash fade-out is gated on `Global.pagePreloadComplete`. That flag is a completion/fail-open gate: it is also set when compile is skipped, after a timeout, and after a list that included compile failures. It does not guarantee that the drill-down types were compiled.
+
+`PageStack.pushPage()` compiles with synchronous `Qt.createComponent()` and instantiates with `createObject()` before the fake x-slide. `CardViewLoader` and the Brief side-panel `Loader` are also synchronous (`asynchronous: false` on the side panel). `MainView.allowPageAnimations` is false only while the PageStack is transitioning or the main SwipeView is flicking (and while geometry is adjusting), not while those trees are being built. In-page animations resume when the slide is idle.
 
 ### UI navigation structure
 
@@ -176,7 +183,7 @@ Main.qml (Window)
 
 ### PageStack
 
-`components/PageStack.qml` (extends StackView) handles drill-down navigation with slide animations. Used for:
+`components/PageStack.qml` (extends StackView) handles drill-down navigation with slide animations. `animationDuration` follows `Global.animationEnabled`, not `MainView.allowPageAnimations` (the latter is false while the stack is busy, which would skip the first fake x-slide). Used for:
 - Overview widget drill-downs (e.g. clicking Battery widget → battery detail page)
 - Settings sub-pages (e.g. Settings → Display → Brightness)
 

@@ -13,7 +13,14 @@ StackView {
 	readonly property bool opened: _fullyOpened
 	readonly property Page currentPage: opened ? currentItem : null
 
-	readonly property int animationDuration: Global.mainView && Global.mainView.allowPageAnimations ? Theme.animation_page_slide_duration : 0
+	// Do not use MainView.allowPageAnimations here. That flag is false while this stack is
+	// transitioning (it disables in-page animations to reduce load). Binding the slide
+	// duration to it makes the first drill-down duration 0: the Immediate push can set
+	// StackView.busy, transitioning becomes true, and the fake x-slide is skipped.
+	readonly property int animationDuration: Global.animationEnabled ? Theme.animation_page_slide_duration : 0
+	// Duration applied to the first-page slide-in, sampled before push() so an Immediate
+	// push that sets StackView.busy cannot zero the fake x-slide.
+	readonly property int fakePushDuration: fakePushAnimation.duration
 	readonly property bool animating: busy || fakePushTransition.running || fakePopTransition.running
 
 	// The file url of the top page on the stack. Undefined if depth=0 or not opened, or an empty
@@ -106,7 +113,9 @@ StackView {
 		let pushedPage = null
 		if (root.state !== "opened") {
 			// When the stack is closed or hidden, push the first page without any animation and
-			// slide the stack into view.
+			// slide the stack into view. Sample the duration before push(): an Immediate push
+			// may set StackView.busy, which used to zero animationDuration via allowPageAnimations.
+			const slideDuration = _animationDuration(operation)
 			pushedPage = root.push(objectOrUrl, properties, StackView.Immediate)
 			if (!pushedPage) {
 				if (createdPageObject && !Theme.objectHasQObjectParent(createdPageObject)) {
@@ -117,7 +126,7 @@ StackView {
 			}
 			root._pageUrls.push(pageUrl)
 			root._topPageUrl = pageUrl
-			fakePushAnimation.duration = _animationDuration(operation)
+			fakePushAnimation.duration = slideDuration
 			root.state = "opened"
 		} else {
 			// Otherwise, push the push onto the visible stack, possibly with an animation.

@@ -33,7 +33,11 @@ Pages whose destination URL is static but whose clickable label/identifier is fu
 are currently not resolvable in target-page mode.
 In target-page mode, runtime QML errors (including binding/runtime JavaScript errors such as
 `ReferenceError`) are counted as test failures, and URL-only success is not enough: the test also
-requires a real page object to be present on the page stack.
+requires a real page object to be present on the page stack. Each `pushPage()` (including the last)
+must finish its stack slide before the step succeeds: `PageStack.animating` false, `opened` true,
+and the destination `currentPage` set. The last push also waits for one presented swap of that
+settled frame; a second swap is not required, because WaitUntil does not request another render
+and UI animations are off by default, so a static window may never swap again.
 
 The `smoke/mock-maximal` test configuration specifies that the UI should also load the "maximal" mock configuration, so it is not necessary to set `--mock-conf maximal`.
 
@@ -184,3 +188,8 @@ Missing features:
 * `RecursivePageCapture` does not click list buttons or radio buttons. This is for the best at the moment, as some buttons have write effects that change the UI and then might result in capture failures, but it also means we can't easily test features where buttons are clicked to open dialogs.
 * `UiTestCase` should provide `keyPress` function for testing key navigation.
 * Other?
+
+`UiTestCase.grabImage(imageName)` captures the current window immediately to
+`<ImageDir>/<imageName>.png` without waiting for a stable frame. Do not call it
+on every vsync: `grabWindow()` blocks the GUI thread and in-flight
+`NumberAnimation`s jump to their end. Target-page mode does not call it.
