@@ -46,6 +46,22 @@ OverviewWidget {
 	}
 
 	VeQuickItem {
+		id: activeBatteryService
+		uid: Global.system.serviceUid + "/ActiveBatteryService"
+	}
+
+	VeQuickItem {
+		id: starterBatteryVoltage
+		uid: {
+			if (!activeBatteryService.valid || AllDevicesModel.count === 0) {
+				return ""
+			}
+			const device = AllDevicesModel.findDeviceWithTypeAndInstance("battery", parseInt(activeBatteryService.value.split('/')[1]))
+			return device ? device.serviceUid + "/Dc/1/Voltage" : ""
+		}
+	}
+
+	VeQuickItem {
 		id: preferRenewableEnergy
 
 		uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Dc/0/PreferRenewableEnergy" : ""
@@ -139,9 +155,95 @@ OverviewWidget {
 			}
 		}
 
-		QuantityLabel {
+		Rectangle {
+			id: starterBattery
 			anchors {
 				top: parent.top
+				topMargin: Theme.geometry_overviewPage_widget_battery_starter_topMargin
+				right: parent.right
+				rightMargin: Theme.geometry_overviewPage_widget_battery_starter_rightMargin
+			}
+
+			width: Theme.geometry_overviewPage_widget_battery_starter_width
+			height: Theme.geometry_overviewPage_widget_battery_starter_height
+			radius: Theme.geometry_overviewPage_widget_battery_starter_radius
+
+			color: Theme.color_page_background
+			visible: starterBatteryVoltage.valid
+
+			Rectangle {
+				anchors {
+					top: parent.top
+					topMargin: Theme.geometry_overviewPage_widget_battery_starter_terminal_topMargin
+					left: parent.left
+					leftMargin: Theme.geometry_overviewPage_widget_battery_starter_terminal_horizontalMargin
+				}
+				width: Theme.geometry_overviewPage_widget_battery_starter_terminal_width
+				height: Theme.geometry_overviewPage_widget_battery_starter_terminal_height
+				topLeftRadius: Theme.geometry_overviewPage_widget_battery_starter_terminal_radius
+				topRightRadius: Theme.geometry_overviewPage_widget_battery_starter_terminal_radius
+				color: Theme.color_overviewPage_widget_border
+			}
+			Rectangle {
+				anchors {
+					top: parent.top
+					topMargin: Theme.geometry_overviewPage_widget_battery_starter_terminal_topMargin
+					right: parent.right
+					rightMargin: Theme.geometry_overviewPage_widget_battery_starter_terminal_horizontalMargin
+				}
+				width: Theme.geometry_overviewPage_widget_battery_starter_terminal_width
+				height: Theme.geometry_overviewPage_widget_battery_starter_terminal_height
+				topLeftRadius: Theme.geometry_overviewPage_widget_battery_starter_terminal_radius
+				topRightRadius: Theme.geometry_overviewPage_widget_battery_starter_terminal_radius
+				color: Theme.color_overviewPage_widget_border
+			}
+
+			Rectangle {
+				anchors {
+					fill: parent
+					topMargin: Theme.geometry_overviewPage_widget_battery_starter_case_topMargin
+					leftMargin: Theme.geometry_overviewPage_widget_battery_starter_case_leftMargin
+					rightMargin: Theme.geometry_overviewPage_widget_battery_starter_case_rightMargin
+					bottomMargin: Theme.geometry_overviewPage_widget_battery_starter_case_bottomMargin
+				}
+				radius: Theme.geometry_overviewPage_widget_battery_starter_case_radius
+				border.width: Theme.geometry_overviewPage_widget_border_width
+				border.color: Theme.color_overviewPage_widget_border
+				color: Theme.color_overviewPage_widget_background
+
+				ColumnLayout {
+					spacing: 0
+					anchors {
+						fill: parent
+						topMargin: Theme.geometry_overviewPage_widget_battery_layout_topMargin
+						leftMargin: Theme.geometry_overviewPage_widget_battery_layout_leftMargin
+						bottomMargin: Theme.geometry_overviewPage_widget_battery_layout_bottomMargin
+						rightMargin: Theme.geometry_overviewPage_widget_battery_layout_rightMargin
+					}
+
+					Label {
+						//% "Starter"
+						text: qsTrId("overview_widget_battery_starter_title")
+						elide: Text.ElideRight
+						font.pixelSize: root.secondaryFontSize
+						Layout.fillWidth: true
+					}
+
+					ElectricalQuantityLabel {
+						font.pixelSize: root.secondaryFontSize
+						alignment: Qt.AlignLeft
+						value: starterBatteryVoltage.valid ? starterBatteryVoltage.value : NaN
+						unit: VenusOS.Units_Volt_DC
+						unitColor: Theme.color_overviewPage_widget_battery_font_secondary
+						Layout.fillWidth: true
+					}
+				}
+			}
+		}
+
+		QuantityLabel {
+			anchors {
+				top: starterBattery.visible ? starterBattery.bottom : parent.top
 				topMargin: Theme.geometry_overviewPage_widget_content_topMargin
 				right: parent.right
 				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
@@ -163,7 +265,7 @@ OverviewWidget {
 			}
 			fillMode: Image.PreserveAspectFit
 			color: Theme.color_font_primary
-			visible: root.preferRenewable
+			visible: root.preferRenewable && !starterBattery.visible
 			source: "qrc:/images/icon_charging_renewables.svg"
 		}
 	}

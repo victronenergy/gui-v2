@@ -27,6 +27,7 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/maximal.json
     data/mock/conf/multi-rs.json
     data/mock/conf/split-phase.json
+    data/mock/conf/starter-battery.json
     data/mock/conf/switch-pane.json
     data/mock/conf/services/alternator.json
     data/mock/conf/services/ble-sensors.json
