@@ -15,6 +15,7 @@ FocusScope {
 	property alias backgroundColor: backgroundRect.color
 	property Component moreButton
 	property bool moreDialogVisible
+	property bool userModified
 
 	readonly property int currentIndex: _currentIndex
 	readonly property string currentTitle: pages[currentIndex]?.title ?? ""
@@ -22,8 +23,9 @@ FocusScope {
 	readonly property int visiblePageCount: Math.min(pages.length,
 			buttonRow.width / Theme.geometry_navigationBar_button_minimumWidth)
 
-	// Internal reference to the currently selected index.
+	// Internal references.
 	property int _currentIndex
+	property string _currentPage: getCurrentPage()
 
 	signal buttonClicked(pageIndex : int)
 
@@ -31,7 +33,7 @@ FocusScope {
 		for (let i = 0; i < pages.length; ++i) {
 			const url = pages[i].url
 			if (url.endsWith("/" + pageName)) {
-				_currentIndex = i
+				setCurrentIndex(i)
 				return true
 			}
 		}
@@ -39,7 +41,7 @@ FocusScope {
 		return false
 	}
 
-	function setCurrentIndex(index) {
+	function setCurrentIndex(index, triggeredByUser) {
 		if (index === _currentIndex) {
 			return
 		}
@@ -47,12 +49,22 @@ FocusScope {
 			console.warn("setCurrentIndex(): invalid index", index, "nav bar count is:", pages.length)
 			return
 		}
+		if (triggeredByUser) {
+			userModified = true
+		}
 		_currentIndex = index
+		_currentPage = getCurrentPage()
 	}
 
 	function getCurrentPage() {
 		const url = pages[currentIndex]?.url ?? ""
 		return url.substring(url.lastIndexOf("/") + 1)
+	}
+
+	function restoreCurrentPage() {
+		if (_currentPage) {
+			setCurrentPage(_currentPage)
+		}
 	}
 
 	implicitWidth: Theme.geometry_screen_width
@@ -89,7 +101,7 @@ FocusScope {
 				focus: checked
 
 				onClicked: {
-					root._currentIndex = index
+					root.setCurrentIndex(index, true)
 					root.buttonClicked(index)
 				}
 
