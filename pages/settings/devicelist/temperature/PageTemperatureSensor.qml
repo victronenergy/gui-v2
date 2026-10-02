@@ -52,7 +52,6 @@ DevicePage {
 					//% "%1/100 (%2)"
 					? qsTrId("temperature_air_quality_score").arg(dataItem.value).arg(qualityLabel)
 					: ""
-			secondaryTextColor: qualityColor
 
 			readonly property string qualityLabel: {
 				if (!dataItem.valid) {
@@ -76,18 +75,6 @@ DevicePage {
 				}
 				//% "Very poor"
 				return qsTrId("temperature_air_quality_very_poor")
-			}
-			readonly property color qualityColor: {
-				if (!dataItem.valid) {
-					return Theme.color_listItem_secondaryText
-				}
-				if (dataItem.value > 80) {
-					return Theme.color_green
-				}
-				if (dataItem.value > 50) {
-					return Theme.color_orange
-				}
-				return Theme.color_red
 			}
 		}
 

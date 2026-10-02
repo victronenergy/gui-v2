@@ -20,7 +20,6 @@ DeviceListDelegate {
 			unit: iaqs.valid ? VenusOS.Units_None
 					: co2.value !== undefined ? VenusOS.Units_PartsPerMillion
 					: Global.systemSettings.temperatureUnit
-			valueColor: iaqs.valid ? iaqs.qualityColor : Theme.color_font_primary
 		}
 		QuantityObject {
 			object: co2.value !== undefined ? (iaqs.valid ? co2 : pm25) : humidity
@@ -87,18 +86,6 @@ DeviceListDelegate {
 			}
 			//% "Very poor"
 			return qsTrId("temperature_air_quality_very_poor")
-		}
-		readonly property color qualityColor: {
-			if (!valid) {
-				return Theme.color_font_primary
-			}
-			if (value > 80) {
-				return Theme.color_green
-			}
-			if (value > 50) {
-				return Theme.color_orange
-			}
-			return Theme.color_red
 		}
 	}
 }
