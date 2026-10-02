@@ -14,20 +14,22 @@ LevelsTab {
 	readonly property int oneGaugeWidth: Gauges.width(Global.environmentInputs.model.count, 6, Theme.geometry_screen_width)
 
 	model: Global.environmentInputs.model
-	delegate: EnvironmentGaugePanel {
+	delegate: Item {
+		id: environmentDelegate
+
+		required property Device device
+
+		// Air quality sensors (e.g. Ruuvi Air) get an air quality card before the
+		// temperature/humidity card. Key navigation treats both cards as a single item.
+		readonly property bool hasAirQuality: iaqsItem.valid || pm25Item.valid || co2Item.valid
+		readonly property int focusPolicy: Qt.TabFocus
+
 		width: root.orientation === ListView.Vertical
-			   ? ListView.view.width
-			   : hasTwoGauges ? root.twoGaugeWidth : root.oneGaugeWidth
+			   ? root.width
+			   : environmentPanel.x + environmentPanel.width
 		height: root.orientation === ListView.Vertical
-			   ? implicitHeight
+			   ? environmentPanel.y + environmentPanel.height
 			   : Gauges.height(Global.pageManager?.expandLayout ?? false)
-		animationEnabled: root.animationEnabled
-		// temperature: temperatureItem.valid ? temperatureItem.value : NaN
-		// temperatureType: temperatureType.valid ? temperatureType.value : VenusOS.Temperature_DeviceType_Generic
-		// humidity: humidity.valid ? humidity.value : NaN
-		temperatureGaugeGradient: temperatureGradient
-		humidityGaugeGradient: humidityGradient
-		focusPolicy: Qt.TabFocus
 
 		Behavior on height {
 			enabled: root.animationEnabled && Global.pageManager?.animatingIdleResize
@@ -38,8 +40,56 @@ LevelsTab {
 		}
 
 		KeyNavigationHighlight.active: activeFocus
-		KeyNavigationHighlight.leftMargin: leftInset
-		KeyNavigationHighlight.rightMargin: rightInset
+
+		Loader {
+			id: airQualityLoader
+
+			width: root.orientation === ListView.Vertical ? parent.width : root.twoGaugeWidth
+			height: root.orientation === ListView.Vertical ? implicitHeight : parent.height
+			active: environmentDelegate.hasAirQuality
+			sourceComponent: EnvironmentGaugePanel {
+				device: environmentDelegate.device
+				animationEnabled: root.animationEnabled
+				temperatureGaugeGradient: temperatureGradient
+				humidityGaugeGradient: humidityGradient
+				showAirQuality: true
+				focusPolicy: Qt.NoFocus
+			}
+		}
+
+		EnvironmentGaugePanel {
+			id: environmentPanel
+
+			x: root.orientation === ListView.Vertical || !airQualityLoader.active ? 0
+				: airQualityLoader.width + root.spacing
+			y: root.orientation === ListView.Vertical && airQualityLoader.active
+				? airQualityLoader.height + root.spacing
+				: 0
+			width: root.orientation === ListView.Vertical
+				   ? parent.width
+				   : hasTwoGauges ? root.twoGaugeWidth : root.oneGaugeWidth
+			height: root.orientation === ListView.Vertical ? implicitHeight : parent.height
+			device: environmentDelegate.device
+			animationEnabled: root.animationEnabled
+			temperatureGaugeGradient: temperatureGradient
+			humidityGaugeGradient: humidityGradient
+			focusPolicy: Qt.NoFocus
+		}
+
+		VeQuickItem {
+			id: iaqsItem
+			uid: environmentDelegate.device ? environmentDelegate.device.serviceUid + "/IAQS" : ""
+		}
+
+		VeQuickItem {
+			id: pm25Item
+			uid: environmentDelegate.device ? environmentDelegate.device.serviceUid + "/PM25" : ""
+		}
+
+		VeQuickItem {
+			id: co2Item
+			uid: environmentDelegate.device ? environmentDelegate.device.serviceUid + "/CO2" : ""
+		}
 	}
 
 	Gradient {

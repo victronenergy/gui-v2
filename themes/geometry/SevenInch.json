@@ -410,6 +410,10 @@
     "geometry_environmentGauge_verticalPadding": 4,
     "geometry_environmentGauge_width": 120,
 
+    "geometry_levelsPage_airQuality_arc_size": 150,
+    "geometry_levelsPage_airQuality_arc_strokeWidth": 6,
+    "geometry_levelsPage_airQuality_expanded_topPadding": 32,
+
     "geometry_levelsGauge_capacity_topPadding": 0,
     "geometry_levelsGauge_gauge_spacing": 8,
     "geometry_levelsGauge_horizontalPadding": 0,
