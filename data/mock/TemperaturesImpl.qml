@@ -95,6 +95,67 @@ Item {
 				VeQuickItem { uid: temperature.uid + "/Temperature" }
 				VeQuickItem { uid: temperature.uid + "/Humidity" }
 			}
+
+			// Sensors with a sequence number (e.g. Ruuvi) increment it on each new measurement.
+			// The air quality card shows the sensor as offline when it stops changing.
+			Timer {
+				running: seqNo.valid && Global.mainView && Global.mainView.mainViewVisible
+				repeat: true
+				interval: 10000
+				onTriggered: seqNo.setValue((seqNo.value + 1) % 65536)
+			}
+
+			VeQuickItem {
+				id: seqNo
+				uid: temperature.uid + "/SeqNo"
+			}
+
+			// Air quality sensors (e.g. Ruuvi Air) cycle through PM2.5/CO2 values that give each
+			// of the air quality categories, from Excellent to Very poor.
+			Timer {
+				property int step
+
+				readonly property var samples: [
+					{ pm25: 2, co2: 450 },
+					{ pm25: 6, co2: 600 },
+					{ pm25: 12, co2: 900 },
+					{ pm25: 25, co2: 1300 },
+					{ pm25: 55, co2: 2100 },
+				]
+
+				// Same calculation as dbus-ble-sensors (ruuvi_calc_iaqs()).
+				function iaqs(pm25, co2) {
+					const dx = Math.min(Math.max(pm25, 0), 60) * (100 / 60)
+					const dy = (Math.min(Math.max(co2, 420), 2300) - 420) * (100 / 1880)
+					return Math.round(100 - Math.min(Math.sqrt(dx * dx + dy * dy), 100))
+				}
+
+				running: iaqsItem.valid && Global.mainView && Global.mainView.mainViewVisible
+				repeat: true
+				interval: 10000
+				onTriggered: {
+					step = (step + 1) % samples.length
+					const sample = samples[step]
+					pm25Item.setValue(sample.pm25)
+					co2Item.setValue(sample.co2)
+					iaqsItem.setValue(iaqs(sample.pm25, sample.co2))
+				}
+			}
+
+			VeQuickItem {
+				id: iaqsItem
+				uid: temperature.uid + "/IAQS"
+			}
+
+			VeQuickItem {
+				id: pm25Item
+				uid: temperature.uid + "/PM25"
+			}
+
+			VeQuickItem {
+				id: co2Item
+				uid: temperature.uid + "/CO2"
+			}
 		}
 	}
 }
