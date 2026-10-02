@@ -20,7 +20,6 @@ DeviceListDelegate {
 			unit: iaqs.valid ? VenusOS.Units_None
 					: co2.value !== undefined ? VenusOS.Units_PartsPerMillion
 					: Global.systemSettings.temperatureUnit
-			valueColor: iaqs.valid ? iaqs.qualityColor : Theme.color_font_primary
 		}
 		QuantityObject {
 			object: co2.value !== undefined ? (iaqs.valid ? co2 : pm25) : humidity
@@ -65,7 +64,6 @@ DeviceListDelegate {
 				? qsTrId("temperature_air_quality_score_short").arg(value).arg(qualityLabel)
 				: ""
 		readonly property string qualityLabel: Global.environmentInputs.airQualityToText(value)
-		readonly property color qualityColor: Global.environmentInputs.airQualityToColor(value, Theme.color_font_primary)
 
 		uid: root.device.serviceUid + "/IAQS"
 	}
