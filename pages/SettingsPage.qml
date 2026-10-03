@@ -9,6 +9,7 @@
  */
 
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
@@ -32,28 +33,44 @@ SwipeViewPage {
 	}
 
 	component SettingsListNavigation : ListNavigation {
+		id: settingsNavigation
+
 		property string pageIconSource
 		property string pageSource
 
-		// Push the ListNavigation content to the right to make space for the icon. We wouldn't do
-		// this if SettingsListNavigation was a standalone reusable type, as the leftPadding could
-		// no longer be customised to shift the mainIcon, but this is an inline component and we
-		// know its leftPadding is never adjusted further.
-		leftPadding: leftInset + horizontalContentPadding + mainIcon.width + horizontalContentPadding
-		topPadding: topInset + Theme.geometry_settingsListNavigation_verticalPadding
-		bottomPadding: bottomInset + Theme.geometry_settingsListNavigation_verticalPadding
-		onClicked: Global.pageManager.pushPage(pageSource, { title: Qt.binding(function() { return text }) })
+		contentItem: RowLayout {
+			spacing: settingsNavigation.horizontalContentPadding
 
-		CP.ColorImage {
-			id: mainIcon
-
-			anchors {
-				verticalCenter: parent.contentItem.verticalCenter
-				left: parent.left
-				leftMargin: parent.leftInset + parent.horizontalContentPadding
+			CP.ColorImage {
+				source: settingsNavigation.pageIconSource
+				color: Theme.color_font_primary
 			}
-			source: parent.pageIconSource
-			color: Theme.color_font_primary
+
+			ColumnLayout {
+				spacing: Theme.geometry_listItem_content_verticalSpacing
+
+				Label {
+					text: settingsNavigation.text
+					textFormat: settingsNavigation.textFormat
+					font: settingsNavigation.font
+					wrapMode: Text.Wrap
+					Layout.fillWidth: true
+				}
+
+				CaptionLabel {
+					text: settingsNavigation.caption
+					Layout.fillWidth: true
+				}
+			}
+
+			CP.ColorImage {
+				source: settingsNavigation.iconSource
+				color: settingsNavigation.iconColor
+			}
+		}
+
+		onClicked: {
+			Global.pageManager.pushPage(pageSource, { title: Qt.binding(function() { return text }) })
 		}
 	}
 

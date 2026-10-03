@@ -121,7 +121,7 @@ UiTestCase {
 		["Item",                   itemComponent],
 		["Label",                  labelComponent],
 		["VeQuickItem",            veQuickItemComponent],
-		["ThreeLabelLayout",       threeLabelLayoutComponent],
+		["TwoLabelLayout",         twoLabelLayoutComponent],
 		["ListItem",               listItemComponent],
 		["ListSetting",            listSettingComponent],
 		["ListNavigation",         listNavigationComponent],
@@ -134,7 +134,7 @@ UiTestCase {
 	Component { id: itemComponent; Item {} }
 	Component { id: labelComponent; Label { text: "abc" } }
 	Component { id: veQuickItemComponent; VeQuickItem {} }
-	Component { id: threeLabelLayoutComponent; ThreeLabelLayout { primaryText: "abc" } }
+	Component { id: twoLabelLayoutComponent; TwoLabelLayout { primaryText: "abc" } }
 	Component { id: listItemComponent; ListItem {} }
 	Component { id: listSettingComponent; ListSetting { text: "abc" } }
 	Component { id: listNavigationComponent; ListNavigation { text: "abc" } }

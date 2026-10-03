@@ -17,7 +17,7 @@ ListSetting {
 	property string text
 	property QuantityObjectModel quantityModel
 	property bool tableMode
-	property string iconSource: "qrc:/images/icon_chevron_right_32.svg"
+	property string iconSource: "qrc:/images/icon_chevron_right_24.svg"
 	property color iconColor: Theme.color_listItem_forwardIcon
 	property bool forceColumnLayout
 
@@ -74,11 +74,7 @@ ListSetting {
 				verticalCenter: parent.verticalCenter
 			}
 			source: root.iconSource
-			color: root.iconColor
-
-			// Set opacity instead of visible, to maintain vertical alignments across multiple
-			// quantity group list items even when list item is not clickable.
-			opacity: root.interactive ? 1 : 0
+			color: root.interactive ? root.iconColor : Theme.color_font_disabled
 		}
 	}
 

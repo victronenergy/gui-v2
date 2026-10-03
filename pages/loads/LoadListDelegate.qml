@@ -64,7 +64,7 @@ ListItem {
 
 		Loader {
 			id: layoutLoader
-			width: parent.width - forwardIcon.width
+			width: parent.width - Theme.geometry_icon_size_medium
 			sourceComponent: Theme.screenSize === Theme.Portrait ? portraitLayoutComponent : landscapeLayoutComponent
 		}
 

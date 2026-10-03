@@ -128,16 +128,17 @@ ListSetting {
 				Layout.rightMargin: Theme.geometry_listItem_flat_content_horizontalMargin
 			}
 
-			ThreeLabelLayout {
-				primaryText: root.text
-				primaryLabel.font: root.font
-				primaryLabel.elide: Text.ElideRight
-				primaryLabel.maximumLineCount: 1
+			Label {
+				text: root.text
+				font: root.font
+				elide: Text.ElideRight
+				Layout.fillWidth: true
+			}
+
+			SecondaryListLabel {
 				//% "No control"
-				secondaryText: deviceActive.value === 0 ? qsTrId("list_device_priority_no_control") : ""
-				secondaryLabel.elide: Text.ElideRight
-				secondaryLabel.maximumLineCount: 1
-				stretchSecondaryText: true
+				text: deviceActive.value === 0 ? qsTrId("list_device_priority_no_control") : ""
+				elide: Text.ElideRight
 			}
 
 			ForwardIcon {
