@@ -20,7 +20,7 @@
     "geometry_button_height": 40,
     "geometry_button_padding": 4,
     "geometry_button_touch_size": 48,
-    "geometry_button_touch_verticalMargin": 14,
+    "geometry_button_touch_verticalMargin": 12,
     "geometry_button_spacing": 7,
     "geometry_button_radius": 8,
     "geometry_button_border_width": 2,
@@ -129,6 +129,8 @@
     "geometry_listItem_textField_maximumWidth": 376,
     "geometry_listItem_accessIndicator_width": 8,
     "geometry_listItem_primaryText_minimumWidth": 180,
+    "geometry_listItem_primary_maximumWidthProportion": 0.6,
+    "geometry_listItem_secondary_maximumWidthProportion": 0.4,
 
     "geometry_valueIndicator_horizontalMargin": 12,
     "geometry_valueIndicator_spacing": 16,
@@ -573,7 +575,6 @@
     "geometry_settings_breadcrumb_topMargin": 9,
     "geometry_settingsListHeader_topPadding": 8,
     "geometry_settingsListHeader_bottomPadding": 2,
-    "geometry_settingsListNavigation_verticalPadding": 8,
 
     "geometry_vebusDeviceListPage_quantityTable_row_spacing": 4,
     "geometry_vebusDeviceListPage_quantityTable_header_height": 58,
@@ -581,9 +582,6 @@
     "geometry_batteryListPage_item_verticalSpacing": 2,
 
     "geometry_loadListPage_defaultColumnWidth": 128,
-
-    "geometry_rangeSlider_labelWidth": 70,
-
 
     "geometry_boatPage_shadow_width": 193,
     "geometry_boatPage_shadow_height": 69,

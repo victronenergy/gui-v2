@@ -71,7 +71,6 @@ ListSetting {
 		rowSpacing: 0 // not needed, there is padding below the primary label already
 
 		Label {
-			// Since the root top/bottomPadding is 0, need to add some padding here.
 			topPadding: Theme.geometry_listItem_content_verticalMargin
 			bottomPadding: Theme.geometry_listItem_content_verticalMargin
 			text: root.text

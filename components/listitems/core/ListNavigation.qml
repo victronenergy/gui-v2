@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
@@ -15,7 +16,7 @@ ListSetting {
 
 	property string secondaryText
 	property color secondaryTextColor: Theme.color_listItem_secondaryText
-	property string iconSource: "qrc:/images/icon_chevron_right_32.svg"
+	property string iconSource: "qrc:/images/icon_chevron_right_24.svg"
 	property color iconColor: Theme.color_listItem_forwardIcon
 
 	signal clicked
@@ -31,38 +32,33 @@ ListSetting {
 	interactive: true
 	hasSubMenu: interactive
 
-	contentItem: Item {
-		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: labelLayout.implicitHeight
+	contentItem: GridLayout {
+		columns: root.interactive ? 2 : 1
+		columnSpacing: root.spacing
+		rowSpacing: Theme.geometry_listItem_content_verticalSpacing
 
-		ThreeLabelLayout {
-			id: labelLayout
-
-			anchors {
-				left: parent.left
-				right: parent.right
-				rightMargin: arrowIcon.visible ? arrowIcon.width + root.spacing : 0
-				verticalCenter: parent.verticalCenter
-			}
+		TwoLabelLayout {
 			primaryText: root.text
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat
 			secondaryText: root.secondaryText
 			secondaryLabel.color: root.secondaryTextColor
-			captionText: root.caption
-			stretchSecondaryText: true
+
+			Layout.fillWidth: true
 		}
 
 		CP.ColorImage {
-			id: arrowIcon
-
-			anchors {
-				right: parent.right
-				verticalCenter: parent.verticalCenter
-			}
 			source: root.iconSource
 			color: root.iconColor
 			visible: root.interactive
+		}
+
+		CaptionLabel {
+			visible: text.length > 0
+			text: root.caption
+
+			Layout.columnSpan: root.interactive ? 2 : 1
+			Layout.fillWidth: true
 		}
 	}
 

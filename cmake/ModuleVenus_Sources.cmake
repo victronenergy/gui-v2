@@ -128,7 +128,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/TankGauge.qml
     components/TankGaugePanel.qml
     components/TemperatureRelaySettings.qml
-    components/ThreeLabelLayout.qml
     components/ThreePhaseBarGauge.qml
     components/ThreePhaseDisplay.qml
     components/ThreePhaseIOTable.qml
@@ -136,6 +135,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/TwoLabelItemLayout.qml
     components/TimeSelector.qml
     components/ToastNotification.qml
+    components/TwoLabelLayout.qml
     components/Utils.js
     components/VeBusAcIODisplay.qml
     components/VeQItemFilteredServiceModel.qml
@@ -785,6 +785,7 @@ set(VictronVenusOS_RESOURCES
     images/icon_battery_24.svg
     images/icon_battery_charging_24.svg
     images/icon_battery_discharging_24.svg
+    images/icon_chevron_right_24.svg
     images/icon_chevron_right_32.svg
     images/icon_chevron_up_32.svg
     images/icon_connectivity_32.svg
