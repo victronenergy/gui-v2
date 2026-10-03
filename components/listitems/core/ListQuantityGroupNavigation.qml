@@ -17,7 +17,7 @@ ListSetting {
 	property string text
 	property QuantityObjectModel quantityModel
 	property bool tableMode
-	property string iconSource: "qrc:/images/icon_chevron_right_32.svg"
+	property string iconSource: "qrc:/images/icon_chevron_right_24.svg"
 	property color iconColor: Theme.color_listItem_forwardIcon
 	property bool forceColumnLayout
 

@@ -10,6 +10,6 @@ import Victron.VenusOS
 CP.ColorImage {
 	id: icon
 
-	source: "qrc:/images/icon_chevron_right_32.svg"
+	source: "qrc:/images/icon_chevron_right_24.svg"
 	color: Theme.color_listItem_forwardIcon
 }

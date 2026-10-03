@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 ListSetting {
@@ -22,40 +23,35 @@ ListSetting {
 
 	interactive: true
 
-	contentItem: Item {
-		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: labelLayout.implicitHeight
+	contentItem: GridLayout {
+		columns: 2
+		columnSpacing: root.spacing
+		rowSpacing: Theme.geometry_listItem_content_verticalSpacing
 
-		ThreeLabelLayout {
-			id: labelLayout
-
-			anchors {
-				left: parent.left
-				right: radioButton.left
-				rightMargin: root.spacing
-				verticalCenter: parent.verticalCenter
-			}
+		TwoLabelLayout {
 			primaryText: root.text
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat
 			secondaryText: root.secondaryText
-			captionText: root.caption
-			stretchSecondaryText: true
+
+			Layout.fillWidth: true
 		}
 
 		RadioButton {
-			id: radioButton
-
-			anchors {
-				right: parent.right
-				verticalCenter: parent.verticalCenter
-			}
 			checkable: false
 			checked: root.checked
 			enabled: root.clickable
 			focusPolicy: Qt.NoFocus
 
 			onClicked: root.click()
+		}
+
+		CaptionLabel {
+			visible: text.length > 0
+			text: root.caption
+
+			Layout.columnSpan: 2
+			Layout.fillWidth: true
 		}
 	}
 
