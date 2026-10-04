@@ -160,7 +160,7 @@ SwitchableOutputSlider {
 						id: measurementCaptionLabel
 						anchors.top: parent.bottom
 						//: The current temperature measurement
-						//% "Current"
+						//% "Measured"
 						text: qsTrId("temperature_slider_current")
 						font.pixelSize: Theme.font_size_tiny
 						width: parent.width
