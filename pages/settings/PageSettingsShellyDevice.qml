@@ -13,6 +13,8 @@ Page {
 	// The root path for the device, e.g. "com.victronenergy.shelly/ABC123"
 	required property string deviceUid
 
+	readonly property bool deviceReachable: !reachableItem.valid || reachableItem.value === 1
+
 	// Get a list of all channels on the device, sorted by name.
 	VeQItemSortTableModel {
 		id: sortedChannelModel
@@ -119,6 +121,10 @@ Page {
 			dataItem.uid: channelUid + "/Enabled"
 			writeAccessLevel: VenusOS.User_AccessType_User
 
+			// If the device is reachable, it can be toggled on/off.
+			// If the device is unreachable, it can only be toggled off.
+			interactive: defaultInteractive && (root.deviceReachable || checked)
+
 			CP.ColorImage {
 				id: typeIcon
 
@@ -146,5 +152,10 @@ Page {
 				uid: channelDelegate.channelUid ? channelDelegate.channelUid + "/Type" : ""
 			}
 		}
+	}
+
+	VeQuickItem {
+		id: reachableItem
+		uid: root.deviceUid + "/Reachable"
 	}
 }
