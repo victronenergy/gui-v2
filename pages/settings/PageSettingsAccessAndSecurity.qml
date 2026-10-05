@@ -27,6 +27,10 @@ Page {
 
 		window: enabled ? Global.main : null
 		onKeyPressed: (key) => {
+			// A regular user isn't allowed to become super user or service.
+			if (Global.systemSettings.accessLevel.value < VenusOS.User_AccessType_Installer)
+				return
+
 			if (key === Qt.Key_Right) {
 				// change to super user mode if the right button is pressed for a while
 				if (Global.systemSettings.accessLevel.value !== VenusOS.User_AccessType_SuperUser && ++repeatCount > 60) {
