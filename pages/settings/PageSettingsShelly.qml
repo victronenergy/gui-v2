@@ -62,26 +62,56 @@ Page {
 					uid: root.serviceUid + "/Refresh"
 				}
 			}
-
-			SectionHeader {
-				leftPadding: Theme.geometry_listItem_content_horizontalMargin
-				text: CommonWords.discovered_devices
-				opacity: shellyListView.count > 0 ? 1 : 0 // set opacity instead of visible to avoid binding loop
-				preferredVisible: shellyServiceEnabled.value === 1
-			}
 		}
 		model: shellyServiceEnabled.value === 1 ? sortedShellyDeviceModel : null
-		delegate: ListNavigation {
+		delegate: ListItemLoader {
+			id: shellyDeviceDelegate
+
 			required property string name
 			required property string uid
+			required property bool reachable
+			required property bool supported
+			required property int enabledChannelCount
 
-			text: name
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/PageSettingsShellyDevice.qml", {
-					deviceUid: uid,
-					title: text,
-				})
+			width: parent.width
+			sourceComponent: supported ? supportedComponent : unsupportedComponent
+
+			Component {
+				id: supportedComponent
+
+				ListNavigation {
+					text: name
+					//% "Unreachable"
+					secondaryText: !reachable ? qsTrId("settings_shelly_unreachable")
+							//% "Enabled"
+							: enabledChannelCount > 0 ? qsTrId("settings_shelly_enabled")
+							: ""
+					secondaryTextColor: reachable && enabledChannelCount > 0
+							? Theme.color_dimGreen : Theme.color_listItem_secondaryText
+					onClicked: {
+						Global.pageManager.pushPage("/pages/settings/PageSettingsShellyDevice.qml", {
+							deviceUid: uid,
+							title: text,
+						})
+					}
+				}
 			}
+
+			Component {
+				id: unsupportedComponent
+
+				ListItem {
+					contentItem: Label {
+						text: shellyDeviceDelegate.name
+						color: Theme.color_font_secondary
+					}
+				}
+			}
+		}
+		section.property: "supported"
+		section.criteria: ViewSection.FullString
+		section.delegate: SectionHeader {
+			text: section == "true" ? CommonWords.discovered_devices : CommonWords.unsupported
 		}
 	}
 }

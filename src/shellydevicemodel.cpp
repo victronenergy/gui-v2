@@ -15,16 +15,10 @@ using namespace Victron::VenusOS;
 
 namespace {
 
-static inline QString shellyServiceUid()
+QString shellyServiceUid()
 {
-	return BackendConnection::create()->serviceUidForType(QStringLiteral("shelly"));
-}
-
-static inline bool isChannelItem(VeQItem *item)
-{
-	bool ok = false;
-	item->id().toInt(&ok);
-	return ok;
+	static const QString uid = BackendConnection::create()->serviceUidForType(QStringLiteral("shelly"));
+	return uid;
 }
 
 static void disconnectItemTree(VeQItem *item, QObject *receiver)
@@ -85,10 +79,11 @@ void ShellyDeviceModel::setServiceItem(VeQItem *serviceItem)
 
 void ShellyDeviceModel::deviceItemAdded(VeQItem *deviceItem)
 {
-	for (const QString &path : { QStringLiteral("Model"), QStringLiteral("Name"), QStringLiteral("Mac"),
-			QStringLiteral("Reachable"), QStringLiteral("Supported") }) {
-		deviceItem->itemGetOrCreate(path)->getValueAndChanges(this, &ShellyDeviceModel::scheduleUpdate);
-	}
+	deviceItem->itemGetOrCreate(QStringLiteral("Model"))->getValue();
+	deviceItem->itemGetOrCreate(QStringLiteral("Mac"))->getValue();
+	deviceItem->itemGetOrCreate(QStringLiteral("Name"))->getValueAndChanges(this, &ShellyDeviceModel::scheduleUpdate);
+	deviceItem->itemGetOrCreate(QStringLiteral("Supported"))->getValueAndChanges(this, &ShellyDeviceModel::scheduleUpdate);
+	deviceItem->itemGetOrCreate(QStringLiteral("Reachable"))->getValueAndChanges(this, &ShellyDeviceModel::scheduleUpdate);
 
 	// Watch the /Enabled value of each channel, to count the number of enabled channels.
 	for (VeQItem *childItem : deviceItem->itemChildren()) {
@@ -102,7 +97,9 @@ void ShellyDeviceModel::deviceItemAdded(VeQItem *deviceItem)
 
 void ShellyDeviceModel::deviceChildItemAdded(VeQItem *childItem)
 {
-	if (isChannelItem(childItem)) {
+	bool isInt = false;
+	childItem->id().toInt(&isInt);
+	if (isInt) {
 		childItem->itemGetOrCreate(QStringLiteral("Enabled"))->getValueAndChanges(this, &ShellyDeviceModel::scheduleUpdate);
 	}
 }
@@ -131,6 +128,12 @@ QVariant ShellyDeviceModel::data(const QModelIndex &index, int role) const
 		return device.uid;
 	case NameRole:
 		return device.name;
+	case ReachableRole:
+		return device.reachable;
+	case SupportedRole:
+		return device.supported;
+	case EnabledChannelCountRole:
+		return device.enabledChannelCount;
 	default:
 		return QVariant();
 	}
@@ -140,7 +143,10 @@ QHash<int, QByteArray> ShellyDeviceModel::roleNames() const
 {
 	static const QHash<int, QByteArray> roles = {
 		{ UidRole, "uid" },
-		{ NameRole, "name" }
+		{ NameRole, "name" },
+		{ ReachableRole, "reachable" },
+		{ SupportedRole, "supported" },
+		{ EnabledChannelCountRole, "enabledChannelCount" }
 	};
 	return roles;
 }
@@ -179,6 +185,28 @@ void ShellyDeviceModel::update()
 						.arg(modelItem->getValue().toString(),
 							 macItem ? macItem->getValue().toString() : QString());
 			}
+
+			// Use itemGet() for /Reachable and /Supported as it may not be present.
+			VeQItem *reachableItem = deviceItem->itemGet(QStringLiteral("Reachable"));
+			if (reachableItem) {
+				const QVariant value = reachableItem ? reachableItem->getValue() : QVariant();
+				device.reachable = value.isValid() ? value.toInt() == 1 : true;
+			}
+			VeQItem *supportedItem = deviceItem->itemGet(QStringLiteral("Supported"));
+			if (supportedItem) {
+				const QVariant value = supportedItem ? supportedItem->getValue() : QVariant();
+				device.supported = value.isValid() ? value.toInt() == 1 : true;
+			}
+			for (VeQItem *childItem : deviceItem->itemChildren()) {
+				bool ok = false;
+				childItem->id().toInt(&ok);
+				if (ok) {
+					VeQItem *enabledItem = childItem->itemGet(QStringLiteral("Enabled"));
+					if (enabledItem && enabledItem->getValue().toInt() == 1) {
+						device.enabledChannelCount++;
+					}
+				}
+			}
 			devices.append(device);
 		}
 	}
@@ -209,6 +237,18 @@ void ShellyDeviceModel::update()
 				existing.name = device.name;
 				changedRoles.append(NameRole);
 			}
+			if (existing.reachable != device.reachable) {
+				existing.reachable = device.reachable;
+				changedRoles.append(ReachableRole);
+			}
+			if (existing.supported != device.supported) {
+				existing.supported = device.supported;
+				changedRoles.append(SupportedRole);
+			}
+			if (existing.enabledChannelCount != device.enabledChannelCount) {
+				existing.enabledChannelCount = device.enabledChannelCount;
+				changedRoles.append(EnabledChannelCountRole);
+			}
 			if (!changedRoles.empty()) {
 				emit dataChanged(index(j), index(j), changedRoles);
 			}
@@ -235,4 +275,25 @@ SortedShellyDeviceModel::SortedShellyDeviceModel(QObject *parent)
 	setSortLocaleAware(true);
 	setSortRole(ShellyDeviceModel::NameRole);
 	sort(0, Qt::AscendingOrder);
+}
+
+bool SortedShellyDeviceModel::lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const
+{
+	// Sort by:
+	// 1. Supported: show "supported" devices first, then "unsupported"
+	// 2. Device name
+
+	const QModelIndex leftIndex = sourceModel()->index(sourceLeft.row(), sourceLeft.column());
+	const QModelIndex rightIndex = sourceModel()->index(sourceRight.row(), sourceRight.column());
+
+	const bool leftSupported = sourceModel()->data(leftIndex, ShellyDeviceModel::SupportedRole).toBool();
+	const bool rightSupported = sourceModel()->data(rightIndex, ShellyDeviceModel::SupportedRole).toBool();
+
+	if (leftSupported == rightSupported) {
+		// Sort by name.
+		return sourceModel()->data(leftIndex, ShellyDeviceModel::NameRole).toString()
+				.localeAwareCompare(sourceModel()->data(rightIndex, ShellyDeviceModel::NameRole).toString()) < 0;
+	} else {
+		return leftSupported;
+	}
 }

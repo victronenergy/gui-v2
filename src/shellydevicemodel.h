@@ -25,6 +25,9 @@ namespace VenusOS {
 	/Devices/<id>/Model
 	/Devices/<id>/Name
 	/Devices/<id>/Mac
+	/Devices/<id>/Reachable
+	/Devices/<id>/Supported
+	/Devices/<id>/<channel>/Enabled
 
 	When a scan is done, the /Devices child paths are invalidated (but still exist), so only devices
 	with a valid /Model value are included in the model.
@@ -38,7 +41,10 @@ class ShellyDeviceModel : public QAbstractListModel
 public:
 	enum Role {
 		UidRole = Qt::UserRole,
-		NameRole
+		NameRole,
+		ReachableRole,
+		SupportedRole,
+		EnabledChannelCountRole
 	};
 	Q_ENUM(Role)
 
@@ -59,6 +65,9 @@ private:
 	struct ShellyDevice {
 		QString uid;
 		QString name;
+		bool reachable = true;
+		bool supported = true;
+		int enabledChannelCount = 0;
 	};
 
 	void serviceAdded(VeQItem *serviceItem);
@@ -83,6 +92,9 @@ class SortedShellyDeviceModel : public QSortFilterProxyModel
 	QML_ELEMENT
 public:
 	explicit SortedShellyDeviceModel(QObject *parent = nullptr);
+
+protected:
+	bool lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const override;
 };
 
 } /* VenusOS */

@@ -612,6 +612,9 @@ QtObject {
 	//% "Unique Identity Number"
 	readonly property string unique_identity_number: qsTrId("common_words_unique_id_number")
 
+	//% "Unsupported"
+	readonly property string unsupported: qsTrId("common_words_unsupported")
+
 	//: Status = "unknown"
 	//% "Unknown"
 	readonly property string unknown_status: qsTrId("common_words_unknown_status")
