@@ -17,55 +17,9 @@ Page {
 	}
 
 	// Get a list of all devices on the shelly service, sorted by name.
-	VeQItemSortTableModel {
+	SortedShellyDeviceModel {
 		id: sortedShellyDeviceModel
-
-		filterRole: VeQItemTableModel.ValueRole
-		sortColumn: childValues.sortValueColumn
-		dynamicSortFilter: true
-
-		model: VeQItemChildModel {
-			id: childValues
-
-			// Get a model of the com.victronenergy.shelly/<x>/Model paths. We need to do this
-			// instead of just fetching the /Devices children because those child paths are
-			// invalidated when a scan is done, so we need to ensure we only show devices with
-			// valid /Model values.
-			model: VeQItemSortTableModel {
-				dynamicSortFilter: true
-				filterFlags: VeQItemSortTableModel.FilterInvalid
-				filterRole: VeQItemTableModel.UniqueIdRole
-				filterRegExp: "\/Devices\/(?:\\w+)\/Model$"
-				model: VeQItemTableModel {
-				uids: [ root.serviceUid + "/Devices" ]
-					// Ideally we could set depth=1 to only add the channel paths, but this is fine
-					// for now, and there are not too many paths below the /Devices level anyway.
-					flags: VeQItemTableModel.AddAllChildren | VeQItemTableModel.AddNonLeaves | VeQItemTableModel.DontAddItem
-				}
-			}
-			sortDelegate: VeQItemSortDelegate {
-				id: deviceSortDelegate
-
-				readonly property string deviceUid: buddy?.itemParent()?.uid ?? ""
-				readonly property string name: nameItem.value || "%1 [%2]".arg(modelItem.value).arg(macItem.value)
-
-				sortValue: buddy.valid ? "" : name
-				VeQuickItem {
-					id: macItem
-					uid: deviceSortDelegate.deviceUid + "/Mac"
-				}
-
-				VeQuickItem {
-					id: modelItem
-					uid: deviceSortDelegate.deviceUid + "/Model"
-				}
-
-				VeQuickItem {
-					id: nameItem
-					uid: deviceSortDelegate.deviceUid + "/Name"
-				}
-			}
-		}
+		sourceModel: ShellyDeviceModel {}
 	}
 
 	GradientListView {
@@ -118,10 +72,13 @@ Page {
 		}
 		model: shellyServiceEnabled.value === 1 ? sortedShellyDeviceModel : null
 		delegate: ListNavigation {
-			text: sortValue
+			required property string name
+			required property string uid
+
+			text: name
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageSettingsShellyDevice.qml", {
-					deviceUid: (buddy?.itemParent()?.uid ?? ""),
+					deviceUid: uid,
 					title: text,
 				})
 			}

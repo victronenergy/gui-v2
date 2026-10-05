@@ -750,6 +750,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/units.cpp
     src/wifimodel.h
     src/wifimodel.cpp
+    src/shellydevicemodel.h
+    src/shellydevicemodel.cpp
     src/screenblanker.h
     src/screenblanker.cpp
     src/solarinput.h
