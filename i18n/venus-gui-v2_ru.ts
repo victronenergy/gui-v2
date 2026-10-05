@@ -1014,7 +1014,7 @@
       <translation type="unfinished">Добавить IP адреса вручную</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="100"/>
       <source>Add IP address manually</source>
       <translation>Добавить IP адреса вручную</translation>
     </message>
@@ -2110,7 +2110,7 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="22"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="195"/>
       <source>[Hidden]</source>
       <translation>[Скрыто]</translation>
     </message>
@@ -2190,27 +2190,27 @@ Use unless prohibited by the utility provider.</source>
       <translation>Осторожно, для систем ESS, а также систем с управляемой батареей экземпляр устройства CAN-bus должен оставаться настроенным на 0. Дополнительную информацию смотрите в руководстве GX.</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="181"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="185"/>
       <source>No access points</source>
       <translation>Не точек доступа</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="187"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Нет подключенных Wi-Fi адаптеров</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="42"/>
       <source>Create access point</source>
       <translation>Создать точку доступа</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="177"/>
       <source>Wi-Fi networks</source>
       <translation>Сети Wi-Fi</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="67"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>Вы уверены, что хотите отключить точку доступа?</translation>
     </message>
@@ -3639,7 +3639,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">Инвертировано</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="61"/>
       <source>Invert alarm logic</source>
       <translation>Инверт. логика сигнала тревоги</translation>
     </message>
@@ -4362,8 +4362,13 @@ Do you want to continue?</source>
       <source>Discharging</source>
       <translation>разряжается</translation>
     </message>
+    <message id="wifimodel_disconnected_ap_off">
+      <location filename="../../src/wifimodel.cpp" line="270"/>
+      <source/>
+      <translation type="unfinished"/>
+    </message>
     <message id="wifimodel_disconnected">
-      <location filename="../../components/WifiModel.qml" line="28"/>
+      <location filename="../../src/wifimodel.cpp" line="273"/>
       <source>Disconnected</source>
       <translation>Отключено</translation>
     </message>
@@ -7983,11 +7988,6 @@ Do you want to continue?</source>
       <source>ESS %1 Discharge Disabled</source>
       <translation>ESS %1 Разрядка отключена</translation>
     </message>
-    <message id="wifimodel_disconnected_ap_off">
-      <location filename="../../components/WifiModel.qml" line="25"/>
-      <source>Disconnected | AP Off</source>
-      <translation>Отключено | Точка доступа выключена</translation>
-    </message>
     <message id="ac-in-genset_disableautostartdialog_title">
       <location filename="../../components/dialogs/GeneratorDisableAutoStartDialog.qml" line="13"/>
       <source>Disable autostart?</source>
@@ -8720,7 +8720,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Резервное копирование и восстановление</translation>
     </message>
     <message id="wifimodel_disconnected_ap_on">
-      <location filename="../../components/WifiModel.qml" line="23"/>
+      <location filename="../../src/wifimodel.cpp" line="268"/>
       <source>Disconnected | AP On</source>
       <translation>Отключено | Точка доступа включена</translation>
     </message>
@@ -9592,7 +9592,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Чтобы изменить ID устройств Modbus-TCP, см. меню «Настройки → VRM → VRM device instances».</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="85"/>
       <source>Refresh devices</source>
       <translation>Обновить устройства</translation>
     </message>
@@ -9619,12 +9619,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Полярность</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="111"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>Длина пароля должна быть равна 0 или от 10 до 63 символов</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="114"/>
       <source>Password updated</source>
       <translation>Пароль обновлен</translation>
     </message>
@@ -10291,12 +10291,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>Разрешить использование Ethernet для доступа в Интернет</translation>
     </message>
     <message id="settings_wifi_access_point">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="37"/>
       <source>Access point</source>
       <translation>Точка доступа</translation>
     </message>
     <message id="settings_tcpip_wifi_gateway_enabled">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="146"/>
       <source>Allow using WiFi for internet access</source>
       <translation>Разрешить использование WiFi для доступа в Интернет</translation>
     </message>
@@ -11035,12 +11035,12 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>Это отключит устройство от VRM, если только оно не сможет подключиться к VRM по Wi-Fi. Вы действительно хотите отключить доступ к Интернету по Ethernet?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="167"/>
       <source>Disable internet access over WiFi?</source>
       <translation>Отключить доступ к Интернету по Wi-Fi?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway_confirm">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="169"/>
       <source>This will disconnect the device from VRM, unless it can connect to VRM over ethernet. Are you sure that you want to disable internet access over WiFi?</source>
       <translation>Это отключит устройство от VRM, если только оно не сможет подключиться к VRM по Ethernet. Вы действительно хотите отключить доступ к Интернету по Wi-Fi?</translation>
     </message>
@@ -11126,7 +11126,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>Удалить — %1</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="87"/>
       <source>Refresh</source>
       <translation>Обновить</translation>
     </message>
@@ -11851,12 +11851,12 @@ CAUTION: use only if required by the utility provider.</source>
       <translation>Экземпляр VE.Can# %1</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="91"/>
       <source>Access point password</source>
       <translation>Пароль точки доступа</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="65"/>
       <source>Disable access point</source>
       <translation>Отключить точку доступа</translation>
     </message>
@@ -11976,6 +11976,11 @@ CAUTION: use only if required by the utility provider.</source>
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
       <source>Button | Outputs → toggle and dim</source>
       <translation>Кнопка | Выходы → Переключать и диммировать</translation>
+    </message>
+    <message id="settings_shelly_integration">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="79"/>
+      <source>Enable Shelly integration</source>
+      <translation>Включить интеграцию с Shelly</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>

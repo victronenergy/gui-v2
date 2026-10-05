@@ -1014,7 +1014,7 @@
       <translation type="unfinished">手动添加IP地址</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="100"/>
       <source>Add IP address manually</source>
       <translation>手动添加IP地址</translation>
     </message>
@@ -2110,7 +2110,7 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="22"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="195"/>
       <source>[Hidden]</source>
       <translation>[隐藏]</translation>
     </message>
@@ -2190,27 +2190,27 @@ Use unless prohibited by the utility provider.</source>
       <translation>请注意，对于ESS系统以及带有管理电池的系统而言，CAN总线设备实例必须始终配置为0。详见GX手册。</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="181"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="185"/>
       <source>No access points</source>
       <translation>无接入点</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="187"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>无Wi-Fi适配器连接</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="42"/>
       <source>Create access point</source>
       <translation>创建接入点</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="177"/>
       <source>Wi-Fi networks</source>
       <translation>Wi-Fi网络</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="67"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>你确定要取消连接热点吗？</translation>
     </message>
@@ -3637,7 +3637,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">倒置</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="61"/>
       <source>Invert alarm logic</source>
       <translation>警报逻辑倒置</translation>
     </message>
@@ -4360,8 +4360,13 @@ Do you want to continue?</source>
       <source>Discharging</source>
       <translation>放电</translation>
     </message>
+    <message id="wifimodel_disconnected_ap_off">
+      <location filename="../../src/wifimodel.cpp" line="270"/>
+      <source/>
+      <translation type="unfinished"/>
+    </message>
     <message id="wifimodel_disconnected">
-      <location filename="../../components/WifiModel.qml" line="28"/>
+      <location filename="../../src/wifimodel.cpp" line="273"/>
       <source>Disconnected</source>
       <translation>已断开连接</translation>
     </message>
@@ -7981,11 +7986,6 @@ Do you want to continue?</source>
       <source>ESS %1 Discharge Disabled</source>
       <translation>ESS %1 放电禁用</translation>
     </message>
-    <message id="wifimodel_disconnected_ap_off">
-      <location filename="../../components/WifiModel.qml" line="25"/>
-      <source>Disconnected | AP Off</source>
-      <translation>断开 | AP 关闭</translation>
-    </message>
     <message id="ac-in-genset_disableautostartdialog_title">
       <location filename="../../components/dialogs/GeneratorDisableAutoStartDialog.qml" line="13"/>
       <source>Disable autostart?</source>
@@ -8716,7 +8716,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>备份 &amp; 恢复</translation>
     </message>
     <message id="wifimodel_disconnected_ap_on">
-      <location filename="../../components/WifiModel.qml" line="23"/>
+      <location filename="../../src/wifimodel.cpp" line="268"/>
       <source>Disconnected | AP On</source>
       <translation>断开 | AP 开启</translation>
     </message>
@@ -9588,7 +9588,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>请查看设置 → VRM → VRM 设备实例菜单来更改 Modbus-TCP 单元 ID。</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="85"/>
       <source>Refresh devices</source>
       <translation>刷新设备</translation>
     </message>
@@ -9615,12 +9615,12 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>极性</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="111"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>密码长度必须为 0 或介于 10 到 63 个字符之间</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="114"/>
       <source>Password updated</source>
       <translation>密码已更新</translation>
     </message>
@@ -10287,12 +10287,12 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>允许使用以太网进行互联网访问</translation>
     </message>
     <message id="settings_wifi_access_point">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="37"/>
       <source>Access point</source>
       <translation>热点</translation>
     </message>
     <message id="settings_tcpip_wifi_gateway_enabled">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="146"/>
       <source>Allow using WiFi for internet access</source>
       <translation>允许使用 WiFi 进行互联网访问</translation>
     </message>
@@ -11031,12 +11031,12 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>这将导致设备与 VRM 断开连接，除非它能通过 Wi-Fi 连接到 VRM。确定要禁用以太网互联网访问吗？</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="167"/>
       <source>Disable internet access over WiFi?</source>
       <translation>是否禁用 Wi-Fi 互联网访问？</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway_confirm">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="169"/>
       <source>This will disconnect the device from VRM, unless it can connect to VRM over ethernet. Are you sure that you want to disable internet access over WiFi?</source>
       <translation>这将导致设备与 VRM 断开连接，除非它能通过以太网连接到 VRM。确定要禁用 Wi-Fi 互联网访问吗？</translation>
     </message>
@@ -11122,7 +11122,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>删除 - %1</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="87"/>
       <source>Refresh</source>
       <translation>刷新</translation>
     </message>
@@ -11847,12 +11847,12 @@ CAUTION: use only if required by the utility provider.</source>
       <translation>VE.Can示例# %1</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="91"/>
       <source>Access point password</source>
       <translation>接入点密码</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="65"/>
       <source>Disable access point</source>
       <translation>取消连接热点</translation>
     </message>
@@ -11972,6 +11972,11 @@ CAUTION: use only if required by the utility provider.</source>
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
       <source>Button | Outputs → toggle and dim</source>
       <translation>按钮 | 输出 → 切换并调光</translation>
+    </message>
+    <message id="settings_shelly_integration">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="79"/>
+      <source>Enable Shelly integration</source>
+      <translation>启用 Shelly 集成</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>

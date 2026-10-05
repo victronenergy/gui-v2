@@ -1014,7 +1014,7 @@
       <translation type="unfinished">Adauga manual adresa IP</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="100"/>
       <source>Add IP address manually</source>
       <translation>Adauga manual adresa IP</translation>
     </message>
@@ -2110,7 +2110,7 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="22"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="195"/>
       <source>[Hidden]</source>
       <translation>[Ascuns]</translation>
     </message>
@@ -2190,27 +2190,27 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
       <translation>Atentie, pentru sistemele ESS, precum si pentru cele cu baterie inteligenta, instanta CAN-bus a dispozitivului trebuie sa ramana configurata pe 0. Verifica manualul GX pentru mai multe informatii.</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="181"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="185"/>
       <source>No access points</source>
       <translation>Niciun punct de acces (AP)</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="187"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Niciun adaptor Wi-Fi conectat</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="42"/>
       <source>Create access point</source>
       <translation>Creaza puct acces (AP)</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="177"/>
       <source>Wi-Fi networks</source>
       <translation>Retele Wi-Fi</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="67"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>Sunteți sigur că doriți să dezactivați punctul de acces?</translation>
     </message>
@@ -3639,7 +3639,7 @@ Utilizați dacă nu este interzis de furnizorul de utilități.</translation>
       <translation type="unfinished">Inversat</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="61"/>
       <source>Invert alarm logic</source>
       <translation>Inverseaza functionalitatea alarmei</translation>
     </message>
@@ -4333,7 +4333,7 @@ Doriți să continuați?</translation>
       <location filename="../../components/controls/TemperatureSlider.qml" line="164"/>
       <source>Current</source>
       <extracomment>The current temperature measurement</extracomment>
-      <translation>Intensitate</translation>
+      <translation>Curent</translation>
     </message>
     <message id="common_words_current_transformers">
       <location filename="../../components/CommonWords.qml" line="164"/>
@@ -4362,8 +4362,13 @@ Doriți să continuați?</translation>
       <source>Discharging</source>
       <translation>descarcare</translation>
     </message>
+    <message id="wifimodel_disconnected_ap_off">
+      <location filename="../../src/wifimodel.cpp" line="270"/>
+      <source/>
+      <translation type="unfinished"/>
+    </message>
     <message id="wifimodel_disconnected">
-      <location filename="../../components/WifiModel.qml" line="28"/>
+      <location filename="../../src/wifimodel.cpp" line="273"/>
       <source>Disconnected</source>
       <translation>Deconectat</translation>
     </message>
@@ -7246,7 +7251,7 @@ Doriți să continuați?</translation>
       <location filename="../../components/CommonWords.qml" line="161"/>
       <source>Current</source>
       <extracomment>Electric current, as measured in Amps</extracomment>
-      <translation type="unfinished">Intensitate</translation>
+      <translation type="unfinished">Curent</translation>
     </message>
     <message id="common_words_daily_history">
       <location filename="../../components/CommonWords.qml" line="170"/>
@@ -7983,11 +7988,6 @@ Doriți să continuați?</translation>
       <source>ESS %1 Discharge Disabled</source>
       <translation>ESS %1 Descărcare dezactivată</translation>
     </message>
-    <message id="wifimodel_disconnected_ap_off">
-      <location filename="../../components/WifiModel.qml" line="25"/>
-      <source>Disconnected | AP Off</source>
-      <translation>Deconectat | AP oprit</translation>
-    </message>
     <message id="ac-in-genset_disableautostartdialog_title">
       <location filename="../../components/dialogs/GeneratorDisableAutoStartDialog.qml" line="13"/>
       <source>Disable autostart?</source>
@@ -8720,7 +8720,7 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <translation>Copie de rezervă și recuperare</translation>
     </message>
     <message id="wifimodel_disconnected_ap_on">
-      <location filename="../../components/WifiModel.qml" line="23"/>
+      <location filename="../../src/wifimodel.cpp" line="268"/>
       <source>Disconnected | AP On</source>
       <translation>Deconectat | AP activ</translation>
     </message>
@@ -9592,7 +9592,7 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <translation>Consultați meniul Setări → VRM → Instanțe de dispozitive VRM pentru a schimba ID-urile unităților Modbus-TCP.</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="85"/>
       <source>Refresh devices</source>
       <translation>Reîmprospătați dispozitivele</translation>
     </message>
@@ -9619,12 +9619,12 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <translation>Polaritate</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="111"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>Lungimea parolei trebuie să fie 0 sau între 10 și 63 de caractere</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="114"/>
       <source>Password updated</source>
       <translation>Parola a fost actualizată</translation>
     </message>
@@ -10291,12 +10291,12 @@ Dispozitivul GX poate controla un singur grup electrogen conectat și îl ia pe 
       <translation>Permite utilizarea ethernet pentru acces la internet</translation>
     </message>
     <message id="settings_wifi_access_point">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="37"/>
       <source>Access point</source>
       <translation>Punct de acces</translation>
     </message>
     <message id="settings_tcpip_wifi_gateway_enabled">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="146"/>
       <source>Allow using WiFi for internet access</source>
       <translation>Permite utilizarea WiFi pentru acces la internet</translation>
     </message>
@@ -11035,12 +11035,12 @@ Vă rugăm să actualizați la cel mai recent firmware pentru a putea ajusta ace
       <translation>Această acțiune va deconecta dispozitivul de la VRM, cu excepția cazului în care se poate conecta la VRM prin Wi-Fi. Sigur doriți să dezactivați accesul la internet prin ethernet?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="167"/>
       <source>Disable internet access over WiFi?</source>
       <translation>Dezactivați accesul la internet prin Wi-Fi?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway_confirm">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="169"/>
       <source>This will disconnect the device from VRM, unless it can connect to VRM over ethernet. Are you sure that you want to disable internet access over WiFi?</source>
       <translation>Această acțiune va deconecta dispozitivul de la VRM, cu excepția cazului în care se poate conecta la VRM prin ethernet. Sigur doriți să dezactivați accesul la internet prin Wi-Fi?</translation>
     </message>
@@ -11126,7 +11126,7 @@ Vă rugăm să actualizați la cel mai recent firmware pentru a putea ajusta ace
       <translation>Ștergere - %1</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="87"/>
       <source>Refresh</source>
       <translation>Reîmprospătează</translation>
     </message>
@@ -11851,12 +11851,12 @@ ATENȚIE: Utilizați numai dacă este solicitat de către furnizorul de utilită
       <translation>Instanță număr VE.Can %1</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="91"/>
       <source>Access point password</source>
       <translation>Parola punctului de acces</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="65"/>
       <source>Disable access point</source>
       <translation>Dezactivați punct de acces</translation>
     </message>
@@ -11976,6 +11976,11 @@ ATENȚIE: Utilizați numai dacă este solicitat de către furnizorul de utilită
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
       <source>Button | Outputs → toggle and dim</source>
       <translation>Buton | Ieșiri → Comută și reduce intensitatea</translation>
+    </message>
+    <message id="settings_shelly_integration">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="79"/>
+      <source>Enable Shelly integration</source>
+      <translation>Activează integrarea Shelly</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>

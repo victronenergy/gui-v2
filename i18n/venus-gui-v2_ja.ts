@@ -1014,7 +1014,7 @@
       <translation type="unfinished">IPアドレスを手動追加</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="100"/>
       <source>Add IP address manually</source>
       <translation>IPアドレスを手動追加</translation>
     </message>
@@ -2110,7 +2110,7 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="22"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="195"/>
       <source>[Hidden]</source>
       <translation>[非表示]</translation>
     </message>
@@ -2190,27 +2190,27 @@ Use unless prohibited by the utility provider.</source>
       <translation>注意：ESSシステム、および管理バッテリーを搭載したシステムでは、CANバスデバイスインスタンスは0に設定されたままでなければなりません。詳細については、GXマニュアルを参照してください。</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="181"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="185"/>
       <source>No access points</source>
       <translation>アクセスポイントなし</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="187"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Wi-Fiアダプターが接続されていません</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="42"/>
       <source>Create access point</source>
       <translation>アクセスポイントを作成</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="177"/>
       <source>Wi-Fi networks</source>
       <translation>Wi-Fiネットワーク</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="67"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>アクセスポイントを無効にしてもよろしいですか？</translation>
     </message>
@@ -3637,7 +3637,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">反転</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="61"/>
       <source>Invert alarm logic</source>
       <translation>アラームロジックを反転</translation>
     </message>
@@ -4360,8 +4360,13 @@ Do you want to continue?</source>
       <source>Discharging</source>
       <translation>放電中</translation>
     </message>
+    <message id="wifimodel_disconnected_ap_off">
+      <location filename="../../src/wifimodel.cpp" line="270"/>
+      <source/>
+      <translation type="unfinished"/>
+    </message>
     <message id="wifimodel_disconnected">
-      <location filename="../../components/WifiModel.qml" line="28"/>
+      <location filename="../../src/wifimodel.cpp" line="273"/>
       <source>Disconnected</source>
       <translation>切断された状態</translation>
     </message>
@@ -7981,11 +7986,6 @@ Do you want to continue?</source>
       <source>ESS %1 Discharge Disabled</source>
       <translation>ESS %1 放電無効</translation>
     </message>
-    <message id="wifimodel_disconnected_ap_off">
-      <location filename="../../components/WifiModel.qml" line="25"/>
-      <source>Disconnected | AP Off</source>
-      <translation>未接続 | APオフ</translation>
-    </message>
     <message id="ac-in-genset_disableautostartdialog_title">
       <location filename="../../components/dialogs/GeneratorDisableAutoStartDialog.qml" line="13"/>
       <source>Disable autostart?</source>
@@ -8716,7 +8716,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>バックアップと復元</translation>
     </message>
     <message id="wifimodel_disconnected_ap_on">
-      <location filename="../../components/WifiModel.qml" line="23"/>
+      <location filename="../../src/wifimodel.cpp" line="268"/>
       <source>Disconnected | AP On</source>
       <translation>未接続 | APオン</translation>
     </message>
@@ -9588,7 +9588,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>Modbus-TCPユニットIDを変更するには、設定 → VRM → VRMデバイスインスタンスメニューを参照してください。</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="85"/>
       <source>Refresh devices</source>
       <translation>デバイスを更新</translation>
     </message>
@@ -9615,12 +9615,12 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>極性</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="111"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>パスワードの長さは0文字、または10文字から63文字の間である必要があります</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="114"/>
       <source>Password updated</source>
       <translation>パスワードを更新しました</translation>
     </message>
@@ -10287,12 +10287,12 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>インターネットアクセスにイーサネットの使用を許可する</translation>
     </message>
     <message id="settings_wifi_access_point">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="37"/>
       <source>Access point</source>
       <translation>アクセスポイント</translation>
     </message>
     <message id="settings_tcpip_wifi_gateway_enabled">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="146"/>
       <source>Allow using WiFi for internet access</source>
       <translation>インターネットアクセスにWiFiの使用を許可する</translation>
     </message>
@@ -11031,12 +11031,12 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>Wi-Fi経由でVRMに接続できない限り、このデバイスはVRMから切断されます。イーサネット経由のインターネット接続を無効にしてもよろしいですか？</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="167"/>
       <source>Disable internet access over WiFi?</source>
       <translation>Wi-Fi経由のインターネット接続を無効にしますか？</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway_confirm">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="169"/>
       <source>This will disconnect the device from VRM, unless it can connect to VRM over ethernet. Are you sure that you want to disable internet access over WiFi?</source>
       <translation>イーサネット経由でVRMに接続できない限り、このデバイスはVRMから切断されます。Wi-Fi経由のインターネット接続を無効にしてもよろしいですか？</translation>
     </message>
@@ -11122,7 +11122,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>%1 を削除</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="87"/>
       <source>Refresh</source>
       <translation>更新</translation>
     </message>
@@ -11847,12 +11847,12 @@ CAUTION: use only if required by the utility provider.</source>
       <translation>VE.Canインスタンス# %1</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="91"/>
       <source>Access point password</source>
       <translation>アクセスポイントパスワード</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="65"/>
       <source>Disable access point</source>
       <translation>アクセスポイントを無効にする</translation>
     </message>
@@ -11972,6 +11972,11 @@ CAUTION: use only if required by the utility provider.</source>
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
       <source>Button | Outputs → toggle and dim</source>
       <translation>ボタン | 出力 → トグルおよび調光</translation>
+    </message>
+    <message id="settings_shelly_integration">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="79"/>
+      <source>Enable Shelly integration</source>
+      <translation>Shelly連携を有効にする</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>

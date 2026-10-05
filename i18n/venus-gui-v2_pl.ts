@@ -1014,7 +1014,7 @@
       <translation type="unfinished">Dodaj adres IP ręcznie</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="100"/>
       <source>Add IP address manually</source>
       <translation>Dodaj adres IP ręcznie</translation>
     </message>
@@ -2110,7 +2110,7 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="22"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="195"/>
       <source>[Hidden]</source>
       <translation>[Ukryte]</translation>
     </message>
@@ -2190,27 +2190,27 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <translation>Uwaga, w przypadku systemów ESS, jak również systemów z zarządzanym akumulatorem, instancja urządzenia CAN-bus musi pozostać skonfigurowana na 0. Więcej informacji w instrukcji GX.</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="181"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="185"/>
       <source>No access points</source>
       <translation>Brak punktów dostępu</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="187"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Brak podłączonego adaptera Wi-Fi</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="42"/>
       <source>Create access point</source>
       <translation>Utwórz punkt dostępu</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="177"/>
       <source>Wi-Fi networks</source>
       <translation>Sieci Wi-Fi</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="67"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>Czy jesteś pewien, że chcesz wyłączyć punkt dostępu?</translation>
     </message>
@@ -3639,7 +3639,7 @@ Używać, o ile nie jest to zabronione przez dostawcę mediów.</translation>
       <translation type="unfinished">Odwrócona</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="61"/>
       <source>Invert alarm logic</source>
       <translation>Odwróć logikę alarmu</translation>
     </message>
@@ -4362,8 +4362,13 @@ Czy chcesz kontynuować?</translation>
       <source>Discharging</source>
       <translation>Rozładowanie</translation>
     </message>
+    <message id="wifimodel_disconnected_ap_off">
+      <location filename="../../src/wifimodel.cpp" line="270"/>
+      <source/>
+      <translation type="unfinished"/>
+    </message>
     <message id="wifimodel_disconnected">
-      <location filename="../../components/WifiModel.qml" line="28"/>
+      <location filename="../../src/wifimodel.cpp" line="273"/>
       <source>Disconnected</source>
       <translation>Odłączone</translation>
     </message>
@@ -7983,11 +7988,6 @@ Czy chcesz kontynuować?</translation>
       <source>ESS %1 Discharge Disabled</source>
       <translation>ESS %1 Rozładowanie Wyłączone</translation>
     </message>
-    <message id="wifimodel_disconnected_ap_off">
-      <location filename="../../components/WifiModel.qml" line="25"/>
-      <source>Disconnected | AP Off</source>
-      <translation>Odłączony | AP wyłączony</translation>
-    </message>
     <message id="ac-in-genset_disableautostartdialog_title">
       <location filename="../../components/dialogs/GeneratorDisableAutoStartDialog.qml" line="13"/>
       <source>Disable autostart?</source>
@@ -8720,7 +8720,7 @@ Urządzenie GX może sterować tylko jednym podłączonym agregatem i wybiera te
       <translation>Kopia zapasowa i Przywracanie</translation>
     </message>
     <message id="wifimodel_disconnected_ap_on">
-      <location filename="../../components/WifiModel.qml" line="23"/>
+      <location filename="../../src/wifimodel.cpp" line="268"/>
       <source>Disconnected | AP On</source>
       <translation>Odłączony | AP włączony</translation>
     </message>
@@ -9592,7 +9592,7 @@ Urządzenie GX może sterować tylko jednym podłączonym agregatem i wybiera te
       <translation>Przejdź do Ustawienia → VRM → Instancje urządzeń VRM, aby zmienić identyfikatory jednostek Modbus-TCP.</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="85"/>
       <source>Refresh devices</source>
       <translation>Odśwież urządzenia</translation>
     </message>
@@ -9619,12 +9619,12 @@ Urządzenie GX może sterować tylko jednym podłączonym agregatem i wybiera te
       <translation>Polaryzacja</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="111"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>Długość hasła musi wynosić 0 lub od 10 do 63 znaków</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="114"/>
       <source>Password updated</source>
       <translation>Hasło zaktualizowane</translation>
     </message>
@@ -10291,12 +10291,12 @@ Urządzenie GX może sterować tylko jednym podłączonym agregatem i wybiera te
       <translation>Zezwól na używanie Ethernetu do dostępu do internetu</translation>
     </message>
     <message id="settings_wifi_access_point">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="37"/>
       <source>Access point</source>
       <translation>Punkt dostępu</translation>
     </message>
     <message id="settings_tcpip_wifi_gateway_enabled">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="146"/>
       <source>Allow using WiFi for internet access</source>
       <translation>Zezwól na używanie Wi-Fi do dostępu do internetu</translation>
     </message>
@@ -11035,12 +11035,12 @@ Zaktualizuj oprogramowanie do najnowszej wersji, aby móc dostosować te ustawie
       <translation>Spowoduje to odłączenie urządzenia od VRM, chyba że może ono połączyć się z VRM przez Wi-Fi. Czy na pewno chcesz wyłączyć dostęp do internetu przez ethernet?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="167"/>
       <source>Disable internet access over WiFi?</source>
       <translation>Wyłączyć dostęp do internetu przez Wi-Fi?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway_confirm">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="169"/>
       <source>This will disconnect the device from VRM, unless it can connect to VRM over ethernet. Are you sure that you want to disable internet access over WiFi?</source>
       <translation>Spowoduje to odłączenie urządzenia od VRM, chyba że może ono połączyć się z VRM przez ethernet. Czy na pewno chcesz wyłączyć dostęp do internetu przez Wi-Fi?</translation>
     </message>
@@ -11126,7 +11126,7 @@ Zaktualizuj oprogramowanie do najnowszej wersji, aby móc dostosować te ustawie
       <translation>Usuń - %1</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="87"/>
       <source>Refresh</source>
       <translation>Odśwież</translation>
     </message>
@@ -11851,12 +11851,12 @@ UWAGA: Używać tylko wtedy, gdy jest to wymagane przez dostawcę mediów.</tran
       <translation>VE.Can Instance# %1</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="91"/>
       <source>Access point password</source>
       <translation>Hasło Punktu Dostępu</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="65"/>
       <source>Disable access point</source>
       <translation>Wyłączenie punktu dostępu</translation>
     </message>
@@ -11976,6 +11976,11 @@ UWAGA: Używać tylko wtedy, gdy jest to wymagane przez dostawcę mediów.</tran
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
       <source>Button | Outputs → toggle and dim</source>
       <translation>Przycisk | Wyjścia → Przełącz i ściemnij</translation>
+    </message>
+    <message id="settings_shelly_integration">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="79"/>
+      <source>Enable Shelly integration</source>
+      <translation>Włącz integrację z Shelly</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>

@@ -1014,7 +1014,7 @@
       <translation type="unfinished">IP adresini manuel olarak ekle</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="100"/>
       <source>Add IP address manually</source>
       <translation>IP adresini manuel olarak ekle</translation>
     </message>
@@ -2110,7 +2110,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="22"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="195"/>
       <source>[Hidden]</source>
       <translation>[Gizli]</translation>
     </message>
@@ -2190,27 +2190,27 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation>ESS sistemlerinde, yönetimli akülü sistemlerde olduğu gibi CAN veri yolu cihazı örneğinin 0'a ayarlı olarak kalması gerektiğine dikkat edin. Daha fazla bilgi için GX kılavuzuna bakın.</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="181"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="185"/>
       <source>No access points</source>
       <translation>Access noktası yok</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="187"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Wi-Fi adaptörü yok</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="42"/>
       <source>Create access point</source>
       <translation>Access noktası oluştur</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="177"/>
       <source>Wi-Fi networks</source>
       <translation>Wi-Fi ağı</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="67"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>Access Pointı devre dışı bırakmak istediğinizden emin misiniz?</translation>
     </message>
@@ -3638,7 +3638,7 @@ Hizmet sağlayıcı tarafından yasaklanmadığı sürece kullanın.</translatio
       <translation type="unfinished">Ters Çevrilmiş</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="61"/>
       <source>Invert alarm logic</source>
       <translation>Alarm mantığını tersine çevir</translation>
     </message>
@@ -4361,8 +4361,13 @@ Devam etmek istiyor musunuz?</translation>
       <source>Discharging</source>
       <translation>Deşarj </translation>
     </message>
+    <message id="wifimodel_disconnected_ap_off">
+      <location filename="../../src/wifimodel.cpp" line="270"/>
+      <source/>
+      <translation type="unfinished"/>
+    </message>
     <message id="wifimodel_disconnected">
-      <location filename="../../components/WifiModel.qml" line="28"/>
+      <location filename="../../src/wifimodel.cpp" line="273"/>
       <source>Disconnected</source>
       <translation>Bağlantı kesildi</translation>
     </message>
@@ -7982,11 +7987,6 @@ Devam etmek istiyor musunuz?</translation>
       <source>ESS %1 Discharge Disabled</source>
       <translation>ESS %1 Deşarj Devre Dışı</translation>
     </message>
-    <message id="wifimodel_disconnected_ap_off">
-      <location filename="../../components/WifiModel.qml" line="25"/>
-      <source>Disconnected | AP Off</source>
-      <translation>Bağlantısız | AP Kapalı</translation>
-    </message>
     <message id="ac-in-genset_disableautostartdialog_title">
       <location filename="../../components/dialogs/GeneratorDisableAutoStartDialog.qml" line="13"/>
       <source>Disable autostart?</source>
@@ -8717,7 +8717,7 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>Yedekle ve Geri Yükle</translation>
     </message>
     <message id="wifimodel_disconnected_ap_on">
-      <location filename="../../components/WifiModel.qml" line="23"/>
+      <location filename="../../src/wifimodel.cpp" line="268"/>
       <source>Disconnected | AP On</source>
       <translation>Bağlantısız | AP Açık</translation>
     </message>
@@ -9589,7 +9589,7 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>Modbus-TCP ünite kimliklerini değiştirmek için Ayarlar → VRM → VRM cihaz örnekleri menüsüne bakın.</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="85"/>
       <source>Refresh devices</source>
       <translation>Cihazları yenile</translation>
     </message>
@@ -9616,12 +9616,12 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>Polarite</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="111"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>Parola uzunluğu 0 veya 10 ile 63 karakter arasında olmalıdır</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="114"/>
       <source>Password updated</source>
       <translation>Parola güncellendi</translation>
     </message>
@@ -10288,12 +10288,12 @@ GX cihazı yalnızca bir bağlı jeneratörü kontrol edebilir ve en düşük VR
       <translation>İnternet erişimi için ethernet kullanımına izin ver</translation>
     </message>
     <message id="settings_wifi_access_point">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="37"/>
       <source>Access point</source>
       <translation>Erişim noktası</translation>
     </message>
     <message id="settings_tcpip_wifi_gateway_enabled">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="146"/>
       <source>Allow using WiFi for internet access</source>
       <translation>İnternet erişimi için WiFi kullanımına izin ver</translation>
     </message>
@@ -11032,12 +11032,12 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <translation>Wi-Fi üzerinden VRM'e bağlanamadığı sürece bu işlem cihazın VRM bağlantısını kesecektir. Ethernet üzerinden internet erişimini devre dışı bırakmak istediğinizden emin misiniz?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="167"/>
       <source>Disable internet access over WiFi?</source>
       <translation>Wi-Fi üzerinden internet erişimi devre dışı bırakılsın mı?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway_confirm">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="169"/>
       <source>This will disconnect the device from VRM, unless it can connect to VRM over ethernet. Are you sure that you want to disable internet access over WiFi?</source>
       <translation>Ethernet üzerinden VRM'e bağlanamadığı sürece bu işlem cihazın VRM bağlantısını kesecektir. Wi-Fi üzerinden internet erişimini devre dışı bırakmak istediğinizden emin misiniz?</translation>
     </message>
@@ -11123,7 +11123,7 @@ Bu ayarları yapabilmek için lütfen en son üretici yazılımına güncelleyin
       <translation>Sil - %1</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="87"/>
       <source>Refresh</source>
       <translation>Yenile</translation>
     </message>
@@ -11848,12 +11848,12 @@ DİKKAT: Yalnızca hizmet sağlayıcı tarafından isteniyorsa kullanın.</trans
       <translation>VE.Can Örneği# %1</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="91"/>
       <source>Access point password</source>
       <translation>Erişim Noktası parolası</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="65"/>
       <source>Disable access point</source>
       <translation>Access Point Devre Dışı Bırak</translation>
     </message>
@@ -11973,6 +11973,11 @@ DİKKAT: Yalnızca hizmet sağlayıcı tarafından isteniyorsa kullanın.</trans
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
       <source>Button | Outputs → toggle and dim</source>
       <translation>Düğme | Çıkışlar → Aç/kapat ve karart</translation>
+    </message>
+    <message id="settings_shelly_integration">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="79"/>
+      <source>Enable Shelly integration</source>
+      <translation>Shelly entegrasyonunu etkinleştir</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
