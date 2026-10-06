@@ -9,9 +9,13 @@ ObjectModel {
 	required property SwipeView view
 	// Bump when plugin enable flips so `pages` re-filters without destroying delegates.
 	property int pluginEnableRevision: 0
+	// Delegate Loaders finish after `count` changes. `itemAt()` is not a binding
+	// dependency, so a nav page is dropped until something re-reads `pages`.
+	property int pluginNavReady: 0
 
 	readonly property list<SwipeViewPage> pages: {
 		void pluginEnableRevision
+		void pluginNavReady
 		var p = []
 		if (showBoatPage) p.push(boatPageLoader.item)
 		p.push(briefPage)
@@ -21,8 +25,11 @@ ObjectModel {
 			if (!loader || !loader.item) {
 				continue
 			}
-			// Disabled nav plugins stay loaded but drop out of the swipe/nav list.
+			// Disabled nav plugins stay in the repeater but drop out of the swipe/nav list.
 			if (!GuiPluginLoader.isPluginEnabled(loader.pluginName)) {
+				continue
+			}
+			if (loader.item.contentFailed) {
 				continue
 			}
 			p.push(loader.item)
@@ -91,10 +98,31 @@ ObjectModel {
 		type: GuiPluginLoader.NavigationPage
 	}
 
+	function pluginHasNavigation(name) {
+		const plugin = GuiPluginLoader.plugin(name)
+		const integrations = plugin ? plugin.integrations : null
+		if (!integrations)
+			return false
+		for (let i = 0; i < integrations.length; ++i) {
+			if (integrations[i].type === GuiPluginLoader.NavigationPage)
+				return true
+		}
+		return false
+	}
+
 	Connections {
 		target: GuiPluginLoader
 		function onPluginEnabledChanged(name) {
-			root.pluginEnableRevision++
+			const mv = Global.mainView
+			if (mv) {
+				const current = mv.swipeView && mv.swipeView.currentItem && mv.swipeView.currentItem.url
+						? String(mv.swipeView.currentItem.url) : ""
+				const pinned = mv._pinnedMainPageUrl ? String(mv._pinnedMainPageUrl) : ""
+				// The visible page wins. A stale pin must not pull the view back to Brief.
+				mv._resyncUrl = current || pinned
+			}
+			if (root.pluginHasNavigation(name))
+				root.pluginEnableRevision++
 		}
 	}
 
@@ -113,10 +141,15 @@ ObjectModel {
 				required property string pluginName
 				required property string title
 				required property url icon
+				required property url iconActive
 				required property url url
 
 				// Keep delegates alive across enable toggles; `pages` filters by enabled.
 				active: true
+				onStatusChanged: {
+					if (status === Loader.Ready)
+						root.pluginNavReady++
+				}
 				sourceComponent: SwipeViewPage {
 					id: pluginSwipePage
 					view: root.view
@@ -124,9 +157,19 @@ ObjectModel {
 					title: pluginPageDelegate.title !== ""
 						? pluginPageDelegate.title
 						: pluginPageDelegate.pluginName
-					iconSource: pluginPageDelegate.icon
+					iconSource: pluginSwipePage.SwipeView.isCurrentItem
+							&& String(pluginPageDelegate.iconActive).length > 0
+						? pluginPageDelegate.iconActive
+						: pluginPageDelegate.icon
 					url: pluginPageDelegate.url
 					focusPolicy: Qt.TabFocus
+
+					property bool contentVisited: false
+					readonly property bool contentEnabled: {
+						void root.pluginEnableRevision
+						return GuiPluginLoader.isPluginEnabled(pluginPageDelegate.pluginName)
+					}
+					readonly property bool contentFailed: pluginContentLoader.status === Loader.Error
 
 					onActiveFocusChanged: {
 						if (activeFocus && Global.keyNavigationEnabled && pluginContentLoader.item) {
@@ -137,7 +180,18 @@ ObjectModel {
 					Loader {
 						id: pluginContentLoader
 						anchors.fill: parent
+						asynchronous: true
+						active: pluginSwipePage.contentEnabled
+								&& (pluginSwipePage.SwipeView.isCurrentItem || pluginSwipePage.contentVisited)
 						source: pluginPageDelegate.url
+						onActiveChanged: {
+							if (active)
+								pluginSwipePage.contentVisited = true
+						}
+						onStatusChanged: {
+							if (status === Loader.Error)
+								root.pluginEnableRevision++
+						}
 					}
 				}
 			}

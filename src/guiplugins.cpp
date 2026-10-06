@@ -15,6 +15,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QFileSystemWatcher>
+#include <QSaveFile>
 #include <QCryptographicHash>
 #include <QVersionNumber>
 
@@ -101,6 +102,11 @@ namespace {
 
 	QString pluginUiStateFilePath()
 	{
+		// Unit tests isolate the state file from the binary directory.
+		const QByteArray overridePath = qgetenv("VENUS_PLUGIN_UI_STATE_FILE");
+		if (!overridePath.isEmpty()) {
+			return QString::fromLocal8Bit(overridePath);
+		}
 #if defined(VENUS_GX_BUILD)
 		// Durable on GX next to applications tree; survives gui-v2 restarts.
 		// Keep out of */gui-v2/*.json so readFromFilesystem never treats it as a plugin.
@@ -261,7 +267,7 @@ void GuiPluginLoader::loadPluginUiState()
 	m_pluginUiState = doc.object();
 }
 
-void GuiPluginLoader::savePluginUiState() const
+void GuiPluginLoader::savePluginUiState()
 {
 	const QString path = pluginUiStatePath();
 	if (path.isEmpty()) {
@@ -272,12 +278,31 @@ void GuiPluginLoader::savePluginUiState() const
 		qCWarning(venusGui) << "Unable to create directory for plugin UI state:" << info.dir().absolutePath();
 		return;
 	}
-	QFile f(path);
-	if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+	QSaveFile f(path);
+	if (!f.open(QIODevice::WriteOnly)) {
 		qCWarning(venusGui) << "Unable to write plugin UI state to" << path << f.errorString();
 		return;
 	}
+	m_writingPluginUiState = true;
 	f.write(QJsonDocument(m_pluginUiState).toJson(QJsonDocument::Indented));
+	const bool committed = f.commit();
+	m_writingPluginUiState = false;
+	if (!committed) {
+		qCWarning(venusGui) << "Unable to commit plugin UI state to" << path << f.errorString();
+		return;
+	}
+	ensureStateFileWatched();
+}
+
+void GuiPluginLoader::ensureStateFileWatched()
+{
+	const QString path = pluginUiStatePath();
+	if (path.isEmpty() || !m_pluginUiStateWatcher) {
+		return;
+	}
+	if (QFile::exists(path) && !m_pluginUiStateWatcher->files().contains(path)) {
+		m_pluginUiStateWatcher->addPath(path);
+	}
 }
 
 void GuiPluginLoader::watchPluginUiStateFile()
@@ -286,25 +311,24 @@ void GuiPluginLoader::watchPluginUiStateFile()
 	if (path.isEmpty()) {
 		return;
 	}
-	// Ensure the file exists so QFileSystemWatcher can attach.
-	if (!QFile::exists(path)) {
-		savePluginUiState();
-	}
 	if (!m_pluginUiStateWatcher) {
 		m_pluginUiStateWatcher = new QFileSystemWatcher(this);
 		connect(m_pluginUiStateWatcher, &QFileSystemWatcher::fileChanged,
-			this, [this](const QString &changedPath) {
+			this, [this](const QString &) {
 				reloadPluginUiStateFromDisk();
-				// Editors that replace the file drop the watch; re-add.
-				if (m_pluginUiStateWatcher && QFile::exists(changedPath)
-						&& !m_pluginUiStateWatcher->files().contains(changedPath)) {
-					m_pluginUiStateWatcher->addPath(changedPath);
-				}
+				ensureStateFileWatched();
+			});
+		connect(m_pluginUiStateWatcher, &QFileSystemWatcher::directoryChanged,
+			this, [this](const QString &) {
+				ensureStateFileWatched();
+				reloadPluginUiStateFromDisk();
 			});
 	}
-	if (!m_pluginUiStateWatcher->files().contains(path)) {
-		m_pluginUiStateWatcher->addPath(path);
+	const QString dir = QFileInfo(path).absolutePath();
+	if (QDir(dir).exists() && !m_pluginUiStateWatcher->directories().contains(dir)) {
+		m_pluginUiStateWatcher->addPath(dir);
 	}
+	ensureStateFileWatched();
 }
 
 void GuiPluginLoader::reloadPluginUiStateFromDisk()
@@ -321,7 +345,13 @@ void GuiPluginLoader::reloadPluginUiStateFromDisk()
 	if (!doc.isObject()) {
 		return;
 	}
+	if (m_writingPluginUiState) {
+		return;
+	}
 	const QJsonObject next = doc.object();
+	if (next == m_pluginUiState) {
+		return;
+	}
 	QSet<QString> names;
 	const QStringList oldKeys = m_pluginUiState.keys();
 	const QStringList newKeys = next.keys();
@@ -383,11 +413,10 @@ void GuiPluginLoader::setPluginEnabled(const QString &name, bool enabled)
 	if (name.isEmpty()) {
 		return;
 	}
-	QJsonObject obj = pluginUiStateObject(name);
-	if (obj.contains(QStringLiteral("enabled"))
-			&& obj.value(QStringLiteral("enabled")).toBool(true) == enabled) {
+	if (isPluginEnabled(name) == enabled) {
 		return;
 	}
+	QJsonObject obj = pluginUiStateObject(name);
 	obj.insert(QStringLiteral("enabled"), enabled);
 	m_pluginUiState.insert(name, obj);
 	savePluginUiState();
@@ -1355,9 +1384,22 @@ GuiPluginIntegrationModel::GuiPluginIntegrationModel(QObject *parent)
 	// NavigationPage delegates stay alive across enable toggles; QML filters
 	// them from the swipe/nav list. Other chrome types still rebuild here.
 	connect(singleton, &GuiPluginLoader::pluginEnabledChanged,
-		this, [this](const QString &) {
-			if (m_type != GuiPluginLoader::NavigationPage) {
-				updateIntegrations();
+		this, [this](const QString &name) {
+			if (m_type == GuiPluginLoader::NavigationPage) {
+				return;
+			}
+			const GuiPlugin plugin = GuiPluginLoader::create()->plugin(name);
+			if (plugin.name().isEmpty()) {
+				return;
+			}
+			const QVector<GuiPluginIntegration> integrations = plugin.integrations();
+			for (const GuiPluginIntegration &integration : integrations) {
+				if (integration.type() == m_type
+						&& (m_cardType == GuiPluginLoader::InvalidCardType
+							|| integration.cardType() == m_cardType)) {
+					updateIntegrations();
+					return;
+				}
 			}
 		});
 }

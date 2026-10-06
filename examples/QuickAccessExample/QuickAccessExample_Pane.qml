@@ -76,7 +76,7 @@ FocusScope {
 					text: {
 						var p = Global.system.battery.power
 						if (isNaN(p)) return "No battery"
-						return (p < 0 ? "Charging " : "Discharging ") + fmtPower(p)
+						return (p > 0 ? "Charging " : "Discharging ") + fmtPower(p)
 					}
 					color: Theme.color_font_secondary
 					font.pixelSize: 13

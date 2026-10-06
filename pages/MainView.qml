@@ -32,6 +32,24 @@ FocusScope {
 	// Pin the visible main page by URL so enable/disable (which reshuffles the
 	// swipe page list) can re-align NavBar and SwipeView to the same page.
 	property url _pinnedMainPageUrl
+	// Snapshot taken when pluginEnabledChanged fires, before pages rebuild and
+	// the swipe view clamps to index 0.
+	property string _resyncUrl
+
+	property url pluginQuickAccessUrl
+	property string pluginQuickAccessName
+
+	function showPluginQuickAccess(pluginName, pageUrl) {
+		pluginQuickAccessName = pluginName
+		pluginQuickAccessUrl = pageUrl
+		cardsLoader.show(pluginQuickAccessComponent)
+	}
+
+	function pluginQuickAccessOpen(pageUrl) {
+		return cardsActive
+				&& cardsLoader.sourceComponent === pluginQuickAccessComponent
+				&& String(pluginQuickAccessUrl) === String(pageUrl)
+	}
 
 	function resyncMainPageSelection() {
 		if (!swipeView || !navBar || !swipePageModel) {
@@ -42,10 +60,10 @@ FocusScope {
 			return
 		}
 
-		let want = ""
-		if (swipeView.currentItem && swipeView.currentItem.url) {
+		let want = _resyncUrl
+		if (!want && swipeView.currentItem && swipeView.currentItem.url) {
 			want = String(swipeView.currentItem.url)
-		} else if (_pinnedMainPageUrl) {
+		} else if (!want && _pinnedMainPageUrl) {
 			want = String(_pinnedMainPageUrl)
 		}
 
@@ -82,6 +100,10 @@ FocusScope {
 	Connections {
 		target: GuiPluginLoader
 		function onPluginEnabledChanged(name) {
+			// SwipePageModel records _resyncUrl before it rebuilds pages.
+			if (!GuiPluginLoader.isPluginEnabled(name) && root.pluginQuickAccessName === name) {
+				cardsLoader.hide()
+			}
 			Qt.callLater(root.resyncMainPageSelection)
 		}
 	}
@@ -536,6 +558,29 @@ FocusScope {
 		Component {
 			id: _auxCardsComponent
 			AuxCardsPage {}
+		}
+
+		Component {
+			id: pluginQuickAccessComponent
+
+			Page {
+				title: root.pluginQuickAccessName
+				focusPolicy: Qt.TabFocus
+
+				onActiveFocusChanged: {
+					if (activeFocus && Global.keyNavigationEnabled && pluginPaneLoader.item) {
+						pluginPaneLoader.item.forceActiveFocus()
+					}
+				}
+
+				Loader {
+					id: pluginPaneLoader
+					anchors.fill: parent
+					active: String(root.pluginQuickAccessUrl).length > 0
+					source: root.pluginQuickAccessUrl
+					asynchronous: true
+				}
+			}
 		}
 	}
 
