@@ -71,7 +71,13 @@ FocusScope {
 				text: {
 					var p = Global.system.battery.power
 					if (isNaN(p)) return ""
-					return (p < 0 ? "Chg " : "Dis ") + Math.abs(Math.round(p)) + "W"
+					var watts = Math.abs(Math.round(p)) + "W"
+					var mode = VenusOS.battery_modeFromPower(p)
+					if (mode === VenusOS.Battery_Mode_Charging)
+						return "Chg " + watts
+					if (mode === VenusOS.Battery_Mode_Discharging)
+						return "Dis " + watts
+					return watts
 				}
 				color: Theme.color_font_secondary
 				font.pixelSize: 12

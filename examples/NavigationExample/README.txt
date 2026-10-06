@@ -37,6 +37,6 @@ The navigation bar now shows:
   Boat | Brief | Overview | Example | Levels | Notifications | Settings
 
 Tap the brick icon to see the tile grid with live data and the
-interactive water pump toggle. Under Settings > Integrations > UI Plugins,
-toggle the plugin off to hide the nav entry, or open Settings to change
-the grid between 2×3 and 3×2.
+interactive water pump toggle. Settings > Integrations > UI Plugins
+opens this plugin's page, where Enabled hides the nav entry and
+Tile grid switches between 2×3 and 3×2.

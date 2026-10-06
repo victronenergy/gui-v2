@@ -11,6 +11,21 @@ Page {
 
 		model: VisibleItemModel {
 			ListSwitch {
+				id: enabledSwitch
+				text: "Enabled"
+				checked: GuiPluginLoader.isPluginEnabled("SimpleTrExample")
+				onClicked: GuiPluginLoader.setPluginEnabled("SimpleTrExample", !checked)
+
+				Connections {
+					target: GuiPluginLoader
+					function onPluginEnabledChanged(name) {
+						if (name === "SimpleTrExample")
+							enabledSwitch.checked = GuiPluginLoader.isPluginEnabled("SimpleTrExample")
+					}
+				}
+			}
+
+			ListSwitch {
 				property bool value
 				//% "Battery"
 				text: qsTrId("simpletrexample_pagesettingssimple_text_battery")

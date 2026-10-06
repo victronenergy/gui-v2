@@ -100,7 +100,12 @@ FocusScope {
 					text: {
 						var p = Global.system.battery.power
 						if (isNaN(p)) return "No battery"
-						return (p < 0 ? "Charging " : "Discharging ") + fmtPower(p)
+						var mode = VenusOS.battery_modeFromPower(p)
+						if (mode === VenusOS.Battery_Mode_Charging)
+							return "Charging " + fmtPower(p)
+						if (mode === VenusOS.Battery_Mode_Discharging)
+							return "Discharging " + fmtPower(p)
+						return fmtPower(p)
 					}
 					color: Theme.color_font_secondary
 					font.pixelSize: 11
@@ -313,25 +318,23 @@ FocusScope {
 			Keys.onReturnPressed: root.fakePumpOn = !root.fakePumpOn
 
 			Column {
-				anchors.centerIn: parent
-				spacing: 4
+				anchors.fill: parent
+				anchors.margins: 10
+				spacing: 2
 
 				Text {
-					anchors.horizontalCenter: parent.horizontalCenter
 					text: "PUMP"
 					color: root.fakePumpOn ? "white" : Theme.color_font_secondary
 					font.pixelSize: 11
 					font.bold: true
 				}
 				Text {
-					anchors.horizontalCenter: parent.horizontalCenter
 					text: root.fakePumpOn ? "ON" : "OFF"
 					color: root.fakePumpOn ? "white" : Theme.color_font_primary
 					font.pixelSize: 36
 					font.bold: true
 				}
 				Text {
-					anchors.horizontalCenter: parent.horizontalCenter
 					text: "Tap or press Space"
 					color: root.fakePumpOn ? Qt.rgba(1,1,1,0.7) : Theme.color_font_secondary
 					font.pixelSize: 11
