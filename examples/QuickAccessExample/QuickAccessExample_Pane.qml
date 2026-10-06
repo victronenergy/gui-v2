@@ -217,25 +217,23 @@ FocusScope {
 			}
 
 			Column {
-				anchors.centerIn: parent
-				spacing: 8
+				anchors.fill: parent
+				anchors.margins: 14
+				spacing: 4
 
 				Text {
-					anchors.horizontalCenter: parent.horizontalCenter
 					text: "WATER PUMP"
 					color: root.fakePumpOn ? "white" : Theme.color_font_secondary
 					font.pixelSize: 13
 					font.bold: true
 				}
 				Text {
-					anchors.horizontalCenter: parent.horizontalCenter
 					text: root.fakePumpOn ? "ON" : "OFF"
 					color: root.fakePumpOn ? "white" : Theme.color_font_primary
 					font.pixelSize: 48
 					font.bold: true
 				}
 				Text {
-					anchors.horizontalCenter: parent.horizontalCenter
 					text: "Tap to toggle"
 					color: root.fakePumpOn ? Qt.rgba(1,1,1,0.7) : Theme.color_font_secondary
 					font.pixelSize: 13
