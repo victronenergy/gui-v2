@@ -335,7 +335,7 @@ FocusScope {
 					font.bold: true
 				}
 				Text {
-					text: "Tap or press Space"
+					text: "Tap to toggle"
 					color: root.fakePumpOn ? Qt.rgba(1,1,1,0.7) : Theme.color_font_secondary
 					font.pixelSize: 11
 				}

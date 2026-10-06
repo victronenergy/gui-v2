@@ -4,10 +4,130 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Page {
 	id: root
+
+	// Status text is anchored to a slot that is always the switch width, so
+	// Enabled and Disabled share a column on a switch row and a chevron row.
+	component PluginEnableRow: ListSetting {
+			id: row
+
+			property string pluginTitle
+			property bool pluginEnabled
+			property bool hasSettingsPage
+			property string settingsUrl
+
+			signal enableToggled
+
+			text: pluginTitle
+			interactive: hasSettingsPage
+			hasSubMenu: hasSettingsPage
+
+			function openPage() {
+				if (settingsUrl.length > 0)
+					Global.pageManager.pushPage(settingsUrl, { title: pluginTitle })
+			}
+
+			function toggleEnabled() {
+				if (checkWriteAccessLevel())
+					enableToggled()
+			}
+
+			rightPadding: rightInset
+			topPadding: topInset
+			bottomPadding: bottomInset
+
+			contentItem: Item {
+				implicitHeight: Math.max(titleLabel.implicitHeight, enableSwitch.implicitHeight)
+
+				Label {
+					id: titleLabel
+
+					anchors {
+						left: parent.left
+						right: statusLabel.left
+						rightMargin: row.spacing
+						verticalCenter: parent.verticalCenter
+					}
+					topPadding: Theme.geometry_listItem_content_verticalMargin
+					bottomPadding: Theme.geometry_listItem_content_verticalMargin
+					text: row.pluginTitle
+					font: row.font
+					elide: Text.ElideRight
+				}
+
+				SecondaryListLabel {
+					id: statusLabel
+
+					anchors {
+						right: trailing.left
+						rightMargin: row.spacing
+						verticalCenter: parent.verticalCenter
+					}
+					text: row.pluginEnabled ? CommonWords.enabled : CommonWords.disabled
+				}
+
+				Item {
+					id: trailing
+
+					anchors {
+						right: parent.right
+						verticalCenter: parent.verticalCenter
+					}
+					width: enableSwitch.implicitWidth
+					height: enableSwitch.implicitHeight
+
+					Switch {
+						id: enableSwitch
+
+						anchors {
+							right: parent.right
+							verticalCenter: parent.verticalCenter
+						}
+						opacity: row.hasSettingsPage ? 0 : 1
+						enabled: !row.hasSettingsPage
+						checked: row.pluginEnabled
+						focusPolicy: Qt.NoFocus
+						leftInset: row.spacing
+						rightInset: row.horizontalContentPadding
+						leftPadding: leftInset
+						rightPadding: rightInset
+						onClicked: row.toggleEnabled()
+					}
+
+					CP.ColorImage {
+						anchors {
+							right: parent.right
+							rightMargin: row.horizontalContentPadding
+							verticalCenter: parent.verticalCenter
+						}
+						visible: row.hasSettingsPage
+						source: "qrc:/images/icon_chevron_right_32.svg"
+						color: Theme.color_listItem_forwardIcon
+					}
+				}
+			}
+
+			ListPressArea {
+				anchors.fill: parent
+				enabled: row.hasSettingsPage
+				onClicked: row.openPage()
+			}
+
+			Keys.onSpacePressed: {
+				if (hasSettingsPage)
+					openPage()
+				else
+					toggleEnabled()
+			}
+			Keys.onRightPressed: {
+				if (hasSettingsPage)
+					openPage()
+			}
+	}
 
 	GradientListView {
 		id: settingsListView
@@ -307,7 +427,6 @@ Page {
 							}
 							return null
 						}
-						readonly property string enabledText: pluginEnabled ? CommonWords.enabled : CommonWords.disabled
 
 						Connections {
 							target: GuiPluginLoader
@@ -318,27 +437,12 @@ Page {
 							}
 						}
 
-						// No settings page: this switch is the only control.
-						ListSwitch {
-							preferredVisible: pluginColumn.pluginSettingsPageIntegration === null
-							text: pluginColumn.name
-							checked: pluginColumn.pluginEnabled
-							secondaryText: pluginColumn.enabledText
-							onClicked: GuiPluginLoader.setPluginEnabled(pluginColumn.name, !pluginColumn.pluginEnabled)
-						}
-
-						// Settings page owns the enable switch. One row, no second toggle.
-						ListNavigation {
-							preferredVisible: pluginColumn.pluginSettingsPageIntegration !== null
-							text: pluginColumn.name
-							secondaryText: pluginColumn.enabledText
-
-							onClicked: {
-								const url = pluginColumn.pluginSettingsPageIntegration?.url ?? ""
-								if (url) {
-									Global.pageManager.pushPage(url, { title: text })
-								}
-							}
+						PluginEnableRow {
+							pluginTitle: pluginColumn.name
+							pluginEnabled: pluginColumn.pluginEnabled
+							hasSettingsPage: pluginColumn.pluginSettingsPageIntegration !== null
+							settingsUrl: String(pluginColumn.pluginSettingsPageIntegration?.url ?? "")
+							onEnableToggled: GuiPluginLoader.setPluginEnabled(pluginColumn.name, !pluginColumn.pluginEnabled)
 						}
 					}
 				}
