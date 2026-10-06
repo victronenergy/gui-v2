@@ -41,6 +41,15 @@ ln -sf /data/apps/available/MyPlugin /data/apps/enabled/MyPlugin
 svc -t /service/start-gui
 ```
 
+To remove it, delete the symlink and restart. The files under
+`available/` can stay.
+
+```
+ssh root@venus.local
+rm /data/apps/enabled/MyPlugin
+svc -t /service/start-gui
+```
+
 ## Examples
 
 ### SimpleExample (Type 1)
