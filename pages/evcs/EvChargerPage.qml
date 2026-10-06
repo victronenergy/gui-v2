@@ -52,8 +52,8 @@ DevicePage {
 					{ text: CommonWords.power_watts, unit: VenusOS.Units_None },
 					{ text: CommonWords.current_amps, unit: VenusOS.Units_None },
 					{ text: CommonWords.energy, unit: VenusOS.Units_None },
-					//: Charging time for the EV charger
-					//% "Time"
+					//: Duration of the current EV charging session
+					//% "Duration"
 					{ text: qsTrId("evcs_charging_time"), unit: VenusOS.Units_None },
 				]
 				bodyHeaderText: CommonWords.total

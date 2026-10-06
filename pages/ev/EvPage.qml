@@ -137,7 +137,8 @@ DevicePage {
 		}
 
 		ListText {
-			//% "Position"
+			//: Geographic location of the vehicle, shown as GPS coordinates
+			//% "Location"
 			text: qsTrId("ev_position")
 			secondaryText: latitude.valid && longitude.valid
 					? "%1, %2"
