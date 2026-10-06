@@ -290,9 +290,12 @@ Page {
 						id: pluginColumn
 
 						required property string name
-						required property color color
 						required property var integrations
 						width: parent ? parent.width : 0
+
+						// isPluginEnabled() is a function, so the row keeps its own copy
+						// and refreshes it when that plugin's enable bit changes.
+						property bool pluginEnabled: GuiPluginLoader.isPluginEnabled(name)
 
 						readonly property var pluginSettingsPageIntegration: {
 							if (integrations !== null && integrations.length > 0) {
@@ -304,53 +307,31 @@ Page {
 							}
 							return null
 						}
-						readonly property string integrationSummary: {
-							var parts = []
-							if (integrations !== null && integrations.length > 0) {
-								for (let i = 0; i < integrations.length; ++i) {
-									var t = integrations[i].type
-									if (t === GuiPluginLoader.DeviceListSettingsPage)
-										//% "Integrates with the device list"
-										parts.push(qsTrId("pagesettingsintegrations_uiplugin_integrates_with_devicelist"))
-									else if (t === GuiPluginLoader.NavigationPage)
-										//% "Navigation page"
-										parts.push(qsTrId("pagesettingsintegrations_uiplugin_navigation_page"))
-									else if (t === GuiPluginLoader.QuickAccessPane)
-										//% "Quick access pane"
-										parts.push(qsTrId("pagesettingsintegrations_uiplugin_quick_access_pane"))
-									else if (t === GuiPluginLoader.QuickAccessPaneCard)
-										//% "Quick access card"
-										parts.push(qsTrId("pagesettingsintegrations_uiplugin_quick_access_card"))
-								}
-							}
-							return parts.join(", ")
-						}
+						readonly property string enabledText: pluginEnabled ? CommonWords.enabled : CommonWords.disabled
 
 						Connections {
 							target: GuiPluginLoader
-							function onPluginUiStateChanged(changedName) {
+							function onPluginEnabledChanged(changedName) {
 								if (changedName === pluginColumn.name) {
-									pluginEnableSwitch.checked = GuiPluginLoader.isPluginEnabled(pluginColumn.name)
+									pluginColumn.pluginEnabled = GuiPluginLoader.isPluginEnabled(pluginColumn.name)
 								}
 							}
 						}
 
+						// No settings page: this switch is the only control.
 						ListSwitch {
-							id: pluginEnableSwitch
+							preferredVisible: pluginColumn.pluginSettingsPageIntegration === null
 							text: pluginColumn.name
-							checked: GuiPluginLoader.isPluginEnabled(pluginColumn.name)
-							secondaryText: checked
-								? pluginColumn.integrationSummary
-								: CommonWords.disabled
-							onClicked: GuiPluginLoader.setPluginEnabled(pluginColumn.name, !checked)
+							checked: pluginColumn.pluginEnabled
+							secondaryText: pluginColumn.enabledText
+							onClicked: GuiPluginLoader.setPluginEnabled(pluginColumn.name, !pluginColumn.pluginEnabled)
 						}
 
+						// Settings page owns the enable switch. One row, no second toggle.
 						ListNavigation {
 							preferredVisible: pluginColumn.pluginSettingsPageIntegration !== null
 							text: pluginColumn.name
-							//% "Settings"
-							secondaryText: qsTrId("pagesettingsintegrations_uiplugin_settings")
-							indicatorColor: pluginColumn.color
+							secondaryText: pluginColumn.enabledText
 
 							onClicked: {
 								const url = pluginColumn.pluginSettingsPageIntegration?.url ?? ""

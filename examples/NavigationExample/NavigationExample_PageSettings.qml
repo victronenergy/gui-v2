@@ -55,13 +55,6 @@ Page {
 					}
 				}
 			}
-
-			ListText {
-				text: "Widget order"
-				// Placeholder for a follow-up: persist an ordered id list in
-				// GuiPluginLoader.pluginSetting(name, "widgetOrder", [...]).
-				secondaryText: "Not yet configurable"
-			}
 		}
 	}
 }
