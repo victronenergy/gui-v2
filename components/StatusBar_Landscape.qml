@@ -17,6 +17,28 @@ FocusScope {
 	signal cardsDeactivated()
 	signal sidePanelToggled()
 
+	function firstFocusable(candidates) {
+		for (let i = 0; i < candidates.length; ++i) {
+			const b = candidates[i]
+			if (b && b.visible && b.enabled)
+				return b
+		}
+		return null
+	}
+
+	function focusablesAfterPlugin(startIndex) {
+		let list = []
+		if (pluginPaneButtons.visible) {
+			for (let i = startIndex; i < pluginRepeater.count; ++i) {
+				const item = pluginRepeater.itemAt(i)
+				if (item)
+					list.push(item)
+			}
+		}
+		list.push(wifiButton, mobileButton, notificationButton, alarmButton, rightButton, sleepButton)
+		return list
+	}
+
 	function updateBreadcrumbsFocusHint() {
 		// When breadcrumbs list is focused: if focus is arriving from the left side, focus the
 		// the left-most breadcrumb, or if from the right side, focus the right-most breadcrumb.
@@ -85,7 +107,7 @@ FocusScope {
 			: buttonType === VenusOS.StatusBar_LeftButton_Back ? "qrc:/images/icon_back_32.svg"
 			: ""
 		enabled: buttonType !== VenusOS.StatusBar_LeftButton_None
-		KeyNavigation.right: auxButton
+		KeyNavigation.right: auxButton.visible ? auxButton : root.firstFocusable(root.focusablesAfterPlugin(0))
 
 		onClicked: {
 			switch (buttonType) {
@@ -130,14 +152,7 @@ FocusScope {
 		icon.source: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
 				: "qrc:/images/icon_smartswitch_off_32.svg"
 
-		Keys.onRightPressed: function(event) {
-			if (pluginPaneButtons.visible && pluginRepeater.count > 0) {
-				pluginRepeater.itemAt(0).forceActiveFocus()
-			} else if (wifiButton.visible && wifiButton.enabled) {
-				wifiButton.forceActiveFocus()
-			}
-			event.accepted = true
-		}
+		KeyNavigation.right: root.firstFocusable(root.focusablesAfterPlugin(0))
 
 		onClicked: {
 			if (auxCardsOpened) {
@@ -181,39 +196,23 @@ FocusScope {
 				readonly property url pluginIcon: pluginQuickAccessModel.integrationAt(index).icon
 				readonly property url pluginIconActive: pluginQuickAccessModel.integrationAt(index).iconActive
 
-				readonly property bool paneOpened: Global.mainView.cardsActive
-						&& Global.mainView.cardsLoader.sourceComponent === _paneComponent
+				readonly property bool paneOpened: Global.mainView.pluginQuickAccessOpen(url)
 				readonly property bool shouldHide: (Global.mainView?.cardsActive ?? false) && !paneOpened
 				readonly property bool interactiveChrome:
 						Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 
-				activeFocusOnTab: true
-				// Include idle fade from StatusBarButton — a bare `shouldHide ? 0 : 1`
-				// overrode that and left the icon stuck visible in idle mode.
-				opacity: (shouldHide || !interactiveChrome) ? 0 : 1
+				visible: !shouldHide
+				activeFocusOnTab: visible
+				opacity: interactiveChrome ? 1 : 0
+				enabled: visible && interactiveChrome
 				bottomInset: Theme.geometry_statusBar_spacing
 				icon.cache: false
 				icon.source: (paneOpened && String(pluginIconActive).length > 0)
 						? pluginPaneButton.pluginIconActive : pluginPaneButton.pluginIcon
 
-				Keys.onLeftPressed: function(event) {
-					if (index > 0) {
-						pluginRepeater.itemAt(index - 1).forceActiveFocus()
-					} else if (auxButton.visible) {
-						auxButton.forceActiveFocus()
-					} else if (leftButton.visible && leftButton.enabled) {
-						leftButton.forceActiveFocus()
-					}
-					event.accepted = true
-				}
-				Keys.onRightPressed: function(event) {
-					if (index < pluginRepeater.count - 1) {
-						pluginRepeater.itemAt(index + 1).forceActiveFocus()
-					} else if (wifiButton.visible && wifiButton.enabled) {
-						wifiButton.forceActiveFocus()
-					}
-					event.accepted = true
-				}
+				KeyNavigation.left: index > 0 ? pluginRepeater.itemAt(index - 1)
+						: (auxButton.visible ? auxButton : leftButton)
+				KeyNavigation.right: root.firstFocusable(root.focusablesAfterPlugin(index + 1))
 
 				onActiveFocusChanged: {
 					if (activeFocus) {
@@ -225,28 +224,7 @@ FocusScope {
 					if (paneOpened) {
 						Global.mainView.cardsLoader.hide()
 					} else {
-						Global.mainView.cardsLoader.show(_paneComponent)
-					}
-				}
-
-				Component {
-					id: _paneComponent
-
-					Page {
-						title: pluginPaneButton.pluginName
-						focusPolicy: Qt.TabFocus
-
-						onActiveFocusChanged: {
-							if (activeFocus && Global.keyNavigationEnabled && _paneContentLoader.item) {
-								_paneContentLoader.item.forceActiveFocus()
-							}
-						}
-
-						Loader {
-							id: _paneContentLoader
-							anchors.fill: parent
-							source: pluginPaneButton.url
-						}
+						Global.mainView.showPluginQuickAccess(pluginName, url)
 					}
 				}
 			}
@@ -335,15 +313,17 @@ FocusScope {
 				: signalStrength.value > 0 ? "qrc:/images/icon_WiFi_1_32.svg"
 				: "qrc:/images/icon_WiFi_noconnection_32.svg"
 
-			Keys.onLeftPressed: function(event) {
+			KeyNavigation.left: {
 				if (pluginPaneButtons.visible && pluginRepeater.count > 0) {
-					pluginRepeater.itemAt(pluginRepeater.count - 1).forceActiveFocus()
-				} else if (auxButton.visible) {
-					auxButton.forceActiveFocus()
-				} else if (leftButton.visible && leftButton.enabled) {
-					leftButton.forceActiveFocus()
+					const last = pluginRepeater.itemAt(pluginRepeater.count - 1)
+					if (last && last.visible && last.enabled)
+						return last
 				}
-				event.accepted = true
+				if (auxButton.visible && auxButton.enabled)
+					return auxButton
+				if (leftButton.visible && leftButton.enabled)
+					return leftButton
+				return null
 			}
 			KeyNavigation.right: mobileButton
 
@@ -418,6 +398,7 @@ FocusScope {
 		bottomInset: Theme.geometry_statusBar_spacing
 		enabled: Global.mainView?.notificationButtonsEnabled
 		visible: enabled
+		KeyNavigation.right: rightButton.visible && rightButton.enabled ? rightButton : sleepButton
 
 		onClicked: NotificationModel.acknowledgeAll()
 	}

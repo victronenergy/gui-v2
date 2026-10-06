@@ -179,13 +179,13 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 				readonly property url pluginIcon: pluginQuickAccessModelPortrait.integrationAt(index).icon
 				readonly property url pluginIconActive: pluginQuickAccessModelPortrait.integrationAt(index).iconActive
 
-				readonly property bool paneOpened: Global.mainView.cardsActive
-						&& Global.mainView.cardsLoader.sourceComponent === _portraitPaneComponent
+				readonly property bool paneOpened: Global.mainView.pluginQuickAccessOpen(url)
 				readonly property bool shouldHide: (Global.mainView?.cardsActive ?? false) && !paneOpened
 				readonly property bool interactiveChrome:
 						Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 
-				opacity: (shouldHide || !interactiveChrome) ? 0 : 1
+				visible: pluginPaneButtons.hasPluginPanes && !shouldHide
+				opacity: interactiveChrome ? 1 : 0
 				leftInset: Theme.geometry_statusBar_spacing / 2
 				rightInset: index === pluginPaneButtons.count - 1 ? Theme.geometry_statusBar_horizontalMargin : Theme.geometry_statusBar_spacing / 2
 				bottomInset: Theme.geometry_statusBar_spacing
@@ -203,28 +203,7 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 					if (paneOpened) {
 						Global.mainView.cardsLoader.hide()
 					} else {
-						Global.mainView.cardsLoader.show(_portraitPaneComponent)
-					}
-				}
-
-				Component {
-					id: _portraitPaneComponent
-
-					Page {
-						title: pluginPaneButtonPortrait.pluginName
-						focusPolicy: Qt.TabFocus
-
-						onActiveFocusChanged: {
-							if (activeFocus && Global.keyNavigationEnabled && _portraitPaneContentLoader.item) {
-								_portraitPaneContentLoader.item.forceActiveFocus()
-							}
-						}
-
-						Loader {
-							id: _portraitPaneContentLoader
-							anchors.fill: parent
-							source: pluginPaneButtonPortrait.url
-						}
+						Global.mainView.showPluginQuickAccess(pluginName, url)
 					}
 				}
 			}

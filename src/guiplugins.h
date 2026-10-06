@@ -116,9 +116,10 @@ private:
 	void unloadPluginData(bool clearCache);
 	bool installPluginTranslatorForLanguage(const QString &pluginName, QLocale::Language language);
 	void loadPluginUiState();
-	void savePluginUiState() const;
+	void savePluginUiState();
 	void reloadPluginUiStateFromDisk();
 	void watchPluginUiStateFile();
+	void ensureStateFileWatched();
 	QString pluginUiStatePath() const;
 	QJsonObject pluginUiStateObject(const QString &name) const;
 	void setPluginUiStateObject(const QString &name, const QJsonObject &obj);
@@ -127,6 +128,7 @@ private:
 	QVector<GuiPlugin> m_plugins;
 	QJsonObject m_pluginUiState;
 	QFileSystemWatcher *m_pluginUiStateWatcher = nullptr;
+	bool m_writingPluginUiState = false;
 	QHash<QString, QHash<QLocale::Language, QTranslator*> > m_pluginTranslators;
 	QHash<QString, QPointer<QTranslator> > m_currentTranslators;
 	QFileSystemWatcher *m_enabledAppsDirWatcher = nullptr;
