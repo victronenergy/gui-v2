@@ -43,7 +43,26 @@ FrameRateModel::FrameRateModel(QObject *parent)
 		});
 }
 
+QQuickWindow *FrameRateModel::window() const
+{
+	return m_window;
+}
+
 void FrameRateModel::setWindow(QQuickWindow *window)
+{
+	if (m_window == window) {
+		return;
+	}
+
+	disconnectWindowSignals();
+	m_window = window;
+	if (m_enabled) {
+		connectWindowSignals();
+	}
+	emit windowChanged();
+}
+
+void FrameRateModel::connectWindowSignals()
 {
 	// We detect frame drops by listening to the afterRendering
 	// signal and determining whether the UI thread is blocked
@@ -56,8 +75,11 @@ void FrameRateModel::setWindow(QQuickWindow *window)
 	// reasonable accuracy.  It won't detect single-frame
 	// drops reliably, but it will detect periods of lower
 	// framerate with decent accuracy.
+	if (!m_window || !m_enabled || m_afterRenderingConnection) {
+		return;
+	}
 
-	QObject::connect(window, &QQuickWindow::afterRendering,
+	m_afterRenderingConnection = QObject::connect(m_window, &QQuickWindow::afterRendering,
 		this, [this] {
 			{
 				QMutexLocker lock(&m_blockedTimerMutex);
@@ -66,10 +88,14 @@ void FrameRateModel::setWindow(QQuickWindow *window)
 				}
 			}
 			emit frameRendered();
-		}); // direct connection, serviced in Render thread.
+		}, Qt::DirectConnection); // serviced in Render thread.
 
-	QObject::connect(this, &FrameRateModel::frameRendered,
+	m_frameRenderedConnection = QObject::connect(this, &FrameRateModel::frameRendered,
 		this, [this] {
+			if (!m_enabled) {
+				return;
+			}
+
 			// blocked is the time between the render thread emitting
 			// afterRendering and the gui thread receiving frameRendered.
 			// If the blocked timer is invalid, it means that we're
@@ -115,9 +141,17 @@ void FrameRateModel::setWindow(QQuickWindow *window)
 			}
 			m_deltaTimer.start();
 		}, Qt::QueuedConnection); // serviced in GUI thread.
+}
 
-	if (m_enabled) {
-		m_deltaTimer.start();
+void FrameRateModel::disconnectWindowSignals()
+{
+	if (m_afterRenderingConnection) {
+		QObject::disconnect(m_afterRenderingConnection);
+		m_afterRenderingConnection = {};
+	}
+	if (m_frameRenderedConnection) {
+		QObject::disconnect(m_frameRenderedConnection);
+		m_frameRenderedConnection = {};
 	}
 }
 
@@ -196,6 +230,7 @@ void FrameRateModel::setEnabled(bool enabled)
 		m_enabled = enabled;
 		emit enabledChanged();
 		if (enabled) {
+			connectWindowSignals();
 			m_visualizationTimer.start();
 			m_deltaTimer.start();
 			QMutexLocker lock(&m_blockedTimerMutex);
@@ -203,6 +238,7 @@ void FrameRateModel::setEnabled(bool enabled)
 				m_blockedTimer.invalidate();
 			}
 		} else {
+			disconnectWindowSignals();
 			m_visualizationTimer.stop();
 			m_deltaTimer.invalidate();
 		}

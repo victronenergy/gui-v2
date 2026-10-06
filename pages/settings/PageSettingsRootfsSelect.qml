@@ -66,7 +66,7 @@ Page {
 
 				onClicked: {
 					if (securityProfile.value === VenusOS.Security_Profile_Indeterminate) {
-						//% "Switching firmware version is not possible without \"Network Security Profile\" in "
+						//% "Switching firmware version is not possible without \"Local network security profile\" in "
 						//% "\"Settings / General\" being selected."
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_firmware_switching_not_possible_indeterminate_profile"), 10000)
 						return

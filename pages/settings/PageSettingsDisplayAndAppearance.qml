@@ -152,7 +152,7 @@ Page {
 
 			ListSwitch {
 				id: animationsEnabled
-				//% "UI Animations"
+				//% "UI animations"
 				text: qsTrId("settings_ui_animations")
 				//% "Disable to reduce CPU usage"
 				secondaryText: qsTrId("settings_ui_animations_description")

@@ -10,14 +10,40 @@ MouseArea {
 	id: root
 
 	property bool effectEnabled: true
-	property alias radius: pressEffect.radius
-	property alias color: pressEffect.color
+	property real radius
+	property color color: Qt.rgba(Theme.color_font_primary.r, Theme.color_font_primary.g, Theme.color_font_primary.b, 0.1)
 
-	onPressed: if (effectEnabled) pressEffect.start(mouseX/width, mouseY/height)
-	onReleased: if (effectEnabled) pressEffect.stop()
-	onCanceled: if (effectEnabled) pressEffect.stop()
-
-	PressEffect {
-		id: pressEffect
+	function _playEffect() {
+		const fx = Global.pressEffect
+		if (!fx) {
+			return
+		}
+		if (fx.parent && fx.parent !== root) {
+			fx.stop()
+		}
+		fx.parent = root
+		fx.radius = root.radius
+		fx.color = root.color
+		fx.start(mouseX / width, mouseY / height)
 	}
+
+	function _stopEffect() {
+		const fx = Global.pressEffect
+		if (fx && fx.parent === root) {
+			fx.stop()
+		}
+	}
+
+	function _releaseEffect() {
+		const fx = Global.pressEffect
+		if (fx && fx.parent === root) {
+			fx.stop()
+			fx.parent = null
+		}
+	}
+
+	onPressed: if (effectEnabled) root._playEffect()
+	onReleased: if (effectEnabled) root._stopEffect()
+	onCanceled: if (effectEnabled) root._stopEffect()
+	Component.onDestruction: root._releaseEffect()
 }

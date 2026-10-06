@@ -24,6 +24,9 @@ Item {
 	property alias expanded: connectorPath.expanded
 	property bool animateGeometry
 	required property bool animationEnabled
+	// User/system animation preference, excluding navigation pauses. Electron delegates stay
+	// alive while page transitions temporarily set animationEnabled to false.
+	readonly property bool animationsConfigured: Global.animationEnabled
 	readonly property bool defaultVisible: startWidget.visible && endWidget.visible && _initialized
 
 	required property FrameAnimation frameAnimation
@@ -31,11 +34,16 @@ Item {
 	property real _electronTravelDistance
 	property bool _initialized
 
+	// Optional: when set, the electrons container is reparented to this Item,
+	// keeping electrons outside the connector paths layer for better batching.
+	property Item electronsParent
+
 	function reset() {
 		// Disable _initialized to ensure path distance calculations are not updated before layout is complete.
 		_initialized = false
 		connectorPath.widgetConnectorLayoutChanged()
 		_initialized = true
+		pathUpdater.invalidateLut()
 		Qt.callLater(_resetDistance)
 	}
 
@@ -58,7 +66,7 @@ Item {
 		// Sets the distance between electrons (i.e. how often to spawn a new electron)
 		// Use a min value to ensure at least one electron is shown for short connectors
 		const electronTravelDistance = Math.max(Theme.geometry_overviewPage_connector_electron_interval, _electronTravelDistance)
-		const modelCount = animationEnabled
+		const modelCount = animationsConfigured
 			? Math.floor(electronTravelDistance / Theme.geometry_overviewPage_connector_electron_interval)
 			: 1 // show just one arrow, if animations are disabled.
 
@@ -84,9 +92,12 @@ Item {
 
 	visible: defaultVisible
 	on_AnimatedChanged: Qt.callLater(_resetDistance)
+	onAnimationsConfiguredChanged: Qt.callLater(_resetDistance)
 
-	// Ensure electrons are shown above connector paths that do not have electrons, to avoid a
-	// situation where non-animated connector paths partially obscure electrons from other paths.
+	// When electronsParent is set, all electrons render in a separate container above all paths,
+	// so this z ordering only affects stacking of path shapes within the paths container.
+	// When electronsParent is not set, this ensures animated connectors render above non-animated
+	// ones so electrons are not obscured by overlapping paths.
 	z: electronRepeater.count === 0 ? -1 : 0
 
 	states: State {
@@ -207,22 +218,30 @@ Item {
 				fillColor: "transparent"
 				pathElements: connectorPath.pathElements
 			}
+		}
+
+		// Electrons are separated from the Shape so that per-frame electron
+		// position/opacity updates do not trigger re-rendering of the Shape layer.
+		Item {
+			id: electronsContainer
+
+			// When reparented to an external container, position ourselves at
+			// the same absolute location as the Shape within the page.
+			parent: root.electronsParent ?? connectorPath
+			x: root.electronsParent ? connectorPath.x : 0
+			y: root.electronsParent ? connectorPath.y + connectorPath.startAnchorY : connectorPath.startAnchorY
+			visible: root.visible
 
 			Repeater {
 				id: electronRepeater
 
 				delegate: Image {
-					opacity: 0.0
-					source: animationEnabled ? "qrc:/images/electron.svg" : "qrc:/images/electron_arrow.svg"
+					// The opacity is owned by pathUpdater, which starts the electron faded
+					// out and fades it in and out at the ends of the path.
+					source: root.animationsConfigured ? "qrc:/images/electron.svg" : "qrc:/images/electron_arrow.svg"
 					visible: root.animationMode !== VenusOS.WidgetConnector_AnimationMode_NotAnimated
-					rotation: animationEnabled ? 0.0 : pathUpdater.angleForArrow(pathUpdater.progress, pathUpdater.startToEnd)
+					rotation: root.animationsConfigured ? 0.0 : pathUpdater.angleForArrow(pathUpdater.progress, pathUpdater.startToEnd)
 
-					Behavior on opacity {
-						enabled: root._animated
-						OpacityAnimator {
-							duration: Theme.animation_overviewPage_connector_fade_duration
-						}
-					}
 					Component.onCompleted: pathUpdater.add(this)
 					Component.onDestruction: pathUpdater.remove(this)
 				}
@@ -234,6 +253,8 @@ Item {
 	// Force drawing the final positions even if animations disabled.
 	property real _transitionUpdating
 	on_TransitionUpdatingChanged: {
+		// Path geometry changes during transitions, so invalidate the LUT
+		pathUpdater.invalidateLut()
 		if (root.frameAnimation.paused
 				|| (!root.animationEnabled && (_transitionUpdating == 1.0 || _transitionUpdating == 0.0))) {
 			pathUpdater.update()
@@ -243,13 +264,13 @@ Item {
 	WidgetConnectorPathUpdater {
 		id: pathUpdater
 
-		property real duration
 		property real normalizedElapsed: 1000 * root.frameAnimation.animationElapsed / pathUpdater.duration
 		readonly property real loopedElapsed: normalizedElapsed - Math.trunc(normalizedElapsed)
 		readonly property bool startToEnd: root.animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd
-		progress: root.animationEnabled ? (startToEnd ? loopedElapsed : 1.0 - loopedElapsed) : 0.515
+		progress: root.animationsConfigured ? (startToEnd ? loopedElapsed : 1.0 - loopedElapsed) : 0.515
 
 		animationMode: root.animationMode
+		fadeDuration: Theme.animation_overviewPage_connector_fade_duration
 
 		// Create a separate Path for the animation, instead of using the ShapePath,
 		// because WidgetConnectorPathUpdater does not work for ShapePath.

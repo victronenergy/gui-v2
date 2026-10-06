@@ -18,11 +18,15 @@ Page {
 		uid: Global.venusPlatform.serviceUid +  "/Network/Wifi/Scan"
 	}
 
+	WifiModel {
+		id: wifiModel
+	}
+
 	GradientListView {
 		id: settingsListView
 
-		model: WifiModel {
-			id: wifiModel
+		model: SortedWifiModel {
+			sourceModel: wifiModel
 		}
 
 		header: SettingsColumn {
@@ -57,7 +61,7 @@ Page {
 
 					ModalWarningDialog {
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						//% "Disable Access Point"
+						//% "Disable access point"
 						title: qsTrId("settings_wifi_disable_ap")
 						//% "Are you sure that you want to disable the access point?"
 						description: qsTrId("settings_wifi_disable_ap_are_you_sure")
@@ -83,7 +87,7 @@ Page {
 					rowSpacing: Theme.geometry_listItem_content_verticalMargin // not needed, there is padding below the primary label already
 
 					Label {
-						//% "Access Point password"
+						//% "Access point password"
 						text: qsTrId("settings_wifi_access_point_password")
 						textFormat: accessPointPassword.textFormat
 						font: accessPointPassword.font
@@ -205,14 +209,12 @@ Page {
 				visible: model.favorite
 			}
 
-			onClicked: Global.pageManager.pushPage(wifiPointComponent)
+			onClicked: Global.pageManager.pushPage(wifiPointComponent, { title: text, service: model.service })
 
 			Component {
 				id: wifiPointComponent
 
 				PageSettingsTcpIp {
-					title: accessPointDelegate.text
-					service: model.service
 					tech: "wifi"
 					ethernetNetworkServices: root.ethernetNetworkServices
 				}

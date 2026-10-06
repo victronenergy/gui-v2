@@ -25,13 +25,33 @@ OverviewWidget {
 	title: VenusOS.dcMeter_typeToText(inputType)
 	enabled: true
 
+	VeQuickItem {
+		id: firstAlternatorTemperature
+		uid: root.serviceType === "alternator" && inputDeviceModel.count === 1
+			? inputDeviceModel.firstObject.serviceUid + "/Dc/0/Temperature"
+			: ""
+	}
+
 	contentItem: ColumnLayout {
 		spacing: Theme.geometry_overviewPage_widget_content_spacing
 
-		WidgetHeader {
-			text: root.title
-			icon.source: VenusOS.dcMeter_iconForType(root.inputType)
-			Layout.fillWidth: true
+		RowLayout {
+			spacing: 0
+
+			WidgetHeader {
+				text: root.title
+				icon.source: VenusOS.dcMeter_iconForType(root.inputType)
+				Layout.fillWidth: true
+			}
+
+			QuantityLabel {
+				value: Units.convert(firstAlternatorTemperature.value, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
+				unit: Global.systemSettings.temperatureUnit
+				unitColor: Theme.color_overviewPage_widget_battery_font_secondary
+				font.pixelSize: root.secondaryFontSize
+				alignment: Qt.AlignRight
+				visible: serviceType === "alternator" && firstAlternatorTemperature.valid
+			}
 		}
 
 		OverviewElectricalQuantityLabel {

@@ -19,6 +19,22 @@ FocusScope {
 		Component.onCompleted: Global.mainView = mainView
 	}
 
+	Component {
+		id: pressEffectComponent
+		PressEffect {}
+	}
+
+	Component.onCompleted: {
+		Global.pressEffect = pressEffectComponent.createObject(null)
+	}
+
+	Component.onDestruction: {
+		if (Global.pressEffect) {
+			Global.pressEffect.destroy()
+			Global.pressEffect = null
+		}
+	}
+
 	FirmwareUpdate {
 		id: firmwareUpdate
 		Component.onCompleted: Global.firmwareUpdate = firmwareUpdate

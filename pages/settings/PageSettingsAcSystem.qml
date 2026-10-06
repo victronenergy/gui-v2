@@ -62,20 +62,20 @@ Page {
 					{
 						//% "AC input only"
 						display: qsTrId("settings_system_ac_input_only"),
-						//% "The AC output of the Inverter/Charger is not used."
+						//% "The AC output of the inverter/charger is not used."
 						caption: qsTrId("settings_system_ac_input_only_description"),
 						readOnly: !Global.system.hasEss
 					},
 					{
 						//% "AC output only"
 						display: qsTrId("settings_system_ac_output_only"),
-						//% "All AC loads are on the output of the Inverter/Charger."
+						//% "All AC loads are on the output of the inverter/charger."
 						caption: qsTrId("settings_system_ac_output_only_description"),
 					},
 					{
 						//% "AC input & output"
 						display: qsTrId("settings_system_ac_input_and_output"),
-						//% "The system will automatically display loads on the input of the Inverter/Charger if a grid meter is present. Loads on the output are always displayed."
+						//% "The system will automatically display loads on the input of the inverter/charger if a grid meter is present. Loads on the output are always displayed."
 						caption: qsTrId("settings_system_ac_input_and_output_description"),
 					},
 				]

@@ -156,16 +156,11 @@ DevicePage {
 
 		ListEvcsSetCurrentSpinBox {
 			serviceUid: evCharger.serviceUid
-			text: CommonWords.charge_current
 			preferredVisible: dataItem.valid && chargeMode.dataItem.value === VenusOS.Evcs_Mode_Manual
 		}
 
-		ListSwitch {
-			//% "Enable charging"
-			text: qsTrId("evcs_enable_charging")
-			dataItem.uid: evCharger.serviceUid + "/StartStop"
-			preferredVisible: dataItem.valid
-			writeAccessLevel: VenusOS.User_AccessType_User
+		ListEvcsStartStopButton {
+			serviceUid: evCharger.serviceUid
 		}
 
 		PowerGuardConsumptionSettings {

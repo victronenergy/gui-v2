@@ -1,0 +1,11 @@
+{
+    "ExitWhenFinished": true,
+    "Tests": [
+        "tst_benchmark_pages.qml"
+    ],
+    "Mock": {
+        "Configuration": ":/data/mock/conf/maximal.json",
+        "TimersActive": false,
+        "UIAnimations": 0
+    }
+}

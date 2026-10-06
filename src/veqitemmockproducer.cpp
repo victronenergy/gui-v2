@@ -44,6 +44,13 @@ QVariant VeQItemMockProducer::value(const QString &uid) const
 	return QVariant();
 }
 
+void VeQItemMockProducer::setProperty(const QString &uid, const QString &name, const QVariant &value)
+{
+	if (VeQItemMock *item = qobject_cast<VeQItemMock*>(mProducerRoot->itemGetOrCreate(normalizedUid(uid), true, true))) {
+		item->itemProduceProperty(name.toUtf8().constData(), value);
+	}
+}
+
 void VeQItemMockProducer::removeValue(const QString &uid)
 {
 	if (VeQItemMock *item = qobject_cast<VeQItemMock*>(mProducerRoot->itemGet(normalizedUid(uid)))) {

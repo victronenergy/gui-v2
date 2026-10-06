@@ -127,7 +127,7 @@ Page {
 			ListSwitch {
 				id: sharedCurrentSense
 
-				//% "SCS - Shared current sense"
+				//% "SCS - Shared Current Sense"
 				text: qsTrId("settings_dvcc_shared_current_sense")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/BatteryCurrentSense"
 				preferredVisible: commonSettings.dvccActive

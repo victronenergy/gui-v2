@@ -529,7 +529,8 @@ FocusScope {
 			WidgetConnector {
 				id: acInputWidgetConnector
 
-				parent: root
+				parent: connectorPathsContainer
+				electronsParent: connectorElectronsContainer
 				startWidget: acInputWidget
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: inverterChargerWidget
@@ -564,7 +565,8 @@ FocusScope {
 			WidgetConnector {
 				id: dcInputConnector
 
-				parent: root
+				parent: connectorPathsContainer
+				electronsParent: connectorElectronsContainer
 				startWidget: dcInputWidget
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: batteryWidget
@@ -589,6 +591,7 @@ FocusScope {
 	FrameAnimation {
 		id: overviewPageRootAnimation
 
+		objectName: "overviewConnectorAnimation" // required by tst_benchmark_pages.qml
 		paused: cpuInfo.overLimit
 		running: root.animationEnabled
 		property real previousElapsed
@@ -604,6 +607,21 @@ FocusScope {
 				previousElapsed = previousElapsed + elapsedTime
 			}
 		}
+	}
+
+	// All connector paths live in this container, separate from electrons.
+	// The key optimization is that electrons are NOT children of any Shape,
+	// so per-frame electron updates do not trigger Shape re-rendering.
+	Item {
+		id: connectorPathsContainer
+		anchors.fill: parent
+	}
+
+	// Electrons are rendered separately from the paths so that their
+	// per-frame position/opacity changes do not invalidate the paths texture.
+	Item {
+		id: connectorElectronsContainer
+		anchors.fill: parent
 	}
 
 	Component {
@@ -627,7 +645,8 @@ FocusScope {
 			WidgetConnector {
 				id: acSolarConnector
 
-				parent: root
+				parent: connectorPathsContainer
+				electronsParent: connectorElectronsContainer
 				startWidget: solarWidget
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: inverterChargerWidget
@@ -647,7 +666,8 @@ FocusScope {
 			WidgetConnector {
 				id: dcSolarConnector
 
-				parent: root
+				parent: connectorPathsContainer
+				electronsParent: connectorElectronsContainer
 				startWidget: solarWidget
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: batteryWidget
@@ -701,6 +721,8 @@ FocusScope {
 	WidgetConnector {
 		id: inverterToAcLoadsConnector
 
+		parent: connectorPathsContainer
+		electronsParent: connectorElectronsContainer
 		startWidget: inverterChargerWidget
 		startLocation: VenusOS.WidgetConnector_Location_Right
 		straighten: _rightWidgets.length === 1 ? VenusOS.WidgetConnector_Straighten_None : VenusOS.WidgetConnector_Straighten_EndToStart
@@ -722,6 +744,8 @@ FocusScope {
 	WidgetConnector {
 		id: inverterToBatteryConnector
 
+		parent: connectorPathsContainer
+		electronsParent: connectorElectronsContainer
 		startWidget: inverterChargerWidget
 		startLocation: VenusOS.WidgetConnector_Location_Bottom
 		endWidget: batteryWidget
@@ -806,7 +830,8 @@ FocusScope {
 		WidgetConnector {
 			id: inverterToEssentialLoadsConnector
 
-			parent: root
+			parent: connectorPathsContainer
+			electronsParent: connectorElectronsContainer
 			startWidget: inverterChargerWidget
 			startLocation: VenusOS.WidgetConnector_Location_Right
 			startOffsetY: inverterToEssentialLoadsStartAnchor.offsetY
@@ -853,7 +878,8 @@ FocusScope {
 			WidgetConnector {
 				id: batteryToDcLoadsConnector
 
-				parent: root
+				parent: connectorPathsContainer
+				electronsParent: connectorElectronsContainer
 				startWidget: batteryWidget
 				startLocation: VenusOS.WidgetConnector_Location_Right
 				endWidget: dcLoadsWidget
@@ -930,7 +956,8 @@ FocusScope {
 			}
 			WidgetConnector {
 				id: acLoadsToEvcsConnector
-				parent: root
+				parent: connectorPathsContainer
+				electronsParent: connectorElectronsContainer
 				visible: acLoadsWidget.visible && (evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads)
 				startWidget: acLoadsWidget
 				startLocation: VenusOS.WidgetConnector_Location_Left
@@ -966,7 +993,8 @@ FocusScope {
 			}
 			WidgetConnector {
 				id: essentialLoadsToEvcsConnector
-				parent: root
+				parent: connectorPathsContainer
+				electronsParent: connectorElectronsContainer
 				visible: evcsWidget.connectToEssentialLoads
 				startWidget: essentialLoadsWidget
 				startLocation: VenusOS.WidgetConnector_Location_Left

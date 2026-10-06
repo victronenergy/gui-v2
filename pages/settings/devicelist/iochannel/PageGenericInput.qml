@@ -69,15 +69,15 @@ Page {
 				dataItem.uid: genericInput.uid + "/Settings/DigitalInputMode"
 				optionModel: [
 					{ display: CommonWords.disabled, value: 0 },
-					//% "Sensor | Outputs → Follow state"
+					//% "Sensor | Outputs → follow state"
 					{ display: qsTrId("iochannel_digital_input_mode_follow_state"), value: 1 },
-					//% "Switch | Outputs → Follow position"
+					//% "Switch | Outputs → follow position"
 					{ display: qsTrId("iochannel_digital_input_mode_follow_position"), value: 2 },
-					//% "Switch | Outputs → Toggle on change"
+					//% "Switch | Outputs → toggle on change"
 					{ display: qsTrId("iochannel_digital_input_mode_toggle_on_change"), value: 3 },
-					//% "Button | Outputs → Toggle on press"
+					//% "Button | Outputs → toggle on press"
 					{ display: qsTrId("iochannel_digital_input_mode_toggle_on_press"), value: 4 },
-					//% "Button | Outputs → Toggle and dim"
+					//% "Button | Outputs → toggle and dim"
 					{ display: qsTrId("iochannel_digital_input_mode_toggle_and_dim"), value: 5 },
 				]
 			}

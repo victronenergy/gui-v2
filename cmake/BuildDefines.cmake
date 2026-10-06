@@ -4,8 +4,22 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_BINARY_DIR}/install CACHE PATH "..." FORCE)
+endif()
+
+if (WIN32)
+    # On Windows, install everything to the prefix root so that Qt plugins
+    # and QML modules (deployed by windeployqt) are found next to the exe.
+    set(CMAKE_INSTALL_BINDIR ".")
+    set(CMAKE_INSTALL_LIBDIR ".")
+    set(VENUS_QML_INSTALL_DIR ".")
+elseif(APPLE)
+    include(GNUInstallDirs)
+    # On macOS, QML files must be inside the app bundle next to the executable,
+    # so that applicationDirPath() + "/Victron" finds them at runtime.
+    set(VENUS_QML_INSTALL_DIR "${PROJECT_NAME}.app/Contents/MacOS")
 else()
     include(GNUInstallDirs)
+    set(VENUS_QML_INSTALL_DIR "${CMAKE_INSTALL_BINDIR}")
 endif()
 
 if (${CMAKE_SYSTEM_PROCESSOR} STREQUAL ${CMAKE_HOST_SYSTEM_PROCESSOR})

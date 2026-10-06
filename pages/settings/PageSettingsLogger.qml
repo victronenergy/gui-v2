@@ -256,7 +256,7 @@ Page {
 			}
 
 			ListText {
-				//% "Connection status (MQTT Real-time channel)"
+				//% "Connection status (MQTT real-time channel)"
 				text: qsTrId("settings_connection_error_realtime_channel")
 				secondaryText: connectionStatus.mqttRealtimeStatus.value || ''
 				preferredVisible: !connectionStatus.preferredVisible && connectionStatus.mqttRealtimeConnected.valid

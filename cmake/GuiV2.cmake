@@ -55,16 +55,33 @@ qt_add_resources(${PROJECT_NAME} "${PROJECT_NAME}_translations_resources"
     FILES ${BUILD_DIR_QM_FILES}
 )
 
+install(TARGETS ${PROJECT_NAME}
+    DESTINATION ${CMAKE_INSTALL_BINDIR}
+    BUNDLE DESTINATION .
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)
+
 if (${VENUS_GX_BUILD})
     qt_query_qml_module(${PROJECT_NAME} QML_FILES module_qml_files QMLDIR module_qmldir)
-    install(TARGETS ${PROJECT_NAME}
-        DESTINATION ${CMAKE_INSTALL_BINDIR}
-        BUNDLE DESTINATION .
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    )
-
     install(FILES ${module_qml_files} ${module_qmldir} $<TARGET_FILE:${PROJECT_NAME}> DESTINATION ${CMAKE_INSTALL_BINDIR})
     install(FILES $<TARGET_FILE:${PROJECT_NAME}> DESTINATION ${CMAKE_INSTALL_BINDIR} PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ)
+endif()
+
+if (WIN32 OR APPLE)
+    if (WIN32)
+        set(VENUS_DEPLOY_TOOL_OPTIONS --qmldir "${PROJECT_SOURCE_DIR}")
+    else()
+        set(VENUS_DEPLOY_TOOL_OPTIONS "-qmldir=${PROJECT_SOURCE_DIR}")
+    endif()
+
+    qt_generate_deploy_app_script(
+        TARGET ${PROJECT_NAME}
+        OUTPUT_SCRIPT deploy_script
+        NO_TRANSLATIONS
+        NO_COMPILER_RUNTIME
+        DEPLOY_TOOL_OPTIONS ${VENUS_DEPLOY_TOOL_OPTIONS}
+    )
+    install(SCRIPT ${deploy_script})
 endif()
 
 target_compile_definitions(${PROJECT_NAME}

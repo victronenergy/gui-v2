@@ -29,6 +29,7 @@ public:
 
 	Q_INVOKABLE void setValue(const QString &uid, const QVariant &value);
 	Q_INVOKABLE QVariant value(const QString &uid) const;
+	Q_INVOKABLE void setProperty(const QString &uid, const QString &name, const QVariant &value);
 	Q_INVOKABLE void removeValue(const QString &uid);
 	Q_INVOKABLE void removeServices(const QString &serviceType);
 	Q_INVOKABLE void dumpValues();
@@ -43,6 +44,7 @@ private:
 	explicit MockManager(QObject *parent = nullptr);
 	bool setValuesFromJson(const QString &fileName);
 	void setServiceValues(const QJsonObject &object);
+	void setPropertyValues(const QString &path, const QJsonObject &properties);
 	VeQItemMockProducer *producer() const;
 
 	QString m_confFileName;

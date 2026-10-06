@@ -141,7 +141,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/VeQItemFilteredServiceModel.qml
     components/ViewGradient.qml
     components/WasmVirtualKeyboardHandler.qml
-    components/WifiModel.qml
     components/controls/AutoToggleButton.qml
     components/controls/Button.qml
     components/controls/CaptionLabel.qml
@@ -214,6 +213,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListDevicePriority.qml
     components/listitems/ListDroopGraph.qml
     components/listitems/ListEvcsSetCurrentSpinBox.qml
+    components/listitems/ListEvcsStartStopButton.qml
     components/listitems/ListFirmwareCheckButton.qml
     components/listitems/ListFirmwareImageTypeInstalled.qml
     components/listitems/ListFirmwareVersion.qml
@@ -742,12 +742,16 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/uiconfig.cpp
     src/uitest.h
     src/uitest.cpp
+    src/uitestutils.h
+    src/uitestutils.cpp
     src/uitestcase.h
     src/uitestcase.cpp
     src/uiteststep.h
     src/uiteststep.cpp
     src/units.h
     src/units.cpp
+    src/wifimodel.h
+    src/wifimodel.cpp
     src/screenblanker.h
     src/screenblanker.cpp
     src/solarinput.h
@@ -766,11 +770,9 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/widgetconnectorpathupdater.cpp
 )
 
-if (VENUS_GX_BUILD)
-    list(APPEND VictronVenusOS_CPP_SOURCES
-        src/urlinterceptor.h
-        src/urlinterceptor.cpp)
-endif()
+list(APPEND VictronVenusOS_CPP_SOURCES
+    src/urlinterceptor.h
+    src/urlinterceptor.cpp)
 
 set(VictronVenusOS_RESOURCES
     fonts/Roboto-Regular.ttf

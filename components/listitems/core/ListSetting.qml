@@ -66,6 +66,7 @@ ListItem {
 			: indicatorColor
 
 	property int toast
+	property bool _toastConnected
 
 	function checkWriteAccessLevel() {
 		if (root.userHasWriteAccess) {
@@ -76,8 +77,36 @@ ListItem {
 			}
 			//% "Setting locked for access level"
 			root.toast = Global.showToastNotification(VenusOS.Notification_Info, qsTrId("listItem_no_access"))
+			root._connectToastSignals()
 			return false
 		}
+	}
+
+	function _onToastGone(modelId) {
+		if (root.toast === modelId) {
+			root.toast = 0
+			root._disconnectToastSignals()
+		}
+	}
+
+	function _connectToastSignals() {
+		if (root._toastConnected) {
+			return
+		}
+		ToastModel.dismissRequested.connect(root._onToastGone)
+		ToastModel.closeRequested.connect(root._onToastGone)
+		ToastModel.removed.connect(root._onToastGone)
+		root._toastConnected = true
+	}
+
+	function _disconnectToastSignals() {
+		if (!root._toastConnected) {
+			return
+		}
+		ToastModel.dismissRequested.disconnect(root._onToastGone)
+		ToastModel.closeRequested.disconnect(root._onToastGone)
+		ToastModel.removed.disconnect(root._onToastGone)
+		root._toastConnected = false
 	}
 
 	// Hide the item when it should not be visible according to preferredVisible and read access.
@@ -88,22 +117,5 @@ ListItem {
 		indicatorColor: root.backgroundIndicatorColor
 	}
 
-	Connections {
-		target: ToastModel
-		function onDismissRequested(modelId) {
-			if (root.toast === modelId) {
-				root.toast = 0
-			}
-		}
-		function onCloseRequested(modelId) {
-			if (root.toast === modelId) {
-				root.toast = 0
-			}
-		}
-		function onRemoved(modelId) {
-			if (root.toast === modelId) {
-				root.toast = 0
-			}
-		}
-	}
+	Component.onDestruction: root._disconnectToastSignals()
 }

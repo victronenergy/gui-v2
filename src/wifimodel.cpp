@@ -1,0 +1,306 @@
+/*
+** Copyright (C) 2026 Victron Energy B.V.
+** See LICENSE.txt for license information.
+*/
+
+#include "wifimodel.h"
+#include "allservicesmodel.h"
+#include "backendconnection.h"
+#include "language.h"
+
+#include <veutil/qt/ve_qitem.hpp>
+
+#include <QCoreApplication>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonParseError>
+
+using namespace Victron::VenusOS;
+
+namespace {
+
+static inline bool isConnected(const QString &state)
+{
+	return state == QStringLiteral("ready") || state == QStringLiteral("online");
+}
+
+}
+
+WifiModel::WifiModel(QObject *parent)
+	: QAbstractListModel(parent)
+{
+	AllServicesModel *allServicesModel = AllServicesModel::create();
+	connect(allServicesModel, &AllServicesModel::serviceAdded,
+			this, &WifiModel::serviceAdded);
+	connect(allServicesModel, &AllServicesModel::serviceAboutToBeRemoved,
+			this, &WifiModel::serviceAboutToBeRemoved);
+
+	const QString platformUid = BackendConnection::create()->serviceUidForType(QStringLiteral("platform"));
+	setPlatformItem(allServicesModel->itemAt(allServicesModel->indexOf(platformUid)));
+
+	connect(Language::create(), &Language::currentLanguageChanged, this, &WifiModel::updateConnectedNetworkName);
+}
+
+void WifiModel::serviceAdded(VeQItem *serviceItem)
+{
+	if (serviceItem->uniqueId() == BackendConnection::create()->serviceUidForType(QStringLiteral("platform"))) {
+		setPlatformItem(serviceItem);
+	}
+}
+
+void WifiModel::serviceAboutToBeRemoved(VeQItem *serviceItem)
+{
+	if (serviceItem->uniqueId() == BackendConnection::create()->serviceUidForType(QStringLiteral("platform"))) {
+		setPlatformItem(nullptr);
+	}
+}
+
+void WifiModel::setPlatformItem(VeQItem *platformItem)
+{
+	for (VeQItem *item : { m_servicesItem.data(), m_scanItem.data(), m_accessPointItem.data() }) {
+		if (item) {
+			item->disconnect(this);
+		}
+	}
+	m_servicesItem.clear();
+	m_scanItem.clear();
+	m_accessPointItem.clear();
+
+	if (platformItem) {
+		m_servicesItem = platformItem->itemGetOrCreate(QStringLiteral("Network/Services"));
+		m_scanItem = platformItem->itemGetOrCreate(QStringLiteral("Network/Wifi/Scan"));
+		m_accessPointItem = platformItem->itemGetOrCreate(QStringLiteral("Services/AccessPoint/Enabled"));
+
+		m_servicesItem->getValueAndChanges(this, &WifiModel::update, VeQItem::DoFetch, Qt::QueuedConnection);
+		m_scanItem->getValueAndChanges(this, &WifiModel::update, VeQItem::DoFetch, Qt::QueuedConnection);
+		m_accessPointItem->getValueAndChanges(this, &WifiModel::update, VeQItem::DoFetch, Qt::QueuedConnection);
+	}
+
+	// Clear the model if the service was removed, or refresh it with the new items.
+	update();
+}
+
+bool WifiModel::valid() const
+{
+	return m_valid;
+}
+
+QString WifiModel::connectedNetworkName() const
+{
+	return m_connectedNetworkName;
+}
+
+int WifiModel::rowCount(const QModelIndex &) const
+{
+	return m_networks.count();
+}
+
+QVariant WifiModel::data(const QModelIndex &index, int role) const
+{
+	const int row = index.row();
+
+	if (row < 0 || row >= m_networks.count()) {
+		return QVariant();
+	}
+
+	const WifiNetwork &wifiNetwork = m_networks.at(row);
+	switch (role) {
+	case NetworkRole:
+		return wifiNetwork.network;
+	case ServiceRole:
+		return wifiNetwork.service;
+	case StateRole:
+		return wifiNetwork.state;
+	case FavoriteRole:
+		return wifiNetwork.favorite;
+	case StrengthRole:
+		return wifiNetwork.strength;
+	default:
+		return QVariant();
+	}
+}
+
+QHash<int, QByteArray> WifiModel::roleNames() const
+{
+	static const QHash<int, QByteArray> roles = {
+		{ NetworkRole, "network" },
+		{ ServiceRole, "service" },
+		{ StateRole, "state" },
+		{ FavoriteRole, "favorite" },
+		{ StrengthRole, "strength" }
+	};
+	return roles;
+}
+
+void WifiModel::update()
+{
+	const bool wasValid = m_valid;
+	m_valid = m_servicesItem && m_scanItem
+			&& m_servicesItem->getValue().isValid() && m_scanItem->getValue().isValid();
+	if (wasValid != m_valid) {
+		emit validChanged();
+	}
+
+	if (!m_valid) {
+		if (!m_networks.isEmpty()) {
+			beginResetModel();
+			m_networks.clear();
+			endResetModel();
+		}
+		updateConnectedNetworkName();
+		return;
+	}
+
+	/*
+		Following config is provided for each network item:
+
+		"Victron": {
+			"Service": "/net/connman/service/wifi_5cc5633c7cfa_56696374726f6e_managed_ieee8021x",
+			"State": "Disconnected",
+			"Strength": "45",
+			"Secured": "yes",
+			"Favorite": "yes",
+			"Address": "192.168.68.62",
+			"Gateway": "",
+			"Method": "manual",
+			"Netmask": "255.255.252.0",
+			"Mac": "5C:C5:63:3C:7C:FA",
+			"Nameservers": ["193.12.34.56", "193.12.34.57"]
+		}
+	*/
+	QJsonParseError parseError;
+	const QJsonDocument doc = QJsonDocument::fromJson(m_servicesItem->getValue().toString().toUtf8(), &parseError);
+	if (parseError.error != QJsonParseError::NoError || !doc.isObject()) {
+		qWarning() << "Network JSON string malformed or document problem. " << parseError.errorString();
+		return;
+	}
+	const QJsonObject wifis = doc.object().value(QStringLiteral("wifi")).toObject();
+
+	// Networks are identified by their service, so ignore any entries without one.
+	QList<QString> services;
+	for (auto it = wifis.constBegin(); it != wifis.constEnd(); ++it) {
+		const QString service = it.value().toObject().value(QStringLiteral("Service")).toString();
+		if (!service.isEmpty()) {
+			services.append(service);
+		}
+	}
+
+	// Remove networks that have been dropped.
+	for (int i = m_networks.count() - 1; i >= 0; --i) {
+		if (!services.contains(m_networks.at(i).service)) {
+			beginRemoveRows(QModelIndex(), i, i);
+			m_networks.removeAt(i);
+			endRemoveRows();
+		}
+	}
+
+	// Update existing networks, and insert newly discovered networks.
+	for (auto it = wifis.constBegin(); it != wifis.constEnd(); ++it) {
+		const QString network = it.key();
+		const QJsonObject details = it.value().toObject();
+		const QString service = details.value(QStringLiteral("Service")).toString();
+		if (service.isEmpty()) {
+			continue;
+		}
+		const QString state = details.value(QStringLiteral("State")).toString();
+		const int strength = details.value(QStringLiteral("Strength")).toVariant().toInt();
+		const bool favorite = details.value(QStringLiteral("Favorite")).toString() == QStringLiteral("yes");
+		bool found = false;
+
+		for (int j = 0; j < m_networks.count(); ++j) {
+			if (service == m_networks.at(j).service) {
+				found = true;
+				QList<int> changedRoles;
+				if (m_networks[j].network != network) {
+					m_networks[j].network = network;
+					changedRoles.append(NetworkRole);
+				}
+				if (m_networks[j].state != state) {
+					m_networks[j].state = state;
+					changedRoles.append(StateRole);
+				}
+				if (m_networks[j].strength != strength) {
+					m_networks[j].strength = strength;
+					changedRoles.append(StrengthRole);
+				}
+				if (m_networks[j].favorite != favorite) {
+					m_networks[j].favorite = favorite;
+					changedRoles.append(FavoriteRole);
+				}
+				if (!changedRoles.empty()) {
+					emit dataChanged(index(j), index(j), changedRoles);
+				}
+				break;
+			}
+		}
+
+		if (!found) {
+			const int insertPos = m_networks.count();
+			beginInsertRows(QModelIndex(), insertPos, insertPos);
+			m_networks.insert(insertPos, WifiNetwork {
+				network,
+				service,
+				state,
+				strength,
+				favorite
+			});
+			endInsertRows();
+		}
+	}
+
+	updateConnectedNetworkName();
+}
+
+void WifiModel::updateConnectedNetworkName()
+{
+	QString name;
+	for (const WifiNetwork &wifiNetwork : std::as_const(m_networks)) {
+		if (isConnected(wifiNetwork.state)) {
+			name = wifiNetwork.network;
+			break;
+		}
+	}
+
+	if (name.isNull()) {
+		if (m_accessPointItem && m_accessPointItem->getValue().isValid()) {
+			name = m_accessPointItem->getValue().toInt() == 1
+				//% "Disconnected | AP On"
+				? qtTrId("wifimodel_disconnected_ap_on")
+				//% "Disconnected | AP Off"
+				: qtTrId("wifimodel_disconnected_ap_off");
+		} else {
+			//% "Disconnected"
+			name = qtTrId("wifimodel_disconnected");
+		}
+	}
+
+	if (name != m_connectedNetworkName) {
+		m_connectedNetworkName = name;
+		emit connectedNetworkNameChanged();
+	}
+}
+
+SortedWifiModel::SortedWifiModel(QObject *parent)
+	: QSortFilterProxyModel(parent)
+{
+	sort(0, Qt::DescendingOrder);
+}
+
+bool SortedWifiModel::lessThan(const QModelIndex &leftIndex, const QModelIndex &rightIndex) const
+{
+	// Sort by:
+	// 1. Connection status (connected first)
+	// 2. Signal strength (strongest first)
+
+	const bool isLeftConnected = isConnected(sourceModel()->data(leftIndex, WifiModel::StateRole).toString());
+	const bool isRightConnected = isConnected(sourceModel()->data(rightIndex, WifiModel::StateRole).toString());
+
+	if (isLeftConnected != isRightConnected) {
+		return isRightConnected;
+	}
+
+	const int leftStrength = sourceModel()->data(leftIndex, WifiModel::StrengthRole).toInt();
+	const int rightStrength = sourceModel()->data(rightIndex, WifiModel::StrengthRole).toInt();
+
+	return leftStrength < rightStrength;
+}

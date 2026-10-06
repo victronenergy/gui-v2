@@ -29,7 +29,7 @@ VisibleItemModel {
 	}
 
 	ListTemperature {
-		//% "Alternator Temperature"
+		//% "Alternator temperature"
 		text: qsTrId("alternator_temperature")
 		dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 		preferredVisible: dataItem.valid
@@ -95,7 +95,7 @@ VisibleItemModel {
 	}
 
 	ListTemperature {
-		//% "Engine Temperature"
+		//% "Engine temperature"
 		text: qsTrId("engine_temperature")
 		dataItem.uid: root.bindPrefix + "/Engine/Temperature"
 		preferredVisible: dataItem.valid

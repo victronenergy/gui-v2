@@ -6,11 +6,9 @@ qt_add_qml_module(VictronUiTest
     ${QML_MODULE_OPTARGS}
 )
 
-if (${VENUS_GX_BUILD})
-    qt_query_qml_module(VictronUiTest QML_FILES module_qml_files QMLDIR module_qmldir)
-    install(FILES ${module_qmldir} DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/UiTest)
-    install(DIRECTORY tests/ui    DESTINATION ${CMAKE_INSTALL_BINDIR}/Victron/UiTest/tests)
-endif()
+qt_query_qml_module(VictronUiTest QML_FILES module_qml_files QMLDIR module_qmldir)
+install(FILES ${module_qmldir} DESTINATION ${VENUS_QML_INSTALL_DIR}/Victron/UiTest)
+install(DIRECTORY tests/ui    DESTINATION ${VENUS_QML_INSTALL_DIR}/Victron/UiTest/tests)
 
 qt_add_resources(VictronUiTest "VictronUiTest_resources"
     BIG_RESOURCES

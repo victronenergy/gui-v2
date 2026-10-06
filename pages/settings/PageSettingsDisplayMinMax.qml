@@ -33,7 +33,7 @@ Page {
 
 					ModalWarningDialog {
 						dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-						//% "Reset Range Values"
+						//% "Reset range values"
 						title: qsTrId("settings_minmax_reset_range_values")
 						//% "Are you sure that you want to reset all the values to zero?"
 						description: qsTrId("settings_minmax_reset_are_you_sure")
@@ -182,7 +182,7 @@ Page {
 			}
 
 			ListRadioButtonGroup {
-				//% "Gauge Display"
+				//% "Gauge display"
 				text: qsTrId("settings_minmax_gauge_display")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/CenterGauge/Type" // TBC
 				preferredVisible: dataItem.valid
@@ -204,7 +204,7 @@ Page {
 
 			ListQuantityField {
 				id: maxSpeed
-				//% "Max Speed"
+				//% "Max speed"
 				text: qsTrId("settings_minmax_max_speed")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Speed/Max"
 				dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Speed_MetresPerSecond)

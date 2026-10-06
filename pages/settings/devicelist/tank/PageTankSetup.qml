@@ -45,9 +45,9 @@ Page {
 				dataItem.uid: root.bindPrefix + "/Standard"
 				preferredVisible: dataItem.valid
 				optionModel: [
-					//% "European (0 to 180 Ohm)"
+					//% "European (0 to 180 ohm)"
 					{ display: qsTrId("devicelist_tanksetup_european_(0_to_180_ohm)"), value: 0 },
-					//% "US (240 to 30 Ohm)"
+					//% "US (240 to 30 ohm)"
 					{ display: qsTrId("devicelist_tanksetup_us_(240_to_30_ohm)"), value: 1 },
 					//% "Custom"
 					{ display: qsTrId("devicelist_tanksetup_custom"), value: 2 },

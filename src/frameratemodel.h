@@ -10,9 +10,10 @@
 #include <QElapsedTimer>
 #include <QAbstractListModel>
 #include <QMutex>
+#include <QPointer>
+#include <QMetaObject>
+#include <QQuickWindow>
 #include <qqmlintegration.h>
-
-class QQuickWindow;
 class QQmlEngine;
 class QJSEngine;
 
@@ -36,6 +37,7 @@ class FrameRateModel : public QAbstractListModel
 	QML_ELEMENT
 	QML_SINGLETON
 	Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged FINAL)
+	Q_PROPERTY(QQuickWindow *window READ window WRITE setWindow NOTIFY windowChanged FINAL)
 	Q_PROPERTY(int visualizationRate READ visualizationRate WRITE setVisualizationRate NOTIFY visualizationRateChanged FINAL)
 	Q_PROPERTY(int secondsToVisualize READ secondsToVisualize WRITE setSecondsToVisualize NOTIFY secondsToVisualizeChanged FINAL)
 	Q_PROPERTY(int expectedFrameRate READ expectedFrameRate WRITE setExpectedFrameRate NOTIFY expectedFrameRateChanged FINAL)
@@ -64,6 +66,7 @@ public:
 	QList<qreal> chunks() const;
 	int frameRate() const;
 
+	QQuickWindow *window() const;
 	void setWindow(QQuickWindow *window);
 
 	// QAbstractListModel
@@ -72,6 +75,7 @@ public:
 
 Q_SIGNALS:
 	void enabledChanged();
+	void windowChanged();
 	void visualizationRateChanged();
 	void secondsToVisualizeChanged();
 	void expectedFrameRateChanged();
@@ -87,6 +91,12 @@ private:
 	void initTimeslices();
 	void initChunks();
 	void updateChunks();
+	void connectWindowSignals();
+	void disconnectWindowSignals();
+
+	QPointer<QQuickWindow> m_window;
+	QMetaObject::Connection m_afterRenderingConnection;
+	QMetaObject::Connection m_frameRenderedConnection;
 	QMutex m_blockedTimerMutex;
 	QTimer m_visualizationTimer;
 	QElapsedTimer m_blockedTimer;

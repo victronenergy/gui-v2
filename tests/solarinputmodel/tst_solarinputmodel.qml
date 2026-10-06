@@ -421,6 +421,71 @@ TestCase {
 					}
 				],
 			},
+			{
+				tag: "solarcharger - 0 power",
+				devices: [
+					{
+						uid: "mock/com.victronenergy.solarcharger.a",
+						children: {
+							"Yield/Power": 0,
+							"Pv/V": 20,
+							DeviceInstance: 0,
+							ProductName: "solarcharger_product",
+						},
+					}
+				],
+				expectedData: [
+					{
+						serviceUid: "mock/com.victronenergy.solarcharger.a",
+						serviceType: "solarcharger",
+						group: "generic",
+						enabled: true,
+						name: "solarcharger_product",
+						power: 0,
+						current: 0,
+						voltage: 20,
+					}
+				],
+			},
+			{
+				tag: "multi - 2 trackers - 0 power",
+				devices: [
+					{
+						uid: "mock/com.victronenergy.multi.a",
+						children: {
+							"Pv/0/P": 0,
+							"Pv/1/P": 0,
+							"Pv/0/V": 5,
+							"Pv/1/V": 10,
+							NrOfTrackers: 2,
+							DeviceInstance: 0,
+							ProductName: "multi_product",
+						},
+					}
+				],
+				expectedData: [
+					{
+						serviceUid: "mock/com.victronenergy.multi.a",
+						serviceType: "multi",
+						group: "generic",
+						enabled: true,
+						name: "multi_product-#1",
+						power: 0,
+						current: 0,
+						voltage: 5,
+					},
+					{
+						serviceUid: "mock/com.victronenergy.multi.a",
+						serviceType: "multi",
+						group: "generic",
+						enabled: true,
+						name: "multi_product-#2",
+						power: 0,
+						current: 0,
+						voltage: 10,
+					}
+				],
+			},
 		]
 	}
 
