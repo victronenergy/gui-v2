@@ -12,7 +12,7 @@ Loader {
 	required property PageStack pageStack
 
 	signal controlCardsActivated()
-	signal auxCardsActivated()
+	signal paneActivated(pane: StatusBarPane)
 	signal cardsDeactivated()
 	signal sidePanelToggled()
 
@@ -26,7 +26,7 @@ Loader {
 			focus: true
 
 			onControlCardsActivated: root.controlCardsActivated()
-			onAuxCardsActivated: root.auxCardsActivated()
+			onPaneActivated: (pane) => root.paneActivated(pane)
 			onCardsDeactivated: root.cardsDeactivated()
 			onSidePanelToggled: root.sidePanelToggled()
 		}
@@ -40,7 +40,7 @@ Loader {
 			focus: true
 
 			onControlCardsActivated: root.controlCardsActivated()
-			onAuxCardsActivated: root.auxCardsActivated()
+			onPaneActivated: (pane) => root.paneActivated(pane)
 			onCardsDeactivated: root.cardsDeactivated()
 			onSidePanelToggled: root.sidePanelToggled()
 		}

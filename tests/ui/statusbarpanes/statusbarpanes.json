@@ -1,0 +1,23 @@
+{
+    "ExitWhenFinished": true,
+    "Logging": "info",
+    "Tests": [
+        "tst_statusbarpanes.qml"
+    ],
+    "Mock": {
+        "Configuration": ":/data/mock/conf/maximal.json",
+        "TimersActive": false
+    },
+    "Steps": {
+        "CaptureAndCompare": {
+            "ImageDir": "image-captures",
+            "StabilizationInterval": 16,
+            "StabilizationTimeout": 1000,
+            "MaximumStabilizationAttempts": 3,
+            "FailIfComparisonFails": false
+        },
+        "WaitUntil": {
+            "DefaultTimeout": 8000
+        }
+    }
+}

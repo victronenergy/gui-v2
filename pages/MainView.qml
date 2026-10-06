@@ -428,8 +428,9 @@ FocusScope {
 	CardViewLoader {
 		id: cardsLoader
 
-		function show(viewComponent) {
+		function show(viewComponent, id) {
 			sourceComponent = viewComponent
+			viewId = id
 			viewActive = true
 		}
 
@@ -469,6 +470,15 @@ FocusScope {
 			id: auxCardsComponent
 			AuxCardsPage {}
 		}
+
+		StatusBarPane {
+			paneId: "switches"
+			order: 100
+			available: (Global.switches?.groups.count ?? 0) > 0
+			iconSource: "qrc:/images/icon_smartswitch_off_32.svg"
+			activeIconSource: "qrc:/images/icon_smartswitch_on_32.svg"
+			paneComponent: auxCardsComponent
+		}
 	}
 
 	StatusBar {
@@ -479,8 +489,8 @@ FocusScope {
 		opacity: 0.0
 		pageStack: root._pageStack
 
-		onControlCardsActivated: cardsLoader.show(controlCardsComponent)
-		onAuxCardsActivated: cardsLoader.show(auxCardsComponent)
+		onControlCardsActivated: cardsLoader.show(controlCardsComponent, "controls")
+		onPaneActivated: (pane) => cardsLoader.show(pane.paneComponent, pane.paneId)
 		onCardsDeactivated: cardsLoader.hide()
 		onSidePanelToggled: root.currentPage.toggleSidePanel()
 

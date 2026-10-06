@@ -14,7 +14,7 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 	required property PageStack pageStack
 
 	signal controlCardsActivated()
-	signal auxCardsActivated()
+	signal paneActivated(pane: StatusBarPane)
 	signal cardsDeactivated()
 	signal sidePanelToggled()
 
@@ -100,7 +100,6 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 			visible: enabled
 
 			Layout.alignment: Qt.AlignTop
-			KeyNavigation.right: auxButton
 
 			onClicked: {
 				switch (buttonType) {
@@ -116,31 +115,36 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 			}
 		}
 
-		StatusBarButton {
-			id: auxButton
+		Repeater {
+			id: paneButtons
 
-			readonly property bool auxCardsOpened: Global.mainView.cardsActive
-					&& controlCardsButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
+			model: Global.statusBarPanes
+			delegate: StatusBarButton {
+				required property int index
+				required property StatusBarPane pane
 
-			// Expand clickable area on right and bottom edges, and on left if leftButton is hidden.
-			leftInset: Theme.geometry_statusBar_spacing / 2
-			rightInset: Theme.geometry_statusBar_horizontalMargin
-			bottomInset: Theme.geometry_statusBar_spacing
+				// While a cards view is open, the other buttons are blank and disabled but keep
+				// their place, so that the buttons before them do not move.
+				readonly property bool otherViewOpen: (Global.mainView?.cardsActive ?? false) && !pane.opened
 
-			visible: ((!root.pageStack.opened && Global.switches.groups.count > 0)
-					|| auxCardsOpened) // allow cards to be closed if all switches are disconnected while opened
-			icon.source: controlCardsButton.buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? ""
-					: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
-					: "qrc:/images/icon_smartswitch_off_32.svg"
-			enabled: !breadcrumbs.enabled && controlCardsButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
+				// Expand clickable area on bottom edge, and on right edge of the last button.
+				leftInset: Theme.geometry_statusBar_spacing / 2
+				rightInset: index === paneButtons.count - 1 ? Theme.geometry_statusBar_horizontalMargin
+						: Theme.geometry_statusBar_spacing / 2
+				bottomInset: Theme.geometry_statusBar_spacing
 
-			Layout.alignment: Qt.AlignTop
+				visible: pane.opened || (pane.available && !root.pageStack.opened)
+				enabled: !breadcrumbs.enabled && !otherViewOpen
+				icon.source: otherViewOpen ? "" : pane.opened ? pane.activeIconSource : pane.iconSource
 
-			onClicked: {
-				if (auxCardsOpened) {
-					root.cardsDeactivated()
-				} else {
-					root.auxCardsActivated()
+				Layout.alignment: Qt.AlignTop
+
+				onClicked: {
+					if (pane.opened) {
+						root.cardsDeactivated()
+					} else {
+						root.paneActivated(pane)
+					}
 				}
 			}
 		}

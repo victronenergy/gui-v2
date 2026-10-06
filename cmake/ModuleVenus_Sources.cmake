@@ -117,6 +117,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/StatusBar.qml
     components/StatusBar_Landscape.qml
     components/StatusBar_Portrait.qml
+    components/StatusBarPane.qml
+    components/StatusBarPaneModel.qml
     components/SwipePageModel.qml
     components/SwipeViewPage.qml
     components/SystemBatteryDelegate.qml
