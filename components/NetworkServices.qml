@@ -67,12 +67,13 @@ VeQuickItem {
 		}
 
 		const services = JSON.parse(value)
+		const techServices = services[tech] || {}
 
 		let details
 
 		// Find the network service using service identifier
 		if (root.service.length > 0) {
-			for (const [network, networkDetails] of Object.entries(services[tech])) {
+			for (const [network, networkDetails] of Object.entries(techServices)) {
 				if (root.service === networkDetails["Service"]) {
 					root.network = network // SSID name may have been updated
 					details = networkDetails
@@ -81,7 +82,7 @@ VeQuickItem {
 			}
 		} else if (network.length > 0) {
 			// If not available use the network name instead (in Ethernet case "Wired")
-			details = network && services[tech][network] ? services[tech][network] : undefined
+			details = techServices[network]
 		}
 
 		if (details) {
@@ -96,6 +97,21 @@ VeQuickItem {
 			strength = details["Strength"] || ""
 			secured = details["Secured"] === "yes"
 			favorite = details["Favorite"] === "yes"
+		} else {
+			// The service has gone away, e.g. connman removes the ethernet service when the
+			// cable is unplugged. Clear the cached details so that stale values (such as the
+			// IP address) are not shown, and so the service is looked up again by name.
+			root.service = ""
+			networkState = ""
+			method_ = ""
+			ipAddress = ""
+			macAddress = ""
+			netmask = ""
+			gateway = ""
+			nameserver = ""
+			strength = ""
+			secured = false
+			favorite = false
 		}
 	}
 
