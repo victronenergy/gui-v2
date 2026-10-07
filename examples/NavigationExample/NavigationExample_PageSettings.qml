@@ -10,22 +10,6 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-			ListSwitch {
-				id: enabledSwitch
-				text: "Enabled"
-				checked: GuiPluginLoader.isPluginEnabled(root.pluginName)
-				onClicked: GuiPluginLoader.setPluginEnabled(root.pluginName, !checked)
-
-				Connections {
-					target: GuiPluginLoader
-					function onPluginUiStateChanged(name) {
-						if (name === root.pluginName) {
-							enabledSwitch.checked = GuiPluginLoader.isPluginEnabled(root.pluginName)
-						}
-					}
-				}
-			}
-
 			ListRadioButtonGroup {
 				id: gridColumnsGroup
 

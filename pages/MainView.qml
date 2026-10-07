@@ -32,9 +32,22 @@ FocusScope {
 	// Pin the visible main page by URL so enable/disable (which reshuffles the
 	// swipe page list) can re-align NavBar and SwipeView to the same page.
 	property url _pinnedMainPageUrl
+	// Page that was current before the latest pin. A nav plugin that fails to
+	// load is no longer in the list, so resync uses this instead of index 0.
+	property string _previousMainPageUrl
 	// Snapshot taken when pluginEnabledChanged fires, before pages rebuild and
 	// the swipe view clamps to index 0.
 	property string _resyncUrl
+
+	function rememberMainPage(pageUrl) {
+		if (!pageUrl)
+			return
+		const next = String(pageUrl)
+		const current = String(_pinnedMainPageUrl)
+		if (current.length > 0 && current !== next)
+			_previousMainPageUrl = current
+		_pinnedMainPageUrl = pageUrl
+	}
 
 	property url pluginQuickAccessUrl
 	property string pluginQuickAccessName
@@ -300,7 +313,7 @@ FocusScope {
 							navBar.setCurrentIndex(currentIndex)
 							const page = currentItem
 							if (page && page.url) {
-								root._pinnedMainPageUrl = page.url
+								root.rememberMainPage(page.url)
 							}
 						}
 					}
@@ -344,7 +357,7 @@ FocusScope {
 				}
 				const page = pages[currentIndex]
 				if (page && page.url) {
-					root._pinnedMainPageUrl = page.url
+					root.rememberMainPage(page.url)
 				}
 			}
 

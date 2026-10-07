@@ -72,6 +72,7 @@ private slots:
 	void own_write_does_not_emit_again();
 	void inplace_external_edit_is_seen();
 	void recreated_file_is_seen();
+	void settings_writes_are_coalesced();
 
 private:
 	QString m_dir;
@@ -111,6 +112,7 @@ void tst_GuiPlugins::save_replaces_file_atomically()
 	QVERIFY(before != 0);
 
 	m_loader->setPluginSetting(QStringLiteral("CardExample"), QStringLiteral("k"), 1);
+	m_loader->flushPluginUiState();
 	const ino_t after = fileInode(m_path);
 	QVERIFY2(after != 0 && after != before,
 			"state file writes must replace the inode (QSaveFile), not truncate in place");
@@ -126,6 +128,7 @@ void tst_GuiPlugins::own_write_does_not_emit_again()
 	QSignalSpy spy(m_loader, &GuiPluginLoader::pluginUiStateChanged);
 	m_loader->setPluginSetting(QStringLiteral("CardExample"), QStringLiteral("k"), 2);
 	QCOMPARE(spy.count(), 1);
+	m_loader->flushPluginUiState();
 	QTest::qWait(500);
 	QCOMPARE(spy.count(), 1);
 }
@@ -157,6 +160,36 @@ void tst_GuiPlugins::recreated_file_is_seen()
 	QVERIFY(writeObject(m_path, root));
 	QTRY_COMPARE_WITH_TIMEOUT(spy.count(), 1, 2000);
 	QVERIFY(!m_loader->isPluginEnabled(QStringLiteral("NavigationExample")));
+}
+
+void tst_GuiPlugins::settings_writes_are_coalesced()
+{
+	qputenv("VENUS_PLUGIN_UI_STATE_SAVE_MS", "250");
+	m_loader->setPluginSetting(QStringLiteral("CardExample"), QStringLiteral("k"), 1);
+	m_loader->flushPluginUiState();
+	const ino_t before = fileInode(m_path);
+	QVERIFY(before != 0);
+	QCOMPARE(readObject(m_path).value(QStringLiteral("CardExample")).toObject()
+			.value(QStringLiteral("settings")).toObject()
+			.value(QStringLiteral("k")).toInt(), 1);
+
+	m_loader->setPluginSetting(QStringLiteral("CardExample"), QStringLiteral("k"), 10);
+	m_loader->setPluginSetting(QStringLiteral("CardExample"), QStringLiteral("k"), 11);
+	m_loader->setPluginSetting(QStringLiteral("CardExample"), QStringLiteral("k"), 12);
+	QCOMPARE(m_loader->pluginSetting(QStringLiteral("CardExample"), QStringLiteral("k")).toInt(), 12);
+
+	QTest::qWait(80);
+	QCOMPARE(fileInode(m_path), before);
+	QCOMPARE(readObject(m_path).value(QStringLiteral("CardExample")).toObject()
+			.value(QStringLiteral("settings")).toObject()
+			.value(QStringLiteral("k")).toInt(), 1);
+
+	QTRY_COMPARE_WITH_TIMEOUT(
+			readObject(m_path).value(QStringLiteral("CardExample")).toObject()
+				.value(QStringLiteral("settings")).toObject()
+				.value(QStringLiteral("k")).toInt(),
+			12, 1000);
+	qunsetenv("VENUS_PLUGIN_UI_STATE_SAVE_MS");
 }
 
 int main(int argc, char **argv)

@@ -91,6 +91,8 @@ public:
 			const QVariant &defaultValue = QVariant()) const;
 	Q_INVOKABLE void setPluginSetting(const QString &name, const QString &key, const QVariant &value);
 	Q_INVOKABLE QVariantMap pluginSettings(const QString &name) const;
+	// Writes any coalesced settings immediately. Enable toggles already do.
+	Q_INVOKABLE void flushPluginUiState();
 
 Q_SIGNALS:
 	void busyChanged();
@@ -117,6 +119,7 @@ private:
 	bool installPluginTranslatorForLanguage(const QString &pluginName, QLocale::Language language);
 	void loadPluginUiState();
 	void savePluginUiState();
+	void schedulePluginUiStateSave();
 	void reloadPluginUiStateFromDisk();
 	void watchPluginUiStateFile();
 	void ensureStateFileWatched();
@@ -137,6 +140,8 @@ private:
 	QVector<GuiPluginMqttFetcher*> m_mqttFetchers;
 	QTimer m_invokeOnceTimer;
 	QTimer m_timeoutTimer;
+	QTimer m_stateSaveTimer;
+	QByteArray m_lastWrittenPluginUiState;
 	bool m_busy = true;
 	QQmlEngine *m_qmlEngine = nullptr;
 };
