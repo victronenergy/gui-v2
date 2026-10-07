@@ -10,8 +10,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	// Status text is anchored to a slot that is always the switch width, so
-	// Enabled and Disabled share a column on a switch row and a chevron row.
+	// Every row has a switch, including plugins whose settings page does not draw one.
+	// The chevron slot is always reserved so Enabled/Disabled stay in one column.
 	component PluginEnableRow: ListSetting {
 			id: row
 
@@ -77,34 +77,31 @@ Page {
 						right: parent.right
 						verticalCenter: parent.verticalCenter
 					}
-					width: enableSwitch.implicitWidth
-					height: enableSwitch.implicitHeight
+					width: enableSwitch.implicitWidth + row.spacing + chevron.implicitWidth + row.horizontalContentPadding
+					height: Math.max(enableSwitch.implicitHeight, chevron.implicitHeight)
 
 					Switch {
 						id: enableSwitch
 
 						anchors {
-							right: parent.right
+							right: chevron.left
+							rightMargin: row.spacing
 							verticalCenter: parent.verticalCenter
 						}
-						opacity: row.hasSettingsPage ? 0 : 1
-						enabled: !row.hasSettingsPage
 						checked: row.pluginEnabled
 						focusPolicy: Qt.NoFocus
-						leftInset: row.spacing
-						rightInset: row.horizontalContentPadding
-						leftPadding: leftInset
-						rightPadding: rightInset
 						onClicked: row.toggleEnabled()
 					}
 
 					CP.ColorImage {
+						id: chevron
+
 						anchors {
 							right: parent.right
 							rightMargin: row.horizontalContentPadding
 							verticalCenter: parent.verticalCenter
 						}
-						visible: row.hasSettingsPage
+						opacity: row.hasSettingsPage ? 1 : 0
 						source: "qrc:/images/icon_chevron_right_32.svg"
 						color: Theme.color_listItem_forwardIcon
 					}
@@ -113,16 +110,13 @@ Page {
 
 			ListPressArea {
 				anchors.fill: parent
+				anchors.rightMargin: trailing.width + row.rightPadding
 				enabled: row.hasSettingsPage
 				onClicked: row.openPage()
 			}
 
-			Keys.onSpacePressed: {
-				if (hasSettingsPage)
-					openPage()
-				else
-					toggleEnabled()
-			}
+			Keys.onSpacePressed: toggleEnabled()
+			Keys.onReturnPressed: toggleEnabled()
 			Keys.onRightPressed: {
 				if (hasSettingsPage)
 					openPage()

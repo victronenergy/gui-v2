@@ -49,7 +49,23 @@ ObjectModel {
 		&& Global.systemSettings
 		&& Global.tanks
 		&& Global.environmentInputs
-		&& pages.length >= 4
+		// Boat, Levels, and plugin nav wrappers load after the four stock pages. A later change
+		// to `pages` resets the swipe view to the first page, which drops a configured start page.
+		// Plugin content is not waited on, so a hanging plugin cannot block startup.
+		&& (!boatPageLoader.active || showBoatPage)
+		&& (!levelsPageLoader.active || showLevelsPage)
+		&& _pluginNavPagesReady
+
+	readonly property bool _pluginNavPagesReady: {
+		void pluginNavReady
+		for (let i = 0; i < pluginNavRepeater.count; ++i) {
+			const loader = pluginNavRepeater.itemAt(i)
+			if (!loader || !loader.item) {
+				return false
+			}
+		}
+		return true
+	}
 
 	property bool _completed: false
 
@@ -169,6 +185,12 @@ ObjectModel {
 						void root.pluginEnableRevision
 						return GuiPluginLoader.isPluginEnabled(pluginPageDelegate.pluginName)
 					}
+					onContentEnabledChanged: {
+						// Disable unloads the page. Leave the visited flag set and a re-enable
+						// while the user is still in Settings reloads it off-screen.
+						if (!contentEnabled)
+							contentVisited = false
+					}
 					readonly property bool contentFailed: pluginContentLoader.status === Loader.Error
 
 					onActiveFocusChanged: {
@@ -189,8 +211,14 @@ ObjectModel {
 								pluginSwipePage.contentVisited = true
 						}
 						onStatusChanged: {
-							if (status === Loader.Error)
+							if (status === Loader.Error) {
+								const mv = Global.mainView
+								if (mv && mv._previousMainPageUrl.length > 0)
+									mv._resyncUrl = mv._previousMainPageUrl
 								root.pluginEnableRevision++
+								if (mv)
+									Qt.callLater(mv.resyncMainPageSelection)
+							}
 						}
 					}
 				}

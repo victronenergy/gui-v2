@@ -26,7 +26,12 @@ FocusScope {
 		return null
 	}
 
+	// Repeater count changes before delegates exist. itemAt() is not a binding
+	// dependency, so key chains must also read this counter (bumped from the delegate).
+	property int pluginButtonReady: 0
+
 	function focusablesAfterPlugin(startIndex) {
+		void pluginButtonReady
 		let list = []
 		if (pluginPaneButtons.visible) {
 			for (let i = startIndex; i < pluginRepeater.count; ++i) {
@@ -210,8 +215,13 @@ FocusScope {
 				icon.source: (paneOpened && String(pluginIconActive).length > 0)
 						? pluginPaneButton.pluginIconActive : pluginPaneButton.pluginIcon
 
-				KeyNavigation.left: index > 0 ? pluginRepeater.itemAt(index - 1)
-						: (auxButton.visible ? auxButton : leftButton)
+				KeyNavigation.left: {
+					void root.pluginButtonReady
+					return index > 0 ? pluginRepeater.itemAt(index - 1)
+							: (auxButton.visible ? auxButton : leftButton)
+				}
+				Component.onCompleted: root.pluginButtonReady++
+				Component.onDestruction: root.pluginButtonReady++
 				KeyNavigation.right: root.firstFocusable(root.focusablesAfterPlugin(index + 1))
 
 				onActiveFocusChanged: {
@@ -314,6 +324,7 @@ FocusScope {
 				: "qrc:/images/icon_WiFi_noconnection_32.svg"
 
 			KeyNavigation.left: {
+				void root.pluginButtonReady
 				if (pluginPaneButtons.visible && pluginRepeater.count > 0) {
 					const last = pluginRepeater.itemAt(pluginRepeater.count - 1)
 					if (last && last.visible && last.enabled)
@@ -454,6 +465,7 @@ FocusScope {
 
 			icon.source: "qrc:/images/icon_screen_sleep_32.svg"
 			visible: ScreenBlanker.supported && ScreenBlanker.enabled
+			KeyNavigation.left: rightButton.visible && rightButton.enabled ? rightButton : alarmButton
 
 			onClicked: ScreenBlanker.setDisplayOff()
 			onActiveFocusChanged: {

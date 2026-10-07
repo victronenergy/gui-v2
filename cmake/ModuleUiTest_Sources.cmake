@@ -13,6 +13,10 @@ set(VictronUiTest_QML_MODULE_SOURCES
     tests/ui/plugins/tst_plugins.qml
     tests/ui/keynav-switches/tst_keynav.qml
     tests/ui/keynav-bare/tst_keynav.qml
+    tests/ui/start-page/StartPageNavPage.qml
+    tests/ui/start-page/StartPageTestCase.qml
+    tests/ui/start-page/maximal/tst_start_page.qml
+    tests/ui/start-page/no-levels/tst_start_page.qml
     tests/ui/target-page/tst_target_page.qml
 )
 
@@ -24,4 +28,6 @@ SET(VictronUiTest_QML_MODULE_RESOURCES
     tests/ui/plugins/plugins.json
     tests/ui/keynav-switches/keynav-switches.json
     tests/ui/keynav-bare/keynav-bare.json
+    tests/ui/start-page/maximal/maximal.json
+    tests/ui/start-page/no-levels/no-levels.json
 )

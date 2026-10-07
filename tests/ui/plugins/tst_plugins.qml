@@ -48,14 +48,20 @@ UiTestCase {
 			timeout: 5000
 		})
 		addStep(UiTestStep.Invoke, { callable: () => {
-			GuiPluginLoader.setPluginEnabled("ToggleProbe", false)
+			GuiPluginLoader.setPluginEnabled("ProbeNav", false)
 			return true
 		}})
 		addStep(UiTestStep.Wait, { timeout: 500 })
 		addStep(UiTestStep.Invoke, { callable: () => {
 			const url = String(Global.mainView.swipeView.currentItem ? Global.mainView.swipeView.currentItem.url : "")
-			console.warn("PAGE after enable flip", url, "nav", Global.mainView.navBar.currentIndex)
-			return url.endsWith("NotificationsPage.qml")
+			console.warn("PAGE after enable flip", url, "nav", Global.mainView.navBar.currentIndex,
+					"probe still listed", root.navHas("ProbeNav_Page.qml"))
+			if (root.navHas("ProbeNav_Page.qml"))
+				return false
+			if (!url.endsWith("NotificationsPage.qml"))
+				return false
+			GuiPluginLoader.setPluginEnabled("ProbeNav", true)
+			return true
 		}})
 		runSteps()
 	}
@@ -221,6 +227,54 @@ UiTestCase {
 					"opened", Global.pageManager.pageStack.opened)
 			return !!btn && btn.visible === false
 		}})
+		runSteps()
+	}
+
+	function test_reenable_does_not_load_offscreen() {
+		addStep(UiTestStep.WaitUntil, { callable: root.ready, timeout: 90000 })
+		addStep(UiTestStep.Invoke, { callable: () => {
+			GuiPluginLoader.setPluginEnabled("ProbeNav", true)
+			return Global.mainView.navBar.setCurrentPage("ProbeNav_Page.qml")
+		}})
+		addStep(UiTestStep.WaitUntil, { callable: () => root.navHas("ProbeNav_Page.qml"), timeout: 5000 })
+		addStep(UiTestStep.Wait, { timeout: 500 })
+		addStep(UiTestStep.Invoke, { callable: () => {
+			GuiPluginLoader.setPluginEnabled("ProbeNav", false)
+			return true
+		}})
+		addStep(UiTestStep.Invoke, { callable: () => Global.mainView.navBar.setCurrentPage("NotificationsPage.qml") })
+		addStep(UiTestStep.Wait, { timeout: 400 })
+		addStep(UiTestStep.Invoke, { callable: () => {
+			const url = String(Global.mainView.swipeView.currentItem ? Global.mainView.swipeView.currentItem.url : "")
+			if (!url.endsWith("NotificationsPage.qml"))
+				return false
+			root._ticksBeforeDisable = Number(GuiPluginLoader.pluginSetting("ProbeNav", "ticks", 0))
+			GuiPluginLoader.setPluginEnabled("ProbeNav", true)
+			return true
+		}})
+		addStep(UiTestStep.Wait, { timeout: 700 })
+		addStep(UiTestStep.Invoke, { callable: () => {
+			const now = Number(GuiPluginLoader.pluginSetting("ProbeNav", "ticks", 0))
+			console.warn("PROBE ticks after re-enable offscreen", root._ticksBeforeDisable, "->", now)
+			return now === root._ticksBeforeDisable
+		}})
+		runSteps()
+	}
+
+	function test_failed_nav_page_returns_to_previous() {
+		addStep(UiTestStep.WaitUntil, { callable: root.ready, timeout: 90000 })
+		addStep(UiTestStep.WaitUntil, { callable: () => root.navHas("ProbeBroken_Page.qml"), timeout: 5000 })
+		addStep(UiTestStep.Invoke, { callable: () => Global.mainView.navBar.setCurrentPage("OverviewPage.qml") })
+		addStep(UiTestStep.WaitUntil, {
+			callable: () => String(Global.mainView.swipeView.currentItem.url).endsWith("OverviewPage.qml"),
+			timeout: 5000
+		})
+		addStep(UiTestStep.Invoke, { callable: () => Global.mainView.navBar.setCurrentPage("ProbeBroken_Page.qml") })
+		addStep(UiTestStep.WaitUntil, {
+			callable: () => String(Global.mainView.swipeView.currentItem.url).endsWith("OverviewPage.qml")
+					&& !root.navHas("ProbeBroken_Page.qml"),
+			timeout: 5000
+		})
 		runSteps()
 	}
 

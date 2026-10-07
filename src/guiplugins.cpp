@@ -82,6 +82,10 @@ namespace {
 		}
 		return QStringList();
 #elif defined(VENUS_DESKTOP_BUILD)
+		const QByteArray overrideDir = qgetenv("VENUS_GUI_PLUGINS_DIR");
+		if (!overrideDir.isEmpty()) {
+			return QStringList { QString::fromLocal8Bit(overrideDir) };
+		}
 		// look in ~appdir/plugins/
 		const QString appDirPath = QCoreApplication::applicationDirPath();
 		QDir pluginDir = QDir(appDirPath);
@@ -131,10 +135,14 @@ GuiPluginLoader* GuiPluginLoader::create(QQmlEngine *engine, QJSEngine *)
 }
 
 GuiPluginLoader::GuiPluginLoader(QObject *parent)
-	: QObject(parent), m_invokeOnceTimer(this), m_timeoutTimer(this)
+	: QObject(parent), m_invokeOnceTimer(this), m_timeoutTimer(this), m_stateSaveTimer(this)
 {
 	loadPluginUiState();
 	watchPluginUiStateFile();
+	// Settings writes update memory immediately and hit the eMMC on this timer.
+	// A ticking or scrolling plugin must not rewrite the state file on every call.
+	m_stateSaveTimer.setSingleShot(true);
+	connect(&m_stateSaveTimer, &QTimer::timeout, this, &GuiPluginLoader::savePluginUiState);
 
 	Language *languageSingleton = Language::create();
 	connect(languageSingleton, &Language::currentLanguageChanged,
@@ -202,6 +210,8 @@ GuiPluginLoader::GuiPluginLoader(QObject *parent)
 
 GuiPluginLoader::~GuiPluginLoader()
 {
+	if (m_stateSaveTimer.isActive())
+		savePluginUiState();
 }
 
 bool GuiPluginLoader::busy() const
@@ -284,14 +294,39 @@ void GuiPluginLoader::savePluginUiState()
 		return;
 	}
 	m_writingPluginUiState = true;
-	f.write(QJsonDocument(m_pluginUiState).toJson(QJsonDocument::Indented));
+	const QByteArray bytes = QJsonDocument(m_pluginUiState).toJson(QJsonDocument::Indented);
+	m_lastWrittenPluginUiState = bytes;
+	f.write(bytes);
 	const bool committed = f.commit();
 	m_writingPluginUiState = false;
 	if (!committed) {
+		m_lastWrittenPluginUiState.clear();
 		qCWarning(venusGui) << "Unable to commit plugin UI state to" << path << f.errorString();
 		return;
 	}
 	ensureStateFileWatched();
+}
+
+void GuiPluginLoader::schedulePluginUiStateSave()
+{
+	if (m_stateSaveTimer.isActive()) {
+		return;
+	}
+	int delayMs = 10000;
+	const QByteArray raw = qgetenv("VENUS_PLUGIN_UI_STATE_SAVE_MS");
+	if (!raw.isEmpty()) {
+		bool ok = false;
+		const int parsed = QString::fromLatin1(raw).toInt(&ok);
+		if (ok && parsed >= 0)
+			delayMs = parsed;
+	}
+	m_stateSaveTimer.start(delayMs);
+}
+
+void GuiPluginLoader::flushPluginUiState()
+{
+	m_stateSaveTimer.stop();
+	savePluginUiState();
 }
 
 void GuiPluginLoader::ensureStateFileWatched()
@@ -341,7 +376,13 @@ void GuiPluginLoader::reloadPluginUiStateFromDisk()
 	if (!f.exists() || !f.open(QIODevice::ReadOnly)) {
 		return;
 	}
-	const QJsonDocument doc = QJsonDocument::fromJson(f.readAll());
+	const QByteArray raw = f.readAll();
+	// The watcher also fires for our own QSaveFile replace. Memory may already
+	// hold settings that have not been flushed yet; do not roll those back.
+	if (raw == m_lastWrittenPluginUiState) {
+		return;
+	}
+	const QJsonDocument doc = QJsonDocument::fromJson(raw);
 	if (!doc.isObject()) {
 		return;
 	}
@@ -395,7 +436,7 @@ void GuiPluginLoader::setPluginUiStateObject(const QString &name, const QJsonObj
 		return;
 	}
 	m_pluginUiState.insert(name, obj);
-	savePluginUiState();
+	schedulePluginUiStateSave();
 	Q_EMIT pluginUiStateChanged(name);
 }
 
@@ -419,7 +460,7 @@ void GuiPluginLoader::setPluginEnabled(const QString &name, bool enabled)
 	QJsonObject obj = pluginUiStateObject(name);
 	obj.insert(QStringLiteral("enabled"), enabled);
 	m_pluginUiState.insert(name, obj);
-	savePluginUiState();
+	flushPluginUiState();
 	Q_EMIT pluginEnabledChanged(name);
 	Q_EMIT pluginUiStateChanged(name);
 }
@@ -450,7 +491,7 @@ void GuiPluginLoader::setPluginSetting(const QString &name, const QString &key, 
 	// Settings-only: notify pages, but do not emit pluginEnabledChanged (would
 	// reset GuiPluginIntegrationModel and scramble nav indices).
 	m_pluginUiState.insert(name, obj);
-	savePluginUiState();
+	schedulePluginUiStateSave();
 	Q_EMIT pluginUiStateChanged(name);
 }
 
