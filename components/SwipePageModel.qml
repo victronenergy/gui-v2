@@ -49,7 +49,26 @@ ObjectModel {
 		&& Global.systemSettings
 		&& Global.tanks
 		&& Global.environmentInputs
-		&& pages.length >= 4
+		// Wait for the main pages that load late at start-up: the Boat and Levels pages and the
+		// plugin nav pages (their wrappers, not the plugin content). Any change to `pages` resets
+		// the swipe view to the first page, so a page that arrived after goToStartPage() would
+		// lose the start page. Pages that only appear after start-up are not covered by this.
+		&& (!boatPageLoader.active || showBoatPage)
+		&& (!levelsPageLoader.active || showLevelsPage)
+		&& _pluginNavPagesReady
+
+	// The plugin content is not waited for: it loads on first visit, so a plugin that hangs cannot
+	// block the start-up.
+	readonly property bool _pluginNavPagesReady: {
+		void pluginNavReady
+		for (let i = 0; i < pluginNavRepeater.count; ++i) {
+			const loader = pluginNavRepeater.itemAt(i)
+			if (!loader || !loader.item) {
+				return false
+			}
+		}
+		return true
+	}
 
 	property bool _completed: false
 
