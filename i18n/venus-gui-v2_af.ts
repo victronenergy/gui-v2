@@ -53,9 +53,10 @@
       <source>None</source>
       <translation>Geen</translation>
     </message>
-    <message id="ev_position">
-      <location filename="../../pages/ev/EvPage.qml" line="141"/>
+    <message id="common_words_position_ac">
+      <location filename="../../components/CommonWords.qml" line="460"/>
       <source>Position</source>
+      <extracomment>AC input or output position</extracomment>
       <translation>Posisie</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
@@ -1014,7 +1015,7 @@
       <translation type="unfinished">Voeg IP-adres handmatig by</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="92"/>
       <source>Add IP address manually</source>
       <translation>Voeg IP-adres handmatig by</translation>
     </message>
@@ -1510,7 +1511,7 @@ Gebruik tensy dit deur die diensverskaffer verbied word.</translation>
     <message id="settings_ess_dynamic">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="315"/>
       <source>Dynamic ESS</source>
-      <translation type="unfinished">Dinamiese WSD</translation>
+      <translation type="unfinished">Dynamic ESS</translation>
     </message>
     <message id="settings_rs_ess_min_soc">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="40"/>
@@ -2110,7 +2111,7 @@ Gebruik tensy dit deur die diensverskaffer verbied word.</translation>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="22"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="195"/>
       <source>[Hidden]</source>
       <translation>[Versteek]</translation>
     </message>
@@ -2190,27 +2191,27 @@ Gebruik tensy dit deur die diensverskaffer verbied word.</translation>
       <translation type="unfinished">Versigtig, vir WSD-stelsels, sowel as stelsels met 'n bestuurde battery, moet die CAN-bus-toestelinstansie op 0 gekonfigureer bly. Sien GX-handleiding vir meer inligting.</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="181"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="185"/>
       <source>No access points</source>
       <translation>Geen toegangspunte nie</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="187"/>
       <source>No Wi-Fi adapter connected</source>
       <translation type="unfinished">Geen Wi-Fi-adapter gekoppel nie</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="42"/>
       <source>Create access point</source>
       <translation>Skep toegangspunt</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="177"/>
       <source>Wi-Fi networks</source>
       <translation>Wi-Fi-netwerke</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="67"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>Is jy seker jy wil die toegangspunt deaktiveer?</translation>
     </message>
@@ -3638,7 +3639,7 @@ Gebruik tensy dit deur die diensverskaffer verbied word.</translation>
       <translation type="unfinished">Omgeskakel</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="61"/>
       <source>Invert alarm logic</source>
       <translation>Omsetter alarm logika </translation>
     </message>
@@ -4328,11 +4329,11 @@ Wil jy voortgaan?</translation>
       <source>Connected</source>
       <translation>Gekoppel</translation>
     </message>
-    <message id="temperature_slider_current">
-      <location filename="../../components/controls/TemperatureSlider.qml" line="164"/>
+    <message id="common_words_current_amps">
+      <location filename="../../components/CommonWords.qml" line="161"/>
       <source>Current</source>
-      <extracomment>The current temperature measurement</extracomment>
-      <translation>Huidige</translation>
+      <extracomment>Electric current, as measured in Amps</extracomment>
+      <translation>Stroom</translation>
     </message>
     <message id="common_words_current_transformers">
       <location filename="../../components/CommonWords.qml" line="164"/>
@@ -4361,8 +4362,13 @@ Wil jy voortgaan?</translation>
       <source>Discharging</source>
       <translation>Ontlaai</translation>
     </message>
+    <message id="wifimodel_disconnected_ap_off">
+      <location filename="../../src/wifimodel.cpp" line="270"/>
+      <source/>
+      <translation type="unfinished"/>
+    </message>
     <message id="wifimodel_disconnected">
-      <location filename="../../components/WifiModel.qml" line="28"/>
+      <location filename="../../src/wifimodel.cpp" line="273"/>
       <source>Disconnected</source>
       <translation>Ontkoppel</translation>
     </message>
@@ -5866,7 +5872,7 @@ Wil jy voortgaan?</translation>
     <message id="settings_rs_ess_dess">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="97"/>
       <source>Dynamic ESS</source>
-      <translation type="unfinished">Dinamiese WSD</translation>
+      <translation>Dynamic ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
       <location filename="../../data/SystemSettings.qml" line="163"/>
@@ -7241,12 +7247,6 @@ Wil jy voortgaan?</translation>
       <source>Confirm</source>
       <translation type="unfinished">Bevestig</translation>
     </message>
-    <message id="common_words_current_amps">
-      <location filename="../../components/CommonWords.qml" line="161"/>
-      <source>Current</source>
-      <extracomment>Electric current, as measured in Amps</extracomment>
-      <translation type="unfinished">Huidige</translation>
-    </message>
     <message id="common_words_daily_history">
       <location filename="../../components/CommonWords.qml" line="170"/>
       <source>Daily history</source>
@@ -7411,12 +7411,6 @@ Wil jy voortgaan?</translation>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation type="unfinished">Krag</translation>
-    </message>
-    <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="460"/>
-      <source>Position</source>
-      <extracomment>AC input or output position</extracomment>
-      <translation type="unfinished">Posisie</translation>
     </message>
     <message id="common_words_running_status">
       <location filename="../../components/CommonWords.qml" line="499"/>
@@ -7858,7 +7852,7 @@ Wil jy voortgaan?</translation>
     <message id="system_state_dynamic_ess">
       <location filename="../../src/enums.cpp" line="814"/>
       <source>Dynamic ESS</source>
-      <translation type="unfinished">Dinamiese WSD</translation>
+      <translation type="unfinished">Dynamic ESS</translation>
     </message>
     <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -7981,11 +7975,6 @@ Wil jy voortgaan?</translation>
       <location filename="../../components/SystemReason.qml" line="55"/>
       <source>ESS %1 Discharge Disabled</source>
       <translation>ESS %1 Ontlading gedeaktiveer</translation>
-    </message>
-    <message id="wifimodel_disconnected_ap_off">
-      <location filename="../../components/WifiModel.qml" line="25"/>
-      <source>Disconnected | AP Off</source>
-      <translation>Ontkoppel | AP af</translation>
     </message>
     <message id="ac-in-genset_disableautostartdialog_title">
       <location filename="../../components/dialogs/GeneratorDisableAutoStartDialog.qml" line="13"/>
@@ -8718,7 +8707,7 @@ Die GX-toestel kan net een gekoppelde genset beheer en neem die een met die laag
       <translation>Rugsteun en herstel</translation>
     </message>
     <message id="wifimodel_disconnected_ap_on">
-      <location filename="../../components/WifiModel.qml" line="23"/>
+      <location filename="../../src/wifimodel.cpp" line="268"/>
       <source>Disconnected | AP On</source>
       <translation>Ontkoppel | AP Aan</translation>
     </message>
@@ -9590,7 +9579,7 @@ Die GX-toestel kan net een gekoppelde genset beheer en neem die een met die laag
       <translation>Sien die Instellings → VRM → VRM toestel instansies menu om die Modbus-TCP eenheid ID's te verander.</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="99"/>
       <source>Refresh devices</source>
       <translation>Verfris toestelle</translation>
     </message>
@@ -9617,12 +9606,12 @@ Die GX-toestel kan net een gekoppelde genset beheer en neem die een met die laag
       <translation>Polariteit</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="111"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>Wagwoordlengte moet óf 0 óf tussen 10 en 63 karakters lank wees</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="114"/>
       <source>Password updated</source>
       <translation>Wagwoord opgedateer</translation>
     </message>
@@ -10236,7 +10225,7 @@ Die GX-toestel kan net een gekoppelde genset beheer en neem die een met die laag
       <translation>Kilometerteller</translation>
     </message>
     <message id="ev_nr_phases">
-      <location filename="../../pages/ev/EvPage.qml" line="158"/>
+      <location filename="../../pages/ev/EvPage.qml" line="159"/>
       <source>Number of phases</source>
       <translation>Aantal fases</translation>
     </message>
@@ -10289,12 +10278,12 @@ Die GX-toestel kan net een gekoppelde genset beheer en neem die een met die laag
       <translation>Laat toe om ethernet vir internettoegang te gebruik</translation>
     </message>
     <message id="settings_wifi_access_point">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="37"/>
       <source>Access point</source>
       <translation>Toegangspunt</translation>
     </message>
     <message id="settings_tcpip_wifi_gateway_enabled">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="146"/>
       <source>Allow using WiFi for internet access</source>
       <translation>Laat toe om WiFi vir internettoegang te gebruik</translation>
     </message>
@@ -10426,7 +10415,7 @@ Die GX-toestel kan net een gekoppelde genset beheer en neem die een met die laag
     <message id="pagesettingssystem_opportunity_loads">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="59"/>
       <source>Opportunity Loads</source>
-      <translation>Geleentheidsladings</translation>
+      <translation>Opportunity Loads</translation>
     </message>
     <message id="microgrid_mode_ems_hybrid_droop">
       <location filename="../../src/enums.cpp" line="873"/>
@@ -10566,7 +10555,7 @@ Die GX-toestel kan net een gekoppelde genset beheer en neem die een met die laag
     <message id="switchable_output_function_opportunity_load">
       <location filename="../../src/enums.cpp" line="629"/>
       <source>Opportunity load</source>
-      <translation>Geleentheidslading</translation>
+      <translation>Opportunity load</translation>
     </message>
     <message id="mk2vsc_state_waiting_for_vebus_setting_access_password">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="40"/>
@@ -11033,12 +11022,12 @@ Dateer asseblief op na die nuutste fermware om hierdie instellings te kan aanpas
       <translation>Dit sal die toestel van VRM ontkoppel, behalwe as dit oor Wi-Fi aan VRM kan koppel. Is jy seker dat jy internettoegang oor ethernet wil deaktiveer?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="167"/>
       <source>Disable internet access over WiFi?</source>
       <translation>Deaktiveer internettoegang oor Wi-Fi?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway_confirm">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="169"/>
       <source>This will disconnect the device from VRM, unless it can connect to VRM over ethernet. Are you sure that you want to disable internet access over WiFi?</source>
       <translation>Dit sal die toestel van VRM ontkoppel, behalwe as dit oor ethernet aan VRM kan koppel. Is jy seker dat jy internettoegang oor Wi-Fi wil deaktiveer?</translation>
     </message>
@@ -11124,7 +11113,7 @@ Dateer asseblief op na die nuutste fermware om hierdie instellings te kan aanpas
       <translation>Skrap - %1</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="101"/>
       <source>Refresh</source>
       <translation>Verfris</translation>
     </message>
@@ -11227,7 +11216,7 @@ Dateer asseblief op na die nuutste fermware om hierdie instellings te kan aanpas
     <message id="page_controllable_loads_preferences_only_applies_when_using_optimized_with_battery_life">
       <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="51"/>
       <source>Only applies when using Optimized with BatteryLife. Opportunity Loads automatically resumes after a full charge.</source>
-      <translation>Geld slegs wanneer Optimized met BatteryLife gebruik word. Geleentheidsladings hervat outomaties na 'n volle lading.</translation>
+      <translation>Geld slegs wanneer Optimized met BatteryLife gebruik word. Opportunity Loads hervat outomaties na 'n volle lading.</translation>
     </message>
     <message id="powerguard_consumption_l1_current_limit">
       <location filename="../../pages/settings/devicelist/ac-in/PowerGuardConsumptionSettings.qml" line="46"/>
@@ -11261,9 +11250,9 @@ Dateer asseblief op na die nuutste fermware om hierdie instellings te kan aanpas
     </message>
     <message id="evcs_charging_time">
       <location filename="../../pages/evcs/EvChargerPage.qml" line="57"/>
-      <source>Time</source>
-      <extracomment>Charging time for the EV charger</extracomment>
-      <translation type="unfinished">Tyd</translation>
+      <source>Duration</source>
+      <extracomment>Duration of the current EV charging session</extracomment>
+      <translation type="unfinished">Duur</translation>
     </message>
     <message id="evcs_auto_mode_source">
       <location filename="../../pages/evcs/EvChargerPage.qml" line="138"/>
@@ -11849,12 +11838,12 @@ WAARSKUWING: Gebruik slegs indien dit deur die nutsverskaffer vereis word.</tran
       <translation>VE.Can Instance# %1</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="91"/>
       <source>Access point password</source>
       <translation>Toegangspunt wagwoord</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="65"/>
       <source>Disable access point</source>
       <translation>Deaktiveer toegangspunt</translation>
     </message>
@@ -11913,7 +11902,7 @@ WAARSKUWING: Gebruik slegs indien dit deur die nutsverskaffer vereis word.</tran
     <message id="pagecontrollableloads_disable_dess_first">
       <location filename="../../pages/settings/PageControllableLoads.qml" line="30"/>
       <source>Opportunity Loads cannot be enabled while Dynamic ESS is running. Disable Dynamic ESS first.</source>
-      <translation>Geleentheidslaste kan nie geaktiveer word terwyl Dinamiese ESS loop nie. Deaktiveer eers Dinamiese ESS.</translation>
+      <translation>Opportunity Loads kan nie geaktiveer word terwyl Dynamic ESS loop nie. Deaktiveer eers Dynamic ESS.</translation>
     </message>
     <message id="pagecontrollableloads_devices_and_priorities">
       <location filename="../../pages/settings/PageControllableLoads.qml" line="41"/>
@@ -11975,6 +11964,28 @@ WAARSKUWING: Gebruik slegs indien dit deur die nutsverskaffer vereis word.</tran
       <source>Button | Outputs → toggle and dim</source>
       <translation>Knoppie | Uitsette → Wissel en verdof</translation>
     </message>
+    <message id="settings_shelly_integration">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="79"/>
+      <source>Enable Shelly integration</source>
+      <translation>Aktiveer Shelly-integrasie</translation>
+    </message>
+    <message id="temperature_slider_current">
+      <location filename="../../components/controls/TemperatureSlider.qml" line="164"/>
+      <source>Measured</source>
+      <extracomment>The current temperature measurement</extracomment>
+      <translation>Gemeet</translation>
+    </message>
+    <message id="ev_position">
+      <location filename="../../pages/ev/EvPage.qml" line="142"/>
+      <source>Location</source>
+      <extracomment>Geographic location of the vehicle, shown as GPS coordinates</extracomment>
+      <translation>ligging</translation>
+    </message>
+    <message id="settings_shelly_autoscan">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="85"/>
+      <source>Automatic device discovery</source>
+      <translation>Outomatiese toestelbespeuring</translation>
+    </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
@@ -12008,12 +12019,12 @@ WAARSKUWING: Gebruik slegs indien dit deur die nutsverskaffer vereis word.</tran
       <translation type="unfinished">DC-invoer</translation>
     </message>
     <message id="brief_ac_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="254"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="240"/>
       <source>AC Loads</source>
       <translation type="unfinished">WS-ladings</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="285"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="271"/>
       <source>DC Loads</source>
       <translation type="unfinished">DG-ladings</translation>
     </message>

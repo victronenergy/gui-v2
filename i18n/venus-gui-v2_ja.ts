@@ -53,9 +53,10 @@
       <source>None</source>
       <translation>なし</translation>
     </message>
-    <message id="ev_position">
-      <location filename="../../pages/ev/EvPage.qml" line="141"/>
+    <message id="common_words_position_ac">
+      <location filename="../../components/CommonWords.qml" line="460"/>
       <source>Position</source>
+      <extracomment>AC input or output position</extracomment>
       <translation>ポジション</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
@@ -1014,7 +1015,7 @@
       <translation type="unfinished">IPアドレスを手動追加</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="92"/>
       <source>Add IP address manually</source>
       <translation>IPアドレスを手動追加</translation>
     </message>
@@ -1510,7 +1511,7 @@ Use unless prohibited by the utility provider.</source>
     <message id="settings_ess_dynamic">
       <location filename="../../pages/settings/PageSettingsHub4.qml" line="315"/>
       <source>Dynamic ESS</source>
-      <translation type="unfinished">ダイナミックESS</translation>
+      <translation type="unfinished">Dynamic ESS</translation>
     </message>
     <message id="settings_rs_ess_min_soc">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="40"/>
@@ -2110,7 +2111,7 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="22"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="195"/>
       <source>[Hidden]</source>
       <translation>[非表示]</translation>
     </message>
@@ -2190,27 +2191,27 @@ Use unless prohibited by the utility provider.</source>
       <translation>注意：ESSシステム、および管理バッテリーを搭載したシステムでは、CANバスデバイスインスタンスは0に設定されたままでなければなりません。詳細については、GXマニュアルを参照してください。</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="181"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="185"/>
       <source>No access points</source>
       <translation>アクセスポイントなし</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="187"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Wi-Fiアダプターが接続されていません</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="42"/>
       <source>Create access point</source>
       <translation>アクセスポイントを作成</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="177"/>
       <source>Wi-Fi networks</source>
       <translation>Wi-Fiネットワーク</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="67"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>アクセスポイントを無効にしてもよろしいですか？</translation>
     </message>
@@ -3637,7 +3638,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">反転</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="61"/>
       <source>Invert alarm logic</source>
       <translation>アラームロジックを反転</translation>
     </message>
@@ -4327,10 +4328,10 @@ Do you want to continue?</source>
       <source>Connected</source>
       <translation>接続済</translation>
     </message>
-    <message id="temperature_slider_current">
-      <location filename="../../components/controls/TemperatureSlider.qml" line="164"/>
+    <message id="common_words_current_amps">
+      <location filename="../../components/CommonWords.qml" line="161"/>
       <source>Current</source>
-      <extracomment>The current temperature measurement</extracomment>
+      <extracomment>Electric current, as measured in Amps</extracomment>
       <translation>電流</translation>
     </message>
     <message id="common_words_current_transformers">
@@ -4360,8 +4361,13 @@ Do you want to continue?</source>
       <source>Discharging</source>
       <translation>放電中</translation>
     </message>
+    <message id="wifimodel_disconnected_ap_off">
+      <location filename="../../src/wifimodel.cpp" line="270"/>
+      <source/>
+      <translation type="unfinished"/>
+    </message>
     <message id="wifimodel_disconnected">
-      <location filename="../../components/WifiModel.qml" line="28"/>
+      <location filename="../../src/wifimodel.cpp" line="273"/>
       <source>Disconnected</source>
       <translation>切断された状態</translation>
     </message>
@@ -5865,7 +5871,7 @@ Do you want to continue?</source>
     <message id="settings_rs_ess_dess">
       <location filename="../../pages/settings/devicelist/rs/PageRsSystemEss.qml" line="97"/>
       <source>Dynamic ESS</source>
-      <translation>ダイナミックESS</translation>
+      <translation>Dynamic ESS</translation>
     </message>
     <message id="systemsettings_networkstatus_group_master">
       <location filename="../../data/SystemSettings.qml" line="163"/>
@@ -7240,12 +7246,6 @@ Do you want to continue?</source>
       <source>Confirm</source>
       <translation type="unfinished">確認</translation>
     </message>
-    <message id="common_words_current_amps">
-      <location filename="../../components/CommonWords.qml" line="161"/>
-      <source>Current</source>
-      <extracomment>Electric current, as measured in Amps</extracomment>
-      <translation type="unfinished">電流</translation>
-    </message>
     <message id="common_words_daily_history">
       <location filename="../../components/CommonWords.qml" line="170"/>
       <source>Daily history</source>
@@ -7410,12 +7410,6 @@ Do you want to continue?</source>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation type="unfinished">電力</translation>
-    </message>
-    <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="460"/>
-      <source>Position</source>
-      <extracomment>AC input or output position</extracomment>
-      <translation type="unfinished">ポジション</translation>
     </message>
     <message id="common_words_running_status">
       <location filename="../../components/CommonWords.qml" line="499"/>
@@ -7857,7 +7851,7 @@ Do you want to continue?</source>
     <message id="system_state_dynamic_ess">
       <location filename="../../src/enums.cpp" line="814"/>
       <source>Dynamic ESS</source>
-      <translation type="unfinished">ダイナミックESS</translation>
+      <translation type="unfinished">Dynamic ESS</translation>
     </message>
     <message id="ess_state_optimized_without_batterylife_button">
       <location filename="../../data/Ess.qml" line="36"/>
@@ -7980,11 +7974,6 @@ Do you want to continue?</source>
       <location filename="../../components/SystemReason.qml" line="55"/>
       <source>ESS %1 Discharge Disabled</source>
       <translation>ESS %1 放電無効</translation>
-    </message>
-    <message id="wifimodel_disconnected_ap_off">
-      <location filename="../../components/WifiModel.qml" line="25"/>
-      <source>Disconnected | AP Off</source>
-      <translation>未接続 | APオフ</translation>
     </message>
     <message id="ac-in-genset_disableautostartdialog_title">
       <location filename="../../components/dialogs/GeneratorDisableAutoStartDialog.qml" line="13"/>
@@ -8716,7 +8705,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>バックアップと復元</translation>
     </message>
     <message id="wifimodel_disconnected_ap_on">
-      <location filename="../../components/WifiModel.qml" line="23"/>
+      <location filename="../../src/wifimodel.cpp" line="268"/>
       <source>Disconnected | AP On</source>
       <translation>未接続 | APオン</translation>
     </message>
@@ -9588,7 +9577,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>Modbus-TCPユニットIDを変更するには、設定 → VRM → VRMデバイスインスタンスメニューを参照してください。</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="99"/>
       <source>Refresh devices</source>
       <translation>デバイスを更新</translation>
     </message>
@@ -9615,12 +9604,12 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>極性</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="111"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>パスワードの長さは0文字、または10文字から63文字の間である必要があります</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="114"/>
       <source>Password updated</source>
       <translation>パスワードを更新しました</translation>
     </message>
@@ -10234,7 +10223,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>オドメーター</translation>
     </message>
     <message id="ev_nr_phases">
-      <location filename="../../pages/ev/EvPage.qml" line="158"/>
+      <location filename="../../pages/ev/EvPage.qml" line="159"/>
       <source>Number of phases</source>
       <translation>相数</translation>
     </message>
@@ -10287,12 +10276,12 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>インターネットアクセスにイーサネットの使用を許可する</translation>
     </message>
     <message id="settings_wifi_access_point">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="37"/>
       <source>Access point</source>
       <translation>アクセスポイント</translation>
     </message>
     <message id="settings_tcpip_wifi_gateway_enabled">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="146"/>
       <source>Allow using WiFi for internet access</source>
       <translation>インターネットアクセスにWiFiの使用を許可する</translation>
     </message>
@@ -10424,7 +10413,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
     <message id="pagesettingssystem_opportunity_loads">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="59"/>
       <source>Opportunity Loads</source>
-      <translation>オポチュニティロード</translation>
+      <translation>Opportunity Loads</translation>
     </message>
     <message id="microgrid_mode_ems_hybrid_droop">
       <location filename="../../src/enums.cpp" line="873"/>
@@ -10564,7 +10553,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
     <message id="switchable_output_function_opportunity_load">
       <location filename="../../src/enums.cpp" line="629"/>
       <source>Opportunity load</source>
-      <translation>オポチュニティロード</translation>
+      <translation>Opportunity load</translation>
     </message>
     <message id="mk2vsc_state_waiting_for_vebus_setting_access_password">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="40"/>
@@ -10951,7 +10940,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message id="settings_ess_disable_ol_first">
       <location filename="../../pages/settings/PageSettingsDynamicEss.qml" line="20"/>
       <source>Dynamic ESS cannot be enabled while Opportunity Loads is enabled. Disable Opportunity Loads first.</source>
-      <translation>オポチュニティロードが有効な間は、ダイナミックESSを有効にできません。先にオポチュニティロードを無効にしてください。</translation>
+      <translation>Opportunity Loads が有効な間は、Dynamic ESS を有効にできません。先に Opportunity Loads を無効にしてください。</translation>
     </message>
     <message id="list_generator_error_empty_group">
       <location filename="../../components/listitems/ListGeneratorError.qml" line="28"/>
@@ -11031,12 +11020,12 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>Wi-Fi経由でVRMに接続できない限り、このデバイスはVRMから切断されます。イーサネット経由のインターネット接続を無効にしてもよろしいですか？</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="167"/>
       <source>Disable internet access over WiFi?</source>
       <translation>Wi-Fi経由のインターネット接続を無効にしますか？</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway_confirm">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="169"/>
       <source>This will disconnect the device from VRM, unless it can connect to VRM over ethernet. Are you sure that you want to disable internet access over WiFi?</source>
       <translation>イーサネット経由でVRMに接続できない限り、このデバイスはVRMから切断されます。Wi-Fi経由のインターネット接続を無効にしてもよろしいですか？</translation>
     </message>
@@ -11122,7 +11111,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>%1 を削除</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="101"/>
       <source>Refresh</source>
       <translation>更新</translation>
     </message>
@@ -11225,7 +11214,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     <message id="page_controllable_loads_preferences_only_applies_when_using_optimized_with_battery_life">
       <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="51"/>
       <source>Only applies when using Optimized with BatteryLife. Opportunity Loads automatically resumes after a full charge.</source>
-      <translation>「BatteryLifeで最適化」を使用している場合のみ適用されます。満充電されると、オポチュニティロードは自動的に再開されます。</translation>
+      <translation>「BatteryLifeで最適化」を使用している場合のみ適用されます。満充電されると、Opportunity Loads は自動的に再開されます。</translation>
     </message>
     <message id="powerguard_consumption_l1_current_limit">
       <location filename="../../pages/settings/devicelist/ac-in/PowerGuardConsumptionSettings.qml" line="46"/>
@@ -11259,9 +11248,9 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     </message>
     <message id="evcs_charging_time">
       <location filename="../../pages/evcs/EvChargerPage.qml" line="57"/>
-      <source>Time</source>
-      <extracomment>Charging time for the EV charger</extracomment>
-      <translation type="unfinished">時間</translation>
+      <source>Duration</source>
+      <extracomment>Duration of the current EV charging session</extracomment>
+      <translation type="unfinished">期間</translation>
     </message>
     <message id="evcs_auto_mode_source">
       <location filename="../../pages/evcs/EvChargerPage.qml" line="138"/>
@@ -11847,12 +11836,12 @@ CAUTION: use only if required by the utility provider.</source>
       <translation>VE.Canインスタンス# %1</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="91"/>
       <source>Access point password</source>
       <translation>アクセスポイントパスワード</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="65"/>
       <source>Disable access point</source>
       <translation>アクセスポイントを無効にする</translation>
     </message>
@@ -11911,7 +11900,7 @@ CAUTION: use only if required by the utility provider.</source>
     <message id="pagecontrollableloads_disable_dess_first">
       <location filename="../../pages/settings/PageControllableLoads.qml" line="30"/>
       <source>Opportunity Loads cannot be enabled while Dynamic ESS is running. Disable Dynamic ESS first.</source>
-      <translation>Dynamic ESSが実行中の間は、オポチュニティロードを有効にできません。まずDynamic ESSを無効にしてください。</translation>
+      <translation>Dynamic ESSが実行中の間は、Opportunity Loads を有効にできません。まずDynamic ESSを無効にしてください。</translation>
     </message>
     <message id="pagecontrollableloads_devices_and_priorities">
       <location filename="../../pages/settings/PageControllableLoads.qml" line="41"/>
@@ -11973,6 +11962,28 @@ CAUTION: use only if required by the utility provider.</source>
       <source>Button | Outputs → toggle and dim</source>
       <translation>ボタン | 出力 → トグルおよび調光</translation>
     </message>
+    <message id="settings_shelly_integration">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="79"/>
+      <source>Enable Shelly integration</source>
+      <translation>Shelly連携を有効にする</translation>
+    </message>
+    <message id="temperature_slider_current">
+      <location filename="../../components/controls/TemperatureSlider.qml" line="164"/>
+      <source>Measured</source>
+      <extracomment>The current temperature measurement</extracomment>
+      <translation>測定値</translation>
+    </message>
+    <message id="ev_position">
+      <location filename="../../pages/ev/EvPage.qml" line="142"/>
+      <source>Location</source>
+      <extracomment>Geographic location of the vehicle, shown as GPS coordinates</extracomment>
+      <translation>所在地</translation>
+    </message>
+    <message id="settings_shelly_autoscan">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="85"/>
+      <source>Automatic device discovery</source>
+      <translation>デバイス自動検出</translation>
+    </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
@@ -12006,12 +12017,12 @@ CAUTION: use only if required by the utility provider.</source>
       <translation type="unfinished">DC入力</translation>
     </message>
     <message id="brief_ac_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="254"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="240"/>
       <source>AC Loads</source>
       <translation type="unfinished">交流負荷</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="285"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="271"/>
       <source>DC Loads</source>
       <translation type="unfinished">直流負荷</translation>
     </message>
