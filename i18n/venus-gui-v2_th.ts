@@ -53,9 +53,10 @@
       <source>None</source>
       <translation>ไม่มี</translation>
     </message>
-    <message id="ev_position">
-      <location filename="../../pages/ev/EvPage.qml" line="141"/>
+    <message id="common_words_position_ac">
+      <location filename="../../components/CommonWords.qml" line="460"/>
       <source>Position</source>
+      <extracomment>AC input or output position</extracomment>
       <translation>ตำแหน่ง</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
@@ -1014,7 +1015,7 @@
       <translation type="unfinished">เพิ่มที่อยู่ IP ด้วยตนเอง</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="92"/>
       <source>Add IP address manually</source>
       <translation>เพิ่มที่อยู่ IP ด้วยตนเอง</translation>
     </message>
@@ -2110,7 +2111,7 @@ Use unless prohibited by the utility provider.</source>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="22"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="195"/>
       <source>[Hidden]</source>
       <translation>[ที่ซ่อนอยู่]</translation>
     </message>
@@ -2190,27 +2191,27 @@ Use unless prohibited by the utility provider.</source>
       <translation>ระวัง สำหรับระบบ ESS เช่นเดียวกับระบบที่มีแบตเตอรี่ที่มีการจัดการ อินสแตนซ์อุปกรณ์ CAN-bus จะต้องยังคงกำหนดค่าเป็น 0 ดูข้อมูลเพิ่มเติมในคู่มือ GX</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="181"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="185"/>
       <source>No access points</source>
       <translation>ไม่มีจุดเชื่อมต่อ</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="187"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>ไม่มีอแด็ปเตอร์ Wi-Fi เชื่อมต่อ</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="42"/>
       <source>Create access point</source>
       <translation>สร้างจุดเชื่อมต่อ</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="177"/>
       <source>Wi-Fi networks</source>
       <translation>เครือข่าย Wi-Fi</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="67"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>คุณแน่ใจหรือไม่ว่าต้องการปิดใช้งานจุดเชื่อมต่อ</translation>
     </message>
@@ -3637,7 +3638,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">คว่ำ</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="61"/>
       <source>Invert alarm logic</source>
       <translation>สลับตรรกะการเตือน</translation>
     </message>
@@ -4327,10 +4328,10 @@ Do you want to continue?</source>
       <source>Connected</source>
       <translation>เชื่อมต่อแล้ว</translation>
     </message>
-    <message id="temperature_slider_current">
-      <location filename="../../components/controls/TemperatureSlider.qml" line="164"/>
+    <message id="common_words_current_amps">
+      <location filename="../../components/CommonWords.qml" line="161"/>
       <source>Current</source>
-      <extracomment>The current temperature measurement</extracomment>
+      <extracomment>Electric current, as measured in Amps</extracomment>
       <translation>หมุนเวียน</translation>
     </message>
     <message id="common_words_current_transformers">
@@ -4360,8 +4361,13 @@ Do you want to continue?</source>
       <source>Discharging</source>
       <translation>การคายประจุ</translation>
     </message>
+    <message id="wifimodel_disconnected_ap_off">
+      <location filename="../../src/wifimodel.cpp" line="270"/>
+      <source/>
+      <translation type="unfinished"/>
+    </message>
     <message id="wifimodel_disconnected">
-      <location filename="../../components/WifiModel.qml" line="28"/>
+      <location filename="../../src/wifimodel.cpp" line="273"/>
       <source>Disconnected</source>
       <translation>ตัดการเชื่อมต่อ</translation>
     </message>
@@ -7240,12 +7246,6 @@ Do you want to continue?</source>
       <source>Confirm</source>
       <translation type="unfinished">ยืนยัน</translation>
     </message>
-    <message id="common_words_current_amps">
-      <location filename="../../components/CommonWords.qml" line="161"/>
-      <source>Current</source>
-      <extracomment>Electric current, as measured in Amps</extracomment>
-      <translation type="unfinished">หมุนเวียน</translation>
-    </message>
     <message id="common_words_daily_history">
       <location filename="../../components/CommonWords.qml" line="170"/>
       <source>Daily history</source>
@@ -7410,12 +7410,6 @@ Do you want to continue?</source>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation type="unfinished">พลังงาน</translation>
-    </message>
-    <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="460"/>
-      <source>Position</source>
-      <extracomment>AC input or output position</extracomment>
-      <translation type="unfinished">ตำแหน่ง</translation>
     </message>
     <message id="common_words_running_status">
       <location filename="../../components/CommonWords.qml" line="499"/>
@@ -7980,11 +7974,6 @@ Do you want to continue?</source>
       <location filename="../../components/SystemReason.qml" line="55"/>
       <source>ESS %1 Discharge Disabled</source>
       <translation>ESS %1 ปิดการใช้งานการระบายออก</translation>
-    </message>
-    <message id="wifimodel_disconnected_ap_off">
-      <location filename="../../components/WifiModel.qml" line="25"/>
-      <source>Disconnected | AP Off</source>
-      <translation>ถูกตัดการเชื่อมต่อ | AP ปิดอยู่</translation>
     </message>
     <message id="ac-in-genset_disableautostartdialog_title">
       <location filename="../../components/dialogs/GeneratorDisableAutoStartDialog.qml" line="13"/>
@@ -8716,7 +8705,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>สำรองและกู้คืน</translation>
     </message>
     <message id="wifimodel_disconnected_ap_on">
-      <location filename="../../components/WifiModel.qml" line="23"/>
+      <location filename="../../src/wifimodel.cpp" line="268"/>
       <source>Disconnected | AP On</source>
       <translation>ถูกตัดการเชื่อมต่อ | AP เปิดอยู่</translation>
     </message>
@@ -9588,7 +9577,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ดูเมนู การตั้งค่า → VRM → อินสแตนซ์อุปกรณ์ VRM เพื่อเปลี่ยน ID หน่วย Modbus-TCP</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="99"/>
       <source>Refresh devices</source>
       <translation>รีเฟรชอุปกรณ์</translation>
     </message>
@@ -9615,12 +9604,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ขั้ว</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="111"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>ความยาวรหัสผ่านต้องเป็น 0 หรือระหว่าง 10 ถึง 63 ตัวอักษร</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="114"/>
       <source>Password updated</source>
       <translation>อัปเดตรหัสผ่านแล้ว</translation>
     </message>
@@ -10234,7 +10223,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>มาตรวัดระยะทาง</translation>
     </message>
     <message id="ev_nr_phases">
-      <location filename="../../pages/ev/EvPage.qml" line="158"/>
+      <location filename="../../pages/ev/EvPage.qml" line="159"/>
       <source>Number of phases</source>
       <translation>จำนวนเฟส</translation>
     </message>
@@ -10287,12 +10276,12 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>อนุญาตให้ใช้ Ethernet เพื่อเชื่อมต่ออินเทอร์เน็ต</translation>
     </message>
     <message id="settings_wifi_access_point">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="37"/>
       <source>Access point</source>
       <translation>จุดเข้าใช้งาน</translation>
     </message>
     <message id="settings_tcpip_wifi_gateway_enabled">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="146"/>
       <source>Allow using WiFi for internet access</source>
       <translation>อนุญาตให้ใช้ WiFi เพื่อเชื่อมต่ออินเทอร์เน็ต</translation>
     </message>
@@ -11031,12 +11020,12 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>การดำเนินการนี้จะตัดการเชื่อมต่ออุปกรณ์จาก VRM เว้นแต่จะสามารถเชื่อมต่อกับ VRM ผ่าน WiFi ได้ คุณแน่ใจหรือไม่ว่าต้องการปิดใช้งานการเข้าถึงอินเทอร์เน็ตผ่านอีเทอร์เน็ต?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="167"/>
       <source>Disable internet access over WiFi?</source>
       <translation>ปิดใช้งานการเข้าถึงอินเทอร์เน็ตผ่าน WiFi หรือไม่?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway_confirm">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="169"/>
       <source>This will disconnect the device from VRM, unless it can connect to VRM over ethernet. Are you sure that you want to disable internet access over WiFi?</source>
       <translation>การดำเนินการนี้จะตัดการเชื่อมต่ออุปกรณ์จาก VRM เว้นแต่จะสามารถเชื่อมต่อกับ VRM ผ่านอีเทอร์เน็ตได้ คุณแน่ใจหรือไม่ว่าต้องการปิดใช้งานการเข้าถึงอินเทอร์เน็ตผ่าน WiFi?</translation>
     </message>
@@ -11122,7 +11111,7 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <translation>ลบ - %1</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="101"/>
       <source>Refresh</source>
       <translation>รีเฟรช</translation>
     </message>
@@ -11259,9 +11248,9 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
     </message>
     <message id="evcs_charging_time">
       <location filename="../../pages/evcs/EvChargerPage.qml" line="57"/>
-      <source>Time</source>
-      <extracomment>Charging time for the EV charger</extracomment>
-      <translation type="unfinished">เวลา</translation>
+      <source>Duration</source>
+      <extracomment>Duration of the current EV charging session</extracomment>
+      <translation type="unfinished">ระยะเวลา</translation>
     </message>
     <message id="evcs_auto_mode_source">
       <location filename="../../pages/evcs/EvChargerPage.qml" line="138"/>
@@ -11847,12 +11836,12 @@ CAUTION: use only if required by the utility provider.</source>
       <translation>VE.Can อินสแตนซ์# %1</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="91"/>
       <source>Access point password</source>
       <translation>รหัสผ่าน Access Point</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="65"/>
       <source>Disable access point</source>
       <translation>ปิดการใช้งานจุดเข้าใช้งาน</translation>
     </message>
@@ -11973,6 +11962,28 @@ CAUTION: use only if required by the utility provider.</source>
       <source>Button | Outputs → toggle and dim</source>
       <translation>ปุ่ม | เอาต์พุต → สลับและหรี่</translation>
     </message>
+    <message id="settings_shelly_integration">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="79"/>
+      <source>Enable Shelly integration</source>
+      <translation>เปิดใช้งานการผสานรวม Shelly</translation>
+    </message>
+    <message id="temperature_slider_current">
+      <location filename="../../components/controls/TemperatureSlider.qml" line="164"/>
+      <source>Measured</source>
+      <extracomment>The current temperature measurement</extracomment>
+      <translation>วัดค่าแล้ว</translation>
+    </message>
+    <message id="ev_position">
+      <location filename="../../pages/ev/EvPage.qml" line="142"/>
+      <source>Location</source>
+      <extracomment>Geographic location of the vehicle, shown as GPS coordinates</extracomment>
+      <translation>ที่ตั้ง</translation>
+    </message>
+    <message id="settings_shelly_autoscan">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="85"/>
+      <source>Automatic device discovery</source>
+      <translation>ค้นหาอุปกรณ์อัตโนมัติ</translation>
+    </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
@@ -12006,12 +12017,12 @@ CAUTION: use only if required by the utility provider.</source>
       <translation type="unfinished">อินพุตกระแสตรง</translation>
     </message>
     <message id="brief_ac_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="254"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="240"/>
       <source>AC Loads</source>
       <translation type="unfinished">โหลด AC</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="285"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="271"/>
       <source>DC Loads</source>
       <translation type="unfinished">โหลดไฟฟ้ากระแสตรง</translation>
     </message>

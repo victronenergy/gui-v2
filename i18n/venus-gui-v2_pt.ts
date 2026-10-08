@@ -53,9 +53,10 @@
       <source>None</source>
       <translation>Nenhum</translation>
     </message>
-    <message id="ev_position">
-      <location filename="../../pages/ev/EvPage.qml" line="141"/>
+    <message id="common_words_position_ac">
+      <location filename="../../components/CommonWords.qml" line="460"/>
       <source>Position</source>
+      <extracomment>AC input or output position</extracomment>
       <translation>Posição</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
@@ -1014,7 +1015,7 @@
       <translation type="unfinished">Adicionar endereço IP manualmente</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="92"/>
       <source>Add IP address manually</source>
       <translation>Adicionar endereço IP manualmente</translation>
     </message>
@@ -2110,7 +2111,7 @@ Use a menos que seja proibido pelo fornecedor de energia.</translation>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="22"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="195"/>
       <source>[Hidden]</source>
       <translation>[Oculto]</translation>
     </message>
@@ -2190,27 +2191,27 @@ Use a menos que seja proibido pelo fornecedor de energia.</translation>
       <translation>Atenção, para sistemas ESS, bem como sistemas com uma bateria gerida, a instância do dispositivo CAN-bus deve permanecer configurada para 0. Consulte o manual do GX para obter mais informações.</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="181"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="185"/>
       <source>No access points</source>
       <translation>Sem pontos de acesso</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="187"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Nenhum adaptador Wi-Fi ligado</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="42"/>
       <source>Create access point</source>
       <translation>Criar ponto de acesso</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="177"/>
       <source>Wi-Fi networks</source>
       <translation>Redes Wi-Fi</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="67"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>Tem a certeza de que pretende desativar o ponto de acesso?</translation>
     </message>
@@ -3638,7 +3639,7 @@ Use a menos que seja proibido pelo fornecedor de energia.</translation>
       <translation type="unfinished">Invertido</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="61"/>
       <source>Invert alarm logic</source>
       <translation>Inverter lógica de alarme</translation>
     </message>
@@ -4328,10 +4329,10 @@ Você quer continuar?</translation>
       <source>Connected</source>
       <translation>Conectado</translation>
     </message>
-    <message id="temperature_slider_current">
-      <location filename="../../components/controls/TemperatureSlider.qml" line="164"/>
+    <message id="common_words_current_amps">
+      <location filename="../../components/CommonWords.qml" line="161"/>
       <source>Current</source>
-      <extracomment>The current temperature measurement</extracomment>
+      <extracomment>Electric current, as measured in Amps</extracomment>
       <translation>Corrente</translation>
     </message>
     <message id="common_words_current_transformers">
@@ -4361,8 +4362,13 @@ Você quer continuar?</translation>
       <source>Discharging</source>
       <translation>A descarregar</translation>
     </message>
+    <message id="wifimodel_disconnected_ap_off">
+      <location filename="../../src/wifimodel.cpp" line="270"/>
+      <source/>
+      <translation type="unfinished"/>
+    </message>
     <message id="wifimodel_disconnected">
-      <location filename="../../components/WifiModel.qml" line="28"/>
+      <location filename="../../src/wifimodel.cpp" line="273"/>
       <source>Disconnected</source>
       <translation>Desconectado</translation>
     </message>
@@ -7241,12 +7247,6 @@ Você quer continuar?</translation>
       <source>Confirm</source>
       <translation type="unfinished">Confirmar</translation>
     </message>
-    <message id="common_words_current_amps">
-      <location filename="../../components/CommonWords.qml" line="161"/>
-      <source>Current</source>
-      <extracomment>Electric current, as measured in Amps</extracomment>
-      <translation type="unfinished">Corrente</translation>
-    </message>
     <message id="common_words_daily_history">
       <location filename="../../components/CommonWords.qml" line="170"/>
       <source>Daily history</source>
@@ -7411,12 +7411,6 @@ Você quer continuar?</translation>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation type="unfinished">Potência</translation>
-    </message>
-    <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="460"/>
-      <source>Position</source>
-      <extracomment>AC input or output position</extracomment>
-      <translation type="unfinished">Posição</translation>
     </message>
     <message id="common_words_running_status">
       <location filename="../../components/CommonWords.qml" line="499"/>
@@ -7981,11 +7975,6 @@ Você quer continuar?</translation>
       <location filename="../../components/SystemReason.qml" line="55"/>
       <source>ESS %1 Discharge Disabled</source>
       <translation>Descarregamento do ESS %1 Desativado</translation>
-    </message>
-    <message id="wifimodel_disconnected_ap_off">
-      <location filename="../../components/WifiModel.qml" line="25"/>
-      <source>Disconnected | AP Off</source>
-      <translation>Desconectado | AP Desligado</translation>
     </message>
     <message id="ac-in-genset_disableautostartdialog_title">
       <location filename="../../components/dialogs/GeneratorDisableAutoStartDialog.qml" line="13"/>
@@ -8718,7 +8707,7 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Backup e Restauro</translation>
     </message>
     <message id="wifimodel_disconnected_ap_on">
-      <location filename="../../components/WifiModel.qml" line="23"/>
+      <location filename="../../src/wifimodel.cpp" line="268"/>
       <source>Disconnected | AP On</source>
       <translation>Desconectado | AP Ligado</translation>
     </message>
@@ -9590,7 +9579,7 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Consulte o menu Configurações → VRM → Instâncias de dispositivo VRM para alterar os IDs de unidade Modbus-TCP.</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="99"/>
       <source>Refresh devices</source>
       <translation>Atualizar dispositivos</translation>
     </message>
@@ -9617,12 +9606,12 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Polaridade</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="111"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>O comprimento da senha deve ser 0 ou entre 10 e 63 caracteres</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="114"/>
       <source>Password updated</source>
       <translation>Senha atualizada</translation>
     </message>
@@ -10236,7 +10225,7 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Odómetro</translation>
     </message>
     <message id="ev_nr_phases">
-      <location filename="../../pages/ev/EvPage.qml" line="158"/>
+      <location filename="../../pages/ev/EvPage.qml" line="159"/>
       <source>Number of phases</source>
       <translation>Número de fases</translation>
     </message>
@@ -10289,12 +10278,12 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Permitir o uso de Ethernet para acesso à internet</translation>
     </message>
     <message id="settings_wifi_access_point">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="37"/>
       <source>Access point</source>
       <translation>Ponto de acesso</translation>
     </message>
     <message id="settings_tcpip_wifi_gateway_enabled">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="146"/>
       <source>Allow using WiFi for internet access</source>
       <translation>Permitir o uso de WiFi para acesso à internet</translation>
     </message>
@@ -11033,12 +11022,12 @@ Por favor, atualize para o firmware mais recente para poder ajustar estas config
       <translation>Isso irá desconectar o dispositivo do VRM, a menos que ele possa se conectar ao VRM via Wi-Fi. Tem certeza de que deseja desativar o acesso à internet via ethernet?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="167"/>
       <source>Disable internet access over WiFi?</source>
       <translation>Desativar acesso à internet via Wi-Fi?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway_confirm">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="169"/>
       <source>This will disconnect the device from VRM, unless it can connect to VRM over ethernet. Are you sure that you want to disable internet access over WiFi?</source>
       <translation>Isso irá desconectar o dispositivo do VRM, a menos que ele possa se conectar ao VRM via ethernet. Tem certeza de que deseja desativar o acesso à internet via Wi-Fi?</translation>
     </message>
@@ -11124,7 +11113,7 @@ Por favor, atualize para o firmware mais recente para poder ajustar estas config
       <translation>Eliminar - %1</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="101"/>
       <source>Refresh</source>
       <translation>Atualizar</translation>
     </message>
@@ -11261,9 +11250,9 @@ Por favor, atualize para o firmware mais recente para poder ajustar estas config
     </message>
     <message id="evcs_charging_time">
       <location filename="../../pages/evcs/EvChargerPage.qml" line="57"/>
-      <source>Time</source>
-      <extracomment>Charging time for the EV charger</extracomment>
-      <translation type="unfinished">Tempo</translation>
+      <source>Duration</source>
+      <extracomment>Duration of the current EV charging session</extracomment>
+      <translation type="unfinished">Duração</translation>
     </message>
     <message id="evcs_auto_mode_source">
       <location filename="../../pages/evcs/EvChargerPage.qml" line="138"/>
@@ -11849,12 +11838,12 @@ CUIDADO: Use apenas se exigido pelo fornecedor de energia.</translation>
       <translation>Instância VE.Can# %1</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="91"/>
       <source>Access point password</source>
       <translation>Senha do ponto de acesso</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="65"/>
       <source>Disable access point</source>
       <translation>Desativar ponto de acesso</translation>
     </message>
@@ -11975,6 +11964,28 @@ CUIDADO: Use apenas se exigido pelo fornecedor de energia.</translation>
       <source>Button | Outputs → toggle and dim</source>
       <translation>Botão | Saídas → Alternar e atenuar</translation>
     </message>
+    <message id="settings_shelly_integration">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="79"/>
+      <source>Enable Shelly integration</source>
+      <translation>Ativar integração Shelly</translation>
+    </message>
+    <message id="temperature_slider_current">
+      <location filename="../../components/controls/TemperatureSlider.qml" line="164"/>
+      <source>Measured</source>
+      <extracomment>The current temperature measurement</extracomment>
+      <translation>Medido</translation>
+    </message>
+    <message id="ev_position">
+      <location filename="../../pages/ev/EvPage.qml" line="142"/>
+      <source>Location</source>
+      <extracomment>Geographic location of the vehicle, shown as GPS coordinates</extracomment>
+      <translation>Localização</translation>
+    </message>
+    <message id="settings_shelly_autoscan">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="85"/>
+      <source>Automatic device discovery</source>
+      <translation>Deteção automática de dispositivos</translation>
+    </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
@@ -12008,12 +12019,12 @@ CUIDADO: Use apenas se exigido pelo fornecedor de energia.</translation>
       <translation type="unfinished">Entrada CC</translation>
     </message>
     <message id="brief_ac_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="254"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="240"/>
       <source>AC Loads</source>
       <translation type="unfinished">Cargas CA</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="285"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="271"/>
       <source>DC Loads</source>
       <translation type="unfinished">Cargas CC</translation>
     </message>
