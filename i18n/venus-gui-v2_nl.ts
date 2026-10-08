@@ -53,9 +53,10 @@
       <source>None</source>
       <translation>Geen</translation>
     </message>
-    <message id="ev_position">
-      <location filename="../../pages/ev/EvPage.qml" line="141"/>
+    <message id="common_words_position_ac">
+      <location filename="../../components/CommonWords.qml" line="460"/>
       <source>Position</source>
+      <extracomment>AC input or output position</extracomment>
       <translation>Positie</translation>
     </message>
     <message id="generic_input_primaryLabel_speed">
@@ -1014,7 +1015,7 @@
       <translation type="unfinished">IP adres handmatig toevoegen</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="88"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="92"/>
       <source>Add IP address manually</source>
       <translation>IP adres handmatig toevoegen</translation>
     </message>
@@ -2110,7 +2111,7 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
     </message>
     <message id="settings_tcpip_hidden">
       <location filename="../../pages/settings/NetworkSettingsPageModel.qml" line="22"/>
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="195"/>
       <source>[Hidden]</source>
       <translation>[Verborgen]</translation>
     </message>
@@ -2190,27 +2191,27 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation>Opgelet, voor ESS systemen en ook systemen met een beheerde accu, moet het CAN bus-apparaat op 0 blijven ingesteld. Raadpleeg GX handleiding voor meer informatie.</translation>
     </message>
     <message id="settings_wifi_no_access_points">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="181"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="185"/>
       <source>No access points</source>
       <translation>Geen toegangspunten</translation>
     </message>
     <message id="settings_wifi_no_wifi_adapter_connected">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="183"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="187"/>
       <source>No Wi-Fi adapter connected</source>
       <translation>Geen WiFi-adapter aangesloten</translation>
     </message>
     <message id="settings_wifi_create_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="38"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="42"/>
       <source>Create access point</source>
       <translation>Access point maken</translation>
     </message>
     <message id="settings_wifi_networks">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="173"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="177"/>
       <source>Wi-Fi networks</source>
       <translation>WiFi netwerken</translation>
     </message>
     <message id="settings_wifi_disable_ap_are_you_sure">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="67"/>
       <source>Are you sure that you want to disable the access point?</source>
       <translation>Access Point uitzetten?</translation>
     </message>
@@ -3638,7 +3639,7 @@ Gebruik tenzij verboden door de energieleverancier.</translation>
       <translation type="unfinished">Omgekeerd</translation>
     </message>
     <message id="digitalinput_invert_alarm_logic">
-      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="60"/>
+      <location filename="../../pages/settings/devicelist/PageDigitalInput.qml" line="61"/>
       <source>Invert alarm logic</source>
       <translation>Alarm logica omkeren</translation>
     </message>
@@ -4325,10 +4326,10 @@ Do you want to continue?</source>
       <source>Connected</source>
       <translation>Verbonden</translation>
     </message>
-    <message id="temperature_slider_current">
-      <location filename="../../components/controls/TemperatureSlider.qml" line="164"/>
+    <message id="common_words_current_amps">
+      <location filename="../../components/CommonWords.qml" line="161"/>
       <source>Current</source>
-      <extracomment>The current temperature measurement</extracomment>
+      <extracomment>Electric current, as measured in Amps</extracomment>
       <translation>Stroom</translation>
     </message>
     <message id="common_words_current_transformers">
@@ -4358,8 +4359,13 @@ Do you want to continue?</source>
       <source>Discharging</source>
       <translation>Ontladen</translation>
     </message>
+    <message id="wifimodel_disconnected_ap_off">
+      <location filename="../../src/wifimodel.cpp" line="270"/>
+      <source/>
+      <translation type="unfinished"/>
+    </message>
     <message id="wifimodel_disconnected">
-      <location filename="../../components/WifiModel.qml" line="28"/>
+      <location filename="../../src/wifimodel.cpp" line="273"/>
       <source>Disconnected</source>
       <translation>Niet verbonden</translation>
     </message>
@@ -7238,12 +7244,6 @@ Do you want to continue?</source>
       <source>Confirm</source>
       <translation type="unfinished">Bevestigen</translation>
     </message>
-    <message id="common_words_current_amps">
-      <location filename="../../components/CommonWords.qml" line="161"/>
-      <source>Current</source>
-      <extracomment>Electric current, as measured in Amps</extracomment>
-      <translation type="unfinished">Stroom</translation>
-    </message>
     <message id="common_words_daily_history">
       <location filename="../../components/CommonWords.qml" line="170"/>
       <source>Daily history</source>
@@ -7408,12 +7408,6 @@ Do you want to continue?</source>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation type="unfinished">Vermogen</translation>
-    </message>
-    <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="460"/>
-      <source>Position</source>
-      <extracomment>AC input or output position</extracomment>
-      <translation type="unfinished">Positie</translation>
     </message>
     <message id="common_words_running_status">
       <location filename="../../components/CommonWords.qml" line="499"/>
@@ -7978,11 +7972,6 @@ Do you want to continue?</source>
       <location filename="../../components/SystemReason.qml" line="55"/>
       <source>ESS %1 Discharge Disabled</source>
       <translation>ESS %1 Ontlading uitgeschakeld</translation>
-    </message>
-    <message id="wifimodel_disconnected_ap_off">
-      <location filename="../../components/WifiModel.qml" line="25"/>
-      <source>Disconnected | AP Off</source>
-      <translation>Uitgeschakeld | AP Uit</translation>
     </message>
     <message id="ac-in-genset_disableautostartdialog_title">
       <location filename="../../components/dialogs/GeneratorDisableAutoStartDialog.qml" line="13"/>
@@ -8715,7 +8704,7 @@ Het GX-apparaat kan slechts één aangesloten aggregaat besturen en neemt degene
       <translation>Backup en Restore</translation>
     </message>
     <message id="wifimodel_disconnected_ap_on">
-      <location filename="../../components/WifiModel.qml" line="23"/>
+      <location filename="../../src/wifimodel.cpp" line="268"/>
       <source>Disconnected | AP On</source>
       <translation>Verbinding verbroken | AP aan</translation>
     </message>
@@ -9589,7 +9578,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation>Ga naar Instellingen → VRM → VRM apparaatinstanties om de Modbus TCP eenheid ID's te wijzigen.</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="99"/>
       <source>Refresh devices</source>
       <translation>Apparaten vernieuwen</translation>
     </message>
@@ -9616,12 +9605,12 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation>Polariteit</translation>
     </message>
     <message id="page_settings_wifi_invalid_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="107"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="111"/>
       <source>Password length must be either 0 or between 10 and 63 characters long</source>
       <translation>Wachtwoord lengte moet 0 zijn of tussen de 10 en 63 tekens lang zijn</translation>
     </message>
     <message id="page_settings_wifi_password_updated">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="110"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="114"/>
       <source>Password updated</source>
       <translation>Wachtwoord bijgewerkt</translation>
     </message>
@@ -10235,7 +10224,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation>Kilometerteller</translation>
     </message>
     <message id="ev_nr_phases">
-      <location filename="../../pages/ev/EvPage.qml" line="158"/>
+      <location filename="../../pages/ev/EvPage.qml" line="159"/>
       <source>Number of phases</source>
       <translation>Aantal fasen</translation>
     </message>
@@ -10288,12 +10277,12 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
       <translation>Ethernet gebruiken voor internettoegang toestaan</translation>
     </message>
     <message id="settings_wifi_access_point">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="33"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="37"/>
       <source>Access point</source>
       <translation>WiFi toegangspunt</translation>
     </message>
     <message id="settings_tcpip_wifi_gateway_enabled">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="142"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="146"/>
       <source>Allow using WiFi for internet access</source>
       <translation>WiFi gebruiken voor internettoegang toestaan</translation>
     </message>
@@ -10425,7 +10414,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
     <message id="pagesettingssystem_opportunity_loads">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="59"/>
       <source>Opportunity Loads</source>
-      <translation>Opportuniteitsbelastingen</translation>
+      <translation>Opportunity Loads</translation>
     </message>
     <message id="microgrid_mode_ems_hybrid_droop">
       <location filename="../../src/enums.cpp" line="873"/>
@@ -10565,7 +10554,7 @@ Geïnstalleerd maar uitgeschakeld (rc.local)
     <message id="switchable_output_function_opportunity_load">
       <location filename="../../src/enums.cpp" line="629"/>
       <source>Opportunity load</source>
-      <translation>Opportuniteitsbelasting</translation>
+      <translation>Opportunity load</translation>
     </message>
     <message id="mk2vsc_state_waiting_for_vebus_setting_access_password">
       <location filename="../../pages/vebusdevice/PageVeBusBackupRestore.qml" line="40"/>
@@ -11032,12 +11021,12 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
       <translation>Hiermee wordt de verbinding met VRM verbroken, tenzij het apparaat verbinding kan maken met VRM via wifi. Weet u zeker dat u internettoegang via ethernet wilt uitschakelen?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="167"/>
       <source>Disable internet access over WiFi?</source>
       <translation>Internettoegang via wifi uitschakelen?</translation>
     </message>
     <message id="settings_tcpip_disable_wifi_gateway_confirm">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="165"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="169"/>
       <source>This will disconnect the device from VRM, unless it can connect to VRM over ethernet. Are you sure that you want to disable internet access over WiFi?</source>
       <translation>Hiermee wordt de verbinding met VRM verbroken, tenzij het apparaat verbinding kan maken met VRM via ethernet. Weet u zeker dat u internettoegang via wifi wilt uitschakelen?</translation>
     </message>
@@ -11123,7 +11112,7 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
       <translation>Verwijderen - %1</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="101"/>
       <source>Refresh</source>
       <translation>Vernieuwen</translation>
     </message>
@@ -11226,7 +11215,7 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
     <message id="page_controllable_loads_preferences_only_applies_when_using_optimized_with_battery_life">
       <location filename="../../pages/settings/PageControllableLoadsPreferences.qml" line="51"/>
       <source>Only applies when using Optimized with BatteryLife. Opportunity Loads automatically resumes after a full charge.</source>
-      <translation>Geldt alleen bij gebruik van Geoptimaliseerd met BatteryLife. Mogelijkheidsbelastingen worden automatisch hervat na een volledige lading.</translation>
+      <translation>Geldt alleen bij gebruik van Geoptimaliseerd met BatteryLife. Opportunity Loads wordt automatisch hervat na een volledige lading.</translation>
     </message>
     <message id="powerguard_consumption_l1_current_limit">
       <location filename="../../pages/settings/devicelist/ac-in/PowerGuardConsumptionSettings.qml" line="46"/>
@@ -11260,9 +11249,9 @@ Update naar de nieuwste firmware om deze instellingen aan te passen.</translatio
     </message>
     <message id="evcs_charging_time">
       <location filename="../../pages/evcs/EvChargerPage.qml" line="57"/>
-      <source>Time</source>
-      <extracomment>Charging time for the EV charger</extracomment>
-      <translation type="unfinished">Tijd</translation>
+      <source>Duration</source>
+      <extracomment>Duration of the current EV charging session</extracomment>
+      <translation type="unfinished">Duur</translation>
     </message>
     <message id="evcs_auto_mode_source">
       <location filename="../../pages/evcs/EvChargerPage.qml" line="138"/>
@@ -11848,12 +11837,12 @@ LET OP: Alleen gebruiken indien vereist door de energieleverancier.</translation
       <translation>VE.Can Instance# %1</translation>
     </message>
     <message id="settings_wifi_access_point_password">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="87"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="91"/>
       <source>Access point password</source>
       <translation>Wachtwoord toegangspunt</translation>
     </message>
     <message id="settings_wifi_disable_ap">
-      <location filename="../../pages/settings/PageSettingsWifi.qml" line="61"/>
+      <location filename="../../pages/settings/PageSettingsWifi.qml" line="65"/>
       <source>Disable access point</source>
       <translation>AP uitzetten</translation>
     </message>
@@ -11912,7 +11901,7 @@ LET OP: Alleen gebruiken indien vereist door de energieleverancier.</translation
     <message id="pagecontrollableloads_disable_dess_first">
       <location filename="../../pages/settings/PageControllableLoads.qml" line="30"/>
       <source>Opportunity Loads cannot be enabled while Dynamic ESS is running. Disable Dynamic ESS first.</source>
-      <translation>Opportunity loads kan niet worden ingeschakeld zolang Dynamische ESS actief is. Schakel eerst Dynamische ESS uit.</translation>
+      <translation>Opportunity Loads kan niet worden ingeschakeld zolang Dynamic ESS actief is. Schakel eerst Dynamic ESS uit.</translation>
     </message>
     <message id="pagecontrollableloads_devices_and_priorities">
       <location filename="../../pages/settings/PageControllableLoads.qml" line="41"/>
@@ -11974,6 +11963,28 @@ LET OP: Alleen gebruiken indien vereist door de energieleverancier.</translation
       <source>Button | Outputs → toggle and dim</source>
       <translation>Knop | Uitgangen → Omschakelen en dimmen</translation>
     </message>
+    <message id="settings_shelly_integration">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="79"/>
+      <source>Enable Shelly integration</source>
+      <translation>Shelly-integratie inschakelen</translation>
+    </message>
+    <message id="temperature_slider_current">
+      <location filename="../../components/controls/TemperatureSlider.qml" line="164"/>
+      <source>Measured</source>
+      <extracomment>The current temperature measurement</extracomment>
+      <translation>Gemeten</translation>
+    </message>
+    <message id="ev_position">
+      <location filename="../../pages/ev/EvPage.qml" line="142"/>
+      <source>Location</source>
+      <extracomment>Geographic location of the vehicle, shown as GPS coordinates</extracomment>
+      <translation>Locatie</translation>
+    </message>
+    <message id="settings_shelly_autoscan">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="85"/>
+      <source>Automatic device discovery</source>
+      <translation>Automatische apparaatdetectie</translation>
+    </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
@@ -12007,12 +12018,12 @@ LET OP: Alleen gebruiken indien vereist door de energieleverancier.</translation
       <translation type="unfinished">DC ingang</translation>
     </message>
     <message id="brief_ac_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="254"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="240"/>
       <source>AC Loads</source>
       <translation type="unfinished">AC Belastingen</translation>
     </message>
     <message id="brief_dc_loads">
-      <location filename="../../pages/BriefSidePanel.qml" line="285"/>
+      <location filename="../../pages/BriefSidePanel.qml" line="271"/>
       <source>DC Loads</source>
       <translation type="unfinished">DC Belastingen</translation>
     </message>
