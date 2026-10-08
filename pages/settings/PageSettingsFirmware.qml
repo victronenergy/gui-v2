@@ -33,6 +33,7 @@ Page {
 			ListNavigation {
 				//% "Online updates"
 				text: qsTrId("settings_online_updates")
+				preferredVisible: !Global.venusInContainer
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOnline.qml", { title: text })
 				}
@@ -41,6 +42,7 @@ Page {
 			ListNavigation {
 				//% "Install firmware from SD/USB"
 				text: qsTrId("settings_install_firmware_from_sd_usb")
+				preferredVisible: !Global.venusInContainer
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsFirmwareOffline.qml", { title: text })
 				}
@@ -49,9 +51,16 @@ Page {
 			ListNavigation {
 				//% "Stored backup firmware"
 				text: qsTrId("settings_stored_backup_firmware")
+				preferredVisible: !Global.venusInContainer
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsRootfsSelect.qml", { title: text })
 				}
+			}
+
+			ListInfoLabel {
+				//% "Running in a container. Update by pulling a new image and recreating the container. See the deployment documentation for details."
+				text: qsTrId("settings_firmware_container_update")
+				preferredVisible: Global.venusInContainer
 			}
 		}
 	}
