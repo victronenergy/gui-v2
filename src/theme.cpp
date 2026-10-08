@@ -267,6 +267,7 @@ void Theme::updateViewportAndKeyboardProperties()
 
 	// If the visual viewport is at least 150px shorter than the layout viewport, assume the
 	// keyboard is open.
+	// Mirrored by resetStuckViewportOffset() in wasm/index.html.
 	static const int keyboardMinHeight = 150;
 	m_virtualKeyboardOpened = (m_windowHeight - m_visualViewportHeight) > keyboardMinHeight;
 

@@ -672,8 +672,112 @@
                     mod.jsSetVisualViewportOffsetTop(Math.round(window.visualViewport.pageTop));
                 }
             }
+
+            // Qt (6.8) only re-reads the size and position of its container on window
+            // and visualViewport 'resize' events; it never observes the container itself
+            // (QWasmScreen::installCanvasResizeObserver exists but has no caller). When
+            // the safe-area insets settle after a rotation, #screen moves or resizes
+            // through the padding alone and Qt keeps the window, canvas, touch-clipping
+            // rectangle and screen origin from the intermediate layout. Forward such
+            // changes as a window resize so Qt re-syncs. The position is measured from
+            // <body>, as Qt measures its screen origin, so Qt's view of the container
+            // follows exactly. Qt's handler only touches the canvas inside #screen, so
+            // this converges after one round.
+            let lastScreenRect = '';
+            function syncQtContainer() {
+                const body = document.body.getBoundingClientRect();
+                const r = screen.getBoundingClientRect();
+                const key = [r.left - body.left, r.top - body.top, r.width, r.height].map(Math.round).join(',');
+                if (key === lastScreenRect) {
+                    return;
+                }
+                lastScreenRect = key;
+                if (window._qtWasmModule) {
+                    window.dispatchEvent(new Event('resize'));
+                }
+            }
+            // ResizeObserver reports size changes only. #screen can also move without
+            // resizing when the insets change (a tablet keeps the aspect-constrained box
+            // centred), so observe #wrapper-outer's content box as well: it shrinks or
+            // grows with the safe-area padding. The timed checks in
+            // scheduleViewportOffsetReset() below cover anything else.
+            if (window.ResizeObserver) {
+                const observer = new ResizeObserver(syncQtContainer);
+                observer.observe(screen);
+                observer.observe(document.getElementById('wrapper-outer'));
+            }
+
+            // iOS home-screen web apps (seen on iOS 27): rotating landscape -> portrait
+            // re-frames the web view below the status bar (innerHeight shrinks by the
+            // status bar height, env(safe-area-inset-top) drops to 0) and leaves the
+            // document shifted by that height: body's client rect sits at -59px while
+            // window.scrollY reports 0 and visualViewport.offsetTop reports 59. The fixed
+            // wrapper is still painted at the visual viewport, so the page looks right,
+            // but hit-testing uses the shifted rects: touches on the bottom bar miss the
+            // Qt canvas and every other touch lands 59px low. Scroll back to the origin
+            // when that signature is seen.
+            //
+            // Only the shifted body rectangle counts as the signature. A pinch zoom moves
+            // visualViewport.offsetTop/Left but not the body rectangle, so it is left
+            // alone. The browser also shifts the page legitimately to keep a focused
+            // field above the keyboard, and the QML side relies on that offset; skip
+            // while a keyboard is open (same 150px threshold as keyboardMinHeight in
+            // src/theme.cpp) or while Qt's hidden text input has focus and anything
+            // smaller (an accessory bar, a small or split keyboard) reduces the visual
+            // viewport. Qt keeps that input focused after the keyboard is dismissed, so
+            // focus alone must not block the reset.
+            function resetStuckViewportOffset() {
+                const vv = window.visualViewport;
+                if (!vv) {
+                    return;
+                }
+                const viewportShrink = window.innerHeight - vv.height;
+                if (viewportShrink > 150) {
+                    return;
+                }
+                const active = document.activeElement;
+                const editing = !!active && (active.tagName === 'INPUT'
+                    || active.tagName === 'TEXTAREA' || active.isContentEditable === true);
+                if (editing && viewportShrink > 1) {
+                    return;
+                }
+                const body = document.body.getBoundingClientRect();
+                if (body.top > -1 && body.left > -1) {
+                    return;
+                }
+                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+                signalQtViewportChange();
+                syncQtContainer();
+            }
+            // The re-framing settles over a few frames, so re-check a little later too,
+            // and re-sync Qt with the container at each step. Re-arm rather than stack
+            // the timers when events arrive in bursts.
+            const viewportResetTimers = [];
+            function scheduleViewportOffsetReset() {
+                while (viewportResetTimers.length) {
+                    clearTimeout(viewportResetTimers.pop());
+                }
+                const check = () => {
+                    resetStuckViewportOffset();
+                    syncQtContainer();
+                };
+                viewportResetTimers.push(setTimeout(check, 150), setTimeout(check, 600));
+                check();
+            }
+            window.addEventListener('resize', scheduleViewportOffsetReset);
+            window.addEventListener('orientationchange', scheduleViewportOffsetReset);
+            if (window.screen && window.screen.orientation) {
+                window.screen.orientation.addEventListener('change', scheduleViewportOffsetReset);
+            }
+
             if (window.visualViewport) {
                 window.visualViewport.addEventListener('resize', () => {
+                    // Orientation and inset changes may resize #wrapper-inner without a
+                    // window resize event; keep the spinner SVG viewBox in step with it.
+                    applySpinnerLayout();
+                    scheduleViewportOffsetReset();
                     signalQtViewportChange();
 
                     // iOS Safari also reports a stale visualViewport.height immediately after the
@@ -825,9 +929,13 @@
                 // not create a global Module object; the instance returned by qtLoad() is
                 // the module with all exported functions on it.
                 window._qtWasmModule = instance;
-                // Report the viewport relative to the container as soon as the module
-                // is reachable, so the keyboard logic starts from correct values.
+                // Report the viewport as soon as the module is reachable, so the
+                // keyboard logic starts from correct values, and re-sync the container
+                // once: Qt measured it when its screen was created, before the module
+                // was reachable here, and the insets may have settled since.
                 signalQtViewportChange();
+                lastScreenRect = '';
+                syncQtContainer();
 
                 // qtLoad() resolves after main() has run: QGuiApplication and the
                 // QML engine are set up and app.exec() has unwound back to the
