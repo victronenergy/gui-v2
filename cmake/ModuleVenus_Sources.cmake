@@ -720,8 +720,14 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/keynavigationhighlighthelper.h
     src/keynavigationhighlighthelper.cpp
     src/mockanimators.h
+    src/mockconsumptioncalculator.h
+    src/mockconsumptioncalculator.cpp
     src/mockmanager.h
     src/mockmanager.cpp
+    src/mocktimerworker.h
+    src/mocktimerworker.cpp
+    src/mockvalueapplier.h
+    src/mockvalueapplier.cpp
     src/phasemodel.h
     src/phasemodel.cpp
     src/productinfo.h
