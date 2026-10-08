@@ -16,13 +16,33 @@
     <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-visual"/>
 
     <title>Victron GUIv2</title>
+    <!--
+      Run as a standalone app (no browser chrome) when added to the home
+      screen. The manifest requests this too, but iOS before 16.4 only
+      honours the metas.
+    -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Victron GUIv2">
+    <!--
+      Opaque status bar tinted with the theme-color below. iOS chooses a
+      readable text colour for it, which a translucent bar (always white
+      text) would not do on the light scheme.
+    -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
     <link rel="manifest" href="icons/manifest.json">
     <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#1f2535">
     <meta name="msapplication-TileColor" content="#1f2535">
-    <meta name="theme-color" content="#1f2535">
+    <!--
+      Match the page background so the status bar and browser toolbar blend
+      with the splash and application background in each colour scheme.
+    -->
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#E6E5E1" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000">
     <style>
       /* Make the html body cover the entire (visual) viewport with no scroll bars. */
       html, body {
@@ -46,6 +66,13 @@
         position: absolute;
         top: 50%;
         left: 50%;
+        /*
+          Centre on the safe-area content box, where #wrapper-inner is centred,
+          rather than on the padding box the absolute position is resolved
+          against. The plain 50% above stays in effect where env() is unknown.
+        */
+        top: calc(50% + (env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)) / 2);
+        left: calc(50% + (env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)) / 2);
         transform: translate(-50%, -50%);
         width: 1200px;
         height: 840px;
@@ -73,18 +100,40 @@
           max-height: 100dvh;
           max-height: 100lvh;
           margin: 0;
+          /*
+            With viewport-fit=cover the layout viewport extends under the
+            status bar, notch and home indicator (e.g. iOS home-screen web
+            apps). Reserve those regions as padding on the outer box so the
+            application is laid out inside the safe area in every orientation;
+            the body background fills the strips. The 0px fallbacks keep
+            engines without safe-area variables unaffected.
+          */
           padding: 0;
+          padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+                   env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+          /* The padding must eat into the 100% box, not grow it, or the page would scroll. */
+          box-sizing: border-box;
           display: flex;
           justify-content: center;
           align-items: center;
-          position: absolute;
+          /*
+            Fixed (not absolute) and with an explicit background colour: iOS 26+
+            home-screen web apps lay a Liquid Glass blur over the top edge of
+            the page unless WebKit finds a fixed or sticky, full-width box with
+            a plain background colour there (LocalFrameView::fixedContainerEdges).
+            Then the status bar takes that colour and the blur is skipped.
+            The body never scrolls, so fixed and absolute lay out identically.
+          */
+          position: fixed;
           top: 0;
           left: 0;
+          background-color: #000000;
         }
         #wrapper-inner {
-          width: calc(100% - env(safe-area-inset-left) - env(safe-area-inset-right));
+          /* Sized against the outer content area, which already excludes the safe-area insets. */
+          width: 100%;
           max-width: 1024px;
-          max-height: calc(100% - env(safe-area-inset-bottom));
+          max-height: 100%;
           aspect-ratio: 1024/600;
           position: relative;
           text-align: center;
@@ -138,6 +187,9 @@
           background: #E6E5E1;
           color: #64635F;
         }
+        #wrapper-outer {
+          background-color: #E6E5E1;
+        }
         #loading-bar-text {
           color: #64635F !important;
         }
@@ -157,6 +209,9 @@
           background: #000 !important;
           color: #969591 !important;
       }
+      html[data-forced-scheme="dark"] #wrapper-outer {
+          background-color: #000000 !important;
+      }
       html[data-forced-scheme="dark"] #loading-bar-text {
           color: #969591 !important;
       }
@@ -175,6 +230,9 @@
           background: #E6E5E1 !important;
           color: #64635F !important;
       }
+      html[data-forced-scheme="light"] #wrapper-outer {
+          background-color: #E6E5E1 !important;
+      }
       html[data-forced-scheme="light"] #loading-bar-text {
           color: #64635F !important;
       }
@@ -192,14 +250,22 @@
               const scheme = params.get('colorScheme').toLowerCase();
               if (scheme === 'dark' || scheme === 'light') {
                   document.documentElement.setAttribute('data-forced-scheme', scheme);
+                  // The theme-color metas above follow the OS preference; make the
+                  // status bar and browser toolbar follow the forced scheme instead.
+                  const colour = scheme === 'dark' ? '#000000' : '#E6E5E1';
+                  document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
+                      meta.removeAttribute('media');
+                      meta.setAttribute('content', colour);
+                  });
               }
           }
       })();
     </script>
   </head>
   <body onload="init()">
-    <img id="device-frame" src="device-frame.svg">
     <div id="wrapper-outer">
+      <!-- Inside #wrapper-outer so it paints above the wrapper's background and below #wrapper-inner. -->
+      <img id="device-frame" src="device-frame.svg">
       <div id="wrapper-inner">
         <figure id="qtspinner">
           <svg width="100%" height="100%" viewBox="0 0 1024 600" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -585,17 +651,133 @@
             });
 
             // Update gui-v2 Theme when the window's visual viewport changes.
+            //
+            // The values are page-relative (pageTop, not offsetTop: #wrapper-outer is
+            // fixed, so Qt's screen origin, measured from <body>, grows with any layout
+            // viewport scroll and only the page-relative position stays consistent).
+            // That is the space the QML keyboard handlers work in: the screen origin
+            // is the container's offset from <body>, and WasmVirtualKeyboardHandler/
+            // ModalDialog add that window position (Global.main.y) to item coordinates
+            // before comparing with Theme.visualViewportBottom. Making the offset
+            // relative to #screen would subtract the container offset twice.
             function signalQtViewportChange() {
                 const mod = window._qtWasmModule;
-                if (mod && typeof mod.jsSetVisualViewportHeight === 'function') {
+                if (!mod || !window.visualViewport) {
+                    return;
+                }
+                if (typeof mod.jsSetVisualViewportHeight === 'function') {
                     mod.jsSetVisualViewportHeight(Math.round(window.visualViewport.height));
                 }
-                if (mod && typeof mod.jsSetVisualViewportOffsetTop === 'function') {
-                    mod.jsSetVisualViewportOffsetTop(Math.round(window.visualViewport.offsetTop));
+                if (typeof mod.jsSetVisualViewportOffsetTop === 'function') {
+                    mod.jsSetVisualViewportOffsetTop(Math.round(window.visualViewport.pageTop));
                 }
             }
+
+            // Qt (6.8) only re-reads the size and position of its container on window
+            // and visualViewport 'resize' events; it never observes the container itself
+            // (QWasmScreen::installCanvasResizeObserver exists but has no caller). When
+            // the safe-area insets settle after a rotation, #screen moves or resizes
+            // through the padding alone and Qt keeps the window, canvas, touch-clipping
+            // rectangle and screen origin from the intermediate layout. Forward such
+            // changes as a window resize so Qt re-syncs. The position is measured from
+            // <body>, as Qt measures its screen origin, so Qt's view of the container
+            // follows exactly. Qt's handler only touches the canvas inside #screen, so
+            // this converges after one round.
+            let lastScreenRect = '';
+            function syncQtContainer() {
+                const body = document.body.getBoundingClientRect();
+                const r = screen.getBoundingClientRect();
+                const key = [r.left - body.left, r.top - body.top, r.width, r.height].map(Math.round).join(',');
+                if (key === lastScreenRect) {
+                    return;
+                }
+                lastScreenRect = key;
+                if (window._qtWasmModule) {
+                    window.dispatchEvent(new Event('resize'));
+                }
+            }
+            // ResizeObserver reports size changes only. #screen can also move without
+            // resizing when the insets change (a tablet keeps the aspect-constrained box
+            // centred), so observe #wrapper-outer's content box as well: it shrinks or
+            // grows with the safe-area padding. The timed checks in
+            // scheduleViewportOffsetReset() below cover anything else.
+            if (window.ResizeObserver) {
+                const observer = new ResizeObserver(syncQtContainer);
+                observer.observe(screen);
+                observer.observe(document.getElementById('wrapper-outer'));
+            }
+
+            // iOS home-screen web apps (seen on iOS 27): rotating landscape -> portrait
+            // re-frames the web view below the status bar (innerHeight shrinks by the
+            // status bar height, env(safe-area-inset-top) drops to 0) and leaves the
+            // document shifted by that height: body's client rect sits at -59px while
+            // window.scrollY reports 0 and visualViewport.offsetTop reports 59. The fixed
+            // wrapper is still painted at the visual viewport, so the page looks right,
+            // but hit-testing uses the shifted rects: touches on the bottom bar miss the
+            // Qt canvas and every other touch lands 59px low. Scroll back to the origin
+            // when that signature is seen.
+            //
+            // Only the shifted body rectangle counts as the signature. A pinch zoom moves
+            // visualViewport.offsetTop/Left but not the body rectangle, so it is left
+            // alone. The browser also shifts the page legitimately to keep a focused
+            // field above the keyboard, and the QML side relies on that offset; skip
+            // while a keyboard is open (same 150px threshold as keyboardMinHeight in
+            // src/theme.cpp) or while Qt's hidden text input has focus and anything
+            // smaller (an accessory bar, a small or split keyboard) reduces the visual
+            // viewport. Qt keeps that input focused after the keyboard is dismissed, so
+            // focus alone must not block the reset.
+            function resetStuckViewportOffset() {
+                const vv = window.visualViewport;
+                if (!vv) {
+                    return;
+                }
+                const viewportShrink = window.innerHeight - vv.height;
+                if (viewportShrink > 150) {
+                    return;
+                }
+                const active = document.activeElement;
+                const editing = !!active && (active.tagName === 'INPUT'
+                    || active.tagName === 'TEXTAREA' || active.isContentEditable === true);
+                if (editing && viewportShrink > 1) {
+                    return;
+                }
+                const body = document.body.getBoundingClientRect();
+                if (body.top > -1 && body.left > -1) {
+                    return;
+                }
+                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+                signalQtViewportChange();
+                syncQtContainer();
+            }
+            // The re-framing settles over a few frames, so re-check a little later too,
+            // and re-sync Qt with the container at each step. Re-arm rather than stack
+            // the timers when events arrive in bursts.
+            const viewportResetTimers = [];
+            function scheduleViewportOffsetReset() {
+                while (viewportResetTimers.length) {
+                    clearTimeout(viewportResetTimers.pop());
+                }
+                const check = () => {
+                    resetStuckViewportOffset();
+                    syncQtContainer();
+                };
+                viewportResetTimers.push(setTimeout(check, 150), setTimeout(check, 600));
+                check();
+            }
+            window.addEventListener('resize', scheduleViewportOffsetReset);
+            window.addEventListener('orientationchange', scheduleViewportOffsetReset);
+            if (window.screen && window.screen.orientation) {
+                window.screen.orientation.addEventListener('change', scheduleViewportOffsetReset);
+            }
+
             if (window.visualViewport) {
                 window.visualViewport.addEventListener('resize', () => {
+                    // Orientation and inset changes may resize #wrapper-inner without a
+                    // window resize event; keep the spinner SVG viewBox in step with it.
+                    applySpinnerLayout();
+                    scheduleViewportOffsetReset();
                     signalQtViewportChange();
 
                     // iOS Safari also reports a stale visualViewport.height immediately after the
@@ -747,6 +929,13 @@
                 // not create a global Module object; the instance returned by qtLoad() is
                 // the module with all exported functions on it.
                 window._qtWasmModule = instance;
+                // Report the viewport as soon as the module is reachable, so the
+                // keyboard logic starts from correct values, and re-sync the container
+                // once: Qt measured it when its screen was created, before the module
+                // was reachable here, and the insets may have settled since.
+                signalQtViewportChange();
+                lastScreenRect = '';
+                syncQtContainer();
 
                 // qtLoad() resolves after main() has run: QGuiApplication and the
                 // QML engine are set up and app.exec() has unwound back to the
