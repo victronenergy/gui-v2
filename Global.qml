@@ -15,6 +15,7 @@ QtObject {
 	property var firmwareUpdate
 	property bool applicationActive: true // i.e. not in Idle mode
 	property bool keyNavigationEnabled
+	readonly property StatusBarPaneModel statusBarPanes: StatusBarPaneModel {}
 
 	readonly property bool backendReady: BackendConnection.state === BackendConnection.Ready
 		&& (Qt.platform.os !== "wasm"
