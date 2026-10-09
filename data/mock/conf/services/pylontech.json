@@ -27,7 +27,7 @@
         "/Dc/0/Power": -52,
         "/Dc/0/Temperature": 27.600000381469727,
         "/Dc/0/Voltage": 52.209999084472656,
-        "/Dc/1/Voltage": null,
+        "/Dc/1/Voltage": 25.2,
         "/DeviceInstance": 512,
         "/Diagnostics/LastErrors/1/Error": null,
         "/Diagnostics/Module0/Alarms/CellImbalance": null,
