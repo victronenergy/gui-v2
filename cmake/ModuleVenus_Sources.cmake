@@ -113,6 +113,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/SolarHistoryTableView.qml
     components/SolarYieldGauge.qml
     components/SolarYieldGraph.qml
+    components/SplashSequence.qml
     components/SplashView.qml
     components/SpinBoxDecimalConverter.qml
     components/StatusBar.qml

@@ -49,6 +49,16 @@ QtObject {
 	property bool pagePreloadComplete
 	property bool boatPageActive
 
+	// Informative, derived view of the startup sequence. This describes the boot
+	// (which the scattered flags above drive); it does not drive it itself.
+	// Splash_Phase (owned by SplashSequence) is the sub-state while Splash here.
+	readonly property int startupPhase: !backendReady ? VenusOS.Startup_Phase_LoadingBackend
+			: !dataManagerLoaded ? VenusOS.Startup_Phase_LoadingData
+			: !allPagesLoaded ? VenusOS.Startup_Phase_LoadingUi
+			: UiConfig.splashScreenVisible ? VenusOS.Startup_Phase_Splash
+			: VenusOS.Startup_Phase_Running
+	onStartupPhaseChanged: console.info("Global: startup phase ->", startupPhase)
+
 	property string firmwareInstalledBuild // don't clear this on UI reload.  it needs to survive reconnection.
 	property bool firmwareInstalledBuildUpdated // as above.
 	property bool needPageReload: Qt.platform.os == "wasm" && firmwareInstalledBuildUpdated // as above.

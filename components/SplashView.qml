@@ -10,16 +10,44 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
-	readonly property bool allPagesLoaded: Global.allPagesLoaded
-
 	color: Theme.color_page_background
 	visible: UiConfig.splashScreenVisible
 
-	onAllPagesLoadedChanged: {
-		if (allPagesLoaded && !UiConfig.showSplashAnimation) {
-			hideSplashView()
+	// Phase changes start the matching animation. Completion handlers below
+	// report back to the sequence; they do not start the next animation.
+	SplashSequence {
+		id: sequence
+
+		splashVisible: UiConfig.splashScreenVisible
+		showAnimation: UiConfig.showSplashAnimation
+		pagesLoaded: Global.allPagesLoaded
+		dataReady: Global.dataManagerLoaded
+		// Same condition as welcomeLoader.active. This object is created first,
+		// so it must not reference the loader id.
+		welcomeActive: Global.dataManagerLoaded && Global.systemSettings.needsOnboarding
+		preloadComplete: Global.pagePreloadComplete
+
+		onPhaseChanged: root._applyPhase(phase)
+	}
+
+	readonly property bool pagePreloadComplete: Global.pagePreloadComplete
+	onPagePreloadCompleteChanged: {
+		if (pagePreloadComplete) {
+			console.info("SplashView: page preload complete")
 		}
 	}
+
+	// Backstop if the gauge has paused and PagePreloader has not finished.
+	Timer {
+		interval: 16000
+		running: sequence.phase === VenusOS.Splash_Phase_WaitingForPreload
+		onTriggered: {
+			console.warn("SplashView: page preload wait timed out")
+			Global.pagePreloadComplete = true
+		}
+	}
+
+	Component.onCompleted: sequence.ready = true
 
 	function hideSplashView() {
 		console.info("SplashView: UI ready; hiding splash view")
@@ -35,35 +63,79 @@ Rectangle {
 		loadingProgress.visible = true
 	}
 
-	function _tryFadeOut() {
-		if (fadeOutAnim.running || !UiConfig.splashScreenVisible) {
-			return
-		}
-		if (!animatedLogo.paused) {
-			return
-		}
-		if (!Global.pagePreloadComplete) {
+	function _applyPhase(phase) {
+		_stopAnimationsForOtherPhases(phase)
+		switch (phase) {
+		case VenusOS.Splash_Phase_Waiting:
+			_restoreLoadingChrome()
+			break
+		case VenusOS.Splash_Phase_HidingProgress:
+			console.info("SplashView: application content pages have loaded, running initial fade animation")
+			initialFadeAnimation.start()
+			break
+		case VenusOS.Splash_Phase_FadingLogo:
+			console.info("SplashView: fading out logo text")
+			logoIconFadeOutAnim.running = true
+			logoTextFadeOutAnim.running = true
+			break
+		case VenusOS.Splash_Phase_PlayingGauge:
+			if (Global.backendReady || Global.backendReadyLatched) {
+				console.info("SplashView: finished fading out logo text")
+			} else {
+				// Should not happen: the logo fade starts only after data is ready.
+				// Keep going so the splash cannot get stuck.
+				console.info("SplashView: fading out logo text but backend is not ready!")
+			}
+			animatedLogo.playing = true
+			if (animatedLogo.paused) {
+				sequence.notifyGaugePaused()
+			}
+			break
+		case VenusOS.Splash_Phase_WaitingForPreload:
 			console.info("SplashView: waiting for page preload before fade out")
-			return
-		}
-		fadeOutAnim.start()
-	}
-
-	readonly property bool pagePreloadComplete: Global.pagePreloadComplete
-	onPagePreloadCompleteChanged: {
-		if (pagePreloadComplete) {
-			console.info("SplashView: page preload complete")
-			root._tryFadeOut()
+			break
+		case VenusOS.Splash_Phase_FadingOut:
+			console.info("SplashView: playing view opacity fade out animation")
+			fadeOutAnim.running = true
+			break
+		case VenusOS.Splash_Phase_Hidden:
+			hideSplashView()
+			break
 		}
 	}
 
-	Timer {
-		interval: 16000
-		running: animatedLogo.paused && !Global.pagePreloadComplete && UiConfig.splashScreenVisible
-		onTriggered: {
-			console.warn("SplashView: page preload wait timed out")
-			Global.pagePreloadComplete = true
+	function _stopAnimationsForOtherPhases(phase) {
+		if (phase !== VenusOS.Splash_Phase_HidingProgress && initialFadeAnimation.running) {
+			initialFadeAnimation.stop()
 		}
+		if (phase !== VenusOS.Splash_Phase_FadingLogo) {
+			if (logoTextFadeOutAnim.running) {
+				logoTextFadeOutAnim.running = false
+			}
+			if (logoIconFadeOutAnim.running) {
+				logoIconFadeOutAnim.running = false
+			}
+		}
+		if (phase !== VenusOS.Splash_Phase_FadingOut && fadeOutAnim.running) {
+			fadeOutAnim.running = false
+		}
+		if (phase !== VenusOS.Splash_Phase_PlayingGauge
+				&& phase !== VenusOS.Splash_Phase_WaitingForPreload
+				&& phase !== VenusOS.Splash_Phase_FadingOut
+				&& phase !== VenusOS.Splash_Phase_Hidden) {
+			animatedLogo.playing = false
+		}
+	}
+
+	function _restoreLoadingChrome() {
+		root.opacity = 1.0
+		logoIcon.opacity = 1.0
+		logoText.opacity = 1.0
+		extraInfoColumn.nextOpacity = 1.0
+		loadingProgress.opacity = 1.0
+		loadingProgress.visible = true
+		animatedLogo.playing = false
+		animatedLogo.currentFrame = 0
 	}
 
 	OpacityAnimator on opacity {
@@ -73,12 +145,11 @@ Rectangle {
 		to: 0
 		duration: Theme.animation_splash_fade_duration
 		onRunningChanged: {
-			if (running) {
-				console.info("SplashView: playing view opacity fade out animation")
-			} else {
-				console.info("SplashView: finished view opacity fade out animation")
-				root.hideSplashView()
+			if (running || sequence.phase !== VenusOS.Splash_Phase_FadingOut) {
+				return
 			}
+			console.info("SplashView: finished view opacity fade out animation")
+			sequence.notifyFadedOut()
 		}
 	}
 
@@ -99,9 +170,12 @@ Rectangle {
 		cache: false
 		paused: currentFrame === Theme.animation_splash_gaugeAnimation_fadeFrame
 		onPausedChanged: {
-			if (paused) {
-				console.info("SplashView: finished gauge gif animation")
-				root._tryFadeOut()
+			if (!paused) {
+				return
+			}
+			console.info("SplashView: finished gauge gif animation")
+			if (sequence.phase === VenusOS.Splash_Phase_PlayingGauge) {
+				sequence.notifyGaugePaused()
 			}
 		}
 
@@ -160,20 +234,10 @@ Rectangle {
 			duration: Theme.animation_splash_logoText_fade_duration
 
 			onRunningChanged: {
-				if (running) {
-					console.info("SplashView: fading out logo text")
-					logoIconFadeOutAnim.running = true
-				} else if (Global.backendReady || Global.backendReadyLatched) {
-					console.info("SplashView: finished fading out logo text")
-					animatedLogo.playing = true
-				} else {
-					// this condition should never be hit.
-					// if we do hit it, continue the splash view teardown,
-					// so that we don't get stuck, even if the UI might
-					// not be fully loaded at this point.
-					console.info("SplashView: fading out logo text but backend is not ready!")
-					animatedLogo.playing = true
+				if (running || sequence.phase !== VenusOS.Splash_Phase_FadingLogo) {
+					return
 				}
+				sequence.notifyLogoFaded()
 			}
 		}
 	}
@@ -181,14 +245,12 @@ Rectangle {
 	SequentialAnimation {
 		id: initialFadeAnimation
 
-		running: Global.dataManagerLoaded && !welcomeLoader.active && Global.allPagesLoaded && UiConfig.showSplashAnimation
-		onRunningChanged: {
-			if (running) {
-				console.info("SplashView: application content pages have loaded, running initial fade animation")
-			} else {
-				console.info("SplashView: finished running initial fade animation")
-				logoTextFadeOutAnim.running = true
+		onFinished: {
+			if (sequence.phase !== VenusOS.Splash_Phase_HidingProgress) {
+				return
 			}
+			console.info("SplashView: finished running initial fade animation")
+			sequence.notifyProgressHidden()
 		}
 
 		PropertyAction {
