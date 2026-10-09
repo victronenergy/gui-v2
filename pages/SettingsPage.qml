@@ -92,6 +92,23 @@ SwipeViewPage {
 			}
 
 			SettingsListNavigation {
+				//% "Storage"
+				text: qsTrId("settings_storage")
+				//% "Disks, usage and storage consumers"
+				caption: storageConnected.valid && storageConnected.value === 1
+						? qsTrId("settings_storage_caption")
+						//% "Storage Manager is not running"
+						: qsTrId("settings_storage_manager_not_running")
+				pageSource: "/pages/settings/PageSettingsStorage.qml"
+				pageIconSource: "qrc:/images/icon_storage_32.svg"
+
+				VeQuickItem {
+					id: storageConnected
+					uid: BackendConnection.serviceUidForType("storage") + "/Connected"
+				}
+			}
+
+			SettingsListNavigation {
 				//% "VRM"
 				text: qsTrId("settings_vrm")
 				//% "Remote monitoring portal"

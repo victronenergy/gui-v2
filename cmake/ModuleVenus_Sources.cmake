@@ -117,6 +117,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/StatusBar.qml
     components/StatusBar_Landscape.qml
     components/StatusBar_Portrait.qml
+    components/StorageVolumeConsumers.qml
+    components/StorageFilesystemCompatibility.qml
     components/SwipePageModel.qml
     components/SwipeViewPage.qml
     components/SystemBatteryDelegate.qml
@@ -179,9 +181,12 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/dialogs/DateSelectorDialog.qml
     components/dialogs/DialogHeader_Portrait.qml
     components/dialogs/DialogShadow.qml
+    components/dialogs/EjectDialog.qml
     components/dialogs/VrmInstanceSwapDialog.qml
     components/dialogs/ESSMinimumSOCDialog.qml
     components/dialogs/EvcsChargerModeDialog.qml
+    components/dialogs/FormatChooseDialog.qml
+    components/dialogs/FormatConfirmDialog.qml
     components/dialogs/GeneratorDialog.qml
     components/dialogs/GeneratorStartDialog.qml
     components/dialogs/GeneratorStopDialog.qml
@@ -234,6 +239,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListPvInverterPositionRadioButtonGroup.qml
     components/listitems/ListRebootButton.qml
     components/listitems/ListRelayState.qml
+    components/listitems/ListResourceGauge.qml
     components/listitems/ListSpinBoxRange.qml
     components/listitems/ListGeneratorAutoStartSwitch.qml
     components/listitems/ListTemperatureRelay.qml
@@ -327,6 +333,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     data/Notifications.qml
     data/SolarInputs.qml
     data/StartPageConfiguration.qml
+    data/Storage.qml
     data/Switches.qml
     data/System.qml
     data/SystemLoad.qml
@@ -460,6 +467,9 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageSettingsIntegrations.qml
     pages/settings/PageSettingsLarge.qml
     pages/settings/PageSettingsLogger.qml
+    pages/settings/PageSettingsLoggerStorage.qml
+    pages/settings/PageSettingsStorage.qml
+    pages/settings/PageSettingsStorageVolume.qml
     pages/settings/PageSettingsModbus.qml
     pages/settings/PageSettingsModbusAddDevice.qml
     pages/settings/PageSettingsModbusDevices.qml
@@ -794,6 +804,7 @@ set(VictronVenusOS_RESOURCES
     images/icon_more_dots.svg
     images/icon_smartswitch_off_32.svg
     images/icon_smartswitch_on_32.svg
+    images/icon_storage_32.svg
     images/icon_switchdev_32.svg
     images/icon_system_32.svg
     images/icon_vrm_32.svg

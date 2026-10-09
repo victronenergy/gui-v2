@@ -10,6 +10,108 @@ Page {
 	id: root
 
 	readonly property string loggerServiceUid: BackendConnection.serviceUidForType("logger")
+	readonly property string storageServiceUid: BackendConnection.serviceUidForType("storage")
+	readonly property string selectedStorageVolumeId: storageVolumeIdSetting.value || ""
+
+	// The vrm-cache StorageVolume selected via PageSettingsLoggerStorage.qml, resolved live from
+	// com.victronenergy.storage's /Volumes tree so "Storage volume" below can show its nickname and
+	// show the active /data fallback while the preferred external volume is unavailable.
+	property string _selectedStorageVolumeUid: ""
+	property string _selectedStorageVolumeName: ""
+
+	// Whether Storage Manager has anything adopted at all - gates whether "Storage volume"
+	// below is navigable. With nothing adopted there is no picker to open: logging always
+	// uses /data, and that should read as a plain fact, not a "Not set >" choice with
+	// nowhere to go.
+	property bool _hasManagedStorageVolume: false
+
+	function _recomputeSelectedStorageVolumeUid() {
+		let found = ""
+		let foundName = ""
+		let anyAdopted = false
+		for (let i = 0; i < selectedVolumeRepeater.count; ++i) {
+			const row = selectedVolumeRepeater.itemAt(i)
+			if (!row) {
+				continue
+			}
+			if (row.lifecycle === VenusOS.Storage_Lifecycle_AdoptedPersistent) {
+				anyAdopted = true
+			}
+			if (row.volumeId === root.selectedStorageVolumeId && row.isPresent) {
+				found = row.volumeUid
+				foundName = row.nickname || row.label
+			}
+		}
+		root._selectedStorageVolumeUid = found
+		root._selectedStorageVolumeName = foundName
+		root._hasManagedStorageVolume = anyAdopted
+	}
+
+	VeQuickItem {
+		id: storageVolumeIdSetting
+		uid: Global.systemSettings.serviceUid + "/Settings/Vrmlogger/StorageVolumeId"
+	}
+	VeQuickItem {
+		id: bufferLocation
+		uid: root.loggerServiceUid + "/Buffer/Location"
+	}
+
+	property VeQItemSortTableModel _storageVolumes: VeQItemSortTableModel {
+		model: VeQItemTableModel {
+			uids: [root.storageServiceUid + "/Volumes"]
+			flags: VeQItemTableModel.AddChildren |
+				   VeQItemTableModel.AddNonLeaves |
+				   VeQItemTableModel.DontAddItem
+		}
+		dynamicSortFilter: true
+		filterFlags: VeQItemSortTableModel.FilterOffline
+	}
+
+	Repeater {
+		id: selectedVolumeRepeater
+
+		model: VeQItemChildModel {
+			model: root._storageVolumes
+			childId: "Id"
+		}
+
+		delegate: Item {
+			readonly property string volumeUid: model.item.itemParent().uid
+			readonly property string volumeId: model.item.value
+			readonly property int lifecycle: lifecycleItem.value
+			readonly property int state: stateItem.value
+			readonly property bool isPresent: state === VenusOS.Storage_VolumeState_Available
+					|| state === VenusOS.Storage_VolumeState_Active
+			readonly property string nickname: nicknameItem.value || ""
+			readonly property string label: labelItem.value || ""
+
+			onVolumeIdChanged: root._recomputeSelectedStorageVolumeUid()
+			onLifecycleChanged: root._recomputeSelectedStorageVolumeUid()
+			onIsPresentChanged: root._recomputeSelectedStorageVolumeUid()
+			onNicknameChanged: root._recomputeSelectedStorageVolumeUid()
+			onLabelChanged: root._recomputeSelectedStorageVolumeUid()
+			Component.onCompleted: root._recomputeSelectedStorageVolumeUid()
+
+			VeQuickItem {
+				id: lifecycleItem
+				uid: volumeUid + "/Lifecycle"
+			}
+			VeQuickItem {
+				id: stateItem
+				uid: volumeUid + "/State"
+			}
+			VeQuickItem {
+				id: nicknameItem
+				uid: volumeUid + "/Nickname"
+			}
+			VeQuickItem {
+				id: labelItem
+				uid: volumeUid + "/Label"
+			}
+		}
+
+		onCountChanged: root._recomputeSelectedStorageVolumeUid()
+	}
 
 	function timeAgo(timestamp) {
 		const timeNow = Math.round(new Date() / 1000)
@@ -285,21 +387,26 @@ Page {
 				preferredVisible: !!dataItem.value && dataItem.value > 0
 			}
 
-			ListRadioButtonGroup {
-				//% "Storage location"
-				text: qsTrId("settings_vrm_storage_location")
-				//% "No buffer active"
-				defaultSecondaryText: qsTrId("settings_vrm_no_buffer_active")
-				optionModel: [
-					//% "Internal storage"
-					{ display: qsTrId("settings_vrm_internal_storage"), value: 0 },
-					//% "Transferring"
-					{ display: qsTrId("settings_vrm_transferring"), value: 1 },
-					//% "External storage"
-					{ display: qsTrId("settings_vrm_external_storage"), value: 2 },
-				]
-				dataItem.uid: root.loggerServiceUid + "/Buffer/Location"
-				interactive: dataItem.value !== undefined
+			ListNavigation {
+				//% "Storage volume"
+				text: qsTrId("settings_vrm_storage_volume")
+				secondaryText: {
+					// The setting is a retained preference. Buffer/Location is the
+					// authoritative active location: 2 means external storage.
+					if (bufferLocation.value !== 2) {
+						//% "System (/data)"
+						return qsTrId("settings_logger_storage_none")
+					}
+					if (!root._selectedStorageVolumeUid) {
+						return qsTrId("settings_logger_storage_none")
+					}
+					return root._selectedStorageVolumeName || root.selectedStorageVolumeId
+				}
+				// Nothing to pick until Storage Manager has adopted a volume - a plain
+				// "System /data" fact then, not a dead-end "Not set >" picker.
+				interactive: root._hasManagedStorageVolume
+				writeAccessLevel: VenusOS.User_AccessType_User
+				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsLoggerStorage.qml", {"title": text})
 			}
 
 			ListRadioButtonGroup {
@@ -335,8 +442,6 @@ Page {
 												 qsTrId("settings_vrm_bytes"))
 				dataItem.uid: root.loggerServiceUid + "/Buffer/FreeDiskSpace"
 			}
-
-			ListMountStateButton {}
 
 			ListText {
 				//% "Stored records"

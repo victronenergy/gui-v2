@@ -84,6 +84,7 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/services/smartshunt-battery.json
     data/mock/conf/services/smartshunt-dcsource.json
     data/mock/conf/services/smartswitch.json
+    data/mock/conf/services/storage.json
     data/mock/conf/services/switch-controls-tester.json
     data/mock/conf/services/tank-blackwater-error-state.json
     data/mock/conf/services/tank-fuel1.json
