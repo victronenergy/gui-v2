@@ -20,7 +20,26 @@ FocusScope {
 	readonly property string currentTitle: pages[currentIndex]?.title ?? ""
 	readonly property real buttonWidth: buttonRow.width / visiblePageCount
 	readonly property int visiblePageCount: Math.min(pages.length,
-			buttonRow.width / Theme.geometry_navigationBar_button_minimumWidth)
+	buttonRow.width / Theme.geometry_navigationBar_button_minimumWidth)
+
+	// Intermediate property written to the Repeater. Do not bind Repeater.model;
+	// setModel while nested AsynchronousIfNested delegates are Loading will assert.
+	readonly property int _buttonModelCount: root.visiblePageCount < root.pages.length
+			? Math.max(0, root.visiblePageCount - 1)
+			: root.visiblePageCount
+	on_ButtonModelCountChanged: root._applyButtonModel()
+	Component.onCompleted: root._applyButtonModel()
+
+	function _applyButtonModel() {
+		if (!buttonRepeater) {
+			return
+		}
+		if (buttonRepeater.model === root._buttonModelCount) {
+			return
+		}
+		FastUtils.drainIncubators(buttonRepeater)
+		buttonRepeater.model = root._buttonModelCount
+	}
 
 	// Internal reference to the currently selected index.
 	property int _currentIndex
@@ -74,9 +93,7 @@ FocusScope {
 		Repeater {
 			id: buttonRepeater
 
-			model: root.visiblePageCount < root.pages.length // If we cannot show all available pages...
-				   ? root.visiblePageCount - 1  // -1 to make space for the "More" button
-				   : root.visiblePageCount // show all available pages
+			model: 0
 			delegate: NavButton {
 				required property int index
 				readonly property SwipeViewPage page: root.pages[index]

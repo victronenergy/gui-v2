@@ -11,9 +11,30 @@ FocusScope {
 	id: root
 
 	property int fontPixelSize: Theme.font_buttonRow_size
-	property alias model: buttonRepeater.model
+	// Do not alias Repeater.model: a bound JS array is a new object each
+	// re-eval, and setModel during nested async incubation asserts.
+	// Assign the Repeater only when the button count changes.
+	property var model
 	property int currentIndex
 	property bool showBorderWhenDisabled: false
+
+	onModelChanged: root._applyRepeaterModelIfCountChanged()
+	Component.onCompleted: root._applyRepeaterModelIfCountChanged()
+
+	function _applyRepeaterModelIfCountChanged() {
+		if (!buttonRepeater) {
+			return
+		}
+		const newCount = Array.isArray(root.model) ? root.model.length
+				: (root.model?.count ?? (root.model != null ? 1 : 0))
+		if (buttonRepeater.model != null && buttonRepeater.count === newCount) {
+			return
+		}
+		// Count changes are still setModel. Drain first so in-flight
+		// AsynchronousIfNested delegates are not released with objectRef 0.
+		FastUtils.drainIncubators(buttonRepeater)
+		buttonRepeater.model = root.model
+	}
 
 	signal buttonClicked(buttonIndex: int)
 
@@ -58,7 +79,8 @@ FocusScope {
 			delegate: T.Button {
 				id: mouseArea
 
-				enabled: root.enabled && modelData.enabled !== false
+				readonly property var _item: root.model?.[model.index]
+				enabled: root.enabled && _item?.enabled !== false
 				width: root.width / buttonRepeater.count
 				height: parent ? parent.height : 0
 				focusPolicy: root.focusPolicy
@@ -70,7 +92,7 @@ FocusScope {
 					color: mouseArea.enabled === false && model.index !== root.currentIndex
 						   ? Theme.color_background_disabled
 						   : ((mouseArea.pressed || model.index === root.currentIndex)
-							  ? modelData.selectedBackgroundColor ?? Theme.color_ok
+							  ? mouseArea._item?.selectedBackgroundColor ?? Theme.color_ok
 							  : Theme.color_darkOk)
 					border.width: Theme.geometry_button_border_width
 					border.color: (!root.showBorderWhenDisabled && mouseArea.enabled === false && model.index !== root.currentIndex) ? buttonDelegate.color : Theme.color_ok
@@ -87,7 +109,7 @@ FocusScope {
 					x: Theme.geometry_tabBar_horizontalMargin
 					width: parent.width - 2*x
 					elide: Text.ElideRight
-					text: modelData.value
+					text: mouseArea._item?.value ?? ""
 					color: mouseArea.enabled === false && model.index !== root.currentIndex
 						   ? Theme.color_font_disabled
 						   : (mouseArea.pressed || model.index === root.currentIndex

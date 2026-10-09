@@ -46,6 +46,8 @@ ListModel {
 			gauges = gauges.filter((data) => data.centerGaugeType !== VenusOS.BriefView_CentralGauge_None)
 		}
 		if (gauges !== _gaugeObjects.model) {
+			// setModel while nested async delegates are Loading causes an assert.
+			FastUtils.drainIncubators(_gaugeObjects)
 			// Clear the model and add default values for each gauge.
 			_gaugeObjects.model = []
 			let hasBatteryId = false
@@ -68,6 +70,8 @@ ListModel {
 			}
 
 			root._batteriesItem.active = hasBatteryId
+			// The [] assignment above can start AsynchronousIfNested delegates.
+			FastUtils.drainIncubators(_gaugeObjects)
 			root._gaugeObjects.model = gauges
 
 			// If showing aggregated tank types for the available tanks on the system, then refresh

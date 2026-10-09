@@ -61,15 +61,62 @@ StackView {
 				easing.type: Easing.InOutQuad
 			}
 			ScriptAction {
-				script: {
-					// Clean up the page object that was created on push.
-					if (root._poppedPage && !Theme.objectHasQObjectParent(root._poppedPage)) {
-						root._poppedPage.destroy()
-					}
-					root._poppedPage = null
-				}
+				script: root._finishPoppedPage()
 			}
 		}
+	}
+
+	// Emit aboutToBeDiscarded once, then destroy. StackView-parented pages
+	// are destroyed by the stack; do not destroy those here.
+	function _destroyUnparentedPage(page) {
+		if (!page || Theme.objectHasQObjectParent(page)) {
+			return
+		}
+		if (page.aboutToBeDiscarded) {
+			page.aboutToBeDiscarded()
+		}
+		page.destroy()
+	}
+
+	function _discardPagesUntil(toPage, skipPage) {
+		for (let i = root.depth - 1; i >= 0; --i) {
+			const item = root.get(i, StackView.DontLoad)
+			if (item === toPage) {
+				break
+			}
+			if (item && item !== skipPage && item.aboutToBeDiscarded) {
+				item.aboutToBeDiscarded()
+			}
+		}
+	}
+
+	// Emit aboutToBeDiscarded once, after the slide, so the page stays
+	// visible during the transition and destroy does not emit twice.
+	function _finishPoppedPage() {
+		const page = root._poppedPage
+		if (!page) {
+			return
+		}
+		root._poppedPage = null
+		if (page.aboutToBeDiscarded) {
+			page.aboutToBeDiscarded()
+		}
+		if (!Theme.objectHasQObjectParent(page)) {
+			page.destroy()
+		}
+	}
+
+	// UI teardown. popAllPages() can be vetoed, and a hidden stack never
+	// runs the close transition. Stops in-flight slides; ignores tryPop.
+	function destroyAllPages() {
+		if (fakePushSequence.running) {
+			fakePushSequence.stop()
+		}
+		if (fakePopSequence.running) {
+			fakePopSequence.stop()
+		}
+		_popAndDestroyAllPages(StackView.Immediate)
+		root._fullyOpened = false
 	}
 
 	function pushPage(obj, properties, operation) {
@@ -109,9 +156,7 @@ StackView {
 			// slide the stack into view.
 			pushedPage = root.push(objectOrUrl, properties, StackView.Immediate)
 			if (!pushedPage) {
-				if (createdPageObject && !Theme.objectHasQObjectParent(createdPageObject)) {
-					createdPageObject.destroy()
-				}
+				_destroyUnparentedPage(createdPageObject)
 				console.warn("Aborted attempt to push page because StackView rejected the page object: " + pageUrl)
 				return null
 			}
@@ -123,9 +168,7 @@ StackView {
 			// Otherwise, push the push onto the visible stack, possibly with an animation.
 			pushedPage = root.push(objectOrUrl, properties, _adjustedStackOperation(operation))
 			if (!pushedPage) {
-				if (createdPageObject && !Theme.objectHasQObjectParent(createdPageObject)) {
-					createdPageObject.destroy()
-				}
+				_destroyUnparentedPage(createdPageObject)
 				console.warn("Aborted attempt to push page because StackView rejected the page object: " + pageUrl)
 				return null
 			}
@@ -152,17 +195,28 @@ StackView {
 		if (!_canPopTo(toPage)) {
 			return
 		}
+		// No-target pop is one page. _discardPagesUntil(undefined) would
+		// notify pages that stay on the stack.
+		const discardToPage = toPage === undefined && root.depth > 1
+				? root.get(root.depth - 2, StackView.DontLoad)
+				: toPage
 		root._pageUrls.pop()
 		root._topPageUrl = root._pageUrls[root._pageUrls.length-1]
 
 		if (root.depth === 1) {
 			// When the last page is removed from the stack, move the stack out of view.
+			// Keep contents through the close slide; notify after it.
 			fakePopAnimation.duration = _animationDuration(operation)
 			root.state = "closed"
 		} else {
-			// Pop and delay destruction of the popped page until the animation completes,
-			// otherwise the page disappears immediately.
-			_poppedPage = root.pop(toPage, _adjustedStackOperation(operation))
+			// Off-screen pages may be destroyed by pop(); notify those now.
+			// The visible page is notified in popExit (or immediately).
+			_discardPagesUntil(discardToPage, root.currentItem)
+			const adjusted = _adjustedStackOperation(operation)
+			_poppedPage = root.pop(toPage, adjusted)
+			if (adjusted === StackView.Immediate) {
+				_finishPoppedPage()
+			}
 		}
 	}
 
@@ -185,14 +239,14 @@ StackView {
 	}
 
 	function _popAndDestroyAllPages(operation) {
+		_finishPoppedPage()
+		_discardPagesUntil(null)
 		root._pageUrls = []
 		root._topPageUrl = undefined
 
 		while (root.depth > 1) {
 			const page = root.pop(operation)
-			if (page && !Theme.objectHasQObjectParent(page)) {
-				page.destroy()
-			}
+			_destroyUnparentedPage(page)
 		}
 
 		// pop() only works for depth > 1
@@ -200,9 +254,7 @@ StackView {
 		root.clear()
 
 		// Clean up the page object that was created in pushPage().
-		if (obj && !Theme.objectHasQObjectParent(obj)) {
-			obj.destroy()
-		}
+		_destroyUnparentedPage(obj)
 	}
 
 	function _canPopTo(toPage) {
@@ -244,6 +296,8 @@ StackView {
 			to: "opened"
 
 			SequentialAnimation {
+				id: fakePushSequence
+
 				NumberAnimation {   // Cannot use XAnimator, it will abruptly reset the StackView x.
 					id: fakePushAnimation
 
@@ -261,6 +315,8 @@ StackView {
 			from: "opened"
 
 			SequentialAnimation {
+				id: fakePopSequence
+
 				ScriptAction {
 					script: root._fullyOpened = false
 				}
