@@ -12,30 +12,26 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
-
-	serviceUid: bindPrefix
-
 	settingsModel: VisibleItemModel {
 		ListSwitch {
 			text: CommonWords.switch_mode
-			dataItem.uid: root.bindPrefix + "/Mode"
+			dataItem.uid: root.serviceUid + "/Mode"
 			valueTrue: 1
 			valueFalse: 4
 			preferredVisible: dataItem.valid
 		}
 
 		ListDcInputQuantityGroup {
-			bindPrefix: root.bindPrefix
+			bindPrefix: root.serviceUid
 		}
 
 		ListDcOutputQuantityGroup {
-			bindPrefix: root.bindPrefix
+			bindPrefix: root.serviceUid
 		}
 
 		ListTemperature {
 			text: CommonWords.battery_temperature
-			dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
+			dataItem.uid: root.serviceUid + "/Dc/0/Temperature"
 			preferredVisible: dataItem.valid
 			unit: Global.systemSettings.temperatureUnit
 		}
@@ -43,18 +39,18 @@ DevicePage {
 		ListText {
 			text: CommonWords.state
 			secondaryText: VenusOS.system_stateToText(dataItem.value)
-			dataItem.uid: root.bindPrefix + "/State"
+			dataItem.uid: root.serviceUid + "/State"
 		}
 
 		ListText {
 			text: CommonWords.error
-			dataItem.uid: root.bindPrefix + "/ErrorCode"
+			dataItem.uid: root.serviceUid + "/ErrorCode"
 			secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
 		}
 
 		DcHistorySettingsColumn {
 			width: parent?.width ?? 0
-			bindPrefix: root.bindPrefix
+			bindPrefix: root.serviceUid
 		}
 
 		ListNavigation {
@@ -62,14 +58,14 @@ DevicePage {
 			preferredVisible: setupOutputItem.valid
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/DcBmsSettingsPage.qml", {
-					bindPrefix: root.bindPrefix,
+					bindPrefix: root.serviceUid,
 					settingsPage: root,
 				})
 			}
 
 			VeQuickItem {
 				id: setupOutputItem
-				uid: bindPrefix + "/Settings/OutputBattery"
+				uid: serviceUid + "/Settings/OutputBattery"
 			}
 		}
 	}

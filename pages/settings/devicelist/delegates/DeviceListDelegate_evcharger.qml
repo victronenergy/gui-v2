@@ -20,9 +20,7 @@ DeviceListDelegate {
 		QuantityObject { object: root._showStatus ? status : null; key: "statusText" }
 	}
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml", { bindPrefix : root.device.serviceUid })
-	}
+	onClicked: Global.openDevicePage(root.device.serviceUid)
 
 	VeQuickItem {
 		id: mode

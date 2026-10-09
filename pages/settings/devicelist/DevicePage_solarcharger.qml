@@ -12,7 +12,6 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	required property string bindPrefix
 	readonly property int trackerCount: nrOfTrackers.valid ? nrOfTrackers.value : 1
 
 	function _isModelSupported() {
@@ -35,27 +34,26 @@ DevicePage {
 		return true
 	}
 
-	serviceUid: root.bindPrefix
 	settingsModel: _isModelSupported() ? supportedProductModel : unsupportedProductModel
 
 	VeQuickItem {
 		id: firmwareVersion
-		uid: root.bindPrefix + "/FirmwareVersion"
+		uid: root.serviceUid + "/FirmwareVersion"
 	}
 
 	VeQuickItem {
 		id: nrOfTrackers
-		uid: root.bindPrefix + "/NrOfTrackers"
+		uid: root.serviceUid + "/NrOfTrackers"
 	}
 
 	VeQuickItem {
 		id: highTemperatureAlarm
-		uid: root.bindPrefix + "/Alarms/HighTemperature"
+		uid: root.serviceUid + "/Alarms/HighTemperature"
 	}
 
 	VeQuickItem {
 		id: shortCircuitAlarm
-		uid: root.bindPrefix + "/Alarms/ShortCircuit"
+		uid: root.serviceUid + "/Alarms/ShortCircuit"
 	}
 
 	VisibleItemModel {
@@ -84,7 +82,7 @@ DevicePage {
 		ListText {
 			text: CommonWords.state
 			secondaryText: VenusOS.system_stateToText(dataItem.value)
-			dataItem.uid: root.bindPrefix + "/State"
+			dataItem.uid: root.serviceUid + "/State"
 		}
 
 		ListQuantityGroup {
@@ -113,12 +111,12 @@ DevicePage {
 
 			VeQuickItem {
 				id: pvVoltage
-				uid: root.bindPrefix + "/Pv/V"
+				uid: root.serviceUid + "/Pv/V"
 			}
 
 			VeQuickItem {
 				id: pvTotalPower
-				uid: root.bindPrefix + "/Yield/Power"
+				uid: root.serviceUid + "/Yield/Power"
 			}
 		}
 
@@ -153,7 +151,7 @@ DevicePage {
 
 					SolarTracker {
 						id: tracker
-						serviceUid: root.bindPrefix
+						serviceUid: root.serviceUid
 						trackerIndex: tableRow.index
 						trackerCount: root.trackerCount
 					}
@@ -188,17 +186,17 @@ DevicePage {
 
 			VeQuickItem {
 				id: batteryVoltage
-				uid: root.bindPrefix + "/Dc/0/Voltage"
+				uid: root.serviceUid + "/Dc/0/Voltage"
 			}
 
 			VeQuickItem {
 				id: batteryCurrent
-				uid: root.bindPrefix + "/Dc/0/Current"
+				uid: root.serviceUid + "/Dc/0/Current"
 			}
 
 			VeQuickItem {
 				id: batteryTemperature
-				uid: root.bindPrefix + "/Dc/0/Temperature"
+				uid: root.serviceUid + "/Dc/0/Temperature"
 				sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
 				displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
 			}
@@ -211,7 +209,7 @@ DevicePage {
 			text: qsTrId("solarcharger_total_yield")
 			preferredVisible: dataItem.valid
 			unit: VenusOS.Units_Energy_KiloWattHour
-			dataItem.uid: root.bindPrefix + "/Yield/User"
+			dataItem.uid: root.serviceUid + "/Yield/User"
 		}
 
 		ListQuantity {
@@ -220,7 +218,7 @@ DevicePage {
 			text: qsTrId("solarcharger_system_yield")
 			preferredVisible: dataItem.valid
 			unit: VenusOS.Units_Energy_KiloWattHour
-			dataItem.uid: root.bindPrefix + "/Yield/System"
+			dataItem.uid: root.serviceUid + "/Yield/System"
 		}
 
 		// Only available on 15A chargers.
@@ -231,7 +229,7 @@ DevicePage {
 
 			//% "Load"
 			text: qsTrId("solarcharger_load")
-			dataItem.uid: root.bindPrefix + "/Load/I"
+			dataItem.uid: root.serviceUid + "/Load/I"
 			unit: VenusOS.Units_Amp
 			preferredVisible: dataItem.valid && loadState.dataItem.value === 1
 		}
@@ -240,20 +238,20 @@ DevicePage {
 			id: loadState
 
 			text: loadQuantityItem.text
-			dataItem.uid: root.bindPrefix + "/Load/State"
+			dataItem.uid: root.serviceUid + "/Load/State"
 			preferredVisible: dataItem.valid && !loadQuantityItem.visible
 			secondaryText: CommonWords.yesOrNo(dataItem.value)
 		}
 
 		ListText {
 			text: CommonWords.error
-			dataItem.uid: root.bindPrefix + "/ErrorCode"
+			dataItem.uid: root.serviceUid + "/ErrorCode"
 			secondaryText: ChargerError.description(dataItem.value)
 		}
 
 		// This is the master´s relay state
 		ListRelayState {
-			dataItem.uid: root.bindPrefix + "/Relay/0/State"
+			dataItem.uid: root.serviceUid + "/Relay/0/State"
 		}
 
 		ListNavigation {
@@ -270,7 +268,7 @@ DevicePage {
 			preferredVisible: root.trackerCount > 0
 			onClicked: {
 				Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
-						{ "serviceUid": root.bindPrefix })
+						{ "serviceUid": root.serviceUid })
 			}
 		}
 
@@ -279,7 +277,7 @@ DevicePage {
 			preferredVisible: root.trackerCount > 0
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
+						{ "title": text, "bindPrefix": root.serviceUid })
 			}
 		}
 
@@ -289,12 +287,12 @@ DevicePage {
 			preferredVisible: linkNetworkStatus.valid
 			onClicked: {
 				Global.pageManager.pushPage("/pages/solar/PageSolarParallelOperation.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
+						{ "title": text, "bindPrefix": root.serviceUid })
 			}
 
 			VeQuickItem {
 				id: linkNetworkStatus
-				uid: root.bindPrefix + "/Link/NetworkStatus"
+				uid: root.serviceUid + "/Link/NetworkStatus"
 			}
 		}
 	}

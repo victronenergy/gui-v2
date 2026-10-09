@@ -384,9 +384,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/controlcards/EVCSCard.qml
     pages/controlcards/GeneratorCard.qml
     pages/controlcards/InverterChargerCard.qml
-    pages/ev/EvPage.qml
     pages/evcs/EvChargerListPage.qml
-    pages/evcs/EvChargerPage.qml
     pages/evcs/EvChargerSetupPage.qml
     pages/invertercharger/InverterChargerListPage.qml
     pages/invertercharger/OverviewInverterChargerPage.qml
@@ -418,7 +416,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/PageGeneratorRuntimeService.qml
     pages/settings/PageGeneratorTestRun.qml
     pages/settings/PageGensets.qml
-    pages/settings/PageGps.qml
     pages/settings/PageHub4Debug.qml
     pages/settings/PageRelayGenerator.qml
     pages/settings/PageSettingsAccessAndSecurity.qml
@@ -498,14 +495,38 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/debug/PageSettingsDemo.qml
     pages/settings/debug/PageSystemData.qml
     pages/settings/devicelist/DeviceListPage.qml
-    pages/settings/devicelist/PageAcCharger.qml
-    pages/settings/devicelist/PageDigitalInput.qml
+    pages/settings/devicelist/DevicePage_acload.qml
+    pages/settings/devicelist/DevicePage_acsystem.qml
+    pages/settings/devicelist/DevicePage_alternator.qml
+    pages/settings/devicelist/DevicePage_battery.qml
+    pages/settings/devicelist/DevicePage_charger.qml
+    pages/settings/devicelist/DevicePage_dcdc.qml
+    pages/settings/devicelist/DevicePage_dcgenset.qml
+    pages/settings/devicelist/DevicePage_dcload.qml
+    pages/settings/devicelist/DevicePage_dcsource.qml
+    pages/settings/devicelist/DevicePage_dcsystem.qml
+    pages/settings/devicelist/DevicePage_digitalinput.qml
+    pages/settings/devicelist/DevicePage_ev.qml
+    pages/settings/devicelist/DevicePage_evcharger.qml
+    pages/settings/devicelist/DevicePage_fuelcell.qml
+    pages/settings/devicelist/DevicePage_genset.qml
+    pages/settings/devicelist/DevicePage_gps.qml
+    pages/settings/devicelist/DevicePage_grid.qml
+    pages/settings/devicelist/DevicePage_heatpump.qml
+    pages/settings/devicelist/DevicePage_inverter.qml
+    pages/settings/devicelist/DevicePage_meteo.qml
+    pages/settings/devicelist/DevicePage_motordrive.qml
+    pages/settings/devicelist/DevicePage_multi.qml
+    pages/settings/devicelist/DevicePage_pulsemeter.qml
+    pages/settings/devicelist/DevicePage_pvinverter.qml
+    pages/settings/devicelist/DevicePage_solarcharger.qml
+    pages/settings/devicelist/DevicePage_switch.qml
+    pages/settings/devicelist/DevicePage_tank.qml
+    pages/settings/devicelist/DevicePage_temperature.qml
+    pages/settings/devicelist/DevicePage_unsupported.qml
+    pages/settings/devicelist/DevicePage_vebus.qml
     pages/settings/devicelist/PageGenset.qml
-    pages/settings/devicelist/PageMeteo.qml
     pages/settings/devicelist/PageMeteoSettings.qml
-    pages/settings/devicelist/PageMotorDrive.qml
-    pages/settings/devicelist/PageSwitch.qml
-    pages/settings/devicelist/PageUnsupportedDevice.qml
     pages/settings/devicelist/battery/BatteryBankModel.qml
     pages/settings/devicelist/battery/BatteryDetails.qml
     pages/settings/devicelist/battery/BatteryHistory.qml
@@ -513,7 +534,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/devicelist/battery/BatterySettingsRelayModel.qml
     pages/settings/devicelist/battery/FuseInfo.qml
     pages/settings/devicelist/battery/Page48TlDiagnostics.qml
-    pages/settings/devicelist/battery/PageBattery.qml
     pages/settings/devicelist/battery/PageBatteryAlarms.qml
     pages/settings/devicelist/battery/PageBatteryDetails.qml
     pages/settings/devicelist/battery/PageBatteryHistory.qml
@@ -528,9 +548,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/devicelist/dc-in/DcHistorySettingsColumn.qml
     pages/settings/devicelist/dc-in/ListCycleHistoryItem.qml
     pages/settings/devicelist/dc-in/DcBmsSettingsPage.qml
-    pages/settings/devicelist/dc-in/PageAlternator.qml
     pages/settings/devicelist/dc-in/PageAlternatorModel.qml
-    pages/settings/devicelist/dc-in/PageDcDcConverter.qml
     pages/settings/devicelist/dc-in/PageDcMeter.qml
     pages/settings/devicelist/dc-in/PageDcMeterModel.qml
     pages/settings/devicelist/dc-in/PageDcMeterAlarms.qml
@@ -569,17 +587,13 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/devicelist/delegates/DeviceListDelegate_vebus.qml
     pages/settings/devicelist/delegates/DisconnectedDeviceListDelegate.qml
     pages/settings/devicelist/delegates/GensetDeviceListDelegate.qml
-    pages/settings/devicelist/inverter/PageInverter.qml
     pages/settings/devicelist/inverter/PageSolarStats.qml
-    pages/settings/devicelist/rs/PageMultiRs.qml
     pages/settings/devicelist/rs/PageRsAlarms.qml
     pages/settings/devicelist/rs/PageRsAlarmSettings.qml
-    pages/settings/devicelist/rs/PageRsSystem.qml
     pages/settings/devicelist/rs/PageRsSystemAlarms.qml
     pages/settings/devicelist/rs/PageRsSystemDevices.qml
     pages/settings/devicelist/rs/PageRsSystemEss.qml
     pages/settings/devicelist/tank/PageTankAlarm.qml
-    pages/settings/devicelist/tank/PageTankSensor.qml
     pages/settings/devicelist/tank/PageTankSetup.qml
     pages/settings/devicelist/tank/PageTankShape.qml
     pages/settings/devicelist/ac-in/PageAcIn.qml
@@ -590,13 +604,11 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/devicelist/ac-in/PageSmappeeDeviceList.qml
     pages/settings/devicelist/ac-in/PowerGuardConsumptionSettings.qml
     pages/settings/devicelist/ac-in/PowerGuardProductionSettings.qml
-    pages/settings/devicelist/pulsemeter/PagePulseCounter.qml
     pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml
     pages/settings/devicelist/iochannel/GenericInputListDelegate.qml
     pages/settings/devicelist/iochannel/PageGenericInput.qml
     pages/settings/devicelist/iochannel/PageSwitchableOutput.qml
     pages/settings/devicelist/iochannel/SwitchableOutputListDelegate.qml
-    pages/settings/devicelist/temperature/PageTemperatureSensor.qml
     pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml
     pages/settings/tz/TzAfricaData.qml
     pages/settings/tz/TzAmericaData.qml
@@ -610,7 +622,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/tz/TzIndianData.qml
     pages/settings/tz/TzPacificData.qml
     pages/battery/BatteryListPage.qml
-    pages/solar/PageSolarCharger.qml
     pages/solar/PageSolarParallelOperation.qml
     pages/solar/PvInverterPage.qml
     pages/solar/SolarDevicePage.qml
@@ -632,7 +643,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/vebusdevice/PageVeBusBackupRestore.qml
     pages/vebusdevice/PVCFListQuantityGroup.qml
     pages/vebusdevice/VeBusAcSensorModel.qml
-    pages/vebusdevice/PageVeBus.qml
     pages/vebusdevice/VeBusAlarm.qml
     pages/vebusdevice/VeBusDeviceAlarmSettingsModel.qml
     pages/vebusdevice/VeBusDeviceAlarmStatusModel.qml

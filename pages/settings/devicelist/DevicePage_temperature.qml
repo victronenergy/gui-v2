@@ -12,14 +12,10 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
-
-	serviceUid: bindPrefix
-
 	settingsModel: VisibleItemModel {
 		ListText {
 			text: CommonWords.status
-			dataItem.uid: root.bindPrefix + "/Status"
+			dataItem.uid: root.serviceUid + "/Status"
 			preferredVisible: dataItem.valid
 			secondaryText: {
 				switch (dataItem.value) {
@@ -48,7 +44,7 @@ DevicePage {
 
 			//% "Air quality"
 			text: qsTrId("temperature_air_quality")
-			dataItem.uid: root.bindPrefix + "/IAQS"
+			dataItem.uid: root.serviceUid + "/IAQS"
 			preferredVisible: dataItem.valid
 			secondaryText: dataItem.valid
 					//% "%1/100 (%2)"
@@ -58,14 +54,14 @@ DevicePage {
 
 		ListTemperature {
 			text: CommonWords.temperature
-			dataItem.uid: bindPrefix + "/Temperature"
+			dataItem.uid: root.serviceUid + "/Temperature"
 			decimals: 0
 		}
 
 		ListQuantity {
 			//% "Humidity"
 			text: qsTrId("temperature_humidity")
-			dataItem.uid: bindPrefix + "/Humidity"
+			dataItem.uid: root.serviceUid + "/Humidity"
 			unit: VenusOS.Units_Percentage
 			preferredVisible: dataItem.valid
 		}
@@ -73,7 +69,7 @@ DevicePage {
 		ListQuantity {
 			//% "Pressure"
 			text: qsTrId("temperature_pressure")
-			dataItem.uid: bindPrefix + "/Pressure"
+			dataItem.uid: root.serviceUid + "/Pressure"
 			unit: VenusOS.Units_Hectopascal
 			preferredVisible: dataItem.valid
 		}
@@ -81,7 +77,7 @@ DevicePage {
 		ListQuantity {
 			//% "PM2.5"
 			text: qsTrId("temperature_pm25")
-			dataItem.uid: bindPrefix + "/PM25"
+			dataItem.uid: root.serviceUid + "/PM25"
 			unit: VenusOS.Units_MicrogramPerCubicMeter
 			preferredVisible: dataItem.valid
 		}
@@ -89,7 +85,7 @@ DevicePage {
 		ListQuantity {
 			//% "CO₂"
 			text: qsTrId("temperature_co2")
-			dataItem.uid: bindPrefix + "/CO2"
+			dataItem.uid: root.serviceUid + "/CO2"
 			unit: VenusOS.Units_PartsPerMillion
 			preferredVisible: dataItem.valid
 		}
@@ -97,7 +93,7 @@ DevicePage {
 		ListQuantity {
 			//% "VOC index"
 			text: qsTrId("temperature_voc")
-			dataItem.uid: bindPrefix + "/VOC"
+			dataItem.uid: root.serviceUid + "/VOC"
 			unit: VenusOS.Units_None
 			preferredVisible: dataItem.valid
 		}
@@ -105,7 +101,7 @@ DevicePage {
 		ListQuantity {
 			//% "NOx index"
 			text: qsTrId("temperature_nox")
-			dataItem.uid: bindPrefix + "/NOX"
+			dataItem.uid: root.serviceUid + "/NOX"
 			unit: VenusOS.Units_None
 			preferredVisible: dataItem.valid
 		}
@@ -113,7 +109,7 @@ DevicePage {
 		ListQuantity {
 			//% "Luminosity"
 			text: qsTrId("temperature_luminosity")
-			dataItem.uid: bindPrefix + "/Luminosity"
+			dataItem.uid: root.serviceUid + "/Luminosity"
 			unit: VenusOS.Units_Lux
 			preferredVisible: dataItem.valid
 		}
@@ -138,7 +134,7 @@ DevicePage {
 
 			VeQuickItem {
 				id: batteryVoltage
-				uid: bindPrefix + "/BatteryVoltage"
+				uid: root.serviceUid + "/BatteryVoltage"
 			}
 			VeQuickItem {
 				id: lowBattery
@@ -153,7 +149,7 @@ DevicePage {
 				}
 				readonly property color textColor: value === 1 ? Theme.color_red : Theme.color_green
 
-				uid: bindPrefix + "/Alarms/LowBattery"
+				uid: root.serviceUid + "/Alarms/LowBattery"
 			}
 		}
 
@@ -161,13 +157,13 @@ DevicePage {
 			text: CommonWords.setup
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/temperature/PageTemperatureSensorSetup.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
+						{ "title": text, "bindPrefix": root.serviceUid })
 			}
 		}
 	}
 
 	VeQuickItem {
 		id: temperatureType
-		uid: bindPrefix + "/TemperatureType"
+		uid: root.serviceUid + "/TemperatureType"
 	}
 }
