@@ -2,6 +2,10 @@
 
 Venus OS GUI v2 — Qt6/QML touch UI for Victron Energy GX devices and WebAssembly remote console.
 
+## Git
+
+An AI agent must never push to any remote repository; a human must always do that.
+
 ## Code review
 
 When asked to review code, you **must** immediately re-read the **entire** [Code Review](.github/code-review.md) document without skipping any sections, and **then** follow the process step-by-step to perform the review. Do not substitute your own ad-hoc review heuristics or skip sections you judge to be irrelevant — apply every section of the checklist systematically.
