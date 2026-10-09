@@ -18,6 +18,8 @@ FocusScope {
 	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready && cardsLoader.item ? cardsLoader.item
 			: (pageStack.currentPage ?? swipeView?.currentItem ?? null)
 	readonly property alias cardsLoader: cardsLoader
+	readonly property alias controlCardsComponent: _controlCardsComponent
+	readonly property alias auxCardsComponent: _auxCardsComponent
 
 	readonly property bool notificationButtonsEnabled: (currentPage?.url?.endsWith("NotificationsPage.qml") ?? false)
 			&& (Global.notifications?.silenceAlarmVisible ?? false)
@@ -26,6 +28,99 @@ FocusScope {
 
 	property bool mainViewVisible: UiConfig.applicationVisible && !UiConfig.splashScreenVisible
 	onMainViewVisibleChanged: if (mainViewVisible) console.info("MainView: UI loaded and visible")
+
+	// Pin the visible main page by URL so enable/disable (which reshuffles the
+	// swipe page list) can re-align NavBar and SwipeView to the same page.
+	property url _pinnedMainPageUrl
+	// Page that was current before the latest pin. A nav plugin that fails to
+	// load is no longer in the list, so resync uses this instead of index 0.
+	property string _previousMainPageUrl
+	// Snapshot taken when pluginEnabledChanged fires, before pages rebuild and
+	// the swipe view clamps to index 0.
+	property string _resyncUrl
+
+	function rememberMainPage(pageUrl) {
+		if (!pageUrl)
+			return
+		const next = String(pageUrl)
+		const current = String(_pinnedMainPageUrl)
+		if (current.length > 0 && current !== next)
+			_previousMainPageUrl = current
+		_pinnedMainPageUrl = pageUrl
+	}
+
+	property url pluginQuickAccessUrl
+	property string pluginQuickAccessName
+
+	function showPluginQuickAccess(pluginName, pageUrl) {
+		pluginQuickAccessName = pluginName
+		pluginQuickAccessUrl = pageUrl
+		cardsLoader.show(pluginQuickAccessComponent)
+	}
+
+	function pluginQuickAccessOpen(pageUrl) {
+		return cardsActive
+				&& cardsLoader.sourceComponent === pluginQuickAccessComponent
+				&& String(pluginQuickAccessUrl) === String(pageUrl)
+	}
+
+	function resyncMainPageSelection() {
+		if (!swipeView || !navBar || !swipePageModel) {
+			return
+		}
+		const pages = swipePageModel.pages
+		if (!pages || pages.length === 0) {
+			return
+		}
+
+		let want = _resyncUrl
+		if (!want && swipeView.currentItem && swipeView.currentItem.url) {
+			want = String(swipeView.currentItem.url)
+		} else if (!want && _pinnedMainPageUrl) {
+			want = String(_pinnedMainPageUrl)
+		}
+
+		let idx = -1
+		if (want.length > 0) {
+			for (let i = 0; i < pages.length; ++i) {
+				if (String(pages[i].url) === want) {
+					idx = i
+					break
+				}
+			}
+		}
+		if (idx < 0) {
+			// Current page was a disabled plugin (or otherwise gone) — land on Overview/Brief.
+			for (let i = 0; i < pages.length; ++i) {
+				const u = String(pages[i].url)
+				if (u.endsWith("OverviewPage.qml") || u.endsWith("BriefPage.qml")) {
+					idx = i
+					break
+				}
+			}
+			if (idx < 0) {
+				idx = Math.min(navBar.currentIndex, pages.length - 1)
+			}
+		}
+
+		navBar.setCurrentIndex(idx)
+		swipeView.setCurrentIndex(idx)
+		if (pages[idx] && pages[idx].url) {
+			_pinnedMainPageUrl = pages[idx].url
+		}
+	}
+
+	Connections {
+		target: GuiPluginLoader
+		function onPluginEnabledChanged(name) {
+			// SwipePageModel records _resyncUrl before it rebuilds pages.
+			if (!GuiPluginLoader.isPluginEnabled(name) && root.pluginQuickAccessName === name) {
+				cardsLoader.hide()
+			}
+			Qt.callLater(root.resyncMainPageSelection)
+		}
+	}
+
 
 	// To reduce the animation load, disable page animations when the PageStack is transitioning
 	// between pages, or when flicking between the main pages. Note that animations are still
@@ -216,6 +311,10 @@ FocusScope {
 					onMovingChanged: {
 						if (!moving) {
 							navBar.setCurrentIndex(currentIndex)
+							const page = currentItem
+							if (page && page.url) {
+								root.rememberMainPage(page.url)
+							}
 						}
 					}
 				}
@@ -255,6 +354,10 @@ FocusScope {
 			onCurrentIndexChanged: {
 				if (swipeView) {
 					swipeView.setCurrentIndex(currentIndex)
+				}
+				const page = pages[currentIndex]
+				if (page && page.url) {
+					root.rememberMainPage(page.url)
 				}
 			}
 
@@ -461,13 +564,36 @@ FocusScope {
 		KeyNavigation.up: statusBar
 
 		Component {
-			id: controlCardsComponent
+			id: _controlCardsComponent
 			ControlCardsPage {}
 		}
 
 		Component {
-			id: auxCardsComponent
+			id: _auxCardsComponent
 			AuxCardsPage {}
+		}
+
+		Component {
+			id: pluginQuickAccessComponent
+
+			Page {
+				title: root.pluginQuickAccessName
+				focusPolicy: Qt.TabFocus
+
+				onActiveFocusChanged: {
+					if (activeFocus && Global.keyNavigationEnabled && pluginPaneLoader.item) {
+						pluginPaneLoader.item.forceActiveFocus()
+					}
+				}
+
+				Loader {
+					id: pluginPaneLoader
+					anchors.fill: parent
+					active: String(root.pluginQuickAccessUrl).length > 0
+					source: root.pluginQuickAccessUrl
+					asynchronous: true
+				}
+			}
 		}
 	}
 
@@ -479,8 +605,8 @@ FocusScope {
 		opacity: 0.0
 		pageStack: root._pageStack
 
-		onControlCardsActivated: cardsLoader.show(controlCardsComponent)
-		onAuxCardsActivated: cardsLoader.show(auxCardsComponent)
+		onControlCardsActivated: cardsLoader.show(_controlCardsComponent)
+		onAuxCardsActivated: cardsLoader.show(_auxCardsComponent)
 		onCardsDeactivated: cardsLoader.hide()
 		onSidePanelToggled: root.currentPage.toggleSidePanel()
 

@@ -34,6 +34,8 @@ Page {
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
+		footerPositioning: ListView.InlineFooter
+		headerPositioning: ListView.InlineHeader
 
 		// When using key navigation to scroll through the control cards, use a velocity that
 		// roughly matches the velocity produced by AuxCardsPage scrollToControl() when it scrolls
@@ -120,6 +122,36 @@ Page {
 				wheel.accepted = true
 			}
 		}
+
+		// Plugin type-5 Controls cards — ListView footer so they scroll horizontally
+		// with built-in cards (a sibling Row below cardsView is off-screen in landscape).
+		footer: Item {
+			visible: pluginControlCards.count > 0
+			implicitWidth: pluginControlCardsRow.implicitWidth
+			width: implicitWidth
+			height: Theme.screenSize === Theme.Portrait
+				? pluginControlCardsRow.implicitHeight
+				: cardsView.height
+
+			Row {
+				id: pluginControlCardsRow
+				spacing: Theme.geometry_controlCardsPage_spacing
+
+				Repeater {
+					model: pluginControlCards
+
+					delegate: Loader {
+						required property int index
+						required property url url
+						required property string pluginName
+
+						width: root.cardWidth
+						height: Theme.screenSize === Theme.Portrait ? implicitHeight : cardsView.height
+						source: url
+					}
+				}
+			}
+		}
 	}
 
 	FilteredDeviceModel {
@@ -142,6 +174,12 @@ Page {
 		}
 	}
 
+	GuiPluginIntegrationModel {
+		id: pluginControlCards
+		type: GuiPluginLoader.QuickAccessPaneCard
+		cardType: GuiPluginLoader.ControlsCard
+	}
+
 	Loader {
 		id: emptyPageLoader
 		anchors {
@@ -149,7 +187,7 @@ Page {
 			leftMargin: Theme.geometry_page_content_horizontalMargin
 			rightMargin: Theme.geometry_page_content_horizontalMargin
 		}
-		active: cardsView.count === 0 && !cardsView.headerItem.active
+		active: cardsView.count === 0 && !cardsView.headerItem.active && pluginControlCards.count === 0
 		sourceComponent: EmptyPageItem {
 			//% "Controls"
 			titleText: qsTrId("controlcards_empty_title")

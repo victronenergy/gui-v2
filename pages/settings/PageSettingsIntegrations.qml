@@ -4,10 +4,124 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 Page {
 	id: root
+
+	// Every row has a switch, including plugins whose settings page does not draw one.
+	// The chevron slot is always reserved so Enabled/Disabled stay in one column.
+	component PluginEnableRow: ListSetting {
+			id: row
+
+			property string pluginTitle
+			property bool pluginEnabled
+			property bool hasSettingsPage
+			property string settingsUrl
+
+			signal enableToggled
+
+			text: pluginTitle
+			interactive: hasSettingsPage
+			hasSubMenu: hasSettingsPage
+
+			function openPage() {
+				if (settingsUrl.length > 0)
+					Global.pageManager.pushPage(settingsUrl, { title: pluginTitle })
+			}
+
+			function toggleEnabled() {
+				if (checkWriteAccessLevel())
+					enableToggled()
+			}
+
+			rightPadding: rightInset
+			topPadding: topInset
+			bottomPadding: bottomInset
+
+			contentItem: Item {
+				implicitHeight: Math.max(titleLabel.implicitHeight, enableSwitch.implicitHeight)
+
+				Label {
+					id: titleLabel
+
+					anchors {
+						left: parent.left
+						right: statusLabel.left
+						rightMargin: row.spacing
+						verticalCenter: parent.verticalCenter
+					}
+					topPadding: Theme.geometry_listItem_content_verticalMargin
+					bottomPadding: Theme.geometry_listItem_content_verticalMargin
+					text: row.pluginTitle
+					font: row.font
+					elide: Text.ElideRight
+				}
+
+				SecondaryListLabel {
+					id: statusLabel
+
+					anchors {
+						right: trailing.left
+						rightMargin: row.spacing
+						verticalCenter: parent.verticalCenter
+					}
+					text: row.pluginEnabled ? CommonWords.enabled : CommonWords.disabled
+				}
+
+				Item {
+					id: trailing
+
+					anchors {
+						right: parent.right
+						verticalCenter: parent.verticalCenter
+					}
+					width: enableSwitch.implicitWidth + row.spacing + chevron.implicitWidth + row.horizontalContentPadding
+					height: Math.max(enableSwitch.implicitHeight, chevron.implicitHeight)
+
+					Switch {
+						id: enableSwitch
+
+						anchors {
+							right: chevron.left
+							rightMargin: row.spacing
+							verticalCenter: parent.verticalCenter
+						}
+						checked: row.pluginEnabled
+						focusPolicy: Qt.NoFocus
+						onClicked: row.toggleEnabled()
+					}
+
+					CP.ColorImage {
+						id: chevron
+
+						anchors {
+							right: parent.right
+							rightMargin: row.horizontalContentPadding
+							verticalCenter: parent.verticalCenter
+						}
+						opacity: row.hasSettingsPage ? 1 : 0
+						source: "qrc:/images/icon_chevron_right_32.svg"
+						color: Theme.color_listItem_forwardIcon
+					}
+				}
+			}
+
+			ListPressArea {
+				anchors.fill: parent
+				anchors.rightMargin: trailing.width + row.rightPadding
+				enabled: row.hasSettingsPage
+				onClicked: row.openPage()
+			}
+
+			Keys.onSpacePressed: toggleEnabled()
+			Keys.onReturnPressed: toggleEnabled()
+			Keys.onRightPressed: {
+				if (hasSettingsPage)
+					openPage()
+			}
+	}
 
 	GradientListView {
 		id: settingsListView
@@ -286,12 +400,17 @@ Page {
 				preferredVisible: guiPluginsHeader.preferredVisible
 				Repeater {
 					model: GuiPluginModel { id: pluginModel }
-					delegate: ListNavigation {
-						id: switchNavigationItem
+					delegate: SettingsColumn {
+						id: pluginColumn
 
 						required property string name
-						required property color color
 						required property var integrations
+						width: parent ? parent.width : 0
+
+						// isPluginEnabled() is a function, so the row keeps its own copy
+						// and refreshes it when that plugin's enable bit changes.
+						property bool pluginEnabled: GuiPluginLoader.isPluginEnabled(name)
+
 						readonly property var pluginSettingsPageIntegration: {
 							if (integrations !== null && integrations.length > 0) {
 								for (let i = 0; i < integrations.length; ++i) {
@@ -302,30 +421,22 @@ Page {
 							}
 							return null
 						}
-						readonly property bool hasDeviceListIntegration: {
-							if (integrations !== null && integrations.length > 0) {
-								for (let i = 0; i < integrations.length; ++i) {
-									if (integrations[i].type === GuiPluginLoader.DeviceListSettingsPage) {
-										return true
-									}
+
+						Connections {
+							target: GuiPluginLoader
+							function onPluginEnabledChanged(changedName) {
+								if (changedName === pluginColumn.name) {
+									pluginColumn.pluginEnabled = GuiPluginLoader.isPluginEnabled(pluginColumn.name)
 								}
 							}
-							return false
 						}
 
-						text: switchNavigationItem.name
-						secondaryText: hasDeviceListIntegration
-							   //% "Integrates with the device list"
-							? qsTrId("pagesettingsintegrations_uiplugin_integrates_with_devicelist")
-							: ""
-						indicatorColor: switchNavigationItem.color
-						interactive: switchNavigationItem.pluginSettingsPageIntegration !== null
-
-						onClicked: {
-							const url = switchNavigationItem.pluginSettingsPageIntegration?.url ?? ""
-							if (url) {
-								Global.pageManager.pushPage(url, { title: text })
-							}
+						PluginEnableRow {
+							pluginTitle: pluginColumn.name
+							pluginEnabled: pluginColumn.pluginEnabled
+							hasSettingsPage: pluginColumn.pluginSettingsPageIntegration !== null
+							settingsUrl: String(pluginColumn.pluginSettingsPageIntegration?.url ?? "")
+							onEnableToggled: GuiPluginLoader.setPluginEnabled(pluginColumn.name, !pluginColumn.pluginEnabled)
 						}
 					}
 				}
