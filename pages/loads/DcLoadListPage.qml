@@ -12,16 +12,6 @@ Page {
 	required property FilteredDeviceModel systemModel
 	required property FilteredDeviceModel nonSystemModel
 
-	function _showSettingsPage(device) {
-		if (BackendConnection.serviceTypeFromUid(device.serviceUid) === "dcdc") {
-			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcDcConverter.qml",
-					{ "bindPrefix": device.serviceUid })
-		} else {
-			  Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeter.qml",
-					{ "bindPrefix": device.serviceUid })
-		}
-	}
-
 	Component {
 		id: headerComponent
 
@@ -122,7 +112,7 @@ Page {
 				: device.serviceType === "dcdc" ? VenusOS.system_stateToText(statusItem.value)
 				: ""
 
-			onClicked: root._showSettingsPage(device)
+			onClicked: Global.openDevicePage(device.serviceUid)
 
 			VeQuickItem {
 				id: temperatureItem

@@ -17,10 +17,7 @@ DeviceListDelegate {
 		QuantityObject { object: irradiance; unit: VenusOS.Units_WattsPerSquareMetre }
 	}
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/devicelist/PageMeteo.qml",
-				{ bindPrefix : root.device.serviceUid })
-	}
+	onClicked: Global.openDevicePage(root.device.serviceUid)
 
 	VeQuickItem {
 		id: estimatedPower

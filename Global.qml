@@ -62,6 +62,17 @@ QtObject {
 		return ToastModel.add(type, text, autoCloseInterval, textFormat)
 	}
 
+	// Pushes the device settings page for the service type of the given uid.
+	function openDevicePage(serviceUid, properties = {}) {
+		const serviceType = BackendConnection.serviceTypeFromUid(serviceUid)
+		if (serviceType.length === 0) {
+			console.warn("Cannot open device page, invalid service uid:", serviceUid)
+			return null
+		}
+		const pageUrl = "/pages/settings/devicelist/DevicePage_%1.qml".arg(serviceType)
+		return pageManager.pushPage(pageUrl, Object.assign({ "serviceUid": serviceUid }, properties))
+	}
+
 	function reset() {
 		// unload the gui.
 		// note: we don't reset `main

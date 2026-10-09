@@ -20,18 +20,7 @@ OverviewWidget {
 		// settings for that battery; otherwise, show the full battery list using BatteryListPage.
 		if (batteries.value.length === 1) {
 			const batteryUids = batteries.value.map((info) => BackendConnection.serviceUidFromName(info.id, info.instance))
-
-			// Show the vebus page if the battery is from a vebus service.
-			if (BackendConnection.serviceTypeFromUid(batteryUids[0]) === "vebus") {
-				Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", {
-					"bindPrefix": batteryUids[0],
-				})
-			} else {
-				// Assume this is a battery service
-				Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml", {
-					"bindPrefix": batteryUids[0]
-				})
-			}
+			Global.openDevicePage(batteryUids[0])
 		} else {
 			Global.pageManager.pushPage("/pages/battery/BatteryListPage.qml")
 		}

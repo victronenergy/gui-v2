@@ -17,8 +17,5 @@ DeviceListDelegate {
 		QuantityObject { object: root; key: "secondaryText"; unit: VenusOS.Units_None }
 	}
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/devicelist/PageUnsupportedDevice.qml",
-				{ "title": text, bindPrefix : root.device.serviceUid })
-	}
+	onClicked: Global.openDevicePage(root.device.serviceUid, { "title": text })
 }

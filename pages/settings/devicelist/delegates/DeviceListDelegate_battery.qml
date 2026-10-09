@@ -15,10 +15,7 @@ DeviceListDelegate {
 		   ? pendingModel
 		   : defaultModel
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml",
-				{ bindPrefix: root.device.serviceUid })
-	}
+	onClicked: Global.openDevicePage(root.device.serviceUid)
 
 	QuantityObjectModel {
 		id: pendingModel

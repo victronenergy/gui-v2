@@ -12,25 +12,21 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
-
 	readonly property bool isInverterCharger: isInverterChargerItem.value === 1
-
-	serviceUid: bindPrefix
 
 	settingsModel: VisibleItemModel {
 		ListInverterChargerModeButton {
-			serviceUid: root.bindPrefix
+			serviceUid: root.serviceUid
 		}
 
 		ListText {
 			text: CommonWords.state
 			secondaryText: VenusOS.system_stateToText(dataItem.value)
-			dataItem.uid: root.bindPrefix + "/State"
+			dataItem.uid: root.serviceUid + "/State"
 		}
 
 		InverterAcOutSettings {
-			bindPrefix: root.bindPrefix
+			bindPrefix: root.serviceUid
 		}
 
 		ListQuantityGroup {
@@ -42,12 +38,12 @@ DevicePage {
 
 			VeQuickItem {
 				id: dcVoltage
-				uid: root.bindPrefix + "/Dc/0/Voltage"
+				uid: root.serviceUid + "/Dc/0/Voltage"
 			}
 
 			VeQuickItem {
 				id: dcCurrent
-				uid: root.bindPrefix + "/Dc/0/Current"
+				uid: root.serviceUid + "/Dc/0/Current"
 			}
 		}
 
@@ -62,12 +58,12 @@ DevicePage {
 
 			VeQuickItem {
 				id: pvV
-				uid: root.bindPrefix + "/Pv/V"
+				uid: root.serviceUid + "/Pv/V"
 			}
 
 			VeQuickItem {
 				id: pvYieldPower
-				uid: root.bindPrefix + "/Yield/Power"
+				uid: root.serviceUid + "/Yield/Power"
 			}
 		}
 
@@ -76,7 +72,7 @@ DevicePage {
 			text: qsTrId("inverter_total_yield")
 			preferredVisible: dataItem.valid
 			unit: VenusOS.Units_Energy_KiloWattHour
-			dataItem.uid: root.bindPrefix + "/Yield/User"
+			dataItem.uid: root.serviceUid + "/Yield/User"
 		}
 
 		ListQuantity {
@@ -84,31 +80,31 @@ DevicePage {
 			text: qsTrId("inverter_system_yield")
 			preferredVisible: dataItem.valid
 			unit: VenusOS.Units_Energy_KiloWattHour
-			dataItem.uid: root.bindPrefix + "/Yield/System"
+			dataItem.uid: root.serviceUid + "/Yield/System"
 		}
 
 		ListQuantity {
 			text: CommonWords.state_of_charge
 			preferredVisible: root.isInverterCharger
 			unit: VenusOS.Units_Percentage
-			dataItem.uid: root.bindPrefix + "/Soc"
+			dataItem.uid: root.serviceUid + "/Soc"
 		}
 
 		ListTemperature {
 			text: CommonWords.battery_temperature
-			dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
+			dataItem.uid: root.serviceUid + "/Dc/0/Temperature"
 			preferredVisible: dataItem.valid
 		}
 
 		ListText {
 			text: CommonWords.error
-			dataItem.uid: root.bindPrefix + "/ErrorCode"
+			dataItem.uid: root.serviceUid + "/ErrorCode"
 			preferredVisible: root.isInverterCharger
 			secondaryText: ChargerError.description(dataItem.value)
 		}
 
 		ListRelayState {
-			dataItem.uid: root.bindPrefix + "/Relay/0/State"
+			dataItem.uid: root.serviceUid + "/Relay/0/State"
 		}
 
 		ListNavigation {
@@ -116,12 +112,12 @@ DevicePage {
 			preferredVisible: (numberOfTrackers.value || 0) > 0
 			onClicked: {
 				Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
-						{ "serviceUid": root.bindPrefix })
+						{ "serviceUid": root.serviceUid })
 			}
 
 			VeQuickItem {
 				id: numberOfTrackers
-				uid: root.bindPrefix + "/NrOfTrackers"
+				uid: root.serviceUid + "/NrOfTrackers"
 			}
 		}
 
@@ -130,7 +126,7 @@ DevicePage {
 			preferredVisible: root.isInverterCharger
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
+						{ "title": text, "bindPrefix": root.serviceUid })
 			}
 		}
 
@@ -139,7 +135,7 @@ DevicePage {
 			preferredVisible: root.isInverterCharger
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarms.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
+						{ "title": text, "bindPrefix": root.serviceUid })
 			}
 		}
 
@@ -148,14 +144,14 @@ DevicePage {
 			preferredVisible: root.isInverterCharger
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarmSettings.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
+						{ "title": text, "bindPrefix": root.serviceUid })
 			}
 		}
 	}
 
 	VeQuickItem {
 		id: isInverterChargerItem
-		uid: root.bindPrefix + "/IsInverterCharger"
+		uid: root.serviceUid + "/IsInverterCharger"
 	}
 
 }

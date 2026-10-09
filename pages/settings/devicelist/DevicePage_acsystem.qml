@@ -15,31 +15,31 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property string bindPrefix
+	property string serviceUid
 	readonly property bool multiPhase: numberOfPhases.valid && numberOfPhases.value > 1
 
 	title: acSystemDevice.name
 
 	VeQuickItem {
 		id: numberOfPhases
-		uid: root.bindPrefix + "/Ac/NumberOfPhases"
+		uid: root.serviceUid + "/Ac/NumberOfPhases"
 	}
 
 	Device {
 		id: acSystemDevice
-		serviceUid: root.bindPrefix
+		serviceUid: root.serviceUid
 	}
 
 	GradientListView {
 		model: VisibleItemModel {
 			ListInverterChargerModeButton {
-				serviceUid: root.bindPrefix
+				serviceUid: root.serviceUid
 			}
 
 			ListText {
 				text: CommonWords.state
 				secondaryText: VenusOS.system_stateToText(dataItem.value)
-				dataItem.uid: root.bindPrefix + "/State"
+				dataItem.uid: root.serviceUid + "/State"
 			}
 
 			SettingsColumn {
@@ -49,12 +49,12 @@ Page {
 				Repeater {
 					model: AcInputSettingsModel {
 						id: inputSettingsModel
-						serviceUid: root.bindPrefix
+						serviceUid: root.serviceUid
 					}
 					delegate: ListCurrentLimitButton {
 						required property AcInputSettings inputSettings
 
-						serviceUid: root.bindPrefix
+						serviceUid: root.serviceUid
 						inputNumber: inputSettings.inputNumber
 						inputType: inputSettings.inputType
 					}
@@ -62,11 +62,11 @@ Page {
 			}
 
 			ListActiveAcInput {
-				bindPrefix: root.bindPrefix
+				bindPrefix: root.serviceUid
 			}
 
 			RsSystemAcIODisplay {
-				serviceUid: root.bindPrefix
+				serviceUid: root.serviceUid
 			}
 
 			ListNavigation {
@@ -74,7 +74,7 @@ Page {
 				text: qsTrId("rssystem_system_alarms")
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemAlarms.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+							{ "title": text, "bindPrefix": root.serviceUid })
 				}
 			}
 
@@ -82,7 +82,7 @@ Page {
 				text: CommonWords.alarm_setup
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarmSettings.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+							{ "title": text, "bindPrefix": root.serviceUid })
 				}
 			}
 
@@ -90,7 +90,7 @@ Page {
 				text: CommonWords.ess
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemEss.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+							{ "title": text, "bindPrefix": root.serviceUid })
 				}
 			}
 
@@ -99,13 +99,13 @@ Page {
 				text: qsTrId("settings_rssystem_inverters")
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystemDevices.qml",
-							{ "title": text, "bindPrefix": root.bindPrefix })
+							{ "title": text, "bindPrefix": root.serviceUid })
 				}
 			}
 
 			ListTextField {
 				text: CommonWords.custom_name
-				dataItem.uid: root.bindPrefix + "/CustomName"
+				dataItem.uid: root.serviceUid + "/CustomName"
 			}
 		}
 	}
