@@ -17,10 +17,7 @@ DeviceListDelegate {
 		QuantityObject { object: power; unit: VenusOS.Units_Watt }
 	}
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageAlternator.qml",
-				{ bindPrefix : root.device.serviceUid })
-	}
+	onClicked: Global.openDevicePage(root.device.serviceUid)
 
 	VeQuickItem {
 		id: voltage

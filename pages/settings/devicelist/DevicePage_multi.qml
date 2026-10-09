@@ -13,33 +13,30 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
 	readonly property bool multiPhase: numberOfPhases.valid && numberOfPhases.value >= 2 && !_phase.valid
 	readonly property int trackerCount: numberOfTrackers.value || 0
-
-	serviceUid: bindPrefix
 
 	settingsModel: VisibleItemModel {
 		ListText {
 			text: CommonWords.state
 			secondaryText: VenusOS.system_stateToText(dataItem.value)
-			dataItem.uid: root.bindPrefix + "/State"
+			dataItem.uid: root.serviceUid + "/State"
 		}
 
 		ListQuantity {
 			text: CommonWords.state_of_charge
-			dataItem.uid: root.bindPrefix + "/Soc"
+			dataItem.uid: root.serviceUid + "/Soc"
 			unit: VenusOS.Units_Percentage
 		}
 
 		ListTemperature {
 			text: CommonWords.battery_temperature
-			dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
+			dataItem.uid: root.serviceUid + "/Dc/0/Temperature"
 			preferredVisible: dataItem.valid
 		}
 
 		ListActiveAcInput {
-			bindPrefix: root.bindPrefix
+			bindPrefix: root.serviceUid
 		}
 
 		Loader {
@@ -49,7 +46,7 @@ DevicePage {
 
 		ListDcOutputQuantityGroup {
 			text: CommonWords.dc
-			bindPrefix: root.bindPrefix
+			bindPrefix: root.serviceUid
 		}
 
 		ListItemLoader {
@@ -64,7 +61,7 @@ DevicePage {
 			text: qsTrId("settings_multirs_total_yield")
 			preferredVisible: root.trackerCount > 0
 			unit: VenusOS.Units_Energy_KiloWattHour
-			dataItem.uid: root.bindPrefix + "/Yield/User"
+			dataItem.uid: root.serviceUid + "/Yield/User"
 		}
 
 		ListQuantity {
@@ -72,17 +69,17 @@ DevicePage {
 			text: qsTrId("settings_multirs_system_yield")
 			preferredVisible: root.trackerCount > 0
 			unit: VenusOS.Units_Energy_KiloWattHour
-			dataItem.uid: root.bindPrefix + "/Yield/System"
+			dataItem.uid: root.serviceUid + "/Yield/System"
 		}
 
 		ListText {
 			text: CommonWords.error
-			dataItem.uid: root.bindPrefix + "/ErrorCode"
+			dataItem.uid: root.serviceUid + "/ErrorCode"
 			secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
 		}
 
 		ListRelayState {
-			dataItem.uid: root.bindPrefix + "/Relay/0/State"
+			dataItem.uid: root.serviceUid + "/Relay/0/State"
 		}
 
 		ListNavigation {
@@ -90,7 +87,7 @@ DevicePage {
 			preferredVisible: root.trackerCount > 0
 			onClicked: {
 				Global.pageManager.pushPage("/pages/solar/SolarHistoryPage.qml",
-						{ "serviceUid": root.bindPrefix })
+						{ "serviceUid": root.serviceUid })
 			}
 		}
 
@@ -99,7 +96,7 @@ DevicePage {
 			preferredVisible: root.trackerCount > 0
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/inverter/PageSolarStats.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
+						{ "title": text, "bindPrefix": root.serviceUid })
 			}
 		}
 
@@ -107,34 +104,34 @@ DevicePage {
 			text: CommonWords.alarm_status
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsAlarms.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
+						{ "title": text, "bindPrefix": root.serviceUid })
 			}
 		}
 	}
 
 	VeQuickItem {
 		id: numberOfPhases
-		uid: root.bindPrefix + "/Ac/NumberOfPhases"
+		uid: root.serviceUid + "/Ac/NumberOfPhases"
 	}
 
 	VeQuickItem {
 		id: _phase
-		uid: root.bindPrefix + "/Settings/System/AcPhase"
+		uid: root.serviceUid + "/Settings/System/AcPhase"
 	}
 
 	VeQuickItem {
 		id: numberOfTrackers
-		uid: root.bindPrefix + "/NrOfTrackers"
+		uid: root.serviceUid + "/NrOfTrackers"
 	}
 
 	VeQuickItem {
 		id: pvTotalPower
-		uid: root.bindPrefix + "/Yield/Power"
+		uid: root.serviceUid + "/Yield/Power"
 	}
 
 	VeQuickItem {
 		id: pvVoltage
-		uid: root.bindPrefix + "/Pv/V"
+		uid: root.serviceUid + "/Pv/V"
 	}
 
 	Component {
@@ -149,14 +146,14 @@ DevicePage {
 				//: %1 = phase name (e.g. L1, L2, L3)
 				//% "AC in %1"
 				text: qsTrId("settings_multirs_ac_in_phase").arg(singlePhaseName)
-				data: AcPhase { serviceUid: root.bindPrefix + "/Ac/In/1/" + singlePhaseName }
+				data: AcPhase { serviceUid: root.serviceUid + "/Ac/In/1/" + singlePhaseName }
 			}
 
 			PVCFListQuantityGroup {
 				//: %1 = phase name (e.g. L1, L2, L3)
 				//% "AC out %1"
 				text: qsTrId("settings_multirs_ac_out_phase").arg(singlePhaseName)
-				data: AcPhase { serviceUid: root.bindPrefix + "/Ac/Out/" + singlePhaseName }
+				data: AcPhase { serviceUid: root.serviceUid + "/Ac/Out/" + singlePhaseName }
 			}
 		}
 	}
@@ -167,8 +164,8 @@ DevicePage {
 		ThreePhaseIOTable {
 			width: parent ? parent.width : 0
 			phaseCount: numberOfPhases.value || 0
-			inputPhaseUidPrefix: root.bindPrefix + "/Ac/In/1"
-			outputPhaseUidPrefix: root.bindPrefix + "/Ac/Out"
+			inputPhaseUidPrefix: root.serviceUid + "/Ac/In/1"
+			outputPhaseUidPrefix: root.serviceUid + "/Ac/Out"
 			voltDecimals: 1
 		}
 	}
@@ -203,7 +200,7 @@ DevicePage {
 			ListQuantity {
 				//% "Total PV power"
 				text: qsTrId("settings_multirs_total_pv_power")
-				dataItem.uid: root.bindPrefix + "/Yield/Power"
+				dataItem.uid: root.serviceUid + "/Yield/Power"
 				unit: VenusOS.Units_Watt
 			}
 
@@ -238,7 +235,7 @@ DevicePage {
 
 						SolarTracker {
 							id: tracker
-							serviceUid: root.bindPrefix
+							serviceUid: root.serviceUid
 							trackerIndex: tableRow.index
 							trackerCount: root.trackerCount
 						}

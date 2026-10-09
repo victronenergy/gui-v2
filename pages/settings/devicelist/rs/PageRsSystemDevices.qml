@@ -55,10 +55,7 @@ Page {
 			text: device.name
 			secondaryText: VenusOS.system_stateToText(_state.value)
 
-			onClicked: {
-				Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageMultiRs.qml",
-						{ "bindPrefix": device.serviceUid })
-			}
+			onClicked: Global.openDevicePage(device.serviceUid)
 		}
 	}
 }

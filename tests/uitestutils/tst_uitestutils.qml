@@ -393,10 +393,10 @@ TestCase {
 
 	function test_resolveTargetRoute_nonSettingsSubPage() {
 		// Non-settings pages reachable via Overview widgets should be resolvable.
-		// PageVeBus is an unconditional destination from BatteryWidget.
+		// DevicePage_vebus is an unconditional destination from BatteryWidget.
 		var result = UiTestUtilsHelper.resolveTargetRoute(
-			"/pages/vebusdevice/PageVeBus.qml")
-		verify(result.success, "PageVeBus should be resolvable from Overview")
+			"/pages/settings/devicelist/DevicePage_vebus.qml")
+		verify(result.success, "DevicePage_vebus should be resolvable from Overview")
 		verify(result.routeSteps.length > 0,
 			"Should have route steps for VeBus page")
 		// Each step should have type, values, and expectedPage

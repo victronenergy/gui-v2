@@ -7,6 +7,7 @@
 
 #include "themeobjects.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QDirIterator>
 #include <QFile>
@@ -217,8 +218,78 @@ ClickIdentifier parseIdentifierFromBlock(const QStringList &blockLines, const QH
 	return ClickIdentifier{};
 }
 
-// Resolve all destination pages from pushPage(...) in a navigation block, including property indirection.
-QStringList parseDestinationsFromBlock(const QStringList &blockLines)
+// Find all pages that Global.openDevicePage() may push, i.e. all of the
+// pages/settings/devicelist/DevicePage_<service-type>.qml files.
+const QStringList &devicePageUrls()
+{
+	static const QStringList urls = []() {
+		QStringList result;
+		const QDir dir(QStringLiteral(":/qt/qml/Victron/VenusOS/pages/settings/devicelist"));
+		const QStringList fileNames = dir.entryList(QStringList() << QStringLiteral("DevicePage_*.qml"), QDir::Files, QDir::Name);
+		for (const QString &fileName : fileNames) {
+			const QString dest = normalizePageUrl(dir.filePath(fileName));
+			if (!dest.isEmpty()) {
+				result.append(dest);
+			}
+		}
+		return result;
+	}();
+	return urls;
+}
+
+// The service types that each Global.openDevicePage() caller may open, keyed by the caller's
+// file name. The service type is only known at runtime, so it cannot be parsed from the call;
+// linking each caller to every DevicePage_*.qml would let routes go through callers that never
+// open the target page. Types are listed in order of preference for route resolution.
+const QHash<QString, QStringList> &openDevicePageServiceTypes()
+{
+	static const QHash<QString, QStringList> types = {
+		// components
+		{ QStringLiteral("SystemBatteryDelegate.qml"), { QStringLiteral("vebus"), QStringLiteral("genset"), QStringLiteral("battery") } },
+		{ QStringLiteral("AcInputWidget.qml"), { QStringLiteral("acsystem"), QStringLiteral("vebus"), QStringLiteral("genset"), QStringLiteral("grid") } },
+		{ QStringLiteral("BatteryWidget.qml"), { QStringLiteral("vebus"), QStringLiteral("battery") } },
+		{ QStringLiteral("DcInputWidget.qml"), { QStringLiteral("alternator"), QStringLiteral("dcgenset"), QStringLiteral("dcsource") } },
+		{ QStringLiteral("EvcsWidget.qml"), { QStringLiteral("evcharger") } },
+		{ QStringLiteral("InverterChargerWidget.qml"), { QStringLiteral("charger") } },
+		// pages
+		{ QStringLiteral("EvChargerListPage.qml"), { QStringLiteral("evcharger") } },
+		{ QStringLiteral("InverterChargerListPage.qml"), { QStringLiteral("charger") } },
+		{ QStringLiteral("OverviewInverterChargerPage.qml"), { QStringLiteral("inverter"), QStringLiteral("vebus"), QStringLiteral("acsystem") } },
+		{ QStringLiteral("AcLoadListPage.qml"), { QStringLiteral("evcharger"), QStringLiteral("acload") } },
+		{ QStringLiteral("DcLoadListPage.qml"), { QStringLiteral("dcdc"), QStringLiteral("dcload") } },
+		{ QStringLiteral("PvInverterPage.qml"), { QStringLiteral("pvinverter") } },
+		{ QStringLiteral("SolarDevicePage.qml"), { QStringLiteral("solarcharger"), QStringLiteral("multi"), QStringLiteral("inverter") } },
+		{ QStringLiteral("PageRsSystemDevices.qml"), { QStringLiteral("multi") } },
+	};
+	return types;
+}
+
+// Append the destinations of any Global.openDevicePage(...) calls in the given text, which is
+// from the file with the given name.
+void appendOpenDevicePageDestinations(const QString &text, const QString &callerFileName, QStringList *destinations)
+{
+	if (!text.contains(QStringLiteral("openDevicePage("))) {
+		return;
+	}
+	const auto typesIt = openDevicePageServiceTypes().constFind(callerFileName);
+	if (typesIt == openDevicePageServiceTypes().constEnd()) {
+		qWarning() << "UiTestUtils: no openDevicePage() service types listed for" << callerFileName
+				<< "- add them to openDevicePageServiceTypes()";
+		return;
+	}
+	for (const QString &serviceType : *typesIt) {
+		const QString dest = QStringLiteral("/pages/settings/devicelist/DevicePage_%1.qml").arg(serviceType);
+		if (!devicePageUrls().contains(dest)) {
+			qWarning() << "UiTestUtils: no device page found for service type" << serviceType << "from" << callerFileName;
+		} else if (!destinations->contains(dest)) {
+			destinations->append(dest);
+		}
+	}
+}
+
+// Resolve all destination pages from pushPage(...) and openDevicePage(...) in a navigation block,
+// including property indirection.
+QStringList parseDestinationsFromBlock(const QStringList &blockLines, const QString &callerFileName)
 {
 	const QString blockText = blockLines.join('\n');
 
@@ -238,6 +309,7 @@ QStringList parseDestinationsFromBlock(const QStringList &blockLines)
 			destinations.append(dest);
 		}
 	}
+	appendOpenDevicePageDestinations(blockText, callerFileName, &destinations);
 
 	// If no literal destinations found, try property indirection for a single destination.
 	if (destinations.isEmpty()) {
@@ -359,7 +431,7 @@ QHash<QString, ComponentNavigationBehavior> scanExternalComponents(const QHash<Q
 				}
 			}
 
-			// Find all pushPage literal destinations
+			// Find all pushPage literal and openDevicePage destinations
 			QRegularExpressionMatchIterator pushMatches = pushPageLiteralRe.globalMatch(content);
 			while (pushMatches.hasNext()) {
 				const QRegularExpressionMatch m = pushMatches.next();
@@ -368,6 +440,7 @@ QHash<QString, ComponentNavigationBehavior> scanExternalComponents(const QHash<Q
 					behavior.allDestinationLiterals.append(dest);
 				}
 			}
+			appendOpenDevicePageDestinations(content, QFileInfo(filePath).fileName(), &behavior.allDestinationLiterals);
 
 			if (!behavior.allDestinationLiterals.isEmpty()) {
 				behavior.destinationLiteral = behavior.allDestinationLiterals.first();
@@ -1143,7 +1216,7 @@ QHash<QString, QList<RouteEdge>> buildPageGraph()
 
 			inNavBlock = false;
 			ClickIdentifier identifier = parseIdentifierFromBlock(blockLines, commonWordsLabels);
-			QStringList destinationPageUrls = parseDestinationsFromBlock(blockLines);
+			QStringList destinationPageUrls = parseDestinationsFromBlock(blockLines, QFileInfo(filePath).fileName());
 
 			// Check inline component behaviors (component X : Y { ... })
 			if (destinationPageUrls.isEmpty() && componentBehaviors.contains(blockTypeName)) {

@@ -29,10 +29,7 @@ DeviceListDelegate {
 		}
 	}
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/devicelist/temperature/PageTemperatureSensor.qml",
-				{ bindPrefix : root.device.serviceUid })
-	}
+	onClicked: Global.openDevicePage(root.device.serviceUid)
 
 	VeQuickItem {
 		id: temperature

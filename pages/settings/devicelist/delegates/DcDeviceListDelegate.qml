@@ -16,15 +16,7 @@ DeviceListDelegate {
 		QuantityObject { object: power; unit: VenusOS.Units_Watt }
 	}
 
-	onClicked: {
-		if (BackendConnection.serviceTypeFromUid(device.serviceUid) === "dcdc") {
-			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcDcConverter.qml",
-					{ "bindPrefix": device.serviceUid })
-		} else {
-			Global.pageManager.pushPage("/pages/settings/devicelist/dc-in/PageDcMeter.qml",
-					{ "bindPrefix": device.serviceUid })
-		}
-	}
+	onClicked: Global.openDevicePage(device.serviceUid)
 
 	VeQuickItem {
 		id: voltage

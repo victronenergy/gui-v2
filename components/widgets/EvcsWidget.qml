@@ -14,8 +14,7 @@ OverviewWidget {
 
 	onClicked: {
 		if (Services.evChargers.model.count === 1) {
-			Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml",
-					{ bindPrefix: Services.evChargers.model.firstObject.serviceUid })
+			Global.openDevicePage(Services.evChargers.model.firstObject.serviceUid)
 		} else {
 			Global.pageManager.pushPage("/pages/evcs/EvChargerListPage.qml")
 		}

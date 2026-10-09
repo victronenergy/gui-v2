@@ -148,18 +148,7 @@ Page {
 				: switchableOutputInfoLoader.item ? switchableOutputInfoLoader.item.statusText
 				: ""
 
-			onClicked: {
-				// TODO use a generic helper to open a page based on the service type/uid. See issue #1388
-				if (device.serviceType === "evcharger") {
-					Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml", {
-						bindPrefix : device.serviceUid
-					})
-				} else {
-					Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
-						"bindPrefix": device.serviceUid
-					})
-				}
-			}
+			onClicked: Global.openDevicePage(device.serviceUid)
 
 			Loader {
 				id: switchableOutputInfoLoader
