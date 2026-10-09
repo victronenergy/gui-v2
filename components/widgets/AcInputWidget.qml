@@ -61,24 +61,5 @@ AcWidget {
 		}
 	}
 
-	onClicked: {
-		const inputServiceUid = BackendConnection.serviceUidFromName(root.inputInfo.serviceName, root.inputInfo.deviceInstance)
-		if (root.inputInfo.serviceType === "acsystem") {
-			Global.pageManager.pushPage("/pages/settings/devicelist/rs/PageRsSystem.qml",
-					{ "bindPrefix": inputServiceUid })
-		} else if (root.inputInfo.serviceType === "vebus") {
-			Global.pageManager.pushPage( "/pages/vebusdevice/PageVeBus.qml", {
-				"bindPrefix": inputServiceUid
-			})
-		} else if (root.inputInfo.serviceType === "genset") {
-			Global.pageManager.pushPage( "/pages/settings/devicelist/PageGenset.qml", {
-				"bindPrefix": inputServiceUid
-			})
-		} else {
-			// Assume this is on a generic AC input
-			Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml", {
-				"bindPrefix": inputServiceUid
-			})
-		}
-	}
+	onClicked: Global.openDevicePage(BackendConnection.serviceUidFromName(root.inputInfo.serviceName, root.inputInfo.deviceInstance))
 }

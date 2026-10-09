@@ -15,10 +15,7 @@ DeviceListDelegate {
 		QuantityObject { object: dcPower; unit: VenusOS.Units_Watt }
 	}
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/devicelist/PageMotorDrive.qml",
-				{ bindPrefix : root.device.serviceUid })
-	}
+	onClicked: Global.openDevicePage(root.device.serviceUid)
 
 	VeQuickItem {
 		id: motorRpm

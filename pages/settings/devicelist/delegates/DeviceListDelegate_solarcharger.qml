@@ -19,7 +19,7 @@ DeviceListDelegate {
 	}
 
 	onClicked: {
-		Global.pageManager.pushPage("/pages/solar/PageSolarCharger.qml", { bindPrefix : root.device.serviceUid })
+		Global.openDevicePage(root.device.serviceUid)
 	}
 
 	VeQuickItem {
