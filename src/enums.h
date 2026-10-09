@@ -527,6 +527,30 @@ public:
 	};
 	Q_ENUM(PageManager_InteractionMode)
 
+	// Splash sequence. Only SplashSequence advances this.
+	enum Splash_Phase {
+		Splash_Phase_Waiting,            // logo and progress visible
+		Splash_Phase_HidingProgress,     // hide progress and status, then pause
+		Splash_Phase_FadingLogo,         // fade logo text and icon
+		Splash_Phase_PlayingGauge,       // gauge intro animation
+		Splash_Phase_WaitingForPreload,  // intro paused, page compile not finished
+		Splash_Phase_FadingOut,          // splash opacity fade
+		Splash_Phase_Hidden              // splash dismissed
+	};
+	Q_ENUM(Splash_Phase)
+
+	// Informative, derived view of application startup. Global.startupPhase is a
+	// read-only function of existing signals: it describes the boot, it does not
+	// drive it. Splash_Phase is the sub-state while in Startup_Phase_Splash.
+	enum Startup_Phase {
+		Startup_Phase_LoadingBackend,  // waiting for BackendConnection to become Ready
+		Startup_Phase_LoadingData,     // backend ready, DataManager building data sources
+		Startup_Phase_LoadingUi,       // data ready, ApplicationContent/SwipeView pages building
+		Startup_Phase_Splash,          // pages built, splash animation and page preload running
+		Startup_Phase_Running          // splash hidden, UI interactive
+	};
+	Q_ENUM(Startup_Phase)
+
 	enum Switch_ForcedMode {
 		Switch_ForcedOff = 2,
 		Switch_ForcedOn = 3
