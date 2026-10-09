@@ -78,6 +78,27 @@ ListView {
 	Keys.onRightPressed: (event) => event.accepted = orientation === Qt.Horizontal ? keyNavHelper.focusNextItem() : false
 	Keys.enabled: Global.keyNavigationEnabled
 
+	// Null the model while complete; dual releaseObject() asserts.
+	property var _containingPage
+	function _updateContainingPage() {
+		let p = parent
+		while (p) {
+			if (p.__is_venus_gui_page__) {
+				_containingPage = p
+				return
+			}
+			p = p.parent
+		}
+		_containingPage = null
+	}
+	onParentChanged: _updateContainingPage()
+	Component.onCompleted: _updateContainingPage()
+
+	Connections {
+		target: root._containingPage
+		function onAboutToBeDiscarded() { root.model = null }
+	}
+
 	KeyNavigationListHelper {
 		id: keyNavHelper
 

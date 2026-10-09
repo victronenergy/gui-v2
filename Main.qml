@@ -38,28 +38,74 @@ Window {
 		UiConfig.splashScreenVisible = false
 	}
 
+	// Destroy ApplicationContent before dropping DataManager. Views still
+	// bound to its models can double-release DelegateModel items.
+	// If guiLoader is still Loading, do not deactivate it: that aborts
+	// in-flight delegates. Wait until it leaves Loading, then drop
+	// DataManager from onItemChanged once the item is gone.
+	property bool _rebuildWaitingForUi
+	property bool _rebuildUnloadStarted
+	property bool _rebuildDataWasActive
+
 	function rebuildUi() {
+		if (root._rebuildWaitingForUi) {
+			// The in-progress rebuild samples connectionReady when it finishes.
+			console.info("Main: UI rebuild already in progress")
+			return
+		}
 		console.info("Main: UI rebuild required")
+		root._rebuildDataWasActive = dataManagerLoader.active
+		root._rebuildWaitingForUi = true
+		root._rebuildUnloadStarted = false
+		UiConfig.splashScreenVisible = true
+		Global.allPagesLoaded = false
+		root._unloadApplicationContent()
+	}
+
+	function _unloadApplicationContent() {
+		if (!root._rebuildWaitingForUi || root._rebuildUnloadStarted) {
+			return
+		}
+		if (guiLoader.status === Loader.Loading && !guiLoader.item
+				&& !FastUtils.drainIncubators(guiLoader)) {
+			// onStatusChanged retries once the loader leaves Loading.
+			return
+		}
 		if (Global.mainView) {
 			Global.mainView.clearUi()
 		}
-		const requiresReloadData = dataManagerLoader.active && dataManagerLoader.connectionReady
-		if (requiresReloadData) {
-			// we haven't lost backend connection.
-			// we must be rebuilding UI due to demo mode change,
-			// gui plugin reload,
-			// or detected crash in localsettings/venus-platform.
-			// manually cycle the data manager loader.
-			console.info("Main: resetting data manager due to change requiring data reload")
+		root._rebuildUnloadStarted = true
+		if (guiLoader.item) {
+			FastUtils.drainIncubators(guiLoader.item)
+			Global.detachDelegateModels(guiLoader.item)
+		}
+		Global.dataManagerLoaded = false
+		if (!guiLoader.item) {
+			root._finishRebuildAfterUiUnloaded()
+		}
+	}
+
+	function _finishRebuildAfterUiUnloaded() {
+		if (!root._rebuildWaitingForUi) {
+			return
+		}
+		const dataWasActive = root._rebuildDataWasActive
+		root._rebuildDataWasActive = false
+
+		if (dataWasActive) {
 			dataManagerLoader.active = false
-		} else {
-			console.info("Main: data reload not required")
 		}
 		Global.reset()
 		gc()
-		if (requiresReloadData) {
+		// Sample connectionReady now; it can change while guiLoader unloads.
+		if (dataWasActive && dataManagerLoader.connectionReady) {
+			console.info("Main: resetting data manager due to change requiring data reload")
 			dataManagerLoader.active = true
+		} else {
+			console.info("Main: data reload not required")
 		}
+		root._rebuildWaitingForUi = false
+		root._rebuildUnloadStarted = false
 		console.info("Main: UI rebuild started successfully")
 	}
 
@@ -115,7 +161,6 @@ Window {
 			} else if (active && !Global.needPageReload) {
 				console.info("Main: data backend ready has changed to false")
 				root.rebuildUi()
-				active = false
 			}
 		}
 
@@ -212,6 +257,16 @@ Window {
 		visible: !consoleLoader.active
 		active: Global.dataManagerLoaded
 		onActiveChanged: if (active) console.info("Main: data manager finished loading; now loading application content")
+		onStatusChanged: {
+			if (status !== Loader.Loading && root._rebuildWaitingForUi) {
+				root._unloadApplicationContent()
+			}
+		}
+		onItemChanged: {
+			if (!item && root._rebuildWaitingForUi && root._rebuildUnloadStarted) {
+				root._finishRebuildAfterUiUnloaded()
+			}
+		}
 		sourceComponent: ApplicationContent {
 			anchors.centerIn: parent
 			focus: true

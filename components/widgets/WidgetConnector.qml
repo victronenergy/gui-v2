@@ -71,6 +71,9 @@ Item {
 			: 1 // show just one arrow, if animations are disabled.
 
 		if (electronRepeater.count !== modelCount) {
+			// Count changes are still setModel. Drain first so in-flight
+			// AsynchronousIfNested delegates are not released with objectRef 0.
+			FastUtils.drainIncubators(electronRepeater)
 			electronRepeater.model = modelCount
 
 			if (electronTravelDistance > 0) {

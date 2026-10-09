@@ -23,6 +23,7 @@ target_link_libraries(VictronVenusOS PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::Qml
+    Qt6::QmlPrivate
     Qt6::Quick
     Qt6::Svg
     Qt6::QuickPrivate

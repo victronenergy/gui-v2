@@ -43,6 +43,14 @@ public:
 	}
 	Q_INVOKABLE QColor invalidColor() const { return QColor(); }
 
+	// Complete nested incubators for object so later setModel/destroy is safe.
+	// Blocks the GUI thread. Returns false if object is a Loader that is still
+	// Loading; the caller must not deactivate that Loader.
+	Q_INVOKABLE bool drainIncubators(QObject *object) const;
+
+	// Instantiator has no QML parent; walk QObject parents to the Page.
+	Q_INVOKABLE QObject *containingPage(QObject *object) const;
+
 	static qreal scale(qreal n, qreal fromMin, qreal fromMax, qreal toMin, qreal toMax) {
 		const qreal fromRange = fromMax - fromMin;
 		const qreal toRange = toMax - toMin;

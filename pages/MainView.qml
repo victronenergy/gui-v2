@@ -70,8 +70,28 @@ FocusScope {
 	}
 
 	function clearUi() {
+		// Snapshot NavBar.pages; Repeater.setModel during teardown asserts.
+		if (navBar.pages && navBar.pages.length) {
+			const snapshot = []
+			for (let i = 0; i < navBar.pages.length; ++i) {
+				snapshot.push(navBar.pages[i])
+			}
+			navBar.pages = snapshot
+		}
+		const view = swipeView
+		if (view) {
+			for (let i = 0; i < view.count; ++i) {
+				const page = view.itemAt(i)
+				if (page && page.aboutToBeDiscarded) {
+					page.aboutToBeDiscarded()
+				}
+			}
+		}
+		// Forced teardown: popAllPages() can be vetoed or skip a hidden stack.
+		pageStack.destroyAllPages()
+		// Remaining non-page views (NavBar Instantiators, cards, …).
+		Global.detachDelegateModels(root)
 		swipeViewLoader.active = false
-		pageStack.popAllPages(StackView.Immediate)
 		_loadedPages = 0
 	}
 
