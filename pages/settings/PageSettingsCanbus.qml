@@ -10,8 +10,6 @@ Page {
 	id: root
 
 	required property CanbusProfile canbusProfile
-	readonly property string _vecanSettingsPrefix: Global.systemSettings.serviceUid + "/Settings/Vecan/" + canbusProfile.gateway
-	readonly property string _rvcSettingsPrefix: Global.systemSettings.serviceUid + "/Settings/Rvc/" + canbusProfile.gateway
 
 	/* VE.Can and RV-C are mutually exclusive */
 	readonly property bool _isRvc: rvcSameUniqueNameUsed.valid
@@ -36,7 +34,7 @@ Page {
 
 	VeQuickItem {
 		id: n2kOutEnabled
-		uid: root._vecanSettingsPrefix + "/N2kGatewayEnabled"
+		uid: canbusService.vecanServiceUid ? canbusService.vecanServiceUid + "/Settings/N2kGatewayEnabled" : ""
 	}
 
 	GradientListView {
@@ -83,24 +81,26 @@ Page {
 			ListSwitch {
 				//% "NMEA2000 inbound alerts"
 				text: qsTrId("settings_canbus_nmea2000in_alerts")
-				dataItem.uid: root._vecanSettingsPrefix + "/AlertsInEnable"
+				dataItem.uid: canbusService.vecanServiceUid ? canbusService.vecanServiceUid + "/Settings/N2kAlertsInEnabled" : ""
 				preferredVisible: root._isVecan && dataItem.valid
 			}
 
 			ListSwitch {
 				//% "Reverse current polarity"
 				text: qsTrId("settings_canbus_rvc_reverse_current_polarity")
-				dataItem.uid: root._rvcSettingsPrefix + "/ReverseCurrent"
+				dataItem.uid: canbusService.rvcServiceUid ? canbusService.rvcServiceUid + "/Settings/ReverseCurrent" : ""
 				preferredVisible: root._isRvc && dataItem.valid
 				//% "When enabled, the current polarity in the CHARGER_AC_STATUS_1, CHARGER_STATUS_2, INVERTER_AC_STATUS_1, and SOLAR_CONTROLLER_BATTERY_STATUS DGNs is reversed."
 				caption: qsTrId("settings_canbus_rvc_reverse_current_polarity_description")
 			}
 
 			ListSpinBox {
+				readonly property string _serviceUid: root._isRvc ? canbusService.rvcServiceUid : canbusService.vecanServiceUid
+
 				//% "Unique identity number selector"
 				text: qsTrId("settings_canbus_unique_id_select")
-				preferredVisible: root._isVecan || root._isRvc
-				dataItem.uid: (root._isRvc ? root._rvcSettingsPrefix : root._vecanSettingsPrefix) + "/VenusUniqueId"
+				preferredVisible: (root._isVecan || root._isRvc) && dataItem.valid
+				dataItem.uid: _serviceUid ? _serviceUid + "/Settings/VenusUniqueId" : ""
 				caption: root._isVecan
 					//% "Above selector sets which block of unique identity numbers to use for the NAME Unique Identity Numbers in the PGN 60928 NAME field. Change only when using multiple GX Devices in one VE.Can network."
 					? qsTrId("settings_canbus_unique_id_vecan_description")
