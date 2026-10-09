@@ -174,6 +174,14 @@ Main.qml (Window)
 - `goToStartPage()` — navigate to user-configured start page
 - Manages idle mode transitions (hide NavBar, full-screen page)
 
+### Opening a device page
+
+To open the page for a device, call `Global.openDevicePage(serviceUid)` rather than calling `pushPage()` with a hardcoded url:
+- `Global.devicePageUrl(serviceUid)` maps the service type of the uid to its page url, or returns an empty string if there is no page for that service type
+- `Global.openDevicePage(serviceUid, properties)` pushes that page, setting its `bindPrefix` (or `serviceUid`, for `switch` pages) to the given uid; other `properties` are passed through to the page. It returns the pushed page, or `null` if there is no page for that service type.
+
+When adding a page for a new service type, add it to `Global.devicePageUrl()`. The visual regression tests parse this function to find the pages that `openDevicePage()` may push, so each case must return a string literal.
+
 ### PageStack
 
 `components/PageStack.qml` (extends StackView) handles drill-down navigation with slide animations. Used for:

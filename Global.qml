@@ -68,6 +68,83 @@ QtObject {
 		return ToastModel.add(type, text, autoCloseInterval)
 	}
 
+	// Returns the url of the device settings page for the service type of the given uid, or an
+	// empty string if there is no page for that service type.
+	function devicePageUrl(serviceUid) {
+		switch (BackendConnection.serviceTypeFromUid(serviceUid)) {
+		case "acload":
+		case "grid":
+		case "heatpump":
+		case "pvinverter":
+			return "/pages/settings/devicelist/ac-in/PageAcIn.qml"
+		case "acsystem":
+			return "/pages/settings/devicelist/rs/PageRsSystem.qml"
+		case "alternator":
+			return "/pages/settings/devicelist/dc-in/PageAlternator.qml"
+		case "battery":
+			return "/pages/settings/devicelist/battery/PageBattery.qml"
+		case "charger":
+			return "/pages/settings/devicelist/PageAcCharger.qml"
+		case "dcdc":
+			return "/pages/settings/devicelist/dc-in/PageDcDcConverter.qml"
+		case "dcload":
+		case "dcsource":
+		case "dcsystem":
+		case "fuelcell":
+			return "/pages/settings/devicelist/dc-in/PageDcMeter.qml"
+		case "dcgenset":
+		case "genset":
+			return "/pages/settings/devicelist/PageGenset.qml"
+		case "digitalinput":
+			return "/pages/settings/devicelist/PageDigitalInput.qml"
+		case "ev":
+			return "/pages/ev/EvPage.qml"
+		case "evcharger":
+			return "/pages/evcs/EvChargerPage.qml"
+		case "gps":
+			return "/pages/settings/PageGps.qml"
+		case "inverter":
+			return "/pages/settings/devicelist/inverter/PageInverter.qml"
+		case "meteo":
+			return "/pages/settings/devicelist/PageMeteo.qml"
+		case "motordrive":
+			return "/pages/settings/devicelist/PageMotorDrive.qml"
+		case "multi":
+			return "/pages/settings/devicelist/rs/PageMultiRs.qml"
+		case "pulsemeter":
+			return "/pages/settings/devicelist/pulsemeter/PagePulseCounter.qml"
+		case "solarcharger":
+			return "/pages/solar/PageSolarCharger.qml"
+		case "switch":
+			return "/pages/settings/devicelist/PageSwitch.qml"
+		case "tank":
+			return "/pages/settings/devicelist/tank/PageTankSensor.qml"
+		case "temperature":
+			return "/pages/settings/devicelist/temperature/PageTemperatureSensor.qml"
+		case "unsupported":
+			return "/pages/settings/devicelist/PageUnsupportedDevice.qml"
+		case "vebus":
+			return "/pages/vebusdevice/PageVeBus.qml"
+		default:
+			return ""
+		}
+	}
+
+	// Pushes the device settings page for the service type of the given uid. The page's uid
+	// property (bindPrefix or serviceUid, depending on the page) is set automatically; any other
+	// properties are passed through to the page.
+	// Returns the pushed page, or null if there is no page for that service type.
+	function openDevicePage(serviceUid, properties = {}) {
+		const pageUrl = devicePageUrl(serviceUid)
+		if (pageUrl.length === 0) {
+			console.warn("No device page available for service:", serviceUid)
+			return null
+		}
+		const uidProperty = BackendConnection.serviceTypeFromUid(serviceUid) === "switch" ? "serviceUid" : "bindPrefix"
+		const pageProperties = Object.assign({ [uidProperty]: serviceUid }, properties)
+		return pageManager.pushPage(pageUrl, pageProperties)
+	}
+
 	function reset() {
 		// unload the gui.
 		dataManagerLoaded = false

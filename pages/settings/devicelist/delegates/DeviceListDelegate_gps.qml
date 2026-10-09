@@ -9,10 +9,7 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/PageGps.qml",
-									{ bindPrefix: root.device.serviceUid })
-	}
+	onClicked: Global.openDevicePage(root.device.serviceUid)
 
 	VeQuickItem {
 		id: productName

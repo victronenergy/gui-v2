@@ -56,9 +56,7 @@ Page {
 				QuantityObject { object: evChargerDelegate; key: "statusText" }
 			}
 
-			onClicked: {
-				Global.pageManager.pushPage("/pages/evcs/EvChargerPage.qml", { bindPrefix: device.serviceUid })
-			}
+			onClicked: Global.openDevicePage(device.serviceUid)
 		}
 	}
 }
