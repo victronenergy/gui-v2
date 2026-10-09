@@ -15,6 +15,8 @@ AbstractListItem {
 	required property Gradient humidityGaugeGradient
 
 	readonly property bool hasTwoGauges: !isNaN(temperatureItem.value) && !isNaN(humidityItem.value)
+	// When set, shows the air quality (score, PM2.5 and CO2) instead of temperature/humidity.
+	property bool showAirQuality
 
 	implicitWidth: Math.max(
 		implicitBackgroundWidth + leftInset + rightInset,
@@ -78,6 +80,7 @@ AbstractListItem {
 		// In landscape, stretch the height to fill the parent.
 		// In portrait, size the height to the gauge content.
 		implicitHeight: Theme.screenSize !== Theme.Portrait ? 0
+				: root.showAirQuality ? airQualityLoader.implicitHeight
 				: (nameLabel.text.length ? nameLabel.height : 0) + gaugeFlow.height
 
 		// In portrait, if there are two gauges, show the name here instead of within the outline.
@@ -91,7 +94,7 @@ AbstractListItem {
 			}
 			font.pixelSize: Theme.font_levelsGauge_title
 			wrapMode: Text.Wrap
-			text: Theme.screenSize === Theme.Portrait && root.hasTwoGauges ? root.device?.name ?? "" : ""
+			text: Theme.screenSize === Theme.Portrait && root.hasTwoGauges && !root.showAirQuality ? root.device?.name ?? "" : ""
 			color: Theme.color_font_primary
 		}
 
@@ -110,6 +113,7 @@ AbstractListItem {
 					: root.hasTwoGauges ? gaugeWidth * 2
 					: gaugeWidth
 			flow: Theme.screenSize === Theme.Portrait ? Flow.TopToBottom : Flow.LeftToRight
+			visible: !root.showAirQuality
 			spacing: Theme.screenSize === Theme.Portrait ? Theme.geometry_levelsGauge_verticalPadding : 0
 
 			LevelsGaugeOutline {
@@ -170,6 +174,18 @@ AbstractListItem {
 						animationEnabled: root.animationEnabled
 					}
 				}
+			}
+		}
+
+		Loader {
+			id: airQualityLoader
+
+			width: parent.width
+			height: Theme.screenSize === Theme.Portrait ? implicitHeight : parent.height
+			active: root.showAirQuality
+			sourceComponent: AirQualityGauges {
+				serviceUid: root.device?.serviceUid ?? ""
+				name: root.device?.name ?? ""
 			}
 		}
 

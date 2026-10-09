@@ -168,6 +168,10 @@
     "color_levelsPage_environment_gauge_tick": "color_gray4",
     "color_levelsPage_environment_temperatureGauge_highlightValue": "color_font_primary",
 
+    "color_levelsPage_airQuality_yellow": "#C9BE45",
+    "color_levelsPage_airQuality_darkYellow": "#3A3816",
+    "color_levelsPage_airQuality_inactive": "color_gray2",
+
     "color_solarHistoryErrorView_primaryText": "color_font_primary",
     "color_solarHistoryErrorView_secondaryText": "color_font_secondary",
 
