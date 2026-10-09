@@ -23,6 +23,8 @@ calls in navigable list items and widgets. Pages reachable via `ListNavigation`,
 `ListQuantityGroupNavigation`, and overview widgets are supported. Navigation blocks with
 runtime-branching `pushPage()` calls (e.g. conditional if/else) have all branches represented
 in the graph; the test verifies at runtime that the expected page actually opened after each click.
+Calls to `Global.openDevicePage()` are treated the same way: every page returned by
+`Global.devicePageUrl()` is added as a possible destination.
 
 Pages that are only reachable via fully dynamic or computed URLs (e.g. plugin integration
 pages) cannot be statically resolved and will produce an error at startup.

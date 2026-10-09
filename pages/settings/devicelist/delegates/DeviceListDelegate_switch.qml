@@ -22,11 +22,7 @@ DeviceListDelegate {
 		QuantityObject { object: state; key: "textValue"; unit: VenusOS.Units_None }
 	}
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/devicelist/PageSwitch.qml", {
-			serviceUid: root.device.serviceUid
-		})
-	}
+	onClicked: Global.openDevicePage(root.device.serviceUid)
 
 	VeQuickItem {
 		id: state

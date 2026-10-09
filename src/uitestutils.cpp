@@ -206,7 +206,61 @@ ClickIdentifier parseIdentifierFromBlock(const QStringList &blockLines, const QH
 	return ClickIdentifier{};
 }
 
-// Resolve all destination pages from pushPage(...) in a navigation block, including property indirection.
+// Pre-parse Global.devicePageUrl() in Global.qml to find all pages that Global.openDevicePage()
+// may push. The actual page depends on the service type at runtime, so all of them are returned.
+const QStringList &devicePageUrls()
+{
+	static const QStringList urls = []() {
+		QStringList result;
+		QFile file(QStringLiteral(":/qt/qml/Victron/VenusOS/Global.qml"));
+		if (!file.open(QFile::ReadOnly | QFile::Text)) {
+			return result;
+		}
+
+		static const QRegularExpression functionStartRe(R"REGEX(^\s*function\s+devicePageUrl\s*\()REGEX");
+		static const QRegularExpression returnLiteralRe(R"REGEX(return\s+"([^"]+)")REGEX");
+
+		bool inFunction = false;
+		int depth = 0;
+		const QStringList lines = QString::fromUtf8(file.readAll()).split('\n');
+		for (const QString &line : lines) {
+			if (!inFunction) {
+				if (!functionStartRe.match(line).hasMatch()) {
+					continue;
+				}
+				inFunction = true;
+			}
+			if (const QRegularExpressionMatch returnMatch = returnLiteralRe.match(line); returnMatch.hasMatch()) {
+				const QString dest = normalizePageUrl(returnMatch.captured(1));
+				if (!dest.isEmpty() && !result.contains(dest)) {
+					result.append(dest);
+				}
+			}
+			depth += countChar(line, '{') - countChar(line, '}');
+			if (depth <= 0 && line.contains('}')) {
+				break;
+			}
+		}
+		return result;
+	}();
+	return urls;
+}
+
+// Append the destinations of any Global.openDevicePage(...) calls in the given text.
+void appendOpenDevicePageDestinations(const QString &text, QStringList *destinations)
+{
+	if (!text.contains(QStringLiteral("openDevicePage("))) {
+		return;
+	}
+	for (const QString &dest : devicePageUrls()) {
+		if (!destinations->contains(dest)) {
+			destinations->append(dest);
+		}
+	}
+}
+
+// Resolve all destination pages from pushPage(...) and openDevicePage(...) in a navigation block,
+// including property indirection.
 QStringList parseDestinationsFromBlock(const QStringList &blockLines)
 {
 	const QString blockText = blockLines.join('\n');
@@ -227,6 +281,7 @@ QStringList parseDestinationsFromBlock(const QStringList &blockLines)
 			destinations.append(dest);
 		}
 	}
+	appendOpenDevicePageDestinations(blockText, &destinations);
 
 	// If no literal destinations found, try property indirection for a single destination.
 	if (destinations.isEmpty()) {
@@ -348,7 +403,7 @@ QHash<QString, ComponentNavigationBehavior> scanExternalComponents(const QHash<Q
 				}
 			}
 
-			// Find all pushPage literal destinations
+			// Find all pushPage literal and openDevicePage destinations
 			QRegularExpressionMatchIterator pushMatches = pushPageLiteralRe.globalMatch(content);
 			while (pushMatches.hasNext()) {
 				const QRegularExpressionMatch m = pushMatches.next();
@@ -357,6 +412,7 @@ QHash<QString, ComponentNavigationBehavior> scanExternalComponents(const QHash<Q
 					behavior.allDestinationLiterals.append(dest);
 				}
 			}
+			appendOpenDevicePageDestinations(content, &behavior.allDestinationLiterals);
 
 			if (!behavior.allDestinationLiterals.isEmpty()) {
 				behavior.destinationLiteral = behavior.allDestinationLiterals.first();

@@ -14,10 +14,7 @@ DeviceListDelegate {
 		QuantityObject { object: aggregate; unit: Global.systemSettings.volumeUnit }
 	}
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/devicelist/pulsemeter/PagePulseCounter.qml",
-				{ bindPrefix : root.device.serviceUid })
-	}
+	onClicked: Global.openDevicePage(root.device.serviceUid)
 
 	VeQuickItem {
 		id: aggregate

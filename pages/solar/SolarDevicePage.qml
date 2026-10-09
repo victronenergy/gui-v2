@@ -172,24 +172,9 @@ Page {
 			ListNavigation {
 				id: productPageLink
 
-				readonly property string pageUrl: {
-					const serviceType = BackendConnection.serviceTypeFromUid(solarDevice.serviceUid)
-					if (serviceType === "solarcharger") {
-						return "/pages/solar/PageSolarCharger.qml"
-					} else if (serviceType === "multi") {
-						return "/pages/settings/devicelist/rs/PageMultiRs.qml"
-					} else if (serviceType === "inverter") {
-						return "/pages/settings/devicelist/inverter/PageInverter.qml"
-					} else {
-						return ""
-					}
-				}
-
 				text: CommonWords.product_page
-				preferredVisible: pageUrl.length > 0
-				onClicked: {
-					Global.pageManager.pushPage(pageUrl, { title: text, bindPrefix: solarDevice.serviceUid })
-				}
+				preferredVisible: Global.devicePageUrl(solarDevice.serviceUid).length > 0
+				onClicked: Global.openDevicePage(solarDevice.serviceUid, { title: text })
 			}
 		}
 	}

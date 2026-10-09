@@ -23,8 +23,7 @@ Page {
 			onClicked: {
 				// Show page for chargers
 				if (model.device.serviceUid.indexOf('charger') >= 0) {
-					Global.pageManager.pushPage("/pages/settings/devicelist/PageAcCharger.qml",
-							{ "bindPrefix": model.device.serviceUid })
+					Global.openDevicePage(model.device.serviceUid)
 				} else {
 					// Show page for inverter, vebus and acsystem services
 					Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml",

@@ -20,10 +20,7 @@ DeviceListDelegate {
 		QuantityObject { object: level; unit: VenusOS.Units_Percentage }
 	}
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankSensor.qml",
-				{ bindPrefix : root.device.serviceUid })
-	}
+	onClicked: Global.openDevicePage(root.device.serviceUid)
 
 	VeQuickItem {
 		id: temperature

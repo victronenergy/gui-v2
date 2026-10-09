@@ -17,8 +17,7 @@ DeviceListDelegate {
 	}
 
 	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/devicelist/PageGenset.qml",
-				{ bindPrefix : root.device.serviceUid })
+		Global.openDevicePage(root.device.serviceUid)
 	}
 
 	VeQuickItem {
