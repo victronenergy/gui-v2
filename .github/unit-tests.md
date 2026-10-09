@@ -25,6 +25,7 @@ tests/
 ├── filtereddevicemodel/
 ├── pagepreloader/              — PagePreloader compile/skip/timeout (injectable URLs)
 ├── pagestack/                  — first-push fake-slide duration while the stack is busy
+├── splashsequence/             — splash phase transitions (no animations)
 ├── (many more...)
 └── ui/                         — visual regression tests (separate system, not covered here)
 ```
