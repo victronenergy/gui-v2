@@ -271,6 +271,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/core/PrimaryListLabel.qml
     components/listitems/core/SecondaryListLabel.qml
     components/listitems/core/SectionHeader.qml
+    components/listitems/core/ListSettingAccessCheckBackground.qml
     components/listitems/core/ListSettingBackground.qml
     components/listitems/core/SettingsListHeader.qml
     components/listitems/core/SliderHandleHighlight.qml
