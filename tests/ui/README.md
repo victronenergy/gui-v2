@@ -9,20 +9,59 @@ For example, this runs the `smoke/mock-maximal` test when gui-v2 is loaded:
 ```
 
 If `--ui-test` does not match a UI test configuration directory, gui-v2 treats the value as a
-destination page and runs a lightweight route-finding test that programmatically clicks through
-menus until that page is reached. That exists so a given `.qml` page can be opened and checked
+destination QML type and runs a lightweight route-finding test that clicks whatever is needed
+to construct and show that type. That exists so a given `.qml` file can be opened and checked
 for compilation errors, reference errors, and other runtime QML failures, without writing a
 dedicated test configuration. For example:
 
 ```
 ./bin/venus-gui-v2 --mock --ui-test /pages/settings/PageSettingsConnectivity.qml
+./bin/venus-gui-v2 --mock --ui-test /pages/BriefPage.qml
+./bin/venus-gui-v2 --mock --ui-test /pages/BriefSidePanel.qml
+
+# Same tests in portrait: set Theme.screenSize before target-page routes
+# are resolved, and the window size before the UI loads. Width < height
+# selects Theme.Portrait. Mid-run resize is not supported.
+./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test /pages/BriefSidePanel.qml
+./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test /pages/ControlCardsPage.qml
+./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test /pages/AuxCardsPage.qml
+
+# Same smoke tests in portrait. Brief and cards cases assert the inline
+# side panel and vertical card lists. No separate portrait configuration.
+./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test smoke/mock-maximal
 ```
 
-The route is resolved statically at startup by scanning compiled QML resources for `pushPage()`
-calls in navigable list items and widgets. Pages reachable via `ListNavigation`,
-`ListQuantityGroupNavigation`, and overview widgets are supported. Navigation blocks with
-runtime-branching `pushPage()` calls (e.g. conditional if/else) have all branches represented
-in the graph; the test verifies at runtime that the expected page actually opened after each click.
+The route is resolved statically at startup:
+
+* Swipe-view root pages (Brief, Overview, Settings, Boat, …) are opened by clicking
+  the nav bar. Boat is compiled in the Victron.Boat module; `--ui-test
+  /pages/boat/BoatPage.qml` still uses that canonical path.
+* Overlay types such as the Brief side panel or control cards are opened by clicking the
+  matching StatusBar icon after the host swipe page is shown. Identifiers come from static
+  `icon.source` values, not runtime probing. Portrait BriefSidePanel is inline, so that
+  route has no StatusBar click. A ShownType click whose target is missing is skipped only
+  when the type is not already shown; the final check then fails. If the type is already
+  shown but the click target is missing, the route fails instead of passing without
+  exercising the control. An already-selected Levels tab is still clicked.
+* `*_Portrait.qml` / `*_Landscape.qml` layout implementations are mutually exclusive.
+  Target-page mode only resolves the variant for the current `Theme.screenSize`; the other
+  orientation is rejected as unresolvable rather than timing out after a zero-click route.
+* Shown-type discovery records page types instantiated in the swipe-page tree,
+  but skips instantiations whose own `visible:` binding is not unconditionally
+  true, except LevelsPage tab children. TanksTab and EnvironmentTab are opened
+  by clicking the TabBar labels (`Tanks`, `Environment`) after the Levels swipe
+  page. If that tab is already selected, the click still runs. Other
+  constructed-but-hidden children remain unresolvable rather than a zero-click
+  timeout. Loader `sourceComponent` / `Component` wrappers still provide
+  orientation layouts and explicit overlays.
+* PageStack destinations are found by scanning compiled QML resources for `pushPage()` calls
+  in navigable list items and widgets (`ListNavigation`, `ListQuantityGroupNavigation`, and
+  overview widgets). Overview widget routes use the Overview layout for the current
+  `Theme.screenSize`.
+
+Navigation blocks with runtime-branching `pushPage()` calls (e.g. conditional if/else) have
+all branches represented in the graph; the test verifies at runtime that the expected page or
+type was actually shown after each click.
 
 Pages that are only reachable via fully dynamic or computed URLs (e.g. plugin integration
 pages) cannot be statically resolved and will produce an error at startup.
@@ -32,8 +71,9 @@ Pages whose destination URL is static but whose clickable label/identifier is fu
 (for example values loaded from runtime data with no static fallback text/icon/objectName)
 are currently not resolvable in target-page mode.
 In target-page mode, runtime QML errors (including binding/runtime JavaScript errors such as
-`ReferenceError`) are counted as test failures, and URL-only success is not enough: the test also
-requires a real page object to be present on the page stack.
+`ReferenceError`) are counted as test failures. Success means the target type was constructed
+and shown — a PageStack URL match when that is how the type is reached, otherwise the type
+present in the UI tree (for swipe roots and overlays).
 
 The `smoke/mock-maximal` test configuration specifies that the UI should also load the "maximal" mock configuration, so it is not necessary to set `--mock-conf maximal`.
 
@@ -52,7 +92,9 @@ venus-gui-v2 --mock --mock-conf barebones --ui-test smoke/generic-capture
 
 UI tests are stored under `gui-v2/tests/ui`:
 
-* `gui-v2/tests/ui/smoke` - "smoke tests", i.e. those run as a quick sanity check on the UI
+* `gui-v2/tests/ui/smoke` - "smoke tests", i.e. those run as a quick sanity check on the UI.
+  Pass `--resolution 480x800` to run the same cases in portrait. Brief and cards assert
+  the inline side panel and vertical card lists.
 * `gui-v2/tests/ui/<feature>` - feature test that verifies some feature in more detail
 
 Each test is specified by a JSON configuration file, and one or more QML test files. The JSON file must have the same name as the test directory.

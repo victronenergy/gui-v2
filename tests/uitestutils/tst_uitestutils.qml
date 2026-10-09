@@ -12,10 +12,12 @@ TestCase {
 	name: "UiTestUtilsTest"
 
 	function _hasValidCurrentPage(pageStack, expectedPageUrl) {
-		if (!pageStack)
+		if (!pageStack) {
 			return false
-		if ((pageStack.topPageUrl ?? "") !== expectedPageUrl)
+		}
+		if ((pageStack.topPageUrl ?? "") !== expectedPageUrl) {
 			return false
+		}
 		const page = pageStack.currentPage
 		return !!page && page.__is_venus_gui_page__ === true
 	}
@@ -70,6 +72,19 @@ TestCase {
 		compare(UiTestUtilsHelper.normalizePageUrl(
 			"some/prefix/pages/settings/PageSettingsConnectivity.qml"),
 			"/pages/settings/PageSettingsConnectivity.qml")
+	}
+
+	function test_normalizePageUrl_boatModule() {
+		compare(UiTestUtilsHelper.normalizePageUrl(
+			"qrc:/qt/qml/Victron/Boat/BoatPage.qml"),
+			"/pages/boat/BoatPage.qml")
+		compare(UiTestUtilsHelper.normalizePageUrl(
+			":/qt/qml/Victron/Boat/BoatPage.qml"),
+			"/pages/boat/BoatPage.qml")
+		compare(UiTestUtilsHelper.normalizePageUrl("/pages/boat/BoatPage.qml"),
+			"/pages/boat/BoatPage.qml")
+		compare(UiTestUtilsHelper.normalizePageUrl("BoatPage.qml"),
+			"/pages/boat/BoatPage.qml")
 	}
 
 	function test_normalizePageUrl_invalidInputs() {
@@ -130,6 +145,30 @@ TestCase {
 		compare(normalized[1], "--ui-test")
 		compare(normalized[2], "smoke/mock-maximal")
 		compare(UiTestUtilsHelper.parseUiTestValueFromArgs(normalized), "smoke/mock-maximal")
+	}
+
+	function test_parseResolution_valid() {
+		const portrait = UiTestUtilsHelper.parseResolution("480x800")
+		compare(portrait.ok, true)
+		compare(portrait.width, 480)
+		compare(portrait.height, 800)
+		compare(portrait.error, "")
+
+		const landscape = UiTestUtilsHelper.parseResolution("1024X600")
+		compare(landscape.ok, true)
+		compare(landscape.width, 1024)
+		compare(landscape.height, 600)
+	}
+
+	function test_parseResolution_invalid() {
+		const cases = ["", "480", "480x", "x800", "480 x 800", "0x800", "-1x800"]
+		for (let i = 0; i < cases.length; ++i) {
+			const parsed = UiTestUtilsHelper.parseResolution(cases[i])
+			compare(parsed.ok, false, "Expected invalid resolution: " + cases[i])
+			compare(parsed.width, 0)
+			compare(parsed.height, 0)
+			verify(parsed.error.length > 0)
+		}
 	}
 
 	// --- buildPageGraph tests ---
@@ -195,18 +234,153 @@ TestCase {
 			"Last step expectedPage should match the target page")
 	}
 
-	function test_resolveTargetRoute_rootPageFails() {
-		// Root pages (e.g. SettingsPage.qml) are SwipeView pages and cannot be
-		// navigated to via pushPage, so resolveTargetRoute should return false.
-		var result = UiTestUtilsHelper.resolveTargetRoute("/pages/SettingsPage.qml")
-		verify(!result.success, "Root pages should not be resolvable")
+	function test_resolveTargetRoute_swipeRootPage() {
+		// SwipeView root pages are shown by clicking the nav bar; extra route
+		// steps are empty because no PageStack push is required.
+		var settings = UiTestUtilsHelper.resolveTargetRoute("/pages/SettingsPage.qml")
+		verify(settings.success, "SettingsPage should be resolvable as a swipe root")
+		compare(settings.entryNavText, "Settings")
+		compare(settings.routeSteps.length, 0)
+
+		var brief = UiTestUtilsHelper.resolveTargetRoute("/pages/BriefPage.qml")
+		verify(brief.success, "BriefPage should be resolvable as a swipe root")
+		compare(brief.entryNavText, "Brief")
+		compare(brief.routeSteps.length, 0)
+
+		// BoatPage is a SwipeViewPage compiled in Victron.Boat, not VenusOS/pages.
+		var boat = UiTestUtilsHelper.resolveTargetRoute("/pages/boat/BoatPage.qml")
+		verify(boat.success, "BoatPage should be resolvable as a swipe root")
+		compare(boat.entryNavText, "Boat")
+		compare(boat.routeSteps.length, 0)
 	}
 
-	function test_resolveTargetRoute_unsupportedPrefix() {
-		// Pages not reachable via ListNavigation from any root should fail.
+	function test_resolveTargetRoute_overlayType() {
+		// Overlay types are constructed by clicking a StatusBar icon after
+		// opening the host swipe page. They are not PageStack destinations.
+		var sidePanel = UiTestUtilsHelper.resolveTargetRoute("/pages/BriefSidePanel.qml")
+		verify(sidePanel.success, "BriefSidePanel should be resolvable via StatusBar")
+		compare(sidePanel.entryNavText, "Brief")
+		compare(sidePanel.routeSteps.length, 1)
+		compare(sidePanel.routeSteps[0].type, "iconSource")
+		compare(sidePanel.routeSteps[0].verify, "type")
+		compare(sidePanel.routeSteps[0].expectedPage, "/pages/BriefSidePanel.qml")
+		verify(sidePanel.routeSteps[0].values.some(function(value) {
+			return value.indexOf("icon_sidepanel_off_32.svg") >= 0
+		}), "Side panel route should click the inactive side-panel icon")
+
+		var cards = UiTestUtilsHelper.resolveTargetRoute("/pages/ControlCardsPage.qml")
+		verify(cards.success, "ControlCardsPage should be resolvable via StatusBar")
+		compare(cards.entryNavText, "Brief")
+		compare(cards.routeSteps.length, 1)
+		compare(cards.routeSteps[0].type, "iconSource")
+		compare(cards.routeSteps[0].verify, "type")
+		verify(cards.routeSteps[0].values.some(function(value) {
+			return value.indexOf("icon_controls_off_32.svg") >= 0
+		}), "Control cards route should click the inactive controls icon")
+	}
+
+	function test_resolveTargetRoute_activeOrientationLayoutType() {
+		// OverviewPage.qml declares both OverviewPage_Landscape and
+		// OverviewPage_Portrait; only the Theme.screenSize branch is live.
+		const landscape = UiTestUtilsHelper.resolveTargetRoute("/pages/OverviewPage_Landscape.qml")
+		const portrait = UiTestUtilsHelper.resolveTargetRoute("/pages/OverviewPage_Portrait.qml")
+		const briefLandscape = UiTestUtilsHelper.resolveTargetRoute("/pages/BriefPage_Landscape.qml")
+		const briefPortrait = UiTestUtilsHelper.resolveTargetRoute("/pages/BriefPage_Portrait.qml")
+		if (Theme.screenSize === Theme.Portrait) {
+			verify(portrait.success, "OverviewPage_Portrait should resolve in portrait")
+			compare(portrait.entryNavText, "Overview")
+			compare(portrait.routeSteps.length, 0)
+			verify(!landscape.success, "OverviewPage_Landscape should be unresolvable in portrait")
+			verify(briefPortrait.success, "BriefPage_Portrait should resolve in portrait")
+			compare(briefPortrait.routeSteps.length, 0)
+			verify(!briefLandscape.success, "BriefPage_Landscape should be unresolvable in portrait")
+		} else {
+			verify(landscape.success, "OverviewPage_Landscape should resolve in landscape")
+			compare(landscape.entryNavText, "Overview")
+			compare(landscape.routeSteps.length, 0)
+			verify(!portrait.success, "OverviewPage_Portrait should be unresolvable in landscape")
+			verify(briefLandscape.success, "BriefPage_Landscape should resolve in landscape")
+			compare(briefLandscape.routeSteps.length, 0)
+			verify(!briefPortrait.success, "BriefPage_Portrait should be unresolvable in landscape")
+		}
+	}
+
+	function test_resolveTargetRoute_portraitOrientationLayoutType() {
+		const previousScreenSize = Theme.screenSize
+		Theme.screenSize = Theme.Portrait
+		const portrait = UiTestUtilsHelper.resolveTargetRoute("/pages/OverviewPage_Portrait.qml")
+		const landscape = UiTestUtilsHelper.resolveTargetRoute("/pages/OverviewPage_Landscape.qml")
+		const briefPortrait = UiTestUtilsHelper.resolveTargetRoute("/pages/BriefPage_Portrait.qml")
+		const briefLandscape = UiTestUtilsHelper.resolveTargetRoute("/pages/BriefPage_Landscape.qml")
+		const sidePanel = UiTestUtilsHelper.resolveTargetRoute("/pages/BriefSidePanel.qml")
+		const cards = UiTestUtilsHelper.resolveTargetRoute("/pages/ControlCardsPage.qml")
+		Theme.screenSize = previousScreenSize
+
+		verify(portrait.success, "OverviewPage_Portrait should resolve when Theme is Portrait")
+		compare(portrait.entryNavText, "Overview")
+		compare(portrait.routeSteps.length, 0)
+		verify(!landscape.success, "OverviewPage_Landscape should be unresolvable when Theme is Portrait")
+		verify(briefPortrait.success, "BriefPage_Portrait should resolve when Theme is Portrait")
+		compare(briefPortrait.routeSteps.length, 0)
+		verify(!briefLandscape.success, "BriefPage_Landscape should be unresolvable when Theme is Portrait")
+		verify(sidePanel.success, "BriefSidePanel should still resolve in portrait")
+		compare(sidePanel.entryNavText, "Brief")
+		compare(sidePanel.routeSteps.length, 0,
+			"Portrait BriefSidePanel is inline; no StatusBar click")
+		verify(cards.success, "ControlCardsPage should still resolve in portrait")
+		compare(cards.entryNavText, "Brief")
+		compare(cards.routeSteps.length, 1)
+		compare(cards.routeSteps[0].verify, "type")
+	}
+
+	function test_resolveTargetRoute_levelsTabTypes() {
+		// LevelsPage TabBar labels switch TanksTab / EnvironmentTab.
+		// currentIndex is runtime (prefer an enabled tab). The click still
+		// runs if that tab is already selected.
+		const tanks = UiTestUtilsHelper.resolveTargetRoute("/pages/TanksTab.qml")
+		verify(tanks.success, "TanksTab should resolve via the Levels TabBar")
+		compare(tanks.entryNavText, "Levels")
+		compare(tanks.routeSteps.length, 1)
+		compare(tanks.routeSteps[0].type, "text")
+		compare(tanks.routeSteps[0].verify, "type")
+		compare(tanks.routeSteps[0].expectedPage, "/pages/TanksTab.qml")
+		verify(tanks.routeSteps[0].values.indexOf("Tanks") >= 0,
+			"TanksTab route should click the Tanks tab label")
+
+		const environment = UiTestUtilsHelper.resolveTargetRoute("/pages/EnvironmentTab.qml")
+		verify(environment.success, "EnvironmentTab should resolve via the Levels TabBar")
+		compare(environment.entryNavText, "Levels")
+		compare(environment.routeSteps.length, 1)
+		compare(environment.routeSteps[0].type, "text")
+		compare(environment.routeSteps[0].verify, "type")
+		compare(environment.routeSteps[0].expectedPage, "/pages/EnvironmentTab.qml")
+		verify(environment.routeSteps[0].values.indexOf("Environment") >= 0,
+			"EnvironmentTab route should click the Environment tab label")
+
+		const levels = UiTestUtilsHelper.resolveTargetRoute("/pages/LevelsPage.qml")
+		verify(levels.success, "LevelsPage should remain a swipe root")
+		compare(levels.entryNavText, "Levels")
+		compare(levels.routeSteps.length, 0)
+
+		const levelsTab = UiTestUtilsHelper.resolveTargetRoute("/pages/LevelsTab.qml")
+		verify(!levelsTab.success,
+			"LevelsTab is the shared tab base, not a navigable view")
+
+		const previousScreenSize = Theme.screenSize
+		Theme.screenSize = Theme.Portrait
+		const environmentPortrait = UiTestUtilsHelper.resolveTargetRoute("/pages/EnvironmentTab.qml")
+		Theme.screenSize = previousScreenSize
+		verify(environmentPortrait.success,
+			"EnvironmentTab should still resolve in portrait")
+		compare(environmentPortrait.entryNavText, "Levels")
+		compare(environmentPortrait.routeSteps.length, 1)
+		verify(environmentPortrait.routeSteps[0].values.indexOf("Environment") >= 0)
+	}
+
+	function test_resolveTargetRoute_unresolvablePage() {
 		var result = UiTestUtilsHelper.resolveTargetRoute(
-			"/pages/BriefPage.qml")
-		verify(!result.success, "SwipeView root pages should not be resolvable")
+			"/pages/ThisPageDoesNotExistAnywhere.qml")
+		verify(!result.success, "Unknown pages should not be resolvable")
 	}
 
 	function test_resolveTargetRoute_nonSettingsSubPage() {
