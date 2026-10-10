@@ -503,6 +503,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/settings/devicelist/PageMotorDrive.qml
     pages/settings/devicelist/PageSwitch.qml
     pages/settings/devicelist/PageUnsupportedDevice.qml
+    pages/settings/devicelist/DeviceOffReason.qml
     pages/settings/devicelist/battery/BatteryBankModel.qml
     pages/settings/devicelist/battery/BatteryDetails.qml
     pages/settings/devicelist/battery/BatteryHistory.qml
