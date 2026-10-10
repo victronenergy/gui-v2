@@ -83,6 +83,9 @@ QtObject {
 	//% "Allow to discharge"
 	readonly property string allow_to_discharge: qsTrId("common_words_allow_to_discharge")
 
+	//% "Always"
+	readonly property string always: qsTrId("common_words_always")
+
 	//% "Auto"
 	readonly property string auto: qsTrId("common_words_auto")
 
@@ -318,6 +321,10 @@ QtObject {
 	//: UTC date/time
 	//% "UTC"
 	readonly property string locale_utc: qsTrId("common_words_locale_utc")
+
+	//: Local device instance
+	//% "Local"
+	readonly property string local: qsTrId("common_words_local")
 
 	//% "Low battery temperature"
 	readonly property string low_battery_temperature: qsTrId("common_words_low_battery_temperature")
@@ -638,8 +645,14 @@ QtObject {
 	//% "Voltage"
 	readonly property string voltage: qsTrId("common_words_voltage")
 
+	//% "VRM"
+	readonly property string vrm: qsTrId("common_words_vrm")
+
 	//% "VRM instance"
 	readonly property string vrm_instance: qsTrId("common_words_vrm_instance")
+
+	//% "Watch app"
+	readonly property string watch_app: qsTrId("common_words_watch_app")
 
 	//% "When warning is cleared stop after"
 	readonly property string when_warning_is_cleared_stop_after: qsTrId("common_words_when_warning_is_cleared_stop_after")

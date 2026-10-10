@@ -505,7 +505,7 @@ TestCase {
 				],
 				initialGroups: [],
 				changes: {
-					"mock/com.victronenergy.solarcharger.a/SwitchableOutput/0/Settings/ShowUIControl": 1
+					"mock/com.victronenergy.solarcharger.a/SwitchableOutput/0/Settings/ShowUIControl": 15
 				},
 				finalGroups: [
 					{
@@ -517,7 +517,7 @@ TestCase {
 				],
 			},
 			{
-				tag: "Add channel to device group by changing ShowUIControl=1",
+				tag: "Add channel to device group by changing ShowUIControl=15",
 				devices: [
 					{
 						uid: "mock/com.victronenergy.solarcharger.a",
@@ -535,7 +535,7 @@ TestCase {
 				],
 				initialGroups: [],
 				changes: {
-					"mock/com.victronenergy.solarcharger.a/SwitchableOutput/0/Settings/ShowUIControl": 1
+					"mock/com.victronenergy.solarcharger.a/SwitchableOutput/0/Settings/ShowUIControl": 15
 				},
 				finalGroups: [
 					{
