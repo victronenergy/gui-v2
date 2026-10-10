@@ -1,4 +1,8 @@
 .env    text eol=lf
-*.qml   text eol=lf
+*.qml   text eol=lf filter=tabspace
 *.sh    text eol=lf
+*.h     filter=tabspace
+*.hpp   filter=tabspace
+*.cpp   filter=tabspace
+*.js    filter=tabspace
 *       text=auto
