@@ -188,6 +188,20 @@ a hard freeze of the whole application.
 ./venus-gui-v2 --mock --skip-splash --ui-test benchmark/pages
 ```
 
+Use the same optimized configuration for both revisions and platforms. For this work that is
+`CMAKE_BUILD_TYPE=RelWithDebInfo` with a single-config generator; on Windows with Visual Studio,
+build/install with `--config RelWithDebInfo` and run tests with `ctest -C RelWithDebInfo`.
+The multi-config build selection, not a cached `CMAKE_BUILD_TYPE`, chooses the Windows binary.
+Set `QT_ASSUME_STDERR_HAS_CONSOLE=1` on Windows so the timing lines reach redirected stderr.
+Run installed builds consistently (filesystem QML), with the same Qt version and `NO_CACHEGEN`
+setting. Use unique `VENUS_GUI_TEST_CAPTURE_DIR` directories per run.
+
+Compare medians of at least three runs, preferably interleaving baseline and candidate.
+Device measurements determine acceptance; Windows timings are informational and are not
+numerically comparable with ARM timings, even with the same optimization configuration.
+Each component measurement constructs 100 instances. A standalone `QuantityLabel` improvement
+does not imply the same percentage improvement in every containing page.
+
 It emits three kinds of line on stderr:
 
 | Line | Meaning |

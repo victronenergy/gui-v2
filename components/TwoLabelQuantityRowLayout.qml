@@ -19,15 +19,30 @@ Flow {
 
 	required property string primaryText
 	required property QuantityObjectModel model
-	property alias captionText: captionLabel.text
+	property string captionText
 
 	property alias primaryLabel: primaryLabel
-	property alias captionLabel: captionLabel
+	property Item captionLabel
 	property alias tableMode: quantityRow.tableMode
 	property bool forceColumnLayout
 
 	readonly property bool _useColumnLayout: forceColumnLayout
 			|| (Math.min(primaryLabel.implicitWidth, Theme.geometry_listItem_primaryText_minimumWidth) + quantityRow.implicitWidth > width)
+
+	function _syncCaptionLabel() {
+		if (root.captionText.length > 0) {
+			if (!root.captionLabel) {
+				root.captionLabel = captionComponent.createObject(root)
+			}
+		} else if (root.captionLabel) {
+			root.captionLabel.visible = false
+			root.captionLabel.destroy()
+			root.captionLabel = null
+		}
+	}
+
+	onCaptionTextChanged: _syncCaptionLabel()
+	Component.onCompleted: _syncCaptionLabel()
 
 	Label {
 		id: primaryLabel
@@ -43,11 +58,13 @@ Flow {
 		model: root.model
 	}
 
-	CaptionLabel {
-		id: captionLabel
+	Component {
+		id: captionComponent
 
-		topPadding: Theme.geometry_listItem_content_verticalSpacing
-		width: parent.width
-		visible: text.length > 0
+		CaptionLabel {
+			text: root.captionText
+			topPadding: Theme.geometry_listItem_content_verticalSpacing
+			width: root.width
+		}
 	}
 }

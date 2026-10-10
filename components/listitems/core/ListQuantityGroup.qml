@@ -38,7 +38,7 @@ ListSetting {
 			model: root.model
 			primaryLabel.textFormat: root.textFormat
 			primaryLabel.font: root.font
-			captionLabel.text: root.caption
+			captionText: root.caption
 		}
 	}
 }
