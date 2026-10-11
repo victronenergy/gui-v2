@@ -46,6 +46,22 @@ OverviewWidget {
 	}
 
 	VeQuickItem {
+		id: activeBatteryService
+		uid: Global.system.serviceUid + "/ActiveBatteryService"
+	}
+
+	VeQuickItem {
+		id: starterBatteryVoltage
+		uid: {
+			if (!activeBatteryService.valid || AllDevicesModel.count === 0) {
+				return ""
+			}
+			const device = AllDevicesModel.findDeviceWithTypeAndInstance("battery", parseInt(activeBatteryService.value.split('/')[1]))
+			return device ? device.serviceUid + "/Dc/1/Voltage" : ""
+		}
+	}
+
+	VeQuickItem {
 		id: preferRenewableEnergy
 
 		uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Dc/0/PreferRenewableEnergy" : ""
@@ -131,93 +147,136 @@ OverviewWidget {
 				}
 			}
 		}
+	}
 
-		QuantityLabel {
+	contentItem: Item {
+		implicitWidth: Theme.geometry_overviewPage_widget_centerWidgetWidth
+		implicitHeight: headerLayout.implicitHeight + middleLayout.implicitHeight + footerLayout.implicitHeight
+
+		Loader {
+			id: starterBatteryLoader
 			anchors {
 				top: parent.top
-				topMargin: Theme.geometry_overviewPage_widget_content_topMargin
+				topMargin: - root.topPadding + Theme.geometry_overviewPage_widget_battery_starter_verticalMargin
 				right: parent.right
-				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
+				rightMargin: - root.rightPadding + Theme.geometry_overviewPage_widget_battery_starter_rightMargin
+			}
+			active: starterBatteryVoltage.valid
+			sourceComponent: starterBattery
+		}
+
+		QuantityLabel {
+			id: temperatureLabel
+			anchors {
+				top: starterBatteryLoader.active ? middleLayout.top : parent.top
+				topMargin: 0
+				right: parent.right
+				rightMargin: 0
 			}
 			value: Global.system.battery.temperature
 			unit: Global.systemSettings.temperatureUnit
+			unitText: Units.degreesSymbol
 			unitColor: Theme.color_overviewPage_widget_battery_font_secondary
-			font.pixelSize: root.secondaryFontSize
+			font.pixelSize: Theme.font_overviewPage_battery_large
 			alignment: Qt.AlignRight
 			visible: !isNaN(Global.system.battery.temperature)
 		}
 
-		CP.ColorImage {
+		ColumnLayout {
+			id: headerLayout
 			anchors {
-				bottom: parent.bottom
-				bottomMargin: Theme.geometry_overviewPage_batterywidget_renewable_icon_bottom_margin
-				right: parent.right
-				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
+				top: parent.top
+				left: parent.left
+				right: starterBatteryLoader.active ? starterBatteryLoader.left
+					: !starterBatteryLoader.active && temperatureLabel.visible ? temperatureLabel.left
+					: parent.right
 			}
-			fillMode: Image.PreserveAspectFit
-			color: Theme.color_font_primary
-			visible: root.preferRenewable
-			source: "qrc:/images/icon_charging_renewables.svg"
-		}
-	}
+			spacing: 0
 
-	contentItem: ColumnLayout {
-		spacing: 0
+			WidgetHeader {
+				text: root.title
+				icon.source: Global.system.battery.icon
+				Layout.fillWidth: true
+				Layout.bottomMargin: Theme.geometry_overviewPage_widget_content_spacing
+			}
 
-		WidgetHeader {
-			text: root.title
-			icon.source: Global.system.battery.icon
-			Layout.fillWidth: true
-			Layout.bottomMargin: Theme.geometry_overviewPage_widget_content_spacing
-		}
-
-		ElectricalQuantityLabel {
-			font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_large
-			alignment: Qt.AlignLeft
-			value: Global.system.battery.stateOfCharge
-			unit: VenusOS.Units_Percentage
-			unitColor: Theme.color_overviewPage_widget_battery_font_secondary
-			Layout.fillWidth: true
-		}
-
-		Label {
-			text: VenusOS.battery_modeToText(Global.system.battery.mode)
-			elide: Text.ElideRight
-			color: Theme.color_overviewPage_widget_battery_font_secondary
-			font.pixelSize: Theme.font_overviewPage_battery_small
-			Layout.fillWidth: true
-		}
-
-		RowLayout {
-			spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin
-			Layout.fillWidth: false
-
-			Label {
-				text: Global.system.battery.timeToGo == 0 ? "" : Utils.secondsToString(Global.system.battery.timeToGo)
-				visible: Global.system.battery.timeToGo > 0
-				elide: Text.ElideRight
-				font.pixelSize: Theme.font_overviewPage_battery_small
+			ElectricalQuantityLabel {
+				font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_large
+				alignment: Qt.AlignLeft
+				value: Global.system.battery.stateOfCharge
+				unit: VenusOS.Units_Percentage
+				unitColor: Theme.color_overviewPage_widget_battery_font_secondary
 				Layout.fillWidth: true
 			}
-
-			CP.ColorImage {
-				fillMode: Image.PreserveAspectFit
-				color: Theme.color_font_primary
-				visible: root.preferRenewableOverride
-				source: root.preferRenewableOverrideGenset
-						? "qrc:/images/icon_charging_generator.svg"
-						: Global.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Shore
-						  ? "qrc:/images/icon_charging_shore.svg"
-						  : "qrc:/images/icon_charging_grid.svg"
-			}
-		}
-
-		Item {
-			Layout.fillWidth: true
-			Layout.fillHeight: true
 		}
 
 		RowLayout {
+			id: middleLayout
+			anchors {
+				top: headerLayout.bottom
+				left: parent.left
+				right: parent.right
+			}
+			spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin
+
+			Rectangle {
+				implicitWidth: Theme.geometry_overviewPage_widget_battery_renewables_width
+				implicitHeight: Theme.geometry_overviewPage_widget_battery_renewables_height
+				radius: Theme.geometry_overviewPage_widget_battery_renewables_radius
+				color: "transparent"
+				border.width: Theme.geometry_overviewPage_widget_battery_renewables_borderWidth
+				border.color: Theme.color_font_primary
+				visible: root.preferRenewable
+
+				CP.ColorImage {
+					anchors.centerIn: parent
+					fillMode: Image.PreserveAspectFit
+					color: Theme.color_font_primary
+					source: "qrc:/images/icon_charging_renewables.svg"
+				}
+			}
+
+			ColumnLayout {
+				spacing: 0
+				Layout.fillWidth: true
+
+				Label {
+					id: modeText
+					text: VenusOS.battery_modeToText(Global.system.battery.mode)
+					elide: Text.ElideRight
+					color: Theme.color_overviewPage_widget_battery_font_secondary
+					font.pixelSize: Theme.font_overviewPage_battery_small
+					Layout.fillWidth: true
+				}
+
+				RowLayout {
+					spacing: 0
+					Layout.fillWidth: true
+					Label {
+						text: Global.system.battery.timeToGo == 0 ? "" : Utils.secondsToString(Global.system.battery.timeToGo)
+						visible: Global.system.battery.timeToGo > 0
+						elide: Text.ElideRight
+						font.pixelSize: Theme.font_overviewPage_battery_small
+						Layout.fillWidth: false
+					}
+
+					CP.ColorImage {
+						fillMode: Image.PreserveAspectFit
+						color: Theme.color_font_primary
+						visible: root.preferRenewableOverride
+						source: root.preferRenewableOverrideGenset
+								? "qrc:/images/icon_charging_generator.svg"
+								: Global.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Shore
+								  ? "qrc:/images/icon_charging_shore.svg"
+								  : "qrc:/images/icon_charging_grid.svg"
+					}
+				}
+			}
+		}
+
+
+		RowLayout {
+			id: footerLayout
 			// Calculate whether voltage, current and power quantities fit on the footer together, if not use smaller font.
 			// Discharging battery has negative amperes and its not unusual for the watts to be in the 1k+ range.
 			readonly property bool _useSmallFont: !quantityLabelFits(batteryVoltageDisplay) || !quantityLabelFits(batteryPowerDisplay)
@@ -234,7 +293,11 @@ OverviewWidget {
 												+ Theme.geometry_quantityLabel_spacing
 												+ quantityLabelFont.advanceWidth(unitText))
 			}
-
+			anchors {
+				left: parent.left
+				right: parent.right
+				bottom: parent.bottom
+			}
 			spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin
 
 			FontMetrics {
@@ -273,6 +336,95 @@ OverviewWidget {
 				font.pixelSize: parent._useSmallFont ? Theme.font_overviewPage_battery_small : Theme.font_overviewPage_battery_large
 				alignment: Qt.AlignRight
 				Layout.fillWidth: true
+			}
+		}
+	}
+
+	component Terminal : Rectangle {
+		anchors {
+			top: parent.top
+			topMargin: Theme.geometry_overviewPage_widget_battery_starter_terminal_topMargin
+			leftMargin: Theme.geometry_overviewPage_widget_battery_starter_terminal_horizontalMargin
+			rightMargin: Theme.geometry_overviewPage_widget_battery_starter_terminal_horizontalMargin
+		}
+		width: Theme.geometry_overviewPage_widget_battery_starter_terminal_width
+		height: Theme.geometry_overviewPage_widget_battery_starter_terminal_height
+		topLeftRadius: Theme.geometry_overviewPage_widget_battery_starter_terminal_radius
+		topRightRadius: Theme.geometry_overviewPage_widget_battery_starter_terminal_radius
+		color: Theme.color_overviewPage_widget_border
+		border.color: Theme.color_page_background
+		border.width: Theme.geometry_overviewPage_widget_battery_starter_terminal_borderWidth
+	}
+
+	Component {
+		id: starterBattery
+
+		Rectangle {
+			implicitWidth: Theme.geometry_overviewPage_widget_battery_starter_width
+			implicitHeight: batteryOutline.implicitHeight
+					+ Theme.geometry_overviewPage_widget_battery_starter_case_topMargin
+					+ Theme.geometry_overviewPage_widget_battery_starter_case_bottomMargin
+
+			radius: Theme.geometry_overviewPage_widget_battery_starter_radius
+			color: Theme.color_page_background
+
+			Terminal {
+				anchors.left: parent.left
+				anchors.leftMargin: Theme.geometry_overviewPage_widget_battery_starter_terminal_horizontalMargin
+			}
+			Terminal {
+				anchors.right: parent.right
+				anchors.rightMargin: Theme.geometry_overviewPage_widget_battery_starter_terminal_horizontalMargin
+			}
+
+			Rectangle {
+				id: batteryOutline
+				anchors {
+					top: parent.top
+					topMargin: Theme.geometry_overviewPage_widget_battery_starter_case_topMargin
+					left: parent.left
+					leftMargin: Theme.geometry_overviewPage_widget_battery_starter_case_leftMargin
+					right: parent.right
+					rightMargin: Theme.geometry_overviewPage_widget_battery_starter_case_rightMargin
+				}
+				implicitHeight: columnLayout.implicitHeight
+								+ Theme.geometry_overviewPage_widget_battery_layout_topMargin
+								+ Theme.geometry_overviewPage_widget_battery_layout_bottomMargin
+				radius: Theme.geometry_overviewPage_widget_battery_starter_case_radius
+				border.width: Theme.geometry_overviewPage_widget_border_width
+				border.color: Theme.color_overviewPage_widget_border
+				color: Theme.color_overviewPage_widget_background
+
+				ColumnLayout {
+					id: columnLayout
+					spacing: 0
+					anchors {
+						fill: parent
+						topMargin: Theme.geometry_overviewPage_widget_battery_layout_topMargin
+						leftMargin: Theme.geometry_overviewPage_widget_battery_layout_leftMargin
+						bottomMargin: Theme.geometry_overviewPage_widget_battery_layout_bottomMargin
+						rightMargin: Theme.geometry_overviewPage_widget_battery_layout_rightMargin
+					}
+
+					Label {
+						id: starterText
+						//% "Starter"
+						text: qsTrId("overview_widget_battery_starter_title")
+						elide: Text.ElideRight
+						font.pixelSize: Theme.font_overviewPage_battery_small
+						Layout.fillWidth: true
+					}
+
+					ElectricalQuantityLabel {
+						id: starterVoltage
+						value: starterBatteryVoltage.value
+						unit: VenusOS.Units_Volt_DC
+						unitColor: Theme.color_overviewPage_widget_battery_font_secondary
+						font.pixelSize: Theme.font_overviewPage_battery_large
+						alignment: Qt.AlignLeft
+						Layout.fillWidth: true
+					}
+				}
 			}
 		}
 	}
