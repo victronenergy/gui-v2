@@ -43,9 +43,9 @@ CT.Button {
 
 		implicitHeight: Theme.geometry_iochannel_control_height
 		color: root.enabled ? (root.down ? Theme.color_ok : Theme.color_darkOk) : Theme.color_background_disabled
-		border.width: Theme.geometry_border_2
+		border.width: Theme.geometry_size_2
 		border.color: root.enabled ? Theme.color_ok : Theme.color_font_disabled
-		radius: Theme.geometry_radius_8
+		radius: Theme.geometry_size_8
 
 		BasePressEffect {
 			id: shaderEffect

@@ -21,13 +21,13 @@ Column {
 
 	readonly property bool showing3Phases: acLoadGauge.active && Global.system.load.ac.phases.count === 3
 
-	width: Theme.geometry_briefPage_edgeGauge_width
+	width: Theme.geometry_size_80
 	on_RightGaugeCountChanged: pauseRightGaugeAnimations.restart()
 
 	Loader {
 		id: motorDriveLoadGauge
 
-		width: Theme.geometry_briefPage_edgeGauge_width
+		width: Theme.geometry_size_80
 		height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
 		active: gps.valid && motorDrives.dcConsumption.quotient.valid
 		sourceComponent: SideGauge {
@@ -35,7 +35,7 @@ Column {
 			direction: PathArc.Counterclockwise
 			startAngle: gaugeParams.end
 			endAngle: gaugeParams.start
-			strokeWidth: Theme.geometry_boatPage_batteryGauge_strokeWidth
+			strokeWidth: Theme.geometry_size_15
 			horizontalAlignment: Qt.AlignRight
 			animationEnabled: root.animationEnabled
 			valueType: VenusOS.Gauges_ValueType_RisingPercentage
@@ -48,7 +48,7 @@ Column {
 	Loader {
 		id: acLoadGauge
 
-		width: Theme.geometry_briefPage_edgeGauge_width
+		width: Theme.geometry_size_80
 		height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
 		active: Global.system?.hasAcLoads && !motorDriveLoadGauge.active
 
@@ -64,8 +64,8 @@ Column {
 			arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset
 			horizontalAlignment: Qt.AlignRight
 			strokeWidth: phaseModel.count <= 1
-						 ? Theme.geometry_boatPage_batteryGauge_strokeWidth
-						 : Theme.geometry_arc_strokeWidth
+						 ? Theme.geometry_size_15
+						 : Theme.geometry_size_8
 			x: -root._gaugeArcMargin
 			animationEnabled: root.animationEnabled
 			valueType: VenusOS.Gauges_ValueType_RisingPercentage
@@ -78,7 +78,7 @@ Column {
 	Loader {
 		id: dcLoadGauge
 
-		width: Theme.geometry_briefPage_edgeGauge_width
+		width: Theme.geometry_size_80
 		height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
 		active: !motorDriveLoadGauge.active && Global.system.dc.hasPower
 		sourceComponent: SideGauge {
@@ -87,7 +87,7 @@ Column {
 			direction: PathArc.Counterclockwise
 			startAngle: gaugeParams.end
 			endAngle: gaugeParams.start
-			strokeWidth: Theme.geometry_boatPage_batteryGauge_strokeWidth
+			strokeWidth: Theme.geometry_size_15
 			arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset
 			horizontalAlignment: Qt.AlignRight
 

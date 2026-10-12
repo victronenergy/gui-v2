@@ -18,8 +18,8 @@ T.Button {
 		? (down ? Theme.color_ok : Theme.color_darkOk)
 		: (down ? Theme.color_button_on_background_disabled : Theme.color_background_disabled)
 	property color borderColor: enabled ? Theme.color_ok : Theme.color_font_disabled
-	property real borderWidth: Theme.geometry_border_2
-	property real radius: Theme.geometry_radius_8
+	property real borderWidth: Theme.geometry_size_2
+	property real radius: Theme.geometry_size_8
 	property real topLeftRadius: NaN
 	property real bottomLeftRadius: NaN
 	property real topRightRadius: NaN
@@ -34,11 +34,11 @@ T.Button {
 	onCanceled: pressEffect.stop()
 
 	down: pressed || checked
-	spacing: Theme.geometry_button_spacing
-	topPadding: topInset + Theme.geometry_space_4
-	bottomPadding: bottomInset + Theme.geometry_space_4
-	leftPadding: leftInset + Theme.geometry_space_4
-	rightPadding: rightInset + Theme.geometry_space_4
+	spacing: Theme.geometry_size_7
+	topPadding: topInset + Theme.geometry_size_4
+	bottomPadding: bottomInset + Theme.geometry_size_4
+	leftPadding: leftInset + Theme.geometry_size_4
+	rightPadding: rightInset + Theme.geometry_size_4
 
 	implicitWidth: Math.max(
 		implicitBackgroundWidth + leftInset + rightInset,
@@ -110,8 +110,8 @@ T.Button {
 
 			x: root.display === T.AbstractButton.TextBesideIcon ? 0 : (parent.width - width) / 2
 			y: root.display === T.AbstractButton.TextUnderIcon ? 0 : (parent.height - height) / 2
-			width: root.icon.width || Theme.geometry_icon_size_medium
-			height: root.icon.height || Theme.geometry_icon_size_medium
+			width: root.icon.width || Theme.geometry_size_32
+			height: root.icon.height || Theme.geometry_size_32
 			source: root.icon.source
 			color: root.icon.color
 			visible: root.display !== T.AbstractButton.TextOnly

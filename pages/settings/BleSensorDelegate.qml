@@ -249,8 +249,8 @@ ListItemLoader {
 				Label {
 					// ListTextField clears the root's vertical padding; add it back here so the
 					// row keeps its normal height.
-					topPadding: Theme.geometry_listItem_content_verticalMargin
-					bottomPadding: Theme.geometry_listItem_content_verticalMargin
+					topPadding: Theme.geometry_listItem_content_spacing
+					bottomPadding: Theme.geometry_listItem_content_spacing
 					text: keyField.text
 					font: keyField.font
 					textFormat: keyField.textFormat
@@ -341,7 +341,7 @@ ListItemLoader {
 					Layout.fillWidth: keyField.portrait
 					Layout.maximumWidth: keyField.portrait ? Number.POSITIVE_INFINITY
 							: Theme.geometry_listItem_textField_maximumWidth
-					Layout.bottomMargin: keyField.portrait ? Theme.geometry_listItem_content_verticalMargin : 0
+					Layout.bottomMargin: keyField.portrait ? Theme.geometry_listItem_content_spacing : 0
 				}
 			}
 		}

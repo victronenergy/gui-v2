@@ -45,7 +45,7 @@ GeneratorDialog {
 			width: parent.width - (2 * Theme.geometry_modalDialog_content_horizontalMargin)
 
 			Label {
-				bottomPadding: Theme.geometry_space_16
+				bottomPadding: Theme.geometry_size_16
 				wrapMode: Text.Wrap
 				horizontalAlignment: Text.AlignHCenter
 				x: Theme.geometry_page_content_horizontalMargin
@@ -77,7 +77,7 @@ GeneratorDialog {
 
 			Label {
 				width: parent.width
-				topPadding: Theme.geometry_space_16
+				topPadding: Theme.geometry_size_16
 				wrapMode: Text.Wrap
 				color: Theme.color_font_primary
 				horizontalAlignment: Text.AlignHCenter

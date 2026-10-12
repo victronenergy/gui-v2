@@ -8,7 +8,7 @@ import Victron.VenusOS
 
 Rectangle {
 	height: label.height
-	width: label.width + Theme.geometry_button_spacing
+	width: label.width + Theme.geometry_size_7
 
 	QuantityLabel {
 		id: label

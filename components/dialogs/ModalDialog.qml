@@ -22,9 +22,9 @@ T.Dialog {
 	property string secondaryTitle
 	property int titleTextFormat: Text.AutoText
 	property color backgroundColor: Theme.color_background_secondary
-	property real borderWidth: Theme.geometry_modalDialog_border_width
+	property real borderWidth: Theme.geometry_border_hairline
 	property real backgroundTopRadius: Theme.geometry_modalDialog_topCorners_radius
-	property real backgroundBottomRadius: Theme.geometry_modalDialog_bottomCorners_radius
+	property real backgroundBottomRadius: Theme.geometry_inset_landscape
 	property Item acceptButtonBackground
 	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndCancel
 	property bool canAccept: true
@@ -119,7 +119,7 @@ T.Dialog {
 			implicitContentHeight + topPadding + bottomPadding + implicitHeaderHeight + implicitFooterHeight))
 	modal: true
 	topPadding: topInset + Theme.geometry_modalDialog_topPadding
-	bottomPadding: bottomInset + Theme.geometry_listItem_content_horizontalMargin
+	bottomPadding: bottomInset + Theme.geometry_shared_24_24_12
 
 	// When "cancel" is the only action available, allow auto-closing with ESC or external clicks.
 	// Otherwise, force the user to explicitly cancel with a button click (or drag away in portrait).
@@ -180,7 +180,7 @@ T.Dialog {
 
 	header: Loader {
 		width: Math.max(implicitWidth, Theme.geometry_modalDialog_width)
-		height: Math.max(implicitHeight, Theme.geometry_modalDialog_header_height)
+		height: Math.max(implicitHeight, Theme.geometry_size_64)
 		sourceComponent: Theme.screenSize === Theme.Portrait ? portraitHeaderComponent : landscapeHeaderComponent
 
 		Component {
@@ -198,7 +198,7 @@ T.Dialog {
 					elide: Text.ElideRight
 					visible: text.length > 0
 					Layout.fillWidth: true
-					Layout.topMargin: Theme.geometry_space_12
+					Layout.topMargin: Theme.geometry_size_12
 				}
 
 				Label {
@@ -288,7 +288,7 @@ T.Dialog {
 				bottomMargin: root.background.border.width
 				top: footerTopSeparator.bottom
 			}
-			width: Theme.geometry_modalDialog_footer_midSeparator_width
+			width: Theme.geometry_size_1
 		}
 
 		Button {
@@ -310,8 +310,8 @@ T.Dialog {
 
 			// In portrait layout, the accept button fills the width of the dialog, and has a
 			// coloured background.
-			leftInset: Theme.geometry_modalDialog_acceptButton_horizontalInset
-			rightInset: Theme.geometry_modalDialog_acceptButton_horizontalInset
+			leftInset: Theme.geometry_inset_portrait
+			rightInset: Theme.geometry_inset_portrait
 			topInset: Theme.geometry_modalDialog_acceptButton_topInset
 			bottomInset: Theme.geometry_modalDialog_acceptButton_bottomInset
 			flat: Theme.screenSize !== Theme.Portrait

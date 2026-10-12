@@ -33,16 +33,16 @@ OverviewWidget {
 	title: qsTrId("overview_widget_inverter_title")
 	type: VenusOS.OverviewWidget_Type_VeBusDevice
 	enabled: !!Global.inverterChargers.firstObject
-	rightPadding: Theme.geometry_space_8
+	rightPadding: Theme.geometry_size_8
 
 	contentItem: Item {
-		implicitWidth: Theme.geometry_overviewPage_widget_centerWidgetWidth
+		implicitWidth: Theme.geometry_size_hero_medium
 		implicitHeight: contentLayout.implicitHeight
 
 		ColumnLayout {
 			id: contentLayout
 
-			width: parent.width - sideGaugeLoader.width - Theme.geometry_space_8
+			width: parent.width - sideGaugeLoader.width - Theme.geometry_size_8
 			height: parent.height
 			spacing: Theme.geometry_overviewPage_widget_content_spacing
 

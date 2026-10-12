@@ -55,7 +55,7 @@ ModalDialog {
 						Loader {
 							anchors {
 								left: parent.horizontalCenter
-								topMargin: Theme.geometry_space_6
+								topMargin: Theme.geometry_size_6
 							}
 							active: (Global.notifications?.navBarNotificationCounterVisible ?? false)
 									&& hiddenPageItem.page.url.endsWith("NotificationsPage.qml")

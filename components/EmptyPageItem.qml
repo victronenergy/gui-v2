@@ -16,12 +16,12 @@ Column {
 	property alias imageSource: logo.source
 	property alias imageColor: logo.color
 
-	spacing: Theme.geometry_space_10
+	spacing: Theme.geometry_size_10
 
 	Label {
 		id: title
 		width: parent.width
-		height: implicitHeight + Theme.geometry_emptyPageItem_title_bottomMargin
+		height: implicitHeight + Theme.geometry_size_40
 		wrapMode: Text.Wrap
 		horizontalAlignment: Text.AlignHCenter
 		font.pixelSize: Theme.font_size_body2
@@ -34,7 +34,7 @@ Column {
 
 	Label {
 		id: primaryLabel
-		topPadding: Theme.geometry_space_10
+		topPadding: Theme.geometry_size_10
 		width: parent.width
 		wrapMode: Text.Wrap
 		horizontalAlignment: Text.AlignHCenter

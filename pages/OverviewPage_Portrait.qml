@@ -19,9 +19,6 @@ FocusScope {
 
 	required property bool animationEnabled
 
-	// Watt threshold for overview connector animation. Not a layout size.
-	readonly property int connectorAnimationPowerThreshold: 30
-
 	// The maximum number of widgets currently shown in the vertical space. This is the sum of the
 	// max column count from all three sections.
 	readonly property int maximumColumnCount: inputLayout.maximumColumnCount
@@ -35,7 +32,7 @@ FocusScope {
 		// If all widgets could be L size and they would all still fit within the vertical space,
 		// then use L size for all of them.
 		if (Theme.geometry_overviewPage_widget_height_l * maximumColumnCount
-				+ (2 * Theme.geometry_overviewPage_energyIndicator_height) < root.height) {
+				+ (2 * Theme.geometry_size_32) < root.height) {
 			return VenusOS.OverviewWidget_Size_L
 		}
 
@@ -87,7 +84,7 @@ FocusScope {
 	// Cannot bind to mainLayout.height for this, as that value refers to the theoretical height
 	// where widgets are expanded to their full heights.
 	implicitHeight: inputLayout.height + centreLayout.height + loadsLayout.height
-			+ (2 * Theme.geometry_overviewPage_energyIndicator_height)
+			+ (2 * Theme.geometry_size_32)
 
 	OverviewLayoutConditions {
 		id: layoutConditions
@@ -108,7 +105,7 @@ FocusScope {
 
 			readonly property int maximumColumnCount: Math.max(rightInputColumn.widgetCount, leftInputColumn.widgetCount)
 
-			spacing: Theme.geometry_space_8
+			spacing: Theme.geometry_size_8
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			Layout.verticalStretchFactor: maximumColumnCount
@@ -135,7 +132,7 @@ FocusScope {
 				readonly property bool swapInputs: (Global.acInputs.isGridOrShore(Global.acInputs.input2)
 													&& !Global.acInputs.isGridOrShore(Global.acInputs.input1))
 
-				rowSpacing: Theme.geometry_space_8
+				rowSpacing: Theme.geometry_size_8
 				columns: 1
 				visible: widgetCount > 0
 
@@ -197,7 +194,7 @@ FocusScope {
 				readonly property bool combineDcSources: dcSourceModel.count > 0
 						&& widgetCountWithoutDcsource + dcSourceModel.count > 3
 
-				spacing: Theme.geometry_space_8
+				spacing: Theme.geometry_size_8
 				visible: widgetCount > 0
 
 				Loader {
@@ -302,7 +299,7 @@ FocusScope {
 
 		// Energy indicators between the top and middle widgets.
 		RowLayout {
-			spacing: Theme.geometry_space_8
+			spacing: Theme.geometry_size_8
 			visible: rightInputColumn.widgetCount > 0 || leftInputColumn.widgetCount > 0
 
 			// Energy between AC inputs or PV inverters and the Inverter/charger.
@@ -316,8 +313,8 @@ FocusScope {
 				readonly property real acInputPower: monitoredAcInput?.power ?? NaN
 
 				// Shown when power from AC input or PV inverters is over the noise threshold.
-				opacity: Math.abs(acInputPower) > root.connectorAnimationPowerThreshold
-						  || Math.abs(Global.system.solar.acPower) > root.connectorAnimationPowerThreshold ? 1 : 0
+				opacity: Math.abs(acInputPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+						  || Math.abs(Global.system.solar.acPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
 
 				// Positive power means energy is flowing towards inverter/charger (downwards) and
 				// negative power means energy is flowing towards the input (upwards, only
@@ -332,8 +329,8 @@ FocusScope {
 			// Energy from DC inputs or PV chargers to battery.
 			OverviewEnergyIndicator {
 				// Shown when power from DC inputs or PV chargers is over the noise threshold.
-				opacity: Math.abs(Global.dcInputs.power) > root.connectorAnimationPowerThreshold
-						|| Math.abs(Global.system.solar.dcPower) > root.connectorAnimationPowerThreshold ? 1 : 0
+				opacity: Math.abs(Global.dcInputs.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+						|| Math.abs(Global.system.solar.dcPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
 
 				// Positive power means energy is flowing towards battery (downwards). It never
 				// flows in the opposite direction.
@@ -346,7 +343,7 @@ FocusScope {
 		RowLayout {
 			id: centreLayout
 
-			spacing: Theme.geometry_space_8
+			spacing: Theme.geometry_size_8
 			Layout.fillHeight: true
 			Layout.verticalStretchFactor: 1
 
@@ -375,7 +372,7 @@ FocusScope {
 
 		// Energy indicators between the middle and bottom widgets.
 		RowLayout {
-			spacing: Theme.geometry_space_8
+			spacing: Theme.geometry_size_8
 
 			// Energy between Inverter/Charger and AC/Essential loads.
 			OverviewEnergyIndicator {
@@ -386,7 +383,7 @@ FocusScope {
 				opacity: (layoutConditions.showAcLoads
 						  || layoutConditions.showEssentialLoads
 						  || layoutConditions.showEvChargers)
-						 && Math.abs(Global.system.load.ac.power) > root.connectorAnimationPowerThreshold ? 1 : 0
+						 && Math.abs(Global.system.load.ac.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
 
 				// If load power is positive (i.e. consumed energy), energy flows to load (downwards).
 				animationMode: !root.animationEnabled || opacity === 0 ? VenusOS.WidgetConnector_AnimationMode_NotAnimated
@@ -398,7 +395,7 @@ FocusScope {
 			OverviewEnergyIndicator {
 				// Shown when DC loads is visible and its power is over the noise threshold.
 				opacity: layoutConditions.showDcLoads
-						 && Math.abs(Global.system.dc.power) > root.connectorAnimationPowerThreshold ? 1 : 0
+						 && Math.abs(Global.system.dc.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold ? 1 : 0
 
 				// If load power is positive (i.e. consumed energy), energy flows to load (downwards).
 				// If load power is negative (i.e. devices generating power but not directly managed
@@ -418,7 +415,7 @@ FocusScope {
 
 			readonly property int maximumColumnCount: Math.max(layoutConditions.showDcLoads ? 1 : 0, leftLoadsColumn.widgetCount)
 
-			spacing: Theme.geometry_space_8
+			spacing: Theme.geometry_size_8
 			Layout.fillHeight: true
 			Layout.verticalStretchFactor: maximumColumnCount
 
@@ -438,7 +435,7 @@ FocusScope {
 						? root._widgetHeightForSize(VenusOS.OverviewWidget_Size_XS)
 						: root._widgetHeightForSize(displayWidgetSize)
 
-				spacing: Theme.geometry_space_8
+				spacing: Theme.geometry_size_8
 
 				Loader {
 					id: acLoadsWidgetLoader

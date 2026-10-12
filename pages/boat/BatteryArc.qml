@@ -15,7 +15,7 @@ Loader {
 	readonly property int _leftGaugeCount: _battery ? 1 : 0
 
 	objectName: "BatteryArc"
-	width: Theme.geometry_briefPage_edgeGauge_width
+	width: Theme.geometry_size_80
 	height: active ? Gauges.gaugeHeight(root._leftGaugeCount) : 0
 	active: _battery
 	sourceComponent: SideGauge {
@@ -28,8 +28,8 @@ Loader {
 		arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset
 		horizontalAlignment: Qt.AlignLeft
 
-		x: Theme.geometry_space_10
-		strokeWidth: Theme.geometry_boatPage_batteryGauge_strokeWidth
+		x: Theme.geometry_size_10
+		strokeWidth: Theme.geometry_size_15
 		animationEnabled: root.animationEnabled && !pauseLeftGaugeAnimations.running
 		valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 		value: _battery ? _battery.stateOfCharge : 0

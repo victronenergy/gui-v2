@@ -68,7 +68,7 @@ SwipeViewPage {
 			PressArea {
 				anchors.fill: parent
 				enabled: !del.acknowledged
-				radius: Theme.geometry_radius_8
+				radius: Theme.geometry_size_8
 				onReleased: NotificationModel.acknowledge(del.modelId)
 			}
 		}
@@ -79,14 +79,14 @@ SwipeViewPage {
 			Row {
 				width: notificationsView.width
 				height: Theme.geometry_listItem_height + (2 * Theme.geometry_page_content_verticalMargin)
-				leftPadding: Theme.geometry_listItem_content_horizontalMargin
-				rightPadding: Theme.geometry_listItem_content_horizontalMargin
+				leftPadding: Theme.geometry_shared_24_24_12
+				rightPadding: Theme.geometry_shared_24_24_12
 
 				Item {
 					id: iconContainer
 
 					anchors.verticalCenter: parent.verticalCenter
-					width: Theme.geometry_icon_size_medium + (2 * Theme.geometry_listItem_content_horizontalMargin)
+					width: Theme.geometry_size_32 + (2 * Theme.geometry_shared_24_24_12)
 					height: parent.height
 
 					Image {
@@ -119,10 +119,10 @@ SwipeViewPage {
 		active: Theme.screenSize === Theme.Portrait && Global.mainView?.notificationButtonsEnabled
 		sourceComponent: SilenceAlarmButton {
 			width: notificationsView.width
-			leftInset: Theme.geometry_listItem_content_horizontalMargin
-			rightInset: Theme.geometry_listItem_content_horizontalMargin
-			topInset: Theme.geometry_listItem_content_verticalMargin
-			bottomInset: Theme.geometry_listItem_content_verticalMargin
+			leftInset: Theme.geometry_shared_24_24_12
+			rightInset: Theme.geometry_shared_24_24_12
+			topInset: Theme.geometry_listItem_content_spacing
+			bottomInset: Theme.geometry_listItem_content_spacing
 
 			onClicked: NotificationModel.acknowledgeAll()
 		}

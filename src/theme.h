@@ -116,6 +116,8 @@ Q_SIGNALS:
 	void forcedColorSchemeChanged(Victron::VenusOS::Theme::ForcedColorScheme forcedColorScheme);
 	void geometry_screen_widthChanged();
 	void geometry_screen_heightChanged();
+	// Live screen size changed. Derived geometry properties listen to this.
+	void derivedGeometryChanged();
 	void adjustingGeometryChanged();
 	void visualViewportBottomChanged();
 	void virtualKeyboardOpenedChanged();

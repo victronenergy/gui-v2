@@ -27,7 +27,7 @@ BaseListView {
 		Global.pageManager.popPage(pageStack.get(index - 1)) // subtract 1, because we inserted a dummy "Settings" breadcrumb at the beginning
 	}
 
-	implicitHeight: Theme.geometry_settings_breadcrumb_height
+	implicitHeight: Theme.geometry_button_height
 	orientation: ListView.Horizontal
 	currentIndex: count - 1
 	clip: true
@@ -45,7 +45,7 @@ BaseListView {
 		readonly property color iconColor: isTopBreadcrumb ? primaryBreadcrumbColor : secondaryBreadcrumbColor
 
 		implicitWidth: implicitContentWidth + leftPadding + rightPadding
-		implicitHeight: Theme.geometry_settings_breadcrumb_height
+		implicitHeight: Theme.geometry_button_height
 		leftInset: leftEdgeIcon.width
 		rightInset: rightEdgeIcon.width
 		bottomInset: 0
@@ -113,7 +113,7 @@ BaseListView {
 
 	Rectangle { // fade out the breadcrumbs LHS when overflowing
 		width: parent.width
-		height: Theme.geometry_settings_breadcrumb_height
+		height: Theme.geometry_button_height
 		visible: !root.atXBeginning
 
 		gradient: Gradient {

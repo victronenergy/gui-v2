@@ -35,7 +35,7 @@ ListSetting {
 			}
 			columns: 2
 			columnSpacing: root.spacing
-			rowSpacing: Theme.geometry_space_4
+			rowSpacing: Theme.geometry_size_4
 
 			Label {
 				text: root.text

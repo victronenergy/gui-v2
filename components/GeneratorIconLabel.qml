@@ -12,7 +12,7 @@ Label {
 
 	required property Generator generator
 
-	leftPadding: icon.width + Theme.geometry_space_4
+	leftPadding: icon.width + Theme.geometry_size_4
 	font.pixelSize: Theme.font_size_body2
 	color: root.generator && root.generator_runtime > 0 ? Theme.color_font_primary : Theme.color_font_secondary
 	verticalAlignment: Text.AlignVCenter
@@ -27,8 +27,8 @@ Label {
 		id: icon
 
 		anchors.verticalCenter: parent.verticalCenter
-		width: visible ? Theme.geometry_generatorIconLabel_icon_width : 0
-		height: Theme.geometry_generatorIconLabel_icon_width
+		width: visible ? Theme.geometry_size_24 : 0
+		height: Theme.geometry_size_24
 		color: Theme.color_font_primary
 		visible: root.generator && root.generator.state !== VenusOS.Generators_RunningBy_NotRunning
 		source: {

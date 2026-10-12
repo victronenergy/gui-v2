@@ -11,9 +11,9 @@ Label {
 
 	property int count: 0
 
-	height: Theme.geometry_navigationBar_notification_counter_height
-	width: count > 9 ? Theme.geometry_navigationBar_notification_counter_width_two_digits
-					 : Theme.geometry_navigationBar_notification_counter_width_one_digit
+	height: Theme.geometry_size_20
+	width: count > 9 ? Theme.geometry_size_30
+					 : Theme.geometry_size_20
 	color: Theme.color_white
 	text: count
 	topPadding: 1 // fix for font baseline

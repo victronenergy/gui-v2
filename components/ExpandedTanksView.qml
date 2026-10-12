@@ -13,7 +13,7 @@ BaseListView {
 	required property bool animationEnabled
 
 	orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
-	spacing: Theme.screenSize === Theme.Portrait ? Theme.geometry_space_8 : Gauges.spacing(count)
+	spacing: Theme.screenSize === Theme.Portrait ? Theme.geometry_size_8 : Gauges.spacing(count)
 	delegate: TankGaugePanel {
 		id: tankDelegate
 
@@ -21,7 +21,7 @@ BaseListView {
 
 		width: root.orientation === ListView.Vertical
 			   ? ListView.view.width
-			   : Gauges.width(root.model.count, Gauges.maxTankCount(), Theme.geometry_screen_width)
+			   : Gauges.width(root.model.count, Theme.geometry_levelsPage_max_tank_count, Theme.geometry_screen_width)
 		height: root.orientation === ListView.Vertical
 			   ? implicitHeight
 			   : ListView.view.height

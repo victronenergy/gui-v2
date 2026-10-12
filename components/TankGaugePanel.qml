@@ -31,12 +31,12 @@ AbstractListItem {
 		implicitBackgroundHeight + topInset + bottomInset,
 		implicitContentHeight + topPadding + bottomPadding)
 
-	leftInset: Theme.geometry_levelsPage_panel_horizontalInset
-	rightInset: Theme.geometry_levelsPage_panel_horizontalInset
-	leftPadding: leftInset + Theme.geometry_levelsGauge_horizontalPadding
-	rightPadding: rightInset + Theme.geometry_levelsGauge_horizontalPadding
-	topPadding: Theme.geometry_levelsPage_panel_header_height + Theme.geometry_space_8
-	bottomPadding: Theme.geometry_space_8
+	leftInset: Theme.geometry_inset_portrait
+	rightInset: Theme.geometry_inset_portrait
+	leftPadding: leftInset + Theme.geometry_inset_portrait
+	rightPadding: rightInset + Theme.geometry_inset_portrait
+	topPadding: Theme.geometry_levelsPage_panel_header_height + Theme.geometry_size_8
+	bottomPadding: Theme.geometry_size_8
 
 	background: Item {
 		implicitWidth: Theme.geometry_levelsPage_panel_background_width
@@ -44,11 +44,11 @@ AbstractListItem {
 
 		// The colour indicator is on the top in landscape, and on the left in portrait.
 		Rectangle {
-			width: Theme.geometry_levelsPage_panel_header_width || parent.width
+			width: Theme.geometry_inset_portrait || parent.width
 			height: Theme.geometry_levelsPage_panel_header_height ||  parent.height
-			topLeftRadius: Theme.geometry_levelsPage_panel_radius
-			topRightRadius: Theme.screenSize === Theme.Portrait ? 0 : Theme.geometry_levelsPage_panel_radius
-			bottomLeftRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_levelsPage_panel_radius : 0
+			topLeftRadius: Theme.geometry_shared_16_16_8
+			topRightRadius: Theme.screenSize === Theme.Portrait ? 0 : Theme.geometry_shared_16_16_8
+			bottomLeftRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_shared_16_16_8 : 0
 			color: root.tankProperties.color
 
 			// In landscape, show the tank name within the header.
@@ -57,7 +57,7 @@ AbstractListItem {
 					left: parent.left
 					right: parent.right
 					bottom: parent.bottom
-					margins: Theme.geometry_levelsPage_panel_background_title_padding
+					margins: Theme.geometry_shared_4_4_0
 				}
 				horizontalAlignment: Text.AlignHCenter
 				elide: Text.ElideRight
@@ -77,9 +77,9 @@ AbstractListItem {
 				topMargin: Theme.geometry_levelsPage_panel_header_height
 			}
 			color: root.backgroundColor
-			topRightRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_levelsPage_panel_radius : 0
-			bottomLeftRadius: Theme.screenSize === Theme.Portrait ? 0 : Theme.geometry_levelsPage_panel_radius
-			bottomRightRadius: Theme.geometry_levelsPage_panel_radius
+			topRightRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_shared_16_16_8 : 0
+			bottomLeftRadius: Theme.screenSize === Theme.Portrait ? 0 : Theme.geometry_shared_16_16_8
+			bottomRightRadius: Theme.geometry_shared_16_16_8
 		}
 	}
 
@@ -122,7 +122,7 @@ AbstractListItem {
 				id: gaugeGroupComponent
 
 				Flow {
-					spacing: Theme.geometry_space_8
+					spacing: Theme.geometry_size_8
 
 					Repeater {
 						model: root.tankModel
@@ -133,7 +133,7 @@ AbstractListItem {
 								   ? parent.width
 								   : Math.floor((parent.width - (parent.spacing * (root.tankModel.count - 1))) / root.tankModel.count)
 							height: Theme.screenSize === Theme.Portrait
-									? Theme.geometry_barGauge_horizontal_height
+									? Theme.geometry_size_8
 									: parent.height
 							orientation: Theme.screenSize === Theme.Portrait ? Qt.Horizontal : Qt.Vertical
 							expanded: !!Global.pageManager && Global.pageManager.expandLayout
@@ -155,7 +155,7 @@ AbstractListItem {
 				bottom: parent.bottom
 				left: levelsGauge.left
 				leftMargin: Theme.screenSize !== Theme.Portrait ? 0
-					: Theme.geometry_icon_size_medium + Theme.geometry_space_12
+					: Theme.geometry_size_32 + Theme.geometry_size_12
 				right: parent.right
 			}
 			topPadding: Theme.geometry_levelsGauge_capacity_topPadding

@@ -15,7 +15,7 @@ Item {
 	property real radius
 	required property bool animationEnabled
 	required property bool shineAnimationEnabled
-	property real strokeWidth: Theme.geometry_progressArc_strokeWidth
+	property real strokeWidth: Theme.geometry_size_8
 	property alias progressColor: progress.strokeColor
 	property alias remainderColor: remainder.strokeColor
 	property alias startAngle: remainder.startAngle

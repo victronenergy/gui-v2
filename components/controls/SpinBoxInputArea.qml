@@ -93,7 +93,7 @@ TextInput {
 	}
 
 	leftPadding: 0
-	rightPadding: (suffixLabel.visible ? suffixLabel.width + Theme.geometry_space_2 : 0)
+	rightPadding: (suffixLabel.visible ? suffixLabel.width + Theme.geometry_size_2 : 0)
 	focus: root.spinBox.editable
 	color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
 	font.family: Global.fontFamily
@@ -113,7 +113,7 @@ TextInput {
 
 		anchors {
 			centerIn: parent
-			horizontalCenterOffset: (parent.contentWidth / 2) + Theme.geometry_space_2
+			horizontalCenterOffset: (parent.contentWidth / 2) + Theme.geometry_size_2
 		}
 		width: text.length ? implicitWidth : 0
 		visible: text.length

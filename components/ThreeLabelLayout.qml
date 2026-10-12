@@ -44,10 +44,10 @@ GridLayout {
 	readonly property bool _useColumnLayout: Theme.screenSize === Theme.Portrait
 		&& ((secondaryText.length > 0 && captionText.length > 0) || _mainTextWouldWrap)
 	readonly property bool _mainTextWouldWrap: Math.ceil(primaryLabel.implicitWidth)
-			+ Math.ceil(secondaryLabel.implicitWidth) >= (width - Theme.geometry_listItem_content_verticalMargin)
+			+ Math.ceil(secondaryLabel.implicitWidth) >= (width - Theme.geometry_listItem_content_spacing)
 
 	columns: _useColumnLayout || secondaryText.length === 0 ? 1 : 2
-	columnSpacing: Theme.geometry_listItem_content_verticalMargin
+	columnSpacing: Theme.geometry_listItem_content_spacing
 	rowSpacing: 0
 
 	Label {
@@ -87,7 +87,7 @@ GridLayout {
 	CaptionLabel {
 		id: captionLabel
 
-		topPadding: Theme.geometry_space_4
+		topPadding: Theme.geometry_size_4
 		bottomPadding: root.bottomPadding
 		visible: text.length > 0
 

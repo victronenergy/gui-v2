@@ -32,7 +32,7 @@ Flow {
 	Label {
 		id: primaryLabel
 
-		bottomPadding: root._useColumnLayout ? Theme.geometry_space_4 : 0
+		bottomPadding: root._useColumnLayout ? Theme.geometry_size_4 : 0
 		width: root._useColumnLayout ? parent.width : parent.width - quantityRow.width
 		text: root.primaryText
 		elide: Text.ElideRight
@@ -46,7 +46,7 @@ Flow {
 	CaptionLabel {
 		id: captionLabel
 
-		topPadding: Theme.geometry_space_4
+		topPadding: Theme.geometry_size_4
 		width: parent.width
 		visible: text.length > 0
 	}

@@ -12,7 +12,7 @@ Shape {
 
 	property real value // 0 - 100
 	property real radius
-	property real strokeWidth: Theme.geometry_progressArc_strokeWidth
+	property real strokeWidth: Theme.geometry_size_8
 	required property bool animationEnabled
 	property alias useLargeArc: progress.useLargeArc
 	property alias progressColor: progress.strokeColor

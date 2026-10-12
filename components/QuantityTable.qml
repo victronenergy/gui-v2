@@ -25,8 +25,8 @@ ListView {
 	property bool equalWidthColumns
 	property bool headersVisible: true
 
-	property real leftPadding: Theme.geometry_listItem_content_horizontalMargin
-	property real rightPadding: Theme.geometry_listItem_content_horizontalMargin
+	property real leftPadding: Theme.geometry_shared_24_24_12
+	property real rightPadding: Theme.geometry_shared_24_24_12
 
 	readonly property real availableWidth: width - leftPadding - rightPadding
 	readonly property real fixedColumnWidth: headerItem?.fixedColumnWidth ?? NaN
@@ -102,7 +102,7 @@ ListView {
 		readonly property int columnCount: quantityRow.count + (headerColumnLabel.visible ? 1 : 0)
 
 		width: table.width
-		height: preferredVisible ? Theme.geometry_quantityTable_row_height : 0
+		height: preferredVisible ? Theme.geometry_size_32 : 0
 		color: index % 2 === 0
 			   ? Theme.color_quantityTable_row_alternateBackground
 			   : Theme.color_quantityTable_row_background

@@ -74,7 +74,7 @@ Item {
 			electronRepeater.model = modelCount
 
 			if (electronTravelDistance > 0) {
-				const fadeDistance = 2 * Theme.geometry_overviewPage_connector_anchor_width
+				const fadeDistance = 2 * Theme.geometry_size_6
 				pathUpdater.fadeOutThreshold = (electronTravelDistance - fadeDistance) / electronTravelDistance
 			}
 		}
@@ -142,8 +142,8 @@ Item {
 			const startWidgetRect = _widgetRect(startWidget, false)
 			const endWidgetRect = _widgetRect(endWidget, false)
 			const anchorWidth = direction === Qt.Horizontal
-					? Theme.geometry_overviewPage_connector_anchor_width
-					: Theme.geometry_overviewPage_connector_anchor_height
+					? Theme.geometry_size_6
+					: Theme.geometry_size_12
 
 			const startX = startLocation === VenusOS.WidgetConnector_Location_Left
 				  ? startWidgetRect.x - anchorWidth
@@ -168,8 +168,8 @@ Item {
 			const startWidgetRect = _widgetRect(startWidget, expandedGeometry)
 			const endWidgetRect = _widgetRect(endWidget, expandedGeometry)
 			const anchorHeight = direction === Qt.Horizontal
-					? Theme.geometry_overviewPage_connector_anchor_height
-					: Theme.geometry_overviewPage_connector_anchor_width
+					? Theme.geometry_size_12
+					: Theme.geometry_size_6
 
 			// Work out the start and end of the path depending on the direction and orientation.
 			let startY = startLocation === VenusOS.WidgetConnector_Location_Top
@@ -213,7 +213,7 @@ Item {
 			y: connectorPath.startAnchorY
 
 			ShapePath {
-				strokeWidth: Theme.geometry_overviewPage_connector_line_width
+				strokeWidth: Theme.geometry_size_2
 				strokeColor: Theme.color_overviewPage_widget_border
 				fillColor: "transparent"
 				pathElements: connectorPath.pathElements

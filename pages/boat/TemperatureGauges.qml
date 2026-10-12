@@ -13,7 +13,7 @@ Column {
 
 	required property MotorDrive motorDrive
 
-	spacing: Theme.geometry_boatPage_motorDrive_temperaturesColumn_spacing
+	spacing: Theme.geometry_offset_n5_n2
 
 	Boat.TemperatureGauge {
 		anchors.right: parent.right

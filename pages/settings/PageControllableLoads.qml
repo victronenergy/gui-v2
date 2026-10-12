@@ -48,14 +48,14 @@ Page {
 		model: mode.value && loads.valid ? opportunityLoadsModel : []
 		delegate: ListDevicePriority {
 			leftInset: Theme.geometry_page_content_horizontalMargin + Theme.geometry_priorityLabel_width
-			leftPadding: leftInset + Theme.geometry_space_4
+			leftPadding: leftInset + Theme.geometry_size_4
 		}
 
 		Column {	// The priority numbers on the LHS should remain stationary, unlike the device delegates
 					// which animate up & down by clicking the up & down arrows.
 			y: -gradientListView.contentY
 			leftPadding: Theme.geometry_page_content_horizontalMargin
-			spacing: Theme.geometry_space_4
+			spacing: Theme.geometry_size_4
 
 			Repeater {
 				model: gradientListView.count

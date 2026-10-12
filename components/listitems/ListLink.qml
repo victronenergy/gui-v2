@@ -144,7 +144,7 @@ ListSetting {
 					anchors {
 						right: parent.right
 						top: parent.top
-						rightMargin: Theme.geometry_space_16
+						rightMargin: Theme.geometry_size_16
 					}
 					onClicked: dialog.close()
 				}

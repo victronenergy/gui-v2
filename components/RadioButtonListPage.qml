@@ -80,8 +80,8 @@ Page {
 			checked: optionsListView.selectedIndex === model.index
 			bottomPadding: bottomContentLoader.height > 0
 					? bottomContentLoader.height
-						+ (2 * Theme.geometry_listItem_content_verticalMargin) // margin above and below Loader
-					: Theme.geometry_listItem_content_verticalMargin
+						+ (2 * Theme.geometry_listItem_content_spacing) // margin above and below Loader
+					: Theme.geometry_listItem_content_spacing
 
 			ButtonGroup.group: radioButtonGroup
 
@@ -98,7 +98,7 @@ Page {
 				anchors {
 					right: parent.right
 					bottom: parent.bottom
-					bottomMargin: Theme.geometry_listItem_content_verticalMargin
+					bottomMargin: Theme.geometry_listItem_content_spacing
 				}
 				active: !!modelObject.promptPassword
 						&& model.index === optionsListView.selectedIndex

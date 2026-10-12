@@ -8,7 +8,7 @@ import Victron.VenusOS
 
 Rectangle {
 	width: parent.width
-	height: Theme.geometry_viewGradient_height
+	height: Theme.geometry_size_28
 	gradient: Gradient {
 		GradientStop {
 			position: Theme.geometry_viewGradient_position1

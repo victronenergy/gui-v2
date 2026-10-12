@@ -22,10 +22,10 @@ Flow {
 	readonly property real _delegateLength: (_longEdgeLength - (spacing * (phaseRepeater.count - 1))) / phaseRepeater.count
 
 	width: orientation === Qt.Vertical
-		   ? (phaseRepeater.count > 1 ? Theme.geometry_barGauge_vertical_width_small : Theme.geometry_barGauge_vertical_width_large)
-		   : Theme.geometry_barGauge_vertical_width_large
-	height: orientation === Qt.Vertical ? parent.height : Theme.geometry_barGauge_horizontal_height
-	spacing: Theme.geometry_space_4
+		   ? (phaseRepeater.count > 1 ? Theme.geometry_size_4 : Theme.geometry_size_8)
+		   : Theme.geometry_size_8
+	height: orientation === Qt.Vertical ? parent.height : Theme.geometry_size_8
+	spacing: Theme.geometry_size_4
 
 	Repeater {
 		id: phaseRepeater
@@ -46,8 +46,8 @@ Flow {
 				id: phaseLabel
 
 				anchors.verticalCenter: parent.verticalCenter
-				leftPadding: Theme.geometry_barGauge_phaseLabel_leftPadding
-				rightPadding: Theme.geometry_barGauge_phaseLabel_rightPadding
+				leftPadding: Theme.geometry_size_3
+				rightPadding: Theme.geometry_size_3
 				text: phaseDelegate.index + 1
 				font.pixelSize: Theme.font_size_phase_number
 				visible: root.orientation === Qt.Horizontal && phaseRepeater.count > 1

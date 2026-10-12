@@ -76,12 +76,12 @@ Page {
 						Layout.fillWidth: true
 					}
 					Item {
-						Layout.preferredWidth: Theme.geometry_settings_gsmModem_icon_container_width
-						Layout.preferredHeight: Theme.geometry_settings_gsmModem_icon_container_height
+						Layout.preferredWidth: Theme.geometry_size_28
+						Layout.preferredHeight: Theme.geometry_size_28
 
 						GsmStatusIcon {
 							id: gsmStatusIcon
-							height: Theme.geometry_settings_gsmModem_icon_height
+							height: Theme.geometry_size_26
 							anchors.centerIn: parent
 						}
 					}

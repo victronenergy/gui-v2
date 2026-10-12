@@ -27,7 +27,7 @@ ShapePath {
 	property real animatedEndAngle: endAngle
 
 	strokeColor: "black"
-	strokeWidth: Theme.geometry_arc_strokeWidth
+	strokeWidth: Theme.geometry_size_8
 	fillColor: "transparent"
 	capStyle: ShapePath.RoundCap
 	joinStyle: ShapePath.RoundJoin

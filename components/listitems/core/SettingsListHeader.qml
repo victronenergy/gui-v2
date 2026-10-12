@@ -12,10 +12,10 @@ Label {
 	readonly property bool effectiveVisible: preferredVisible
 	property bool preferredVisible: true
 
-	leftPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin
-	rightPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin
-	topPadding: Theme.geometry_space_8
-	bottomPadding: Theme.geometry_space_2 + Theme.geometry_space_4
+	leftPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_shared_24_24_12
+	rightPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_shared_24_24_12
+	topPadding: Theme.geometry_size_8
+	bottomPadding: Theme.geometry_size_2 + Theme.geometry_size_4
 	width: Math.max(implicitWidth, 1)
 	font.pixelSize: Theme.font_listItem_flat_primary_size_flat
 	wrapMode: Text.Wrap

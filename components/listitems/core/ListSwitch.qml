@@ -95,8 +95,8 @@ ListSetting {
 			stretchSecondaryText: true
 
 			// Since padding is cleared in the root item, add it back again here.
-			topPadding: Theme.geometry_listItem_content_verticalMargin
-			bottomPadding: Theme.geometry_listItem_content_verticalMargin
+			topPadding: Theme.geometry_listItem_content_spacing
+			bottomPadding: Theme.geometry_listItem_content_spacing
 		}
 
 		Switch {
@@ -108,8 +108,8 @@ ListSetting {
 			}
 
 			// Expand the switch touch area to make it easier to click.
-			topInset: Theme.geometry_listItem_content_verticalMargin
-			bottomInset: Theme.geometry_listItem_content_verticalMargin
+			topInset: Theme.geometry_listItem_content_spacing
+			bottomInset: Theme.geometry_listItem_content_spacing
 			leftInset: root.spacing
 			rightInset: root.horizontalContentPadding
 			topPadding: topInset

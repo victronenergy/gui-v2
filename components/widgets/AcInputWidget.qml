@@ -15,8 +15,8 @@ AcWidget {
 
 	readonly property bool _showSideGauge: inputOperational && size >= VenusOS.OverviewWidget_Size_M
 
-	rightPadding: _showSideGauge ? Theme.geometry_space_8
-			: Theme.geometry_overviewPage_widget_content_horizontalMargin
+	rightPadding: _showSideGauge ? Theme.geometry_size_8
+			: Theme.geometry_shared_8_12_12
 	title: !!inputInfo ? Global.acInputs.sourceToText(inputInfo.source) : ""
 	quantitySourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 	quantityDataObject: inputOperational ? input : null
@@ -24,13 +24,13 @@ AcWidget {
 	enabled: !!inputInfo
 
 	contentItem: Item {
-		implicitWidth: Theme.geometry_overviewPage_widget_leftWidgetWidth
+		implicitWidth: Theme.geometry_size_column
 		implicitHeight: contentLayout.implicitHeight
 
 		AcWidgetContent {
 			id: contentLayout
 
-			width: parent.width - (sideGaugeLoader.active ? sideGaugeLoader.width + Theme.geometry_space_8 : 0)
+			width: parent.width - (sideGaugeLoader.active ? sideGaugeLoader.width + Theme.geometry_size_8 : 0)
 			height: parent.height
 			widget: root
 			iconSource: !!root.inputInfo ? Global.acInputs.sourceIcon(root.inputInfo.source) : ""

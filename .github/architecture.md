@@ -250,7 +250,7 @@ themes/
 
 `tools/themeparser.py` generates `src/themeobjects.h` at build time, creating the `Theme` C++ singleton with all properties accessible in QML as `Theme.color_*`, `Theme.geometry_*`, `Theme.animation_*`, `Theme.font_*`.
 
-The theme supports multiple screen sizes (FiveInch, SevenInch, Portrait) with geometry values that adapt accordingly.
+The theme supports multiple screen sizes (FiveInch, SevenInch, Portrait). Each screen file in `themes/geometry/` defines the same token names, and Theme exposes the value for the current screen. Shared steps are `geometry_size_N`. Page content size and the control-card fill size are derived in `Theme` from the live screen size and those roles — do not repeat those formulas, and do not choose a pixel size with a `screenSize` ternary.
 
 ## Build variants
 

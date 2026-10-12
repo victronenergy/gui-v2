@@ -18,7 +18,7 @@ Item {
 
 	readonly property color currentColor: colorSwatch.color
 
-	readonly property real _halfStrokeWidth: Theme.geometry_colorWheel_slider_strokeWidth/2
+	readonly property real _halfStrokeWidth: Theme.geometry_size_34/2
 	readonly property real _temperatureCool: 6500
 	readonly property real _temperatureWarm: 2000
 
@@ -96,7 +96,7 @@ Item {
 		x: 0
 		anchors.verticalCenter: colorWheel.verticalCenter
 		width: Theme.geometry_colorWheel_slider_width
-		height: Theme.geometry_colorWheel_slider_height
+		height: Theme.geometry_size_216
 		value: root.colorDimmerData.color.hsvValue
 		orientation: Qt.Vertical
 		topPadding: root._halfStrokeWidth
@@ -108,16 +108,16 @@ Item {
 		}
 
 		handle: Halo {
-			x: Theme.geometry_colorWheel_slider_arc_radius + (Theme.geometry_colorWheel_slider_strokeWidth - height)/2 + Math.cos((leftSliderHighlight.startAngle + leftSliderHighlight.sweepAngle) * (Math.PI / 180)) * Theme.geometry_colorWheel_slider_arc_radius
-			y: leftSlider.availableHeight/2 + (Theme.geometry_colorWheel_slider_strokeWidth - width)/2 + Math.sin((leftSliderHighlight.startAngle + leftSliderHighlight.sweepAngle) * (Math.PI / 180)) * Theme.geometry_colorWheel_slider_arc_radius
-			width: Theme.geometry_colorWheel_slider_halo_diameter
+			x: Theme.geometry_colorWheel_slider_arc_radius + (Theme.geometry_size_34 - height)/2 + Math.cos((leftSliderHighlight.startAngle + leftSliderHighlight.sweepAngle) * (Math.PI / 180)) * Theme.geometry_colorWheel_slider_arc_radius
+			y: leftSlider.availableHeight/2 + (Theme.geometry_size_34 - width)/2 + Math.sin((leftSliderHighlight.startAngle + leftSliderHighlight.sweepAngle) * (Math.PI / 180)) * Theme.geometry_colorWheel_slider_arc_radius
+			width: Theme.geometry_size_26
 		}
 
 		background: Shape {
 			ShapePath {
 				id: borderPath
 				strokeColor: Theme.color_blue
-				strokeWidth: Theme.geometry_colorWheel_slider_strokeWidth
+				strokeWidth: Theme.geometry_size_34
 				fillColor: "transparent"
 				capStyle: ShapePath.RoundCap
 				joinStyle: ShapePath.RoundJoin
@@ -136,7 +136,7 @@ Item {
 			ShapePath {
 				id: backgroundPath
 				strokeColor: Theme.color_darkOk
-				strokeWidth: Theme.geometry_colorWheel_slider_strokeWidth - Theme.geometry_border_2 * 2
+				strokeWidth: Theme.geometry_size_34 - Theme.geometry_size_2 * 2
 				fillColor: "transparent"
 				capStyle: ShapePath.RoundCap
 				joinStyle: ShapePath.RoundJoin
@@ -165,7 +165,7 @@ Item {
 			ShapePath {
 				id: highlightPath
 				strokeColor: Theme.color_blue
-				strokeWidth: Theme.geometry_colorWheel_slider_strokeWidth - Theme.geometry_border_2 // margin so highlight falls within the border
+				strokeWidth: Theme.geometry_size_34 - Theme.geometry_size_2 // margin so highlight falls within the border
 				fillColor: "transparent"
 				capStyle: ShapePath.RoundCap
 				joinStyle: ShapePath.RoundJoin
@@ -174,7 +174,7 @@ Item {
 
 				PathAngleArc {
 					id: leftSliderHighlight
-					centerX : leftSlider.width - Theme.geometry_colorWheel_component_overlap + colorWheel.width/2   // slider overlaps selector by 9 pixels
+					centerX : leftSlider.width - Theme.geometry_size_7 + colorWheel.width/2   // slider overlaps selector by 9 pixels
 					centerY : leftSlider.height/2 - root._halfStrokeWidth
 					moveToStart : true
 					radiusX : Theme.geometry_colorWheel_slider_arc_radius
@@ -209,10 +209,10 @@ Item {
 
 		property real strokeAngle: 45
 
-		x: colorWheel.x + colorWheel.width - Theme.geometry_colorWheel_component_overlap
+		x: colorWheel.x + colorWheel.width - Theme.geometry_size_7
 		anchors.verticalCenter: colorWheel.verticalCenter
 		width: Theme.geometry_colorWheel_slider_width
-		height: Theme.geometry_colorWheel_slider_height
+		height: Theme.geometry_size_216
 		orientation: Qt.Vertical
 		topPadding: root._halfStrokeWidth
 		bottomPadding: root._halfStrokeWidth
@@ -224,9 +224,9 @@ Item {
 		}
 
 		handle: Halo {
-			x: Math.cos((Math.asin(.5 - rightSlider.position) * rightSlider.availableHeight)/Theme.geometry_colorWheel_slider_arc_radius) * Theme.geometry_colorWheel_slider_arc_radius - colorWheel.width/2 + Theme.geometry_colorWheel_component_overlap - root._halfStrokeWidth + (Theme.geometry_colorWheel_slider_strokeWidth - width)/2 - 1
-			y: (rightSlider.availableHeight) * (1 - rightSlider.position) + (Theme.geometry_colorWheel_slider_strokeWidth - height)/2
-			width: Theme.geometry_colorWheel_slider_halo_diameter
+			x: Math.cos((Math.asin(.5 - rightSlider.position) * rightSlider.availableHeight)/Theme.geometry_colorWheel_slider_arc_radius) * Theme.geometry_colorWheel_slider_arc_radius - colorWheel.width/2 + Theme.geometry_size_7 - root._halfStrokeWidth + (Theme.geometry_size_34 - width)/2 - 1
+			y: (rightSlider.availableHeight) * (1 - rightSlider.position) + (Theme.geometry_size_34 - height)/2
+			width: Theme.geometry_size_26
 		}
 
 		contentItem: Shape {
@@ -305,11 +305,11 @@ Item {
 	T.Slider {
 		id: lowerSlider
 
-		y: colorWheel.y + colorWheel.height + Theme.geometry_colorWheel_lowerSlider_padding
+		y: colorWheel.y + colorWheel.height + Theme.geometry_spacing_5
 		anchors.horizontalCenter: colorWheel.horizontalCenter
 		to: 100
 		width: Theme.geometry_colorWheel_lowerSlider_width
-		height: Theme.geometry_colorWheel_lowerSlider_height
+		height: Theme.geometry_size_51
 		orientation: Qt.Horizontal
 		leftPadding: root._halfStrokeWidth
 		rightPadding: root._halfStrokeWidth
@@ -321,10 +321,10 @@ Item {
 		}
 
 		handle: Halo {
-			x: (lowerSlider.availableWidth) * (lowerSlider.position) + (Theme.geometry_colorWheel_slider_strokeWidth - width)/2
-			y: Math.cos((Math.asin(.5 - lowerSlider.position) * lowerSlider.availableWidth)/Theme.geometry_colorWheel_slider_arc_radius) * Theme.geometry_colorWheel_slider_arc_radius - colorWheel.height/2 - Theme.geometry_colorWheel_lowerSlider_padding - root._halfStrokeWidth + (Theme.geometry_colorWheel_slider_strokeWidth - height)/2
+			x: (lowerSlider.availableWidth) * (lowerSlider.position) + (Theme.geometry_size_34 - width)/2
+			y: Math.cos((Math.asin(.5 - lowerSlider.position) * lowerSlider.availableWidth)/Theme.geometry_colorWheel_slider_arc_radius) * Theme.geometry_colorWheel_slider_arc_radius - colorWheel.height/2 - Theme.geometry_spacing_5 - root._halfStrokeWidth + (Theme.geometry_size_34 - height)/2
 			color: Theme.color_blue
-			width: Theme.geometry_colorWheel_slider_halo_diameter
+			width: Theme.geometry_size_26
 		}
 
 		DropShadow {
@@ -358,9 +358,9 @@ Item {
 			verticalCenter: parent.verticalCenter
 			verticalCenterOffset: -lowerSlider.height / 2
 		}
-		x: leftSlider.width - Theme.geometry_colorWheel_component_overlap // small overlap for sliders and color wheel
-		width: Theme.geometry_colorWheel_selector_width
-		height: Theme.geometry_colorWheel_selector_height
+		x: leftSlider.width - Theme.geometry_size_7 // small overlap for sliders and color wheel
+		width: Theme.geometry_size_216
+		height: Theme.geometry_size_216
 
 		ShapePath {
 			id: colorGradientShape
@@ -382,8 +382,8 @@ Item {
 		Halo {
 			id: indicator
 			x: (parent.width - width)/2
-			y: (Theme.geometry_colorWheel_selector_ring_width - Theme.geometry_colorWheel_selector_halo_diameter)/2
-			width: Theme.geometry_colorWheel_selector_halo_diameter
+			y: (Theme.geometry_colorWheel_selector_ring_width - Theme.geometry_size_34)/2
+			width: Theme.geometry_size_34
 
 			transform: Rotation {
 				angle: mouseArea.angle
@@ -413,7 +413,7 @@ Item {
 				color: root.outputType === VenusOS.SwitchableOutput_Type_ColorDimmerCct
 						? root.angleToTemperatureColor(mouseArea.angle)
 						: root.angleToColor(360 - mouseArea.angle, 90 - colorGradient.angle, rightSlider.value)
-				border.width: Theme.geometry_border_2
+				border.width: Theme.geometry_size_2
 				border.color: color.darker(1.1)
 			}
 		}

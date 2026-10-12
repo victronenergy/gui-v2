@@ -25,7 +25,7 @@ ListItem {
 	readonly property notificationData entry: NotificationModel.get(modelId)
 
 	background: ListItemBackground {
-		border.width: root.acknowledged ? 0 : Theme.geometry_border_2
+		border.width: root.acknowledged ? 0 : Theme.geometry_size_2
 		border.color: Theme.color_notificationsPage_delegate_unacknowledged_border
 		color: root.acknowledged ? Theme.color_listItem_background : Theme.color_notificationsPage_delegate_unacknowledged_background
 	}
@@ -73,9 +73,9 @@ ListItem {
 			anchors {
 				top: parent.top
 				left: icon.right
-				leftMargin: Theme.geometry_listItem_content_horizontalMargin
+				leftMargin: Theme.geometry_shared_24_24_12
 				right: timestampLabel.left
-				rightMargin: Theme.geometry_listItem_content_horizontalMargin
+				rightMargin: Theme.geometry_shared_24_24_12
 			}
 
 			wrapMode: Text.Wrap
@@ -92,11 +92,11 @@ ListItem {
 			id: secondaryLabel
 			anchors {
 				top: descriptionLabel.visible ? descriptionLabel.bottom : parent.top
-				topMargin: descriptionLabel.visible ? Theme.geometry_space_4 : 0
+				topMargin: descriptionLabel.visible ? Theme.geometry_size_4 : 0
 				left: icon.right
-				leftMargin: Theme.geometry_listItem_content_horizontalMargin
+				leftMargin: Theme.geometry_shared_24_24_12
 				right: descriptionLabel.visible ? parent.right : timestampLabel.left
-				rightMargin: descriptionLabel.visible ? 0 : Theme.geometry_listItem_content_horizontalMargin
+				rightMargin: descriptionLabel.visible ? 0 : Theme.geometry_shared_24_24_12
 			}
 
 			wrapMode: Text.Wrap

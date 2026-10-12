@@ -11,11 +11,11 @@ ControlCard {
 
 	property alias serviceUid: generator.serviceUid
 
-	implicitHeight: controlButton.y + controlButton.height + Theme.geometry_space_16
+	implicitHeight: controlButton.y + controlButton.height + Theme.geometry_size_16
 	icon.source: "qrc:/images/generator.svg"
 	title.text: CommonWords.generator
 	status.text: generator.stateText
-	status.rightPadding: timerDisplay.width + Theme.geometry_space_16
+	status.rightPadding: timerDisplay.width + Theme.geometry_size_16
 
 	Generator {
 		id: generator
@@ -25,7 +25,7 @@ ControlCard {
 		id: timerDisplay
 		anchors {
 			right: parent.right
-			rightMargin: Theme.geometry_space_16
+			rightMargin: Theme.geometry_size_16
 			baseline: parent.status.baseline
 		}
 		generator: generator
@@ -36,11 +36,11 @@ ControlCard {
 
 		anchors {
 			top: root.status.bottom
-			topMargin: Theme.geometry_space_6
+			topMargin: Theme.geometry_size_6
 			left: parent.left
-			leftMargin: Theme.geometry_space_16
+			leftMargin: Theme.geometry_size_16
 			right: parent.right
-			rightMargin: Theme.geometry_space_16
+			rightMargin: Theme.geometry_size_16
 		}
 		text: generator.isAutoStarted
 			  ? CommonWords.autostarted_dot_running_by.arg(generator.runningByText)
@@ -90,14 +90,14 @@ ControlCard {
 	GeneratorManualControlButton {
 		id: controlButton
 		anchors {
-			margins: Theme.geometry_controlCard_button_margins
+			margins: Theme.geometry_shared_24_24_16
 			top: Theme.screenSize === Theme.Portrait ? autostartSwitch.bottom : undefined
 			bottom: Theme.screenSize === Theme.Portrait ? undefined : parent.bottom
 			left: parent.left
 			right: parent.right
 		}
 		height: Theme.geometry_card_button_height
-		radius: Theme.geometry_radius_8
+		radius: Theme.geometry_size_8
 		font.pixelSize: Theme.font_button_size
 		generatorUid: generator.serviceUid
 	}

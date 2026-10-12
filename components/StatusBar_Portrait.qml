@@ -33,8 +33,8 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 		StatusBarButton {
 			id: backButton
 
-			leftInset: Theme.geometry_statusBar_spacing
-			bottomInset: Theme.geometry_statusBar_spacing
+			leftInset: Theme.geometry_shared_16_16_8
+			bottomInset: Theme.geometry_shared_16_16_8
 			icon.source: "qrc:/images/icon_back_32.svg"
 			enabled: breadcrumbs.enabled
 			visible: breadcrumbs.visible
@@ -50,13 +50,13 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 
 			pageStack: root.pageStack
 			Layout.fillWidth: true
-			Layout.topMargin: ((backButton.height - height) / 2) - Theme.geometry_statusBar_spacing/2
+			Layout.topMargin: ((backButton.height - height) / 2) - Theme.geometry_shared_16_16_8/2
 			Layout.alignment: Qt.AlignTop
 		}
 
 		Label {
 			leftPadding: Theme.geometry_statusBar_horizontalMargin
-			rightPadding: Theme.geometry_statusBar_spacing
+			rightPadding: Theme.geometry_shared_16_16_8
 			verticalAlignment: Text.AlignVCenter
 			font.pixelSize: Theme.font_size_body2
 			fontSizeMode: Text.HorizontalFit
@@ -65,7 +65,7 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 
 			Layout.fillWidth: true
 			Layout.alignment: Qt.AlignTop
-			Layout.preferredHeight: Theme.geometry_statusBar_button_height
+			Layout.preferredHeight: (Theme.geometry_statusBar_height - Theme.geometry_size_4)
 		}
 
 		StatusBarButton {
@@ -73,9 +73,9 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 
 			enabled: Global.notifications?.statusBarNotificationIconVisible ?? false
 			visible: !breadcrumbs.visible && enabled
-			leftInset: Theme.geometry_statusBar_spacing
-			rightInset: Theme.geometry_statusBar_spacing / 2
-			bottomInset: Theme.geometry_statusBar_spacing
+			leftInset: Theme.geometry_shared_16_16_8
+			rightInset: Theme.geometry_shared_16_16_8 / 2
+			bottomInset: Theme.geometry_shared_16_16_8
 			color: Global.notifications?.statusBarNotificationIconColor ?? "transparent"
 			icon.source: Global.notifications?.statusBarNotificationIconSource ?? ""
 
@@ -90,9 +90,9 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 
 			readonly property int buttonType: Global.mainView.currentPage?.topLeftButton ?? VenusOS.StatusBar_LeftButton_None
 
-			leftInset: Theme.geometry_statusBar_spacing / 2
-			rightInset: Theme.geometry_statusBar_spacing / 2
-			bottomInset: Theme.geometry_statusBar_spacing
+			leftInset: Theme.geometry_shared_16_16_8 / 2
+			rightInset: Theme.geometry_shared_16_16_8 / 2
+			bottomInset: Theme.geometry_shared_16_16_8
 			icon.source: buttonType === VenusOS.StatusBar_LeftButton_ControlsInactive ? "qrc:/images/icon_controls_off_32.svg"
 				: buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? "qrc:/images/icon_controls_on_32.svg"
 				: ""
@@ -123,9 +123,9 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 					&& controlCardsButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
 
 			// Expand clickable area on right and bottom edges, and on left if leftButton is hidden.
-			leftInset: Theme.geometry_statusBar_spacing / 2
+			leftInset: Theme.geometry_shared_16_16_8 / 2
 			rightInset: Theme.geometry_statusBar_horizontalMargin
-			bottomInset: Theme.geometry_statusBar_spacing
+			bottomInset: Theme.geometry_shared_16_16_8
 
 			visible: ((!root.pageStack.opened && Global.switches.groups.count > 0)
 					|| auxCardsOpened) // allow cards to be closed if all switches are disconnected while opened

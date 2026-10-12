@@ -16,7 +16,7 @@ Row {
 	property alias icon: icon
 	property alias font: label.font
 
-	spacing: Theme.geometry_space_4
+	spacing: Theme.geometry_size_4
 
 	ElectricalQuantityLabel {
 		id: label

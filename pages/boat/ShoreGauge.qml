@@ -13,7 +13,7 @@ Row {
 	required property bool isShoreConnected
 	readonly property bool isShoreCharging: isShoreConnected && Global.acInputs.highlightedInput && Global.acInputs.highlightedInput.power > 0
 
-	spacing: Theme.geometry_space_4
+	spacing: Theme.geometry_size_4
 
 	CP.ColorImage {
 		id: icon

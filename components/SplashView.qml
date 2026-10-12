@@ -185,7 +185,7 @@ Rectangle {
 			verticalCenterOffset: Theme.geometry_splashView_progressBar_verticalCenterOffset
 			horizontalCenter: parent.horizontalCenter
 		}
-		width: Math.min(Theme.geometry_splashView_progressBar_width, parent.width - 2 * Theme.geometry_page_content_horizontalMargin)
+		width: Math.min(Theme.geometry_tabBar_width, parent.width - 2 * Theme.geometry_page_content_horizontalMargin)
 		indeterminate: visible && BackendConnection.state !== BackendConnection.Failed
 		opacity: 1.0
 		Behavior on opacity {
@@ -199,7 +199,7 @@ Rectangle {
 		id: extraInfoColumn
 		anchors {
 			top: loadingProgress.bottom
-			topMargin: Theme.geometry_space_12
+			topMargin: Theme.geometry_size_12
 			left: parent.left
 			leftMargin: Theme.geometry_page_content_horizontalMargin
 			right: parent.right
@@ -270,7 +270,7 @@ Rectangle {
 		Label {
 			width: parent.width
 			horizontalAlignment: Text.AlignHCenter
-			height: implicitHeight + Theme.geometry_space_4
+			height: implicitHeight + Theme.geometry_size_4
 			font.pixelSize: Theme.font_splashView_progressText_size
 			color: Theme.color_font_secondary
 			wrapMode: Text.Wrap

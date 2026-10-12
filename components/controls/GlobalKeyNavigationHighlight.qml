@@ -51,8 +51,8 @@ BorderImage {
 
 		// If the width/height of the highlight is shorter than the corner size, then shrink the
 		// border size to avoid cropping the corners of the image.
-		horizontalBorders: Math.min(root.width * 0.5, Theme.geometry_focus_highlight_corner_size)
-		verticalBorders: Math.min(root.height * 0.5, Theme.geometry_focus_highlight_corner_size)
+		horizontalBorders: Math.min(root.width * 0.5, Theme.geometry_size_14)
+		verticalBorders: Math.min(root.height * 0.5, Theme.geometry_size_14)
 	}
 
 	// Automatic reparenting of this object into the activeFocusItem (or specified fill item)

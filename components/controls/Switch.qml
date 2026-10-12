@@ -24,24 +24,24 @@ T.Switch {
 	bottomPadding: 0
 
 	background: Rectangle {
-		implicitWidth: Theme.geometry_switch_groove_width
-		implicitHeight: Theme.geometry_switch_groove_height
-		radius: Theme.geometry_switch_groove_radius
+		implicitWidth: Theme.geometry_size_44
+		implicitHeight: Theme.geometry_size_20
+		radius: Theme.geometry_size_24
 		color: root.enabled
 			   ? (root.checked ? Theme.color_switch_groove_on : Theme.color_switch_groove_off)
 			   : Theme.color_switch_groove_disabled
 		border.color: root.checked ? Theme.color_switch_groove_border_on
 			: Theme.color_switch_groove_border_off
-		border.width: Theme.geometry_border_2
+		border.width: Theme.geometry_size_2
 	}
 
 	indicator: Image {
 		x: root.checked
-			? root.background.width - width + Theme.geometry_switch_indicator_shadowOffset + root.leftPadding
-			: -Theme.geometry_switch_indicator_shadowOffset + root.leftPadding
-		y: (parent.height / 2) - (height / 2) + Theme.geometry_switch_indicator_shadowOffset
-		width: Theme.geometry_switch_indicator_width
-		height: Theme.geometry_switch_indicator_width
+			? root.background.width - width + Theme.geometry_size_2 + root.leftPadding
+			: -Theme.geometry_size_2 + root.leftPadding
+		y: (parent.height / 2) - (height / 2) + Theme.geometry_size_2
+		width: Theme.geometry_size_28
+		height: Theme.geometry_size_28
 		source: "qrc:/images/switch_indicator.png"
 
 		Behavior on x {
@@ -56,10 +56,10 @@ T.Switch {
 	}
 
 	KeyNavigationHighlight.active: root.activeFocus
-	KeyNavigationHighlight.leftMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
-	KeyNavigationHighlight.rightMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
-	KeyNavigationHighlight.topMargin: -Theme.geometry_listItem_content_verticalMargin
-	KeyNavigationHighlight.bottomMargin: -Theme.geometry_listItem_content_verticalMargin
+	KeyNavigationHighlight.leftMargin: -Theme.geometry_shared_16_16_12
+	KeyNavigationHighlight.rightMargin: -Theme.geometry_shared_16_16_12
+	KeyNavigationHighlight.topMargin: -Theme.geometry_listItem_content_spacing
+	KeyNavigationHighlight.bottomMargin: -Theme.geometry_listItem_content_spacing
 
 	// Don't animate the value change when setting the value on initial load
 	Component.onCompleted: valueChangeBehavior.enabled = true

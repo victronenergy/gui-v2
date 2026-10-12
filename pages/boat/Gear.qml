@@ -32,7 +32,7 @@ Item {
 			}
 		}
 		font.pixelSize: Theme.font_boatPage_gear_pixelSize
-		width: Theme.geometry_boatPage_gearIndicator_width
+		width: Theme.geometry_size_24
 		horizontalAlignment: Text.AlignHCenter
 		text: {
 			switch (direction) {

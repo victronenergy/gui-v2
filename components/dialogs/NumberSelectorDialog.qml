@@ -67,15 +67,15 @@ ModalDialog {
 				right: parent.right
 				rightMargin: Theme.geometry_modalDialog_content_horizontalMargin
 				verticalCenter: parent.verticalCenter
-				verticalCenterOffset: -Theme.geometry_numberSelector_spinBox_bottomPadding / 2
+				verticalCenterOffset: -Theme.geometry_shared_32_32_24 / 2
 			}
-			spacing: Theme.geometry_space_16
+			spacing: Theme.geometry_size_16
 
 			// Show error label above the spinbox, as items below it may be obscured by the VKB.
 			Label {
 				id: errorLabel
 
-				leftPadding: alarmIcon.width +  Theme.geometry_space_12
+				leftPadding: alarmIcon.width +  Theme.geometry_size_12
 				visible: errorLabel.text.length > 0
 				font.pixelSize: Theme.font_dialog_body_secondary_size
 				wrapMode: Text.Wrap
@@ -94,10 +94,10 @@ ModalDialog {
 				id: spinBox
 
 				width: parent.width
-				height: Theme.geometry_timeSelector_spinBox_height
+				height: Theme.geometry_size_72
 				editable: true
 				indicatorImplicitWidth: implicitContentWidth
-						+ (2 * Theme.geometry_statusBar_spacing) + (2 * spinBox.spacing)
+						+ (2 * Theme.geometry_shared_16_16_8) + (2 * spinBox.spacing)
 						+ (2 * Theme.geometry_spinBox_indicator_maximumWidth)
 							> root.implicitBackgroundWidth
 						? Theme.geometry_spinBox_indicator_minimumWidth

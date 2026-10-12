@@ -33,12 +33,12 @@ Item {
 			horizontalCenter: parent.horizontalCenter
 		}
 		rotation: -Theme.geometry_boatPage_centerGauge_angularRange / 2
-		width: Theme.geometry_boatPage_centerGauge_width
+		width: Theme.geometry_size_hero_large
 		height: width
 		radius: width/2
 		endAngle: Theme.geometry_boatPage_centerGauge_angularRange
 		value: root.activeDataSource ? Math.abs(root.activeDataSource.percentage) : 0
-		strokeWidth: Theme.geometry_boatPage_centerGauge_strokeWidth
+		strokeWidth: Theme.geometry_size_24
 		animationEnabled: root.animationEnabled
 		progressColor: root.activeDataSource === root.motorDriveDcConsumption && root.motorDrives.isRegenerating ? Theme.color_boatPage_regenProgress : Theme.color_ok
 		remainderColor: root.activeDataSource === root.motorDriveDcConsumption && root.motorDrives.isRegenerating ? Theme.color_boatPage_regenRemainder : Theme.color_darkOk
@@ -57,7 +57,8 @@ Item {
 			}
 
 			width: outerGauge.strokeWidth
-			height: Theme.geometry_boatPage_centerGauge_needleHeight - radius / 2
+			// Overhang is half the gauge plus 9. Portrait does not instantiate this gauge.
+			height: outerGauge.width / 2 + 9 - radius / 2
 			radius: width / 2
 			// https://github.com/victronenergy/gui-v2/issues/2158
 			// The boat page has a different background color to other pages when in 'Light Mode'
@@ -75,7 +76,7 @@ Item {
 					topMargin: radius
 					horizontalCenter: parent.horizontalCenter
 				}
-				width: Theme.geometry_boatPage_centerGauge_innerNeedleWidth
+				width: Theme.geometry_size_10
 				height: Theme.geometry_boatPage_centerGauge_innerNeedleHeight
 				radius: width / 2
 				gradient: Gradient {
@@ -105,12 +106,12 @@ Item {
 			horizontalCenter: parent.horizontalCenter
 		}
 		rotation: 0
-		width: Theme.geometry_boatPage_centerGauge_width
+		width: Theme.geometry_size_hero_large
 		height: width
 		radius: width/2
 		endAngle: 360
 		value: Global.system.battery.stateOfCharge
-		strokeWidth: Theme.geometry_boatPage_centerGauge_strokeWidth
+		strokeWidth: Theme.geometry_size_24
 		animationEnabled: root.animationEnabled
 		progressColor: root.isBatteryCharging ? Theme.color_boatPage_regenProgress : Theme.color_ok
 		remainderColor: root.isBatteryCharging ? Theme.color_boatPage_regenRemainder : Theme.color_darkOk
@@ -195,9 +196,9 @@ Item {
 		Row {
 			visible: batteryOuterGauge.visible
 			anchors.horizontalCenter: parent.horizontalCenter
-			bottomPadding: Theme.geometry_space_12
+			bottomPadding: Theme.geometry_size_12
 
-			spacing: Theme.geometry_space_4
+			spacing: Theme.geometry_size_4
 
 			CP.ColorImage {
 				anchors.verticalCenter: batteryLabel.verticalCenter
@@ -237,9 +238,9 @@ Item {
 		Row {
 			visible: batteryOuterGauge.visible
 			anchors.horizontalCenter: parent.horizontalCenter
-			topPadding: Theme.geometry_overviewPage_widget_content_horizontalMargin
+			topPadding: Theme.geometry_shared_8_12_12
 
-			spacing: Theme.geometry_space_8
+			spacing: Theme.geometry_size_8
 
 			QuantityLabel {
 				value: Global.system.battery.voltage
@@ -288,7 +289,7 @@ Item {
 		startAngle: outerGauge.startAngle
 		endAngle: outerGauge.endAngle
 		value: root.motorDrives.singleMotorDrive.rpm.percentage
-		strokeWidth: Theme.geometry_boatPage_rpmGauge_strokeWidth
+		strokeWidth: Theme.geometry_size_8
 		animationEnabled: root.animationEnabled
 		visible: root.motorDrives.singleMotorDrive.rpm.valid
 
@@ -312,7 +313,7 @@ Item {
 		startAngle: outerGauge.startAngle
 		endAngle: outerGauge.startAngle + Theme.geometry_boatPage_dualRpmGauge_spanAngle
 		value: root.motorDrives.leftMotorDrive.rpm.percentage
-		strokeWidth: Theme.geometry_boatPage_rpmGauge_strokeWidth
+		strokeWidth: Theme.geometry_size_8
 		animationEnabled: root.animationEnabled
 		visible: root.motorDrives.leftMotorDrive.rpm.valid
 
@@ -337,7 +338,7 @@ Item {
 		startAngle: outerGauge.endAngle
 		endAngle: outerGauge.endAngle - Theme.geometry_boatPage_dualRpmGauge_spanAngle
 		value: root.motorDrives.rightMotorDrive.rpm.percentage
-		strokeWidth: Theme.geometry_boatPage_rpmGauge_strokeWidth
+		strokeWidth: Theme.geometry_size_8
 		animationEnabled: root.animationEnabled
 		visible: root.motorDrives.rightMotorDrive.rpm.valid
 
@@ -357,7 +358,7 @@ Item {
 		width: 2 * rpmGauge.radius * Math.sin(((outerGauge.endAngle - outerGauge.startAngle) * Math.PI / 180) / 2)
 		visible: rpmGauge.visible
 
-		spacing: Theme.geometry_boatPage_singleRpmLabel_spacing
+		spacing: Theme.geometry_spacing_5
 
 		Label {
 			anchors.horizontalCenter: parent.horizontalCenter
@@ -458,7 +459,7 @@ Item {
 		anchors {
 			top: outerGaugeMin.top
 			right: outerGauge.right
-			rightMargin: Theme.geometry_boatPage_rpmGauge_minmax_rightMargin
+			rightMargin: Theme.geometry_size_50
 		}
 		valueColor: Theme.color_font_secondary
 		font.pixelSize: Theme.font_boatPage_rpm_min_max_pixelSize

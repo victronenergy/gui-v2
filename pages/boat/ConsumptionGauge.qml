@@ -45,7 +45,7 @@ Column {
 		sourceType: VenusOS.ElectricalQuantity_Source_Ac
 		dataObject: Global.system.load.ac
 		icon.source: "qrc:/images/acloads.svg"
-		icon.width: Theme.geometry_widgetHeader_icon_size
+		icon.width: Theme.geometry_size_24
 		visible: !motorDriveLoad.visible && Global.system?.hasAcLoads // && !isNaN(value) once #2159 is resolved
 	}
 
@@ -58,7 +58,7 @@ Column {
 		sourceType: VenusOS.ElectricalQuantity_Source_Dc
 		dataObject: Global.system.dc
 		icon.source: "qrc:/images/dcloads.svg"
-		icon.width: Theme.geometry_widgetHeader_icon_size
+		icon.width: Theme.geometry_size_24
 		visible: !motorDriveLoad.visible && !isNaN(value)
 	}
 }

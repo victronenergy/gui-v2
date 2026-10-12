@@ -14,7 +14,7 @@ FocusScope {
 	property alias month: monthSpinbox.value
 	property alias day: daySpinbox.value
 
-	readonly property real _columnWidth: (width / 3) - (2 * Theme.geometry_space_16)
+	readonly property real _columnWidth: (width / 3) - (2 * Theme.geometry_size_16)
 
 	implicitWidth: contentLayout.implicitWidth
 	implicitHeight: contentLayout.implicitHeight
@@ -23,14 +23,14 @@ FocusScope {
 		id: contentLayout
 
 		anchors.centerIn: parent
-		spacing: Theme.geometry_space_16
+		spacing: Theme.geometry_size_16
 
 		SpinBox {
 			id: yearSpinbox
 
 			width: root._columnWidth
 			orientation: Qt.Vertical
-			spacing: Theme.geometry_space_10
+			spacing: Theme.geometry_size_10
 			font.pixelSize: Theme.font_dialog_control_smallSize
 			from: 1970
 			to: 2100
@@ -49,7 +49,7 @@ FocusScope {
 
 			width: root._columnWidth
 			orientation: Qt.Vertical
-			spacing: Theme.geometry_space_10
+			spacing: Theme.geometry_size_10
 			font.pixelSize: Theme.font_dialog_control_smallSize
 			from: 1
 			to: 12
@@ -66,7 +66,7 @@ FocusScope {
 
 			width: root._columnWidth
 			orientation: Qt.Vertical
-			spacing: Theme.geometry_space_10
+			spacing: Theme.geometry_size_10
 			font.pixelSize: Theme.font_dialog_control_smallSize
 			from: 1
 			to: root.year,root.month, ClockTime.daysInMonth(root.month, root.year)

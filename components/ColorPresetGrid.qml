@@ -40,8 +40,8 @@ FocusScope {
 			right: buttonGrid.right
 			rightMargin: Theme.geometry_colorWheelDialog_preset_button_spacing / 2
 		}
-		width: Theme.geometry_colorWheelDialog_preset_trash_width
-		height: Theme.geometry_colorWheelDialog_preset_trash_width
+		width: Theme.geometry_size_48
+		height: Theme.geometry_size_48
 		icon.source: "qrc:/images/icon_trash_32.svg"
 		flat: false
 		onClicked: checked = !checked
@@ -51,7 +51,7 @@ FocusScope {
 		id: separator
 		anchors {
 			top: trashButton.bottom
-			topMargin: Theme.geometry_statusBar_spacing
+			topMargin: Theme.geometry_shared_16_16_8
 			horizontalCenter: buttonGrid.horizontalCenter
 		}
 		x: Theme.geometry_colorWheelDialog_preset_button_spacing / 2
@@ -81,8 +81,8 @@ FocusScope {
 		interactive: false
 		width: cellWidth * 3
 		height: cellHeight * 3
-		cellWidth: Theme.geometry_colorWheelDialog_preset_button_width + Theme.geometry_colorWheelDialog_preset_button_spacing
-		cellHeight: Theme.geometry_colorWheelDialog_preset_button_width + Theme.geometry_colorWheelDialog_preset_button_spacing
+		cellWidth: Theme.geometry_size_56 + Theme.geometry_colorWheelDialog_preset_button_spacing
+		cellHeight: Theme.geometry_size_56 + Theme.geometry_colorWheelDialog_preset_button_spacing
 		currentIndex: -1
 		model: root.model
 		delegate: Item {
@@ -103,13 +103,13 @@ FocusScope {
 				id: colorButton
 
 				anchors.centerIn: parent
-				width: Theme.geometry_colorWheelDialog_preset_button_width
-				height: Theme.geometry_colorWheelDialog_preset_button_width
-				borderWidth: Theme.geometry_border_2
+				width: Theme.geometry_size_56
+				height: Theme.geometry_size_56
+				borderWidth: Theme.geometry_size_2
 				borderColor: presetDelegate.displayColor.valid ? Theme.color_ok
 							: enabled ? Theme.color_colorWheelDialog_preset_empty_button_border
 							: Theme.color_colorWheelDialog_preset_empty_button_border_disabled
-				radius: Theme.geometry_radius_6
+				radius: Theme.geometry_size_6
 				centerColor: presetDelegate.displayColor.valid
 						? Qt.hsva(presetDelegate.displayColor.hsvHue,
 							presetDelegate.displayColor.hsvSaturation,

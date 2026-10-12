@@ -26,11 +26,11 @@ ListSetting {
 	}
 
 	component Arrow: Button {
-		radius: Theme.geometry_radius_6
+		radius: Theme.geometry_size_6
 		flat: false
 		icon.source: "qrc:/images/icon_arrow.svg"
-		defaultBackgroundWidth: Theme.geometry_listItem_height - 2*Theme.geometry_space_4
-		defaultBackgroundHeight: Theme.geometry_listItem_height - 2*Theme.geometry_space_4
+		defaultBackgroundWidth: Theme.geometry_listItem_height - 2*Theme.geometry_size_4
+		defaultBackgroundHeight: Theme.geometry_listItem_height - 2*Theme.geometry_size_4
 	}
 
 	component PageData : QtObject {
@@ -115,7 +115,7 @@ ListSetting {
 					root._model.move(index, index - 1, 1)
 					root._model.writeToBackEnd()
 				}
-				Layout.rightMargin: Theme.geometry_space_4
+				Layout.rightMargin: Theme.geometry_size_4
 			}
 
 			Arrow {
@@ -125,7 +125,7 @@ ListSetting {
 					root._model.move(index + 1, index, 1)
 					root._model.writeToBackEnd()
 				}
-				Layout.rightMargin: Theme.geometry_listItem_flat_content_horizontalMargin
+				Layout.rightMargin: Theme.geometry_shared_16_16_12
 			}
 
 			ThreeLabelLayout {

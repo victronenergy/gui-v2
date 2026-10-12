@@ -15,10 +15,10 @@ Label {
 	width: parent ? parent.width : 0
 	height: preferredVisible ? implicitHeight : 0
 	visible: preferredVisible
-	topPadding: preferredVisible ? Theme.geometry_listItem_content_verticalMargin : 0
-	bottomPadding: preferredVisible ? Theme.geometry_listItem_content_verticalMargin : 0
-	leftPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin
-	rightPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin
+	topPadding: preferredVisible ? Theme.geometry_listItem_content_spacing : 0
+	bottomPadding: preferredVisible ? Theme.geometry_listItem_content_spacing : 0
+	leftPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_shared_24_24_12
+	rightPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_shared_24_24_12
 	font.pixelSize: Theme.font_listItem_flat_primary_size_flat
 	wrapMode: Text.Wrap
 }

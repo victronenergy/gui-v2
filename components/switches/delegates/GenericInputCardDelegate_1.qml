@@ -22,11 +22,11 @@ Item {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_space_8
+			topMargin: Theme.geometry_size_8
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
+			leftMargin: Theme.geometry_shared_24_24_16
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
+			rightMargin: Theme.geometry_shared_24_24_16
 		}
 		genericInput: root.genericInput
 	}
@@ -34,16 +34,16 @@ Item {
 	GenericInputCardDelegateBackground {
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
+			leftMargin: Theme.geometry_shared_24_24_16
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
+			rightMargin: Theme.geometry_shared_24_24_16
 			top: header.bottom
 		}
 
 		Label {
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry_space_12
+				leftMargin: Theme.geometry_size_12
 				right: quantityLabel.left
 				rightMargin: Theme.geometry_valueIndicator_spacing
 				verticalCenter: parent.verticalCenter
@@ -62,7 +62,7 @@ Item {
 
 			anchors {
 				right: parent.right
-				rightMargin: Theme.geometry_space_12
+				rightMargin: Theme.geometry_size_12
 				verticalCenter: parent.verticalCenter
 			}
 			ioChannel: root.genericInput

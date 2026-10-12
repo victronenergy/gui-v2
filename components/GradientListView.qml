@@ -9,11 +9,11 @@ import Victron.VenusOS
 BaseListView {
 	id: root
 
-	bottomMargin: Theme.geometry_space_16
+	bottomMargin: Theme.geometry_size_16
 
 	ScrollBar.vertical: ScrollBar {
-		topPadding: Theme.geometry_gradientList_topMargin
-		bottomPadding: Theme.geometry_space_16
+		topPadding: Theme.geometry_size_6
+		bottomPadding: Theme.geometry_size_16
 	}
 
 	ViewGradient {

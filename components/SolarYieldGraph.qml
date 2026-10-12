@@ -11,8 +11,8 @@ import Victron.VenusOS
 Item {
 	id: root
 
-	readonly property int maximumBarCount: (width + Theme.geometry_space_4)
-		/ (Theme.geometry_overviewPage_widget_solar_graph_bar_width + Theme.geometry_space_4)
+	readonly property int maximumBarCount: (width + Theme.geometry_size_4)
+		/ (Theme.geometry_size_10 + Theme.geometry_size_4)
 
 	Repeater {
 		model: SolarYieldModel {
@@ -22,16 +22,16 @@ Item {
 		}
 
 		delegate: Rectangle {
-			x: model.index * Theme.geometry_overviewPage_widget_solar_graph_bar_width
-				+ (Theme.geometry_space_4 * model.index)
+			x: model.index * Theme.geometry_size_10
+				+ (Theme.geometry_size_4 * model.index)
 				// Cancel out the spacing added for the last bar.
-				+ (Theme.geometry_space_4/yieldModel.count * model.index)
+				+ (Theme.geometry_size_4/yieldModel.count * model.index)
 			y: parent.height - height
 			height: yieldModel.maximumYield > 0
 					? root.height * (model.yieldKwh / yieldModel.maximumYield)
 					: 0
-			width: Theme.geometry_overviewPage_widget_solar_graph_bar_width
-			radius: Theme.geometry_radius_8
+			width: Theme.geometry_size_10
+			radius: Theme.geometry_size_8
 			color: Theme.color_overviewPage_widget_solar_graph_bar
 		}
 	}

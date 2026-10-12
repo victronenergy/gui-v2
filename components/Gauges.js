@@ -105,18 +105,10 @@ function tankProperties(type) {
 	return {}
 }
 
-function maxTankCount() {
-	// Five-inch stored 5; seven-inch and portrait stored 6.
-	if (V.Theme.screenSize === V.Theme.FiveInch) {
-		return 5
-	}
-	return 6
-}
-
 function width(count, maxCount, availableSpace){
 	const _count = Math.min(maxCount, count)
 	if (_count <= 3) {
-		return V.Theme.geometry_levelsPage_panel_max_width
+		return V.Theme.geometry_size_column
 	} else {
 		const _spacing = spacing(_count)
 		const margin = V.Theme.geometry_page_content_horizontalMargin
@@ -125,7 +117,7 @@ function width(count, maxCount, availableSpace){
 }
 
 function height(expanded) {
-	return expanded ? V.Theme.geometry_levelsPage_panel_expanded_height
+	return expanded ? (V.Theme.geometry_levelsPage_panel_compact_height + 2 * V.Theme.geometry_size_48)
 					: V.Theme.geometry_levelsPage_panel_compact_height
 }
 
@@ -137,9 +129,9 @@ function spacing(count) {
 	} else if (count === 3) {
 		return V.Theme.geometry_levelsPage_gauge_spacing_medium
 	} else if (count === 4) {
-		return V.Theme.geometry_space_16
+		return V.Theme.geometry_size_16
 	} else {
-		return V.Theme.geometry_space_8
+		return V.Theme.geometry_size_8
 	}
 }
 

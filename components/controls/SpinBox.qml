@@ -59,7 +59,7 @@ T.SpinBox {
 	rightPadding: orientation === Qt.Horizontal ? down.indicator.width + spacing : 0
 	topPadding: orientation === Qt.Vertical ? up.indicator.height + spacing : 0
 	bottomPadding: orientation === Qt.Vertical ? down.indicator.height + spacing : 0
-	spacing: Theme.geometry_spinBox_spacing
+	spacing: Theme.geometry_size_7
 	validator: DoubleValidator {
 		locale: Units.numberFormattingLocaleName
 	}
@@ -160,7 +160,7 @@ T.SpinBox {
 			id: contentArea
 
 			anchors.centerIn: parent
-			implicitWidth: Math.max(inputArea.implicitWidth, secondaryLabel.implicitWidth) + 2*Theme.geometry_statusBar_spacing
+			implicitWidth: Math.max(inputArea.implicitWidth, secondaryLabel.implicitWidth) + 2*Theme.geometry_shared_16_16_8
 			implicitHeight: secondaryLabel.y + secondaryLabel.height
 			width: Math.min(implicitWidth, parent.width)
 			height: Math.min(implicitHeight, parent.height)
@@ -203,8 +203,8 @@ T.SpinBox {
 						 && !spinBoxContentItem.KeyNavigationHighlight.active
 				color: "transparent"
 				border.color: Theme.color_blue
-				border.width: Theme.geometry_focus_highlight_border_size
-				radius: Theme.geometry_radius_8
+				border.width: Theme.geometry_size_4
+				radius: Theme.geometry_size_8
 			}
 
 			// Orange frame with arrow indicators, to hint that up/down keys will change the value,
@@ -225,8 +225,8 @@ T.SpinBox {
 		   ? contentItem.y + (contentItem.height / 2) - (height / 2)
 		   : contentItem.y + contentItem.height + root.spacing
 		implicitWidth: root.indicatorImplicitWidth
-		implicitHeight: Theme.geometry_spinBox_indicator_height
-		radius: Theme.geometry_radius_6
+		implicitHeight: Theme.geometry_segmentedButtonRow_height
+		radius: Theme.geometry_size_6
 		color: enabled
 			   ? (root.up.pressed ? Theme.color_button_down : Theme.color_button)
 			   : Theme.color_background_disabled
@@ -251,8 +251,8 @@ T.SpinBox {
 		   ? contentItem.y + (contentItem.height / 2) - (height / 2)
 		   : contentItem.y - root.spacing - height
 		implicitWidth: root.indicatorImplicitWidth
-		implicitHeight: Theme.geometry_spinBox_indicator_height
-		radius: Theme.geometry_radius_6
+		implicitHeight: Theme.geometry_segmentedButtonRow_height
+		radius: Theme.geometry_size_6
 		color: enabled
 			   ? (downIndicatorPressArea.pressed ? Theme.color_button_down : Theme.color_button)
 			   : Theme.color_background_disabled

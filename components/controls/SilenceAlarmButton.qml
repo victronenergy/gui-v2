@@ -9,8 +9,8 @@ import Victron.VenusOS
 Button {
 	id: root
 
-	leftPadding: leftInset + Theme.geometry_space_16
-	rightPadding: rightInset + Theme.geometry_space_16
+	leftPadding: leftInset + Theme.geometry_size_16
+	rightPadding: rightInset + Theme.geometry_size_16
 	defaultBackgroundHeight: Theme.geometry_notificationsPage_snoozeButton_height
 	flat: false
 	backgroundColor: Theme.color_critical_background
@@ -19,7 +19,7 @@ Button {
 	text: CommonWords.silence_alarm
 
 	// ensure highlight border can be seen against critical backgroundColor
-	KeyNavigationHighlight.margins: -(4 * Theme.geometry_border_2)
+	KeyNavigationHighlight.margins: -(4 * Theme.geometry_size_2)
 
 	Binding {
 		target: Global.notifications ?? null

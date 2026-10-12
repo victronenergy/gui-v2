@@ -25,19 +25,19 @@ T.ProgressBar {
 	background: Rectangle {
 		x: root.leftPadding
 		y: root.topPadding + (root.availableHeight / 2) - (height / 2)
-		implicitWidth: Theme.geometry_control_width
-		implicitHeight: Theme.geometry_progressBar_height
+		implicitWidth: Theme.geometry_size_80
+		implicitHeight: Theme.geometry_size_8
 		width: root.availableWidth
 		height: implicitHeight
-		radius: Theme.geometry_radius_8
+		radius: Theme.geometry_size_8
 		color: Theme.color_darkOk
 
 		Rectangle {
 			id: highlightRect
 
-			height: Theme.geometry_progressBar_height
+			height: Theme.geometry_size_8
 			color: Theme.color_ok
-			radius: Theme.geometry_radius_8
+			radius: Theme.geometry_size_8
 
 			Binding {
 				when: !indeterminateAnim.running

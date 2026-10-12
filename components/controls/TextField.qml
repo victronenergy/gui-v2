@@ -16,11 +16,11 @@ T.TextField {
 	font.pixelSize: Theme.font_listItem_primary_size
 	passwordCharacter: "\u2022"
 
-	leftPadding: leftInset + Theme.geometry_statusBar_spacing
-	rightPadding: rightInset + Theme.geometry_statusBar_spacing
+	leftPadding: leftInset + Theme.geometry_shared_16_16_8
+	rightPadding: rightInset + Theme.geometry_shared_16_16_8
 
 	implicitWidth: Math.max(contentWidth, placeholderText.implicitWidth) + leftPadding + rightPadding
-	implicitHeight: Theme.geometry_textField_height
+	implicitHeight: Theme.geometry_button_height
 
 	horizontalAlignment: Text.AlignHCenter
 	verticalAlignment: Text.AlignVCenter
@@ -33,8 +33,8 @@ T.TextField {
 	background: Rectangle {
 		color: "transparent"
 		border.color: root.borderColor
-		border.width: Theme.geometry_border_2
-		radius: Theme.geometry_radius_8
+		border.width: Theme.geometry_size_2
+		radius: Theme.geometry_size_8
 
 		// QTBUG-100490 placeholderText doesn't appear in TextField if inside StackView, so
 		// create our own placeholder here.

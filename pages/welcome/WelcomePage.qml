@@ -52,7 +52,7 @@ Rectangle {
 
 		Label {
 			Layout.fillWidth: true
-			bottomPadding: Theme.geometry_space_8
+			bottomPadding: Theme.geometry_size_8
 			wrapMode: Text.Wrap
 			text: root.title
 			font.pixelSize: Theme.font_size_h1
@@ -85,7 +85,7 @@ Rectangle {
 		RowLayout {
 			Layout.fillWidth: true
 			Layout.preferredHeight: Theme.geometry_listItem_height
-			spacing: Theme.geometry_space_8
+			spacing: Theme.geometry_size_8
 
 			Button {
 				Layout.fillWidth: true

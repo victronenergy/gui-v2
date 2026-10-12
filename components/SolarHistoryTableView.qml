@@ -161,9 +161,9 @@ ColumnLayout {
 		timeInFloat: root._trackerHistoryTotal("timeInFloat")
 
 		Layout.fillWidth: true
-		Layout.leftMargin: Theme.geometry_solarDetailBox_margins
-		Layout.rightMargin: Theme.geometry_solarDetailBox_margins
-		Layout.topMargin: Theme.geometry_solarDetailBox_margins
-		Layout.bottomMargin: Theme.geometry_solarDetailBox_margins
+		Layout.leftMargin: Theme.geometry_shared_8_8_12
+		Layout.rightMargin: Theme.geometry_shared_8_8_12
+		Layout.topMargin: Theme.geometry_shared_8_8_12
+		Layout.bottomMargin: Theme.geometry_shared_8_8_12
 	}
 }

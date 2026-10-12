@@ -30,11 +30,11 @@ Item {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_space_8
+			topMargin: Theme.geometry_size_8
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
+			leftMargin: Theme.geometry_shared_24_24_16
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
+			rightMargin: Theme.geometry_shared_24_24_16
 		}
 		switchableOutput: root.switchableOutput
 	}
@@ -54,10 +54,10 @@ Item {
 		// Expand clickable area horizontally (to delegate edges) and vertically.
 		defaultBackgroundWidth: header.width
 		defaultBackgroundHeight: Theme.geometry_iochannel_control_height
-		topInset: Theme.geometry_button_touch_verticalMargin
-		bottomInset: Theme.geometry_button_touch_verticalMargin
-		leftInset: Theme.geometry_controlCard_button_margins
-		rightInset: Theme.geometry_controlCard_button_margins
+		topInset: Theme.geometry_size_14
+		bottomInset: Theme.geometry_size_14
+		leftInset: Theme.geometry_shared_24_24_16
+		rightInset: Theme.geometry_shared_24_24_16
 
 		onOnClicked: toggleState.writeValue(1)
 		onOffClicked: toggleState.writeValue(0)

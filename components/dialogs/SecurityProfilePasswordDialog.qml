@@ -58,7 +58,7 @@ ModalDialog {
 				right: parent.right
 				rightMargin: Theme.geometry_modalDialog_content_horizontalMargin
 			}
-			spacing: Theme.geometry_space_16
+			spacing: Theme.geometry_size_16
 
 			Label {
 				id: description

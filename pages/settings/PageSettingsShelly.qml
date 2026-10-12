@@ -110,7 +110,7 @@ Page {
 			}
 
 			SectionHeader {
-				leftPadding: Theme.geometry_listItem_content_horizontalMargin
+				leftPadding: Theme.geometry_shared_24_24_12
 				text: CommonWords.discovered_devices
 				opacity: shellyListView.count > 0 ? 1 : 0 // set opacity instead of visible to avoid binding loop
 				preferredVisible: shellyServiceEnabled.value === 1

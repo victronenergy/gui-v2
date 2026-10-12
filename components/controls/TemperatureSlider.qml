@@ -16,7 +16,7 @@ SwitchableOutputSlider {
 	readonly property real rightLabelWidth: rightPaddingText.implicitWidth
 
 	// Determine the number of dots with padding will fit into the available space (Add one for the maximal dot)
-	readonly property real dotWithPadding: Theme.geometry_temperatureSlider_dot_size + Theme.geometry_space_4
+	readonly property real dotWithPadding: Theme.geometry_size_4 + Theme.geometry_size_4
 	readonly property int dotCount: Math.min(Math.floor(availableWidth / dotWithPadding) + 1, ((to - from) / stepSize) + 1)
 
 	leftPadding: leftLabelWidth
@@ -28,7 +28,7 @@ SwitchableOutputSlider {
 	background: Rectangle {
 		implicitWidth: Theme.geometry_controlCard_minimumWidth
 		implicitHeight: Theme.geometry_iochannel_control_height
-		radius: Theme.geometry_radius_8
+		radius: Theme.geometry_size_8
 
 		// the background is the border with an additional rectangle for fill
 		gradient: Gradient {
@@ -39,8 +39,8 @@ SwitchableOutputSlider {
 
 		Rectangle {
 			anchors.fill: parent
-			anchors.margins: Theme.geometry_border_2
-			radius: Theme.geometry_radius_8 - anchors.margins
+			anchors.margins: Theme.geometry_size_2
+			radius: Theme.geometry_size_8 - anchors.margins
 
 			gradient: Gradient {
 				orientation: Qt.Horizontal
@@ -57,8 +57,8 @@ SwitchableOutputSlider {
 			CP.ColorImage {
 				x: modelData * (root.availableWidth - width)/(dotCount - 1)
 				anchors.verticalCenter: parent.verticalCenter
-				width: Theme.geometry_temperatureSlider_dot_size
-				height: Theme.geometry_temperatureSlider_dot_size
+				width: Theme.geometry_size_4
+				height: Theme.geometry_size_4
 				source: "qrc:/images/dot.svg"
 				color: root.enabled ? Theme.color_white : Theme.color_font_disabled
 			}
@@ -87,21 +87,21 @@ SwitchableOutputSlider {
 			id: popup
 
 			x: handle.x + (handle.width / 2) - (width / 2)
-			y: -height + Theme.geometry_border_2
-			leftPadding: Theme.geometry_space_8
-			rightPadding: Theme.geometry_space_8
+			y: -height + Theme.geometry_size_2
+			leftPadding: Theme.geometry_size_8
+			rightPadding: Theme.geometry_size_8
 			topPadding: 0
 			bottomPadding: 0
 			closePolicy: Popup.CloseOnReleaseOutside
 
 			background: Rectangle {
 				color: Theme.color_blue
-				radius: Theme.geometry_radius_8
+				radius: Theme.geometry_size_8
 				layer.enabled: true
 				layer.effect: Effects.MultiEffect {
 					shadowEnabled: true
-					shadowHorizontalOffset: Theme.geometry_temperatureSlider_popup_shadow_horizontalOffset
-					shadowVerticalOffset: Theme.geometry_temperatureSlider_popup_shadow_verticalOffset
+					shadowHorizontalOffset: Theme.geometry_size_2
+					shadowVerticalOffset: Theme.geometry_size_6
 					blurMax: 24
 				}
 
@@ -122,7 +122,7 @@ SwitchableOutputSlider {
 				id: popupLabel
 				rightPadding: measurementLabel.visible
 						// Add padding on either side of the separator, and on the right edge
-						? measurementLabel.width + (2 * Theme.geometry_space_8)
+						? measurementLabel.width + (2 * Theme.geometry_size_8)
 						: 0
 				horizontalAlignment: Text.AlignHCenter
 				verticalAlignment: Text.AlignVCenter
@@ -135,9 +135,9 @@ SwitchableOutputSlider {
 					anchors {
 						verticalCenter: parent.verticalCenter
 						right: measurementLabel.left
-						rightMargin: Theme.geometry_space_8
+						rightMargin: Theme.geometry_size_8
 					}
-					height: popupLabel.implicitHeight - (2 * Theme.geometry_space_8)
+					height: popupLabel.implicitHeight - (2 * Theme.geometry_size_8)
 					visible: root.measurementText.length > 0
 					color: Theme.color_gray7
 				}
@@ -174,8 +174,8 @@ SwitchableOutputSlider {
 
 	component MinMaxLabel : Label {
 		anchors.verticalCenter: parent.verticalCenter
-		leftPadding: Theme.geometry_space_8
-		rightPadding: Theme.geometry_space_8
+		leftPadding: Theme.geometry_size_8
+		rightPadding: Theme.geometry_size_8
 		color: root.enabled ? Theme.color_button_down_text : Theme.color_font_disabled
 	}
 

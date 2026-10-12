@@ -26,7 +26,7 @@ LevelsTab {
 	delegate: TankGaugePanel {
 		width: root.orientation === ListView.Vertical
 			   ? ListView.view.width
-			   : Gauges.width(root.count, Gauges.maxTankCount(), root.width)
+			   : Gauges.width(root.count, Theme.geometry_levelsPage_max_tank_count, root.width)
 		height: root.orientation === ListView.Vertical
 			   ? implicitHeight
 			   : Gauges.height(Global.pageManager?.expandLayout ?? false)
@@ -56,7 +56,7 @@ LevelsTab {
 		PressArea {
 			id: pressArea
 			anchors.fill: parent
-			radius: Theme.geometry_levelsPage_panel_radius
+			radius: Theme.geometry_shared_16_16_8
 			enabled: parent.isGroup
 			onClicked: {
 				Global.dialogLayer.open(expandedTanksComponent, { tankModel: tankModel })
@@ -79,8 +79,8 @@ LevelsTab {
 			backgroundColor: "transparent"
 			leftMargin: 0
 			rightMargin: 0
-			topPadding: Theme.geometry_tankGaugeDialog_topPadding
-			bottomPadding: Theme.geometry_tankGaugeDialog_bottomPadding
+			topPadding: Theme.geometry_size_48
+			bottomPadding: Theme.geometry_size_24
 
 			background: DialogShadow {
 				implicitWidth: Theme.geometry_screen_width
@@ -103,9 +103,9 @@ LevelsTab {
 
 					anchors {
 						bottom: expandedTanksView.top
-						bottomMargin: Theme.geometry_space_12
+						bottomMargin: Theme.geometry_size_12
 						right: parent.right
-						rightMargin: Theme.geometry_space_16
+						rightMargin: Theme.geometry_size_16
 					}
 					color: Theme.color_ok
 					source: "qrc:/images/icon_close_32.svg"

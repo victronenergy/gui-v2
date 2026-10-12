@@ -41,7 +41,7 @@ Item {
 			bottom: root.alignment & Qt.AlignBottom ? parent.bottom : undefined
 		}
 
-		spacing: Theme.geometry_space_2
+		spacing: Theme.geometry_size_2
 
 		Label {
 			id: valueLabel

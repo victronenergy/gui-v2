@@ -13,8 +13,8 @@ AbstractListItem {
 	id: root
 
 	readonly property real horizontalContentPadding: flat
-			? Theme.geometry_listItem_flat_content_horizontalMargin
-			: Theme.geometry_listItem_content_horizontalMargin
+			? Theme.geometry_shared_16_16_12
+			: Theme.geometry_shared_24_24_12
 
 	// The default format for text in the item. Defaults to AutoText, same as for QtQuick Text.
 	property int textFormat: Text.AutoText
@@ -35,11 +35,11 @@ AbstractListItem {
 	// visible items.
 	leftInset: flat ? 0 : Theme.geometry_page_content_horizontalMargin
 	rightInset: flat ? 0 : Theme.geometry_page_content_horizontalMargin
-	bottomInset: Theme.geometry_space_4
+	bottomInset: Theme.geometry_size_4
 	leftPadding: leftInset + horizontalContentPadding
 	rightPadding: rightInset + horizontalContentPadding
-	topPadding: topInset + Theme.geometry_listItem_content_verticalMargin
-	bottomPadding: bottomInset + Theme.geometry_listItem_content_verticalMargin
+	topPadding: topInset + Theme.geometry_listItem_content_spacing
+	bottomPadding: bottomInset + Theme.geometry_listItem_content_spacing
 
 	implicitWidth: effectiveVisible ? Math.max(
 			implicitBackgroundWidth + leftInset + rightInset,
@@ -48,7 +48,7 @@ AbstractListItem {
 			implicitBackgroundHeight + topInset + bottomInset,
 			implicitContentHeight + topPadding + bottomPadding) : 0
 	width: parent?.width ?? Theme.geometry_listItem_width
-	spacing: Theme.geometry_listItem_content_verticalMargin
+	spacing: Theme.geometry_listItem_content_spacing
 
 	// By default, the item is visible if preferredVisible=true.
 	effectiveVisible: preferredVisible

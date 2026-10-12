@@ -18,10 +18,10 @@ Rectangle {
 	signal animationFinished()
 
 	color: Theme.color_dimGreen
-	topLeftRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_radius_8 : 0
-	topRightRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_radius_8 : 0
-	bottomLeftRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_radius_8 : 0
-	bottomRightRadius: Theme.geometry_radius_8
+	topLeftRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_size_8 : 0
+	topRightRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_size_8 : 0
+	bottomLeftRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_size_8 : 0
+	bottomRightRadius: Theme.geometry_size_8
 
 	// Slowly expands a rectangle from the left edge to the right.
 	SequentialAnimation {

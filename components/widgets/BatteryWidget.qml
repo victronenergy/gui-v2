@@ -64,13 +64,13 @@ OverviewWidget {
 	background: BarGauge {
 		id: batteryGauge
 
-		implicitWidth: Theme.geometry_overviewPage_widget_centerWidgetWidth
+		implicitWidth: Theme.geometry_size_hero_medium
 		implicitHeight: Theme.geometry_overviewPage_widget_compact_l_height
 		foregroundColor: Theme.color_overviewPage_widget_battery_background
 		backgroundColor: Theme.color_overviewPage_widget_background
-		borderWidth: enabled ? Theme.geometry_border_2 : 0
+		borderWidth: enabled ? Theme.geometry_size_2 : 0
 		borderColor: Theme.color_overviewPage_widget_border
-		radius: Theme.geometry_radius_8
+		radius: Theme.geometry_size_8
 		animationEnabled: root.animationEnabled // Note: don't use _animationReady here.
 		value: root._normalizedStateOfCharge / 100
 
@@ -137,7 +137,7 @@ OverviewWidget {
 				top: parent.top
 				topMargin: Theme.geometry_overviewPage_widget_content_topMargin
 				right: parent.right
-				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
+				rightMargin: Theme.geometry_shared_8_12_12
 			}
 			value: Global.system.battery.temperature
 			unit: Global.systemSettings.temperatureUnit
@@ -152,7 +152,7 @@ OverviewWidget {
 				bottom: parent.bottom
 				bottomMargin: Theme.geometry_overviewPage_batterywidget_renewable_icon_bottom_margin
 				right: parent.right
-				rightMargin: Theme.geometry_overviewPage_widget_content_horizontalMargin
+				rightMargin: Theme.geometry_shared_8_12_12
 			}
 			fillMode: Image.PreserveAspectFit
 			color: Theme.color_font_primary
@@ -189,7 +189,7 @@ OverviewWidget {
 		}
 
 		RowLayout {
-			spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin
+			spacing: Theme.geometry_shared_8_12_12
 			Layout.fillWidth: false
 
 			Label {
@@ -223,7 +223,7 @@ OverviewWidget {
 			readonly property bool _useSmallFont: !quantityLabelFits(batteryVoltageDisplay) || !quantityLabelFits(batteryPowerDisplay)
 
 			function quantityLabelFits(label) {
-				return root.width/2 - 2*Theme.geometry_overviewPage_widget_content_horizontalMargin
+				return root.width/2 - 2*Theme.geometry_shared_8_12_12
 					> quantityLabelWidth(batteryCurrentDisplay.valueText, batteryCurrentDisplay.unitText)/2
 					+ quantityLabelWidth(label.valueText, label.unitText)
 			}
@@ -231,11 +231,11 @@ OverviewWidget {
 			function quantityLabelWidth(valueText, unitText){
 				const valueTextRect = quantityLabelFont.tightBoundingRect(valueText)
 				return quantityLabelFont.font, (valueTextRect.x + valueTextRect.width
-												+ Theme.geometry_space_2
+												+ Theme.geometry_size_2
 												+ quantityLabelFont.advanceWidth(unitText))
 			}
 
-			spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin
+			spacing: Theme.geometry_shared_8_12_12
 
 			FontMetrics {
 				id: quantityLabelFont

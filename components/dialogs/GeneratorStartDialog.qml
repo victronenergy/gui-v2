@@ -32,21 +32,21 @@ GeneratorDialog {
 			id: contentColumn
 			x: Theme.geometry_modalDialog_content_horizontalMargin
 			width: parent.width - (2 * Theme.geometry_modalDialog_content_horizontalMargin)
-			spacing: Theme.geometry_space_16
+			spacing: Theme.geometry_size_16
 
 			Row {
 				anchors {
 					left: timeSelector.left
 					right: timeSelector.right
 				}
-				topPadding: Theme.geometry_space_16
+				topPadding: Theme.geometry_size_16
 
 				Label {
 					id: timedRunLabel
 					//% "Timed run"
 					text: qsTrId("controlcard_generator_startdialog_timed_run")
 					width: parent.width - timedRunSwitch.width
-					rightPadding: Theme.geometry_listItem_content_verticalMargin
+					rightPadding: Theme.geometry_listItem_content_spacing
 					elide: Text.ElideRight
 				}
 
@@ -58,7 +58,7 @@ GeneratorDialog {
 					focus: true
 
 					// Include label in the navigation highlight
-					KeyNavigationHighlight.leftMargin: -timedRunLabel.width - Theme.geometry_listItem_content_verticalMargin
+					KeyNavigationHighlight.leftMargin: -timedRunLabel.width - Theme.geometry_listItem_content_spacing
 					KeyNavigation.down: timeSelector
 				}
 			}

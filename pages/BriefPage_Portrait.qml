@@ -25,16 +25,16 @@ Item {
 
 		x: Theme.geometry_page_content_horizontalMargin
 		width: root.width - (2 * Theme.geometry_page_content_horizontalMargin)
-		height: mainGauge.height + (2 * Theme.geometry_mainGauge_padding)
+		height: mainGauge.height + (2 * Theme.geometry_size_30)
 		color: Theme.color_background_secondary
-		radius: Theme.geometry_radius_8
+		radius: Theme.geometry_size_8
 
 		Loader {
 			id: mainGauge
 
 			anchors.centerIn: parent
-			width: Theme.geometry_mainGauge_size
-			height: Theme.geometry_mainGauge_size
+			width: Theme.geometry_size_hero_large
+			height: Theme.geometry_size_hero_large
 			sourceComponent: gaugeModel.count === 0 ? singleGauge : multiGauge
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load main gauge")
 		}
@@ -64,7 +64,7 @@ Item {
 				width: root.width - (2 * Theme.geometry_page_content_horizontalMargin)
 				height: panelAutoCloseColumn.height
 				color: Theme.color_background_secondary
-				radius: Theme.geometry_radius_8
+				radius: Theme.geometry_size_8
 
 				Column {
 					id: panelAutoCloseColumn
@@ -76,8 +76,8 @@ Item {
 
 					Label {
 						width: parent.width
-						leftPadding: Theme.geometry_levelsGauge_horizontalPadding
-						rightPadding: Theme.geometry_levelsGauge_horizontalPadding
+						leftPadding: Theme.geometry_inset_portrait
+						rightPadding: Theme.geometry_inset_portrait
 						horizontalAlignment: Text.AlignHCenter
 						wrapMode: Text.Wrap
 						//% "Graphs and additional details have been hidden to reduce the CPU load."
@@ -108,7 +108,7 @@ Item {
 
 			BriefCenterDisplay {
 				anchors.centerIn: parent
-				width: parent.width - (gaugeModel.count * circularMultiGauge._stepSize) + Theme.geometry_listItem_flat_content_horizontalMargin
+				width: parent.width - (gaugeModel.count * circularMultiGauge._stepSize) + Theme.geometry_shared_16_16_12
 				showFullDetails: gaugeModel.count === 1
 			}
 		}
