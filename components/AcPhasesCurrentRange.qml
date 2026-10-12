@@ -4,6 +4,7 @@
 */
 
 import QtQml
+import Victron.VenusOS
 
 QtObject {
 	id: root

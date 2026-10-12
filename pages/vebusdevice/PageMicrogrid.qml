@@ -274,15 +274,15 @@ Page {
 
 					dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmin/Value"
 					dataItemModifiedFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmin/Modified"
-					rangeModelFrom.minimumValue: -200
-					rangeModelFrom.maximumValue: 200
-					rangeModelFrom.stepSize: 0.01
+					rangeFrom.minimumValue: -200
+					rangeFrom.maximumValue: 200
+					rangeFrom.stepSize: 0.01
 
 					dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmax/Value"
 					dataItemModifiedTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/Pmax/Modified"
-					rangeModelTo.minimumValue: -200
-					rangeModelTo.maximumValue: 200
-					rangeModelTo.stepSize: 0.01
+					rangeTo.minimumValue: -200
+					rangeTo.maximumValue: 200
+					rangeTo.stepSize: 0.01
 
 					unit: VenusOS.Units_Percentage
 					decimals: 2
@@ -296,15 +296,15 @@ Page {
 
 					dataItemFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMin/Value"
 					dataItemModifiedFrom.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMin/Modified"
-					rangeModelFrom.minimumValue: -70
-					rangeModelFrom.maximumValue: 70
-					rangeModelFrom.stepSize: 0.01
+					rangeFrom.minimumValue: -70
+					rangeFrom.maximumValue: 70
+					rangeFrom.stepSize: 0.01
 
 					dataItemTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMax/Value"
 					dataItemModifiedTo.uid: root.bindPrefix + "/MicroGrid/DroopModeParameters/QMax/Modified"
-					rangeModelTo.minimumValue: -70
-					rangeModelTo.maximumValue: 70
-					rangeModelTo.stepSize: 0.01
+					rangeTo.minimumValue: -70
+					rangeTo.maximumValue: 70
+					rangeTo.stepSize: 0.01
 
 					unit: VenusOS.Units_Percentage
 					decimals: 2

@@ -38,8 +38,8 @@
 **
 ****************************************************************************/
 
-#ifndef QRANGEMODEL_P_H
-#define QRANGEMODEL_P_H
+#ifndef RANGE_P_H
+#define RANGE_P_H
 
 //
 //  W A R N I N G
@@ -52,14 +52,14 @@
 // We mean it.
 //
 
-#include "qrangemodel.h"
+#include "range.h"
 
-class QRangeModelPrivate
+class RangePrivate
 {
-	Q_DECLARE_PUBLIC(QRangeModel)
+	Q_DECLARE_PUBLIC(Range)
 public:
-	QRangeModelPrivate(QRangeModel *qq);
-	virtual ~QRangeModelPrivate();
+	RangePrivate(Range *qq);
+	virtual ~RangePrivate();
 
 	void init();
 
@@ -68,7 +68,7 @@ public:
 
 	uint inverted : 1;
 
-	QRangeModel *q_ptr;
+	Range *q_ptr;
 
 	inline qreal effectivePosAtMin() const {
 		return inverted ? posatmax : posatmin;
@@ -103,4 +103,4 @@ public:
 	void emitValueAndPositionIfChanged(const qreal oldValue, const qreal oldPosition);
 };
 
-#endif // QRANGEMODEL_P_H
+#endif // RANGE_P_H
