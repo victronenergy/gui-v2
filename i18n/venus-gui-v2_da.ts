@@ -172,27 +172,27 @@
       <translation>Autostart</translation>
     </message>
     <message id="settings_access_level">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="67"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="71"/>
       <source>Access level</source>
       <translation>Adgangsniveau</translation>
     </message>
     <message id="settings_access_user">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="72"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="76"/>
       <source>User</source>
       <translation>Bruger</translation>
     </message>
     <message id="settings_access_user_installer">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
       <source>User &amp; Installer</source>
       <translation>Bruger &amp; installatør</translation>
     </message>
     <message id="settings_access_superuser">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="80"/>
       <source>Superuser</source>
       <translation>Superbruger</translation>
     </message>
     <message id="settings_access_service">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="82"/>
       <source>Service</source>
       <translation>Service</translation>
     </message>
@@ -1111,17 +1111,17 @@
       <translation>AC-In2...</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="295"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="299"/>
       <source>Remote support</source>
       <translation>Fjernsupport</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="301"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="305"/>
       <source>Remote support tunnel</source>
       <translation>Fjern support tunnel</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="310"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="314"/>
       <source>Remote support IP and port</source>
       <translation>Fjern support IP og port</translation>
     </message>
@@ -4989,7 +4989,7 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Indstilling af låst adgangsniveau</translation>
     </message>
     <message id="settings_access_incorrect_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="89"/>
       <source>Incorrect password</source>
       <translation>Forkert adgangskode</translation>
     </message>
@@ -6585,42 +6585,42 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Denne PV-inverter har understøttelse af effektbegrænsning. Deaktiver denne indstilling, hvis den forstyrrer den normale drift.</translation>
     </message>
     <message id="settings_local_network_security_profile">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="124"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="128"/>
       <source>Local network security profile</source>
       <translation>Sikkerhedsprofil for lokalt netværk</translation>
     </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
       <source>Please select...</source>
       <translation>Vælg venligst...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="137"/>
       <source>Secured</source>
       <translation>Sikret</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="140"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>Beskyttet med adgangskode, og netværkskommunikationen er krypteret</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="145"/>
       <source>Weak</source>
       <translation>Svag</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="148"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>Passwordbeskyttet, men netværkskommunikationen er ikke krypteret</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="153"/>
       <source>Unsecured</source>
       <translation>Usikret</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="152"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="156"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>Ingen adgangskode, og netværkskommunikationen er ikke krypteret</translation>
     </message>
@@ -6630,22 +6630,22 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
       <translation>Adgangskoden skal være mindst 8 tegn lang</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="227"/>
       <source>Select 'Secured' profile?</source>
       <translation>Vælg profilen 'Sikret'?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="226"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
       <source>Select 'Weak' profile?</source>
       <translation>Vælg 'Svag' profil?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="229"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="233"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>Vælg profilen 'Usikret'?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="244"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -6656,81 +6656,81 @@ Når opladningsprocessen er afsluttet, vender systemet tilbage til normal drift 
 - Usikre indstillinger kan ikke aktiveres</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="243"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="247"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Lokale netværkstjenester er beskyttet med adgangskode
 - Ukrypteret adgang til lokale hjemmesider er også aktiveret (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="246"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="250"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- Lokale netværkstjenester behøver ikke en adgangskode
 - Ukrypteret adgang til lokale hjemmesider er også aktiveret (HTTP/HTTPS)</translation>
     </message>
     <message id="access_and_security_page_will_reload">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="118"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="122"/>
       <source>Page will automatically reload in 5 seconds</source>
       <translation>Siden genindlæses automatisk om 5 sekunder</translation>
     </message>
     <message id="settings_security_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="159"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="163"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">Adgangskoden skal være mindst 8 tegn lang</translation>
     </message>
     <message id="settings_security_profile_update">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="187"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="191"/>
       <source>Update</source>
       <translation type="unfinished">Opdater</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="265"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
       <source>Root password</source>
       <translation>Adgangskode til roden</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="272"/>
       <source>Enter password</source>
       <translation type="unfinished">Indtast adgangskode</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="273"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="277"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">Adgangskoden skal være mindst 8 tegn lang</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="279"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="283"/>
       <source>Root password changed to %1</source>
       <translation>Root-adgangskode ændret til %1</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="286"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
       <source>Enable SSH on LAN</source>
       <translation>Aktivér SSH på LAN</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="317"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="321"/>
       <source>Logout</source>
       <translation>Log ud</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="319"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="323"/>
       <source>Log out now</source>
       <translation>Log ud nu</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="331"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
       <source>Log out?</source>
       <translation>Logge ud?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="333"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="337"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Dette vil afbryde alle lokale netværksforbindelser.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="339"/>
       <source>Log out</source>
       <translation>Log af</translation>
     </message>
@@ -9029,7 +9029,7 @@ GX-enheden kan kun styre én tilsluttet generator og tager den med det laveste V
       <translation>Bemærk: Backup-filer er specifikke for VE.Bus-firmwareversionen og kan kun bruges til at gendanne indstillinger på produkter med tilsvarende firmwareversioner.</translation>
     </message>
     <message id="settings_security_profile_change_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="185"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="189"/>
       <source>Change password</source>
       <translation>Skift adgangskode</translation>
     </message>

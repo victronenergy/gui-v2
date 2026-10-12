@@ -172,27 +172,27 @@
       <translation>自動開始</translation>
     </message>
     <message id="settings_access_level">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="67"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="71"/>
       <source>Access level</source>
       <translation>アクセスレベル</translation>
     </message>
     <message id="settings_access_user">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="72"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="76"/>
       <source>User</source>
       <translation>ユーザー</translation>
     </message>
     <message id="settings_access_user_installer">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
       <source>User &amp; Installer</source>
       <translation>ユーザーと設置者</translation>
     </message>
     <message id="settings_access_superuser">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="80"/>
       <source>Superuser</source>
       <translation>スーパーユーザー</translation>
     </message>
     <message id="settings_access_service">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="82"/>
       <source>Service</source>
       <translation>サービス</translation>
     </message>
@@ -1111,17 +1111,17 @@
       <translation>AC入力2 --</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="295"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="299"/>
       <source>Remote support</source>
       <translation>リモートサポート</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="301"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="305"/>
       <source>Remote support tunnel</source>
       <translation>リモートサポートトンネル</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="310"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="314"/>
       <source>Remote support IP and port</source>
       <translation>リモートサポートIPとポート</translation>
     </message>
@@ -4988,7 +4988,7 @@ Do you want to continue?</source>
       <translation>アクセスレベルのため設定がロックされています</translation>
     </message>
     <message id="settings_access_incorrect_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="89"/>
       <source>Incorrect password</source>
       <translation>パスワードが正しくありません</translation>
     </message>
@@ -6584,42 +6584,42 @@ Do you want to continue?</source>
       <translation>このPVインバーターは電力制限に対応しています。通常の操作に支障をきたす場合は、この設定を無効にしてください。</translation>
     </message>
     <message id="settings_local_network_security_profile">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="124"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="128"/>
       <source>Local network security profile</source>
       <translation>ローカルネットワークセキュリティプロファイル</translation>
     </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
       <source>Please select...</source>
       <translation>選択してください...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="137"/>
       <source>Secured</source>
       <translation>セキュア</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="140"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>パスワードで保護され、ネットワーク通信は暗号化されています</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="145"/>
       <source>Weak</source>
       <translation>Weak</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="148"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>パスワードで保護されていますが、ネットワーク通信は暗号化されていません</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="153"/>
       <source>Unsecured</source>
       <translation>保護なし</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="152"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="156"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>パスワードなしで、ネットワーク通信は暗号化されていません</translation>
     </message>
@@ -6629,22 +6629,22 @@ Do you want to continue?</source>
       <translation>パスワードは8文字以上である必要があります</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="227"/>
       <source>Select 'Secured' profile?</source>
       <translation>「セキュア」プロファイルを選択しますか？</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="226"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
       <source>Select 'Weak' profile?</source>
       <translation>「低セキュリティ」プロファイルを選択しますか？</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="229"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="233"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>「保護なし」プロファイルを選択しますか？</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="244"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -6655,81 +6655,81 @@ Do you want to continue?</source>
 • セキュリティの低い設定は有効にできません</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="243"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="247"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• ローカルネットワークサービスはパスワードで保護されています
 • ローカルウェブサイトへの暗号化されていないアクセス（HTTP/HTTPS）も有効になります</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="246"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="250"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• ローカルネットワークサービスにパスワードは不要です
 • ローカルウェブサイトへの暗号化されていないアクセス（HTTP/HTTPS）も有効になります</translation>
     </message>
     <message id="access_and_security_page_will_reload">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="118"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="122"/>
       <source>Page will automatically reload in 5 seconds</source>
       <translation>ページは5秒後に自動的に再読み込みされます</translation>
     </message>
     <message id="settings_security_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="159"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="163"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">パスワードは8文字以上である必要があります</translation>
     </message>
     <message id="settings_security_profile_update">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="187"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="191"/>
       <source>Update</source>
       <translation type="unfinished">更新</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="265"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
       <source>Root password</source>
       <translation>ルートパスワード</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="272"/>
       <source>Enter password</source>
       <translation type="unfinished">パスワードを入力</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="273"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="277"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">パスワードは8文字以上である必要があります</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="279"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="283"/>
       <source>Root password changed to %1</source>
       <translation>ルートパスワードが %1 に変更されました</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="286"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
       <source>Enable SSH on LAN</source>
       <translation>LAN上でSSHを有効にする</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="317"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="321"/>
       <source>Logout</source>
       <translation>ログアウト</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="319"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="323"/>
       <source>Log out now</source>
       <translation>今すぐログアウト</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="331"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
       <source>Log out?</source>
       <translation>ログアウトしますか？</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="333"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="337"/>
       <source>This will disconnect all local network connections.</source>
       <translation>これにより、すべてのローカルネットワーク接続が切断されます。</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="339"/>
       <source>Log out</source>
       <translation>ログアウト</translation>
     </message>
@@ -9027,7 +9027,7 @@ GXデバイスは接続された発電機を1台のみ制御できます。最�
       <translation>注: バックアップファイルはVE.Busファームウェアのバージョン固有であり、一致するファームウェアバージョンの製品にのみ設定を復元するために使用できます。</translation>
     </message>
     <message id="settings_security_profile_change_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="185"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="189"/>
       <source>Change password</source>
       <translation>パスワードの変更</translation>
     </message>

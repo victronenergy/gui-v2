@@ -172,27 +172,27 @@
       <translation>التشغيل الآلي</translation>
     </message>
     <message id="settings_access_level">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="67"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="71"/>
       <source>Access level</source>
       <translation>مستوى الدخول</translation>
     </message>
     <message id="settings_access_user">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="72"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="76"/>
       <source>User</source>
       <translation>مستخدم</translation>
     </message>
     <message id="settings_access_user_installer">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
       <source>User &amp; Installer</source>
       <translation>مستخدم ومركب</translation>
     </message>
     <message id="settings_access_superuser">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="80"/>
       <source>Superuser</source>
       <translation>مستخدم ذو صلاحيات عليا</translation>
     </message>
     <message id="settings_access_service">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="82"/>
       <source>Service</source>
       <translation>خادم</translation>
     </message>
@@ -1111,17 +1111,17 @@
       <translation>AC-In2 --</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="295"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="299"/>
       <source>Remote support</source>
       <translation>دعم عن بعد</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="301"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="305"/>
       <source>Remote support tunnel</source>
       <translation>نفق داعم عن بعد</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="310"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="314"/>
       <source>Remote support IP and port</source>
       <translation>عنوان IP ومنفذ دعم عن بعد</translation>
     </message>
@@ -4993,7 +4993,7 @@ Do you want to continue?</source>
       <translation>قفل الإعداد لمستوى الوصول</translation>
     </message>
     <message id="settings_access_incorrect_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="89"/>
       <source>Incorrect password</source>
       <translation>كلمة سر خاطئة</translation>
     </message>
@@ -6589,42 +6589,42 @@ Do you want to continue?</source>
       <translation>يدعم المعاكس الضوئي تحديد الطاقة. عطل هذه الخاصية إذا كانت تتداخل مع التشغيل العادي.</translation>
     </message>
     <message id="settings_local_network_security_profile">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="124"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="128"/>
       <source>Local network security profile</source>
       <translation>ملف تعريف أمن الشبكة المحلية</translation>
     </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
       <source>Please select...</source>
       <translation>برجاء الاختيار...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="137"/>
       <source>Secured</source>
       <translation>مؤمنة</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="140"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>محمي بكلمة مرور، والاتصال الشبكي مشفر</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="145"/>
       <source>Weak</source>
       <translation>ضعيفة</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="148"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>محمي بكلمة مرور، والاتصال الشبكي غير مشفر</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="153"/>
       <source>Unsecured</source>
       <translation>غير مؤمنة</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="152"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="156"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>لا توجد كلمة مرور والاتصال الشبكي غير مشفر</translation>
     </message>
@@ -6634,22 +6634,22 @@ Do you want to continue?</source>
       <translation>يجب أن تحتوي كلمة المرور على الأقل على 8 رموز</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="227"/>
       <source>Select 'Secured' profile?</source>
       <translation>اختر الملف «المؤمن»؟</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="226"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
       <source>Select 'Weak' profile?</source>
       <translation>اختر الملف «الضعيف»؟</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="229"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="233"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>اختر الملف «غير المؤمن»؟</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="244"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -6660,81 +6660,81 @@ Do you want to continue?</source>
 • لا يمكن تفعيل الإعدادات غير الآمنة</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="243"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="247"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• إن خدمات الشبكات المحلية مؤمنة بكلمة مرور
 • تم تفعيل الوصول غير المشفر للمواقع الإلكترونية المحلية أيضا (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="246"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="250"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• إن خدمات الشبكات المحلية لا تحتاج إلى كلمة مرور
 • تم تفعيل الوصول غير المشفر للمواقع الإلكترونية المحلية أيضا (HTTP/HTTPS)</translation>
     </message>
     <message id="access_and_security_page_will_reload">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="118"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="122"/>
       <source>Page will automatically reload in 5 seconds</source>
       <translation>سيعاد تحميل الصفحة تلقائيا خلال 5 ثوانٍ.</translation>
     </message>
     <message id="settings_security_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="159"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="163"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">يجب أن تحتوي كلمة المرور على الأقل على 8 رموز</translation>
     </message>
     <message id="settings_security_profile_update">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="187"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="191"/>
       <source>Update</source>
       <translation type="unfinished">تحديث</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="265"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
       <source>Root password</source>
       <translation>كلمة المرور الرئيسية</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="272"/>
       <source>Enter password</source>
       <translation type="unfinished">إدخال كلمة المرور</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="273"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="277"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">يجب أن تحتوي كلمة المرور على الأقل على 8 رموز</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="279"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="283"/>
       <source>Root password changed to %1</source>
       <translation>تم تغيير كلمة الكرور الرئيسية إلى %1</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="286"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
       <source>Enable SSH on LAN</source>
       <translation>تفعيل خلية آمنة على الشبكة المحلية</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="317"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="321"/>
       <source>Logout</source>
       <translation>تسجيل الخروج</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="319"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="323"/>
       <source>Log out now</source>
       <translation>تسجيل خروج الآن</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="331"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
       <source>Log out?</source>
       <translation>تسجيل خروج؟</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="333"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="337"/>
       <source>This will disconnect all local network connections.</source>
       <translation>سيؤدي هذا إلى قطع الاتصال بجميع الشبكات المحلية.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="339"/>
       <source>Log out</source>
       <translation>تسجيل الخروج</translation>
     </message>
@@ -9033,7 +9033,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>ملاحظة: ملفات النسخ الاحتياطي مخصصة لإصدارات برنامج VE.Bus الثابتة ولا يمكن استخدامها لاستعادة الإعدادات إلا على المنتجات التي تحمل نفس إصدار البرنامج الثابت</translation>
     </message>
     <message id="settings_security_profile_change_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="185"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="189"/>
       <source>Change password</source>
       <translation>تغيير كلمة المرور</translation>
     </message>

@@ -172,27 +172,27 @@
       <translation>เริ่มอัตโนมัติ</translation>
     </message>
     <message id="settings_access_level">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="67"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="71"/>
       <source>Access level</source>
       <translation>ระดับการเข้าถึง</translation>
     </message>
     <message id="settings_access_user">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="72"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="76"/>
       <source>User</source>
       <translation>ผู้ใช้</translation>
     </message>
     <message id="settings_access_user_installer">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
       <source>User &amp; Installer</source>
       <translation>ผู้ใช้ &amp; ผู้ติดตั้ง</translation>
     </message>
     <message id="settings_access_superuser">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="80"/>
       <source>Superuser</source>
       <translation>ผู้ใช้ขั้นสูง</translation>
     </message>
     <message id="settings_access_service">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="82"/>
       <source>Service</source>
       <translation>บริการ</translation>
     </message>
@@ -1111,17 +1111,17 @@
       <translation>เอซี-อิน2 --</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="295"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="299"/>
       <source>Remote support</source>
       <translation>การสนับสนุนระยะไกล</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="301"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="305"/>
       <source>Remote support tunnel</source>
       <translation>ช่องทางการสนับสนุนระยะไกล</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="310"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="314"/>
       <source>Remote support IP and port</source>
       <translation>รองรับ IP และพอร์ตระยะไกล</translation>
     </message>
@@ -4988,7 +4988,7 @@ Do you want to continue?</source>
       <translation>การตั้งค่าถูกล็อคสำหรับระดับการเข้าถึง</translation>
     </message>
     <message id="settings_access_incorrect_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="89"/>
       <source>Incorrect password</source>
       <translation>รหัสผ่านผิด</translation>
     </message>
@@ -6584,42 +6584,42 @@ Do you want to continue?</source>
       <translation>อินเวอร์เตอร์ PV นี้รองรับการจำกัดพลังงาน ปิดใช้งานการตั้งค่านี้หากรบกวนการทำงานปกติ</translation>
     </message>
     <message id="settings_local_network_security_profile">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="124"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="128"/>
       <source>Local network security profile</source>
       <translation>โปรไฟล์ความปลอดภัยเครือข่ายท้องถิ่น</translation>
     </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
       <source>Please select...</source>
       <translation>กรุณาเลือก...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="137"/>
       <source>Secured</source>
       <translation>ปลอดภัย</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="140"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>มีการป้องกันด้วยรหัสผ่านและการสื่อสารเครือข่ายได้รับการเข้ารหัส</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="145"/>
       <source>Weak</source>
       <translation>อ่อนแอ</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="148"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>มีการป้องกันด้วยรหัสผ่าน แต่การสื่อสารเครือข่ายไม่ได้เข้ารหัส</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="153"/>
       <source>Unsecured</source>
       <translation>ไม่ปลอดภัย</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="152"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="156"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>ไม่มีรหัสผ่านและการสื่อสารเครือข่ายไม่ได้เข้ารหัส</translation>
     </message>
@@ -6629,22 +6629,22 @@ Do you want to continue?</source>
       <translation>รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="227"/>
       <source>Select 'Secured' profile?</source>
       <translation>เลือกโปรไฟล์ 'ปลอดภัย' หรือไม่?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="226"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
       <source>Select 'Weak' profile?</source>
       <translation>เลือกโปรไฟล์ 'อ่อนแอ' หรือไม่?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="229"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="233"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>เลือกโปรไฟล์ 'ไม่ปลอดภัย' หรือไม่?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="244"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -6655,81 +6655,81 @@ Do you want to continue?</source>
 • ไม่สามารถเปิดใช้งานการตั้งค่าที่ไม่ปลอดภัยได้</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="243"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="247"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• บริการเครือข่ายท้องถิ่นได้รับการป้องกันด้วยรหัสผ่าน
 • เปิดใช้งานการเข้าถึงเว็บไซต์ท้องถิ่นโดยไม่เข้ารหัส (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="246"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="250"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• บริการเครือข่ายท้องถิ่นไม่จำเป็นต้องมีรหัสผ่าน
 • เปิดใช้งานการเข้าถึงเว็บไซต์ท้องถิ่นแบบไม่เข้ารหัสด้วยเช่นกัน (HTTP/HTTPS)</translation>
     </message>
     <message id="access_and_security_page_will_reload">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="118"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="122"/>
       <source>Page will automatically reload in 5 seconds</source>
       <translation>หน้าจะโหลดซ้ำอัตโนมัติภายใน 5 วินาที</translation>
     </message>
     <message id="settings_security_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="159"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="163"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร</translation>
     </message>
     <message id="settings_security_profile_update">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="187"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="191"/>
       <source>Update</source>
       <translation type="unfinished">อัปเดต</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="265"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
       <source>Root password</source>
       <translation>รหัสผ่านรูท</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="272"/>
       <source>Enter password</source>
       <translation type="unfinished">ใส่รหัสผ่าน</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="273"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="277"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="279"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="283"/>
       <source>Root password changed to %1</source>
       <translation>รหัสผ่านรูทเปลี่ยนเป็น %1</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="286"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
       <source>Enable SSH on LAN</source>
       <translation>เปิดใช้งาน SSH บน LAN</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="317"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="321"/>
       <source>Logout</source>
       <translation>ออกจากระบบ</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="319"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="323"/>
       <source>Log out now</source>
       <translation>ออกจากระบบตอนนี้</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="331"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
       <source>Log out?</source>
       <translation>ออกจากระบบใช่ไหม?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="333"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="337"/>
       <source>This will disconnect all local network connections.</source>
       <translation>การกระทำนี้จะตัดการเชื่อมต่อเครือข่ายท้องถิ่นทั้งหมด</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="339"/>
       <source>Log out</source>
       <translation>ออกจากระบบ</translation>
     </message>
@@ -9027,7 +9027,7 @@ The GX device can only control one connected genset and takes the one with the l
       <translation>หมายเหตุ: ไฟล์สำรองข้อมูลเป็นเวอร์ชันเฟิร์มแวร์ VE.Bus ที่เฉพาะเจาะจงและสามารถใช้เพื่อคืนค่าการตั้งค่าบนผลิตภัณฑ์ที่มีเวอร์ชันเฟิร์มแวร์ที่ตรงกันเท่านั้น</translation>
     </message>
     <message id="settings_security_profile_change_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="185"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="189"/>
       <source>Change password</source>
       <translation>เปลี่ยนรหัสผ่าน</translation>
     </message>
