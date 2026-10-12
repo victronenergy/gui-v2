@@ -35,8 +35,8 @@ AbstractListItem {
 	rightInset: Theme.geometry_levelsPage_panel_horizontalInset
 	leftPadding: leftInset + Theme.geometry_levelsGauge_horizontalPadding
 	rightPadding: rightInset + Theme.geometry_levelsGauge_horizontalPadding
-	topPadding: Theme.geometry_levelsPage_panel_header_height + Theme.geometry_levelsGauge_verticalPadding
-	bottomPadding: Theme.geometry_levelsGauge_verticalPadding
+	topPadding: Theme.geometry_levelsPage_panel_header_height + Theme.geometry_space_8
+	bottomPadding: Theme.geometry_space_8
 
 	background: Item {
 		implicitWidth: Theme.geometry_levelsPage_panel_background_width
@@ -122,7 +122,7 @@ AbstractListItem {
 				id: gaugeGroupComponent
 
 				Flow {
-					spacing: Theme.geometry_levelsGauge_gauge_spacing
+					spacing: Theme.geometry_space_8
 
 					Repeater {
 						model: root.tankModel
@@ -155,7 +155,7 @@ AbstractListItem {
 				bottom: parent.bottom
 				left: levelsGauge.left
 				leftMargin: Theme.screenSize !== Theme.Portrait ? 0
-					: Theme.geometry_icon_size_medium + Theme.geometry_levelsGauge_horizontalSpacing
+					: Theme.geometry_icon_size_medium + Theme.geometry_space_12
 				right: parent.right
 			}
 			topPadding: Theme.geometry_levelsGauge_capacity_topPadding

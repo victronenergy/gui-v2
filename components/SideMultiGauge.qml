@@ -54,7 +54,7 @@ Item {
 				animationEnabled: root.animationEnabled
 				width: Theme.geometry_briefPage_edgeGauge_width
 				height: root.height
-				x: (gaugeDelegate.index * (strokeWidth + Theme.geometry_briefPage_edgeGauge_gaugeSpacing))
+				x: (gaugeDelegate.index * (strokeWidth + Theme.geometry_space_4))
 					// If showing multiple gauges on the right edge, shift them towards the left
 					- (gaugeRepeater.count === 1 || root.horizontalAlignment === Qt.AlignLeft ? 0 : (strokeWidth * gaugeRepeater.count))
 				valueType: root.valueType

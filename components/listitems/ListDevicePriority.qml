@@ -26,11 +26,11 @@ ListSetting {
 	}
 
 	component Arrow: Button {
-		radius: Theme.geometry_opportunityLoad_button_radius
+		radius: Theme.geometry_radius_6
 		flat: false
 		icon.source: "qrc:/images/icon_arrow.svg"
-		defaultBackgroundWidth: Theme.geometry_listItem_height - 2*Theme.geometry_opportunityLoad_margin
-		defaultBackgroundHeight: Theme.geometry_listItem_height - 2*Theme.geometry_opportunityLoad_margin
+		defaultBackgroundWidth: Theme.geometry_listItem_height - 2*Theme.geometry_space_4
+		defaultBackgroundHeight: Theme.geometry_listItem_height - 2*Theme.geometry_space_4
 	}
 
 	component PageData : QtObject {
@@ -115,7 +115,7 @@ ListSetting {
 					root._model.move(index, index - 1, 1)
 					root._model.writeToBackEnd()
 				}
-				Layout.rightMargin: Theme.geometry_opportunityLoad_margin
+				Layout.rightMargin: Theme.geometry_space_4
 			}
 
 			Arrow {

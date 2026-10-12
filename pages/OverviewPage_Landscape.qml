@@ -12,6 +12,9 @@ FocusScope {
 	required property bool isCurrentPage
 	required property bool animationEnabled
 
+	// Watt threshold for overview connector animation. Not a layout size.
+	readonly property int connectorAnimationPowerThreshold: 30
+
 	property var _leftWidgets: []
 	readonly property var _centerWidgets: [inverterChargerWidget, batteryWidget]
 	property var _rightWidgets: []
@@ -390,7 +393,7 @@ FocusScope {
 
 		// Assumes startWidget is the AC/DC input widget.
 		// Use the displayed power to calculate whether the connector should be animated.
-		if (isNaN(power) || Math.abs(power) <= Theme.geometry_overviewPage_connector_animationPowerThreshold) {
+		if (isNaN(power) || Math.abs(power) <= root.connectorAnimationPowerThreshold) {
 			return VenusOS.WidgetConnector_AnimationMode_NotAnimated
 		}
 
@@ -402,12 +405,12 @@ FocusScope {
 
 			// For AC inputs, positive power means energy is flowing towards inverter/charger,
 			// and negative power means energy is flowing towards the input.
-			return Math.abs(power) < Theme.geometry_overviewPage_connector_animationPowerThreshold ? VenusOS.WidgetConnector_AnimationMode_NotAnimated
+			return Math.abs(power) < root.connectorAnimationPowerThreshold ? VenusOS.WidgetConnector_AnimationMode_NotAnimated
 					: power > 0.0 ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_EndToStart
 		} else if (connectorWidget.endWidget === batteryWidget) {
 			// For DC inputs, positive power means energy is flowing towards battery.
-			return power > Theme.geometry_overviewPage_connector_animationPowerThreshold
+			return power > root.connectorAnimationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 		} else {
@@ -659,7 +662,7 @@ FocusScope {
 
 				// Energy flows to Inverter/Charger if there is any PV Inverter power (i.e. AC)
 				animationMode: root.isCurrentPage
-						&& Math.abs(Global.system.solar.acPower || 0) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+						&& Math.abs(Global.system.solar.acPower || 0) > root.connectorAnimationPowerThreshold
 							   ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 							   : VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
@@ -680,7 +683,7 @@ FocusScope {
 
 				// Energy flows to battery if there is any PV Charger power (i.e. DC, so solar is charging battery)
 				animationMode: root.isCurrentPage
-						&& Math.abs(Global.system.solar.dcPower) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+						&& Math.abs(Global.system.solar.dcPower) > root.connectorAnimationPowerThreshold
 							   ? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 							   : VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
@@ -737,7 +740,7 @@ FocusScope {
 		animationMode: root.isCurrentPage
 				&& !isNaN(Global.system.load.ac.power)
 				&& Global.system.load.ac.power > 0
-				&& Math.abs(Global.system.load.ac.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+				&& Math.abs(Global.system.load.ac.power) > root.connectorAnimationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 	}
@@ -758,7 +761,7 @@ FocusScope {
 		// If inverter/charger power is positive: battery is charging, so energy flows to battery.
 		// If inverter/charger power is negative: battery is discharging, so energy flows to inverter/charger.
 		animationMode: root.isCurrentPage
-				&& Math.abs(inverterChargerPower.value) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+				&& Math.abs(inverterChargerPower.value) > root.connectorAnimationPowerThreshold
 						? (inverterChargerPower.value > 0
 								? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 								: VenusOS.WidgetConnector_AnimationMode_EndToStart)
@@ -820,7 +823,7 @@ FocusScope {
 			// Use a fixed offsetY, not a dynamic one that could change after the connector path is
 			// already drawn; otherwise, if the offsetY changes after _resetWidgets() has already
 			// laid out the paths, then the path may start/end in the wrong position.
-			offsetY: Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing
+			offsetY: Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_space_4
 		}
 
 		WidgetConnectorAnchor {
@@ -846,7 +849,7 @@ FocusScope {
 			animationMode: root.isCurrentPage
 					&& !isNaN(Global.system.load.acOut.power)
 					&& Global.system.load.acOut.power > 0
-					&& Math.abs(Global.system.load.acOut.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold
+					&& Math.abs(Global.system.load.acOut.power) > root.connectorAnimationPowerThreshold
 						? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 						: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 		}
@@ -893,7 +896,7 @@ FocusScope {
 				// If load power is negative (i.e. devices generating power but not directly managed by GX), energy flows to battery.
 				animationMode: root.isCurrentPage
 								&& !isNaN(Global.system.dc.power)
-								&& (Math.abs(Global.system.dc.power) > Theme.geometry_overviewPage_connector_animationPowerThreshold)
+								&& (Math.abs(Global.system.dc.power) > root.connectorAnimationPowerThreshold)
 							? (Global.system.dc.power > 0
 								? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 								: VenusOS.WidgetConnector_AnimationMode_EndToStart)
@@ -945,13 +948,13 @@ FocusScope {
 				id: acLoadsToEvcsStartAnchor
 				parent: acLoadsWidget
 				location: VenusOS.WidgetConnector_Location_Left
-				offsetY: Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing
+				offsetY: Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_space_4
 				visible: acLoadsWidget.visible && (evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads)
 			}
 			WidgetConnectorAnchor {
 				id: acLoadsToEvcsEndAnchor
 				location: VenusOS.WidgetConnector_Location_Left
-				offsetY: -(Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing)
+				offsetY: -(Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_space_4)
 				visible: acLoadsWidget.visible && (evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads)
 			}
 			WidgetConnector {
@@ -971,8 +974,8 @@ FocusScope {
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root.isCurrentPage
-						&& ( (evcsWidget.connectToCombinedAcLoads && Global.evChargers.power > Theme.geometry_overviewPage_connector_animationPowerThreshold)
-						  || (evcsWidget.connectToSplitAcLoads && Global.evChargers.acInputPositionPower > Theme.geometry_overviewPage_connector_animationPowerThreshold) )
+						&& ( (evcsWidget.connectToCombinedAcLoads && Global.evChargers.power > root.connectorAnimationPowerThreshold)
+						  || (evcsWidget.connectToSplitAcLoads && Global.evChargers.acInputPositionPower > root.connectorAnimationPowerThreshold) )
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}
@@ -982,13 +985,13 @@ FocusScope {
 				id: essentialLoadsToEvcsStartAnchor
 				parent: essentialLoadsWidget
 				location: VenusOS.WidgetConnector_Location_Left
-				offsetY: -(Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing)
+				offsetY: -(Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_space_4)
 				visible: evcsWidget.connectToEssentialLoads
 			}
 			WidgetConnectorAnchor {
 				id: essentialLoadsToEvcsEndAnchor
 				location: VenusOS.WidgetConnector_Location_Left
-				offsetY: Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing
+				offsetY: Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_space_4
 				visible: evcsWidget.connectToEssentialLoads
 			}
 			WidgetConnector {
@@ -1008,7 +1011,7 @@ FocusScope {
 				animateGeometry: root._animateGeometry
 				animationEnabled: root.animationEnabled
 				animationMode: root.isCurrentPage
-						&& Global.evChargers.acOutputPositionPower > Theme.geometry_overviewPage_connector_animationPowerThreshold
+						&& Global.evChargers.acOutputPositionPower > root.connectorAnimationPowerThreshold
 					? VenusOS.WidgetConnector_AnimationMode_StartToEnd
 					: VenusOS.WidgetConnector_AnimationMode_NotAnimated
 			}

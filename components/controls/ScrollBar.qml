@@ -35,7 +35,7 @@ T.ScrollBar {
 	contentItem: Rectangle {
 		implicitWidth: Theme.geometry_scrollBar_bar_width
 		implicitHeight: 100
-		radius: Theme.geometry_scrollBar_bar_radius
+		radius: Theme.geometry_radius_8
 		color: Theme.color_scrollBar_bar
 	}
 }

@@ -13,7 +13,7 @@ T.Slider {
 	property color highlightColor: enabled ? Theme.color_ok : Theme.color_button_on_background_disabled
 	property color backgroundColor: enabled ? Theme.color_darkOk : Theme.color_background_disabled
 	property color borderColor: enabled ? Theme.color_ok : Theme.color_font_disabled
-	property int borderWidth: Theme.geometry_button_border_width
+	property int borderWidth: Theme.geometry_border_2
 	property bool animationEnabled: visible && Global.animationEnabled
 
 	// This is the standard indicator width, plus left/right padding on either side.
@@ -52,7 +52,7 @@ T.Slider {
 	background: Rectangle {
 		implicitWidth: Theme.geometry_controlCard_minimumWidth
 		implicitHeight: Theme.geometry_iochannel_control_height
-		radius: Theme.geometry_slider_groove_radius
+		radius: Theme.geometry_radius_8
 		color: root.backgroundColor
 
 		// Inner rectangle that fills the slider area up until the handle position, to display the
@@ -66,10 +66,10 @@ T.Slider {
 				top: parent.top
 				bottom: parent.bottom
 			}
-			topLeftRadius: Theme.geometry_slider_groove_radius
-			bottomLeftRadius: Theme.geometry_slider_groove_radius
-			topRightRadius: width > maximumWidth - Theme.geometry_slider_groove_radius ? Theme.geometry_slider_groove_radius - (maximumWidth - width) : 0
-			bottomRightRadius: width > maximumWidth - Theme.geometry_slider_groove_radius ? Theme.geometry_slider_groove_radius - (maximumWidth - width) : 0
+			topLeftRadius: Theme.geometry_radius_8
+			bottomLeftRadius: Theme.geometry_radius_8
+			topRightRadius: width > maximumWidth - Theme.geometry_radius_8 ? Theme.geometry_radius_8 - (maximumWidth - width) : 0
+			bottomRightRadius: width > maximumWidth - Theme.geometry_radius_8 ? Theme.geometry_radius_8 - (maximumWidth - width) : 0
 			width: Math.round(root.sliderX + root.indicatorBackgroundWidth - root.leftInset) // round to avoid sub-pixel artifacts
 			color: root.highlightColor
 		}
@@ -80,7 +80,7 @@ T.Slider {
 			color: "transparent"
 			border.color: root.borderColor
 			border.width: root.borderWidth
-			radius: Theme.geometry_slider_groove_radius
+			radius: Theme.geometry_radius_8
 		}
 	}
 

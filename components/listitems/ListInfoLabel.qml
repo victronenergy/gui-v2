@@ -14,7 +14,7 @@ PrimaryListLabel {
 
 	font.pixelSize: Theme.font_size_caption
 	color: Theme.color_font_disabled
-	leftPadding: infoIcon.x + infoIcon.width + Theme.geometry_listItem_content_spacing
+	leftPadding: infoIcon.x + infoIcon.width + Theme.geometry_listItem_content_verticalMargin
 
 	CP.IconImage {
 		id: infoIcon

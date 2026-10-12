@@ -50,7 +50,7 @@ ListSetting {
 			captionText: root.caption
 
 			secondaryComponent: RowLayout {
-				spacing: Theme.geometry_listItem_content_spacing
+				spacing: Theme.geometry_listItem_content_verticalMargin
 
 				ListItemButton {
 					text: Units.getCombinedDisplayText(root.unit, dataItemFrom.value, root.decimals, Units.NoDecimalAdjustment)

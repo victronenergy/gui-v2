@@ -25,7 +25,7 @@ Flow {
 		   ? (phaseRepeater.count > 1 ? Theme.geometry_barGauge_vertical_width_small : Theme.geometry_barGauge_vertical_width_large)
 		   : Theme.geometry_barGauge_vertical_width_large
 	height: orientation === Qt.Vertical ? parent.height : Theme.geometry_barGauge_horizontal_height
-	spacing: Theme.geometry_three_phase_gauge_spacing
+	spacing: Theme.geometry_space_4
 
 	Repeater {
 		id: phaseRepeater

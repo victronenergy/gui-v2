@@ -24,8 +24,8 @@ QuantityTable {
 
 	bodyFontSize: Theme.font_quantityTableSummary_body_size
 	model: 1
-	topMargin: Theme.geometry_quantityTableSummary_verticalMargin
-	bottomMargin: Theme.geometry_quantityTableSummary_verticalMargin
+	topMargin: Theme.geometry_space_8
+	bottomMargin: Theme.geometry_space_8
 	equalWidthColumns: compactLayout
 	headersVisible: !compactLayout
 
@@ -40,7 +40,7 @@ QuantityTable {
 			width: root.availableWidth
 			text: root.compactLayout ? root.bodyHeaderText : ""
 			topPadding: headerTitleLabel.text.length ? headerTitleLabel.height : 0
-			bottomPadding: Theme.geometry_quantityTableSummary_verticalMargin
+			bottomPadding: Theme.geometry_space_8
 			elide: Text.ElideRight
 			font.pixelSize: table.bodyFontSize
 			color: Theme.color_quantityTable_quantityValue
@@ -48,7 +48,7 @@ QuantityTable {
 			Label {
 				id: headerTitleLabel
 				width: parent.width
-				topPadding: Theme.geometry_quantityTableSummary_verticalMargin
+				topPadding: Theme.geometry_space_8
 				text: root.compactLayout ? root.summaryHeaderText : ""
 				font.pixelSize: root.headerFontSize
 				color: Theme.color_solarListPage_header_text

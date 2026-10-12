@@ -31,7 +31,7 @@ ModalDialog {
 			Label {
 				anchors.horizontalCenter: parent.horizontalCenter
 				color: Theme.color_font_secondary
-				bottomPadding: Theme.geometry_modalDialog_content_spacing
+				bottomPadding: Theme.geometry_space_16
 				//: Shown below the minimum state of charge, as configured by the user
 				//% "Unless grid fails"
 				text: qsTrId("ess_unless_grid_fails")
@@ -41,7 +41,7 @@ ModalDialog {
 				id: slider
 
 				anchors.horizontalCenter: parent.horizontalCenter
-				width: parent.width - (2 * Theme.geometry_modalDialog_content_spacing)
+				width: parent.width - (2 * Theme.geometry_space_16)
 				value: root.minimumStateOfCharge
 				from: 0
 				to: 100
@@ -59,7 +59,7 @@ ModalDialog {
 			Label {
 				anchors.horizontalCenter: parent.horizontalCenter
 				width: parent.width - (2 * Theme.geometry_page_content_horizontalMargin)
-				topPadding: Theme.geometry_modalDialog_content_spacing
+				topPadding: Theme.geometry_space_16
 				wrapMode: Text.Wrap
 				color: Theme.color_font_secondary
 				horizontalAlignment: Text.AlignHCenter

@@ -29,7 +29,7 @@ T.ProgressBar {
 		implicitHeight: Theme.geometry_progressBar_height
 		width: root.availableWidth
 		height: implicitHeight
-		radius: Theme.geometry_progressBar_radius
+		radius: Theme.geometry_radius_8
 		color: Theme.color_darkOk
 
 		Rectangle {
@@ -37,7 +37,7 @@ T.ProgressBar {
 
 			height: Theme.geometry_progressBar_height
 			color: Theme.color_ok
-			radius: Theme.geometry_progressBar_radius
+			radius: Theme.geometry_radius_8
 
 			Binding {
 				when: !indeterminateAnim.running

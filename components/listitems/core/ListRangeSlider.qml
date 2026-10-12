@@ -99,8 +99,8 @@ ListSetting {
 				id: sliderItem
 
 				// Make space for labels on either side.
-				leftInset: Theme.geometry_rangeSlider_labelWidth + Theme.geometry_slider_spacing
-				rightInset: Theme.geometry_rangeSlider_labelWidth + Theme.geometry_slider_spacing
+				leftInset: Theme.geometry_rangeSlider_labelWidth + Theme.geometry_space_12
+				rightInset: Theme.geometry_rangeSlider_labelWidth + Theme.geometry_space_12
 				leftPadding: leftInset
 				rightPadding: rightInset
 

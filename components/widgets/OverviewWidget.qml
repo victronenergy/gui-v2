@@ -39,9 +39,9 @@ T.Control {
 		const availableHeight = Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
 		return s === VenusOS.OverviewWidget_Size_XL ? availableHeight
 			: s === VenusOS.OverviewWidget_Size_L ? Theme.geometry_overviewPage_widget_compact_l_height
-			: s === VenusOS.OverviewWidget_Size_M ? (availableHeight - 2*Theme.geometry_overviewPage_widget_spacing)/3
-			: s === VenusOS.OverviewWidget_Size_S ? (availableHeight - 3*Theme.geometry_overviewPage_widget_spacing)/4
-			: s === VenusOS.OverviewWidget_Size_XS ? (availableHeight - 4*Theme.geometry_overviewPage_widget_spacing)/5
+			: s === VenusOS.OverviewWidget_Size_M ? (availableHeight - 2*Theme.geometry_space_8)/3
+			: s === VenusOS.OverviewWidget_Size_S ? (availableHeight - 3*Theme.geometry_space_8)/4
+			: s === VenusOS.OverviewWidget_Size_XS ? (availableHeight - 4*Theme.geometry_space_8)/5
 			: 0
 	}
 
@@ -49,9 +49,9 @@ T.Control {
 		const availableHeight = Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_overviewPage_layout_expanded_bottomMargin
 		return s === VenusOS.OverviewWidget_Size_XL ? availableHeight
 			: s === VenusOS.OverviewWidget_Size_L ? Theme.geometry_overviewPage_widget_expanded_l_height
-			: s === VenusOS.OverviewWidget_Size_M ? (availableHeight - 2*Theme.geometry_overviewPage_widget_spacing)/3
-			: s === VenusOS.OverviewWidget_Size_S ? (availableHeight - 3*Theme.geometry_overviewPage_widget_spacing)/4
-			: s === VenusOS.OverviewWidget_Size_XS ? (availableHeight - 4*Theme.geometry_overviewPage_widget_spacing)/5
+			: s === VenusOS.OverviewWidget_Size_M ? (availableHeight - 2*Theme.geometry_space_8)/3
+			: s === VenusOS.OverviewWidget_Size_S ? (availableHeight - 3*Theme.geometry_space_8)/4
+			: s === VenusOS.OverviewWidget_Size_XS ? (availableHeight - 4*Theme.geometry_space_8)/5
 			: 0
 	}
 
@@ -81,7 +81,7 @@ T.Control {
 	rightPadding: Theme.geometry_overviewPage_widget_content_horizontalMargin
 	topPadding: Theme.geometry_overviewPage_widget_content_topMargin
 	bottomPadding: size >= VenusOS.OverviewWidget_Size_L
-			? Theme.geometry_overviewPage_widget_content_bottomMargin_large
+			? Theme.geometry_space_8
 			: Theme.geometry_overviewPage_widget_content_bottomMargin_small
 	height: Theme.screenSize === Theme.Portrait ? implicitHeight : compactHeight
 	visible: size !== VenusOS.OverviewWidget_Size_Zero
@@ -97,10 +97,10 @@ T.Control {
 	background: Rectangle {
 		implicitWidth: Theme.geometry_overviewPage_widget_leftWidgetWidth
 		implicitHeight: Theme.geometry_overviewPage_widget_compact_l_height
-		border.width: enabled ? Theme.geometry_overviewPage_widget_border_width : 0
+		border.width: enabled ? Theme.geometry_border_2 : 0
 		border.color: Theme.color_overviewPage_widget_border
 		color: Theme.color_overviewPage_widget_background
-		radius: Theme.geometry_overviewPage_widget_radius
+		radius: Theme.geometry_radius_8
 
 		PressArea {
 			radius: parent.radius

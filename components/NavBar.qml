@@ -101,7 +101,7 @@ FocusScope {
 					z: 1 // to get it on top of the IconLabel
 					anchors {
 						left: parent.horizontalCenter
-						topMargin: Theme.geometry_navigationBar_notifications_redDot_margin
+						topMargin: Theme.geometry_space_6
 					}
 					active: (Global.notifications?.navBarNotificationCounterVisible ?? false)
 							&& page.url.endsWith("NotificationsPage.qml")

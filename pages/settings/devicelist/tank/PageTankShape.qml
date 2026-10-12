@@ -214,18 +214,18 @@ Page {
 						right: parent.right
 						rightMargin: Theme.geometry_page_content_horizontalMargin
 						verticalCenter: parent.verticalCenter
-						verticalCenterOffset: -(Theme.geometry_modalDialog_content_spacing / 2)
+						verticalCenterOffset: -(Theme.geometry_space_16 / 2)
 					}
-					columnSpacing: Theme.geometry_modalDialog_content_spacing
+					columnSpacing: Theme.geometry_space_16
 					rowSpacing: 0
 					columns: Theme.screenSize === Theme.Portrait ? 1 : 2
 
 					ColumnLayout {
-						spacing: Theme.geometry_modalDialog_content_spacing
+						spacing: Theme.geometry_space_16
 
 						Layout.preferredWidth: sensorLevelSpinBox.width
 						Layout.alignment: Qt.AlignHCenter
-						Layout.bottomMargin: Theme.screenSize === Theme.Portrait ? Theme.geometry_modalDialog_content_spacing : 0
+						Layout.bottomMargin: Theme.screenSize === Theme.Portrait ? Theme.geometry_space_16 : 0
 
 						Label {
 							elide: Text.ElideRight
@@ -242,7 +242,7 @@ Page {
 							id: sensorLevelSpinBox
 							width: Theme.geometry_tankShapeSelector_spinBox_width
 							height: Theme.geometry_tankShapeSelector_spinBox_height
-							spacing: Theme.geometry_spinBox_wide_spacing
+							spacing: Theme.geometry_space_10
 							from: 1
 							to: 99
 							suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
@@ -261,7 +261,7 @@ Page {
 					}
 
 					ColumnLayout {
-						spacing: Theme.geometry_modalDialog_content_spacing
+						spacing: Theme.geometry_space_16
 
 						Layout.preferredWidth: volumeSpinBox.width
 						Layout.alignment: Qt.AlignHCenter
@@ -282,7 +282,7 @@ Page {
 
 							width: Theme.geometry_tankShapeSelector_spinBox_width
 							height: Theme.geometry_tankShapeSelector_spinBox_height
-							spacing: Theme.geometry_spinBox_wide_spacing
+							spacing: Theme.geometry_space_10
 							from: 1
 							to: 99
 							suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
@@ -298,7 +298,7 @@ Page {
 					}
 
 					RowLayout {
-						spacing: Theme.geometry_listItem_content_spacing
+						spacing: Theme.geometry_listItem_content_verticalMargin
 						opacity: errorLabel.text.length > 0 ? 1 : 0
 
 						Layout.alignment: Qt.AlignTop | Qt.AlignHCenter

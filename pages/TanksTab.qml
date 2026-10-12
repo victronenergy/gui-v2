@@ -26,7 +26,7 @@ LevelsTab {
 	delegate: TankGaugePanel {
 		width: root.orientation === ListView.Vertical
 			   ? ListView.view.width
-			   : Gauges.width(root.count, Theme.geometry_levelsPage_max_tank_count, root.width)
+			   : Gauges.width(root.count, Gauges.maxTankCount(), root.width)
 		height: root.orientation === ListView.Vertical
 			   ? implicitHeight
 			   : Gauges.height(Global.pageManager?.expandLayout ?? false)
@@ -103,9 +103,9 @@ LevelsTab {
 
 					anchors {
 						bottom: expandedTanksView.top
-						bottomMargin: Theme.geometry_tankGaugeDialog_closeButton_leftMargin
+						bottomMargin: Theme.geometry_space_12
 						right: parent.right
-						rightMargin: Theme.geometry_tankGaugeDialog_closeButton_rightMargin
+						rightMargin: Theme.geometry_space_16
 					}
 					color: Theme.color_ok
 					source: "qrc:/images/icon_close_32.svg"

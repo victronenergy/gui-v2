@@ -10,5 +10,5 @@ Rectangle {
 	implicitWidth: Theme.geometry_listItem_width
 	implicitHeight: Theme.geometry_listItem_height
 	color: Theme.color_listItem_background
-	radius: Theme.geometry_listItem_radius
+	radius: Theme.geometry_radius_8
 }

@@ -19,8 +19,8 @@ QuantityTable {
 	header: Rectangle {
 		width: root.width
 		height: Theme.geometry_vebusDeviceListPage_quantityTable_header_height
-		topLeftRadius: Theme.geometry_listItem_radius
-		topRightRadius: Theme.geometry_listItem_radius
+		topLeftRadius: Theme.geometry_radius_8
+		topRightRadius: Theme.geometry_radius_8
 		color: Theme.color_quantityTable_row_background
 
 		Label {

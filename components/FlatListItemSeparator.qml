@@ -13,9 +13,9 @@ Item {
 	SeparatorBar {
 		id: bar
 
-		x: Theme.geometry_separatorBar_horizontalMargin
-		y: -(Theme.geometry_gradientList_spacing / 2)
-		width: parent.width - (2 * Theme.geometry_separatorBar_horizontalMargin)
+		x: Theme.geometry_space_8
+		y: -(Theme.geometry_space_4 / 2)
+		width: parent.width - (2 * Theme.geometry_space_8)
 		height: Theme.geometry_separatorBar_size
 		color: Theme.color_card_separator
 	}

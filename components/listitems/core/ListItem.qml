@@ -35,7 +35,7 @@ AbstractListItem {
 	// visible items.
 	leftInset: flat ? 0 : Theme.geometry_page_content_horizontalMargin
 	rightInset: flat ? 0 : Theme.geometry_page_content_horizontalMargin
-	bottomInset: Theme.geometry_gradientList_spacing
+	bottomInset: Theme.geometry_space_4
 	leftPadding: leftInset + horizontalContentPadding
 	rightPadding: rightInset + horizontalContentPadding
 	topPadding: topInset + Theme.geometry_listItem_content_verticalMargin
@@ -48,7 +48,7 @@ AbstractListItem {
 			implicitBackgroundHeight + topInset + bottomInset,
 			implicitContentHeight + topPadding + bottomPadding) : 0
 	width: parent?.width ?? Theme.geometry_listItem_width
-	spacing: Theme.geometry_listItem_content_spacing
+	spacing: Theme.geometry_listItem_content_verticalMargin
 
 	// By default, the item is visible if preferredVisible=true.
 	effectiveVisible: preferredVisible

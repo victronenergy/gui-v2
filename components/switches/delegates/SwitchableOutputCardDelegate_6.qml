@@ -34,7 +34,7 @@ FocusScope {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_switches_header_topMargin
+			topMargin: Theme.geometry_space_8
 			left: parent.left
 			leftMargin: Theme.geometry_controlCard_button_margins
 			right: parent.right
@@ -61,10 +61,10 @@ FocusScope {
 		bottomInset: Theme.geometry_button_touch_verticalMargin
 		leftInset: Theme.geometry_controlCard_button_margins
 		rightInset: Theme.geometry_controlCard_button_margins
-		topPadding: topInset + Theme.geometry_comboBox_verticalPadding
-		bottomPadding: bottomInset + Theme.geometry_comboBox_verticalPadding
-		leftPadding: leftInset + Theme.geometry_comboBox_leftPadding
-		rightPadding: rightInset + Theme.geometry_comboBox_rightPadding
+		topPadding: topInset + Theme.geometry_space_10
+		bottomPadding: bottomInset + Theme.geometry_space_10
+		leftPadding: leftInset + Theme.geometry_space_18
+		rightPadding: rightInset + Theme.geometry_space_10
 
 		currentIndex: Math.floor(dropdownSync.dataItem.value || 0)
 

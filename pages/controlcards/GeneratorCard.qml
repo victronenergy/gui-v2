@@ -11,11 +11,11 @@ ControlCard {
 
 	property alias serviceUid: generator.serviceUid
 
-	implicitHeight: controlButton.y + controlButton.height + Theme.geometry_controlCard_contentMargins
+	implicitHeight: controlButton.y + controlButton.height + Theme.geometry_space_16
 	icon.source: "qrc:/images/generator.svg"
 	title.text: CommonWords.generator
 	status.text: generator.stateText
-	status.rightPadding: timerDisplay.width + Theme.geometry_controlCard_contentMargins
+	status.rightPadding: timerDisplay.width + Theme.geometry_space_16
 
 	Generator {
 		id: generator
@@ -25,7 +25,7 @@ ControlCard {
 		id: timerDisplay
 		anchors {
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_contentMargins
+			rightMargin: Theme.geometry_space_16
 			baseline: parent.status.baseline
 		}
 		generator: generator
@@ -36,11 +36,11 @@ ControlCard {
 
 		anchors {
 			top: root.status.bottom
-			topMargin: Theme.geometry_controlCard_status_topMargin
+			topMargin: Theme.geometry_space_6
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_contentMargins
+			leftMargin: Theme.geometry_space_16
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_contentMargins
+			rightMargin: Theme.geometry_space_16
 		}
 		text: generator.isAutoStarted
 			  ? CommonWords.autostarted_dot_running_by.arg(generator.runningByText)
@@ -97,7 +97,7 @@ ControlCard {
 			right: parent.right
 		}
 		height: Theme.geometry_card_button_height
-		radius: Theme.geometry_button_radius
+		radius: Theme.geometry_radius_8
 		font.pixelSize: Theme.font_button_size
 		generatorUid: generator.serviceUid
 	}

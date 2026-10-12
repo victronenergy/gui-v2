@@ -63,7 +63,7 @@ CT.SpinBox {
 			}
 			color: root.enabled ? Theme.color_background_secondary : Theme.color_background_disabled
 			border.color: enabled ? Theme.color_ok : Theme.color_font_disabled
-			border.width: Theme.geometry_button_border_width
+			border.width: Theme.geometry_border_2
 		}
 
 		Keys.onPressed: (event) => {
@@ -118,13 +118,13 @@ CT.SpinBox {
 	down.indicator: Rectangle {
 		width: root.indicatorWidth
 		height: root.availableHeight
-		topLeftRadius: Theme.geometry_button_radius
-		bottomLeftRadius: Theme.geometry_button_radius
+		topLeftRadius: Theme.geometry_radius_8
+		bottomLeftRadius: Theme.geometry_radius_8
 		color: enabled
 			   ? (root.down.pressed ? Theme.color_ok : Theme.color_darkOk)
 			   : Theme.color_background_disabled
 		border.color: enabled ? Theme.color_ok : Theme.color_font_disabled
-		border.width: Theme.geometry_button_border_width
+		border.width: Theme.geometry_border_2
 
 		MouseArea {
 			anchors.fill: parent
@@ -151,13 +151,13 @@ CT.SpinBox {
 		x: parent.width - width
 		width: root.indicatorWidth
 		height: root.availableHeight
-		topRightRadius: Theme.geometry_button_radius
-		bottomRightRadius: Theme.geometry_button_radius
+		topRightRadius: Theme.geometry_radius_8
+		bottomRightRadius: Theme.geometry_radius_8
 		color: enabled
 			   ? (root.up.pressed ? Theme.color_ok : Theme.color_darkOk)
 			   : Theme.color_background_disabled
 		border.color: enabled ? Theme.color_ok : Theme.color_font_disabled
-		border.width: Theme.geometry_button_border_width
+		border.width: Theme.geometry_border_2
 
 		MouseArea {
 			anchors.fill: parent

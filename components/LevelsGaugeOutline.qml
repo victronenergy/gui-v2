@@ -47,9 +47,9 @@ Item {
 
 		anchors {
 			left: icon.right
-			leftMargin: Theme.geometry_levelsGauge_horizontalSpacing
+			leftMargin: Theme.geometry_space_12
 			right: quantityLabel.left
-			rightMargin: Theme.geometry_levelsGauge_horizontalSpacing
+			rightMargin: Theme.geometry_space_12
 			bottom: quantityLabel.bottom
 		}
 		font.pixelSize: Theme.font_levelsGauge_title

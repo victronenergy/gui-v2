@@ -51,7 +51,7 @@ FocusScope {
 		id: separator
 		anchors {
 			top: trashButton.bottom
-			topMargin: Theme.geometry_colorWheelDialog_preset_trash_spacing
+			topMargin: Theme.geometry_statusBar_spacing
 			horizontalCenter: buttonGrid.horizontalCenter
 		}
 		x: Theme.geometry_colorWheelDialog_preset_button_spacing / 2
@@ -105,11 +105,11 @@ FocusScope {
 				anchors.centerIn: parent
 				width: Theme.geometry_colorWheelDialog_preset_button_width
 				height: Theme.geometry_colorWheelDialog_preset_button_width
-				borderWidth: Theme.geometry_button_border_width
+				borderWidth: Theme.geometry_border_2
 				borderColor: presetDelegate.displayColor.valid ? Theme.color_ok
 							: enabled ? Theme.color_colorWheelDialog_preset_empty_button_border
 							: Theme.color_colorWheelDialog_preset_empty_button_border_disabled
-				radius: Theme.geometry_colorWheelDialog_preset_button_radius
+				radius: Theme.geometry_radius_6
 				centerColor: presetDelegate.displayColor.valid
 						? Qt.hsva(presetDelegate.displayColor.hsvHue,
 							presetDelegate.displayColor.hsvSaturation,

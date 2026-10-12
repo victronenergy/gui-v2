@@ -12,7 +12,7 @@ Label {
 
 	property alias icon: icon
 
-	leftPadding: icon.width + Theme.geometry_widgetHeader_spacing
+	leftPadding: icon.width + Theme.geometry_space_4
 	elide: Text.ElideRight
 	verticalAlignment: Text.AlignVCenter
 	font.pixelSize: Theme.font_control_title

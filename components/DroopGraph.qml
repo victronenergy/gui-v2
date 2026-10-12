@@ -190,7 +190,7 @@ Item {
 
 		// This calculates an adjustment +/- to apply to each y axis label
 		property real _yLabelHeight: Math.max(height, yAxisOperationQuantityLabel.height)
-									 + Theme.geometry_droopGraph_xAxis_label_padding
+									 + Theme.geometry_space_4
 		property real _yAdjustment: Math.abs(_guidelineIntersection.y - _operationPoint.y) > _yLabelHeight
 									? 0
 									: (_yLabelHeight - Math.abs(_guidelineIntersection.y - _operationPoint.y))/2
@@ -231,7 +231,7 @@ Item {
 
 		// This calculates an adjustment +/- to apply to each x axis label
 		property real _xLabelWidth: Math.max(width, xAxisOperationQuantityLabel.width)
-									+ Theme.geometry_droopGraph_xAxis_label_padding
+									+ Theme.geometry_space_4
 		property real _xAdjustment: Math.abs(_guidelineIntersection.x - _operationPoint.x) > _xLabelWidth
 									? 0
 									: (_xLabelWidth - Math.abs(_guidelineIntersection.x - _operationPoint.x))/2
@@ -264,8 +264,8 @@ Item {
 
 		CP.ColorImage {
 			anchors.centerIn: parent
-			sourceSize: Qt.size(Theme.geometry_droopGraph_operationPoint_diameter - Theme.geometry_droopGraph_operationPoint_border_width*2,
-								Theme.geometry_droopGraph_operationPoint_diameter - Theme.geometry_droopGraph_operationPoint_border_width*2)
+			sourceSize: Qt.size(Theme.geometry_droopGraph_operationPoint_diameter - Theme.geometry_border_2*2,
+								Theme.geometry_droopGraph_operationPoint_diameter - Theme.geometry_border_2*2)
 			source: "qrc:/images/dot.svg"
 			color: Theme.color_lightBlue
 		}

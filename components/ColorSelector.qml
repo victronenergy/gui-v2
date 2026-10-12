@@ -136,7 +136,7 @@ Item {
 			ShapePath {
 				id: backgroundPath
 				strokeColor: Theme.color_darkOk
-				strokeWidth: Theme.geometry_colorWheel_slider_strokeWidth - Theme.geometry_colorWheel_slider_borderWidth * 2
+				strokeWidth: Theme.geometry_colorWheel_slider_strokeWidth - Theme.geometry_border_2 * 2
 				fillColor: "transparent"
 				capStyle: ShapePath.RoundCap
 				joinStyle: ShapePath.RoundJoin
@@ -165,7 +165,7 @@ Item {
 			ShapePath {
 				id: highlightPath
 				strokeColor: Theme.color_blue
-				strokeWidth: Theme.geometry_colorWheel_slider_strokeWidth - Theme.geometry_colorWheel_slider_borderWidth // margin so highlight falls within the border
+				strokeWidth: Theme.geometry_colorWheel_slider_strokeWidth - Theme.geometry_border_2 // margin so highlight falls within the border
 				fillColor: "transparent"
 				capStyle: ShapePath.RoundCap
 				joinStyle: ShapePath.RoundJoin
@@ -413,7 +413,7 @@ Item {
 				color: root.outputType === VenusOS.SwitchableOutput_Type_ColorDimmerCct
 						? root.angleToTemperatureColor(mouseArea.angle)
 						: root.angleToColor(360 - mouseArea.angle, 90 - colorGradient.angle, rightSlider.value)
-				border.width: Theme.geometry_colorWheel_selector_swatch_borderWidth
+				border.width: Theme.geometry_border_2
 				border.color: color.darker(1.1)
 			}
 		}

@@ -51,7 +51,7 @@ OverviewWidget {
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			Layout.preferredWidth: root.stretchHorizontally
-					? (parent.width/2 + Theme.geometry_overviewPage_widget_spacing)  // push details to the right
+					? (parent.width/2 + Theme.geometry_space_8)  // push details to the right
 					: -1
 		}
 

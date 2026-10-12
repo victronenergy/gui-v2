@@ -11,7 +11,7 @@ Button {
 
 	icon.width: Theme.geometry_navigationBar_button_icon_width
 	icon.height: Theme.geometry_navigationBar_button_icon_height
-	spacing: Theme.geometry_navigationBar_button_spacing
+	spacing: Theme.geometry_space_4
 	display: Button.TextUnderIcon
 	radius: 0
 	color: down

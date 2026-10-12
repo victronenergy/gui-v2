@@ -65,8 +65,8 @@ Page {
 
 		anchors {
 			fill: parent
-			leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
-			rightMargin: Theme.geometry_controlCardsPage_horizontalMargin
+			leftMargin: Theme.geometry_page_content_horizontalMargin
+			rightMargin: Theme.geometry_page_content_horizontalMargin
 			bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing

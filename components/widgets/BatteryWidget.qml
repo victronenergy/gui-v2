@@ -68,9 +68,9 @@ OverviewWidget {
 		implicitHeight: Theme.geometry_overviewPage_widget_compact_l_height
 		foregroundColor: Theme.color_overviewPage_widget_battery_background
 		backgroundColor: Theme.color_overviewPage_widget_background
-		borderWidth: enabled ? Theme.geometry_overviewPage_widget_border_width : 0
+		borderWidth: enabled ? Theme.geometry_border_2 : 0
 		borderColor: Theme.color_overviewPage_widget_border
-		radius: Theme.geometry_overviewPage_widget_radius
+		radius: Theme.geometry_radius_8
 		animationEnabled: root.animationEnabled // Note: don't use _animationReady here.
 		value: root._normalizedStateOfCharge / 100
 
@@ -231,7 +231,7 @@ OverviewWidget {
 			function quantityLabelWidth(valueText, unitText){
 				const valueTextRect = quantityLabelFont.tightBoundingRect(valueText)
 				return quantityLabelFont.font, (valueTextRect.x + valueTextRect.width
-												+ Theme.geometry_quantityLabel_spacing
+												+ Theme.geometry_space_2
 												+ quantityLabelFont.advanceWidth(unitText))
 			}
 

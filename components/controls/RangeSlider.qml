@@ -24,7 +24,7 @@ T.RangeSlider {
 		implicitHeight: Theme.geometry_slider_groove_height
 		width: root.availableWidth
 		height: implicitHeight
-		radius: Theme.geometry_slider_groove_radius
+		radius: Theme.geometry_radius_8
 		color: Theme.color_darkOk
 
 		Rectangle {
@@ -32,7 +32,7 @@ T.RangeSlider {
 			width: root.second.visualPosition * parent.width - x
 			height: Theme.geometry_slider_groove_height
 			color: Theme.color_ok
-			radius: Theme.geometry_slider_groove_radius
+			radius: Theme.geometry_radius_8
 		}
 	}
 

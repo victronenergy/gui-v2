@@ -107,7 +107,7 @@ MouseArea {
 	Rectangle {
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_modalDialog_grabber_topMargin
+			topMargin: Theme.geometry_space_6
 			horizontalCenter: parent.horizontalCenter
 		}
 		visible: root.enabled

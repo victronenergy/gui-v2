@@ -27,7 +27,7 @@ T.RadioButton {
 		implicitWidth: Theme.geometry_radioButton_indicator_width
 		implicitHeight: implicitWidth
 		radius: implicitWidth/2
-		border.width: Theme.geometry_radioButton_border_width
+		border.width: Theme.geometry_border_2
 		border.color: root.enabled || root.checked
 			? ((root.down || root.checked) ? Theme.color_radioButton_indicator_on : Theme.color_radioButton_indicator_off)
 			: Theme.color_radioButton_indicator_disabled

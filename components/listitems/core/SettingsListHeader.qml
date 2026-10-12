@@ -14,8 +14,8 @@ Label {
 
 	leftPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin
 	rightPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin
-	topPadding: Theme.geometry_settingsListHeader_topPadding
-	bottomPadding: Theme.geometry_settingsListHeader_bottomPadding + Theme.geometry_gradientList_spacing
+	topPadding: Theme.geometry_space_8
+	bottomPadding: Theme.geometry_space_2 + Theme.geometry_space_4
 	width: Math.max(implicitWidth, 1)
 	font.pixelSize: Theme.font_listItem_flat_primary_size_flat
 	wrapMode: Text.Wrap

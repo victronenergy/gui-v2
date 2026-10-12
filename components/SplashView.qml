@@ -199,7 +199,7 @@ Rectangle {
 		id: extraInfoColumn
 		anchors {
 			top: loadingProgress.bottom
-			topMargin: Theme.geometry_splashView_progressText_topMargin
+			topMargin: Theme.geometry_space_12
 			left: parent.left
 			leftMargin: Theme.geometry_page_content_horizontalMargin
 			right: parent.right
@@ -270,7 +270,7 @@ Rectangle {
 		Label {
 			width: parent.width
 			horizontalAlignment: Text.AlignHCenter
-			height: implicitHeight + Theme.geometry_splashView_progressText_spacing
+			height: implicitHeight + Theme.geometry_space_4
 			font.pixelSize: Theme.font_splashView_progressText_size
 			color: Theme.color_font_secondary
 			wrapMode: Text.Wrap

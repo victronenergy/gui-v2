@@ -22,7 +22,7 @@ Item {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_switches_header_topMargin
+			topMargin: Theme.geometry_space_8
 			left: parent.left
 			leftMargin: Theme.geometry_controlCard_button_margins
 			right: parent.right
@@ -43,7 +43,7 @@ Item {
 		MiniSlider {
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry_valueIndicator_horizontalMargin
+				leftMargin: Theme.geometry_space_12
 				right: quantityLabel.left
 				rightMargin: Theme.geometry_valueIndicator_spacing
 				verticalCenter: parent.verticalCenter
@@ -68,7 +68,7 @@ Item {
 
 				Rectangle {
 					anchors.centerIn: parent
-					width: parent.width - Theme.geometry_valueIndicator_slider_handle_border_width * 2
+					width: parent.width - Theme.geometry_border_2 * 2
 					height: parent.height
 					color: Theme.color_valueIndicator_slider_handle_border
 				}
@@ -91,7 +91,7 @@ Item {
 
 			anchors {
 				right: parent.right
-				rightMargin: Theme.geometry_valueIndicator_horizontalMargin
+				rightMargin: Theme.geometry_space_12
 				verticalCenter: parent.verticalCenter
 			}
 			ioChannel: root.genericInput

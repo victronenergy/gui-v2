@@ -18,10 +18,10 @@ Row {
 	// The boat is considered moving if the GPS speed is above 0.2 m/s (0.72 km/h).
 	readonly property bool isMoving: root.gps.valid && root.gps.numerator > 0.2
 
-	spacing: Theme.geometry_boatPage_row_spacing
+	spacing: Theme.geometry_space_4
 
 	Item {
-		width: Theme.geometry_boatPage_batteryGauge_iconWidth - Theme.geometry_boatPage_row_spacing
+		width: Theme.geometry_boatPage_batteryGauge_iconWidth - Theme.geometry_space_4
 		height: Theme.geometry_boatPage_batteryGauge_iconWidth
 
 		CP.ColorImage {

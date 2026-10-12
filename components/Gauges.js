@@ -105,6 +105,14 @@ function tankProperties(type) {
 	return {}
 }
 
+function maxTankCount() {
+	// Five-inch stored 5; seven-inch and portrait stored 6.
+	if (V.Theme.screenSize === V.Theme.FiveInch) {
+		return 5
+	}
+	return 6
+}
+
 function width(count, maxCount, availableSpace){
 	const _count = Math.min(maxCount, count)
 	if (_count <= 3) {
@@ -129,9 +137,9 @@ function spacing(count) {
 	} else if (count === 3) {
 		return V.Theme.geometry_levelsPage_gauge_spacing_medium
 	} else if (count === 4) {
-		return V.Theme.geometry_levelsPage_gauge_spacing_small
+		return V.Theme.geometry_space_16
 	} else {
-		return V.Theme.geometry_levelsPage_gauge_spacing_tiny
+		return V.Theme.geometry_space_8
 	}
 }
 

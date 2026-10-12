@@ -19,7 +19,7 @@ Item {
 			? VenusOS.StatusBar_RightButton_SidePanelActive
 			: VenusOS.StatusBar_RightButton_SidePanelInactive
 
-	property real _gaugeArcMargin: Theme.geometry_briefPage_edgeGauge_initialize_margin
+	property real _gaugeArcMargin: Theme.geometry_space_10
 	property real _gaugeLabelMargin: Theme.geometry_briefPage_edgeGauge_label_initialize_margin
 	property real _gaugeArcOpacity: 0
 	property real _gaugeLabelOpacity: 0
@@ -77,11 +77,11 @@ Item {
 			// Caption spans from the centre to the left quantity label.
 			// Longer captions span further, to the edge of the left gauge bars.
 			shortCaptionWidth: longCaptionWidth - (acInputGauge.item?.quantityWidth ?? 0)
-			longCaptionWidth: (root.width / 2) - (acInputGaugeColumn.x + acInputGaugeColumn.width + Theme.geometry_circularMultiGauge_spacing)
+			longCaptionWidth: (root.width / 2) - (acInputGaugeColumn.x + acInputGaugeColumn.width + Theme.geometry_listItem_flat_content_horizontalMargin)
 
 			BriefCenterDisplay {
 				anchors.centerIn: parent
-				width: parent.width - (gaugeModel.count * circularMultiGauge._stepSize) + Theme.geometry_circularMultiGauge_spacing
+				width: parent.width - (gaugeModel.count * circularMultiGauge._stepSize) + Theme.geometry_listItem_flat_content_horizontalMargin
 				showFullDetails: gaugeModel.count === 1
 			}
 		}
@@ -114,7 +114,7 @@ Item {
 		anchors {
 			verticalCenter: mainGauge.verticalCenter
 			left: parent.left
-			leftMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
+			leftMargin: Theme.geometry_page_content_horizontalMargin
 		}
 		width: Theme.geometry_briefPage_edgeGauge_width
 
@@ -158,7 +158,7 @@ Item {
 					anchors {
 						left: acInGaugeQuantity.left
 						bottom: acInGaugeQuantity.top
-						bottomMargin: Theme.geometry_briefPage_edgeGauge_quantityLabel_feedback_margin
+						bottomMargin: Theme.geometry_space_4
 					}
 					input: Global.acInputs.highlightedInput
 				}
@@ -266,7 +266,7 @@ Item {
 		anchors {
 			verticalCenter: mainGauge.verticalCenter
 			right: parent.right
-			rightMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
+			rightMargin: Theme.geometry_page_content_horizontalMargin
 		}
 		width: Theme.geometry_briefPage_edgeGauge_width
 

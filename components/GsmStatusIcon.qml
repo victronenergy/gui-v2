@@ -53,12 +53,12 @@ Row {
 	Row {
 		id: gsmRow
 
-		spacing: Theme.geometry_settings_gsmModem_signalStrengthBars_spacing
+		spacing: Theme.geometry_space_2
 		visible: !simLockedIcon.visible
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_settings_gsmModem_signalStrengthBars_topMargin
+			topMargin: Theme.geometry_space_2
 			bottom: parent.bottom
 		}
 

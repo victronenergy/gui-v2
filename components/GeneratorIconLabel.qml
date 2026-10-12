@@ -12,7 +12,7 @@ Label {
 
 	required property Generator generator
 
-	leftPadding: icon.width + Theme.geometry_generatorIconLabel_icon_margin
+	leftPadding: icon.width + Theme.geometry_space_4
 	font.pixelSize: Theme.font_size_body2
 	color: root.generator && root.generator_runtime > 0 ? Theme.color_font_primary : Theme.color_font_secondary
 	verticalAlignment: Text.AlignVCenter

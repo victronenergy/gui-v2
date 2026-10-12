@@ -123,7 +123,7 @@ ListSetting {
 							// In portrait, this stretches to the left edge, so add the page edge inset.
 							+ (Theme.screenSize === Theme.Portrait ? root.leftInset : 0)
 					leftPadding: leftInset
-					rightInset: Theme.geometry_slider_spacing
+					rightInset: Theme.geometry_space_12
 					rightPadding: rightInset
 
 					icon.source: "qrc:/images/icon_minus.svg"
@@ -149,7 +149,7 @@ ListSetting {
 					defaultBackgroundHeight: Theme.geometry_slider_button_size
 					topInset: (sliderItem.height - defaultBackgroundHeight) / 2
 					bottomInset: (sliderItem.height - defaultBackgroundHeight) / 2
-					leftInset: Theme.geometry_slider_spacing
+					leftInset: Theme.geometry_space_12
 					leftPadding: leftInset
 					rightInset: root.horizontalContentPadding + root.rightInset
 					rightPadding: rightInset

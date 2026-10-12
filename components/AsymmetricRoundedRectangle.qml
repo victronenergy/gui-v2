@@ -62,8 +62,8 @@ Item {
 			width: root.width
 			height: root.height
 			color: Theme.color_darkOk
-			radius: Theme.geometry_button_radius
-			border.width: root.flat ? 0 : Theme.geometry_button_border_width
+			radius: Theme.geometry_radius_8
+			border.width: root.flat ? 0 : Theme.geometry_border_2
 			border.color: Theme.color_ok
 		}
 	}

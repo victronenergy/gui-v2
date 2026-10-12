@@ -8,5 +8,5 @@ import Victron.VenusOS
 
 PressArea {
 	color: Theme.color_listItem_down_background
-	radius: Theme.geometry_listItem_radius
+	radius: Theme.geometry_radius_8
 }

@@ -32,7 +32,7 @@ Rectangle {
 		color: "transparent"
 		radius: width / 2
 		border.color: Theme.color_ok
-		border.width: Theme.geometry_button_border_width
+		border.width: Theme.geometry_border_2
 	}
 
 	IconButton {
@@ -58,7 +58,7 @@ Rectangle {
 	// Vertical separator in the middle of the button.
 	Rectangle {
 		anchors.centerIn: parent
-		width: Theme.geometry_button_border_width
+		width: Theme.geometry_border_2
 		height: tempColorIcon.height
 		color: Theme.color_colorWheelDialog_mode_button_separator
 	}

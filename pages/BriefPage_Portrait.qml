@@ -27,7 +27,7 @@ Item {
 		width: root.width - (2 * Theme.geometry_page_content_horizontalMargin)
 		height: mainGauge.height + (2 * Theme.geometry_mainGauge_padding)
 		color: Theme.color_background_secondary
-		radius: Theme.geometry_button_radius
+		radius: Theme.geometry_radius_8
 
 		Loader {
 			id: mainGauge
@@ -64,7 +64,7 @@ Item {
 				width: root.width - (2 * Theme.geometry_page_content_horizontalMargin)
 				height: panelAutoCloseColumn.height
 				color: Theme.color_background_secondary
-				radius: Theme.geometry_button_radius
+				radius: Theme.geometry_radius_8
 
 				Column {
 					id: panelAutoCloseColumn
@@ -76,8 +76,8 @@ Item {
 
 					Label {
 						width: parent.width
-						leftPadding: Theme.geometry_sidePanel_sideWidget_horizontalMargin
-						rightPadding: Theme.geometry_sidePanel_sideWidget_horizontalMargin
+						leftPadding: Theme.geometry_levelsGauge_horizontalPadding
+						rightPadding: Theme.geometry_levelsGauge_horizontalPadding
 						horizontalAlignment: Text.AlignHCenter
 						wrapMode: Text.Wrap
 						//% "Graphs and additional details have been hidden to reduce the CPU load."
@@ -108,7 +108,7 @@ Item {
 
 			BriefCenterDisplay {
 				anchors.centerIn: parent
-				width: parent.width - (gaugeModel.count * circularMultiGauge._stepSize) + Theme.geometry_circularMultiGauge_spacing
+				width: parent.width - (gaugeModel.count * circularMultiGauge._stepSize) + Theme.geometry_listItem_flat_content_horizontalMargin
 				showFullDetails: gaugeModel.count === 1
 			}
 		}

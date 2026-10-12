@@ -160,7 +160,7 @@ T.SpinBox {
 			id: contentArea
 
 			anchors.centerIn: parent
-			implicitWidth: Math.max(inputArea.implicitWidth, secondaryLabel.implicitWidth) + 2*Theme.geometry_textField_horizontalMargin
+			implicitWidth: Math.max(inputArea.implicitWidth, secondaryLabel.implicitWidth) + 2*Theme.geometry_statusBar_spacing
 			implicitHeight: secondaryLabel.y + secondaryLabel.height
 			width: Math.min(implicitWidth, parent.width)
 			height: Math.min(implicitHeight, parent.height)
@@ -204,7 +204,7 @@ T.SpinBox {
 				color: "transparent"
 				border.color: Theme.color_blue
 				border.width: Theme.geometry_focus_highlight_border_size
-				radius: Theme.geometry_button_radius
+				radius: Theme.geometry_radius_8
 			}
 
 			// Orange frame with arrow indicators, to hint that up/down keys will change the value,
@@ -226,7 +226,7 @@ T.SpinBox {
 		   : contentItem.y + contentItem.height + root.spacing
 		implicitWidth: root.indicatorImplicitWidth
 		implicitHeight: Theme.geometry_spinBox_indicator_height
-		radius: Theme.geometry_spinBox_indicator_radius
+		radius: Theme.geometry_radius_6
 		color: enabled
 			   ? (root.up.pressed ? Theme.color_button_down : Theme.color_button)
 			   : Theme.color_background_disabled
@@ -252,7 +252,7 @@ T.SpinBox {
 		   : contentItem.y - root.spacing - height
 		implicitWidth: root.indicatorImplicitWidth
 		implicitHeight: Theme.geometry_spinBox_indicator_height
-		radius: Theme.geometry_spinBox_indicator_radius
+		radius: Theme.geometry_radius_6
 		color: enabled
 			   ? (downIndicatorPressArea.pressed ? Theme.color_button_down : Theme.color_button)
 			   : Theme.color_background_disabled

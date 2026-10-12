@@ -15,7 +15,7 @@ Rectangle {
 	color: "transparent"
 	border.color: Theme.color_focus_highlight
 	border.width: Theme.geometry_focus_highlight_border_size
-	radius: Theme.geometry_button_radius
+	radius: Theme.geometry_radius_8
 
 	CP.ColorImage {
 		anchors {

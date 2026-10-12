@@ -286,8 +286,8 @@ FocusScope {
 					Rectangle {
 						anchors {
 							left: parent.horizontalCenter
-							leftMargin: Theme.geometry_navigationBar_notifications_redDot_margin
-							topMargin: Theme.geometry_navigationBar_notifications_redDot_margin
+							leftMargin: Theme.geometry_space_6
+							topMargin: Theme.geometry_space_6
 						}
 						width: Theme.geometry_navigationBar_notifications_redDot_size
 						height: Theme.geometry_navigationBar_notifications_redDot_size
@@ -348,7 +348,7 @@ FocusScope {
 			YAnimator {
 				id: navBarInitialYAnimator
 				target: navBar
-				from: root.height - navBar.height + Theme.geometry_navigationBar_initialize_margin
+				from: root.height - navBar.height + Theme.geometry_space_12
 				to: root.height - navBar.height
 				duration: UiConfig.showSplashAnimation && Global.animationEnabled ? Theme.animation_navBar_initialize_fade_duration : 1
 			}

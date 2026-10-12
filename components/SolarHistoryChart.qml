@@ -169,9 +169,9 @@ FocusScope {
 			bottom: parent.bottom
 			bottomMargin: Theme.geometry_solarChart_bottomMargin
 		}
-		spacing: barRepeater.count >= 30 ? Theme.geometry_solarChart_bar_spacing_thirtyDays
-			   : barRepeater.count >= 14 ? Theme.geometry_solarChart_bar_spacing_fourteenDays
-			   : Theme.geometry_solarChart_bar_spacing_sevenDays
+		spacing: barRepeater.count >= 30 ? Theme.geometry_space_4
+			   : barRepeater.count >= 14 ? Theme.geometry_space_6
+			   : Theme.geometry_space_8
 
 		Repeater {
 			id: barRepeater
@@ -219,14 +219,14 @@ FocusScope {
 						bottomMargin: Theme.geometry_solarChart_tickLine_height
 					}
 					width: parent.width
-					radius: Theme.geometry_solarChart_bar_radius
+					radius: Theme.geometry_radius_8
 
 					// This base rectangle ensures the bar is not transparent when pressed
 					color: barMouseArea.containsPress ? Theme.color_background_primary : "transparent"
 
 					Rectangle {
 						anchors.fill: parent
-						radius: Theme.geometry_solarChart_bar_radius
+						radius: Theme.geometry_radius_8
 						color: barMouseArea.containsPress ? Theme.color_lightBlue : Theme.color_ok
 					}
 				}

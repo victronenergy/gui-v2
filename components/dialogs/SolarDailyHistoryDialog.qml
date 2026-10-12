@@ -98,7 +98,7 @@ T.Dialog {
 	background: Rectangle {
 		implicitWidth: Theme.geometry_modalDialog_width
 		implicitHeight: 0
-		radius: Theme.geometry_solarDailyHistoryDialog_background_radius
+		radius: Theme.geometry_radius_8
 		color: Theme.color_background_secondary
 		border.color: Theme.color_modalDialog_border
 
@@ -111,7 +111,7 @@ T.Dialog {
 			id: highlightBar
 
 			color: Theme.color_ok
-			radius: Theme.geometry_solarChart_bar_radius
+			radius: Theme.geometry_radius_8
 		}
 
 		component ArrowButton : IconButton {
@@ -149,7 +149,7 @@ T.Dialog {
 		implicitHeight: historyListView.y + historyListView.height
 			+ (errorView.enabled ? errorView.collapsedHeight + Theme.geometry_solarDetailBox_margins : 0)
 
-		radius: Theme.geometry_solarDailyHistoryDialog_background_radius
+		radius: Theme.geometry_radius_8
 		color: Theme.color_background_secondary
 		focus: true
 

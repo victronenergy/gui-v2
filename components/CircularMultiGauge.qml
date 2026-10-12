@@ -21,7 +21,7 @@ Item {
 	property real shortCaptionWidth: width / 2
 
 	// Step change in the size of the bounding boxes of successive gauges
-	readonly property real _stepSize: 2 * (strokeWidth + Theme.geometry_circularMultiGauge_spacing)
+	readonly property real _stepSize: 2 * (strokeWidth + Theme.geometry_listItem_flat_content_horizontalMargin)
 
 	Item {
 		id: antialiased
@@ -117,7 +117,7 @@ Item {
 				Label {
 					id: valueLabel
 					anchors.verticalCenter: parent.verticalCenter
-					rightPadding: Theme.geometry_circularMultiGauge_value_rightMargin
+					rightPadding: Theme.geometry_space_2
 					horizontalAlignment: Text.AlignRight
 					font.pixelSize: Theme.font_circularMultiGauge_label_smallSize
 					color: Theme.color_font_primary

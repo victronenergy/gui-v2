@@ -33,7 +33,7 @@ ListItem {
 		property alias unit: quantityLabel.unit
 
 		width: root.columnWidth || implicitWidth
-		spacing: Theme.geometry_batteryListPage_item_verticalSpacing
+		spacing: Theme.geometry_space_2
 
 		Label {
 			id: quantityTitle
@@ -103,7 +103,7 @@ ListItem {
 				Column {
 					Layout.fillWidth: true
 					Layout.rightMargin: root.columnSpacing
-					spacing: Theme.geometry_batteryListPage_item_verticalSpacing
+					spacing: Theme.geometry_space_2
 
 					Label {
 						elide: Text.ElideRight

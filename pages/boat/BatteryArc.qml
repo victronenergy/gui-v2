@@ -28,7 +28,7 @@ Loader {
 		arcVerticalCenterOffset: gaugeParams.arcVerticalCenterOffset
 		horizontalAlignment: Qt.AlignLeft
 
-		x: Theme.geometry_briefPage_edgeGauge_initialize_margin
+		x: Theme.geometry_space_10
 		strokeWidth: Theme.geometry_boatPage_batteryGauge_strokeWidth
 		animationEnabled: root.animationEnabled && !pauseLeftGaugeAnimations.running
 		valueType: VenusOS.Gauges_ValueType_NeutralPercentage

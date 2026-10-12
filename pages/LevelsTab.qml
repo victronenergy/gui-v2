@@ -14,7 +14,7 @@ BaseListView {
 
 	bottomMargin: Global.pageManager?.expandLayout
 			? Theme.geometry_levelsPage_gaugesView_expanded_bottomMargin
-			: Theme.geometry_levelsPage_gaugesView_compact_bottomMargin
+			: Theme.geometry_space_16
 	leftMargin: contentWidth > width
 			? Theme.geometry_levelsPage_gaugesView_horizontalMargin
 			: parent.width/2 - contentWidth / 2
@@ -23,7 +23,7 @@ BaseListView {
 			: 0
 
 	orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
-	spacing: Theme.screenSize === Theme.Portrait ? Theme.geometry_levelsPage_gauge_spacing_tiny : Gauges.spacing(count)
+	spacing: Theme.screenSize === Theme.Portrait ? Theme.geometry_space_8 : Gauges.spacing(count)
 	currentIndex: 0
 
 	// If the gauges overflow beyond the view bounds, clip when the user may swipe into previous/

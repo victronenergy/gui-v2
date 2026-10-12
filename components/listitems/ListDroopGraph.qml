@@ -29,9 +29,9 @@ ListItem {
 	component GraphLabel: Label {
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_droopGraph_container_label_topMargin
+			topMargin: Theme.geometry_space_16
 			left: parent.left
-			leftMargin: Theme.geometry_droopGraph_container_label_leftMargin
+			leftMargin: Theme.geometry_controlCard_button_margins
 		}
 		font.pixelSize: Theme.font_droopGraph_figure_label_size
 		color: Theme.color_font_primary
@@ -46,7 +46,7 @@ ListItem {
 	contentItem: Flow {
 		readonly property real graphWidth: (Theme.screenSize === Theme.Portrait ? width : (width - spacing) / 2)
 
-		spacing: Theme.geometry_droopGraph_container_spacing
+		spacing: Theme.geometry_space_4
 
 		ListItemBackground {
 			id: frequencyBackground
@@ -63,10 +63,10 @@ ListItem {
 				id: frequencyDroopGraph
 				anchors {
 					top: frequencyLabel.bottom
-					topMargin: Theme.geometry_droopGraph_container_graph_topMargin
+					topMargin: Theme.geometry_space_8
 					horizontalCenter: parent.horizontalCenter
 				}
-				width: parent.width - (2 * Theme.geometry_droopGraph_container_graph_leftMargin)
+				width: parent.width - (2 * Theme.geometry_page_content_horizontalMargin)
 
 				// Intentionally not translated
 				yAxisLabel: "P"
@@ -97,10 +97,10 @@ ListItem {
 				id: voltageDroopGraph
 				anchors {
 					top: voltageLabel.bottom
-					topMargin: Theme.geometry_droopGraph_container_graph_topMargin
+					topMargin: Theme.geometry_space_8
 					horizontalCenter: parent.horizontalCenter
 				}
-				width: parent.width - (2 * Theme.geometry_droopGraph_container_graph_leftMargin)
+				width: parent.width - (2 * Theme.geometry_page_content_horizontalMargin)
 
 				// Intentionally not translated
 				yAxisLabel: "Q"

@@ -119,7 +119,7 @@ T.Dialog {
 			implicitContentHeight + topPadding + bottomPadding + implicitHeaderHeight + implicitFooterHeight))
 	modal: true
 	topPadding: topInset + Theme.geometry_modalDialog_topPadding
-	bottomPadding: bottomInset + Theme.geometry_modalDialog_bottomPadding
+	bottomPadding: bottomInset + Theme.geometry_listItem_content_horizontalMargin
 
 	// When "cancel" is the only action available, allow auto-closing with ESC or external clicks.
 	// Otherwise, force the user to explicitly cancel with a button click (or drag away in portrait).
@@ -198,7 +198,7 @@ T.Dialog {
 					elide: Text.ElideRight
 					visible: text.length > 0
 					Layout.fillWidth: true
-					Layout.topMargin: Theme.geometry_modalDialog_header_verticalPadding
+					Layout.topMargin: Theme.geometry_space_12
 				}
 
 				Label {

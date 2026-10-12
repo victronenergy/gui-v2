@@ -27,7 +27,7 @@ Rectangle {
 			id: whatsNewLabel
 			anchors {
 				bottom: progressBar.top
-				bottomMargin: Theme.geometry_welcome_header_bottomMargin
+				bottomMargin: Theme.geometry_space_4
 			}
 			font.pixelSize: Theme.font_size_body2
 			//% "What's New"

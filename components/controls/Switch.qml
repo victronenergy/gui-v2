@@ -32,7 +32,7 @@ T.Switch {
 			   : Theme.color_switch_groove_disabled
 		border.color: root.checked ? Theme.color_switch_groove_border_on
 			: Theme.color_switch_groove_border_off
-		border.width: Theme.geometry_switch_groove_border_width
+		border.width: Theme.geometry_border_2
 	}
 
 	indicator: Image {

@@ -49,9 +49,9 @@ Rectangle {
 
 		x: Theme.geometry_solarDetailBox_horizontalPadding
 		width: parent.width - (2 * Theme.geometry_solarDetailBox_horizontalPadding)
-		spacing: Theme.geometry_solarDetailBox_separator_horizontalMargin
-		topPadding: Theme.geometry_solarDetailBox_verticalPadding
-		bottomPadding: Theme.geometry_solarDetailBox_verticalPadding
+		spacing: Theme.geometry_space_12
+		topPadding: Theme.geometry_space_8
+		bottomPadding: Theme.geometry_space_8
 		rows: Theme.screenSize === Theme.Portrait ? 3 : 1
 
 		GridLayout {
@@ -137,7 +137,7 @@ Rectangle {
 		color: Theme.color_solarDetailBox_columnTitle
 
 		Layout.columnSpan: 3
-		Layout.bottomMargin: Theme.geometry_solarDetailBox_header_bottomPadding
+		Layout.bottomMargin: Theme.geometry_quantityMetricPadding
 	}
 
 	component BatteryDetail : ColumnLayout {
@@ -147,7 +147,7 @@ Rectangle {
 		required property real value
 		required property int unit
 
-		spacing: Theme.geometry_solarDetailBox_title_bottomPadding
+		spacing: Theme.geometry_space_2
 		Layout.fillWidth: true
 
 		Label {
@@ -170,7 +170,7 @@ Rectangle {
 		required property string title
 		required property real value
 
-		spacing: Theme.geometry_solarDetailBox_title_bottomPadding
+		spacing: Theme.geometry_space_2
 		Layout.fillWidth: true
 
 		Label {
@@ -181,7 +181,7 @@ Rectangle {
 		}
 
 		Label {
-			rightPadding: hourLabel.width + Theme.geometry_quantityLabel_spacing
+			rightPadding: hourLabel.width + Theme.geometry_space_2
 			text: root._formatTime(timeDetail.value)
 			font.pixelSize: root.bodyFontSize
 

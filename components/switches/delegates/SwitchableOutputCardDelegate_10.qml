@@ -29,7 +29,7 @@ Item {
 		id: header
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_switches_header_topMargin
+			topMargin: Theme.geometry_space_8
 			left: parent.left
 			leftMargin: Theme.geometry_controlCard_button_margins
 			right: parent.right

@@ -25,7 +25,7 @@ Row {
 		 ? parent.height - height - Theme.geometry_briefPage_edgeGauge_quantityLabel_bottomMargin
 		 : Theme.geometry_briefPage_edgeGauge_quantityLabel_topMargin    // root.alignment & Qt.AlignTop
 
-	spacing: Theme.geometry_briefPage_edgeGauge_quantityLabel_spacing
+	spacing: Theme.geometry_space_2
 	layoutDirection: root.alignment & Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight
 
 	CP.ColorImage {

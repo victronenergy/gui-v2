@@ -18,7 +18,7 @@ BaseListView {
 	// Expand clickable area vertically for On/Off and delegate buttons.
 	readonly property real verticalPressMargin: Theme.geometry_button_touch_verticalMargin
 
-	readonly property real _totalDelegateWidth: width - (headerItem?.width ?? 0) - Theme.geometry_button_border_width
+	readonly property real _totalDelegateWidth: width - (headerItem?.width ?? 0) - Theme.geometry_border_2
 
 	signal indexClicked(index: int)
 	signal onClicked()
@@ -37,7 +37,7 @@ BaseListView {
 		width: parent.width - (2 * root.horizontalPressMargin)
 		height: Theme.geometry_iochannel_control_height
 		color: enabled ? Theme.color_ok : Theme.color_font_disabled
-		radius: Theme.geometry_button_radius
+		radius: Theme.geometry_radius_8
 		z: -1
 	}
 
@@ -58,9 +58,9 @@ BaseListView {
 
 			y: -root.verticalPressMargin
 			defaultBackgroundWidth: (root._totalDelegateWidth - root.horizontalPressMargin) / root.model.length
-			defaultBackgroundHeight: Theme.geometry_iochannel_control_height - (2 * Theme.geometry_button_border_width)
-			topInset: root.verticalPressMargin + Theme.geometry_button_border_width
-			bottomInset: root.verticalPressMargin + Theme.geometry_button_border_width
+			defaultBackgroundHeight: Theme.geometry_iochannel_control_height - (2 * Theme.geometry_border_2)
+			topInset: root.verticalPressMargin + Theme.geometry_border_2
+			bottomInset: root.verticalPressMargin + Theme.geometry_border_2
 			rightInset: lastListItem ? root.horizontalPressMargin : 0
 
 			// Offset the content to fit within the background.
@@ -69,9 +69,9 @@ BaseListView {
 			rightPadding: rightInset
 
 			topLeftRadius: 0
-			topRightRadius: lastListItem ? Theme.geometry_button_radius - Theme.geometry_button_border_width : 0
+			topRightRadius: lastListItem ? Theme.geometry_radius_8 - Theme.geometry_border_2 : 0
 			bottomLeftRadius: 0
-			bottomRightRadius: lastListItem ? Theme.geometry_button_radius - Theme.geometry_button_border_width : 0
+			bottomRightRadius: lastListItem ? Theme.geometry_radius_8 - Theme.geometry_border_2 : 0
 			borderWidth: 0
 			flat: false
 			text: modelData.text
@@ -100,19 +100,19 @@ BaseListView {
 			id: stateToggleButton
 
 			y: -root.verticalPressMargin
-			defaultBackgroundHeight: Theme.geometry_iochannel_control_height - (2 * Theme.geometry_button_border_width)
-			topInset: root.verticalPressMargin + Theme.geometry_button_border_width
-			bottomInset: root.verticalPressMargin + Theme.geometry_button_border_width
-			leftInset: root.horizontalPressMargin + Theme.geometry_button_border_width
+			defaultBackgroundHeight: Theme.geometry_iochannel_control_height - (2 * Theme.geometry_border_2)
+			topInset: root.verticalPressMargin + Theme.geometry_border_2
+			bottomInset: root.verticalPressMargin + Theme.geometry_border_2
+			leftInset: root.horizontalPressMargin + Theme.geometry_border_2
 
 			// Offset the content to fit within the background.
 			topPadding: topInset
 			bottomPadding: bottomInset
 			leftPadding: leftInset
 
-			topLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
+			topLeftRadius: Theme.geometry_radius_8 - Theme.geometry_border_2
 			topRightRadius: 0
-			bottomLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
+			bottomLeftRadius: Theme.geometry_radius_8 - Theme.geometry_border_2
 			bottomRightRadius: 0
 			borderWidth: 0
 			flat: false

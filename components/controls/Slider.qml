@@ -29,7 +29,7 @@ T.Slider {
 		implicitHeight: Theme.geometry_slider_groove_height
 		width: root.availableWidth
 		height: implicitHeight
-		radius: Theme.geometry_slider_groove_radius
+		radius: Theme.geometry_radius_8
 		foregroundColor: root.highlightColor
 		backgroundColor: root.grooveColor
 		orientation: Qt.Horizontal // we have no vertical sliders at present

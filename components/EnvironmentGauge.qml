@@ -40,7 +40,7 @@ Item {
 	}
 
 	implicitHeight: root.orientation === Qt.Vertical ? 0
-			: gaugeBar.height + gaugeTicks.height + Theme.geometry_levelsGauge_verticalPadding
+			: gaugeBar.height + gaugeTicks.height + Theme.geometry_space_8
 
 	Rectangle {
 		id: gaugeBar
@@ -49,7 +49,7 @@ Item {
 			: parent.width/2 - valueMarker.width + Theme.geometry_environmentGauge_tick_size/2
 		width: root.orientation === Qt.Vertical ? Theme.geometry_barGauge_vertical_width_large : parent.width
 		height: root.orientation === Qt.Vertical
-				? parent.height - bottomSeparator.height - 2*Theme.geometry_levelsGauge_verticalPadding
+				? parent.height - bottomSeparator.height - 2*Theme.geometry_space_8
 				: Theme.geometry_barGauge_horizontal_height
 		radius: root.orientation === Qt.Vertical ? width / 2 : height / 2
 		gradient: root.gradient
@@ -63,10 +63,10 @@ Item {
 			horizontalCenter: root.orientation === Qt.Vertical ? parent.horizontalCenter : gaugeBar.horizontalCenter
 			verticalCenter: root.orientation === Qt.Vertical ? gaugeBar.verticalCenter : undefined
 			top: root.orientation === Qt.Vertical ? undefined : gaugeBar.bottom
-			topMargin: Theme.geometry_levelsGauge_verticalPadding
+			topMargin: Theme.geometry_space_8
 		}
 		flow: root.orientation === Qt.Vertical ? Flow.TopToBottom : Flow.LeftToRight
-		spacing: ((root.orientation === Qt.Vertical ? gaugeBar.height - 2*Theme.geometry_environmentGauge_verticalPadding : gaugeBar.width)
+		spacing: ((root.orientation === Qt.Vertical ? gaugeBar.height - 2*Theme.geometry_space_4 : gaugeBar.width)
 					- (tickRepeater.count * Theme.geometry_environmentGauge_tick_size))
 						/ (tickRepeater.count - 1)
 
@@ -88,7 +88,7 @@ Item {
 				Label {
 					anchors.verticalCenter: parent.verticalCenter
 					anchors.horizontalCenter: root.orientation === Qt.Vertical ? undefined : parent.horizontalCenter
-					leftPadding: Theme.geometry_environmentGauge_tick_margin
+					leftPadding: Theme.geometry_environmentGauge_gauge_horizontalPadding
 					text: tickValue === root.maximumValue ? root.maximumValue
 						: tickValue === root.minimumValue ? root.minimumValue
 						: tickValue === root.highlightedValue ? tickValue
@@ -117,7 +117,7 @@ Item {
 
 		visible: !isNaN(root.value)
 		x: root.orientation === Qt.Vertical ? gaugeBar.x : root._barPosForValue(root.value) - width/2
-		y: root.orientation === Qt.Vertical ? Theme.geometry_environmentGauge_verticalPadding + root._barPosForValue(root.value) - height/2 : 0
+		y: root.orientation === Qt.Vertical ? Theme.geometry_space_4 + root._barPosForValue(root.value) - height/2 : 0
 		width: root.orientation === Qt.Vertical
 			   ? Theme.geometry_environmentGauge_valueMarker_background_width
 			   : gaugeBar.height
@@ -142,10 +142,10 @@ Item {
 		Rectangle {
 			anchors {
 				fill: parent
-				leftMargin: root.orientation === Qt.Vertical ? 0 : Theme.geometry_environmentGauge_valueMarker_padding
-				rightMargin: root.orientation === Qt.Vertical ? 0 : Theme.geometry_environmentGauge_valueMarker_padding
-				topMargin: Theme.geometry_environmentGauge_valueMarker_padding
-				bottomMargin: Theme.geometry_environmentGauge_valueMarker_padding
+				leftMargin: root.orientation === Qt.Vertical ? 0 : Theme.geometry_space_2
+				rightMargin: root.orientation === Qt.Vertical ? 0 : Theme.geometry_space_2
+				topMargin: Theme.geometry_space_2
+				bottomMargin: Theme.geometry_space_2
 			}
 			color: Theme.color_font_primary
 

@@ -24,7 +24,7 @@ MouseArea {
 
 	Rectangle {
 		anchors.fill: parent
-		radius: Theme.geometry_solarHistoryErrorView_radius
+		radius: Theme.geometry_radius_6
 		color: Theme.color_toastNotification_background_error
 
 		AsymmetricRoundedRectangle {
@@ -34,7 +34,7 @@ MouseArea {
 				bottom: parent.bottom
 			}
 			width: Theme.geometry_solarHistoryErrorView_iconBackground_width
-			radius: Theme.geometry_solarHistoryErrorView_radius
+			radius: Theme.geometry_radius_6
 			color: Theme.color_toastNotification_highlight_error
 			flat: true
 
@@ -55,7 +55,7 @@ MouseArea {
 			top: parent.top
 			topMargin: (root.collapsedHeight - height) / 2
 			right: parent.right
-			rightMargin: Theme.geometry_solarHistoryErrorView_expandIcon_horizontalMargin
+			rightMargin: Theme.geometry_space_8
 		}
 		height: Theme.geometry_solarHistoryErrorView_expandIcon_size
 		fillMode: Image.PreserveAspectFit
@@ -70,11 +70,11 @@ MouseArea {
 		anchors {
 			left: parent.left
 			leftMargin: Theme.geometry_solarHistoryErrorView_iconBackground_width
-					+ Theme.geometry_solarHistoryErrorView_textBackground_horizontalMargin
+					+ Theme.geometry_space_16
 			right: parent.right
-			rightMargin: Theme.geometry_solarHistoryErrorView_textBackground_horizontalMargin
+			rightMargin: Theme.geometry_space_16
 		}
-		bottomPadding: root.expanded ? Theme.geometry_solarHistoryErrorView_textBackground_bottomMargin : 0
+		bottomPadding: root.expanded ? Theme.geometry_space_10 : 0
 		height: root.expanded ? implicitHeight : Theme.geometry_solarHistoryErrorView_itemHeight
 
 		Behavior on height {
@@ -107,7 +107,7 @@ MouseArea {
 
 				width: parent.width
 				height: Theme.geometry_solarHistoryErrorView_itemHeight
-				spacing: Theme.geometry_solarHistoryErrorView_textBackground_horizontalMargin
+				spacing: Theme.geometry_space_16
 
 				Label {
 					id: titleLabel

@@ -23,7 +23,7 @@ Item {
 	property int valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 	property int borderWidth
 	property color borderColor: Theme.color_overviewPage_widget_border
-	property int radius: Theme.geometry_overviewPage_widget_radius
+	property int radius: Theme.geometry_radius_8
 
 	// The status that determines the foreground/background colours. The calculation uses 'value'
 	// rather than 'animatedValue' to reduce possible colour changes.

@@ -195,9 +195,9 @@ Item {
 		Row {
 			visible: batteryOuterGauge.visible
 			anchors.horizontalCenter: parent.horizontalCenter
-			bottomPadding: Theme.geometry_boatPage_batteryCenterGauge_title_bottomPadding
+			bottomPadding: Theme.geometry_space_12
 
-			spacing: Theme.geometry_boatPage_batteryCenterGauge_title_spacing
+			spacing: Theme.geometry_space_4
 
 			CP.ColorImage {
 				anchors.verticalCenter: batteryLabel.verticalCenter
@@ -237,9 +237,9 @@ Item {
 		Row {
 			visible: batteryOuterGauge.visible
 			anchors.horizontalCenter: parent.horizontalCenter
-			topPadding: Theme.geometry_boatPage_batteryCenterGauge_detailsRow_topPadding
+			topPadding: Theme.geometry_overviewPage_widget_content_horizontalMargin
 
-			spacing: Theme.geometry_boatPage_batteryCenterGauge_detailsRow_spacing
+			spacing: Theme.geometry_space_8
 
 			QuantityLabel {
 				value: Global.system.battery.voltage

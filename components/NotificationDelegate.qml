@@ -25,7 +25,7 @@ ListItem {
 	readonly property notificationData entry: NotificationModel.get(modelId)
 
 	background: ListItemBackground {
-		border.width: root.acknowledged ? 0 : Theme.geometry_notificationsPage_delegate_unacknowledged_border_width
+		border.width: root.acknowledged ? 0 : Theme.geometry_border_2
 		border.color: Theme.color_notificationsPage_delegate_unacknowledged_border
 		color: root.acknowledged ? Theme.color_listItem_background : Theme.color_notificationsPage_delegate_unacknowledged_background
 	}
@@ -92,7 +92,7 @@ ListItem {
 			id: secondaryLabel
 			anchors {
 				top: descriptionLabel.visible ? descriptionLabel.bottom : parent.top
-				topMargin: descriptionLabel.visible ? Theme.geometry_listItem_content_verticalSpacing : 0
+				topMargin: descriptionLabel.visible ? Theme.geometry_space_4 : 0
 				left: icon.right
 				leftMargin: Theme.geometry_listItem_content_horizontalMargin
 				right: descriptionLabel.visible ? parent.right : timestampLabel.left

@@ -13,7 +13,7 @@ Button {
 	property bool separatorVisible: true
 
 	defaultBackgroundWidth: Math.ceil(labelTextMetrics.tightBoundingRect.x + labelTextMetrics.tightBoundingRect.width)
-			+ (2 * Theme.geometry_miniSlider_text_padding)
+			+ (2 * Theme.geometry_space_12)
 	text: root.checked ? CommonWords.on : CommonWords.off
 	color: enabled
 		? Theme.color_button_down_text
@@ -29,7 +29,7 @@ Button {
 		anchors.right: parent.right
 		anchors.verticalCenter: parent.verticalCenter
 		width: Theme.geometry_miniSlider_separator_width
-		height: parent.defaultBackgroundHeight - (Theme.geometry_miniSlider_decorator_vertical_padding * 2)
+		height: parent.defaultBackgroundHeight - (Theme.geometry_space_6 * 2)
 		radius: Theme.geometry_miniSlider_separator_width / 2
 		color: root.separatorColor
 		visible: root.separatorVisible

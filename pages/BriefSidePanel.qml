@@ -42,7 +42,7 @@ ColumnLayout {
 		visible: loadersActive
 		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 		quantityLabel.dataObject: generatorInput
-		quantityLabel.leftPadding: generatorDirectionIcon.visible ? (generatorDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
+		quantityLabel.leftPadding: generatorDirectionIcon.visible ? (generatorDirectionIcon.width + Theme.geometry_space_2) : 0
 		stretchGraph: false
 		graph: GeneratorIconLabel {
 			height: generatorWidget.quantityLabel.height
@@ -78,7 +78,7 @@ ColumnLayout {
 		icon.source: loadersActive ? Global.acInputs.sourceIcon(nonGeneratorInput.source) : ""
 		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 		quantityLabel.dataObject: nonGeneratorInput
-		quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
+		quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_space_2) : 0
 		loadersActive: nonGeneratorInput && nonGeneratorInput.operational
 		visible: loadersActive
 

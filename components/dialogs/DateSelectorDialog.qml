@@ -24,7 +24,7 @@ ModalDialog {
 
 			anchors {
 				centerIn: parent
-				verticalCenterOffset: -Theme.geometry_modalDialog_content_spacing
+				verticalCenterOffset: -Theme.geometry_space_16
 			}
 			width: parent.width - (2 * Theme.geometry_modalDialog_content_horizontalMargin)
 			focus: true

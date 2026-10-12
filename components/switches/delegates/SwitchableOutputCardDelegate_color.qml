@@ -42,7 +42,7 @@ FocusScope {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_switches_header_topMargin
+			topMargin: Theme.geometry_space_8
 			left: parent.left
 			leftMargin: Theme.geometry_controlCard_button_margins
 			right: parent.right
@@ -134,7 +134,7 @@ FocusScope {
 			topInset: Theme.geometry_button_touch_verticalMargin
 			bottomInset: Theme.geometry_button_touch_verticalMargin
 			leftInset: Theme.geometry_controlCard_button_margins
-			rightInset: Theme.geometry_iochannel_spacing / 2
+			rightInset: Theme.geometry_space_16 / 2
 			topPadding: topInset
 			bottomPadding: bottomInset
 			rightPadding: rightInset
@@ -172,7 +172,7 @@ FocusScope {
 					   1.0, 1.0)
 
 		topInset: Theme.geometry_button_touch_verticalMargin
-		leftInset: Theme.geometry_iochannel_spacing / 2
+		leftInset: Theme.geometry_space_16 / 2
 		rightInset: Theme.geometry_controlCard_button_margins
 		bottomInset: Theme.geometry_button_touch_verticalMargin
 

@@ -34,8 +34,8 @@ FocusScope {
 
 		anchors.centerIn: parent
 		columns: Theme.screenSize === Theme.Portrait ? 1 : 3
-		columnSpacing: Theme.geometry_modalDialog_content_spacing
-		rowSpacing: Theme.geometry_modalDialog_content_spacing
+		columnSpacing: Theme.geometry_space_16
+		rowSpacing: Theme.geometry_space_16
 
 		SpinBox {
 			id: hrSpinbox

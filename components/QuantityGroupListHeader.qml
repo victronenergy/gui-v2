@@ -28,7 +28,7 @@ Row {
 	height: Theme.geometry_quantityTable_row_height
 	leftPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin
 	rightPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin
-	spacing: Theme.geometry_quantityGroupRow_spacing
+	spacing: Theme.geometry_space_12
 
 	Label {
 		id: firstTitleLabel

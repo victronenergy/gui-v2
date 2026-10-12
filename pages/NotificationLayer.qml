@@ -72,8 +72,8 @@ Item {
 			rightMargin: Theme.geometry_page_content_horizontalMargin
 		}
 		// Use y binding instead of anchors so that it adjusts for portrait/landscape changes.
-		y: Theme.screenSize === Theme.Portrait ? Theme.geometry_toastNotification_verticalMargin
-				: parent.height - height - Theme.geometry_toastNotification_verticalMargin
+		y: Theme.screenSize === Theme.Portrait ? Theme.geometry_space_8
+				: parent.height - height - Theme.geometry_space_8
 		height: 2*Theme.geometry_toastNotification_highlightWidth
 		spacing: Theme.geometry_page_content_verticalMargin
 		orientation: Qt.Horizontal

@@ -33,8 +33,8 @@ Item {
 			: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_CancelOnly ? Qt.AlignRight
 			: Qt.AlignLeft
 	readonly property real _labelOffset: _closeButtonAlignment === 0 ? 0
-			: _closeButtonAlignment === Qt.AlignRight ? (roundCloseButton.width + Theme.geometry_modalDialog_content_spacing)/2
-			: -(roundCloseButton.width + Theme.geometry_modalDialog_content_spacing)/2
+			: _closeButtonAlignment === Qt.AlignRight ? (roundCloseButton.width + Theme.geometry_space_16)/2
+			: -(roundCloseButton.width + Theme.geometry_space_16)/2
 	readonly property bool _showCloseButton: root.dialogDoneOptions !== VenusOS.ModalDialog_DoneOptions_OkOnly
 
 	signal closeButtonClicked
@@ -57,9 +57,9 @@ Item {
 		anchors {
 			verticalCenter: root._showCloseButton ? roundCloseButton.verticalCenter: parent.verticalCenter
 			left: root._closeButtonAlignment === Qt.AlignLeft ? roundCloseButton.right : parent.left
-			leftMargin: root._closeButtonAlignment === Qt.AlignLeft ? Theme.geometry_modalDialog_content_spacing : Theme.geometry_page_content_horizontalMargin
+			leftMargin: root._closeButtonAlignment === Qt.AlignLeft ? Theme.geometry_space_16 : Theme.geometry_page_content_horizontalMargin
 			right: root._closeButtonAlignment === Qt.AlignRight ? roundCloseButton.left : parent.right
-			rightMargin: root._closeButtonAlignment === Qt.AlignRight ? Theme.geometry_modalDialog_content_spacing : Theme.geometry_page_content_horizontalMargin
+			rightMargin: root._closeButtonAlignment === Qt.AlignRight ? Theme.geometry_space_16 : Theme.geometry_page_content_horizontalMargin
 		}
 		spacing: Theme.geometry_modalDialog_header_spacing
 

@@ -72,9 +72,9 @@ FocusScope {
 						   : ((mouseArea.pressed || model.index === root.currentIndex)
 							  ? modelData.selectedBackgroundColor ?? Theme.color_ok
 							  : Theme.color_darkOk)
-					border.width: Theme.geometry_button_border_width
+					border.width: Theme.geometry_border_2
 					border.color: (!root.showBorderWhenDisabled && mouseArea.enabled === false && model.index !== root.currentIndex) ? buttonDelegate.color : Theme.color_ok
-					radius: Theme.geometry_button_radius
+					radius: Theme.geometry_radius_8
 					roundedSide: model.index === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
 							: model.index === (buttonRepeater.count-1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right
 							: VenusOS.AsymmetricRoundedRectangle_RoundedSide_NoneHorizontal
@@ -84,7 +84,7 @@ FocusScope {
 					font.pixelSize: root.fontPixelSize
 					horizontalAlignment: Text.AlignHCenter
 					verticalAlignment: Text.AlignVCenter
-					x: Theme.geometry_tabBar_horizontalMargin
+					x: Theme.geometry_space_6
 					width: parent.width - 2*x
 					elide: Text.ElideRight
 					text: modelData.value

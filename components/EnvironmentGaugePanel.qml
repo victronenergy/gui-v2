@@ -27,8 +27,8 @@ AbstractListItem {
 	rightInset: Theme.geometry_levelsPage_panel_horizontalInset
 	leftPadding: leftInset + Theme.geometry_levelsGauge_horizontalPadding
 	rightPadding: rightInset + Theme.geometry_levelsGauge_horizontalPadding
-	topPadding: Theme.geometry_levelsPage_panel_header_height + Theme.geometry_environmentGaugePanel_verticalPadding
-	bottomPadding: Theme.geometry_environmentGaugePanel_verticalPadding
+	topPadding: Theme.geometry_levelsPage_panel_header_height + Theme.geometry_solarDetailBox_margins
+	bottomPadding: Theme.geometry_solarDetailBox_margins
 
 	background: Item {
 		implicitWidth: Theme.geometry_levelsPage_panel_background_width
@@ -86,7 +86,7 @@ AbstractListItem {
 
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry_icon_size_medium + Theme.geometry_levelsGauge_horizontalSpacing
+				leftMargin: Theme.geometry_icon_size_medium + Theme.geometry_space_12
 				right: parent.right
 			}
 			font.pixelSize: Theme.font_levelsGauge_title
@@ -110,7 +110,7 @@ AbstractListItem {
 					: root.hasTwoGauges ? gaugeWidth * 2
 					: gaugeWidth
 			flow: Theme.screenSize === Theme.Portrait ? Flow.TopToBottom : Flow.LeftToRight
-			spacing: Theme.screenSize === Theme.Portrait ? Theme.geometry_levelsGauge_verticalPadding : 0
+			spacing: Theme.screenSize === Theme.Portrait ? Theme.geometry_space_8 : 0
 
 			LevelsGaugeOutline {
 				width: gaugeFlow.gaugeWidth

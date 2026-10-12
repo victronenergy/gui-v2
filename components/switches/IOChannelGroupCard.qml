@@ -16,7 +16,7 @@ ControlCard {
 					? Theme.geometry_screen_width - (2 * Theme.geometry_page_content_horizontalMargin)
 					: Math.max(channelGrid.cellWidth * channelGrid.landscapeColumnCount, Theme.geometry_controlCard_minimumWidth)
 	implicitHeight: Theme.screenSize === Theme.Portrait
-					? channelGrid.y + (channelGrid.cellHeight * channelGrid.count) + Theme.geometry_controlCard_contentMargins
+					? channelGrid.y + (channelGrid.cellHeight * channelGrid.count) + Theme.geometry_space_16
 					: Theme.geometry_controlCard_height
 	icon.source: "qrc:/images/icon_switch_24.svg"
 	title.text: root.group?.name ?? ""

@@ -14,18 +14,18 @@ Button {
 	defaultBackgroundWidth: Theme.geometry_iochannel_control_height
 	defaultBackgroundHeight: Theme.geometry_iochannel_control_height
 	backgroundColor: "transparent"
-	radius: Theme.geometry_colorWheelDialog_preset_button_radius
+	radius: Theme.geometry_radius_6
 	flat: false
 
 	Rectangle {
 		anchors {
 			fill: parent
-			leftMargin: (2 * Theme.geometry_button_border_width) + root.leftInset
-			rightMargin: (2 * Theme.geometry_button_border_width) + root.rightInset
-			topMargin: (2 * Theme.geometry_button_border_width) + root.topInset
-			bottomMargin: (2 * Theme.geometry_button_border_width) + root.bottomInset
+			leftMargin: (2 * Theme.geometry_border_2) + root.leftInset
+			rightMargin: (2 * Theme.geometry_border_2) + root.rightInset
+			topMargin: (2 * Theme.geometry_border_2) + root.topInset
+			bottomMargin: (2 * Theme.geometry_border_2) + root.bottomInset
 		}
-		radius: root.radius - (2 * Theme.geometry_button_border_width)
+		radius: root.radius - (2 * Theme.geometry_border_2)
 		visible: root.centerColor.valid
 		color: root.centerColor
 	}

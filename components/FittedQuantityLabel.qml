@@ -12,7 +12,7 @@ QuantityLabel {
 	property int minimumPixelSize: -1
 	property int maximumPixelSize: -1
 
-	readonly property real _maximumWidth: width - Theme.geometry_quantityLabel_spacing
+	readonly property real _maximumWidth: width - Theme.geometry_space_2
 	readonly property string _combinedText: valueText + unitText
 
 	on_MaximumWidthChanged: Qt.callLater(_calculateFontFitting)

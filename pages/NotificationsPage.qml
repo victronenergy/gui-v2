@@ -68,7 +68,7 @@ SwipeViewPage {
 			PressArea {
 				anchors.fill: parent
 				enabled: !del.acknowledged
-				radius: Theme.geometry_listItem_radius
+				radius: Theme.geometry_radius_8
 				onReleased: NotificationModel.acknowledge(del.modelId)
 			}
 		}

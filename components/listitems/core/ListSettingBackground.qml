@@ -14,14 +14,14 @@ Rectangle {
 	implicitWidth: Theme.geometry_listItem_width
 	implicitHeight: Theme.geometry_listItem_height
 	color: Theme.color_listItem_background
-	radius: Theme.geometry_listItem_radius
+	radius: Theme.geometry_radius_8
 
 	Rectangle {
 		visible: color.a > 0.0
 		width: Theme.geometry_listItem_accessIndicator_width
 		height: parent.height
-		topLeftRadius: Theme.geometry_listItem_radius
-		bottomLeftRadius: Theme.geometry_listItem_radius
+		topLeftRadius: Theme.geometry_radius_8
+		bottomLeftRadius: Theme.geometry_radius_8
 		color: root.indicatorColor
 	}
 }
