@@ -1017,7 +1017,7 @@ ToastModel::ToastModel(QObject *parent)
 {
 }
 
-quint32 ToastModel::addNotification(quint32 notificationModelId, int type, const QString &text, int autoCloseInterval)
+quint32 ToastModel::addNotification(quint32 notificationModelId, int type, const QString &text, int autoCloseInterval, Qt::TextFormat textFormat)
 {
 	toastData toast;
 	toast.modelId = ++m_modelId;
@@ -1025,6 +1025,7 @@ quint32 ToastModel::addNotification(quint32 notificationModelId, int type, const
 	toast.type = type;
 	toast.description = text;
 	toast.autoCloseInterval = autoCloseInterval;
+	toast.textFormat = textFormat;
 
 	// insert in appropriate sort order, highest prio first.
 	for (qsizetype i = 0; i < m_data.size(); ++i) {
@@ -1074,9 +1075,9 @@ bool ToastModel::removeNotification(quint32 notificationModelId)
 	return false;
 }
 
-quint32 ToastModel::add(int type, const QString &text, int autoCloseInterval)
+quint32 ToastModel::add(int type, const QString &text, int autoCloseInterval, Qt::TextFormat textFormat)
 {
-	return addNotification(0, type, text, autoCloseInterval);
+	return addNotification(0, type, text, autoCloseInterval, textFormat);
 }
 
 bool ToastModel::remove(quint32 modelId)
@@ -1171,6 +1172,8 @@ QVariant ToastModel::data(const QModelIndex& index, int role) const
 			return m_data[row].description;
 		case static_cast<int>(ToastRoles::AutoCloseInterval):
 			return m_data[row].autoCloseInterval;
+		case static_cast<int>(ToastRoles::TextFormat):
+			return static_cast<int>(m_data[row].textFormat);
 		default: break;
 	}
 	return QVariant();
@@ -1189,6 +1192,7 @@ QHash<int, QByteArray> ToastModel::roleNames() const
 		{ static_cast<int>(ToastRoles::Type), "type" },
 		{ static_cast<int>(ToastRoles::Description), "description" },
 		{ static_cast<int>(ToastRoles::AutoCloseInterval), "autoCloseInterval" },
+		{ static_cast<int>(ToastRoles::TextFormat), "textFormat" },
 	};
 	return roles;
 }

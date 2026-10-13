@@ -64,8 +64,8 @@ QtObject {
 
 	signal aboutToFocusTextField(textField : Item, viewToScroll : Flickable)
 
-	function showToastNotification(type, text, autoCloseInterval = 0) {
-		return ToastModel.add(type, text, autoCloseInterval)
+	function showToastNotification(type, text, autoCloseInterval = 0, textFormat = Text.AutoText) {
+		return ToastModel.add(type, text, autoCloseInterval, textFormat)
 	}
 
 	function reset() {

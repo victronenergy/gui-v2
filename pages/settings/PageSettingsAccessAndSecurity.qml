@@ -280,7 +280,7 @@ Page {
 						var json = JSON.stringify(object)
 						securityApi.setValue(json)
 						//% "Root password changed to %1"
-						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_root_password_changed_to").arg(secondaryText), 5000)
+						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_root_password_changed_to").arg(secondaryText), 5000, Qt.PlainText)
 					}
 				}
 			}

@@ -100,6 +100,7 @@ Item {
 			required property int type
 			required property string description
 			required property int autoCloseInterval
+			required property int textFormat
 
 			width: view.width
 			height: view.height
@@ -136,6 +137,7 @@ Item {
 				notificationModelId: toastContainer.notificationModelId
 				toastModelId: toastContainer.modelId
 				text: toastContainer.description
+				textFormat: toastContainer.textFormat
 				type: toastContainer.type
 
 				onDismissed: {

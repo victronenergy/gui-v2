@@ -234,6 +234,7 @@ class toastData
 	Q_PROPERTY(int type MEMBER type FINAL)
 	Q_PROPERTY(QString description MEMBER description FINAL)
 	Q_PROPERTY(int autoCloseInterval MEMBER autoCloseInterval FINAL)
+	Q_PROPERTY(Qt::TextFormat textFormat MEMBER textFormat FINAL)
 
 public:
 	quint32 modelId = 0;
@@ -241,6 +242,7 @@ public:
 	int type = -1;
 	QString description;
 	int autoCloseInterval = -1;
+	Qt::TextFormat textFormat = Qt::AutoText;
 };
 
 // The model of toast entries, and client-facing API.
@@ -259,7 +261,8 @@ public:
 		NotificationModelId,
 		Type,
 		Description,
-		AutoCloseInterval
+		AutoCloseInterval,
+		TextFormat
 	};
 	Q_ENUM(ToastRoles);
 
@@ -269,11 +272,11 @@ public:
 	QVariant data(const QModelIndex& index, int role) const override;
 	int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
-	Q_INVOKABLE quint32 addNotification(quint32 notificationModelId, int type, const QString &text, int autoCloseInterval = -1);
+	Q_INVOKABLE quint32 addNotification(quint32 notificationModelId, int type, const QString &text, int autoCloseInterval = -1, Qt::TextFormat textFormat = Qt::AutoText);
 	Q_INVOKABLE void updateNotification(quint32 notificationModelId, const QString &text);
 	Q_INVOKABLE bool removeNotification(quint32 notificationModelId);
 
-	Q_INVOKABLE quint32 add(int type, const QString &text, int autoCloseInterval = -1);
+	Q_INVOKABLE quint32 add(int type, const QString &text, int autoCloseInterval = -1, Qt::TextFormat textFormat = Qt::AutoText);
 	Q_INVOKABLE bool remove(quint32 modelId);
 	Q_INVOKABLE bool removeFirst();
 	Q_INVOKABLE bool removeRow(int row);
