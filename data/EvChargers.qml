@@ -60,7 +60,7 @@ QtObject {
 			//% "Waiting for sun"
 			return qsTrId("evchargers_status_waiting_for_sun")
 		case VenusOS.Evcs_Status_WaitingForRFID:
-			//% "Waiting for RFID"
+			//% "Waiting for tag"
 			return qsTrId("evchargers_status_waiting_for_rfid")
 		case VenusOS.Evcs_Status_WaitingForStart:
 			//% "Waiting for start"
