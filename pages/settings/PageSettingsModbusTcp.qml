@@ -29,18 +29,36 @@ Page {
 				//% "Enable Modbus TCP server"
 				text: qsTrId("settings_modbus_enable_modbus_tcp")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+				updateDataOnClick: false
+				onClicked: {
+					if (checked) {
+						dataItem.setValue(0)
+					} else {
+						// Always start the server in read-only mode, so that write access must be
+						// explicitly re-enabled each time.
+						accessPermissions.dataItem.setValue(0)
+						dataItem.setValue(1)
+					}
+				}
 			}
 
 			ListRadioButtonGroup {
+				id: accessPermissions
+
 				//% "Access permissions"
 				text: qsTrId("settings_modbus_access_rights")
 				preferredVisible: enableModbusTcp.checked
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/ModbusServer/ReadWrite"
 				optionModel: [
-					//% "Write allowed"
-					{ display: qsTrId("settings_modbus_access_readwrite"), value: 1 },
 					//% "Read only"
 					{ display: qsTrId("settings_modbus_access_readonly"), value: 0 },
+					{
+						//% "Write allowed"
+						display: qsTrId("settings_modbus_access_readwrite"),
+						//% "Only allow write access when the GX device is on a trusted network."
+						caption: qsTrId("settings_modbus_write_access_warning"),
+						value: 1
+					},
 				]
 			}
 
