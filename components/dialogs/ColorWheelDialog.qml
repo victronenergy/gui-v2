@@ -58,7 +58,7 @@ ModalDialog {
 	dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_NoOptions
 
 	header: Item {
-		implicitHeight: headerLabel.height + secondaryLabel.height + (2 * Theme.geometry_modalDialog_header_verticalPadding)
+		implicitHeight: headerLabel.height + secondaryLabel.height + (2 * Theme.geometry_size_12)
 
 		Label {
 			id: headerLabel
@@ -88,18 +88,18 @@ ModalDialog {
 		CloseButton {
 			anchors {
 				top: parent.top
-				topMargin: Theme.geometry_closeButton_rightMargin
+				topMargin: Theme.geometry_size_8
 				right: parent.right
-				rightMargin: Theme.geometry_closeButton_rightMargin
+				rightMargin: Theme.geometry_size_8
 			}
 			onClicked: root.close()
 		}
 	}
 
-	topPadding: topInset + Theme.geometry_colorWheelDialog_topPadding
+	topPadding: topInset + Theme.geometry_size_0
 	bottomPadding: bottomInset + Theme.geometry_colorWheelDialog_bottomPadding
 	leftPadding: leftInset + Theme.geometry_colorWheelDialog_leftPadding
-	rightPadding: leftInset + Theme.geometry_colorWheelDialog_rightPadding
+	rightPadding: leftInset + Theme.geometry_shared_24_24_12
 
 	contentItem: ModalDialog.FocusableContentItem {
 		implicitWidth: contentLayout.implicitWidth
@@ -162,7 +162,7 @@ ModalDialog {
 					visible: enabled || Theme.screenSize !== Theme.Portrait // in portrait, collapse space when not enabled
 
 					Layout.alignment: Qt.AlignHCenter
-					Layout.bottomMargin: Theme.geometry_colorWheelDialog_mode_button_verticalMargin
+					Layout.bottomMargin: Theme.geometry_spacing_18
 
 					onRgbClicked: {
 						if (root.switchableOutput.validTypes & (1 << VenusOS.SwitchableOutput_Type_ColorDimmerRgbW)) {

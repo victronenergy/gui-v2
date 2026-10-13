@@ -16,14 +16,30 @@ The value is set automatically in `Main.qml` based on window dimensions (width <
 
 ## Geometry system
 
-Each screen size has its own geometry JSON file:
+Each screen file defines the same token names. Theme exposes the value for the current screen. Equal values are constants.
+
 ```
 themes/geometry/FiveInch.json   — 800×480 landscape
 themes/geometry/SevenInch.json  — 1024×600 landscape
-themes/geometry/Portrait.json   — variable-width portrait
+themes/geometry/Portrait.json   — portrait (design size 383×793; live width and height vary)
 ```
 
-The `Theme` singleton dynamically provides the correct `Theme.geometry_*` values for the current screen size. When `Theme.screenSize` changes, all geometry-dependent properties update automatically.
+Shared pixel steps are `Theme.geometry_size_N`, for example `Theme.geometry_size_8`. A step can still differ by screen, for example `Theme.geometry_shared_16_16_8` (16 / 16 / 8). Role tokens remain when the design is specific, for example `Theme.geometry_page_content_horizontalMargin` (24 / 40 / 16). Do not pick a pixel size with a `Theme.screenSize` ternary. A screen-size check is for structure (which component, orientation, column count), not for choosing a length.
+
+Large layout roles share a box:
+
+- `Theme.geometry_size_hero_large` — brief center gauge and boat center gauge (320 / 400 / 240)
+- `Theme.geometry_size_hero_medium` — brief side panel and overview center column (240 / 304 / 304)
+- `Theme.geometry_size_column` — overview side columns and the uncrowded levels panel (176 / 224 / 224)
+
+Sizes that are just the screen minus chrome are derived when read, so they follow the live portrait width and height:
+
+- `Theme.geometry_page_content_width` — screen width minus the page's horizontal margins
+- `Theme.geometry_page_content_height` — screen height minus the status bar and navigation bar
+- `Theme.geometry_controlCard_height` — screen height minus the status bar and the cards bottom margin
+- `Theme.geometry_controlCard_maximumWidth` — half the content row after `geometry_controlCard_gap` in landscape; the content width in portrait
+
+Do not store those in JSON. When `Theme.screenSize` or the live screen size changes, geometry-dependent properties update automatically.
 
 ## Layout patterns
 
@@ -57,7 +73,7 @@ BaseListView {
 
 Item {
     width: Theme.screenSize === Theme.Portrait
-        ? Theme.geometry_screen_width - (2 * margin)
+        ? Theme.geometry_page_content_width
         : fixedLandscapeWidth
 }
 ```
@@ -86,6 +102,7 @@ In portrait mode:
 
 - Always test both orientations — check `Theme.screenSize === Theme.Portrait` where layouts need to differ
 - Use `Theme.geometry_*` values instead of hardcoded dimensions — they adapt to screen size automatically
+- Do not choose a pixel size with `Theme.screenSize`. If 5-inch and 7-inch differ, add or reuse a role token
 - For pages with fundamentally different layouts, create `*_Landscape.qml` and `*_Portrait.qml` variants loaded by a Loader
 - List views that are horizontal in landscape should become vertical in portrait (use conditional `orientation`)
 - Widget sizes must account for the available height being much larger (and width smaller) in portrait

@@ -14,6 +14,6 @@ EditFrame {
 
 	width: handle.width
 	height: handle.height
-	y: -Theme.geometry_switch_indicator_shadowOffset
+	y: -Theme.geometry_size_2
 	rotation: 90
 }

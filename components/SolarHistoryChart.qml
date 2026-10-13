@@ -111,9 +111,9 @@ FocusScope {
 			leftMargin: Theme.geometry_solarChart_horizontalMargin
 			right: parent.right
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry_solarChart_bottomMargin
+			bottomMargin: Theme.geometry_size_28
 		}
-		spacing: (height - (root._tickCount * Theme.geometry_solarChart_tickLine_height)) / (root._tickCount - 1)
+		spacing: (height - (root._tickCount * Theme.geometry_size_1)) / (root._tickCount - 1)
 
 		onHeightChanged: Qt.callLater(root._fitChartToMaxYield)
 
@@ -124,7 +124,7 @@ FocusScope {
 
 			delegate: Item {
 				width: parent.width
-				height: Theme.geometry_solarChart_tickLine_height
+				height: Theme.geometry_size_1
 
 				Rectangle {
 					id: markerLine
@@ -134,7 +134,7 @@ FocusScope {
 						rightMargin: Theme.geometry_solarChart_horizontalMargin
 						right: markerLabel.left
 					}
-					height: Theme.geometry_solarChart_tickLine_height
+					height: Theme.geometry_size_1
 					color: Theme.color_listItem_separator
 				}
 
@@ -167,11 +167,11 @@ FocusScope {
 			rightMargin: Theme.geometry_solarChart_tickLabel_width + (2 * Theme.geometry_solarChart_horizontalMargin)
 			top: kwhLabel.bottom
 			bottom: parent.bottom
-			bottomMargin: Theme.geometry_solarChart_bottomMargin
+			bottomMargin: Theme.geometry_size_28
 		}
-		spacing: barRepeater.count >= 30 ? Theme.geometry_solarChart_bar_spacing_thirtyDays
-			   : barRepeater.count >= 14 ? Theme.geometry_solarChart_bar_spacing_fourteenDays
-			   : Theme.geometry_solarChart_bar_spacing_sevenDays
+		spacing: barRepeater.count >= 30 ? Theme.geometry_size_4
+			   : barRepeater.count >= 14 ? Theme.geometry_size_6
+			   : Theme.geometry_size_8
 
 		Repeater {
 			id: barRepeater
@@ -216,17 +216,17 @@ FocusScope {
 
 					anchors {
 						bottom: parent.bottom
-						bottomMargin: Theme.geometry_solarChart_tickLine_height
+						bottomMargin: Theme.geometry_size_1
 					}
 					width: parent.width
-					radius: Theme.geometry_solarChart_bar_radius
+					radius: Theme.geometry_size_8
 
 					// This base rectangle ensures the bar is not transparent when pressed
 					color: barMouseArea.containsPress ? Theme.color_background_primary : "transparent"
 
 					Rectangle {
 						anchors.fill: parent
-						radius: Theme.geometry_solarChart_bar_radius
+						radius: Theme.geometry_size_8
 						color: barMouseArea.containsPress ? Theme.color_lightBlue : Theme.color_ok
 					}
 				}

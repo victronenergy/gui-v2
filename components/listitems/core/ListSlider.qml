@@ -63,8 +63,8 @@ ListSetting {
 			Label {
 				// Since the root padding is 0, need to add some padding here.
 				leftPadding: root.leftInset + root.horizontalContentPadding
-				topPadding: Theme.geometry_listItem_content_verticalMargin
-				bottomPadding: Theme.screenSize === Theme.Portrait ? 0 : Theme.geometry_listItem_content_verticalMargin
+				topPadding: Theme.geometry_listItem_content_spacing
+				bottomPadding: Theme.screenSize === Theme.Portrait ? 0 : Theme.geometry_listItem_content_spacing
 
 				text: root.text
 				textFormat: root.textFormat
@@ -106,7 +106,7 @@ ListSetting {
 				}
 
 				// Expand the vertical touch area, to make it easier to click.
-				Layout.preferredHeight: implicitHeight + (2 * Theme.geometry_listItem_content_verticalMargin)
+				Layout.preferredHeight: implicitHeight + (2 * Theme.geometry_listItem_content_spacing)
 				Layout.fillWidth: true
 				Layout.maximumWidth: Theme.screenSize === Theme.Portrait ? -1 : root.availableWidth * 2/3
 
@@ -115,15 +115,15 @@ ListSetting {
 
 					anchors.verticalCenter: parent.verticalCenter
 					// Use insets to vertically expand the touch area, to make it easier to click.
-					defaultBackgroundWidth: Theme.geometry_slider_button_size
-					defaultBackgroundHeight: Theme.geometry_slider_button_size
+					defaultBackgroundWidth: Theme.geometry_size_32
+					defaultBackgroundHeight: Theme.geometry_size_32
 					topInset: (sliderItem.height - defaultBackgroundHeight) / 2
 					bottomInset: (sliderItem.height - defaultBackgroundHeight) / 2
 					leftInset: root.horizontalContentPadding
 							// In portrait, this stretches to the left edge, so add the page edge inset.
 							+ (Theme.screenSize === Theme.Portrait ? root.leftInset : 0)
 					leftPadding: leftInset
-					rightInset: Theme.geometry_slider_spacing
+					rightInset: Theme.geometry_size_12
 					rightPadding: rightInset
 
 					icon.source: "qrc:/images/icon_minus.svg"
@@ -145,11 +145,11 @@ ListSetting {
 					anchors.verticalCenter: parent.verticalCenter
 					// Use insets to expand the touch area, to make it easier to click.
 					anchors.right: parent.right
-					defaultBackgroundWidth: Theme.geometry_slider_button_size
-					defaultBackgroundHeight: Theme.geometry_slider_button_size
+					defaultBackgroundWidth: Theme.geometry_size_32
+					defaultBackgroundHeight: Theme.geometry_size_32
 					topInset: (sliderItem.height - defaultBackgroundHeight) / 2
 					bottomInset: (sliderItem.height - defaultBackgroundHeight) / 2
-					leftInset: Theme.geometry_slider_spacing
+					leftInset: Theme.geometry_size_12
 					leftPadding: leftInset
 					rightInset: root.horizontalContentPadding + root.rightInset
 					rightPadding: rightInset
@@ -174,7 +174,7 @@ ListSetting {
 
 				Layout.columnSpan: 2
 				Layout.maximumWidth: root.availableWidth
-				Layout.bottomMargin: Theme.geometry_listItem_content_verticalMargin
+				Layout.bottomMargin: Theme.geometry_listItem_content_spacing
 			}
 		}
 	}

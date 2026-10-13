@@ -9,16 +9,16 @@ Rectangle {
 	property alias highlightVisible: highlight.visible
 	property alias handle: highlight.handle
 
-	width: Theme.geometry_slider_indicator_width
-	height: Theme.geometry_slider_indicator_height
+	width: Theme.geometry_size_4
+	height: Theme.geometry_size_28
 	color: Theme.color_white
-	radius: Theme.geometry_Slider_indicator_radius
+	radius: Theme.geometry_size_2
 
 	// Inverted width/height for how highlight expects layout
 	SliderHandleHighlight {
 		id: highlight
 		anchors.centerIn: parent
-		width: Theme.geometry_slider_indicator_height
-		height: Theme.geometry_slider_indicator_width
+		width: Theme.geometry_size_28
+		height: Theme.geometry_size_4
 	}
 }

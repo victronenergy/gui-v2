@@ -38,7 +38,7 @@ FocusScope {
 		width: root.defaultBackgroundWidth
 		height: root.defaultBackgroundHeight
 		color: enabled ? Theme.color_ok : Theme.color_font_disabled
-		radius: Theme.geometry_button_radius
+		radius: Theme.geometry_size_8
 	}
 
 	Button {
@@ -46,10 +46,10 @@ FocusScope {
 
 		anchors.left: parent.left
 		defaultBackgroundWidth: root.defaultBackgroundWidth / 2
-		defaultBackgroundHeight: root.defaultBackgroundHeight - (2 * Theme.geometry_button_border_width)
-		leftInset: root.leftInset + Theme.geometry_button_border_width
-		topInset: root.topInset + Theme.geometry_button_border_width
-		bottomInset: root.bottomInset + Theme.geometry_button_border_width
+		defaultBackgroundHeight: root.defaultBackgroundHeight - (2 * Theme.geometry_size_2)
+		leftInset: root.leftInset + Theme.geometry_size_2
+		topInset: root.topInset + Theme.geometry_size_2
+		bottomInset: root.bottomInset + Theme.geometry_size_2
 		topPadding: topInset
 		bottomPadding: bottomInset
 		leftPadding: leftInset
@@ -58,8 +58,8 @@ FocusScope {
 		down: checked
 		borderWidth: 0
 		radius: 0 // ensure press effect does not have radius
-		topLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
-		bottomLeftRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
+		topLeftRadius: Theme.geometry_size_8 - Theme.geometry_size_2
+		bottomLeftRadius: Theme.geometry_size_8 - Theme.geometry_size_2
 		flat: false
 		text: root.offButtonText
 		focus: checked
@@ -83,10 +83,10 @@ FocusScope {
 
 		anchors.right: parent.right
 		defaultBackgroundWidth: root.defaultBackgroundWidth / 2
-		defaultBackgroundHeight: root.defaultBackgroundHeight - (2 * Theme.geometry_button_border_width)
-		rightInset: root.rightInset + Theme.geometry_button_border_width
-		topInset: root.topInset + Theme.geometry_button_border_width
-		bottomInset: root.bottomInset + Theme.geometry_button_border_width
+		defaultBackgroundHeight: root.defaultBackgroundHeight - (2 * Theme.geometry_size_2)
+		rightInset: root.rightInset + Theme.geometry_size_2
+		topInset: root.topInset + Theme.geometry_size_2
+		bottomInset: root.bottomInset + Theme.geometry_size_2
 		topPadding: topInset
 		bottomPadding: bottomInset
 		rightPadding: rightInset
@@ -96,8 +96,8 @@ FocusScope {
 		down: checked
 		radius: 0 // ensure press effect does not have radius
 		borderWidth: 0
-		topRightRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
-		bottomRightRadius: Theme.geometry_button_radius - Theme.geometry_button_border_width
+		topRightRadius: Theme.geometry_size_8 - Theme.geometry_size_2
+		bottomRightRadius: Theme.geometry_size_8 - Theme.geometry_size_2
 		text: CommonWords.on
 		focus: checked
 		focusPolicy: root.focusPolicy

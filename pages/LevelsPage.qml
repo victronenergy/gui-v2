@@ -84,7 +84,7 @@ SwipeViewPage {
 		anchors {
 			top: tabBar.bottom
 			topMargin: Global.pageManager?.expandLayout
-					? Theme.geometry_levelsPage_gaugesView_expanded_topMargin
+					? Theme.geometry_size_0
 					: Theme.geometry_levelsPage_gaugesView_compact_topMargin
 			bottom: parent.bottom
 			left: parent.left

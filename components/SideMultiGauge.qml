@@ -21,7 +21,7 @@ Item {
 	property real minimumValue
 	property real maximumValue
 	property bool inputMode
-	property int strokeWidth: Theme.geometry_arc_strokeWidth
+	property int strokeWidth: Theme.geometry_size_8
 
 	width: parent.width
 	height: parent.height
@@ -44,7 +44,7 @@ Item {
 			required property real power
 			required property real current
 
-			width: Theme.geometry_briefPage_edgeGauge_width
+			width: Theme.geometry_size_80
 			height: root.height
 
 			readonly property bool feedingToGrid: root.inputMode && power < -1.0 // ignore noise values (close to zero)
@@ -52,9 +52,9 @@ Item {
 			SideGauge {
 				id: gauge
 				animationEnabled: root.animationEnabled
-				width: Theme.geometry_briefPage_edgeGauge_width
+				width: Theme.geometry_size_80
 				height: root.height
-				x: (gaugeDelegate.index * (strokeWidth + Theme.geometry_briefPage_edgeGauge_gaugeSpacing))
+				x: (gaugeDelegate.index * (strokeWidth + Theme.geometry_size_4))
 					// If showing multiple gauges on the right edge, shift them towards the left
 					- (gaugeRepeater.count === 1 || root.horizontalAlignment === Qt.AlignLeft ? 0 : (strokeWidth * gaugeRepeater.count))
 				valueType: root.valueType

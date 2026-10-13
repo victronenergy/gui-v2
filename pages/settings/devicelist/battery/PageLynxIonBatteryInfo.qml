@@ -133,7 +133,7 @@ Page {
 
 			SettingsFlow {
 				width: parent ? parent.width : 0
-				spacing: Theme.geometry_gradientList_spacing
+				spacing: Theme.geometry_size_4
 				leftPadding: Theme.geometry_page_content_horizontalMargin
 				rightPadding: Theme.geometry_page_content_horizontalMargin
 
@@ -148,7 +148,7 @@ Page {
 							// In portrait, show all cells in a single column.
 							? parent.width - (2 * Theme.geometry_page_content_horizontalMargin)
 							// In landscape, show two cells per row.
-							: (parent.width - 2*Theme.geometry_page_content_horizontalMargin - Theme.geometry_gradientList_spacing) / 2
+							: (parent.width - 2*Theme.geometry_page_content_horizontalMargin - Theme.geometry_size_4) / 2
 						rightInset: 0
 						leftInset: 0
 						bottomInset: 0

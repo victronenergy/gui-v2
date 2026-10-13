@@ -34,11 +34,11 @@ FocusScope {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_switches_header_topMargin
+			topMargin: Theme.geometry_size_8
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
+			leftMargin: Theme.geometry_shared_24_24_16
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
+			rightMargin: Theme.geometry_shared_24_24_16
 		}
 		switchableOutput: root.switchableOutput
 	}
@@ -54,9 +54,9 @@ FocusScope {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
+			leftMargin: Theme.geometry_shared_24_24_16
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
+			rightMargin: Theme.geometry_shared_24_24_16
 			top: header.bottom
 		}
 		height: Theme.geometry_iochannel_control_height

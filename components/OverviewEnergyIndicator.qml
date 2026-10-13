@@ -15,7 +15,7 @@ Item {
 	required property int animationMode
 
 	implicitWidth: boltImage1.width
-	implicitHeight: Theme.geometry_overviewPage_energyIndicator_height
+	implicitHeight: Theme.geometry_size_32
 	clip: true
 	rotation: animationMode === VenusOS.WidgetConnector_AnimationMode_StartToEnd ? 180 : 0
 

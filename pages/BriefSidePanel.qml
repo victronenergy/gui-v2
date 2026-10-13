@@ -42,7 +42,7 @@ ColumnLayout {
 		visible: loadersActive
 		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 		quantityLabel.dataObject: generatorInput
-		quantityLabel.leftPadding: generatorDirectionIcon.visible ? (generatorDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
+		quantityLabel.leftPadding: generatorDirectionIcon.visible ? (generatorDirectionIcon.width + Theme.geometry_size_2) : 0
 		stretchGraph: false
 		graph: GeneratorIconLabel {
 			height: generatorWidget.quantityLabel.height
@@ -52,7 +52,7 @@ ColumnLayout {
 		}
 		footer: ThreePhaseBarGauge {
 			width: parent.width
-			height: Theme.geometry_barGauge_vertical_width_large
+			height: Theme.geometry_size_8
 			orientation: Qt.Horizontal
 			phaseModel: root.visible ? generatorInput.phases : null
 			minimumValue: generatorInput.inputInfo.minimumCurrent
@@ -78,7 +78,7 @@ ColumnLayout {
 		icon.source: loadersActive ? Global.acInputs.sourceIcon(nonGeneratorInput.source) : ""
 		quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 		quantityLabel.dataObject: nonGeneratorInput
-		quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
+		quantityLabel.leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_size_2) : 0
 		loadersActive: nonGeneratorInput && nonGeneratorInput.operational
 		visible: loadersActive
 
@@ -192,7 +192,7 @@ exported power v  0.4 |   /
 
 		footer: ThreePhaseBarGauge {
 			width: parent.width
-			height: Theme.geometry_barGauge_vertical_width_large
+			height: Theme.geometry_size_8
 			orientation: Qt.Horizontal
 			phaseModel: root.visible ? nonGeneratorInput.phases : null
 			minimumValue: nonGeneratorInput.inputInfo.minimumCurrent
@@ -255,7 +255,7 @@ exported power v  0.4 |   /
 		}
 		footer: ThreePhaseBarGauge {
 			width: parent.width
-			height: Theme.geometry_barGauge_vertical_width_large
+			height: Theme.geometry_size_8
 			orientation: Qt.Horizontal
 			valueType: VenusOS.Gauges_ValueType_RisingPercentage
 			phaseModel: root.visible ? Global.system.load.ac.phases : null

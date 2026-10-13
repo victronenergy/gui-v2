@@ -497,7 +497,7 @@ Page {
 				CP.IconImage {
 					id: warningIcon
 
-					x: Theme.geometry_listItem_content_horizontalMargin
+					x: Theme.geometry_shared_24_24_12
 					y: warningDescriptionLabel.topPadding
 					source: "qrc:/images/icon_warning_32.svg"
 					color: Theme.color_warning

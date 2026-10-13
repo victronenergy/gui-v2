@@ -61,7 +61,7 @@ FocusScope {
 
 		// Expand clickable area on left and bottom edges.
 		leftInset: Theme.geometry_statusBar_horizontalMargin
-		bottomInset: Theme.geometry_statusBar_spacing
+		bottomInset: Theme.geometry_shared_16_16_8
 
 		icon.source: buttonType === VenusOS.StatusBar_LeftButton_ControlsInactive ? "qrc:/images/icon_controls_off_32.svg"
 			: buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? "qrc:/images/icon_controls_on_32.svg"
@@ -104,9 +104,9 @@ FocusScope {
 			left: leftButton.right
 			leftMargin: -leftInset
 		}
-		leftInset: leftButton.enabled ? 0 : Theme.geometry_statusBar_spacing
-		rightInset: Theme.geometry_statusBar_spacing
-		bottomInset: Theme.geometry_statusBar_spacing
+		leftInset: leftButton.enabled ? 0 : Theme.geometry_shared_16_16_8
+		rightInset: Theme.geometry_shared_16_16_8
+		bottomInset: Theme.geometry_shared_16_16_8
 
 		visible: (!root.pageStack.opened && Global.switches.groups.count > 0)
 				|| auxCardsOpened // allow cards to be closed if all switches are disconnected while opened
@@ -147,7 +147,7 @@ FocusScope {
 
 		Rectangle { // fade out the breadcrumbs RHS when overflowing
 			width: parent.width
-			height: Theme.geometry_settings_breadcrumb_height
+			height: Theme.geometry_button_height
 			visible: !parent.atXEnd
 
 			gradient: Gradient {
@@ -182,7 +182,7 @@ FocusScope {
 
 		anchors {
 			left: clockLabel.right
-			leftMargin: Theme.geometry_statusBar_spacing
+			leftMargin: Theme.geometry_shared_16_16_8
 			verticalCenter: parent.verticalCenter
 		}
 		visible: !breadcrumbs.visible
@@ -224,7 +224,7 @@ FocusScope {
 
 			GsmStatusIcon {
 				id: mobileIcon
-				height: Theme.geometry_status_bar_gsmModem_icon_height
+				height: Theme.geometry_size_24
 				anchors.centerIn: parent
 			}
 		}
@@ -238,9 +238,9 @@ FocusScope {
 			verticalCenter: parent.verticalCenter
 		}
 		// Expand clickable area on vertical and bottom edges.
-		rightInset: Theme.geometry_statusBar_spacing / 2
-		topInset: Theme.geometry_statusBar_spacing
-		bottomInset: Theme.geometry_statusBar_spacing
+		rightInset: Theme.geometry_shared_16_16_8 / 2
+		topInset: Theme.geometry_shared_16_16_8
+		bottomInset: Theme.geometry_shared_16_16_8
 
 		// The notificationButton should always be shown, even when the page is not interactive
 		opacity: 1
@@ -268,10 +268,10 @@ FocusScope {
 		}
 		width: Math.min(parent.width - x - rightButtonRow.width, implicitWidth)
 		// Expand clickable area on horizontal and bottom edges.
-		leftInset: Theme.geometry_statusBar_spacing / 2
-		rightInset: Theme.geometry_statusBar_spacing / 2
-		topInset: Theme.geometry_statusBar_spacing
-		bottomInset: Theme.geometry_statusBar_spacing
+		leftInset: Theme.geometry_shared_16_16_8 / 2
+		rightInset: Theme.geometry_shared_16_16_8 / 2
+		topInset: Theme.geometry_shared_16_16_8
+		bottomInset: Theme.geometry_shared_16_16_8
 		enabled: Global.mainView?.notificationButtonsEnabled
 		visible: enabled
 
@@ -290,8 +290,8 @@ FocusScope {
 			readonly property int buttonType: Global.mainView?.currentPage?.topRightButton ?? VenusOS.StatusBar_RightButton_None
 
 			// Expand clickable area on left and bottom edges.
-			leftInset: Theme.geometry_statusBar_spacing
-			bottomInset: Theme.geometry_statusBar_spacing
+			leftInset: Theme.geometry_shared_16_16_8
+			bottomInset: Theme.geometry_shared_16_16_8
 
 			enabled: buttonType != VenusOS.StatusBar_RightButton_None
 			visible: enabled
@@ -320,10 +320,10 @@ FocusScope {
 
 			// Expand clickable area on right and bottom edges, and on left edge if right button is
 			// hidden. This is the right-most button in the row, so on the right edge, use
-			// Theme.geometry_statusBar_horizontalMargin instead of Theme.geometry_statusBar_spacing.
-			leftInset: rightButton.visible ? 0 : Theme.geometry_statusBar_spacing
+			// Theme.geometry_statusBar_horizontalMargin instead of Theme.geometry_shared_16_16_8.
+			leftInset: rightButton.visible ? 0 : Theme.geometry_shared_16_16_8
 			rightInset: Theme.geometry_statusBar_horizontalMargin
-			bottomInset: Theme.geometry_statusBar_spacing
+			bottomInset: Theme.geometry_shared_16_16_8
 
 			icon.source: "qrc:/images/icon_screen_sleep_32.svg"
 			visible: ScreenBlanker.supported && ScreenBlanker.enabled

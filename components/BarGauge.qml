@@ -23,7 +23,7 @@ Item {
 	property int valueType: VenusOS.Gauges_ValueType_NeutralPercentage
 	property int borderWidth
 	property color borderColor: Theme.color_overviewPage_widget_border
-	property int radius: Theme.geometry_overviewPage_widget_radius
+	property int radius: Theme.geometry_size_8
 
 	// The status that determines the foreground/background colours. The calculation uses 'value'
 	// rather than 'animatedValue' to reduce possible colour changes.
@@ -67,8 +67,8 @@ Item {
 		NumberAnimation { duration: Theme.animation_briefPage_sidePanel_sliderValueChange_duration }
 	}
 
-	implicitWidth: orientation === Qt.Vertical ? Theme.geometry_barGauge_vertical_width_large : Theme.geometry_control_width
-	implicitHeight: orientation === Qt.Vertical ? Theme.geometry_button_height : Theme.geometry_barGauge_horizontal_height
+	implicitWidth: orientation === Qt.Vertical ? Theme.geometry_size_8 : Theme.geometry_size_80
+	implicitHeight: orientation === Qt.Vertical ? Theme.geometry_button_height : Theme.geometry_size_8
 
 	// Base rectangle filled with background color.
 	Rectangle {

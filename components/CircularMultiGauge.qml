@@ -12,7 +12,7 @@ Item {
 	id: gauges
 
 	property alias model: arcRepeater.model
-	readonly property real strokeWidth: Theme.geometry_circularMultiGauge_strokeWidth
+	readonly property real strokeWidth: Theme.geometry_shared_16_16_12
 	required property bool animationEnabled
 	property real labelMargin
 	property alias labelOpacity: textCol.opacity
@@ -21,7 +21,7 @@ Item {
 	property real shortCaptionWidth: width / 2
 
 	// Step change in the size of the bounding boxes of successive gauges
-	readonly property real _stepSize: 2 * (strokeWidth + Theme.geometry_circularMultiGauge_spacing)
+	readonly property real _stepSize: 2 * (strokeWidth + Theme.geometry_shared_16_16_12)
 
 	Item {
 		id: antialiased
@@ -117,7 +117,7 @@ Item {
 				Label {
 					id: valueLabel
 					anchors.verticalCenter: parent.verticalCenter
-					rightPadding: Theme.geometry_circularMultiGauge_value_rightMargin
+					rightPadding: Theme.geometry_size_2
 					horizontalAlignment: Text.AlignRight
 					font.pixelSize: Theme.font_circularMultiGauge_label_smallSize
 					color: Theme.color_font_primary

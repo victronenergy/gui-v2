@@ -12,7 +12,7 @@ MouseArea {
 
 	property var model
 	property bool expanded
-	readonly property int collapsedHeight: Theme.geometry_solarHistoryErrorView_itemHeight
+	readonly property int collapsedHeight: Theme.geometry_size_40
 
 	property real _maxErrorTitleWidth
 
@@ -24,7 +24,7 @@ MouseArea {
 
 	Rectangle {
 		anchors.fill: parent
-		radius: Theme.geometry_solarHistoryErrorView_radius
+		radius: Theme.geometry_size_6
 		color: Theme.color_toastNotification_background_error
 
 		AsymmetricRoundedRectangle {
@@ -33,15 +33,15 @@ MouseArea {
 				top: parent.top
 				bottom: parent.bottom
 			}
-			width: Theme.geometry_solarHistoryErrorView_iconBackground_width
-			radius: Theme.geometry_solarHistoryErrorView_radius
+			width: Theme.geometry_size_56
+			radius: Theme.geometry_size_6
 			color: Theme.color_toastNotification_highlight_error
 			flat: true
 
 			CP.ColorImage {
 				anchors {
 					top: parent.top
-					topMargin: (Theme.geometry_solarHistoryErrorView_itemHeight - height) / 2
+					topMargin: (Theme.geometry_size_40 - height) / 2
 					horizontalCenter: parent.horizontalCenter
 				}
 				color: Theme.color_solarHistoryErrorView_primaryText
@@ -55,9 +55,9 @@ MouseArea {
 			top: parent.top
 			topMargin: (root.collapsedHeight - height) / 2
 			right: parent.right
-			rightMargin: Theme.geometry_solarHistoryErrorView_expandIcon_horizontalMargin
+			rightMargin: Theme.geometry_size_8
 		}
-		height: Theme.geometry_solarHistoryErrorView_expandIcon_size
+		height: Theme.geometry_size_32
 		fillMode: Image.PreserveAspectFit
 		color: Theme.color_solarHistoryErrorView_primaryText
 		source: "qrc:/images/icon_chevron_up_32.svg"
@@ -69,13 +69,13 @@ MouseArea {
 
 		anchors {
 			left: parent.left
-			leftMargin: Theme.geometry_solarHistoryErrorView_iconBackground_width
-					+ Theme.geometry_solarHistoryErrorView_textBackground_horizontalMargin
+			leftMargin: Theme.geometry_size_56
+					+ Theme.geometry_size_16
 			right: parent.right
-			rightMargin: Theme.geometry_solarHistoryErrorView_textBackground_horizontalMargin
+			rightMargin: Theme.geometry_size_16
 		}
-		bottomPadding: root.expanded ? Theme.geometry_solarHistoryErrorView_textBackground_bottomMargin : 0
-		height: root.expanded ? implicitHeight : Theme.geometry_solarHistoryErrorView_itemHeight
+		bottomPadding: root.expanded ? Theme.geometry_size_10 : 0
+		height: root.expanded ? implicitHeight : Theme.geometry_size_40
 
 		Behavior on height {
 			enabled: Global.animationEnabled
@@ -88,8 +88,8 @@ MouseArea {
 			id: headerLabel
 
 			width: parent.width
-			height: Theme.geometry_solarHistoryErrorView_itemHeight
-			rightPadding: Theme.geometry_solarHistoryErrorView_expandIcon_size
+			height: Theme.geometry_size_40
+			rightPadding: Theme.geometry_size_32
 			elide: Text.ElideRight
 			verticalAlignment: Text.AlignVCenter
 			color: Theme.color_solarHistoryErrorView_primaryText
@@ -106,8 +106,8 @@ MouseArea {
 				readonly property alias titleImplicitWidth: titleLabel.implicitWidth
 
 				width: parent.width
-				height: Theme.geometry_solarHistoryErrorView_itemHeight
-				spacing: Theme.geometry_solarHistoryErrorView_textBackground_horizontalMargin
+				height: Theme.geometry_size_40
+				spacing: Theme.geometry_size_16
 
 				Label {
 					id: titleLabel

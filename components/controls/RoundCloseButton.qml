@@ -8,8 +8,8 @@ import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 PressArea {
-	implicitWidth: Theme.geometry_roundCloseButton_size
-	implicitHeight: Theme.geometry_roundCloseButton_size
+	implicitWidth: Theme.geometry_size_44
+	implicitHeight: Theme.geometry_size_44
 	radius: Theme.geometry_roundCloseButton_radius
 
 	Rectangle {

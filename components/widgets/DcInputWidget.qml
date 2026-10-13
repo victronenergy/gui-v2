@@ -94,8 +94,8 @@ OverviewWidget {
 					width: parent.width
 					metricsFontSize: Theme.font_listItem_secondary_size // align columns with those in the delegate
 					rightPadding: Theme.geometry_page_content_horizontalMargin // list item right inset
-							+ Theme.geometry_listItem_content_horizontalMargin // list item right padding
-							+ Theme.geometry_icon_size_medium // arrow icon width
+							+ Theme.geometry_shared_24_24_12 // list item right padding
+							+ Theme.geometry_size_32 // arrow icon width
 					textHorizontalAlignment: Text.AlignHCenter
 					model: [
 						{ text: CommonWords.voltage, unit: VenusOS.Units_Volt_DC },

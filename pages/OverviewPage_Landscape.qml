@@ -168,9 +168,7 @@ FocusScope {
 			expandedWidgetHeights += widget.getExpandedHeight(widget.size)
 		}
 
-		const compactPageHeight = Theme.geometry_screen_height
-				- Theme.geometry_statusBar_height
-				- Theme.geometry_navigationBar_height
+		const compactPageHeight = Theme.geometry_page_content_height
 		const compactWidgetsTopMargin = Math.max(0, (compactPageHeight - compactWidgetHeights) / Math.max(1, widgets.length - 1))
 		const expandedPageHeight = Theme.geometry_screen_height
 				- Theme.geometry_statusBar_height
@@ -197,13 +195,13 @@ FocusScope {
 		for (i = 0; i < widgets.length; ++i) {
 			widget = widgets[i]
 			if (widgets === _leftWidgets) {
-				widget.width = Theme.geometry_overviewPage_widget_leftWidgetWidth
+				widget.width = Theme.geometry_size_column
 				widget.x = Theme.geometry_page_content_horizontalMargin
 			} else if (widgets === _centerWidgets) {
-				widget.width = Theme.geometry_overviewPage_widget_centerWidgetWidth
+				widget.width = Theme.geometry_size_hero_medium
 				widget.x = root.width/2 - widget.width/2
 			} else if (widgets === _rightWidgets) {
-				widget.width = Theme.geometry_overviewPage_widget_rightWidgetWidth
+				widget.width = Theme.geometry_size_column
 				widget.x = root.width - widget.width - Theme.geometry_page_content_horizontalMargin
 			}
 		}
@@ -820,7 +818,7 @@ FocusScope {
 			// Use a fixed offsetY, not a dynamic one that could change after the connector path is
 			// already drawn; otherwise, if the offsetY changes after _resetWidgets() has already
 			// laid out the paths, then the path may start/end in the wrong position.
-			offsetY: Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing
+			offsetY: Theme.geometry_size_12 + Theme.geometry_size_4
 		}
 
 		WidgetConnectorAnchor {
@@ -945,13 +943,13 @@ FocusScope {
 				id: acLoadsToEvcsStartAnchor
 				parent: acLoadsWidget
 				location: VenusOS.WidgetConnector_Location_Left
-				offsetY: Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing
+				offsetY: Theme.geometry_size_12 + Theme.geometry_size_4
 				visible: acLoadsWidget.visible && (evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads)
 			}
 			WidgetConnectorAnchor {
 				id: acLoadsToEvcsEndAnchor
 				location: VenusOS.WidgetConnector_Location_Left
-				offsetY: -(Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing)
+				offsetY: -(Theme.geometry_size_12 + Theme.geometry_size_4)
 				visible: acLoadsWidget.visible && (evcsWidget.connectToCombinedAcLoads || evcsWidget.connectToSplitAcLoads)
 			}
 			WidgetConnector {
@@ -982,13 +980,13 @@ FocusScope {
 				id: essentialLoadsToEvcsStartAnchor
 				parent: essentialLoadsWidget
 				location: VenusOS.WidgetConnector_Location_Left
-				offsetY: -(Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing)
+				offsetY: -(Theme.geometry_size_12 + Theme.geometry_size_4)
 				visible: evcsWidget.connectToEssentialLoads
 			}
 			WidgetConnectorAnchor {
 				id: essentialLoadsToEvcsEndAnchor
 				location: VenusOS.WidgetConnector_Location_Left
-				offsetY: Theme.geometry_overviewPage_connector_anchor_height + Theme.geometry_overviewPage_connector_anchor_spacing
+				offsetY: Theme.geometry_size_12 + Theme.geometry_size_4
 				visible: evcsWidget.connectToEssentialLoads
 			}
 			WidgetConnector {

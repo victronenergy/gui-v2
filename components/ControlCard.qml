@@ -27,7 +27,7 @@ FocusScope {
 		anchors {
 			verticalCenter: title.verticalCenter
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_contentMargins
+			leftMargin: Theme.geometry_size_16
 		}
 		color: Theme.color_font_primary
 	}
@@ -37,7 +37,7 @@ FocusScope {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_controlCard_title_topMargin
+			topMargin: Theme.geometry_size_16
 			left: icon.right
 			leftMargin: Theme.geometry_controlCard_title_spacing
 			right: parent.right
@@ -53,11 +53,11 @@ FocusScope {
 
 		anchors {
 			top: title.bottom
-			topMargin: Theme.geometry_controlCard_status_topMargin
+			topMargin: Theme.geometry_size_6
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_contentMargins
+			leftMargin: Theme.geometry_size_16
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_contentMargins
+			rightMargin: Theme.geometry_size_16
 		}
 		font.pixelSize: Theme.font_controlCard_status
 		wrapMode: Text.Wrap

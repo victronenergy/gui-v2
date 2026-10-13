@@ -72,7 +72,7 @@ MouseArea {
 	onMouseYChanged: {
 		if (_readyToDrag
 				// Prevent upwards dragging over a small threshold.
-				&& root.dialog.y > _dialogYOnPress - Theme.geometry_modalDialog_grabber_bottomDragLimit) {
+				&& root.dialog.y > _dialogYOnPress - Theme.geometry_size_24) {
 			root.dialog.y += (mouseY - _mouseYOnPress)
 		}
 	}
@@ -107,13 +107,13 @@ MouseArea {
 	Rectangle {
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_modalDialog_grabber_topMargin
+			topMargin: Theme.geometry_size_6
 			horizontalCenter: parent.horizontalCenter
 		}
 		visible: root.enabled
-		width: Theme.geometry_modalDialog_grabber_width
-		height: Theme.geometry_modalDialog_grabber_height
-		radius: Theme.geometry_modalDialog_grabber_height
+		width: Theme.geometry_size_36
+		height: Theme.geometry_size_4
+		radius: Theme.geometry_size_4
 		color: Theme.color_modalDialog_grabber_background
 	}
 }

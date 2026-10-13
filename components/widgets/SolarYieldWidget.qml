@@ -35,7 +35,7 @@ OverviewWidget {
 			? VenusOS.OverviewWidget_PreferredSize_PreferLarge
 			: VenusOS.OverviewWidget_PreferredSize_Any
 	bottomPadding: _showGraph
-			? Theme.geometry_overviewPage_widget_content_bottomMargin_large
+			? Theme.geometry_size_8
 			: Theme.geometry_overviewPage_widget_content_bottomMargin_small
 
 	// Solar yield history is only available for PV chargers, and phase data is only available for

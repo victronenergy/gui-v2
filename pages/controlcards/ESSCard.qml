@@ -21,7 +21,7 @@ ControlCard {
 			top: root.title.bottom
 			topMargin: Theme.geometry_controlCard_status_bottomMargin
 		}
-		bottomPadding: Theme.geometry_controlCard_contentMargins
+		bottomPadding: Theme.geometry_size_16
 		width: parent.width
 
 		ButtonGroup {

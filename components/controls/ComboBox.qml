@@ -45,11 +45,11 @@ T.ComboBox {
 		implicitBackgroundHeight + topInset + bottomInset,
 		implicitContentHeight + topPadding + bottomPadding)
 
-	leftPadding: Theme.geometry_comboBox_leftPadding
-	rightPadding: Theme.geometry_comboBox_rightPadding
-	topPadding: Theme.geometry_comboBox_verticalPadding
-	bottomPadding: Theme.geometry_comboBox_verticalPadding
-	spacing: Theme.geometry_comboBox_spacing
+	leftPadding: Theme.geometry_spacing_18
+	rightPadding: Theme.geometry_size_10
+	topPadding: Theme.geometry_size_10
+	bottomPadding: Theme.geometry_size_10
+	spacing: Theme.geometry_size_8
 
 	delegate: T.ItemDelegate {
 		id: optionDelegate
@@ -62,16 +62,16 @@ T.ComboBox {
 		contentItem: Rectangle {
 			implicitWidth: Theme.geometry_comboBox_width
 			implicitHeight: Theme.geometry_button_height
-			topLeftRadius: index === 0 ? Theme.geometry_button_radius : 0
-			topRightRadius: index === 0 ? Theme.geometry_button_radius : 0
-			bottomLeftRadius: index === root.count - 1 ? Theme.geometry_button_radius : 0
-			bottomRightRadius: index === root.count - 1 ? Theme.geometry_button_radius : 0
+			topLeftRadius: index === 0 ? Theme.geometry_size_8 : 0
+			topRightRadius: index === 0 ? Theme.geometry_size_8 : 0
+			bottomLeftRadius: index === root.count - 1 ? Theme.geometry_size_8 : 0
+			bottomRightRadius: index === root.count - 1 ? Theme.geometry_size_8 : 0
 			color: optionDelegate.highlighted ? Theme.color_ok : "transparent"
 
 			Label {
 				anchors.fill: parent
-				leftPadding: Theme.geometry_comboBox_leftPadding
-				rightPadding: Theme.geometry_comboBox_leftPadding  // no indicator here, use same padding as left side
+				leftPadding: Theme.geometry_spacing_18
+				rightPadding: Theme.geometry_spacing_18  // no indicator here, use same padding as left side
 				font.pixelSize: Theme.font_button_size
 				verticalAlignment: Text.AlignVCenter
 				elide: Text.ElideRight
@@ -111,8 +111,8 @@ T.ComboBox {
 		implicitWidth: root.defaultBackgroundWidth
 		implicitHeight: root.defaultBackgroundHeight
 		border.color: root.enabled ? Theme.color_ok : Theme.color_font_disabled
-		border.width: Theme.geometry_button_border_width
-		radius: Theme.geometry_button_radius
+		border.width: Theme.geometry_size_2
+		radius: Theme.geometry_size_8
 		color: root.enabled
 			   ? (root.pressed ? Theme.color_ok : Theme.color_darkOk)
 			   : Theme.color_background_disabled
@@ -121,7 +121,7 @@ T.ComboBox {
 	popup: T.Popup {
 		x: root.leftInset
 		width: root.width
-		height: Math.min(contentItem.implicitHeight, Global.mainView.height - (2 * Theme.geometry_comboBox_verticalPadding))
+		height: Math.min(contentItem.implicitHeight, Global.mainView.height - (2 * Theme.geometry_size_10))
 
 		contentItem: ListView {
 			clip: true
@@ -131,8 +131,8 @@ T.ComboBox {
 			currentIndex: root.highlightedIndex
 
 			ScrollBar.vertical: ScrollBar {
-				topPadding: Theme.geometry_comboBox_verticalPadding
-				bottomPadding: Theme.geometry_comboBox_verticalPadding
+				topPadding: Theme.geometry_size_10
+				bottomPadding: Theme.geometry_size_10
 			}
 		}
 
@@ -140,14 +140,14 @@ T.ComboBox {
 			// This base rectangle is required because the inner rect below has a transparent
 			// background (Theme.color_darkOk).
 			border.color: Theme.color_ok
-			border.width: Theme.geometry_button_border_width
-			radius: Theme.geometry_button_radius
+			border.width: Theme.geometry_size_2
+			radius: Theme.geometry_size_8
 			color: Theme.color_page_background
 
 			Rectangle {
 				anchors.fill: parent
-				radius: Theme.geometry_button_radius
-				border.width: Theme.geometry_button_border_width
+				radius: Theme.geometry_size_8
+				border.width: Theme.geometry_size_2
 				border.color: Theme.color_ok
 				color: Theme.color_darkOk
 			}
@@ -156,13 +156,13 @@ T.ComboBox {
 		onAboutToShow: {
 			// Prefer to show popup in a position where the current selection is shown over the top
 			// of the combo box.
-			y = root.topInset - (root.currentIndex * root.defaultBackgroundHeight) + Theme.geometry_button_border_width
+			y = root.topInset - (root.currentIndex * root.defaultBackgroundHeight) + Theme.geometry_size_2
 
 			// If the popup would be shown with the top edge above the top of the main view, move
 			// it downwards.
 			const posInWindow = mapToItem(Global.mainView, 0, y)
-			if (posInWindow.y < Theme.geometry_comboBox_verticalPadding) {
-				y = mapFromItem(Global.mainView, 0, Theme.geometry_comboBox_verticalPadding).y
+			if (posInWindow.y < Theme.geometry_size_10) {
+				y = mapFromItem(Global.mainView, 0, Theme.geometry_size_10).y
 			}
 		}
 	}

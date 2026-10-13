@@ -41,11 +41,11 @@ FocusScope {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_switches_header_topMargin
+			topMargin: Theme.geometry_size_8
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
+			leftMargin: Theme.geometry_shared_24_24_16
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
+			rightMargin: Theme.geometry_shared_24_24_16
 		}
 		switchableOutput: root.switchableOutput
 		quantityValue: slider.value // already in the display unit
@@ -66,10 +66,10 @@ FocusScope {
 
 		// Expand clickable area horizontally (to delegate edges) and vertically. Adjust paddings
 		// by the same amount to fit the content within the background.
-		topInset: Theme.geometry_button_touch_verticalMargin
-		bottomInset: Theme.geometry_button_touch_verticalMargin
-		leftInset: Theme.geometry_controlCard_button_margins
-		rightInset: Theme.geometry_controlCard_button_margins
+		topInset: Theme.geometry_size_14
+		bottomInset: Theme.geometry_size_14
+		leftInset: Theme.geometry_shared_24_24_16
+		rightInset: Theme.geometry_shared_24_24_16
 		topPadding: topInset
 		bottomPadding: bottomInset
 		leftPadding: leftInset

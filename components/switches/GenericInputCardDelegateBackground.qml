@@ -9,5 +9,5 @@ import Victron.VenusOS
 Rectangle {
 	implicitHeight: Theme.geometry_iochannel_control_height
 	color: Theme.color_valueIndicator_background
-	radius: Theme.geometry_listItem_radius
+	radius: Theme.geometry_size_8
 }

@@ -19,14 +19,14 @@ QuantityTable {
 	header: Rectangle {
 		width: root.width
 		height: Theme.geometry_vebusDeviceListPage_quantityTable_header_height
-		topLeftRadius: Theme.geometry_listItem_radius
-		topRightRadius: Theme.geometry_listItem_radius
+		topLeftRadius: Theme.geometry_size_8
+		topRightRadius: Theme.geometry_size_8
 		color: Theme.color_quantityTable_row_background
 
 		Label {
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry_listItem_content_horizontalMargin
+				leftMargin: Theme.geometry_shared_24_24_12
 				verticalCenter: parent.verticalCenter
 			}
 			font.pixelSize: root.labelFontSize
@@ -36,7 +36,7 @@ QuantityTable {
 		Column {
 			anchors {
 				right: parent.right
-				rightMargin: Theme.geometry_listItem_content_horizontalMargin
+				rightMargin: Theme.geometry_shared_24_24_12
 				verticalCenter: parent.verticalCenter
 			}
 			visible: root.totalPowerUid.length > 0

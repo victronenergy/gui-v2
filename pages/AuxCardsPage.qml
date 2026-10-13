@@ -65,9 +65,9 @@ Page {
 
 		anchors {
 			fill: parent
-			leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
-			rightMargin: Theme.geometry_controlCardsPage_horizontalMargin
-			bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
+			leftMargin: Theme.geometry_page_content_horizontalMargin
+			rightMargin: Theme.geometry_page_content_horizontalMargin
+			bottomMargin: Theme.geometry_shared_16_24_24
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal

@@ -27,7 +27,7 @@ FontMetrics {
 		return maxTextRect.width + maxTextRect.x
 			// Add a buffer to increase the padding around quantity labels, especially for quantity
 			// table headers, which are longer and ideally should not be elided.
-			+ Theme.geometry_quantityMetricPadding
+			+ Theme.geometry_shared_8_8_4
 			// If the quantity contains more decimals than usual, provide extra space for them.
 			+ (decimals > defaultDecimals ? (decimals - defaultDecimals) * averageCharacterWidth : 0)
 	}

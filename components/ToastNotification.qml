@@ -58,7 +58,7 @@ Item {
 	signal dismissed()
 	signal closed()
 
-	implicitWidth: Theme.geometry_control_width
+	implicitWidth: Theme.geometry_size_80
 	implicitHeight: contentLayout.y + contentLayout.implicitHeight
 
 	// Block mouse events beneath the toast notification area.
@@ -70,7 +70,7 @@ Item {
 		id: background
 
 		anchors.fill: parent
-		radius: Theme.geometry_toastNotification_radius
+		radius: Theme.geometry_size_8
 		color: root.type === VenusOS.Notification_Alarm ? Theme.color_toastNotification_background_error
 			: root.type === VenusOS.Notification_Warning ? Theme.color_toastNotification_background_warning
 			: Theme.color_toastNotification_background_informative
@@ -84,7 +84,7 @@ Item {
 			}
 
 			visible: root.type !== ToastNotification.None
-			width: Theme.geometry_toastNotification_highlightWidth
+			width: Theme.geometry_size_64
 			topLeftRadius: parent.radius
 			bottomLeftRadius: parent.radius
 
@@ -97,7 +97,7 @@ Item {
 
 				x: (parent.width - width) / 2
 				y: Theme.screenSize === Theme.Portrait
-				   ? Theme.geometry_toastNotification_verticalMargin + Theme.geometry_toastNotification_padding
+				   ? Theme.geometry_size_8 + Theme.geometry_size_16
 				   : (parent.height - height) / 2
 				color: Theme.color_toastNotification_foreground
 				source: root.type === VenusOS.Notification_Alarm ? "qrc:/images/icon_alarm_32.svg"
@@ -127,7 +127,7 @@ Item {
 			Label {
 				id: label
 
-				leftPadding: Theme.geometry_toastNotification_padding
+				leftPadding: Theme.geometry_size_16
 				verticalAlignment: Text.AlignVCenter
 				text: root.text
 				wrapMode: Text.Wrap
@@ -136,18 +136,18 @@ Item {
 				color: Theme.color_toastNotification_foreground
 
 				Layout.fillWidth: true
-				Layout.topMargin: Theme.geometry_toastNotification_padding
+				Layout.topMargin: Theme.geometry_size_16
 				Layout.bottomMargin: Theme.screenSize === Theme.Portrait && silenceButton.visible ? 0
-						: Theme.geometry_toastNotification_padding
+						: Theme.geometry_size_16
 			}
 
 			Button {
-				leftInset: Theme.geometry_toastNotification_padding
-				rightInset: Theme.geometry_toastNotification_padding
-				topInset: Theme.geometry_toastNotification_padding
-				bottomInset: Theme.geometry_toastNotification_padding
-				defaultBackgroundWidth: Theme.geometry_button_touch_size
-				defaultBackgroundHeight: Theme.geometry_button_touch_size
+				leftInset: Theme.geometry_size_16
+				rightInset: Theme.geometry_size_16
+				topInset: Theme.geometry_size_16
+				bottomInset: Theme.geometry_size_16
+				defaultBackgroundWidth: Theme.geometry_size_48
+				defaultBackgroundHeight: Theme.geometry_size_48
 				color: Theme.color_toastNotification_foreground
 				icon.source: "qrc:/images/icon_close_32.svg"
 				visible: !root.isSilenceButton
@@ -163,10 +163,10 @@ Item {
 				flat: true
 				font.pixelSize: Theme.font_toastSnoozeButton_size
 				visible: root.isSilenceButton
-				leftInset: Theme.geometry_toastNotification_padding
-				rightInset: Theme.geometry_toastNotification_padding
-				topInset: Theme.geometry_toastNotification_padding
-				bottomInset: Theme.geometry_toastNotification_padding
+				leftInset: Theme.geometry_size_16
+				rightInset: Theme.geometry_size_16
+				topInset: Theme.geometry_size_16
+				bottomInset: Theme.geometry_size_16
 
 				Layout.fillWidth: Theme.screenSize === Theme.Portrait
 				onClicked: root._buttonClicked()
@@ -174,12 +174,12 @@ Item {
 				Rectangle {
 					anchors {
 						fill: parent
-						margins: Theme.geometry_toastNotification_padding
+						margins: Theme.geometry_size_16
 					}
 					radius: parent.radius
 					color: "transparent"
 					border.color: Theme.color_toastNotification_foreground
-					border.width: Theme.geometry_button_border_width
+					border.width: Theme.geometry_size_2
 				}
 			}
 		}

@@ -64,7 +64,7 @@ GridLayout {
 		Layout.alignment: root._useColumnLayout ? Qt.AlignLeft : Qt.AlignRight
 		Layout.rowSpan: captionLabel.text.length > 0 && (!root._useColumnLayout && !root._useStretchedCaptionLayout) ? 2 : 1
 		Layout.preferredWidth: root._useColumnLayout ? Math.min(implicitWidth, parent.width) : implicitWidth
-		Layout.topMargin: root._useColumnLayout ? Theme.geometry_listItem_content_verticalSpacing : 0
+		Layout.topMargin: root._useColumnLayout ? Theme.geometry_size_4 : 0
 	}
 
 	CaptionLabel {
@@ -74,6 +74,6 @@ GridLayout {
 
 		Layout.fillWidth: true
 		Layout.columnSpan: root._useStretchedCaptionLayout ? 2 : 1
-		Layout.topMargin: Theme.geometry_listItem_content_verticalSpacing
+		Layout.topMargin: Theme.geometry_size_4
 	}
 }

@@ -9,15 +9,15 @@ import Victron.VenusOS
 Rectangle {
 	implicitWidth: modeLabel.implicitWidth
 	implicitHeight: modeLabel.implicitHeight
-	topLeftRadius: Theme.geometry_button_radius
-	topRightRadius: Theme.geometry_button_radius
+	topLeftRadius: Theme.geometry_size_8
+	topRightRadius: Theme.geometry_size_8
 	color: Theme.color_demoModeIndicator_background
 
 	Label {
 		id: modeLabel
 
-		leftPadding: Theme.geometry_demoModeIndicator_horizontalPadding
-		rightPadding: Theme.geometry_demoModeIndicator_horizontalPadding
+		leftPadding: Theme.geometry_size_12
+		rightPadding: Theme.geometry_size_12
 		topPadding: Theme.geometry_demoModeIndicator_topPadding
 		bottomPadding: Theme.geometry_demoModeIndicator_bottomPadding
 		color: Theme.color_demoModeIndicator_foreground

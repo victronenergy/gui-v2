@@ -45,7 +45,7 @@ GridLayout {
 		Layout.fillWidth: true
 		Layout.fillHeight: true
 		Layout.preferredWidth: root._effectiveStretchHorizontally
-				? (parent.width/2 + Theme.geometry_overviewPage_widget_spacing)  // push phases to the right
+				? (parent.width/2 + Theme.geometry_size_8)  // push phases to the right
 				: -1
 		Layout.alignment: Qt.AlignTop
 
@@ -53,7 +53,7 @@ GridLayout {
 			id: quantityLabelComponent
 
 			ElectricalQuantityLabel {
-				leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_acInputDirectionIcon_rightMargin) : 0
+				leftPadding: acInputDirectionIcon.visible ? (acInputDirectionIcon.width + Theme.geometry_size_2) : 0
 				alignment: Qt.AlignLeft
 				sourceType: root.widget.quantitySourceType
 				dataObject: root.widget.quantityDataObject

@@ -21,20 +21,20 @@ RowLayout {
 	property string quantityText // If set, this overrides the displayed quantityValue
 	property color quantityColor: Theme.color_font_primary
 
-	spacing: Theme.geometry_iochannel_label_margin
+	spacing: Theme.geometry_size_2
 
 	Label {
 		id: nameLabel
 
 		Layout.fillWidth: true
-		Layout.bottomMargin: Theme.geometry_iochannel_label_margin
+		Layout.bottomMargin: Theme.geometry_size_2
 		text: root.ioChannel.formattedName
 		elide: Text.ElideMiddle // don't elide right, as it may obscure a trailing channel id
 		font.pixelSize: Theme.font_switches_header_title
 	}
 
 	IOChannelQuantityLabel {
-		Layout.bottomMargin: Theme.geometry_iochannel_label_margin
+		Layout.bottomMargin: Theme.geometry_size_2
 		Layout.preferredHeight: nameLabel.height
 		ioChannel: root.ioChannel
 		value: root.quantityValue
@@ -49,7 +49,7 @@ RowLayout {
 	Rectangle {
 		id: statusRect
 
-		Layout.bottomMargin: Theme.geometry_iochannel_label_margin
+		Layout.bottomMargin: Theme.geometry_size_2
 		Layout.maximumWidth: parent.width / 2
 		Layout.minimumWidth: statusLabel.implicitWidth
 		Layout.alignment: Qt.AlignRight | Qt.AlignTop
@@ -58,7 +58,7 @@ RowLayout {
 				: statusLabel.color === Theme.color_orange ? Theme.color_darkOrange
 				: statusLabel.color === Theme.color_red ? Theme.color_darkRed
 				: Theme.color_switch_status_disabled
-		radius: Theme.geometry_iochannel_status_radius
+		radius: Theme.geometry_size_10
 		visible: root.statusVisible
 
 		Label {
@@ -67,10 +67,10 @@ RowLayout {
 			anchors.centerIn: parent
 			text: root.statusText
 			width: parent.width
-			topPadding: Theme.geometry_iochannel_status_verticalPadding
-			bottomPadding: Theme.geometry_iochannel_status_verticalPadding
-			leftPadding: Theme.geometry_iochannel_status_horizontalPadding
-			rightPadding: Theme.geometry_iochannel_status_horizontalPadding
+			topPadding: Theme.geometry_size_2
+			bottomPadding: Theme.geometry_size_2
+			leftPadding: Theme.geometry_size_8
+			rightPadding: Theme.geometry_size_8
 			horizontalAlignment: Text.AlignHCenter
 			elide: Text.ElideRight
 			font.pixelSize: Theme.font_switches_header_status

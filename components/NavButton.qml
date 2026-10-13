@@ -9,9 +9,9 @@ import Victron.VenusOS
 Button {
 	id: root
 
-	icon.width: Theme.geometry_navigationBar_button_icon_width
-	icon.height: Theme.geometry_navigationBar_button_icon_height
-	spacing: Theme.geometry_navigationBar_button_spacing
+	icon.width: Theme.geometry_shared_32_32_24
+	icon.height: Theme.geometry_shared_32_32_24
+	spacing: Theme.geometry_size_4
 	display: Button.TextUnderIcon
 	radius: 0
 	color: down

@@ -84,8 +84,8 @@ ListSetting {
 
 			Label {
 				// Since the root top/bottomPadding is 0, need to add some padding here.
-				topPadding: Theme.geometry_listItem_content_verticalMargin
-				bottomPadding: Theme.screenSize === Theme.Portrait ? 0 : Theme.geometry_listItem_content_verticalMargin
+				topPadding: Theme.geometry_listItem_content_spacing
+				bottomPadding: Theme.screenSize === Theme.Portrait ? 0 : Theme.geometry_listItem_content_spacing
 				text: root.text
 				textFormat: root.textFormat
 				font: root.font
@@ -99,8 +99,8 @@ ListSetting {
 				id: sliderItem
 
 				// Make space for labels on either side.
-				leftInset: Theme.geometry_rangeSlider_labelWidth + Theme.geometry_slider_spacing
-				rightInset: Theme.geometry_rangeSlider_labelWidth + Theme.geometry_slider_spacing
+				leftInset: Theme.geometry_rangeSlider_labelWidth + Theme.geometry_size_12
+				rightInset: Theme.geometry_rangeSlider_labelWidth + Theme.geometry_size_12
 				leftPadding: leftInset
 				rightPadding: rightInset
 
@@ -115,7 +115,7 @@ ListSetting {
 				focus: true
 
 				// Expand the vertical touch area, to make it easier to click.
-				Layout.preferredHeight: implicitHeight + (2 * Theme.geometry_listItem_content_verticalMargin)
+				Layout.preferredHeight: implicitHeight + (2 * Theme.geometry_listItem_content_spacing)
 				Layout.fillWidth: true
 				Layout.maximumWidth: Theme.screenSize === Theme.Portrait ? -1 : root.availableWidth * 2/3
 
@@ -174,7 +174,7 @@ ListSetting {
 
 				Layout.columnSpan: 2
 				Layout.maximumWidth: root.availableWidth
-				Layout.bottomMargin: Theme.geometry_listItem_content_verticalMargin
+				Layout.bottomMargin: Theme.geometry_listItem_content_spacing
 			}
 		}
 	}

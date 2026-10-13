@@ -12,7 +12,7 @@ Row {
 	required property VeQuickItem dataItem
 	required property string iconSource
 
-	spacing: Theme.geometry_boatPage_row_spacing
+	spacing: Theme.geometry_size_4
 	visible: dataItem && dataItem.valid
 
 	QuantityLabel {

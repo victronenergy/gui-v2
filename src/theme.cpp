@@ -133,6 +133,7 @@ void Theme::setScreenSize(Victron::VenusOS::Theme::ScreenSize size)
 
 		Q_EMIT screenSizeChanged(size);
 		Q_EMIT screenSizeChanged_parameterless(); // work around moc limitation.
+		Q_EMIT derivedGeometryChanged();
 		setAdjustingGeometry(false);
 	}
 }
@@ -201,6 +202,9 @@ void Theme::setGeometry_screen_width(int width)
 		setAdjustingGeometry(true);
 		m_screenWidth = width;
 		Q_EMIT geometry_screen_widthChanged();
+		if (!wasAdjusting) {
+			Q_EMIT derivedGeometryChanged();
+		}
 		setAdjustingGeometry(wasAdjusting);
 	}
 }
@@ -217,6 +221,9 @@ void Theme::setGeometry_screen_height(int height)
 		setAdjustingGeometry(true);
 		m_screenHeight = height;
 		Q_EMIT geometry_screen_heightChanged();
+		if (!wasAdjusting) {
+			Q_EMIT derivedGeometryChanged();
+		}
 		setAdjustingGeometry(wasAdjusting);
 	}
 }

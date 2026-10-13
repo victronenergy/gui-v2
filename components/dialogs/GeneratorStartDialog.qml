@@ -32,14 +32,14 @@ GeneratorDialog {
 			id: contentColumn
 			x: Theme.geometry_modalDialog_content_horizontalMargin
 			width: parent.width - (2 * Theme.geometry_modalDialog_content_horizontalMargin)
-			spacing: Theme.geometry_modalDialog_content_spacing
+			spacing: Theme.geometry_size_16
 
 			Row {
 				anchors {
 					left: timeSelector.left
 					right: timeSelector.right
 				}
-				topPadding: Theme.geometry_modalDialog_content_spacing
+				topPadding: Theme.geometry_size_16
 
 				Label {
 					id: timedRunLabel

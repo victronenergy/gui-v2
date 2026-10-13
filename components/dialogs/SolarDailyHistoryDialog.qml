@@ -98,7 +98,7 @@ T.Dialog {
 	background: Rectangle {
 		implicitWidth: Theme.geometry_modalDialog_width
 		implicitHeight: 0
-		radius: Theme.geometry_solarDailyHistoryDialog_background_radius
+		radius: Theme.geometry_size_8
 		color: Theme.color_background_secondary
 		border.color: Theme.color_modalDialog_border
 
@@ -111,11 +111,11 @@ T.Dialog {
 			id: highlightBar
 
 			color: Theme.color_ok
-			radius: Theme.geometry_solarChart_bar_radius
+			radius: Theme.geometry_size_8
 		}
 
 		component ArrowButton : IconButton {
-			icon.sourceSize.height: Theme.geometry_solarDailyHistoryDialog_arrow_icon_size
+			icon.sourceSize.height: Theme.geometry_size_72
 			icon.color: containsPress ? Theme.color_gray4 : Theme.color_gray5
 			icon.source: "qrc:/images/icon_chevron_right_32.svg"
 			effectEnabled: false
@@ -147,9 +147,9 @@ T.Dialog {
 	contentItem: Rectangle {
 		implicitWidth: Theme.geometry_modalDialog_width
 		implicitHeight: historyListView.y + historyListView.height
-			+ (errorView.enabled ? errorView.collapsedHeight + Theme.geometry_solarDetailBox_margins : 0)
+			+ (errorView.enabled ? errorView.collapsedHeight + Theme.geometry_shared_8_8_12 : 0)
 
-		radius: Theme.geometry_solarDailyHistoryDialog_background_radius
+		radius: Theme.geometry_size_8
 		color: Theme.color_background_secondary
 		focus: true
 
@@ -163,7 +163,7 @@ T.Dialog {
 			id: dateLabel
 
 			width: parent.width
-			height: Theme.geometry_solarDailyHistoryDialog_header_height
+			height: Theme.geometry_size_50
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 			font.pixelSize: Theme.font_size_body1
@@ -229,9 +229,9 @@ T.Dialog {
 			anchors {
 				horizontalCenter: parent.horizontalCenter
 				bottom: parent.bottom
-				bottomMargin: Theme.geometry_solarDetailBox_margins
+				bottomMargin: Theme.geometry_shared_8_8_12
 			}
-			width: parent.width - (2 * Theme.geometry_solarDetailBox_margins)
+			width: parent.width - (2 * Theme.geometry_shared_8_8_12)
 			model: {
 				const history = root.solarHistory.dailyHistory(root.day)
 				return history ? history.errorModel : null

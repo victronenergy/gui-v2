@@ -20,7 +20,7 @@ FocusScope {
 	readonly property string currentTitle: pages[currentIndex]?.title ?? ""
 	readonly property real buttonWidth: buttonRow.width / visiblePageCount
 	readonly property int visiblePageCount: Math.min(pages.length,
-			buttonRow.width / Theme.geometry_navigationBar_button_minimumWidth)
+			buttonRow.width / (Theme.geometry_navigationBar_height - Theme.geometry_size_4))
 
 	// Internal reference to the currently selected index.
 	property int _currentIndex
@@ -101,7 +101,7 @@ FocusScope {
 					z: 1 // to get it on top of the IconLabel
 					anchors {
 						left: parent.horizontalCenter
-						topMargin: Theme.geometry_navigationBar_notifications_redDot_margin
+						topMargin: Theme.geometry_size_6
 					}
 					active: (Global.notifications?.navBarNotificationCounterVisible ?? false)
 							&& page.url.endsWith("NotificationsPage.qml")

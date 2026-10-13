@@ -45,7 +45,7 @@ Page {
 					equalWidthColumns: true
 
 					// Set rightPadding to align with the columns in the delegates.
-					rightPadding: Theme.geometry_icon_size_medium + tableListItem.horizontalContentPadding
+					rightPadding: Theme.geometry_size_32 + tableListItem.horizontalContentPadding
 					summaryModel: [
 						{ text: "", unit: VenusOS.Units_None },
 						{ text: "", unit: VenusOS.Units_None },

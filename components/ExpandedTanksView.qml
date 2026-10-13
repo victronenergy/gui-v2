@@ -13,7 +13,7 @@ BaseListView {
 	required property bool animationEnabled
 
 	orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
-	spacing: Theme.screenSize === Theme.Portrait ? Theme.geometry_levelsPage_gauge_spacing_tiny : Gauges.spacing(count)
+	spacing: Theme.screenSize === Theme.Portrait ? Theme.geometry_size_8 : Gauges.spacing(count)
 	delegate: TankGaugePanel {
 		id: tankDelegate
 

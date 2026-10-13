@@ -87,7 +87,7 @@ GridLayout {
 	CaptionLabel {
 		id: captionLabel
 
-		topPadding: Theme.geometry_listItem_content_verticalSpacing
+		topPadding: Theme.geometry_size_4
 		bottomPadding: root.bottomPadding
 		visible: text.length > 0
 

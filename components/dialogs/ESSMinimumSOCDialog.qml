@@ -31,7 +31,7 @@ ModalDialog {
 			Label {
 				anchors.horizontalCenter: parent.horizontalCenter
 				color: Theme.color_font_secondary
-				bottomPadding: Theme.geometry_modalDialog_content_spacing
+				bottomPadding: Theme.geometry_size_16
 				//: Shown below the minimum state of charge, as configured by the user
 				//% "Unless grid fails"
 				text: qsTrId("ess_unless_grid_fails")
@@ -41,7 +41,7 @@ ModalDialog {
 				id: slider
 
 				anchors.horizontalCenter: parent.horizontalCenter
-				width: parent.width - (2 * Theme.geometry_modalDialog_content_spacing)
+				width: parent.width - (2 * Theme.geometry_size_16)
 				value: root.minimumStateOfCharge
 				from: 0
 				to: 100
@@ -50,16 +50,16 @@ ModalDialog {
 				onMoved: root.minimumStateOfCharge = value
 
 				KeyNavigationHighlight.active: slider.activeFocus
-				KeyNavigationHighlight.leftMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
-				KeyNavigationHighlight.rightMargin: -Theme.geometry_listItem_flat_content_horizontalMargin
-				KeyNavigationHighlight.topMargin: -Theme.geometry_listItem_content_verticalMargin
-				KeyNavigationHighlight.bottomMargin: -Theme.geometry_listItem_content_verticalMargin
+				KeyNavigationHighlight.leftMargin: -Theme.geometry_shared_16_16_12
+				KeyNavigationHighlight.rightMargin: -Theme.geometry_shared_16_16_12
+				KeyNavigationHighlight.topMargin: -Theme.geometry_listItem_content_spacing
+				KeyNavigationHighlight.bottomMargin: -Theme.geometry_listItem_content_spacing
 			}
 
 			Label {
 				anchors.horizontalCenter: parent.horizontalCenter
 				width: parent.width - (2 * Theme.geometry_page_content_horizontalMargin)
-				topPadding: Theme.geometry_modalDialog_content_spacing
+				topPadding: Theme.geometry_size_16
 				wrapMode: Text.Wrap
 				color: Theme.color_font_secondary
 				horizontalAlignment: Text.AlignHCenter

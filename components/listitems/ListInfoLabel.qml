@@ -21,8 +21,8 @@ PrimaryListLabel {
 
 		// Apply inset+padding as for ListItem.
 		x: (root.flat ? 0 : Theme.geometry_page_content_horizontalMargin)
-		   + (root.flat ? Theme.geometry_listItem_flat_content_horizontalMargin
-			   : Theme.geometry_listItem_content_horizontalMargin)
+		   + (root.flat ? Theme.geometry_shared_16_16_12
+			   : Theme.geometry_shared_24_24_12)
 		y: root.topPadding + (infoFontMetrics.boundingRect("A").height - height)/2
 		source: "qrc:/images/information.svg"
 		color: root.color

@@ -127,8 +127,8 @@ Page {
 					leftMargin: parent.leftInset + spacing
 					verticalCenter: parent.verticalCenter
 				}
-				width: Theme.geometry_icon_size_medium
-				height: Theme.geometry_icon_size_medium
+				width: Theme.geometry_size_32
+				height: Theme.geometry_size_32
 				color: Theme.color_font_primary
 				opacity: status === Image.Ready ? 1 : 0 // keep space even if no icon is available, to maintain vertical alignments
 				source: {

@@ -25,14 +25,14 @@ Row {
 		 ? parent.height - height - Theme.geometry_briefPage_edgeGauge_quantityLabel_bottomMargin
 		 : Theme.geometry_briefPage_edgeGauge_quantityLabel_topMargin    // root.alignment & Qt.AlignTop
 
-	spacing: Theme.geometry_briefPage_edgeGauge_quantityLabel_spacing
+	spacing: Theme.geometry_size_2
 	layoutDirection: root.alignment & Qt.AlignRight ? Qt.RightToLeft : Qt.LeftToRight
 
 	CP.ColorImage {
 		id: icon
 
 		anchors.verticalCenter: parent.verticalCenter
-		width: Theme.geometry_widgetHeader_icon_width
+		width: Theme.geometry_size_24
 		fillMode: Image.Pad
 		color: Theme.color_font_primary
 	}

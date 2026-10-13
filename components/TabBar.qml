@@ -10,6 +10,6 @@ SegmentedButtonRow {
 	id: buttons
 
 	implicitWidth: Theme.geometry_tabBar_width
-	implicitHeight: Theme.geometry_tabBar_height
+	implicitHeight: Theme.geometry_button_height
 	fontPixelSize: Theme.font_button_size
 }

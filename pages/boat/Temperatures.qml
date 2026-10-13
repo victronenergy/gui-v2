@@ -12,7 +12,7 @@ Row {
 
 	required property MotorDrives motorDrives
 
-	spacing: Theme.geometry_boatPage_temperature_row_spacing
+	spacing: Theme.geometry_shared_16_24_24
 
 	component ColumnHeader: Label {
 		anchors.horizontalCenter: parent.horizontalCenter
@@ -33,7 +33,7 @@ Row {
 		required property string label
 		required property string dataProperty
 
-		spacing: Theme.geometry_boatPage_temperature_temperatureColumn_spacing
+		spacing: Theme.geometry_size_2
 
 		visible: motorDrives.singleMotorDrive && motorDrives.singleMotorDrive[dataProperty].valid
 				|| motorDrives.leftMotorDrive && motorDrives.leftMotorDrive[dataProperty].valid
@@ -46,7 +46,7 @@ Row {
 		Row {
 			anchors.horizontalCenter: parent.horizontalCenter
 
-			spacing: Theme.geometry_boatPage_temperature_temperatureRow_spacing
+			spacing: Theme.geometry_size_8
 
 			Temperature {
 				value: motorDrives.singleMotorDrive && motorDrives.singleMotorDrive[dataProperty].valid ? motorDrives.singleMotorDrive[dataProperty].value : NaN
@@ -65,12 +65,12 @@ Row {
 	component TemperatureSeparator: SeparatorBar {
 		anchors.verticalCenter: parent.verticalCenter
 		height: Theme.geometry_boatPage_temperature_temperatureSeparator_height
-		width: Theme.geometry_boatPage_temperature_temperatureSeparator_width
+		width: Theme.geometry_size_2
 	}
 
 	Column {
 		id: batteryTemperatureColumn
-		spacing: Theme.geometry_boatPage_temperature_temperatureColumn_spacing
+		spacing: Theme.geometry_size_2
 
 		visible: Global.system && Global.system.battery && !isNaN(Global.system.battery.temperature)
 

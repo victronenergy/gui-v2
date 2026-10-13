@@ -33,7 +33,7 @@ Item {
 			top: promptImage.bottom
 		}
 
-		topPadding: Theme.geometry_rotateDevicePrompt_spacing
+		topPadding: Theme.geometry_size_36
 		horizontalAlignment: Text.AlignHCenter
 		//: Prompts the user to rotate the device. %1 = the name of the current page.
 		//% "Rotate device to view %1"

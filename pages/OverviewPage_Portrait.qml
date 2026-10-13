@@ -32,7 +32,7 @@ FocusScope {
 		// If all widgets could be L size and they would all still fit within the vertical space,
 		// then use L size for all of them.
 		if (Theme.geometry_overviewPage_widget_height_l * maximumColumnCount
-				+ (2 * Theme.geometry_overviewPage_energyIndicator_height) < root.height) {
+				+ (2 * Theme.geometry_size_32) < root.height) {
 			return VenusOS.OverviewWidget_Size_L
 		}
 
@@ -84,7 +84,7 @@ FocusScope {
 	// Cannot bind to mainLayout.height for this, as that value refers to the theoretical height
 	// where widgets are expanded to their full heights.
 	implicitHeight: inputLayout.height + centreLayout.height + loadsLayout.height
-			+ (2 * Theme.geometry_overviewPage_energyIndicator_height)
+			+ (2 * Theme.geometry_size_32)
 
 	OverviewLayoutConditions {
 		id: layoutConditions
@@ -105,7 +105,7 @@ FocusScope {
 
 			readonly property int maximumColumnCount: Math.max(rightInputColumn.widgetCount, leftInputColumn.widgetCount)
 
-			spacing: Theme.geometry_overviewPage_widget_spacing
+			spacing: Theme.geometry_size_8
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			Layout.verticalStretchFactor: maximumColumnCount
@@ -132,7 +132,7 @@ FocusScope {
 				readonly property bool swapInputs: (Global.acInputs.isGridOrShore(Global.acInputs.input2)
 													&& !Global.acInputs.isGridOrShore(Global.acInputs.input1))
 
-				rowSpacing: Theme.geometry_overviewPage_widget_spacing
+				rowSpacing: Theme.geometry_size_8
 				columns: 1
 				visible: widgetCount > 0
 
@@ -194,7 +194,7 @@ FocusScope {
 				readonly property bool combineDcSources: dcSourceModel.count > 0
 						&& widgetCountWithoutDcsource + dcSourceModel.count > 3
 
-				spacing: Theme.geometry_overviewPage_widget_spacing
+				spacing: Theme.geometry_size_8
 				visible: widgetCount > 0
 
 				Loader {
@@ -299,7 +299,7 @@ FocusScope {
 
 		// Energy indicators between the top and middle widgets.
 		RowLayout {
-			spacing: Theme.geometry_overviewPage_widget_spacing
+			spacing: Theme.geometry_size_8
 			visible: rightInputColumn.widgetCount > 0 || leftInputColumn.widgetCount > 0
 
 			// Energy between AC inputs or PV inverters and the Inverter/charger.
@@ -343,7 +343,7 @@ FocusScope {
 		RowLayout {
 			id: centreLayout
 
-			spacing: Theme.geometry_overviewPage_widget_spacing
+			spacing: Theme.geometry_size_8
 			Layout.fillHeight: true
 			Layout.verticalStretchFactor: 1
 
@@ -372,7 +372,7 @@ FocusScope {
 
 		// Energy indicators between the middle and bottom widgets.
 		RowLayout {
-			spacing: Theme.geometry_overviewPage_widget_spacing
+			spacing: Theme.geometry_size_8
 
 			// Energy between Inverter/Charger and AC/Essential loads.
 			OverviewEnergyIndicator {
@@ -415,7 +415,7 @@ FocusScope {
 
 			readonly property int maximumColumnCount: Math.max(layoutConditions.showDcLoads ? 1 : 0, leftLoadsColumn.widgetCount)
 
-			spacing: Theme.geometry_overviewPage_widget_spacing
+			spacing: Theme.geometry_size_8
 			Layout.fillHeight: true
 			Layout.verticalStretchFactor: maximumColumnCount
 
@@ -435,7 +435,7 @@ FocusScope {
 						? root._widgetHeightForSize(VenusOS.OverviewWidget_Size_XS)
 						: root._widgetHeightForSize(displayWidgetSize)
 
-				spacing: Theme.geometry_overviewPage_widget_spacing
+				spacing: Theme.geometry_size_8
 
 				Loader {
 					id: acLoadsWidgetLoader

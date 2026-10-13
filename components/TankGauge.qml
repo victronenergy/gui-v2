@@ -14,11 +14,11 @@ BarGauge {
 	property bool isGrouped: false
 	property bool expanded
 
-	radius: Theme.geometry_levelsPage_tankGauge_radius
+	radius: Theme.geometry_size_8
 
 	component BarSeparator : Rectangle {
-		width: root.orientation === Qt.Vertical ? parent.width : Theme.geometry_levelsGauge_separator_size
-		height: root.orientation === Qt.Vertical ? Theme.geometry_levelsGauge_separator_size : parent.height
+		width: root.orientation === Qt.Vertical ? parent.width : Theme.geometry_size_2
+		height: root.orientation === Qt.Vertical ? Theme.geometry_size_2 : parent.height
 		color: root.separatorColor
 	}
 

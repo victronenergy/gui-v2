@@ -53,12 +53,12 @@ Row {
 	Row {
 		id: gsmRow
 
-		spacing: Theme.geometry_settings_gsmModem_signalStrengthBars_spacing
+		spacing: Theme.geometry_size_2
 		visible: !simLockedIcon.visible
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_settings_gsmModem_signalStrengthBars_topMargin
+			topMargin: Theme.geometry_size_2
 			bottom: parent.bottom
 		}
 
@@ -69,8 +69,8 @@ Row {
 
 			Rectangle {
 				y: parent.height - height
-				height: (index + 1) * Theme.geometry_settings_gsmModem_signalStrengthBars_bar_incremental_height
-				width: Theme.geometry_settings_gsmModem_signalStrengthBars_bar_width
+				height: (index + 1) * Theme.geometry_size_6
+				width: Theme.geometry_size_4
 				radius: width / 2
 				color: getScaledStrength(strength.value) >= (index + 1) ?
 						   Theme.color_settings_gsmModem_signalStrength_active : Theme.color_settings_gsmModem_signalStrength_inactive

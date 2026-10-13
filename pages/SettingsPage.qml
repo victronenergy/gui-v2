@@ -40,8 +40,8 @@ SwipeViewPage {
 		// no longer be customised to shift the mainIcon, but this is an inline component and we
 		// know its leftPadding is never adjusted further.
 		leftPadding: leftInset + horizontalContentPadding + mainIcon.width + horizontalContentPadding
-		topPadding: topInset + Theme.geometry_settingsListNavigation_verticalPadding
-		bottomPadding: bottomInset + Theme.geometry_settingsListNavigation_verticalPadding
+		topPadding: topInset + Theme.geometry_size_8
+		bottomPadding: bottomInset + Theme.geometry_size_8
 		onClicked: Global.pageManager.pushPage(pageSource, { title: Qt.binding(function() { return text }) })
 
 		CP.ColorImage {

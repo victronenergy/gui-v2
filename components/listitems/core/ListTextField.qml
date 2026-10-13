@@ -72,8 +72,8 @@ ListSetting {
 
 		Label {
 			// Since the root top/bottomPadding is 0, need to add some padding here.
-			topPadding: Theme.geometry_listItem_content_verticalMargin
-			bottomPadding: Theme.geometry_listItem_content_verticalMargin
+			topPadding: Theme.geometry_listItem_content_spacing
+			bottomPadding: Theme.geometry_listItem_content_spacing
 			text: root.text
 			textFormat: root.textFormat
 			font: root.font
@@ -135,7 +135,7 @@ ListSetting {
 
 			Layout.columnSpan: 2
 			Layout.maximumWidth: root.availableWidth
-			Layout.bottomMargin: Theme.geometry_listItem_content_verticalMargin
+			Layout.bottomMargin: Theme.geometry_listItem_content_spacing
 		}
 	}
 

@@ -18,8 +18,8 @@ Rectangle {
 	signal cctClicked()
 
 	implicitWidth: Theme.geometry_colorWheelDialog_mode_button_width
-	implicitHeight: Theme.geometry_colorWheelDialog_mode_button_height
-	radius: Theme.geometry_colorWheelDialog_mode_button_radius
+	implicitHeight: Theme.geometry_size_40
+	radius: Theme.geometry_size_32
 	color: Theme.color_colorWheelDialog_mode_button_background
 
 	// Circular border around the selected icon.
@@ -32,14 +32,14 @@ Rectangle {
 		color: "transparent"
 		radius: width / 2
 		border.color: Theme.color_ok
-		border.width: Theme.geometry_button_border_width
+		border.width: Theme.geometry_size_2
 	}
 
 	IconButton {
 		id: rgbColorIcon
 		anchors.verticalCenter: parent.verticalCenter
 		x: y
-		radius: Theme.geometry_colorWheelDialog_mode_button_radius
+		radius: Theme.geometry_size_32
 		icon.source: "qrc:/images/color_wheel_rgb.png"
 		onClicked: root.rgbClicked()
 	}
@@ -58,7 +58,7 @@ Rectangle {
 	// Vertical separator in the middle of the button.
 	Rectangle {
 		anchors.centerIn: parent
-		width: Theme.geometry_button_border_width
+		width: Theme.geometry_size_2
 		height: tempColorIcon.height
 		color: Theme.color_colorWheelDialog_mode_button_separator
 	}

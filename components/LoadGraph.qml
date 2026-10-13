@@ -14,7 +14,7 @@ Item {
 	property real initialModelValue: 0.0
 	property real offsetFraction
 	property real threshold: 0.8    // same as 80% warning level for gauges
-	property int dotSize: Theme.geometry_briefPage_sidePanel_loadGraph_dotSize
+	property int dotSize: Theme.geometry_size_1
 	property color aboveThresholdFillColor: Theme.color_orange
 	property color belowThresholdFillColor: Theme.color_blue
 	property color horizontalGradientColor1: Theme.screenSize === Theme.Portrait ? Theme.color_background_secondary : Theme.color_briefPage_background
@@ -33,7 +33,7 @@ Item {
 
 	clip: true // we have to clip if we don't use a layer in LoadGraphShapePath.
 	implicitWidth: Theme.geometry_briefPage_sidePanel_loadGraph_width
-	implicitHeight: Theme.geometry_briefPage_sidePanel_loadGraph_height
+	implicitHeight: Theme.geometry_size_51
 
 	Timer {
 		id: pausedAnimationTimer
@@ -148,11 +148,11 @@ Item {
 			orientation: Gradient.Horizontal
 			GradientStop { position: 0; color: horizontalGradientColor1 }
 			GradientStop {
-				position: Theme.geometry_briefPage_sidePanel_loadGraph_horizontalGradient_width/width
+				position: Theme.geometry_size_10/width
 				color: horizontalGradientColor2
 			}
 			GradientStop {
-				position: 1 - Theme.geometry_briefPage_sidePanel_loadGraph_horizontalGradient_width/width
+				position: 1 - Theme.geometry_size_10/width
 				color: horizontalGradientColor2
 			}
 			GradientStop { position: 1; color: horizontalGradientColor1 }

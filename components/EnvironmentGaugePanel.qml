@@ -23,12 +23,12 @@ AbstractListItem {
 		implicitBackgroundHeight + topInset + bottomInset,
 		implicitContentHeight + topPadding + bottomPadding)
 
-	leftInset: Theme.geometry_levelsPage_panel_horizontalInset
-	rightInset: Theme.geometry_levelsPage_panel_horizontalInset
-	leftPadding: leftInset + Theme.geometry_levelsGauge_horizontalPadding
-	rightPadding: rightInset + Theme.geometry_levelsGauge_horizontalPadding
-	topPadding: Theme.geometry_levelsPage_panel_header_height + Theme.geometry_environmentGaugePanel_verticalPadding
-	bottomPadding: Theme.geometry_environmentGaugePanel_verticalPadding
+	leftInset: Theme.geometry_inset_portrait
+	rightInset: Theme.geometry_inset_portrait
+	leftPadding: leftInset + Theme.geometry_inset_portrait
+	rightPadding: rightInset + Theme.geometry_inset_portrait
+	topPadding: Theme.geometry_levelsPage_panel_header_height + Theme.geometry_shared_8_8_12
+	bottomPadding: Theme.geometry_shared_8_8_12
 
 	background: Item {
 		implicitWidth: Theme.geometry_levelsPage_panel_background_width
@@ -40,8 +40,8 @@ AbstractListItem {
 
 			width: parent.width
 			height: Theme.geometry_levelsPage_panel_header_height
-			topLeftRadius: Theme.geometry_levelsPage_panel_radius
-			topRightRadius: Theme.geometry_levelsPage_panel_radius
+			topLeftRadius: Theme.geometry_shared_16_16_8
+			topRightRadius: Theme.geometry_shared_16_16_8
 			color: Theme.color_environmentGaugePanel_header
 			visible: Theme.screenSize !== Theme.Portrait
 
@@ -50,7 +50,7 @@ AbstractListItem {
 					left: parent.left
 					right: parent.right
 					bottom: parent.bottom
-					margins: Theme.geometry_levelsPage_panel_background_title_padding
+					margins: Theme.geometry_shared_4_4_0
 				}
 				horizontalAlignment: Text.AlignHCenter
 				elide: Text.ElideRight
@@ -66,10 +66,10 @@ AbstractListItem {
 			}
 			border.color: Theme.screenSize === Theme.Portrait ? "transparent" : Theme.color_environmentGaugePanel_header
 			color: Theme.color_environmentGaugePanel_background
-			topLeftRadius: colorIndicator.visible ? 0 : Theme.geometry_levelsPage_panel_radius
-			topRightRadius: colorIndicator.visible ? 0 : Theme.geometry_levelsPage_panel_radius
-			bottomLeftRadius: Theme.geometry_levelsPage_panel_radius
-			bottomRightRadius: Theme.geometry_levelsPage_panel_radius
+			topLeftRadius: colorIndicator.visible ? 0 : Theme.geometry_shared_16_16_8
+			topRightRadius: colorIndicator.visible ? 0 : Theme.geometry_shared_16_16_8
+			bottomLeftRadius: Theme.geometry_shared_16_16_8
+			bottomRightRadius: Theme.geometry_shared_16_16_8
 		}
 	}
 
@@ -86,7 +86,7 @@ AbstractListItem {
 
 			anchors {
 				left: parent.left
-				leftMargin: Theme.geometry_icon_size_medium + Theme.geometry_levelsGauge_horizontalSpacing
+				leftMargin: Theme.geometry_size_32 + Theme.geometry_size_12
 				right: parent.right
 			}
 			font.pixelSize: Theme.font_levelsGauge_title
@@ -99,7 +99,7 @@ AbstractListItem {
 			id: gaugeFlow
 
 			readonly property int gaugeWidth: Theme.screenSize === Theme.Portrait ? parent.width
-					: hasTwoGauges ? (parent.width - (2 * Theme.geometry_levelsPage_panel_border_width)) / 2
+					: hasTwoGauges ? (parent.width - (2 * Theme.geometry_size_1)) / 2
 					: Theme.geometry_environmentGauge_width
 
 			anchors {
@@ -110,7 +110,7 @@ AbstractListItem {
 					: root.hasTwoGauges ? gaugeWidth * 2
 					: gaugeWidth
 			flow: Theme.screenSize === Theme.Portrait ? Flow.TopToBottom : Flow.LeftToRight
-			spacing: Theme.screenSize === Theme.Portrait ? Theme.geometry_levelsGauge_verticalPadding : 0
+			spacing: Theme.screenSize === Theme.Portrait ? Theme.geometry_size_8 : 0
 
 			LevelsGaugeOutline {
 				width: gaugeFlow.gaugeWidth
@@ -121,7 +121,7 @@ AbstractListItem {
 				unit: Global.systemSettings.temperatureUnit
 				unitText: Units.defaultUnitString(Global.systemSettings.temperatureUnit)
 				quantityFormatHints: Theme.screenSize === Theme.Portrait ? 0 : Units.CompactUnitFormat
-				gaugeHorizontalPadding: Theme.geometry_environmentGauge_gauge_horizontalPadding
+				gaugeHorizontalPadding: Theme.geometry_inset_landscape
 
 				gauge: EnvironmentGauge {
 					orientation: Theme.screenSize === Theme.Portrait ? Qt.Horizontal : Qt.Vertical
@@ -150,7 +150,7 @@ AbstractListItem {
 				// In case user is not familiar with the acronym "RH" there is also drop icon and percentage sign (%).
 				unitText: "RH"
 				quantityFormatHints: Theme.screenSize === Theme.Portrait ? 0 : Units.CompactUnitFormat
-				gaugeHorizontalPadding: Theme.geometry_environmentGauge_gauge_horizontalPadding
+				gaugeHorizontalPadding: Theme.geometry_inset_landscape
 				gauge: isNaN(humidityItem.value) ? null : humidityGaugeComponent
 
 				Component {
@@ -161,7 +161,7 @@ AbstractListItem {
 						value: humidityItem.value ?? NaN
 						minimumValue: Theme.geometry_levelsPage_environment_humidityGauge_minimumValue
 						maximumValue: Theme.geometry_levelsPage_environment_humidityGauge_maximumValue
-						stepSize: Theme.geometry_environmentGauge_tick_step
+						stepSize: Theme.geometry_size_10
 						highlightedValue: Theme.geometry_levelsPage_environment_humidityGauge_highlightedValue
 						minimumValueColor: Theme.color_orange
 						maximumValueColor: Theme.color_blue

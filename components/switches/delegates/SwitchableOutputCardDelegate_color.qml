@@ -42,11 +42,11 @@ FocusScope {
 
 		anchors {
 			top: parent.top
-			topMargin: Theme.geometry_switches_header_topMargin
+			topMargin: Theme.geometry_size_8
 			left: parent.left
-			leftMargin: Theme.geometry_controlCard_button_margins
+			leftMargin: Theme.geometry_shared_24_24_16
 			right: parent.right
-			rightMargin: Theme.geometry_controlCard_button_margins
+			rightMargin: Theme.geometry_shared_24_24_16
 		}
 		switchableOutput: root.switchableOutput
 		quantityValue: currentColorDimmerData.color.hsvValue * 100 // convert from 0-1 range to 0-100%
@@ -131,10 +131,10 @@ FocusScope {
 
 			// Expand clickable area left (to delegate edge) and vertically. Adjust paddings
 			// by the same amount to fit the content within the background.
-			topInset: Theme.geometry_button_touch_verticalMargin
-			bottomInset: Theme.geometry_button_touch_verticalMargin
-			leftInset: Theme.geometry_controlCard_button_margins
-			rightInset: Theme.geometry_iochannel_spacing / 2
+			topInset: Theme.geometry_size_14
+			bottomInset: Theme.geometry_size_14
+			leftInset: Theme.geometry_shared_24_24_16
+			rightInset: Theme.geometry_size_16 / 2
 			topPadding: topInset
 			bottomPadding: bottomInset
 			rightPadding: rightInset
@@ -171,10 +171,10 @@ FocusScope {
 					   currentColorDimmerData.displayColor.hsvSaturation,
 					   1.0, 1.0)
 
-		topInset: Theme.geometry_button_touch_verticalMargin
-		leftInset: Theme.geometry_iochannel_spacing / 2
-		rightInset: Theme.geometry_controlCard_button_margins
-		bottomInset: Theme.geometry_button_touch_verticalMargin
+		topInset: Theme.geometry_size_14
+		leftInset: Theme.geometry_size_16 / 2
+		rightInset: Theme.geometry_shared_24_24_16
+		bottomInset: Theme.geometry_size_14
 
 		KeyNavigationHighlight.active: activeFocus
 		KeyNavigation.left: sliderScope

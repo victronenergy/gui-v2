@@ -124,7 +124,11 @@ class ThemeProperty:
     def property_declaration(self):
         assert self.type_name, 'No values have been set for property {}'.format(self.name)
         if self.json_info.enum_type == 'ScreenSize':
-            notify_signal = 'screenSizeChanged_parameterless'
+            screen_values = [self.values.get(key) for key in ('FiveInch', 'SevenInch', 'Portrait')]
+            if all(value is not None for value in screen_values) and screen_values[0] == screen_values[1] == screen_values[2]:
+                notify_signal = None
+            else:
+                notify_signal = 'screenSizeChanged_parameterless'
         elif self.json_info.enum_type == 'ColorScheme':
             notify_signal = 'colorSchemeChanged_parameterless'
         elif self.json_info.enum_type == 'SystemColorScheme':
@@ -241,8 +245,10 @@ class JsonThemeParser:
             for property_name, referenced_property_name in referenced_properties.items():
                 referenced_property = self.theme_properties.get(referenced_property_name)
                 if referenced_property:
-                    property_value = referenced_property.get_value() or referenced_property.get_value(json_info.enum_value)
-                    if property_value:
+                    property_value = referenced_property.get_value()
+                    if property_value is None:
+                        property_value = referenced_property.get_value(json_info.enum_value)
+                    if property_value is not None:
                         self.add_property(property_name, property_value, json_info)
                         continue
                 # if the property or value is not found, this must be a nested reference, i.e. the
@@ -253,8 +259,10 @@ class JsonThemeParser:
                 referenced_property = self.theme_properties.get(referenced_property_name)
                 if not referenced_property:
                     raise ValueError('Bad json value: "{}" value is {} but cannot find another theme property with this name'.format(property_name, referenced_property_name))
-                property_value = referenced_property.get_value() or referenced_property.get_value(json_info.enum_value)
-                if not property_value:
+                property_value = referenced_property.get_value()
+                if property_value is None:
+                    property_value = referenced_property.get_value(json_info.enum_value)
+                if property_value is None:
                     raise ValueError('Cannot find property value for theme {}'.format(json_info.enum_value))
                 self.add_property(property_name, property_value, json_info)
 
@@ -273,6 +281,48 @@ class JsonThemeParser:
     def sorted_theme_properties(self):
         return sorted(self.theme_properties.values(), key=lambda theme_property: theme_property.name)
 
+# Layout leftovers. Computed when read so portrait width/height stay live.
+# These names must not also be JSON keys.
+DERIVED_GEOMETRY = (
+    (
+        "geometry_controlCard_height",
+        "int",
+        "return geometry_screen_height() - geometry_statusBar_height() - geometry_shared_16_24_24();",
+    ),
+    (
+        "geometry_controlCard_maximumWidth",
+        "int",
+        "return m_screenSize == Theme::Portrait\n"
+        "\t\t\t\t? geometry_page_content_width()\n"
+        "\t\t\t\t: (geometry_page_content_width() - geometry_controlCard_gap()) / 2;",
+    ),
+    (
+        "geometry_page_content_height",
+        "int",
+        "return geometry_screen_height() - geometry_statusBar_height() - geometry_navigationBar_height();",
+    ),
+    (
+        "geometry_page_content_width",
+        "int",
+        "return geometry_screen_width() - (2 * geometry_page_content_horizontalMargin());",
+    ),
+)
+
+
+def derived_geometry_code(existing_names):
+    declarations = []
+    accessors = []
+    for name, type_name, body in DERIVED_GEOMETRY:
+        if name in existing_names:
+            raise ValueError('{} is both derived and a JSON key'.format(name))
+        declarations.append(
+            '\tQ_PROPERTY({} {} READ {} NOTIFY derivedGeometryChanged FINAL)'.format(type_name, name, name)
+        )
+        accessors.append('\n\t{type_name} {name}() const {{\n\t\t{body}\n\t}}'.format(
+            type_name=type_name, name=name, body=body))
+    return declarations, accessors
+
+
 def generate_theme_code(themes_dir, output_header_name):
     parser = JsonThemeParser()
     for subdir in os.listdir(themes_dir):
@@ -283,6 +333,11 @@ def generate_theme_code(themes_dir, output_header_name):
     theme_properties = parser.sorted_theme_properties()
     property_declarations = [theme_property.property_declaration() for theme_property in theme_properties]
     property_accessors = [theme_property.property_accessor() for theme_property in theme_properties]
+    derived_declarations, derived_accessors = derived_geometry_code(
+        {theme_property.name for theme_property in theme_properties}
+    )
+    property_declarations.extend(derived_declarations)
+    property_accessors.extend(derived_accessors)
     output_template = HEADER_TEMPLATE % ('\n'.join(property_declarations), '\n'.join(property_accessors))
     with open(output_header_name, 'w') as f:
         f.write(output_template)

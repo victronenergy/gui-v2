@@ -25,10 +25,10 @@ Row {
 	// part of a table with headers.
 	property bool padLastColumn
 
-	height: Theme.geometry_quantityTable_row_height
-	leftPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin
-	rightPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_listItem_content_horizontalMargin
-	spacing: Theme.geometry_quantityGroupRow_spacing
+	height: Theme.geometry_size_32
+	leftPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_shared_24_24_12
+	rightPadding: Theme.geometry_page_content_horizontalMargin + Theme.geometry_shared_24_24_12
+	spacing: Theme.geometry_size_12
 
 	Label {
 		id: firstTitleLabel

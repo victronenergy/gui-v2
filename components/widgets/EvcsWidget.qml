@@ -51,7 +51,7 @@ OverviewWidget {
 			Layout.fillWidth: true
 			Layout.fillHeight: true
 			Layout.preferredWidth: root.stretchHorizontally
-					? (parent.width/2 + Theme.geometry_overviewPage_widget_spacing)  // push details to the right
+					? (parent.width/2 + Theme.geometry_size_8)  // push details to the right
 					: -1
 		}
 
@@ -108,7 +108,7 @@ OverviewWidget {
 			Row {
 				width: parent.width
 				height: chargingTimeLabel.height
-				spacing: Theme.geometry_overviewPage_widget_content_horizontalMargin / 2
+				spacing: Theme.geometry_shared_8_12_12 / 2
 
 				Label {
 					width: parent.width - chargingTimeLabel.width - parent.spacing

@@ -24,7 +24,7 @@ Column {
 	Row {
 		id: timeToGo
 
-		spacing: Theme.geometry_boatPage_timeToGo_rowSpacing
+		spacing: Theme.geometry_size_7
 
 		component TimeToGoQuantityLabel : QuantityLabel {
 			font.pixelSize: Theme.font_boatPage_timeToGo_value_pixelSize

@@ -26,7 +26,7 @@ Item {
 
 		delegate: SideGauge {
 			animationEnabled: root.animationEnabled
-			width: Theme.geometry_briefPage_edgeGauge_width
+			width: Theme.geometry_size_80
 			x: index*strokeWidth
 			opacity: 1.0 - index * 0.3
 			height: root.height

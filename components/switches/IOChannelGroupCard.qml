@@ -13,10 +13,10 @@ ControlCard {
 	readonly property Item currentItem: Global.keyNavigationEnabled && activeFocus ? channelGrid.currentItem : null
 
 	implicitWidth: Theme.screenSize === Theme.Portrait
-					? Theme.geometry_screen_width - (2 * Theme.geometry_page_content_horizontalMargin)
+					? Theme.geometry_page_content_width
 					: Math.max(channelGrid.cellWidth * channelGrid.landscapeColumnCount, Theme.geometry_controlCard_minimumWidth)
 	implicitHeight: Theme.screenSize === Theme.Portrait
-					? channelGrid.y + (channelGrid.cellHeight * channelGrid.count) + Theme.geometry_controlCard_contentMargins
+					? channelGrid.y + (channelGrid.cellHeight * channelGrid.count) + Theme.geometry_size_16
 					: Theme.geometry_controlCard_height
 	icon.source: "qrc:/images/icon_switch_24.svg"
 	title.text: root.group?.name ?? ""
@@ -24,7 +24,14 @@ ControlCard {
 	GridView {
 		id: channelGrid
 
-		readonly property int landscapeRowCount: Math.floor(Theme.geometry_controlCard_height / cellHeight)
+		// Use the grid's own height. The card-height token includes the title,
+		// so dividing by it asks for a row that does not fit.
+		readonly property int landscapeRowCount: {
+			if (cellHeight <= 0 || height <= 0) {
+				return 1
+			}
+			return Math.max(1, Math.floor(height / cellHeight))
+		}
 		readonly property int landscapeColumnCount: Math.ceil(count / Math.max(1, landscapeRowCount))
 
 		anchors {

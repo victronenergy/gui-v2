@@ -73,7 +73,7 @@ Item {
 	implicitHeight: Theme.geometry_droopGraph_bottomMargin + Theme.geometry_droopGraph_defaultAxisHeight
 
 	component GraphLine: ShapePath {
-		strokeWidth: Theme.geometry_droopGraph_axis_width
+		strokeWidth: Theme.geometry_size_3
 		strokeColor: Theme.color_droopGraph_axis_line
 		fillColor: "transparent"
 		strokeStyle: ShapePath.SolidLine
@@ -81,19 +81,19 @@ Item {
 		joinStyle: ShapePath.RoundJoin
 	}
 	component ReferenceGuideLine: GraphLine {
-		strokeWidth: Theme.geometry_droopGraph_guideline_width
+		strokeWidth: Theme.geometry_size_1_5
 		strokeStyle: ShapePath.DashLine
 		dashPattern: [ 1, 2 ]
 	}
 	component OperationGuideLine: ReferenceGuideLine {
-		strokeWidth: Theme.geometry_droopGraph_operationPoint_guideline_width
+		strokeWidth: Theme.geometry_size_2
 		strokeColor: Theme.color_droopGraph_operationPoint_guidelines
 		fillColor: "transparent"
 	}
 
 	component AxisLabel: Label {
-		width: Theme.geometry_droopGraph_axis_label_width
-		height: Theme.geometry_droopGraph_axis_label_height
+		width: Theme.geometry_size_20
+		height: Theme.geometry_size_20
 		color: Theme.color_droopGraph_axis_line
 		font.pixelSize: Theme.font_droopGraph_axis_label_size
 		verticalAlignment: Text.AlignVCenter
@@ -121,14 +121,14 @@ Item {
 			PathLine { x: _yAxisEnd.x; y: _yAxisEnd.y }
 		}
 		GraphLine { // y axis arrow
-			startX: _yAxisEnd.x - Theme.geometry_droopGraph_arrow_size; startY: _yAxisEnd.y + Theme.geometry_droopGraph_arrow_size
+			startX: _yAxisEnd.x - Theme.geometry_size_8; startY: _yAxisEnd.y + Theme.geometry_size_8
 			PathLine { x: _yAxisEnd.x; y: _yAxisEnd.y }
-			PathLine { x: _yAxisEnd.x + Theme.geometry_droopGraph_arrow_size; y: _yAxisEnd.y + Theme.geometry_droopGraph_arrow_size }
+			PathLine { x: _yAxisEnd.x + Theme.geometry_size_8; y: _yAxisEnd.y + Theme.geometry_size_8 }
 		}
 		GraphLine { // x axis arrow
-			startX: _xAxisEnd.x - Theme.geometry_droopGraph_arrow_size; startY: _xAxisEnd.y - Theme.geometry_droopGraph_arrow_size
+			startX: _xAxisEnd.x - Theme.geometry_size_8; startY: _xAxisEnd.y - Theme.geometry_size_8
 			PathLine { x: _xAxisEnd.x; y: _xAxisEnd.y }
-			PathLine { x: _xAxisEnd.x - Theme.geometry_droopGraph_arrow_size; y: _xAxisEnd.y + Theme.geometry_droopGraph_arrow_size }
+			PathLine { x: _xAxisEnd.x - Theme.geometry_size_8; y: _xAxisEnd.y + Theme.geometry_size_8 }
 		}
 		ReferenceGuideLine { // default reference vertical guideline
 			startX: _guidelineIntersection.x; startY: _origin.y
@@ -136,7 +136,7 @@ Item {
 		}
 		ReferenceGuideLine { // default reference horizontal guideline
 			startX: _origin.x; startY: _guidelineIntersection.y
-			PathLine { x: _xAxisEnd.x - Theme.geometry_droopGraph_droopLine_xAxis_offset; y: _guidelineIntersection.y }
+			PathLine { x: _xAxisEnd.x - Theme.geometry_size_15; y: _guidelineIntersection.y }
 		}
 
 		// draw the dynamic overlay elements
@@ -152,27 +152,27 @@ Item {
 				GradientStop { position: 1.0; color: Theme.color_droopGraph_gradient_edge }
 			}
 			// Offset each end of the line for design purposes (x Axis)
-			startX: _origin.x + Theme.geometry_droopGraph_axis_width; startY: _droopLineUpper.y - Theme.geometry_droopGraph_droopLine_half_width
+			startX: _origin.x + Theme.geometry_size_3; startY: _droopLineUpper.y - Theme.geometry_size_1_5
 			// One side of the main gradient line with slope ...
-			PathLine { x: _droopLineUpper.x; y: _droopLineUpper.y - Theme.geometry_droopGraph_droopLine_half_width }
-			PathLine { x: _droopLineLower.x; y: _droopLineLower.y - Theme.geometry_droopGraph_droopLine_half_width }
+			PathLine { x: _droopLineUpper.x; y: _droopLineUpper.y - Theme.geometry_size_1_5 }
+			PathLine { x: _droopLineLower.x; y: _droopLineLower.y - Theme.geometry_size_1_5 }
 			// the lower right horizontal line
-			PathLine { x: _xAxisEnd.x - Theme.geometry_droopGraph_droopLine_xAxis_offset; y: _droopLineLower.y - Theme.geometry_droopGraph_droopLine_half_width }
-			PathLine { x: _xAxisEnd.x - Theme.geometry_droopGraph_droopLine_xAxis_offset; y: _droopLineLower.y + Theme.geometry_droopGraph_droopLine_half_width }
+			PathLine { x: _xAxisEnd.x - Theme.geometry_size_15; y: _droopLineLower.y - Theme.geometry_size_1_5 }
+			PathLine { x: _xAxisEnd.x - Theme.geometry_size_15; y: _droopLineLower.y + Theme.geometry_size_1_5 }
 			// the other side of the main gradient line with slope
-			PathLine { x: _droopLineLower.x; y: _droopLineLower.y + Theme.geometry_droopGraph_droopLine_half_width }
-			PathLine { x: _droopLineUpper.x; y: _droopLineUpper.y + Theme.geometry_droopGraph_droopLine_half_width }
+			PathLine { x: _droopLineLower.x; y: _droopLineLower.y + Theme.geometry_size_1_5 }
+			PathLine { x: _droopLineUpper.x; y: _droopLineUpper.y + Theme.geometry_size_1_5 }
 			// Complete the path back to the upper left
-			PathLine { x: _origin.x + Theme.geometry_droopGraph_axis_width; y: _droopLineUpper.y + Theme.geometry_droopGraph_droopLine_half_width  }
+			PathLine { x: _origin.x + Theme.geometry_size_3; y: _droopLineUpper.y + Theme.geometry_size_1_5  }
 		}
 		OperationGuideLine { // dynamic operation horizontal guideline
 			// offset the end of the lines by the width of the graph axes
-			startX: _operationPoint.x; startY: _origin.y - Theme.geometry_droopGraph_axis_width/2
+			startX: _operationPoint.x; startY: _origin.y - Theme.geometry_size_3/2
 			PathLine { x: _operationPoint.x; y: _operationPoint.y }
 		}
 		OperationGuideLine { // dynamic operation vertical guideline
 			// offset the end of the lines by the width of the graph axes
-			startX: _origin.x + Theme.geometry_droopGraph_axis_width/2; startY: _operationPoint.y
+			startX: _origin.x + Theme.geometry_size_3/2; startY: _operationPoint.y
 			PathLine { x: _operationPoint.x; y: _operationPoint.y }
 		}
 	}
@@ -190,7 +190,7 @@ Item {
 
 		// This calculates an adjustment +/- to apply to each y axis label
 		property real _yLabelHeight: Math.max(height, yAxisOperationQuantityLabel.height)
-									 + Theme.geometry_droopGraph_xAxis_label_padding
+									 + Theme.geometry_size_4
 		property real _yAdjustment: Math.abs(_guidelineIntersection.y - _operationPoint.y) > _yLabelHeight
 									? 0
 									: (_yLabelHeight - Math.abs(_guidelineIntersection.y - _operationPoint.y))/2
@@ -198,7 +198,7 @@ Item {
 		anchors.left: parent.left
 		y: _guidelineIntersection.y + _yAdjustment * Math.sign(_guidelineIntersection.y - _operationPoint.y)
 			- _yLabelHeight/2
-		width: Theme.geometry_droopGraph_yAxis_quantityLabel_width
+		width: Theme.geometry_size_44
 
 		value: root.yAxisReferenceValue
 		unit: VenusOS.Units_Percentage
@@ -211,7 +211,7 @@ Item {
 		anchors.left: parent.left
 		y: _operationPoint.y - yAxisReferenceQuantityLabel._yAdjustment * Math.sign(_guidelineIntersection.y - _operationPoint.y)
 			- yAxisReferenceQuantityLabel._yLabelHeight/2
-		width: Theme.geometry_droopGraph_yAxis_quantityLabel_width
+		width: Theme.geometry_size_44
 
 		value: yAxisReferenceValue + _operationDroop
 		unit: VenusOS.Units_Percentage
@@ -231,7 +231,7 @@ Item {
 
 		// This calculates an adjustment +/- to apply to each x axis label
 		property real _xLabelWidth: Math.max(width, xAxisOperationQuantityLabel.width)
-									+ Theme.geometry_droopGraph_xAxis_label_padding
+									+ Theme.geometry_size_4
 		property real _xAdjustment: Math.abs(_guidelineIntersection.x - _operationPoint.x) > _xLabelWidth
 									? 0
 									: (_xLabelWidth - Math.abs(_guidelineIntersection.x - _operationPoint.x))/2
@@ -258,14 +258,14 @@ Item {
 	CP.ColorImage {
 		x: _operationPoint.x - width/2
 		y: _operationPoint.y - height/2
-		sourceSize: Qt.size(Theme.geometry_droopGraph_operationPoint_diameter,Theme.geometry_droopGraph_operationPoint_diameter)
+		sourceSize: Qt.size(Theme.geometry_size_16,Theme.geometry_size_16)
 		source: "qrc:/images/dot.svg"
 		color: Theme.color_background_primary
 
 		CP.ColorImage {
 			anchors.centerIn: parent
-			sourceSize: Qt.size(Theme.geometry_droopGraph_operationPoint_diameter - Theme.geometry_droopGraph_operationPoint_border_width*2,
-								Theme.geometry_droopGraph_operationPoint_diameter - Theme.geometry_droopGraph_operationPoint_border_width*2)
+			sourceSize: Qt.size(Theme.geometry_size_16 - Theme.geometry_size_2*2,
+								Theme.geometry_size_16 - Theme.geometry_size_2*2)
 			source: "qrc:/images/dot.svg"
 			color: Theme.color_lightBlue
 		}

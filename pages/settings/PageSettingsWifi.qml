@@ -76,15 +76,15 @@ Page {
 			ListSetting {
 				id: accessPointPassword
 
-				topPadding: Theme.screenSize === Theme.Portrait ? topInset + Theme.geometry_listItem_content_verticalMargin : 0
-				bottomPadding: Theme.screenSize === Theme.Portrait ? topInset + Theme.geometry_listItem_content_verticalMargin : 0
+				topPadding: Theme.screenSize === Theme.Portrait ? topInset + Theme.geometry_listItem_content_spacing : 0
+				bottomPadding: Theme.screenSize === Theme.Portrait ? topInset + Theme.geometry_listItem_content_spacing : 0
 				preferredVisible: accessPoint.valid
 
 				contentItem: GridLayout {
 					columns: Theme.screenSize === Theme.Portrait ? 2 : 3
 					rows: Theme.screenSize === Theme.Portrait ? 2 : 1
 					columnSpacing: accessPointPassword.spacing
-					rowSpacing: Theme.geometry_listItem_content_verticalMargin // not needed, there is padding below the primary label already
+					rowSpacing: Theme.geometry_listItem_content_spacing // not needed, there is padding below the primary label already
 
 					Label {
 						//% "Access point password"
@@ -196,7 +196,7 @@ Page {
 			secondaryText: Utils.connmanServiceState(model.state)
 
 			// Move the text and arrow icon to the right of the checkmark icon space
-			leftPadding: leftInset + 2*spacing + Theme.geometry_icon_size_medium
+			leftPadding: leftInset + 2*spacing + Theme.geometry_size_32
 
 			CP.ColorImage {
 				anchors {

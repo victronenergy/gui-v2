@@ -19,14 +19,14 @@ Item {
 			? VenusOS.StatusBar_RightButton_SidePanelActive
 			: VenusOS.StatusBar_RightButton_SidePanelInactive
 
-	property real _gaugeArcMargin: Theme.geometry_briefPage_edgeGauge_initialize_margin
+	property real _gaugeArcMargin: Theme.geometry_size_10
 	property real _gaugeLabelMargin: Theme.geometry_briefPage_edgeGauge_label_initialize_margin
 	property real _gaugeArcOpacity: 0
 	property real _gaugeLabelOpacity: 0
 
 	readonly property int _leftGaugeCount: (acInputGauge.active ? 1 : 0) + (dcInputGauge.active ? 1 : 0) + (solarYieldGauge.active ? 1 : 0)
 	readonly property int _rightGaugeCount: (acLoadGauge.active ? 1 : 0) + (dcLoadGauge.active ? 1 : 0)
-	readonly property real _unexpandedHeight: Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height
+	readonly property real _unexpandedHeight: Theme.geometry_page_content_height
 
 	function initialize(animate) {
 		initializeTransition.enabled = animate
@@ -56,8 +56,8 @@ Item {
 		id: mainGauge
 
 		y: (root._unexpandedHeight - height) / 2
-		width: Theme.geometry_mainGauge_size
-		height: Theme.geometry_mainGauge_size
+		width: Theme.geometry_size_hero_large
+		height: Theme.geometry_size_hero_large
 		x: sidePanel.x/2 - width/2
 		sourceComponent: gaugeModel.count === 0 ? singleGauge : multiGauge
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load main gauge")
@@ -77,11 +77,11 @@ Item {
 			// Caption spans from the centre to the left quantity label.
 			// Longer captions span further, to the edge of the left gauge bars.
 			shortCaptionWidth: longCaptionWidth - (acInputGauge.item?.quantityWidth ?? 0)
-			longCaptionWidth: (root.width / 2) - (acInputGaugeColumn.x + acInputGaugeColumn.width + Theme.geometry_circularMultiGauge_spacing)
+			longCaptionWidth: (root.width / 2) - (acInputGaugeColumn.x + acInputGaugeColumn.width + Theme.geometry_shared_16_16_12)
 
 			BriefCenterDisplay {
 				anchors.centerIn: parent
-				width: parent.width - (gaugeModel.count * circularMultiGauge._stepSize) + Theme.geometry_circularMultiGauge_spacing
+				width: parent.width - (gaugeModel.count * circularMultiGauge._stepSize) + Theme.geometry_shared_16_16_12
 				showFullDetails: gaugeModel.count === 1
 			}
 		}
@@ -114,14 +114,14 @@ Item {
 		anchors {
 			verticalCenter: mainGauge.verticalCenter
 			left: parent.left
-			leftMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
+			leftMargin: Theme.geometry_page_content_horizontalMargin
 		}
-		width: Theme.geometry_briefPage_edgeGauge_width
+		width: Theme.geometry_size_80
 
 		Loader {
 			id: acInputGauge
 
-			width: Theme.geometry_briefPage_edgeGauge_width
+			width: Theme.geometry_size_80
 			height: active ? Gauges.gaugeHeight(root._leftGaugeCount) : 0
 
 			// Similarly to the Overview page, show the AC input, even when it is not connected, as
@@ -158,7 +158,7 @@ Item {
 					anchors {
 						left: acInGaugeQuantity.left
 						bottom: acInGaugeQuantity.top
-						bottomMargin: Theme.geometry_briefPage_edgeGauge_quantityLabel_feedback_margin
+						bottomMargin: Theme.geometry_size_4
 					}
 					input: Global.acInputs.highlightedInput
 				}
@@ -182,7 +182,7 @@ Item {
 		Loader {
 			id: dcInputGauge
 
-			width: Theme.geometry_briefPage_edgeGauge_width
+			width: Theme.geometry_size_80
 			height: active ? Gauges.gaugeHeight(root._leftGaugeCount) : 0
 			active: Global.dcInputs.model.count > 0 && root.state !== "panelOpened"
 			sourceComponent: SideGauge {
@@ -229,7 +229,7 @@ Item {
 		Loader {
 			id: solarYieldGauge
 
-			width: Theme.geometry_briefPage_edgeGauge_width
+			width: Theme.geometry_size_80
 			height: active ? Gauges.gaugeHeight(root._leftGaugeCount) : 0
 			active: Global.solarInputs.inputCount > 0 && root.state !== "panelOpened"
 			sourceComponent: SolarYieldGauge {
@@ -266,14 +266,14 @@ Item {
 		anchors {
 			verticalCenter: mainGauge.verticalCenter
 			right: parent.right
-			rightMargin: Theme.geometry_briefPage_edgeGauge_horizontalMargin
+			rightMargin: Theme.geometry_page_content_horizontalMargin
 		}
-		width: Theme.geometry_briefPage_edgeGauge_width
+		width: Theme.geometry_size_80
 
 		Loader {
 			id: acLoadGauge
 
-			width: Theme.geometry_briefPage_edgeGauge_width
+			width: Theme.geometry_size_80
 			height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
 			active: Global.system.hasAcLoads && root.state !== "panelOpened"
 
@@ -311,7 +311,7 @@ Item {
 		Loader {
 			id: dcLoadGauge
 
-			width: Theme.geometry_briefPage_edgeGauge_width
+			width: Theme.geometry_size_80
 			height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
 			active: Global.system.dc.hasPower && root.state !== "panelOpened"
 
@@ -362,9 +362,9 @@ Item {
 
 	Loader {
 		id: sidePanel
-		width: Theme.geometry_briefPage_sidePanel_width
+		width: Theme.geometry_size_hero_medium
 		sourceComponent: BriefSidePanel {
-			width: Theme.geometry_briefPage_sidePanel_width
+			width: Theme.geometry_size_hero_medium
 			height: Math.max(root._unexpandedHeight, implicitHeight)
 			animationEnabled: root.animationEnabled
 		}

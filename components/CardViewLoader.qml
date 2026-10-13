@@ -33,7 +33,7 @@ Loader {
 		ParallelAnimation {
 			YAnimator {
 				target: root
-				from: root.statusBarItem.height - Theme.geometry_controlCards_slide_distance
+				from: root.statusBarItem.height - Theme.geometry_size_32
 				to: root.statusBarItem.height
 				duration: root._animationDuration
 				easing.type: Easing.OutSine
@@ -78,7 +78,7 @@ Loader {
 			YAnimator {
 				target: root
 				from: root.statusBarItem.height
-				to: root.statusBarItem.height - Theme.geometry_controlCards_slide_distance
+				to: root.statusBarItem.height - Theme.geometry_size_32
 				duration: root._animationDuration
 				easing.type: Easing.InSine
 			}

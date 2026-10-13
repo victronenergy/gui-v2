@@ -27,7 +27,7 @@ Row {
 
 	readonly property bool _showSeparators: !tableMode
 
-	spacing: Theme.geometry_quantityGroupRow_spacing
+	spacing: Theme.geometry_size_12
 
 	Repeater {
 		id: quantityRepeater
@@ -43,7 +43,7 @@ Row {
 				: quantityObject.unit === VenusOS.Units_None ? implicitWidth
 				: quantityMetrics.columnWidth(quantityObject.unit, decimals)
 						+ (root.padLastColumn && index === root.model.count - 1 ? root.spacing : 0)
-			leftPadding: (verticalSeparator.visible ? Theme.geometry_listItem_separator_width : 0)
+			leftPadding: (verticalSeparator.visible ? Theme.geometry_size_1 : 0)
 					+ (root._showSeparators ? root.spacing : 0) // offset the space to the previous item
 			alignment: root.labelAlignment
 			opacity: quantityObject.hidden ? 0 : 1
@@ -63,7 +63,7 @@ Row {
 			Rectangle {
 				id: verticalSeparator
 				anchors.verticalCenter: parent.verticalCenter
-				width: Theme.geometry_listItem_separator_width
+				width: Theme.geometry_size_1
 				height: quantityMetrics.height
 				visible: root._showSeparators && quantityDelegate.index > 0
 				color: Theme.color_listItem_separator

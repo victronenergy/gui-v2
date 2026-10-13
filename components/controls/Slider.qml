@@ -26,10 +26,10 @@ T.Slider {
 		x: root.leftPadding
 		y: root.topPadding + (root.availableHeight / 2) - (height / 2)
 		implicitWidth: Theme.geometry_slider_groove_width
-		implicitHeight: Theme.geometry_slider_groove_height
+		implicitHeight: Theme.geometry_size_8
 		width: root.availableWidth
 		height: implicitHeight
-		radius: Theme.geometry_slider_groove_radius
+		radius: Theme.geometry_size_8
 		foregroundColor: root.highlightColor
 		backgroundColor: root.grooveColor
 		orientation: Qt.Horizontal // we have no vertical sliders at present
@@ -39,9 +39,9 @@ T.Slider {
 
 	handle: Image {
 		x: visible ? root.leftPadding + root.visualPosition * (root.availableWidth - width) : 0
-		y: visible ? root.topPadding + root.availableHeight / 2 - height / 2 + Theme.geometry_switch_indicator_shadowOffset : 0
-		width: Theme.geometry_switch_indicator_width
-		height: Theme.geometry_switch_indicator_width
+		y: visible ? root.topPadding + root.availableHeight / 2 - height / 2 + Theme.geometry_size_2 : 0
+		width: Theme.geometry_size_28
+		height: Theme.geometry_size_28
 		source: "qrc:/images/switch_indicator.png"
 		visible: root.showHandle
 

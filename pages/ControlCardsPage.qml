@@ -12,7 +12,7 @@ Page {
 
 	readonly property alias flickableView: cardsView
 	readonly property int cardWidth: Theme.screenSize === Theme.Portrait
-		? Theme.geometry_screen_width - (2 * Theme.geometry_page_content_horizontalMargin)
+		? Theme.geometry_page_content_width
 		: (cardsView.count > 2 ? Theme.geometry_controlCard_minimumWidth : Theme.geometry_controlCard_maximumWidth)
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsActive
@@ -28,9 +28,9 @@ Page {
 
 		anchors {
 			fill: parent
-			leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
-			rightMargin: Theme.geometry_controlCardsPage_horizontalMargin
-			bottomMargin: Theme.geometry_controlCardsPage_bottomMargin
+			leftMargin: Theme.geometry_page_content_horizontalMargin
+			rightMargin: Theme.geometry_page_content_horizontalMargin
+			bottomMargin: Theme.geometry_shared_16_24_24
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal

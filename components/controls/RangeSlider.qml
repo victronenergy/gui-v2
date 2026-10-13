@@ -21,18 +21,18 @@ T.RangeSlider {
 		x: root.leftPadding
 		y: root.topPadding + (root.availableHeight / 2) - (height / 2)
 		implicitWidth: Theme.geometry_slider_groove_width
-		implicitHeight: Theme.geometry_slider_groove_height
+		implicitHeight: Theme.geometry_size_8
 		width: root.availableWidth
 		height: implicitHeight
-		radius: Theme.geometry_slider_groove_radius
+		radius: Theme.geometry_size_8
 		color: Theme.color_darkOk
 
 		Rectangle {
 			x: root.first.visualPosition * parent.width
 			width: root.second.visualPosition * parent.width - x
-			height: Theme.geometry_slider_groove_height
+			height: Theme.geometry_size_8
 			color: Theme.color_ok
-			radius: Theme.geometry_slider_groove_radius
+			radius: Theme.geometry_size_8
 		}
 	}
 
@@ -41,10 +41,10 @@ T.RangeSlider {
 			left: parent.left
 			leftMargin: root.leftPadding + root.first.visualPosition * (root.availableWidth - width)
 			top: parent.top
-			topMargin: root.topPadding + root.availableHeight / 2 - height / 2 + Theme.geometry_switch_indicator_shadowOffset
+			topMargin: root.topPadding + root.availableHeight / 2 - height / 2 + Theme.geometry_size_2
 		}
-		width: Theme.geometry_switch_indicator_width
-		height: Theme.geometry_switch_indicator_width
+		width: Theme.geometry_size_28
+		height: Theme.geometry_size_28
 		source: "qrc:/images/switch_indicator.png"
 		color: root.firstColor
 
@@ -59,10 +59,10 @@ T.RangeSlider {
 			left: parent.left
 			leftMargin: root.leftPadding + root.second.visualPosition * (root.availableWidth - width)
 			top: parent.top
-			topMargin: root.topPadding + root.availableHeight / 2 - height / 2 + Theme.geometry_switch_indicator_shadowOffset
+			topMargin: root.topPadding + root.availableHeight / 2 - height / 2 + Theme.geometry_size_2
 		}
-		width: Theme.geometry_switch_indicator_width
-		height: Theme.geometry_switch_indicator_width
+		width: Theme.geometry_size_28
+		height: Theme.geometry_size_28
 		source: "qrc:/images/switch_indicator.png"
 		color: root.secondColor
 

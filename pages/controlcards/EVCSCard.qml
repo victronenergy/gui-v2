@@ -46,7 +46,7 @@ ControlCard {
 			left: parent.left
 			right: parent.right
 		}
-		bottomPadding: Theme.geometry_controlCard_contentMargins
+		bottomPadding: Theme.geometry_size_16
 
 		ListButton {
 			id: modeListButton

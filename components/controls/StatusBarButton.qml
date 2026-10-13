@@ -9,8 +9,8 @@ import Victron.VenusOS
 Button {
 	id: root
 
-	defaultBackgroundWidth: Theme.geometry_statusBar_button_height
-	defaultBackgroundHeight: Theme.geometry_statusBar_button_height
+	defaultBackgroundWidth: (Theme.geometry_statusBar_height - Theme.geometry_size_4)
+	defaultBackgroundHeight: (Theme.geometry_statusBar_height - Theme.geometry_size_4)
 	radius: 0
 	backgroundColor: "transparent"  // don't show background when disabled
 	display: Button.IconOnly

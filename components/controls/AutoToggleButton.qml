@@ -32,12 +32,12 @@ BaseAutoToggleSwitch {
 
 			// Expand clickable area left (to delegate edge), right (halfway to auto button), and
 			// vertically. Paddings don't need adjustment as that is done internally by the control.
-			defaultBackgroundWidth: root.defaultBackgroundWidth - autoButton.defaultBackgroundWidth - Theme.geometry_iochannel_spacing
+			defaultBackgroundWidth: root.defaultBackgroundWidth - autoButton.defaultBackgroundWidth - Theme.geometry_size_16
 			defaultBackgroundHeight: Theme.geometry_iochannel_control_height
-			topInset: Theme.geometry_button_touch_verticalMargin
-			bottomInset: Theme.geometry_button_touch_verticalMargin
-			leftInset: Theme.geometry_controlCard_button_margins
-			rightInset: Theme.geometry_iochannel_spacing / 2
+			topInset: Theme.geometry_size_14
+			bottomInset: Theme.geometry_size_14
+			leftInset: Theme.geometry_shared_24_24_16
+			rightInset: Theme.geometry_size_16 / 2
 
 			onOnClicked: root.autoChecked ? root.notification() : root.onClicked()
 			onOffClicked: root.autoChecked ? root.notification() : root.offClicked()
@@ -47,9 +47,9 @@ BaseAutoToggleSwitch {
 			id: autoButton
 
 			anchors.right: parent.right
-			radius: Theme.geometry_button_radius
+			radius: Theme.geometry_size_8
 			flat: false
-			borderWidth: Theme.geometry_button_border_width
+			borderWidth: Theme.geometry_size_2
 			borderColor: root.enabled ? Theme.color_ok : Theme.color_font_disabled
 			text: CommonWords.auto
 			checked: root.autoChecked
@@ -57,12 +57,12 @@ BaseAutoToggleSwitch {
 
 			// Expand clickable area left (halfway to toggle buttons), right (to delegate edge), and
 			// vertically. Paddings don't need adjustment as that is done internally by the control.
-			defaultBackgroundWidth: (root.defaultBackgroundWidth - Theme.geometry_iochannel_spacing) / root.buttonCount
+			defaultBackgroundWidth: (root.defaultBackgroundWidth - Theme.geometry_size_16) / root.buttonCount
 			defaultBackgroundHeight: root.defaultBackgroundHeight
-			topInset: Theme.geometry_button_touch_verticalMargin
-			bottomInset: Theme.geometry_button_touch_verticalMargin
-			leftInset: Theme.geometry_iochannel_spacing / 2
-			rightInset: Theme.geometry_controlCard_button_margins
+			topInset: Theme.geometry_size_14
+			bottomInset: Theme.geometry_size_14
+			leftInset: Theme.geometry_size_16 / 2
+			rightInset: Theme.geometry_shared_24_24_16
 			topPadding: topInset
 			bottomPadding: bottomInset
 			leftPadding: leftInset

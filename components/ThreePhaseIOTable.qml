@@ -27,7 +27,7 @@ ListItem {
 				? root.availableWidth
 				: (root.availableWidth - spacing) / 2
 
-		spacing: Theme.geometry_vebusDeviceListPage_quantityTable_row_spacing
+		spacing: Theme.geometry_shared_4_4_0
 
 		ThreePhaseQuantityTable {
 			id: inputTable

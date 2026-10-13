@@ -12,7 +12,7 @@ Label {
 
 	property alias icon: icon
 
-	leftPadding: icon.width + Theme.geometry_widgetHeader_spacing
+	leftPadding: icon.width + Theme.geometry_size_4
 	elide: Text.ElideRight
 	verticalAlignment: Text.AlignVCenter
 	font.pixelSize: Theme.font_control_title
@@ -21,8 +21,8 @@ Label {
 		id: icon
 
 		anchors.verticalCenter: parent.verticalCenter
-		width: Theme.geometry_widgetHeader_icon_size
-		height: Theme.geometry_widgetHeader_icon_size
+		width: Theme.geometry_size_24
+		height: Theme.geometry_size_24
 		fillMode: Image.Pad
 		color: parent.color
 	}

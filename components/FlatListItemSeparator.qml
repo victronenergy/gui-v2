@@ -13,10 +13,10 @@ Item {
 	SeparatorBar {
 		id: bar
 
-		x: Theme.geometry_separatorBar_horizontalMargin
-		y: -(Theme.geometry_gradientList_spacing / 2)
-		width: parent.width - (2 * Theme.geometry_separatorBar_horizontalMargin)
-		height: Theme.geometry_separatorBar_size
+		x: Theme.geometry_size_8
+		y: -(Theme.geometry_size_4 / 2)
+		width: parent.width - (2 * Theme.geometry_size_8)
+		height: Theme.geometry_size_1
 		color: Theme.color_card_separator
 	}
 }

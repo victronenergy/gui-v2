@@ -23,7 +23,7 @@ Boat.Background { // the blue shadows
 			left: parent.left
 			leftMargin: Theme.geometry_page_content_horizontalMargin
 		}
-		y: (root.Theme.geometry_screen_height - Theme.geometry_statusBar_height - Theme.geometry_navigationBar_height - height) / 2
+		y: (Theme.geometry_page_content_height - height) / 2
 		motorDrives: motorDrives
 		gps: _gps
 		animationEnabled: root.animationEnabled
@@ -36,7 +36,7 @@ Boat.Background { // the blue shadows
 			left: slotLeftArc.left
 			leftMargin: Theme.geometry_boatPage_batteryGauge_leftMargin
 			verticalCenter: slotLeftArc.verticalCenter
-			verticalCenterOffset: Theme.geometry_boatPage_batteryGauge_verticalCenterOffset
+			verticalCenterOffset: Theme.geometry_offset_n5_n2
 		}
 		motorDrives: motorDrives
 		gps: _gps

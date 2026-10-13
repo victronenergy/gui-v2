@@ -28,14 +28,14 @@ T.ScrollBar {
 	Behavior on opacity { OpacityAnimator { duration: Theme.animation_scrollbar_fade_duration; easing.type: Easing.InOutQuad } }
 
 	background: Item {
-		implicitWidth: Theme.geometry_scrollBar_bar_width
+		implicitWidth: Theme.geometry_size_8
 		implicitHeight: 100
 	}
 
 	contentItem: Rectangle {
-		implicitWidth: Theme.geometry_scrollBar_bar_width
+		implicitWidth: Theme.geometry_size_8
 		implicitHeight: 100
-		radius: Theme.geometry_scrollBar_bar_radius
+		radius: Theme.geometry_size_8
 		color: Theme.color_scrollBar_bar
 	}
 }

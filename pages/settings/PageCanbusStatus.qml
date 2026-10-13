@@ -117,7 +117,7 @@ Page {
 				preferredVisible: root._showStateGroup
 				contentItem: GridLayout {
 					columns: Theme.screenSize === Theme.Portrait ? 1 : 2
-					rowSpacing: Theme.geometry_listItem_content_verticalSpacing
+					rowSpacing: Theme.geometry_size_4
 					columnSpacing: Theme.geometry_listItem_content_spacing
 
 					Label {
@@ -152,7 +152,7 @@ Page {
 
 				contentItem: GridLayout {
 					columns: 2
-					rowSpacing: Theme.geometry_listItem_content_verticalSpacing
+					rowSpacing: Theme.geometry_size_4
 					columnSpacing: Theme.geometry_listItem_content_spacing
 
 					Label {
@@ -184,7 +184,7 @@ Page {
 
 				contentItem: GridLayout {
 					columns: 2
-					rowSpacing: Theme.geometry_listItem_content_verticalSpacing
+					rowSpacing: Theme.geometry_size_4
 					columnSpacing: Theme.geometry_listItem_content_spacing
 
 					Label {

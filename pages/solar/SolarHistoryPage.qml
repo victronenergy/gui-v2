@@ -83,7 +83,7 @@ Page {
 			right: parent.right
 			rightMargin: Theme.geometry_page_content_horizontalMargin
 			top: Theme.screenSize === Theme.Portrait ? tabBar.bottom : tabBar.top
-			topMargin: Theme.screenSize === Theme.Portrait ? Theme.geometry_listItem_content_verticalMargin : 0
+			topMargin: Theme.screenSize === Theme.Portrait ? Theme.geometry_listItem_content_spacing : 0
 		}
 		width: Theme.screenSize === Theme.Portrait
 			   ? parent.width - (2 * Theme.geometry_page_content_horizontalMargin)
@@ -115,8 +115,8 @@ Page {
 		// stretchTableVertically changes value (when switching tabs).
 		x: Theme.geometry_page_content_horizontalMargin
 		width: parent.width - (2 * Theme.geometry_page_content_horizontalMargin)
-		y: daysComboBox.y + daysComboBox.height + Theme.geometry_listItem_content_verticalMargin
-		height: stretchTableVertically ? parent.height - y - Theme.geometry_listItem_content_verticalMargin : implicitHeight
+		y: daysComboBox.y + daysComboBox.height + Theme.geometry_listItem_content_spacing
+		height: stretchTableVertically ? parent.height - y - Theme.geometry_listItem_content_spacing : implicitHeight
 
 		solarHistory: root.solarHistory
 		dayRange: daysComboBox.model[daysComboBox.currentIndex].dayRange

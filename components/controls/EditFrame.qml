@@ -10,12 +10,12 @@ import Victron.VenusOS
 Rectangle {
 	id: root
 
-	property real arrowMargin: Theme.geometry_focus_highlight_border_size
+	property real arrowMargin: Theme.geometry_size_4
 
 	color: "transparent"
 	border.color: Theme.color_focus_highlight
-	border.width: Theme.geometry_focus_highlight_border_size
-	radius: Theme.geometry_button_radius
+	border.width: Theme.geometry_size_4
+	radius: Theme.geometry_size_8
 
 	CP.ColorImage {
 		anchors {
