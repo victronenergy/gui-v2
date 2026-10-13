@@ -77,6 +77,7 @@ TestCase {
 					type: ToastModel.data(index, ToastModel.ToastRoles.Type),
 					description: ToastModel.data(index, ToastModel.ToastRoles.Description),
 					modelId: ToastModel.data(index, ToastModel.ToastRoles.ModelId),
+					textFormat: ToastModel.data(index, ToastModel.ToastRoles.TextFormat),
 				}
 			}
 		}
@@ -699,5 +700,46 @@ TestCase {
 			compare(toast.type, expectedType,
 					"N=" + n + " slot=" + slotIndex + ": toast type correct")
 		}
+	}
+
+	// -----------------------------------------------------------------------
+	// Test: Notification toasts show device-supplied text as auto text.
+	// -----------------------------------------------------------------------
+	function test_notificationToastIsAutoText() {
+		setNotificationSlot(0, {
+			deviceName: "<b>Custom name</b>",
+			description: "Low battery voltage",
+			type: VenusOS.Notification_Alarm,
+			active: 1,
+			acknowledged: 0,
+		})
+		wait(1) // one event-loop pump for childAdded QueuedConnection → watchSlot
+
+		const modelId = notificationModelIdForSlot(0)
+		const toast = findToastForNotification(modelId)
+		verify(toast !== null, "Toast was created")
+		compare(toast.textFormat, Qt.AutoText)
+	}
+
+	// -----------------------------------------------------------------------
+	// Test: A toast added with PlainText keeps that format, so markup in the
+	// text (e.g. a password) is not interpreted as rich text.
+	// -----------------------------------------------------------------------
+	function test_toastIsPlainText() {
+		const text = "Root password changed to <b>secret</b>&amp;"
+		const modelId = ToastModel.add(VenusOS.Notification_Info, text, 5000, Text.PlainText)
+		verify(modelId !== 0, "Toast was created")
+
+		let found = false
+		for (let i = 0; i < ToastModel.rowCount(); ++i) {
+			const index = ToastModel.index(i, 0)
+			if (ToastModel.data(index, ToastModel.ToastRoles.ModelId) === modelId) {
+				compare(ToastModel.data(index, ToastModel.ToastRoles.Description), text)
+				compare(ToastModel.data(index, ToastModel.ToastRoles.TextFormat), Text.PlainText)
+				found = true
+				break
+			}
+		}
+		verify(found, "Toast found in model")
 	}
 }

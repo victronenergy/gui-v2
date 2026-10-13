@@ -18,6 +18,7 @@ Item {
 	property alias backgroundColor: background.color
 	property alias highlightColor: highlight.color
 	property string text
+	property int textFormat: Text.AutoText
 
 	readonly property bool isSilenceButton: notificationModelId !== 0
 			&& (root.type === VenusOS.Notification_Warning || root.type === VenusOS.Notification_Alarm)
@@ -130,6 +131,7 @@ Item {
 				leftPadding: Theme.geometry_toastNotification_padding
 				verticalAlignment: Text.AlignVCenter
 				text: root.text
+				textFormat: root.textFormat
 				wrapMode: Text.Wrap
 				maximumLineCount: 12
 				elide: Text.ElideRight
