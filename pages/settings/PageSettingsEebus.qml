@@ -39,7 +39,7 @@ Page {
 				readonly property string deviceUid: buddy.itemParent()?.uid ?? ""
 				readonly property string name: nameItem.valid ? nameItem.value : ""
 
-				sortValue: buddy.valid ? "" : name
+				sortValue: buddy.valid ? "" : name.toUpperCase()
 
 				VeQuickItem {
 					id: nameItem
