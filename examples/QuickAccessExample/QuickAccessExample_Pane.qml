@@ -1,3 +1,8 @@
+/*
+** Copyright (C) 2026 Victron Energy B.V.
+** See LICENSE.txt for license information.
+*/
+
 import QtQuick
 import QtQuick.Layouts
 import Victron.VenusOS

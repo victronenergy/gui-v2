@@ -12,6 +12,10 @@ FocusScope {
 
 	required property PageStack pageStack
 
+	// Repeater count changes before delegates exist. itemAt() is not a binding
+	// dependency, so key chains must also read this counter (bumped from the delegate).
+	property int pluginButtonReady: 0
+
 	signal controlCardsActivated()
 	signal auxCardsActivated()
 	signal cardsDeactivated()
@@ -25,10 +29,6 @@ FocusScope {
 		}
 		return null
 	}
-
-	// Repeater count changes before delegates exist. itemAt() is not a binding
-	// dependency, so key chains must also read this counter (bumped from the delegate).
-	property int pluginButtonReady: 0
 
 	function focusablesAfterPlugin(startIndex) {
 		void pluginButtonReady

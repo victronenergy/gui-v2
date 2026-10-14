@@ -1,3 +1,8 @@
+/*
+** Copyright (C) 2026 Victron Energy B.V.
+** See LICENSE.txt for license information.
+*/
+
 import QtQuick
 import QtQuick.Layouts
 import Victron.VenusOS
@@ -43,6 +48,19 @@ FocusScope {
 		return cols === 2 ? 2 : 3
 	}
 
+	// Tile order is row-major, so the neighbor on the right changes when the
+	// grid drops from three columns to two.
+	function tileNeighbor(index, rowDelta, columnDelta) {
+		const columns = gridColumns
+		const row = Math.floor(index / columns) + rowDelta
+		const column = (index % columns) + columnDelta
+		if (row < 0 || column < 0 || column >= columns)
+			return null
+		const next = row * columns + column
+		const tiles = [batteryTile, solarTile, propaneTile, waterTile, pumpTile, dcTile]
+		return next < tiles.length ? tiles[next] : null
+	}
+
 	Connections {
 		target: GuiPluginLoader
 		function onPluginUiStateChanged(name) {
@@ -70,8 +88,8 @@ FocusScope {
 			border.width: batteryTile.activeFocus ? 3 : root.tileBorderWidth
 			focus: true
 			activeFocusOnTab: true
-			KeyNavigation.right: solarTile
-			KeyNavigation.down: waterTile
+			KeyNavigation.right: root.tileNeighbor(0, 0, 1)
+			KeyNavigation.down: root.tileNeighbor(0, 1, 0)
 
 			Column {
 				anchors.fill: parent
@@ -123,9 +141,9 @@ FocusScope {
 			border.color: solarTile.activeFocus ? Theme.color_focus_highlight : root.tileBorder
 			border.width: solarTile.activeFocus ? 3 : root.tileBorderWidth
 			activeFocusOnTab: true
-			KeyNavigation.left: batteryTile
-			KeyNavigation.right: propaneTile
-			KeyNavigation.down: pumpTile
+			KeyNavigation.left: root.tileNeighbor(1, 0, -1)
+			KeyNavigation.right: root.tileNeighbor(1, 0, 1)
+			KeyNavigation.down: root.tileNeighbor(1, 1, 0)
 
 			Column {
 				anchors.fill: parent
@@ -172,8 +190,10 @@ FocusScope {
 			border.color: propaneTile.activeFocus ? Theme.color_focus_highlight : root.tileBorder
 			border.width: propaneTile.activeFocus ? 3 : root.tileBorderWidth
 			activeFocusOnTab: true
-			KeyNavigation.left: solarTile
-			KeyNavigation.down: dcTile
+			KeyNavigation.left: root.tileNeighbor(2, 0, -1)
+			KeyNavigation.right: root.tileNeighbor(2, 0, 1)
+			KeyNavigation.up: root.tileNeighbor(2, -1, 0)
+			KeyNavigation.down: root.tileNeighbor(2, 1, 0)
 
 			Column {
 				anchors.fill: parent
@@ -245,8 +265,10 @@ FocusScope {
 			border.color: waterTile.activeFocus ? Theme.color_focus_highlight : root.tileBorder
 			border.width: waterTile.activeFocus ? 3 : root.tileBorderWidth
 			activeFocusOnTab: true
-			KeyNavigation.up: batteryTile
-			KeyNavigation.right: pumpTile
+			KeyNavigation.up: root.tileNeighbor(3, -1, 0)
+			KeyNavigation.down: root.tileNeighbor(3, 1, 0)
+			KeyNavigation.left: root.tileNeighbor(3, 0, -1)
+			KeyNavigation.right: root.tileNeighbor(3, 0, 1)
 
 			Column {
 				anchors.fill: parent
@@ -306,9 +328,9 @@ FocusScope {
 			border.width: pumpTile.activeFocus ? 3 : root.tileBorderWidth
 			focus: true
 			activeFocusOnTab: true
-			KeyNavigation.up: solarTile
-			KeyNavigation.left: waterTile
-			KeyNavigation.right: dcTile
+			KeyNavigation.up: root.tileNeighbor(4, -1, 0)
+			KeyNavigation.left: root.tileNeighbor(4, 0, -1)
+			KeyNavigation.right: root.tileNeighbor(4, 0, 1)
 
 			Behavior on color {
 				ColorAnimation { duration: 200 }
@@ -360,8 +382,9 @@ FocusScope {
 			border.color: dcTile.activeFocus ? Theme.color_focus_highlight : root.tileBorder
 			border.width: dcTile.activeFocus ? 3 : root.tileBorderWidth
 			activeFocusOnTab: true
-			KeyNavigation.up: propaneTile
-			KeyNavigation.left: pumpTile
+			KeyNavigation.up: root.tileNeighbor(5, -1, 0)
+			KeyNavigation.left: root.tileNeighbor(5, 0, -1)
+			KeyNavigation.right: root.tileNeighbor(5, 0, 1)
 
 			Column {
 				anchors.fill: parent
