@@ -304,8 +304,8 @@ Page {
 					{ display: qsTrId("page_settings_demo_2"), value: 3 },
 				]
 
-				//% "Starting demo mode will change some settings and the user interface will be unresponsive for a moment."
-				caption: qsTrId("settings_demo_mode_caption")
+				//% "Starting demo mode changes some settings and causes the screen to stop responding for a moment."
+				caption: qsTrId("settings_demo_mode_consequence")
 
 				onOptionClicked: function(index) {
 					Qt.callLater(Global.main.rebuildUi)

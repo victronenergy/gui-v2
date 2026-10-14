@@ -17,8 +17,8 @@ Page {
 				text: qsTrId("settings_minmax_autorange")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
 				writeAccessLevel: VenusOS.User_AccessType_User
-				//% "When enabled, the minima and maxima of gauges and graphs are automatically adjusted based on past values."
-				caption: qsTrId("settings_minmax_autorange_desc")
+				//% "Adjust the minima and maxima of gauges and graphs automatically, based on past values."
+				caption: qsTrId("settings_minmax_autorange_adjust_desc")
 			}
 
 			ListButton {
