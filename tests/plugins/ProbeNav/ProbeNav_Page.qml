@@ -2,13 +2,14 @@ import QtQuick
 import Victron.VenusOS
 
 Item {
+	id: root
+
+	property int ticks: 0
+
 	Timer {
 		interval: 200
 		repeat: true
 		running: true
-		onTriggered: {
-			const n = Number(GuiPluginLoader.pluginSetting("ProbeNav", "ticks", 0))
-			GuiPluginLoader.setPluginSetting("ProbeNav", "ticks", n + 1)
-		}
+		onTriggered: root.ticks++
 	}
 }

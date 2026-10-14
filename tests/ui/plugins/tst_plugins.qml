@@ -33,35 +33,9 @@ UiTestCase {
 				console.warn("PROBE plugins missing:", names)
 				return false
 			}
-			const ticks = Number(GuiPluginLoader.pluginSetting("ProbeNav", "ticks", 0))
+			const ticks = root.probeNavTicks()
 			console.warn("PROBE ticks before visit", ticks)
 			return ticks === 0
-		}})
-		runSteps()
-	}
-
-	function test_enable_keeps_current_page() {
-		addStep(UiTestStep.WaitUntil, { callable: root.ready, timeout: 90000 })
-		addStep(UiTestStep.Invoke, { callable: () => Global.mainView.navBar.setCurrentPage("NotificationsPage.qml") })
-		addStep(UiTestStep.WaitUntil, {
-			callable: () => String(Global.mainView.swipeView.currentItem.url).endsWith("NotificationsPage.qml"),
-			timeout: 5000
-		})
-		addStep(UiTestStep.Invoke, { callable: () => {
-			GuiPluginLoader.setPluginEnabled("ProbeNav", false)
-			return true
-		}})
-		addStep(UiTestStep.Wait, { timeout: 500 })
-		addStep(UiTestStep.Invoke, { callable: () => {
-			const url = String(Global.mainView.swipeView.currentItem ? Global.mainView.swipeView.currentItem.url : "")
-			console.warn("PAGE after enable flip", url, "nav", Global.mainView.navBar.currentIndex,
-					"probe still listed", root.navHas("ProbeNav_Page.qml"))
-			if (root.navHas("ProbeNav_Page.qml"))
-				return false
-			if (!url.endsWith("NotificationsPage.qml"))
-				return false
-			GuiPluginLoader.setPluginEnabled("ProbeNav", true)
-			return true
 		}})
 		runSteps()
 	}
@@ -73,6 +47,37 @@ UiTestCase {
 				return true
 		}
 		return false
+	}
+
+	function probeNavPage() {
+		const pages = Global.mainView.navBar.pages
+		for (let i = 0; i < pages.length; ++i) {
+			if (String(pages[i].url).indexOf("ProbeNav_Page.qml") >= 0)
+				return pages[i]
+		}
+		return null
+	}
+
+	function readTicks(item) {
+		if (!item)
+			return 0
+		if (item.ticks !== undefined)
+			return Number(item.ticks)
+		const children = item.children
+		if (!children)
+			return 0
+		for (let i = 0; i < children.length; ++i) {
+			if (children[i] && children[i].ticks !== undefined)
+				return Number(children[i].ticks)
+			const nested = root.readTicks(children[i])
+			if (nested > 0)
+				return nested
+		}
+		return 0
+	}
+
+	function probeNavTicks() {
+		return root.readTicks(root.probeNavPage())
 	}
 
 	// findItem walks QObject children and misses this portrait repeater's icon.
@@ -98,35 +103,25 @@ UiTestCase {
 		return img ? findClickableParent(img) : null
 	}
 
-	function test_disabled_nav_plugin_stops() {
+	function test_nav_plugin_ticks_while_shown() {
 		addStep(UiTestStep.WaitUntil, { callable: root.ready, timeout: 90000 })
 		addStep(UiTestStep.WaitUntil, { callable: () => root.navHas("ProbeNav_Page.qml"), timeout: 5000 })
 		addStep(UiTestStep.Invoke, { callable: () => Global.mainView.navBar.setCurrentPage("ProbeNav_Page.qml") })
 		addStep(UiTestStep.Wait, { timeout: 500 })
 		addStep(UiTestStep.Invoke, { callable: () => {
-			root._ticksAtOpen = Number(GuiPluginLoader.pluginSetting("ProbeNav", "ticks", 0))
+			root._ticksAtOpen = root.probeNavTicks()
 			return true
 		}})
 		addStep(UiTestStep.Wait, { timeout: 500 })
 		addStep(UiTestStep.Invoke, { callable: () => {
-			const now = Number(GuiPluginLoader.pluginSetting("ProbeNav", "ticks", 0))
+			const now = root.probeNavTicks()
 			console.warn("PROBE ticks while open", root._ticksAtOpen, "->", now)
-			if (now <= root._ticksAtOpen)
-				return false
-			root._ticksBeforeDisable = now
-			GuiPluginLoader.setPluginEnabled("ProbeNav", false)
-			return true
-		}})
-		addStep(UiTestStep.Wait, { timeout: 700 })
-		addStep(UiTestStep.Invoke, { callable: () => {
-			const now = Number(GuiPluginLoader.pluginSetting("ProbeNav", "ticks", 0))
-			console.warn("PROBE ticks after disable", root._ticksBeforeDisable, "->", now)
-			return now === root._ticksBeforeDisable
+			return now > root._ticksAtOpen
 		}})
 		runSteps()
 	}
 
-	function test_quickaccess_pane_survives_reset() {
+	function test_quickaccess_pane_opens_and_closes() {
 		addStep(UiTestStep.WaitUntil, { callable: root.ready, timeout: 90000 })
 		addStep(UiTestStep.Invoke, { callable: () => {
 			if (Global.mainView.cardsActive)
@@ -141,15 +136,10 @@ UiTestCase {
 		}})
 		addStep(UiTestStep.WaitUntil, { callable: () => Global.mainView.cardsActive, timeout: 5000 })
 		addStep(UiTestStep.Invoke, { callable: () => {
-			GuiPluginLoader.setPluginEnabled("ProbeCard", false)
-			return true
-		}})
-		addStep(UiTestStep.Wait, { timeout: 400 })
-		addStep(UiTestStep.Invoke, { callable: () => {
 			const img = findItem(Global.mainView.statusBar, { "source": Qt.url("qrc:/ProbeQuick/icon_brick.svg") })
 			const btn = findClickableParent(img)
 			if (!btn) {
-				console.warn("ProbeQuick button missing after model reset")
+				console.warn("ProbeQuick button missing")
 				return false
 			}
 			console.warn("PANE cardsActive", Global.mainView.cardsActive, "opacity", btn.opacity, "visible", btn.visible)
@@ -165,39 +155,11 @@ UiTestCase {
 		runSteps()
 	}
 
-	function test_disabling_open_quickaccess_closes_pane() {
-		addStep(UiTestStep.WaitUntil, { callable: root.ready, timeout: 90000 })
-		addStep(UiTestStep.Invoke, { callable: () => {
-			GuiPluginLoader.setPluginEnabled("ProbeQuick", true)
-			if (Global.mainView.cardsActive)
-				Global.mainView.cardsLoader.hide()
-			const img = findItem(Global.mainView.statusBar, { "source": Qt.url("qrc:/ProbeQuick/icon_brick.svg") })
-			const btn = findClickableParent(img)
-			if (!btn) {
-				console.warn("ProbeQuick button not found for close-on-disable")
-				return false
-			}
-			return mouseClick(btn)
-		}})
-		addStep(UiTestStep.WaitUntil, { callable: () => Global.mainView.cardsActive, timeout: 5000 })
-		addStep(UiTestStep.Invoke, { callable: () => {
-			GuiPluginLoader.setPluginEnabled("ProbeQuick", false)
-			return true
-		}})
-		addStep(UiTestStep.Wait, { timeout: 400 })
-		addStep(UiTestStep.Invoke, { callable: () => {
-			console.warn("PANE cardsActive after disabling ProbeQuick", Global.mainView.cardsActive)
-			return !Global.mainView.cardsActive
-		}})
-		runSteps()
-	}
-
 	function test_portrait_hides_plugin_icon_on_subpage() {
 		addStep(UiTestStep.WaitUntil, { callable: root.ready, timeout: 90000 })
 		addStep(UiTestStep.Invoke, { callable: () => {
 			if (Global.mainView.cardsActive)
 				Global.mainView.cardsLoader.hide()
-			GuiPluginLoader.setPluginEnabled("ProbeQuick", true)
 			// The status bar picks its layout from Theme.screenSize. The Xvfb
 			// screen is landscape, so select portrait directly.
 			Theme.screenSize = Theme.Portrait
@@ -226,37 +188,6 @@ UiTestCase {
 			console.warn("PORTRAIT subpage visible", btn ? btn.visible : "missing",
 					"opened", Global.pageManager.pageStack.opened)
 			return !!btn && btn.visible === false
-		}})
-		runSteps()
-	}
-
-	function test_reenable_does_not_load_offscreen() {
-		addStep(UiTestStep.WaitUntil, { callable: root.ready, timeout: 90000 })
-		addStep(UiTestStep.Invoke, { callable: () => {
-			GuiPluginLoader.setPluginEnabled("ProbeNav", true)
-			return Global.mainView.navBar.setCurrentPage("ProbeNav_Page.qml")
-		}})
-		addStep(UiTestStep.WaitUntil, { callable: () => root.navHas("ProbeNav_Page.qml"), timeout: 5000 })
-		addStep(UiTestStep.Wait, { timeout: 500 })
-		addStep(UiTestStep.Invoke, { callable: () => {
-			GuiPluginLoader.setPluginEnabled("ProbeNav", false)
-			return true
-		}})
-		addStep(UiTestStep.Invoke, { callable: () => Global.mainView.navBar.setCurrentPage("NotificationsPage.qml") })
-		addStep(UiTestStep.Wait, { timeout: 400 })
-		addStep(UiTestStep.Invoke, { callable: () => {
-			const url = String(Global.mainView.swipeView.currentItem ? Global.mainView.swipeView.currentItem.url : "")
-			if (!url.endsWith("NotificationsPage.qml"))
-				return false
-			root._ticksBeforeDisable = Number(GuiPluginLoader.pluginSetting("ProbeNav", "ticks", 0))
-			GuiPluginLoader.setPluginEnabled("ProbeNav", true)
-			return true
-		}})
-		addStep(UiTestStep.Wait, { timeout: 700 })
-		addStep(UiTestStep.Invoke, { callable: () => {
-			const now = Number(GuiPluginLoader.pluginSetting("ProbeNav", "ticks", 0))
-			console.warn("PROBE ticks after re-enable offscreen", root._ticksBeforeDisable, "->", now)
-			return now === root._ticksBeforeDisable
 		}})
 		runSteps()
 	}
@@ -291,5 +222,4 @@ UiTestCase {
 	}
 
 	property int _ticksAtOpen: -1
-	property int _ticksBeforeDisable: -1
 }

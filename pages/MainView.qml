@@ -29,14 +29,14 @@ FocusScope {
 	property bool mainViewVisible: UiConfig.applicationVisible && !UiConfig.splashScreenVisible
 	onMainViewVisibleChanged: if (mainViewVisible) console.info("MainView: UI loaded and visible")
 
-	// Pin the visible main page by URL so enable/disable (which reshuffles the
-	// swipe page list) can re-align NavBar and SwipeView to the same page.
+	// Pin the visible main page by URL so a rebuilt swipe list can re-align
+	// NavBar and SwipeView to the same page.
 	property url _pinnedMainPageUrl
 	// Page that was current before the latest pin. A nav plugin that fails to
 	// load is no longer in the list, so resync uses this instead of index 0.
 	property string _previousMainPageUrl
-	// Snapshot taken when pluginEnabledChanged fires, before pages rebuild and
-	// the swipe view clamps to index 0.
+	// Set when a nav plugin page fails to load, before pages rebuild and the
+	// swipe view clamps to index 0.
 	property string _resyncUrl
 
 	function rememberMainPage(pageUrl) {
@@ -109,18 +109,6 @@ FocusScope {
 			_pinnedMainPageUrl = pages[idx].url
 		}
 	}
-
-	Connections {
-		target: GuiPluginLoader
-		function onPluginEnabledChanged(name) {
-			// SwipePageModel records _resyncUrl before it rebuilds pages.
-			if (!GuiPluginLoader.isPluginEnabled(name) && root.pluginQuickAccessName === name) {
-				cardsLoader.hide()
-			}
-			Qt.callLater(root.resyncMainPageSelection)
-		}
-	}
-
 
 	// To reduce the animation load, disable page animations when the PageStack is transitioning
 	// between pages, or when flicking between the main pages. Note that animations are still

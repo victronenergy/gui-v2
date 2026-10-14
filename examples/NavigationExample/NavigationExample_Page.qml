@@ -40,13 +40,7 @@ FocusScope {
 	readonly property color tileBorder: Theme.color_overviewPage_widget_border
 	readonly property real tileBorderWidth: Theme.geometry_overviewPage_widget_border_width || 2
 	readonly property real tileRadius: Theme.geometry_overviewPage_widget_radius || 8
-	readonly property string pluginName: "NavigationExample"
-	property int uiStateRevision: 0
-	readonly property int gridColumns: {
-		const _rev = uiStateRevision
-		const cols = Number(GuiPluginLoader.pluginSetting(pluginName, "gridColumns", 3))
-		return cols === 2 ? 2 : 3
-	}
+	readonly property int gridColumns: 3
 
 	// Tile order is row-major, so the neighbor on the right changes when the
 	// grid drops from three columns to two.
@@ -59,15 +53,6 @@ FocusScope {
 		const next = row * columns + column
 		const tiles = [batteryTile, solarTile, propaneTile, waterTile, pumpTile, dcTile]
 		return next < tiles.length ? tiles[next] : null
-	}
-
-	Connections {
-		target: GuiPluginLoader
-		function onPluginUiStateChanged(name) {
-			if (name === root.pluginName) {
-				root.uiStateRevision++
-			}
-		}
 	}
 
 	GridLayout {

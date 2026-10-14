@@ -16,21 +16,6 @@ Page {
 
 		model: VisibleItemModel {
 			ListSwitch {
-				id: enabledSwitch
-				text: "Enabled"
-				checked: GuiPluginLoader.isPluginEnabled("SimpleExample")
-				onClicked: GuiPluginLoader.setPluginEnabled("SimpleExample", !checked)
-
-				Connections {
-					target: GuiPluginLoader
-					function onPluginEnabledChanged(name) {
-						if (name === "SimpleExample")
-							enabledSwitch.checked = GuiPluginLoader.isPluginEnabled("SimpleExample")
-					}
-				}
-			}
-
-			ListSwitch {
 				property bool value
 				text: "Switch"
 				checked: value
