@@ -32,6 +32,7 @@ ListSetting {
 			primaryText: root.text
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat
+			primaryLabel.color: root.interactive || root.checked ? Theme.color_font_primary : Theme.color_font_disabled
 			secondaryText: root.secondaryText
 
 			Layout.fillWidth: true

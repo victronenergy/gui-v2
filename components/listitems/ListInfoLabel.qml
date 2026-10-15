@@ -13,7 +13,7 @@ PrimaryListLabel {
 	property bool flat
 
 	font.pixelSize: Theme.font_size_caption
-	color: Theme.color_font_disabled
+	color: Theme.color_font_secondary
 	leftPadding: infoIcon.x + infoIcon.width + Theme.geometry_listItem_content_spacing
 
 	CP.IconImage {

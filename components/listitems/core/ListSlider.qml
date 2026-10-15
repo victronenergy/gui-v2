@@ -69,6 +69,7 @@ ListSetting {
 				text: root.text
 				textFormat: root.textFormat
 				font: root.font
+				color: root.interactive ? Theme.color_font_primary : Theme.color_font_disabled
 				wrapMode: Text.Wrap
 				verticalAlignment: Text.AlignVCenter
 
