@@ -7,11 +7,34 @@ ObjectModel {
 	id: root
 
 	required property SwipeView view
-	readonly property list<SwipeViewPage> pages
-		: showBoatPage && showLevelsPage ? [ boatPageLoader.item, briefPage, overviewPage, levelsPageLoader.item, notificationsPage, settingsPage ]
-		: showBoatPage ? [ boatPageLoader.item, briefPage, overviewPage, notificationsPage, settingsPage ]
-		: showLevelsPage ? [ briefPage, overviewPage, levelsPageLoader.item, notificationsPage, settingsPage ]
-		: [ briefPage, overviewPage, notificationsPage, settingsPage ]
+	// Bump when a nav plugin page fails to load, so `pages` drops that entry.
+	property int pluginPageRevision: 0
+	// Delegate Loaders finish after `count` changes. `itemAt()` is not a binding
+	// dependency, so a nav page is dropped until something re-reads `pages`.
+	property int pluginNavReady: 0
+
+	readonly property list<SwipeViewPage> pages: {
+		void pluginPageRevision
+		void pluginNavReady
+		var p = []
+		if (showBoatPage) p.push(boatPageLoader.item)
+		p.push(briefPage)
+		p.push(overviewPage)
+		for (var i = 0; i < pluginNavRepeater.count; i++) {
+			var loader = pluginNavRepeater.itemAt(i)
+			if (!loader || !loader.item) {
+				continue
+			}
+			if (loader.item.contentFailed) {
+				continue
+			}
+			p.push(loader.item)
+		}
+		if (showLevelsPage) p.push(levelsPageLoader.item)
+		p.push(notificationsPage)
+		p.push(settingsPage)
+		return p
+	}
 	readonly property bool showLevelsPage: levelsPageLoader.active && !!levelsPageLoader.item
 	readonly property bool showBoatPage: boatPageLoader.active && !!boatPageLoader.item
 	readonly property int tankCount: Global.tanks ? Global.tanks.totalTankCount : 0
@@ -22,10 +45,23 @@ ObjectModel {
 		&& Global.systemSettings
 		&& Global.tanks
 		&& Global.environmentInputs
-		&& ((boatPageLoader.active && levelsPageLoader.active) ? pages.length === 6
-		  : boatPageLoader.active ? pages.length === 5
-		  : levelsPageLoader.active ? pages.length === 5
-		  : pages.length === 4)
+		// Boat, Levels, and plugin nav wrappers load after the four stock pages. A later change
+		// to `pages` resets the swipe view to the first page, which drops a configured start page.
+		// Plugin content is not waited on, so a hanging plugin cannot block startup.
+		&& (!boatPageLoader.active || showBoatPage)
+		&& (!levelsPageLoader.active || showLevelsPage)
+		&& _pluginNavPagesReady
+
+	readonly property bool _pluginNavPagesReady: {
+		void pluginNavReady
+		for (let i = 0; i < pluginNavRepeater.count; ++i) {
+			const loader = pluginNavRepeater.itemAt(i)
+			if (!loader || !loader.item) {
+				return false
+			}
+		}
+		return true
+	}
 
 	property bool _completed: false
 
@@ -62,6 +98,89 @@ ObjectModel {
 	OverviewPage {
 		id: overviewPage
 		view: root.view
+	}
+
+	// Plugin NavigationPage (type 3) support.
+	// Queries all loaded plugins for type 3 integrations and dynamically
+	// creates a SwipeViewPage for each one, inserted between Overview and
+	// Levels in the nav bar.  Each plugin JSON specifies icon, url, and an
+	// optional title (falls back to the plugin name when omitted).
+	GuiPluginIntegrationModel {
+		id: pluginNavIntegrations
+		type: GuiPluginLoader.NavigationPage
+	}
+
+	Item {
+		id: pluginPagesContainer
+		visible: false
+		width: 0; height: 0
+
+		Repeater {
+			id: pluginNavRepeater
+			model: pluginNavIntegrations
+
+			delegate: Loader {
+				id: pluginPageDelegate
+				required property int index
+				required property string pluginName
+				required property string title
+				required property url icon
+				required property url iconActive
+				required property url url
+
+				// Keep the wrapper. Content loads on first visit.
+				active: true
+				onStatusChanged: {
+					if (status === Loader.Ready)
+						root.pluginNavReady++
+				}
+				sourceComponent: SwipeViewPage {
+					id: pluginSwipePage
+					view: root.view
+					topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
+					title: pluginPageDelegate.title !== ""
+						? pluginPageDelegate.title
+						: pluginPageDelegate.pluginName
+					iconSource: pluginSwipePage.SwipeView.isCurrentItem
+							&& String(pluginPageDelegate.iconActive).length > 0
+						? pluginPageDelegate.iconActive
+						: pluginPageDelegate.icon
+					url: pluginPageDelegate.url
+					focusPolicy: Qt.TabFocus
+
+					property bool contentVisited: false
+					readonly property bool contentFailed: pluginContentLoader.status === Loader.Error
+
+					onActiveFocusChanged: {
+						if (activeFocus && Global.keyNavigationEnabled && pluginContentLoader.item) {
+							pluginContentLoader.item.forceActiveFocus()
+						}
+					}
+
+					Loader {
+						id: pluginContentLoader
+						anchors.fill: parent
+						asynchronous: true
+						active: pluginSwipePage.SwipeView.isCurrentItem || pluginSwipePage.contentVisited
+						source: pluginPageDelegate.url
+						onActiveChanged: {
+							if (active)
+								pluginSwipePage.contentVisited = true
+						}
+						onStatusChanged: {
+							if (status === Loader.Error) {
+								const mv = Global.mainView
+								if (mv && mv._previousMainPageUrl.length > 0)
+									mv._resyncUrl = mv._previousMainPageUrl
+								root.pluginPageRevision++
+								if (mv)
+									Qt.callLater(mv.resyncMainPageSelection)
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	Loader {
