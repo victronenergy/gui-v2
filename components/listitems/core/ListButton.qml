@@ -9,6 +9,11 @@ import Victron.VenusOS
 
 /*
 	A list setting item with a button on the right.
+
+	When interactive=false, the primary text and button are dimmed.
+
+	When readOnly=true, the button text is shown without a background, i.e. as if it was plain text,
+	without the look of a button.
 */
 ListSetting {
 	id: root
@@ -46,6 +51,7 @@ ListSetting {
 			primaryText: root.text
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat
+			primaryLabel.color: root.interactive ? Theme.color_font_primary : Theme.color_font_disabled
 			captionText: root.caption
 
 			secondaryComponent: ListItemButton {

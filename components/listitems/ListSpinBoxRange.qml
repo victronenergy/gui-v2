@@ -47,6 +47,7 @@ ListSetting {
 			primaryText: root.text
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat
+			primaryLabel.color: root.interactive ? Theme.color_font_primary : Theme.color_font_disabled
 			captionText: root.caption
 
 			secondaryComponent: RowLayout {
@@ -94,6 +95,7 @@ ListSetting {
 					//: Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')
 					//% "to"
 					text: qsTrId("list-spin-box-range_minimum_maximum_delimiter")
+					color: root.interactive ? Theme.color_listItem_secondaryText : Theme.color_font_disabled
 				}
 
 				ListItemButton {
