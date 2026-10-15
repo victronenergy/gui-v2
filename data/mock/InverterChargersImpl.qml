@@ -80,30 +80,53 @@ Item {
 			required property Device device
 			readonly property string serviceUid: device.serviceUid
 
-			// When /VebusSetChargeState=1, cycle between equalize and absorption change states.
+			// Simulate manual equalization and interrupting it (see PageVeBusAdvanced.qml).
+			// Writing /VebusSetChargeState requests a charge state change:
+			//   1 = start equalization, which switches over to float once completed
+			//   2 = interrupt equalization and restart absorption
+			//   3 = interrupt equalization and go to float
+			// After a brief delay, /VebusChargeState is updated and /VebusSetChargeState is reset to 0.
 			VeQuickItem {
+				id: vebusChargeState
+				uid: veBusDelegate.serviceUid + "/VebusChargeState"
+			}
+
+			VeQuickItem {
+				id: vebusSetChargeState
 				uid: veBusDelegate.serviceUid + "/VebusSetChargeState"
 				onValueChanged: {
-					if (value === 1) {
-						equalizeTimer.start()
+					if (value >= 1 && value <= 3) {
+						setChargeStateTimer.requestedState = value
+						setChargeStateTimer.restart()
 					}
 				}
+			}
 
-				property Timer equalizeTimer: Timer {
-					interval: 5000
-					repeat: true
-					onTriggered: {
-						switch (parent.value) {
-						case VenusOS.VeBusDevice_ChargeState_Absorption:
-							parent.setValue(VenusOS.VeBusDevice_ChargeState_Equalize)
-							break
-						default:
-							parent.setValue(VenusOS.VeBusDevice_ChargeState_Absorption)
-							stop()
-							break
-						}
+			Timer {
+				id: setChargeStateTimer
+
+				property int requestedState
+
+				interval: 1000
+				onTriggered: {
+					vebusSetChargeState.setValue(0)
+					if (requestedState === 1) {
+						vebusChargeState.setValue(VenusOS.VeBusDevice_ChargeState_Equalize)
+						equalizeTimer.restart()
+					} else if (vebusChargeState.value === VenusOS.VeBusDevice_ChargeState_Equalize) {
+						equalizeTimer.stop()
+						vebusChargeState.setValue(requestedState === 2
+								? VenusOS.VeBusDevice_ChargeState_Absorption
+								: VenusOS.VeBusDevice_ChargeState_Float)
 					}
 				}
+			}
+
+			// Equalization completes automatically if it is not interrupted.
+			Timer {
+				id: equalizeTimer
+				interval: 20000
+				onTriggered: vebusChargeState.setValue(VenusOS.VeBusDevice_ChargeState_Float)
 			}
 
 			// When /RedetectSystem or /SystemReset features are triggered, clear these values after a delay
