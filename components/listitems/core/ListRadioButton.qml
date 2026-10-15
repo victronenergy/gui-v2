@@ -29,6 +29,7 @@ ListSetting {
 		rowSpacing: Theme.geometry_listItem_content_verticalSpacing
 
 		TwoLabelLayout {
+			enabled: root.interactive || root.checked
 			primaryText: root.text
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat

@@ -48,6 +48,7 @@ ListSetting {
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat
 			captionText: root.caption
+			enabled: root.interactive
 
 			secondaryComponent: RowLayout {
 				spacing: Theme.geometry_listItem_content_spacing

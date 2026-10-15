@@ -94,6 +94,7 @@ ListSetting {
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat
 			secondaryText: root.secondaryText
+			enabled: root.interactive
 		}
 
 		Switch {

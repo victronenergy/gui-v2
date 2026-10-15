@@ -33,10 +33,11 @@
     "color_focus_highlight": "color_green",
 
     "color_button": "color_blue",
+    "color_button_disabled": "#504F4B",
     "color_button_down": "color_darkishBlue",
     "color_button_down_text": "color_white",
-    "color_button_icon": "color_gray4",
-    "color_button_icon_down": "color_gray5",
+    "color_button_icon": "color_gray5",
+    "color_button_icon_down": "color_gray4",
     "color_button_on_background": "color_ok",
     "color_button_off_background": "color_dimBlue",
     "color_button_on_background_disabled": "color_gray3",

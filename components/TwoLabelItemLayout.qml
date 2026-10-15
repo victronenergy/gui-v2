@@ -62,6 +62,7 @@ GridLayout {
 		text: root.primaryText
 		wrapMode: Text.WordWrap
 		verticalAlignment: Text.AlignVCenter
+		color: root.enabled ? Theme.color_font_primary : Theme.color_font_disabled
 
 		Layout.fillHeight: true
 		Layout.fillWidth: true

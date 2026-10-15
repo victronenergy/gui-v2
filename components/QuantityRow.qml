@@ -53,10 +53,12 @@ Row {
 			decimals: quantityObject.decimals < 0 ? Units.defaultUnitDecimals(quantityObject.unit) : quantityObject.decimals
 			valueText: unit === VenusOS.Units_PowerFactor ? "PF" : (quantityObject.textValue || quantityInfo.number)
 			unitText: unit === VenusOS.Units_PowerFactor ? (quantityObject.textValue || quantityInfo.number) : quantityInfo.unit
-			valueColor: unit === VenusOS.Units_PowerFactor ? Theme.color_quantityTable_quantityUnit
+			valueColor: !root.enabled ? Theme.color_font_disabled
+				: unit === VenusOS.Units_PowerFactor ? Theme.color_quantityTable_quantityUnit
 				: quantityObject.valueColor.valid ? quantityObject.valueColor
 				: root.valueColor
-			unitColor: unit !== VenusOS.Units_PowerFactor ? Theme.color_quantityTable_quantityUnit
+			unitColor: !root.enabled ? Theme.color_font_disabled
+				: unit !== VenusOS.Units_PowerFactor ? Theme.color_quantityTable_quantityUnit
 				: quantityObject.valueColor.valid ? quantityObject.valueColor
 				: root.valueColor
 

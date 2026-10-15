@@ -76,7 +76,8 @@ ListSetting {
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat
 			secondaryText: root.secondaryText
-			secondaryLabel.color: root.secondaryTextColor
+			secondaryLabel.color: root.interactive ? root.secondaryTextColor : Theme.color_font_disabled
+			enabled: root.interactive
 
 			Layout.fillWidth: true
 		}

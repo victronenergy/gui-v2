@@ -50,6 +50,7 @@ GridLayout {
 
 		text: root.primaryText
 		wrapMode: Text.WordWrap
+		color: root.enabled ? Theme.color_font_primary : Theme.color_font_disabled
 
 		Layout.fillWidth: true
 		Layout.columnSpan: root._useColumnLayout ? 2 : 1

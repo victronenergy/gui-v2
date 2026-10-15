@@ -64,6 +64,7 @@ ListSetting {
 			captionLabel.text: root.caption
 			tableMode: root.tableMode
 			forceColumnLayout: root.forceColumnLayout
+			enabled: root.interactive
 		}
 
 		CP.ColorImage {
