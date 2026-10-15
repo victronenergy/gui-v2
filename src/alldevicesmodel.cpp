@@ -144,6 +144,13 @@ Device *AllDevicesModel::newDeviceCandidate(VeQItem *item)
 	Device *device = new Device(this, item);
 	m_allDeviceCandidates.insert(item->uniqueId(), device);
 	connect(device, &BaseDevice::validChanged, this, &AllDevicesModel::deviceValidChanged);
+	connect(device, &BaseDevice::deviceInstanceChanged, this, [this, device]() {
+		// Only report changes for devices in the model. If this change makes the device valid,
+		// it is not in the model yet; deviceAdded() will be emitted instead.
+		if (m_devices.contains(device)) {
+			emit deviceInstanceChanged(device);
+		}
+	});
 
 	return device;
 }
