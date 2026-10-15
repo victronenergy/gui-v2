@@ -148,7 +148,7 @@ Page {
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("vebus_device_no_equalisation_during_bulk"), 5000)
 						break;
 					case VenusOS.VeBusDevice_ChargeState_Equalize:
-						stopEq.clicked()
+						stopEq.click()
 						break;
 					default:
 						setChargerState.setValue(forceEqCmd)

@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 // Each item in the model is expected to have at least 2 values:
@@ -13,7 +14,7 @@ import Victron.VenusOS
 // The default behaviour supports a simple array-based model. When using a ListModel or C++ model,
 // set the currentIndex and secondaryText properties manually.
 
-ListNavigation {
+ListSetting {
 	id: root
 
 	readonly property alias dataItem: dataItem
@@ -30,6 +31,10 @@ ListNavigation {
 		return defaultIndex
 	}
 
+	property string secondaryText: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
+			? optionModel[currentIndex].display
+			: defaultSecondaryText
+	property color secondaryTextColor: Theme.color_listItem_secondaryText
 	readonly property var currentValue: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
 			? optionModel[currentIndex].value
 			: undefined
@@ -49,18 +54,59 @@ ListNavigation {
 	signal optionClicked(index: int)
 	signal aboutToPop()
 
-	secondaryText: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
-			? optionModel[currentIndex].display
-			: defaultSecondaryText
+	function click() {
+		// Open the options page if the user has write access; otherwise, show the toast error.
+		if (root.interactive && root.checkWriteAccessLevel()) {
+			Global.pageManager.pushPage(optionsPageComponent, { title: Qt.binding(function() { return root.text }) })
+			return true
+		}
+		return false
+	}
 
 	interactive: (dataItem.uid === "" || dataItem.valid)
+	hasSubMenu: clickable
 
-	onClicked: {
-		// Open the options page if the user has write access; otherwise, show the toast error.
-		if (root.checkWriteAccessLevel()) {
-			Global.pageManager.pushPage(optionsPageComponent, { title: Qt.binding(function() { return root.text }) })
+	contentItem: GridLayout {
+		columns: root.clickable ? 2 : 1
+		columnSpacing: root.spacing
+		rowSpacing: Theme.geometry_listItem_content_verticalSpacing
+
+		TwoLabelLayout {
+			primaryText: root.text
+			primaryLabel.font: root.font
+			primaryLabel.textFormat: root.textFormat
+			secondaryText: root.secondaryText
+			secondaryLabel.color: root.secondaryTextColor
+
+			Layout.fillWidth: true
+		}
+
+		ForwardIcon {
+			visible: root.clickable
+		}
+
+		CaptionLabel {
+			visible: text.length > 0
+			text: root.caption
+
+			Layout.columnSpan: root.clickable ? 2 : 1
+			Layout.fillWidth: true
 		}
 	}
+
+	background: ListSettingBackground {
+		color: root.flat ? "transparent" : Theme.color_listItem_background
+		indicatorColor: root.backgroundIndicatorColor
+
+		ListPressArea {
+			anchors.fill: parent
+			enabled: root.interactive
+			onClicked: root.click()
+		}
+	}
+
+	Keys.onSpacePressed: click()
+	Keys.onRightPressed: click()
 
 	VeQuickItem {
 		id: dataItem

@@ -67,6 +67,8 @@ Page {
 		boundsBehavior: Flickable.DragOverBounds
 		model: VisibleItemModel {
 			ListRadioButtonGroup {
+				id: accessLevelOptions
+
 				//% "Access level"
 				text: qsTrId("settings_access_level")
 				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/AccessLevel"
@@ -88,13 +90,27 @@ Page {
 					//% "Incorrect password"
 					return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_access_incorrect_password"))
 				}
-				onClicked: {
-					// When the access options list is open, enable the key shortcuts for changing
-					// the access level.
-					keyEvents.repeatCount = 0
-					keyEvents.upCount = 0
-					keyEvents.downCount = 0
-					keyEvents.enabled = true
+				background: ListSettingBackground {
+					indicatorColor: accessLevelOptions.backgroundIndicatorColor
+
+					ListPressArea {
+						anchors.fill: parent
+						enabled: accessLevelOptions.interactive
+						onClicked: {
+							if (accessLevelOptions.click()) {
+								// When the access options list is open, enable the key shortcuts for changing
+								// the access level.
+								keyEvents.repeatCount = 0
+								keyEvents.upCount = 0
+								keyEvents.downCount = 0
+								keyEvents.enabled = true
+							}
+						}
+						focus: true
+						KeyNavigationHighlight.active: accessLevelOptions.activeFocus
+						Keys.onSpacePressed: clicked(null)
+						Keys.onRightPressed: clicked(null)
+					}
 				}
 			}
 
