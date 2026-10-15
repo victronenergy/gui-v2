@@ -68,4 +68,79 @@ TestCase {
 
 		device.destroy()
 	}
+
+	function test_fromServiceTypeDeviceInstance_data() {
+		return [
+			{
+				tag: "data added before device is created",
+				serviceType: "b",
+				deviceInstance: 1,
+				addDataFirst: true,
+				properties: {
+					DeviceInstance: 1,
+					ProductName: "Product A",
+				}
+			},
+			{
+				tag: "data added after device is created",
+				serviceType: "b",
+				deviceInstance: 2,
+				addDataFirst: false,
+				properties: {
+					DeviceInstance: 2,
+					ProductName: "Product B",
+					ProductId: 2,
+					CustomName: "Custom B",
+				}
+			},
+		]
+	}
+
+	function test_fromServiceTypeDeviceInstance(data) {
+		let propertyName
+		const serviceUid = "mock/com.victronenergy.%1.instance%2".arg(data.serviceType).arg(data.deviceInstance)
+
+		// Add a decoy service of the same type with a different device instance, which should
+		// not be matched.
+		const decoyUid = "mock/com.victronenergy.%1.decoy%2".arg(data.serviceType).arg(data.deviceInstance)
+		MockManager.setValue(decoyUid + "/DeviceInstance", data.deviceInstance + 100)
+		MockManager.setValue(decoyUid + "/ProductName", "Decoy")
+
+		function addMockData() {
+			for (propertyName in data.properties) {
+				MockManager.setValue(serviceUid + "/" + propertyName, data.properties[propertyName])
+			}
+		}
+
+		if (data.addDataFirst) {
+			addMockData()
+		}
+
+		// Create a Device with the service type and device instance, and expect the serviceUid
+		// to be found and the relevant properties to be fetched.
+		const device = deviceComponent.createObject(root)
+		device.serviceType = data.serviceType
+		device.deviceInstance = data.deviceInstance
+
+		if (!data.addDataFirst) {
+			compare(device.serviceUid, "")
+			addMockData()
+		}
+
+		compare(device.serviceUid, serviceUid)
+		compare(device.serviceType, data.serviceType)
+		for (propertyName in data.properties) {
+			const devicePropertyName = propertyName[0].toLowerCase() + propertyName.substr(1)
+			compare(device[devicePropertyName], data.properties[propertyName], propertyName)
+		}
+		compare(device.name, device.customName || device.productName)
+		verify(device.valid)
+
+		// Once the serviceUid is set, the serviceType cannot be changed.
+		ignoreWarning(/Cannot set serviceType/)
+		device.serviceType = "c"
+		compare(device.serviceType, data.serviceType)
+
+		device.destroy()
+	}
 }
