@@ -92,7 +92,20 @@ VeQItem *VeQItemMockProducer::createItem()
 
 QString VeQItemMockProducer::normalizedUid(const QString &uid)
 {
+	// Must match normalizedMockUid(): strip a leading "mock/" only.
 	return uid.startsWith("mock/") ? uid.mid(5) : uid;
+}
+
+VeQItem *VeQItemMockProducer::itemForUid(const QString &uid, bool create)
+{
+	const QString normalized = normalizedUid(uid);
+	if (normalized.isEmpty()) {
+		return nullptr;
+	}
+	if (create) {
+		return mProducerRoot->itemGetOrCreate(normalized, true, true);
+	}
+	return mProducerRoot->itemGet(normalized);
 }
 
 
