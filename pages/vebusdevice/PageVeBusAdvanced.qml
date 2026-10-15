@@ -189,7 +189,7 @@ Page {
 						readOnly: false
 					}
 				]
-				currentIndex: 1 // float state is always selected
+				currentIndex: -1 // nothing is initially selected to enable user to select any option
 				preferredVisible: false
 				onOptionClicked: function(index) {
 					const localValue = optionModel[index].value
@@ -202,8 +202,8 @@ Page {
 				}
 
 				onAboutToPop: function() {
-					// Return back to float as default option
-					currentIndex = 1
+					// Return back to nothing selected
+					currentIndex = -1
 				}
 			}
 
