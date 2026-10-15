@@ -63,21 +63,21 @@ Page {
 	function supportStateColor() {
 		if (isModified){
 			// "Modified"
-			return Theme.color_red
+			return Theme.color_critical
 		}
 		if (modbusTcpItem.value !== 0
 			|| (signalKItem.valid && signalKItem.value !== 0)
 			|| (nodeRedItem.valid && nodeRedItem.value !== 0)) {
 			// "Running integrations"
-			return Theme.color_orange
+			return Theme.color_warning
 		}
 		if (isRaspberry){
 			// "Unsupported GX device"
-			return Theme.color_red
+			return Theme.color_critical
 		}
 		if (isClean){
 			// "Clean"
-			return Theme.color_green
+			return Theme.color_success
 		}
 
 		// ""
@@ -266,8 +266,8 @@ Page {
 							right: supportStatusForwardIcon.left
 							rightMargin: supportStatus.spacing
 						}
-						source: root.supportStateColor() === Theme.color_green ? "qrc:/images/icon_checkmark_32.svg"
-								: root.supportStateColor() === Theme.color_orange ? "qrc:/images/icon_warning_32.svg"
+						source: root.supportStateColor() === Theme.color_success ? "qrc:/images/icon_checkmark_32.svg"
+								: root.supportStateColor() === Theme.color_warning ? "qrc:/images/icon_warning_32.svg"
 								: "qrc:/images/icon_alarm_32.svg"
 						color: supportStateColor()
 					}

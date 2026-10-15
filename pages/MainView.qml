@@ -292,7 +292,7 @@ FocusScope {
 						width: Theme.geometry_navigationBar_notifications_redDot_size
 						height: Theme.geometry_navigationBar_notifications_redDot_size
 						radius: Theme.geometry_navigationBar_notifications_redDot_size / 2
-						color: Theme.color_red
+						color: Theme.color_critical
 						visible: (Global.notifications?.unacknowledgedCount ?? 0) > 0
 					}
 

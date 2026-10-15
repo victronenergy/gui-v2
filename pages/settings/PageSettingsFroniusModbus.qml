@@ -94,7 +94,7 @@ Page {
 			//% "Remove Modbus port and unit ID?"
 			title: qsTrId("page_settings_fronius_modbus_remove_location")
 			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-			icon.color: Theme.color_orange
+			icon.color: Theme.color_warning
 			acceptText: CommonWords.remove
 
 			onAccepted: {

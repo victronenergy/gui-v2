@@ -404,6 +404,13 @@ These apply when a change introduces a performance optimisation that trades off 
 
 4.a.v. **Dead code**: Unused functions, unreachable branches, commented-out code, and `#if 0` blocks add confusion. Remove them.
 
+4.a.vi. **Self-documenting names, no invented jargon**: Code must be readable without a glossary. Names of variables, functions, classes, properties, enum values and files must say plainly what the thing is or does.
+- Do not invent or condense jargon. For example, do not call "a color that the Branding sets" a "seed", or "a dim background behind a status color" a "well". Write `brandingColor`, `dimBackground` or similar.
+- Well-established terms of the domain (sRGB, relative luminance, WCAG contrast ratio, Qt incubation, D-Bus service) are fine.
+- If a name only makes sense after reading its comment, rename it so that the comment is not needed.
+- The same applies to comments, documentation, commit messages and plan files.
+- Changes and plans written with AI help often introduce such jargon. Do not copy it or build on it: flag it, and ask the author whether it is intended or should be replaced with plain language.
+
 ### 4.b. Code style
 
 4.b.i. **Formatting**: Follow `victron.astyle` rules — 1TBS braces, tab indentation, 120 character line limit. Run astyle before committing C++ changes.

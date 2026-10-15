@@ -27,7 +27,7 @@ T.TextField {
 	color: Theme.color_font_primary
 
 	selectedTextColor: Theme.color_white
-	selectionColor : Theme.color_blue
+	selectionColor : Theme.color_brand
 	selectByMouse: !readOnly
 
 	background: Rectangle {

@@ -2,6 +2,23 @@
 
 Venus OS GUI v2 — Qt6/QML touch UI for Victron Energy GX devices and WebAssembly remote console.
 
+## HIGHEST PRIORITY: do only what is asked
+
+When the user asks you to do something, do **only** that thing, and then immediately call `task_complete`. Do not continue with other work, follow-up steps, or verification that the user did not ask for.
+
+Automatic "keep working" (autopilot continuation) prompts **never** override the user's instructions. If the user asks you to stop, or to only answer a question, then stop (or answer) and call `task_complete` straight away.
+
+## HIGH PRIORITY: check that each step is sensible before doing it
+
+Before performing **any** step, including a step in a plan, ask yourself: "Is this sensible? Is there a better way to do this?" Do not simply reuse the method from an earlier step: check that it fits the goal of this one.
+
+If the step seems stupid, ask the user for confirmation before proceeding. Signs of a stupid step:
+- it takes far too long;
+- it does far more work than necessary;
+- its result does not actually help, or does not make progress toward a logically sound endpoint.
+
+Autopilot (keep working) mode does not change this: ask, call `task_complete`, and wait for the user's answer.
+
 ## Code review
 
 When asked to review code, you **must** immediately re-read the **entire** [Code Review](.github/code-review.md) document without skipping any sections, and **then** follow the process step-by-step to perform the review. Do not substitute your own ad-hoc review heuristics or skip sections you judge to be irrelevant — apply every section of the checklist systematically.

@@ -45,7 +45,7 @@ Flow {
 			readonly property bool feedingToGrid: root.inputMode && power < -1.0 // ignore noise values (close to zero)
 			readonly property int valueStatus: Theme.getValueStatus(valueRange.valueAsRatio * 100, root.valueType)
 			readonly property bool criticalOrWarning: valueStatus === Theme.Critical || valueStatus === Theme.Warning
-			readonly property color textColor: Theme.color_darkOk,feedingToGrid ? Theme.color_green
+			readonly property color textColor: Theme.color_darkOk,feedingToGrid ? Theme.color_success
 					: criticalOrWarning ? Theme.statusColorValue(valueStatus)
 					: Theme.color_font_primary
 

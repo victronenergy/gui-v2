@@ -13,7 +13,7 @@ RowLayout {
 	required property IOChannel ioChannel
 	required property string statusText
 	property bool statusVisible
-	property color statusColor: Theme.color_red
+	property color statusColor: Theme.color_critical
 
 	// If quantityValue or quantityText is set, the QuantityLabel is displayed.
 	property real quantityValue: NaN
@@ -54,9 +54,9 @@ RowLayout {
 		Layout.minimumWidth: statusLabel.implicitWidth
 		Layout.alignment: Qt.AlignRight | Qt.AlignTop
 		Layout.preferredHeight: statusLabel.height
-		color: statusLabel.color === Theme.color_green ? Theme.color_darkGreen
-				: statusLabel.color === Theme.color_orange ? Theme.color_darkOrange
-				: statusLabel.color === Theme.color_red ? Theme.color_darkRed
+		color: statusLabel.color === Theme.color_success ? Theme.color_darkSuccess
+				: statusLabel.color === Theme.color_warning ? Theme.color_darkWarning
+				: statusLabel.color === Theme.color_critical ? Theme.color_darkCritical
 				: Theme.color_switch_status_disabled
 		radius: Theme.geometry_iochannel_status_radius
 		visible: root.statusVisible

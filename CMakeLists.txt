@@ -48,6 +48,7 @@ if (${NO_CACHEGEN})
     set (QML_MODULE_OPTARGS ${QML_MODULE_OPTARGS} "NO_CACHEGEN")
 endif()
 
+include(cmake/ModuleBranding_Sources.cmake)
 include(cmake/ModuleVenus_Sources.cmake)
 include(cmake/ModuleShaders_Sources.cmake)
 include(cmake/ModuleGauges_Sources.cmake)
@@ -60,6 +61,7 @@ include(cmake/GuiV2_Sources.cmake)
 include(cmake/GenerateTheme.cmake)
 include(cmake/Translations.cmake)
 
+include(cmake/ModuleBranding.cmake)
 include(cmake/ModuleVenus.cmake)
 include(cmake/ModuleShaders.cmake)
 include(cmake/ModuleGauges.cmake)
@@ -75,6 +77,8 @@ if ("${GUI_V2_BUILD}" STREQUAL "ON")
     include(cmake/QZXing.cmake)
     include(cmake/GuiV2.cmake)
     target_link_libraries(${PROJECT_NAME} PRIVATE
+        VictronBranding
+        VictronBrandingplugin
         VictronVenusOS
         VictronVenusOSplugin
         VictronVenusOSShaders

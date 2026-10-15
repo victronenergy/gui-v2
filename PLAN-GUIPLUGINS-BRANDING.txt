@@ -1,0 +1,1392 @@
+=====================================================
+Plan: Victron.Branding and Victron.GuiPlugins modules
+=====================================================
+
+Contents
+========
+
+1 Status and context
+1.A Numbering
+1.B Status
+1.C Changes made after reviewing the first draft against the code
+1.D Open questions
+1.E Plugin UI options
+1.F Example branding plugin
+1.G Issues
+1.H Related work (#3061, #3307)
+1.I Prototype
+
+2 Goal
+2.A Scope
+2.B Plugin modules
+2.C Branding approach
+
+3 Proposed solution summary
+3.A Modules
+3.B Branding plugins
+3.C Colors
+3.D Loading
+3.E Compiler
+3.F Plugin UI
+3.G Order of work
+3.H Out of scope
+
+4 What exists today
+4.A Plugin format
+4.B GuiPluginLoader (src/guiplugins.h, src/guiplugins.cpp)
+4.C Plugin compiler
+4.D Theme (src/theme.h, generated src/themeobjects.h, tools/themeparser.py)
+4.E Assets that are not theme lookups
+4.F List items and plugin pages
+4.G veutil submodule
+
+5 Decisions
+5.A Branding type
+5.B Settable properties
+5.C Literal values only
+5.D Plugin order and merging
+5.E Theme getters
+5.F Branding colors, not palette colors
+5.G Victron fallback
+5.H Derived and explicit colors
+5.I No hard-coded exceptions
+5.J Brand marks
+5.K Icon lookup deferred
+5.L Modules
+5.M No dependency on #3061
+5.N Groundwork first, with no visible change
+5.O Numeric thresholds
+5.P Property names
+
+6 Branding type
+6.A Creation and snapshot
+6.B No children
+6.C No public maps
+6.D Sketch
+6.E Unset tracking
+6.F Logo properties
+6.G URLs
+6.H Preserve-colors flags
+6.I Logo canvas
+6.J Font files
+6.K UI font lookup order
+6.L Writing-system check
+6.M Quantity font
+
+7 Color model
+7.A Fallback and branding colors
+7.B Naming
+7.C No nested objects
+7.D Branding colors the OEM may set
+7.E Page background
+7.F Derived colors
+7.G Not generated, ever, from these branding colors
+7.H color_ok
+7.I What the files actually are
+7.J Dark vs light, one set of branding colors
+7.K Per-scheme overrides (rejected)
+7.L Dim and dark colors, blended and opaque
+7.M Contrast rules
+7.N Victron's colors use the same formulas
+7.O Internal rename, required, not polish
+
+8 Allowlist
+8.A v1 properties on Branding
+8.B Not in v1
+
+9 How lookups work
+9.A List of BrandingData
+9.B Resolved palette
+9.C Colors
+9.D Generator
+9.E Fonts and logos
+9.F Call sites to migrate
+9.G NOTIFY, not invokables
+9.H Branding does not read Theme
+
+10 Integration type
+10.A Integration type 6
+10.B Integration URL
+10.C Plugins with several integrations
+10.D Engine at first load
+10.E Loader rules
+10.F Compiler: --branding Branding.qml
+10.G Compiler: literal-only check
+10.H Compiler: --install <gx-host>
+
+11 Module split
+11.A Module dependencies
+11.B Victron.Branding 1.0
+11.C Forbidden dependencies
+11.D Victron.GuiPlugins 1.0
+11.E Type names
+11.F veutil
+11.G Key navigation
+11.H Page host contract
+11.I Shared token names
+
+12 Plugin UI API: options considered
+12.A The question
+12.B Findings behind the options
+12.C Starting proposal: a Victron.UI module
+12.D Option 1: independent implementations
+12.E Option 2: thin wrappers (preferred)
+12.F Option 3: tooling-enforced subset
+12.G Option 4: declarative rows
+12.H Option 5: no UI compatibility promise
+12.I Direction
+
+13 Compatibility
+13.A The contract
+13.B CI
+13.C Versioning
+13.D minRequiredVersion / maxRequiredVersion
+13.E Branding color names
+
+14 Tests
+14.A Colors: derivation, branding colors, background factor, and call sites
+14.B Logos and fonts
+14.C Loader, list of BrandingData, reload, and module
+14.D Compiler
+14.E Visual, examples, and on-device
+
+15 Docs
+15.A Developer docs to update
+15.B Audiences
+15.C Example plugins
+15.D Generated property reference
+15.E Rules the README states
+15.F Versioning policy pages
+15.G Plugin UI reference
+
+16 Example branding plugin
+16.A Status
+16.B Directory
+16.C Files
+16.D Branding.qml
+16.E Choices, and why
+16.F Resolved values
+16.G Contrast checks
+16.H Known weak spots
+16.I Expected result on the device
+16.J README.txt steps
+16.K Minimal example
+
+17 Implementation order
+17.A Color and asset tables
+17.B Generator
+17.C Branding type, loader and Theme
+17.D Formula commit
+17.E Audit
+17.F Tests, examples, and docs
+17.G Victron.GuiPlugins
+17.H Later
+17.I Parallel work
+
+18 Non-goals
+18.A WASM/HTML connecting screen
+18.B Cached WASM branding
+18.C Qt icon themes
+18.D Geometry, animation, arbitrary keys
+18.E Token minimisation
+18.F Generated data colors
+18.G Treating palette colors as role colors
+18.H Translucent dim and dark colors
+18.I Per-scheme branding colors
+18.J Returning stored hexes
+18.K Replacing every SVG
+18.L Mass-editing VenusOS imports
+18.M Theme.icon(name)
+18.N Font size overrides
+18.O Correcting OEM contrast
+18.P App-store packaging (#3307)
+18.Q Depending on #3061
+18.R Enable state for branding
+
+19 Open questions
+19.A About these questions
+19.B User switch-off
+19.C Recoloring warning and critical
+19.D Contrast thresholds
+19.E Light button_down
+19.F WASM splash before the blob
+19.G Font sizes
+19.H Per-scheme branding colors
+19.I Several Branding plugins
+19.J Focus ring
+19.K Alpha in branding colors
+19.L Plugin UI types
+19.M Inherited secondary backgrounds
+19.N Non-text contrast
+19.O Rows in PluginGradientListView
+19.P Version fields
+19.Q Arithmetic
+
+
+1 Status and context
+====================
+
+1.A Numbering: sections are 1, 2, 3; minor sections A, B, C; subsections 1, 2, 3; bullets a, b, c; dot points 1, 2, 3; steps i, ii, iii; sub-steps 1, 2, 3. Every entry starts with its full number (for example 12.E.6.e.2), so cite that number. Cross-references in this plan use the same numbers. A heading's number also covers any text directly under the heading.
+
+1.B Status: design; implementation has started. Steps 17.B (generated alias getters, which call the getter of the key they alias), 17.C (the Branding type, loader and Theme changes, with no visible change), 17.D (derived colors computed from the branding colors) and 17.E (palette colors that mean a role replaced by role colors, untinted images tinted, and the focus ring drawn from color_focus_highlight) are implemented in gui-v2 and not yet merged. Runtime captures confirmed that 17.B changes no pixels (see 9.D.3.a). 17.D moves Victron pixels. Every color getter gives the same value, in both schemes, as the script behind the 17.A document, and the before and after captures showed only the expected shifts; design signed off. 17.E's captures showed no color change, only differences of one step in one channel on anti-aliased edges, and mock values that differ between runs. The GX benchmark (9.B.2) has not been run yet. Where the implementation differs from this plan, a note says so (6.J, 6.L, 7.F.3.a, 7.J.10.a, 7.M.6.a, 7.O.2.a, 7.O.10.a, 9.D.1.a, 9.D.2.a, 9.D.3.a, 9.E.1.a, 10.F.5.a). Step 17.A is written as a separate document, ROLE-AND-ASSET-TABLES-BRANDING.txt (next to this plan), and awaits design review of its open items (its section 10). Step 17.F is not started. In short: an OEM sets branding colors (brand, success, warning, critical, backgrounds, fonts), not palette tokens and not primary/secondary/tertiary/accent. Branding colors are role colors: colors named by their purpose in the UI, such as brand, success or background (Material Design calls these color roles). The host derives everything else, including the dim and dark colors (opaque colors made by blending a branding color onto the background; see 7.L). There are no hard-coded exceptions: the same formula produces the Victron default and every OEM brand.
+
+1.C Changes made after reviewing the first draft against the code
+-----------------------------------------------------------------
+
+1.C.1 The loader needs the QML engine before it creates Branding objects.
+1.C.2 Plugin order is defined.
+1.C.3 The theme generator change is an explicit step.
+1.C.4 One combined NOTIFY signal and a cached palette.
+1.C.5 Plain logo properties replace Theme.icon().
+1.C.6 Contrast thresholds are numbers, with their Victron pixel cost listed.
+1.C.7 An asset audit covers baked-color images (focus ring, Overview connector art).
+1.C.8 Fonts are packed, unregistered on unload, and checked for script coverage.
+1.C.9 Font sizes leave v1.
+1.C.10 The #3305 install flag and agent-readable docs are in v1.
+1.C.11 Branding has its own module, Victron.Branding, separate from Victron.GuiPlugins. Victron.VenusOS never imports Victron.GuiPlugins. See section 11 (Module split).
+
+1.D Decisions that need a Victron owner are in section 19 (Open questions).
+
+1.E The plugin UI options, with the maintainer's view of each (preferred: thin wrappers over the internal types, with rows declared directly in PluginGradientListView), are in section 12 (Plugin UI API: options considered).
+
+1.F An example branding plugin is specified in section 16 (Example branding plugin). It sets branding colors for the Dark scheme and a background factor (light_mode_background_factor), and its Light scheme is derived. There are no per-scheme color overrides (7.K, Open question 19.H).
+
+1.G Issues: #2937 (parent), #3306 (stable plugin module: Victron.GuiPlugins), #3305 (partner branding: Victron.Branding).
+
+1.H Related: #3061 (integration types 3-5 and per-plugin enable/disable) is an open community PR and may land after branding, or in a different shape. Branding does not depend on it. Its per-plugin JSON enable state is not wanted: application lifecycle needs its own design, later. Do not block on #3307 (app install lifecycle).
+
+1.I The private prototype (nmbath/guiv2-customisation, venus-private#704) was not readable when this plan was written. The design below is from the issue text and the current loader/theme code, plus the decisions made in review of that design.
+
+
+2 Goal
+======
+
+2.A Do #3306 in a shape that can carry #3305.
+
+2.B Plugin modules
+------------------
+
+Plugin authors get two versioned modules. Neither exposes a Victron.VenusOS type:
+
+2.B.1 Victron.Branding (#3305): the Branding type, and nothing else.
+2.B.2 Victron.GuiPlugins (#3306): data and UI types for plugin pages and settings lists.
+2.B.3 A plugin that imports Victron.VenusOS is unsupported and may break on any gui-v2 upgrade.
+2.B.4 Victron.VenusOS never imports Victron.GuiPlugins. #3306 says the reverse: the module must not import VenusOS, and VenusOS may import the module. Its aim, no VenusOS type in the promised API, is kept. 11.A.4 explains why the direction changes.
+
+2.C Branding is not plugin QML that writes Theme properties. It is a creatable Branding object, from Victron.Branding. An OEM sets a small set of branding colors (brand, success, warning, critical, two backgrounds, two fonts), plus font files and logos. The host derives the other color scheme and the dim and dark colors from those branding colors. A host-owned Victron Branding is always first in the list of branding snapshots (the plugins follow it in plugin-name order), and is the fallback for every theme color. Existing Theme.color_* / Theme.font_* call sites keep working where the token already means that role. Direct uses of palette colors have to be split into role colors and data colors. See section 7 (Color model).
+
+
+3 Proposed solution summary
+===========================
+
+3.A Two new modules for plugins, each with its own version and its own API check in CI. Victron.Branding (#3305) holds only the Branding type. Victron.GuiPlugins (#3306) holds the data types, UI types, common words, and icons that plugin pages use. Dependencies run one way: GuiPlugins uses VenusOS, and VenusOS uses Branding. Victron.VenusOS never imports Victron.GuiPlugins, and plugins do not import Victron.VenusOS. See section 11 (Module split).
+
+3.B A branding plugin is one Branding.qml file of literal assignments: branding colors (brand, success, warning, critical, two backgrounds, two text colors), font files and families, and the two splash logos. The colors are the Dark scheme's. The host derives Light, and one number, the background factor (light_mode_background_factor), sets how far Light's backgrounds move (7.J.10). The plugin ships in today's JSON plus RCC format, as integration type 6, and has no enable state of its own. See sections 6 (Branding type) and 8 (Allowlist).
+
+3.C The OEM sets branding colors, not palette colors. Theme derives the rest with one formula: the other color scheme, the dim and dark colors, and the text color on filled controls. Victron's own colors come from the same formula, so a few Victron pixels move, once. Data colors (tanks, temperatures, data series) cannot be branded. See section 7 (Color model).
+
+3.D The loader creates each Branding object, copies the values it set, and destroys it, so no plugin binding stays live. The copies are listed after a built-in Victron default, in plugin-name order, and for each property the value from the last plugin that set it is used. The exceptions follow background_primary: the background factor (7.J.12), and background_secondary and background_page (7.J.13). Theme caches the resolved colors and notifies once per change. On GX the first frame is branded; on WASM the UI repaints when the plugin arrives. See sections 9 (How lookups work) and 10 (Integration type).
+
+3.E The plugin compiler checks Branding.qml before packing it: allowed imports, literal values only, known property names, and valid values, then qmllint. It packs fonts and logos, and can install the plugin on a GX device for testing. See 10.F-10.H.
+
+3.F Plugin UI comes after branding, in Victron.GuiPlugins: Plugin* types that are thin wrappers over the list items that settings pages use most (the preferred option; the v1 list is 12.E.12), with rows declared directly in PluginGradientListView; PluginDataItem instead of VeQuickItem; and a Tokens singleton for the role colors and fonts. See 11.D and section 12 (Plugin UI API: options considered).
+
+3.G Order of work: a reviewed color table; then the generator and the Branding type, loader and Theme changes, none of which changes a pixel; then one reviewed commit in which the formula takes over Victron's colors; then the audit of direct palette uses. Branding ships with two example plugins, and docs that an OEM developer or an AI agent can follow. See section 17 (Implementation order).
+
+3.H Out of scope: app installation and enable state (#3307, #3061), geometry and font-size overrides, token minimisation, and the WASM connecting screen. See section 18 (Non-goals). Undecided points are in section 19 (Open questions).
+
+
+4 What exists today
+===================
+
+4.A Plugins are a JSON blob plus a base64 RCC, produced by tools/gui-v2-plugin-compiler.py.
+
+4.B GuiPluginLoader (src/guiplugins.h, src/guiplugins.cpp)
+----------------------------------------------------------
+
+4.B.1 GX: reads /data/apps/enabled/<app>/gui-v2/ synchronously in the loader constructor, before Main.qml is loaded. First paint can be branded, but not as the code stands. The constructor runs inside GuiPluginLoader::create(engine), and m_qmlEngine is assigned only after the constructor returns. Nothing can be instantiated from plugin QML during that first load. The "engine reference not set" warning in unloadPluginData() is the same gap.
+4.B.2 GX watches /data/apps/enabled/ and each plugin directory with QFileSystemWatcher. Adding a symlink there triggers a reload.
+4.B.3 Desktop: plugins/ next to the executable, unless --mqtt is set.
+4.B.4 WASM / MQTT: waits up to 15s for broker data. By definition this is after the connecting view. Branding can still restyle the in-app UI when the blob arrives. It cannot restyle the HTML loader. That remains out of scope (#3305) and belongs to the Venus application story, not gui-v2 plugins. Until the blob arrives, the in-app SplashView shows the built-in Victron marks.
+4.B.5 A plugin with no valid integration is dropped. A branding-only plugin must therefore count as an integration. populatePlugins() treats any type above QuickAccessPaneCard (5) as invalid, and url is required.
+4.B.6 Types 1 and 2 are wired (settings page, device-list page). Types 3-5 are parsed and otherwise TODO. #3061 (open, not merged) implements them and adds per-plugin enable/disable (Settings > Integrations > UI Plugins), kept in a JSON state file on GX and only in memory on WASM. That state file is not wanted. Branding is type 6 and depends on none of #3061.
+4.B.7 Which plugins load is decided only by where they are found: on GX, apps linked under /data/apps/enabled/; on desktop, plugins/; on WASM, what the broker publishes. There is no per-plugin enable flag in the merged code.
+4.B.8 Plugin order is not defined. Filesystem plugins come out of a QMap keyed by app directory path, then a name-sorted list of JSON files. MQTT plugins are keyed by the fetcher's plugin path. The same set of plugins can load in a different order on GX and on WASM. A duplicate plugin name keeps the first one seen.
+4.B.9 Reload is unload-all, reload-all. populatePlugins() calls unloadPluginData(): every RCC is unregistered, translators are removed, and the QML component cache is cleared. Then everything loads again. Main.qml calls rebuildUi() when GuiPluginLoader.busy goes true, and DataManager waits for !busy. Any plugin change rebuilds MainView. Objects outside MainView, and the Theme singleton, survive it.
+4.B.10 minRequiredVersion / maxRequiredVersion are checked against the gui-v2 version in loadPluginData().
+
+4.C The compiler, tools/gui-v2-plugin-compiler.py, packs only top-level .svg, .png, .qml, and .ts/.qm files from the working directory. It does not pack fonts or subdirectories. The navigation, quick-access, and card options print TODO.
+
+4.D Theme (src/theme.h, generated src/themeobjects.h, tools/themeparser.py)
+---------------------------------------------------------------------------
+
+4.D.1 Values come from themes/color, themes/geometry, themes/typography, themes/animation.
+4.D.2 Getters return literals. Many properties are CONSTANT.
+4.D.3 The generator turns JSON aliases into literal colors. Dark.json says "color_ok": "color_blue", but the getter returns QColor(56, 125, 197), not color_blue(). Overriding the palette does nothing to buttons, ok-state, or splash tint until the generator is fixed.
+4.D.4 Properties are not writable. Plugin QML cannot assign Theme.color_blue.
+4.D.5 A Q_PROPERTY has one NOTIFY signal. Dark.json / Light.json keys NOTIFY colorSchemeChanged_parameterless. Screen-size keys NOTIFY screenSizeChanged_parameterless. ColorDesign and TypographyDesign keys are CONSTANT.
+4.D.6 statusColorValue() is a Q_INVOKABLE that reads color_ok, color_warning, color_critical, and their dark variants. An invokable records no binding dependency. The gauges (BarGauge, CircularSingleGauge, CircularMultiGauge, SideGauge, SideMultiGauge, ThreePhaseBarGauge, ThreePhaseDisplay) work around that with `Theme.color_darkOk, Theme.statusColorValue(...)`, which subscribes the binding to color_darkOk's NOTIFY. That only works while every color the invokable reads shares that one signal.
+4.D.7 C++ reads no palette color except through statusColorValue().
+
+4.E Assets that are not theme lookups
+-------------------------------------
+
+4.E.1 Splash marks are string literals in components/SplashView.qml (qrc:/images/splash-logo-icon.svg, splash-logo-text.svg), drawn with ColorImage and tinted by color_splash_logo_icon / color_splash_logo_text.
+4.E.2 UI font family is Global.fontFamily, from a FontLoader on Language.fontFileUrl. Language-specific fonts exist only for Arabic, Chinese, Japanese, and Thai (src/language.cpp). Every other language uses Roboto, including Cyrillic (Russian, Ukrainian) and Latin-extended (Czech, Polish, Romanian, Turkish). Quantity font is Global.quantityFontFamily, a FontLoader on qrc:/fonts/Roboto-Regular.ttf, used by QuantityLabel and BatteryWidget. Roboto-Regular.ttf is the only bundled font file.
+4.E.3 About 197 other qrc:/images references exist. Button.qml ignores icon.name and draws icon.source with ColorImage. Qt Quick Controls icon themes do not see any of this.
+4.E.4 QResource::registerResource cannot replace an existing :/images/... path. A plugin RCC cannot shadow a built-in file.
+4.E.5 The key-navigation focus ring (components/controls/GlobalKeyNavigationHighlight.qml) is a BorderImage of key_navigation_highlight_dark.svg / _light.svg. The SVGs have #72B84C / #F0962E baked in. color_focus_highlight does not draw the ring.
+4.E.5.a Implementation note (17.E): the ring is now one SVG tinted with color_focus_highlight (7.F.3.a), and the images in 4.E.6 and 4.E.9 are tinted too (7.O.10.a).
+4.E.6 Overview connector art is plain Image with Victron blue #387DC5 baked in: overview_lightning_bolts.svg (OverviewEnergyIndicator), electron.svg (WidgetConnector), widget_connector_nub_horizontal.svg / _vertical.svg (WidgetConnectorAnchor). The connector line drawn next to that art uses color_overviewPage_widget_border, which is color_ok. Under an OEM brand the line moves and the nubs and electrons stay Victron blue. electron.svg is two-color: a white head, and a tail fading from white to #387DC5 at zero opacity.
+4.E.7 19 SVGs contain saturated palette hexes, and 7 more contain only grays. Most are drawn with ColorImage, IconImage or a Button icon.color and follow the theme. The untinted ones do not.
+4.E.8 Scheme-dependent images already exist: WelcomeView QR codes, the ColorSelector slider background, the SplashView gauge GIFs.
+4.E.9 Other untinted images: the SpinBox plus and minus icons (white, plain Image), the NotificationsPage "no notifications" checkmark (icon_checkmark_48.svg, #72B84C, plain Image), and boat_glow.png (a ColorImage whose color is unset in its default state, so the PNG's own blue shows). The 17.A document's asset table (its section 7) lists every image with a decision.
+
+4.F List items, Page, and QuantityLabel import VenusOS and use Theme, Global, Units, and VeQuickItem. VeQuickItem is registered in the VenusOS module because veutil sources are compiled into that module (~296 QML files use it). Plugin pages are pushed as raw URLs and given a VenusOS Device object. That leaks VenusOS types. KeyNavigationHighlight is a VenusOS attached type.
+
+4.G src/veutil is a git submodule (victronenergy/veutil). VeQuickItem is declared QML_ELEMENT in ve_quick_item.hpp, and cmake/VeUtil_Sources.cmake appends the veutil sources to the VenusOS module. Moving its registration touches the submodule and needs an upstream veutil change. cmake/ModuleVenus.cmake already calls qt_add_qml_module(... URI Victron.VenusOS ... IMPORTS QtQuick.Controls.Basic). Re-exporting another module to everything that imports VenusOS is an existing pattern here. This plan may use it for Victron.VeUtil (11.F.5), and never for Victron.GuiPlugins (11.C.1).
+
+
+5 Decisions
+===========
+
+5.A The public branding API is a QML/C++ type named Branding, not a JSON manifest and not a type named ThemeOverride.
+
+5.B Only properties declared on Branding can be set by a plugin. OEM color properties are the branding colors below, not arbitrary theme keys, and not the generated dim and dark colors.
+
+5.C Authors assign literal values only: strings, booleans, numbers, and arrays of strings. No expressions, so no bindings. The compiler enforces this with a strict grammar (see 10.G). The loader does not trust the compiler: it snapshots the values right after creation and destroys the instance, so anything that slips through is evaluated once and never again. A binding to Theme would also loop.
+
+5.D Runtime model is a vector of Branding snapshots in a defined order: the Victron object first, then plugin snapshots sorted by plugin name (the JSON name). The order is the same on GX and WASM. Directory order and MQTT arrival order do not count. For each property, the value from the last plugin that sets it is used. This is per property, not per object, except for the properties that follow background_primary (7.J.12, 7.J.13). A second plugin can replace a logo without wiping colors. The loader logs when two plugins set the same property.
+
+5.E Theme getters consult that vector. Theme keys named by their purpose (color_button, color_ok, and so on) keep their call sites. Direct palette uses that mean "brand" do not.
+
+5.F OEM color input is the branding colors, not color_blue / color_orange / color_green / color_red. Those palette names stay data colors. color_warning and color_critical are settable because those are role names, not palette names.
+
+5.G A host-owned Victron Branding is always first in the list of Branding snapshots (5.D). It is the fallback for every theme color. It is not a plugin and it is never unloaded.
+
+5.H Control colors (buttons, borders, separators), the dim and dark status colors, and the backgrounds are derived from the merged branding colors. Data colors and the tank and temperature color scales are explicit on the Victron object. They are not generated.
+
+5.I There are no hard-coded exceptions. Every computed color comes from its formula, including the Victron default. Hand-tuned hexes are not a second source of truth. A few dim and dark colors will move. That is accepted if the result is close. Data colors are not computed and stay explicit.
+
+5.J Brand marks are plain Theme properties with NOTIFY: Theme.splash_logo_icon, Theme.splash_logo_text, and their preserve-colors flags. There is no Theme.icon(name) in v1. Do not use Qt Quick Controls / freedesktop icon themes.
+
+5.K A generic icon-by-name lookup is deferred until there are more than two slots. When it comes, it is property-based with NOTIFY, not a Q_INVOKABLE that captures a revision property. Overrides are real properties on Branding.
+
+5.L Modules (section 11): Branding is in its own module, Victron.Branding, which depends on no other Victron module. Plugin UI is in Victron.GuiPlugins, whose public API contains no VenusOS type. Victron.VenusOS never imports Victron.GuiPlugins. Branding does not know built-in asset paths. The Victron fallback object is host-owned; plugin files do not instantiate it. Branding.qml files import only Victron.Branding, QtQml, and QtQuick.
+
+5.M Branding does not depend on #3061, and may land before it. #3061 is a community PR, and getting it ready may take a while. Its per-plugin JSON enable state is not wanted. Application lifecycle (install, enable, disable, and where that state lives) needs its own design and is not part of this work. Branding adds no enable state of its own: no state file, no setting, no toggle. A Branding plugin is active exactly when the loader loads it today (see 4.B.7). On GX, removing the /data/apps/enabled/<name> link removes the brand. Both PRs edit populatePlugins() and its type range check, so whichever lands second rebases onto the other. Type 6 does not clash with #3061's types 3-5. Do not block on #3307. Do not define an app-package format here. Ship the existing JSON blob plus RCC.
+
+5.N The groundwork lands first, with no visible change: the generator, the Branding type, the loader, the list of Branding snapshots, and getters that still return today's values. The commit in which the formula produces Victron's colors is separate. Its pixel shifts are captured and reviewed.
+
+5.O Every threshold in this plan is a number. "Contrasts", "readable", and "close enough" each name a WCAG ratio or a channel distance. See 7.M (Contrast rules).
+
+5.P Branding and Theme property names use lower_case_with_underscores, like Theme's keys (color_font_primary): font_files, font_family, splash_logo_icon, splash_logo_icon_preserve_colors. No camelCase property names on Branding. Plugin JSON fields keep their existing camelCase (minRequiredVersion, requiredBrandingVersion), because they are JSON fields, not properties.
+
+
+6 Branding type
+===============
+
+6.A Creatable type in Victron.Branding (see 11.B). Not a singleton. Each plugin file is one instance. The loader creates it, copies the properties that the file set, and which ones those are (see 6.E), into a host-owned snapshot, appends the snapshot to the vector, and destroys the instance. No plugin QML object stays alive. On unload, the snapshot is removed.
+
+6.B Branding has no default property and accepts no children. It cannot host Timers, Connections, or Items. A Branding file is a list of literal assignments. The compiler's literal-only check defines exactly what is allowed.
+
+6.C There is no public icons map and no public color map. The allowlist is the property list. The API-dump CI (see section 13, Compatibility) freezes it. Unknown QML properties are not part of the type.
+
+6.D Sketch (names, not a final API dump):
+
+    import Victron.Branding
+
+    Branding {
+        color_brand: "#003366"
+        color_success: "#3D8F4A"
+        color_warning: "#E0A020"
+        color_critical: "#C4473A"
+
+        color_background_primary: "#101418"
+        color_background_secondary: "#1A2228"
+        // color_background_page: "#101418"
+
+        color_font_primary: "#F4F1EA"
+        color_font_secondary: "#A8A49C"
+
+        font_files: [ "OemSans-Regular.ttf", "OemSans-Medium.ttf" ]
+        font_family: "OemSans"
+        quantity_font_family: "OemSans"
+
+        splash_logo_icon: "logo.svg"
+        splash_logo_text: "wordmark.svg"
+        // splash_logo_icon_preserve_colors: true
+    }
+
+6.E Unset tracking: if the QML file does not mention a property, the setter does not run and the property stays marked as not set. Lookups skip it. Do not use a sentinel color, an empty URL, or -1 as "not set". An OEM may legitimately set a transparent color or an explicit empty URL later. Only that marker says whether a property is set.
+
+6.F Logo properties are url properties that record whether they were set, like the colors. Branding has no icon(name) method in v1. It never falls back to qrc:/images and never reads Theme.
+
+6.G URLs are plain string literals, relative to Branding.qml. Do not use Qt.resolvedUrl(). It is a function call, and the literal-only check rejects it. Qt 6 does not resolve a relative URL when it is assigned to a url property; the type that uses the URL has to. The loader resolves each URL (logos and font_files) against the integration URL, qrc:/<name>/Branding.qml, when it takes the snapshot.
+
+6.H Each logo property has its own _preserve_colors flag. A URL is not a tint. ColorImage with a transparent color hides the image; it does not mean "keep the file's colors". The splash call site uses Image when Theme.splash_logo_icon_preserve_colors (or splash_logo_text_preserve_colors) is true, otherwise ColorImage tinted by the splash logo color, as today.
+
+6.I Logo canvas: SplashView draws the icon and the wordmark overlaid, centred on the same point, in one box: 284x55 on SevenInch and Portrait, 224x43 on FiveInch (geometry_splashScreen_logo_width / _height). The fill mode is the default Stretch. Victron's two SVGs share a 285x54 viewBox, with the icon on the left, the wordmark to its right, and transparency elsewhere. An OEM draws both marks on that canvas. Any other aspect ratio is stretched. The box is geometry, so it is not brandable in v1. A logo with preserve_colors set must read on both the Light and the Dark page, because one file serves both schemes.
+
+6.J Font files
+--------------
+
+Font files are shipped in the plugin RCC and listed in font_files. The family properties name families, not files. The loader registers each listed file with QFontDatabase::addApplicationFont after registerResource and before the snapshot is appended, and keeps the returned ids. On unload it calls removeApplicationFont for each id. Without that, every reload leaks a font registration. addApplicationFont reads qrc data into memory, so unregistering the RCC afterwards is safe. If font_family or quantity_font_family names a family that no listed file registered and that is not already installed, the loader logs it and treats the property as unset.
+
+6.J.1 Implementation note (17.C): Naming the built-in family (Roboto) is the same as leaving the property unset. The loader cannot look that name up in QFontDatabase, because Global.qml registers the built-in font after the loader takes the snapshot. Instead it reads the family name from the built-in font file, compares it with the branded name (ignoring case), and treats a match as unset without logging.
+
+6.K UI font lookup order
+------------------------
+
+Language-specific fonts still take precedence (Arabic, CJK, Thai):
+
+6.K.1 Language.fontFileUrl when the current language has its own font
+6.K.2 else branding font_family, if QFontDatabase::writingSystems(family) covers the current language's writing system
+6.K.3 else the built-in font
+
+6.L Writing-system check
+------------------------
+
+The coverage check is for Cyrillic and Latin-extended languages, which use Roboto today. A Latin-only OEM font in Russian would draw mixed glyphs from fallback fonts. With the check, Russian uses Roboto throughout, and the loader logs one line. A small table maps Language to QFontDatabase::WritingSystem.
+
+6.L.1 Implementation note (17.C): Theme runs the check, not the loader, because the language can change after the plugin loads. Theme re-runs it on every language change (Language emits fontFileUrlChanged for each one). It logs one line per family and language. Writing-system support alone does not prove a font has every letter of a Latin-extended language, so the check also asks QRawFont::supportsCharacter for a few sample letters of that language.
+
+6.M Quantity font is the branding quantity family, else Roboto. It is not replaced by a language-specific UI font. It needs tabular digits, or changing values jitter. The loader cannot check that. The docs require it.
+
+
+7 Color model
+=============
+
+7.A Yes. A default Victron Branding is the fallback for every theme color. An OEM does not set color_blue. That name is a data color. The previous four-color model (primary / secondary / tertiary / accent) is dropped. In Victron's UI, secondary and tertiary had no use other than as status colors. Status colors are branding colors now, under role names.
+
+7.B Naming
+----------
+
+Names are flat Theme.color_* properties, not nested objects and not brand_color. The hierarchy is the prefix:
+
+7.B.1 color_<role>                 a brand or status branding color
+7.B.2 color_<role>_dim / _dark     generated, not settable
+7.B.3 color_background_*           background branding colors
+7.B.4 color_font_*                 font branding colors
+
+7.C QML properties cannot use dots. A nested QtObject would hide the allowlist and complicate recording which properties were set. Do not add one.
+
+7.D Branding colors the OEM may set
+-----------------------------------
+
+Unset inherits. Victron values:
+
+7.D.1 color_brand                  #387DC5   today's color_blue. Buttons, the active navigation-bar button, selection, color_ok.
+7.D.2 color_success                #72B84C   today's color_green, only where it means feed-in / regen / "energy going the good way". Not color_ok.
+7.D.3 color_warning                #F0962E   today's color_orange, where it means warning.
+7.D.4 color_critical               #F35C58   today's color_red, where it means alarm / critical.
+7.D.5 color_background_primary     #000000. The light scheme derives white.
+7.D.6 color_background_secondary   #141414. The light scheme derives #F7F7F7 (the background factor, 7.J.5 and 7.J.10), 3 channels from today's #FAF9F5. #141414 is the 8% mix from black toward font_primary that 7.J.13 derives, so an OEM that sets only background_primary gets the same mix from its own primary.
+7.D.7 color_font_primary           #FFFFFF. The light scheme derives a near-black, about #262626, not today's #272622.
+7.D.8 color_font_secondary         #969591. Kept in a scheme only where it passes the secondary-text threshold. It passes in dark (7.0:1 on black) and fails in light (2.4:1 on the light page). See 7.M.4.
+
+7.E color_background_page is an optional extra branding color. Unset means the page formula, not a stored hex. Only the Branding whose background_primary is used, or a later one, can set it (7.J.13). In the darker scheme, page = background_primary. In the lighter scheme, page = mix(background_primary, font_primary, 0.12). For Victron that is black, and #E5E5E5 against today's gray7 #E6E5E1. Close enough. An OEM who sets it still gets the other scheme from the same rule.
+
+7.F Derived colors
+------------------
+
+Not branding colors. Always derived from the merged branding colors and the current scheme:
+
+7.F.1 color_font_disabled, color_background_disabled. The font or background branding color, mixed further toward the other. Not OEM properties in v1.
+7.F.2 Separators and list borders that are currently one of the grays in ColorDesign.json. Same rule. The nine grays in ColorDesign.json (color_gray1 to color_gray9) are not something an OEM sets. These colors become a plain mix of the background and font branding colors, with no added tint (decided): font_over_background(n) in Dark.json and Light.json, which is font_primary at alpha n, blended onto background_primary. For Victron the slightly warm grays become neutral, within 4 channels; under an OEM they take the hue of the OEM's background and font. This may be revisited. The implementation (17.D) puts a code comment on the font_over_background formula, along the lines of: "This produces colors which are cooler than the original design. In future, it may be necessary to modify this procedure to prefer warmer colors for the Victron branding, if required."
+7.F.3 color_focus_highlight. Not a branding color. Dark reads color_success (today's green). Light reads color_warning (today's orange). That is the current mapping, not an accent color. The ring itself is a baked SVG today (see 4.E.5), so this token does not reach it. Branding the ring needs it drawn from the token: a small image provider that rewrites the SVG color before rasterising, or corners drawn in QML. Measure the choice on GX. Until that lands, the ring stays green/orange under every brand, and the docs say so.
+7.F.3.a Implementation note (17.E): the image provider, image://tinted/<hex>/<resource path> (src/tintedimageprovider.cpp). It fills the image's opaque pixels with one color, as ColorImage does; it does not edit the SVG text. One SVG, key_navigation_highlight.svg, replaces the dark and light pair, which differed only in color. A tint matches the SVG's own color except on about 1% of the pixels, the anti-aliased edges, which differ by one step in one channel from rounding; accepted. BorderImage's sourceSize is read-only, so the ring is always rasterised at a device pixel ratio of 1: sharp on GX, slightly soft on high-DPI screens. Accepted for now; revisit if needed. Not measured on GX (19.J).
+
+7.G Not generated, ever, from these branding colors
+---------------------------------------------------
+
+7.G.1 color_blue, color_green, color_orange, color_red as palette / data colors.
+7.G.2 Tank and fuel colors, temperature and humidity scales, environment-gauge endpoints.
+7.G.3 Graph fills that encode a series rather than a status. AcInputDirectionIcon's import arrow stays color_blue. Only its export arrow (power < 0, color_green) moves to color_success. BriefSidePanel's feed-in fill is the same split.
+7.G.4 Droop-graph stops, and per-widget one-off colors that have no formula in the 17.A color table. The color wheel dialog's button colors (the colorWheelDialog_* keys) are not in this list: they are font_over_background grays (7.F.2), so under an OEM they follow the background and font (decided; see the entry "Color-wheel dialog buttons" in the 17.A document).
+
+7.H color_ok stays a theme getter and is not a branding color. It reads color_brand. Today ok is blue, and feed-in is green. Do not point color_ok at color_success. A yellow brand will make "ok" look like a warning. That is accepted. Do not silently remap it. Text on the brand color follows the rule for text on a colored fill in 7.M.2.
+
+7.I What the files actually are
+-------------------------------
+
+7.I.1 ColorDesign.json: 36 hand-picked hexes. Blue, orange, green, red, the nine grays (color_gray1 to color_gray9), tank/fuel, temperature. color_dimBlue #27588A lives here.
+7.I.2 Dark.json: 142 keys. 96 are aliases, 43 are raw hexes. color_ok aliases color_blue. color_warning aliases color_orange. color_critical aliases color_red. color_focus_highlight aliases color_green. font_secondary is color_gray5, not a translucent white.
+7.I.3 Light.json: 142 keys. 100 aliases, 39 raw hexes. color_focus_highlight aliases color_orange. color_page_background is color_gray7, not color_background_primary. Splash icon tint is color_blue; splash text is color_black, not color_font_primary (gray2).
+7.I.4 107 direct palette references in 42 QML files. The largest clusters: BatterySettingsAlarmModel and BatterySettingsRelayModel (14 each), SwitchableOutputCardDelegateHeader (8), SystemBatteryDelegate (6), PageSettingsGeneral (6), EnvironmentGaugePanel (5).
+7.I.5 Size of the color table in the 17.A document: 142 per-scheme keys plus the 36 ColorDesign keys, so about 180 rows. 67 Dark and 71 Light keys alias a gray, black, white, dim, or dark color. Those are most of the rules for backgrounds, borders and text. The table is the largest single piece of the color work. Size it before estimating anything else.
+
+7.J Dark vs light, one set of branding colors
+---------------------------------------------
+
+7.J.1 The OEM does not supply a dark Branding and a light Branding. The brand and status colors are scheme-independent. The same hex is used in both schemes. That is how Victron works today: blue, green, orange, and red live in ColorDesign.json, not per scheme. There are no per-scheme overrides (7.K). The background factor (7.J.10) does not apply to the brand and status colors: a brand hex is often a trademark, and Victron's saturated colors are the same in both schemes today.
+7.J.2 The branding colors are the Dark scheme's values (decided, Open question 19.H). Light is always the derived scheme. Branding colors are not classified by luminance, and there is no flag that says which scheme they are for. A light color_background_primary is still Dark's background, and Light gets the Light mode background conversion of it (7.J.5): #E0E0E0 gives #1F1F1F at factor 1. With the Victron fonts, the primary-text warning (7.M.6) then fires in both schemes.
+7.J.3 The font branding colors are Dark's too: font_primary and font_secondary are text on Dark's backgrounds. Light's font_primary is derived (7.J.7), and font_secondary is checked in each scheme (7.J.8).
+7.J.4 The other scheme is derived, not stored. Same function for Victron and for an OEM.
+7.J.5 Light's background_primary = the Light mode background conversion, lightModeBackgroundColor(): HSL lightness L' = 0.5 + factor * (0.5 - L), with hue and saturation kept, where factor is the background factor, light_mode_background_factor (7.J.10), softened at the ends by 7.J.11. At factor 1 it is the plain inversion L' = 1 - L. A factor below 1 squeezes the other scheme's backgrounds toward mid grey; a factor above 1 spreads them apart. Victron black becomes white. That matches Light.json.
+7.J.6 Light's background_secondary = the same conversion (7.J.5) of Dark's background_secondary, with the same factor. Victron #141414 at factor 1.12 becomes #F7F7F7. Today's light secondary is #FAF9F5, 3 channels away: it is slightly warm, and the conversion keeps #141414's neutral hue. Accepted. Decided: this replaces an earlier rule that kept the secondary's mix toward the font, which gave #EEEEEE.
+7.J.7 Light's font_primary = luminance invert (the background factor does not apply), then mix about 15% toward the other background so text is not pure black on white. Victron lands near #262626. Today's light font is #272622. Accepted.
+7.J.8 font_secondary is not inverted. Per scheme, keep it if it passes the secondary-text threshold in 7.M.4. Otherwise mix it toward that scheme's font_primary in 5% steps until it passes. Victron gray5 passes in dark and fails in light, so light-scheme secondary text gets darker. That is a Victron pixel change, listed in the formula commit. Do not copy white text onto the derived light page.
+7.J.9 page uses the page formula in 7.E. Do not store a light-scheme page hex to preserve gray7. The background factor reaches the page only through background_primary.
+7.J.10 The background factor is an optional Branding property, a number named light_mode_background_factor (decided, Open question 19.H). Unset means 1.0. The Victron object sets 1.12, so its derived light secondary lands near today's #FAF9F5. It applies to the derived backgrounds only (7.J.5, 7.J.6). The brand and status colors keep their hex (7.J.1), and text follows the font and contrast rules (7.J.7, 7.J.8, 7.M). The compiler accepts 0 < factor <= 2 and rejects anything else. The loader drops an out-of-range value, as for a translucent branding color (19.K). Arithmetic as in 7.L.12: the loader rounds the factor to three decimal places, kept as a whole number of thousandths, and the conversion uses the double thousandths / 1000.0 (1.12 is 1120 / 1000.0), so every platform starts from the same value.
+7.J.10.a Implementation note (17.D): a factor below 0.0005 rounds to 0 thousandths, so the compiler and the loader reject it too, with the same check.
+7.J.11 Soft clamp. At factor <= 1, L' never leaves [0, 1]. At factor > 1 a hard clamp would turn every lightness below (factor - 1) / (2 * factor) white, so distinct near-black backgrounds would collapse: #000000 and #0A0A0A would both become #FFFFFF at factor 1.1. Instead, let x be the linear result, m = 0.5 + 0.5 * factor its largest value, and t = 2 - m. Above t, x becomes x - a(x - t)^2, with a = (m - 1)/(m - t)^2. Below 1 - t, use the mirror image. The result is continuous, never increases with L for a factor up to 2 (hence the compiler's limit), and reaches exactly 1 at L = 0 and 0 at L = 1, so Victron black still becomes white. At factor 1.12, greys 00, 05, 0A, 0F, 14, 1E become FF, FE, FD, FA, F7, ED.
+7.J.12 Which background factor applies (decided): light_mode_background_factor comes from the same Branding as background_primary. Only the snapshot whose color_background_primary is used, the last one in the list that sets it (3.D), is read for the factor. If that snapshot does not set the factor, the factor is 1.0, even if an earlier snapshot such as the Victron object sets one, because a factor is tuned for the backgrounds it was set with. So an OEM that sets only color_brand keeps Victron's backgrounds and Victron's 1.12, and an OEM that sets background_primary without the factor gets 1.0. A factor in any other snapshot has no effect, so the compiler warns when a file sets the factor without color_background_primary, and names the line. The secondary uses the same factor, whether it is set or derived (7.J.13).
+7.J.13 Which secondary and page apply (decided, Open question 19.M): background_secondary and background_page are chosen against a background_primary, so they follow it, like the background factor. They are read only from the snapshot whose color_background_primary is used, or from a later one. A value in an earlier snapshot, such as the Victron object's #141414, is ignored. A later snapshot may set them without the primary, for example a small plugin that adjusts the cards of an OEM's theme. If none sets the secondary, it is derived: mix(background_primary, font_primary, 0.08), Victron's own 8% mix (#141414 from black, and #2C2C2C from the example's #1A1A1A, 16.E.3). If none sets the page, the page formula applies (7.E). Both use the resolved Dark branding colors, and Light is then derived from them as if the OEM had set them (7.J.6, 7.J.9). Arithmetic as in 7.L.12.
+
+7.K Per-scheme overrides (rejected)
+-----------------------------------
+
+Decided (Open question 19.H): no per-scheme color properties in v1.
+
+7.K.1 Rejected: flat light_color_<role> and dark_color_<role> overrides for each of the nine branding colors (18 more properties), and, before them, a flag saying which scheme the branding colors are for ("these colors are my light scheme"). Nested per-scheme objects are ruled out in 7.C.
+7.K.2 Why: the background factor (7.J.10) covers what motivated them, a Light background that is not the plain inversion. A factor of 0.3 maps the example's #1A1A1A to the mid grey #9E9E9E it first asked for, and the example uses 0.45 (16.E.2). The branding colors are always Dark's (7.J.2), so no branding color lands on the wrong side of a luminance split, and a scheme flag has nothing to fix.
+7.K.3 Cost: a brand or status color is one hex in both schemes (7.J.1). An OEM cannot have a darker brand in Light only. The example first asked for dark orange #B34700 in Light; it keeps #F28C28 in both (16.E.1).
+7.K.4 The background factor is the only per-scheme Branding property. If OEMs need per-scheme colors later, they can be added as new properties.
+7.K.5 Inherited secondary backgrounds were a separate gap, now decided: the secondary and page follow background_primary, and are derived when not set (7.J.13, Open question 19.M).
+
+7.L Dim and dark colors, blended and opaque
+-------------------------------------------
+
+7.L.1 Commit fa4f2ef6728a887311a0b0ad7d2e9618590e613f ("Use opaque colors") removed translucent palette tokens because alpha blending is expensive. The old values were the base color with an alpha byte, not a second hex:
+
+    dim  = 0xB3 = 179/255 ≈ 70%
+    dark = 0x4D = 77/255 ≈ 30%
+
+7.L.2 Generation must not put those alphas back into the scene graph. Blend onto the background, then store alpha 255:
+
+    blend_onto(color, alphaByte, background):
+        a = alphaByte / 255
+        out = round(color * a + background * (1 - a))
+        out.a = 255
+
+7.L.3 Blend onto that scheme's background_primary, not onto black unconditionally and not onto white unconditionally. A warm page must not get dim and dark colors blended onto a cold white. Exception: toast backgrounds (7.L.6).
+7.L.4 Over black, 70% and 30% exactly match color_dimBlue #27588A, color_darkBlue #11263B, color_dimGreen #508135, color_darkGreen #223817, color_darkOrange #482D0E, and color_darkRed #491C1B. color_critical_background #AA403E is one channel off the 70% red. Light button_off #74A4D6 is one channel off 70% blue over white. The Light scheme's dark colors (color_dark*) were drawn over gray9 #FAF9F5, not white: 30% over gray9 reproduces them within 1 channel. Over the derived white background they come out 7 channels lighter. Those count as close enough. The formula replaces the hex. Do not keep the hex beside it.
+7.L.5 Two dim and dark colors are not close, and still follow the formula. color_dimRed #592220 is about 36% red over black, not 70%. The 70% result is #AB413E. GeneratorManualControlButton and GeneratorDialog use dimRed as a background next to dimGreen, which is already the 70% green. The dim red gets brighter and follows the same rule as the dim green. Light dimRed #F0C3BF becomes #F78D8A, a stronger pink. Decided in review: accepted, so the Manual Stop background matches the Manual Start background and the silence-alarm button's critical_background. Do not add a red-only alpha or keep the hex to preserve the hand-tuned value, and do not map dimRed to the dark (30%) color.
+7.L.6 Toast backgrounds are about 74-79% over black (alpha 188, 201 and 200), not 70%, and are the same in both schemes. Use the dim color, blended onto the Dark scheme's background_primary in both schemes (dark_mode_dim()). Over the light background_primary the informative toast would be #73A4D6, with 2.6:1 white text. The informative toast moves from #295C91 to #27588A (7 channels). The warning toast moves from #BD7624 to #A86920 and the error toast from #BF4845 to #AB413E, about 20 channels each. Their white text rises from 3.63:1 to 4.46:1 and from 4.97:1 to 5.90:1. Accepted.
+7.L.7 The names dim and dark mean "the 70% mix" and "the 30% mix". On a light background the 30% mix is the lighter tint. Do not "fix" dark to mean darker than dim.
+7.L.8 Button-down / darkish is blend_onto(color, 121, background). That is one channel off color_darkishBlue #1B3B5C. It is not a Branding property.
+7.L.9 That rule only matches the dark scheme. Light button_down today is color_lightBlue #73A2D3, which is the 70% mix over white (#73A4D6), not the alpha-121 mix. blend_onto(blue, 121, white) is #A1C1E3, a much paler pressed state. No label is drawn on button_down: button_down_text sits on the brand fill, and only the SpinBox plus and minus icons sit on button_down (1.9:1 for those white icons on #A1C1E3). The color table in the 17.A document proposes the dim color (19.E), so light button_down moves 3 channels and no text moves.
+7.L.10 Text on these colors follows 7.M (Contrast rules). Do not assume white.
+7.L.11 Remaining alpha is an exception, not a blended color. ColorDesign still has color_dimWhite2 #99FFFFFF, color_dimGray2 #99272622, color_darkGray2 #4D272622, used where text antialiasing needs alpha. A few overlays (gauge shine, tank-group scrim) are also translucent. Do not generate those. Do not reintroduce translucent control or background colors. One decided exception: viewGradient_color2 is the page color at alpha 0x66, so the list-edge fade follows an OEM page (17.A document, 6.G).
+7.L.12 Arithmetic (decided, Open question 19.Q): every mix (blend_onto, the page mix, the font mixes, the derived background_secondary) works per channel on 8-bit sRGB values and rounds half up. That is the space the identities in 7.L.4 were checked in, and the space the old alpha blending used. Moving to a perceptual space such as OKLab is a separate change with its own capture review. The mixes use integer arithmetic. The HSL operations, the Light mode background conversion (7.J.5, 7.J.11) and the font inversion (7.J.7), use double precision. Tests compare exact expected hex values for both. The point is the same output on every platform and in the reference script, not visual accuracy: every difference below is one step (1/255) in one channel, which nobody can see.
+7.L.12.a Ties in the mixes. A mix by a fraction with an even denominator can land exactly on .5, and then rounding decides the result. The 5% steps of font_secondary (1/20) and the 15% mix of font_primary (3/20) can. In double precision 0.05 * 14 is 0.7000000000000001, so the green channel of the Light font_secondary for the example's Dark branding colors at factor 0.3 (14.A.16), exactly 61.5, comes out just under it and rounds to 61, not 62. The integer form is exact and no harder to write. For a fraction n / D: (a * (D - n) * 2 + b * n * 2 + D) // (2 * D). The dim, darkish and dark colors divide by 255, and the 8% and 12% mixes by 25. Both are odd, so those never tie, but they use the same integer form.
+7.L.12.b The HSL operations. Exact rationals, as the 17.A script uses, would need a rational type in C++. The soft clamp squares terms whose denominators already carry 255 and the factor's 1000, and the HSL-to-RGB step multiplies in the hue's denominator, so intermediate values can pass 64 bits, and MSVC has no 128-bit integer. Doubles are enough: IEEE 754 rounds + - * / correctly, so the same operations in the same order give the same bits on every platform (7.L.12.c is the exception). Measured against exact arithmetic: no Victron value changes, and no example value at factor 0.45 or 0.3 (16.F, 14.A.16). Over every grey and 20,000 random colors, 0.13% to 0.39% of results differ at factors 0.3, 0.45 and 1.12, and none at factors 1 or 2. Every difference is one step, in a channel whose exact value is a .5 tie: #8C8C8C at factor 1.12 is exactly 113.5 per channel, and doubles give #717171 where exact arithmetic gives #727272. The implementation's result is the defined one. In doubles the lightness still strictly decreases over the 256 greys for every factor from 0.001 to 2 in steps of 0.001, and black still becomes exactly white for every factor >= 1, so 7.J.11 and 14.A.18 hold. Round half up as floor(x * 255 + 0.5).
+7.L.12.c Fused multiply-add. GCC fuses a * b + c into one instruction by default wherever the target has one, which current ARM cores do; Clang does so within an expression. A fused result is rounded once, not twice, so a tie can go the other way on a GX device than on the desktop that ran the tests. x86-64 builds with default flags, and WebAssembly, have no such instruction to fuse into. The derivation code is in its own source file, compiled with -ffp-contract=off on GCC and Clang, so it fuses nowhere.
+7.L.12.d Contrast ratios (7.M) need the WCAG linearisation, a 2.4 power. pow() is not correctly rounded, so the C libraries on desktop, GX and WebAssembly may differ in the last bit. Only a ratio equal to a threshold to about 15 significant digits could compare differently. The closest of the Victron and example comparisons is 0.02 away (3.019:1 against 3.0:1). To remove even that, the 256 linearised channel values are a fixed table in the source, generated once. The luminance and the ratio are then + - * / only.
+7.L.12.e The reference. Python floats are IEEE doubles, and CPython does not fuse, so a Python reference that performs the same operations in the same order matches the C++ bit for bit. In 17.D the 17.A script's HSL code changes from exact rationals to doubles in the C++ order; its mixes stay integer. The exact-arithmetic rule in section 2 of the 17.A document, which says integers or rationals and not binary floating point, is updated to this rule when the document is regenerated. The exact expected values for HSL-derived colors come from the implementation and are checked against the reference.
+
+7.M Contrast rules
+------------------
+
+7.M.1 Ratios are WCAG 2 contrast ratios from relative luminance. Each rule names its threshold.
+7.M.2 Text on a colored fill (buttons, the active navigation-bar button, dim or dark colors with a label): white if white's contrast with the fill is at least 3.0:1, else the scheme's dark font. Do not pick "whichever contrasts more". Victron blue #387DC5 is 4.28:1 against white and 4.91:1 against black, so a max-contrast rule turns every Victron button label black.
+7.M.3 At 3.0:1, blue (4.28:1) and red #F35C58 (3.24:1) keep white text. Green #72B84C (2.42:1) and orange #F0962E (2.31:1) take dark text. For Victron the only change to text on a colored fill is the light demo-mode indicator: white to dark text on orange. No Victron label is drawn on green. button_down_text is checked against the brand fill only; it is not drawn on button_down (7.L.9). Two sites draw it on other fills: MultiStepButton on the light dim color when a step is checked while the button is off (white, 2.6:1, kept), and TemperatureSlider on palette blue and the temperature gradient, which 17.E moves to color_white.
+7.M.4 Secondary text: at least 3.0:1 against the scheme's page and background_secondary. gray5 #969591 is 7.0:1 on black and 6.1:1 on #141414. In light it is 3.0:1 on white, 2.8:1 on #F7F7F7, and 2.4:1 on the derived page #E5E5E5. It fails in light. Four 5% steps (7.J.8) give #807F7C: 3.18:1 on the page, 3.74:1 on #F7F7F7. At 4.5:1 it would be #646361 (9 steps).
+7.M.5 3.0:1 is the WCAG floor for large text and UI components. Body-text 4.5:1 would move more Victron pixels. Leaving today's light secondary text untouched would need a threshold near 2.3:1, which is not an accessibility rule. Design picks the number (see Open question 19.D). Whatever it is, the moved pixels are listed and captured.
+7.M.6 OEM primary text: if font_primary on background_primary is under 4.5:1 in either scheme after derivation, the loader logs a warning naming the plugin. It does not correct the OEM's choice.
+7.M.6.a Implementation note (17.D): Theme logs the warning, not the loader, because Theme runs the derivation. It checks both schemes when the plugin branding changes, and not again when the color scheme changes, so each problem is logged once. It names the plugin that supplied the font_primary or background_primary in use. Victron's own colors are not checked.
+
+7.N Victron's colors use the same formulas
+------------------------------------------
+
+7.N.1 The Victron object holds one set of branding values: the four saturated colors, the dark-scheme backgrounds and fonts, and the background factor 1.12 (7.J.10). It does not hold a resolved Dark.json or Light.json for computed colors.
+7.N.2 Every computed getter runs the formula. Matching Victron's branding colors does not skip it. Copying #000000 into color_background_primary still derives the light scheme.
+7.N.3 Unset plugin branding colors inherit Victron's. The formula then runs for the current scheme. An OEM who sets only color_brand keeps Victron success, warning, critical, backgrounds, and fonts, and still gets derived dim and dark colors and a derived light scheme.
+7.N.4 Once a key's getter computes it from a formula, delete its hex from Dark.json and Light.json. A leftover hex will drift. Data colors, tank colors, temperature, and the translucent text/overlay exceptions stay in the theme files. They are not computed.
+7.N.5 A one-time comparison against today's JSON is a review note, not a test that fails on mismatch. The deltas listed in 7.J, 7.L, and 7.M, itemised in section 8 of the 17.A document, are the expected ones.
+
+7.O Internal rename, required, not polish
+-----------------------------------------
+
+7.O.1 Add Theme.color_brand and Theme.color_success. New code uses those, not color_blue / color_green, when it means the role.
+7.O.2 Add generated getters color_brand_dim / color_brand_dark, and the same for success, warning, critical. They are not Branding properties.
+7.O.2.a Implementation note (17.E): not done as written. 17.E added only the dim and dark colors that call sites read, as theme keys named like the existing color_darkOk, color_darkWarning and color_darkCritical: color_darkSuccess, color_dimSuccess, color_darkishOk and color_dimCritical. Keys named after a palette color whose call sites mean a role were replaced: dimRed by dimCritical, dimGreen by dimSuccess, darkGreen by darkSuccess, darkishBlue by darkishOk, darkOrange by darkWarning and darkRed by darkCritical. Each replacement has the same formula over a role color that equals the old palette color for Victron, so Victron's values do not change.
+7.O.3 color_button, color_ok, color_navigationBar_button_on read color_brand. Their existing QML call sites stay.
+7.O.4 color_warning() reads the warning branding color. It must not `return color_orange()`. color_critical() must not `return color_red()`. color_ok() must not `return color_blue()`.
+7.O.5 Direct Theme.color_blue / lightBlue that mean selected or pressed move to the brand token. Known sites: SpinBox border, TextField and SpinBoxInputArea selection, ColorSelector stroke, DialogLayer icon, SolarHistoryChart press.
+7.O.6 Direct green that means feed-in or regen moves to color_success. Known sites: AcInputDirectionIcon (power < 0 only), BriefSidePanel belowThresholdFillColor when the graph shows feed-in, color_boatPage_regenProgress (#72B84C hardcoded). The import / consumption blue next to those stays color_blue.
+7.O.7 Direct red/orange/green that mean alarm move to color_critical / color_warning / color_success. Classify each site. Do not bulk-replace color_green. Known clusters to audit: battery alarm models, ListTextStatus, ListUnpairButton, switchable-output and IO headers, modal dialogs, PageSettingsGeneral support state.
+7.O.8 Direct blue/green/red that encode a series stay on the palette tokens. Known clusters: EnvironmentGaugePanel, TemperatureSlider, LoadGraph, BriefSidePanel non-feed-in fills.
+7.O.9 Splash tint is not a branding color; it follows them. Dark icon and text follow color_font_primary. Light icon follows color_brand. Light text follows the derived light font_primary (near black, not a stored color_black).
+7.O.10 Untinted images are part of the audit, not only Theme.color_* reads. The Overview nubs, electrons, and lightning bolts move to ColorImage tinted by the same token as the connector line, or to the focus-ring image provider if the art is not single-color. Check every Image whose SVG has a palette hex. List the scheme-dependent images (WelcomeView QR codes, ColorSelector slider, SplashView gauge GIFs) and record why each one stays. Also untinted (4.E.9): the SpinBox icons (tint with color_button_down_text), the NotificationsPage checkmark (tint with color_success), and boat_glow.png's default state (tint with color_ok). electron.svg is not single-color (4.E.6): a tint would turn its white head brand-colored. The 17.A document's asset table records the decision for each image.
+7.O.10.a Implementation note (17.E): done. The lightning bolts and connector nubs are ColorImage tinted with color_overviewPage_widget_border, the NotificationsPage checkmark with color_success, the SpinBox icons with color_button_down_text, and boat_glow's default state with color_ok. For Victron each tint is the art's own color, so pixels change by at most one step on anti-aliased edges. electron.svg stays as it is: the image provider in 7.F.3.a fills the whole image with one color, so it cannot recolor only the tail. That needs a provider that replaces one hex in the SVG text (17.A document, 7.D and 10.E).
+7.O.11 Until that audit lands, branding will restyle buttons and the navigation bar and leave spinbox borders, text selection, and feed-in green on the old palette. Ship the audit with the color work, not after.
+
+
+8 Allowlist
+===========
+
+8.A v1 properties on Branding
+-----------------------------
+
+8.A.1 Branding colors. Optional. Unset inherits from the earlier snapshots in the list, which means the Victron object if nothing else set it. background_secondary and background_page are the exception: they follow background_primary, and are derived when not set with it (7.J.13). They are the Dark scheme's values; Light is derived (7.J.2).
+
+8.A.1.a color_brand
+8.A.1.b color_success
+8.A.1.c color_warning
+8.A.1.d color_critical
+8.A.1.e color_background_primary
+8.A.1.f color_background_secondary: optional; derived from background_primary if unset (7.J.13)
+8.A.1.g color_background_page: optional; see 7.E and 7.J.13
+8.A.1.h color_font_primary
+8.A.1.i color_font_secondary
+
+8.A.2 No per-scheme color properties: no nested objects, and no light_ or dark_ overrides (7.K). The OEM supplies the Dark branding colors, and the host derives Light. Generated dim and dark colors are not properties.
+
+8.A.2.a light_mode_background_factor: the background factor (7.J.10), one number. Unset means 1.0. It is not inherited like the branding colors: it is read only from the Branding whose background_primary is used (7.J.12).
+
+8.A.3 None of the nine grays (color_gray1 to color_gray9), no tank colors, no color_blue / color_green / color_orange / color_red, no raw dim/dark hexes. Those live on the Victron fallback only.
+
+8.A.4 Font families:
+
+8.A.4.a font_files: list of font file URLs inside the plugin RCC
+8.A.4.b font_family
+8.A.4.c quantity_font_family
+
+8.A.5 Font sizes are not in v1. See 8.B and Open question 19.G.
+
+8.A.6 Brand marks, not the icon set:
+
+8.A.6.a splash_logo_icon
+8.A.6.b splash_logo_text
+8.A.6.c splash_logo_icon_preserve_colors, splash_logo_text_preserve_colors
+
+8.A.7 Icon recoloring is already ColorImage plus theme colors. Replacing status-bar, wifi, and widget SVGs is out of v1. The gauge intro GIF is screen-size-specific and is not an icon. Leave it. A later asset slot can suppress or replace it if an OEM asks.
+
+8.B Not in v1
+-------------
+
+8.B.1 Geometry, corner radius, spacing, animation durations. Those differ by portrait and landscape and will break layout.
+8.B.2 Font sizes (font_size_tiny .. font_size_h5). Same risk as geometry: a larger body size overflows fixed-height rows, buttons, and labels, and five inch and portrait have the least room. Most widget sizes in themes/typography/*.json alias those steps, so one override reaches everything. If an OEM needs it later, the safe shape is one bounded scale factor, clamped by the loader and captured at the clamp limits on all three sizes, not ten free sizes.
+8.B.3 Per-widget colors (color_boatPage_needle, droop-graph stops, the color wheel dialog's button colors).
+8.B.4 A locked light/dark mode. That is behaviour, not a token.
+8.B.5 A product-name string. Strings do name Victron (PageSettingsDocumentation "Victron Community", PageSettingsGsm, PageSettingsSupportStatus, PageSolarCharger, PageSettingsBleSensors "VictronConnect"). Several name real Victron services or apps and stay correct under an OEM brand. Classify them before adding a property. It is not a theme getter.
+
+
+9 How lookups work
+==================
+
+9.A List of BrandingData
+------------------------
+
+9.A.1 QVector of BrandingData snapshots (10.E.3). Index 0 is the Victron object. Plugin snapshots follow in plugin-name order (Decision 5.D). Walked from the end.
+9.A.2 For each property, use the first object (walking from the end) that set it.
+9.A.3 For each property, the value from the last plugin that sets it is used, except for the background factor (7.J.12) and background_secondary and background_page (7.J.13), which follow background_primary. There is no per-object scheme filter. Derivation reads Theme.colorScheme.
+
+9.B Resolved palette
+--------------------
+
+9.B.1 Getters do not walk the list or run derive() per call. Theme keeps a resolved palette: the merged branding colors and every derived color for the current scheme. It is recomputed when the vector changes and when the color scheme changes. Snapshots are immutable, so a branding color cannot change on its own. Then themeValuesChanged is emitted once.
+9.B.2 Getters return the cached QColor. Page construction on GX is already slow enough that PageStack builds asynchronously. Measure with --ui-test benchmark/pages (.github/benchmarking.md) before and after the generator change, on a GX device, not only on desktop.
+
+9.C Colors
+----------
+
+9.C.1 Each branding color is the last set value in the list. The Victron object sets every branding color.
+9.C.2 A branding color that the OEM does not set inherits Victron's. It does not mean "return the Light.json hex". The formula then runs for the current scheme. See 7.N (Victron's colors use the same formulas).
+9.C.3 Every computed color runs derive() when the palette is resolved. There is no shortcut back to today's JSON when the branding colors match Victron's.
+9.C.4 Data colors (color_blue, tank colors, temperature) always return the explicit table. OEM branding colors are ignored.
+9.C.5 color_blue() does not read color_brand. color_ok() does. color_warning() reads the warning branding color, not color_orange().
+9.C.6 A Q_PROPERTY has exactly one NOTIFY. Every branding-dependent property uses one signal, themeValuesChanged, emitted on a branding change and on a color-scheme change. That includes keys that are only scheme-dependent today: they move from colorSchemeChanged_parameterless to themeValuesChanged. Keys that are CONSTANT today and become branding-dependent lose CONSTANT.
+9.C.7 color_darkOk and every color statusColorValue() reads must be on themeValuesChanged, or the gauges' comma-expression workaround (4.D.6) stops updating. Replacing that pattern with a property-based status color is optional cleanup, not part of this work.
+9.C.8 A binding on Theme.color_button subscribes to that NOTIFY. The getter reads the resolved palette. That hop does not affect binding evaluation.
+9.C.9 Do not bind a branding color to a Theme color. Victron's branding colors are literals. Derivation runs in Theme's C++, not in a QML binding on the Branding object.
+
+9.D Generator
+-------------
+
+9.D.1 tools/themeparser.py bakes aliases into literals today, so overrides do nothing until it changes. The getter of a branding-dependent alias must call the getter of the key it aliases: the generated color_ok() returns color_brand(), not QColor(56, 125, 197). Keys that never depend on a branding color may keep returning a literal.
+9.D.1.a Implementation note (17.B): the aliases in Dark.json and Light.json say which getters call another getter. An alias of another color scheme key calls that key's getter. Every other alias (palette colors from ColorDesign.json, geometry, typography) keeps returning a literal. Victron's branding colors stay literals inside victronBrandingColor(). 17.B pointed 56 per-scheme aliases at the key that the 17.A color table says they follow, for example color_ok and color_button at color_brand, and in Dark color_listItem_secondaryText at color_font_secondary. It did so only where today's value already equals the target's value in that scheme. Three Light keys keep color_black until 17.D, because today they are black, not the light font_primary: boatPage_needle, droopGraph_operationPoint_guidelines and splash_logo_text. Data and exception keys alias only palette colors, so they never follow a branding color (9.C.4). Aliases that already pointed at a color scheme key call that key's getter too, for example color_darkOk at color_darkBlue and the Dark keys for text on a colored fill at color_font_primary; 17.D replaces them with formulas. Alias chains of any depth resolve.
+9.D.2 The generator picks each property's NOTIFY or CONSTANT from the color table in the 17.A document: themeValuesChanged for branding-dependent keys, screenSizeChanged_parameterless for screen-size keys, CONSTANT for the rest.
+9.D.2.a Implementation note (17.B): the NOTIFY change in 9.C.6 landed with 17.C. Every key in Dark.json and Light.json, and every branding color, is on themeValuesChanged. No branding-dependent key is a ColorDesign key, so none loses CONSTANT, and the file a key is in gives the same NOTIFY as the color table would. The generator does not read the color table. Data and exception keys in Dark.json and Light.json stay on themeValuesChanged; a branding change re-evaluates their bindings to the same value.
+9.D.3 This is its own implementation step. It lands before the getters consult the list of BrandingData, and it changes no pixels by construction.
+9.D.3.a Implementation note (17.B): 17.C landed first, so the getters of the branding colors already read the list when 17.B landed. 17.B still changes no pixels with no plugin installed. This was checked by evaluating every generated getter before and after, in both color schemes and all three screen sizes (845 getters, no difference). tst_branding checks that aliases follow their branding color. Runtime captures of the mock-maximal smoke test (a partial run: 639 dark and 506 light images) showed no color change against the 17.C captures; the only differences were live mock values and the scrollbar. Toasts, the splash and the focus highlight are not in those captures and rely on the getter comparison. The GX benchmark (9.B.2) has not been run yet.
+9.D.4 Font sizes are not in v1, so typography aliases may keep returning literals.
+
+9.E Fonts and logos
+-------------------
+
+9.E.1 Font family and logo URLs are not theme properties today. Add the fewest Theme properties that give call sites one lookup. Each of these NOTIFY themeValuesChanged.
+
+9.E.1.a Theme.font_family, Theme.quantity_font_family: default to the current Language / Roboto behaviour, including the language-specific exception and the writing-system check.
+9.E.1.a.1 Implementation note (17.C): both properties are "" unless a branding family applies. Global.fontFamily and Global.quantityFontFamily then use their existing FontLoaders. Theme does not return the built-in family name itself, because on WebAssembly the language fonts are loaded over HTTP by those FontLoaders, and their family name is known only once loading is done. The lookup order in 6.K is unchanged.
+9.E.1.b Theme.splash_logo_icon, Theme.splash_logo_text -> url: last set value in the list, else the built-in qrc:/images path.
+9.E.1.c Theme.splash_logo_icon_preserve_colors, Theme.splash_logo_text_preserve_colors -> bool: same walk. Splash uses them to pick Image vs ColorImage.
+
+9.F Point only the migrated call sites at these. v1 migration is SplashView's two logos, plus Global / Label font family. Do not rewrite the other ~197 image URLs.
+
+9.G These are properties, so a late MQTT blob or a hot reload repaints through NOTIFY. No Q_INVOKABLE, no propertyCapture, no revision counter. A plugin reload already rebuilds MainView, but objects outside MainView and the Theme singleton survive it, so NOTIFY is still required.
+
+9.H Branding does not read Theme, and cannot: Victron.Branding does not depend on VenusOS (11.C.4). The built-in fallback lives only in Theme.
+
+
+10 Integration type
+===================
+
+10.A Add GuiPluginLoader.Branding = 6. Update the range check in populatePlugins() that rejects types above QuickAccessPaneCard. url is required, as for the other types.
+
+10.B The plugin's integration URL points at the Branding QML file inside the RCC, for example qrc:/OemName/Branding.qml. The loader creates that object after registerResource, takes its snapshot, and appends the snapshot (10.E.3). It must not push the URL as a page.
+
+10.C A plugin may contain a Branding integration and a settings-page integration. A branding-only plugin is valid because type 6 counts.
+
+10.D Engine at first load
+-------------------------
+
+10.D.1 Creating the object needs the QQmlEngine. Today the GX constructor loads plugins before create() assigns m_qmlEngine. Pass the engine into the constructor, or create the Branding objects in create() once the engine is set. Either way it happens before main.cpp compiles Main.qml, so the first GX frame is branded.
+
+10.E Loader rules
+-----------------
+
+10.E.1 No enable state. A Branding is created for every plugin the loader loads (Decision 5.M). The loader reads and writes no per-plugin state for it.
+10.E.2 If Branding.qml fails to compile or create, drop that integration only, log the QML errors with the plugin name, and keep the plugin's other integrations. A plugin whose only integration was Branding is then dropped like any other invalid plugin. The UI falls back to the earlier snapshots in the list.
+10.E.3 Snapshot, then destroy. Right after the object is created, the loader calls a C++ method on it that returns the properties that the file set, and which ones those are, as a plain value (for example BrandingData). The loader does not read them through QML. It resolves relative URLs against the integration URL, drops and logs any branding color whose alpha is not 255, and appends the BrandingData to the list. Then it deletes the object. This protects against a hand-built JSON or RCC that never went through the compiler: a binding that got in was evaluated once, during creation, and is never evaluated again. The palette depends only on the snapshots and the color scheme. The snapshot does not stop code from running. Component.onCompleted or a function call in a binding still runs once. That is not a new hole, because a plugin can already ship arbitrary QML in a settings page. The goal is that branding cannot leave a live binding into the theme, not that it cannot run code.
+10.E.4 Runtime binding detection was considered and rejected. It needs private API (QQmlPropertyPrivate::binding). It also reports false positives: QML compiles an array value such as font_files as a script binding, even though it has no dependencies. Snapshotting needs neither.
+10.E.5 Reload drops every plugin snapshot, removes their fonts, creates and snapshots each loaded plugin's Branding again from the new data in plugin-name order, recomputes the palette, and emits themeValuesChanged once. The Victron object is not touched.
+10.E.6 The loader reads the Branding file's import lines and logs a warning if it imports anything other than Victron.Branding, QtQml, and QtQuick (Victron.VenusOS, for example). It cannot stop the import. It can name the plugin.
+
+10.F Compiler: --branding Branding.qml
+--------------------------------------
+
+10.F.1 Checks the file exists.
+10.F.2 Packs the Branding QML, its images, and the font files it lists. Today the compiler packs only top-level .svg, .png, .qml, and translations. Add .ttf and .otf. Either pack subdirectories with their paths kept, or reject them with a clear error. Do not drop them silently.
+10.F.3 Emits { "type": 6, "url": "qrc:/<name>/Branding.qml" }.
+10.F.4 Runs the literal-only check (10.G) before packing, so a rejected file never produces an RCC. It allows only the Victron.Branding, QtQml, and QtQuick imports, so this is where a Victron.VenusOS or Victron.GuiPlugins import is rejected.
+10.F.5 Then runs qmllint against the Victron.Branding qmltypes. This is v1, not later. The literal-only check covers the file's shape. qmllint checks types against the real module, so it still catches a property list that has drifted from the C++. An agent writing a plugin can run the compiler to check its own work, which is what #3305 wants the docs to enable. qmllint needs only the Victron.Branding module, not VenusOS or GuiPlugins.
+10.F.5.a The build installs Victron.Branding's qmldir and qmltypes next to the compiler, as it already installs each module's qmldir (cmake/ModuleBoat.cmake). The compiler passes that directory to qmllint. The same qmldir gives the module version that the compiler writes into the plugin JSON (13.C.2).
+10.F.5.a.1 Implementation note (17.C): the directory defaults to the compiler's own directory. --qml-import-path overrides it, for running the compiler from a source tree against a build's install directory. The qmldir declares "depends QtQuick", because QtQuick provides the QML color type; without it, qmllint reports every color assignment as a type error. If the qmldir is not found, the compiler says so and skips qmllint, as in 10.F.5.b.
+10.F.5.b The compiler looks for qmllint the way it looks for rcc today (tools/gui-v2-plugin-compiler.py:69-92). If qmllint is not found, for example on a GX device, the compiler says so and carries on. The literal-only check still runs. CI always runs qmllint.
+
+10.G Compiler: literal-only check
+---------------------------------
+
+10.G.1 Every value in Branding.qml must be a literal. No value may be an expression that QML would turn into a binding.
+
+10.G.2 Why a grammar, not binding detection: whether a value is a literal or a script binding is decided inside QML's own compiler, and the rule is not obvious. "#003366" and -1 are literals. "#00" + "3366" is a binding. So is Qt.resolvedUrl("x"), and so is [ "a.ttf" ]. qmllint has no warning for "this is a binding", and the toolchain has no Python QML parser. So the compiler does not try to find bindings. It accepts only an allowlisted grammar and rejects everything else. The grammar is small, and its parser is a few hundred lines of Python with no new dependencies.
+
+10.G.3 Grammar, for the whole file. Whitespace and // and /* */ comments may appear between any two tokens.
+
+    file       := import+ object
+    import     := "import" module [version] [";"]
+    module     := "Victron.Branding" | "QtQml" | "QtQuick"
+    object     := "Branding" "{" assignment* "}"
+    assignment := property ":" value [";"]
+    value      := string | number | "true" | "false" | list
+    list       := "[" [ string ( "," string )* [","] ] "]"
+    string     := a single- or double-quoted JavaScript string with standard escapes. No template literals.
+    number     := ["-"] a decimal literal
+
+10.G.4 Imports: Victron.Branding is required. QtQml and QtQuick are allowed, because authors and editor templates add them out of habit, but neither is needed. Imports may come in any order, and each module may be imported at most once. No "as" qualifier, so the root is always the bare name Branding. Allowing QtQml and QtQuick does not widen anything else: values are still literals, so Qt.rgba and the like are still calls, and QtQuick types are still child objects. Both are rejected.
+10.G.5 property must be a Branding property name. The list comes from a file generated from the C++ declaration (for example tools/branding-properties.json: name and type). It is the same generator and the same source as the property reference and the API dump, and the same CI staleness check covers it. The list is not hand-kept in the Python.
+10.G.6 The value must match the property's type. color and url properties take a string. bool properties take true or false. List properties (font_files) take a list. No v1 property takes a number. Numbers are in the grammar so a later property does not need a grammar change.
+10.G.7 Each property may be assigned at most once.
+
+10.G.8 Everything else is rejected. That includes:
+
+10.G.8.a any identifier or member access as a value: Theme.color_ok, color_brand, undefined, null
+10.G.8.b any call: Qt.resolvedUrl(...), Qt.rgba(...), Qt.lighter(...), qsTr(...)
+10.G.8.c any operator or grouping: "a" + "b", a ternary, !true, parentheses, nested lists, object literals
+10.G.8.d template literals (backticks)
+10.G.8.e block bindings: color_brand: { return "#003366" }
+10.G.8.f id, property / readonly / required / default declarations, signal, function, enum, inline components
+10.G.8.g signal handlers (onColor_brandChanged), Component.onCompleted, attached or grouped properties (a.b: ...), "Behavior on" and other "on" value sources
+10.G.8.h child objects, a second root object, a root type other than Branding
+10.G.8.i any other import (Victron.VenusOS, Victron.GuiPlugins, QtQuick.Controls, a JavaScript import, a directory import), a qualified import ("as"), a repeated import, a missing Victron.Branding import, and any pragma
+
+10.G.9 Errors: each error is reported as file:line:col, then the property, then what was found and how to fix it. For example:
+
+    Branding.qml:14:18: splash_logo_icon: expected a string literal, found a call to Qt.resolvedUrl. Write "logo.svg"; the path is relative to Branding.qml.
+
+10.G.10 The compiler reports every error in the file, not only the first, and exits non-zero. An agent can fix the whole file in one pass.
+
+10.G.11 Value checks, after parsing:
+
+10.G.11.a Colors: "#RGB", "#RRGGBB", "#AARRGGBB", or an SVG color name. These are the string forms QML accepts. Branding colors are opaque in v1, so "transparent" is rejected. A "#AARRGGBB" value whose alpha is not FF is rejected, and the error says QML puts alpha first. CSS writes #RRGGBBAA, so "#003366CC" is not the color a web designer expects.
+10.G.11.b URLs: relative only. No scheme (qrc:, file:, http:, https:, data:), no leading "/", and no "..". The file must exist under the plugin directory, and the compiler packs it. Logos must be .svg or .png. font_files entries must be .ttf or .otf, with no duplicates.
+10.G.11.c font_family and quantity_font_family: non-empty. The compiler does not parse font files. The loader checks the family at runtime (see 6.K).
+
+10.G.12 The check runs only in the compiler. A hand-built JSON or RCC skips it. The loader's snapshot covers that case (see 10.E.3).
+
+10.H Compiler: --install <gx-host>
+----------------------------------
+
+10.H.1 #3305 asks for this, so OEMs can test on a Cerbo before #3307 provides installation. It is in v1. Copy the built plugin over SSH to /data/apps/available/<name>/gui-v2/ and symlink /data/apps/enabled/<name> to /data/apps/available/<name>. The loader's QFileSystemWatcher on /data/apps/enabled/ then reloads it without a GUI restart.
+10.H.2 Dev-only. It uses the developer's own SSH setup. It is not part of the runtime design, and the runtime does not depend on it.
+
+
+11 Module split
+===============
+
+11.A Module dependencies
+------------------------
+
+Three modules, with dependencies in one direction only:
+
+11.A.1 Victron.Branding: the Branding type, for #3305 (11.B). Branding plugins import it.
+11.A.2 Victron.GuiPlugins: the data and UI types for plugin pages, for #3306 (11.D). Plugin pages import it.
+11.A.3 Victron.VenusOS: the host. Plugins must not import it (2.B.3).
+11.A.4 Direction: GuiPlugins depends on VenusOS, and VenusOS depends on Branding. Branding depends only on Qt. Nothing points back, so there is no cycle. GuiPlugins has to depend on VenusOS, because its UI types are thin wrappers over the internal VenusOS types (option 2, 12.E). So VenusOS cannot also depend on GuiPlugins, as #3306 allowed. The #3306 rule "the module must not import Victron.VenusOS" becomes "no VenusOS type in the module's public API", checked on the API dump (13.B.4).
+11.A.5 Why Branding is not in GuiPlugins: the loader and Theme are VenusOS code, and they use the Branding type from C++. With Branding in GuiPlugins, VenusOS would depend on GuiPlugins, and GuiPlugins on VenusOS.
+11.A.6 The split has other benefits. Branding ships without waiting for the plugin UI module (17.I). The compiler checks a branding plugin against one small module (10.F.5). Each module has its own API dump and version (13.B, 13.C), so a change to the UI types never bumps the Branding version.
+11.A.7 GuiPlugins does not re-export Branding. A plugin imports each module it uses: Branding.qml imports Victron.Branding, and a settings page imports Victron.GuiPlugins.
+11.A.8 Alternatives considered and rejected:
+11.A.8.a Branding in GuiPlugins, with the loader reading it by property name instead of by C++ type. It avoids the cycle, but the loader's view of Branding is then untyped, and a rename breaks branding at run time instead of at build time.
+11.A.8.b Branding in VenusOS, with a PluginBranding type in GuiPlugins that wraps it. A QML wrapper cannot pass through which properties were set: every forwarded property looks set. A C++ wrapper needs an interface in VenusOS for it to implement. Both are more code for the same result.
+11.A.8.c Accepting the cycle. Each module's build and type checking would then need the other. Nothing is gained.
+
+11.B Victron.Branding 1.0
+-------------------------
+
+11.B.1 Contents: the Branding type (6.A), and the BrandingData snapshot (10.E.3). BrandingData is C++ only, not a QML type. Nothing else.
+11.B.2 Depends only on Qt: Qt Core, Qt Gui (for QColor), and Qt Qml. It imports, includes, and links no Victron module (11.C.4).
+11.B.3 Built like Victron.Boat: a static library with qt_add_qml_module (cmake/ModuleBoat.cmake), linked into the app with its plugin target and imported with qt_import_qml_plugins (CMakeLists.txt:82-90). Plugin QML can then import it at run time.
+11.B.4 VenusOS uses it from C++ only: GuiPluginLoader creates Branding objects and takes their snapshots, and Theme reads the list of BrandingData. No VenusOS QML file needs to import it. The Victron fallback (5.G) is a BrandingData built in C++.
+11.B.5 The property reference and tools/branding-properties.json are generated from this module's C++ declaration (15.D). Its API dump is the Branding contract (13.A).
+
+11.C Forbidden dependencies
+---------------------------
+
+CI checks each rule (13.B.4):
+
+11.C.1 Victron.VenusOS never imports Victron.GuiPlugins. No VenusOS QML file imports it. VenusOS's qt_add_qml_module lists it in neither IMPORTS nor DEPENDENCIES. No VenusOS C++ source includes a GuiPlugins header, and the VenusOS library does not link GuiPlugins.
+11.C.2 VenusOS has no need to. The loader reads Branding from Victron.Branding (11.B.4). The host creates a plugin page from its URL inside a Page of its own, and reads the page's properties by name, never through a GuiPlugins type (11.H). The common words and icons that GuiPlugins offers stay in VenusOS, and GuiPlugins forwards to them (11.D.3), so VenusOS does not need GuiPlugins for resources either. Tokens reads Theme, not the other way round.
+11.C.3 Only the app executable, and the tests, link Victron.GuiPlugins, so that plugin QML can import it at run time.
+11.C.4 Victron.Branding depends on no Victron module: no Victron QML import, no Victron entry in IMPORTS or DEPENDENCIES, and no Victron include or link.
+11.C.5 The GuiPlugins sources live in their own directory, apart from the VenusOS sources, so the check can tell them apart. GuiPluginLoader (src/guiplugins.h, src/guiplugins.cpp) is VenusOS code, despite its name.
+11.C.6 Plugins: Branding.qml imports only Victron.Branding, QtQml, and QtQuick, and the compiler enforces that (10.G.4). Plugin pages import Victron.GuiPlugins. A plugin that imports Victron.VenusOS is unsupported (2.B.3).
+
+11.D Victron.GuiPlugins 1.0
+---------------------------
+
+The rest of #3306. Branding does not need it (17.I):
+
+11.D.1 PluginDataItem: a C++ type in GuiPlugins that composes a VeQuickItem and declares only the promised members. Decided. Plugins use it instead of VeQuickItem, so the whole promise stays in one module that gui-v2 owns. VeQuickItem lives in the veutil submodule, which other projects share. Promising it would freeze its whole QML API: 24 properties, getText() / getValue() / setValue(), and two veutil enums (VeQItem::State, Unit::Type).
+11.D.1.a Start with what the core rows use: uid, value, valid, setValue(), min, and max. components/listitems/core/ uses uid 29 times, valid 23, value 22, setValue 13, and min and max 5 each. Add text, units, isSetting, and the rest when plugins need them, as minor-version additions.
+11.D.1.b A future VeQuickItem change (like isValid renamed to valid in March 2025) only changes PluginDataItem's forwarding.
+11.D.1.c Cost: one extra object per data item, kept small by writing it in C++. Two VeQuickItems with the same uid share one backend VeQItem (src/veutil/src/qt/ve_quick_item.cpp:91), so a PluginDataItem and its inner row's VeQuickItem do not subscribe twice.
+11.D.1.d Rejected alternative: promise VeQuickItem whole, through the Victron.VeUtil module. Plugins do not import Victron.VeUtil.
+11.D.2 Tokens: a read-only GuiPlugins singleton that exposes the Theme keys named by purpose (color_brand, color_ok, color_font_primary, the backgrounds, font_family, quantity_font_family) from the same resolved palette. Plugin UI reads it without importing VenusOS. Theme stays the host's full, unstable API. The name must not be Theme: a plugin file that still imports VenusOS, as prototype pages do today, would see two Theme types (the same reason as for the Plugin* names, 12.E.11).
+11.D.3 Common words and icons (#3306 items 2 and 3). The strings and images stay in VenusOS, where CommonWords and qrc:/images already are. GuiPlugins exposes a promised subset: one translated string per word, and one url per icon, each a property (not a lookup by name; see 5.K). The translations come from gui-v2's own translation files, so plugins do not ship them. A promised icon keeps its name; the file behind it may change. Type names and the first subset are decided with the UI types (17.G).
+11.D.4 UI types: thin wrappers composed over the internal types (option 2, 12.E). Only the types in 12.E.12 ship in v1: the row types that built-in settings pages use most, the custom row PluginListItem, PluginGradientListView, and PluginPage. The whole VenusOS UI is not mirrored. Focus and key navigation come from the inner types (12.E.9.c).
+11.D.5 No Page, Global, Device, VenusOS enums, or DelegateComponentModel in the public API. Where a wrapper needs an enum, GuiPlugins declares its own (units, 12.E.12.c).
+11.D.6 The implementations import VenusOS (11.A.4). The API dump checks that no VenusOS type reaches the public API (13.B.4).
+
+11.E Type names
+---------------
+
+11.E.1 ListText, ListQuantity, ListSwitch, ListNavigation, and SectionHeader already exist in VenusOS (components/listitems/core/). VenusOS never imports GuiPlugins (11.C.1), so VenusOS files see no clash. A plugin file that imports both modules, as prototype pages do today, would get "ambiguous type" errors if GuiPlugins reused those names.
+11.E.2 Decided: GuiPlugins types are named Plugin plus the internal type's name (PluginListSwitch, PluginListTextField, PluginListNavigation, PluginGradientListView, and so on; see option 2, 12.E). No name collides with a VenusOS type. A name is frozen once it ships, even if the internal type is later renamed.
+
+11.F veutil
+-----------
+
+11.F.1 Optional, because PluginDataItem (11.D.1) was chosen: an internal tidy-up, not part of the plugin promise.
+11.F.2 If it is done: move the veutil C++ sources into a library of their own, so a Victron.VeUtil module can register VeQuickItem without duplicating symbols.
+11.F.3 src/veutil is a submodule, and VeQuickItem's QML_ELEMENT is in upstream ve_quick_item.hpp. Splitting or moving that registration starts as a veutil change.
+11.F.4 Keep VeQuickItem visible to VenusOS files (QML_FOREIGN if the source file moves).
+11.F.5 A Victron.VeUtil QML module no longer means editing the ~296 existing files. VenusOS lists Victron.VeUtil in its qt_add_qml_module IMPORTS, the same mechanism it already uses for QtQuick.Controls.Basic. Every file that imports Victron.VenusOS still sees VeQuickItem. That is the module the #3306 comment sketches. It is still not required to ship branding, and it is not required for #3306 either, because PluginDataItem uses VeQuickItem from inside gui-v2, the way the wrappers use the core types.
+
+11.G Key navigation
+-------------------
+
+11.G.1 KeyNavigationHighlight stays in VenusOS. Plugin rows get it from the inner types they wrap (12.E.9.i). An earlier idea, moving it into GuiPlugins and having VenusOS re-export it, is dropped: VenusOS never imports GuiPlugins (11.C.1).
+11.G.2 Key handling inside a plugin's own row content is the plugin's job, documented with the key navigation rules (15.G).
+
+11.H Page host contract
+-----------------------
+
+For when non-branding plugins start using the module:
+
+11.H.1 A plugin page's root is PluginPage (12.E.9.j). PageStack and PageManager type their pages as Page (components/PageStack.qml:14, pages/PageManager.qml:12), so the host does not push the plugin's root directly. It pushes a Page of its own, which creates the plugin URL inside it and provides the back button and screen-size handling.
+11.H.2 Pass serviceUid / productId / name, not a VenusOS Device.
+11.H.3 Existing prototype pages that import VenusOS keep working until they break. Their root is already a Page, so the host pushes it as it does today, and wraps anything else. Docs say not to import VenusOS.
+11.H.4 The host reads the plugin page's properties (title, and the others PluginPage declares) by name, as QML property access already works. It never names the PluginPage type, so VenusOS does not import GuiPlugins (11.C.1). Check this in the prototype (12.I).
+
+11.I Tokens uses the same names that Branding overrides, so one branding file restyles host UI and plugin UI. Do not invent a second token vocabulary.
+
+
+12 Plugin UI API: options considered
+====================================
+
+12.A Plugin authors will build custom UI in their pages and settings lists, and they will do it in QML. The question is which QML types they build it from, and what Victron promises about those types. Branding v1 does not depend on the answer.
+
+12.B Findings behind the options
+--------------------------------
+
+Checked against main and the DelegateComponentModel branch, October 2026:
+
+12.B.1 VeQuickItem is stable. It had one break in two years (isValid renamed to valid, March 2025). Everything else was additive.
+12.B.2 components/listitems/core/ is not stable. It had 49 commits in the 12 months to October 2026. The March 2026 rewrite removed or replaced more than 20 public members (content / bottomContent, and the inner textField / slider / button aliases). The May 2026 portrait work removed secondaryFontSize and readOnly. Churn has since dropped to 1-4 commits a month, and removing the child aliases narrowed the API.
+12.B.3 The DelegateComponentModel branch (chriadam/delegate-component-model) wraps every row in a DelegateComponent and changes the shipped plugin examples. It also changes showAccessLevel silently. Set on the inner row, it still draws the SuperUser stripe, but it no longer hides the row. That change compiles and passes qmllint.
+12.B.4 core/ does not stand alone. It uses AbstractListItem and KeyNavigationHighlight (C++), and about 17 other VenusOS types: Label, Switch, Button, Slider, RadioButton, ListPressArea, QuantityLabel, the label layouts, and the number / date / time selector dialogs. It also uses VenusOS enums, 36 Theme tokens, and host services reached through Global and singletons (systemSettings.canAccess, ToastModel, dialogLayer, pageManager, fontFamily, keyNavigationEnabled, Units).
+12.B.5 A QML type's API is everything it exposes: every property without a leading underscore, plus the whole Control API it inherits (contentItem, background, padding). Promising a type promises all of that unless the promise says otherwise.
+
+12.C Starting proposal: a Victron.UI module
+-------------------------------------------
+
+12.C.1 What: move the core UI types (ListNavigation and the rest) into a new Victron.UI module. Victron.GuiPlugins imports Victron.UI and Victron.VeUtil, and adds Branding. Victron.VenusOS imports Victron.UI and Victron.VeUtil. Victron promises compatibility for Victron.VeUtil and Victron.UI.
+12.C.2 The layering is feasible. The IMPORTS mechanism already exists, and the types move instead of being duplicated, so the collision in 11.E (Type names) goes away. The dependencies listed in 12.B.4 must move with the types. That needs a host-services singleton that VenusOS fills at startup, and Theme in an internal module that Victron.UI uses but does not re-export.
+12.C.3 The risk is the promise, not the layering. The core types change too often to freeze today, so the alternatives in 12.D-12.H were drawn up. Whichever option is chosen, VeUtil can be promised now.
+12.C.4 Status: superseded by option 2 (12.E). With composed Plugin* wrappers, the promise is their declared members, so the core types need no promise and no module of their own. The host-services singleton and the internal Theme module are not needed either, because the wrappers run inside VenusOS and import it. Moving the core types into an internal module remains possible later as a refactor with no compatibility promise; nothing in this plan depends on it. For the data side, see PluginDataItem, 11.D.1. Branding is in its own module either way (11.B).
+
+12.D Option 1: independent implementations
+------------------------------------------
+
+New stable types in GuiPlugins, with independent, naive implementations.
+
+12.D.1 What: GuiPlugins defines its own row types, built from QtQuick, Tokens, and a host-services singleton. They share no code with core/.
+12.D.2 For: fully decoupled from core/. The API is designed for plugins, without the inherited Control API.
+12.D.3 Against: plugin rows drift visibly from built-in rows, on OEM devices of all places. The types still need key navigation, portrait and landscape, access checks with toasts, and dataItem writes. The editors (spin box, radio group) need dialogs and pages, which are not naive. Maintenance is duplicated, and the types need a second set of captures.
+12.D.4 Maintainer view: rejected. Basically unworkable, for the reasons in 12.D.3.
+
+12.E Option 2: thin wrappers (preferred)
+----------------------------------------
+
+New stable types in GuiPlugins, as thin wrappers over the internal types. Preferred.
+
+12.E.1 What: each GuiPlugins type is a small QML file. Its root is a QtQuick type (FocusScope for rows) and declares only the promised properties, signals, and functions. It creates the internal type (for example ListSwitch) as its only child and forwards to it. The promise is the wrapper's declared members. The internal type behind it may change. Only the forwarding changes with it.
+12.E.2 For: plugin rows look and behave like built-in rows by construction. Internal churn stops at the wrapper. The promised API is explicit and small, and the API dump reads it from the wrapper files. Plugin authors write ordinary QML, including their own custom items next to the wrappers.
+12.E.3 Against: one extra object and a few forwarding bindings per row, and every row is built when the page opens (see 12.E.6). GX page build time is measured per row (.github/benchmarking.md). The forwarding has to be exact (12.E.9). The wrapper implementations import VenusOS, which the module split allows (11.A.4).
+12.E.4 Maintainer view: preferred, if the forwarding of key navigation and the other row state can be done properly. Prototype that first. For plugin pages, stability matters more than performance, within reason: a plugin page may cost somewhat more to build than the same built-in page, but not a lot more.
+
+12.E.5 Maintainer decisions for option 2:
+
+12.E.5.a Compose, never inherit. No wrapper's root is a VenusOS type. QML cannot hide inherited members, so a wrapper derived from a VenusOS type (ListSwitch, AbstractListItem, DelegateComponent) would promise that type's whole API, which is the leak option 2 exists to prevent. The root is a QtQuick type, so its inherited API is Qt's, which Qt keeps compatible within Qt 6.
+12.E.5.b Plugins do not use DelegateComponentModel or DelegateComponent. Rows are declared directly in PluginGradientListView, which builds its own model internally, with no on-demand row creation (see 12.E.6). If DelegateComponentModel, or any other model, is easy to use behind it later, that is an internal change.
+
+12.E.6 Row model (decided: row model option B, 12.E.8, rows declared directly in PluginGradientListView):
+
+12.E.6.a No filtering model is needed. ListItem already collapses a hidden row: implicitWidth and implicitHeight are 0, visible is false, and focusPolicy is Qt.NoFocus while effectiveVisible is false (components/listitems/core/ListItem.qml:33-61). The wrappers forward that (see 12.E.9), so a plain ObjectModel from QtQml.Models, which is public Qt API, is enough. The earlier idea, a copy of src/visibleitemmodel.cpp / .h (about 350 lines of C++ on Qt's private QQmlInstanceModel), is dropped.
+12.E.6.a.1 Why VisibleItemModel exists, confirmed with the list-item maintainers (October 2026): ListView spacing is laid out even between invisible items, so hidden rows used to leave double spacing, and VisibleItemModel removed them from the view's model. The spacing now comes from ListItem's bottomInset, which collapses with the row (components/listitems/core/ListItem.qml:33-35), and GradientListView sets no spacing. That reason is gone.
+12.E.6.a.2 Caveat: a plain ObjectModel only works for rows that collapse themselves. ListItem (every AbstractListItem row), PrimaryListLabel, and SectionHeader do. SettingsColumn, SettingsFlow, and SettingsListHeader do not: they declare effectiveVisible only so that VisibleItemModel can filter them out (src/visibleitemmodel.cpp:68-74), so under ObjectModel a hidden one keeps its full height. ListItemLoader collapses only while it is inactive, not when preferredVisible is false while it is active. Every Plugin* row type must therefore collapse itself (see 12.E.9.a.1).
+12.E.6.a.3 The built-in pages could also move from VisibleItemModel to ObjectModel, but only after those types collapse themselves. Only a debug page reads VisibleItemModel's filtered count (pages/settings/debug/PageSettingsDemo.qml:392). That is separate work, not part of this plan.
+12.E.6.b Every row exists from page creation, as VisibleItemModel does for built-in pages on main today. Nothing is created on demand.
+12.E.6.c The row model does not need the DelegateComponentModel branch. The wrappers use the inner rows' path without a DelegateComponent, which main and the branch both keep: effectiveVisible is preferredVisible && userHasReadAccess (components/listitems/core/ListSetting.qml:113 on main, :117-119 on the branch).
+12.E.6.d Differences from VisibleItemModel: hidden rows stay in the model as zero-height items, so the view's count includes them, and each hidden row costs a zero-height slot in the view. Neither the count nor the model is exposed to plugins.
+
+12.E.6.e Hiding rows. Plugin authors hide a row with preferredVisible, never visible. Assigning visible on a Plugin* row replaces the wrapper's own binding, and then:
+12.E.6.e.1 the row leaves a gap. ListView lays out invisible items, which is why ListItem collapses its own height and puts the list spacing in bottomInset (components/listitems/core/ListItem.qml:47-58).
+12.E.6.e.2 hiding by access level (userHasReadAccess, showAccessLevel) is lost.
+12.E.6.e.3 the row stays focusable, so key navigation can land on it. Utils.acceptsKeyNavigation checks focusPolicy and enabled, not visible (components/Utils.js:372).
+12.E.6.f Nothing, in the wrapper or the model, may collapse a row or filter on visible. visible is effective visibility: it goes false whenever the page is hidden, so every row would collapse and the list would lay out again on each hide and show. src/visibleitemmodel.h documents the same trap, which is why it filters on effectiveVisible.
+12.E.6.g The plugin UI reference states the rule (see 15.G). Proposed: the plugin compiler warns when a plugin assigns visible on a Plugin* row.
+
+12.E.7 Row model option A: a public PluginItemModel. Rejected.
+
+12.E.7.a What: PluginItemModel.qml with an ObjectModel root. Plugins write PluginGradientListView { model: PluginItemModel { PluginListSwitch { ... } } }, the same shape as GradientListView { model: VisibleItemModel { ... } } in about 105 files under pages/.
+12.E.7.b For: it matches the internal idiom, so built-in pages port across almost verbatim. Rows can be added and removed one at a time at runtime (append, insert, move, remove), with no reset of scroll position or focus. A model is its own object, so a page can build one and choose which view shows it.
+12.E.7.c Against: it promises ObjectModel's whole API for good: count (which includes hidden rows), get, append, insert, move, remove, clear, and the ObjectModel.index attached property. Moving to a filtering or on-demand model later means reimplementing all of that, on the private QQmlInstanceModel again. PluginItemModel inherits a Qt type. "Compose, never inherit" (12.E.5.a) bans only VenusOS roots, so that is allowed, but it is still a leak.
+12.E.7.d Against, misuse: rows declared directly inside the composed PluginGradientListView become visual children of its root and overlap the list. One model given to two views breaks, because an ObjectModel item lives in one view at a time. ObjectModel accepts any QObject, so nothing flags a row that is not a Plugin* type.
+
+12.E.8 Row model option B: rows declared directly in PluginGradientListView. Selected.
+
+12.E.8.a What: plugins write PluginGradientListView { PluginListSwitch { ... } PluginListTextField { ... } }. The wrapper declares a default list property for the rows and builds its model internally. Today that model is an ObjectModel.
+12.E.8.b For: the smallest promise. The only promise is that rows are declared children, so the internal model can later become a filtering or on-demand model, or DelegateComponentModel, with no plugin change. It follows "Compose, never inherit" (12.E.5.a) completely, because no model type is exposed.
+12.E.8.c For, misuse: there is no model to share between views or to swap for a ListModel, and the row list has a declared element type, which qmllint checks (see Open question 19.O.2). Per-row policy (checks, width, the visible warning) lives in one place. Less boilerplate for plugin authors.
+12.E.8.d Against: it differs from the internal idiom, so built-in pages do not port across verbatim. No runtime add or remove in v1: rows are fixed when the page is created. Rebuilding the internal model when the row list changes would lose scroll position and focus, so v1 does not do it. Lists driven by data (one row per device, for example) need a later feature, such as model + delegate on PluginGradientListView (Open question 19.O.1). Plugins get no count or index, unless that is added later.
+12.E.8.e Why B: both gaps can be closed later with new API, which is compatible. Option A's API cannot be withdrawn once it ships. For plugins, stability comes before convenience.
+12.E.8.f Implementation, checked in the prototype: the wrapper's root declares default property list<Item> rows (the element type is part of Open question 19.O.2). ObjectModel's children property is undocumented (DESIGNABLE false in qqmlobjectmodel_p.h, Qt 6.8.3), so the wrapper does not bind to it. It fills the ObjectModel once, with the documented append(), in Component.onCompleted. Check that this timing works with page creation in PageStack and with key navigation.
+
+12.E.9 What a wrapper must forward (checked against main, October 2026):
+
+12.E.9.a Visibility. No model filters rows (see 12.E.6). The wrapper declares preferredVisible and passes it to the inner row. It takes effectiveVisible from the inner row's effectiveVisible property, so hiding by access level comes with it. It sets its own visible from effectiveVisible, not from the inner row's visible, which depends on the wrapper's own visibility. Sizing and focusPolicy follow effectiveVisible too (12.E.9.c, 12.E.9.d), so a hidden row collapses and key navigation skips it.
+12.E.9.a.1 This applies to every Plugin* row type, not only the wrappers over ListItem types. If the inner type does not collapse itself (SettingsColumn, SettingsFlow, SettingsListHeader, or a ListItemLoader that stays active; see 12.E.6.a.2), the wrapper collapses instead: implicit size 0, visible false, and focusPolicy Qt.NoFocus while effectiveVisible is false, as PrimaryListLabel does (components/listitems/core/PrimaryListLabel.qml:15-19). A wrapper over SectionHeader gets this from PrimaryListLabel.
+12.E.9.b Access levels. showAccessLevel and writeAccessLevel are forwarded to the inner row. Without a DelegateComponent, the inner row filters and draws the SuperUser stripe from its own showAccessLevel, on main and on the branch, so the branch's silent showAccessLevel change does not reach plugins.
+12.E.9.c Focus and key navigation. KeyNavigationListHelper moves focus to the row root and asks Utils.acceptsKeyNavigation(root), which checks focusPolicy & Qt.TabFocus and enabled (components/Utils.js:372). Every Item has focusPolicy since Qt 6.7, and gui-v2 requires Qt 6.8.3 (cmake/BuildRequirements.cmake:1). So the FocusScope root sets focusPolicy from effectiveVisible, and the inner row has focus: true. When the root gets active focus, so does the inner row: its KeyNavigationHighlight shows, and its key handlers run (for example Space on ListSwitch). ListItemLoader (components/listitems/core/ListItemLoader.qml) already does this with a Loader root and works with today's list helpers.
+12.E.9.d Sizing. implicitWidth / implicitHeight come from the inner row, including its zero height when hidden. The inner row fills the wrapper's width.
+12.E.9.e Attached properties. The wrapper, not the inner row, is the list's item, so the inner row's attached-property reads find nothing. ListTextField takes its flickable from root.ListView.view (components/listitems/core/ListTextField.qml:20); its wrapper passes the wrapper's ListView.view instead. Audit each wrapped type for attached-property reads.
+12.E.9.f Two-way state. Some rows assign their own properties, which breaks a plain binding from the wrapper. ListSwitch with checkable set assigns checked on click (components/listitems/core/ListSwitch.qml:53-54). Text fields, sliders, and spin boxes edit their values. Sync both directions explicitly, and keep the internal type's documented semantics (ListSwitch documents that a click overwrites a checked binding). Audit each wrapped type for self-assignment.
+12.E.9.g Data. dataItem is exposed as a PluginDataItem (see 11.D.1). The inner row keeps its own VeQuickItem, with its uid bound to the PluginDataItem's uid.
+12.E.9.h Signals and functions, forwarded by name: clicked, click(), checkWriteAccessLevel().
+12.E.9.i Custom rows. Plugin authors put their own QML in rows. PluginListItem composes the internal ListItem and places the plugin's children in its content area, so the row gets the standard background, highlight, focus, and access handling. Rows then take KeyNavigationHighlight from the inner types, so it stays in VenusOS (11.G.1). Key handling inside the plugin's own content is the plugin's job, documented with the key navigation rules.
+12.E.9.j Lists and pages. PluginGradientListView composes GradientListView and takes its rows as declared children (see 12.E.6). PluginPage is the root of a plugin page and declares the promised page members. It does not compose Page: the host wraps it in a Page of its own (11.H). Both follow the same rules: a QtQuick root, and only the declared members.
+12.E.9.k UI tests. The smoke tests and the UI-test selectors find rows by type. Selectors must either see through a wrapper to the inner row, or match the wrapper type.
+
+12.E.10 Dependency direction: the wrapper implementations import VenusOS. That is allowed, because VenusOS never imports GuiPlugins (11.C.1), so there is no cycle. Decision 5.L and the CI rule 13.B.4 therefore check the public API: no VenusOS type appears in the GuiPlugins API dump. VenusOS does not need the wrappers. The host reads Branding through the C++ snapshot struct from Victron.Branding (11.B.4), and reads plugin page properties by name (11.H.4).
+12.E.11 Names (decided): each wrapper is named Plugin plus the name of the internal type it wraps: PluginListSwitch, PluginListTextField, PluginListNavigation, PluginListItem (custom rows), PluginGradientListView, and PluginPage. There is no public model type (see row model option B, 12.E.8). No name collides with a VenusOS type, so a plugin file that still imports VenusOS, as prototype pages do today, gets no "ambiguous type" errors. A name is frozen once it ships, even if the internal type is later renamed.
+12.E.12 v1 type list (decided). Only these types ship in Victron.GuiPlugins 1.0. A core type gets a wrapper if built-in settings pages use it in at least 10 files, or if plugins cannot do without it. The counts are files under pages/settings/ (216 QML files) on main at v1.4.1. Any other type is a minor-version addition when a plugin needs it, not a v1 promise.
+12.E.12.a Rows, with the wrapped type and its file count:
+12.E.12.a.1 PluginListText (ListText, 66): a label and read-only text.
+12.E.12.a.2 PluginListNavigation (ListNavigation, 57): opens a subpage.
+12.E.12.a.3 PluginListSwitch (ListSwitch, 56).
+12.E.12.a.4 PluginListRadioButtonGroup (ListRadioButtonGroup, 46): one choice from a list, on its own subpage.
+12.E.12.a.5 PluginListQuantity (ListQuantity, 29): a value with a unit.
+12.E.12.a.6 PluginListButton (ListButton, 28).
+12.E.12.a.7 PluginPrimaryListLabel (PrimaryListLabel, 28): explanatory text.
+12.E.12.a.8 PluginListSpinBox (ListSpinBox, 24): a number setting.
+12.E.12.a.9 PluginListTemperature (ListTemperature, 15): a temperature, shown in the user's unit.
+12.E.12.a.10 PluginSettingsListHeader (SettingsListHeader, 13): a heading between groups of rows.
+12.E.12.a.11 PluginListTextField (ListTextField, 10).
+12.E.12.a.12 PluginListItem (ListItem, 6): the custom row (12.E.9.i). It is below the threshold, but it lets authors build any row that this list does not cover.
+12.E.12.b Containers: PluginGradientListView (12.E.9.j) and PluginPage (11.H).
+12.E.12.c Units. PluginListQuantity cannot take VenusOS.Units_* (11.D.5). GuiPlugins declares its own unit enum, with the units that settings pages pass to a unit property at least four times: None, Watt, Volt_DC, Amp, Percentage, Energy_KiloWattHour, AmpHour, RevolutionsPerMinute, and VoltAmpere, plus Volt_AC as the counterpart of Volt_DC. The wrapper maps each value to the internal enum. Other units are minor-version additions. Temperatures use PluginListTemperature, not a unit.
+12.E.12.d Not in v1:
+12.E.12.d.1 ListQuantityGroup (13 files). Its model is QuantityObjectModel, a VenusOS type, so it would need a promised model type of its own. Use several PluginListQuantity rows, or a custom row.
+12.E.12.d.2 Too few uses to promise yet: ListQuantityField (8), SectionHeader (7; PluginSettingsListHeader covers headings), ListAlarm (4, alarm settings only), ListTimeSelector (4), ListRangeSlider (3), ListSlider (3), ListIntField (3), ListIpAddressField (3), ListPortField (3), ListSwitchForced (2), ListDateSelector (2), ListQuantityGroupNavigation (2), ListItemLoader (2), and ListRadioButton (0).
+12.E.12.d.3 Base and helper types: ListSetting, ListItemBackground, ListSettingBackground, ListSettingAccessCheckBackground, SecondaryListLabel, and SliderHandleHighlight. Plugins get their behaviour through the wrappers.
+12.E.12.e Each wrapper declares only the members that built-in settings pages use often, decided type by type in the prototype (12.I), as for PluginDataItem (11.D.1.a). Rows read and write data through PluginDataItem, not through the inner type's VeQuickItem.
+
+12.F Option 3: tooling-enforced subset
+--------------------------------------
+
+The same types, with the promised subset enforced by tooling.
+
+12.F.1 What: no new types. GuiPlugins re-exports the internal types, so a plugin's ListSwitch is VenusOS's ListSwitch. The promise is a documented subset of their members, and tooling enforces it on both sides:
+12.F.1.a Plugin side: the plugin compiler runs qmllint, with warnings as errors, against a stub module that declares only the promised members. A plugin that uses anything else fails to build.
+12.F.1.b gui-v2 side: CI dumps the promised subset from the real types, and fails if a promised member is removed, renamed, or retyped.
+12.F.2 In other words, tooling stops Victron breaking the promised subset of the VenusOS types, and stops plugins reaching past that subset. Members outside the subset stay free to change.
+12.F.3 For: no duplicate code, no extra object per row, identical look.
+12.F.4 Against: internal code carries the compatibility burden. Renaming a promised member means keeping an alias on the internal type. Behaviour changes pass the tooling; the showAccessLevel change in 12.B.3 would. Plugins built without the compiler are not checked. The stub is one more generated artifact that must match the real types.
+12.F.5 Maintainer view: undecided. Option 2 (12.E) is preferred.
+
+12.G Option 4: declarative rows
+-------------------------------
+
+Plugins describe settings rows as data (JSON, or literal-only QML), and the host renders them with whatever internal types exist in that release.
+
+12.G.1 For: the strongest compatibility, because the data format is versioned and the renderer is free to change.
+12.G.2 Against: it covers only what the format covers, and custom visuals would still need a way to write QML.
+12.G.3 Maintainer view: rejected. It was tried in another project and was a nightmare. Plugin authors will want custom UI in their pages and settings lists, so let them write it. QML is the right language for that, directly, not an intermediate IDL or JSON that our implementation converts to QML.
+
+12.H Option 5: no UI compatibility promise
+------------------------------------------
+
+Rely on minRequiredVersion / maxRequiredVersion, and on CI that builds known plugins against each release.
+
+12.H.1 For: cheapest.
+12.H.2 Against: plugins stop loading or break across gui-v2 updates.
+12.H.3 Maintainer view: rejected. Users in the field will update their devices. If a plugin breaks because of the update, they will blame Victron, and it is a poor user experience.
+
+12.I Direction: option 2 (12.E) after a prototype, composed over the internal types, with rows declared directly in PluginGradientListView (row model option B, 12.E.8). Prototype on main; the row model does not need the DelegateComponentModel branch. Proposed prototype: PluginGradientListView (internal ObjectModel), PluginListSwitch (two-way checked), PluginListTextField (attached ListView, edited text), PluginListNavigation, and one custom row on PluginListItem, on a PluginPage pushed through the host's Page (11.H). Check key navigation through a plugin settings page, access-level filtering and the SuperUser stripe, the UI-test selectors, and --ui-test benchmark/pages on a GX device, all compared with the same page built from the internal types. Also check that a row hidden with preferredVisible leaves no gap and that key navigation skips it, and that pushing a subpage and popping back keeps the list's scroll position and focus. Pass: identical behaviour, and only a modest build-time cost over the built-in page. If the forwarding cannot be made exact, revisit option 3 (12.F).
+
+
+13 Compatibility
+================
+
+13.A The contract is two API dumps: Victron.Branding (the Branding property list), and later Victron.GuiPlugins (including PluginDataItem). It is not the gui-v2 version and it is not the full Theme API.
+
+13.B CI
+-------
+
+13.B.1 Fail if a public member of Victron.Branding or Victron.GuiPlugins is removed, renamed, or retyped.
+13.B.2 Additions are allowed.
+13.B.3 PluginDataItem composes VeQuickItem from the veutil submodule. A submodule bump that changes VeQuickItem changes PluginDataItem's forwarding, not the GuiPlugins API dump.
+13.B.4 Fail on any forbidden dependency in 11.C: VenusOS importing GuiPlugins, listing it in IMPORTS or DEPENDENCIES, including its headers, or linking it; Victron.Branding depending on any Victron module; or a VenusOS type in the GuiPlugins API dump. A text check over the QML imports, the CMake files, and the C++ includes covers the first two.
+13.B.5 Compare a normalised API dump per module, checked in: the type, property, signal, method, and enum names and types, sorted. Do not diff raw generated qmltypes. They change with Qt upgrades and compiler details, and a failure there says nothing about plugins.
+
+13.C Versioning
+---------------
+
+13.C.1 Each module has its own major.minor version. Additions inside a major version are tagged with Q_REVISION / QML_ADDED_IN_VERSION, so the minor version says which members exist.
+13.C.2 Proposed (Open question 19.P): the plugin JSON gains one field per module it uses, each major.minor: requiredBrandingVersion for the Branding integration, and requiredGuiPluginsVersion for the other integrations. The loader rejects a field whose major differs or whose minor is newer than the running module, logs why, and drops the integrations that field covers. The plugin's other integrations still load. The compiler writes each field from the module version it checked against (10.F.5.a).
+13.C.3 Deprecation policy, written in each module's docs: a deprecated member is marked, logs once at load when used, and is removed only in the next major version. A major version bump is announced, with the old major supported for a stated period.
+
+13.D Plugin minRequiredVersion / maxRequiredVersion stays as a coarse way to stop a plugin loading on gui-v2 versions it does not support. Authors who only use Victron.Branding and Victron.GuiPlugins should not set a max. The module versions are the real contract.
+
+13.E Branding color names deliberately match the Theme keys named by purpose. color_brand is not color_blue. color_warning is the role, and it is settable; color_orange is the palette color, and it is not. A theme key can be renamed internally if the branding color name and the color table in the 17.A document stay.
+
+
+14 Tests
+========
+
+14.A Colors: derivation, branding colors, background factor, and call sites
+---------------------------------------------------------------------------
+
+14.A.1 No OEM branding: computed getters return the formula applied to Victron's branding colors, not today's JSON. Dark-scheme dim and dark colors that the 70% and 30% blends already match stay on those hexes because the formula produces them, not because a hard-coded value returns them.
+14.A.2 blend_onto(Victron blue, 0x4D, black) == #11263B and blend_onto(Victron blue, 0xB3, black) == #27588A. color_darkBlue() and color_dimBlue() return those values with no OEM object.
+14.A.3 color_dimCritical() (color_dimRed before 17.E) is #AB413E, not #592220. That difference is expected. Do not "fix" the test back to the old hex.
+14.A.4 Generated dim and dark colors are opaque (alpha 255). dimWhite2 / darkGray2 stay the existing translucent exceptions.
+14.A.5 OEM color_brand set: color_button, color_ok, and color_navigationBar_button_on change. color_success, color_warning, color_critical, color_blue, tank colors, and page background do not.
+14.A.6 OEM color_success set: feed-in / regen call sites change. color_ok does not. Data color_green does not.
+14.A.7 OEM color_warning set: warning tokens change. color_orange data does not. Same split for color_critical and color_red.
+14.A.8 OEM color_background_primary set to a non-Victron dark color: dark backgrounds use it, light backgrounds are the derived inverse, and the dim and dark brand colors are blended again onto those backgrounds even if color_brand is still #387DC5. White font is not left on the derived light page.
+14.A.9 OEM sets color_background_primary to #000000 and nothing else: light mode is still the derived scheme. Matching Victron's branding color does not restore Light.json.
+14.A.10 Unset color_success does not overwrite Victron's branding color. A second plugin can replace color_brand without clearing color_warning.
+14.A.11 color_ok binding updates when a Branding snapshot is appended.
+14.A.12 The gauges' binding `Theme.color_darkOk, Theme.statusColorValue(...)` (4.D.6) re-evaluates when color_warning or color_critical changes through branding, and on a scheme change.
+14.A.13 Text on a colored fill at 3.0:1: Victron blue and red keep white. Green and orange fills take dark text. Light button_down_text stays white: its rule checks the brand fill only (7.M.3). A max-contrast implementation fails this test.
+14.A.14 Secondary text: dark keeps #969591. Light font_secondary is darker than #969591 and reaches at least 3.0:1 on the derived page and on background_secondary.
+14.A.15 The branding colors are Dark's (7.J.2): color_background_primary #E0E0E0 is Dark's background as given, not classified as light. Light gets #1F1F1F (factor 1), and with the Victron fonts the primary-text warning fires for both schemes.
+14.A.16 Exact expected values for blend_onto and mix: 8-bit sRGB, round half up. Light button_down is the dim color that the color table in the 17.A document proposes (19.E), #73A4D6 for Victron. One case checks the integer mix rule in 7.L.12.a exactly: with the example's Dark branding colors (16.D) at factor 0.3, Light font_secondary is #3E3E3C, not the floating-point #3E3D3C. Another checks a tie in the double-precision HSL operations (7.L.12.b): #8C8C8C at factor 1.12, exactly 113.5 per channel, gives #717171 with the operations in the order 7.J.5 and 7.J.11 write them, so a reordering or a fused multiply-add (7.L.12.c) fails the test.
+14.A.17 Direct data-blue call sites are unchanged by an OEM brand. Brand-meaning call sites that were migrated do change. Feed-in green sites that were migrated follow color_success, not color_brand.
+14.A.18 Background factor (7.J.10 to 7.J.12): an unset light_mode_background_factor gives the plain inversion. The Victron object gives #F7F7F7 from #141414. At factor 1.12 the soft clamp keeps #000000 and #0A0A0A apart (#FFFFFF, #FDFDFD) and is strictly monotonic. A factor <= 1 equals the linear formula. The brand and status colors and the fonts ignore the factor. An OEM that sets background_primary without the factor gets 1.0, not Victron's 1.12. An OEM that sets only color_brand keeps 1.12. A factor in a Branding whose background_primary is not used, or that sets none, has no effect. The compiler rejects 0, negative values, and values above 2.
+14.A.19 Secondary and page follow the primary (7.J.13): an OEM that sets only background_primary #1A1A1A gets the derived secondary #2C2C2C, not Victron's #141414, and the Dark page #1A1A1A. An OEM that sets only color_brand keeps #141414. A later Branding that sets only background_secondary is used instead of both. A secondary or page in a Branding earlier in the list than the one whose background_primary is used has no effect.
+
+14.B Logos and fonts
+--------------------
+
+14.B.1 No plugin sets a logo: Theme.splash_logo_icon is the built-in URL.
+14.B.2 Theme.splash_logo_icon binding updates when a Branding snapshot is appended after first evaluation (MQTT / hot reload).
+14.B.3 Relative URLs resolve against the integration URL: splash_logo_icon "logo.svg" and a font_files entry "OemSans-Regular.ttf" become qrc:/<name>/logo.svg and qrc:/<name>/OemSans-Regular.ttf in the snapshot.
+14.B.4 The _preserve_colors flags select Image vs ColorImage for the splash marks.
+14.B.5 Language-specific font takes precedence over branding font_family.
+14.B.6 Latin-only branding font: English uses it; Russian falls back to Roboto and logs one line.
+14.B.7 Reload twenty times: no duplicate application fonts (each id from addApplicationFont is removed), one Victron object, one snapshot per loaded Branding plugin, and no live Branding objects.
+
+14.C Loader, list of BrandingData, reload, and module
+-----------------------------------------------------
+
+14.C.1 Hand-built RCC (no compiler): Branding with a child object or a Timer fails to create (no default property).
+14.C.2 Two plugins that set the same branding color, loaded in both directory orders and in MQTT order: the same merged result every time, by plugin name.
+14.C.3 On the filesystem path, removing a Branding plugin's /data/apps/enabled/<name> link (a plugins/ entry on desktop) reloads and returns to the earlier snapshots in the list. Restoring it brings the brand back. No state file is read or written.
+14.C.4 Branding builds and passes its tests on main without #3061.
+14.C.5 Engine at first load: on the desktop filesystem path (same constructor as GX), Branding objects exist before Main.qml is compiled, and the first SplashView frame shows the OEM logo.
+14.C.6 requiredBrandingVersion with a newer minor or a different major: the Branding integration is rejected with a log line, and the plugin's other integrations still load.
+14.C.7 Load-time check, hand-built RCC that imports Victron.VenusOS and binds color_brand to a ternary on Theme.colorScheme: the loader logs the import warning; the snapshot holds the value from creation; after a scheme change the value is unchanged, there is no binding-loop warning, and no Branding object is alive.
+14.C.8 A hand-built RCC with a translucent branding color: that color is dropped and logged, and it inherits from the earlier snapshots in the list.
+14.C.9 The dependency check (13.B.4) passes on the tree, and fails on a test fixture for each rule: a VenusOS QML file that imports Victron.GuiPlugins, Victron.GuiPlugins in VenusOS's IMPORTS, a VenusOS source that includes a GuiPlugins header, and a Victron import in Victron.Branding.
+
+14.D Compiler
+-------------
+
+14.D.1 Compiler warns, naming the line, when a file sets the background factor without color_background_primary (7.J.12). The RCC is still written.
+14.D.2 Unknown Branding property fails the compiler's literal-only check, which names the property and its location. A hand-built RCC with an unknown property fails to create at load. That integration is dropped with a log line naming the plugin, and the plugin's other integrations still load.
+14.D.3 Compiler: packs .ttf/.otf; keeps or rejects subdirectories, never drops them; rejects a Victron.VenusOS or Victron.GuiPlugins import in Branding.qml; emits type 6.
+14.D.4 Literal-only check accepts: the sketch in 6.D, both example Branding.qml files (BrandingExample and BrandingMinimalExample), comments anywhere, single and double quotes with escapes, optional semicolons, a trailing comma in font_files, and import QtQml and import QtQuick, with and without a version, before or after the Victron.Branding import.
+14.D.5 Literal-only check rejects each of these with file:line:col and a reason, one case per form: Qt.resolvedUrl("logo.svg"), Theme.color_ok, a bare identifier, null, "a" + "b", a ternary, parentheses, a backtick string, a block binding, a nested list, an object literal, id, a property declaration, a function, an onX handler, Component.onCompleted, a grouped property, Behavior on, a child object, a second root object, a root other than Branding, an import other than Victron.Branding, QtQml, or QtQuick (Victron.VenusOS, Victron.GuiPlugins, and QtQuick.Controls each have a case), a qualified import, a repeated import, a file with no Victron.Branding import, a QtQuick child object such as Item or Timer, a JavaScript import, a pragma, and a duplicate property.
+14.D.6 A file with three errors reports all three. The exit code is non-zero, and no RCC is written.
+14.D.7 Value checks reject: a value of the wrong kind (true for a color, a string for font_files), a malformed color, "#AARRGGBB" with alpha not FF (the message names the alpha-first order), a URL with a scheme or a leading "/" or "..", a URL naming a missing file, a logo that is not .svg or .png, a font file that is not .ttf or .otf, and a duplicate font_files entry.
+14.D.8 CI fails if tools/branding-properties.json does not match the Branding C++ declaration.
+14.D.9 qmllint not found: the compiler says so, still runs the literal-only check, and still writes the RCC and requiredBrandingVersion.
+
+14.E Visual, examples, and on-device
+------------------------------------
+
+14.E.1 Filesystem branding is visible on the first frame. MQTT branding is applied when the blob arrives and does not pretend to recolor the HTML loader.
+14.E.2 Visual: a test branding plugin (non-blue brand, warm dark background, logos) is loadable in the --mock UI-test flow. Capture it at FiveInch, SevenInch, and Portrait, in Dark and Light, with tools/uicompare. The same captures with no plugin are the Victron baseline for the formula commit.
+14.E.3 Example plugins: CI compiles examples/BrandingExample and examples/BrandingMinimalExample with --branding (literal-only check, then qmllint), so the docs never ship a file the compiler rejects. BrandingExample resolves to the exact expected values in 16.F in both schemes. It is also loaded in the UI-test flow and captured in Dark and Light at FiveInch, SevenInch, and Portrait. It is the fixture for a background factor below 1 and a mid-tone light background. The UI-test flow does not capture SplashView today, so its logos are covered by the first-frame and URL tests (14.C.5, 14.B.3) and by the README's on-device check.
+14.E.4 Key navigation under the test brand: focus moves through the settings smoke routes, and the focus ring is visible in both schemes, drawn in color_focus_highlight (7.F.3.a).
+14.E.5 Overview under the test brand: connector line, nubs, and bolts are one color. Electron tails keep their faint Victron blue unless a provider that replaces one hex in the SVG text is built (17.A document, 7.D; the tinting provider in 7.F.3.a cannot do it).
+
+
+15 Docs
+=======
+
+15.A When this is implemented, update .github/architecture.md (the three modules and the forbidden dependencies, 11.A and 11.C), .github/key-navigation.md (focus ring under branding), and .github/visual-regression-tests.md (the branding captures).
+
+15.B #3305 asks for two audiences: OEM developers, and an AI agent an OEM points at the docs. Both read the same files. They live outside gui-v2's internals and are complete on their own.
+
+15.C Ship two example plugins, specified in section 16 (Example branding plugin): examples/BrandingExample/ (Dark branding colors, a background factor, and both logos) and examples/BrandingMinimalExample/ (one color_brand line, everything else inherited). Each has a README an agent can follow without reading VenusOS. The form that sets every Branding property, including font_files, is the sketch in 6.D. The README's reference section shows it, so no example has to ship a font file.
+
+15.D Generate the Branding property reference from the C++ declaration (name, type, default, what it affects), not by hand. The same generator writes tools/branding-properties.json for the compiler's literal-only check. CI fails if either is stale.
+
+15.E Rules the README states
+----------------------------
+
+15.E.1 import Victron.Branding; QtQml and QtQuick are allowed but not needed; nothing else, not even Victron.GuiPlugins
+15.E.2 assign only literals on Branding: quoted strings, true / false, a number for the background factor, and a list of strings for font_files. No Qt.resolvedUrl, no Theme, no expressions. URLs are relative to Branding.qml. Colors are opaque; QML's 8-digit form is #AARRGGBB, not CSS #RRGGBBAA
+15.E.3 only the properties on Branding exist; there is no default property and no children
+15.E.4 list font files in font_files; fonts must cover the languages the product ships, or those languages fall back to Roboto; the quantity font needs tabular digits
+15.E.5 contrast: the color of text on a colored fill is chosen automatically; font_primary on background_primary should reach 4.5:1, or the loader warns
+15.E.6 colors: the color_ properties are the Dark scheme's colors, and Light is derived from them. Brand, success, warning, and critical are the same hex in both schemes. Light's backgrounds mirror Dark's lightness, scaled by the background factor (default 1.0; lower is greyer, higher spreads them apart), and Light's text is derived for contrast. The factor is read only from the Branding that sets background_primary, so set the two together; the compiler warns if a file sets the factor alone. The secondary background and the page follow background_primary too: if the file that sets it does not set them, they are derived from it, not taken from Victron.
+15.E.7 logos: draw the icon and the wordmark on one 285x54 canvas each, at their Victron positions; set both, or the Victron wordmark stays; a logo with preserve_colors set must read on both the Light and the Dark page; draw text as paths, not SVG text
+15.E.8 the images that branding does not reach: the faint Victron blue in the Overview electron tails, the intro GIFs, and the welcome screenshots (17.A document, section 7)
+15.E.9 do not edit gui-v2 theme JSON or copy qrc paths over built-in images
+15.E.10 the check loop: run the compiler with --branding (literal-only check, then qmllint), fix every reported file:line:col, then --install <gx-host>, then look at the device
+
+15.F Write each module's deprecation and versioning policy (see 13.C) as its own page, linked from the README. Victron.Branding's page ships with branding (17.F); Victron.GuiPlugins' page ships with the UI types (17.G).
+
+15.G When the plugin UI types land (step 17.G), their reference states the rules in 12.E.6: rows are declared directly in PluginGradientListView, and a row is hidden with preferredVisible, never visible. It also states the key navigation rules for a plugin's own row content (11.G.2), and that a plugin page's root is PluginPage (11.H).
+
+
+16 Example branding plugin
+==========================
+
+16.A Status: proposed. It sets Dark branding colors and a background factor of 0.45, and its Light scheme is derived. It does not reproduce the first request for Light, dark orange on mid grey: the brand is one hex in both schemes (7.K.3).
+
+16.B Directory: examples/BrandingExample/, CamelCase like DeviceListExample, SimpleExample, and SimpleTrExample. The compiler names the plugin after the directory, so the integration URL is qrc:/BrandingExample/Branding.qml, and "logo.svg" resolves to qrc:/BrandingExample/logo.svg.
+
+16.C Files
+----------
+
+16.C.1 Branding.qml       the colors and logos in 16.D
+16.C.2 logo.svg           the icon mark, drawn for this example
+16.C.3 wordmark.svg       the text mark "EXAMPLE", drawn for this example
+16.C.4 README.txt         same shape as the other examples' README.txt, plus the rules in 15.E
+
+16.D Branding.qml:
+
+    import Victron.Branding
+
+    Branding {
+        // Dark: mid orange on very dark grey. Light is derived.
+        color_brand: "#F28C28"
+        color_background_primary: "#1A1A1A"
+
+        // Light backgrounds: mid grey, not the plain inversion.
+        light_mode_background_factor: 0.45
+
+        // Amber, so that warnings do not look like the orange brand.
+        color_warning: "#F2C200"
+
+        splash_logo_icon: "logo.svg"
+        splash_logo_icon_preserve_colors: true
+        splash_logo_text: "wordmark.svg"
+    }
+
+16.E Choices, and why
+---------------------
+
+16.E.1 "Foreground" is the brand color (color_brand): buttons, the active navigation-bar button, selection, color_ok, and the Light splash icon tint. Text keeps the font branding colors. Orange text would be 1.1:1 on the Light background, far under the 4.5:1 primary-text warning. The brand is #F28C28 in both schemes (7.J.1). The first request was dark orange #B34700 in Light; without per-scheme overrides (7.K) that cannot be set, and mid orange on grey was accepted in review.
+16.E.2 light_mode_background_factor is 0.45 (decided in review). It gives Light #ADADAD from #1A1A1A, and #A5A5A5 from #2C2C2C. A factor of 0.3 would give the first request's #9E9E9E; 0.45 was preferred in review. The plain inversion (factor 1) would give #E5E5E5. The factor does not reach text (7.J.7): the derived Light font #1A1A1A is 7.8:1 on #ADADAD and 6.3:1 on its derived page #9B9B9B.
+16.E.3 The Dark secondary is not set. It is derived from the primary with Victron's 8% mix toward the font, here white (7.J.13): #2C2C2C from #1A1A1A. Victron's #141414 is not inherited; it would be darker than the #1A1A1A page. Light's secondary is derived from it with the same factor.
+16.E.4 Fonts and the page are not set. They derive from the backgrounds.
+16.E.5 color_warning: Victron's #F0962E is hue 32 deg, next to the brand #F28C28 (hue 30 deg, 1.06:1). Open question 19.C proposes a loader warning for that pair. Amber #F2C200 (hue 48 deg) keeps warnings apart from the brand. Critical and success stay Victron's.
+16.E.6 The icon keeps its own colors (the Image path) and the wordmark is tinted (the ColorImage path), so the example covers both. The icon is a mid orange #F28C28 shape with a #1A1A1A outline. In Dark the fill carries it (7.1:1 on the page). In Light the outline does (6.3:1 on #9B9B9B); the fill alone would be 1.1:1. The wordmark is tinted white in Dark and the derived #1A1A1A in Light.
+16.E.7 Both SVGs use Victron's 285x54 canvas (see 6.I): the icon in the left 54x54, the wordmark to its right, transparent elsewhere. The wordmark is outlined paths, not SVG text, so it does not depend on the fonts on the device. Both are original drawings, not edits of Victron art.
+
+16.F Resolved values. Exact expected values for the tests: 8-bit sRGB, rounded half up, from the formulas in section 7 (Color model), with the arithmetic in 7.L.12.
+
+                                Light                       Dark
+    background_primary          #ADADAD (factor 0.45)       #1A1A1A
+    background_secondary        #A5A5A5 (factor 0.45)       #2C2C2C (derived)
+    page                        #9B9B9B (derived)           #1A1A1A (derived)
+    font_primary                #1A1A1A (derived)           #FFFFFF (Victron)
+    font_secondary              #4C4B4A (12 steps of 5%)    #969591 (Victron)
+    brand                       #F28C28                     #F28C28
+    brand dim / dark            #DD9650 / #C2A385           #B26A24 / #5B3C1E
+    label on brand fill         dark (white 2.45:1)         dark (white 2.45:1)
+    warning                     #F2C200                     #F2C200
+    label on warning fill       dark (white 1.68:1)         dark (white 1.68:1)
+
+16.G Contrast checks against 7.M (Contrast rules): font_primary on background_primary is 7.8:1 (Light) and 17.4:1 (Dark), so the loader does not warn. font_secondary is 3.1:1 on the Light page and 3.5:1 on the Light secondary, and 5.8:1 on #1A1A1A and 4.7:1 on #2C2C2C in Dark.
+
+16.H Known weak spots
+---------------------
+
+The plan has no rule for non-text contrast (Open question 19.N). The captures show these, and the README says so:
+
+16.H.1 Light: the brand fill is 1.09:1 on #ADADAD and 1.13:1 on the page. It differs from the grey in hue, not in lightness. WCAG's non-text floor (1.4.11) is 3.0:1. Buttons still read by label and shape. Accepted in review: orange on grey does not vanish.
+16.H.2 Light: Victron success #72B84C (1.08:1), critical #F35C58 (1.44:1), and the amber warning (1.33:1), which is also the Light focus ring (7.F.3.a), are weak on #ADADAD. A mid-tone background takes contrast from every mid-tone status color. The brand and status colors are one hex in both schemes (7.K.3), so the remedy is a higher background factor, a lighter Light background: at factor 1 the brand is 1.95:1 on #E5E5E5. The example does not do that.
+16.H.3 Dark has no weak spot: on #1A1A1A the brand is 7.1:1, the warning 10.4:1, and the green ring 7.2:1.
+
+16.I Expected result on the device
+----------------------------------
+
+This is the README's last step, and the reference for the capture review:
+
+16.I.1 Splash: the example icon and wordmark, not Victron's.
+16.I.2 Light: mid orange buttons, the active navigation-bar button, and selection, with dark labels, on grey #ADADAD.
+16.I.3 Dark: mid orange buttons, with dark labels, on very dark grey.
+16.I.4 Warnings are amber in both schemes. Critical and success stay Victron red and green.
+16.I.5 Focus ring: color_focus_highlight, which is the success color in Dark (Victron green) and the warning color in Light (the example's amber).
+16.I.6 Data colors (tank, temperature, series blue) are unchanged.
+16.I.7 Removing /data/apps/enabled/BrandingExample and reloading returns to Victron colors and logos.
+
+16.J README.txt steps
+---------------------
+
+In the shape of DeviceListExample's README.txt:
+
+16.J.1 Compile: python3 ../../tools/gui-v2-plugin-compiler.py --branding Branding.qml, in a terminal with the Venus OS SDK environment sourced, or on the device with /opt/victronenergy/gui-v2/gui-v2-plugin-compiler.py. Fix every reported file:line:col. If qmllint is not installed (on the device, for example), the compiler says so and skips it (10.F.5.b).
+16.J.2 Install: --install <gx-host>. Or copy BrandingExample.json to /data/apps/available/BrandingExample/gui-v2/, and link /data/apps/enabled/BrandingExample to /data/apps/available/BrandingExample.
+16.J.3 Restart the GUI and watch the splash.
+16.J.4 Switch Settings -> General -> Display & Appearance -> GX display appearance between Dark and Light. Compare with the expected result in 16.I.
+
+16.K examples/BrandingMinimalExample/ is the second example: a Branding.qml that sets color_brand and nothing else, and a README with the same steps. It shows the default path: one branding color, Light derived, and Victron logos, fonts, status colors, and background factor kept.
+
+
+17 Implementation order
+=======================
+
+17.A Color table and asset table, as a reviewed document, no code. Written: ROLE-AND-ASSET-TABLES-BRANDING.txt, next to this plan. It awaits design review of its open items (its section 10). Every color key (180) has a row with its category (branding, alias, gray, blended, text on fill, data, exception, or palette; defined in its section 4), its formula, and the Victron result in both schemes. It includes the light button_down choice and the proposed contrast thresholds (19.D, 19.E). It lists every untinted Image whose SVG has a palette hex, plus the focus ring, each with a decision. Its section 8 lists the expected Victron pixel shifts: dimRed, toasts, light page, light background_secondary, light primary and secondary text, the Light scheme's dark colors, blended colors whose names do not say dim or dark (they move to the nearest of the three standard alphas), and the light demo-mode text. Its section 9 lists the corrections it made to this plan.
+
+17.B Generator. themeparser generates alias getters that call the getter of the key they alias, for branding-dependent keys; one combined themeValuesChanged; NOTIFY / CONSTANT from the color table in the 17.A document. Getters still return today's values. No pixel changes, so the captures must be empty. Run --ui-test benchmark/pages on a GX device before and after. Implemented: see 9.D.1.a to 9.D.3.a. Captures checked (9.D.3.a). The benchmark is still to run.
+
+17.C The Branding type, loader and Theme changes, with no visible change. The Victron.Branding module (11.B) with the Branding type (no default property), the list of BrandingData, recording which properties each file set, the resolved palette cache. The branding colors read the list; derived colors still return today's hexes. Loader: engine at first load, type 6 and the range check, plugin-name order, no enable state, failure isolation, snapshot-then-destroy with URL resolution and the check that branding colors are opaque, font registration and removal, reload. Compiler: --branding, the literal-only check and the generated tools/branding-properties.json, font and subdirectory packing, qmllint against the installed Victron.Branding qmltypes, --install. Theme font family and splash logo properties; migrate SplashView and Global / Label; writing-system check; the _preserve_colors flags. With no plugin installed, captures must be empty.
+
+17.D Formula commit. Derived colors run derive() and the contrast rules, with the arithmetic in 7.L.12: integer mixes, double HSL operations, a fixed linearisation table, and the derivation file built with -ffp-contract=off. The font_over_background formula carries the warm-gray comment in 7.F.2. Add the background factor (7.J.10) to Branding, with the compiler's range check and its warning for a factor set without color_background_primary (7.J.12), and set 1.12 on the Victron object. Read background_secondary and background_page only from the Branding whose background_primary is used or a later one, and derive them otherwise (7.J.13). Delete the derived hexes from Dark.json and Light.json. Victron pixels move here and nowhere else. Capture before and after at FiveInch, SevenInch, and Portrait, in Dark and Light, and compare with tools/uicompare. Read the diff against the expected shifts in section 8 of the 17.A document. Design signs off. Do not refresh baselines until a group is accepted. Revert a group that looks wrong. Implemented: see 7.J.10.a, 7.M.6.a and 7.O.2.a. Every color getter gives the same value, in both schemes, as the script behind the 17.A document. Done: captures of 13 pages before and after, at 800x480 and 480x800 (only pages with a portrait layout), in Dark and Light, showed only the expected shifts; colors no page shows in mock mode (demo mode, dimRed, toasts, Microgrid, boat regen) were checked against the 17.A table. Design signed off.
+
+17.E Audit. Move direct palette uses to role colors or leave them as data colors: brand-meaning color_blue to color_brand, feed-in green to color_success, alarm red/orange/green to color_critical / color_warning / color_success. Do not bulk-replace color_green. Tint the Overview art. Draw the focus ring from color_focus_highlight (7.F.3). For Victron these change no pixels (color_brand is color_blue), so the captures must be empty. Steps 17.D and 17.E ship in the same release. Do not announce branding to OEMs before step 17.E lands. Implemented: see 4.E.5.a, 7.F.3.a, 7.O.2.a and 7.O.10.a. Done: the 13 pages of 17.D, at 800x480 and 480x800, in Dark and Light, captured before and after, show no change of color. The only differences are one step in one channel on anti-aliased edges, where the tints round differently (accepted), and values and graphs that differ between mock-mode runs.
+
+17.F Test branding plugin in the UI-test flow, with its captures and the key-navigation check. Example plugins (BrandingExample and BrandingMinimalExample; see section 16), generated property reference, agent-readable README, Victron.Branding's deprecation and versioning page, updates to architecture.md, key-navigation.md, and visual-regression-tests.md. The Victron.Branding API dump and the dependency check (13.B.4). requiredBrandingVersion in the loader and compiler.
+
+17.G Then the rest of #3306: the Victron.GuiPlugins module (11.D), with its API dump, requiredGuiPluginsVersion, and versioning page; PluginDataItem (the upstream veutil change and the Victron.VeUtil module are optional); the Tokens singleton; common words and icons; the plugin UI types in 12.E.12 (preferred: thin wrappers composed over the internal types, with rows declared directly in PluginGradientListView, prototyped first; rows take KeyNavigationHighlight from the inner types); PluginPage and the host's Page wrapper (11.H). Plugin UI uses the same Theme keys named by purpose, not color_blue.
+
+17.H Later, not blocking: WASM brand caching, intro GIF slot, product-name string, generic icon lookup, a bounded font scale.
+
+17.I Step 17.F's docs and example can start once the Branding property list is frozen at the end of step 17.C. Branding does not wait for step 17.G. BrandingExample's exact expected values are checked once step 17.D's formulas land.
+
+
+18 Non-goals
+============
+
+18.A Customising the WASM/HTML connecting screen, or any other file outside the gui-v2 plugin RCC.
+
+18.B Persisting the last MQTT branding blob so the next WASM cold start is pre-branded. It avoids an unbranded first frame and can show a stale brand after uninstall. Leave it out.
+
+18.C Qt icon themes, freedesktop index.theme, or QIcon::setThemeName.
+
+18.D Overriding geometry, animation, or arbitrary theme keys.
+
+18.E Token minimisation (geometry token condensation). It is separate work, with no dependency in either direction: branding overrides no geometry, and that work changes no colors or typography. If both are in flight, whichever lands second rebases.
+
+18.F Generating tank, temperature, humidity, or data-series colors from the branding colors.
+
+18.G Treating color_blue as color_brand, color_green as color_success, or color_ok as color_success.
+
+18.H Reintroducing translucent dim and dark colors. Blend onto the background, then store alpha 255.
+
+18.I Per-scheme branding colors, nested (light { ... }) or flat (light_color_* / dark_color_*). Rejected in 7.K: the branding colors are Dark's, and the background factor is the only per-scheme property.
+
+18.J Returning stored hexes, as a hard-coded exception, when the branding colors match Victron's.
+
+18.K Replacing every SVG.
+
+18.L Mass-editing VenusOS files to import a new VeUtil module. IMPORTS makes that unnecessary.
+
+18.M A generic Theme.icon(name) lookup in v1.
+
+18.N Font size overrides in v1.
+
+18.O Correcting an OEM's chosen primary text contrast. The loader warns; it does not change the color.
+
+18.P App-store packaging, signatures, and the installer UI (#3307).
+
+18.Q Depending on #3061 in any way: not its integration types, not its enable state.
+
+18.R Per-plugin enable/disable state, a state file, or a UI toggle for branding. Application lifecycle is designed separately, later.
+
+
+19 Open questions
+=================
+
+19.A These need a Victron owner, not an implementer's guess. Each has a proposed default so work can start.
+
+19.B Can an end user switch OEM branding off? Not in v1, which has no enable state (Decision 5.M). The question belongs to the application lifecycle design. Record the tension for it: an OEM may not accept any user switching back to Victron branding, and Victron support may not accept a brand nobody can switch off. Proposed for v1: no toggle. On GX, a brand is removed by removing the app.
+
+19.C May OEMs recolor color_warning and color_critical? Both mean alarms. Options: allow freely; allow, but warn when the hue is close to color_brand or color_success; or keep them off the v1 allowlist. Proposed: allow, with the warning. Calibration case from the example plugin: Victron's warning #F0962E (hue 32 deg) next to the example's brand #F28C28 (hue 30 deg) must warn, and the example's amber #F2C200 (hue 48 deg, 18 deg from that brand) must not.
+
+19.D Contrast thresholds. Proposed: 3.0:1 for text on a colored fill and secondary text, 4.5:1 for the primary-text warning. The threshold for text on a colored fill must stay at or below 4.28:1 (white on Victron blue): at 4.5:1 every Victron button label turns dark. Design signs off knowing what moves for Victron: light secondary text (#969591 to #807F7C at 3.0:1, or #646361 at 4.5:1) and the light demo-mode indicator text on orange (white to dark). No light button_down label moves (7.M.3). Decided: 3.0:1 for both text on a colored fill and secondary text, open to revisiting later.
+
+19.E Light button_down: the dim color (today's look) or the alpha-121 mix (paler)? Proposed: the dim color. Only the SpinBox icons sit on it (7.L.9). Decided: the dim color.
+
+19.F WASM splash before the blob arrives: show Victron marks and then swap, or hide the marks while GuiPluginLoader.busy on MQTT backends? Proposed: hide them.
+
+19.G Font sizes stay out of v1? Proposed: yes. If OEMs need it, one clamped scale factor later.
+
+19.H Per-scheme branding colors. Decided: no per-scheme color properties in v1 (7.K). The branding colors are always the Dark scheme's values (7.J.2, 7.J.3): no luminance classification and no flag saying which scheme they are for. Light is derived, and one background factor, light_mode_background_factor, sets how far its backgrounds move (7.J.5 to 7.J.12). The factor applies to the derived backgrounds only, defaults to 1.0, is 1.12 on the Victron object, uses the soft clamp, and is read only from the Branding whose background_primary is used. The compiler warns when a file sets the factor without color_background_primary. Rejected: flat light_color_<role> and dark_color_<role> overrides, and the scheme flag. The colors keep the color_<role> names (7.B). The factor is named light_mode_background_factor: it names the mode, what it changes, and that it is a multiplier.
+
+19.I Several Branding plugins: per-property merge in plugin-name order (this plan), or one active Branding with the others ignored and logged? Merge is more flexible and harder to support. Proposed: merge, with the duplicate-property log.
+
+19.J Focus ring: an image provider that recolors the SVG, or corners drawn in QML? Proposed: decide after measuring both on GX. Implemented in 17.E with the image provider (7.F.3.a), with one SVG; not measured on GX yet. Its one known limitation, a slightly soft ring on high-DPI screens, is accepted for now.
+
+19.K Alpha in branding colors: v1 requires opaque branding colors. The compiler rejects a translucent branding color, and the loader drops one. Should a later version allow a translucent branding color, and what would blending it onto the background mean for it? Proposed: keep it opaque. Revisit only if an OEM needs it.
+
+19.L Plugin UI types: confirm option 2, 12.E (thin wrappers, composed, with rows declared directly in PluginGradientListView), after the prototype. Decided: wrappers compose and never inherit a VenusOS type; plugins do not see DelegateComponentModel or DelegateComponent; there is no public model type, and rows are declared directly in PluginGradientListView (row model option B, 12.E.8); wrapper names are Plugin plus the internal type's name (PluginListSwitch, PluginListTextField, and so on).
+
+19.M Inherited secondary backgrounds. Decided: the same-plugin rule, with derivation (7.J.13). background_secondary and background_page are read only from the Branding whose background_primary is used, or a later one. Otherwise the secondary is derived with Victron's 8% mix toward font_primary, and the page uses the page formula. Rejected: a plain per-property merge, under which an OEM that sets only background_primary #1A1A1A would inherit Victron's #141414 cards, darker than its page. The example no longer sets background_secondary (16.E.3).
+
+19.N Non-text contrast. There is no rule for a brand or status fill against the background. The example's Light scheme shows why it matters: brand fill 1.09:1 on #ADADAD, and the status colors, including the amber focus ring, 1.08-1.44:1. Options: a loader warning below 3.0:1 (WCAG 1.4.11) for the brand and each status color against background_primary in each scheme, like the primary-text warning; or no rule, with the captures judging. Proposed: no rule in v1. The example keeps the reviewed palette, and its README names the weak spots. If design wants the example to model good practice instead, it raises the background factor (a lighter Light background), and the exact expected values are recomputed.
+
+19.O Rows in PluginGradientListView
+-----------------------------------
+
+Row model option B (12.E.8):
+
+19.O.1 Does v1 need rows added or removed at runtime, or lists driven by data? Proposed: no. Rows are fixed when the page is created; add model + delegate, or insert / remove functions, later as new API.
+19.O.2 The element type of the rows list. list<Item> accepts any Item, and a plain Item gets no row behaviour (collapse, focus, access levels). A GuiPlugins row base type would let qmllint flag rows that are not Plugin* types, but that base type is then promised too. Widening the type later is compatible; narrowing it is not. Proposed: decide after the prototype, before the first release.
+
+19.P Version fields (13.C.2). One field per module at the plugin level (requiredBrandingVersion, requiredGuiPluginsVersion), or a version on each integration entry? Per integration is finer, but every page integration would repeat the same GuiPlugins version. Proposed: one field per module, at the plugin level, each covering the integrations that use that module.
+
+19.Q Arithmetic. Decided: integer arithmetic for the mixes, double precision for the HSL operations, and exact expected values from the implementation (7.L.12). The question was whether every derived color must be computed in exact arithmetic, which the plan first required. Options: A, exact integers or rationals everywhere, which needs a rational type in C++ whose intermediate values can pass 64 bits (7.L.12.b), for no visible gain; B, the split above (chosen); C, doubles everywhere, with tests that allow one step per channel, which would also hide real off-by-one errors in the mix rules, such as rounding half to even, while the integer mixes cost nothing (7.L.12.a). The options differ by at most one step in one channel, at exact .5 ties.

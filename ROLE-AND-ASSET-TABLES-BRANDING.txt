@@ -1,0 +1,853 @@
+===========================================
+Role table and asset table (plan step 17.A)
+===========================================
+
+Contents
+========
+
+1 Status and scope
+1.A Purpose
+1.B Numbering
+1.C Method
+1.D Coverage
+1.E Result
+1.F Assumptions
+
+2 Basic color operations
+2.A mix
+2.B blend_onto
+2.C dim, darkish, dark
+2.D font_over_background
+2.E text_color_on
+2.F Arithmetic
+
+3 Victron's branding colors
+3.A Dark
+3.B Light, derived
+3.C Secondary at 4.5
+3.D Darker font_primary
+
+4 Key categories
+4.A branding
+4.B alias
+4.C gray
+4.D Secondary and tertiary text
+4.E blended
+4.F text on fill
+4.G data
+4.H exception
+4.I palette
+4.J NOTIFY
+
+5 Color table
+5.A Branding colors
+5.B Aliases
+5.C Computed grays and the secondary and tertiary text colors
+5.D Blended colors
+5.E Text on a colored fill
+5.F Data
+5.G Exceptions
+5.H Palette (ColorDesign.json)
+
+6 Decisions in this table
+6.A Light button_down
+6.B Thresholds
+6.C button_down_text
+6.D SpinBox icons
+6.E Toasts
+6.F Dark colors in the Light scheme
+6.G viewGradient_color2
+6.H Blended colors not named dim or dark
+6.I Black text
+6.J Notification tint
+6.K Multistep separator
+6.L Slider separator
+6.M Handle border
+6.N Demo-mode indicator
+6.O Alternate rows
+6.P Color-wheel dialog buttons
+
+7 Asset table
+7.A Focus ring
+7.B Lightning bolts
+7.C Connector nubs
+7.D Electrons
+7.E Checkmark
+7.F SpinBox icons
+7.G Boat glow
+7.H Intro GIFs
+7.I Welcome screenshots
+7.J Welcome QR codes
+7.K Color slider
+7.L Color wheel
+7.M Monochrome art
+7.N WASM logos
+7.O Generated QR codes
+7.P Tinted SVGs
+
+8 Expected Victron pixel shifts
+8.A Light background_secondary
+8.B Light page
+8.C Light primary text
+8.D Light secondary text
+8.E font_over_background grays
+8.F Dark colors in the Light scheme
+8.G Toasts
+8.H dimRed
+8.I Blended colors not named dim or dark
+8.J Notification tint
+8.K Text on a colored fill
+8.L Not shifts
+8.M Keys with diff > 4
+8.N Step 17.E
+
+9 Plan corrections
+9.A button_down label
+9.B Toasts
+9.C Exact expected value
+9.D Approximations
+9.E Dark colors in the Light scheme
+9.F Untinted images
+9.G Shift list
+
+10 Open review items
+10.A Thresholds
+10.B Toast background
+10.C viewGradient_color2
+10.D Color-wheel dialog buttons
+10.E Electrons
+10.F Warm grays
+10.G Multistep label
+10.H Unused keys
+
+
+1 Status and scope
+==================
+
+1.A This document is step 17.A of PLAN-GUIPLUGINS-BRANDING.txt (the plan). It is a review document, not code. The "role table" in the title is the color table, section 5. Step 17.B takes NOTIFY / CONSTANT from the key categories (4.J). Step 17.D implements the formulas and checks the differences in its visual regression captures against section 8.
+1.B Numbering follows the plan (plan 1.A). "Plan 7.L.5" cites the plan; a bare number cites this document.
+1.C Every value comes from a script that uses the arithmetic in 2.F (plan 7.L.12), run against themes/color/ColorDesign.json, Dark.json and Light.json in the current gui-v2 tree. The C++ implementation (plan step 17.D) gives the same value for every key in both schemes. "today" is the resolved JSON value. "Victron" is the formula output for Victron's branding colors. diff is the largest difference in any channel, alpha included: 0 to 255. Contrast ratios are WCAG 2 (plan 7.M.1).
+1.D 180 keys: every key in the three files. Categories (section 4): branding 9, alias 35, gray 48, blended 26, text on fill 5, data 15, exception 9, palette 33.
+1.E Victron result against today: Dark 128 keys exact, 46 with a diff of 4 or less, 6 with a larger diff. Light 87 exact, 64 with a diff of 4 or less, 29 with a larger diff. Every larger shift is in section 8, with its cause.
+1.F Minimum contrast: 3.0:1 for white text on a colored fill and for secondary text (plan 19.D, decided). Light button_down: dim(brand) (plan 19.E, decided). 6.A and 6.B list what moves under the alternatives.
+
+
+2 Basic color operations
+========================
+
+2.A mix(a, b, t) = a * (1 - t) + b * t per channel, rounded half up, alpha 255.
+2.B blend_onto(color, n, background) = mix(background, color, n / 255): color at alpha n (0 to 255), blended onto background. Plan 7.L.2.
+2.C These blend a color onto the scheme's background_primary (plan 7.L.3): dim(x) = blend_onto(x, 179, background_primary), darkish(x) = blend_onto(x, 121, background_primary) (plan 7.L.8), dark(x) = blend_onto(x, 77, background_primary).
+2.D font_over_background(n) = blend_onto(font_primary, n, background_primary): a gray between the scheme's background and font. n is a constant for each key: an alpha chosen once to match today's color, by projecting today's value onto the line from today's background to today's font (Dark #000000 to #FFFFFF, Light #FFFFFF to #272622). It is fixed in this table and in Dark.json and Light.json. It is not an OEM property (plan 7.F.2).
+2.E text_color_on(f1, f2, ...) = white if white has at least the minimum contrast for white text (3.0:1) against every listed fill, else the darker font_primary (plan 7.M.2). The darker font_primary is the darker of the two schemes' resolved font_primary: #262626 for Victron.
+2.F The mixes use integers and round each 8-bit channel half up, so a mix that lands exactly on .5 always rounds up. Example: the plan 16.D Dark branding colors with light_mode_background_factor 0.3 give a Light font_secondary of 14 steps of 5%, a 70% mix. Green channel: 149 * 0.30 + 24 * 0.70 = 61.5, which rounds half up to 62 (#3E3E3C). In double precision, 0.05 * 14 is 0.7000000000000001, the channel comes out just under 61.5, and the result is #3E3D3C. Integer form for a fraction t = p / q: (a * (q - p) * 2 + b * p * 2 + q) // (2 * q). The HSL operations (the light mode background formula, plan 7.J.5 and 7.J.11) use double precision, in the same order as the C++ code, which is built without fused multiply-add, so the script and the C++ code give the same result (plan 7.L.12.b, 7.L.12.c).
+
+
+3 Victron's branding colors
+===========================
+
+3.A Dark, authored: brand #387DC5, success #72B84C, warning #F0962E, critical #F35C58, background_primary #000000, background_secondary #141414, font_primary #FFFFFF, font_secondary #969591. Page unset, so page = background_primary (plan 7.E). font_secondary passes as authored: 7.00:1 on #000000, 6.14:1 on #141414.
+
+3.B Light, derived
+------------------
+
+Plan 7.J:
+
+3.B.1 background_primary #FFFFFF: the light mode background formula (plan 7.J.5) with Victron's light_mode_background_factor 1.12 (plan 7.J.10). Black is the end point of the soft clamp (plan 7.J.11), so it lands exactly on white.
+3.B.2 font_primary #262626: #000000, then 15% toward #FFFFFF (38.25 rounds to 38). Plan 7.J.7. 15.13:1 on white.
+3.B.3 background_secondary #F7F7F7: the same formula on #141414 (plan 7.J.6). HSL lightness 20/255 gives 0.5 + 1.12 x (0.5 - 20/255) = 0.9722. That is above 0.94, where the soft clamp starts, so the soft clamp pulls it to 0.9678, which is 246.80 of 255 and rounds to 247. Today's #FAF9F5 differs by at most 3 in any channel.
+3.B.4 page #E5E5E5: 12% from #FFFFFF toward #262626 (228.96, so 229). Plan 7.E said "about #E5E5E4".
+3.B.5 font_secondary #807F7C: gray5 #969591 is 2.38:1 on the page and 2.80:1 on background_secondary, under 3.0:1, so it steps 5% at a time toward #262626. Four steps pass: 3.18:1 on the page, 3.74:1 on background_secondary. Plan 7.J.8.
+
+3.C At a minimum secondary text contrast of 4.5:1, light font_secondary would be #646361 (9 steps), which differs from today's gray4 #64635F by at most 2 in any channel.
+3.D The darker font_primary, used for text on a colored fill when white does not pass, is #262626 in both schemes.
+
+
+4 Key categories
+================
+
+4.A branding: one of the nine branding colors, which a Branding object may set (plan 7.D, 7.E). The Theme getter reads the resolved list of branding values.
+4.B alias: in each scheme, an alias of a branding color or of another alias. A key is an alias of a branding color in a scheme only when today's value equals that branding color's value in that scheme. Text and icon keys may be aliases of font branding colors; background keys may be aliases of background branding colors. Some keys are aliases of a different branding color in each scheme (focus_highlight, splash_logo_icon, the boat and brief page backgrounds, levelsPage_gauge_backgroundColor). The table keeps both mappings.
+4.C gray: a computed gray, either font_over_background(n) (2.D) or one of the secondary and tertiary text colors (4.D).
+4.D Today Dark secondary text is gray5 and tertiary text (units, button icons) is gray4; Light swaps them (secondary gray4, tertiary gray5). Keys that use the secondary text color are font_secondary in Dark and a font_over_background gray in Light. Keys that use the tertiary text color are a font_over_background gray in Dark and font_secondary in Light. Both keep today's ordering in each scheme.
+4.E blended: a dim, darkish or dark color (2.C) of a branding or palette color, or a blend_onto with its own alpha. Which of dim, darkish and dark: the one in the key's name (dim*, dark*, darkish*), else the one whose alpha is nearest the alpha that matches the key's Dark value today (the three alphas came from Dark.json, plan 7.L.9). The same one is used in both schemes, except where the table says otherwise. Plan 7.L.5 still applies: dimRed follows the dim formula.
+4.F text on fill: text or icons drawn on a saturated color fill (2.E). The formula lists the fills the rule checks; a note names any other fill the key is drawn on.
+4.G data: kept as a hex value, never generated (plan 7.G). Stays in the theme files (plan 7.N.4).
+4.H exception: translucent or transparent, kept (plan 7.L.11). One decided change: 6.G.
+4.I palette: ColorDesign.json, kept (plan 7.G.1), except the three translucent keys, which are exceptions.
+4.J For step 17.B: branding, alias, gray, blended and text on fill keys depend on branding and NOTIFY on themeValuesChanged, as does viewGradient_color2 (6.G). Data, exception and palette keys do not depend on branding.
+
+
+5 Color table
+=============
+
+Each entry: today's value -> the Victron result, in each scheme. diff is omitted when it is 0. Each font_over_background(n), and each blend_onto with an alpha chosen to match today's color, shows that alpha as a number.
+
+5.A Branding colors
+-------------------
+
+5.A.1 color_background_primary
+    Dark   background_primary                             #000000 -> #000000
+    Light  background_primary                             #FFFFFF -> #FFFFFF
+5.A.2 color_background_secondary
+    Dark   background_secondary                           #141414 -> #141414
+    Light  background_secondary                           #FAF9F5 -> #F7F7F7   diff=3
+5.A.3 color_brand
+    Dark   brand                                          #387DC5 -> #387DC5
+    Light  brand                                          #387DC5 -> #387DC5
+5.A.4 color_critical
+    Dark   critical                                       #F35C58 -> #F35C58
+    Light  critical                                       #F35C58 -> #F35C58
+5.A.5 color_font_primary
+    Dark   font_primary                                   #FFFFFF -> #FFFFFF
+    Light  font_primary                                   #272622 -> #262626   diff=4
+5.A.6 color_font_secondary
+    Dark   font_secondary                                 #969591 -> #969591
+    Light  font_secondary                                 #969591 -> #807F7C   diff=22
+5.A.7 color_page_background
+    Dark   page                                           #000000 -> #000000
+    Light  page                                           #E6E5E1 -> #E5E5E5   diff=4
+    Optional branding color (Branding color_background_page); if unset, the page formula, plan 7.E.
+5.A.8 color_success
+    Dark   success                                        #72B84C -> #72B84C
+    Light  success                                        #72B84C -> #72B84C
+5.A.9 color_warning
+    Dark   warning                                        #F0962E -> #F0962E
+    Light  warning                                        #F0962E -> #F0962E
+
+5.B Aliases
+-----------
+
+5.B.1 color_boatPage_background
+    Dark   background_primary                             #000000 -> #000000
+    Light  background_secondary                           #FAF9F5 -> #F7F7F7   diff=3
+    Light matched today's background_secondary (gray9).
+5.B.2 color_boatPage_icon
+    Dark   font_primary                                   #FFFFFF -> #FFFFFF
+    Light  font_primary                                   #272622 -> #262626   diff=4
+5.B.3 color_boatPage_needle
+    Dark   font_primary                                   #FFFFFF -> #FFFFFF
+    Light  font_primary                                   #000000 -> #262626   diff=38
+    Light was black, not the light font.
+5.B.4 color_boatPage_regenProgress
+    Dark   success                                        #72B84C -> #72B84C
+    Light  success                                        #72B84C -> #72B84C
+    Plan 7.O.6: feed-in / regen.
+5.B.5 color_briefPage_background
+    Dark   background_primary                             #000000 -> #000000
+    Light  background_secondary                           #FAF9F5 -> #F7F7F7   diff=3
+    Light matched today's background_secondary (gray9).
+5.B.6 color_button
+    Dark   brand                                          #387DC5 -> #387DC5
+    Light  brand                                          #387DC5 -> #387DC5
+5.B.7 color_button_off_text_disabled
+    Dark   font_disabled                                  #64635F -> #626262   diff=3
+    Light  font_disabled                                  #64635F -> #626262   diff=3
+5.B.8 color_button_on_background
+    Dark   ok                                             #387DC5 -> #387DC5
+    Light  ok                                             #387DC5 -> #387DC5
+5.B.9 color_button_on_border_modified
+    Dark   warning                                        #F0962E -> #F0962E
+    Light  warning                                        #F0962E -> #F0962E
+5.B.10 color_droopGraph_operationPoint_guidelines
+    Dark   font_primary                                   #FFFFFF -> #FFFFFF
+    Light  font_primary                                   #000000 -> #262626   diff=38
+    Light was black, not the light font.
+5.B.11 color_environmentGaugePanel_background
+    Dark   background_secondary                           #141414 -> #141414
+    Light  background_secondary                           #FAF9F5 -> #F7F7F7   diff=3
+5.B.12 color_focus_highlight
+    Dark   success                                        #72B84C -> #72B84C
+    Light  warning                                        #F0962E -> #F0962E
+    Plan 7.F.3. The ring itself is an SVG with its colors baked in (7.A).
+5.B.13 color_levelsPage_environment_temperatureGauge_highlightValue
+    Dark   font_primary                                   #FFFFFF -> #FFFFFF
+    Light  font_primary                                   #272622 -> #262626   diff=4
+5.B.14 color_levelsPage_fallingGauge_alarmIcon
+    Dark   critical                                       #F35C58 -> #F35C58
+    Light  critical                                       #F35C58 -> #F35C58
+5.B.15 color_levelsPage_gauge_backgroundColor
+    Dark   background_secondary                           #141414 -> #141414
+    Light  background_primary                             #FFFFFF -> #FFFFFF
+5.B.16 color_levelsPage_tankIcon
+    Dark   font_primary                                   #FFFFFF -> #FFFFFF
+    Light  font_primary                                   #272622 -> #262626   diff=4
+5.B.17 color_listItem_background
+    Dark   background_secondary                           #141414 -> #141414
+    Light  background_secondary                           #FAF9F5 -> #F7F7F7   diff=3
+5.B.18 color_listItem_forwardIcon
+    Dark   button_icon                                    #64635F -> #626262   diff=3
+    Light  button_icon                                    #969591 -> #807F7C   diff=22
+5.B.19 color_navigationBar_button_on
+    Dark   brand                                          #387DC5 -> #387DC5
+    Light  brand                                          #387DC5 -> #387DC5
+5.B.20 color_ok
+    Dark   brand                                          #387DC5 -> #387DC5
+    Light  brand                                          #387DC5 -> #387DC5
+5.B.21 color_overviewPage_widget_border
+    Dark   ok                                             #387DC5 -> #387DC5
+    Light  ok                                             #387DC5 -> #387DC5
+5.B.22 color_overviewPage_widget_solar_graph_bar
+    Dark   ok                                             #387DC5 -> #387DC5
+    Light  ok                                             #387DC5 -> #387DC5
+5.B.23 color_quantityTable_row_background
+    Dark   background_secondary                           #141414 -> #141414
+    Light  background_secondary                           #FAF9F5 -> #F7F7F7   diff=3
+5.B.24 color_radioButton_indicator_on
+    Dark   ok                                             #387DC5 -> #387DC5
+    Light  ok                                             #387DC5 -> #387DC5
+5.B.25 color_settings_breadcrumb_background_top_page
+    Dark   navigationBar_button_on                        #387DC5 -> #387DC5
+    Light  navigationBar_button_on                        #387DC5 -> #387DC5
+5.B.26 color_settings_breadcrumb_secondaryText
+    Dark   font_primary                                   #FFFFFF -> #FFFFFF
+    Light  font_primary                                   #272622 -> #262626   diff=4
+5.B.27 color_settings_gsmModem_signalStrength_active
+    Dark   font_primary                                   #FFFFFF -> #FFFFFF
+    Light  font_primary                                   #272622 -> #262626   diff=4
+5.B.28 color_solarHistoryErrorView_secondaryText
+    Dark   font_secondary                                 #969591 -> #969591
+    Light  font_secondary                                 #969591 -> #807F7C   diff=22
+5.B.29 color_splash_logo_icon
+    Dark   font_primary                                   #FFFFFF -> #FFFFFF
+    Light  brand                                          #387DC5 -> #387DC5
+    Plan 7.O.9.
+5.B.30 color_splash_logo_text
+    Dark   font_primary                                   #FFFFFF -> #FFFFFF
+    Light  font_primary                                   #000000 -> #262626   diff=38
+    Plan 7.O.9: Light text follows the derived light font_primary.
+5.B.31 color_switch_groove_on
+    Dark   ok                                             #387DC5 -> #387DC5
+    Light  ok                                             #387DC5 -> #387DC5
+5.B.32 color_toastNotification_highlight_error
+    Dark   critical                                       #F35C58 -> #F35C58
+    Light  critical                                       #F35C58 -> #F35C58
+5.B.33 color_toastNotification_highlight_informative
+    Dark   brand                                          #387DC5 -> #387DC5
+    Light  brand                                          #387DC5 -> #387DC5
+5.B.34 color_toastNotification_highlight_warning
+    Dark   warning                                        #F0962E -> #F0962E
+    Light  warning                                        #F0962E -> #F0962E
+5.B.35 color_viewGradient_color3
+    Dark   page                                           #000000 -> #000000
+    Light  page                                           #E6E5E1 -> #E5E5E5   diff=4
+
+5.C Computed grays and the secondary and tertiary text colors
+-------------------------------------------------------------
+
+5.C.1 color_background_disabled
+    Dark   font_over_background(37)                       #272622 -> #252525   diff=3
+    Light  font_over_background(43)                       #DCDBD7 -> #DADADA   diff=3
+5.C.2 color_briefPage_battery_unit_text_color
+    Dark   font_over_background(98)                       #64635F -> #626262   diff=3
+    Light  font_secondary                                 #969591 -> #807F7C   diff=22
+5.C.3 color_briefPage_battery_value_text_color
+    Dark   font_secondary                                 #969591 -> #969591
+    Light  font_over_background(184)                      #64635F -> #626262   diff=3
+5.C.4 color_briefPage_sidePanel_loadGraph_dotColor
+    Dark   font_over_background(78)                       #504F4B -> #4E4E4E   diff=3
+    Light  font_over_background(207)                      #504F4B -> #4F4F4F   diff=4
+5.C.5 color_button_icon
+    Dark   font_over_background(98)                       #64635F -> #626262   diff=3
+    Light  font_secondary                                 #969591 -> #807F7C   diff=22
+5.C.6 color_button_icon_down
+    Dark   font_secondary                                 #969591 -> #969591
+    Light  font_over_background(184)                      #64635F -> #626262   diff=3
+5.C.7 color_button_off_background_disabled
+    Dark   font_over_background(51)                       #333333 -> #333333
+    Light  font_over_background(80)                       #BBBBBB -> #BBBBBB
+5.C.8 color_button_on_background_disabled
+    Dark   font_over_background(78)                       #504F4B -> #4E4E4E   diff=3
+    Light  font_over_background(125)                      #969591 -> #959595   diff=4
+5.C.9 color_button_on_text_disabled
+    Dark   font_over_background(218)                      #DCDBD7 -> #DADADA   diff=3
+    Light  font_over_background(43)                       #DCDBD7 -> #DADADA   diff=3
+5.C.10 color_card_separator
+    Dark   font_over_background(37)                       #272622 -> #252525   diff=3
+    Light  font_over_background(43)                       #DCDBD7 -> #DADADA   diff=3
+5.C.11 color_colorWheelDialog_mode_button_background
+    Dark   font_over_background(28)                       #1D1D1B -> #1C1C1C   diff=1
+    Light  font_over_background(20)                       #F0EFEB -> #EEEEEE   diff=3
+    Color-wheel dialog buttons: font_over_background grays, decided (6.P).
+5.C.12 color_colorWheelDialog_mode_button_separator
+    Dark   font_over_background(37)                       #272622 -> #252525   diff=3
+    Light  font_over_background(32)                       #E6E5E1 -> #E4E4E4   diff=3
+    Color-wheel dialog buttons: font_over_background grays, decided (6.P).
+5.C.13 color_colorWheelDialog_preset_empty_button_background
+    Dark   font_over_background(28)                       #1D1D1B -> #1C1C1C   diff=1
+    Light  font_over_background(20)                       #F0EFEB -> #EEEEEE   diff=3
+    Color-wheel dialog buttons: font_over_background grays, decided (6.P).
+5.C.14 color_colorWheelDialog_preset_empty_button_border
+    Dark   font_over_background(78)                       #504F4B -> #4E4E4E   diff=3
+    Light  font_over_background(125)                      #969591 -> #959595   diff=4
+    Color-wheel dialog buttons: font_over_background grays, decided (6.P).
+5.C.15 color_colorWheelDialog_preset_empty_button_border_disabled
+    Dark   font_over_background(37)                       #272622 -> #252525   diff=3
+    Light  font_over_background(32)                       #E6E5E1 -> #E4E4E4   diff=3
+    Color-wheel dialog buttons: font_over_background grays, decided (6.P).
+5.C.16 color_colorWheelDialog_preset_empty_button_icon_disabled
+    Dark   font_over_background(78)                       #504F4B -> #4E4E4E   diff=3
+    Light  font_over_background(62)                       #CCCBC7 -> #CACACA   diff=3
+    Color-wheel dialog buttons: font_over_background grays, decided (6.P).
+5.C.17 color_droopGraph_axis_line
+    Dark   font_over_background(148)                      #969591 -> #949494   diff=3
+    Light  font_over_background(125)                      #969591 -> #959595   diff=4
+5.C.18 color_environmentGaugePanel_header
+    Dark   font_over_background(28)                       #1D1D1B -> #1C1C1C   diff=1
+    Light  font_over_background(20)                       #F0EFEB -> #EEEEEE   diff=3
+5.C.19 color_font_disabled
+    Dark   font_over_background(98)                       #64635F -> #626262   diff=3
+    Light  font_over_background(184)                      #64635F -> #626262   diff=3
+5.C.20 color_levelsPage_environment_gauge_tick
+    Dark   font_over_background(98)                       #64635F -> #626262   diff=3
+    Light  font_over_background(125)                      #969591 -> #959595   diff=4
+5.C.21 color_levelsPage_panel_border_color
+    Dark   font_over_background(37)                       #272622 -> #252525   diff=3
+    Light  font_over_background(62)                       #CCCBC7 -> #CACACA   diff=3
+5.C.22 color_listItem_down_background
+    Dark   font_over_background(37)                       #272622 -> #252525   diff=3
+    Light  font_over_background(20)                       #F0EFEB -> #EEEEEE   diff=3
+5.C.23 color_listItem_secondaryText
+    Dark   font_secondary                                 #969591 -> #969591
+    Light  font_over_background(184)                      #64635F -> #626262   diff=3
+5.C.24 color_listItem_separator
+    Dark   font_over_background(98)                       #64635F -> #626262   diff=3
+    Light  font_over_background(125)                      #969591 -> #959595   diff=4
+5.C.25 color_modalDialog_border
+    Dark   font_over_background(37)                       #272622 -> #252525   diff=3
+    Light  font_over_background(255)                      #272622 -> #262626   diff=4
+5.C.26 color_modalDialog_grabber_background
+    Dark   font_over_background(51)                       #333333 -> #333333
+    Light  font_over_background(60)                       #CCCCCC -> #CCCCCC
+5.C.27 color_navigationBar_button_off
+    Dark   font_secondary                                 #969591 -> #969591
+    Light  font_over_background(184)                      #64635F -> #626262   diff=3
+5.C.28 color_notificationsPage_delegate_unacknowledged_background
+    Dark   font_over_background(37)                       #272622 -> #252525   diff=3
+    Light  blend_onto(brand, 38, background_primary)      #E4EAF2 -> #E1ECF6   diff=4
+    Light is a blue tint today; dark is neutral.
+5.C.29 color_notificationsPage_delegate_unacknowledged_border
+    Dark   font_over_background(71)                       #494844 -> #474747   diff=3
+    Light  blend_onto(brand, 89, background_primary)      #C1CDDD -> #BAD2EB   diff=14
+    Light is a blue tint today; dark is neutral.
+5.C.30 color_quantityTable_quantityUnit
+    Dark   font_over_background(98)                       #64635F -> #626262   diff=3
+    Light  font_secondary                                 #969591 -> #807F7C   diff=22
+5.C.31 color_quantityTable_quantityValue
+    Dark   font_secondary                                 #969591 -> #969591
+    Light  font_over_background(184)                      #64635F -> #626262   diff=3
+5.C.32 color_quantityTable_row_alternateBackground
+    Dark   font_over_background(37)                       #272622 -> #252525   diff=3
+    Light  page                                           #E6E5E1 -> #E5E5E5   diff=4
+5.C.33 color_radioButton_indicator_disabled
+    Dark   font_over_background(37)                       #272622 -> #252525   diff=3
+    Light  font_over_background(43)                       #DCDBD7 -> #DADADA   diff=3
+5.C.34 color_radioButton_indicator_off
+    Dark   font_over_background(78)                       #504F4B -> #4E4E4E   diff=3
+    Light  font_over_background(207)                      #504F4B -> #4F4F4F   diff=4
+5.C.35 color_roundCloseButton_background
+    Dark   font_over_background(78)                       #504F4B -> #4E4E4E   diff=3
+    Light  font_over_background(43)                       #DCDBD7 -> #DADADA   diff=3
+5.C.36 color_roundCloseButton_foreground
+    Dark   font_over_background(228)                      #E6E5E1 -> #E4E4E4   diff=3
+    Light  font_over_background(184)                      #64635F -> #626262   diff=3
+5.C.37 color_scrollBar_bar
+    Dark   font_over_background(37)                       #272622 -> #252525   diff=3
+    Light  font_over_background(125)                      #969591 -> #959595   diff=4
+5.C.38 color_settings_gsmModem_signalStrength_inactive
+    Dark   font_over_background(98)                       #64635F -> #626262   diff=3
+    Light  kept                                           #4D272622 -> #4D272622
+    Light is translucent darkGray2 (exception).
+5.C.39 color_solarDetailBox_border
+    Dark   font_over_background(98)                       #64635F -> #626262   diff=3
+    Light  font_over_background(207)                      #504F4B -> #4F4F4F   diff=4
+5.C.40 color_solarDetailBox_columnTitle
+    Dark   font_over_background(218)                      #DCDBD7 -> #DADADA   diff=3
+    Light  font_over_background(207)                      #504F4B -> #4F4F4F   diff=4
+5.C.41 color_solarDetailBox_quantityTitle
+    Dark   font_secondary                                 #969591 -> #969591
+    Light  font_over_background(184)                      #64635F -> #626262   diff=3
+5.C.42 color_solarListPage_header_text
+    Dark   font_secondary                                 #969591 -> #969591
+    Light  font_over_background(207)                      #504F4B -> #4F4F4F   diff=4
+5.C.43 color_switch_groove_border_off
+    Dark   font_over_background(98)                       #64635F -> #626262   diff=3
+    Light  font_over_background(125)                      #969591 -> #959595   diff=4
+5.C.44 color_switch_groove_disabled
+    Dark   font_over_background(98)                       #64635F -> #626262   diff=3
+    Light  font_over_background(125)                      #969591 -> #959595   diff=4
+5.C.45 color_switch_status_disabled
+    Dark   font_over_background(51)                       #333333 -> #333333
+    Light  font_over_background(43)                       #DCDBD7 -> #DADADA   diff=3
+5.C.46 color_valueIndicator_background
+    Dark   font_over_background(28)                       #1D1D1B -> #1C1C1C   diff=1
+    Light  font_over_background(20)                       #F0EFEB -> #EEEEEE   diff=3
+5.C.47 color_valueIndicator_slider_handle
+    Dark   font_over_background(28)                       #1D1D1B -> #1C1C1C   diff=1
+    Light  font_over_background(20)                       #F0EFEB -> #EEEEEE   diff=3
+5.C.48 color_valueIndicator_slider_handle_border
+    Dark   font_over_background(248)                      #FAF9F5 -> #F8F8F8   diff=3
+    Light  font_over_background(255)                      #1D1D1B -> #262626   diff=11
+
+5.D Blended colors
+------------------
+
+5.D.1 color_boatPage_regenRemainder
+    Dark   dark(success)                                  #2D4221 -> #223817   diff=11
+    Light  dark(success)                                  #D1E5C2 -> #D4EAC9   diff=7
+    Today's colors match alpha 96 (Dark) / 86 (Light); of dim, darkish and dark, the alpha nearest the Dark one is dark (4.E).
+5.D.2 color_button_down
+    Dark   darkish(brand)                                 #1B3B5C -> #1B3B5D   diff=1
+    Light  dim(brand)                                     #73A2D3 -> #73A4D6   diff=3
+    Light: dim(brand), plan 19.E, decided (6.A).
+5.D.3 color_button_off_background
+    Dark   dim(brand)                                     #27588A -> #27588A
+    Light  dim(brand)                                     #74A4D6 -> #73A4D6   diff=1
+5.D.4 color_button_on_background_modified
+    Dark   dark(warning)                                  #482D0E -> #482D0E
+    Light  dark(warning)                                  #F0D5B4 -> #FADFC0   diff=12
+5.D.5 color_critical_background
+    Dark   dim(critical)                                  #AA403E -> #AB413E   diff=1
+    Light  dim(critical)                                  #F58B87 -> #F78D8A   diff=3
+5.D.6 color_darkBlue
+    Dark   dark(blue)                                     #11263B -> #11263B
+    Light  dark(blue)                                     #C0D4E6 -> #C3D8ED   diff=7
+    Blended from a palette (data) color.
+5.D.7 color_darkCritical
+    Dark   dark(critical)                                 #491C1B -> #491C1B
+    Light  dark(critical)                                 #F8CAC6 -> #FBCECD   diff=7
+5.D.8 color_darkGreen
+    Dark   dark(green)                                    #223817 -> #223817
+    Light  dark(green)                                    #D1E6C2 -> #D4EAC9   diff=7
+    Blended from a palette (data) color.
+    Step 17.E: replaced by color_darkSuccess (8.N).
+5.D.9 color_darkOk
+    Dark   dark(brand)                                    #11263B -> #11263B
+    Light  dark(brand)                                    #C0D4E6 -> #C3D8ED   diff=7
+5.D.10 color_darkOrange
+    Dark   dark(orange)                                   #482D0E -> #482D0E
+    Light  dark(orange)                                   #F7DBB9 -> #FADFC0   diff=7
+    Blended from a palette (data) color.
+    Step 17.E: replaced by color_darkWarning (8.N).
+5.D.11 color_darkRed
+    Dark   dark(red)                                      #491C1B -> #491C1B
+    Light  dark(red)                                      #F8CAC6 -> #FBCECD   diff=7
+    Blended from a palette (data) color.
+    Step 17.E: replaced by color_darkCritical (8.N).
+5.D.12 color_darkWarning
+    Dark   dark(warning)                                  #482D0E -> #482D0E
+    Light  dark(warning)                                  #F7DBB9 -> #FADFC0   diff=7
+5.D.13 color_darkishBlue
+    Dark   darkish(blue)                                  #1B3B5C -> #1B3B5D   diff=1
+    Light  dark(blue)                                     #C0D4E6 -> #C3D8ED   diff=7
+    Blended from a palette (data) color. Light was dark(blue) today.
+    Step 17.E: replaced by color_darkishOk (8.N).
+5.D.14 color_demoModeIndicator_background
+    Dark   dark(warning)                                  #593912 -> #482D0E   diff=17
+    Light  warning                                        #F0962E -> #F0962E
+    Dark matches alpha 95 today: dark (4.E). Light is the warning fill itself.
+5.D.15 color_dimGreen
+    Dark   dim(green)                                     #508135 -> #508135
+    Light  dim(green)                                     #9BCB7E -> #9CCD81   diff=3
+    Blended from a palette (data) color.
+    Step 17.E: replaced by color_dimSuccess (8.N).
+5.D.16 color_dimRed
+    Dark   dim(red)                                       #592220 -> #AB413E   diff=82
+    Light  dim(red)                                       #F0C3BF -> #F78D8A   diff=54
+    Plan 7.L.5: follows the dim formula like dimGreen (today ~36%, hand-tuned). Accepted shift.
+    Step 17.E: replaced by color_dimCritical (8.N).
+5.D.17 color_emptyPageItem_logo
+    Dark   dim(brand)                                     #27588A -> #27588A
+    Light  dim(brand)                                     #73A2D3 -> #73A4D6   diff=3
+5.D.18 color_listItem_highAccessLevel
+    Dark   dark(warning)                                  #482D0E -> #482D0E
+    Light  dark(warning)                                  #F7DBB9 -> #FADFC0   diff=7
+5.D.19 color_multistepbutton_separator
+    Dark   blend_onto(#FFFFFF, 84, darkOk)                #5B6E80 -> #5F6D7C   diff=4
+    Light  blend_onto(#FFFFFF, 62, darkOk)                #D3E1EE -> #D2E1F1   diff=3
+    White over darkOk (lighter than darkOk in both schemes today); n chosen in each scheme to match today's color.
+5.D.20 color_overviewPage_widget_background
+    Dark   dark(brand)                                    #11263B -> #11263B
+    Light  background_primary                             #FFFFFF -> #FFFFFF
+5.D.21 color_overviewPage_widget_battery_background
+    Dark   brand                                          #387DC5 -> #387DC5
+    Light  dim(brand)                                     #73A2D3 -> #73A4D6   diff=3
+5.D.22 color_settings_breadcrumb_background
+    Dark   dark(brand)                                    #11253B -> #11263B   diff=1
+    Light  dark(brand)                                    #B2C6D9 -> #C3D8ED   diff=20
+    Light #B2C6D9 is not a clean brand tint today (the closest alpha, 106, still gives diff=14); it uses dark(brand), like the Dark scheme.
+5.D.23 color_slider_separator
+    Dark   blend_onto(text_color_on(brand), 179, brand)   #C3D8EE -> #C4D8EE   diff=1
+    Light  blend_onto(text_color_on(brand), 179, brand)   #C3D8EE -> #C4D8EE   diff=1
+    The text color for the brand fill, at 70% over the brand fill. Victron #C4D8EE; today #C3D8EE (diff=1).
+5.D.24 color_toastNotification_background_error
+    Dark   dim(critical) over the Dark background_primary #BF4845 -> #AB413E   diff=20
+    Light  dim(critical) over the Dark background_primary #BF4845 -> #AB413E   diff=20
+    6.E.
+5.D.25 color_toastNotification_background_informative
+    Dark   dim(brand) over the Dark background_primary    #295C91 -> #27588A   diff=7
+    Light  dim(brand) over the Dark background_primary    #295C91 -> #27588A   diff=7
+    6.E. Toasts are the same in both schemes today.
+5.D.26 color_toastNotification_background_warning
+    Dark   dim(warning) over the Dark background_primary  #BD7624 -> #A86920   diff=21
+    Light  dim(warning) over the Dark background_primary  #BD7624 -> #A86920   diff=21
+    6.E.
+
+5.E Text on a colored fill
+--------------------------
+
+5.E.1 color_button_down_text
+    Dark   text_color_on(ok)                              #FFFFFF -> #FFFFFF
+    Light  text_color_on(ok)                              #FFFFFF -> #FFFFFF
+    Drawn on the brand fill, never on button_down. Other fills it is drawn on: 6.C.
+5.E.2 color_demoModeIndicator_foreground
+    Dark   warning                                        #F0962E -> #F0962E
+    Light  text_color_on(warning)                         #FFFFFF -> #262626   diff=217
+    Dark: warning text on dark(warning).
+5.E.3 color_settings_breadcrumb_primaryText
+    Dark   text_color_on(settings_breadcrumb_background_top_page)
+                                                          #FFFFFF -> #FFFFFF
+    Light  text_color_on(settings_breadcrumb_background_top_page)
+                                                          #FAF9F5 -> #FFFFFF   diff=10
+5.E.4 color_solarHistoryErrorView_primaryText
+    Dark   text_color_on(toastNotification_background_error, toastNotification_highlight_error)
+                                                          #FFFFFF -> #FFFFFF
+    Light  text_color_on(toastNotification_background_error, toastNotification_highlight_error)
+                                                          #FFFFFF -> #FFFFFF
+    On the error toast fill and the critical highlight.
+5.E.5 color_toastNotification_foreground
+    Dark   text_color_on(toastNotification_background_informative, toastNotification_background_warning, toastNotification_background_error)
+                                                          #FFFFFF -> #FFFFFF
+    Light  text_color_on(toastNotification_background_informative, toastNotification_background_warning, toastNotification_background_error)
+                                                          #FFFFFF -> #FFFFFF
+    Must pass on all three toast fills.
+
+5.F Data
+--------
+
+5.F.1 color_droopGraph_gradient_centre: kept, #387DC5.
+5.F.2 color_droopGraph_gradient_edge: kept, #F0962E.
+5.F.3 color_humidity1: kept, Dark #1C3F62, Light #5D9AD7.
+5.F.4 color_humidity2: kept, Dark #405A25, Light #97B974.
+5.F.5 color_humidity3: kept, Dark #784B17, Light #DBB78E.
+5.F.6 color_levelsPage_risingGauge_alarmIcon: kept, #FFFFFF.
+    White icon on the tank (data) fill.
+5.F.7 color_levelsPage_tank_title: kept, #141414.
+    Dark text on the tank (data) color header.
+5.F.8 color_temperature1: kept, Dark #752E2C, Light #D66A67.
+5.F.9 color_temperature2: kept, Dark #2D2647, Light #7E6EB7.
+5.F.10 color_temperature3: kept, Dark #1D3D60, Light #5991CE.
+5.F.11 color_temperatureslider_gradient_max: kept, Dark #752E2C, Light #D66A67.
+5.F.12 color_temperatureslider_gradient_max_border: kept, #F35C58.
+5.F.13 color_temperatureslider_gradient_mid: kept, Dark #1D3D60, Light #7E6EB7.
+5.F.14 color_temperatureslider_gradient_min: kept, Dark #2D2647, Light #5991CE.
+5.F.15 color_temperatureslider_gradient_min_border: kept, #387DC5.
+
+5.G Exceptions
+--------------
+
+5.G.1 color_briefPage_circularGauge_shine: kept, #BBFFFFFF.
+5.G.2 color_darkGray2: kept, #4D272622.
+5.G.3 color_dimGray2: kept, #99272622.
+5.G.4 color_dimWhite2: kept, #99FFFFFF.
+5.G.5 color_overviewPage_widget_battery_font_secondary: kept, Dark #99FFFFFF, Light #99272622.
+5.G.6 color_switch_groove_border_on: kept, transparent.
+5.G.7 color_switch_groove_off: kept, transparent.
+5.G.8 color_viewGradient_color1: kept, transparent.
+5.G.9 color_viewGradient_color2
+    Dark   page at alpha 0x66                             #66000000 -> #66000000
+    Light  page at alpha 0x66                             #66E6E5E1 -> #66E5E5E5   diff=4
+    Decided: page at alpha 0x66 (today's alpha). A kept hex value would fade to black / gray7 under an OEM page.
+
+5.H Palette (ColorDesign.json)
+------------------------------
+
+5.H.1 color_black: kept, #000000.
+5.H.2 color_blackWater: kept, #A277FF.
+5.H.3 color_blue: kept, #387DC5.
+5.H.4 color_darkWhite: kept, #64635F.
+5.H.5 color_diesel: kept, #FFFE76.
+5.H.6 color_dimBlue: kept, #27588A.
+5.H.7 color_dimWhite: kept, #969591.
+5.H.8 color_freshWater: kept, #84CBF8.
+5.H.9 color_fuel: kept, #B0C62B.
+5.H.10 color_gasoline: kept, #DFBC3E.
+5.H.11 color_gray1: kept, #141414.
+5.H.12 color_gray2: kept, #272622.
+5.H.13 color_gray3: kept, #504F4B.
+5.H.14 color_gray4: kept, #64635F.
+5.H.15 color_gray5: kept, #969591.
+5.H.16 color_gray6: kept, #DCDBD7.
+5.H.17 color_gray7: kept, #E6E5E1.
+5.H.18 color_gray8: kept, #F0EFEB.
+5.H.19 color_gray9: kept, #FAF9F5.
+5.H.20 color_green: kept, #72B84C.
+5.H.21 color_hydraulicOil: kept, #B56847.
+5.H.22 color_lightBlue: kept, #73A2D3.
+5.H.23 color_liveWell: kept, #249989.
+5.H.24 color_lng: kept, #919AE7.
+5.H.25 color_lpg: kept, #B98CDD.
+5.H.26 color_oil: kept, #A3755C.
+5.H.27 color_orange: kept, #F0962E.
+5.H.28 color_rawWater: kept, #4B93B2.
+5.H.29 color_red: kept, #F35C58.
+5.H.30 color_temperature_cool: kept, #51A6FF.
+5.H.31 color_temperature_warm: kept, #FFB055.
+5.H.32 color_wasteWater: kept, #30B9D3.
+5.H.33 color_white: kept, #FFFFFF.
+
+
+6 Decisions in this table
+=========================
+
+6.A Light button_down: dim(brand), #73A2D3 -> #73A4D6 (diff=3). It also follows from 4.E: the Light value matches alpha 181. darkish(brand), alpha 121, would be #A1C1E3. The only thing drawn on button_down is the SpinBox plus and minus icon (6.D), so the choice moves no text. Plan 19.E, decided: dim(brand).
+
+6.B Thresholds
+--------------
+
+Plan 19.D:
+
+6.B.1 The minimum contrast for white text must not exceed 4.28:1, white on Victron blue. At 4.5:1, every key for text on a colored fill turns #262626 for Victron: button_down_text, settings_breadcrumb_primaryText, toastNotification_foreground and solarHistoryErrorView_primaryText, and slider_separator with them. Decided: 3.0:1.
+6.B.2 Secondary text at 3.0:1 moves light font_secondary from #969591 to #807F7C; at 4.5:1 it is #646361. Either way the same six keys move: font_secondary, listItem_forwardIcon, solarHistoryErrorView_secondaryText, briefPage_battery_unit_text_color, button_icon, quantityTable_quantityUnit. Decided: 3.0:1.
+
+6.C button_down_text
+--------------------
+
+button_down_text = text_color_on(ok). It is drawn on the brand fill (Button, MomentaryButton, ComboBox, SegmentedButtonRow, MultiStepButton when checked), never on button_down. Two other uses:
+
+6.C.1 MultiStepButton draws it on button_off_background (dim(brand)) when a step is checked while the button is off. Light white on #73A4D6 is 2.62:1 today and stays. Adding that fill to the text_color_on rule would turn every light Victron button label dark.
+6.C.2 TemperatureSlider draws it on palette blue (the value popup) and on the temperature gradient (data). Step 17.E moves those two uses to color_white, so a light brand does not put dark text on Victron blue.
+
+6.D The SpinBox plus and minus icons (untinted white Image) sit on color_button and color_button_down. Step 17.E tints them with color_button_down_text. Victron stays white, so this leaves Victron's pixels unchanged, and the pressed light state keeps today's 2.62:1. Under a light brand the icons turn dark instead of vanishing.
+6.E Toasts do not depend on the scheme today: the same three fills in both schemes. Plan 7.L.3 would blend them onto each scheme's background_primary, which makes Light toasts pale (dim(brand) over white is #73A4D6, 2.62:1 white text). Decided: dark_mode_dim(x), which is dim(x) over the Dark background_primary, in both schemes. Today's fills match alpha 188 (informative), 201 (warning) and 200 (error), so dim, at alpha 179, darkens them: informative diff=7, warning diff=21, error diff=20. White text contrast rises: informative 6.92 -> 7.37, warning 3.63 -> 4.46, error 4.97 -> 5.90.
+6.F The Light scheme's dark colors were drawn over gray9 #FAF9F5, not white: blend_onto(x, 77, #FAF9F5) reproduces darkOk, darkGreen, darkWarning and darkCritical with a diff of at most 1. The formula blends onto the derived light background_primary #FFFFFF, so every dark color in the Light scheme gets lighter (diff=7).
+6.G viewGradient_color2 = page at alpha 0x66, today's alpha (decided). This differs from plan 7.L.11, which keeps exceptions as hex: a kept #66000000 / #66E6E5E1 would fade the list edge into black or gray7 under an OEM page. It stays translucent and is not a blended color.
+6.H Blended colors whose names do not say dim or dark take the nearest of the three alphas (4.E): boatPage_regenRemainder (matches alpha 96: dark), demoModeIndicator_background Dark (matches 95: dark), settings_breadcrumb_background (matches 76: dark; Light #B2C6D9 is not a clean tint), button_on_background_modified and listItem_highAccessLevel (77: dark).
+6.I Light boatPage_needle, droopGraph_operationPoint_guidelines and splash_logo_text were #000000. They use font_primary (#262626). Plan 7.O.9 for the splash text.
+6.J notificationsPage_delegate_unacknowledged_background and _border: Dark is a neutral font_over_background gray; Light is a brand tint today. Light becomes blend_onto(brand, n, background_primary), with n fixed at 38 and 89 to match today's colors, so under an OEM the tint follows the brand.
+6.K multistepbutton_separator: blend_onto(#FFFFFF, n, darkOk), with n fixed at 84 (Dark) and 62 (Light) to match today's colors. A lighter line on darkOk in both schemes, not text on a colored fill.
+6.L slider_separator: blend_onto(text_color_on(brand), 179, brand): the text color for the brand fill, at 70% over the brand fill. Victron #C4D8EE against today's #C3D8EE.
+6.M valueIndicator_slider_handle_border: Light #1D1D1B is darker than the light font, so its font_over_background alpha clamps at 255, which is font_primary #262626 (diff=11).
+6.N demoModeIndicator: Dark is warning text on dark(warning). Light is the warning fill with text_color_on(warning) text, white -> #262626, because white on orange is 2.31:1.
+6.O quantityTable_row_alternateBackground: a font_over_background gray in Dark; Light uses page (today gray7).
+6.P The colorWheelDialog_* mode button and empty preset button colors: font_over_background grays (decided), so under an OEM they follow the background and font. This differs from plan 7.G.4, which kept them as data. For Victron the diff is at most 4 (8.E).
+
+
+7 Asset table
+=============
+
+Images whose pixels do not come from a Theme color, and what happens to each. "Tint" means CP.ColorImage or IconImage with a Theme color. For Victron, tints of single-color art should leave the pixels unchanged; the step 17.E visual regression captures confirm it. Step 17.E: they did, apart from a difference of one step in one channel on anti-aliased edges (the tint rounds differently from the SVG renderer), which is accepted.
+
+7.A key_navigation_highlight_dark.svg / _light.svg: BorderImage in GlobalKeyNavigationHighlight.qml:30-31, #72B84C / #F0962E baked in. Draw it from color_focus_highlight (plan 7.F.3, 19.J). Step 17.E. Until then it stays green / orange under every brand (plan 16.I.5). Done in step 17.E: one SVG, key_navigation_highlight.svg, tinted with color_focus_highlight by the image provider image://tinted (plan 7.F.3.a).
+7.B overview_lightning_bolts.svg: Image in OverviewEnergyIndicator.qml:27 and 41, single color #387DC5. Tint with color_overviewPage_widget_border, the connector color (an alias of ok). Step 17.E. Done.
+7.C widget_connector_nub_horizontal.svg / _vertical.svg: Image in WidgetConnectorAnchor.qml:31-32, #387DC5. Same as 7.B. Done in step 17.E.
+7.D electron.svg: Image in WidgetConnector.qml:241. A white head, and a tail whose gradient runs from white to #387DC5 at stop-opacity 0, so the blue shows only as a faint tint in the fading tail. A tint would turn the white head brand-colored, a change to Victron's pixels. Proposed: recolor #387DC5 with the focus-ring mechanism (19.J) once it exists; until then accept the faint Victron blue. electron_arrow.svg (the static variant) is white and stays. Step 17.E: unchanged. The focus-ring mechanism that was built tints the whole image with one color, so it cannot recolor only #387DC5 (10.E).
+7.E icon_checkmark_48.svg: plain Image in NotificationsPage.qml:94, #72B84C baked in (the "no notifications" check). Tint with color_success. Step 17.E. VrmInstanceSwapDialog already tints it (icon.color color_green, which the 17.E audit classifies). Done in step 17.E; VrmInstanceSwapDialog now uses color_success, and color_critical for its alarm icon.
+7.F icon_plus.svg / icon_minus.svg: plain Image in SpinBox.qml:241 and 263, white, on the brand fill. Tint with color_button_down_text (6.D). Step 17.E. Done.
+7.G boat_glow.png: CP.ColorImage in pages/boat/Background.qml:21-34. Tinted red (shore connected and moving; the 17.E audit classifies it) or boatPage_regenProgress; otherwise the color is undefined and the PNG's own blue shows. Tint the default state with color_ok. The PNG's blurred edge pixels may not be exactly #387DC5, so this may change Victron's pixels; the visual regression captures decide, and a visible change goes in the 17.E list. Done in step 17.E: the default state is color_ok and the shore-connected state color_critical. The BoatPage captures differ by at most one step in one channel.
+7.H gauge_intro_5/7_matte_black/white.gif: SplashView.qml:77-81, a Victron blue animation chosen by scheme and screen size. Stays (plan 8.A.7); an OEM slot is plan 17.H.
+7.I welcome-*.png: WelcomeView.qml:64-114, screenshots of the Victron UI. Stay. A v1 limitation: under an OEM brand the welcome screenshots show Victron colors. The docs say so.
+7.J welcome-qrCode.png / -light.png: WelcomeView.qml:132, monochrome, chosen by scheme. Stay.
+7.K slider_background_dark.svg / _light.svg: ColorSelector.qml:337, gray, chosen by scheme. Stay (plan 7.G.4).
+7.L color_wheel_*.png: data. Stay.
+7.M switch_indicator.png, selection_dot, icon_minus_bordered: black and white. Stay.
+7.N victronenergy.svg / victronenergy-light.svg: copied next to the WASM page (cmake/GuiV2.cmake:14-18), outside the plugin RCC. Stay (plan 18.A, 17.H).
+7.O ListLink QR codes (QZXing): generated black and white. Stay.
+7.P Every other SVG with a palette hex is drawn through ColorImage, IconImage or Button icon.color with a Theme color, so it follows that color. The 17.E audit still classifies each of those colors (for example, the TemperatureSlider popup arrow is color_blue and stays data).
+
+
+8 Expected Victron pixel shifts
+===============================
+
+The differences in the step 17.D visual regression captures should be these and nothing else. Grouped by cause; diff is the largest difference in any channel (1.C).
+
+8.A Light background_secondary #FAF9F5 -> #F7F7F7 (diff=3): background_secondary, listItem_background, quantityTable_row_background, environmentGaugePanel_background, boatPage_background, briefPage_background.
+8.B Light page #E6E5E1 -> #E5E5E5 (diff=4): page_background, viewGradient_color2 / _color3, quantityTable_row_alternateBackground.
+8.C Light font_primary #272622 -> #262626 (diff=4). Light #000000 -> #262626 (diff=38): boatPage_needle, droopGraph_operationPoint_guidelines, splash_logo_text.
+8.D Light secondary text #969591 -> #807F7C (diff=22): the six keys in 6.B.2.
+8.E The font_over_background grays lose the warm tint of today's grays (gray1 to gray9), with a diff of at most 4 in both schemes, including the color-wheel dialog buttons (6.P). One exception: light valueIndicator_slider_handle_border (diff=11, 6.M).
+8.F The Light scheme's dark colors get lighter (diff=7, 6.F): darkOk, darkBlue, darkishBlue, darkGreen, darkOrange, darkRed, darkWarning, darkCritical, listItem_highAccessLevel, boatPage_regenRemainder.
+8.G Toasts, both schemes (6.E): informative #295C91 -> #27588A (diff=7), warning #BD7624 -> #A86920 (diff=21), error #BF4845 -> #AB413E (diff=20).
+8.H dimRed, both schemes (plan 7.L.5): Dark #592220 -> #AB413E (diff=82), Light #F0C3BF -> #F78D8A (diff=54). GeneratorManualControlButton and GeneratorDialog.
+8.I Blended colors not named dim or dark (6.H): boatPage_regenRemainder Dark #2D4221 -> #223817 (diff=11); demoModeIndicator_background Dark #593912 -> #482D0E (diff=17); button_on_background_modified Light #F0D5B4 -> #FADFC0 (diff=12); settings_breadcrumb_background Light #B2C6D9 -> #C3D8ED (diff=20).
+8.J Notification tint, Light (6.J): unacknowledged_border #C1CDDD -> #BAD2EB (diff=14); unacknowledged_background diff=4.
+8.K Text on a colored fill: light demoModeIndicator_foreground white -> #262626 (6.N); light settings_breadcrumb_primaryText #FAF9F5 -> #FFFFFF (diff=10).
+8.L Not in the list, though the plan expected them: the light button_down label (6.C: it is not drawn on button_down), and dark text on green fills (no Victron key for text on a colored fill is drawn on green). Step 17.E may add text_color_on uses on green or orange fills (switchable-output headers, for example); those are listed there.
+
+8.M Keys with diff > 4
+----------------------
+
+As computed:
+
+8.M.1 color_font_secondary Light #969591 -> #807F7C (diff=22)
+8.M.2 color_boatPage_needle Light #000000 -> #262626 (diff=38)
+8.M.3 color_droopGraph_operationPoint_guidelines Light #000000 -> #262626 (diff=38)
+8.M.4 color_listItem_forwardIcon Light #969591 -> #807F7C (diff=22)
+8.M.5 color_solarHistoryErrorView_secondaryText Light #969591 -> #807F7C (diff=22)
+8.M.6 color_splash_logo_text Light #000000 -> #262626 (diff=38)
+8.M.7 color_briefPage_battery_unit_text_color Light #969591 -> #807F7C (diff=22)
+8.M.8 color_button_icon Light #969591 -> #807F7C (diff=22)
+8.M.9 color_notificationsPage_delegate_unacknowledged_border Light #C1CDDD -> #BAD2EB (diff=14)
+8.M.10 color_quantityTable_quantityUnit Light #969591 -> #807F7C (diff=22)
+8.M.11 color_valueIndicator_slider_handle_border Light #1D1D1B -> #262626 (diff=11)
+8.M.12 color_boatPage_regenRemainder Dark #2D4221 -> #223817 (diff=11)
+8.M.13 color_boatPage_regenRemainder Light #D1E5C2 -> #D4EAC9 (diff=7)
+8.M.14 color_button_on_background_modified Light #F0D5B4 -> #FADFC0 (diff=12)
+8.M.15 color_darkBlue Light #C0D4E6 -> #C3D8ED (diff=7)
+8.M.16 color_darkCritical Light #F8CAC6 -> #FBCECD (diff=7)
+8.M.17 color_darkGreen Light #D1E6C2 -> #D4EAC9 (diff=7)
+8.M.18 color_darkOk Light #C0D4E6 -> #C3D8ED (diff=7)
+8.M.19 color_darkOrange Light #F7DBB9 -> #FADFC0 (diff=7)
+8.M.20 color_darkRed Light #F8CAC6 -> #FBCECD (diff=7)
+8.M.21 color_darkWarning Light #F7DBB9 -> #FADFC0 (diff=7)
+8.M.22 color_darkishBlue Light #C0D4E6 -> #C3D8ED (diff=7)
+8.M.23 color_demoModeIndicator_background Dark #593912 -> #482D0E (diff=17)
+8.M.24 color_dimRed Dark #592220 -> #AB413E (diff=82)
+8.M.25 color_dimRed Light #F0C3BF -> #F78D8A (diff=54)
+8.M.26 color_listItem_highAccessLevel Light #F7DBB9 -> #FADFC0 (diff=7)
+8.M.27 color_settings_breadcrumb_background Light #B2C6D9 -> #C3D8ED (diff=20)
+8.M.28 color_toastNotification_background_error Dark #BF4845 -> #AB413E (diff=20)
+8.M.29 color_toastNotification_background_error Light #BF4845 -> #AB413E (diff=20)
+8.M.30 color_toastNotification_background_informative Dark #295C91 -> #27588A (diff=7)
+8.M.31 color_toastNotification_background_informative Light #295C91 -> #27588A (diff=7)
+8.M.32 color_toastNotification_background_warning Dark #BD7624 -> #A86920 (diff=21)
+8.M.33 color_toastNotification_background_warning Light #BD7624 -> #A86920 (diff=21)
+8.M.34 color_demoModeIndicator_foreground Light #FFFFFF -> #262626 (diff=217)
+8.M.35 color_settings_breadcrumb_primaryText Light #FAF9F5 -> #FFFFFF (diff=10)
+
+8.N Step 17.E
+-------------
+
+Step 17.E changes call sites, not values, except for one key.
+
+8.N.1 Keys named after a palette color whose call sites mean a role were replaced (plan 7.O.2.a). Each replacement has the same formula over a role color that equals the old palette color for Victron, so the values in this table do not change: dimRed by dimCritical (#AB413E / #F78D8A), dimGreen by dimSuccess (#508135 / #9CCD81), darkGreen by darkSuccess (#223817 / #D4EAC9), darkishBlue by darkishOk (#1B3B5D / #C3D8ED; dark(ok) in Light, as darkishBlue was), darkOrange by the existing darkWarning, and darkRed by the existing darkCritical. The 8.F and 8.M rows use the old names.
+8.N.2 New key solarHistoryChart_bar_pressed, the pressed solar history bar: blend_onto(ok, 179, #FFFFFF), #73A4D6 in both schemes. It was the palette color lightBlue #73A2D3 (diff=3). It follows the brand under an OEM, as the unpressed bar (ok) does.
+8.N.3 No text_color_on keys were added (8.L).
+8.N.4 The step 17.E captures (the 13 pages of step 17.D, in both schemes) show no change of color: only a difference of one step in one channel on anti-aliased edges, where the new tints round differently (section 7). Other differences are values and graphs that differ between mock-mode runs. The pressed bar is not shown in the captures.
+
+
+9 Plan corrections
+==================
+
+Applied to the plan in the same change as this document.
+
+9.A Plan 7.M.3, 19.D, 17.A: the light button_down label does not move. button_down_text is drawn on the brand fill, not on button_down (6.C). What sits on button_down is the SpinBox icon, tinted in 17.E (6.D).
+9.B Plan 7.L.6: warning and error toasts move by a diff of about 20, not "nearly where they are". Toasts blend onto the Dark background_primary in both schemes (6.E).
+9.C Plan 14.A.16: for the 16.D Dark branding colors with light_mode_background_factor 0.3, light font_secondary is #3E3E3C, not #3E3D3C. Plan 7.L.12 gains the exact-arithmetic rule (2.F).
+9.D Plan 7.E, 7.M.4: #E5E5E4 -> #E5E5E5. Plan 7.D.6, 7.J.6, 7.M.4: the Light background_secondary is #F7F7F7, from the light mode background formula (plan 7.J.5, 7.J.10), not the earlier rule, which took the same step from background toward font as in Dark (about 8%).
+9.E Plan 7.L.4: the Light scheme's dark colors differ from 30% over white (diff=7), because they were drawn over gray9 (6.F).
+9.F Plan 7.O.10 and 4.E: add the SpinBox icons, the NotificationsPage checkmark and boat_glow to the untinted images; electron.svg is two-color (7.D).
+9.G Plan 17.A: the expected-shift list is section 8 of this document.
+
+
+10 Open review items
+====================
+
+10.A Thresholds (plan 19.D): decided, 3.0:1 for both white text on a colored fill and secondary text (6.B).
+10.B Toasts: decided, over the Dark background_primary in both schemes (6.E).
+10.C viewGradient_color2: decided, page at alpha 0x66 (6.G).
+10.D colorWheelDialog_* mode button and empty preset button colors: decided, font_over_background grays (6.P).
+10.E electron.svg: wait for the recolor mechanism, or accept the faint Victron blue (7.D). Still open after step 17.E: the mechanism built there tints the whole image with one color and cannot recolor only the tail.
+10.F font_over_background grays: decided, neutral, so today's warm grays lose their tint (8.E). Under an OEM, the grays follow the OEM's font and background hues. May be revisited: Victron may later want warmer grays. The font_over_background code carries a comment saying so (plan 7.F.2).
+10.G MultiStepButton's checked-while-off label stays at 2.62:1 in Light (6.C.1). An existing weak spot; fixing it is a separate design change.
+10.H 13 keys are not referenced by QML, JS or C++: black, button_on_background, darkBlue, darkGray2, darkWhite, dimBlue, dimGray2, dimWhite, gray1, gray2, gray6, gray8, gray9. They have rows here. Removing them is a separate cleanup, not part of branding.

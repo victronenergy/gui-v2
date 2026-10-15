@@ -81,7 +81,7 @@ Rectangle {
 				  : "qrc:/images/gauge_intro_5_matte_black.gif"
 	}
 
-	CP.ColorImage {
+	Item {
 		id: logoIcon
 
 		anchors {
@@ -89,11 +89,24 @@ Rectangle {
 			verticalCenterOffset: Theme.geometry_splashView_logo_verticalCenterOffset
 			horizontalCenterOffset: Theme.geometry_splashView_logo_horizontalCenterOffset
 		}
-		source: "qrc:/images/splash-logo-icon.svg"
-		color: Theme.color_splash_logo_icon
 		width: Theme.geometry_splashScreen_logo_width
 		height: Theme.geometry_splashScreen_logo_height
-		sourceSize: Qt.size(width, height)
+
+		// A branding logo may keep its own colors instead of being tinted.
+		Image {
+			anchors.fill: parent
+			visible: Theme.splash_logo_icon_preserve_colors
+			source: visible ? Theme.splash_logo_icon : ""
+			sourceSize: Qt.size(width, height)
+		}
+
+		CP.ColorImage {
+			anchors.fill: parent
+			visible: !Theme.splash_logo_icon_preserve_colors
+			source: visible ? Theme.splash_logo_icon : ""
+			color: Theme.color_splash_logo_icon
+			sourceSize: Qt.size(width, height)
+		}
 
 		OpacityAnimator on opacity {
 			id: logoIconFadeOutAnim
@@ -104,7 +117,7 @@ Rectangle {
 		}
 	}
 
-	CP.ColorImage {
+	Item {
 		id: logoText
 
 		anchors {
@@ -112,11 +125,23 @@ Rectangle {
 			verticalCenterOffset: Theme.geometry_splashView_logo_verticalCenterOffset
 			horizontalCenterOffset: Theme.geometry_splashView_logo_horizontalCenterOffset
 		}
-		source: "qrc:/images/splash-logo-text.svg"
-		color: Theme.color_splash_logo_text
 		width: Theme.geometry_splashScreen_logo_width
 		height: Theme.geometry_splashScreen_logo_height
-		sourceSize: Qt.size(width, height)
+
+		Image {
+			anchors.fill: parent
+			visible: Theme.splash_logo_text_preserve_colors
+			source: visible ? Theme.splash_logo_text : ""
+			sourceSize: Qt.size(width, height)
+		}
+
+		CP.ColorImage {
+			anchors.fill: parent
+			visible: !Theme.splash_logo_text_preserve_colors
+			source: visible ? Theme.splash_logo_text : ""
+			color: Theme.color_splash_logo_text
+			sourceSize: Qt.size(width, height)
+		}
 
 		OpacityAnimator on opacity {
 			id: logoTextFadeOutAnim

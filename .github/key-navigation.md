@@ -6,7 +6,7 @@
 
 1. **Global toggle**: `Global.keyNavigationEnabled` controls whether key navigation is active. It is enabled when a navigation key is pressed and disabled after an idle timeout.
 
-2. **Focus highlight**: A single `GlobalKeyNavigationHighlight` (BorderImage) auto-reparents itself to the current `Window.activeFocusItem`. It only appears when `Global.keyNavigationEnabled` is true and the item has opted in via `KeyNavigationHighlight.active`.
+2. **Focus highlight**: A single `GlobalKeyNavigationHighlight` (BorderImage) auto-reparents itself to the current `Window.activeFocusItem`. It only appears when `Global.keyNavigationEnabled` is true and the item has opted in via `KeyNavigationHighlight.active`. The ring is one SVG, tinted with `Theme.color_focus_highlight` by the `image://tinted` image provider, so it follows branding.
 
 3. **Focus eligibility**: `Utils.acceptsKeyNavigation(item)` checks `item.focusPolicy & Qt.TabFocus && item.enabled`. Items that should be navigable must set `focusPolicy: Qt.TabFocus`.
 
