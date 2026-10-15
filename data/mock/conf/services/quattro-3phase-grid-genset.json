@@ -482,7 +482,7 @@
         "/Soc": 73,
         "/State": 3,
         "/SystemReset": null,
-        "/VebusChargeState": 1,
+        "/VebusChargeState": 3,
         "/VebusError": 0,
         "/VebusMainState": 9,
         "/VebusSetChargeState": 0
