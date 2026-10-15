@@ -271,7 +271,7 @@
         "/Dc/0/MaxChargeCurrent": 120,
         "/Dc/0/Current": 30.899999618530273,
         "/Dc/0/PreferRenewableEnergy": null,
-        "/VebusChargeState": 1,
+        "/VebusChargeState": 3,
         "/VebusSetChargeState": 0,
         "/ProductId": 10112,
         "/ModeIsAdjustable": 1,
