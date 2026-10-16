@@ -321,7 +321,7 @@ bool IOChannel::canShowUI(const QVariant &showUIValue) const
 		return true;
 	}
 
-	// Check the /ShowUIControl value:
+	// Check the /ShowUIInput or /ShowUIControl value:
 	// - Off = do not show
 	// - Local = show for local viewing only (i.e. on GX or Wasm local)
 	// - Remote = show for remote viewing only (i.e. on Wasm VRM)
