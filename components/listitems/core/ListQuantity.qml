@@ -17,6 +17,21 @@ ListSetting {
 	property color unitColor: Theme.color_font_secondary
 	property int decimals: -1 // if -1, use default decimals
 	property int formatHints
+	property Item _captionLabel
+
+	function _syncCaptionLabel() {
+		if (root.caption.length > 0) {
+			if (!root._captionLabel) {
+				root._captionLabel = captionLabelComponent.createObject(contentLayout)
+			}
+		} else if (root._captionLabel) {
+			root._captionLabel.destroy()
+			root._captionLabel = null
+		}
+	}
+
+	onCaptionChanged: root._syncCaptionLabel()
+	Component.onCompleted: root._syncCaptionLabel()
 
 	// Layout has 2 columns, 2 rows. The caption spans across both columns.
 	// | Primary label | Quantity label |
@@ -57,14 +72,17 @@ ListSetting {
 
 				Layout.alignment: Qt.AlignRight
 			}
+		}
+	}
 
-			CaptionLabel {
-				text: root.caption
-				visible: text.length > 0
+	Component {
+		id: captionLabelComponent
 
-				Layout.columnSpan: 2
-				Layout.maximumWidth: root.availableWidth
-			}
+		CaptionLabel {
+			text: root.caption
+
+			Layout.columnSpan: 2
+			Layout.maximumWidth: root.availableWidth
 		}
 	}
 

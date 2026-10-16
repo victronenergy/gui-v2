@@ -135,8 +135,8 @@ ListSetting {
 				primaryLabel.maximumLineCount: 1
 				//% "No control"
 				secondaryText: deviceActive.value === 0 ? qsTrId("list_device_priority_no_control") : ""
-				secondaryLabel.elide: Text.ElideRight
-				secondaryLabel.maximumLineCount: 1
+				secondaryLabelElide: Text.ElideRight
+				secondaryLabelMaximumLineCount: 1
 				stretchSecondaryText: true
 			}
 
