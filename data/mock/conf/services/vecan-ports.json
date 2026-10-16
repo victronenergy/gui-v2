@@ -1,0 +1,9 @@
+{
+    "com.victronenergy.platform": {
+        "/CanBus/Interfaces": [ { "config": 0, "interface": "vecan0", "name": "VE.Can port 1" }, { "config": 3, "interface": "vecan1", "name": "VE.Can port 2" } ]
+    },
+    "com.victronenergy.settings": {
+        "/Settings/Canbus/vecan0/Profile": 1,
+        "/Settings/Canbus/vecan1/Profile": 0
+    }
+}
