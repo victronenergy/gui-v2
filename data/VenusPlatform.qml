@@ -18,6 +18,4 @@ QtObject {
 	property VeQuickItem _reboot: VeQuickItem {
 		 uid: root.serviceUid + "/Device/Reboot"
 	}
-
-	Component.onCompleted: Global.venusPlatform = root
 }

@@ -11,7 +11,7 @@ Page {
 
 	VeQuickItem {
 		id: modelItem
-		uid: Global.venusPlatform.serviceUid + "/Device/Model"
+		uid: Services.platform.serviceUid + "/Device/Model"
 	}
 
 	GradientListView {

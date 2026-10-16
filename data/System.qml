@@ -121,6 +121,4 @@ QtObject {
 	readonly property VeQuickItem _feedbackEnabled: VeQuickItem {
 		uid: root.serviceUid + "/Ac/ActiveIn/FeedbackEnabled"
 	}
-
-	Component.onCompleted: Global.system = root
 }

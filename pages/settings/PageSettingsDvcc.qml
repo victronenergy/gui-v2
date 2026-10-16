@@ -50,7 +50,7 @@ Page {
 				//% "Maximum charge voltage"
 				text: qsTrId("settings_dvcc_max_charge_voltage")
 				preferredVisible: maxChargeVoltageSwitch.visible && maxChargeVoltageSwitch.checked
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/MaxChargeVoltage"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/SystemSetup/MaxChargeVoltage"
 				suffix: "V"
 				decimals: 1
 				stepSize: 0.1
@@ -59,7 +59,7 @@ Page {
 			ListSwitchForced {
 				//% "SVS - Shared voltage sense"
 				text: qsTrId("settings_dvcc_shared_voltage_sense")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SharedVoltageSense"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/SystemSetup/SharedVoltageSense"
 				preferredVisible: commonSettings.dvccActive
 			}
 
@@ -68,7 +68,7 @@ Page {
 
 				//% "STS - Shared temperature sense"
 				text: qsTrId("settings_dvcc_shared_temp_sense")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/SharedTemperatureSense"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/SystemSetup/SharedTemperatureSense"
 				preferredVisible: commonSettings.dvccActive
 			}
 
@@ -76,13 +76,13 @@ Page {
 				id: temperatureServiceRadioButtons
 
 				text: CommonWords.temperature_sensor
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/TemperatureService"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/SystemSetup/TemperatureService"
 				//% "Unavailable sensor, set another"
 				defaultSecondaryText: qsTrId("settings_system_unavailable_sensor")
 				preferredVisible: commonSettings.dvccActive && sharedTempSense.checked
 
 				VeQuickItem {
-					uid: Global.system.serviceUid + "/AvailableTemperatureServices"
+					uid: Services.system.serviceUid + "/AvailableTemperatureServices"
 					onValueChanged: {
 						if (value === undefined) {
 							return
@@ -118,7 +118,7 @@ Page {
 			ListText {
 				//% "Used sensor"
 				text: qsTrId("settings_dvcc_used_sensor")
-				dataItem.uid: Global.system.serviceUid + "/AutoSelectedTemperatureService"
+				dataItem.uid: Services.system.serviceUid + "/AutoSelectedTemperatureService"
 				preferredVisible: sharedTempSense.checked
 					&& commonSettings.dvccActive
 					&& temperatureServiceRadioButtons.dataItem.value === "default"
@@ -129,14 +129,14 @@ Page {
 
 				//% "SCS - Shared current sense"
 				text: qsTrId("settings_dvcc_shared_current_sense")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/BatteryCurrentSense"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/SystemSetup/BatteryCurrentSense"
 				preferredVisible: commonSettings.dvccActive
 			}
 
 			ListRadioButtonGroup {
 				//% "SCS status"
 				text: qsTrId("settings_dvcc_scs_status")
-				dataItem.uid: Global.system.serviceUid + "/Control/BatteryCurrentSense"
+				dataItem.uid: Services.system.serviceUid + "/Control/BatteryCurrentSense"
 				preferredVisible: commonSettings.dvccActive && sharedCurrentSense.checked
 				interactive: false
 
@@ -164,7 +164,7 @@ Page {
 
 				//% "Controlling BMS"
 				text: qsTrId("settings_dvcc_controlling_bms")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/BmsInstance"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/SystemSetup/BmsInstance"
 				optionModel: defaultOptionModel
 
 				//: Shown when BMS instance is invalid
@@ -175,7 +175,7 @@ Page {
 						 && (bmsOptions.optionModel.length > 2 || bmsService.valid)
 
 				VeQuickItem {
-					uid: Global.system.serviceUid + "/AvailableBmsServices"
+					uid: Services.system.serviceUid + "/AvailableBmsServices"
 					onValueChanged: {
 						if (value === undefined) {
 							return
@@ -209,12 +209,12 @@ Page {
 
 				VeQuickItem {
 					id: bmsService
-					uid: Global.system.serviceUid + "/ActiveBmsService"
+					uid: Services.system.serviceUid + "/ActiveBmsService"
 				}
 
 				VeQuickItem {
 					id: bmsInstance
-					uid: Global.system.serviceUid + "/ActiveBmsInstance"
+					uid: Services.system.serviceUid + "/ActiveBmsInstance"
 				}
 
 				VeQuickItem {
@@ -231,14 +231,14 @@ Page {
 			ListSwitch {
 				//% "Control MK3-USB connected inverter/charger system"
 				text: qsTrId("settings_dvcc_control_mk3_usb_inverter_charger_system")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/DvccControlAllMultis"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/SystemSetup/DvccControlAllMultis"
 				preferredVisible: commonSettings.dvccActive &&
 						 nrVebusDevices.valid && nrVebusDevices.value > 1
 				//% "Enable this setting when having a secondary MultiPlus or Quattro system powered by the same battery bank as the main inverter/charger system. When this setting is enabled, this secondary system will use the CVL and DCL parameters of the selected BMS."
 				caption: qsTrId("settings_dvcc_control_mk3_usb_inverter_charger_system_caption")
 				VeQuickItem {
 					id: nrVebusDevices
-					uid: Global.system.serviceUid + "/Devices/NumberOfVebusDevices"
+					uid: Services.system.serviceUid + "/Devices/NumberOfVebusDevices"
 				}
 			}
 		}

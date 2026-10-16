@@ -92,7 +92,7 @@ Item {
 
 		CircularSingleGauge {
 			readonly property var properties: Gauges.tankProperties(VenusOS.Tank_Type_Battery)
-			readonly property var battery: Global.system.battery
+			readonly property var battery: Services.system.battery
 
 			value: visible && !isNaN(battery.stateOfCharge) ? battery.stateOfCharge : 0
 			status: Theme.getValueStatus(value, properties.valueType)
@@ -126,7 +126,7 @@ Item {
 
 			// Similarly to the Overview page, show the AC input, even when it is not connected, as
 			// long as one of the AC input sources are valid.
-			active: Global.acInputs.findValidSource() !== VenusOS.AcInputs_InputSource_NotAvailable && root.state !== "panelOpened"
+			active: Services.acInputs.findValidSource() !== VenusOS.AcInputs_InputSource_NotAvailable && root.state !== "panelOpened"
 
 			sourceComponent: SideMultiGauge {
 				readonly property real quantityWidth: acInGaugeQuantity.width - acInputDirectionIcon.width
@@ -148,9 +148,9 @@ Item {
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled && !pauseLeftGaugeAnimations.running
 				valueType: VenusOS.Gauges_ValueType_NeutralPercentage
-				phaseModel: Global.acInputs.highlightedInput?.phases ?? null
-				minimumValue: !!Global.acInputs.highlightedInput ? Global.acInputs.highlightedInput.inputInfo.minimumCurrent : NaN
-				maximumValue: !!Global.acInputs.highlightedInput ? Global.acInputs.highlightedInput.inputInfo.maximumCurrent : NaN
+				phaseModel: Services.acInputs.highlightedInput?.phases ?? null
+				minimumValue: !!Services.acInputs.highlightedInput ? Services.acInputs.highlightedInput.inputInfo.minimumCurrent : NaN
+				maximumValue: !!Services.acInputs.highlightedInput ? Services.acInputs.highlightedInput.inputInfo.maximumCurrent : NaN
 				inputMode: true
 
 				AcInputDirectionIcon {
@@ -160,7 +160,7 @@ Item {
 						bottom: acInGaugeQuantity.top
 						bottomMargin: Theme.geometry_briefPage_edgeGauge_quantityLabel_feedback_margin
 					}
-					input: Global.acInputs.highlightedInput
+					input: Services.acInputs.highlightedInput
 				}
 
 				ArcGaugeQuantityRow {
@@ -169,11 +169,11 @@ Item {
 					// When >= 2 left gauges, AC input is always the top one, so label aligns to
 					// the bottom.
 					alignment: Qt.AlignLeft | (gaugeParams.activeGaugeCount >= 2 ? Qt.AlignBottom : Qt.AlignVCenter)
-					icon.source: Global.acInputs.sourceIcon(Global.acInputs.highlightedInput?.source ?? Global.acInputs.findValidSource())
+					icon.source: Services.acInputs.sourceIcon(Services.acInputs.highlightedInput?.source ?? Services.acInputs.findValidSource())
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
 					quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
-					quantityLabel.dataObject: Global.acInputs.highlightedInput
+					quantityLabel.dataObject: Services.acInputs.highlightedInput
 				}
 			}
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load AC input edge")
@@ -184,7 +184,7 @@ Item {
 
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? Gauges.gaugeHeight(root._leftGaugeCount) : 0
-			active: Global.dcInputs.model.count > 0 && root.state !== "panelOpened"
+			active: Services.dcInputs.model.count > 0 && root.state !== "panelOpened"
 			sourceComponent: SideGauge {
 				readonly property var gaugeParams: Gauges.leftGaugeParameters(solarYieldGauge.active ? 1 : 0, _leftGaugeCount)
 
@@ -208,19 +208,19 @@ Item {
 							// top, or is the first (top) gauge, so label aligns to the bottom.
 							? Qt.AlignLeft | (acInputGauge.active ? Qt.AlignTop : Qt.AlignBottom)
 							: Qt.AlignLeft| Qt.AlignVCenter
-					icon.source: Global.dcInputs.model.count === 1
-							? VenusOS.dcMeter_iconForType(Global.dcInputs.model.firstMeterType)
+					icon.source: Services.dcInputs.model.count === 1
+							? VenusOS.dcMeter_iconForType(Services.dcInputs.model.firstMeterType)
 							: VenusOS.dcMeter_iconForMultipleTypes()
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
 					quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Dc
-					quantityLabel.dataObject: Global.dcInputs
+					quantityLabel.dataObject: Services.dcInputs
 				}
 
 				ValueRange {
 					id: dcInputRange
-					value: root.visible && Global.timersEnabled ? Global.dcInputs.power || 0 : 0
-					maximumValue: Global.dcInputs.maximumPower
+					value: root.visible && Global.timersEnabled ? Services.dcInputs.power || 0 : 0
+					maximumValue: Services.dcInputs.maximumPower
 				}
 			}
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load DC input edge")
@@ -231,7 +231,7 @@ Item {
 
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? Gauges.gaugeHeight(root._leftGaugeCount) : 0
-			active: Global.solarInputs.inputCount > 0 && root.state !== "panelOpened"
+			active: Services.solarInputs.inputCount > 0 && root.state !== "panelOpened"
 			sourceComponent: SolarYieldGauge {
 				readonly property var gaugeParams: Gauges.leftGaugeParameters(0, _leftGaugeCount)
 
@@ -254,7 +254,7 @@ Item {
 					leftPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
 					quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Any
-					quantityLabel.dataObject: Global.system.solar
+					quantityLabel.dataObject: Services.system.solar
 				}
 			}
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load solar yield gauge")
@@ -275,7 +275,7 @@ Item {
 
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
-			active: Global.system.hasAcLoads && root.state !== "panelOpened"
+			active: Services.system.hasAcLoads && root.state !== "panelOpened"
 
 			sourceComponent: SideMultiGauge {
 				readonly property var gaugeParams: Gauges.rightGaugeParameters(0, _rightGaugeCount, phaseModel.count > 1)
@@ -293,8 +293,8 @@ Item {
 				opacity: root._gaugeArcOpacity
 				animationEnabled: root.animationEnabled && !pauseRightGaugeAnimations.running
 				valueType: VenusOS.Gauges_ValueType_RisingPercentage
-				phaseModel: Global.system.load.ac.phases
-				maximumValue: Global.acInputs.maximumAcCurrent
+				phaseModel: Services.system.load.ac.phases
+				maximumValue: Services.acInputs.maximumAcCurrent
 
 				ArcGaugeQuantityRow {
 					alignment: Qt.AlignRight | (gaugeParams.activeGaugeCount === 2 ? Qt.AlignBottom : Qt.AlignVCenter)
@@ -302,7 +302,7 @@ Item {
 					rightPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
 					quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Ac
-					quantityLabel.dataObject: Global.system.load.ac
+					quantityLabel.dataObject: Services.system.load.ac
 				}
 			}
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load AC load edge")
@@ -313,7 +313,7 @@ Item {
 
 			width: Theme.geometry_briefPage_edgeGauge_width
 			height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
-			active: Global.system.dc.hasPower && root.state !== "panelOpened"
+			active: Services.system.dc.hasPower && root.state !== "panelOpened"
 
 			sourceComponent: SideGauge {
 				readonly property var gaugeParams: Gauges.rightGaugeParameters(acLoadGauge.active ? 1 : 0, _rightGaugeCount)
@@ -337,13 +337,13 @@ Item {
 					rightPadding: root._gaugeLabelMargin - root._gaugeArcMargin
 					opacity: root._gaugeLabelOpacity
 					quantityLabel.sourceType: VenusOS.ElectricalQuantity_Source_Dc
-					quantityLabel.dataObject: Global.system.dc
+					quantityLabel.dataObject: Services.system.dc
 				}
 
 				ValueRange {
 					id: dcLoadsRange
-					value: root.visible && Global.timersEnabled ? Global.system.dc.power || 0 : 0
-					maximumValue: Global.system.dc.maximumPower
+					value: root.visible && Global.timersEnabled ? Services.system.dc.power || 0 : 0
+					maximumValue: Services.system.dc.maximumPower
 				}
 			}
 			onStatusChanged: if (status === Loader.Error) console.warn("Unable to load DC load gauge")

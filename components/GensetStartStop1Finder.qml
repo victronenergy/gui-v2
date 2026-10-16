@@ -47,7 +47,7 @@ QtObject {
 	property string _generatorWithGensetService
 
 	readonly property Instantiator _generatorObjects: Instantiator {
-		model: BackendConnection.type === BackendConnection.MqttSource ? Global.generators.model : null
+		model: BackendConnection.type === BackendConnection.MqttSource ? Services.generators.model : null
 		delegate: VeQuickItem {
 			uid: model.device.serviceUid + "/GensetService"
 			onValueChanged: {

@@ -19,7 +19,7 @@ UiTestCase {
 		addStep(UiTestStep.Invoke, { callable: ()=> { return mouseClick(findClickableChild(findItem(Global.mainView, { text: "Overview" }))) } })
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
 		addStep(UiTestStep.Invoke, { callable: ()=> {
-			if (!Global.animationEnabled || !Global.systemSettings.animationEnabled) {
+			if (!Global.animationEnabled || !Services.settings.animationEnabled) {
 				console.warn("Overview benchmark: animations are disabled; Mock.UIAnimations opt-in was not applied")
 				return false
 			}

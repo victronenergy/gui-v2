@@ -203,8 +203,6 @@ void ChildFilterHandler::deviceChildAboutToBeRemoved(VeQItem *child)
 
 void ChildFilterHandler::removeAllDeviceChildren()
 {
-	AllDevicesModel::create()->disconnect(this);
-
 	// Disconnect from all Device serviceItems, and clear the map of VeQItem children.
 	for (auto it = m_childItems.begin(); it != m_childItems.end(); ++it) {
 		if (VeQItem *childItem = it.value()) {

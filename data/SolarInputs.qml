@@ -24,6 +24,4 @@ QtObject {
 	}
 
 	readonly property int inputCount: devices.count + pvInverterDevices.count
-
-	Component.onCompleted: Global.solarInputs = root
 }

@@ -37,17 +37,17 @@ Page {
 
 		ListRadioButtonGroup {
 			text: CommonWords.mode
-			optionModel: Global.systemSettings.ess.stateModel
+			optionModel: Services.settings.ess.stateModel
 			currentIndex: {
 				for (let i = 0; i < optionModel.length; ++i) {
-					if (optionModel[i].value === Global.systemSettings.ess.state) {
+					if (optionModel[i].value === Services.settings.ess.state) {
 						return i
 					}
 				}
 				return -1
 			}
 			onOptionClicked: function(index) {
-				Global.systemSettings.ess.setState(optionModel[index].value)
+				Services.settings.ess.setState(optionModel[index].value)
 			}
 		}
 
@@ -56,7 +56,7 @@ Page {
 
 			//% "Grid metering"
 			text: qsTrId("settings_ess_grid_metering")
-			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/RunWithoutGridMeter"
+			dataItem.uid: Services.settings.serviceUid + "/Settings/CGwacs/RunWithoutGridMeter"
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 			optionModel: [
 				//% "External meter"
@@ -69,7 +69,7 @@ Page {
 		ListRadioButtonGroup {
 			//% "Grid meter required"
 			text: qsTrId("settings_ess_grid_meter_required")
-			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/GridMeterRequired"
+			dataItem.uid: Services.settings.serviceUid + "/Settings/CGwacs/GridMeterRequired"
 			preferredVisible: withoutGridMeter.currentIndex === 0
 				&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 			optionModel: [
@@ -91,7 +91,7 @@ Page {
 		ListRadioButtonGroup {
 			//% "Self-consumption from battery"
 			text: qsTrId("settings_ess_self_consumption_battery")
-			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryUse"
+			dataItem.uid: Services.settings.serviceUid + "/Settings/CGwacs/BatteryUse"
 			preferredVisible: withoutGridMeter.currentIndex === 0 && (hasAcOutSystemItem.value === 1 || dataItem.value === 1)
 			optionModel: [
 				//% "All system loads"
@@ -131,7 +131,7 @@ Page {
 
 			//% "Minimum SOC (unless grid fails)"
 			text: qsTrId("settings_ess_min_soc")
-			secondaryText: Global.systemSettings.ess.minimumStateOfCharge + "%"
+			secondaryText: Services.settings.ess.minimumStateOfCharge + "%"
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 				&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			onClicked: Global.dialogLayer.open(minSocDialogComponent)
@@ -140,8 +140,8 @@ Page {
 				id: minSocDialogComponent
 
 				ESSMinimumSOCDialog {
-					minimumStateOfCharge: Global.systemSettings.ess.minimumStateOfCharge
-					onAccepted: Global.systemSettings.ess.setMinimumStateOfCharge(minimumStateOfCharge)
+					minimumStateOfCharge: Services.settings.ess.minimumStateOfCharge
+					onAccepted: Services.settings.ess.setMinimumStateOfCharge(minimumStateOfCharge)
 				}
 			}
 		}
@@ -150,8 +150,8 @@ Page {
 			//% "Active SOC limit"
 			text: qsTrId("settings_ess_active_soc_limit")
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& Global.systemSettings.ess.isBatteryLifeActive(batteryLifeState.dataItem.value)
-			value: Math.max(Global.systemSettings.ess.minimumStateOfCharge || 0, socLimit.value || 0)
+				&& Services.settings.ess.isBatteryLifeActive(batteryLifeState.dataItem.value)
+			value: Math.max(Services.settings.ess.minimumStateOfCharge || 0, socLimit.value || 0)
 			unit: VenusOS.Units_Percentage
 		}
 
@@ -160,9 +160,9 @@ Page {
 
 			//% "BatteryLife state"
 			text: qsTrId("settings_ess_batteryLife_state")
-			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
+			dataItem.uid: Services.settings.serviceUid + "/Settings/CGwacs/BatteryLife/State"
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& Global.systemSettings.ess.isBatteryLifeActive(batteryLifeState.dataItem.value)
+				&& Services.settings.ess.isBatteryLifeActive(batteryLifeState.dataItem.value)
 			interactive: false
 			optionModel: [
 				// Values below taken from MaintenanceState enum in dbus-cgwacs
@@ -204,7 +204,7 @@ Page {
 			//% "Maximum charge power"
 			text: qsTrId("settings_ess_max_charge_power")
 			preferredVisible: maxChargePowerSwitch.visible && maxChargePowerSwitch.checked
-			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePower"
+			dataItem.uid: Services.settings.serviceUid + "/Settings/CGwacs/MaxChargePower"
 			suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 			from: 0
 			to: 200000
@@ -235,7 +235,7 @@ Page {
 			//% "Maximum inverter power"
 			text: qsTrId("settings_ess_max_inverter_power")
 			preferredVisible: maxInverterPowerSwitch.visible && maxInverterPowerSwitch.checked
-			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
+			dataItem.uid: Services.settings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
 			suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 			from: 0
 			to: 300000
@@ -246,7 +246,7 @@ Page {
 			//% "Grid setpoint"
 			text: qsTrId("settings_ess_grid_setpoint")
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
+			dataItem.uid: Services.settings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
 			suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 			stepSize: 10
 		}
@@ -288,12 +288,12 @@ Page {
 
 			VeQuickItem {
 				id: scheduleSoc
-				uid: Global.system.serviceUid + "/Control/ScheduledSoc"
+				uid: Services.system.serviceUid + "/Control/ScheduledSoc"
 			}
 
 			VeQuickItem {
 				id: hasAcOutSystemItem
-				uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem"
+				uid: Services.settings.serviceUid + "/Settings/SystemSetup/HasAcOutSystem"
 			}
 
 			Component {
@@ -313,7 +313,7 @@ Page {
 		ListNavigation {
 			//% "Dynamic ESS"
 			text: qsTrId("settings_ess_dynamic")
-			preferredVisible: (dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service))
+			preferredVisible: (dEssModeItem.value > 0 || Services.settings.canAccess(VenusOS.User_AccessType_Service))
 					&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 					&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			onClicked: {
@@ -322,14 +322,14 @@ Page {
 
 			VeQuickItem {
 				id: dEssModeItem
-				uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/Mode"
+				uid: Services.settings.serviceUid + "/Settings/DynamicEss/Mode"
 			}
 		}
 
 		ListNavigation {
 			text: CommonWords.debug
 			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
-				&& Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
+				&& Services.settings.canAccess(VenusOS.User_AccessType_Service)
 
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageHub4Debug.qml")
@@ -347,7 +347,7 @@ Page {
 			//% "Battery charge limit (% of CCL)"
 			text: qsTrId("settings_ess_max_charge_percentage")
 			preferredVisible: dataItem.value < 100.0
-			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePercentage"
+			dataItem.uid: Services.settings.serviceUid + "/Settings/CGwacs/MaxChargePercentage"
 			suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
 			from: 0
 			to: 100
@@ -358,7 +358,7 @@ Page {
 			//% "Battery discharge limit (% of DCL)"
 			text: qsTrId("settings_ess_max_discharge_percentage")
 			preferredVisible: dataItem.value < 100.0
-			dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePercentage"
+			dataItem.uid: Services.settings.serviceUid + "/Settings/CGwacs/MaxDischargePercentage"
 			suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
 			from: 0
 			to: 100
@@ -377,21 +377,21 @@ Page {
 
 	VeQuickItem {
 		id: systemType
-		uid: Global.system.serviceUid + "/SystemType"
+		uid: Services.system.serviceUid + "/SystemType"
 	}
 
 	VeQuickItem {
 		id: essMode
-		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/Hub4Mode"
+		uid: Services.settings.serviceUid + "/Settings/CGwacs/Hub4Mode"
 	}
 
 	VeQuickItem {
 		id: socLimit
-		uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/BatteryLife/SocLimit"
+		uid: Services.settings.serviceUid + "/Settings/CGwacs/BatteryLife/SocLimit"
 	}
 
 	VeQuickItem {
 		id: maxChargeCurrentControl
-		uid: Global.system.serviceUid + "/Control/MaxChargeCurrent"
+		uid: Services.system.serviceUid + "/Control/MaxChargeCurrent"
 	}
 }

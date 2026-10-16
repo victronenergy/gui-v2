@@ -22,7 +22,7 @@ QtObject {
 	}
 
 	property VeQuickItem canbusProfile: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/Canbus/" + root.gateway + "/Profile"
+		uid: Services.settings.serviceUid + "/Settings/Canbus/" + root.gateway + "/Profile"
 	}
 
 	property var optionModel: [

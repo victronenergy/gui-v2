@@ -20,7 +20,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: Global.inverterChargers.rsAlarms
+		model: Services.inverterChargers.rsAlarms
 		delegate: VeBusAlarm {
 			text: modelData.text
 			bindPrefix: root.bindPrefix

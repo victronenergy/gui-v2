@@ -58,9 +58,9 @@ Page {
 			ListQuantityGroup {
 				text: "Battery"
 				model: QuantityObjectModel {
-					QuantityObject { object: Global.system.battery; key: "power"; unit: VenusOS.Units_Watt }
-					QuantityObject { object: Global.system.battery; key: "voltage"; unit: VenusOS.Units_Volt_DC }
-					QuantityObject { object: Global.system.battery; key: "current"; unit: VenusOS.Units_Amp }
+					QuantityObject { object: Services.system.battery; key: "power"; unit: VenusOS.Units_Watt }
+					QuantityObject { object: Services.system.battery; key: "voltage"; unit: VenusOS.Units_Volt_DC }
+					QuantityObject { object: Services.system.battery; key: "current"; unit: VenusOS.Units_Amp }
 				}
 			}
 

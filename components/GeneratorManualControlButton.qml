@@ -13,7 +13,7 @@ ListItemButton {
 	property string gensetUid: BackendConnection.serviceUidFromName(_gensetServiceName.value || "", _gensetInstance.value || 0)
 	property int _generatorStateBeforeDialogOpen: -1
 	readonly property bool defaultEnabled: _state.value !== VenusOS.Generators_State_Error && _state.value !== VenusOS.Generators_State_StoppedByTankLevel
-										   && Global.systemSettings.canAccess(VenusOS.User_AccessType_User)
+										   && Services.settings.canAccess(VenusOS.User_AccessType_User)
 
 	enabled: defaultEnabled
 	color: enabled ? Theme.color_font_primary : Theme.color_font_disabled

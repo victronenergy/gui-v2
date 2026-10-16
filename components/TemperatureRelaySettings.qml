@@ -15,7 +15,7 @@ SettingsColumn {
 	property bool hasInvalidRelayTempConfig
 
 	readonly property string tempRelayPrefix: BackendConnection.serviceUidForType("temprelay") + "/Sensor/" + sensorId
-	readonly property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/TempSensorRelay/" + sensorId
+	readonly property string settingsBindPrefix: Services.settings.serviceUid + "/Settings/TempSensorRelay/" + sensorId
 	readonly property bool relayValue: cRelay.currentValue
 
 	function showEqualValuesWarningToast() {
@@ -27,7 +27,7 @@ SettingsColumn {
 
 	VeQuickItem {
 		id: relay1Item
-		uid: Global.system.serviceUid + "/Relay/1/State"
+		uid: Services.system.serviceUid + "/Relay/1/State"
 	}
 
 	ListText {
@@ -67,10 +67,10 @@ SettingsColumn {
 		text: qsTrId("settings_relay_activation_value")
 		dataItem.uid: "%1/%2/SetValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
 		dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
-		from: Units.convert(-50, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
-		to: Units.convert(100, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
-		suffix: Global.systemSettings.temperatureUnitSuffix
+		dataItem.displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
+		from: Units.convert(-50, VenusOS.Units_Temperature_Celsius, Services.settings.temperatureUnit)
+		to: Units.convert(100, VenusOS.Units_Temperature_Celsius, Services.settings.temperatureUnit)
+		suffix: Services.settings.temperatureUnitSuffix
 
 		onValueChanged: {
 			if (value === cClear.value) {
@@ -86,7 +86,7 @@ SettingsColumn {
 		text: qsTrId("settings_relay_deactivation_value")
 		dataItem.uid: "%1/%2/ClearValue".arg(root.settingsBindPrefix).arg(root.relayNumber)
 		dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		dataItem.displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 		from: cSet.from
 		to: cSet.to
 		suffix: cSet.suffix

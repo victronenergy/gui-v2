@@ -13,7 +13,7 @@ OverviewWidget {
 
 	readonly property bool preferRenewable: preferRenewableEnergy.valid
 	readonly property bool preferRenewableOverride: preferRenewableEnergy.value === 0 || preferRenewableEnergy.value === 2
-	readonly property bool preferRenewableOverrideGenset: remoteGeneratorSelected.value === 1 || Global.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Generator
+	readonly property bool preferRenewableOverrideGenset: remoteGeneratorSelected.value === 1 || Services.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Generator
 
 	onClicked: {
 		// If com.victronenergy.system/Batteries has only one battery, then show the device
@@ -37,17 +37,17 @@ OverviewWidget {
 		}
 	}
 
-	readonly property int _normalizedStateOfCharge: Math.round(Global.system.battery.stateOfCharge || 0)
-	readonly property bool _animationReady: animationEnabled && !isNaN(Global.system.battery.stateOfCharge)
+	readonly property int _normalizedStateOfCharge: Math.round(Services.system.battery.stateOfCharge || 0)
+	readonly property bool _animationReady: animationEnabled && !isNaN(Services.system.battery.stateOfCharge)
 
 	VeQuickItem {
 		id: batteries
-		uid: Global.system.serviceUid + "/Batteries"
+		uid: Services.system.serviceUid + "/Batteries"
 	}
 
 	VeQuickItem {
 		id: activeBatteryService
-		uid: Global.system.serviceUid + "/ActiveBatteryService"
+		uid: Services.system.serviceUid + "/ActiveBatteryService"
 	}
 
 	VeQuickItem {
@@ -65,13 +65,13 @@ OverviewWidget {
 	VeQuickItem {
 		id: preferRenewableEnergy
 
-		uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Dc/0/PreferRenewableEnergy" : ""
+		uid: Services.system.veBus.serviceUid ? Services.system.veBus.serviceUid + "/Dc/0/PreferRenewableEnergy" : ""
 	}
 
 	VeQuickItem {
 		id: remoteGeneratorSelected
 
-		uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Ac/State/RemoteGeneratorSelected" : ""
+		uid: Services.system.veBus.serviceUid ? Services.system.veBus.serviceUid + "/Ac/State/RemoteGeneratorSelected" : ""
 	}
 
 	title: CommonWords.battery
@@ -107,7 +107,7 @@ OverviewWidget {
 			}
 			width: batteryGauge.width - (2 * batteryGauge.borderWidth)
 			height: (batteryGauge.height - (2 * batteryGauge.borderWidth)) * batteryGauge.animatedValue
-			visible: Global.system.battery.mode === VenusOS.Battery_Mode_Charging && root._animationReady
+			visible: Services.system.battery.mode === VenusOS.Battery_Mode_Charging && root._animationReady
 			clip: true
 
 			SequentialAnimation {
@@ -174,13 +174,13 @@ OverviewWidget {
 				right: parent.right
 				rightMargin: 0
 			}
-			value: Global.system.battery.temperature
-			unit: Global.systemSettings.temperatureUnit
+			value: Services.system.battery.temperature
+			unit: Services.settings.temperatureUnit
 			unitText: Units.degreesSymbol
 			unitColor: Theme.color_overviewPage_widget_battery_font_secondary
 			font.pixelSize: Theme.font_overviewPage_battery_large
 			alignment: Qt.AlignRight
-			visible: !isNaN(Global.system.battery.temperature)
+			visible: !isNaN(Services.system.battery.temperature)
 		}
 
 		ColumnLayout {
@@ -196,7 +196,7 @@ OverviewWidget {
 
 			WidgetHeader {
 				text: root.title
-				icon.source: Global.system.battery.icon
+				icon.source: Services.system.battery.icon
 				Layout.fillWidth: true
 				Layout.bottomMargin: Theme.geometry_overviewPage_widget_content_spacing
 			}
@@ -204,7 +204,7 @@ OverviewWidget {
 			ElectricalQuantityLabel {
 				font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_large
 				alignment: Qt.AlignLeft
-				value: Global.system.battery.stateOfCharge
+				value: Services.system.battery.stateOfCharge
 				unit: VenusOS.Units_Percentage
 				unitColor: Theme.color_overviewPage_widget_battery_font_secondary
 				Layout.fillWidth: true
@@ -243,7 +243,7 @@ OverviewWidget {
 
 				Label {
 					id: modeText
-					text: VenusOS.battery_modeToText(Global.system.battery.mode)
+					text: VenusOS.battery_modeToText(Services.system.battery.mode)
 					elide: Text.ElideRight
 					color: Theme.color_overviewPage_widget_battery_font_secondary
 					font.pixelSize: Theme.font_overviewPage_battery_small
@@ -254,8 +254,8 @@ OverviewWidget {
 					spacing: 0
 					Layout.fillWidth: true
 					Label {
-						text: Global.system.battery.timeToGo == 0 ? "" : Utils.secondsToString(Global.system.battery.timeToGo)
-						visible: Global.system.battery.timeToGo > 0
+						text: Services.system.battery.timeToGo == 0 ? "" : Utils.secondsToString(Services.system.battery.timeToGo)
+						visible: Services.system.battery.timeToGo > 0
 						elide: Text.ElideRight
 						font.pixelSize: Theme.font_overviewPage_battery_small
 						Layout.fillWidth: false
@@ -267,7 +267,7 @@ OverviewWidget {
 						visible: root.preferRenewableOverride
 						source: root.preferRenewableOverrideGenset
 								? "qrc:/images/icon_charging_generator.svg"
-								: Global.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Shore
+								: Services.acInputs.activeInSource === VenusOS.AcInputs_InputSource_Shore
 								  ? "qrc:/images/icon_charging_shore.svg"
 								  : "qrc:/images/icon_charging_grid.svg"
 					}
@@ -310,7 +310,7 @@ OverviewWidget {
 			QuantityLabel {
 				id: batteryVoltageDisplay
 
-				value: Global.system.battery.voltage
+				value: Services.system.battery.voltage
 				unit: VenusOS.Units_Volt_DC
 				unitColor: Theme.color_overviewPage_widget_battery_font_secondary
 				font.pixelSize: parent._useSmallFont ? Theme.font_overviewPage_battery_small : Theme.font_overviewPage_battery_large
@@ -321,7 +321,7 @@ OverviewWidget {
 			QuantityLabel {
 				id: batteryCurrentDisplay
 
-				value: Global.system.battery.current
+				value: Services.system.battery.current
 				unit: VenusOS.Units_Amp
 				unitColor: Theme.color_overviewPage_widget_battery_font_secondary
 				font.pixelSize: parent._useSmallFont ? Theme.font_overviewPage_battery_small : Theme.font_overviewPage_battery_large
@@ -331,7 +331,7 @@ OverviewWidget {
 			QuantityLabel {
 				id: batteryPowerDisplay
 
-				value: Global.system.battery.power
+				value: Services.system.battery.power
 				unit: VenusOS.Units_Watt
 				unitColor: Theme.color_overviewPage_widget_battery_font_secondary
 				font.pixelSize: parent._useSmallFont ? Theme.font_overviewPage_battery_small : Theme.font_overviewPage_battery_large

@@ -18,7 +18,7 @@ Page {
 				id: autoBrightness
 				//% "Adaptive brightness"
 				text: qsTrId("settings_adaptive_brightness")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/AutoBrightness"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gui/AutoBrightness"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: Qt.platform.os != "wasm" && dataItem.valid && dataItem.max === 1
 			}
@@ -26,7 +26,7 @@ Page {
 			ListSlider {
 				//% "Brightness"
 				text: qsTrId("settings_brightness")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/Brightness"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gui/Brightness"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				preferredVisible: !autoBrightness.checked && Qt.platform.os != "wasm"
 			}
@@ -34,7 +34,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Display off time"
 				text: qsTrId("settings_display_off_time")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/DisplayOff"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gui/DisplayOff"
 				writeAccessLevel: VenusOS.User_AccessType_User
 
 				optionModel: [
@@ -58,7 +58,7 @@ Page {
 				//% "GX display appearance"
 				text: qsTrId("settings_gx_display_appearance")
 				writeAccessLevel: VenusOS.User_AccessType_User
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/ColorScheme"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gui/ColorScheme"
 				optionModel: [
 					//: Dark colors mode
 					//% "Dark"
@@ -103,7 +103,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Remote Console appearance"
 				text: qsTrId("settings_remote_console_appearance")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/RemoteConsoleColorMode"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gui/RemoteConsoleColorMode"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					//% "Same as GX display"
@@ -156,7 +156,7 @@ Page {
 				text: qsTrId("settings_ui_animations")
 				//% "Disable to reduce CPU usage"
 				secondaryText: qsTrId("settings_ui_animations_description")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/UIAnimations"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gui2/UIAnimations"
 				preferredVisible: dataItem.valid
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
@@ -169,7 +169,7 @@ Page {
 					  ? qsTrId("settings_display_onscreen_ui")
 						//% "User interface (Remote Console)"
 					  : qsTrId("settings_display_remote_console_ui")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/RunningVersion"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gui/RunningVersion"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				updateDataOnClick: false
 				optionModel: [
@@ -199,7 +199,7 @@ Page {
 
 				VeQuickItem {
 					id: onScreenGuiv2Possible
-					uid: Global.venusPlatform.serviceUid + "/Gui/OnScreenGuiv2Supported"
+					uid: Services.platform.serviceUid + "/Gui/OnScreenGuiv2Supported"
 				}
 
 				Component {

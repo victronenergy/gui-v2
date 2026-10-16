@@ -15,7 +15,7 @@ SettingsColumn {
 
 		//% "DVCC"
 		text: qsTrId("settings_dvcc_dvcc")
-		dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Bol"
+		dataItem.uid: Services.settings.serviceUid + "/Settings/Services/Bol"
 
 		onCheckedChanged: {
 			if (dataItem.valid && !checked && nrVebusDevices.valid && nrVebusDevices.value >= 1) {
@@ -26,7 +26,7 @@ SettingsColumn {
 
 		VeQuickItem {
 			id: nrVebusDevices
-			uid: Global.system.serviceUid + "/Devices/NumberOfVebusDevices"
+			uid: Services.system.serviceUid + "/Devices/NumberOfVebusDevices"
 		}
 	}
 
@@ -48,7 +48,7 @@ SettingsColumn {
 		//% "Maximum charge current"
 		text: qsTrId("settings_dvcc_max_charge_current")
 		preferredVisible: maxChargeCurrentSwitch.visible && maxChargeCurrentSwitch.checked
-		dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/MaxChargeCurrent"
+		dataItem.uid: Services.settings.serviceUid + "/Settings/SystemSetup/MaxChargeCurrent"
 		suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 		from: 0
 	}

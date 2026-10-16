@@ -15,7 +15,7 @@ Page {
 				id: nodered
 
 				text: qsTrId("settings_large_node_red")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Mode"
+				dataItem.uid: Services.platform.serviceUid + "/Services/NodeRed/Mode"
 				preferredVisible: dataItem.valid
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.NodeRed_Mode_Disabled },
@@ -35,7 +35,7 @@ Page {
 
 				VeQuickItem {
 					id: nodeRedFactoryResetItem
-					uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/FactoryReset"
+					uid: Services.platform.serviceUid + "/Services/NodeRed/FactoryReset"
 				}
 
 				Component {

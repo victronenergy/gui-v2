@@ -14,7 +14,7 @@ Page {
 	GradientListView {
 		id: settingsListView
 
-		model: Global.inverterChargers.rsAlarms
+		model: Services.inverterChargers.rsAlarms
 
 		header: PrimaryListLabel {
 			function updateVisibility() {

@@ -9,8 +9,8 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	readonly property string generator1ServiceUid: Global.generators.generator1ServiceUid
-	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Generator1"
+	readonly property string generator1ServiceUid: Services.generators.generator1ServiceUid
+	property string settingsBindPrefix: Services.settings.serviceUid + "/Settings/Generator1"
 	readonly property bool enableControls: gensetError.dataItem.valid && gensetError.dataItem.value !== VenusOS.Genset_ErrorCode_EmptyCustomEnabledGensetsGroup
 
 	function generator1ServiceUid_append(suffix) {

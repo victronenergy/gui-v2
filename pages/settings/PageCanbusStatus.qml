@@ -23,7 +23,7 @@ Page {
 
 	VeQuickItem {
 		id: canStats
-		uid: Global.venusPlatform.serviceUid + "/CanBus/Interface/" + gateway + "/Statistics"
+		uid: Services.platform.serviceUid + "/CanBus/Interface/" + gateway + "/Statistics"
 		onValueChanged: {
 			if (value === undefined) {
 				return

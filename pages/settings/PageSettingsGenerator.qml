@@ -123,13 +123,13 @@ Page {
 				VeQuickItem {
 					id: acIn1Source
 
-					uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput1"
+					uid: Services.settings.serviceUid + "/Settings/SystemSetup/AcInput1"
 				}
 
 				VeQuickItem {
 					id: acIn2Source
 
-					uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput2"
+					uid: Services.settings.serviceUid + "/Settings/SystemSetup/AcInput2"
 				}
 			}
 

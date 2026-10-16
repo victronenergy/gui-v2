@@ -21,7 +21,7 @@ Item {
 	Boat.BatteryArc {
 		id: batteryGauge
 
-		visible: (root.gps.valid || root.motorDrives.dcConsumption.quotient.valid) && !isNaN(Global.system.battery.stateOfCharge)
+		visible: (root.gps.valid || root.motorDrives.dcConsumption.quotient.valid) && !isNaN(Services.system.battery.stateOfCharge)
 		animationEnabled: root.animationEnabled
 	}
 

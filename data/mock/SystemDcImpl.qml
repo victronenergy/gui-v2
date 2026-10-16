@@ -17,15 +17,15 @@ Item {
 	}
 
 	function setGaugesValue(path, value) {
-		MockManager.setValue(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges" + path, value)
+		MockManager.setValue(Services.settings.serviceUid + "/Settings/Gui/Gauges" + path, value)
 	}
 	function gaugesValue(path) {
-		return MockManager.value(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges" + path)
+		return MockManager.value(Services.settings.serviceUid + "/Settings/Gui/Gauges" + path)
 	}
 
 	VeQuickItem {
 		id: gaugesAutoMax
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
+		uid: Services.settings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
 	}
 
 	// DC inputs: set the max DC-in power for the Brief/Overview gauge ranges.
@@ -70,7 +70,7 @@ Item {
 			}
 		}
 
-		model: Global.system?.dc.serviceModel ?? undefined
+		model: Services.system?.dc.serviceModel ?? undefined
 		delegate: QtObject {
 			id: dcLoad
 
@@ -83,7 +83,7 @@ Item {
 	}
 	VeQuickItem {
 		id: hasDcSystem
-		uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
+		uid: Services.settings.serviceUid + "/Settings/SystemSetup/HasDcSystem"
 	}
 
 	// Animate DC meters.

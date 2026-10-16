@@ -146,7 +146,7 @@ Page {
 			ListAlarm {
 				//% "Circuit breaker tripped"
 				text: qsTrId("batteryalarms_circuit_breaker_tripped")
-				dataItem.uid: Global.system.serviceUid + "/Dc/Battery/Alarms/CircuitBreakerTripped"
+				dataItem.uid: Services.system.serviceUid + "/Dc/Battery/Alarms/CircuitBreakerTripped"
 				preferredVisible: dataItem.valid
 			}
 

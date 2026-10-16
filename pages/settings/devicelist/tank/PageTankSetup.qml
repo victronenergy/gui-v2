@@ -18,12 +18,12 @@ Page {
 				text: qsTrId("devicelist_tanksetup_capacity")
 				dataItem.uid: root.bindPrefix + "/Capacity"
 				dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Volume_CubicMetre)
-				dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.volumeUnit)
-				suffix: Units.defaultUnitString(Global.systemSettings.volumeUnit)
-				stepSize: Global.systemSettings.volumeUnit === VenusOS.Units_Volume_CubicMetre
+				dataItem.displayUnit: Units.unitToVeUnit(Services.settings.volumeUnit)
+				suffix: Units.defaultUnitString(Services.settings.volumeUnit)
+				stepSize: Services.settings.volumeUnit === VenusOS.Units_Volume_CubicMetre
 						  ? 0.005
 						  : 1   // Litres, Gallons
-				decimals: Units.defaultUnitDecimals(Global.systemSettings.volumeUnit)
+				decimals: Units.defaultUnitDecimals(Services.settings.volumeUnit)
 			}
 
 			ListRadioButtonGroup {
@@ -78,7 +78,7 @@ Page {
 				//% "Fluid type"
 				text: qsTrId("devicelist_tanksetup_fluid_type")
 				dataItem.uid: root.bindPrefix + "/FluidType"
-				optionModel: Global.tanks.tankTypes.map(function(tankType) {
+				optionModel: Services.tanks.tankTypes.map(function(tankType) {
 					return { display: VenusOS.tank_fluidTypeToText(tankType), value: tankType }
 				})
 			}

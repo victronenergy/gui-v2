@@ -74,13 +74,13 @@ QtObject {
 			id: minCellTemperature
 			uid: root.bindPrefix + "/System/MinCellTemperature"
 			sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-			displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+			displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 		},
 		VeQuickItem {
 			id: maxCellTemperature
 			uid: root.bindPrefix + "/System/MaxCellTemperature"
 			sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-			displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+			displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 		},
 		VeQuickItem {
 			id: minVoltageCellId

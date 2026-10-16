@@ -54,14 +54,14 @@ FocusScope {
 					.arg(Theme.color_font_secondary)
 					.arg(measurementItem.value.toFixed(root.switchableOutput.decimals))
 			: slider.value.toFixed(root.switchableOutput.decimals)
-		quantityUnit: Global.systemSettings.toPreferredUnit(Global.systemSettings.temperatureUnit)
+		quantityUnit: Services.settings.toPreferredUnit(Services.settings.temperatureUnit)
 	}
 
 	VeQuickItem {
 		id: measurementItem
 		uid: root.switchableOutput.uid + "/Measurement"
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 
 	TemperatureSlider {

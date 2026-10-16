@@ -19,7 +19,7 @@ DeviceListDelegate {
 			key: iaqs.valid ? "textValue" : "value"
 			unit: iaqs.valid ? VenusOS.Units_None
 					: co2.value !== undefined ? VenusOS.Units_PartsPerMillion
-					: Global.systemSettings.temperatureUnit
+					: Services.settings.temperatureUnit
 		}
 		QuantityObject {
 			object: co2.value !== undefined ? (iaqs.valid ? co2 : pm25) : humidity
@@ -38,7 +38,7 @@ DeviceListDelegate {
 		id: temperature
 		uid: root.device.serviceUid + "/Temperature"
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 
 	VeQuickItem {
@@ -63,7 +63,7 @@ DeviceListDelegate {
 				//% "%1 (%2)"
 				? qsTrId("temperature_air_quality_score_short").arg(value).arg(qualityLabel)
 				: ""
-		readonly property string qualityLabel: Global.environmentInputs.airQualityToText(value)
+		readonly property string qualityLabel: Services.environment.airQualityToText(value)
 
 		uid: root.device.serviceUid + "/IAQS"
 	}

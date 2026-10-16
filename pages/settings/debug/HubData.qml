@@ -17,24 +17,24 @@ Page {
 
 	QtObject {
 		id: _pvCharger
-		property VeQuickItem power: VeQuickItem { uid: Global.system.serviceUid + "/Dc/Pv/Power" }
+		property VeQuickItem power: VeQuickItem { uid: Services.system.serviceUid + "/Dc/Pv/Power" }
 	}
 
 	ObjectAcConnection {
 		id: _pvOnAcOut
-		bindPrefix: Global.system.serviceUid + "/Ac/PvOnOutput"
+		bindPrefix: Services.system.serviceUid + "/Ac/PvOnOutput"
 		updateOnLoad: true
 	}
 
 	ObjectAcConnection {
 		id: _pvOnAcIn1
-		bindPrefix: Global.system.serviceUid + "/Ac/PvOnGenset"
+		bindPrefix: Services.system.serviceUid + "/Ac/PvOnGenset"
 		updateOnLoad: true
 	}
 
 	ObjectAcConnection {
 		id: _pvOnAcIn2
-		bindPrefix: Global.system.serviceUid + "/Ac/PvOnGrid"
+		bindPrefix: Services.system.serviceUid + "/Ac/PvOnGrid"
 		updateOnLoad: true
 	}
 
@@ -50,14 +50,14 @@ Page {
 
 	VeQuickItem {
 		id: _splitPhaseL2Passthru
-		uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Ac/State/SplitPhaseL2Passthru" : ""
+		uid: Services.system.veBus.serviceUid ? Services.system.veBus.serviceUid + "/Ac/State/SplitPhaseL2Passthru" : ""
 	}
 
 	ObjectAcConnection {
 		id: _acLoad
 		splitPhaseL2PassthruDisabled: _splitPhaseL2Passthru.value === 0
 		isAcOutput: true
-		bindPrefix: Global.system.serviceUid + "/Ac/Consumption"
+		bindPrefix: Services.system.serviceUid + "/Ac/Consumption"
 		updateOnLoad: true
 	}
 }

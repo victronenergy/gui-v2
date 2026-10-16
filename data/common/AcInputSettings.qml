@@ -17,7 +17,7 @@ QtObject {
 	property int inputNumber
 	readonly property int inputType: {
 		if (serviceType === "vebus"
-				&& serviceUid === Global.system.veBus.serviceUid
+				&& serviceUid === Services.system.veBus.serviceUid
 				&& _systemSetupType.valid) {
 			// The /SystemSetup/AcInput<x> settings only apply to the first/main vebus service.
 			return  _systemSetupType.value
@@ -29,7 +29,7 @@ QtObject {
 
 	property VeQuickItem _systemSetupType: VeQuickItem {
 		// The setting path is 1-based: setting for first AC input is under /AcInput1
-		uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/AcInput" + inputNumber
+		uid: Services.settings.serviceUid + "/Settings/SystemSetup/AcInput" + inputNumber
 	}
 
 	property VeQuickItem _type: VeQuickItem {
