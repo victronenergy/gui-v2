@@ -9,6 +9,8 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
+	required property string settingsServiceUid
+
 	readonly property real power: model.totalPower
 	readonly property real current: model.totalCurrent
 	readonly property real maximumPower: _maximumPower.valid ? _maximumPower.value : NaN
@@ -18,7 +20,7 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _maximumPower: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Dc/Input/Power/Max"
+		uid: root.settingsServiceUid + "/Settings/Gui/Gauges/Dc/Input/Power/Max"
 	}
 
 	function overviewWidgetTypeForService(serviceType, dcMeterType = -1) {
