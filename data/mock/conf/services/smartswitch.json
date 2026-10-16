@@ -6,10 +6,7 @@
     },
     "com.victronenergy.settings": {
         "/Settings/Canbus/vecan0/Profile": 0,
-        "/Settings/Canbus/vecan1/Profile": 1,
-        "/Settings/Vecan/vecan1/AlertsInEnable": 0,
-        "/Settings/Vecan/vecan1/N2kGatewayEnabled": 0,
-        "/Settings/Vecan/vecan1/VenusUniqueId": 1
+        "/Settings/Canbus/vecan1/Profile": 1
     },
     "com.victronenergy.switch.smartswitch_123": {
         "/Channel/0/Direction": -1,
@@ -104,6 +101,9 @@
         "/Devices/0000A2610A4B/Nad": 80,
         "/Devices/0000A2610A4B/Serial": "1234",
         "/Identifier": "vecan1",
+        "/Settings/N2kAlertsInEnabled": 0,
+        "/Settings/N2kGatewayEnabled": 0,
+        "/Settings/VenusUniqueId": 1,
         "/Link/BatteryCurrent": null,
         "/Link/ChargeVoltage": null,
         "/Link/ChargeVoltageSolarOffset": null,
