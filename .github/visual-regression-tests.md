@@ -27,6 +27,10 @@ VENUS_GUI_TEST_CAPTURE_DIR=~/my-captures ./bin/venus-gui-v2 --mock --ui-test smo
 ./bin/venus-gui-v2 --mock --ui-test /pages/settings/PageSettingsConnectivity.qml
 ./bin/venus-gui-v2 --mock --ui-test /pages/BriefSidePanel.qml
 
+# Capture one page, saved as tst_target_page-<TypeName>.png. Turn off mock
+# timers and animations so that repeated runs give the same image.
+./bin/venus-gui-v2 --mock --no-mock-timers --animationEnabled false --ui-test-capture --ui-test /pages/BriefPage.qml
+
 # Portrait (desktop): apply WxH before target-page routes resolve and
 # before pages load. Width < height selects Theme.Portrait. The window
 # size is fixed for that process.
@@ -49,6 +53,9 @@ are not currently resolvable.
 For target-page mode, runtime QML errors (for example `ReferenceError` in bindings) are treated
 as failures. Completion requires the target type to be constructed and shown, not only a
 matching PageStack URL.
+With `--ui-test-capture`, target-page mode also saves one image of the shown page. It does not
+clear the image capture directory, so several runs (for example one per page) can save into one
+directory. It does not set `UIAnimations` to 0, so pass `--animationEnabled false` as well.
 
 By default, captured images are stored in `<working-directory>/image-captures/` (configurable in the test JSON).
 
@@ -242,8 +249,8 @@ tests/ui/
 
 ## Important notes
 
-- **Animations must be disabled** (`UIAnimations: 0`) for deterministic captures
-- **Mock timers must be off** (`TimersActive: false`) to prevent animated data values from changing between captures
+- **Animations must be disabled** (`UIAnimations: 0`, or `--animationEnabled false` for `--ui-test-capture` runs) for deterministic captures
+- **Mock timers must be off** (`TimersActive: false`, or `--no-mock-timers` for `--ui-test-capture` runs) to prevent animated data values from changing between captures
 - **Stabilization**: pages with asynchronous content (Repeaters, Loaders) may take multiple frames to stabilize. The system retries captures until the image is stable (consecutive captures are identical)
 - **RecursivePageCapture limitations**: it does not click buttons or radio buttons (only `ListNavigation` items), because buttons may have write side-effects that alter the UI state
 - **Debug logging**: set `"Logging": "debug"` in the test JSON to see detailed output when `findItem()` calls fail

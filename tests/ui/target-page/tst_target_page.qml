@@ -278,6 +278,9 @@ UiTestCase {
 			},
 			message: "Target type verified: %1".arg(targetPageUrl),
 		})
+		if (UiTest.settingValue("CaptureImage", false)) {
+			addStep(UiTestStep.CaptureAndCompare, { imageName: _qmlTypeNameFromUrl(targetPageUrl) })
+		}
 		runSteps()
 	}
 
