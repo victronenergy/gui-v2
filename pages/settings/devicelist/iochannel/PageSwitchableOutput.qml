@@ -133,8 +133,9 @@ Page {
 				defaultSecondaryText: VenusOS.switchableOutput_functionToText(switchableOutput.function)
 			}
 
-			ListIOChannelShowRadioButtonGroup {
-				dataItem.uid: switchableOutput.uid + "/Settings/ShowUIControl"
+			ListIOChannelShowDetails {
+				capabilitiesUid: switchableOutput.serviceUid + "/SwitchableOutput/Capabilities"
+				showUiUid: switchableOutput.uid + "/Settings/ShowUIControl"
 				interactive: _writeable
 			}
 
