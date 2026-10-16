@@ -110,8 +110,8 @@ ListSetting {
 
 	caption: root.mode === VenusOS.ListLink_Mode_LinkButton ? ""
 		  //: %1 = url text
-		  //% "Open the QR code to scan it with your portable device.<br />Or insert the link: %1"
-		: qsTrId("listlink_scan_qr_code").arg(formattedUrl)
+		  //% "Scan the QR code with your phone, or go to: %1"
+		: qsTrId("listlink_scan_qr_code_with_phone").arg(formattedUrl)
 
 	Keys.onSpacePressed: click()
 

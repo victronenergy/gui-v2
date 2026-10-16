@@ -47,6 +47,7 @@ ListSetting {
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat
 			captionText: root.caption
+			enabled: root.interactive
 
 			secondaryComponent: ListItemButton {
 				text: root.secondaryText

@@ -243,41 +243,35 @@ Page {
 					implicitWidth: Theme.geometry_listItem_width
 					implicitHeight: supportStatusLayout.implicitHeight
 
-					ThreeLabelLayout {
+					RowLayout {
 						id: supportStatusLayout
-
 						anchors {
 							left: parent.left
-							right: supportStatusIcon.left
-							rightMargin: supportStatus.spacing
-							verticalCenter: parent.verticalCenter
-						}
-
-						primaryText: supportStatus.text
-						primaryLabel.font: supportStatus.font
-						secondaryText: root.supportStateText()
-					}
-
-					CP.ColorImage {
-						id: supportStatusIcon
-
-						anchors {
-							verticalCenter: parent.verticalCenter
-							right: supportStatusForwardIcon.left
-							rightMargin: supportStatus.spacing
-						}
-						source: root.supportStateColor() === Theme.color_green ? "qrc:/images/icon_checkmark_32.svg"
-								: root.supportStateColor() === Theme.color_orange ? "qrc:/images/icon_warning_32.svg"
-								: "qrc:/images/icon_alarm_32.svg"
-						color: supportStateColor()
-					}
-
-					ForwardIcon {
-						id: supportStatusForwardIcon
-						anchors {
 							right: parent.right
 							verticalCenter: parent.verticalCenter
 						}
+						spacing: supportStatus.spacing
+
+						Label {
+							id: supportStatusLabel
+							text: supportStatus.text
+							font: supportStatus.font
+							elide: Text.ElideRight
+							Layout.fillWidth: true
+						}
+
+						SecondaryListLabel {
+							text: root.supportStateText()
+						}
+
+						CP.ColorImage {
+							source: root.supportStateColor() === Theme.color_green ? "qrc:/images/icon_checkmark_32.svg"
+									: root.supportStateColor() === Theme.color_orange ? "qrc:/images/icon_warning_32.svg"
+									: "qrc:/images/icon_alarm_32.svg"
+							color: supportStateColor()
+						}
+
+						ForwardIcon {}
 					}
 				}
 
@@ -310,8 +304,8 @@ Page {
 					{ display: qsTrId("page_settings_demo_2"), value: 3 },
 				]
 
-				//% "Starting demo mode will change some settings and the user interface will be unresponsive for a moment."
-				caption: qsTrId("settings_demo_mode_caption")
+				//% "Starting demo mode changes some settings and causes the screen to stop responding for a moment."
+				caption: qsTrId("settings_demo_mode_consequence")
 
 				onOptionClicked: function(index) {
 					Qt.callLater(Global.main.rebuildUi)

@@ -8,7 +8,7 @@ import Victron.VenusOS
 
 Label {
 	font.pixelSize: Theme.font_listItem_secondary_size
-	color: Theme.color_listItem_secondaryText
+	color: enabled ? Theme.color_listItem_secondaryText : Theme.color_font_disabled
 	wrapMode: Text.Wrap
 	horizontalAlignment: Text.AlignRight
 	verticalAlignment: Text.AlignVCenter

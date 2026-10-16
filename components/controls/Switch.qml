@@ -30,8 +30,9 @@ T.Switch {
 		color: root.enabled
 			   ? (root.checked ? Theme.color_switch_groove_on : Theme.color_switch_groove_off)
 			   : Theme.color_switch_groove_disabled
-		border.color: root.checked ? Theme.color_switch_groove_border_on
-			: Theme.color_switch_groove_border_off
+		border.color: root.enabled
+				? (root.checked ? Theme.color_switch_groove_border_on : Theme.color_switch_groove_border_off)
+				: Theme.color_switch_groove_disabled
 		border.width: Theme.geometry_switch_groove_border_width
 	}
 

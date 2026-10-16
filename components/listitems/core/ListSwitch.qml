@@ -71,32 +71,30 @@ ListSetting {
 		}
 	}
 
-	// Remove padding around the edges, so that the internal Switch can expand its touch area.
+	// Remove padding, so that the internal Switch can extend its touch area to the right edge.
 	rightPadding: rightInset
-	topPadding: topInset
-	bottomPadding: bottomInset
 
 	interactive: defaultInteractive
 
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: labelLayout.implicitHeight
+		implicitHeight: labelLayout.implicitHeight + (captionLabel.visible ? captionLabel.implicitHeight : 0)
 
-		ThreeLabelLayout {
+		TwoLabelLayout {
 			id: labelLayout
 
-			anchors.verticalCenter: parent.verticalCenter
-			width: parent.width - switchItem.width - root.spacing
+			anchors {
+				left: parent.left
+				right: switchItem.left
+				rightMargin: root.spacing
+				verticalCenter: parent.verticalCenter
+				verticalCenterOffset: captionLabel.visible ? -captionLabel.height/2 : 0
+			}
 			primaryText: root.text
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat
 			secondaryText: root.secondaryText
-			captionText: root.caption
-			stretchSecondaryText: true
-
-			// Since padding is cleared in the root item, add it back again here.
-			topPadding: Theme.geometry_listItem_content_verticalMargin
-			bottomPadding: Theme.geometry_listItem_content_verticalMargin
+			enabled: root.interactive
 		}
 
 		Switch {
@@ -104,12 +102,11 @@ ListSetting {
 
 			anchors {
 				right: parent.right
-				verticalCenter: parent.verticalCenter
+				verticalCenter: labelLayout.verticalCenter
 			}
-
 			// Expand the switch touch area to make it easier to click.
-			topInset: Theme.geometry_listItem_content_verticalMargin
-			bottomInset: Theme.geometry_listItem_content_verticalMargin
+			topInset: Theme.geometry_button_touch_verticalMargin
+			bottomInset: Theme.geometry_button_touch_verticalMargin
 			leftInset: root.spacing
 			rightInset: root.horizontalContentPadding
 			topPadding: topInset
@@ -124,6 +121,20 @@ ListSetting {
 
 			onClicked: root.click()
 			Component.onCompleted: root._switchItem = switchItem
+		}
+
+		CaptionLabel {
+			id: captionLabel
+
+			anchors {
+				top: labelLayout.bottom
+				left: parent.left
+				right: parent.right
+				rightMargin: root.horizontalContentPadding
+			}
+			visible: text.length > 0
+			topPadding: Theme.geometry_listItem_content_verticalSpacing
+			text: root.caption
 		}
 	}
 

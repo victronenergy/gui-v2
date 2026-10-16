@@ -89,6 +89,7 @@ ListSetting {
 				text: root.text
 				textFormat: root.textFormat
 				font: root.font
+				color: root.interactive ? Theme.color_font_primary : Theme.color_font_disabled
 				wrapMode: Text.Wrap
 				verticalAlignment: Text.AlignVCenter
 
@@ -99,8 +100,8 @@ ListSetting {
 				id: sliderItem
 
 				// Make space for labels on either side.
-				leftInset: Theme.geometry_rangeSlider_labelWidth + Theme.geometry_slider_spacing
-				rightInset: Theme.geometry_rangeSlider_labelWidth + Theme.geometry_slider_spacing
+				leftInset: labelFontMetrics.width + Theme.geometry_slider_spacing
+				rightInset: labelFontMetrics.width + Theme.geometry_slider_spacing
 				leftPadding: leftInset
 				rightPadding: rightInset
 
@@ -149,8 +150,19 @@ ListSetting {
 					}
 				}
 
+				TextMetrics {
+					id: labelFontMetrics
+
+					readonly property string _fromText: Units.formatNumber(root.from, root.decimals)
+					readonly property string _toText: Units.formatNumber(root.to, root.decimals)
+
+					font.pixelSize: Theme.font_listItem_secondary_size
+					font.family: Global.fontFamily
+					text: (_fromText.length > _toText.length ? _fromText : _toText) + root.suffix
+				}
+
 				SecondaryListLabel {
-					width: Theme.geometry_rangeSlider_labelWidth
+					width: labelFontMetrics.width
 					height: parent.height
 					wrapMode: Text.NoWrap
 					horizontalAlignment: Text.AlignRight
@@ -160,9 +172,10 @@ ListSetting {
 
 				SecondaryListLabel {
 					anchors.right: parent.right
-					width: Theme.geometry_rangeSlider_labelWidth
+					width: labelFontMetrics.width
 					height: parent.height
 					wrapMode: Text.NoWrap
+					horizontalAlignment: Text.AlignLeft
 					verticalAlignment: Text.AlignVCenter
 					text: Units.formatNumber(sliderItem.second.value, root.decimals) + root.suffix
 				}

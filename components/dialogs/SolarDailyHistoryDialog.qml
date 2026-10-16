@@ -117,7 +117,7 @@ T.Dialog {
 		component ArrowButton : IconButton {
 			icon.sourceSize.height: Theme.geometry_solarDailyHistoryDialog_arrow_icon_size
 			icon.color: containsPress ? Theme.color_gray4 : Theme.color_gray5
-			icon.source: "qrc:/images/icon_chevron_right_32.svg"
+			icon.source: "qrc:/images/icon_chevron_right_24.svg"
 			effectEnabled: false
 		}
 

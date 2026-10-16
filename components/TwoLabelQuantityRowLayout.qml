@@ -36,6 +36,7 @@ Flow {
 		width: root._useColumnLayout ? parent.width : parent.width - quantityRow.width
 		text: root.primaryText
 		elide: Text.ElideRight
+		color: root.enabled ? Theme.color_font_primary : Theme.color_font_disabled
 	}
 
 	QuantityRow {

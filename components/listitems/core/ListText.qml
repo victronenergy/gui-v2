@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 /*
@@ -16,24 +17,24 @@ ListSetting {
 	property string secondaryText: dataItem.valid ? dataItem.value : ""
 	property color secondaryTextColor: Theme.color_listItem_secondaryText
 
-	contentItem: Item {
-		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: labelLayout.implicitHeight
+	contentItem: ColumnLayout {
+		spacing: Theme.geometry_listItem_content_verticalSpacing
 
-		ThreeLabelLayout {
-			id: labelLayout
-
-			anchors {
-				left: parent.left
-				right: parent.right
-				verticalCenter: parent.verticalCenter
-			}
+		TwoLabelLayout {
 			primaryText: root.text
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat
 			secondaryText: root.secondaryText
-			secondaryLabel.color: root.secondaryTextColor
-			captionText: root.caption
+			secondaryLabel.color: enabled ? root.secondaryTextColor : Theme.color_font_disabled
+
+			Layout.fillWidth: true
+		}
+
+		CaptionLabel {
+			visible: text.length > 0
+			text: root.caption
+
+			Layout.fillWidth: true
 		}
 	}
 

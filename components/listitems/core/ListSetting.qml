@@ -36,6 +36,10 @@ import Victron.VenusOS
 
 	If the entire item is clickable, you can use ListPressArea in the background to highlight the
 	whole item when clicked.
+
+	When the item is non-interactive, dim the primary text colour to Theme.color_font_disabled. Be
+	sure to bind the colour condition to 'interactive' instead of 'enabled', else the text will be
+	dimmed when the parent Page slides in/out of view, as the whole page is disabled in thate state.
 */
 ListItem {
 	id: root
