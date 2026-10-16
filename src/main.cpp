@@ -117,7 +117,7 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	Victron::VenusOS::UiConfig *uiconfig = Victron::VenusOS::UiConfig::create();
 	bool mockTimersEnabled = true;
 
-	QString queryMqttAddress, queryMqttPortalId, queryMqttShard, queryMqttUser, queryMqttPass, queryMqttToken, queryFpsCounter, queryColorScheme, queryAnimationEnabled, queryNodeRedUrl, querySignalKUrl;
+	QString queryMqttAddress, queryMqttPortalId, queryMqttShard, queryMqttUser, queryMqttPass, queryMqttToken, queryFpsCounter, queryColorScheme, queryAnimation, queryNodeRedUrl, querySignalKUrl;
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	emscripten_set_visibilitychange_callback(static_cast<void*>(uiconfig), 1, visibilitychange_callback);
 	emscripten::val webLocation = emscripten::val::global("location");
@@ -154,8 +154,8 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 		// "dark" forces dark mode, "light" forces light mode, "auto" forces auto mode, "default" uses the user choice
 		queryColorScheme = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("colorScheme").toUtf8())); // e.g.: "dark", "light", "auto", "default"
 	}
-	if (query.hasQueryItem("animationEnabled")) {
-		queryAnimationEnabled = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("animationEnabled").toUtf8())); // e.g.: "true", "false"
+	if (query.hasQueryItem("animation")) {
+		queryAnimation = QString::fromUtf8(QByteArray::fromPercentEncoding(query.queryItemValue("animation").toUtf8())); // e.g.: "true", "false"; omitted means true
 	}
 #endif
 
@@ -242,6 +242,11 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	parser.addOption(uiTest);
 	optionList << uiTest;
 
+	QCommandLineOption uiTestCapture("ui-test-capture",
+		QGuiApplication::tr("Save an image of the page given by --ui-test once it is shown"));
+	parser.addOption(uiTestCapture);
+	optionList << uiTestCapture;
+
 	QCommandLineOption noMockTimers("no-mock-timers",
 		QGuiApplication::tr("Set to disable mock timers on startup"));
 	parser.addOption(noMockTimers);
@@ -265,11 +270,11 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	parser.addOption(colorScheme);
 	optionList << colorScheme;
 
-	QCommandLineOption animationEnabled("animationEnabled",
-		QGuiApplication::tr("UI animations enabled (true, false)"),
-		QGuiApplication::tr("enabled", "Animation enabled value"));
-	parser.addOption(animationEnabled);
-	optionList << animationEnabled;
+	QCommandLineOption animation("animation",
+		QGuiApplication::tr("UI animations (true, false). Defaults to true if not supplied."),
+		QGuiApplication::tr("true|false", "Animation value"));
+	parser.addOption(animation);
+	optionList << animation;
 
 	QCommandLineOption resolution("resolution",
 		QGuiApplication::tr("Window resolution as WxH, applied before the UI loads."),
@@ -342,10 +347,17 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	}
 	if (!uiTestName.isEmpty()) {
 		if (Victron::VenusOS::UiTestConfiguration::exists(uiTestName)) {
+			if (parser.isSet(uiTestCapture)) {
+				// Test configurations choose their own captures.
+				qFatal() << "Error: --ui-test-capture only works when --ui-test is a page path,"
+						 << "not the test configuration" << uiTestName;
+			}
 			uiTestConf.load(uiTestName);
 		} else {
-			uiTestConf.loadTargetPageNavigation(uiTestName);
+			uiTestConf.loadTargetPageNavigation(uiTestName, parser.isSet(uiTestCapture));
 		}
+	} else if (parser.isSet(uiTestCapture)) {
+		qFatal() << "Error: --ui-test-capture requires --ui-test with a page path";
 	}
 
 	// Load the specified --mock-conf option.
@@ -473,13 +485,13 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 		colorSchemeValue = queryColorScheme.toLower();
 	}
 
-	bool animationEnabledValue = true;
-	if (parser.isSet(animationEnabled)) {
-		animationEnabledValue = parser.value(animationEnabled).toLower() != QStringLiteral("false");
-	} else if (!queryAnimationEnabled.isEmpty()) {
-		animationEnabledValue = queryAnimationEnabled.toLower() != QStringLiteral("false");
+	bool animationEnabled = true;
+	if (parser.isSet(animation)) {
+		animationEnabled = parser.value(animation).toLower() != QStringLiteral("false");
+	} else if (!queryAnimation.isEmpty()) {
+		animationEnabled = queryAnimation.toLower() != QStringLiteral("false");
 	}
-	uiconfig->setAnimationEnabled(animationEnabledValue);
+	uiconfig->setAnimationEnabled(animationEnabled);
 
 	Victron::VenusOS::Theme::ForcedColorScheme forcedScheme;
 	if (colorSchemeValue == "dark") {

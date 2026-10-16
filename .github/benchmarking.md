@@ -113,7 +113,7 @@ Key settings:
   measured.
 - **`UIAnimations: 1`** — Opt-in so `/Settings/Gui2/UIAnimations` stays enabled
   after mock load. UI tests force that setting to 0 unless this key is present;
-  `--animationEnabled` alone does not override it. The overview test asserts
+  `--animation` alone does not override it. The overview test asserts
   that animations are actually running before it holds for capture.
 - **`ExitWhenFinished: false`** — The application stays alive after the test
   completes (allowing the script to control the run duration via process

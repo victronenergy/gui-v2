@@ -28,7 +28,9 @@ public:
 	// qrc:tests/ui/smoke/mock-maximal/mock-maximal.json.
 	void load(const QString &dirName);
 	static bool exists(const QString &dirName);
-	void loadTargetPageNavigation(const QString &targetPage);
+	// Builds a configuration that clicks through the UI to show one page. If captureImage is true,
+	// an image of the page is saved once it is shown.
+	void loadTargetPageNavigation(const QString &targetPage, bool captureImage);
 
 	bool isValid() const { return !dirName().isEmpty(); }
 	QString dirName() const;
