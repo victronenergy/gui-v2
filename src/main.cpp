@@ -242,6 +242,11 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	parser.addOption(uiTest);
 	optionList << uiTest;
 
+	QCommandLineOption uiTestCapture("ui-test-capture",
+		QGuiApplication::tr("Save an image of the page given by --ui-test once it is shown"));
+	parser.addOption(uiTestCapture);
+	optionList << uiTestCapture;
+
 	QCommandLineOption noMockTimers("no-mock-timers",
 		QGuiApplication::tr("Set to disable mock timers on startup"));
 	parser.addOption(noMockTimers);
@@ -342,10 +347,17 @@ void initBackend(bool *enableFpsCounter, bool *skipSplashScreen)
 	}
 	if (!uiTestName.isEmpty()) {
 		if (Victron::VenusOS::UiTestConfiguration::exists(uiTestName)) {
+			if (parser.isSet(uiTestCapture)) {
+				// Test configurations choose their own captures.
+				qFatal() << "Error: --ui-test-capture only works when --ui-test is a page path,"
+						 << "not the test configuration" << uiTestName;
+			}
 			uiTestConf.load(uiTestName);
 		} else {
-			uiTestConf.loadTargetPageNavigation(uiTestName);
+			uiTestConf.loadTargetPageNavigation(uiTestName, parser.isSet(uiTestCapture));
 		}
+	} else if (parser.isSet(uiTestCapture)) {
+		qFatal() << "Error: --ui-test-capture requires --ui-test with a page path";
 	}
 
 	// Load the specified --mock-conf option.
