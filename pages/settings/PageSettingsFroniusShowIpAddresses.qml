@@ -12,7 +12,7 @@ Page {
 	IpAddressListView {
 		id: settingsListView
 
-		addressesUid: Global.systemSettings.serviceUid + "/Settings/Fronius/KnownIPAddresses"
+		addressesUid: Services.settings.serviceUid + "/Settings/Fronius/KnownIPAddresses"
 		header: ListNavigation {
 			bottomInset: Theme.geometry_listItem_itemSeparator_height
 			bottomPadding: bottomInset + topPadding

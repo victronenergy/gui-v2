@@ -21,10 +21,10 @@ Rectangle {
 		splashVisible: UiConfig.splashScreenVisible
 		showAnimation: UiConfig.showSplashAnimation
 		pagesLoaded: Global.allPagesLoaded
-		dataReady: Global.dataManagerLoaded
+		dataReady: Services.appDataReady
 		// Same condition as welcomeLoader.active. This object is created first,
 		// so it must not reference the loader id.
-		welcomeActive: Global.dataManagerLoaded && Global.systemSettings.needsOnboarding
+		welcomeActive: Services.appDataReady && Services.settings.needsOnboarding
 		preloadComplete: Global.pagePreloadComplete
 
 		onPhaseChanged: root._applyPhase(phase)
@@ -473,7 +473,7 @@ Rectangle {
 	Loader {
 		id: welcomeLoader
 
-		active: Global.dataManagerLoaded && Global.systemSettings.needsOnboarding
+		active: Services.appDataReady && Services.settings.needsOnboarding
 		anchors.fill: parent
 		sourceComponent: WelcomeView {
 			anchors.centerIn: parent

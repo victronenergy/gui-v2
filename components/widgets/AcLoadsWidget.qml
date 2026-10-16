@@ -10,9 +10,9 @@ import Victron.VenusOS
 AcWidget {
 	id: root
 
-	readonly property ObjectAcConnection measurements: Global.system.showInputLoads
-			? Global.system.load.acIn
-			: Global.system.load.ac
+	readonly property ObjectAcConnection measurements: Services.system.showInputLoads
+			? Services.system.load.acIn
+			: Services.system.load.ac
 
 	//% "AC Loads"
 	title: qsTrId("overview_widget_acloads_title")
@@ -31,7 +31,7 @@ AcWidget {
 		widget: root
 		iconSource: "qrc:/images/acloads.svg"
 		gaugeValueType: VenusOS.Gauges_ValueType_RisingPercentage
-		gaugeMaximumValue: Global.acInputs.maximumAcCurrent
+		gaugeMaximumValue: Services.acInputs.maximumAcCurrent
 	}
 
 	onClicked: {
@@ -45,7 +45,7 @@ AcWidget {
 	FilteredDeviceModel {
 		id: acLoadDevices
 		serviceTypes: ["acload", "evcharger", "heatpump"]
-		childFilterIds: Global.system.showInputLoads
+		childFilterIds: Services.system.showInputLoads
 				? { "acload": ["Position"], "evcharger": ["Position"], "heatpump": ["Position"] }
 				: {}
 		childFilterFunction: (device, childItems) => {

@@ -28,7 +28,7 @@ Page {
 
 				//% "Enable Modbus TCP server"
 				text: qsTrId("settings_modbus_enable_modbus_tcp")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Modbus"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Services/Modbus"
 				updateDataOnClick: false
 				onClicked: {
 					if (checked) {
@@ -48,7 +48,7 @@ Page {
 				//% "Access permissions"
 				text: qsTrId("settings_modbus_access_rights")
 				preferredVisible: enableModbusTcp.checked
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/ModbusServer/ReadWrite"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/ModbusServer/ReadWrite"
 				optionModel: [
 					//% "Read only"
 					{ display: qsTrId("settings_modbus_access_readonly"), value: 0 },

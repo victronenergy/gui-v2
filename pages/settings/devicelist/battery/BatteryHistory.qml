@@ -68,12 +68,12 @@ QtObject {
 	readonly property VeQuickItem minimumTemperature: VeQuickItem {
 		uid: root.bindPrefix + "/History/MinimumTemperature"
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 	readonly property VeQuickItem maximumTemperature: VeQuickItem {
 		uid: root.bindPrefix + "/History/MaximumTemperature"
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 	readonly property VeQuickItem dischargedEnergy: VeQuickItem {
 		uid: root.bindPrefix + "/History/DischargedEnergy"

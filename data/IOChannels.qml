@@ -14,6 +14,4 @@ QtObject {
 	// - a group for a particular switch device, containing all the channels on that device that do
 	//   not belong to a custom named group.
 	readonly property IOChannelGroupModel groups: IOChannelGroupModel {}
-
-	Component.onCompleted: Global.switches = root
 }

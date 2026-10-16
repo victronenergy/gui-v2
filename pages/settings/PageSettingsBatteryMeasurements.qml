@@ -18,7 +18,7 @@ Page {
 
 	VeQuickItem {
 		id: availableBatteries
-		uid: Global.system.serviceUid + "/AvailableBatteries"
+		uid: Services.system.serviceUid + "/AvailableBatteries"
 		onValueChanged: {
 			let jsonObject
 			try {
@@ -34,7 +34,7 @@ Page {
 
 	VeQuickItem {
 		id: activeBatteryService
-		uid: Global.system.serviceUid + "/ActiveBatteryService"
+		uid: Services.system.serviceUid + "/ActiveBatteryService"
 	}
 
 	GradientListView {
@@ -73,7 +73,7 @@ Page {
 
 			VeQuickItem {
 				id: batteryEnabled
-				uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Enabled"
+				uid: Services.settings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Enabled"
 			}
 
 			Component {
@@ -101,7 +101,7 @@ Page {
 								text: qsTrId("settings_batteries_name")
 								//% "Enter name"
 								placeholderText: qsTrId("settings_batteries_enter_name")
-								dataItem.uid: Global.systemSettings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
+								dataItem.uid: Services.settings.serviceUid + "/Settings/SystemSetup/Batteries/Configuration/" + batteryMenuItem.configId + "/Name"
 								preferredVisible: dataItem.valid
 								maximumLength: 32
 							}

@@ -84,12 +84,12 @@ Page {
 
 					VeQuickItem {
 						id: relay0FunctionItem
-						uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
+						uid: Services.settings.serviceUid + "/Settings/Relay/Function"
 					}
 
 					VeQuickItem {
 						id: relay1FunctionItem
-						uid: Global.systemSettings.serviceUid + "/Settings/Relay/1/Function"
+						uid: Services.settings.serviceUid + "/Settings/Relay/1/Function"
 					}
 
 					GradientListView {

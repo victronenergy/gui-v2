@@ -19,7 +19,7 @@ Row {
 		anchors.verticalCenter: parent.verticalCenter
 		font.pixelSize: Theme.font_boatPage_batteryTemperature_pixelSize
 		value: dataItem && dataItem.valid ? dataItem.value : NaN
-		unit: Global.systemSettings.temperatureUnit
+		unit: Services.settings.temperatureUnit
 	}
 
 	CP.ColorImage {

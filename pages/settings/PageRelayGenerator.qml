@@ -11,7 +11,7 @@ PageGenerator {
 
 	VeQuickItem {
 		id: relayFunction
-		uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
+		uid: Services.settings.serviceUid + "/Settings/Relay/Function"
 	}
 
 	model: !relayFunction.valid || relayFunction.value === 1 ? startStopModel : disabledModel

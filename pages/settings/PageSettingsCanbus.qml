@@ -42,7 +42,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "CAN-bus profile"
 				text: qsTrId("settings_canbus_profile")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Canbus/" + canbusProfile.gateway + "/Profile"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Canbus/" + canbusProfile.gateway + "/Profile"
 				optionModel: canbusProfile.optionModel
 			}
 

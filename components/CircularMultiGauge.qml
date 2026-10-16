@@ -56,7 +56,7 @@ Item {
 						remainderColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus, true)
 						strokeWidth: gauges.strokeWidth
 						animationEnabled: gauges.animationEnabled
-						shineAnimationEnabled: Global.system.battery.mode === VenusOS.Battery_Mode_Charging
+						shineAnimationEnabled: Services.system.battery.mode === VenusOS.Battery_Mode_Charging
 					}
 				}
 
@@ -127,7 +127,7 @@ Item {
 					property quantityInfo quantity
 
 					states: State {
-						when: Global.systemSettings.briefView.unit.value !== VenusOS.BriefView_Unit_None
+						when: Services.settings.briefView.unit.value !== VenusOS.BriefView_Unit_None
 						PropertyChanges {
 							target: valueLabel
 
@@ -135,12 +135,12 @@ Item {
 							text: quantity.number + quantity.unit
 							quantity: Units.getDisplayText(unit, value)
 							unit: {
-								if (Global.systemSettings.briefView.unit.value === VenusOS.BriefView_Unit_Percentage) {
+								if (Services.settings.briefView.unit.value === VenusOS.BriefView_Unit_Percentage) {
 									return VenusOS.Units_Percentage
 								} else if (model.tankType === VenusOS.Tank_Type_Battery) {
 									return VenusOS.Units_Percentage
 								} else {
-									return Global.systemSettings.volumeUnit
+									return Services.settings.volumeUnit
 								}
 							}
 						}

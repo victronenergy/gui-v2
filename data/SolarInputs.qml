@@ -6,6 +6,12 @@
 import QtQuick
 import Victron.VenusOS
 
+/*
+	Provides overall details for solar-related services on the system.
+
+	This includes all solarcharger and pvinverter services, as well as any multi and inverter
+	services with trackers (as specified by /NrOfTrackers).
+*/
 QtObject {
 	id: root
 
@@ -24,6 +30,4 @@ QtObject {
 	}
 
 	readonly property int inputCount: devices.count + pvInverterDevices.count
-
-	Component.onCompleted: Global.solarInputs = root
 }

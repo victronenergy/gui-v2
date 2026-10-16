@@ -63,7 +63,7 @@ AbstractListItem {
 		return Math.max(_metricCategory(pm25Item, pm25Boundaries), _metricCategory(co2Item, co2Boundaries))
 	}
 	readonly property string categoryText: iaqsItem.valid && !offline
-			? Global.environmentInputs.airQualityToText(iaqsItem.value)
+			? Services.environment.airQualityToText(iaqsItem.value)
 			  //% "No data"
 			: qsTrId("temperature_air_quality_no_data")
 

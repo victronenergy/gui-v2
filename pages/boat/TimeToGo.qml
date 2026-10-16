@@ -10,7 +10,7 @@ import Victron.Gauges
 Column {
 	id: root
 
-	readonly property ActiveSystemBattery battery: Global.system && Global.system.battery ? Global.system.battery : null
+	readonly property ActiveSystemBattery battery: Services.system && Services.system.battery ? Services.system.battery : null
 	readonly property var duration: Utils.decomposeSeconds(battery.timeToGo)
 
 	visible: !!battery && battery.timeToGo > 60

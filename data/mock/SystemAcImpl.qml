@@ -10,23 +10,23 @@ Item {
 	id: root
 
 	function setSystemValue(path, value) {
-		MockManager.setValue(Global.system.serviceUid + path, value)
+		MockManager.setValue(Services.system.serviceUid + path, value)
 	}
 
 	function systemValue(path) {
-		return MockManager.value(Global.system.serviceUid + path)
+		return MockManager.value(Services.system.serviceUid + path)
 	}
 
 	function setGaugesValue(path, value) {
-		MockManager.setValue(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges" + path, value)
+		MockManager.setValue(Services.settings.serviceUid + "/Settings/Gui/Gauges" + path, value)
 	}
 	function gaugesValue(path) {
-		return MockManager.value(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges" + path)
+		return MockManager.value(Services.settings.serviceUid + "/Settings/Gui/Gauges" + path)
 	}
 
 	VeQuickItem {
 		id: gaugesAutoMax
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
+		uid: Services.settings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
 	}
 
 	// AC inputs: on initialization, set the AC input current min/max for the Brief/Overview gauges.
@@ -40,7 +40,7 @@ Item {
 			id: acInputDelegate
 
 			required property int index
-			readonly property AcInput acInput: Global.acInputs["input" + (index + 1)]
+			readonly property AcInput acInput: Services.acInputs["input" + (index + 1)]
 
 			function updateMinMaxCurrent() {
 				if (!acInput) {
@@ -68,7 +68,7 @@ Item {
 				const maximumCurrentPath = "/Ac/In/" + acInputDelegate.index + "/Current/Max"
 				root.setGaugesValue(maximumCurrentPath, Math.max(maximumCurrent, root.gaugesValue(maximumCurrentPath) || 0))
 
-				const minimumCurrent = Global.system.feedbackEnabled ? maximumCurrent * -1 : 0
+				const minimumCurrent = Services.system.feedbackEnabled ? maximumCurrent * -1 : 0
 				const minimumCurrentPath = "/Ac/In/" + acInputDelegate.index + "/Current/Min"
 				root.setGaugesValue(minimumCurrentPath, Math.min(minimumCurrent, root.gaugesValue(minimumCurrent) || 0))
 			}
@@ -228,12 +228,12 @@ Item {
 
 	// Animate AC input values.
 	Instantiator {
-		model: [Global.acInputs.input1Info, Global.acInputs.input2Info]
+		model: [Services.acInputs.input1Info, Services.acInputs.input2Info]
 		delegate: Item {
 			required property int index
 			required property AcInputSystemInfo modelData
 			readonly property AcInputSystemInfo acInputInfo: modelData
-			readonly property AcInput acInput: Global.acInputs["input" + (index + 1)]
+			readonly property AcInput acInput: Services.acInputs["input" + (index + 1)]
 
 			// For each phase, slide between the minimum and maximum current values.
 			MockDataRangeAnimator {

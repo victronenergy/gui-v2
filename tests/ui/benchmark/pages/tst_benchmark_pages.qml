@@ -210,7 +210,7 @@ UiTestCase {
 			return { bindPrefix: _uid("com.victronenergy.inverter.socketcan_can0_vi0_uc87197") }
 		case "/pages/loads/AcLoadListPage.qml":
 			return {
-				measurements: Global.system.load.ac,
+				measurements: Services.system.load.ac,
 				model: benchAcLoadDevices
 			}
 		case "/pages/loads/DcLoadListPage.qml":

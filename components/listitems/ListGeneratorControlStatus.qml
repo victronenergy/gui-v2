@@ -14,14 +14,14 @@ ListText {
 	//% "Control status"
 	text: qsTrId("list_generator_control_status")
 	secondaryText: activeCondition.isAutoStarted && generatorState.value === VenusOS.Generators_State_Running
-					   ? CommonWords.autostarted_dot_running_by.arg(Global.generators.runningByText(activeCondition.value))
+					   ? CommonWords.autostarted_dot_running_by.arg(Services.generators.runningByText(activeCondition.value))
 					   : generatorState.valid && activeCondition.valid
-						 ? Global.generators.stateAndCondition(generatorState.value, activeCondition.value)
+						 ? Services.generators.stateAndCondition(generatorState.value, activeCondition.value)
 						 : ""
 
 	VeQuickItem {
 		id: activeCondition
-		readonly property bool isAutoStarted: valid && Global.generators.isAutoStarted(value)
+		readonly property bool isAutoStarted: valid && Services.generators.isAutoStarted(value)
 		uid: root.startStopBindPrefix ? root.startStopBindPrefix + "/RunningByConditionCode" : ""
 	}
 

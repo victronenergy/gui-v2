@@ -10,7 +10,7 @@ DeviceListDelegate {
 	id: root
 
 	function _systemDistanceUnit() {
-		switch (Global.systemSettings.speedUnit) {
+		switch (Services.settings.speedUnit) {
 		case VenusOS.Units_Speed_KilometresPerHour:
 			return VenusOS.Units_Kilometre
 		case VenusOS.Units_Speed_MetresPerSecond:

@@ -26,7 +26,7 @@ OverviewWidget {
 
 		OverviewElectricalQuantityLabel {
 			widgetSize: root.size
-			dataObject: Global.system.dc
+			dataObject: Services.system.dc
 			sourceType: VenusOS.ElectricalQuantity_Source_Dc
 			Layout.fillWidth: true
 			Layout.fillHeight: true

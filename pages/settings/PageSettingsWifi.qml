@@ -15,7 +15,7 @@ Page {
 
 	VeQuickItem {
 		id: scanItem
-		uid: Global.venusPlatform.serviceUid +  "/Network/Wifi/Scan"
+		uid: Services.platform.serviceUid +  "/Network/Wifi/Scan"
 	}
 
 	WifiModel {
@@ -53,7 +53,7 @@ Page {
 
 				VeQuickItem {
 					id: accessPoint
-					uid: Global.venusPlatform.serviceUid + "/Services/AccessPoint/Enabled"
+					uid: Services.platform.serviceUid + "/Services/AccessPoint/Enabled"
 				}
 
 				Component {
@@ -144,7 +144,7 @@ Page {
 				id: wifiGatewayEnabled
 				//% "Allow using WiFi for internet access"
 				text: qsTrId("settings_tcpip_wifi_gateway_enabled")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Network/Wifi/GatewayEnabled"
+				dataItem.uid: Services.platform.serviceUid + "/Network/Wifi/GatewayEnabled"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				valueTrue: true
 				valueFalse: false

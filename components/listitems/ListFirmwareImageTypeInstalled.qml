@@ -13,10 +13,10 @@ ListText {
 
 	VeQuickItem {
 		id: imageType
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/ImageType"
+		uid: Services.platform.serviceUid + "/Firmware/Installed/ImageType"
 	}
 	VeQuickItem {
 		id: largeImageSupport
-		uid: Global.venusPlatform.serviceUid + "/Firmware/LargeImageSupport"
+		uid: Services.platform.serviceUid + "/Firmware/LargeImageSupport"
 	}
 }

@@ -9,14 +9,14 @@ import Victron.VenusOS
 DeviceListDelegate {
 	id: root
 
-	readonly property string statusText: level.valid ? "" : (status.valid ? Global.tanks.statusToText(status.value) : "")
+	readonly property string statusText: level.valid ? "" : (status.valid ? Services.tanks.statusToText(status.value) : "")
 
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
 
 		QuantityObject { object: root; key: root.statusText ? "statusText" : ""; unit: VenusOS.Units_None }
-		QuantityObject { object: temperature; unit: Global.systemSettings.temperatureUnit }
-		QuantityObject { object: remaining; unit: Global.systemSettings.volumeUnit }
+		QuantityObject { object: temperature; unit: Services.settings.temperatureUnit }
+		QuantityObject { object: remaining; unit: Services.settings.volumeUnit }
 		QuantityObject { object: level; unit: VenusOS.Units_Percentage }
 	}
 
@@ -29,7 +29,7 @@ DeviceListDelegate {
 		id: temperature
 		uid: root.device.serviceUid + "/Temperature"
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 
 	VeQuickItem {
@@ -41,7 +41,7 @@ DeviceListDelegate {
 		id: remaining
 		uid: root.device.serviceUid + "/Remaining"
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Volume_CubicMetre)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.volumeUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.volumeUnit)
 	}
 
 	VeQuickItem {

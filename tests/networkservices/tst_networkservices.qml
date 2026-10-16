@@ -41,14 +41,6 @@ TestCase {
 		}
 	}
 
-	function initTestCase() {
-		Global.venusPlatform = { serviceUid: platformUid }
-	}
-
-	function cleanupTestCase() {
-		Global.venusPlatform = null
-	}
-
 	function test_unplugCable() {
 		setEthernet(pluggedIn("192.168.1.10"))
 

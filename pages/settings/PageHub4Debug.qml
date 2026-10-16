@@ -26,7 +26,7 @@ Page {
 
 				bottomPadding: gridSetpointSlider.height + Theme.geometry_listItem_content_verticalMargin
 				text: root.title
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
 				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
 				from: -15000
 				to: 15000
@@ -36,7 +36,7 @@ Page {
 					id: gridSetpointSlider
 
 					anchors.bottom: parent.bottom
-					dataItem.uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
+					dataItem.uid: Services.settings.serviceUid + "/Settings/CGwacs/AcPowerSetPoint"
 					from: -15000
 					to: 15000
 					stepSize: 50
@@ -46,7 +46,7 @@ Page {
 			ListText {
 				//% "AC-In setpoint"
 				text: qsTrId("settings_ess_debug_ac_in_setpoint")
-				dataItem.uid: Global.system.veBus.serviceUid ? Global.system.veBus.serviceUid + "/Hub4/L1/AcPowerSetpoint" : ""
+				dataItem.uid: Services.system.veBus.serviceUid ? Services.system.veBus.serviceUid + "/Hub4/L1/AcPowerSetpoint" : ""
 			}
 
 			ListQuantityGroup {
@@ -107,14 +107,14 @@ Page {
 					id: batteryChargePower
 					readonly property string summary: "Charge: %1"
 						.arg(valid ? Units.getCombinedDisplayText(VenusOS.Units_Watt, value) : "--")
-					uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxChargePower"
+					uid: Services.settings.serviceUid + "/Settings/CGwacs/MaxChargePower"
 				}
 
 				VeQuickItem {
 					id: batteryDischargePower
 					readonly property string summary: "Discharge: %1"
 						.arg(valid ? Units.getCombinedDisplayText(VenusOS.Units_Watt, value) : "--")
-					uid: Global.systemSettings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
+					uid: Services.settings.serviceUid + "/Settings/CGwacs/MaxDischargePower"
 				}
 			}
 		}

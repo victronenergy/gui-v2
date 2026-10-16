@@ -85,7 +85,7 @@ Page {
 			ListSwitch {
 				id: enable
 				text: CommonWords.enable
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/BleSensors"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Services/BleSensors"
 			}
 
 			ListNavigation {
@@ -131,7 +131,7 @@ Page {
 		Page {
 			VeQuickItem {
 				id: bleTokenUsers
-				uid: Global.venusPlatform.serviceUid + "/BleTokens/Users"
+				uid: Services.platform.serviceUid + "/BleTokens/Users"
 				onValueChanged: {
 					if (!valid) {
 						bleTokensView.model = []
@@ -215,13 +215,13 @@ Page {
 					}
 
 					ListPairingModeButton {
-						countDownUid: Global.venusPlatform.serviceUid + "/Tokens/Pairing/CountDown"
+						countDownUid: Services.platform.serviceUid + "/Tokens/Pairing/CountDown"
 						preferredVisible: blePairingEnable.valid && !!gatewayAccess.currentValue
 						onClicked: blePairingEnable.setValue("")
 
 						VeQuickItem {
 							id: blePairingEnable
-							uid: Global.venusPlatform.serviceUid + "/Tokens/Pairing/Enable"
+							uid: Services.platform.serviceUid + "/Tokens/Pairing/Enable"
 						}
 					}
 
@@ -257,7 +257,7 @@ Page {
 
 					VeQuickItem {
 						id: bleTokenRemove
-						uid: Global.venusPlatform.serviceUid + "/BleTokens/Remove"
+						uid: Services.platform.serviceUid + "/BleTokens/Remove"
 					}
 				}
 			}

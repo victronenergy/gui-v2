@@ -71,29 +71,29 @@ VisibleItemModel {
 
 	ListRangeSlider {
 		text: CommonWords.low_battery_temperature
-		suffix: Global.systemSettings.temperatureUnitSuffix
+		suffix: Services.settings.temperatureUnitSuffix
 		firstColor: Theme.color_red
 		secondColor: Theme.color_green
 		firstDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowBatteryTemperature"
 		firstDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
-		firstDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		firstDataItem.displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowBatteryTemperatureClear"
 		secondDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
-		secondDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		secondDataItem.displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 		preferredVisible: dataValid
 	}
 
 	ListRangeSlider {
 		text: CommonWords.high_battery_temperature
-		suffix: Global.systemSettings.temperatureUnitSuffix
+		suffix: Services.settings.temperatureUnitSuffix
 		firstColor: Theme.color_green
 		secondColor: Theme.color_red
 		firstDataItem.uid: root.bindPrefix + "/Settings/Alarm/HighBatteryTemperatureClear"
 		firstDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
-		firstDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		firstDataItem.displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/HighBatteryTemperature"
 		secondDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
-		secondDataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		secondDataItem.displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 		preferredVisible: dataValid
 	}
 }

@@ -11,7 +11,7 @@ VisibleItemModel {
 	id: root
 
 	property string bindPrefix
-	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Generator1"
+	property string settingsBindPrefix: Services.settings.serviceUid + "/Settings/Generator1"
 	property string startStopBindPrefix: _startStop1Finder.startStop1Uid
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(bindPrefix)
 	readonly property bool dcGenset: serviceType === "dcgenset"
@@ -108,7 +108,7 @@ VisibleItemModel {
 	ListText {
 		//% "Genset status"
 		text: qsTrId("ac-in-genset_status")
-		secondaryText: Global.acInputs.gensetStatusCodeToText(gensetStatus.value)
+		secondaryText: Services.acInputs.gensetStatusCodeToText(gensetStatus.value)
 
 		VeQuickItem {
 			id: gensetStatus

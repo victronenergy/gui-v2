@@ -210,6 +210,4 @@ QtObject {
 		const match = roles.find(function(r) { return r.role === role })
 		return match ? match.name : "--"
 	}
-
-	Component.onCompleted: Global.acInputs = root
 }

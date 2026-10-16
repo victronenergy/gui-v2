@@ -27,14 +27,14 @@ Page {
 				]
 				bodyHeaderText: CommonWords.total
 				bodyModel: QuantityObjectModel {
-					QuantityObject { object: Global.evChargers; key: "power"; unit: VenusOS.Units_Watt }
-					QuantityObject { object: Global.evChargers; key: "energy"; unit: VenusOS.Units_Energy_KiloWattHour }
+					QuantityObject { object: Services.evChargers; key: "power"; unit: VenusOS.Units_Watt }
+					QuantityObject { object: Services.evChargers; key: "energy"; unit: VenusOS.Units_Energy_KiloWattHour }
 				}
 			}
 		}
 
 		model: SortedEvChargerDeviceModel {
-			sourceModel: Global.evChargers.model
+			sourceModel: Services.evChargers.model
 		}
 		delegate: ListQuantityGroupNavigation {
 			id: evChargerDelegate
@@ -42,7 +42,7 @@ Page {
 			required property BaseDevice device
 			required property int status
 			required property real energy
-			readonly property string statusText: Global.evChargers.chargerStatusToText(status)
+			readonly property string statusText: Services.evChargers.chargerStatusToText(status)
 
 			text: device.name
 			quantityModel: QuantityObjectModel {

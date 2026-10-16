@@ -130,6 +130,4 @@ QtObject {
 			return ""
 		}
 	}
-
-	Component.onCompleted: Global.evChargers = root
 }

@@ -45,8 +45,8 @@ OverviewWidget {
 			}
 
 			QuantityLabel {
-				value: Units.convert(firstAlternatorTemperature.value, VenusOS.Units_Temperature_Celsius, Global.systemSettings.temperatureUnit)
-				unit: Global.systemSettings.temperatureUnit
+				value: Units.convert(firstAlternatorTemperature.value, VenusOS.Units_Temperature_Celsius, Services.settings.temperatureUnit)
+				unit: Services.settings.temperatureUnit
 				unitColor: Theme.color_overviewPage_widget_battery_font_secondary
 				font.pixelSize: root.secondaryFontSize
 				alignment: Qt.AlignRight
@@ -72,7 +72,7 @@ OverviewWidget {
 						root.detailUrl,
 						{ "bindPrefix": inputDeviceModel.firstObject.serviceUid })
 		} else {
-			Global.pageManager.pushPage(root._widgetOnlyPresentsDcGensets && Global.generators.multipleDcGensetsSupported
+			Global.pageManager.pushPage(root._widgetOnlyPresentsDcGensets && Services.generators.multipleDcGensetsSupported
 										? "/pages/settings/PageDcGensets.qml" : listPageComponent)
 		}
 	}

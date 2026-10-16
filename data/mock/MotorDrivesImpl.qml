@@ -22,12 +22,12 @@ Item {
 
 	VeQuickItem {
 		id: gaugesAutoMax
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
+		uid: Services.settings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
 	}
 
 	VeQuickItem {
 		id: maxMotorRpm
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max"
+		uid: Services.settings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max"
 	}
 
 	Loader {
@@ -73,7 +73,7 @@ Item {
 			MockDataRangeAnimator {
 				active: Global.mainView && Global.mainView.mainViewVisible
 				stepSize: -876 // use a step size that looks uneven
-				maximumValue: MockManager.value(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max") || 0
+				maximumValue: MockManager.value(Services.settings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/RPM/Max") || 0
 				VeQuickItem { uid: root.motorDriveUid + "/Motor/RPM" }
 			}
 			MockDataRangeAnimator {
