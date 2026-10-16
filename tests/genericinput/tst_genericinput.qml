@@ -414,6 +414,94 @@ TestCase {
 				allowedInGroupModel: true,
 			},
 			{
+				tag: "ShowUIInput=Watch, local connection",
+				uid: "mock/com.victronenergy.test.a/GenericInput/1",
+				inputProperties: {
+					"Name": "A",
+					"Settings/ShowUIInput": 8, // Watch=0x8
+					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				vrm: false,
+				allowedInGroupModel: false,
+			},
+			{
+				tag: "ShowUIInput=Watch, remote connection",
+				uid: "mock/com.victronenergy.test.a/GenericInput/1",
+				inputProperties: {
+					"Name": "A",
+					"Settings/ShowUIInput": 8, // Watch=0x8
+					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				vrm: true,
+				allowedInGroupModel: false,
+			},
+			{
+				tag: "ShowUIInput=Local+Watch, local connection",
+				uid: "mock/com.victronenergy.test.a/GenericInput/1",
+				inputProperties: {
+					"Name": "A",
+					"Settings/ShowUIInput": 10, // Local+Watch = 0x2 | 0x8
+					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				vrm: false,
+				allowedInGroupModel: true,
+			},
+			{
+				tag: "ShowUIInput=Local+Watch, remote connection",
+				uid: "mock/com.victronenergy.test.a/GenericInput/1",
+				inputProperties: {
+					"Name": "A",
+					"Settings/ShowUIInput": 10, // Local+Watch = 0x2 | 0x8
+					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				vrm: true,
+				allowedInGroupModel: false,
+			},
+			{
+				tag: "ShowUIInput=Remote+Watch, local connection",
+				uid: "mock/com.victronenergy.test.a/GenericInput/1",
+				inputProperties: {
+					"Name": "A",
+					"Settings/ShowUIInput": 12, // Remote+Watch = 0x4 | 0x8
+					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				vrm: false,
+				allowedInGroupModel: false,
+			},
+			{
+				tag: "ShowUIInput=Remote+Watch, remote connection",
+				uid: "mock/com.victronenergy.test.a/GenericInput/1",
+				inputProperties: {
+					"Name": "A",
+					"Settings/ShowUIInput": 12, // Remote+Watch = 0x4 | 0x8
+					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				vrm: true,
+				allowedInGroupModel: true,
+			},
+			{
+				tag: "ShowUIInput=Local+Remote+Watch, local connection",
+				uid: "mock/com.victronenergy.test.a/GenericInput/1",
+				inputProperties: {
+					"Name": "A",
+					"Settings/ShowUIInput": 14, // Local+Remote+Watch = 0x2 | 0x4 | 0x8
+					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				vrm: false,
+				allowedInGroupModel: true,
+			},
+			{
+				tag: "ShowUIInput=Local+Remote+Watch, remote connection",
+				uid: "mock/com.victronenergy.test.a/GenericInput/1",
+				inputProperties: {
+					"Name": "A",
+					"Settings/ShowUIInput": 14, // Local+Remote+Watch = 0x2 | 0x4 | 0x8
+					"Settings/Type": 0, "Settings/ValidTypes": 1 << 0
+				},
+				vrm: true,
+				allowedInGroupModel: true,
+			},
+			{
 				// If value is invalid, then show the control (just like if ShowUIInput is not set)
 				tag: "ShowUIInput=0x5 (invalid)",
 				uid: "mock/com.victronenergy.test.a/GenericInput/1",
