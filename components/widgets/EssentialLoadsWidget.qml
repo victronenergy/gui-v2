@@ -29,7 +29,7 @@ AcWidget {
 		widget: root
 		iconSource: "qrc:/images/icon_CL_24.svg"
 		gaugeValueType: VenusOS.Gauges_ValueType_RisingPercentage
-		gaugeMaximumValue: Global.system.load.maximumAcCurrent
+		gaugeMaximumValue: Global.acInputs.maximumAcCurrent
 	}
 
 	onClicked: {

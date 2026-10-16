@@ -250,7 +250,7 @@ exported power v  0.4 |   /
 			AcPhasesCurrentRange {
 				id: acLoadGraphRange
 				phaseModel: root.visible ? Global.system.load.ac.phases : null
-				maximumCurrent: Global.system.load.maximumAcCurrent
+				maximumCurrent: Global.acInputs.maximumAcCurrent
 			}
 		}
 		footer: ThreePhaseBarGauge {
@@ -259,7 +259,7 @@ exported power v  0.4 |   /
 			orientation: Qt.Horizontal
 			valueType: VenusOS.Gauges_ValueType_RisingPercentage
 			phaseModel: root.visible ? Global.system.load.ac.phases : null
-			maximumValue: Global.system.load.maximumAcCurrent
+			maximumValue: Global.acInputs.maximumAcCurrent
 			animationEnabled: root.animationEnabled
 		}
 

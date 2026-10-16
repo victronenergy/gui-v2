@@ -13,6 +13,22 @@ LevelsTab {
 	readonly property int twoGaugeWidth: Gauges.width(Global.environmentInputs.model.count, 4, Theme.geometry_screen_width)
 	readonly property int oneGaugeWidth: Gauges.width(Global.environmentInputs.model.count, 6, Theme.geometry_screen_width)
 
+	readonly property var _temperatureGaugeParameters: [
+		{ min: -20,     max: 60,    step: 10 },     // 0: Battery
+		{ min: 0,       max: 20,    step: 5 },      // 1: Fridge
+		{ min: -40,     max: 60,    step: 10 },     // 2: Generic
+		{ min: 5,       max: 35,    step: 10 },     // 3: Room
+		{ min: -40,     max: 60,    step: 10 },     // 4: Outdoor
+		{ min: 0,       max: 100,   step: 10 },     // 5: Water Heater
+		{ min: -30,     max: 0,     step: 5 },      // 6: Freezer
+	]
+
+	function _gaugeParameters(temperatureType) {
+		return temperatureType == null || temperatureType < 0 || temperatureType >= _temperatureGaugeParameters.length
+				? _temperatureGaugeParameters[VenusOS.Temperature_DeviceType_Generic]
+				: _temperatureGaugeParameters[temperatureType]
+	}
+
 	model: Global.environmentInputs.model
 	delegate: ListItemLoader {
 		id: panelLoader
@@ -35,6 +51,13 @@ LevelsTab {
 					   : Gauges.height(Global.pageManager?.expandLayout ?? false)
 				device: panelLoader.device
 				animationEnabled: root.animationEnabled
+				minimumValue: Units.convert(root._gaugeParameters(temperatureType.value).min,
+						VenusOS.Units_Temperature_Celsius,
+						Global.systemSettings.temperatureUnit)
+				maximumValue: Units.convert(root._gaugeParameters(temperatureType.value).max,
+						VenusOS.Units_Temperature_Celsius,
+						Global.systemSettings.temperatureUnit)
+				stepSize: root._gaugeParameters(temperatureType.value).step
 				temperatureGaugeGradient: temperatureGradient
 				humidityGaugeGradient: humidityGradient
 
@@ -79,10 +102,22 @@ LevelsTab {
 					height: root.orientation === ListView.Vertical ? implicitHeight : parent.height
 					device: panelLoader.device
 					animationEnabled: root.animationEnabled
+					minimumValue: Units.convert(root._gaugeParameters(temperatureType.value).min,
+							VenusOS.Units_Temperature_Celsius,
+							Global.systemSettings.temperatureUnit)
+					maximumValue: Units.convert(root._gaugeParameters(temperatureType.value).max,
+							VenusOS.Units_Temperature_Celsius,
+							Global.systemSettings.temperatureUnit)
+					stepSize: root._gaugeParameters(temperatureType.value).step
 					temperatureGaugeGradient: temperatureGradient
 					humidityGaugeGradient: humidityGradient
 				}
 			}
+		}
+
+		VeQuickItem {
+			id: temperatureType
+			uid: panelLoader.device ? panelLoader.device.serviceUid + "/TemperatureType" : ""
 		}
 
 		VeQuickItem {
