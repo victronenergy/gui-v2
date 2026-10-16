@@ -43,6 +43,19 @@ DevicePage {
 			}
 		}
 
+		ListText {
+			readonly property string qualityLabel: Global.environmentInputs.airQualityToText(dataItem.value)
+
+			//% "Air quality"
+			text: qsTrId("temperature_air_quality")
+			dataItem.uid: root.bindPrefix + "/IAQS"
+			preferredVisible: dataItem.valid
+			secondaryText: dataItem.valid
+					//% "%1/100 (%2)"
+					? qsTrId("temperature_air_quality_score").arg(dataItem.value).arg(qualityLabel)
+					: ""
+		}
+
 		ListTemperature {
 			text: CommonWords.temperature
 			dataItem.uid: bindPrefix + "/Temperature"

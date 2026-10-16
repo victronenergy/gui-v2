@@ -17,6 +17,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/AcInputDirectionIcon.qml
     components/AcOutput.qml
     components/AcPhase.qml
+    components/AirQualityGaugePanel.qml
     components/Arc.qml
     components/ArcGauge.qml
     components/ArcGaugeQuantityRow.qml
@@ -48,6 +49,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/EmptyPageItem.qml
     components/EnvironmentGauge.qml
     components/EnvironmentGaugePanel.qml
+    components/EnvironmentGaugePanelBackground.qml
     components/ExpandedTanksView.qml
     components/FirmwareUpdate.qml
     components/FittedQuantityLabel.qml

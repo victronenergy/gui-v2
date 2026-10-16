@@ -12,14 +12,20 @@ DeviceListDelegate {
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
 
-		// Show air quality data if CO2 is available, otherwise show temperature/humidity
+		// Show the overall air quality score if available, otherwise raw CO2/PM2.5,
+		// otherwise show temperature/humidity
 		QuantityObject {
-			object: co2.value !== undefined ? co2 : temperature
-			unit: co2.value !== undefined ? VenusOS.Units_PartsPerMillion : Global.systemSettings.temperatureUnit
+			object: iaqs.valid ? iaqs : co2.value !== undefined ? co2 : temperature
+			key: iaqs.valid ? "textValue" : "value"
+			unit: iaqs.valid ? VenusOS.Units_None
+					: co2.value !== undefined ? VenusOS.Units_PartsPerMillion
+					: Global.systemSettings.temperatureUnit
 		}
 		QuantityObject {
-			object: co2.value !== undefined ? pm25 : humidity
-			unit: co2.value !== undefined ? VenusOS.Units_MicrogramPerCubicMeter : VenusOS.Units_Percentage
+			object: co2.value !== undefined ? (iaqs.valid ? co2 : pm25) : humidity
+			unit: co2.value === undefined ? VenusOS.Units_Percentage
+					: iaqs.valid ? VenusOS.Units_PartsPerMillion
+					: VenusOS.Units_MicrogramPerCubicMeter
 		}
 	}
 
@@ -48,5 +54,17 @@ DeviceListDelegate {
 	VeQuickItem {
 		id: pm25
 		uid: root.device.serviceUid + "/PM25"
+	}
+
+	VeQuickItem {
+		id: iaqs
+
+		readonly property string textValue: valid
+				//% "%1 (%2)"
+				? qsTrId("temperature_air_quality_score_short").arg(value).arg(qualityLabel)
+				: ""
+		readonly property string qualityLabel: Global.environmentInputs.airQualityToText(value)
+
+		uid: root.device.serviceUid + "/IAQS"
 	}
 }

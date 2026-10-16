@@ -14,32 +14,91 @@ LevelsTab {
 	readonly property int oneGaugeWidth: Gauges.width(Global.environmentInputs.model.count, 6, Theme.geometry_screen_width)
 
 	model: Global.environmentInputs.model
-	delegate: EnvironmentGaugePanel {
-		width: root.orientation === ListView.Vertical
-			   ? ListView.view.width
-			   : hasTwoGauges ? root.twoGaugeWidth : root.oneGaugeWidth
-		height: root.orientation === ListView.Vertical
-			   ? implicitHeight
-			   : Gauges.height(Global.pageManager?.expandLayout ?? false)
-		animationEnabled: root.animationEnabled
-		// temperature: temperatureItem.valid ? temperatureItem.value : NaN
-		// temperatureType: temperatureType.valid ? temperatureType.value : VenusOS.Temperature_DeviceType_Generic
-		// humidity: humidity.valid ? humidity.value : NaN
-		temperatureGaugeGradient: temperatureGradient
-		humidityGaugeGradient: humidityGradient
-		focusPolicy: Qt.TabFocus
+	delegate: ListItemLoader {
+		id: panelLoader
 
-		Behavior on height {
-			enabled: root.animationEnabled && Global.pageManager?.animatingIdleResize
-			NumberAnimation {
-				duration: Theme.animation_page_idleResize_duration
-				easing.type: Easing.InOutQuad
+		required property Device device
+		readonly property bool hasAirQuality: iaqsItem.valid || pm25Item.valid || co2Item.valid
+
+		sourceComponent: hasAirQuality ? twoPanelsComponent : singlePanelComponent
+		KeyNavigationHighlight.active: activeFocus
+
+		Component {
+			id: singlePanelComponent
+
+			EnvironmentGaugePanel {
+				width: root.orientation === ListView.Vertical
+					   ? root.width
+					   : hasTwoGauges ? root.twoGaugeWidth : root.oneGaugeWidth
+				height: root.orientation === ListView.Vertical
+					   ? implicitHeight
+					   : Gauges.height(Global.pageManager?.expandLayout ?? false)
+				device: panelLoader.device
+				animationEnabled: root.animationEnabled
+				temperatureGaugeGradient: temperatureGradient
+				humidityGaugeGradient: humidityGradient
+
+				Behavior on height {
+					enabled: root.animationEnabled && Global.pageManager?.animatingIdleResize
+					NumberAnimation {
+						duration: Theme.animation_page_idleResize_duration
+						easing.type: Easing.InOutQuad
+					}
+				}
 			}
 		}
 
-		KeyNavigationHighlight.active: activeFocus
-		KeyNavigationHighlight.leftMargin: leftInset
-		KeyNavigationHighlight.rightMargin: rightInset
+		Component {
+			id: twoPanelsComponent
+
+			Grid {
+				height: root.orientation === ListView.Vertical ? implicitHeight : Gauges.height(Global.pageManager?.expandLayout ?? false)
+				columns: root.orientation === ListView.Vertical ? 1 : 2
+				rows: root.orientation === ListView.Vertical ? 2 : 1
+				columnSpacing: Math.max(root.spacing, Theme.geometry_levelsPage_gauge_spacing_tiny)
+				rowSpacing: root.spacing
+
+				Behavior on height {
+					enabled: root.animationEnabled && Global.pageManager?.animatingIdleResize
+					NumberAnimation {
+						duration: Theme.animation_page_idleResize_duration
+						easing.type: Easing.InOutQuad
+					}
+				}
+
+				AirQualityGaugePanel {
+					width: root.orientation === ListView.Vertical ? root.width : root.twoGaugeWidth
+					height: root.orientation === ListView.Vertical ? implicitHeight : parent.height
+					device: panelLoader.device
+				}
+
+				EnvironmentGaugePanel {
+					width: root.orientation === ListView.Vertical
+							? root.width
+							: hasTwoGauges ? root.twoGaugeWidth : root.oneGaugeWidth
+					height: root.orientation === ListView.Vertical ? implicitHeight : parent.height
+					device: panelLoader.device
+					animationEnabled: root.animationEnabled
+					temperatureGaugeGradient: temperatureGradient
+					humidityGaugeGradient: humidityGradient
+				}
+			}
+		}
+
+		VeQuickItem {
+			id: iaqsItem
+			uid: panelLoader.device ? panelLoader.device.serviceUid + "/IAQS" : ""
+		}
+
+		VeQuickItem {
+			id: pm25Item
+			uid: panelLoader.device ? panelLoader.device.serviceUid + "/PM25" : ""
+		}
+
+		VeQuickItem {
+			id: co2Item
+			uid: panelLoader.device ? panelLoader.device.serviceUid + "/CO2" : ""
+		}
 	}
 
 	Gradient {
