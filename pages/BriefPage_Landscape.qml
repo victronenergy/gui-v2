@@ -294,7 +294,7 @@ Item {
 				animationEnabled: root.animationEnabled && !pauseRightGaugeAnimations.running
 				valueType: VenusOS.Gauges_ValueType_RisingPercentage
 				phaseModel: Global.system.load.ac.phases
-				maximumValue: Global.system.load.maximumAcCurrent
+				maximumValue: Global.acInputs.maximumAcCurrent
 
 				ArcGaugeQuantityRow {
 					alignment: Qt.AlignRight | (gaugeParams.activeGaugeCount === 2 ? Qt.AlignBottom : Qt.AlignVCenter)
