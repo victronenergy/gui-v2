@@ -22,12 +22,12 @@ Page {
 
 	VeQuickItem {
 		id: leftDeviceInstanceItem
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/MultiDrive/Left/DeviceInstance"
+		uid: Services.settings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/MultiDrive/Left/DeviceInstance"
 	}
 
 	VeQuickItem {
 		id: rightDeviceInstanceItem
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/MultiDrive/Right/DeviceInstance"
+		uid: Services.settings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/MultiDrive/Right/DeviceInstance"
 	}
 
 	function getOptions(side) {
@@ -70,14 +70,14 @@ Page {
 		model: VisibleItemModel {
 			ListSwitch {
 				text: CommonWords.enabled
-				dataItem.uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
+				dataItem.uid: !!Services.settings ? Services.settings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
 			ListSwitch {
 				//% "Show temperatures"
 				text: qsTrId("pagesettingsboatpage_show_temperatures")
-				dataItem.uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/ShowTemperatures" : ""
+				dataItem.uid: !!Services.settings ? Services.settings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/ShowTemperatures" : ""
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 

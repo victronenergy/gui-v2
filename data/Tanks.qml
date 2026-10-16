@@ -186,6 +186,4 @@ QtObject {
 			return ""
 		}
 	}
-
-	Component.onCompleted: Global.tanks = root
 }

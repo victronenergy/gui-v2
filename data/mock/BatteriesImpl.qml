@@ -65,12 +65,12 @@ Item {
 
 	VeQuickItem {
 		id: activeBatteryService
-		uid: Global.system.serviceUid + "/ActiveBatteryService"
+		uid: Services.system.serviceUid + "/ActiveBatteryService"
 	}
 
 	VeQuickItem {
 		id: activeBmsService
-		uid: Global.system.serviceUid + "/ActiveBmsService"
+		uid: Services.system.serviceUid + "/ActiveBmsService"
 	}
 
 	VeQuickItem {
@@ -82,7 +82,7 @@ Item {
 			setValue(services)
 		}
 
-		uid: Global.system.serviceUid + "/AvailableBmsServices"
+		uid: Services.system.serviceUid + "/AvailableBmsServices"
 	}
 
 	// Set system /Batteries (a list of objects). Example value:
@@ -149,7 +149,7 @@ Item {
 			return properties
 		}
 
-		uid: Global.system.serviceUid + "/Batteries"
+		uid: Services.system.serviceUid + "/Batteries"
 	}
 
 	// Set system /AvailableBatteries (type is string). Example value:
@@ -173,7 +173,7 @@ Item {
 			setValue(JSON.stringify(batteryMap))
 		}
 
-		uid: Global.system.serviceUid + "/AvailableBatteries"
+		uid: Services.system.serviceUid + "/AvailableBatteries"
 	}
 
 	// Set system /AvailableBatteryServices (type is string). Example value:
@@ -193,7 +193,7 @@ Item {
 			setValue(JSON.stringify(batteryServices))
 		}
 
-		uid: Global.system.serviceUid + "/AvailableBatteryServices"
+		uid: Services.system.serviceUid + "/AvailableBatteryServices"
 	}
 
 	// Set system /AvailableBatteryMeasurements (type is object). Example value:
@@ -218,7 +218,7 @@ Item {
 			setValue(batteryNames)
 		}
 
-		uid: Global.system.serviceUid + "/AvailableBatteryMeasurements"
+		uid: Services.system.serviceUid + "/AvailableBatteryMeasurements"
 	}
 
 	// Set settings /Settings/SystemSetup/Batteries/Configuration/*. Example values for a battery
@@ -233,7 +233,7 @@ Item {
 
 		function configPath(battery) {
 			const batteryId = battery.portableIdWithInstance().replace(/\./g, "_")
-			return `${Global.systemSettings.serviceUid}/Settings/SystemSetup/Batteries/Configuration/${batteryId}`
+			return `${Services.settings.serviceUid}/Settings/SystemSetup/Batteries/Configuration/${batteryId}`
 		}
 
 		function addBattery(battery) {

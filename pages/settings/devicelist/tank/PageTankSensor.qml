@@ -21,7 +21,7 @@ DevicePage {
 		ListText {
 			text: CommonWords.status
 			dataItem.uid: root.bindPrefix + "/Status"
-			secondaryText: Global.tanks.statusToText(dataItem.value)
+			secondaryText: Services.tanks.statusToText(dataItem.value)
 		}
 
 		ListQuantity {
@@ -36,8 +36,8 @@ DevicePage {
 			text: qsTrId("devicelist_tanksensor_remaining")
 			dataItem.uid: root.bindPrefix + "/Remaining"
 			dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Volume_CubicMetre)
-			dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.volumeUnit)
-			unit: Global.systemSettings.volumeUnit
+			dataItem.displayUnit: Units.unitToVeUnit(Services.settings.volumeUnit)
+			unit: Services.settings.volumeUnit
 		}
 
 		ListTemperature {

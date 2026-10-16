@@ -9,8 +9,6 @@ import Victron.VenusOS
 QtObject {
 	id: root
 
-	required property string platformServiceUid
-
 	readonly property string serviceUid: BackendConnection.serviceUidForType("settings")
 	readonly property bool needsOnboarding: _onboardingState.needsOnboarding
 			// The needsOnboarding setting can't be updated in ReadOnly mode, so never show onboarding in that case.
@@ -303,7 +301,7 @@ QtObject {
 	}
 
 	property VeQuickItem time: VeQuickItem {
-		uid: root.platformServiceUid + "/Device/Time"
+		uid: BackendConnection.serviceUidForType("platform") + "/Device/Time"
 		onValueChanged: {
 			if (value !== undefined) {
 				ClockTime.clockTime = value
@@ -367,7 +365,9 @@ QtObject {
 				root.electricalPowerDisplay = VenusOS.ElectricalPowerDisplay_Mixed
 				break
 			default:
-				console.warn("Cannot load electrical quantity,", uid, "has unsupported value:", value, "default to watts")
+				if (valid && value !== "") {
+					console.warn("Cannot load electrical quantity,", uid, "has unsupported value:", value, "default to watts")
+				}
 				root.electricalPowerDisplay = VenusOS.ElectricalPowerDisplay_PreferWatts
 				break
 			}
@@ -390,7 +390,7 @@ QtObject {
 				root.temperatureUnitSuffix = "°F"
 				break
 			default:
-				if (Global.dataManagerLoaded) {
+				if (valid && value !== "") {
 					console.warn("Cannot load temperature unit,", uid, "has unsupported value:", value, "default to celsius")
 				}
 				root.temperatureUnit = VenusOS.Units_Temperature_Celsius
@@ -423,9 +423,7 @@ QtObject {
 				root.altitudeUnit = VenusOS.Units_Foot
 				break
 			default:
-				if (Global.dataManagerLoaded
-						// If altitude is just an empty string (rather than an unexpected value), skip the warning.
-						&& value !== "") {
+				if (valid && value !== "") {
 					console.warn("Cannot load altitude unit,", uid, "has unsupported value:", value, "default to metre")
 				}
 				root.altitudeUnit = VenusOS.Units_Metre
@@ -456,7 +454,9 @@ QtObject {
 				root.volumeUnit = VenusOS.Units_Volume_GallonUS
 				break
 			default:
-				console.warn("Cannot load volume unit,", uid, "has unsupported value:", value, "default to m3")
+				if (valid && value !== "") {
+					console.warn("Cannot load volume unit,", uid, "has unsupported value:", value, "default to m3")
+				}
 				root.volumeUnit = VenusOS.Units_Volume_CubicMetre
 				break
 			}
@@ -499,6 +499,4 @@ QtObject {
 	function reset() {
 		// no-op
 	}
-
-	Component.onCompleted: Global.systemSettings = root
 }

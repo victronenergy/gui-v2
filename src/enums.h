@@ -544,8 +544,8 @@ public:
 	// drive it. Splash_Phase is the sub-state while in Startup_Phase_Splash.
 	enum Startup_Phase {
 		Startup_Phase_LoadingBackend,  // waiting for BackendConnection to become Ready
-		Startup_Phase_LoadingData,     // backend ready, DataManager building data sources
-		Startup_Phase_LoadingUi,       // data ready, ApplicationContent/SwipeView pages building
+		Startup_Phase_LoadingData,     // backend ready, app building data sources
+		Startup_Phase_LoadingUi,       // app data ready, ApplicationContent/SwipeView pages building
 		Startup_Phase_Splash,          // pages built, splash animation and page preload running
 		Startup_Phase_Running          // splash hidden, UI interactive
 	};

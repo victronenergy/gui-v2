@@ -37,7 +37,7 @@ DevicePage {
 			text: CommonWords.battery_temperature
 			dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
 			preferredVisible: dataItem.valid
-			unit: Global.systemSettings.temperatureUnit
+			unit: Services.settings.temperatureUnit
 		}
 
 		ListText {

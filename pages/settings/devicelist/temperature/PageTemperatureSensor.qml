@@ -44,7 +44,7 @@ DevicePage {
 		}
 
 		ListText {
-			readonly property string qualityLabel: Global.environmentInputs.airQualityToText(dataItem.value)
+			readonly property string qualityLabel: Services.environment.airQualityToText(dataItem.value)
 
 			//% "Air quality"
 			text: qsTrId("temperature_air_quality")

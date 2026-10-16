@@ -40,7 +40,7 @@ RowLayout {
 		value: root.quantityValue
 		valueColor: root.quantityColor
 		valueText: root.quantityText || quantityInfo.number
-		unit: root.quantityUnit >= 0 ? root.quantityUnit : Global.systemSettings.toPreferredUnit(ioChannel.unitType)
+		unit: root.quantityUnit >= 0 ? root.quantityUnit : Services.settings.toPreferredUnit(ioChannel.unitType)
 		unitColor: root.quantityColor
 		font.pixelSize: Theme.font_switches_header_secondary
 		visible: !root.statusVisible && (root.quantityText.length > 0 || !isNaN(root.quantityValue))

@@ -25,7 +25,7 @@ ModalDialog {
 
 			Repeater {
 				id: repeater
-				model: Global.evChargers.modeOptionModel
+				model: Services.evChargers.modeOptionModel
 				delegate: SettingsColumn {
 					width: parent.width
 

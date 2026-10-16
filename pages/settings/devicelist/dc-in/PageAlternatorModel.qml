@@ -44,7 +44,7 @@ VisibleItemModel {
 
 	ListText {
 		text: CommonWords.network_status
-		secondaryText: Global.systemSettings.networkStatusToText(dataItem.value)
+		secondaryText: Services.settings.networkStatusToText(dataItem.value)
 		dataItem.uid: root.bindPrefix + "/Link/NetworkStatus"
 		preferredVisible: dataItem.valid
 	}

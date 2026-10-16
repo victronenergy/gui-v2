@@ -10,7 +10,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property string settingsBindPrefix: Global.systemSettings.serviceUid + "/Settings/Generator0"
+	property string settingsBindPrefix: Services.settings.serviceUid + "/Settings/Generator0"
 	property string startStopBindPrefix: generator0ServiceUid
 
 	// The generator start/stop service is always com.victronenergy.generator.startstop0 on D-Bus,
@@ -42,7 +42,7 @@ Page {
 
 		VeQuickItem {
 			id: relayFunction
-			uid: Global.systemSettings.serviceUid + "/Settings/Relay/Function"
+			uid: Services.settings.serviceUid + "/Settings/Relay/Function"
 		}
 	}
 
@@ -76,13 +76,13 @@ Page {
 			text: CommonWords.state
 			preferredVisible: root.startStopBindPrefix === root.generator0ServiceUid
 			secondaryText: activeCondition.isAutoStarted && generatorState.value === VenusOS.Generators_State_Running
-						   ? CommonWords.autostarted_dot_running_by.arg(Global.generators.runningByText(activeCondition.value))
-						   : Global.generators.stateAndCondition(generatorState.value, activeCondition.value)
+						   ? CommonWords.autostarted_dot_running_by.arg(Services.generators.runningByText(activeCondition.value))
+						   : Services.generators.stateAndCondition(generatorState.value, activeCondition.value)
 
 			VeQuickItem {
 				id: activeCondition
 
-				readonly property bool isAutoStarted: valid && Global.generators.isAutoStarted(value)
+				readonly property bool isAutoStarted: valid && Services.generators.isAutoStarted(value)
 
 				uid: root.startStopBindPrefix + "/RunningByConditionCode"
 			}

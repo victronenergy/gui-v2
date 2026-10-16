@@ -11,7 +11,7 @@ Row {
 	id: root
 
 	required property bool isShoreConnected
-	readonly property bool isShoreCharging: isShoreConnected && Global.acInputs.highlightedInput && Global.acInputs.highlightedInput.power > 0
+	readonly property bool isShoreCharging: isShoreConnected && Services.acInputs.highlightedInput && Services.acInputs.highlightedInput.power > 0
 
 	spacing: Theme.geometry_boatPage_row_spacing
 
@@ -33,6 +33,6 @@ Row {
 		anchors.verticalCenter: parent.verticalCenter
 		font.pixelSize: Theme.font_boatPage_shoreGauge_label_pixelSize
 		sourceType: VenusOS.ElectricalQuantity_Source_Ac
-		dataObject: isShoreConnected ? Global.acInputs.highlightedInput : null
+		dataObject: isShoreConnected ? Services.acInputs.highlightedInput : null
 	}
 }

@@ -13,14 +13,14 @@ QtObject {
 
 	readonly property VeQuickItemsQuotient rpm: VeQuickItemsQuotient {
 		numeratorUid: root.serviceUid ? root.serviceUid + "/Motor/RPM" : ""
-		denominatorUid: Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gui/Gauges/MotorDrive/RPM/Max" : ""
+		denominatorUid: Services.settings ? Services.settings.serviceUid  + "/Settings/Gui/Gauges/MotorDrive/RPM/Max" : ""
 		sourceUnit: VenusOS.Units_RevolutionsPerMinute
 		displayUnit: VenusOS.Units_RevolutionsPerMinute
 	}
 
 	readonly property VeQuickItemsQuotient power: VeQuickItemsQuotient {
 		numeratorUid: root.serviceUid ? root.serviceUid + "/Dc/0/Power" : ""
-		denominatorUid : Global.systemSettings ? Global.systemSettings.serviceUid  + "/Settings/Gui/Gauges/MotorDrive/Power/Max" : ""
+		denominatorUid : Services.settings ? Services.settings.serviceUid  + "/Settings/Gui/Gauges/MotorDrive/Power/Max" : ""
 		sourceUnit: VenusOS.Units_Watt
 		displayUnit: VenusOS.Units_Watt
 	}
@@ -46,18 +46,18 @@ QtObject {
 	readonly property VeQuickItem motorTemperature: VeQuickItem {
 		uid: root.serviceUid ? root.serviceUid + "/Motor/Temperature" : ""
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 
 	readonly property VeQuickItem controllerTemperature: VeQuickItem {
 		uid: root.serviceUid ? root.serviceUid + "/Controller/Temperature" : ""
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 
 	readonly property VeQuickItem coolantTemperature: VeQuickItem {
 		uid: root.serviceUid ? root.serviceUid + "/Coolant/Temperature" : ""
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-		displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+		displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 	}
 }

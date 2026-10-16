@@ -50,10 +50,8 @@ QtObject {
 			}
 			return VenusOS.OverviewWidget_Type_GenericDcSource
 		default:
-			console.warn("DC input service type was", serviceType, "which is not in Global.dcInputs.model!")
+			console.warn("DC input service type was", serviceType, "which is not in Services.dcInputs.model!")
 			return -1
 		}
 	}
-
-	Component.onCompleted: Global.dcInputs = root
 }

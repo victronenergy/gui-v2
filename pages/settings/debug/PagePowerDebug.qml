@@ -11,7 +11,7 @@ Page {
 
 	property string qwacsPvInverterPrefix: "%1/com.victronenergy.pvinverter.qwacs_di1".arg(BackendConnection.uidPrefix())
 	property string sensorsPvInverterPrefix: "%1/com.victronenergy.pvinverter.vebusacsensor_output".arg(BackendConnection.uidPrefix())
-	property string vebusPrefix: Global.system.veBus.serviceUid
+	property string vebusPrefix: Services.system.veBus.serviceUid
 
 	function powerDiff(a, b) {
 		return a.valid && !b.valid ? a.value - b.value : NaN

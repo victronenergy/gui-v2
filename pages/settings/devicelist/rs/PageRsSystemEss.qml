@@ -18,7 +18,7 @@ Page {
 	VeQuickItem {
 		id: dEssModeItem
 
-		uid: Global.systemSettings.serviceUid + "/Settings/DynamicEss/Mode"
+		uid: Services.settings.serviceUid + "/Settings/DynamicEss/Mode"
 	}
 
 	VeQuickItem {
@@ -31,7 +31,7 @@ Page {
 			ListRadioButtonGroup {
 				id: essMode
 				text: CommonWords.mode
-				optionModel: Global.systemSettings.ess.stateModel
+				optionModel: Services.settings.ess.stateModel
 				dataItem.uid: root.bindPrefix + "/Settings/Ess/Mode"
 			}
 
@@ -75,7 +75,7 @@ Page {
 
 				VeQuickItem {
 					id: scheduleSoc
-					uid: Global.system.serviceUid + "/Control/ScheduledSoc"
+					uid: Services.system.serviceUid + "/Control/ScheduledSoc"
 				}
 
 				Component {
@@ -95,7 +95,7 @@ Page {
 			ListNavigation {
 				//% "Dynamic ESS"
 				text: qsTrId("settings_rs_ess_dess")
-				preferredVisible: dEssModeItem.value > 0 || Global.systemSettings.canAccess(VenusOS.User_AccessType_Service)
+				preferredVisible: dEssModeItem.value > 0 || Services.settings.canAccess(VenusOS.User_AccessType_Service)
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsDynamicEss.qml",
 							{ title: text })

@@ -72,7 +72,7 @@ Item {
 				id: valueItem
 				uid: root.genericInput.uid + "/Value"
 				sourceUnit: Units.unitToVeUnit(root.genericInput.unitType)
-				displayUnit: Units.unitToVeUnit(Global.systemSettings.toPreferredUnit(root.genericInput.unitType))
+				displayUnit: Units.unitToVeUnit(Services.settings.toPreferredUnit(root.genericInput.unitType))
 			}
 		}
 	}

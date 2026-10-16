@@ -159,7 +159,7 @@ Page {
 							filterType: QuantityObjectModel.HasValue
 
 							QuantityObject { object: cellVoltage; unit: VenusOS.Units_Volt_DC; decimals: 3 }
-							QuantityObject { object: cellTemperature; unit: Global.systemSettings.temperatureUnit }
+							QuantityObject { object: cellTemperature; unit: Services.settings.temperatureUnit }
 						}
 						preferredVisible: cellVoltage.valid
 
@@ -172,7 +172,7 @@ Page {
 							id: cellTemperature
 							uid: root.bindPrefix + "/Battery/" + batteryRequestId.value + "/Cell/" + cellIndex + "/Temperature"
 							sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Celsius)
-							displayUnit: Units.unitToVeUnit(Global.systemSettings.temperatureUnit)
+							displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
 						}
 					}
 				}

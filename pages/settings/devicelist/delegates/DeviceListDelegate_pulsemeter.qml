@@ -11,7 +11,7 @@ DeviceListDelegate {
 
 	quantityModel: QuantityObjectModel {
 		filterType: QuantityObjectModel.HasValue
-		QuantityObject { object: aggregate; unit: Global.systemSettings.volumeUnit }
+		QuantityObject { object: aggregate; unit: Services.settings.volumeUnit }
 	}
 
 	onClicked: {

@@ -20,7 +20,7 @@ Item {
 			MockDataRangeAnimator {
 				active: Global.mainView && Global.mainView.mainViewVisible
 				stepSize: 8
-				maximumValue: MockManager.value(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/Speed/Max") || 0
+				maximumValue: MockManager.value(Services.settings.serviceUid + "/Settings/Gui/Gauges/Speed/Max") || 0
 				VeQuickItem { uid: gps.uid + "/Speed" }
 			}
 		}

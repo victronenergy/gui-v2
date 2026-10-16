@@ -13,7 +13,7 @@ Page {
 
 	VeQuickItem {
 		id: shellyServiceEnabled
-		uid: Global.systemSettings.serviceUid + "/Settings/Services/Shelly"
+		uid: Services.settings.serviceUid + "/Settings/Services/Shelly"
 	}
 
 	// Get a list of all devices on the shelly service, sorted by name.
@@ -31,7 +31,7 @@ Page {
 			ListSwitch {
 				//% "Enable Shelly integration"
 				text: qsTrId("settings_shelly_integration")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Shelly"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Services/Shelly"
 			}
 
 			ListSwitch {

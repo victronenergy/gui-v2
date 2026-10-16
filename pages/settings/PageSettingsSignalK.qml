@@ -16,7 +16,7 @@ Page {
 
 				//% "Signal K"
 				text: qsTrId("settings_large_signal_k")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Services/SignalK/Enabled"
+				dataItem.uid: Services.platform.serviceUid + "/Services/SignalK/Enabled"
 			}
 
 			ListLink {

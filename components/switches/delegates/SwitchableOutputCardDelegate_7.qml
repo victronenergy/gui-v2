@@ -62,7 +62,7 @@ FocusScope {
 		}
 		switchableOutput: root.switchableOutput
 		sourceUnit: root.switchableOutput.unitType
-		displayUnit: Global.systemSettings.toPreferredUnit(root.switchableOutput.unitType)
+		displayUnit: Services.settings.toPreferredUnit(root.switchableOutput.unitType)
 
 		// Expand clickable area horizontally (to delegate edges) and vertically. Adjust paddings
 		// by the same amount to fit the content within the background.

@@ -326,7 +326,7 @@ DevicePage {
 	VeQuickItem {
 		id: mk3Update
 
-		uid: Global.systemSettings.serviceUid + "/Settings/Vebus/AllowMk3Fw212Update"
+		uid: Services.settings.serviceUid + "/Settings/Vebus/AllowMk3Fw212Update"
 	}
 
 	VeQuickItem {
