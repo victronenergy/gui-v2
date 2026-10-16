@@ -236,10 +236,17 @@ function secondsToString(secs, showSeconds = true) {
 // TODO - this matches the old gui implementation, but is unusual in that it returns eg. "1127.96M bytes"
 // instead of the more familiar "1127.96MB". Check with victron.
 function qtyToString(qty, unitSingle, unitMultiple) {
-	if (qty > 1000000) {
-		return "%1M %2".arg(Math.round((qty * 100) / 1000000) / 100).arg(unitMultiple)
-	} else if (qty > 1000) {
-		return "%1k %2".arg(Math.round((qty * 100) / 1000) / 100).arg(unitMultiple)
+	// toFixed() before .arg(): QString::arg(double) uses Qt's 'g' format
+	// (6 significant digits), which silently renders large values as
+	// scientific notation otherwise.
+	if (qty >= 1000000000000) {
+		return "%1T %2".arg((qty / 1000000000000).toFixed(2)).arg(unitMultiple)
+	} else if (qty >= 1000000000) {
+		return "%1G %2".arg((qty / 1000000000).toFixed(2)).arg(unitMultiple)
+	} else if (qty >= 1000000) {
+		return "%1M %2".arg((qty / 1000000).toFixed(2)).arg(unitMultiple)
+	} else if (qty >= 1000) {
+		return "%1k %2".arg((qty / 1000).toFixed(2)).arg(unitMultiple)
 	} else if (qty > 1 || qty === 0) {
 		return "%1 %2".arg(qty).arg(unitMultiple)
 	} else if (qty === 1) {

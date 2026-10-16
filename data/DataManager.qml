@@ -18,6 +18,7 @@ Item {
 			&& !!Global.inverterChargers
 			&& !!Global.notifications
 			&& !!Global.solarInputs
+			&& !!Global.storage
 			&& !!Global.system
 			&& !!Global.systemSettings
 			&& !!Global.switches
@@ -47,6 +48,7 @@ Item {
 	InverterChargers {}
 	Notifications {}
 	SolarInputs {}
+	Storage {}
 	Switches {}
 	System {}
 	SystemSettings {}
