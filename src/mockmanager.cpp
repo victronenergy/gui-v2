@@ -66,83 +66,14 @@ MockManager::MockManager(QObject *parent)
 	if (!producer()) {
 		qFatal("MockManager can only be used when VeQItemMockProducer is available!");
 	}
-	initWorkerThread();
-}
-
-MockManager::~MockManager()
-{
-#if QT_CONFIG(thread)
-	if (m_workerThread) {
-		if (m_timerWorker) {
-			m_timerWorker->deleteLater();
-			m_timerWorker = nullptr;
-		}
-		m_workerThread->quit();
-		m_workerThread->wait();
-		delete m_workerThread;
-		m_workerThread = nullptr;
-	}
-#else
-	delete m_timerWorker;
-	m_timerWorker = nullptr;
-#endif
-	delete m_valueApplier;
-}
-
-void MockManager::initWorkerThread()
-{
-	// Register metatypes for cross-thread signal/slot connections
-	qRegisterMetaType<Victron::VenusOS::MockAnimatorConfig>(
-		"Victron::VenusOS::MockAnimatorConfig");
-	qRegisterMetaType<Victron::VenusOS::MockValueUpdateList>(
-		"Victron::VenusOS::MockValueUpdateList");
-	qRegisterMetaType<Victron::VenusOS::MockNotifyEvent>(
-		"Victron::VenusOS::MockNotifyEvent");
-	qRegisterMetaType<Victron::VenusOS::MockNotifyEventList>(
-		"Victron::VenusOS::MockNotifyEventList");
-	qRegisterMetaType<Victron::VenusOS::MockValueCache>(
-		"MockValueCache");
-	qRegisterMetaType<Victron::VenusOS::MockValueCache>(
-		"Victron::VenusOS::MockValueCache");
-	qRegisterMetaType<Victron::VenusOS::MockConsumptionConfig>(
-		"Victron::VenusOS::MockConsumptionConfig");
-
-	// Create worker and GUI-thread value applier
-	m_timerWorker = new MockTimerWorker(); // no parent — will be moved to thread (or stays on main thread for WASM)
 	m_valueApplier = new MockValueApplier(this);
+	m_timerWorker = new MockTimerWorker(m_valueApplier, this);
 
-#if QT_CONFIG(thread)
-	qDebug() << "Initialising mock manager in multi-threaded mode";
-
-	// Create worker thread and move worker to it
-	m_workerThread = new QThread();
-	m_workerThread->setObjectName(QStringLiteral("MockTimerWorkerThread"));
-	m_timerWorker->moveToThread(m_workerThread);
-
-	// Connect worker output to GUI-thread applier (queued automatically due to thread affinity)
-	connect(m_timerWorker, &MockTimerWorker::valuesReady,
-			m_valueApplier, &MockValueApplier::applyValues);
-	connect(m_timerWorker, &MockTimerWorker::externalValueObserved,
-			m_valueApplier, &MockValueApplier::acknowledgeExternalWrite);
-	connect(m_timerWorker, &MockTimerWorker::uidPrefixForgotten,
-			m_valueApplier, &MockValueApplier::acknowledgePrefix);
-
-	// Start the worker thread
-	m_workerThread->start();
-#else
-	qDebug() << "Initialising mock manager in single-threaded mode";
-
-	// Single-threaded mode (e.g. WASM): worker stays on the main thread.
-	// Timer events fire in the main event loop. Connections are direct since
-	// both objects share the same thread.
-	connect(m_timerWorker, &MockTimerWorker::valuesReady,
-			m_valueApplier, &MockValueApplier::applyValues);
-	connect(m_timerWorker, &MockTimerWorker::externalValueObserved,
-			m_valueApplier, &MockValueApplier::acknowledgeExternalWrite);
-	connect(m_timerWorker, &MockTimerWorker::uidPrefixForgotten,
-			m_valueApplier, &MockValueApplier::acknowledgePrefix);
-#endif
+	// A VeQuickItem::setValue() from QML. MockManager::setValue() calls onExternalWrite() itself.
+	connect(producer(), &VeQItemMockProducer::valueWritten, this, &MockManager::onExternalWrite);
 }
+
+MockManager::~MockManager() = default;
 
 bool MockManager::timersActive() const
 {
@@ -153,21 +84,7 @@ void MockManager::setTimersActive(bool active)
 {
 	if (active != m_timersActive) {
 		m_timersActive = active;
-		if (m_timerWorker) {
-			if (active) {
-				// Restart from the producer, not the cache captured at registration.
-				MockValueCache snapshot;
-				for (auto it = m_watches.constBegin(); it != m_watches.constEnd(); ++it) {
-					snapshot.insert(it.key(), producer()->value(it.key()));
-				}
-				if (!snapshot.isEmpty()) {
-					QMetaObject::invokeMethod(m_timerWorker, "updateValues",
-						Qt::QueuedConnection, Q_ARG(MockValueCache, snapshot));
-				}
-			}
-			QMetaObject::invokeMethod(m_timerWorker, "setAllTimersActive",
-				Qt::QueuedConnection, Q_ARG(bool, active));
-		}
+		m_timerWorker->setAllTimersActive(active);
 		Q_EMIT timersActiveChanged();
 	}
 }
@@ -180,19 +97,11 @@ void MockManager::setValue(const QString &uid, const QVariant &value)
 	// true if the value is null, but false if it is undefined.
 	const QVariant effectiveValue = value.isNull() ? QVariant() : value;
 	producer()->setValue(uid, effectiveValue);
-	// Watched items forward the change from valueChanged. Unwatched JSON load
-	// stays local; a later runtime write must still supersede a queued batch.
-	const QString normalized = normalizedMockUid(uid);
-	if (!normalized.isEmpty() && !m_watches.contains(normalized)) {
-		syncExternalWrite(normalized, effectiveValue);
-	}
+	onExternalWrite(uid);
 }
 
 void MockManager::applyWorkerUpdatesForTest(const QVariantList &updates)
 {
-	if (!m_valueApplier) {
-		return;
-	}
 	MockValueUpdateList batch;
 	batch.reserve(updates.size());
 	for (const QVariant &entry : updates) {
@@ -206,11 +115,18 @@ void MockManager::applyWorkerUpdatesForTest(const QVariantList &updates)
 	m_valueApplier->applyValues(batch);
 }
 
+void MockManager::queueTimerUpdateForTest(const QString &uid, const QVariant &value)
+{
+	m_timerWorker->queueUpdateForTest(normalizedMockUid(uid), value);
+}
+
+void MockManager::tickAnimatorsForTest()
+{
+	m_timerWorker->tickAnimatorsForTest();
+}
+
 void MockManager::registerStepperForTest(const QString &uid, qreal interval)
 {
-	if (!m_timerWorker) {
-		return;
-	}
 	const QString normalized = normalizedMockUid(uid);
 	if (normalized.isEmpty()) {
 		return;
@@ -222,11 +138,7 @@ void MockManager::registerStepperForTest(const QString &uid, qreal interval)
 	config.interval = interval;
 	config.stepSize = 1.0;
 	config.repeat = true;
-	const QVariant current = producer()->value(uid);
-	QMetaObject::invokeMethod(m_timerWorker, "updateValue",
-			Qt::QueuedConnection, Q_ARG(QString, normalized), Q_ARG(QVariant, current));
-	QMetaObject::invokeMethod(m_timerWorker, "registerAnimator",
-			Qt::QueuedConnection, Q_ARG(MockAnimatorConfig, config));
+	m_timerWorker->registerAnimator(config);
 }
 
 QVariant MockManager::value(const QString &uid) const
@@ -239,30 +151,16 @@ void MockManager::setProperty(const QString &uid, const QString &name, const QVa
 	producer()->setProperty(uid, name, value);
 }
 
-void MockManager::blockRemovedUid(const QString &uid)
-{
-	if (!m_valueApplier || !m_timerWorker) {
-		return;
-	}
-	const QString normalized = normalizedMockUid(uid);
-	if (normalized.isEmpty()) {
-		return;
-	}
-	// Block before the producer unlink. Do not call acknowledgePrefix() here:
-	// forgetUidPrefix() emits uidPrefixForgotten() only after it has stopped
-	// writers. An earlier ack lets valuesReady() call setValue() and recreate
-	// the service via itemGetOrCreate().
-	m_valueApplier->blockPrefix(normalized);
-	const bool invoked = QMetaObject::invokeMethod(m_timerWorker, "forgetUidPrefix",
-			Qt::QueuedConnection, Q_ARG(QString, normalized));
-	if (!invoked) {
-		m_valueApplier->acknowledgePrefix(normalized);
-	}
-}
-
 void MockManager::removeValue(const QString &uid)
 {
-	blockRemovedUid(uid);
+	// Stop the writers and drop their queued updates first. A later
+	// VeQItemMockProducer::setValue() calls itemGetOrCreate() and would
+	// recreate the removed service.
+	const QString normalized = normalizedMockUid(uid);
+	if (!normalized.isEmpty()) {
+		m_valueApplier->removeQueuedUnderPrefix(normalized);
+		m_timerWorker->forgetUidPrefix(normalized);
+	}
 	producer()->removeValue(uid);
 }
 
@@ -403,104 +301,37 @@ MockValueApplier *MockManager::valueApplier() const
 	return m_valueApplier;
 }
 
-void MockManager::watchUids(const QStringList &uids, MockWatchRole role)
+void MockManager::watchCalculatorSources(const QStringList &uids)
 {
-	for (const QString &rawUid : uids) {
-		if (rawUid.isEmpty()) {
-			continue;
+	for (const QString &uid : uids) {
+		const QString normalized = normalizedMockUid(uid);
+		if (!normalized.isEmpty()) {
+			++m_calculatorSources[normalized];
 		}
-		const QString uid = normalizedMockUid(rawUid);
-		if (uid.isEmpty()) {
-			continue;
-		}
-		UidWatch &watch = m_watches[uid];
-		const bool alreadyWatching = watch.animatorRefs + watch.calculatorRefs > 0;
-		if (role == MockWatchRole::AnimatorInput) {
-			++watch.animatorRefs;
-		} else {
-			++watch.calculatorRefs;
-		}
-		if (alreadyWatching) {
-			continue;
-		}
-		VeQItem *item = producer()->itemForUid(uid, true);
-		if (!item) {
-			continue;
-		}
-		watch.connection = connect(item, &VeQItem::valueChanged, this,
-				[this, uid](const QVariant &value) {
-			onWatchedValueChanged(uid, value);
-		});
 	}
 }
 
-void MockManager::unwatchUids(const QStringList &uids, MockWatchRole role)
+void MockManager::unwatchCalculatorSources(const QStringList &uids)
 {
-	for (const QString &rawUid : uids) {
-		if (rawUid.isEmpty()) {
-			continue;
+	for (const QString &uid : uids) {
+		auto it = m_calculatorSources.find(normalizedMockUid(uid));
+		if (it != m_calculatorSources.end() && --it.value() <= 0) {
+			m_calculatorSources.erase(it);
 		}
-		const QString uid = normalizedMockUid(rawUid);
-		auto it = m_watches.find(uid);
-		if (it == m_watches.end()) {
-			continue;
-		}
-		int &refs = role == MockWatchRole::AnimatorInput ? it->animatorRefs : it->calculatorRefs;
-		if (refs > 0) {
-			--refs;
-		}
-		if (it->animatorRefs + it->calculatorRefs > 0) {
-			continue;
-		}
-		QObject::disconnect(it->connection);
-		m_watches.erase(it);
 	}
 }
 
-void MockManager::setSuppressWorkerSync(bool suppress)
+void MockManager::onExternalWrite(const QString &uid)
 {
-	if (suppress) {
-		++m_suppressWorkerSync;
-	} else if (m_suppressWorkerSync > 0) {
-		--m_suppressWorkerSync;
-	}
-}
-
-bool MockManager::shouldSyncUnwatchedExternalWrite(const QString &uid) const
-{
-	// JSON load happens before watches, timers, or queued batches exist.
-	if (m_timersActive || !m_watches.isEmpty()) {
-		return true;
-	}
-	return m_valueApplier && m_valueApplier->hasPending(uid);
-}
-
-void MockManager::syncExternalWrite(const QString &uid, const QVariant &value)
-{
-	if (m_suppressWorkerSync > 0 || !m_timerWorker || !m_valueApplier) {
+	const QString normalized = normalizedMockUid(uid);
+	if (normalized.isEmpty()) {
 		return;
 	}
-	if (!m_watches.contains(uid) && !shouldSyncUnwatchedExternalWrite(uid)) {
-		return;
-	}
-	m_valueApplier->supersede(uid);
-	QMetaObject::invokeMethod(m_timerWorker, "observeExternalValue",
-		Qt::QueuedConnection, Q_ARG(QString, uid), Q_ARG(QVariant, value));
-}
-
-void MockManager::onWatchedValueChanged(const QString &uid, const QVariant &value)
-{
-	if (m_suppressWorkerSync > 0 || !m_timerWorker) {
-		return;
-	}
-	const auto it = m_watches.constFind(uid);
-	if (it == m_watches.constEnd()) {
-		return;
-	}
-	syncExternalWrite(uid, value);
-	if (it->calculatorRefs > 0) {
-		QMetaObject::invokeMethod(m_timerWorker, "scheduleCalculatorFlush",
-			Qt::QueuedConnection);
+	// A batched or queued timer update for this uid is older than this write.
+	m_timerWorker->dropPendingUpdate(normalized);
+	m_valueApplier->removeQueued(normalized);
+	if (m_calculatorSources.contains(normalized)) {
+		m_timerWorker->scheduleCalculatorFlush();
 	}
 }
 

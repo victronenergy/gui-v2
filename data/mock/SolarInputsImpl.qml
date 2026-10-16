@@ -61,7 +61,7 @@ Item {
 	}
 
 	// Set /Ac/PvOnOutput to the total PV power/current of each phase of PV inverters on the system.
-	// Computation runs entirely on the worker thread.
+	// Computation runs in MockTimerWorker.
 	MockPhaseSumCalculator {
 		id: pvAcTotals
 		targetPrefix: Global.system.serviceUid + "/Ac/PvOnOutput"

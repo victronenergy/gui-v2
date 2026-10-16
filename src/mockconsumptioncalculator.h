@@ -17,10 +17,10 @@ namespace Victron {
 namespace VenusOS {
 
 /*
-	MockConsumptionCalculator is a QML_ELEMENT that lives on the GUI thread.
+	MockConsumptionCalculator is a QML_ELEMENT.
 	It manages a list of AC service UIDs (added/removed dynamically via Instantiator)
-	and posts the configuration to MockTimerWorker, which evaluates consumption
-	entirely on the worker thread.
+	and passes the configuration to MockTimerWorker, which evaluates consumption
+	in C++.
 
 	The worker computes:
 	  - ConsumptionOnInput/L{1,2,3}/{Power,Current}
@@ -93,8 +93,8 @@ private:
 
 /*
 	MockPhaseSumCalculator sums per-phase power/current from a dynamic set of
-	services and writes the totals to target paths. All computation runs on the
-	worker thread.
+	services and writes the totals to target paths. All computation runs in
+	MockTimerWorker.
 
 	Usage in QML:
 		MockPhaseSumCalculator {

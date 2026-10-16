@@ -5,7 +5,6 @@
 
 #include "mockvalueapplier.h"
 #include "backendconnection.h"
-#include "mockmanager.h"
 #include "veqitemmockproducer.h"
 
 using namespace Victron::VenusOS;
@@ -41,26 +40,12 @@ void MockValueApplier::unregisterNotify(int animatorId)
 		}
 	}
 	m_pendingNotifications = kept;
-	if (m_queue.isEmpty()) {
+	if (!m_applying && m_queue.isEmpty()) {
 		dispatchReadyNotifications();
 		if (m_pendingNotifications.isEmpty()) {
 			m_drainTimer.stop();
 		}
 	}
-}
-
-bool MockValueApplier::isBlocked(const QString &uid) const
-{
-	const QString normalized = normalizedMockUid(uid);
-	if (m_externalBlocks.value(normalized) > 0) {
-		return true;
-	}
-	for (auto it = m_prefixBlocks.constBegin(); it != m_prefixBlocks.constEnd(); ++it) {
-		if (it.value() > 0 && mockUidUnderPrefix(normalized, it.key())) {
-			return true;
-		}
-	}
-	return false;
 }
 
 void MockValueApplier::removeQueued(const QString &uid)
@@ -81,7 +66,7 @@ void MockValueApplier::removeQueued(const QString &uid)
 	}
 	// Also drop a notify whose write was already applied and is no longer queued.
 	dropNotifications([&normalized](const QString &dep) { return dep == normalized; });
-	if (m_queue.isEmpty()) {
+	if (!m_applying && m_queue.isEmpty()) {
 		dispatchReadyNotifications();
 		if (m_pendingNotifications.isEmpty()) {
 			m_drainTimer.stop();
@@ -108,7 +93,7 @@ void MockValueApplier::removeQueuedUnderPrefix(const QString &prefix)
 	dropNotifications([&normalized](const QString &dep) {
 		return mockUidUnderPrefix(dep, normalized);
 	});
-	if (m_queue.isEmpty()) {
+	if (!m_applying && m_queue.isEmpty()) {
 		dispatchReadyNotifications();
 		if (m_pendingNotifications.isEmpty()) {
 			m_drainTimer.stop();
@@ -116,72 +101,19 @@ void MockValueApplier::removeQueuedUnderPrefix(const QString &prefix)
 	}
 }
 
-void MockValueApplier::supersede(const QString &uid)
+QVariant MockValueApplier::latestValue(const QString &uid) const
 {
 	const QString normalized = normalizedMockUid(uid);
 	if (normalized.isEmpty()) {
-		return;
+		return QVariant();
 	}
-	removeQueued(normalized);
-	m_externalBlocks[normalized] += 1;
-}
-
-void MockValueApplier::blockPrefix(const QString &prefix)
-{
-	const QString normalized = normalizedMockUid(prefix);
-	if (normalized.isEmpty()) {
-		return;
-	}
-	// Drop queued copies now. In-flight batches are skipped by isBlocked() until
-	// acknowledgePrefix(). Applying either would call VeQItemMockProducer::setValue(),
-	// which calls itemGetOrCreate() and recreates the deleted service.
-	removeQueuedUnderPrefix(normalized);
-	m_prefixBlocks[normalized] += 1;
-}
-
-void MockValueApplier::acknowledgePrefix(const QString &prefix)
-{
-	const QString normalized = normalizedMockUid(prefix);
-	auto it = m_prefixBlocks.find(normalized);
-	if (it == m_prefixBlocks.end()) {
-		return;
-	}
-	if (it.value() <= 1) {
-		m_prefixBlocks.erase(it);
-	} else {
-		--it.value();
-	}
-}
-
-void MockValueApplier::acknowledgeExternalWrite(const QString &uid)
-{
-	const QString normalized = normalizedMockUid(uid);
-	auto it = m_externalBlocks.find(normalized);
-	if (it == m_externalBlocks.end()) {
-		return;
-	}
-	if (it.value() <= 1) {
-		m_externalBlocks.erase(it);
-	} else {
-		--it.value();
-	}
-}
-
-bool MockValueApplier::hasPending(const QString &uid) const
-{
-	const QString normalized = normalizedMockUid(uid);
-	if (normalized.isEmpty()) {
-		return false;
-	}
-	if (m_externalBlocks.value(normalized) > 0) {
-		return true;
-	}
+	// applyValues() keeps at most one queued update per uid.
 	for (const MockValueUpdate &update : m_queue) {
-		if (normalizedMockUid(update.first) == normalized) {
-			return true;
+		if (update.first == normalized) {
+			return update.second;
 		}
 	}
-	return false;
+	return m_producer ? m_producer->value(normalized) : QVariant();
 }
 
 bool MockValueApplier::notificationReady(const MockNotifyEvent &event) const
@@ -205,10 +137,6 @@ void MockValueApplier::enqueueNotification(const MockNotifyEvent &event)
 		const QString uid = normalizedMockUid(dep);
 		if (uid.isEmpty()) {
 			continue;
-		}
-		// The write was dropped. Do not emit a notify for a value that will not be applied.
-		if (isBlocked(uid)) {
-			return;
 		}
 		depends.append(uid);
 	}
@@ -256,26 +184,31 @@ void MockValueApplier::dispatchNotification(const MockNotifyEvent &event)
 	if (it == m_notifyMap.end()) {
 		return;
 	}
+	// Copy: the handler can re-register or unregister this animator.
+	const MockNotifyCallbacks callbacks = it.value();
 	if (event.type == MockNotifyEvent::Update) {
-		if (it->onUpdate) {
-			it->onUpdate(event.index, event.value);
+		if (callbacks.onUpdate) {
+			callbacks.onUpdate(event.index, event.value);
 		}
-	} else if (it->onTotal) {
-		it->onTotal(event.value);
+	} else if (callbacks.onTotal) {
+		callbacks.onTotal(event.value);
 	}
 }
 
 void MockValueApplier::dispatchReadyNotifications()
 {
+	// A handler can write values, which calls back in here. The outer call
+	// dispatches the rest in order.
+	if (m_applying) {
+		return;
+	}
+	m_applying = true;
 	// Do not skip a not-ready record. A later notify must not jump ahead of it.
-	QVector<MockNotifyEvent> ready;
 	while (!m_pendingNotifications.isEmpty()
 			&& notificationReady(m_pendingNotifications.constFirst())) {
-		ready.append(m_pendingNotifications.takeFirst());
+		dispatchNotification(m_pendingNotifications.takeFirst());
 	}
-	for (const MockNotifyEvent &event : ready) {
-		dispatchNotification(event);
-	}
+	m_applying = false;
 }
 
 void MockValueApplier::applyValues(const MockValueUpdateList &updates,
@@ -295,7 +228,7 @@ void MockValueApplier::applyValues(const MockValueUpdateList &updates,
 
 	for (const auto &[uid, value] : updates) {
 		const QString normalized = normalizedMockUid(uid);
-		if (normalized.isEmpty() || isBlocked(normalized)) {
+		if (normalized.isEmpty()) {
 			continue;
 		}
 		auto it = uidIndex.find(normalized);
@@ -314,16 +247,12 @@ void MockValueApplier::applyValues(const MockValueUpdateList &updates,
 	// Safety valve: if the queue is growing beyond a reasonable size,
 	// drain everything immediately to prevent unbounded accumulation.
 	if (m_queue.size() > MaxQueueSize) {
-		MockManager::create()->setSuppressWorkerSync(true);
+		m_applying = true;
 		while (!m_queue.isEmpty()) {
 			const auto [uid, value] = m_queue.dequeue();
-			if (isBlocked(uid)) {
-				dropNotifications([&uid](const QString &dep) { return dep == uid; });
-				continue;
-			}
 			m_producer->setValue(uid, value.isNull() ? QVariant() : value);
 		}
-		MockManager::create()->setSuppressWorkerSync(false);
+		m_applying = false;
 		dispatchReadyNotifications();
 		m_drainTimer.stop();
 		return;
@@ -349,17 +278,13 @@ void MockValueApplier::processQueue()
 		return;
 	}
 
-	const int count = qMin(static_cast<qsizetype>(MaxUpdatesPerTick), m_queue.size());
-	MockManager::create()->setSuppressWorkerSync(true);
-	for (int i = 0; i < count; ++i) {
+	// setValue() runs QML handlers, which can write values and so shrink m_queue.
+	m_applying = true;
+	for (int i = 0; i < MaxUpdatesPerTick && !m_queue.isEmpty(); ++i) {
 		const auto [uid, value] = m_queue.dequeue();
-		if (isBlocked(uid)) {
-			dropNotifications([&uid](const QString &dep) { return dep == uid; });
-			continue;
-		}
 		m_producer->setValue(uid, value.isNull() ? QVariant() : value);
 	}
-	MockManager::create()->setSuppressWorkerSync(false);
+	m_applying = false;
 	// Emit notifyUpdate/notifyTotal only after the setValue() calls above.
 	dispatchReadyNotifications();
 

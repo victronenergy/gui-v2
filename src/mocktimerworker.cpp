@@ -4,17 +4,21 @@
 */
 
 #include "mocktimerworker.h"
+#include "mockvalueapplier.h"
 
+#include <algorithm>
 #include <cmath>
 #include <cstdint>
 #include <limits>
+#include <utility>
 
 #include <QtMath>
 
 using namespace Victron::VenusOS;
 
-MockTimerWorker::MockTimerWorker(QObject *parent)
+MockTimerWorker::MockTimerWorker(MockValueApplier *applier, QObject *parent)
 	: QObject(parent)
+	, m_applier(applier)
 	, m_rng(QRandomGenerator::securelySeeded())
 {
 }
@@ -112,13 +116,10 @@ void MockTimerWorker::registerAnimator(const MockAnimatorConfig &config)
 		while (stored.actualStepSizes.size() < stored.uids.size()) {
 			stored.actualStepSizes.append(stored.stepSize);
 		}
-		Q_EMIT actualStepSizesChanged(stored.animatorId, stored.actualStepSizes);
+		Q_EMIT actualStepSizesChanged(stored.animatorId);
 	}
 
 	m_configs[stored.animatorId] = stored;
-
-	// Seed the value cache with any initial values provided via updateValues() prior to this call.
-	// (The GUI thread should have called updateValues() before registerAnimator().)
 
 	// If globally active and not individually deactivated, start the timer immediately
 	if (m_globalActive && !m_inactiveAnimators.contains(stored.animatorId)) {
@@ -131,6 +132,9 @@ void MockTimerWorker::unregisterAnimator(int animatorId)
 	stopAnimatorTimer(animatorId);
 	m_configs.remove(animatorId);
 	m_inactiveAnimators.remove(animatorId);
+	// A batched tick made with this config must not be applied, even if the same
+	// id is registered again with a new config before the flush.
+	dropPendingTicks({});
 }
 
 void MockTimerWorker::setAnimatorActive(int animatorId, bool active)
@@ -172,36 +176,10 @@ void MockTimerWorker::setAllTimersActive(bool active)
 	}
 }
 
-void MockTimerWorker::updateValue(const QString &uid, const QVariant &value)
-{
-	if (!uid.isEmpty()) {
-		m_valueCache[normalizedMockUid(uid)] = value;
-	}
-}
-
-void MockTimerWorker::observeExternalValue(const QString &uid, const QVariant &value)
-{
-	const QString normalized = normalizedMockUid(uid);
-	if (normalized.isEmpty()) {
-		return;
-	}
-	m_valueCache[normalized] = value;
-	Q_EMIT externalValueObserved(normalized);
-}
-
 void MockTimerWorker::forgetUidPrefix(const QString &prefix)
 {
 	const QString normalized = normalizedMockUid(prefix);
 	if (!normalized.isEmpty()) {
-		MockValueUpdateList kept;
-		kept.reserve(m_pendingUpdates.size());
-		for (const MockValueUpdate &update : m_pendingUpdates) {
-			if (!mockUidUnderPrefix(update.first, normalized)) {
-				kept.append(update);
-			}
-		}
-		m_pendingUpdates = kept;
-
 		const QList<int> animatorIds = m_configs.keys();
 		for (int animatorId : animatorIds) {
 			if (animatorWritesUnderPrefix(m_configs.value(animatorId), normalized)) {
@@ -230,30 +208,28 @@ void MockTimerWorker::forgetUidPrefix(const QString &prefix)
 			}
 		}
 
-		// Drop notifies whose writes were stripped or whose animator was stopped.
-		// Leaving them in the batch would emit notifyUpdate/notifyTotal with no setValue().
-		MockNotifyEventList keptNotifications;
-		keptNotifications.reserve(m_pendingNotifications.size());
-		for (const MockNotifyEvent &event : m_pendingNotifications) {
-			if (!m_configs.contains(event.animatorId)) {
-				continue;
-			}
-			bool dropped = false;
-			for (const QString &dep : event.dependsOn) {
-				if (mockUidUnderPrefix(dep, normalized)) {
-					dropped = true;
-					break;
-				}
-			}
-			if (!dropped) {
-				keptNotifications.append(event);
+		// Drop the batched updates under prefix, and every tick of a stopped animator
+		// or that used them. A notify without its setValue() must not be emitted.
+		QSet<QString> dropped;
+		for (const MockValueUpdate &update : std::as_const(m_pendingUpdates)) {
+			if (mockUidUnderPrefix(update.first, normalized)) {
+				dropped.insert(update.first);
 			}
 		}
-		m_pendingNotifications = keptNotifications;
+		dropPendingTicks(dropped);
 	}
-	// Ack only after writers for this prefix are stopped. An earlier
-	// uidPrefixForgotten() lets a later tick's valuesReady() recreate the service.
-	Q_EMIT uidPrefixForgotten(normalized);
+}
+
+void MockTimerWorker::dropPendingUpdate(const QString &uid)
+{
+	// A tick that wrote uid, or computed something from it, is dropped whole, so
+	// the write behaves as if it came just after the flush.
+	dropPendingTicks({ uid });
+}
+
+QVector<qreal> MockTimerWorker::actualStepSizes(int animatorId) const
+{
+	return m_configs.value(animatorId).actualStepSizes;
 }
 
 void MockTimerWorker::updateAnimatorActualStepSizes(int animatorId, const QVector<qreal> &stepSizes)
@@ -262,21 +238,9 @@ void MockTimerWorker::updateAnimatorActualStepSizes(int animatorId, const QVecto
 	if (it == m_configs.end()) {
 		return;
 	}
-	// setActualStepSizes() already stored this vector, then emitted
-	// actualStepSizesPushed to call this slot. Only assign the worker config.
-	// Do not Q_EMIT actualStepSizesChanged(). That signal's GUI handler writes
-	// m_actualStepSizes directly and must not call setActualStepSizes(): that
-	// setter emits actualStepSizesPushed and would call this slot again.
+	// setActualStepSizes() already stored this vector and calls this. Only assign
+	// the worker config. Do not Q_EMIT actualStepSizesChanged() back to it.
 	it->actualStepSizes = stepSizes;
-}
-
-void MockTimerWorker::updateValues(const MockValueCache &values)
-{
-	for (auto it = values.constBegin(); it != values.constEnd(); ++it) {
-		if (!it.key().isEmpty()) {
-			m_valueCache[normalizedMockUid(it.key())] = it.value();
-		}
-	}
 }
 
 void MockTimerWorker::updateAnimatorFollowSignOf(int animatorId, qreal followSignOf)
@@ -318,20 +282,7 @@ void MockTimerWorker::timerEvent(QTimerEvent *event)
 		}
 	}
 
-	switch (config.type) {
-	case MockAnimatorConfig::Randomizer:
-		processRandomizer(config);
-		break;
-	case MockAnimatorConfig::RangeAnimator:
-		processRangeAnimator(config);
-		break;
-	case MockAnimatorConfig::Stepper:
-		processStepper(config);
-		break;
-	case MockAnimatorConfig::Toggler:
-		processToggler(config);
-		break;
-	}
+	processTick(config);
 
 	if (!config.repeat) {
 		stopAnimatorTimer(animatorId);
@@ -389,6 +340,77 @@ void MockTimerWorker::stopAnimatorTimer(int animatorId)
 	m_phasePending.remove(animatorId);
 }
 
+void MockTimerWorker::processTick(MockAnimatorConfig &config)
+{
+	const qsizetype first = m_pendingUpdates.size();
+	switch (config.type) {
+	case MockAnimatorConfig::Randomizer:
+		processRandomizer(config);
+		break;
+	case MockAnimatorConfig::RangeAnimator:
+		processRangeAnimator(config);
+		break;
+	case MockAnimatorConfig::Stepper:
+		processStepper(config);
+		break;
+	case MockAnimatorConfig::Toggler:
+		processToggler(config);
+		break;
+	}
+	// Remember what this tick read and wrote, so that it can be dropped as a whole.
+	PendingTick tick;
+	tick.animatorId = config.animatorId;
+	tick.inputs = config.uids + config.derivedDivisorUids + config.derivedMultiplierUids;
+	for (qsizetype i = first; i < m_pendingUpdates.size(); ++i) {
+		tick.outputs.append(m_pendingUpdates.at(i).first);
+	}
+	if (!tick.outputs.isEmpty()) {
+		m_pendingTicks.append(tick);
+	}
+}
+
+void MockTimerWorker::dropPendingTicks(QSet<QString> dropped)
+{
+	// Drop every tick that read or wrote a dropped uid, or whose animator is gone,
+	// with all of its outputs and notifies. Its outputs are dropped uids too, and
+	// all batched updates of a dropped uid are removed, including those of earlier
+	// ticks, so repeat until no more ticks are dropped.
+	QSet<int> droppedAnimators;
+	for (bool changed = true; changed;) {
+		changed = false;
+		for (auto it = m_pendingTicks.begin(); it != m_pendingTicks.end();) {
+			bool drop = !m_configs.contains(it->animatorId);
+			for (const QString &uid : it->inputs + it->outputs) {
+				drop = drop || dropped.contains(uid);
+			}
+			if (drop) {
+				for (const QString &uid : std::as_const(it->outputs)) {
+					dropped.insert(uid);
+				}
+				droppedAnimators.insert(it->animatorId);
+				it = m_pendingTicks.erase(it);
+				changed = true;
+			} else {
+				++it;
+			}
+		}
+	}
+	m_pendingUpdates.removeIf([&dropped](const MockValueUpdate &update) {
+		return dropped.contains(update.first);
+	});
+	m_pendingNotifications.removeIf([&](const MockNotifyEvent &event) {
+		if (droppedAnimators.contains(event.animatorId) || !m_configs.contains(event.animatorId)) {
+			return true;
+		}
+		for (const QString &dep : event.dependsOn) {
+			if (dropped.contains(dep)) {
+				return true;
+			}
+		}
+		return false;
+	});
+}
+
 void MockTimerWorker::processRandomizer(MockAnimatorConfig &config)
 {
 	qreal total = 0.0;
@@ -403,10 +425,10 @@ void MockTimerWorker::processRandomizer(MockAnimatorConfig &config)
 
 	for (qsizetype i = 0; i < config.uids.size(); ++i) {
 		const QString &uid = config.uids[i];
-		const QVariant cached = m_valueCache.value(uid);
+		const QVariant current = currentValue(uid);
 
 		bool ok = false;
-		const qreal rv = cached.toReal(&ok);
+		const qreal rv = current.toReal(&ok);
 		if (!ok || qIsNaN(rv)) {
 			continue;
 		}
@@ -430,9 +452,6 @@ void MockTimerWorker::processRandomizer(MockAnimatorConfig &config)
 			newValue = qMin(config.maximumValue, newValue);
 		}
 
-		// Update our local cache
-		m_valueCache[uid] = newValue;
-
 		m_pendingUpdates.append({uid, QVariant(newValue)});
 		total += newValue;
 		QStringList itemDepends;
@@ -441,13 +460,12 @@ void MockTimerWorker::processRandomizer(MockAnimatorConfig &config)
 		// Compute derived value (e.g. current = power / voltage)
 		if (hasDerived && !config.derivedTargetUids[i].isEmpty()) {
 			const QString &divisorUid = config.derivedDivisorUids[i];
-			const QVariant divisorVal = m_valueCache.value(divisorUid);
+			const QVariant divisorVal = currentValue(divisorUid);
 			bool divOk = false;
 			const qreal divisor = divisorVal.toReal(&divOk);
 			if (divOk && divisor > 0.0) {
 				const qreal derived = newValue / divisor;
 				const QString &targetUid = config.derivedTargetUids[i];
-				m_valueCache[targetUid] = derived;
 				m_pendingUpdates.append({targetUid, QVariant(derived)});
 				itemDepends.append(targetUid);
 			}
@@ -456,13 +474,12 @@ void MockTimerWorker::processRandomizer(MockAnimatorConfig &config)
 		// Compute multiply derived value (e.g. power = current * voltage)
 		if (hasMultiply && !config.derivedMultiplyTargetUids[i].isEmpty()) {
 			const QString &multiplierUid = config.derivedMultiplierUids[i];
-			const QVariant multiplierVal = m_valueCache.value(multiplierUid);
+			const QVariant multiplierVal = currentValue(multiplierUid);
 			bool mulOk = false;
 			const qreal multiplier = multiplierVal.toReal(&mulOk);
 			if (mulOk) {
 				const qreal derived = newValue * multiplier;
 				const QString &targetUid = config.derivedMultiplyTargetUids[i];
-				m_valueCache[targetUid] = derived;
 				m_pendingUpdates.append({targetUid, QVariant(derived)});
 				itemDepends.append(targetUid);
 				multiplyTotal += derived;
@@ -479,14 +496,12 @@ void MockTimerWorker::processRandomizer(MockAnimatorConfig &config)
 
 	// Write total to target uid if configured
 	if (!config.totalTargetUid.isEmpty()) {
-		m_valueCache[config.totalTargetUid] = total;
 		m_pendingUpdates.append({config.totalTargetUid, QVariant(total)});
 		tickDepends.append(config.totalTargetUid);
 	}
 
 	// Write multiply-derived total if configured
 	if (hasMultiply && !config.derivedMultiplyTotalTargetUid.isEmpty()) {
-		m_valueCache[config.derivedMultiplyTotalTargetUid] = multiplyTotal;
 		m_pendingUpdates.append({config.derivedMultiplyTotalTargetUid, QVariant(multiplyTotal)});
 		tickDepends.append(config.derivedMultiplyTotalTargetUid);
 	}
@@ -525,10 +540,10 @@ void MockTimerWorker::processRangeAnimator(MockAnimatorConfig &config)
 
 	for (qsizetype i = 0; i < config.uids.size(); ++i) {
 		const QString &uid = config.uids[i];
-		const QVariant cached = m_valueCache.value(uid);
+		const QVariant current = currentValue(uid);
 
 		bool ok = false;
-		const qreal rv = cached.toReal(&ok);
+		const qreal rv = current.toReal(&ok);
 		if (!ok || qIsNaN(rv)) {
 			continue;
 		}
@@ -541,9 +556,6 @@ void MockTimerWorker::processRangeAnimator(MockAnimatorConfig &config)
 			newValue = qMin(config.rangeMax, newValue);
 		}
 
-		// Update our local cache
-		m_valueCache[uid] = newValue;
-
 		m_pendingUpdates.append({uid, QVariant(newValue)});
 		total += newValue;
 		tickDepends.append(uid);
@@ -551,13 +563,12 @@ void MockTimerWorker::processRangeAnimator(MockAnimatorConfig &config)
 		// Compute derived value (e.g. current = power / voltage)
 		if (hasDerived && !config.derivedTargetUids[i].isEmpty()) {
 			const QString &divisorUid = config.derivedDivisorUids[i];
-			const QVariant divisorVal = m_valueCache.value(divisorUid);
+			const QVariant divisorVal = currentValue(divisorUid);
 			bool divOk = false;
 			const qreal divisor = divisorVal.toReal(&divOk);
 			if (divOk && divisor > 0.0) {
 				const qreal derived = newValue / divisor;
 				const QString &targetUid = config.derivedTargetUids[i];
-				m_valueCache[targetUid] = derived;
 				m_pendingUpdates.append({targetUid, QVariant(derived)});
 				tickDepends.append(targetUid);
 			}
@@ -566,13 +577,12 @@ void MockTimerWorker::processRangeAnimator(MockAnimatorConfig &config)
 		// Compute multiply derived value (e.g. power = current * voltage)
 		if (hasMultiply && !config.derivedMultiplyTargetUids[i].isEmpty()) {
 			const QString &multiplierUid = config.derivedMultiplierUids[i];
-			const QVariant multiplierVal = m_valueCache.value(multiplierUid);
+			const QVariant multiplierVal = currentValue(multiplierUid);
 			bool mulOk = false;
 			const qreal multiplier = multiplierVal.toReal(&mulOk);
 			if (mulOk) {
 				const qreal derived = newValue * multiplier;
 				const QString &targetUid = config.derivedMultiplyTargetUids[i];
-				m_valueCache[targetUid] = derived;
 				m_pendingUpdates.append({targetUid, QVariant(derived)});
 				tickDepends.append(targetUid);
 				multiplyTotal += derived;
@@ -597,14 +607,12 @@ void MockTimerWorker::processRangeAnimator(MockAnimatorConfig &config)
 
 	// Write total to target uid if configured
 	if (!config.totalTargetUid.isEmpty()) {
-		m_valueCache[config.totalTargetUid] = total;
 		m_pendingUpdates.append({config.totalTargetUid, QVariant(total)});
 		tickDepends.append(config.totalTargetUid);
 	}
 
 	// Write multiply-derived total if configured
 	if (hasMultiply && !config.derivedMultiplyTotalTargetUid.isEmpty()) {
-		m_valueCache[config.derivedMultiplyTotalTargetUid] = multiplyTotal;
 		m_pendingUpdates.append({config.derivedMultiplyTotalTargetUid, QVariant(multiplyTotal)});
 		tickDepends.append(config.derivedMultiplyTotalTargetUid);
 	}
@@ -615,18 +623,35 @@ void MockTimerWorker::processRangeAnimator(MockAnimatorConfig &config)
 			MockNotifyEvent::Total, config.animatorId, -1, total, tickDepends));
 
 	if (stepSizesChanged) {
-		Q_EMIT actualStepSizesChanged(config.animatorId, config.actualStepSizes);
+		Q_EMIT actualStepSizesChanged(config.animatorId);
 	}
 }
 
 void MockTimerWorker::scheduleBatchFlush()
 {
 	// Coalesce every animator tick in this event-loop iteration into one
-	// valuesReady() emission. Notifications travel in that same emission.
+	// applier batch. Notifications travel in that same batch.
 	if (m_flushTimerId == 0
 			&& (!m_pendingUpdates.isEmpty() || !m_pendingNotifications.isEmpty())) {
 		m_flushTimerId = startTimer(0);
 	}
+}
+
+void MockTimerWorker::queueUpdateForTest(const QString &uid, const QVariant &value)
+{
+	m_pendingUpdates.append({uid, value});
+	scheduleBatchFlush();
+}
+
+void MockTimerWorker::tickAnimatorsForTest()
+{
+	// In creation order, as a test expects a later animator to read an earlier one's outputs.
+	QList<int> animatorIds = m_configs.keys();
+	std::sort(animatorIds.begin(), animatorIds.end());
+	for (int animatorId : animatorIds) {
+		processTick(m_configs[animatorId]);
+	}
+	scheduleBatchFlush();
 }
 
 void MockTimerWorker::scheduleCalculatorFlush()
@@ -645,7 +670,7 @@ void MockTimerWorker::flushBatch()
 		m_flushTimerId = 0;
 	}
 
-	// Evaluate consumption after all animator ticks have updated the cache
+	// Evaluate consumption after all animator ticks have batched their updates
 	if (!m_consumptionServices.isEmpty()) {
 		evaluateConsumption();
 	}
@@ -655,10 +680,13 @@ void MockTimerWorker::flushBatch()
 		evaluatePhaseSums();
 	}
 
-	if (!m_pendingUpdates.isEmpty() || !m_pendingNotifications.isEmpty()) {
-		Q_EMIT valuesReady(m_pendingUpdates, m_pendingNotifications);
-		m_pendingUpdates.clear();
-		m_pendingNotifications.clear();
+	if (m_applier && (!m_pendingUpdates.isEmpty() || !m_pendingNotifications.isEmpty())) {
+		// Take the batch first. Applying it runs QML handlers, which can call back
+		// into this object and start the next batch.
+		m_pendingTicks.clear();
+		const MockValueUpdateList updates = std::exchange(m_pendingUpdates, {});
+		const MockNotifyEventList notifications = std::exchange(m_pendingNotifications, {});
+		m_applier->applyValues(updates, notifications);
 	}
 }
 
@@ -666,10 +694,10 @@ void MockTimerWorker::processStepper(MockAnimatorConfig &config)
 {
 	for (qsizetype i = 0; i < config.uids.size(); ++i) {
 		const QString &uid = config.uids[i];
-		const QVariant cached = m_valueCache.value(uid);
+		const QVariant current = currentValue(uid);
 
 		bool ok = false;
-		const qreal rv = cached.toReal(&ok);
+		const qreal rv = current.toReal(&ok);
 		if (!ok || qIsNaN(rv)) {
 			continue;
 		}
@@ -684,7 +712,6 @@ void MockTimerWorker::processStepper(MockAnimatorConfig &config)
 			newValue = qMin(config.maximumValue, newValue);
 		}
 
-		m_valueCache[uid] = newValue;
 		m_pendingUpdates.append({uid, QVariant(newValue)});
 	}
 }
@@ -692,19 +719,15 @@ void MockTimerWorker::processStepper(MockAnimatorConfig &config)
 void MockTimerWorker::processToggler(MockAnimatorConfig &config)
 {
 	for (const QString &uid : config.uids) {
-		const QVariant cached = m_valueCache.value(uid);
-		const QVariant newValue = (cached == config.toggleA) ? config.toggleB : config.toggleA;
-		m_valueCache[uid] = newValue;
+		const QVariant current = currentValue(uid);
+		const QVariant newValue = (current == config.toggleA) ? config.toggleB : config.toggleA;
 		m_pendingUpdates.append({uid, newValue});
 	}
 }
 
 void MockTimerWorker::setConsumptionConfig(const QString &systemUidPrefix,
-	const MockConsumptionConfig &services, bool gaugesAutoMax, const QString &gaugesUidPrefix,
-	const MockValueCache &currentValues)
+	const MockConsumptionConfig &services, bool gaugesAutoMax, const QString &gaugesUidPrefix)
 {
-	// evaluateConsumption() reads this copy. The live values were written before this call.
-	updateValues(currentValues);
 	const QString prefix = normalizedMockUid(systemUidPrefix);
 	MockConsumptionConfig normalized = services;
 	for (MockConsumptionServiceInfo &svc : normalized) {
@@ -753,7 +776,7 @@ void MockTimerWorker::evaluateConsumption()
 			int servicePhaseCount = 0;
 			if (svc.serviceType == QLatin1String("vebus") || svc.serviceType == QLatin1String("acsystem")) {
 				const QString phaseCountUid = svc.uid + QStringLiteral("/Ac/NumberOfPhases");
-				servicePhaseCount = m_valueCache.value(phaseCountUid).toInt(&limitPhases);
+				servicePhaseCount = currentValue(phaseCountUid).toInt(&limitPhases);
 			}
 			if (limitPhases && phaseIndex >= servicePhaseCount) {
 				continue;
@@ -768,7 +791,7 @@ void MockTimerWorker::evaluateConsumption()
 			// Sum AC-in power/current
 			if (!acInPrefix.isEmpty()) {
 				const QString inPowerUid = acInPrefix + phaseStr + powerKey;
-				const QVariant inPVal = m_valueCache.value(inPowerUid);
+				const QVariant inPVal = currentValue(inPowerUid);
 				bool ok = false;
 				const qreal p = inPVal.toReal(&ok);
 				if (ok && !qIsNaN(p)) {
@@ -776,7 +799,7 @@ void MockTimerWorker::evaluateConsumption()
 				}
 
 				const QString inCurrentUid = acInPrefix + phaseStr + currentKey;
-				const QVariant inIVal = m_valueCache.value(inCurrentUid);
+				const QVariant inIVal = currentValue(inCurrentUid);
 				const qreal c = inIVal.toReal(&ok);
 				if (ok && !qIsNaN(c)) {
 					phaseAcInCurrent = qIsNaN(phaseAcInCurrent) ? c : (phaseAcInCurrent + c);
@@ -786,7 +809,7 @@ void MockTimerWorker::evaluateConsumption()
 			// Sum AC-out power/current
 			if (!acOutPrefix.isEmpty()) {
 				const QString outPowerUid = acOutPrefix + phaseStr + powerKey;
-				const QVariant outPVal = m_valueCache.value(outPowerUid);
+				const QVariant outPVal = currentValue(outPowerUid);
 				bool ok = false;
 				const qreal p = outPVal.toReal(&ok);
 				if (ok && !qIsNaN(p)) {
@@ -794,7 +817,7 @@ void MockTimerWorker::evaluateConsumption()
 				}
 
 				const QString outCurrentUid = acOutPrefix + phaseStr + currentKey;
-				const QVariant outIVal = m_valueCache.value(outCurrentUid);
+				const QVariant outIVal = currentValue(outCurrentUid);
 				const qreal c = outIVal.toReal(&ok);
 				if (ok && !qIsNaN(c)) {
 					phaseAcOutCurrent = qIsNaN(phaseAcOutCurrent) ? c : (phaseAcOutCurrent + c);
@@ -828,8 +851,7 @@ void MockTimerWorker::evaluateConsumption()
 		auto writeValue = [&](const QString &path, qreal value) {
 			const QVariant v = qIsNaN(value) ? QVariant() : QVariant(value);
 			const QString uid = prefix + path;
-			if (m_valueCache.value(uid) != v) {
-				m_valueCache[uid] = v;
+			if (currentValue(uid) != v) {
 				m_pendingUpdates.append({uid, v});
 			}
 		};
@@ -876,8 +898,7 @@ void MockTimerWorker::evaluateConsumption()
 	const QVariant phaseCount = maxPhaseIndex >= 0 ? QVariant(maxPhaseIndex + 1) : QVariant();
 	auto writePhaseCount = [&](const QString &path) {
 		const QString uid = m_consumptionSystemPrefix + path;
-		if (m_valueCache.value(uid) != phaseCount) {
-			m_valueCache[uid] = phaseCount;
+		if (currentValue(uid) != phaseCount) {
 			m_pendingUpdates.append({uid, phaseCount});
 		}
 	};
@@ -889,11 +910,10 @@ void MockTimerWorker::evaluateConsumption()
 		auto raiseGaugeMax = [this](const QString &path, qreal computed) {
 			const QString uid = m_gaugesUidPrefix + path;
 			bool ok = false;
-			const qreal existing = m_valueCache.value(uid).toReal(&ok);
+			const qreal existing = currentValue(uid).toReal(&ok);
 			const qreal floor = (ok && !qIsNaN(existing)) ? existing : 0.0;
 			const qreal next = qMax(computed, floor);
 			if (!ok || qIsNaN(existing) || next > existing) {
-				m_valueCache[uid] = next;
 				m_pendingUpdates.append({uid, QVariant(next)});
 			}
 		};
@@ -911,7 +931,6 @@ void MockTimerWorker::invalidateConsumptionValues()
 
 	const QString prefix = m_consumptionSystemPrefix;
 	auto invalidate = [&](const QString &path) {
-		m_valueCache.remove(prefix + path);
 		m_pendingUpdates.append({prefix + path, QVariant()});
 	};
 
@@ -933,10 +952,8 @@ void MockTimerWorker::invalidateConsumptionValues()
 
 void MockTimerWorker::setPhaseSumConfig(int ruleId, const QString &targetPrefix,
 	const QStringList &serviceUids, const QString &sourcePhasePattern,
-	const QString &sourceCurrentPattern, const MockValueCache &currentValues)
+	const QString &sourceCurrentPattern)
 {
-	// evaluatePhaseSums() reads this copy. The live values were written before this call.
-	updateValues(currentValues);
 	const QString prefix = normalizedMockUid(targetPrefix);
 	QStringList services;
 	services.reserve(serviceUids.size());
@@ -981,7 +998,7 @@ void MockTimerWorker::evaluatePhaseSums()
 			for (const QString &svcUid : cfg.serviceUids) {
 				// Sum power
 				const QString powerUid = svcUid + cfg.sourcePhasePattern.arg(phase);
-				const QVariant pVal = m_valueCache.value(powerUid);
+				const QVariant pVal = currentValue(powerUid);
 				bool ok = false;
 				const qreal p = pVal.toReal(&ok);
 				if (ok && !qIsNaN(p)) {
@@ -991,7 +1008,7 @@ void MockTimerWorker::evaluatePhaseSums()
 				// Sum current
 				if (!cfg.sourceCurrentPattern.isEmpty()) {
 					const QString currentUid = svcUid + cfg.sourceCurrentPattern.arg(phase);
-					const QVariant cVal = m_valueCache.value(currentUid);
+					const QVariant cVal = currentValue(currentUid);
 					const qreal c = cVal.toReal(&ok);
 					if (ok && !qIsNaN(c)) {
 						currentSum = qIsNaN(currentSum) ? c : (currentSum + c);
@@ -1002,8 +1019,7 @@ void MockTimerWorker::evaluatePhaseSums()
 			// Write power
 			const QString targetPower = cfg.targetPrefix + QStringLiteral("/L%1/Power").arg(phase);
 			const QVariant pv = qIsNaN(powerSum) ? QVariant() : QVariant(powerSum);
-			if (m_valueCache.value(targetPower) != pv) {
-				m_valueCache[targetPower] = pv;
+			if (currentValue(targetPower) != pv) {
 				m_pendingUpdates.append({targetPower, pv});
 			}
 
@@ -1011,8 +1027,7 @@ void MockTimerWorker::evaluatePhaseSums()
 			if (!cfg.sourceCurrentPattern.isEmpty()) {
 				const QString targetCurrent = cfg.targetPrefix + QStringLiteral("/L%1/Current").arg(phase);
 				const QVariant cv = qIsNaN(currentSum) ? QVariant() : QVariant(currentSum);
-				if (m_valueCache.value(targetCurrent) != cv) {
-					m_valueCache[targetCurrent] = cv;
+				if (currentValue(targetCurrent) != cv) {
 					m_pendingUpdates.append({targetCurrent, cv});
 				}
 			}
@@ -1028,8 +1043,7 @@ void MockTimerWorker::evaluatePhaseSums()
 		// Write NumberOfPhases only if changed
 		const QString nPhasesUid = cfg.targetPrefix + QStringLiteral("/NumberOfPhases");
 		const QVariant nPhases = maxPhaseIndex >= 0 ? QVariant(maxPhaseIndex + 1) : QVariant();
-		if (m_valueCache.value(nPhasesUid) != nPhases) {
-			m_valueCache[nPhasesUid] = nPhases;
+		if (currentValue(nPhasesUid) != nPhases) {
 			m_pendingUpdates.append({nPhasesUid, nPhases});
 		}
 	}
@@ -1044,7 +1058,6 @@ void MockTimerWorker::invalidatePhaseSumValues(int ruleId)
 
 	const PhaseSumConfig &cfg = it.value();
 	auto invalidate = [&](const QString &path) {
-		m_valueCache.remove(path);
 		m_pendingUpdates.append({path, QVariant()});
 	};
 
@@ -1057,4 +1070,16 @@ void MockTimerWorker::invalidatePhaseSumValues(int ruleId)
 	invalidate(cfg.targetPrefix + QStringLiteral("/NumberOfPhases"));
 
 	scheduleBatchFlush();
+}
+
+QVariant MockTimerWorker::currentValue(const QString &uid) const
+{
+	// Newest first: this batch, then updates the applier has not written yet,
+	// then the producer.
+	for (auto it = m_pendingUpdates.crbegin(); it != m_pendingUpdates.crend(); ++it) {
+		if (it->first == uid) {
+			return it->second;
+		}
+	}
+	return m_applier ? m_applier->latestValue(uid) : QVariant();
 }

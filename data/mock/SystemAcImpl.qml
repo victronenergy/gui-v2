@@ -78,7 +78,7 @@ Item {
 		}
 	}
 
-	// AC loads and consumption-gauge maxima are computed on the worker thread.
+	// AC loads and consumption-gauge maxima are computed in MockTimerWorker.
 	// The QML side only manages service discovery.
 	MockConsumptionCalculator {
 		id: consumptionCalculator
@@ -121,7 +121,7 @@ Item {
 			}
 
 			// For each phase, slide between the minimum and maximum current values.
-			// Power = current * voltage is computed in the worker thread.
+			// Power = current * voltage is computed in MockTimerWorker.
 			MockDataRangeAnimator {
 				active: Global.mainView && Global.mainView.mainViewVisible
 				maximumValue: acInputInfo.maximumCurrent

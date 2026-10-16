@@ -6,8 +6,6 @@
 #include "mockconsumptioncalculator.h"
 #include "mockmanager.h"
 
-#include <atomic>
-
 using namespace Victron::VenusOS;
 
 MockConsumptionCalculator::MockConsumptionCalculator(QObject *parent)
@@ -18,10 +16,7 @@ MockConsumptionCalculator::MockConsumptionCalculator(QObject *parent)
 MockConsumptionCalculator::~MockConsumptionCalculator()
 {
 	replaceWatches({});
-	MockTimerWorker *worker = MockManager::create()->timerWorker();
-	if (worker) {
-		QMetaObject::invokeMethod(worker, "clearConsumptionConfig", Qt::QueuedConnection);
-	}
+	MockManager::create()->timerWorker()->clearConsumptionConfig();
 }
 
 void MockConsumptionCalculator::setSystemUidPrefix(const QString &v)
@@ -44,10 +39,7 @@ void MockConsumptionCalculator::setActive(bool v)
 				postConfigToWorker();
 			} else {
 				replaceWatches({});
-				MockTimerWorker *worker = MockManager::create()->timerWorker();
-				if (worker) {
-					QMetaObject::invokeMethod(worker, "clearConsumptionConfig", Qt::QueuedConnection);
-				}
+				MockManager::create()->timerWorker()->clearConsumptionConfig();
 			}
 		}
 		Q_EMIT activeChanged();
@@ -111,8 +103,8 @@ void MockConsumptionCalculator::replaceWatches(const QStringList &uids)
 		return;
 	}
 	MockManager *manager = MockManager::create();
-	manager->unwatchUids(m_watchedSources, MockWatchRole::CalculatorSource);
-	manager->watchUids(uids, MockWatchRole::CalculatorSource);
+	manager->unwatchCalculatorSources(m_watchedSources);
+	manager->watchCalculatorSources(uids);
 	m_watchedSources = uids;
 }
 
@@ -139,19 +131,7 @@ QStringList MockConsumptionCalculator::sourceUids() const
 
 void MockConsumptionCalculator::postConfigToWorker()
 {
-	MockTimerWorker *worker = MockManager::create()->timerWorker();
-	if (!worker) {
-		return;
-	}
-
-	const QStringList sources = sourceUids();
-	replaceWatches(sources);
-
-	MockValueCache currentValues;
-	MockManager *manager = MockManager::create();
-	for (const QString &uid : sources) {
-		currentValues.insert(uid, manager->value(uid));
-	}
+	replaceWatches(sourceUids());
 
 	MockConsumptionConfig config;
 	config.reserve(m_services.size());
@@ -159,21 +139,16 @@ void MockConsumptionCalculator::postConfigToWorker()
 		config.append({svc.uid, svc.serviceType, svc.index});
 	}
 
-	QMetaObject::invokeMethod(worker, "setConsumptionConfig",
-		Qt::QueuedConnection,
-		Q_ARG(QString, m_systemUidPrefix),
-		Q_ARG(Victron::VenusOS::MockConsumptionConfig, config),
-		Q_ARG(bool, m_gaugesAutoMax),
-		Q_ARG(QString, m_gaugesUidPrefix),
-		Q_ARG(MockValueCache, currentValues));
+	MockManager::create()->timerWorker()->setConsumptionConfig(
+		m_systemUidPrefix, config, m_gaugesAutoMax, m_gaugesUidPrefix);
 }
 
 // --- MockPhaseSumCalculator ---
 
 int MockPhaseSumCalculator::nextRuleId()
 {
-	static std::atomic<int> s_id{1};
-	return s_id.fetch_add(1);
+	static int s_id = 1;
+	return s_id++;
 }
 
 MockPhaseSumCalculator::MockPhaseSumCalculator(QObject *parent)
@@ -185,11 +160,7 @@ MockPhaseSumCalculator::MockPhaseSumCalculator(QObject *parent)
 MockPhaseSumCalculator::~MockPhaseSumCalculator()
 {
 	replaceWatches({});
-	MockTimerWorker *worker = MockManager::create()->timerWorker();
-	if (worker) {
-		QMetaObject::invokeMethod(worker, "clearPhaseSumConfig",
-			Qt::QueuedConnection, Q_ARG(int, m_ruleId));
-	}
+	MockManager::create()->timerWorker()->clearPhaseSumConfig(m_ruleId);
 }
 
 void MockPhaseSumCalculator::setTargetPrefix(const QString &v)
@@ -245,23 +216,19 @@ void MockPhaseSumCalculator::replaceWatches(const QStringList &uids)
 		return;
 	}
 	MockManager *manager = MockManager::create();
-	manager->unwatchUids(m_watchedSources, MockWatchRole::CalculatorSource);
-	manager->watchUids(uids, MockWatchRole::CalculatorSource);
+	manager->unwatchCalculatorSources(m_watchedSources);
+	manager->watchCalculatorSources(uids);
 	m_watchedSources = uids;
 }
 
 void MockPhaseSumCalculator::postConfigToWorker()
 {
 	MockTimerWorker *worker = MockManager::create()->timerWorker();
-	if (!worker) {
-		return;
-	}
 
 	// Treat empty targetPrefix, sourcePhasePattern, or service list as "disabled"
 	if (m_targetPrefix.isEmpty() || m_sourcePhasePattern.isEmpty() || m_serviceUids.isEmpty()) {
 		replaceWatches({});
-		QMetaObject::invokeMethod(worker, "clearPhaseSumConfig",
-			Qt::QueuedConnection, Q_ARG(int, m_ruleId));
+		worker->clearPhaseSumConfig(m_ruleId);
 		return;
 	}
 
@@ -272,18 +239,6 @@ void MockPhaseSumCalculator::postConfigToWorker()
 	}
 	replaceWatches(sources);
 
-	MockValueCache currentValues;
-	MockManager *manager = MockManager::create();
-	for (const QString &uid : sources) {
-		currentValues.insert(uid, manager->value(uid));
-	}
-
-	QMetaObject::invokeMethod(worker, "setPhaseSumConfig",
-		Qt::QueuedConnection,
-		Q_ARG(int, m_ruleId),
-		Q_ARG(QString, m_targetPrefix),
-		Q_ARG(QStringList, m_serviceUids),
-		Q_ARG(QString, m_sourcePhasePattern),
-		Q_ARG(QString, m_sourceCurrentPattern),
-		Q_ARG(MockValueCache, currentValues));
+	worker->setPhaseSumConfig(m_ruleId, m_targetPrefix, m_serviceUids,
+		m_sourcePhasePattern, m_sourceCurrentPattern);
 }

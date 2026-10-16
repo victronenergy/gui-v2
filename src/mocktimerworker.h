@@ -18,9 +18,10 @@
 namespace Victron {
 namespace VenusOS {
 
+class MockValueApplier;
+
 using MockValueUpdate = QPair<QString, QVariant>;
 using MockValueUpdateList = QVector<MockValueUpdate>;
-using MockValueCache = QHash<QString, QVariant>;
 
 // A QML notifyUpdate/notifyTotal to emit after the listed uids have been written.
 // The worker queues these with the value batch. It must not emit the QML signals.
@@ -37,7 +38,7 @@ struct MockNotifyEvent {
 };
 using MockNotifyEventList = QVector<MockNotifyEvent>;
 
-// Configuration for consumption calculation on the worker thread
+// Configuration for consumption calculation
 struct MockConsumptionServiceInfo {
 	QString uid;
 	QString serviceType;
@@ -45,7 +46,7 @@ struct MockConsumptionServiceInfo {
 };
 using MockConsumptionConfig = QVector<MockConsumptionServiceInfo>;
 
-// Producer paths and the worker cache omit a leading "mock/". QML service uids include it.
+// Producer paths and queued updates omit a leading "mock/". QML service uids include it.
 inline QString normalizedMockUid(const QString &uid)
 {
 	return uid.startsWith(QLatin1String("mock/")) ? uid.mid(5) : uid;
@@ -148,14 +149,14 @@ struct MockAnimatorConfig {
 	QVariant toggleA;
 	QVariant toggleB;
 
-	// Derived value outputs (computed in worker, no GUI-thread JS needed)
+	// Derived value outputs (computed in C++, no QML JS needed)
 	// If totalTargetUid is set, the sum of all data item values is written to that uid.
 	QString totalTargetUid;
-	// Per-item derived output: derivedTargetUids[i] = value[i] / cache[derivedDivisorUids[i]]
+	// Per-item derived output: derivedTargetUids[i] = value[i] / value[derivedDivisorUids[i]]
 	// (e.g. current = power / voltage). Lists must be same size as uids.
 	QStringList derivedTargetUids;
 	QStringList derivedDivisorUids;
-	// Per-item multiply derived output: derivedMultiplyTargetUids[i] = value[i] * cache[derivedMultiplierUids[i]]
+	// Per-item multiply derived output: derivedMultiplyTargetUids[i] = value[i] * value[derivedMultiplierUids[i]]
 	// (e.g. power = current * voltage). Lists must be same size as uids.
 	QStringList derivedMultiplyTargetUids;
 	QStringList derivedMultiplierUids;
@@ -164,53 +165,49 @@ struct MockAnimatorConfig {
 };
 
 /*
-	MockTimerWorker lives on a dedicated worker thread.
+	MockTimerWorker lives on the GUI thread, as does everything else in the mock.
 	It owns all the mock-data timers and performs the value computations
-	(random deltas, range-step animations) off the GUI thread.
+	(random deltas, range-step animations, consumption and phase sums) in C++
+	instead of in QML.
 
-	Results are emitted via valuesReady(), delivered to the GUI thread via a
-	queued connection. Notify records in that batch are not QML signals. The
-	applier emits notifyUpdate and notifyTotal after the associated setValue().
+	It reads the current values from the mock producer, and passes each batch of
+	results to MockValueApplier, which writes them a few per frame. Notify records
+	in that batch are not QML signals. The applier emits notifyUpdate and
+	notifyTotal after the associated setValue().
 */
 class MockTimerWorker : public QObject
 {
 	Q_OBJECT
 
 public:
-	explicit MockTimerWorker(QObject *parent = nullptr);
+	explicit MockTimerWorker(MockValueApplier *applier, QObject *parent = nullptr);
 	~MockTimerWorker() override;
 
-public Q_SLOTS:
-	void registerAnimator(const Victron::VenusOS::MockAnimatorConfig &config);
+	void registerAnimator(const MockAnimatorConfig &config);
 	void unregisterAnimator(int animatorId);
 	void setAnimatorActive(int animatorId, bool active);
 	void setAllTimersActive(bool active);
-	void updateValue(const QString &uid, const QVariant &value);
-	void updateValues(const Victron::VenusOS::MockValueCache &values);
-	// External write: update the cache, then ack so the applier can unblock the uid.
-	void observeExternalValue(const QString &uid, const QVariant &value);
-	// Stop writers under prefix, then emit uidPrefixForgotten(). Do not ack earlier.
+	// Stop writers under prefix, and drop their batched updates.
 	void forgetUidPrefix(const QString &prefix);
+	// An external write replaces a batched update for uid that is not flushed yet.
+	void dropPendingUpdate(const QString &uid);
+	QVector<qreal> actualStepSizes(int animatorId) const;
 	void updateAnimatorFollowSignOf(int animatorId, qreal followSignOf);
 	void updateAnimatorActualStepSizes(int animatorId, const QVector<qreal> &stepSizes);
 	void setConsumptionConfig(const QString &systemUidPrefix,
-		const Victron::VenusOS::MockConsumptionConfig &services,
-		bool gaugesAutoMax, const QString &gaugesUidPrefix,
-		const Victron::VenusOS::MockValueCache &currentValues);
+		const MockConsumptionConfig &services,
+		bool gaugesAutoMax, const QString &gaugesUidPrefix);
 	void clearConsumptionConfig();
 	void scheduleCalculatorFlush();
 	void setPhaseSumConfig(int ruleId, const QString &targetPrefix,
 		const QStringList &serviceUids, const QString &sourcePhasePattern,
-		const QString &sourceCurrentPattern,
-		const Victron::VenusOS::MockValueCache &currentValues);
+		const QString &sourceCurrentPattern);
 	void clearPhaseSumConfig(int ruleId);
+	void queueUpdateForTest(const QString &uid, const QVariant &value);
+	void tickAnimatorsForTest();
 
 Q_SIGNALS:
-	void valuesReady(const Victron::VenusOS::MockValueUpdateList &updates,
-			const Victron::VenusOS::MockNotifyEventList &notifications);
-	void actualStepSizesChanged(int animatorId, const QVector<qreal> &stepSizes);
-	void externalValueObserved(const QString &uid);
-	void uidPrefixForgotten(const QString &prefix);
+	void actualStepSizesChanged(int animatorId);
 
 protected:
 	void timerEvent(QTimerEvent *event) override;
@@ -228,17 +225,27 @@ private:
 	void invalidateConsumptionValues();
 	void evaluatePhaseSums();
 	void invalidatePhaseSumValues(int ruleId);
+	QVariant currentValue(const QString &uid) const;
+	void processTick(MockAnimatorConfig &config);
+	void dropPendingTicks(QSet<QString> dropped);
 
+	MockValueApplier *m_applier = nullptr;
 	QHash<int, MockAnimatorConfig> m_configs;
 	QHash<int, int> m_timerIdToAnimator;
 	QHash<int, int> m_animatorToTimer;
 	QSet<int> m_phasePending; // animators whose current timer is only the initial offset
-	QHash<QString, QVariant> m_valueCache; // Not evicted on unregister. See .github/architecture.md.
 
 	// Batching: accumulate updates from multiple animators firing in the same tick.
 	// Notifications stay with the writes they describe; the applier emits them.
 	MockValueUpdateList m_pendingUpdates;
 	MockNotifyEventList m_pendingNotifications;
+	// The animator ticks in the batch, in order, with the uids each read and wrote.
+	struct PendingTick {
+		int animatorId = -1;
+		QStringList inputs;
+		QStringList outputs;
+	};
+	QVector<PendingTick> m_pendingTicks;
 	int m_flushTimerId = 0;
 
 	// Consumption calculation state
@@ -263,11 +270,5 @@ private:
 
 } // namespace VenusOS
 } // namespace Victron
-
-Q_DECLARE_METATYPE(Victron::VenusOS::MockAnimatorConfig)
-Q_DECLARE_METATYPE(Victron::VenusOS::MockValueUpdateList)
-Q_DECLARE_METATYPE(Victron::VenusOS::MockNotifyEvent)
-Q_DECLARE_METATYPE(Victron::VenusOS::MockNotifyEventList)
-Q_DECLARE_METATYPE(Victron::VenusOS::MockConsumptionConfig)
 
 #endif // VICTRON_GUIV2_MOCKTIMERWORKER_H

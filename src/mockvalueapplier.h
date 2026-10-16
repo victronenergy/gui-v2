@@ -27,7 +27,7 @@ struct MockNotifyCallbacks {
 };
 
 /*
-	MockValueApplier lives on the GUI thread. It:
+	MockValueApplier:
 	1. Receives batched value updates from MockTimerWorker and applies them
 	   spread across frames (max N per 16ms tick) to avoid binding cascade spikes.
 	2. Emits notifyUpdate/notifyTotal only after setValue() has applied the
@@ -53,17 +53,15 @@ public:
 	void registerNotify(int animatorId, const MockNotifyCallbacks &callbacks);
 	void unregisterNotify(int animatorId);
 
-	// Drop queued copies of uid and ignore in-flight batches until the worker acks.
-	void supersede(const QString &uid);
-	void acknowledgeExternalWrite(const QString &uid);
-	// Drop queued updates under prefix until forgetUidPrefix() emits uidPrefixForgotten().
-	void blockPrefix(const QString &prefix);
-	void acknowledgePrefix(const QString &prefix);
-	bool hasPending(const QString &uid) const;
+	// Drop queued updates for uid, or for every uid under prefix, and the notify
+	// records that depend on them.
+	void removeQueued(const QString &uid);
+	void removeQueuedUnderPrefix(const QString &prefix);
+	// The queued value for uid if there is one, else the producer value.
+	QVariant latestValue(const QString &uid) const;
 
-public Q_SLOTS:
-	void applyValues(const Victron::VenusOS::MockValueUpdateList &updates,
-			const Victron::VenusOS::MockNotifyEventList &notifications = {});
+	void applyValues(const MockValueUpdateList &updates,
+			const MockNotifyEventList &notifications = {});
 
 private Q_SLOTS:
 	void processQueue();
@@ -75,14 +73,10 @@ private:
 
 	// Direct dispatch map: animatorId -> callbacks
 	QHash<int, MockNotifyCallbacks> m_notifyMap;
-	// Uids with an external write the worker has not observed yet.
-	QHash<QString, int> m_externalBlocks;
-	// Service prefixes removed on the GUI thread. Held until the worker acks.
-	QHash<QString, int> m_prefixBlocks;
+	// True while values or notifies are being applied. QML handlers run then, and
+	// may call back in; the outer pass dispatches notifies when it is done.
+	bool m_applying = false;
 
-	bool isBlocked(const QString &uid) const;
-	void removeQueued(const QString &uid);
-	void removeQueuedUnderPrefix(const QString &prefix);
 	bool notificationReady(const MockNotifyEvent &event) const;
 	void enqueueNotification(const MockNotifyEvent &event);
 	void dropNotifications(const std::function<bool(const QString &)> &affected);

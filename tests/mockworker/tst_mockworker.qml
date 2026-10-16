@@ -180,7 +180,7 @@ TestCase {
 		calc.destroy()
 	}
 
-	// A paced worker batch must not revert a newer external write.
+	// A paced timer batch must not revert a newer external write.
 	function test_externalWrite_supersedesQueuedUpdate() {
 		const uid = "mock/com.victronenergy.test.mockworker/Supersede"
 		const filler = "mock/com.victronenergy.test.mockworker/Supersede/Filler/"
@@ -193,12 +193,230 @@ TestCase {
 		updates.push({ uid: uid, value: 3 })
 		MockManager.applyWorkerUpdatesForTest(updates)
 		MockManager.setValue(uid, 99)
-		// In-flight batch, already computed before the worker observes 99.
-		MockManager.applyWorkerUpdatesForTest([{ uid: uid, value: 3 }])
 
 		wait(80)
 		compare(MockManager.value(uid), 99)
 		compare(MockManager.value(filler + "0"), 7)
+	}
+
+	Component {
+		id: handlerWriteComponent
+		VeQuickItem {
+			property string otherUid
+			onValueChanged: if (value === 1) MockManager.setValue(otherUid, 5000)
+		}
+	}
+
+	// A write from a QML handler while a batch is applied replaces the queued
+	// update for that uid, even when it is in the chunk being applied.
+	function test_handlerWrite_supersedesQueuedUpdate() {
+		const trigger = "mock/com.victronenergy.test.mockworker/Handler/Trigger"
+		const other = "mock/com.victronenergy.test.mockworker/Handler/Other"
+		MockManager.setValue(trigger, 0)
+		MockManager.setValue(other, 0)
+		const item = handlerWriteComponent.createObject(root, { uid: trigger, otherUid: other })
+		verify(item)
+
+		MockManager.applyWorkerUpdatesForTest([{ uid: trigger, value: 1 }, { uid: other, value: 115 }])
+		wait(80)
+		compare(MockManager.value(trigger), 1)
+		compare(MockManager.value(other), 5000)
+		item.destroy()
+	}
+
+	// A write between an animator tick and the flush of its batch must win, and
+	// calculators flushed with that batch must read the written value.
+	function test_externalWrite_supersedesBatchedTimerUpdate() {
+		const pv = "com.victronenergy.pvinverter.mockworker.batched"
+		const source = "mock/" + pv + "/Ac/L1/Power"
+		const target = "mock/com.victronenergy.system.mockworker/Ac/PvBatched"
+		MockManager.setValue(source, 10)
+		const calc = phaseSumComponent.createObject(root, {
+			targetPrefix: target,
+			sourcePhasePattern: "/Ac/L%1/Power"
+		})
+		verify(calc)
+		calc.addService("mock/" + pv)
+		waitForValue(target + "/L1/Power", 10)
+
+		MockManager.queueTimerUpdateForTest(source, 5000)
+		MockManager.setValue(source, 115)
+		wait(80)
+		compare(MockManager.value(source), 115)
+		compare(MockManager.value(target + "/L1/Power"), 115)
+		calc.destroy()
+	}
+
+	// The tick writes Power 5000, Current 20 (5000 / 250 V) and Total 5000. An
+	// external write to any of them, or to the voltage, before the flush must drop
+	// the whole tick, not leave outputs computed from the superseded values.
+	function test_externalWrite_dropsWholeTimerTick_data() {
+		return [
+			{ tag: "output", write: "", value: 115, power: 115 },
+			{ tag: "derived", write: "/Current", value: 7, power: 100 },
+			{ tag: "divisor", write: "/Voltage", value: 230, power: 100 },
+		]
+	}
+
+	function test_externalWrite_dropsWholeTimerTick(row) {
+		compare(MockManager.timersActive, false)
+		const power = "mock/com.victronenergy.test.mockworker/Tick/" + row.tag
+		const current = power + "/Current"
+		const total = power + "/Total"
+		const voltage = power + "/Voltage"
+		MockManager.setValue(power, 100)
+		MockManager.setValue(current, 0.4)
+		MockManager.setValue(total, 100)
+		MockManager.setValue(voltage, 250)
+		const randomizer = randomizerComponent.createObject(root, {
+			valueUid: power,
+			active: true,
+			minimumValue: 5000,
+			totalTargetUid: total,
+			derivedTargetUids: [current],
+			derivedDivisorUids: [voltage]
+		})
+		verify(randomizer)
+
+		MockManager.tickAnimatorsForTest()
+		MockManager.setValue(power + row.write, row.value)
+		wait(80)
+		// Every output keeps its value from before the tick, unless written.
+		compare(MockManager.value(power), row.power)
+		compare(MockManager.value(current), row.tag === "derived" ? 7 : 0.4)
+		compare(MockManager.value(total), 100)
+		compare(MockManager.value(voltage), row.tag === "divisor" ? 230 : 250)
+		randomizer.destroy()
+	}
+
+	// Y's tick divides by W, which X's earlier tick in the same batch wrote. A write
+	// to X's input V drops X's tick, so Y's tick, computed from X's W, must go too.
+	function test_externalWrite_dropsDependentTimerTicks() {
+		compare(MockManager.timersActive, false)
+		const base = "mock/com.victronenergy.test.mockworker/Chain"
+		const v = base + "/V", w = base + "/W", one = base + "/One"
+		const p = base + "/P", i = base + "/I"
+		MockManager.setValue(v, 250)
+		MockManager.setValue(w, 250)
+		MockManager.setValue(one, 1)
+		MockManager.setValue(p, 100)
+		MockManager.setValue(i, 0.4)
+		const x = randomizerComponent.createObject(root, {
+			valueUid: v, active: true, minimumValue: 300,
+			derivedTargetUids: [w], derivedDivisorUids: [one]
+		})
+		const y = randomizerComponent.createObject(root, {
+			valueUid: p, active: true, minimumValue: 5000,
+			derivedTargetUids: [i], derivedDivisorUids: [w]
+		})
+		verify(x)
+		verify(y)
+
+		MockManager.tickAnimatorsForTest()
+		MockManager.setValue(v, 260)
+		wait(80)
+		compare(MockManager.value(v), 260)
+		compare(MockManager.value(w), 250)
+		compare(MockManager.value(p), 100)
+		compare(MockManager.value(i), 0.4)
+		x.destroy()
+		y.destroy()
+	}
+
+	// Removing a service that holds only some of a tick's outputs stops the animator
+	// and drops its whole tick, not just the outputs under the removed service.
+	function test_removeValue_dropsWholeTimerTick() {
+		compare(MockManager.timersActive, false)
+		const keep = "mock/com.victronenergy.test.mockworker/Span"
+		const removed = "mock/com.victronenergy.tank.mockworker_span"
+		MockManager.setValue(keep + "/Power", 100)
+		MockManager.setValue(keep + "/Voltage", 250)
+		MockManager.setValue(removed + "/Current", 0.4)
+		const randomizer = randomizerComponent.createObject(root, {
+			valueUid: keep + "/Power", active: true, minimumValue: 5000,
+			derivedTargetUids: [removed + "/Current"], derivedDivisorUids: [keep + "/Voltage"]
+		})
+		verify(randomizer)
+
+		MockManager.tickAnimatorsForTest()
+		MockManager.removeValue(removed)
+		wait(80)
+		compare(MockManager.value(keep + "/Power"), 100)
+		verify(isInvalid(MockManager.value(removed + "/Current")))
+		randomizer.destroy()
+	}
+
+	// Re-registering after a property change keeps the animator id. The tick made
+	// with the old config must not be applied.
+	function test_reregister_dropsPendingTimerTick() {
+		compare(MockManager.timersActive, false)
+		const p = "mock/com.victronenergy.test.mockworker/Reregister/P"
+		MockManager.setValue(p, 100)
+		const randomizer = randomizerComponent.createObject(root, {
+			valueUid: p, active: true, minimumValue: 5000
+		})
+		verify(randomizer)
+
+		MockManager.tickAnimatorsForTest()
+		randomizer.deltaLow = 1
+		wait(80)
+		compare(MockManager.value(p), 100)
+		randomizer.destroy()
+	}
+
+	// a writes X, b reads X and writes P and Y, c writes X. Dropping c's tick removes
+	// every batched X, so a's tick and b's tick, computed from a's X, must go too.
+	function test_droppedTick_dropsTicksSharingItsOutputs() {
+		compare(MockManager.timersActive, false)
+		const base = "mock/com.victronenergy.test.mockworker/Shared"
+		const x = base + "/X", p = base + "/P", y = base + "/Y"
+		MockManager.setValue(x, 10)
+		MockManager.setValue(p, 100)
+		MockManager.setValue(y, 10)
+		const a = randomizerComponent.createObject(root, { valueUid: x, active: true, minimumValue: 5000 })
+		const b = randomizerComponent.createObject(root, {
+			valueUid: p, active: true, minimumValue: 300,
+			derivedTargetUids: [y], derivedDivisorUids: [x]
+		})
+		const c = randomizerComponent.createObject(root, { valueUid: x, active: true, minimumValue: 7000 })
+		verify(a && b && c)
+
+		MockManager.tickAnimatorsForTest()
+		c.deltaLow = 1
+		wait(80)
+		compare(MockManager.value(x), 10)
+		compare(MockManager.value(p), 100)
+		compare(MockManager.value(y), 10)
+		a.destroy()
+		b.destroy()
+		c.destroy()
+	}
+
+	Component {
+		id: reregisteringRandomizerComponent
+		MockDataRandomizer {
+			interval: 30
+			deltaLow: 0
+			deltaHigh: 0
+			property string valueUid
+			property int totals: 0
+			VeQuickItem { uid: valueUid }
+			// Re-registering replaces this animator's notify callback while it runs.
+			onNotifyTotal: function(total) {
+				totals++
+				interval = (interval === 30 ? 31 : 30)
+			}
+		}
+	}
+
+	function test_notifyHandler_reregistersOwnAnimator() {
+		const uid = "mock/com.victronenergy.test.mockworker/Notify/Reregister"
+		MockManager.setValue(uid, 5)
+		MockManager.timersActive = true
+		const randomizer = reregisteringRandomizerComponent.createObject(root, { valueUid: uid, active: true })
+		verify(randomizer)
+		tryVerify(function() { return randomizer.totals >= 3 }, 5000, "totals " + randomizer.totals)
+		randomizer.destroy()
 	}
 
 	function test_animator_rejectsNonFiniteInterval() {
@@ -231,7 +449,7 @@ TestCase {
 		stepper.destroy()
 	}
 
-	// A queued or in-flight batch must not call setValue() on a removed service.
+	// A queued batch must not call setValue() on a removed service.
 	// setValue() uses itemGetOrCreate() and would recreate it.
 	function test_removeValue_doesNotResurrectService() {
 		const service = "mock/com.victronenergy.tank.mockworker_remove"
@@ -246,20 +464,11 @@ TestCase {
 		updates.push({ uid: level, value: 9 })
 		MockManager.applyWorkerUpdatesForTest(updates)
 		MockManager.removeValue(service)
-		// Item is already unlinked. This batch must not recreate it.
-		MockManager.applyWorkerUpdatesForTest([{ uid: level, value: 8 }])
 		verify(isInvalid(MockManager.value(level)))
 
 		wait(80)
 		verify(isInvalid(MockManager.value(level)))
 		compare(MockManager.value(other + "/Filler/0"), 7)
-
-		// The block clears after forgetUidPrefix() acks. A later write applies.
-		tryVerify(function() {
-			MockManager.applyWorkerUpdatesForTest([{ uid: level, value: 4 }])
-			return MockManager.value(level) === 4
-		})
-		MockManager.removeValue(service)
 	}
 
 	function test_removeServices_doesNotResurrectService() {
@@ -275,14 +484,13 @@ TestCase {
 		updates.push({ uid: level, value: 9 })
 		MockManager.applyWorkerUpdatesForTest(updates)
 		MockManager.removeServices("tank")
-		MockManager.applyWorkerUpdatesForTest([{ uid: level, value: 8 }])
+		wait(80)
 		verify(isInvalid(MockManager.value(level)))
 		compare(MockManager.value(other), 2)
 	}
 
-	// forgetUidPrefix() must stop the animator before uidPrefixForgotten().
-	// The ack clears the block within a few milliseconds; a 30ms writer that
-	// is still running will recreate the service during this wait.
+	// forgetUidPrefix() must stop the animator. A 30ms writer that is still
+	// running will recreate the service during this wait.
 	// No VeQuickItem: a QML item still bound to Level warns when the item is deleted.
 	function test_removeValue_stopsAnimatorBeforeResurrection() {
 		const service = "mock/com.victronenergy.tank.mockworker_live"

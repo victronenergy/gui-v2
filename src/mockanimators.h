@@ -17,66 +17,12 @@
 #include <QQmlListProperty>
 #include <QTimerEvent>
 
-#include <atomic>
 #include <functional>
 
 namespace Victron {
 namespace VenusOS {
 
-inline std::atomic<int> s_nextAnimatorId{1};
-
-// Watches animator inputs so an external write is in the cache before the next tick.
-// The stored list is the one registered, not the live property values: setters update
-// members before reregistering, and unregister must release the previous uids.
-struct MockAnimatorInputWatch {
-	QStringList uids;
-
-	void reset(const QStringList &dataUids, const QStringList &extraUids = {})
-	{
-		QStringList next;
-		auto appendUnique = [&next](const QString &uid) {
-			const QString normalized = normalizedMockUid(uid);
-			if (!normalized.isEmpty() && !next.contains(normalized)) {
-				next.append(normalized);
-			}
-		};
-		for (const QString &uid : dataUids) {
-			appendUnique(uid);
-		}
-		for (const QString &uid : extraUids) {
-			appendUnique(uid);
-		}
-		if (uids == next) {
-			return;
-		}
-		MockManager *manager = MockManager::create();
-		manager->unwatchUids(uids, MockWatchRole::AnimatorInput);
-		manager->watchUids(next, MockWatchRole::AnimatorInput);
-		uids = next;
-	}
-
-	void clear()
-	{
-		if (uids.isEmpty()) {
-			return;
-		}
-		MockManager::create()->unwatchUids(uids, MockWatchRole::AnimatorInput);
-		uids.clear();
-	}
-
-	void resnapshot(MockTimerWorker *worker) const
-	{
-		if (!worker || uids.isEmpty()) {
-			return;
-		}
-		MockValueCache snapshot;
-		for (const QString &uid : uids) {
-			snapshot.insert(uid, MockManager::create()->value(uid));
-		}
-		QMetaObject::invokeMethod(worker, "updateValues",
-			Qt::QueuedConnection, Q_ARG(MockValueCache, snapshot));
-	}
-};
+inline int s_nextAnimatorId = 1;
 
 // Item uids can change through bindings without an animator setter running.
 struct MockAnimatorItemUidWatch {
@@ -135,13 +81,13 @@ class MockDataRandomizer : public QObject, public QQmlParserStatus
 	Q_PROPERTY(bool repeat READ repeat WRITE setRepeat NOTIFY repeatChanged FINAL)
 	Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged FINAL)
 
-	// Derived value computation (done entirely in worker thread, no GUI JS needed)
+	// Derived value computation (done in MockTimerWorker, no QML JS needed)
 	// totalTargetUid: the worker writes the sum of all data items to this uid
 	Q_PROPERTY(QString totalTargetUid READ totalTargetUid WRITE setTotalTargetUid NOTIFY totalTargetUidChanged FINAL)
-	// derivedTargetUids[i] = value[i] / cache[derivedDivisorUids[i]] (e.g. current = power/voltage)
+	// derivedTargetUids[i] = value[i] / value[derivedDivisorUids[i]] (e.g. current = power/voltage)
 	Q_PROPERTY(QStringList derivedTargetUids READ derivedTargetUids WRITE setDerivedTargetUids NOTIFY derivedTargetUidsChanged FINAL)
 	Q_PROPERTY(QStringList derivedDivisorUids READ derivedDivisorUids WRITE setDerivedDivisorUids NOTIFY derivedDivisorUidsChanged FINAL)
-	// derivedMultiplyTargetUids[i] = value[i] * cache[derivedMultiplierUids[i]] (e.g. power = current*voltage)
+	// derivedMultiplyTargetUids[i] = value[i] * value[derivedMultiplierUids[i]] (e.g. power = current*voltage)
 	Q_PROPERTY(QStringList derivedMultiplyTargetUids READ derivedMultiplyTargetUids WRITE setDerivedMultiplyTargetUids NOTIFY derivedMultiplyTargetUidsChanged FINAL)
 	Q_PROPERTY(QStringList derivedMultiplierUids READ derivedMultiplierUids WRITE setDerivedMultiplierUids NOTIFY derivedMultiplierUidsChanged FINAL)
 	// Sum of all multiply-derived values written to this uid
@@ -153,7 +99,7 @@ class MockDataRandomizer : public QObject, public QQmlParserStatus
 public:
 	explicit MockDataRandomizer(QObject *parent = nullptr)
 			: QObject(parent)
-			, m_animatorId(s_nextAnimatorId.fetch_add(1)) {
+			, m_animatorId(s_nextAnimatorId++) {
 	}
 
 	~MockDataRandomizer() override {
@@ -213,11 +159,7 @@ public:
 		if (m_followSignOf != v) {
 			m_followSignOf = v;
 			// followSignOf changes frequently (e.g. bound to SOC), use lightweight update
-			MockTimerWorker *worker = MockManager::create()->timerWorker();
-			if (worker) {
-				QMetaObject::invokeMethod(worker, "updateAnimatorFollowSignOf",
-					Qt::QueuedConnection, Q_ARG(int, m_animatorId), Q_ARG(qreal, v));
-			}
+			MockManager::create()->timerWorker()->updateAnimatorFollowSignOf(m_animatorId, v);
 			Q_EMIT followSignOfChanged();
 		}
 	}
@@ -244,13 +186,8 @@ public:
 	void setActive(bool v) {
 		if (m_active != v) {
 			m_active = v;
-			MockTimerWorker *worker = MockManager::create()->timerWorker();
-			if (worker && m_registered) {
-				if (v) {
-					m_inputWatch.resnapshot(worker);
-				}
-				QMetaObject::invokeMethod(worker, "setAnimatorActive",
-					Qt::QueuedConnection, Q_ARG(int, m_animatorId), Q_ARG(bool, v));
+			if (m_registered) {
+				MockManager::create()->timerWorker()->setAnimatorActive(m_animatorId, v);
 			} else if (v && m_complete && !m_registered) {
 				registerWithWorker();
 			}
@@ -344,8 +281,7 @@ protected:
 
 private:
 	void registerWithWorker() {
-		MockTimerWorker *worker = MockManager::create()->timerWorker();
-		if (!worker || m_dataItems.isEmpty()) {
+		if (m_dataItems.isEmpty()) {
 			return;
 		}
 
@@ -367,39 +303,11 @@ private:
 		config.derivedMultiplierUids = m_derivedMultiplierUids;
 		config.derivedMultiplyTotalTargetUid = m_derivedMultiplyTotalTargetUid;
 
-		// Collect UIDs and sync current values to worker cache
-		QHash<QString, QVariant> initialValues;
 		for (VeQuickItem *item : m_dataItems) {
-			if (item) {
-				const QString uid = item->getUid();
-				config.uids.append(uid);
-				initialValues[uid] = item->getValue();
-			} else {
-				config.uids.append(QString());
-			}
+			config.uids.append(item ? item->getUid() : QString());
 		}
 
-		// Also sync derived-value dependencies (e.g. voltages for current = power / voltage)
-		auto syncDerivedDeps = [&initialValues](const QStringList &uids) {
-			for (const QString &uid : uids) {
-				if (!uid.isEmpty() && !initialValues.contains(uid)) {
-					VeQItem *item = VeQItems::getRoot()->itemGet(uid);
-					if (item && item->getValue().isValid()) {
-						initialValues[uid] = item->getValue();
-					}
-				}
-			}
-		};
-		syncDerivedDeps(config.derivedDivisorUids);
-		syncDerivedDeps(config.derivedMultiplierUids);
-		m_inputWatch.reset(config.uids, config.derivedDivisorUids + config.derivedMultiplierUids);
-
-		// Sync values to worker cache first, then register
-		QMetaObject::invokeMethod(worker, "updateValues",
-			Qt::QueuedConnection, Q_ARG(MockValueCache, initialValues));
-		QMetaObject::invokeMethod(worker, "registerAnimator",
-			Qt::QueuedConnection,
-			Q_ARG(Victron::VenusOS::MockAnimatorConfig, config));
+		MockManager::create()->timerWorker()->registerAnimator(config);
 
 		// Register targeted notification dispatch
 		MockValueApplier *applier = MockManager::create()->valueApplier();
@@ -417,12 +325,7 @@ private:
 		if (!m_registered) {
 			return;
 		}
-		m_inputWatch.clear();
-		MockTimerWorker *worker = MockManager::create()->timerWorker();
-		if (worker) {
-			QMetaObject::invokeMethod(worker, "unregisterAnimator",
-				Qt::QueuedConnection, Q_ARG(int, m_animatorId));
-		}
+		MockManager::create()->timerWorker()->unregisterAnimator(m_animatorId);
 		MockValueApplier *applier = MockManager::create()->valueApplier();
 		if (applier) {
 			applier->unregisterNotify(m_animatorId);
@@ -492,7 +395,6 @@ private:
 	bool m_active = false;
 	bool m_complete = false;
 	bool m_registered = false;
-	MockAnimatorInputWatch m_inputWatch;
 	MockAnimatorItemUidWatch m_itemUidWatch;
 };
 
@@ -518,7 +420,7 @@ class MockDataRangeAnimator : public QObject, public QQmlParserStatus
 	Q_PROPERTY(bool repeat READ repeat WRITE setRepeat NOTIFY repeatChanged FINAL)
 	Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged FINAL)
 
-	// Derived value computation (done entirely in worker thread)
+	// Derived value computation (done in MockTimerWorker)
 	Q_PROPERTY(QString totalTargetUid READ totalTargetUid WRITE setTotalTargetUid NOTIFY totalTargetUidChanged FINAL)
 	Q_PROPERTY(QStringList derivedTargetUids READ derivedTargetUids WRITE setDerivedTargetUids NOTIFY derivedTargetUidsChanged FINAL)
 	Q_PROPERTY(QStringList derivedDivisorUids READ derivedDivisorUids WRITE setDerivedDivisorUids NOTIFY derivedDivisorUidsChanged FINAL)
@@ -532,23 +434,25 @@ class MockDataRangeAnimator : public QObject, public QQmlParserStatus
 public:
 	explicit MockDataRangeAnimator(QObject *parent = nullptr)
 			: QObject(parent)
-			, m_animatorId(s_nextAnimatorId.fetch_add(1)) {
+			, m_animatorId(s_nextAnimatorId++) {
 		MockTimerWorker *worker = MockManager::create()->timerWorker();
 		if (worker) {
 			// Worker-calculated vectors only: initial fill and direction reversal.
-			// AutoConnection resolves to QueuedConnection (cross-thread).
+			// Queued: the worker emits this mid-tick, and a QML handler must not
+			// change the animator configs while the worker is using them. Read the
+			// worker's vector on delivery: the signal's copy may be stale by then.
 			// Assign the member directly. Do not call setActualStepSizes(): it
-			// emits actualStepSizesPushed, and updateAnimatorActualStepSizes()
-			// must not Q_EMIT actualStepSizesChanged() back.
+			// would pass the vector back to updateAnimatorActualStepSizes().
 			connect(worker, &MockTimerWorker::actualStepSizesChanged,
-					this, [this](int animatorId, const QVector<qreal> &stepSizes) {
-						if (animatorId == m_animatorId) {
+					this, [this, worker](int animatorId) {
+						if (animatorId == m_animatorId && m_registered) {
+							const QVector<qreal> stepSizes = worker->actualStepSizes(animatorId);
 							if (m_actualStepSizes != stepSizes) {
 								m_actualStepSizes = stepSizes;
 								Q_EMIT actualStepSizesChanged();
 							}
 						}
-					});
+					}, Qt::QueuedConnection);
 		}
 	}
 
@@ -600,7 +504,7 @@ public:
 		if (m_actualStepSizes != v) {
 			m_actualStepSizes = v;
 			if (m_registered) {
-				Q_EMIT actualStepSizesPushed(m_animatorId, v);
+				MockManager::create()->timerWorker()->updateAnimatorActualStepSizes(m_animatorId, v);
 			}
 			Q_EMIT actualStepSizesChanged();
 		}
@@ -628,13 +532,8 @@ public:
 	void setActive(bool v) {
 		if (m_active != v) {
 			m_active = v;
-			MockTimerWorker *worker = MockManager::create()->timerWorker();
-			if (worker && m_registered) {
-				if (v) {
-					m_inputWatch.resnapshot(worker);
-				}
-				QMetaObject::invokeMethod(worker, "setAnimatorActive",
-					Qt::QueuedConnection, Q_ARG(int, m_animatorId), Q_ARG(bool, v));
+			if (m_registered) {
+				MockManager::create()->timerWorker()->setAnimatorActive(m_animatorId, v);
 			} else if (v && m_complete && !m_registered) {
 				registerWithWorker();
 			}
@@ -704,7 +603,6 @@ Q_SIGNALS:
 	void maximumValueChanged();
 	void stepSizeChanged();
 	void actualStepSizesChanged();
-	void actualStepSizesPushed(int animatorId, const QVector<qreal> &stepSizes);
 	void intervalChanged();
 	void repeatChanged();
 	void activeChanged();
@@ -721,12 +619,6 @@ protected:
 	void componentComplete() override {
 		m_complete = true;
 		publishInitialStepSizes();
-		MockTimerWorker *worker = MockManager::create()->timerWorker();
-		if (worker) {
-			connect(this, &MockDataRangeAnimator::actualStepSizesPushed,
-					worker, &MockTimerWorker::updateAnimatorActualStepSizes,
-					static_cast<Qt::ConnectionType>(Qt::QueuedConnection | Qt::UniqueConnection));
-		}
 		if (m_active) {
 			registerWithWorker();
 		}
@@ -745,8 +637,7 @@ private:
 	}
 
 	void registerWithWorker() {
-		MockTimerWorker *worker = MockManager::create()->timerWorker();
-		if (!worker || m_dataItems.isEmpty()) {
+		if (m_dataItems.isEmpty()) {
 			return;
 		}
 		publishInitialStepSizes();
@@ -768,39 +659,11 @@ private:
 		config.derivedMultiplierUids = m_derivedMultiplierUids;
 		config.derivedMultiplyTotalTargetUid = m_derivedMultiplyTotalTargetUid;
 
-		// Collect UIDs and sync current values to worker cache
-		QHash<QString, QVariant> initialValues;
 		for (VeQuickItem *item : m_dataItems) {
-			if (item) {
-				const QString uid = item->getUid();
-				config.uids.append(uid);
-				initialValues[uid] = item->getValue();
-			} else {
-				config.uids.append(QString());
-			}
+			config.uids.append(item ? item->getUid() : QString());
 		}
 
-		// Also sync derived-value dependencies (e.g. voltages for power = current * voltage)
-		auto syncDerivedDeps = [&initialValues](const QStringList &uids) {
-			for (const QString &uid : uids) {
-				if (!uid.isEmpty() && !initialValues.contains(uid)) {
-					VeQItem *item = VeQItems::getRoot()->itemGet(uid);
-					if (item && item->getValue().isValid()) {
-						initialValues[uid] = item->getValue();
-					}
-				}
-			}
-		};
-		syncDerivedDeps(config.derivedDivisorUids);
-		syncDerivedDeps(config.derivedMultiplierUids);
-		m_inputWatch.reset(config.uids, config.derivedDivisorUids + config.derivedMultiplierUids);
-
-		// Sync values to worker cache first, then register
-		QMetaObject::invokeMethod(worker, "updateValues",
-			Qt::QueuedConnection, Q_ARG(MockValueCache, initialValues));
-		QMetaObject::invokeMethod(worker, "registerAnimator",
-			Qt::QueuedConnection,
-			Q_ARG(Victron::VenusOS::MockAnimatorConfig, config));
+		MockManager::create()->timerWorker()->registerAnimator(config);
 
 		// Register targeted notification dispatch
 		MockValueApplier *applier = MockManager::create()->valueApplier();
@@ -818,12 +681,7 @@ private:
 		if (!m_registered) {
 			return;
 		}
-		m_inputWatch.clear();
-		MockTimerWorker *worker = MockManager::create()->timerWorker();
-		if (worker) {
-			QMetaObject::invokeMethod(worker, "unregisterAnimator",
-				Qt::QueuedConnection, Q_ARG(int, m_animatorId));
-		}
+		MockManager::create()->timerWorker()->unregisterAnimator(m_animatorId);
 		MockValueApplier *applier = MockManager::create()->valueApplier();
 		if (applier) {
 			applier->unregisterNotify(m_animatorId);
@@ -897,7 +755,6 @@ private:
 	bool m_active = false;
 	bool m_complete = false;
 	bool m_registered = false;
-	MockAnimatorInputWatch m_inputWatch;
 	MockAnimatorItemUidWatch m_itemUidWatch;
 };
 
@@ -920,7 +777,7 @@ class MockDataStepper : public QObject, public QQmlParserStatus
 public:
 	explicit MockDataStepper(QObject *parent = nullptr)
 			: QObject(parent)
-			, m_animatorId(s_nextAnimatorId.fetch_add(1)) {
+			, m_animatorId(s_nextAnimatorId++) {
 	}
 
 	~MockDataStepper() override {
@@ -969,13 +826,8 @@ public:
 	void setActive(bool v) {
 		if (m_active != v) {
 			m_active = v;
-			MockTimerWorker *worker = MockManager::create()->timerWorker();
-			if (worker && m_registered) {
-				if (v) {
-					m_inputWatch.resnapshot(worker);
-				}
-				QMetaObject::invokeMethod(worker, "setAnimatorActive",
-					Qt::QueuedConnection, Q_ARG(int, m_animatorId), Q_ARG(bool, v));
+			if (m_registered) {
+				MockManager::create()->timerWorker()->setAnimatorActive(m_animatorId, v);
 			} else if (v && m_complete && !m_registered) {
 				registerWithWorker();
 			}
@@ -1001,8 +853,7 @@ protected:
 
 private:
 	void registerWithWorker() {
-		MockTimerWorker *worker = MockManager::create()->timerWorker();
-		if (!worker || m_dataItems.isEmpty()) {
+		if (m_dataItems.isEmpty()) {
 			return;
 		}
 
@@ -1013,35 +864,17 @@ private:
 		config.repeat = m_repeat;
 		config.stepSize = m_stepSize;
 
-		QHash<QString, QVariant> initialValues;
 		for (VeQuickItem *item : m_dataItems) {
-			if (item) {
-				const QString uid = item->getUid();
-				config.uids.append(uid);
-				initialValues[uid] = item->getValue();
-			} else {
-				config.uids.append(QString());
-			}
+			config.uids.append(item ? item->getUid() : QString());
 		}
-		m_inputWatch.reset(config.uids);
-
-		QMetaObject::invokeMethod(worker, "updateValues",
-			Qt::QueuedConnection, Q_ARG(MockValueCache, initialValues));
-		QMetaObject::invokeMethod(worker, "registerAnimator",
-			Qt::QueuedConnection,
-			Q_ARG(Victron::VenusOS::MockAnimatorConfig, config));
+		MockManager::create()->timerWorker()->registerAnimator(config);
 
 		m_registered = true;
 	}
 
 	void unregisterFromWorker() {
 		if (!m_registered) return;
-		m_inputWatch.clear();
-		MockTimerWorker *worker = MockManager::create()->timerWorker();
-		if (worker) {
-			QMetaObject::invokeMethod(worker, "unregisterAnimator",
-				Qt::QueuedConnection, Q_ARG(int, m_animatorId));
-		}
+		MockManager::create()->timerWorker()->unregisterAnimator(m_animatorId);
 		m_registered = false;
 	}
 
@@ -1094,7 +927,6 @@ private:
 	bool m_active = false;
 	bool m_complete = false;
 	bool m_registered = false;
-	MockAnimatorInputWatch m_inputWatch;
 	MockAnimatorItemUidWatch m_itemUidWatch;
 };
 
@@ -1117,7 +949,7 @@ class MockDataToggler : public QObject, public QQmlParserStatus
 public:
 	explicit MockDataToggler(QObject *parent = nullptr)
 			: QObject(parent)
-			, m_animatorId(s_nextAnimatorId.fetch_add(1)) {
+			, m_animatorId(s_nextAnimatorId++) {
 	}
 
 	~MockDataToggler() override {
@@ -1175,13 +1007,8 @@ public:
 	void setActive(bool v) {
 		if (m_active != v) {
 			m_active = v;
-			MockTimerWorker *worker = MockManager::create()->timerWorker();
-			if (worker && m_registered) {
-				if (v) {
-					m_inputWatch.resnapshot(worker);
-				}
-				QMetaObject::invokeMethod(worker, "setAnimatorActive",
-					Qt::QueuedConnection, Q_ARG(int, m_animatorId), Q_ARG(bool, v));
+			if (m_registered) {
+				MockManager::create()->timerWorker()->setAnimatorActive(m_animatorId, v);
 			} else if (v && m_complete && !m_registered) {
 				registerWithWorker();
 			}
@@ -1208,8 +1035,7 @@ protected:
 
 private:
 	void registerWithWorker() {
-		MockTimerWorker *worker = MockManager::create()->timerWorker();
-		if (!worker || m_dataItems.isEmpty()) {
+		if (m_dataItems.isEmpty()) {
 			return;
 		}
 
@@ -1221,35 +1047,17 @@ private:
 		config.toggleA = m_valueA;
 		config.toggleB = m_valueB;
 
-		QHash<QString, QVariant> initialValues;
 		for (VeQuickItem *item : m_dataItems) {
-			if (item) {
-				const QString uid = item->getUid();
-				config.uids.append(uid);
-				initialValues[uid] = item->getValue();
-			} else {
-				config.uids.append(QString());
-			}
+			config.uids.append(item ? item->getUid() : QString());
 		}
-		m_inputWatch.reset(config.uids);
-
-		QMetaObject::invokeMethod(worker, "updateValues",
-			Qt::QueuedConnection, Q_ARG(MockValueCache, initialValues));
-		QMetaObject::invokeMethod(worker, "registerAnimator",
-			Qt::QueuedConnection,
-			Q_ARG(Victron::VenusOS::MockAnimatorConfig, config));
+		MockManager::create()->timerWorker()->registerAnimator(config);
 
 		m_registered = true;
 	}
 
 	void unregisterFromWorker() {
 		if (!m_registered) return;
-		m_inputWatch.clear();
-		MockTimerWorker *worker = MockManager::create()->timerWorker();
-		if (worker) {
-			QMetaObject::invokeMethod(worker, "unregisterAnimator",
-				Qt::QueuedConnection, Q_ARG(int, m_animatorId));
-		}
+		MockManager::create()->timerWorker()->unregisterAnimator(m_animatorId);
 		m_registered = false;
 	}
 
@@ -1303,7 +1111,6 @@ private:
 	bool m_active = false;
 	bool m_complete = false;
 	bool m_registered = false;
-	MockAnimatorInputWatch m_inputWatch;
 	MockAnimatorItemUidWatch m_itemUidWatch;
 };
 

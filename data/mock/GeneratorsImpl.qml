@@ -38,7 +38,7 @@ Item {
 				}
 			}
 
-			// When the generator is running, increment /Runtime on the worker thread.
+			// When the generator is running, increment /Runtime in MockTimerWorker.
 			MockDataStepper {
 				active: MockManager.timersActive
 						&& generator.state === VenusOS.Generators_State_Running
