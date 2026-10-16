@@ -29,7 +29,18 @@ dedicated test configuration. For example:
 # Same smoke tests in portrait. Brief and cards cases assert the inline
 # side panel and vertical card lists. No separate portrait configuration.
 ./bin/venus-gui-v2 --mock --resolution 480x800 --ui-test smoke/mock-maximal
+
+# Save an image of the page once it is shown, as
+# tst_target_page-<TypeName>.png. Turn off mock timers and animations so
+# that repeated runs give the same image.
+./bin/venus-gui-v2 --mock --no-mock-timers --animation false --ui-test-capture --ui-test /pages/BriefPage.qml
 ```
+
+`--ui-test-capture` only works with a page path. The image goes into the same image capture
+directory as other UI tests (see below). Page-path runs do not clear that directory, so several
+runs can save into one directory; an image with the same name is replaced. Page-path runs do
+not set `/Settings/Gui2/UIAnimations` to 0 the way test configurations do, so pass
+`--animation false`; otherwise the image may be taken while values are still animating.
 
 The route is resolved statically at startup:
 
@@ -122,10 +133,10 @@ Tests are configured with a JSON file; see `smoke/mock-maximal` for an example. 
 * Mock - when running in mock mode, sets the mock mode parameters
   * `Configuration` — mock JSON to load
   * `TimersActive` — whether mock data timers run
-  * `UIAnimations` — optional. UI tests force `/Settings/Gui2/UIAnimations` to 0
+  * `UIAnimations` — optional. Test configurations force `/Settings/Gui2/UIAnimations` to 0
     unless this is set (use `1` for animation performance tests). Visual
-    captures should omit it or set `0`. `--animationEnabled` does not override
-    the backend setting.
+    captures should omit it or set `0`. `--animation` does not override
+    the backend setting. Page-path runs do not set it; see `--ui-test-capture` above.
 * Steps - contains configurations for UI test steps
   * For example, for the "CaptureAndCompare" step, if you set "ComparisonThreshold" to 0.1, then it will compare captured images with an error threshold of 0.1%.
 
