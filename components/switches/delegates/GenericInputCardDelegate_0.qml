@@ -49,7 +49,7 @@ Item {
 				verticalCenter: parent.verticalCenter
 			}
 			text: root.genericInput.primaryLabel || CommonWords.state
-			color: Theme.color_listItem_secondaryText
+			color: Theme.color_font_secondary
 			font.pixelSize: Theme.font_size_body2
 			elide: Text.ElideRight
 		}

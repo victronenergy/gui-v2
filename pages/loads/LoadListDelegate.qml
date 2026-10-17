@@ -39,7 +39,7 @@ ListItem {
 			id: quantityTitle
 			width: parent.width
 			elide: Text.ElideRight
-			color: Theme.color_listItem_secondaryText
+			color: Theme.color_font_secondary
 			font.pixelSize: Theme.font_size_caption
 		}
 
@@ -114,7 +114,7 @@ ListItem {
 
 					Label {
 						font.pixelSize: Theme.font_size_body1
-						color: Theme.color_listItem_secondaryText
+						color: Theme.color_font_secondary
 						text: root._statusLabelText
 					}
 				}

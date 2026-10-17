@@ -34,7 +34,7 @@ ListSetting {
 	property string secondaryText: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
 			? optionModel[currentIndex].display
 			: defaultSecondaryText
-	property color secondaryTextColor: Theme.color_listItem_secondaryText
+	property color secondaryTextColor: Theme.color_font_secondary
 	readonly property var currentValue: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
 			? optionModel[currentIndex].value
 			: undefined

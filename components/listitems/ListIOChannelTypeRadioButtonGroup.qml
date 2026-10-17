@@ -17,7 +17,7 @@ ListRadioButtonGroup {
 	dataItem.uid: root.ioChannel.uid + "/Settings/Type"
 	preferredVisible: dataItem.valid
 	writeAccessLevel: VenusOS.User_AccessType_User
-	secondaryTextColor: root.ioChannel.hasValidType ? Theme.color_listItem_secondaryText : Theme.color_critical
+	secondaryTextColor: root.ioChannel.hasValidType ? Theme.color_font_secondary : Theme.color_critical
 	optionModel: {
 		let options = []
 		const maxType = root.ioChannel.direction === IOChannel.Input

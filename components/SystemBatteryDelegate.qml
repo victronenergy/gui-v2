@@ -106,7 +106,7 @@ ListItem {
 					QuantityObject { object: root.device; key: "temperature"; unit: Global.systemSettings.temperatureUnit }
 				}
 				primaryLabel.font: root.font
-				primaryLabel.color: Theme.color_listItem_secondaryText
+				primaryLabel.color: Theme.color_font_secondary
 
 				Layout.fillWidth: true
 			}

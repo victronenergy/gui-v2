@@ -168,7 +168,7 @@ ListSetting {
 					horizontalAlignment: Text.AlignRight
 					verticalAlignment: Text.AlignVCenter
 					text: Units.formatNumber(sliderItem.first.value, root.decimals) + root.suffix
-					color: root.interactive ? Theme.color_listItem_secondaryText : Theme.color_font_disabled
+					color: root.interactive ? Theme.color_font_secondary : Theme.color_font_disabled
 				}
 
 				SecondaryListLabel {
@@ -179,7 +179,7 @@ ListSetting {
 					horizontalAlignment: Text.AlignLeft
 					verticalAlignment: Text.AlignVCenter
 					text: Units.formatNumber(sliderItem.second.value, root.decimals) + root.suffix
-					color: root.interactive ? Theme.color_listItem_secondaryText : Theme.color_font_disabled
+					color: root.interactive ? Theme.color_font_secondary : Theme.color_font_disabled
 				}
 			}
 

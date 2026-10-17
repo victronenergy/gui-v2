@@ -95,7 +95,7 @@ ListSetting {
 					//: Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')
 					//% "to"
 					text: qsTrId("list-spin-box-range_minimum_maximum_delimiter")
-					color: root.interactive ? Theme.color_listItem_secondaryText : Theme.color_font_disabled
+					color: root.interactive ? Theme.color_font_secondary : Theme.color_font_disabled
 				}
 
 				ListItemButton {

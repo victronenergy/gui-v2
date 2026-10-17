@@ -47,7 +47,7 @@ T.TextField {
 			font: root.font
 			elide: Text.ElideRight
 			visible: root.text.length === 0 && !root.activeFocus
-			color: Theme.color_listItem_secondaryText
+			color: Theme.color_font_secondary
 		}
 	}
 }
