@@ -222,7 +222,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListInverterChargerModeButton.qml
     components/listitems/ListIOChannelGroupField.qml
     components/listitems/ListIOChannelNameField.qml
-    components/listitems/ListIOChannelShowRadioButtonGroup.qml
+    components/listitems/ListIOChannelShowDetails.qml
     components/listitems/ListIOChannelTypeRadioButtonGroup.qml
     components/listitems/ListLink.qml
     components/listitems/ListMotorDriveGear.qml
