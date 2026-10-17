@@ -15,7 +15,7 @@ ListSetting {
 
 	readonly property alias dataItem: dataItem
 	property string secondaryText: dataItem.valid ? dataItem.value : ""
-	property color secondaryTextColor: Theme.color_listItem_secondaryText
+	property color secondaryTextColor: Theme.color_font_secondary
 
 	contentItem: ColumnLayout {
 		spacing: Theme.geometry_listItem_content_verticalSpacing

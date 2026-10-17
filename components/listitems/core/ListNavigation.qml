@@ -15,7 +15,7 @@ ListSetting {
 	id: root
 
 	property string secondaryText
-	property color secondaryTextColor: Theme.color_listItem_secondaryText
+	property color secondaryTextColor: Theme.color_font_secondary
 	property string iconSource: "qrc:/images/icon_chevron_right_24.svg"
 	property color iconColor: Theme.color_listItem_forwardIcon
 

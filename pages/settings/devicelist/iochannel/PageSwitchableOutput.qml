@@ -115,7 +115,7 @@ Page {
 				preferredVisible: dataItem.valid
 						&& (switchableOutput.validFunctions !== (1 << VenusOS.SwitchableOutput_Function_Manual))
 				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
-				secondaryTextColor: switchableOutput.hasValidFunction ? Theme.color_listItem_secondaryText : Theme.color_critical
+				secondaryTextColor: switchableOutput.hasValidFunction ? Theme.color_font_secondary : Theme.color_critical
 				optionModel: {
 					let options = []
 					for (let i = 0; i <= VenusOS.SwitchableOutput_Function_MaxSupportedType; i++) {

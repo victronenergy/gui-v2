@@ -52,7 +52,7 @@ Item {
 			//: Refers to the current value of the input.
 			//% "Value"
 			text: root.genericInput.primaryLabel || qsTrId("generic_input_value")
-			color: Theme.color_listItem_secondaryText
+			color: Theme.color_font_secondary
 			font.pixelSize: Theme.font_size_body2
 			elide: Text.ElideRight
 		}

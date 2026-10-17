@@ -81,7 +81,7 @@ ListItem {
 			wrapMode: Text.Wrap
 			visible: root.description.length > 0 || root.value.length > 0
 			elide: Text.ElideRight
-			color: root.historical ? Theme.color_listItem_secondaryText : Theme.color_font_primary
+			color: root.historical ? Theme.color_font_secondary : Theme.color_font_primary
 			font: root.font
 			//: %1 = notification description (e.g. 'High temperature'), %2 = the value that triggered the notification (e.g. '25 C')
 			//% "%1 %2"
@@ -101,7 +101,7 @@ ListItem {
 
 			wrapMode: Text.Wrap
 			visible: text.length > 0
-			color: root.historical ? Theme.color_font_disabled : Theme.color_listItem_secondaryText
+			color: root.historical ? Theme.color_font_disabled : Theme.color_font_secondary
 			font.pixelSize: descriptionLabel.visible ? Theme.font_listItem_secondary_size : Theme.font_listItem_primary_size
 			text: root.deviceName
 		}

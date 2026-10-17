@@ -199,7 +199,7 @@ Page {
 			secondaryTextColor: (centerGaugeType === VenusOS.BriefView_CentralGauge_BatteryId && batteryName.length === 0)
 					|| (centerGaugeType === VenusOS.BriefView_CentralGauge_TankId && !_device)
 				? Theme.color_red
-				: Theme.color_listItem_secondaryText
+				: Theme.color_font_secondary
 
 			onClicked: {
 				const optionModel = root._levelOptionModel(centerGaugeType, centerGaugeValue)
