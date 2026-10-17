@@ -21,20 +21,7 @@ ListItem {
 			return
 		}
 
-		// TODO use a generic helper to open a page based on the service type/uid. See issue #1388
-		if (root.serviceType === "vebus") {
-			Global.pageManager.pushPage("/pages/vebusdevice/PageVeBus.qml", {
-				"bindPrefix": root.device.serviceUid
-			})
-		} else if (root.serviceType === "genset") {
-			Global.pageManager.pushPage("/pages/settings/devicelist/PageGenset.qml", {
-				"bindPrefix": root.device.serviceUid
-			})
-		} else {
-			Global.pageManager.pushPage("/pages/settings/devicelist/battery/PageBattery.qml", {
-				"bindPrefix": root.device.serviceUid,
-			})
-		}
+		Global.openDevicePage(root.device.serviceUid)
 	}
 
 	hasSubMenu: _clickable

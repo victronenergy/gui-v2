@@ -9,6 +9,10 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
+	property string bindPrefix
+
+	serviceUid: bindPrefix
+
 	title: 	{
 		if (device.customName) {
 			return device.customName

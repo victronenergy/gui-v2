@@ -68,6 +68,25 @@ QtObject {
 		return ToastModel.add(type, text, autoCloseInterval, textFormat)
 	}
 
+	// Pushes the device settings page for the service type of the given uid, bindPrefix for ServiceUid
+	// is set automatically. If there is no page for the service type, the page for unsupported
+	// devices is pushed instead.
+	function openDevicePage(serviceUid, properties = {}) {
+		const serviceType = BackendConnection.serviceTypeFromUid(serviceUid)
+		if (serviceType.length === 0) {
+			console.warn("Cannot open device page, invalid service uid:", serviceUid)
+			return null
+		}
+		let pageUrl = "/pages/settings/devicelist/DevicePage_%1.qml".arg(serviceType)
+		const pageComponent = Qt.createComponent(Qt.resolvedUrl(pageUrl.substring(1)))
+		if (pageComponent.status !== Component.Ready) {
+			console.warn("No device page for service:", serviceUid, pageComponent.errorString())
+			pageUrl = "/pages/settings/devicelist/DevicePage_unsupported.qml"
+		}
+		const pageProperties = Object.assign({ ["bindPrefix"]: serviceUid }, properties)
+		return pageManager.pushPage(pageUrl, pageProperties)
+	}
+
 	function reset() {
 		// unload the gui.
 		dataManagerLoaded = false

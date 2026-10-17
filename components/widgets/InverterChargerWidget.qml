@@ -18,8 +18,7 @@ OverviewWidget {
 			chargerModelLoader.active = true
 			if (chargerModelLoader.item.count > 0) {
 				const charger = chargerModelLoader.item.firstObject
-				Global.pageManager.pushPage("/pages/settings/devicelist/PageAcCharger.qml",
-						{ "bindPrefix": charger.serviceUid })
+				Global.openDevicePage(charger.serviceUid)
 			} else {
 				// Show page for inverter, vebus and acsystem services
 				const device = Global.inverterChargers.firstObject

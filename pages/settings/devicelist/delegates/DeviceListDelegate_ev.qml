@@ -31,11 +31,7 @@ DeviceListDelegate {
 		QuantityObject { object: range; unit: root._systemDistanceUnit() }
 	}
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/ev/EvPage.qml", {
-			bindPrefix: root.device.serviceUid
-		})
-	}
+	onClicked: Global.openDevicePage(root.device.serviceUid)
 
 	VeQuickItem {
 		id: soc
