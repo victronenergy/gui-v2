@@ -1,5 +1,9 @@
 set(REQUIRED_QT_VERSION 6.8.3)
 
+# Qt 6.9 introduced this cmake variable to control how find_packages handles
+# internal dependencies
+set(QT_FIND_PRIVATE_MODULES ON)
+
 find_package(Qt6 ${REQUIRED_QT_VERSION}
     COMPONENTS
         Core Gui Qml Quick QuickControls2 Svg Xml Mqtt LinguistTools ShaderTools

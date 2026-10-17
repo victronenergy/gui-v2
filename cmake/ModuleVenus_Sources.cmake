@@ -734,9 +734,9 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/quantityobject.cpp
     src/quantityobjectmodel.h
     src/quantityobjectmodel.cpp
-    src/qrangemodel_p.h
-    src/qrangemodel.h
-    src/qrangemodel.cpp
+    src/range_p.h
+    src/range.h
+    src/range.cpp
     src/uiconfig.h
     src/uiconfig.cpp
     src/uitest.h

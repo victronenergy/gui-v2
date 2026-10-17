@@ -38,19 +38,18 @@
 **
 ****************************************************************************/
 
-#ifndef QRANGEMODEL_H
-#define QRANGEMODEL_H
+#ifndef RANGE_H
+#define RANGE_H
 
 #include <QObject>
 #include <QQmlEngine>
-//#include <qtquick_compat.hpp>
 
-class QRangeModelPrivate;
+class RangePrivate;
 
-class QRangeModel : public QObject
+class Range : public QObject
 {
 	Q_OBJECT
-	QML_NAMED_ELEMENT(RangeModel)
+	QML_NAMED_ELEMENT(Range)
 	Q_PROPERTY(qreal value READ value WRITE setValue NOTIFY valueChanged USER true FINAL)
 	Q_PROPERTY(qreal minimumValue READ minimum WRITE setMinimum NOTIFY minimumChanged FINAL)
 	Q_PROPERTY(qreal maximumValue READ maximum WRITE setMaximum NOTIFY maximumChanged FINAL)
@@ -61,8 +60,8 @@ class QRangeModel : public QObject
 	Q_PROPERTY(bool inverted READ inverted WRITE setInverted NOTIFY invertedChanged FINAL)
 
 public:
-	QRangeModel(QObject *parent = nullptr);
-	virtual ~QRangeModel() override;
+	Range(QObject *parent = nullptr);
+	virtual ~Range() override;
 
 	void setRange(qreal min, qreal max);
 	void setPositionRange(qreal min, qreal max);
@@ -111,13 +110,13 @@ Q_SIGNALS:
 	void positionAtMaximumChanged(qreal max);
 
 protected:
-	QRangeModel(QRangeModelPrivate &dd, QObject *parent);
-	QRangeModelPrivate* d_ptr;
+	Range(RangePrivate &dd, QObject *parent);
+	RangePrivate* d_ptr;
 
 private:
-	Q_DISABLE_COPY(QRangeModel)
-	Q_DECLARE_PRIVATE(QRangeModel)
+	Q_DISABLE_COPY(Range)
+	Q_DECLARE_PRIVATE(Range)
 
 };
 
-#endif // QRANGEMODEL_H
+#endif // RANGE_H

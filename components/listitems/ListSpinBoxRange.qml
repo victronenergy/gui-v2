@@ -15,8 +15,8 @@ ListSetting {
 	readonly property alias dataItemModifiedFrom: dataItemModifiedFrom
 	readonly property alias dataItemModifiedTo: dataItemModifiedTo
 
-	readonly property alias rangeModelFrom: rangeModelFrom
-	readonly property alias rangeModelTo: rangeModelTo
+	readonly property alias rangeFrom: rangeFrom
+	readonly property alias rangeTo: rangeTo
 
 	property int unit: VenusOS.Units_None
 	property int decimals: 0
@@ -80,9 +80,9 @@ ListSetting {
 							//% "Minimum value"
 							secondaryTitle: qsTrId("list-spin-box-range_minimum_value")
 							suffix: Units.defaultUnitString(root.unit)
-							stepSize: rangeModelFrom.stepSize
-							from: rangeModelFrom.minimumValue
-							to: rangeModelFrom.maximumValue
+							stepSize: rangeFrom.stepSize
+							from: rangeFrom.minimumValue
+							to: rangeFrom.maximumValue
 							decimals: root.decimals
 							presets: Array.from({ length: 5 }, (_, i) => from + i * (to - from)/4).map(function(v) { return { value: v.toFixed(root.decimals) } })
 							onAccepted: dataItemFrom.setValue(value)
@@ -124,9 +124,9 @@ ListSetting {
 							//% "Maximum value"
 							secondaryTitle: qsTrId("list-spin-box-range_maximum_value")
 							suffix: Units.defaultUnitString(root.unit)
-							stepSize: rangeModelTo.stepSize
-							from: rangeModelTo.minimumValue
-							to: rangeModelTo.maximumValue
+							stepSize: rangeTo.stepSize
+							from: rangeTo.minimumValue
+							to: rangeTo.maximumValue
 							decimals: root.decimals
 							presets: Array.from({ length: 5 }, (_, i) => from + i * (to - from)/4).map(function(v) { return { value: v.toFixed(root.decimals) } })
 							onAccepted: dataItemTo.setValue(value)
@@ -149,11 +149,11 @@ ListSetting {
 		contentItem.focus = true
 	}
 
-	RangeModel {
-		id: rangeModelFrom
+	Range {
+		id: rangeFrom
 	}
-	RangeModel {
-		id: rangeModelTo
+	Range {
+		id: rangeTo
 	}
 
 	VeQuickItem {
