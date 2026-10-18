@@ -34,21 +34,27 @@ OverviewWidget {
 		uid: Services.system.serviceUid + "/Batteries"
 	}
 
+	Device {
+		id: activeBatteryDevice
+	}
+
 	VeQuickItem {
 		id: activeBatteryService
 		uid: Services.system.serviceUid + "/ActiveBatteryService"
+
+		onValueChanged: {
+			activeBatteryDevice.serviceUid = ""
+			activeBatteryDevice.serviceType = ""
+			activeBatteryDevice.deviceInstance = -1
+			const batteryInfo = BackendConnection.portableIdInfo(value)
+			activeBatteryDevice.serviceType = batteryInfo.type
+			activeBatteryDevice.deviceInstance = batteryInfo.instance
+		}
 	}
 
 	VeQuickItem {
 		id: starterBatteryVoltage
-		uid: {
-			if (!activeBatteryService.valid || AllDevicesModel.count === 0) {
-				return ""
-			}
-			const info = BackendConnection.portableIdInfo(activeBatteryService.value)
-			const device = AllDevicesModel.findDeviceWithTypeAndInstance(info.type, parseInt(info.instance))
-			return device ? device.serviceUid + "/Dc/1/Voltage" : ""
-		}
+		uid: activeBatteryDevice.serviceUid + "/Dc/1/Voltage"
 	}
 
 	VeQuickItem {
