@@ -34,7 +34,7 @@
         "/Dc/0/Temperature": null,
         "/Dc/0/Voltage": 53.040000915527344,
         "/DeviceInstance": 0,
-        "/DeviceOffReason": 1024,
+        "/DeviceOffReason": 15,
         "/Devices/0/CustomName": "",
         "/Devices/0/DeviceInstance": 0,
         "/Devices/0/FirmwareVersion": 74495,
