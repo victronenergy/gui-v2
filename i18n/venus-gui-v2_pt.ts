@@ -172,27 +172,27 @@
       <translation>Arranque automático</translation>
     </message>
     <message id="settings_access_level">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="67"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="71"/>
       <source>Access level</source>
       <translation>Nível de acesso</translation>
     </message>
     <message id="settings_access_user">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="72"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="76"/>
       <source>User</source>
       <translation>Utilizador</translation>
     </message>
     <message id="settings_access_user_installer">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
       <source>User &amp; Installer</source>
       <translation>Utilizador e instalador</translation>
     </message>
     <message id="settings_access_superuser">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="80"/>
       <source>Superuser</source>
       <translation>Superutilizador</translation>
     </message>
     <message id="settings_access_service">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="82"/>
       <source>Service</source>
       <translation>Serviço</translation>
     </message>
@@ -1111,17 +1111,17 @@
       <translation>AC-In2 --</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="295"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="299"/>
       <source>Remote support</source>
       <translation>Suporte remoto</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="301"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="305"/>
       <source>Remote support tunnel</source>
       <translation>Túnel de suporte remoto</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="310"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="314"/>
       <source>Remote support IP and port</source>
       <translation>IP e porta de suporte remoto</translation>
     </message>
@@ -1886,17 +1886,17 @@ Use a menos que seja proibido pelo fornecedor de energia.</translation>
       <translation>Antiguidade do registo mais antigo</translation>
     </message>
     <message id="settings_modbus_no_errors">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="56"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="74"/>
       <source>No errors reported</source>
       <translation>Nenhum erro relatado</translation>
     </message>
     <message id="settings_modbus_time_of_last_error">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="81"/>
       <source>Time of last error</source>
       <translation>Hora do último erro</translation>
     </message>
     <message id="settings_modbus_available_services">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="67"/>
       <source>Available services</source>
       <translation>Serviços disponíveis</translation>
     </message>
@@ -3345,7 +3345,7 @@ Use a menos que seja proibido pelo fornecedor de energia.</translation>
       <translation type="unfinished">Bateria do sensor</translation>
     </message>
     <message id="temperature_sensor_battery">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="112"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="125"/>
       <source>Sensor battery</source>
       <translation>Bateria do sensor</translation>
     </message>
@@ -3714,12 +3714,12 @@ Use a menos que seja proibido pelo fornecedor de energia.</translation>
       <translation>Bateria do sensor fraca</translation>
     </message>
     <message id="temperature_humidity">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="54"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="67"/>
       <source>Humidity</source>
       <translation>Umidade</translation>
     </message>
     <message id="temperature_pressure">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="62"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="75"/>
       <source>Pressure</source>
       <translation>Pressão</translation>
     </message>
@@ -4989,7 +4989,7 @@ Você quer continuar?</translation>
       <translation>Definição bloqueada para o nível de acesso</translation>
     </message>
     <message id="settings_access_incorrect_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="89"/>
       <source>Incorrect password</source>
       <translation>Senha incorreta</translation>
     </message>
@@ -5645,11 +5645,6 @@ Você quer continuar?</translation>
       <location filename="../../data/EvChargers.qml" line="61"/>
       <source>Waiting for sun</source>
       <translation>A aguardar o sol</translation>
-    </message>
-    <message id="evchargers_status_waiting_for_rfid">
-      <location filename="../../data/EvChargers.qml" line="64"/>
-      <source>Waiting for RFID</source>
-      <translation>A aguardar RFID</translation>
     </message>
     <message id="evchargers_status_waiting_for_start">
       <location filename="../../data/EvChargers.qml" line="67"/>
@@ -6585,42 +6580,42 @@ Você quer continuar?</translation>
       <translation>Este inversor FV tem suporte para limitação de potência. Desative esta configuração se interferir com o funcionamento normal.</translation>
     </message>
     <message id="settings_local_network_security_profile">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="124"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="128"/>
       <source>Local network security profile</source>
       <translation>Perfil de segurança da rede local</translation>
     </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
       <source>Please select...</source>
       <translation>Por favor, selecione...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="137"/>
       <source>Secured</source>
       <translation>Seguro</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="140"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>Protegido por palavra-passe e a comunicação de rede é encriptada</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="145"/>
       <source>Weak</source>
       <translation>Fraco</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="148"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>Protegido por palavra-passe, mas a comunicação de rede não é encriptada</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="153"/>
       <source>Unsecured</source>
       <translation>Não seguro</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="152"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="156"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>Sem palavra-passe e a comunicação de rede não é encriptada</translation>
     </message>
@@ -6630,22 +6625,22 @@ Você quer continuar?</translation>
       <translation>A palavra-passe deve ter pelo menos 8 caracteres</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="227"/>
       <source>Select 'Secured' profile?</source>
       <translation>Selecionar o perfil 'Seguro'?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="226"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
       <source>Select 'Weak' profile?</source>
       <translation>Selecionar o perfil 'Fraco'?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="229"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="233"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>Selecionar o perfil 'Não seguro'?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="244"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -6656,81 +6651,81 @@ Você quer continuar?</translation>
 • As definições não seguras não podem ser ativadas</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="243"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="247"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• Os serviços de rede local são protegidos por palavra-passe
 • O acesso não encriptado a websites locais também está ativado (HTTP/HTTPS)</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="246"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="250"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• Os serviços de rede local não precisam de palavra-passe
 • O acesso não encriptado a websites locais também está ativado (HTTP/HTTPS)</translation>
     </message>
     <message id="access_and_security_page_will_reload">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="118"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="122"/>
       <source>Page will automatically reload in 5 seconds</source>
       <translation>A página será recarregada automaticamente em 5 segundos</translation>
     </message>
     <message id="settings_security_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="159"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="163"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">A palavra-passe deve ter pelo menos 8 caracteres</translation>
     </message>
     <message id="settings_security_profile_update">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="187"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="191"/>
       <source>Update</source>
       <translation type="unfinished">Atualizar</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="265"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
       <source>Root password</source>
       <translation>Palavra-passe root</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="272"/>
       <source>Enter password</source>
       <translation type="unfinished">Introduzir a palavra-passe</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="273"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="277"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">A palavra-passe deve ter pelo menos 8 caracteres</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="279"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="283"/>
       <source>Root password changed to %1</source>
       <translation>Senha root alterada para %1</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="286"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
       <source>Enable SSH on LAN</source>
       <translation>Ativar SSH na LAN</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="317"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="321"/>
       <source>Logout</source>
       <translation>Sair</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="319"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="323"/>
       <source>Log out now</source>
       <translation>Sair agora</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="331"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
       <source>Log out?</source>
       <translation>Sair?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="333"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="337"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Isto irá desconectar todas as ligações de rede local.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="339"/>
       <source>Log out</source>
       <translation>Sair</translation>
     </message>
@@ -8181,10 +8176,9 @@ Tenha em atenção que este menu apenas mostra medidores Carlo Gavazzi conectado
       <extracomment>%1 = 'AC input 1' or 'AC input 2'</extracomment>
       <translation>%1 (não disponível)</translation>
     </message>
-    <message id="settings_minmax_ac_in_header_with_source">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="85"/>
+    <message id="temperature_air_quality_score_short">
+      <location filename="../../pages/settings/devicelist/delegates/DeviceListDelegate_temperature.qml" line="64"/>
       <source>%1 (%2)</source>
-      <extracomment>%1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)</extracomment>
       <translation>%1 (%2)</translation>
     </message>
     <message id="settings_minmax_acout_max_acin1">
@@ -9029,7 +9023,7 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Nota: Os ficheiros de cópia de segurança são específicos da versão de firmware VE.Bus e só podem ser usados para restaurar as definições em produtos com versões de firmware correspondentes</translation>
     </message>
     <message id="settings_security_profile_change_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="185"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="189"/>
       <source>Change password</source>
       <translation>Alterar palavra-passe</translation>
     </message>
@@ -9112,17 +9106,17 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <translation>Limite de SOC ativo: %1%</translation>
     </message>
     <message id="settings_modbus_access_rights">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="36"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="49"/>
       <source>Access permissions</source>
       <translation>Permissões de acesso</translation>
     </message>
     <message id="settings_modbus_access_readwrite">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="41"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="57"/>
       <source>Write allowed</source>
       <translation>Permissão de escrita</translation>
     </message>
     <message id="settings_modbus_access_readonly">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="54"/>
       <source>Read only</source>
       <translation>Apenas leitura</translation>
     </message>
@@ -9778,6 +9772,18 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <source>Frequency setpoint (f)</source>
       <translation>Ponto de ajuste de frequência (f)</translation>
     </message>
+    <message id="temperature_pm25">
+      <location filename="../../components/AirQualityGaugePanel.qml" line="252"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="83"/>
+      <source>PM2.5</source>
+      <translation>PM2.5</translation>
+    </message>
+    <message id="temperature_co2">
+      <location filename="../../components/AirQualityGaugePanel.qml" line="261"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="91"/>
+      <source>CO₂</source>
+      <translation>CO₂</translation>
+    </message>
     <message id="temperature_short_circuited">
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="32"/>
       <source>Short circuited</source>
@@ -9793,33 +9799,23 @@ O dispositivo GX só pode controlar um grupo gerador conectado e utiliza aquele 
       <source>Sensor battery low</source>
       <translation type="unfinished">Bateria do sensor fraca</translation>
     </message>
-    <message id="temperature_pm25">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="70"/>
-      <source>PM2.5</source>
-      <translation>PM2.5</translation>
-    </message>
-    <message id="temperature_co2">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="78"/>
-      <source>CO₂</source>
-      <translation>CO₂</translation>
-    </message>
     <message id="temperature_voc">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="86"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="99"/>
       <source>VOC index</source>
       <translation>Índice de COV</translation>
     </message>
     <message id="temperature_nox">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="94"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="107"/>
       <source>NOx index</source>
       <translation>Índice de NOx</translation>
     </message>
     <message id="temperature_luminosity">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="102"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="115"/>
       <source>Luminosity</source>
       <translation>Luminosidade</translation>
     </message>
     <message id="temperature_sensor_battery_status_low">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="136"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="149"/>
       <source>Low</source>
       <translation type="unfinished">Baixa</translation>
     </message>
@@ -11852,6 +11848,12 @@ CUIDADO: Use apenas se exigido pelo fornecedor de energia.</translation>
       <source>Reset range values</source>
       <translation>Redefinir valores de alcance</translation>
     </message>
+    <message id="settings_minmax_ac_in_header_with_source">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="85"/>
+      <source>%1 (%2)</source>
+      <extracomment>%1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)</extracomment>
+      <translation type="unfinished">%1 (%2)</translation>
+    </message>
     <message id="settings_minmax_gauge_display">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="186"/>
       <source>Gauge display</source>
@@ -11986,6 +11988,67 @@ CUIDADO: Use apenas se exigido pelo fornecedor de energia.</translation>
       <source>Automatic device discovery</source>
       <translation>Deteção automática de dispositivos</translation>
     </message>
+    <message id="temperature_air_quality_score">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="55"/>
+      <source>%1/100 (%2)</source>
+      <translation>%1/100 (%2)</translation>
+    </message>
+    <message id="settings_modbus_write_access_warning">
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="59"/>
+      <source>Only allow write access when the GX device is on a trusted network.</source>
+      <translation>Apenas permitir acesso de gravação quando o dispositivo GX estiver numa rede fidedigna.</translation>
+    </message>
+    <message id="temperature_air_quality_excellent">
+      <location filename="../../data/EnvironmentInputs.qml" line="18"/>
+      <source>Excellent</source>
+      <translation>Excelente</translation>
+    </message>
+    <message id="temperature_air_quality_good">
+      <location filename="../../data/EnvironmentInputs.qml" line="21"/>
+      <source>Good</source>
+      <translation>Boa</translation>
+    </message>
+    <message id="temperature_air_quality_fair">
+      <location filename="../../data/EnvironmentInputs.qml" line="24"/>
+      <source>Fair</source>
+      <translation>Razoável</translation>
+    </message>
+    <message id="temperature_air_quality_poor">
+      <location filename="../../data/EnvironmentInputs.qml" line="27"/>
+      <source>Poor</source>
+      <translation>Má</translation>
+    </message>
+    <message id="temperature_air_quality_very_poor">
+      <location filename="../../data/EnvironmentInputs.qml" line="30"/>
+      <source>Very poor</source>
+      <translation>Muito má</translation>
+    </message>
+    <message id="temperature_type_unknown">
+      <location filename="../../data/EnvironmentInputs.qml" line="100"/>
+      <source>Unknown</source>
+      <translation type="unfinished">Desconhecido</translation>
+    </message>
+    <message id="evchargers_status_waiting_for_rfid">
+      <location filename="../../data/EvChargers.qml" line="64"/>
+      <source>Waiting for tag</source>
+      <translation>A aguardar etiqueta</translation>
+    </message>
+    <message id="temperature_air_quality_no_data">
+      <location filename="../../components/AirQualityGaugePanel.qml" line="68"/>
+      <source>No data</source>
+      <translation>Sem dados</translation>
+    </message>
+    <message id="temperature_air_quality">
+      <location filename="../../components/AirQualityGaugePanel.qml" line="228"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="50"/>
+      <source>Air quality</source>
+      <translation>Qualidade do ar</translation>
+    </message>
+    <message id="overview_widget_battery_starter_title">
+      <location filename="../../components/widgets/BatteryWidget.qml" line="412"/>
+      <source>Starter</source>
+      <translation>Iniciando</translation>
+    </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
@@ -12005,11 +12068,6 @@ CUIDADO: Use apenas se exigido pelo fornecedor de energia.</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
-      <source>Unknown</source>
-      <translation type="unfinished">Desconhecido</translation>
-    </message>
-    <message id="temperature_type_unknown">
-      <location filename="../../data/EnvironmentInputs.qml" line="65"/>
       <source>Unknown</source>
       <translation type="unfinished">Desconhecido</translation>
     </message>
@@ -12741,37 +12799,37 @@ CUIDADO: Use apenas se exigido pelo fornecedor de energia.</translation>
   <context>
     <name>EnvironmentInputs</name>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="18"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="53"/>
       <source>Battery</source>
       <translation>Bateria</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="24"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="59"/>
       <source>Fridge</source>
       <translation>Frigorífico</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="30"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="65"/>
       <source>Generic</source>
       <translation>Genérico</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="36"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="71"/>
       <source>Room</source>
       <translation>Quarto</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="42"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="77"/>
       <source>Outdoor</source>
       <translation>Exterior</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="48"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="83"/>
       <source>Water Heater</source>
       <translation>Aquecedor de Água</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="54"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="89"/>
       <source>Freezer</source>
       <translation>Congelador</translation>
     </message>
@@ -13630,171 +13688,182 @@ CUIDADO: Use apenas se exigido pelo fornecedor de energia.</translation>
   <context>
     <name>QGuiApplication</name>
     <message>
-      <location filename="../../src/main.cpp" line="126"/>
+      <location filename="../../src/main.cpp" line="170"/>
       <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
       <translation>Usar a fonte de dados D-Bus: ligar ao endereço D-Bus especificado.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="127"/>
+      <location filename="../../src/main.cpp" line="171"/>
       <source>address</source>
       <comment>D-Bus address</comment>
       <translation>address</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="132"/>
+      <location filename="../../src/main.cpp" line="176"/>
       <source>Use D-Bus data source: connect to the default D-Bus address</source>
       <translation>Usar a fonte de dados D-Bus: ligar ao endereço D-Bus predefinido</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="138"/>
+      <location filename="../../src/main.cpp" line="182"/>
       <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
       <translation>Usar a fonte de dados MQTT: ligar ao endereço do broker MQTT especificado.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="139"/>
+      <location filename="../../src/main.cpp" line="183"/>
       <source>address</source>
       <comment>MQTT broker address</comment>
       <translation>address</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="145"/>
+      <location filename="../../src/main.cpp" line="189"/>
       <source>MQTT data source device portal id.</source>
       <translation>ID do portal do dispositivo da fonte de dados MQTT.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="146"/>
+      <location filename="../../src/main.cpp" line="190"/>
       <source>portalId</source>
       <translation>portalId</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="151"/>
+      <location filename="../../src/main.cpp" line="195"/>
       <source>MQTT VRM webhost shard</source>
       <translation>Shard do webhost VRM MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="152"/>
+      <location filename="../../src/main.cpp" line="196"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
       <translation>shard</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="157"/>
+      <location filename="../../src/main.cpp" line="201"/>
       <source>MQTT data source username</source>
       <translation>Nome de utilizador da fonte de dados MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="158"/>
+      <location filename="../../src/main.cpp" line="202"/>
       <source>user</source>
       <comment>MQTT broker username.</comment>
       <translation>user</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="163"/>
+      <location filename="../../src/main.cpp" line="207"/>
       <source>MQTT data source password</source>
       <translation>Palavra-passe da fonte de dados MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="164"/>
+      <location filename="../../src/main.cpp" line="208"/>
       <source>pass</source>
       <comment>MQTT broker password.</comment>
       <translation>pass</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="169"/>
+      <location filename="../../src/main.cpp" line="213"/>
       <source>MQTT data source token</source>
       <translation>Token da fonte de dados MQTT</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="170"/>
+      <location filename="../../src/main.cpp" line="214"/>
       <source>token</source>
       <comment>MQTT broker auth token.</comment>
       <translation>token</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="175"/>
+      <location filename="../../src/main.cpp" line="219"/>
       <source>Enable FPS counter</source>
       <translation>Ativar contador de FPS</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="180"/>
+      <location filename="../../src/main.cpp" line="224"/>
       <source>Skip splash screen</source>
       <translation>Ignorar tela inicial</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="185"/>
+      <location filename="../../src/main.cpp" line="229"/>
       <source>Use mock data source for testing.</source>
       <translation>Usar fonte de dados simulada para teste.</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="190"/>
+      <location filename="../../src/main.cpp" line="234"/>
       <source>Name of mock configuration</source>
       <translation>Nome da configuração simulada</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="191"/>
+      <location filename="../../src/main.cpp" line="235"/>
       <source>mockConfig</source>
       <comment>Configuration name</comment>
       <translation>mockConfig</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="202"/>
+      <location filename="../../src/main.cpp" line="246"/>
       <source>Set to disable mock timers on startup</source>
       <translation>Defina para desativar os temporizadores simulados na inicialização</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="207"/>
+      <location filename="../../src/main.cpp" line="251"/>
       <source>Node-RED URL</source>
       <translation>URL do Node-RED</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="208"/>
+      <location filename="../../src/main.cpp" line="252"/>
       <source>url</source>
       <comment>Node-RED URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="213"/>
+      <location filename="../../src/main.cpp" line="257"/>
       <source>Signal K URL</source>
       <translation>URL do Signal K</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="214"/>
+      <location filename="../../src/main.cpp" line="258"/>
       <source>url</source>
       <comment>Signal K URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="219"/>
+      <location filename="../../src/main.cpp" line="263"/>
       <source>Color scheme (dark, light, auto, default)</source>
       <translation>Esquema de cores (escuro, claro, automático, padrão)</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="220"/>
+      <location filename="../../src/main.cpp" line="264"/>
       <source>scheme</source>
       <comment>Color scheme value</comment>
       <translation>scheme</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="196"/>
+      <location filename="../../src/main.cpp" line="240"/>
       <source>Name of UI test</source>
       <translation>Nome do teste de UI</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="197"/>
+      <location filename="../../src/main.cpp" line="241"/>
       <source>uiTest</source>
       <comment>UI test name</comment>
       <translation>teste de UI</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="225"/>
+      <location filename="../../src/main.cpp" line="269"/>
       <source>UI animations enabled (true, false)</source>
       <translation>Animações de interface ativadas (verdadeiro, falso)</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="226"/>
+      <location filename="../../src/main.cpp" line="270"/>
       <source>enabled</source>
       <comment>Animation enabled value</comment>
       <translation>Ativado</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="275"/>
+      <source>Window resolution as WxH, applied before the UI loads.</source>
+      <translation>Resolução da janela como LxP, aplicada antes de carregar a IU.</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="276"/>
+      <source>WxH</source>
+      <comment>Window width and height</comment>
+      <translation>LxP</translation>
     </message>
   </context>
   <context>

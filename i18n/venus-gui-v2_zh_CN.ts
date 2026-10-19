@@ -172,27 +172,27 @@
       <translation>自动启动</translation>
     </message>
     <message id="settings_access_level">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="67"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="71"/>
       <source>Access level</source>
       <translation>访问级别</translation>
     </message>
     <message id="settings_access_user">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="72"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="76"/>
       <source>User</source>
       <translation>用户</translation>
     </message>
     <message id="settings_access_user_installer">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="74"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
       <source>User &amp; Installer</source>
       <translation>用户&amp;安装商</translation>
     </message>
     <message id="settings_access_superuser">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="80"/>
       <source>Superuser</source>
       <translation>超级用户</translation>
     </message>
     <message id="settings_access_service">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="82"/>
       <source>Service</source>
       <translation>服务</translation>
     </message>
@@ -1111,17 +1111,17 @@
       <translation>AC-In2 --</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="295"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="299"/>
       <source>Remote support</source>
       <translation>远程支持</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="301"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="305"/>
       <source>Remote support tunnel</source>
       <translation>远程支持通道</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="310"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="314"/>
       <source>Remote support IP and port</source>
       <translation>远程支持IP和端口</translation>
     </message>
@@ -1886,17 +1886,17 @@ Use unless prohibited by the utility provider.</source>
       <translation>最旧的记录存留期</translation>
     </message>
     <message id="settings_modbus_no_errors">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="56"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="74"/>
       <source>No errors reported</source>
       <translation>无报告错误</translation>
     </message>
     <message id="settings_modbus_time_of_last_error">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="63"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="81"/>
       <source>Time of last error</source>
       <translation>上次错误时间</translation>
     </message>
     <message id="settings_modbus_available_services">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="49"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="67"/>
       <source>Available services</source>
       <translation>可用服务</translation>
     </message>
@@ -3344,7 +3344,7 @@ Use unless prohibited by the utility provider.</source>
       <translation type="unfinished">感应器电池</translation>
     </message>
     <message id="temperature_sensor_battery">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="112"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="125"/>
       <source>Sensor battery</source>
       <translation>感应器电池</translation>
     </message>
@@ -3713,12 +3713,12 @@ Use unless prohibited by the utility provider.</source>
       <translation>感应器电量低</translation>
     </message>
     <message id="temperature_humidity">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="54"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="67"/>
       <source>Humidity</source>
       <translation>湿度</translation>
     </message>
     <message id="temperature_pressure">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="62"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="75"/>
       <source>Pressure</source>
       <translation>压力</translation>
     </message>
@@ -4988,7 +4988,7 @@ Do you want to continue?</source>
       <translation>设置锁定访问级别</translation>
     </message>
     <message id="settings_access_incorrect_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="89"/>
       <source>Incorrect password</source>
       <translation>密码错误</translation>
     </message>
@@ -5644,11 +5644,6 @@ Do you want to continue?</source>
       <location filename="../../data/EvChargers.qml" line="61"/>
       <source>Waiting for sun</source>
       <translation>等待太阳</translation>
-    </message>
-    <message id="evchargers_status_waiting_for_rfid">
-      <location filename="../../data/EvChargers.qml" line="64"/>
-      <source>Waiting for RFID</source>
-      <translation>等待RFID</translation>
     </message>
     <message id="evchargers_status_waiting_for_start">
       <location filename="../../data/EvChargers.qml" line="67"/>
@@ -6584,42 +6579,42 @@ Do you want to continue?</source>
       <translation>本光伏逆变器支持功率限制。如果会影响正常运行，请禁用此设置。</translation>
     </message>
     <message id="settings_local_network_security_profile">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="124"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="128"/>
       <source>Local network security profile</source>
       <translation>本地网络安全配置文件</translation>
     </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="129"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
       <source>Please select...</source>
       <translation>请选择...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="137"/>
       <source>Secured</source>
       <translation>安全</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="136"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="140"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>密码保护和网络通信加密</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="141"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="145"/>
       <source>Weak</source>
       <translation>弱</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="144"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="148"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>有密码保护，但网络通信未加密</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="149"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="153"/>
       <source>Unsecured</source>
       <translation>不安全</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="152"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="156"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>无密码，网络通信未加密</translation>
     </message>
@@ -6629,22 +6624,22 @@ Do you want to continue?</source>
       <translation>密码长度至少为 8 个字符</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="223"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="227"/>
       <source>Select 'Secured' profile?</source>
       <translation>选择 "安全 "配置文件？</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="226"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
       <source>Select 'Weak' profile?</source>
       <translation>选择 "弱 "配置文件？</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="229"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="233"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>选择 "无担保 "配置文件？</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="240"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="244"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -6655,81 +6650,81 @@ Do you want to continue?</source>
 - 无法启用不安全设置</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="243"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="247"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- 本地网络服务受密码保护
 - 本地网站的非加密访问也已启用（HTTP/HTTPS）</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="246"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="250"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>- 本地网络服务不需要密码
 - 本地网站的非加密访问也已启用（HTTP/HTTPS）</translation>
     </message>
     <message id="access_and_security_page_will_reload">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="118"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="122"/>
       <source>Page will automatically reload in 5 seconds</source>
       <translation>页面将在 5 秒后自动重新加载</translation>
     </message>
     <message id="settings_security_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="159"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="163"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">密码长度至少为 8 个字符</translation>
     </message>
     <message id="settings_security_profile_update">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="187"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="191"/>
       <source>Update</source>
       <translation type="unfinished">更新</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="265"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
       <source>Root password</source>
       <translation>根密码</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="268"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="272"/>
       <source>Enter password</source>
       <translation type="unfinished">输入密码</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="273"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="277"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">密码长度至少为 8 个字符</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="279"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="283"/>
       <source>Root password changed to %1</source>
       <translation>根密码更改为 %1</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="286"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
       <source>Enable SSH on LAN</source>
       <translation>在局域网上启用 SSH</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="317"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="321"/>
       <source>Logout</source>
       <translation>登出</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="319"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="323"/>
       <source>Log out now</source>
       <translation>立即退出</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="331"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
       <source>Log out?</source>
       <translation>注销？</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="333"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="337"/>
       <source>This will disconnect all local network connections.</source>
       <translation>这将断开所有本地网络连接。</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="339"/>
       <source>Log out</source>
       <translation>登出</translation>
     </message>
@@ -8180,10 +8175,9 @@ Note that this menu only shows Carlo Gavazzi meters connected over RS485. For an
       <extracomment>%1 = 'AC input 1' or 'AC input 2'</extracomment>
       <translation>%1 (不可用)</translation>
     </message>
-    <message id="settings_minmax_ac_in_header_with_source">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="85"/>
+    <message id="temperature_air_quality_score_short">
+      <location filename="../../pages/settings/devicelist/delegates/DeviceListDelegate_temperature.qml" line="64"/>
       <source>%1 (%2)</source>
-      <extracomment>%1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)</extracomment>
       <translation>%1 (%2)</translation>
     </message>
     <message id="settings_minmax_acout_max_acin1">
@@ -9027,7 +9021,7 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>注意：备份文件与 VE.Bus 固件版本有关，只能用于在固件版本相匹配的产品上恢复设置。</translation>
     </message>
     <message id="settings_security_profile_change_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="185"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="189"/>
       <source>Change password</source>
       <translation>更改密码</translation>
     </message>
@@ -9110,17 +9104,17 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <translation>激活 SOC 限制：%1%</translation>
     </message>
     <message id="settings_modbus_access_rights">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="36"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="49"/>
       <source>Access permissions</source>
       <translation>访问权限</translation>
     </message>
     <message id="settings_modbus_access_readwrite">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="41"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="57"/>
       <source>Write allowed</source>
       <translation>允许写入</translation>
     </message>
     <message id="settings_modbus_access_readonly">
-      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="43"/>
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="54"/>
       <source>Read only</source>
       <translation>只读</translation>
     </message>
@@ -9776,6 +9770,18 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <source>Frequency setpoint (f)</source>
       <translation>频率设定点 (f)</translation>
     </message>
+    <message id="temperature_pm25">
+      <location filename="../../components/AirQualityGaugePanel.qml" line="252"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="83"/>
+      <source>PM2.5</source>
+      <translation>PM2.5</translation>
+    </message>
+    <message id="temperature_co2">
+      <location filename="../../components/AirQualityGaugePanel.qml" line="261"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="91"/>
+      <source>CO₂</source>
+      <translation>CO₂</translation>
+    </message>
     <message id="temperature_short_circuited">
       <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="32"/>
       <source>Short circuited</source>
@@ -9791,33 +9797,23 @@ GX 设备只能控制一个已连接的发电机组，并选择 VRM 实例编号
       <source>Sensor battery low</source>
       <translation type="unfinished">感应器电量低</translation>
     </message>
-    <message id="temperature_pm25">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="70"/>
-      <source>PM2.5</source>
-      <translation>PM2.5</translation>
-    </message>
-    <message id="temperature_co2">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="78"/>
-      <source>CO₂</source>
-      <translation>CO₂</translation>
-    </message>
     <message id="temperature_voc">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="86"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="99"/>
       <source>VOC index</source>
       <translation>VOC 指数</translation>
     </message>
     <message id="temperature_nox">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="94"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="107"/>
       <source>NOx index</source>
       <translation>NOx 指数</translation>
     </message>
     <message id="temperature_luminosity">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="102"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="115"/>
       <source>Luminosity</source>
       <translation>亮度</translation>
     </message>
     <message id="temperature_sensor_battery_status_low">
-      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="136"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="149"/>
       <source>Low</source>
       <translation type="unfinished">低</translation>
     </message>
@@ -11850,6 +11846,12 @@ CAUTION: use only if required by the utility provider.</source>
       <source>Reset range values</source>
       <translation>重置范围值</translation>
     </message>
+    <message id="settings_minmax_ac_in_header_with_source">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="85"/>
+      <source>%1 (%2)</source>
+      <extracomment>%1 = 'AC input 1' or 'AC input 2', %2 = name of connected input (e.g. Grid, Shore)</extracomment>
+      <translation type="unfinished">%1 (%2)</translation>
+    </message>
     <message id="settings_minmax_gauge_display">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="186"/>
       <source>Gauge display</source>
@@ -11984,6 +11986,67 @@ CAUTION: use only if required by the utility provider.</source>
       <source>Automatic device discovery</source>
       <translation>自动设备发现</translation>
     </message>
+    <message id="temperature_air_quality_score">
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="55"/>
+      <source>%1/100 (%2)</source>
+      <translation>%1/100 (%2)</translation>
+    </message>
+    <message id="settings_modbus_write_access_warning">
+      <location filename="../../pages/settings/PageSettingsModbusTcp.qml" line="59"/>
+      <source>Only allow write access when the GX device is on a trusted network.</source>
+      <translation>仅当 GX 设备位于受信任网络时才允许写入访问。</translation>
+    </message>
+    <message id="temperature_air_quality_excellent">
+      <location filename="../../data/EnvironmentInputs.qml" line="18"/>
+      <source>Excellent</source>
+      <translation>优</translation>
+    </message>
+    <message id="temperature_air_quality_good">
+      <location filename="../../data/EnvironmentInputs.qml" line="21"/>
+      <source>Good</source>
+      <translation>好</translation>
+    </message>
+    <message id="temperature_air_quality_fair">
+      <location filename="../../data/EnvironmentInputs.qml" line="24"/>
+      <source>Fair</source>
+      <translation>中</translation>
+    </message>
+    <message id="temperature_air_quality_poor">
+      <location filename="../../data/EnvironmentInputs.qml" line="27"/>
+      <source>Poor</source>
+      <translation>差</translation>
+    </message>
+    <message id="temperature_air_quality_very_poor">
+      <location filename="../../data/EnvironmentInputs.qml" line="30"/>
+      <source>Very poor</source>
+      <translation>极差</translation>
+    </message>
+    <message id="temperature_type_unknown">
+      <location filename="../../data/EnvironmentInputs.qml" line="100"/>
+      <source>Unknown</source>
+      <translation type="unfinished">未知</translation>
+    </message>
+    <message id="evchargers_status_waiting_for_rfid">
+      <location filename="../../data/EvChargers.qml" line="64"/>
+      <source>Waiting for tag</source>
+      <translation>正在等待标签</translation>
+    </message>
+    <message id="temperature_air_quality_no_data">
+      <location filename="../../components/AirQualityGaugePanel.qml" line="68"/>
+      <source>No data</source>
+      <translation>暂无数据</translation>
+    </message>
+    <message id="temperature_air_quality">
+      <location filename="../../components/AirQualityGaugePanel.qml" line="228"/>
+      <location filename="../../pages/settings/devicelist/temperature/PageTemperatureSensor.qml" line="50"/>
+      <source>Air quality</source>
+      <translation>空气质量</translation>
+    </message>
+    <message id="overview_widget_battery_starter_title">
+      <location filename="../../components/widgets/BatteryWidget.qml" line="412"/>
+      <source>Starter</source>
+      <translation>启动中</translation>
+    </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
       <source>Input</source>
@@ -12003,11 +12066,6 @@ CAUTION: use only if required by the utility provider.</source>
     </message>
     <message id="settings_radio_button_group_unknown">
       <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
-      <source>Unknown</source>
-      <translation type="unfinished">未知</translation>
-    </message>
-    <message id="temperature_type_unknown">
-      <location filename="../../data/EnvironmentInputs.qml" line="65"/>
       <source>Unknown</source>
       <translation type="unfinished">未知</translation>
     </message>
@@ -12739,37 +12797,37 @@ CAUTION: use only if required by the utility provider.</source>
   <context>
     <name>EnvironmentInputs</name>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="18"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="53"/>
       <source>Battery</source>
       <translation>电池</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="24"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="59"/>
       <source>Fridge</source>
       <translation>冰箱</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="30"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="65"/>
       <source>Generic</source>
       <translation>通用</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="36"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="71"/>
       <source>Room</source>
       <translation>房间</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="42"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="77"/>
       <source>Outdoor</source>
       <translation>户外</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="48"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="83"/>
       <source>Water Heater</source>
       <translation>加热器</translation>
     </message>
     <message>
-      <location filename="../../data/EnvironmentInputs.qml" line="54"/>
+      <location filename="../../data/EnvironmentInputs.qml" line="89"/>
       <source>Freezer</source>
       <translation>冷冻室</translation>
     </message>
@@ -13628,171 +13686,182 @@ CAUTION: use only if required by the utility provider.</source>
   <context>
     <name>QGuiApplication</name>
     <message>
-      <location filename="../../src/main.cpp" line="126"/>
+      <location filename="../../src/main.cpp" line="170"/>
       <source>Use D-Bus data source: connect to the specified D-Bus address.</source>
       <translation>使用D-Bus数据源：连接到指定的D-Bus地址。</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="127"/>
+      <location filename="../../src/main.cpp" line="171"/>
       <source>address</source>
       <comment>D-Bus address</comment>
       <translation>地址</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="132"/>
+      <location filename="../../src/main.cpp" line="176"/>
       <source>Use D-Bus data source: connect to the default D-Bus address</source>
       <translation>使用D-Bus数据源：连接到默认的D-Bus地址</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="138"/>
+      <location filename="../../src/main.cpp" line="182"/>
       <source>Use MQTT data source: connect to the specified MQTT broker address.</source>
       <translation>使用MQTT数据源：连接到指定的MQTT代理地址。</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="139"/>
+      <location filename="../../src/main.cpp" line="183"/>
       <source>address</source>
       <comment>MQTT broker address</comment>
       <translation>地址</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="145"/>
+      <location filename="../../src/main.cpp" line="189"/>
       <source>MQTT data source device portal id.</source>
       <translation>MQTT 数据源设备门户 ID。</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="146"/>
+      <location filename="../../src/main.cpp" line="190"/>
       <source>portalId</source>
       <translation>门户ID</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="151"/>
+      <location filename="../../src/main.cpp" line="195"/>
       <source>MQTT VRM webhost shard</source>
       <translation>MQTT VRM Web 主机分片</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="152"/>
+      <location filename="../../src/main.cpp" line="196"/>
       <source>shard</source>
       <comment>MQTT VRM webhost shard</comment>
       <translation>分片</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="157"/>
+      <location filename="../../src/main.cpp" line="201"/>
       <source>MQTT data source username</source>
       <translation>MQTT 数据源用户名</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="158"/>
+      <location filename="../../src/main.cpp" line="202"/>
       <source>user</source>
       <comment>MQTT broker username.</comment>
       <translation>用户</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="163"/>
+      <location filename="../../src/main.cpp" line="207"/>
       <source>MQTT data source password</source>
       <translation>MQTT数据源密码</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="164"/>
+      <location filename="../../src/main.cpp" line="208"/>
       <source>pass</source>
       <comment>MQTT broker password.</comment>
       <translation>通过</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="169"/>
+      <location filename="../../src/main.cpp" line="213"/>
       <source>MQTT data source token</source>
       <translation>MQTT 数据源令牌</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="170"/>
+      <location filename="../../src/main.cpp" line="214"/>
       <source>token</source>
       <comment>MQTT broker auth token.</comment>
       <translation>令牌代码</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="175"/>
+      <location filename="../../src/main.cpp" line="219"/>
       <source>Enable FPS counter</source>
       <translation>启用 FPS 计数器</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="180"/>
+      <location filename="../../src/main.cpp" line="224"/>
       <source>Skip splash screen</source>
       <translation>跳过启动画面</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="185"/>
+      <location filename="../../src/main.cpp" line="229"/>
       <source>Use mock data source for testing.</source>
       <translation>使用模拟数据源进行测试。</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="190"/>
+      <location filename="../../src/main.cpp" line="234"/>
       <source>Name of mock configuration</source>
       <translation>模拟配置的名称</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="191"/>
+      <location filename="../../src/main.cpp" line="235"/>
       <source>mockConfig</source>
       <comment>Configuration name</comment>
       <translation>mockConfig</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="202"/>
+      <location filename="../../src/main.cpp" line="246"/>
       <source>Set to disable mock timers on startup</source>
       <translation>设置为在启动时禁用模拟定时器</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="207"/>
+      <location filename="../../src/main.cpp" line="251"/>
       <source>Node-RED URL</source>
       <translation>Node-RED URL</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="208"/>
+      <location filename="../../src/main.cpp" line="252"/>
       <source>url</source>
       <comment>Node-RED URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="213"/>
+      <location filename="../../src/main.cpp" line="257"/>
       <source>Signal K URL</source>
       <translation>Signal K URL</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="214"/>
+      <location filename="../../src/main.cpp" line="258"/>
       <source>url</source>
       <comment>Signal K URL</comment>
       <translation>url</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="219"/>
+      <location filename="../../src/main.cpp" line="263"/>
       <source>Color scheme (dark, light, auto, default)</source>
       <translation>配色方案（深色、浅色、自动、默认）</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="220"/>
+      <location filename="../../src/main.cpp" line="264"/>
       <source>scheme</source>
       <comment>Color scheme value</comment>
       <translation>scheme</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="196"/>
+      <location filename="../../src/main.cpp" line="240"/>
       <source>Name of UI test</source>
       <translation>UI测试名称</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="197"/>
+      <location filename="../../src/main.cpp" line="241"/>
       <source>uiTest</source>
       <comment>UI test name</comment>
       <translation>UI测试</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="225"/>
+      <location filename="../../src/main.cpp" line="269"/>
       <source>UI animations enabled (true, false)</source>
       <translation>启用 UI 动画 (true, false)</translation>
     </message>
     <message>
-      <location filename="../../src/main.cpp" line="226"/>
+      <location filename="../../src/main.cpp" line="270"/>
       <source>enabled</source>
       <comment>Animation enabled value</comment>
       <translation>已启用</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="275"/>
+      <source>Window resolution as WxH, applied before the UI loads.</source>
+      <translation>窗口分辨率格式为宽x高，在加载 UI 之前应用。</translation>
+    </message>
+    <message>
+      <location filename="../../src/main.cpp" line="276"/>
+      <source>WxH</source>
+      <comment>Window width and height</comment>
+      <translation>宽x高</translation>
     </message>
   </context>
   <context>
