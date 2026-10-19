@@ -259,14 +259,14 @@ Page {
 				text: "Spin box range"
 
 				dataItemFrom.value: 0
-				rangeModelFrom.minimumValue: -5
-				rangeModelFrom.maximumValue: 20
-				rangeModelFrom.stepSize: 0.5
+				rangeFrom.minimumValue: -5
+				rangeFrom.maximumValue: 20
+				rangeFrom.stepSize: 0.5
 
 				dataItemTo.value: 75
-				rangeModelTo.minimumValue: 50
-				rangeModelTo.maximumValue: 100
-				rangeModelTo.stepSize: 10
+				rangeTo.minimumValue: 50
+				rangeTo.maximumValue: 100
+				rangeTo.stepSize: 10
 
 				unit: VenusOS.Units_Volume_Litre
 			}
