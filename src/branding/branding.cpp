@@ -12,8 +12,9 @@ each entry below. An entry starts with the property name, then what it sets, the
 
 color_brand
 The brand color: buttons, switches, sliders, radio buttons, the selected navigation bar tab, and
-the Overview widget borders. It is not used for informative notifications. The Light scheme uses
-the same color.
+the Overview widget borders. The battery gauge fill, and the selected Off side of a switch, are
+based on it and may be darkened or lightened so their text stays readable. It is not used for
+informative notifications. The Light scheme uses the same color.
 If not set: Victron's color.
 
 color_success
@@ -75,19 +76,23 @@ If not set: 1.0. Victron's own backgrounds use 1.12, so a plugin that sets no
 color_background_primary keeps that.
 
 font_files
-Font files (.ttf or .otf) to register, relative to Branding.qml. Name the font with font_family and
-quantity_font_family.
+Font files (.ttf or .otf) to register, relative to Branding.qml. font_family and
+quantity_font_family in this file must name a family that one of these files registers.
 If not set: no font files are registered.
 
 font_family
-The family name of the font for all text except quantities, from font_files or installed on the
-device. It is used only for languages it has the letters for; the others, and languages that have
-their own font (such as Chinese), use the built-in font.
+The family name of the font for all text except quantities. It must be a family that font_files
+in this same file registers. A family from another plugin, or a font that is only installed on
+the device, is not used: the GUI ignores this plugin's branding. It is used only for languages
+it has the letters for; the others, and languages that have their own font (such as Chinese),
+use the built-in font.
 If not set: the built-in font, Roboto, or the language's own font.
 
 quantity_font_family
-The family name of the font for quantities: numbers with their units. It needs digits of equal
-width, or changing values jitter. It is used for every language.
+The family name of the font for quantities: numbers with their units. It must be a family that
+font_files in this same file registers. A family from another plugin, or a font that is only
+installed on the device, is not used: the GUI ignores this plugin's branding. It needs digits of
+equal width, or changing values jitter. It is used for every language.
 If not set: Roboto.
 
 splash_logo_icon

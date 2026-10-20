@@ -8,11 +8,14 @@
 import importlib.util
 import json
 import os
+import subprocess
 import sys
 import unittest
 from unittest.mock import mock_open, patch
 
 TOOLS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'tools')
+EXAMPLES_DIR = os.path.join(TOOLS_DIR, '..', 'examples')
+
 # Do not leave a __pycache__ directory in the source tree.
 sys.dont_write_bytecode = True
 spec = importlib.util.spec_from_file_location('plugincompiler', os.path.join(TOOLS_DIR, 'gui-v2-plugin-compiler.py'))
@@ -320,6 +323,45 @@ class RequiredBrandingVersionTest(unittest.TestCase):
         for prop in propertyList['properties']:
             with self.subTest(property=prop['name']):
                 self.assertEqual(compiler.required_branding_version(propertyList, [prop['name']]), prop['since'])
+
+
+class ExampleBrandingTest(unittest.TestCase):
+    """The example branding plugins in examples/ pass the checks that the compiler runs."""
+
+    # Example directory: the image and font files, other than Branding.qml, that the compiler packs.
+    EXAMPLES = {
+        'BrandingExample': ['logo.svg', 'splash_gauge.gif', 'wordmark.svg'],
+        'BrandingMinimalExample': [],
+    }
+
+    def test_branding_check(self):
+        propertyList = compiler.load_branding_property_list()
+        firstVersion = propertyList['version'].split('.')[0] + '.0'
+        for name, expectedFiles in self.EXAMPLES.items():
+            with self.subTest(example=name):
+                assigned = []
+                errors, files = compiler.check_branding_file(
+                    os.path.join(EXAMPLES_DIR, name, 'Branding.qml'), PROPERTIES, assigned)
+                self.assertEqual(errors, [])
+                self.assertEqual(files, expectedFiles)
+                self.assertIn('color_brand', assigned)
+                self.assertEqual(compiler.required_branding_version(propertyList, assigned), firstVersion)
+
+    # tests/CMakeLists.txt sets these to qmllint and the build directory, which holds Victron.Branding.
+    def test_qmllint(self):
+        qmllint = os.environ.get('GUI_V2_QMLLINT')
+        importPath = os.environ.get('GUI_V2_QML_IMPORT_PATH')
+        if not qmllint or not importPath:
+            self.skipTest('GUI_V2_QMLLINT and GUI_V2_QML_IMPORT_PATH are not set')
+        # CI runs ctest with QT_DEBUG_PLUGINS=1. qmllint then logs plugin
+        # metadata; that is not a lint error, so do not pass the flag through.
+        env = os.environ.copy()
+        env.pop('QT_DEBUG_PLUGINS', None)
+        for name in self.EXAMPLES:
+            with self.subTest(example=name):
+                result = subprocess.run([qmllint, '-I', importPath, os.path.join(EXAMPLES_DIR, name, 'Branding.qml')],
+                                        capture_output=True, text=True, env=env)
+                self.assertEqual((result.returncode, (result.stdout + result.stderr).strip()), (0, ''))
 
 
 if __name__ == '__main__':

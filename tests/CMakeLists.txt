@@ -60,4 +60,10 @@ if (Python3_Interpreter_FOUND)
         COMMAND ${Python3_EXECUTABLE} -B -m unittest discover -s ${CMAKE_CURRENT_SOURCE_DIR}/plugincompiler -p "test_*.py")
     add_test(NAME tst_brandingproperties
         COMMAND ${Python3_EXECUTABLE} -B -m unittest discover -s ${CMAKE_CURRENT_SOURCE_DIR}/brandingproperties -p "test_*.py")
+    # Lets tst_plugincompiler run qmllint on the example branding plugins, against the
+    # Victron.Branding module in the build directory.
+    if (TARGET Qt6::qmllint)
+        set_tests_properties(tst_plugincompiler PROPERTIES ENVIRONMENT
+            "GUI_V2_QMLLINT=$<TARGET_FILE:Qt6::qmllint>;GUI_V2_QML_IMPORT_PATH=${CMAKE_BINARY_DIR}")
+    endif()
 endif()

@@ -14,3 +14,13 @@ qt_add_resources(tst_branding "tst_branding_files"
         data/valid/Branding.qml
 )
 
+# The example branding plugins, so that the tests check them: qrc:/branding-test/BrandingExample/...
+qt_add_resources(tst_branding "tst_branding_examples"
+    PREFIX "/branding-test"
+    BASE ${PROJECT_SOURCE_DIR}/examples
+    FILES
+        ${PROJECT_SOURCE_DIR}/examples/BrandingExample/Branding.qml
+        ${PROJECT_SOURCE_DIR}/examples/BrandingExample/logo.svg
+        ${PROJECT_SOURCE_DIR}/examples/BrandingExample/wordmark.svg
+        ${PROJECT_SOURCE_DIR}/examples/BrandingMinimalExample/Branding.qml
+)

@@ -664,6 +664,63 @@ TestCase {
 		compare(result.data.color_brand.toString(), "#003366")
 	}
 
+	Image {
+		id: exampleLogo
+		sourceSize: Qt.size(285, 54)
+	}
+
+	// examples/BrandingExample loads without warnings, and gives the colors that its README describes.
+	function test_brandingExample() {
+		failOnWarning(/./)
+		const result = BrandingTestHelper.loadBrandingFile("BrandingExample")
+		verify(result.valid)
+		BrandingTestHelper.setThemeBranding([Object.assign({ pluginName: result.pluginName }, result.data)])
+
+		// Theme color: [Dark, Light]
+		const expected = {
+			color_background_primary: ["#1a1a1a", "#adadad"],
+			color_background_secondary: ["#2c2c2c", "#a5a5a5"],
+			color_page_background: ["#1a1a1a", "#9b9b9b"],
+			color_font_primary: ["#ffffff", "#1a1a1a"],
+			color_font_secondary: ["#969591", "#4c4b4a"],
+			color_brand: ["#f28c28", "#f28c28"],
+			color_button_off_background: ["#b26a24", "#dd9650"],  // dimmed brand; already readable, so not adjusted
+			color_darkBrand: ["#5b3c1e", "#c2a385"],  // dark(color_brand)
+			color_button_down_text: ["#1a1a1a", "#1a1a1a"],  // the label on a brand fill
+			color_warning: ["#f2c200", "#f2c200"],
+			color_success: ["#67b03f", "#67b03f"],
+			color_critical: ["#f35c58", "#f35c58"],
+		}
+		const names = Object.keys(expected)
+		compare(names.map(name => Theme[name].toString()), names.map(name => expected[name][0]))
+		Theme.colorScheme = Theme.Light
+		compare(names.map(name => Theme[name].toString()), names.map(name => expected[name][1]))
+		// The label on a warning fill.
+		compare(Theme.color_demoModeIndicator_foreground.toString(), "#1a1a1a")
+
+		verify(Theme.splash_logo_icon_preserve_colors)
+		verify(!Theme.splash_logo_text_preserve_colors)
+		for (const logo of [Theme.splash_logo_icon, Theme.splash_logo_text]) {
+			exampleLogo.source = logo
+			tryCompare(exampleLogo, "status", Image.Ready)
+		}
+		compare(exampleLogo.source.toString(), "qrc:/branding-test/BrandingExample/wordmark.svg")
+		compare(Theme.splash_gauge_animation.toString(), "qrc:/branding-test/BrandingExample/splash_gauge.gif")
+		compare(Theme.splash_gauge_animation_light.toString(), "")
+	}
+
+	// examples/BrandingMinimalExample changes the brand color and nothing else.
+	function test_brandingMinimalExample() {
+		failOnWarning(/./)
+		const result = BrandingTestHelper.loadBrandingFile("BrandingMinimalExample")
+		verify(result.valid)
+		compare(Object.keys(result.data), ["color_brand"])
+		BrandingTestHelper.setThemeBranding([Object.assign({ pluginName: result.pluginName }, result.data)])
+		compare(themeBrandingColors(), Object.assign({}, builtInDark, { color_brand: "#f28c28" }))
+		Theme.colorScheme = Theme.Light
+		compare(themeBrandingColors(), Object.assign({}, builtInLight, { color_brand: "#f28c28" }))
+	}
+
 	function test_disallowedImportWarns() {
 		ignoreWarning(/imports Victron\.VenusOS - only Victron\.Branding, QtQml and QtQuick are supported/)
 		const result = BrandingTestHelper.loadBrandingFile("import")

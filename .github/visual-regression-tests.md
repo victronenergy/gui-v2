@@ -71,6 +71,36 @@ cmake -B build && cmake --build build
 
 The tool provides a side-by-side visual interface showing differences, with pass/fail status for each image based on a similarity threshold.
 
+### Capturing with a branding plugin
+
+To check how a branding plugin (see [Branding Plugins](branding-plugins.md)) changes the UI,
+capture the same pages with and without the plugin, and compare them.
+
+Desktop builds load plugins from the `plugins/` directory next to the executable; there is no
+option to load them from somewhere else. So:
+
+1. Compile the plugin, and copy its `<Name>.json` into `<executable directory>/plugins/`.
+2. Run the captures.
+3. Remove the `.json` again, so that later captures show the Victron colors.
+
+Capture both color schemes (`--colorScheme dark` and `--colorScheme light`), at 800x480 and at
+480x800 (`--resolution`). These pages between them show most of the colors that branding
+changes: `BriefPage`, `BriefSidePanel`, `OverviewPage`, `TanksTab`, `EnvironmentTab`,
+`boat/BoatPage`, `SettingsPage`, `settings/PageSettingsDisplayAndAppearance`, `ControlCardsPage`
+and `AuxCardsPage`, plus `NotificationsPage` with `--mock-conf multi-rs`, which has active
+notifications.
+
+The key navigation focus ring is only drawn while key navigation is on, so the page captures
+do not show it. To capture it, run the `smoke/key-navigation` test, which captures the ring on a
+navigation bar button and on the first settings list item:
+
+```bash
+./bin/venus-gui-v2 --mock --no-mock-timers --animationEnabled false --colorScheme light --ui-test smoke/key-navigation
+```
+
+UI tests cannot press keys yet, so the test turns on key navigation and gives each item the
+focus directly. Like other test configurations, it needs an empty capture directory.
+
 ## Workflow for verifying changes
 
 1. **Before your change**: run the visual tests to capture a baseline set of images
