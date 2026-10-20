@@ -25,10 +25,13 @@ tests/
 ├── filtereddevicemodel/
 ├── pagepreloader/              — PagePreloader compile/skip/timeout (injectable URLs)
 ├── pagestack/                  — first-push fake-slide duration while the stack is busy
+├── pluginpagestack/            — plugin page hosting, rejection, and cleanup on PageStack
 ├── splashsequence/             — splash phase transitions (no animations)
 ├── (many more...)
 └── ui/                         — visual regression tests (separate system, not covered here)
 ```
+
+The Python tools have their own tests, which `tests/CMakeLists.txt` registers with ctest when a Python 3 interpreter is found: `tst_moduledependencies` (fails if a module uses one that it must not).
 
 ## Creating a new unit test
 

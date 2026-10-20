@@ -126,7 +126,11 @@ Page {
 						text: qsTrId(title)
 						indicatorColor: pluginColor
 
-						onClicked: Global.pageManager.pushPage(url, {"device": root.device})
+						onClicked: Global.pageManager.pushPluginPage(url, {
+							serviceUid: root.serviceUid,
+							productId: root.device.productId,
+							deviceName: root.device.name
+						})
 					}
 				}
 			}

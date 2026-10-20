@@ -1,9 +1,17 @@
+DeviceListExample: a plugin that adds pages to a device's page
+
+Each page's root is a PluginDevicePage, from Victron.GuiPlugins. The app sets
+its serviceUid, productId and deviceName properties when it opens the page.
+The rules that plugin pages must follow are in .github/gui-plugins.md in the
+gui-v2 source. DeviceListExample_ComponentError.qml does not compile, on
+purpose, to show that a broken plugin page does not break the GUI.
+
 1) Compile this plugin for gui-v2 using the gui-v2-plugin-compiler
 
 Either: run the following in a terminal which has sourced the Venus OS SDK environment:
 
 python3 ../../tools/gui-v2-plugin-compiler.py \
-    --min-required-version v1.2.13 \
+    --min-required-version v1.4.1 \
     --devicelist 0x106 DeviceListExample_CellVoltages.qml devicelistexample_cellvoltages_title_cell_voltages \
     --devicelist 0x106 DeviceListExample_CellTemperatures.qml 'Cell Temperatures' \
     --devicelist 0x106 DeviceListExample_ComponentError.qml 'Invalid Customisation'
@@ -14,7 +22,7 @@ rsync -avc . root@gx.device.ip.address:/tmp/DeviceListExample/
 ssh root@gx.device.ip.address
 cd /tmp/DeviceListExample/
 python3 /opt/victronenergy/gui-v2/gui-v2-plugin-compiler.py \
-    --min-required-version v1.2.13 \
+    --min-required-version v1.4.1 \
     --devicelist 0x106 DeviceListExample_CellVoltages.qml devicelistexample_cellvoltages_title_cell_voltages \
     --devicelist 0x106 DeviceListExample_CellTemperatures.qml 'Cell Temperatures' \
     --devicelist 0x106 DeviceListExample_ComponentError.qml 'Invalid Customisation'

@@ -43,7 +43,20 @@ add_subdirectory(solaryieldmodel)
 add_subdirectory(sortedruntimedevicemodel)
 add_subdirectory(splashsequence)
 add_subdirectory(switchableoutput)
+add_subdirectory(listswitch)
+add_subdirectory(plugindataitem)
+add_subdirectory(pluginwordsandicons)
+add_subdirectory(pluginpagestack)
 add_subdirectory(uitestutils)
 add_subdirectory(units)
 add_subdirectory(visibleitemmodel)
 add_subdirectory(wifimodel)
+
+# Tests for the Python tools: the module dependency rules.
+find_package(Python3 COMPONENTS Interpreter)
+if (Python3_Interpreter_FOUND)
+    # -B: do not write __pycache__ directories into the source tree.
+    add_test(NAME tst_moduledependencies
+        COMMAND ${Python3_EXECUTABLE} -B -m unittest discover -s ${CMAKE_CURRENT_SOURCE_DIR}/moduledependencies -p "test_*.py")
+endif()
+
