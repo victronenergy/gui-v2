@@ -319,7 +319,7 @@ Run with `--mock` flag to use mock backend. Mock configurations (e.g. "maximal",
 - Plugins can be loaded from MQTT (VRM) or filesystem
 - Hot-reloading supported via file system watcher
 
-Plugins are built with `tools/gui-v2-plugin-compiler.py`. Its `--branding` option checks a `Branding.qml` file before packing it: the file may only assign literal values (no expressions or bindings) to the properties listed in `tools/branding-properties.json`, and every referenced logo and font file must exist. That list is generated from `src/branding/branding.h` by `tools/brandingproperties.py`; the `tst_brandingproperties` test fails if it is out of date. The list is also the checked-in record of the `Victron.Branding` API, and the script will not remove a property from it, or change one, without a new major version.
+Plugins are built with `tools/gui-v2-plugin-compiler.py`. Its `--branding` option checks a `Branding.qml` file before packing it: the file may only assign literal values (no expressions or bindings) to the properties listed in `tools/branding-properties.json`, and every referenced logo and font file must exist. That list is generated from `src/branding/branding.h` by `tools/brandingproperties.py`; the `tst_brandingproperties` test fails if it is out of date. The list is also the checked-in record of the `Victron.Branding` API, and the script will not remove a property from it, or change one, without a new major version. See [Branding plugins](branding-plugins.md).
 
 ### Branding module
 

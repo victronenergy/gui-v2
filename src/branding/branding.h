@@ -80,8 +80,9 @@ class Branding : public QObject
 	Q_OBJECT
 	QML_ELEMENT
 
-	// The comment above each property says what the property sets, then "If not set:" and what is
-	// used when no installed Branding file sets it.
+	// The comment above each property is its entry in the property reference in
+	// .github/branding-plugins.md: tools/brandingproperties.py copies it there. It says what the
+	// property sets, then "If not set:" and what is used when no installed Branding file sets it.
 
 	// The brand color: buttons, switches, sliders, radio buttons, the selected navigation bar tab,
 	// the Overview widget borders, and informative notifications. The Light scheme uses the same color.

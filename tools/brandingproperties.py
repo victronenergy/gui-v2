@@ -3,17 +3,21 @@
 # Copyright (C) 2026 Victron Energy B.V.
 # See LICENSE.txt for license information.
 #
-# Generates tools/branding-properties.json from the Q_PROPERTY declarations in
-# src/branding/branding.h and the module version in cmake/ModuleBranding.cmake. It is the Branding
-# property list that gui-v2-plugin-compiler.py uses for its literal-only check and to work out a
-# plugin's requiredBrandingVersion. It is also the checked-in record of the Victron.Branding API:
-# plugins can only set properties, so the list of property names, types and versions is the whole
-# API. This script will not remove a property from it, or change one's type or version, unless the
-# major version goes up (see --allow-breaking-changes).
+# Generates two things from the Q_PROPERTY declarations in src/branding/branding.h and the module
+# version in cmake/ModuleBranding.cmake:
+#  - tools/branding-properties.json, the Branding property list that gui-v2-plugin-compiler.py uses
+#    for its literal-only check and to work out a plugin's requiredBrandingVersion. It is also the
+#    checked-in record of the Victron.Branding API: plugins can only set properties, so the list of
+#    property names, types and versions is the whole API. This script will not remove a property
+#    from it, or change one's type or version, unless the major version goes up (see
+#    --allow-breaking-changes);
+#  - the property reference in .github/branding-plugins.md, between the BEGIN and END lines below.
+#    Each entry is the comment above the property in branding.h, plus Victron's value of each
+#    branding color, read from themes/color/Dark.json.
 #
 # Usage:
-#   brandingproperties.py           regenerate it
-#   brandingproperties.py --check   exit non-zero if it is out of date, or if branding.h breaks
+#   brandingproperties.py           regenerate both
+#   brandingproperties.py --check   exit non-zero if either is out of date, or if branding.h breaks
 #                                   the checked-in property list
 
 import argparse
@@ -22,12 +26,19 @@ import os
 import re
 import sys
 
+from themeparser import THEME_KEY_TO_BRANDING_COLOR
+
 TOOLS_DIR = os.path.dirname(os.path.abspath(__file__))
 SOURCE_DIR = os.path.dirname(TOOLS_DIR)
 DEFAULT_HEADER = os.path.join(SOURCE_DIR, 'src', 'branding', 'branding.h')
 DEFAULT_CMAKE_FILE = os.path.join(SOURCE_DIR, 'cmake', 'ModuleBranding.cmake')
+DEFAULT_THEME_DIR = os.path.join(SOURCE_DIR, 'themes', 'color')
 DEFAULT_OUTPUT = os.path.join(TOOLS_DIR, 'branding-properties.json')
+DEFAULT_DOCS = os.path.join(SOURCE_DIR, '.github', 'branding-plugins.md')
 
+DOCS_BEGIN = ('<!-- BEGIN property reference. tools/brandingproperties.py writes this part from '
+              'src/branding/branding.h: edit the comments there, not this text. -->')
+DOCS_END = '<!-- END property reference -->'
 IF_NOT_SET = 'If not set:'
 
 TYPE_NAMES = {
@@ -39,6 +50,17 @@ TYPE_NAMES = {
     'int': 'int',
     'qreal': 'real',
     'double': 'real',
+}
+
+# The type names in the property reference, for people writing a Branding file.
+DOCS_TYPE_NAMES = {
+    'color': 'color',
+    'url': 'url (a file path)',
+    'string': 'string',
+    'stringlist': 'list of strings',
+    'bool': 'bool',
+    'int': 'whole number',
+    'real': 'number',
 }
 
 PROPERTY_RE = re.compile(r'Q_PROPERTY\(\s*([\w:<>]+)\s+(\w+)\s(.*)\)\s*$')
@@ -116,6 +138,30 @@ def parse_properties(header_text, header_path, module_version):
     return properties
 
 
+def read_victron_colors(theme_dir, color_property_names):
+    """Returns {Branding property name: hex}: Victron's value of each branding color that Dark.json sets."""
+    with open(os.path.join(theme_dir, 'Dark.json'), encoding='utf-8') as file:
+        dark = json.load(file)
+    with open(os.path.join(theme_dir, 'ColorDesign.json'), encoding='utf-8') as file:
+        design = json.load(file)
+    colors = {}
+    for theme_key, enum_value in THEME_KEY_TO_BRANDING_COLOR.items():
+        # The Branding property is named after the BrandingData::Color value: BackgroundPage is
+        # color_background_page. The Theme key can differ (color_page_background).
+        name = 'color_' + re.sub(r'(?<!^)(?=[A-Z])', '_', enum_value).lower()
+        if name not in color_property_names:
+            raise ValueError('BrandingData::%s has no Branding property %s' % (enum_value, name))
+        value = dark.get(theme_key)
+        if value is None:
+            continue
+        value = design.get(value, value)
+        if not re.fullmatch(r'#[0-9A-Fa-f]{6}', value):
+            raise ValueError('Dark.json: %s must be a #RRGGBB color, or the name of one in ColorDesign.json'
+                             % theme_key)
+        colors[name] = value
+    return colors
+
+
 def generate_json(module_version, properties):
     return json.dumps({
         'module': 'Victron.Branding',
@@ -164,6 +210,38 @@ def new_properties_without_revision(old_list, module_version, properties):
             if prop['name'] not in old_names and prop['since'] != module_version]
 
 
+def generate_reference(properties, victron_colors):
+    """Returns the property reference: the lines from DOCS_BEGIN to DOCS_END, ending with a newline."""
+    lines = [DOCS_BEGIN]
+    for prop in properties:
+        lines += [
+            '',
+            '### `%s`' % prop['name'],
+            '',
+            prop['description'],
+            '',
+            '- Type: %s' % DOCS_TYPE_NAMES[prop['type']],
+            '- Added in: %d.%d' % prop['since'],
+            '- If not set: %s' % prop['if_not_set'],
+        ]
+        if prop['name'] in victron_colors:
+            lines.append("- Victron's value: `%s`" % victron_colors[prop['name']])
+    lines += ['', DOCS_END]
+    return '\n'.join(lines) + '\n'
+
+
+def replace_reference(docs_text, docs_path, reference):
+    """Returns docs_text with its lines from DOCS_BEGIN to DOCS_END replaced by reference."""
+    begin = docs_text.find(DOCS_BEGIN)
+    end = docs_text.find(DOCS_END)
+    if begin < 0 or end < begin or docs_text.find(DOCS_BEGIN, begin + 1) >= 0:
+        raise ValueError('%s must contain these two lines once each, in this order:\n%s\n%s'
+                         % (docs_path, DOCS_BEGIN, DOCS_END))
+    end = docs_text.find('\n', end)
+    end = len(docs_text) if end < 0 else end + 1
+    return docs_text[:begin] + reference + docs_text[end:]
+
+
 def read_text(path):
     try:
         with open(path, encoding='utf-8', newline='') as file:
@@ -173,11 +251,14 @@ def read_text(path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Generates the Branding property list for the plugin compiler')
+    parser = argparse.ArgumentParser(description='Generates the Branding property list for the plugin compiler, '
+                                                 'and the property reference')
     parser.add_argument('--header', default=DEFAULT_HEADER)
     parser.add_argument('--cmake-file', default=DEFAULT_CMAKE_FILE)
+    parser.add_argument('--theme-dir', default=DEFAULT_THEME_DIR)
     parser.add_argument('--output', default=DEFAULT_OUTPUT)
-    parser.add_argument('--check', action='store_true', help='Fail if the output file is out of date')
+    parser.add_argument('--docs', default=DEFAULT_DOCS)
+    parser.add_argument('--check', action='store_true', help='Fail if an output file is out of date')
     parser.add_argument('--allow-breaking-changes', action='store_true',
                         help='Allow removing a property, or changing its type or version, without a new major '
                              'version. Only do this for a property that no released GUI has.')
@@ -202,17 +283,28 @@ def main():
     if breaking or unversioned:
         return 1
 
-    contents = generate_json(module_version, properties)
+    color_property_names = [prop['name'] for prop in properties if prop['type'] == 'color']
+    victron_colors = read_victron_colors(args.theme_dir, color_property_names)
+    current_docs = read_text(args.docs)
+    if current_docs is None:
+        print('Cannot read %s' % args.docs)
+        return 1
+    outputs = {
+        args.output: generate_json(module_version, properties),
+        args.docs: replace_reference(current_docs, args.docs, generate_reference(properties, victron_colors)),
+    }
 
     if args.check:
-        if current_list != contents:
-            print('%s is out of date. Run tools/brandingproperties.py to regenerate it.' % args.output)
-            return 1
-        print('%s is up to date.' % args.output)
-        return 0
+        stale = [path for path, contents in outputs.items() if read_text(path) != contents]
+        for path in stale:
+            print('%s is out of date. Run tools/brandingproperties.py to regenerate it.' % path)
+        if not stale:
+            print('%s are up to date.' % ' and '.join(outputs))
+        return 1 if stale else 0
 
-    with open(args.output, 'w', encoding='utf-8', newline='\n') as file:
-        file.write(contents)
+    for path, contents in outputs.items():
+        with open(path, 'w', encoding='utf-8', newline='\n') as file:
+            file.write(contents)
     return 0
 
 
