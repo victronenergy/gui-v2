@@ -36,12 +36,52 @@
 using namespace Victron::VenusOS;
 
 namespace {
+	// Checks the value of fieldName, a required version of moduleName from a compiled plugin,
+	// against the module's version in this build, moduleMajor.moduleMinor.
+	// Returns an empty string if the value is missing or this build has that version,
+	// or the reason why not.
+	QString checkRequiredModuleVersion(const QJsonValue &value, const QString &fieldName,
+			const QString &moduleName, int moduleMajor, int moduleMinor) {
+		if (value.isUndefined()) {
+			return QString();
+		}
+		static const QRegularExpression versionExpression(QStringLiteral("^(\\d+)\\.(\\d+)$"));
+		const QRegularExpressionMatch match = versionExpression.match(value.toString());
+		if (!value.isString() || !match.hasMatch()) {
+			return QStringLiteral("%1 is not a \"major.minor\" string").arg(fieldName);
+		}
+		bool majorOk = false;
+		bool minorOk = false;
+		const int major = match.captured(1).toInt(&majorOk);
+		const int minor = match.captured(2).toInt(&minorOk);
+		const QString supported = QStringLiteral("%1.%2").arg(moduleMajor).arg(moduleMinor);
+		if (!majorOk || !minorOk || major != moduleMajor) {
+			return QStringLiteral("it needs %1 %2, but this GUI has %3").arg(moduleName, value.toString(), supported);
+		}
+		if (minor > moduleMinor) {
+			return QStringLiteral("it needs %1 %2, but this GUI only has %3").arg(moduleName, value.toString(), supported);
+		}
+		return QString();
+	}
+
 	// Returns a path that QFile and QFontDatabase accept, or an empty string.
 	QString localFilePath(const QUrl &url) {
 		if (url.scheme() == QLatin1String("qrc")) {
 			return QLatin1Char(':') + url.path();
 		}
 		return url.isLocalFile() ? url.toLocalFile() : QString();
+	}
+
+	// The family name that this plugin's own font files registered, or empty.
+	// The match is case-insensitive; the returned name is the one the file
+	// registered, which is what Qt looks up later.
+	QString familyRegisteredByPlugin(const QStringList &registeredFamilies, const QString &requested) {
+		for (const QString &family : registeredFamilies) {
+			if (family.compare(requested, Qt::CaseInsensitive) == 0) {
+				return family;
+			}
+		}
+		return QString();
 	}
 
 	// The compiler rejects a Branding file that imports anything else. This
@@ -643,10 +683,19 @@ void GuiPluginLoader::initPlugins()
 	setPluginsJson(QStringLiteral("[ %1 ]").arg(allPlugins.join(QChar(','))));
 }
 
+QString GuiPluginLoader::checkRequiredBrandingVersion(const QJsonValue &value)
+{
+	return checkRequiredModuleVersion(value, QStringLiteral("requiredBrandingVersion"),
+			QStringLiteral("Victron.Branding"),
+			Victron::BrandingModuleMajorVersion, Victron::BrandingModuleMinorVersion);
+}
+
 QVector<GuiPluginIntegration> GuiPluginLoader::parseIntegrations(const QJsonObject &plugin, const QString &pluginName)
 {
 	QVector<GuiPluginIntegration> integrations;
 	const QJsonArray pluginIntegrations = plugin.value(QStringLiteral("integrations")).toArray();
+	const QString brandingVersionProblem
+			= checkRequiredBrandingVersion(plugin.value(QStringLiteral("requiredBrandingVersion")));
 	for (qsizetype j = 0; j < pluginIntegrations.size(); ++j) {
 		const QJsonValue iv = pluginIntegrations[j];
 		if (!iv.isObject()) {
@@ -717,6 +766,12 @@ QVector<GuiPluginIntegration> GuiPluginLoader::parseIntegrations(const QJsonObje
 			continue;
 		}
 
+		if (integrationType == GuiPluginLoader::Branding && !brandingVersionProblem.isEmpty()) {
+			qCWarning(venusGui).noquote() << "Ignoring the branding integration in plugin" << pluginName
+				<< "-" << brandingVersionProblem;
+			continue;
+		}
+
 		GuiPluginIntegration pi;
 		pi.m_pluginName = pluginName;
 		pi.m_type = static_cast<GuiPluginLoader::IntegrationType>(integrationType);
@@ -752,6 +807,7 @@ void GuiPluginLoader::populatePlugins()
 	//   version: "version",
 	//   minRequiredVersion: "version",
 	//   maxRequiredVersion: "version,
+	//   requiredBrandingVersion: "major.minor", // optional, only for branding plugins
 	//   resource: "base64-encoded-rcc-file",
 	//   translations: [ "qrc:/AppName/translations_en.qm", ... ]
 	//   integrations: [ ... ]
@@ -1064,11 +1120,13 @@ std::optional<Victron::BrandingData> GuiPluginLoader::createBrandingSnapshot(
 	object.reset();
 	data.pluginName = pluginName;
 
-	checkAndResolveBrandingSnapshot(&data, url, fontIds);
+	if (!checkAndResolveBrandingSnapshot(&data, url, fontIds)) {
+		return std::nullopt;
+	}
 	return data;
 }
 
-void GuiPluginLoader::checkAndResolveBrandingSnapshot(
+bool GuiPluginLoader::checkAndResolveBrandingSnapshot(
 		Victron::BrandingData *data, const QUrl &url, QList<int> *fontIds)
 {
 	const QString &pluginName = data->pluginName;
@@ -1107,6 +1165,12 @@ void GuiPluginLoader::checkAndResolveBrandingSnapshot(
 	if (data->splashGaugeAnimationLight.has_value()) {
 		data->splashGaugeAnimationLight = url.resolved(*data->splashGaugeAnimationLight);
 	}
+	// Families are accepted only from files this plugin listed. A family that another
+	// plugin registered, or that is only installed on the device, is not a substitute:
+	// plugins are snapshotted before they are sorted, so sharing a file across plugins
+	// would depend on discovery order.
+	QStringList registeredFamilies;
+	QList<int> addedFontIds;
 	if (data->fontFiles.has_value()) {
 		QStringList resolvedFontFiles;
 		for (const QString &fontFile : std::as_const(*data->fontFiles)) {
@@ -1117,26 +1181,38 @@ void GuiPluginLoader::checkAndResolveBrandingSnapshot(
 				qCWarning(venusGui) << "Cannot register branding font" << fontUrl << "in plugin" << pluginName;
 				continue;
 			}
-			if (fontIds) {
-				fontIds->append(fontId);
-			}
+			addedFontIds.append(fontId);
+			registeredFamilies.append(QFontDatabase::applicationFontFamilies(fontId));
 			resolvedFontFiles.append(fontUrl.toString());
 		}
 		data->fontFiles = resolvedFontFiles;
 	}
 
-	// A family that no listed file registered and that is not installed is unset.
-	const QStringList families = QFontDatabase::families();
+	bool familyMissing = false;
 	for (std::optional<QString> *family : { &data->fontFamily, &data->quantityFontFamily }) {
 		if (!family->has_value()) {
 			continue;
 		}
-		if (!families.contains(**family, Qt::CaseInsensitive)) {
-			qCWarning(venusGui) << "Ignoring branding font family" << **family << "in plugin" << pluginName
-					<< ": no such font";
-			family->reset();
+		const QString registered = familyRegisteredByPlugin(registeredFamilies, **family);
+		if (registered.isEmpty()) {
+			qCWarning(venusGui) << "Ignoring branding in plugin" << pluginName
+					<< ": font family" << **family << "is not provided by a font file in this plugin";
+			familyMissing = true;
+			continue;
 		}
+		*family = registered;
 	}
+	if (familyMissing) {
+		// Do not leave this plugin's fonts registered: its branding is ignored.
+		for (int fontId : std::as_const(addedFontIds)) {
+			QFontDatabase::removeApplicationFont(fontId);
+		}
+		return false;
+	}
+	if (fontIds) {
+		fontIds->append(addedFontIds);
+	}
+	return true;
 }
 
 bool GuiPluginLoader::installPluginTranslatorForLanguage(const QString &pluginName, QLocale::Language language)

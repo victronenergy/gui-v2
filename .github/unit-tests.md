@@ -27,7 +27,15 @@ tests/
 ├── pagestack/                  — first-push fake-slide duration while the stack is busy
 ├── splashsequence/             — splash phase transitions (no animations)
 ├── (many more...)
+├── plugincompiler/             — Python tests for tools/gui-v2-plugin-compiler.py (not a QML test)
+├── themepruner/                — Python tests for tools/themepruner.py (not a QML test)
 └── ui/                         — visual regression tests (separate system, not covered here)
+```
+
+The Python tools have their own tests, which `tests/CMakeLists.txt` registers with ctest when a Python 3 interpreter is found: `tst_plugincompiler` (the plugin compiler's Branding import and name checks, the image and font files it packs, and the `Victron.Branding` version that it writes), `tst_brandingproperties` (fails if `tools/branding-properties.json` is out of date, or if a property was added after a release tag without a newer module version; regenerate it with `python tools/brandingproperties.py`), and `tst_themepruner` (keeps commas inside color formulas). To run the compiler tests without ctest:
+
+```bash
+python -m unittest discover -s tests/plugincompiler -p "test_*.py"
 ```
 
 ## Creating a new unit test

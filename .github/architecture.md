@@ -316,9 +316,11 @@ Run with `--mock` flag to use mock backend. Mock configurations (e.g. "maximal",
 - Plugins can be loaded from MQTT (VRM) or filesystem
 - Hot-reloading supported via file system watcher
 
+Plugins are built with `tools/gui-v2-plugin-compiler.py`. Its `--branding` option checks a `Branding.qml` file before packing it: `import Victron.Branding` is required, `QtQml` and `QtQuick` are allowed, and the file must not contain a few obvious calls such as `createQmlObject` or `XMLHttpRequest`. It does not check property values. It packs every `.svg`, `.png`, `.ttf` and `.otf` file under the plugin directory, and writes `requiredBrandingVersion` from properties assigned as `name:` on their own line, after indentation. The property names and versions come from `tools/branding-properties.json`, generated from `src/branding/branding.h` by `tools/brandingproperties.py`; the `tst_brandingproperties` test fails if it is out of date. The list is also the checked-in record of the `Victron.Branding` API, and the script will not remove a property from it, or change one, without a new major version.
+
 ### Branding module
 
-The `Branding` type is in its own QML module, `Victron.Branding` (`src/branding/`, `cmake/ModuleBranding.cmake`), so that a branding plugin uses only this one small module.
+The `Branding` type is in its own QML module, `Victron.Branding` (`src/branding/`, `cmake/ModuleBranding.cmake`), so that a branding plugin is checked against this one small module, and so that it has its own version. The module's `qmldir` and `qmltypes` are installed next to the plugin compiler, which runs `qmllint` against them.
 
 ## Translations
 
