@@ -1,9 +1,16 @@
+SimpleExample: a plugin that adds a settings page
+
+The page has one switch. It is written with the Victron.GuiPlugins types
+(PluginPage, PluginGradientListView and PluginListSwitch); a plugin page
+must not import Victron.VenusOS. The rules that plugin pages must follow are
+in .github/gui-plugins.md in the gui-v2 source.
+
 1) Compile this plugin for gui-v2 using the gui-v2-plugin-compiler
 
 Either: run the following in a terminal which has sourced the Venus OS SDK environment:
 
 python3 ../../tools/gui-v2-plugin-compiler.py \
-    --min-required-version v1.2.13 \
+    --min-required-version v1.4.1 \
     --settings SimpleExample_PageSettingsSimple.qml
 
 Alternatively: copy the contents of this directory to the device, ssh in, and compile it on device (requires Large image):
@@ -12,7 +19,7 @@ rsync -avc . root@gx.device.ip.address:/tmp/SimpleExample/
 ssh root@gx.device.ip.address
 cd /tmp/SimpleExample/
 python3 /opt/victronenergy/gui-v2/gui-v2-plugin-compiler.py \
-    --min-required-version v1.2.13 \
+    --min-required-version v1.4.1 \
     --settings SimpleExample_PageSettingsSimple.qml
 
 2) Copy the output file `SimpleExample.json` to /data/apps/available/SimpleExample/gui-v2/SimpleExample.json on device: `mkdir -p /data/apps/available/SimpleExample/gui-v2/ && cp SimpleExample.json /data/apps/available/SimpleExample/gui-v2/SimpleExample.json`

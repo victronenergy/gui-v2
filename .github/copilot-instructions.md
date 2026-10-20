@@ -20,6 +20,7 @@ When asked to review code, you **must** immediately re-read the **entire** [Code
 - [Layout Modes](.github/layout-modes.md) — landscape and portrait mode implementation (must be supported by all features)
 - [Internationalisation](.github/i18n-l10n.md) — translations, dynamic language changes, POEditor workflow
 - [Device Settings](.github/device-settings.md) — settings data binding, access levels, ListSetting component hierarchy
+- [GUI Plugins](.github/gui-plugins.md) — plugin pages: Victron.GuiPlugins types, page and row rules, data items, how plugin pages are hosted
 - [Unit Tests](.github/unit-tests.md) — test framework, creating tests, running tests, best practices
 - [Visual Regression Tests](.github/visual-regression-tests.md) — image-capture testing, comparison tool, verifying UI changes
 - [Benchmarking](.github/benchmarking.md) — animation performance measurement, QSG_RENDER_TIMING workflow
