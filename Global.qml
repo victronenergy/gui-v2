@@ -16,8 +16,9 @@ QtObject {
 	property bool applicationActive: true // i.e. not in Idle mode
 	property bool keyNavigationEnabled
 
-	readonly property string fontFamily: _defaultFontLoader.name
-	readonly property string quantityFontFamily: _quantityFontLoader.name
+	// A branding font is used when Theme provides one (i.e. it covers the current language).
+	readonly property string fontFamily: Theme.font_family !== "" ? Theme.font_family : _defaultFontLoader.name
+	readonly property string quantityFontFamily: Theme.quantity_font_family !== "" ? Theme.quantity_font_family : _quantityFontLoader.name
 	property var dialogLayer
 	property var notificationLayer
 	property var pressEffect

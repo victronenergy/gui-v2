@@ -262,7 +262,24 @@ themes/
 
 `tools/themeparser.py` generates `src/themeobjects.h` at build time, creating the `Theme` C++ singleton with all properties accessible in QML as `Theme.color_*`, `Theme.geometry_*`, `Theme.animation_*`, `Theme.font_*`.
 
+A value that names another key is an alias. In `Dark.json` / `Light.json`, an alias of another color scheme key reads that key's computed value (`color_ok` is `color_brand`), so it follows that key's branding. Any other alias, for example of a `ColorDesign.json` palette color or a geometry key, is copied in as a literal. Data colors (tank, temperature and similar) must alias palette colors, not color scheme keys, so that they never follow branding. Aliases may be chained.
+
+A color scheme value can also be a function call, such as `dim(color_red)` (red at 70% alpha, blended onto `color_background_primary`) or `text_color_on(color_ok)` (white, or a dark font color if white has too little contrast on `color_ok`). The functions are listed in `tools/themeparser.py` and implemented in `src/colorderivation.h`. The generated `Theme` computes every color scheme value whenever the branding or the color scheme changes, so all of them follow the branding.
+
 The theme supports multiple screen sizes (FiveInch, SevenInch, Portrait) with geometry values that adapt accordingly.
+
+### Theme branding
+
+Victron's own look is a `Branding` object, `VictronBranding.qml`. `Main.qml` adds it with `Theme.addBranding()` before showing the splash screen. The palette is not resolved until that object has been added. A branding plugin (see [GUI plugins](#gui-plugins)) can override the same values: ten colors (`color_brand`, `color_success`, `color_warning`, `color_critical`, `color_info`, `color_background_primary`, `color_background_secondary`, `color_background_page`, `color_font_primary` and `color_font_secondary`), `light_mode_background_factor`, the font families, and the splash logos.
+- `GuiPluginLoader` creates each plugin's `Branding` object once, copies the values that it sets into a `BrandingData` struct, and destroys the object, so no plugin binding stays alive. Those values are given to `Theme::setPluginBranding()` in plugin-name order, and are applied after Victron's branding. When more than one entry sets a value, the last one is used, except that `light_mode_background_factor` is used only from the entry whose `color_background_primary` is used, and `color_background_secondary` and `color_background_page` only from that entry or a later one (see `ColorDerivation::resolveBrandingColors()`).
+- The Branding colors are the Dark scheme's colors, whatever their lightness. The Light scheme's colors are computed from them: the brand and status colors are kept; `color_background_primary` and `color_background_secondary` have their lightness inverted (scaled by `light_mode_background_factor`); `color_font_primary` has its lightness inverted and is moved 15% toward the background; and the page background is computed from those. A color that an entry does not set is taken from an earlier entry, or is computed from the colors that are set. `Theme` logs a warning if a plugin's `color_font_primary` has too little contrast on `color_background_primary`.
+- All other color scheme values are computed from these ten colors (see [Theme system](#theme-system)), so they follow the branding.
+- `Theme.font_family` and `Theme.quantity_font_family` come from the same list: Victron's families, unless a later entry sets them. An empty `Theme.font_family` means the language font (`Global`'s `FontLoader`). A language that has its own font keeps it. A plugin family is not used for a language that it does not cover.
+- `Theme.splash_logo_icon` and `Theme.splash_logo_text` come from the same list. `SplashView` tints them with the splash colors unless `splash_logo_*_preserve_colors` is set.
+- `Theme.splash_gauge_animation` and `Theme.splash_gauge_animation_light` come from the same list. `SplashView` plays the light file in the Light scheme when it is set, otherwise the dark file, at the file's own size, to its last frame. If that file is also unset, Victron's size-specific animation is used, which pauses at a fixed frame.
+- Every change to the branding or to the color scheme emits `Theme.themeValuesChanged`, which is the NOTIFY signal of the affected properties.
+
+With no branding plugin installed, the values are Victron's, from `VictronBranding.qml`.
 
 ## Build variants
 
@@ -295,9 +312,13 @@ Run with `--mock` flag to use mock backend. Mock configurations (e.g. "maximal",
 
 `GuiPluginLoader` supports third-party UI extensions:
 - Plugins are JSON-defined with QML components
-- Integration types: settings pages, device list pages, navigation pages, quick access cards
+- Integration types: settings pages, device list pages, navigation pages, quick access panes and cards, and branding (type 6)
 - Plugins can be loaded from MQTT (VRM) or filesystem
 - Hot-reloading supported via file system watcher
+
+### Branding module
+
+The `Branding` type is in its own QML module, `Victron.Branding` (`src/branding/`, `cmake/ModuleBranding.cmake`), so that a branding plugin uses only this one small module.
 
 ## Translations
 

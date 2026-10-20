@@ -15,7 +15,11 @@ Window {
 	//% "Venus OS GUI"
 	//~ Context only shown on desktop systems
 	title: qsTrId("venus_os_gui")
-	color: Global.allPagesLoaded && !!guiLoader.item ? guiLoader.item.mainView.backgroundColor : Theme.color_page_background
+	// False until Victron's branding has been added. Theme colors are not resolved before then.
+	property bool brandingReady: false
+	color: !brandingReady ? "transparent"
+			: Global.allPagesLoaded && !!guiLoader.item ? guiLoader.item.mainView.backgroundColor
+			: Theme.color_page_background
 
 	width: Qt.platform.os != "wasm" ? Theme.geometry_screen_width/scaleFactor : Screen.width/scaleFactor
 	height: Qt.platform.os != "wasm" ? Theme.geometry_screen_height/scaleFactor : Screen.height/scaleFactor
@@ -78,7 +82,16 @@ Window {
 		}
 	}
 
-	Component.onCompleted: Global.main = root
+	VictronBranding {
+		id: victronBranding
+	}
+
+	Component.onCompleted: {
+		Theme.addBranding(victronBranding)
+		brandingReady = true
+		UiConfig.splashScreenVisible = true
+		Global.main = root
+	}
 
 	readonly property bool appDataReady: Global.appDataReady
 	onAppDataReadyChanged: {

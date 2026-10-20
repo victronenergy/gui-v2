@@ -110,6 +110,7 @@ public:
 	QUrl fontFileUrl() const;
 	QString fontUrlPrefix() const;
 	void setFontUrlPrefix(const QString &prefix);
+	static bool fontFamilyCovers(const QString &family, QLocale::Language language);
 
 Q_SIGNALS:
 	void languageChangeFailed();

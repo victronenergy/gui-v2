@@ -10,7 +10,13 @@ Run from the root gui-v2 directory:
     python tools/themepruner.py
 '''
 
-import os, sys
+import os, re, sys
+
+from themeparser import THEME_KEY_TO_BRANDING_COLOR
+
+# A theme value refers to other properties by name: directly, or inside a color formula such as
+# "dim(color_red)" or "text_color_on(color_ok)".
+IDENTIFIER_RE = re.compile(r'[A-Za-z_][A-Za-z0-9_]*')
 
 def find_theme_files(root_dir):
     'Returns a list of all JSON files in the directory and its subdirectories.'
@@ -38,7 +44,9 @@ def parse_theme_property(line):
     except ValueError:
         return ('','')
     name = name.strip().replace('"', '')
-    value = value.strip().replace(',', '').replace('"', '')
+    # Drop only the JSON separator. A comma inside a formula separates arguments:
+    # text_color_on(color_a,color_b) must not become one identifier.
+    value = value.strip().rstrip(',').replace('"', '')
     return (name, value)
 
 def parse_theme_properties(json_filename):
@@ -90,12 +98,11 @@ def main(root_dir):
     'Finds unused theme properties and removes them from the json files.'
     source_code_filenames = find_source_code_files(root_dir)
     all_theme_properties = {}
-    nested_theme_properties = {}
+    referenced_names = {}
     for json_filename in find_theme_files(root_dir):
         print(f'Parsing {json_filename}...')
         for theme_property_name, theme_property_value in parse_theme_properties(json_filename):
-            if '_' in theme_property_value:
-                nested_theme_properties.setdefault(theme_property_name, []).append(theme_property_value)
+            referenced_names.setdefault(theme_property_name, set()).update(IDENTIFIER_RE.findall(theme_property_value))
             all_theme_properties.setdefault(theme_property_name, []).append(json_filename)
 
     # Search each QML file. Each time a theme property is found in a QML file, remove it from the
@@ -106,17 +113,22 @@ def main(root_dir):
         for theme_property in find_theme_properties_in_source_code_file(source_code_filename, unused_theme_properties.keys()):
             del unused_theme_properties[theme_property]
 
+    # The colors that a branding plugin may set are Theme properties written by resolvePalette(),
+    # so keep them.
+    for theme_property_name in THEME_KEY_TO_BRANDING_COLOR:
+        unused_theme_properties.pop(theme_property_name, None)
+
     # Now unused_theme_properties is a list of the properties that are not used in any QML/JS files.
-    # But, a property might be used as a value for another property that *is* used by a QML/JS file.
-    # So, make sure those properties are not removed.
-    required_nested_property_names = set()
-    for theme_property_name in unused_theme_properties.keys():
-        for nested_theme_property_name, nested_theme_property_values in nested_theme_properties.items():
-            if theme_property_name in nested_theme_property_values and nested_theme_property_name not in unused_theme_properties.keys():
-                print(f'Do not remove {theme_property_name}, used for value of {nested_theme_property_name}')
-                required_nested_property_names.add(theme_property_name)
-    for theme_property_name in required_nested_property_names:
-        del unused_theme_properties[theme_property_name]
+    # But, a property might be used in the value of another property that is used, directly or
+    # through a chain of other properties. So, make sure those properties are not removed.
+    pending = [name for name in all_theme_properties if name not in unused_theme_properties]
+    while pending:
+        used_property_name = pending.pop()
+        for theme_property_name in sorted(referenced_names.get(used_property_name, ())):
+            if theme_property_name in unused_theme_properties:
+                print(f'Do not remove {theme_property_name}, used for value of {used_property_name}')
+                del unused_theme_properties[theme_property_name]
+                pending.append(theme_property_name)
 
     print('Unused theme values:')
     for theme_property_name in unused_theme_properties.keys():
