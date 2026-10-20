@@ -47,3 +47,14 @@ add_subdirectory(uitestutils)
 add_subdirectory(units)
 add_subdirectory(visibleitemmodel)
 add_subdirectory(wifimodel)
+
+# Tests for the Python tools: the plugin compiler's Branding checks, and the generated Branding
+# property list (which is also the Victron.Branding API record).
+find_package(Python3 COMPONENTS Interpreter)
+if (Python3_Interpreter_FOUND)
+    # -B: do not write __pycache__ directories into the source tree.
+    add_test(NAME tst_plugincompiler
+        COMMAND ${Python3_EXECUTABLE} -B -m unittest discover -s ${CMAKE_CURRENT_SOURCE_DIR}/plugincompiler -p "test_*.py")
+    add_test(NAME tst_brandingproperties
+        COMMAND ${Python3_EXECUTABLE} -B -m unittest discover -s ${CMAKE_CURRENT_SOURCE_DIR}/brandingproperties -p "test_*.py")
+endif()

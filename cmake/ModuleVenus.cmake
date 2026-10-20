@@ -64,5 +64,6 @@ install(
 install(
     FILES
         ${PROJECT_SOURCE_DIR}/tools/gui-v2-plugin-compiler.py
+        ${PROJECT_SOURCE_DIR}/tools/branding-properties.json
     DESTINATION ${VENUS_QML_INSTALL_DIR})
 

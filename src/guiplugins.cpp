@@ -36,6 +36,34 @@
 using namespace Victron::VenusOS;
 
 namespace {
+	// Checks the value of fieldName, a required version of moduleName from a compiled plugin,
+	// against the module's version in this build, moduleMajor.moduleMinor.
+	// Returns an empty string if the value is missing or this build has that version,
+	// or the reason why not.
+	QString checkRequiredModuleVersion(const QJsonValue &value, const QString &fieldName,
+			const QString &moduleName, int moduleMajor, int moduleMinor) {
+		if (value.isUndefined()) {
+			return QString();
+		}
+		static const QRegularExpression versionExpression(QStringLiteral("^(\\d+)\\.(\\d+)$"));
+		const QRegularExpressionMatch match = versionExpression.match(value.toString());
+		if (!value.isString() || !match.hasMatch()) {
+			return QStringLiteral("%1 is not a \"major.minor\" string").arg(fieldName);
+		}
+		bool majorOk = false;
+		bool minorOk = false;
+		const int major = match.captured(1).toInt(&majorOk);
+		const int minor = match.captured(2).toInt(&minorOk);
+		const QString supported = QStringLiteral("%1.%2").arg(moduleMajor).arg(moduleMinor);
+		if (!majorOk || !minorOk || major != moduleMajor) {
+			return QStringLiteral("it needs %1 %2, but this GUI has %3").arg(moduleName, value.toString(), supported);
+		}
+		if (minor > moduleMinor) {
+			return QStringLiteral("it needs %1 %2, but this GUI only has %3").arg(moduleName, value.toString(), supported);
+		}
+		return QString();
+	}
+
 	// Returns a path that QFile and QFontDatabase accept, or an empty string.
 	QString localFilePath(const QUrl &url) {
 		if (url.scheme() == QLatin1String("qrc")) {
@@ -643,10 +671,19 @@ void GuiPluginLoader::initPlugins()
 	setPluginsJson(QStringLiteral("[ %1 ]").arg(allPlugins.join(QChar(','))));
 }
 
+QString GuiPluginLoader::checkRequiredBrandingVersion(const QJsonValue &value)
+{
+	return checkRequiredModuleVersion(value, QStringLiteral("requiredBrandingVersion"),
+			QStringLiteral("Victron.Branding"),
+			Victron::BrandingModuleMajorVersion, Victron::BrandingModuleMinorVersion);
+}
+
 QVector<GuiPluginIntegration> GuiPluginLoader::parseIntegrations(const QJsonObject &plugin, const QString &pluginName)
 {
 	QVector<GuiPluginIntegration> integrations;
 	const QJsonArray pluginIntegrations = plugin.value(QStringLiteral("integrations")).toArray();
+	const QString brandingVersionProblem
+			= checkRequiredBrandingVersion(plugin.value(QStringLiteral("requiredBrandingVersion")));
 	for (qsizetype j = 0; j < pluginIntegrations.size(); ++j) {
 		const QJsonValue iv = pluginIntegrations[j];
 		if (!iv.isObject()) {
@@ -717,6 +754,12 @@ QVector<GuiPluginIntegration> GuiPluginLoader::parseIntegrations(const QJsonObje
 			continue;
 		}
 
+		if (integrationType == GuiPluginLoader::Branding && !brandingVersionProblem.isEmpty()) {
+			qCWarning(venusGui).noquote() << "Ignoring the branding integration in plugin" << pluginName
+				<< "-" << brandingVersionProblem;
+			continue;
+		}
+
 		GuiPluginIntegration pi;
 		pi.m_pluginName = pluginName;
 		pi.m_type = static_cast<GuiPluginLoader::IntegrationType>(integrationType);
@@ -752,6 +795,7 @@ void GuiPluginLoader::populatePlugins()
 	//   version: "version",
 	//   minRequiredVersion: "version",
 	//   maxRequiredVersion: "version,
+	//   requiredBrandingVersion: "major.minor", // optional, only for branding plugins
 	//   resource: "base64-encoded-rcc-file",
 	//   translations: [ "qrc:/AppName/translations_en.qm", ... ]
 	//   integrations: [ ... ]

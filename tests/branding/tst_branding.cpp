@@ -8,6 +8,8 @@
 #include <QQmlContext>
 #include <QFile>
 #include <QFontDatabase>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QPointer>
 #include <QtEndian>
 
@@ -251,6 +253,32 @@ public:
 	Q_INVOKABLE QVariantMap brandingLoadedBeforeQtQuick() const
 	{
 		return m_brandingLoadedBeforeQtQuick;
+	}
+
+	// The Victron.Branding module version of this build, as "major.minor".
+	Q_INVOKABLE QString brandingModuleVersion() const
+	{
+		return QStringLiteral("%1.%2").arg(Victron::BrandingModuleMajorVersion)
+				.arg(Victron::BrandingModuleMinorVersion);
+	}
+
+	// Runs the loader's requiredBrandingVersion check on the plugin entry in pluginJson.
+	Q_INVOKABLE QString checkRequiredBrandingVersion(const QString &pluginJson) const
+	{
+		const QJsonObject plugin = QJsonDocument::fromJson(pluginJson.toUtf8()).object();
+		return GuiPluginLoader::checkRequiredBrandingVersion(plugin.value(QStringLiteral("requiredBrandingVersion")));
+	}
+
+	// The types of the integrations that the loader keeps from the plugin entry in pluginJson.
+	Q_INVOKABLE QVariantList integrationTypes(const QString &pluginJson) const
+	{
+		const QJsonObject plugin = QJsonDocument::fromJson(pluginJson.toUtf8()).object();
+		QVariantList types;
+		for (const Victron::VenusOS::GuiPluginIntegration &integration
+				: GuiPluginLoader::parseIntegrations(plugin, TestPluginName)) {
+			types.append(static_cast<int>(integration.type()));
+		}
+		return types;
 	}
 
 public slots:

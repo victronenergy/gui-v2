@@ -439,6 +439,51 @@ TestCase {
 		verify(!result.valid)
 	}
 
+	function test_requiredBrandingVersion_data() {
+		const parts = BrandingTestHelper.brandingModuleVersion().split(".").map(Number)
+		const major = parts[0]
+		const minor = parts[1]
+		return [
+			{ tag: "missing", plugin: {}, problem: "" },
+			{ tag: "this version", plugin: { requiredBrandingVersion: major + "." + minor }, problem: "" },
+			{ tag: "first minor", plugin: { requiredBrandingVersion: major + ".0" }, problem: "" },
+			{ tag: "newer minor", plugin: { requiredBrandingVersion: major + "." + (minor + 1) },
+				problem: "it needs Victron.Branding " + major + "." + (minor + 1) + ", but this GUI only has " + major + "." + minor },
+			{ tag: "newer major", plugin: { requiredBrandingVersion: (major + 1) + ".0" },
+				problem: "it needs Victron.Branding " + (major + 1) + ".0, but this GUI has " + major + "." + minor },
+			{ tag: "older major", plugin: { requiredBrandingVersion: (major - 1) + ".0" },
+				problem: "it needs Victron.Branding " + (major - 1) + ".0, but this GUI has " + major + "." + minor },
+			{ tag: "no minor", plugin: { requiredBrandingVersion: "" + major }, problem: "requiredBrandingVersion is not a \"major.minor\" string" },
+			{ tag: "patch number", plugin: { requiredBrandingVersion: major + ".0.0" }, problem: "requiredBrandingVersion is not a \"major.minor\" string" },
+			{ tag: "spaces", plugin: { requiredBrandingVersion: " " + major + ".0" }, problem: "requiredBrandingVersion is not a \"major.minor\" string" },
+			{ tag: "number", plugin: { requiredBrandingVersion: major }, problem: "requiredBrandingVersion is not a \"major.minor\" string" },
+			{ tag: "null", plugin: { requiredBrandingVersion: null }, problem: "requiredBrandingVersion is not a \"major.minor\" string" },
+		]
+	}
+
+	function test_requiredBrandingVersion(data) {
+		compare(BrandingTestHelper.checkRequiredBrandingVersion(JSON.stringify(data.plugin)), data.problem)
+	}
+
+	function test_unsupportedBrandingVersionDropsOnlyTheBrandingIntegration() {
+		// GuiPluginLoader.PluginSettingsPage and GuiPluginLoader.Branding. The enum values are not
+		// used directly, as that would create the GuiPluginLoader singleton.
+		const settingsPageType = 1
+		const brandingType = 6
+		const major = Number(BrandingTestHelper.brandingModuleVersion().split(".")[0])
+		const plugin = {
+			integrations: [
+				{ type: settingsPageType, url: "qrc:/TestPlugin/SettingsPage.qml" },
+				{ type: brandingType, url: "qrc:/TestPlugin/Branding.qml" },
+			]
+		}
+		compare(BrandingTestHelper.integrationTypes(JSON.stringify(plugin)), [settingsPageType, brandingType])
+
+		plugin.requiredBrandingVersion = (major + 1) + ".0"
+		ignoreWarning(/^Ignoring the branding integration in plugin TestPlugin - it needs Victron\.Branding /)
+		compare(BrandingTestHelper.integrationTypes(JSON.stringify(plugin)), [settingsPageType])
+	}
+
 	function test_colorThatIsNotOpaqueIsIgnored() {
 		ignoreWarning(/Ignoring branding color "color_success" in plugin "TestPlugin" : it must be opaque/)
 		const result = BrandingTestHelper.checkAndResolveBrandingSnapshot(

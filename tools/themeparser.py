@@ -123,8 +123,8 @@ def spaces_to_tabs(line):
 
 # The Theme keys that a branding plugin may set, and the Victron::BrandingData::Color enum value of
 # each. The Theme key and the Branding property name differ for the page background
-# (color_page_background and color_background_page), so this cannot be made from the Branding
-# property names. Victron's values for these keys are in Dark.json only; a key that is
+# (color_page_background and color_background_page), so this cannot be read from
+# branding-properties.json. Victron's values for these keys are in Dark.json only; a key that is
 # missing there has no Victron value, and is computed from the others. Light.json must not set
 # them: the Light scheme's branding colors are computed from the Dark scheme's.
 THEME_KEY_TO_BRANDING_COLOR = {

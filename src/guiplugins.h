@@ -32,6 +32,7 @@
 
 class QFileSystemWatcher;
 class QJsonObject;
+class QJsonValue;
 
 namespace Victron {
 namespace VenusOS {
@@ -102,7 +103,16 @@ public:
 	// Logs a warning for each value that it drops, except the built-in family.
 	static void checkAndResolveBrandingSnapshot(Victron::BrandingData *data, const QUrl &url, QList<int> *fontIds);
 
-	// Returns the valid integrations of the plugin.
+	// Checks the requiredBrandingVersion value from a compiled plugin.
+	// Returns an empty string if this build can load the plugin's Branding
+	// file, or the reason it cannot. A missing value means no requirement.
+	// The value must be a "major.minor" string, with the same major as the
+	// Victron.Branding module and a minor that is not newer.
+	static QString checkRequiredBrandingVersion(const QJsonValue &value);
+
+	// Returns the valid integrations of the plugin. If
+	// checkRequiredBrandingVersion() rejects the plugin's
+	// requiredBrandingVersion, its Branding integrations are left out.
 	static QVector<GuiPluginIntegration> parseIntegrations(const QJsonObject &plugin, const QString &pluginName);
 
 Q_SIGNALS:
