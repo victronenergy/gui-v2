@@ -27,6 +27,8 @@ python3 /opt/victronenergy/gui-v2/gui-v2-plugin-compiler.py \
     --devicelist 0x106 DeviceListExample_CellTemperatures.qml 'Cell Temperatures' \
     --devicelist 0x106 DeviceListExample_ComponentError.qml 'Invalid Customisation'
 
+For a testing install on a GX device, add `--install <gx-host> --ssh-key <private-key>` to the command above. It connects as root and does steps 2 and 3. Or do them by hand:
+
 2) Copy the output file `DeviceListExample.json` to /data/apps/available/DeviceListExample/gui-v2/DeviceListExample.json on device: `mkdir -p /data/apps/available/DeviceListExample/gui-v2/ && cp DeviceListExample.json /data/apps/available/DeviceListExample/gui-v2/DeviceListExample.json`
 3) Symlink the `DeviceListExample` directory as follows: `ln -s /data/apps/available/DeviceListExample /data/apps/enabled/DeviceListExample` on device
 4) Run gui-v2 in mock mode, e.g. `/opt/victronenergy/venus-gui-v2 --mock --no-mock-timers`

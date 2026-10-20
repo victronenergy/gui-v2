@@ -309,6 +309,8 @@ Plugin settings pages and device sub-pages are written with the `Victron.GuiPlug
 
 Any other QML module provided in the future, for a specific kind of plugin, must also not import `Victron.VenusOS` or `Victron.GuiPlugins`, to avoid a circular import or leaking implementation details into that plugin's API.
 
+`Victron.GuiPlugins` may use `Victron.VenusOS` in its own code, but no `Victron.VenusOS` type may appear in its API, because plugins do not import `Victron.VenusOS`. `tools/guipluginsapi.py` checks this, and keeps the checked-in record of the API, `tools/guiplugins-api.json`; the `tst_guipluginsapi` test fails if either is wrong. The plugin compiler reads the record to write each plugin's `requiredGuiPluginsVersion`. See [Changing Victron.GuiPlugins](gui-plugins.md#changing-victronguiplugins-gui-v2-contributors).
+
 ## Translations
 
 See [Internationalisation and Localisation](.github/i18n-l10n.md) for full details.
