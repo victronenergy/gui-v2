@@ -104,6 +104,44 @@ Item {
 		onValueChanged: root.removeBleToken(value)
 	}
 
+	// Applies {"<flow id>": <enabled>, ...} to /Services/NodeRed/Flows/List after a delay,
+	// like venus-platform does after restarting Node-RED.
+	VeQuickItem {
+		id: nodeRedSetFlowsEnabled
+		uid: Global.venusPlatform.serviceUid + "/Services/NodeRed/Flows/SetEnabled"
+		onValueChanged: {
+			if (!value) {
+				return
+			}
+			try {
+				Object.assign(nodeRedFlowsRestart.changes, JSON.parse(value))
+				nodeRedFlowsRestart.restart()
+			} catch (e) {
+				console.warn(uid, ": invalid request:", value)
+			}
+			// Reset, so the same request can be written again.
+			setValue("")
+		}
+	}
+
+	Timer {
+		id: nodeRedFlowsRestart
+
+		property var changes: ({})
+
+		interval: 3000
+		onTriggered: {
+			let flows = JSON.parse(platformValue("/Services/NodeRed/Flows/List") ?? "[]")
+			for (let i = 0; i < flows.length; ++i) {
+				if (changes[flows[i].id] !== undefined) {
+					flows[i].enabled = changes[flows[i].id]
+				}
+			}
+			changes = {}
+			setPlatformValue("/Services/NodeRed/Flows/List", JSON.stringify(flows))
+		}
+	}
+
 	Timer {
 		id: tokenPairingCountDown
 		interval: 1000
