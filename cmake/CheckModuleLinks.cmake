@@ -7,9 +7,10 @@
 # not depend on the build tool or the generator.
 #
 # Victron.VenusOS must not link Victron.GuiPlugins. Victron.Branding, when that
-# target exists, must not link another Victron library. The app and the tests
-# may link Victron.GuiPlugins. See "Module dependencies" in
-# .github/architecture.md.
+# target exists, must not link another Victron library. A library Qt generates
+# for that same target, such as VictronBranding_resources_1, is not another
+# module. The app and the tests may link Victron.GuiPlugins. See "Module
+# dependencies" in .github/architecture.md.
 
 # The library name in one link entry. $<LINK_ONLY:VictronGuiPlugins> is the name
 # inside the generator expression. A path is the file that was linked, so a
@@ -23,6 +24,25 @@ function(_victron_link_name item out_var)
         cmake_path(GET name FILENAME name)
     endif()
     set(${out_var} "${name}" PARENT_SCOPE)
+endfunction()
+
+# True when item names only this target, or a library Qt generates for it
+# (${target}_resources_<n>, ${target}plugin). qt_add_qml_module() links those,
+# sometimes inside a generator expression, so the module's own QML is compiled
+# in. That is not another Victron module. An item that also names a different
+# Victron library is not own.
+function(_victron_is_own_link target item out_var)
+    set(${out_var} FALSE PARENT_SCOPE)
+    string(REGEX MATCHALL "Victron[A-Za-z0-9_]*" tokens "${item}")
+    if(NOT tokens)
+        return()
+    endif()
+    foreach(token ${tokens})
+        if(NOT token STREQUAL "${target}" AND NOT token MATCHES "^${target}(_|plugin)")
+            return()
+        endif()
+    endforeach()
+    set(${out_var} TRUE PARENT_SCOPE)
 endfunction()
 
 # Adds one message to out_var if target links a library whose name matches
@@ -42,6 +62,10 @@ function(_victron_forbidden_links target name_regex match_raw message out_var)
             continue()
         endif()
         foreach(library ${libraries})
+            _victron_is_own_link("${target}" "${library}" own)
+            if(own)
+                continue()
+            endif()
             _victron_link_name("${library}" name)
             if(name MATCHES "${name_regex}")
                 list(APPEND found "${name}")

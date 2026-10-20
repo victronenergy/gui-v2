@@ -26,6 +26,9 @@ import Victron.VenusOS
 	welcomeActive holds the sequence in Waiting. If it becomes active during any
 	later phase, return to Waiting instead of continuing to Hidden.
 	notify* calls from the wrong phase are ignored.
+	A notify* call, or a flag change, made while the phase is changing (for example from an
+	onPhaseChanged handler) runs as soon as that change has finished. Changing the phase
+	from inside its own change would leave 'phase' on the old value.
 	Evaluation waits until ready, so the view can finish creating the welcome loader first.
 */
 QtObject {
@@ -41,6 +44,8 @@ QtObject {
 
 	readonly property int phase: _phase
 	property int _phase: VenusOS.Splash_Phase_Waiting
+	property bool _changingPhase: false
+	property var _callsAfterPhaseChange: []
 
 	Component.onCompleted: {
 		if (ready) {
@@ -61,21 +66,24 @@ QtObject {
 	onPreloadCompleteChanged: _evaluate()
 
 	function notifyProgressHidden() {
-		if (_phase !== VenusOS.Splash_Phase_HidingProgress) {
+		if (_delayIfChangingPhase(notifyProgressHidden)
+				|| _phase !== VenusOS.Splash_Phase_HidingProgress) {
 			return
 		}
 		_enter(VenusOS.Splash_Phase_FadingLogo)
 	}
 
 	function notifyLogoFaded() {
-		if (_phase !== VenusOS.Splash_Phase_FadingLogo) {
+		if (_delayIfChangingPhase(notifyLogoFaded)
+				|| _phase !== VenusOS.Splash_Phase_FadingLogo) {
 			return
 		}
 		_enter(VenusOS.Splash_Phase_PlayingGauge)
 	}
 
 	function notifyGaugePaused() {
-		if (_phase !== VenusOS.Splash_Phase_PlayingGauge) {
+		if (_delayIfChangingPhase(notifyGaugePaused)
+				|| _phase !== VenusOS.Splash_Phase_PlayingGauge) {
 			return
 		}
 		if (preloadComplete) {
@@ -86,14 +94,16 @@ QtObject {
 	}
 
 	function notifyFadedOut() {
-		if (_phase !== VenusOS.Splash_Phase_FadingOut) {
+		if (_delayIfChangingPhase(notifyFadedOut)
+				|| _phase !== VenusOS.Splash_Phase_FadingOut) {
 			return
 		}
 		_enter(VenusOS.Splash_Phase_Hidden)
 	}
 
 	function _evaluate() {
-		if (!ready || _phase === VenusOS.Splash_Phase_Hidden) {
+		if (_delayIfChangingPhase(_evaluate)
+				|| !ready || _phase === VenusOS.Splash_Phase_Hidden) {
 			return
 		}
 		// Visibility can be applied after other flags (createObject order, or
@@ -139,7 +149,22 @@ QtObject {
 			return
 		}
 		console.info("SplashSequence:", _phaseName(_phase), "->", _phaseName(nextPhase))
+		_changingPhase = true
 		_phase = nextPhase
+		_changingPhase = false
+		while (_callsAfterPhaseChange.length > 0) {
+			const call = _callsAfterPhaseChange.shift()
+			call()
+		}
+	}
+
+	// Returns true if the call was saved to run after the current phase change.
+	function _delayIfChangingPhase(call) {
+		if (!_changingPhase) {
+			return false
+		}
+		_callsAfterPhaseChange.push(call)
+		return true
 	}
 
 	function _phaseName(phase) {
