@@ -15,6 +15,7 @@
 #include <QFile>
 #include <QFileSystemWatcher>
 #include <QCryptographicHash>
+#include <QRegularExpression>
 #include <QVersionNumber>
 
 #include <QJsonDocument>
@@ -96,6 +97,38 @@ namespace {
 #else
 		return QStringList();
 #endif
+	}
+
+	// The Victron.GuiPlugins module version of this build. cmake/ModuleGuiPlugins.cmake sets it.
+	constexpr int GuiPluginsModuleMajorVersion = VICTRON_GUIPLUGINS_VERSION_MAJOR;
+	constexpr int GuiPluginsModuleMinorVersion = VICTRON_GUIPLUGINS_VERSION_MINOR;
+
+	// Checks the value of fieldName, a required version of moduleName from a compiled plugin,
+	// against the module's version in this build, moduleMajor.moduleMinor.
+	// Returns an empty string if the value is missing or this build has that version,
+	// or the reason why not.
+	QString checkRequiredModuleVersion(const QJsonValue &value, const QString &fieldName,
+			const QString &moduleName, int moduleMajor, int moduleMinor) {
+		if (value.isUndefined()) {
+			return QString();
+		}
+		static const QRegularExpression versionExpression(QStringLiteral("^(\\d+)\\.(\\d+)$"));
+		const QRegularExpressionMatch match = versionExpression.match(value.toString());
+		if (!value.isString() || !match.hasMatch()) {
+			return QStringLiteral("%1 is not a \"major.minor\" string").arg(fieldName);
+		}
+		bool majorOk = false;
+		bool minorOk = false;
+		const int major = match.captured(1).toInt(&majorOk);
+		const int minor = match.captured(2).toInt(&minorOk);
+		const QString supported = QStringLiteral("%1.%2").arg(moduleMajor).arg(moduleMinor);
+		if (!majorOk || !minorOk || major != moduleMajor) {
+			return QStringLiteral("it needs %1 %2, but this GUI has %3").arg(moduleName, value.toString(), supported);
+		}
+		if (minor > moduleMinor) {
+			return QStringLiteral("it needs %1 %2, but this GUI only has %3").arg(moduleName, value.toString(), supported);
+		}
+		return QString();
 	}
 }
 
@@ -601,12 +634,143 @@ void GuiPluginLoader::initPlugins()
 	setPluginsJson(QStringLiteral("[ %1 ]").arg(allPlugins.join(QChar(','))));
 }
 
-void GuiPluginLoader::populatePlugins()
+QString GuiPluginLoader::checkRequiredGuiPluginsVersion(const QJsonValue &value)
 {
-	// then, load the new data.
+	return checkRequiredModuleVersion(value, QStringLiteral("requiredGuiPluginsVersion"),
+			QStringLiteral("Victron.GuiPlugins"), GuiPluginsModuleMajorVersion, GuiPluginsModuleMinorVersion);
+}
+
+QString GuiPluginLoader::checkPluginName(const QString &name)
+{
+	// The compiler uses the same rule. See plugin_name_error() in gui-v2-plugin-compiler.py.
+	static const QRegularExpression re(QRegularExpression::anchoredPattern(
+			QStringLiteral("[A-Za-z][A-Za-z0-9_]{0,63}")));
+	if (re.match(name).hasMatch()) {
+		return QString();
+	}
+	return QStringLiteral("plugin name must start with a letter, contain only letters, digits and "
+			"underscores, and be at most 64 characters");
+}
+
+GuiPluginIntegration::GuiPluginIntegration(
+		const QString &pluginName,
+		GuiPluginLoader::IntegrationType type,
+		const QUrl &url,
+		const QString &productId,
+		const QString &title,
+		const QUrl &icon,
+		GuiPluginLoader::QuickAccessPaneCardType cardType)
+	: m_pluginName(pluginName)
+	, m_type(type)
+	, m_url(url)
+	, m_productId(productId)
+	, m_title(title)
+	, m_icon(icon)
+	, m_cardType(cardType)
+{
+}
+
+QVector<GuiPluginIntegration> GuiPluginLoader::parseIntegrations(const QJsonObject &plugin, const QString &pluginName)
+{
+	QVector<GuiPluginIntegration> integrations;
+	const QJsonArray pluginIntegrations = plugin.value(QStringLiteral("integrations")).toArray();
+	const QString guiPluginsVersionProblem
+			= checkRequiredGuiPluginsVersion(plugin.value(QStringLiteral("requiredGuiPluginsVersion")));
+	for (qsizetype j = 0; j < pluginIntegrations.size(); ++j) {
+		const QJsonValue iv = pluginIntegrations[j];
+		if (!iv.isObject()) {
+			qCWarning(venusGui) << "Ignoring integration at index" << j << "in plugin" << pluginName;
+			continue;
+		}
+
+		// each entry in the integrations array looks like one of the following:
+		// {
+		//     type: 1, // new settings page under Settings/Integrations/UI Plugins
+		//     url: "qrc:/AppName/SettingsPage.qml"
+		// },
+		// {
+		//     type: 2, // device list settings page integration
+		//     productId: "prodId",
+		//     title: "AppName_some_title_translation_id", // or a string, if no translations...
+		//     url: "qrc/AppName/CustomInjectionPage.qml"
+		// },
+		// {
+		//     type: 3, // new navigation page
+		//     icon: "qrc:/AppName/icon.svg",
+		//     url: "qrc:/AppName/CustomNavPage.qml"
+		// },
+		// {
+		//     type: 4, // new quick access pane
+		//     icon: "qrc:/AppName/icon.png",
+		//     url: "qrc:/AppName/CustomCardsPage.qml"
+		// },
+		// {
+		//     type: 5, // new card within a quick access pane
+		//     cardType: 1/2/ ... 1 = controls card, 2 = switches card, ...
+		//     url: "qrc:/AppName/CustomCard.qml"
+		// }
+
+		const QJsonObject integration = iv.toObject();
+		const int integrationType = integration.value(QStringLiteral("type")).toInt(0);
+		const QString integrationUrl = integration.value(QStringLiteral("url")).toString();
+		const QString integrationProductId = integration.value(QStringLiteral("productId")).toString();
+		const QString integrationTitle = integration.value(QStringLiteral("title")).toString();
+		const QString integrationIcon = integration.value(QStringLiteral("icon")).toString();
+		const int integrationCardType = integration.value(QStringLiteral("cardType")).toInt(0);
+
+		const bool invalidType = integrationType == GuiPluginLoader::InvalidIntegrationType
+				|| integrationType > GuiPluginLoader::QuickAccessPaneCard;
+		const bool missingDeviceListFields = integrationType == GuiPluginLoader::DeviceListSettingsPage
+				&& (integrationProductId.isEmpty() || integrationTitle.isEmpty());
+		const bool missingIcon = (integrationType == GuiPluginLoader::NavigationPage
+				|| integrationType == GuiPluginLoader::QuickAccessPane)
+				&& integrationIcon.isEmpty();
+		const bool invalidCardType = integrationType == GuiPluginLoader::QuickAccessPaneCard
+				&& integrationCardType != GuiPluginLoader::ControlsCard
+				&& integrationCardType != GuiPluginLoader::SwitchesCard;
+		if (invalidType || missingDeviceListFields || missingIcon || invalidCardType || integrationUrl.isEmpty()) {
+			QStringList reasons;
+			if (invalidType)              reasons << QStringLiteral("invalid type");
+			if (missingDeviceListFields)  reasons << QStringLiteral("missing productId or title");
+			if (missingIcon)              reasons << QStringLiteral("missing icon");
+			if (invalidCardType)          reasons << QStringLiteral("invalid cardType");
+			if (integrationUrl.isEmpty()) reasons << QStringLiteral("missing url");
+			qCWarning(venusGui).noquote() << "Ignoring invalid integration at index" << j << "in plugin" << pluginName
+				<< "- type:" << integrationType
+				<< "url:" << (integrationUrl.isEmpty() ? QStringLiteral("<missing>") : integrationUrl)
+				<< "-" << reasons.join(QStringLiteral(", "));
+			continue;
+		}
+
+		if (!guiPluginsVersionProblem.isEmpty()) {
+			qCWarning(venusGui).noquote() << "Ignoring integration at index" << j << "in plugin" << pluginName
+				<< "- type:" << integrationType << "-" << guiPluginsVersionProblem;
+			continue;
+		}
+
+		const bool isDeviceList = integrationType == GuiPluginLoader::DeviceListSettingsPage;
+		const bool hasIcon = integrationType == GuiPluginLoader::NavigationPage
+				|| integrationType == GuiPluginLoader::QuickAccessPane;
+		const bool isCard = integrationType == GuiPluginLoader::QuickAccessPaneCard;
+		integrations.append(GuiPluginIntegration(
+				pluginName,
+				static_cast<GuiPluginLoader::IntegrationType>(integrationType),
+				QUrl(integrationUrl),
+				isDeviceList ? integrationProductId : QString(),
+				isDeviceList ? integrationTitle : QString(),
+				hasIcon ? QUrl(integrationIcon) : QUrl(),
+				isCard ? static_cast<GuiPluginLoader::QuickAccessPaneCardType>(integrationCardType)
+						: GuiPluginLoader::InvalidCardType));
+	}
+
+	return integrations;
+}
+
+QVector<GuiPlugin> GuiPluginLoader::pluginsFromJson(const QString &pluginsJson)
+{
 	QVector<GuiPlugin> data;
 
-	const QByteArray json = m_pluginsJson.toUtf8();
+	const QByteArray json = pluginsJson.toUtf8();
 	const QJsonDocument doc = QJsonDocument::fromJson(json);
 	const QJsonArray array = doc.array();
 
@@ -618,6 +782,7 @@ void GuiPluginLoader::populatePlugins()
 	//   version: "version",
 	//   minRequiredVersion: "version",
 	//   maxRequiredVersion: "version,
+	//   requiredGuiPluginsVersion: "major.minor", // optional, only if the plugin uses Victron.GuiPlugins
 	//   resource: "base64-encoded-rcc-file",
 	//   translations: [ "qrc:/AppName/translations_en.qm", ... ]
 	//   integrations: [ ... ]
@@ -632,6 +797,13 @@ void GuiPluginLoader::populatePlugins()
 
 		const QJsonObject plugin = v.toObject();
 		const QString pluginName = plugin.value(QStringLiteral("name")).toString();
+		const QString nameProblem = checkPluginName(pluginName);
+		if (!nameProblem.isEmpty()) {
+			qCWarning(venusGui).noquote() << "Ignoring plugin with invalid name at index" << i
+					<< ":" << (pluginName.isEmpty() ? QStringLiteral("<missing>") : pluginName)
+					<< "-" << nameProblem;
+			continue;
+		}
 		const QString pluginVersion = plugin.value(QStringLiteral("version")).toString();
 		const QString pluginResource = plugin.value(QStringLiteral("resource")).toString();
 		const QByteArray pluginDecodedResource = QByteArray::fromBase64(pluginResource.toUtf8());
@@ -666,88 +838,7 @@ void GuiPluginLoader::populatePlugins()
 			continue;
 		}
 
-		QVector<GuiPluginIntegration> integrations;
-		const QJsonArray pluginIntegrations = iva.toArray();
-		for (qsizetype j = 0; j < pluginIntegrations.size(); ++j) {
-			const QJsonValue iv = pluginIntegrations[j];
-			if (!iv.isObject()) {
-				qCWarning(venusGui) << "Ignoring integration at index" << j << "in plugin at index" << i << ":" << pluginName;
-				continue;
-			}
-
-			// each entry in the integrations array looks like one of the following:
-			// {
-			//     type: 1, // new settings page under Settings/Integrations/UI Plugins
-			//     url: "qrc:/AppName/SettingsPage.qml"
-			// },
-			// {
-			//     type: 2, // device list settings page integration
-			//     productId: "prodId",
-			//     title: "AppName_some_title_translation_id", // or a string, if no translations...
-			//     url: "qrc/AppName/CustomInjectionPage.qml"
-			// },
-			// {
-			//     type: 3, // new navigation page
-			//     icon: "qrc:/AppName/icon.svg",
-			//     url: "qrc:/AppName/CustomNavPage.qml"
-			// },
-			// {
-			//     type: 4, // new quick access pane
-			//     icon: "qrc:/AppName/icon.png",
-			//     url: "qrc:/AppName/CustomCardsPage.qml"
-			// },
-			// {
-			//     type: 5, // new card within a quick access pane
-			//     cardType: 1/2/ ... 1 = controls card, 2 = switches card, ...
-			//     url: "qrc:/AppName/CustomCard.qml"
-			// }
-
-			const QJsonObject integration = iv.toObject();
-			const int integrationType = integration.value(QStringLiteral("type")).toInt(0);
-			const QString integrationUrl = integration.value(QStringLiteral("url")).toString();
-			const QString integrationProductId = integration.value(QStringLiteral("productId")).toString();
-			const QString integrationTitle = integration.value(QStringLiteral("title")).toString();
-			const QString integrationIcon = integration.value(QStringLiteral("icon")).toString();
-			const int integrationCardType = integration.value(QStringLiteral("cardType")).toInt(0);
-
-			const bool invalidType = integrationType == GuiPluginLoader::InvalidIntegrationType
-					|| integrationType > GuiPluginLoader::QuickAccessPaneCard;
-			const bool missingDeviceListFields = integrationType == GuiPluginLoader::DeviceListSettingsPage
-					&& (integrationProductId.isEmpty() || integrationTitle.isEmpty());
-			const bool missingIcon = (integrationType == GuiPluginLoader::NavigationPage
-					|| integrationType == GuiPluginLoader::QuickAccessPane)
-					&& integrationIcon.isEmpty();
-			const bool invalidCardType = integrationType == GuiPluginLoader::QuickAccessPaneCard
-					&& integrationCardType != GuiPluginLoader::ControlsCard
-					&& integrationCardType != GuiPluginLoader::SwitchesCard;
-			if (invalidType || missingDeviceListFields || missingIcon || invalidCardType || integrationUrl.isEmpty()) {
-				QStringList reasons;
-				if (invalidType)              reasons << QStringLiteral("invalid type");
-				if (missingDeviceListFields)  reasons << QStringLiteral("missing productId or title");
-				if (missingIcon)              reasons << QStringLiteral("missing icon");
-				if (invalidCardType)          reasons << QStringLiteral("invalid cardType");
-				if (integrationUrl.isEmpty()) reasons << QStringLiteral("missing url");
-				qCWarning(venusGui).noquote() << "Ignoring invalid integration at index" << j << "in plugin" << pluginName
-					<< "- type:" << integrationType
-					<< "url:" << (integrationUrl.isEmpty() ? QStringLiteral("<missing>") : integrationUrl)
-					<< "-" << reasons.join(QStringLiteral(", "));
-				continue;
-			}
-
-			GuiPluginIntegration pi;
-			pi.m_pluginName = pluginName;
-			pi.m_type = static_cast<GuiPluginLoader::IntegrationType>(integrationType);
-			pi.m_url = QUrl(integrationUrl);
-			if (integrationType == GuiPluginLoader::DeviceListSettingsPage) {
-				pi.m_productId = integrationProductId;
-				pi.m_title = integrationTitle;
-			} else if (integrationType == GuiPluginLoader::NavigationPage || integrationType == GuiPluginLoader::QuickAccessPane) {
-				pi.m_icon = QUrl(integrationIcon);
-			} else if (integrationType == GuiPluginLoader::QuickAccessPaneCard) {
-				pi.m_cardType = static_cast<GuiPluginLoader::QuickAccessPaneCardType>(integrationCardType);
-			}
-			integrations.append(pi);
-		}
+		const QVector<GuiPluginIntegration> integrations = parseIntegrations(plugin, pluginName);
 
 		if (integrations.size() == 0) {
 			qCWarning(venusGui) << "Ignoring plugin without integrations at index" << i << ":" << pluginName;
@@ -776,6 +867,14 @@ void GuiPluginLoader::populatePlugins()
 		qCInfo(venusGui) << "Populated plugin at index" << i << ":" << pluginName;
 		data.append(p);
 	}
+
+	return data;
+}
+
+void GuiPluginLoader::populatePlugins()
+{
+	// then, load the new data.
+	QVector<GuiPlugin> data = pluginsFromJson(m_pluginsJson);
 
 	bool firstTimeInit = m_busy;
 	if (!m_busy) {
@@ -940,7 +1039,7 @@ bool GuiPluginLoader::installPluginTranslatorForLanguage(const QString &pluginNa
 	return true;
 }
 
-QColor GuiPluginLoader::determineColor(const QString &pluginName, const QVector<GuiPlugin> &otherPlugins) const
+QColor GuiPluginLoader::determineColor(const QString &pluginName, const QVector<GuiPlugin> &otherPlugins)
 {
 	static const QVector<QVector<QColor> > colors {
 		{

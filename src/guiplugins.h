@@ -19,6 +19,8 @@
 
 #include <QTimer>
 
+#include <QJsonObject>
+#include <QJsonValue>
 #include <QLocale>
 #include <QTranslator>
 
@@ -32,6 +34,7 @@ namespace Victron {
 namespace VenusOS {
 
 class GuiPlugin;
+class GuiPluginIntegration;
 class GuiPluginMqttFetcher;
 
 // needs to be initialised before loading the UI.
@@ -78,6 +81,29 @@ public:
 	QVector<GuiPlugin> plugins() const;
 	Q_INVOKABLE GuiPlugin plugin(const QString &name) const;
 
+	// Checks the requiredGuiPluginsVersion value from a compiled plugin.
+	// Returns an empty string if this build can load the plugin's pages,
+	// or the reason it cannot. A missing value means no requirement.
+	// The value must be a "major.minor" string, with the same major as the
+	// Victron.GuiPlugins module and a minor that is not newer.
+	static QString checkRequiredGuiPluginsVersion(const QJsonValue &value);
+
+	// Checks a plugin name from a compiled plugin. Returns an empty string if
+	// the name is valid, or the reason it is not. A valid name starts with a
+	// letter, then contains only letters, digits and underscores, and is at
+	// most 64 characters. The plugin compiler uses the same rule.
+	static QString checkPluginName(const QString &name);
+
+	// Reads plugin entries from a compiled-plugins JSON array. Skips an entry
+	// that cannot be used, including one whose name is not valid. Does not load
+	// the plugin resources.
+	static QVector<GuiPlugin> pluginsFromJson(const QString &json);
+
+	// Returns the valid integrations of the plugin. If
+	// checkRequiredGuiPluginsVersion() rejects requiredGuiPluginsVersion,
+	// the integrations are left out.
+	static QVector<GuiPluginIntegration> parseIntegrations(const QJsonObject &plugin, const QString &pluginName);
+
 Q_SIGNALS:
 	void busyChanged();
 	void pluginsJsonChanged();
@@ -92,7 +118,7 @@ private:
 	void readFromFilesystem(const QString &path);
 	void initPlugins();
 	void populatePlugins();
-	QColor determineColor(const QString &pluginName, const QVector<GuiPlugin> &otherPlugins) const;
+	static QColor determineColor(const QString &pluginName, const QVector<GuiPlugin> &otherPlugins);
 	bool loadPluginData(const GuiPlugin &plugin);
 	void unloadPluginData(bool clearCache);
 	bool installPluginTranslatorForLanguage(const QString &pluginName, QLocale::Language language);
@@ -167,6 +193,16 @@ public:
 	QUrl url() const { return m_url; }
 	GuiPluginLoader::IntegrationType type() const { return m_type; }
 	GuiPluginLoader::QuickAccessPaneCardType cardType() const { return m_cardType; }
+
+	GuiPluginIntegration() = default;
+	GuiPluginIntegration(
+			const QString &pluginName,
+			GuiPluginLoader::IntegrationType type,
+			const QUrl &url,
+			const QString &productId,
+			const QString &title,
+			const QUrl &icon,
+			GuiPluginLoader::QuickAccessPaneCardType cardType);
 
 private:
 	friend class GuiPluginLoader;
