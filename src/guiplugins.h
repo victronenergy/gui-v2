@@ -19,6 +19,8 @@
 
 #include <QTimer>
 
+#include <QJsonObject>
+#include <QJsonValue>
 #include <QLocale>
 #include <QTranslator>
 
@@ -32,6 +34,7 @@ namespace Victron {
 namespace VenusOS {
 
 class GuiPlugin;
+class GuiPluginIntegration;
 class GuiPluginMqttFetcher;
 
 // needs to be initialised before loading the UI.
@@ -77,6 +80,18 @@ public:
 
 	QVector<GuiPlugin> plugins() const;
 	Q_INVOKABLE GuiPlugin plugin(const QString &name) const;
+
+	// Checks the requiredGuiPluginsVersion value from a compiled plugin.
+	// Returns an empty string if this build can load the plugin's pages,
+	// or the reason it cannot. A missing value means no requirement.
+	// The value must be a "major.minor" string, with the same major as the
+	// Victron.GuiPlugins module and a minor that is not newer.
+	static QString checkRequiredGuiPluginsVersion(const QJsonValue &value);
+
+	// Returns the valid integrations of the plugin. If
+	// checkRequiredGuiPluginsVersion() rejects requiredGuiPluginsVersion,
+	// the integrations are left out.
+	static QVector<GuiPluginIntegration> parseIntegrations(const QJsonObject &plugin, const QString &pluginName);
 
 Q_SIGNALS:
 	void busyChanged();
@@ -167,6 +182,16 @@ public:
 	QUrl url() const { return m_url; }
 	GuiPluginLoader::IntegrationType type() const { return m_type; }
 	GuiPluginLoader::QuickAccessPaneCardType cardType() const { return m_cardType; }
+
+	GuiPluginIntegration() = default;
+	GuiPluginIntegration(
+			const QString &pluginName,
+			GuiPluginLoader::IntegrationType type,
+			const QUrl &url,
+			const QString &productId,
+			const QString &title,
+			const QUrl &icon,
+			GuiPluginLoader::QuickAccessPaneCardType cardType);
 
 private:
 	friend class GuiPluginLoader;

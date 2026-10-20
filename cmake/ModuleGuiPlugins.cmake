@@ -7,6 +7,21 @@
 # Only the app and the tests link it, so that plugin QML can import it at run
 # time. Its sources live in guiplugins/, apart from the VenusOS sources.
 
+# The module version. tools/guipluginsapi.py reads these two lines, and records
+# in tools/guiplugins-api.json the version that added each type and member. A
+# new member gets the current version, so after a release, increase the minor
+# version before adding to the API. See .github/gui-plugins.md.
+set(VICTRON_GUIPLUGINS_VERSION_MAJOR 1)
+set(VICTRON_GUIPLUGINS_VERSION_MINOR 0)
+
+# The plugin loader in Victron.VenusOS checks each plugin's
+# requiredGuiPluginsVersion against this version. Only the two numbers are
+# passed: Victron.VenusOS still does not use this module.
+target_compile_definitions(VictronVenusOS PRIVATE
+    VICTRON_GUIPLUGINS_VERSION_MAJOR=${VICTRON_GUIPLUGINS_VERSION_MAJOR}
+    VICTRON_GUIPLUGINS_VERSION_MINOR=${VICTRON_GUIPLUGINS_VERSION_MINOR}
+)
+
 # Keep the file names flat in the module, so that the qmldir lists
 # PluginPage.qml rather than guiplugins/PluginPage.qml.
 foreach(qml_file ${VictronGuiPlugins_QML_MODULE_SOURCES})
@@ -18,7 +33,7 @@ qt_add_library(VictronGuiPlugins STATIC)
 qt_add_qml_module(VictronGuiPlugins
     ${QML_MODULE_OPTARGS}
     URI Victron.GuiPlugins
-    VERSION 1.0
+    VERSION ${VICTRON_GUIPLUGINS_VERSION_MAJOR}.${VICTRON_GUIPLUGINS_VERSION_MINOR}
     OUTPUT_DIRECTORY Victron/GuiPlugins
     QML_FILES ${VictronGuiPlugins_QML_MODULE_SOURCES}
     SOURCES ${VictronGuiPlugins_CPP_SOURCES}
