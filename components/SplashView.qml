@@ -87,9 +87,11 @@ Rectangle {
 				console.info("SplashView: fading out logo text but backend is not ready!")
 			}
 			animatedLogo.playing = true
+			// Already on the pause frame, or a plugin file that will never reach one.
 			if (animatedLogo.paused) {
 				sequence.notifyGaugePaused()
 			}
+			_finishPluginGaugeIfNeeded()
 			break
 		case VenusOS.Splash_Phase_WaitingForPreload:
 			console.info("SplashView: waiting for page preload before fade out")
@@ -138,6 +140,36 @@ Rectangle {
 		animatedLogo.currentFrame = 0
 	}
 
+	// AnimatedImage does not set paused for a file that is not an animation, so the
+	// last-frame binding never ends the splash. Finish those plugin files here.
+	function _finishPluginGaugeIfNeeded() {
+		if (sequence.phase !== VenusOS.Splash_Phase_PlayingGauge) {
+			return
+		}
+		if (animatedLogo.status === Image.Error) {
+			sequence.notifyGaugePaused()
+			return
+		}
+		if (animatedLogo.usingPluginSource
+				&& animatedLogo.status === Image.Ready
+				&& animatedLogo.frameCount <= 1) {
+			console.info("SplashView: plugin gauge file is not an animation:", animatedLogo.source)
+			sequence.notifyGaugePaused()
+		}
+	}
+
+	// No custom branding plugin: keep the design colors. A plugin tints every logo that is not
+	// drawn in its own colors, including a Victron file it did not replace.
+	function _splashLogoTint(lightDesignColor, themeColor) {
+		if (Theme.hasPluginBranding) {
+			return themeColor
+		}
+		if (Theme.colorScheme === Theme.Light) {
+			return lightDesignColor
+		}
+		return Theme.color_white
+	}
+
 	OpacityAnimator on opacity {
 		id: fadeOutAnim
 
@@ -161,6 +193,13 @@ Rectangle {
 			verticalCenterOffset: Theme.geometry_splashView_gaugeAnimation_verticalCenterOffset
 		}
 
+		// The dark file is used in both schemes unless a light file is set. An empty URL keeps Victron's file.
+		readonly property url pluginSource: Theme.colorScheme === Theme.Light
+				&& Theme.splash_gauge_animation_light.toString().length > 0
+				? Theme.splash_gauge_animation_light
+				: Theme.splash_gauge_animation
+		readonly property bool usingPluginSource: pluginSource.toString().length > 0
+
 		playing: false
 		onPlayingChanged: {
 			if (playing) {
@@ -168,7 +207,11 @@ Rectangle {
 			}
 		}
 		cache: false
-		paused: currentFrame === Theme.animation_splash_gaugeAnimation_fadeFrame
+		// A plugin animation plays to its last frame. Victron's pauses at a fixed frame.
+		// A file that is not an animation does not set paused; _finishPluginGaugeIfNeeded() releases it.
+		paused: usingPluginSource
+				? frameCount > 0 && currentFrame === frameCount - 1
+				: currentFrame === Theme.animation_splash_gaugeAnimation_fadeFrame
 		onPausedChanged: {
 			if (!paused) {
 				return
@@ -178,8 +221,16 @@ Rectangle {
 				sequence.notifyGaugePaused()
 			}
 		}
+		onStatusChanged: {
+			if (status === Image.Error && source.toString().length > 0) {
+				console.warn("SplashView: gauge animation failed to load:", source)
+			}
+			root._finishPluginGaugeIfNeeded()
+		}
+		onFrameCountChanged: root._finishPluginGaugeIfNeeded()
 
 		source: !UiConfig.showSplashAnimation ? ""
+			: usingPluginSource ? pluginSource
 			: Theme.colorScheme === Theme.Light
 				? Theme.screenSize === Theme.SevenInch
 				  ? "qrc:/images/gauge_intro_7_matte_white.gif"
@@ -197,11 +248,13 @@ Rectangle {
 			verticalCenterOffset: Theme.geometry_splashView_logo_verticalCenterOffset
 			horizontalCenterOffset: Theme.geometry_splashView_logo_horizontalCenterOffset
 		}
-		source: "qrc:/images/splash-logo-icon.svg"
-		color: Theme.color_splash_logo_icon
 		width: Theme.geometry_splashScreen_logo_width
 		height: Theme.geometry_splashScreen_logo_height
+		source: Theme.splash_logo_icon
 		sourceSize: Qt.size(width, height)
+		// Transparent skips the tint, so the logo keeps its own colors.
+		color: Theme.splash_logo_icon_preserve_colors ? "transparent"
+			: _splashLogoTint(Theme.color_blue, Theme.color_splash_logo_icon)
 
 		OpacityAnimator on opacity {
 			id: logoIconFadeOutAnim
@@ -220,11 +273,13 @@ Rectangle {
 			verticalCenterOffset: Theme.geometry_splashView_logo_verticalCenterOffset
 			horizontalCenterOffset: Theme.geometry_splashView_logo_horizontalCenterOffset
 		}
-		source: "qrc:/images/splash-logo-text.svg"
-		color: Theme.color_splash_logo_text
 		width: Theme.geometry_splashScreen_logo_width
 		height: Theme.geometry_splashScreen_logo_height
+		source: Theme.splash_logo_text
 		sourceSize: Qt.size(width, height)
+		// Transparent skips the tint, so the logo keeps its own colors.
+		color: Theme.splash_logo_text_preserve_colors ? "transparent"
+			: _splashLogoTint(Theme.color_black, Theme.color_splash_logo_text)
 
 		OpacityAnimator on opacity {
 			id: logoTextFadeOutAnim
