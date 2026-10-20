@@ -26,12 +26,18 @@
 #include <QQmlEngine>
 #include <QQmlParserStatus>
 
+#include <optional>
+
+#include "branding.h"
+
 class QFileSystemWatcher;
+class QJsonObject;
 
 namespace Victron {
 namespace VenusOS {
 
 class GuiPlugin;
+class GuiPluginIntegration;
 class GuiPluginMqttFetcher;
 
 // needs to be initialised before loading the UI.
@@ -52,7 +58,8 @@ public:
 		DeviceListSettingsPage,
 		NavigationPage,
 		QuickAccessPane,
-		QuickAccessPaneCard
+		QuickAccessPaneCard,
+		Branding
 	};
 	Q_ENUM(IntegrationType)
 
@@ -67,7 +74,7 @@ public:
 	GuiPluginLoader() = delete;
 	GuiPluginLoader(const GuiPluginLoader&) = delete;
 	GuiPluginLoader& operator=(const GuiPluginLoader&) = delete;
-	GuiPluginLoader(QObject *parent);
+	GuiPluginLoader(QQmlEngine *engine, QObject *parent);
 	~GuiPluginLoader() override;
 
 	bool busy() const;
@@ -77,6 +84,26 @@ public:
 
 	QVector<GuiPlugin> plugins() const;
 	Q_INVOKABLE GuiPlugin plugin(const QString &name) const;
+
+	// Creates the Branding object at url, copies the properties that it set,
+	// destroys it, and passes the copy to checkAndResolveBrandingSnapshot().
+	// Returns nullopt on error.
+	static std::optional<Victron::BrandingData> createBrandingSnapshot(
+			QQmlEngine *engine, const QUrl &url, const QString &pluginName, QList<int> *fontIds);
+
+	// Prepares the values copied from the Branding file at url for use:
+	// - drops colors that are not opaque
+	// - drops a light_mode_background_factor that is not more than 0 and at
+	//   most 2, and rounds a valid one to thousandths
+	// - resolves URLs against url, and registers font_files with QFontDatabase
+	//   (the ids are appended to fontIds)
+	// - drops font families that are not installed, and the built-in family
+	//   (naming it is the same as leaving the property unset).
+	// Logs a warning for each value that it drops, except the built-in family.
+	static void checkAndResolveBrandingSnapshot(Victron::BrandingData *data, const QUrl &url, QList<int> *fontIds);
+
+	// Returns the valid integrations of the plugin.
+	static QVector<GuiPluginIntegration> parseIntegrations(const QJsonObject &plugin, const QString &pluginName);
 
 Q_SIGNALS:
 	void busyChanged();
@@ -95,9 +122,14 @@ private:
 	QColor determineColor(const QString &pluginName, const QVector<GuiPlugin> &otherPlugins) const;
 	bool loadPluginData(const GuiPlugin &plugin);
 	void unloadPluginData(bool clearCache);
+	void unloadSinglePluginData(const GuiPlugin &plugin);
+	void loadBranding(QVector<GuiPlugin> *plugins);
+	void applyBranding();
 	bool installPluginTranslatorForLanguage(const QString &pluginName, QLocale::Language language);
 	QString m_pluginsJson;
 	QVector<GuiPlugin> m_plugins;
+	QList<Victron::BrandingData> m_branding;
+	QList<int> m_brandingFontIds;
 	QHash<QString, QHash<QLocale::Language, QTranslator*> > m_pluginTranslators;
 	QHash<QString, QPointer<QTranslator> > m_currentTranslators;
 	QFileSystemWatcher *m_enabledAppsDirWatcher = nullptr;
@@ -107,7 +139,8 @@ private:
 	QTimer m_invokeOnceTimer;
 	QTimer m_timeoutTimer;
 	bool m_busy = true;
-	QQmlEngine *m_qmlEngine = nullptr;
+	bool m_brandingPending = false;
+	QPointer<QQmlEngine> m_qmlEngine;
 };
 
 /*
@@ -116,7 +149,7 @@ Each plugin can specify one or more integrations.
 Each integration is associated with a plugin,
 which is identified by the pluginName property.
 
-There are currently 5 supported types of integrations:
+There are currently 6 supported types of integrations:
 	1) a plugin settings page
 		- causes the plugin entry in Settings/Integrations/UI Plugins
 		  to become a drill-down to the custom settings page.
@@ -136,9 +169,13 @@ There are currently 5 supported types of integrations:
 		- causes a new card to be injected into one of the
 		  existing quick action pane views (i.e. either a
 		  controls card, or a switches card).
+	6) branding
+		- the url is a Branding.qml file (Victron.Branding module)
+		  whose colors, fonts and splash logos override the
+		  built-in ones. The loader reads it once and destroys it.
 
 ** TODO: actually support 3/4/5. **
-In the prototype, only type 1 and 2 are supported.
+In the prototype, only type 1, 2 and 6 are supported.
 */
 class GuiPluginIntegration
 {

@@ -4,12 +4,85 @@
 */
 
 #include "theme.h"
+#include "language.h"
+#include "logging.h"
+
 #include <QInputMethod>
+#include <QFont>
+#include <QFontDatabase>
+#include <QLocale>
+#include <QRawFont>
 
 using namespace Victron::VenusOS;
 
 // Global pointer to current theme instance
 static Victron::VenusOS::Theme *g_themeInstance = nullptr;
+
+namespace {
+
+using Victron::BrandingData;
+
+QFontDatabase::WritingSystem writingSystemForLanguage(QLocale::Language language)
+{
+	switch (QLocale(language).script()) {
+	case QLocale::LatinScript: return QFontDatabase::Latin;
+	case QLocale::CyrillicScript: return QFontDatabase::Cyrillic;
+	case QLocale::GreekScript: return QFontDatabase::Greek;
+	case QLocale::ArabicScript: return QFontDatabase::Arabic;
+	case QLocale::HebrewScript: return QFontDatabase::Hebrew;
+	case QLocale::ThaiScript: return QFontDatabase::Thai;
+	case QLocale::SimplifiedHanScript: return QFontDatabase::SimplifiedChinese;
+	case QLocale::TraditionalHanScript: return QFontDatabase::TraditionalChinese;
+	case QLocale::JapaneseScript: return QFontDatabase::Japanese;
+	case QLocale::KoreanScript: return QFontDatabase::Korean;
+	default: return QFontDatabase::Any;
+	}
+}
+
+// Fonts report "Latin" for basic Latin alone, so also sample the
+// Latin-extended letters of the supported languages that need them.
+QList<char32_t> sampleCharacters(QLocale::Language language)
+{
+	switch (language) {
+	case QLocale::Czech:
+		return { 0x011B, 0x0161, 0x010D, 0x0159, 0x017E, 0x016F, 0x011A, 0x0160, 0x010C, 0x0158, 0x017D, 0x016E };
+	case QLocale::Polish:
+		return { 0x0105, 0x0107, 0x0119, 0x0142, 0x0144, 0x015B, 0x017A, 0x017C, 0x0104, 0x0141, 0x015A, 0x017B };
+	case QLocale::Romanian:
+		return { 0x0103, 0x00E2, 0x00EE, 0x0219, 0x021B, 0x0102, 0x0218, 0x021A };
+	case QLocale::Turkish:
+		return { 0x011F, 0x0131, 0x015F, 0x00E7, 0x0130, 0x011E, 0x015E };
+	default:
+		return {};
+	}
+}
+
+bool fontCoversLanguage(const QString &family, QLocale::Language language)
+{
+	const QFontDatabase::WritingSystem writingSystem = writingSystemForLanguage(language);
+	if (writingSystem != QFontDatabase::Any
+			&& !QFontDatabase::writingSystems(family).contains(writingSystem)) {
+		return false;
+	}
+	const QList<char32_t> samples = sampleCharacters(language);
+	if (!samples.isEmpty()) {
+		const QRawFont rawFont = QRawFont::fromFont(QFont(family));
+		for (char32_t c : samples) {
+			if (!rawFont.supportsCharacter(c)) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+const QUrl &builtInLanguageFontUrl()
+{
+	static const QUrl url(QStringLiteral("qrc:/fonts/Roboto-Regular.ttf"));
+	return url;
+}
+
+}
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 #include <emscripten.h>
@@ -38,7 +111,10 @@ EM_JS(int, getVisualViewportOffsetTop, (), {
 
 #endif
 
-Theme::Theme(QObject *parent) : QObject(parent)
+Theme::Theme(QObject *parent)
+	: QObject(parent)
+	, m_splashLogoIcon(builtInSplashLogoIcon())
+	, m_splashLogoText(builtInSplashLogoText())
 {
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 	// 5"-6" Smartphones have 320 - 480 CSS independent pixel wide screens.
@@ -146,8 +222,10 @@ void Theme::setColorScheme(Victron::VenusOS::Theme::ColorScheme scheme)
 {
 	if (m_colorScheme != scheme) {
 		m_colorScheme = scheme;
+		resolvePalette();
 		Q_EMIT colorSchemeChanged(scheme);
 		Q_EMIT colorSchemeChanged_parameterless(); // work around moc limitation.
+		Q_EMIT themeValuesChanged();
 	}
 }
 
@@ -320,6 +398,196 @@ void Theme::setWindowHeight(int height)
 		m_windowHeight = height;
 		updateViewportAndKeyboardProperties();
 	}
+}
+
+QUrl Theme::builtInSplashLogoIcon()
+{
+	return QUrl(QStringLiteral("qrc:/images/splash-logo-icon.svg"));
+}
+
+QUrl Theme::builtInSplashLogoText()
+{
+	return QUrl(QStringLiteral("qrc:/images/splash-logo-text.svg"));
+}
+
+QString Theme::builtInFontFamily()
+{
+	// Read from the file: Global.qml registers the built-in font only after the branding has loaded.
+	static const QString family = QRawFont(QLatin1Char(':') + builtInLanguageFontUrl().path(), 12).familyName();
+	return family;
+}
+
+QColor Theme::victronBrandingColor(Victron::BrandingData::Color) const
+{
+	return QColor();
+}
+
+void Theme::resolvePalette()
+{
+}
+
+void Theme::resolveBrandingColors(bool warnAboutContrast)
+{
+	// The built-in (Victron) branding is the first entry.
+	BrandingData victron;
+	for (int i = 0; i < BrandingData::ColorCount; ++i) {
+		const QColor color = victronBrandingColor(static_cast<BrandingData::Color>(i));
+		if (color.isValid()) {
+			victron.colors[i] = color;
+		}
+	}
+	victron.lightModeBackgroundFactor = VictronLightModeBackgroundFactorThousandths / 1000.0;
+	QList<BrandingData> brandingList { victron };
+	brandingList.append(m_pluginBranding);
+	m_brandingColors = ColorDerivation::resolveBrandingColors(brandingList);
+
+	if (!warnAboutContrast) {
+		return;
+	}
+	// The built-in branding is not checked: only an OEM's choice of text and background.
+	QStringList plugins;
+	for (qsizetype index : { m_brandingColors.backgroundPrimarySourceIndex, m_brandingColors.fontPrimarySourceIndex }) {
+		if (index > 0 && !plugins.contains(brandingList.at(index).pluginName)) {
+			plugins.append(brandingList.at(index).pluginName);
+		}
+	}
+	if (plugins.isEmpty()) {
+		return;
+	}
+	const auto warn = [&plugins](const QString &schemeName, const ColorDerivation::BrandingColors &scheme) {
+		const double ratio = ColorDerivation::contrastRatio(scheme[BrandingData::FontPrimary],
+				scheme[BrandingData::BackgroundPrimary]);
+		if (ratio < ColorDerivation::MinimumPrimaryTextContrast) {
+			qCWarning(venusGui).noquote() << QStringLiteral(
+					"Branding from plugin %1: color_font_primary on color_background_primary has a contrast ratio "
+					"of %2:1 in the %3 color scheme, below %4:1")
+					.arg(plugins.join(QStringLiteral(", ")), QString::number(ratio, 'f', 2), schemeName,
+						QString::number(ColorDerivation::MinimumPrimaryTextContrast));
+		}
+	};
+	warn(QStringLiteral("Dark"), m_brandingColors.darkScheme);
+	warn(QStringLiteral("Light"), m_brandingColors.lightScheme);
+}
+
+QList<Victron::BrandingData> Theme::pluginBranding() const
+{
+	return m_pluginBranding;
+}
+
+void Theme::setPluginBranding(const QList<Victron::BrandingData> &pluginBranding)
+{
+	m_pluginBranding = pluginBranding;
+	if (!m_pluginBranding.isEmpty() && !m_languageConnected) {
+		m_languageConnected = true;
+		connect(Language::create(), &Language::fontFileUrlChanged, this, [this]() {
+			const QString family = resolveFontFamily();
+			if (family != m_fontFamily) {
+				m_fontFamily = family;
+				Q_EMIT themeValuesChanged();
+			}
+		});
+	}
+	resolveBranding();
+	resolveBrandingColors(true);
+	resolvePalette();
+	Q_EMIT themeValuesChanged();
+}
+
+void Theme::resolveBranding()
+{
+	// When more than one plugin sets a property, the last one is used. (The colors are resolved by
+	// resolveBrandingColors().)
+	std::optional<QUrl> splashLogoIcon;
+	std::optional<QUrl> splashLogoText;
+	std::optional<bool> splashLogoIconPreserveColors;
+	std::optional<bool> splashLogoTextPreserveColors;
+	std::optional<QString> quantityFontFamily;
+	for (const BrandingData &data : std::as_const(m_pluginBranding)) {
+		if (data.splashLogoIcon.has_value()) {
+			splashLogoIcon = data.splashLogoIcon;
+		}
+		if (data.splashLogoText.has_value()) {
+			splashLogoText = data.splashLogoText;
+		}
+		if (data.splashLogoIconPreserveColors.has_value()) {
+			splashLogoIconPreserveColors = data.splashLogoIconPreserveColors;
+		}
+		if (data.splashLogoTextPreserveColors.has_value()) {
+			splashLogoTextPreserveColors = data.splashLogoTextPreserveColors;
+		}
+		if (data.quantityFontFamily.has_value()) {
+			quantityFontFamily = data.quantityFontFamily;
+		}
+	}
+
+	m_splashLogoIcon = splashLogoIcon.value_or(builtInSplashLogoIcon());
+	m_splashLogoText = splashLogoText.value_or(builtInSplashLogoText());
+	m_splashLogoIconPreserveColors = splashLogoIconPreserveColors.value_or(false);
+	m_splashLogoTextPreserveColors = splashLogoTextPreserveColors.value_or(false);
+	m_quantityFontFamily = quantityFontFamily.value_or(QString());
+	m_fontFamily = resolveFontFamily();
+}
+
+QString Theme::resolveFontFamily()
+{
+	QString family;
+	for (const Victron::BrandingData &data : std::as_const(m_pluginBranding)) {
+		if (data.fontFamily.has_value()) {
+			family = *data.fontFamily;
+		}
+	}
+	if (family.isEmpty()) {
+		return QString();
+	}
+
+	// A language that has its own font (e.g. Arabic, Chinese, Japanese, Thai on GX) keeps it.
+	const Language *language = Language::create();
+	const QUrl languageFontUrl = language->fontFileUrl();
+	if (!languageFontUrl.isEmpty() && languageFontUrl != builtInLanguageFontUrl()) {
+		return QString();
+	}
+
+	const QLocale::Language currentLanguage = language->getCurrentLanguage();
+	if (!fontCoversLanguage(family, currentLanguage)) {
+		const QString warningKey = family + QLatin1Char('|') + QLocale::languageToCode(currentLanguage);
+		if (warningKey != m_lastFontCoverageWarning) {
+			m_lastFontCoverageWarning = warningKey;
+			qCWarning(venusGui) << "Branding font family" << family << "does not cover language"
+					<< QLocale::languageToCode(currentLanguage) << "- using the built-in font";
+		}
+		return QString();
+	}
+	return family;
+}
+
+QString Theme::font_family() const
+{
+	return m_fontFamily;
+}
+
+QString Theme::quantity_font_family() const
+{
+	return m_quantityFontFamily;
+}
+
+QUrl Theme::splash_logo_icon() const
+{
+	return m_splashLogoIcon;
+}
+
+QUrl Theme::splash_logo_text() const
+{
+	return m_splashLogoText;
+}
+
+bool Theme::splash_logo_icon_preserve_colors() const
+{
+	return m_splashLogoIconPreserveColors;
+}
+
+bool Theme::splash_logo_text_preserve_colors() const
+{
+	return m_splashLogoTextPreserveColors;
 }
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)

@@ -669,6 +669,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/basetankdevicemodel.cpp
     src/classandvrminstancemodel.h
     src/classandvrminstancemodel.cpp
+    src/colorderivation.h
+    src/colorderivation.cpp
     src/colordimmerdata.h
     src/colordimmerdata.cpp
     src/dcmeterdevicemodel.h

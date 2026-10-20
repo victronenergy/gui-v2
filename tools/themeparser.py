@@ -4,6 +4,7 @@
 #
 import json
 import os
+import re
 import sys
 
 HEADER_TEMPLATE = '''
@@ -25,6 +26,9 @@ HEADER_TEMPLATE = '''
 #include <QVariantMap>
 
 #include "theme.h"
+#include "colorderivation.h"
+
+#include <array>
 
 namespace Victron {
 namespace VenusOS {
@@ -37,12 +41,15 @@ class ThemeSingleton : public Theme
 	QML_SINGLETON
 
 	// property declarations
-%s
+%(declarations)s
 
 public:
 	ThemeSingleton(QObject *parent)
 		: Theme(parent)
 	{
+		// The Theme constructor cannot call the overrides below, so the palette is resolved here.
+		resolveBrandingColors();
+		resolvePalette();
 	}
 
 	static ThemeSingleton *create(QQmlEngine *engine = nullptr, QJSEngine *js = nullptr) {
@@ -51,7 +58,18 @@ public:
 	}
 
 	// property accessors
-%s
+%(accessors)s
+
+	// Victron's branding colors (the built-in branding): their values in Dark.json. The Light
+	// scheme's branding colors are computed from them.
+	QColor victronBrandingColor(Victron::BrandingData::Color color) const override
+	{
+		switch (color) {
+%(branding_color_cases)s
+		default:
+			return QColor();
+		}
+	}
 
 	// NOTE: won't capture, so client needs to manually capture the color change signal.
 	Q_INVOKABLE QColor statusColorValue(StatusLevel level, bool darkColor = false) const
@@ -64,6 +82,32 @@ public:
 			: color_critical();
 		return c.typeId() == QMetaType::QColor ? c.value<QColor>() : QColor(c.value<QString>());
 	}
+
+protected:
+	// Computes every color scheme key for the current scheme, from the resolved branding colors and
+	// the formulas in Dark.json and Light.json.
+	void resolvePalette() override
+	{
+		using namespace ColorDerivation;
+		using Victron::BrandingData;
+		const BrandingColors &schemeColors = m_colorScheme == Theme::Dark
+			? m_brandingColors.darkScheme
+			: m_brandingColors.lightScheme;
+%(branding_color_assignments)s
+		if (m_colorScheme == Theme::Dark) {
+%(dark_assignments)s
+		} else {
+%(light_assignments)s
+		}
+	}
+
+private:
+	enum PaletteIndex {
+%(palette_enum)s
+		PaletteCount
+	};
+
+	std::array<QColor, PaletteCount> m_palette;
 };
 
 
@@ -76,6 +120,24 @@ public:
 
 def spaces_to_tabs(line):
     return line.replace('    ', '\t')
+
+# The Theme keys that a branding plugin may set, and the Victron::BrandingData::Color enum value of
+# each. The Theme key and the Branding property name differ for the page background
+# (color_page_background and color_background_page), so this cannot be made from the Branding
+# property names. Victron's values for these keys are in Dark.json only; a key that is
+# missing there has no Victron value, and is computed from the others. Light.json must not set
+# them: the Light scheme's branding colors are computed from the Dark scheme's.
+THEME_KEY_TO_BRANDING_COLOR = {
+    'color_brand': 'Brand',
+    'color_success': 'Success',
+    'color_warning': 'Warning',
+    'color_critical': 'Critical',
+    'color_background_primary': 'BackgroundPrimary',
+    'color_background_secondary': 'BackgroundSecondary',
+    'color_page_background': 'BackgroundPage',
+    'color_font_primary': 'FontPrimary',
+    'color_font_secondary': 'FontSecondary',
+}
 
 def color_to_rgba(value):
     return tuple(int(value[i:i+2], 16) for i in (0, 2, 4, 6))
@@ -125,8 +187,6 @@ class ThemeProperty:
         assert self.type_name, 'No values have been set for property {}'.format(self.name)
         if self.json_info.enum_type == 'ScreenSize':
             notify_signal = 'screenSizeChanged_parameterless'
-        elif self.json_info.enum_type == 'ColorScheme':
-            notify_signal = 'colorSchemeChanged_parameterless'
         elif self.json_info.enum_type == 'SystemColorScheme':
             notify_signal = 'systemColorSchemeChanged_parameterless'
         elif not self.json_info.enum_type:
@@ -137,6 +197,13 @@ class ThemeProperty:
         return '\tQ_PROPERTY({} {} READ {} {} FINAL)'.format(self.type_name, self.name, self.name, notify_or_constant)
 
     def property_accessor(self):
+        expression = self.value_expression()
+        return spaces_to_tabs('''
+    {type_name} {name}() const {{
+        return {expression};
+    }}'''.format(type_name=self.type_name, name=self.name, expression=expression))
+
+    def value_expression(self):
         assert self.type_name, 'No values have been for property {}'.format(self.name)
         if self.json_info.enum_type == 'ScreenSize':
             try:
@@ -152,41 +219,251 @@ class ThemeProperty:
             except KeyError:
                 raise ValueError('JSON missing portrait value for property "{}"'.format(self.name))
             if five_inch_value == seven_inch_value and seven_inch_value == portrait_value:
-                return self.constant_property_accessor(five_inch_value)
+                return self.constant_expression(five_inch_value)
             else:
-                return self.conditional_property_accessor_multi('m_screenSize == Theme::FiveInch', five_inch_value, 'm_screenSize == Theme::SevenInch', seven_inch_value, portrait_value)
-        elif self.json_info.enum_type == 'ColorScheme':
-            try:
-                dark_rgba = self.values['Dark']
-                light_rgba = self.values['Light']
-            except KeyError:
-                raise ValueError('JSON missing dark or light value for property "{}"'.format(self.name))
-            if dark_rgba == light_rgba:
-                return self.constant_property_accessor(dark_rgba)
-            else:
-                return self.conditional_property_accessor('m_colorScheme == Theme::Dark', dark_rgba, light_rgba)
+                return self.conditional_expression_multi('m_screenSize == Theme::FiveInch', five_inch_value, 'm_screenSize == Theme::SevenInch', seven_inch_value, portrait_value)
         elif not self.json_info.enum_type:
-            return self.constant_property_accessor(self.values[""])
+            return self.constant_expression(self.values[""])
         else:
             raise ValueError('Cannot create property_accessor for property "{}"'.format(self.name))
 
-    def conditional_property_accessor(self, condition, value1, value2):
-        return spaces_to_tabs('''
-    {type_name} {name}() const {{
-        return {condition} ? {value1} : {value2};
-    }}'''.format(type_name=self.type_name, name=self.name, condition=condition, value1=qt_value_string(self.type_name, value1), value2=qt_value_string(self.type_name, value2)))
+    def conditional_expression_multi(self, condition1, value1, condition2, value2, value3):
+        return '{condition1} ? {value1} : {condition2} ? {value2} : {value3}'.format(condition1=condition1, condition2=condition2, value1=qt_value_string(self.type_name, value1), value2=qt_value_string(self.type_name, value2), value3=qt_value_string(self.type_name, value3))
 
-    def conditional_property_accessor_multi(self, condition1, value1, condition2, value2, value3):
-        return spaces_to_tabs('''
-    {type_name} {name}() const {{
-        return {condition1} ? {value1} : {condition2} ? {value2} : {value3};
-    }}'''.format(type_name=self.type_name, name=self.name, condition1=condition1, condition2=condition2, value1=qt_value_string(self.type_name, value1), value2=qt_value_string(self.type_name, value2), value3=qt_value_string(self.type_name, value3)))
+    def constant_expression(self, constant_value):
+        return qt_value_string(self.type_name, constant_value)
 
-    def constant_property_accessor(self, constant_value):
-        return spaces_to_tabs('''
-    {type_name} {name}() const {{
-        return {value};
-    }}'''.format(type_name=self.type_name, name=self.name, value=qt_value_string(self.type_name, constant_value)))
+# The color scheme files (Dark.json and Light.json) hold one value per color key. A value is:
+# - a color: "#RRGGBB", "#AARRGGBB" or "transparent";
+# - the name of a color key: a key of the color scheme files, or a key in
+#   THEME_KEY_TO_BRANDING_COLOR, is read from the palette (and so follows the branding); any
+#   other key (for example color_blue in ColorDesign.json) is a fixed color;
+# - a function call, which combines those. All numbers are alpha values, 0 to 255. "Blended onto"
+#   means the color is drawn at that alpha over the background, giving an opaque color:
+#     font_over_background(n)  font_primary at alpha n, blended onto background_primary: a gray
+#                              between the two
+#     dim(c)                   c at alpha 179, blended onto background_primary
+#     darkish(c)               c at alpha 121, blended onto background_primary
+#     dark(c)                  c at alpha 77, blended onto background_primary
+#     dark_mode_dim(c)         c at alpha 179, blended onto the Dark scheme's background_primary
+#     blend_onto(c, n, bg)     c at alpha n, blended onto bg
+#     text_color_on(c, ...)    the color of text on the colored fills c, ...: white if white has a
+#                              contrast of at least 3:1 on all of them, else the darker of the two
+#                              schemes' font_primary
+#     with_alpha(c, n)         c with alpha n (translucent)
+# The C++ functions are in src/colorderivation.h.
+COLOR_FUNCTIONS = {
+    'font_over_background': ('number',),
+    'dim': ('color',),
+    'darkish': ('color',),
+    'dark': ('color',),
+    'dark_mode_dim': ('color',),
+    'blend_onto': ('color', 'number', 'color'),
+    'text_color_on': None, # one or more colors
+    'with_alpha': ('color', 'number'),
+}
+
+FORMULA_TOKEN_RE = re.compile(r'\s*(?:(?P<hex>#[0-9A-Fa-f]*)|(?P<ident>[A-Za-z_][A-Za-z0-9_]*)|(?P<number>[0-9]+)|(?P<punct>[(),]))')
+
+def tokenize_formula(text, where):
+    tokens = []
+    pos = 0
+    while text[pos:].strip():
+        match = FORMULA_TOKEN_RE.match(text, pos)
+        if not match:
+            raise ValueError('{}: cannot parse "{}" at "{}"'.format(where, text, text[pos:].strip()))
+        kind = match.lastgroup
+        tokens.append((kind, match.group(kind)))
+        pos = match.end()
+    return tokens
+
+def parse_formula(text, where):
+    """Parses a color scheme value into ('color', hex), ('number', n), ('ref', name) or ('call', name, args)."""
+    tokens = tokenize_formula(text, where)
+    pos = 0
+
+    def fail(message):
+        raise ValueError('{}: "{}": {}'.format(where, text, message))
+
+    def expression():
+        nonlocal pos
+        if pos >= len(tokens):
+            fail('unexpected end')
+        kind, value = tokens[pos]
+        pos += 1
+        if kind == 'hex':
+            if len(value) not in (7, 9):
+                fail('{} is not a #RRGGBB or #AARRGGBB color'.format(value))
+            return ('color', value)
+        if kind == 'number':
+            return ('number', int(value))
+        if kind != 'ident':
+            fail('unexpected "{}"'.format(value))
+        if pos < len(tokens) and tokens[pos] == ('punct', '('):
+            pos += 1
+            args = [expression()]
+            while pos < len(tokens) and tokens[pos] == ('punct', ','):
+                pos += 1
+                args.append(expression())
+            if pos >= len(tokens) or tokens[pos] != ('punct', ')'):
+                fail('missing ")" after the arguments of {}'.format(value))
+            pos += 1
+            return ('call', value, args)
+        if value == 'transparent':
+            return ('color', value)
+        return ('ref', value)
+
+    result = expression()
+    if pos != len(tokens):
+        fail('unexpected "{}" after the value'.format(tokens[pos][1]))
+    return result
+
+class PaletteGenerator:
+    """Generates the palette: the color scheme keys, computed from the branding colors in resolvePalette()."""
+
+    SCHEMES = ('Dark', 'Light')
+
+    def __init__(self, color_schemes, theme_properties):
+        self.theme_properties = theme_properties
+        for scheme in self.SCHEMES:
+            if scheme not in color_schemes:
+                raise ValueError('Missing color scheme file {}.json'.format(scheme))
+        self.schemes = {scheme: color_schemes[scheme] for scheme in self.SCHEMES}
+        dark, light = self.schemes['Dark'], self.schemes['Light']
+
+        for scheme, values in self.schemes.items():
+            for name, value in values.items():
+                if not name.startswith('color_') or not isinstance(value, str):
+                    raise ValueError('{}.json: {} must be a color key with a string value'.format(scheme, name))
+                if name in theme_properties:
+                    raise ValueError('{}.json: {} is also defined outside the color scheme files'.format(scheme, name))
+        for name in light:
+            if name in THEME_KEY_TO_BRANDING_COLOR:
+                raise ValueError('Light.json: {} is a branding color. Remove it: the Light scheme\'s branding '
+                                 'colors are computed from the Dark scheme\'s.'.format(name))
+        self.keys = [name for name in dark if name not in THEME_KEY_TO_BRANDING_COLOR]
+        for name in self.keys:
+            if name not in light:
+                raise ValueError('JSON missing light value for property "{}"'.format(name))
+        for name in light:
+            if name not in dark:
+                raise ValueError('JSON missing dark value for property "{}"'.format(name))
+        self.names = sorted(list(THEME_KEY_TO_BRANDING_COLOR) + self.keys)
+
+    def fixed_color(self, name, where):
+        theme_property = self.theme_properties.get(name)
+        if not theme_property or theme_property.type_name != 'QColor' or theme_property.json_info.enum_type:
+            raise ValueError('{}: {} is not a color key'.format(where, name))
+        return theme_property
+
+    def expression(self, node, where):
+        """Returns (kind, C++ expression, palette keys it reads)."""
+        if node[0] == 'color':
+            return 'color', qt_value_string('QColor', node[1]), set()
+        if node[0] == 'number':
+            if not 0 <= node[1] <= 255:
+                raise ValueError('{}: {} is not in 0 to 255'.format(where, node[1]))
+            return 'number', str(node[1]), set()
+        if node[0] == 'ref':
+            name = node[1]
+            if name in THEME_KEY_TO_BRANDING_COLOR:
+                return 'color', 'm_palette[Palette_{}]'.format(name), set()
+            if name in self.keys:
+                return 'color', 'm_palette[Palette_{}]'.format(name), {name}
+            self.fixed_color(name, where)
+            return 'color', '{}()'.format(name), set()
+
+        function, args = node[1], node[2]
+        if function not in COLOR_FUNCTIONS:
+            raise ValueError('{}: unknown function {}()'.format(where, function))
+        kinds = COLOR_FUNCTIONS[function] or ('color',) * len(args)
+        if len(args) != len(kinds):
+            raise ValueError('{}: {}() takes {} arguments'.format(where, function, len(kinds)))
+        values = []
+        deps = set()
+        for arg, kind in zip(args, kinds):
+            arg_kind, arg_value, arg_deps = self.expression(arg, where)
+            if arg_kind != kind:
+                raise ValueError('{}: argument of {}() must be a {}'.format(where, function, kind))
+            values.append(arg_value)
+            deps |= arg_deps
+        font = 'schemeColors[BrandingData::FontPrimary]'
+        background = 'schemeColors[BrandingData::BackgroundPrimary]'
+        alphas = {'dim': 'DimAlpha', 'darkish': 'DarkishAlpha', 'dark': 'DarkAlpha'}
+        if function == 'font_over_background':
+            cpp = 'blendOnto({}, {}, {})'.format(font, values[0], background)
+        elif function in alphas:
+            cpp = 'blendOnto({}, {}, {})'.format(values[0], alphas[function], background)
+        elif function == 'dark_mode_dim':
+            cpp = 'blendOnto({}, DimAlpha, m_brandingColors.darkScheme[BrandingData::BackgroundPrimary])'.format(
+                values[0])
+        elif function == 'blend_onto':
+            cpp = 'blendOnto({}, {}, {})'.format(*values)
+        elif function == 'text_color_on':
+            cpp = 'textColorOn({{ {} }}, m_brandingColors.darkerFontPrimary)'.format(', '.join(values))
+        else:
+            cpp = 'withAlpha({}, {})'.format(*values)
+        return 'color', cpp, deps
+
+    def assignments(self, scheme):
+        values = self.schemes[scheme]
+        compiled = {}
+        for name in self.keys:
+            where = '{}.json: {}'.format(scheme, name)
+            kind, cpp, deps = self.expression(parse_formula(values[name], where), where)
+            if kind != 'color':
+                raise ValueError('{}: the value must be a color'.format(where))
+            compiled[name] = (cpp, deps)
+
+        # Each key is computed after the keys it reads.
+        ordered = []
+        state = {}
+        def visit(name, chain):
+            if state.get(name) == 'done':
+                return
+            if state.get(name) == 'visiting':
+                raise ValueError('{}.json: circular reference: {}'.format(scheme, ' -> '.join(chain + [name])))
+            state[name] = 'visiting'
+            for dep in sorted(compiled[name][1], key=self.keys.index):
+                visit(dep, chain + [name])
+            state[name] = 'done'
+            ordered.append(name)
+        for name in self.keys:
+            visit(name, [])
+        return '\n'.join('\t\t\tm_palette[Palette_{}] = {}; // {}'.format(name, compiled[name][0], values[name])
+                         for name in ordered)
+
+    def branding_color_assignments(self):
+        return '\n'.join('\t\tm_palette[Palette_{}] = schemeColors[BrandingData::{}];'.format(name, enum_value)
+                         for name, enum_value in THEME_KEY_TO_BRANDING_COLOR.items())
+
+    def branding_color_cases(self):
+        cases = []
+        for name, enum_value in THEME_KEY_TO_BRANDING_COLOR.items():
+            value = self.schemes['Dark'].get(name)
+            if value is None:
+                continue
+            where = 'Dark.json: {}'.format(name)
+            node = parse_formula(value, where)
+            if node[0] == 'ref':
+                node = ('color', self.fixed_color(node[1], where).get_value())
+            if node[0] != 'color':
+                raise ValueError('{}: a branding color must be a color, or the name of a ColorDesign color'.format(
+                    where))
+            cases.append('\t\tcase Victron::BrandingData::{}:\n\t\t\treturn {};'.format(
+                enum_value, qt_value_string('QColor', node[1])))
+        return '\n'.join(cases)
+
+    def palette_enum(self):
+        return '\n'.join('\t\tPalette_{},'.format(name) for name in self.names)
+
+    def property_declarations(self):
+        return [(name, '\tQ_PROPERTY(QColor {0} READ {0} NOTIFY themeValuesChanged FINAL)'.format(name))
+                for name in self.names]
+
+    def property_accessors(self):
+        return [(name, '\n\tQColor {0}() const {{\n\t\treturn m_palette[Palette_{0}];\n\t}}'.format(name))
+                for name in self.names]
 
 class JsonFileInfo:
     theme_enums = {
@@ -217,6 +494,7 @@ class JsonFileInfo:
 class JsonThemeParser:
     def __init__(self):
         self.theme_properties = {}
+        self.color_schemes = {}
 
     def parse_theme_subdir(self, theme_subdir):
         unparsed_properties = {}
@@ -228,39 +506,44 @@ class JsonThemeParser:
             with open(os.path.join(theme_subdir, filename)) as f:
                 # Step 1: parse theme properties that have simple values
                 json_input = json.loads(f.read())
+                if json_info.enum_type == 'ColorScheme':
+                    # The color scheme files are formulas, compiled by PaletteGenerator.
+                    self.color_schemes[json_info.enum_value] = json_input
+                    continue
                 for property_name, property_value in json_input.items():
                     if isinstance(property_value, str) and '_' in property_value:
                         unparsed_properties.setdefault(filename, {})[property_name] = property_value
                     else:
                         self.add_property(property_name, property_value, json_info)
 
-        # Step 2: parse theme values that are references to other theme properties
-        for filename, referenced_properties in unparsed_properties.items():
-            json_info = JsonFileInfo.from_json_filename(filename)
-            nested_references = {}
-            for property_name, referenced_property_name in referenced_properties.items():
-                referenced_property = self.theme_properties.get(referenced_property_name)
-                if referenced_property:
-                    property_value = referenced_property.get_value() or referenced_property.get_value(json_info.enum_value)
-                    if property_value:
-                        self.add_property(property_name, property_value, json_info)
+        # Step 2: parse theme values that are references to other theme properties. A referenced
+        # property may itself be a reference, so repeat until no reference can be resolved.
+        while unparsed_properties:
+            unresolved_properties = {}
+            for filename, referenced_properties in unparsed_properties.items():
+                json_info = JsonFileInfo.from_json_filename(filename)
+                for property_name, referenced_property_name in referenced_properties.items():
+                    referenced_property = self.theme_properties.get(referenced_property_name)
+                    property_value = None
+                    if referenced_property:
+                        property_value = referenced_property.get_value()
+                        if property_value is None:
+                            property_value = referenced_property.get_value(json_info.enum_value)
+                    if property_value is None:
+                        unresolved_properties.setdefault(filename, {})[property_name] = referenced_property_name
                         continue
-                # if the property or value is not found, this must be a nested reference, i.e. the
-                # value is a reference to another referenced value
-                nested_references[property_name] = referenced_property_name
-            # Step 3: parse nested property references within this file
-            for property_name, referenced_property_name in nested_references.items():
-                referenced_property = self.theme_properties.get(referenced_property_name)
-                if not referenced_property:
+                    self.add_property(property_name, property_value, json_info)
+            if unresolved_properties == unparsed_properties:
+                filename, referenced_properties = next(iter(unresolved_properties.items()))
+                property_name, referenced_property_name = next(iter(referenced_properties.items()))
+                if referenced_property_name not in self.theme_properties:
                     raise ValueError('Bad json value: "{}" value is {} but cannot find another theme property with this name'.format(property_name, referenced_property_name))
-                property_value = referenced_property.get_value() or referenced_property.get_value(json_info.enum_value)
-                if not property_value:
-                    raise ValueError('Cannot find property value for theme {}'.format(json_info.enum_value))
-                self.add_property(property_name, property_value, json_info)
+                raise ValueError('Cannot find property value for "{}" in {}: circular reference via {}?'.format(property_name, filename, referenced_property_name))
+            unparsed_properties = unresolved_properties
 
     def add_property(self, property_name, value, json_info):
         if json_info.enum_type:
-            # This value changes depending on geometry or color
+            # This value changes depending on geometry
             theme_property = self.theme_properties.get(property_name) or ThemeProperty(property_name, json_info)
             theme_property.set_value(value, json_info.enum_value)
             self.theme_properties[property_name] = theme_property
@@ -280,10 +563,19 @@ def generate_theme_code(themes_dir, output_header_name):
         if not subdir.startswith("."):
             parser.parse_theme_subdir(os.path.join(themes_dir, subdir))
 
+    palette = PaletteGenerator(parser.color_schemes, parser.theme_properties)
     theme_properties = parser.sorted_theme_properties()
-    property_declarations = [theme_property.property_declaration() for theme_property in theme_properties]
-    property_accessors = [theme_property.property_accessor() for theme_property in theme_properties]
-    output_template = HEADER_TEMPLATE % ('\n'.join(property_declarations), '\n'.join(property_accessors))
+    property_declarations = sorted([(p.name, p.property_declaration()) for p in theme_properties] + palette.property_declarations())
+    property_accessors = sorted([(p.name, p.property_accessor()) for p in theme_properties] + palette.property_accessors())
+    output_template = HEADER_TEMPLATE % {
+        'declarations': '\n'.join(declaration for _, declaration in property_declarations),
+        'accessors': '\n'.join(accessor for _, accessor in property_accessors),
+        'branding_color_cases': palette.branding_color_cases(),
+        'branding_color_assignments': palette.branding_color_assignments(),
+        'dark_assignments': palette.assignments('Dark'),
+        'light_assignments': palette.assignments('Light'),
+        'palette_enum': palette.palette_enum(),
+    }
     with open(output_header_name, 'w') as f:
         f.write(output_template)
 
