@@ -104,6 +104,8 @@ QtObject {
 		case VenusOS.Evcs_Status_StopCharging:
 			//% "Stop charging"
 			return qsTrId("evchargers_status_stop_charging")
+		case VenusOS.Evcs_Status_Standby:
+			return CommonWords.standby
 		default:
 			if (status > VenusOS.Evcs_Status_OverheatingDetected && status < VenusOS.Evcs_Status_ChargingLimit) {
 				//% "Reserved"

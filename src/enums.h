@@ -831,7 +831,8 @@ public:
 		Evcs_Status_StartCharging,
 		Evcs_Status_SwitchingToThreePhase,
 		Evcs_Status_SwitchingToSinglePhase,
-		Evcs_Status_StopCharging
+		Evcs_Status_StopCharging,
+		Evcs_Status_Standby = 25
 	};
 	Q_ENUM(Evcs_Status)
 
