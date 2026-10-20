@@ -144,6 +144,37 @@ TestCase {
 		compare(sequence.phase, VenusOS.Splash_Phase_Hidden)
 	}
 
+	// SplashView reports a step that is already finished from its onPhaseChanged handler.
+	function test_notifyFromPhaseChangeHandler() {
+		failOnWarning(/Binding loop/)
+		const sequence = createSequence({
+			ready: true,
+			showAnimation: true,
+			pagesLoaded: true,
+			dataReady: true,
+			preloadComplete: true,
+		})
+		const seenPhases = []
+		sequence.phaseChanged.connect(function() {
+			seenPhases.push(sequence.phase)
+			if (sequence.phase === VenusOS.Splash_Phase_PlayingGauge) {
+				sequence.notifyGaugePaused()
+			} else if (sequence.phase === VenusOS.Splash_Phase_FadingOut) {
+				sequence.notifyFadedOut()
+			}
+		})
+		sequence.notifyProgressHidden()
+		sequence.notifyLogoFaded()
+
+		compare(sequence.phase, VenusOS.Splash_Phase_Hidden)
+		compare(seenPhases, [
+			VenusOS.Splash_Phase_FadingLogo,
+			VenusOS.Splash_Phase_PlayingGauge,
+			VenusOS.Splash_Phase_FadingOut,
+			VenusOS.Splash_Phase_Hidden,
+		])
+	}
+
 	function test_gaugePauseWaitsForPreload() {
 		const sequence = createSequence({
 			ready: true,

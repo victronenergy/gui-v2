@@ -56,6 +56,8 @@ if (WIN32)
 endif()
 
 target_link_libraries(${TEST_NAME} PRIVATE
+    VictronBranding
+    VictronBrandingplugin
     VictronVenusOS
     VictronVenusOSplugin
     VictronVenusOSShaders
