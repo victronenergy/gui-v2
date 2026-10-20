@@ -15,23 +15,23 @@ Four example plugins show the rules in practice:
 
 ## Quick start
 
-1. Make a directory named after your plugin, for example `OemName`. The compiler names the plugin after the directory.
-2. Write the page, for example `OemName/OemNameSettings.qml`, following the rules below. Start from one of the examples.
+1. Make a directory named after your plugin, for example `PluginName`. The compiler names the plugin after the directory.
+2. Write the page, for example `PluginName/PluginNameSettings.qml`, following the rules below. Start from one of the examples.
 3. Compile it, from that directory:
 
    ```
-   python3 <gui-v2>/tools/gui-v2-plugin-compiler.py --settings OemNameSettings.qml
+   python3 <gui-v2>/tools/gui-v2-plugin-compiler.py --settings PluginNameSettings.qml
    ```
 
-   For a page on the page of a device, give the product id, the page file and the row title instead: `--devicelist 0x106 OemNameDevice.qml "Cell Voltages"`. On a GX device with the Large image, the compiler is `/opt/victronenergy/gui-v2/gui-v2-plugin-compiler.py`.
-4. The compiler packs every `.qml` file in the directory, so subpages need no option of their own. It writes `OemName.json`.
-5. Install it on a GX device by hand: copy `OemName.json` to `/data/apps/available/OemName/gui-v2/`, then `ln -s /data/apps/available/OemName /data/apps/enabled/OemName`. On a desktop build of gui-v2, copy `OemName.json` into the `plugins` directory next to the `venus-gui-v2` executable.
+   For a page on the page of a device, give the product id, the page file and the row title instead: `--devicelist 0x106 PluginNameDevice.qml "Cell Voltages"`. On a GX device with the Large image, the compiler is `/opt/victronenergy/gui-v2/gui-v2-plugin-compiler.py`.
+4. The compiler packs every `.qml` file in the directory, so subpages need no option of their own. It writes `PluginName.json`.
+5. To try it on a GX device, add `--install <gx-host> --ssh-key <private-key>` to the compile command. This is for testing only. The compiler connects as root with that key, copies `PluginName.json` to `/data/apps/available/PluginName/gui-v2/`, and symlinks that app directory to `/data/apps/enabled/PluginName`. A repeat install replaces that symlink. It will not replace a real directory. You can do the same copy and symlink by hand. On a desktop build of gui-v2, copy `PluginName.json` into the `plugins` directory next to the `venus-gui-v2` executable.
 
 ## Rules for plugin pages
 
 The compiler does not check these rules. A page that breaks them may work today, and then break with any GUI update.
 
-1. **Imports.** Import `Victron.GuiPlugins`, and Qt modules such as `QtQuick` and `QtQuick.Layouts`. Never import `Victron.VenusOS`, or any other Victron module: their types are gui-v2's own, and change without notice.
+1. **Imports.** Import `Victron.GuiPlugins`, without a version, and Qt modules such as `QtQuick` and `QtQuick.Layouts`. Never import `Victron.VenusOS`, or any other Victron module: their types are gui-v2's own, and change without notice.
 2. **The root type.** The root of a settings page, and of every subpage, is a `PluginPage`. The root of a page on the page of a device is a `PluginDevicePage`. The root may also be a type that your plugin defines in its own file, if that file's root is one of these. The GUI refuses a page whose root is a `Page` (the type that gui-v2's own pages use): it does not open it, and logs `Aborted attempt to push plugin page whose root is a Page`. It also refuses a root that is not an item, such as `QtObject`, and logs `Aborted attempt to push plugin page whose root is not an item`. Plugins written for older versions of gui-v2, with a `Page` root, must be ported.
 3. **Rows.** Declare the rows directly inside a `PluginGradientListView`, in the order they are shown. Only the `Plugin*` row types can be rows. The rows are fixed when the page is created: to hide a row, set its `preferredVisible` to `false`, and the row then takes no space, and key navigation skips it. If that row has the key focus, focus moves to a visible row. Never set `visible` on a row.
 4. **Subpages.** Open a subpage with a `PluginListNavigation` row, and give its file as `pageUrl: Qt.resolvedUrl("SubPage.qml")`, so that it is found next to your page. A subpage must be a file of its own: a page written inline, as a `Component`, cannot be opened.
@@ -143,10 +143,63 @@ The row types:
 - **`PluginUnit`**: the units for `PluginListQuantity`: `None`, `Amp`, `AmpHour`, `Energy_KiloWattHour`, `Percentage`, `RevolutionsPerMinute`, `VoltAmpere`, `Volt_AC`, `Volt_DC`, `Watt`.
 - **`PluginWords`**, **`PluginIcons`** and **`PluginIconImage`**: see [Words and icons](#words-and-icons).
 
+### Versions
+
+The version of `Victron.GuiPlugins` that added each type. A type's members came with it, unless they are listed after it with a later version. See [Versioning](#versioning).
+
+<!-- BEGIN versions. tools/guipluginsapi.py writes this part from tools/guiplugins-api.json: do not edit it. -->
+
+- `PluginAccessLevel`: 1.0
+- `PluginDataItem`: 1.0
+- `PluginDevicePage`: 1.0
+- `PluginGradientListView`: 1.0
+- `PluginIconImage`: 1.0
+- `PluginIcons`: 1.0
+- `PluginListButton`: 1.0
+- `PluginListItem`: 1.0
+- `PluginListNavigation`: 1.0
+- `PluginListQuantity`: 1.0
+- `PluginListRadioButtonGroup`: 1.0
+- `PluginListRow`: 1.0
+- `PluginListSpinBox`: 1.0
+- `PluginListSwitch`: 1.0
+- `PluginListTemperature`: 1.0
+- `PluginListText`: 1.0
+- `PluginListTextField`: 1.0
+- `PluginPage`: 1.0
+- `PluginPrimaryListLabel`: 1.0
+- `PluginSettingsListHeader`: 1.0
+- `PluginUnit`: 1.0
+- `PluginWords`: 1.0
+
+<!-- END versions -->
+
+## Versioning
+
+`Victron.GuiPlugins` has its own version, `major.minor`, separate from gui-v2's version.
+
+- **Minor versions add types and members.** The [versions](#versions) list in the type reference says which version added each one.
+- **The required version.** The compiler writes `requiredGuiPluginsVersion` into the plugin's JSON file, and prints it: the lowest `Victron.GuiPlugins` version that has every type and member that your files use. A plugin that uses only types and members from 1.0 needs 1.0, even if the compiler was built for a newer version, so it still runs on older GX devices. If none of your files imports `Victron.GuiPlugins`, the compiler writes no `requiredGuiPluginsVersion`. Write `import Victron.GuiPlugins` with no version. The compiler rejects a version on that import: it is not the required version, and an older GUI could accept the plugin and then fail to load the file.
+- **How the compiler finds what you use.** It goes by names. A member counts as used if its name appears in your files, outside comments and plain strings, and it belongs to a type that you use, to that type's base type, or to the type of another member that you use. `PluginWords.reset` and `PluginWords["reset"]` both use `reset`; `PluginWords[word]` does not, because the key is not a constant. A handler such as `onToggled` or `onCheckedChanged` uses `toggled` or `checked`. So does a direct connection, such as `checkedChanged.connect(...)`. So if one of your own properties or functions has the same name as a newer member, the version can be newer than needed. The compiler prints the members that need the version it writes; if one of them is really your own property or function, rename yours.
+- **What the GUI does with it.** If the GUI's `Victron.GuiPlugins` has a different major version, or an older minor version, than `requiredGuiPluginsVersion`, the GUI ignores the plugin's pages and logs why, for example `Ignoring integration at index 0 in plugin OemName - type: 1 - it needs Victron.GuiPlugins 1.2, but this GUI only has 1.1`. A plugin without `requiredGuiPluginsVersion` is not checked.
+- **Older GUIs.** Versions of gui-v2 without `Victron.GuiPlugins` do not check `requiredGuiPluginsVersion`, and cannot open the plugin's pages. So also pass `--min-required-version` to the compiler, with the first gui-v2 version that has `Victron.GuiPlugins`, as the examples do.
+- **Deprecation.** A type or member that is to be removed is marked deprecated in the type reference. The compiler warns when a plugin uses it. The GUI does not. It is removed only in the next major version. Nothing is deprecated yet. The warning uses the same name matching as the required version, so one of your own properties can cause it if it has the same name.
+- **Major versions** remove or change types and members. When a new major version is announced, plugin authors must port their plugins to the new API.
+
 ## Changing Victron.GuiPlugins (gui-v2 contributors)
 
 - The module is in `guiplugins/`, and its files are listed in `cmake/ModuleGuiPlugins_Sources.cmake`. Its types wrap `Victron.VenusOS` types, and may use them in their own code. `Victron.VenusOS` must never use `Victron.GuiPlugins`; the `tst_moduledependencies` test fails if it does. See [Module dependencies](architecture.md#module-dependencies).
 - Every promised member is declared on the wrapper's root, so that the inner `Victron.VenusOS` type can change without changing the plugin API. A row type's root is `PluginListRow`, and the inner row (`id: inner`) takes `preferredVisible` and `showAccessLevel` from it.
+- `tools/guiplugins-api.json` is the checked-in record of the API: every type in the module, and each type's properties, signals, methods and enums, with the version that added each one. `tools/guipluginsapi.py` writes it from the files in `cmake/ModuleGuiPlugins_Sources.cmake`, and writes the [versions](#versions) list from it. The `tst_guipluginsapi` test fails if either is out of date. Every file in the module is part of the API. A QML file's API is its root type and the declarations directly inside its root object; a header's API is the class or namespace that it registers with `QML_ELEMENT`.
+- The script refuses:
+  - a change that could break a plugin, unless `VICTRON_GUIPLUGINS_VERSION_MAJOR` goes up: removing or renaming a type or member, changing a type's base or a property's type, making a property read-only or required, changing the default property, changing a signal's or method's parameters or return type, or changing an enum value's number. Only for a type or member that no released GUI has, `--allow-breaking-changes` lets you make such a change;
+  - a new type or member, unless the version in `cmake/ModuleGuiPlugins.cmake` is already higher than the version in `tools/guiplugins-api.json`. It writes nothing, and prints what to do;
+  - a type that plugins cannot use, anywhere in the API. Plugins import only `Victron.GuiPlugins`, `QtQml` and `QtQuick`, so the API may use only QML's basic types, `QtObject`, `Item`, `FocusScope`, `Component`, and the module's own types. This keeps `Victron.VenusOS` types out of it;
+  - a declaration that it cannot read, such as an inline component, a slot, or a `Q_PROPERTY` written over several lines.
+- To add to the API: first increase `VICTRON_GUIPLUGINS_VERSION_MINOR` in `cmake/ModuleGuiPlugins.cmake`. Then add the type or member, and run `python3 tools/guipluginsapi.py`. New types and members get that version, and the script adds them to the [versions](#versions) list. If you did not increase the version, the script stops and does not change `tools/guiplugins-api.json`. Increase the minor version, then run it again.
+- Removing or changing a type or member needs a new major version. See [Versioning](#versioning). The script cannot see a change to a property's initial value, or to what a function does. Those can still break a plugin, and they need a new major version too.
+- To deprecate a type or member, add `"deprecated": true` to it in `tools/guiplugins-api.json`, say so in the type reference, and run `python3 tools/guipluginsapi.py`. The script keeps the flag. The compiler then warns a plugin that uses it; the GUI does not. Removing it still needs a new major version.
+- The compiler reads `tools/guiplugins-api.json`, which is installed next to it, to work out each plugin's `requiredGuiPluginsVersion` and to warn about deprecated types and members (see [Versioning](#versioning)). The plugin loader, in `src/guiplugins.cpp`, gets the module version from `cmake/ModuleGuiPlugins.cmake` as two compile definitions, and drops a plugin's pages if it needs a version that the GUI does not have. The `tst_plugincompiler` and `tst_guipluginloader` tests cover both.
 - The enums for plugins, `PluginAccessLevel` and `PluginUnit`, are C++ namespaces with explicit values, equal to the `VenusOS` values that the wrappers pass them to. `pluginaccesslevel.cpp` and `pluginunit.cpp` check this at build time. If a `VenusOS` value changes, keep the plugin value, and map it in the wrapper instead.
 - `PluginWords` copies `CommonWords`, and `PluginIcons` points at the images in `qrc:/images`. Both are promises: never rename or remove one of their properties. If a `CommonWords` word or an image is renamed, point the existing property at the new one; for a word, also add the old and new names to `renamedWords` in `tst_pluginwordsandicons`. That test checks that each word has the text of the `CommonWords` word with the same (or new) name, and that each icon loads. `PluginIconImage` is the only way that plugins get the GUI's colors, and it gives only the colors named by its `tint` values.
 - `PageStack.pushPluginPage()` (reached through `Global.pageManager.pushPluginPage()`) opens a plugin page. It creates a `PluginHostPage`, which is a `Page`, and then the plugin page with the host page as its parent, so the two are destroyed together. A root that is a `Page`, or that is not an item, is destroyed with the host and is not opened. `PageStack.pushPage()` is for gui-v2's own pages, and refuses a page whose root is not a `Page`.

@@ -43,6 +43,8 @@ python3 /opt/victronenergy/gui-v2/gui-v2-plugin-compiler.py \
     --settings FullApiExample_Main.qml \
     --devicelist 0x106 FullApiExample_Device.qml 'Full API example'
 
+For a testing install on a GX device, add `--install <gx-host> --ssh-key <private-key>` to the command above. It connects as root and does steps 2 and 3. Or do them by hand:
+
 2) Copy the output file `FullApiExample.json` to /data/apps/available/FullApiExample/gui-v2/FullApiExample.json on device: `mkdir -p /data/apps/available/FullApiExample/gui-v2/ && cp FullApiExample.json /data/apps/available/FullApiExample/gui-v2/FullApiExample.json`
 3) Symlink the `FullApiExample` directory as follows: `ln -s /data/apps/available/FullApiExample /data/apps/enabled/FullApiExample` on device
 4) Run gui-v2 in mock mode, e.g. `/opt/victronenergy/venus-gui-v2 --mock --no-mock-timers`
