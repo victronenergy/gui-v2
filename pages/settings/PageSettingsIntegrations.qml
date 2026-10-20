@@ -324,7 +324,10 @@ Page {
 						onClicked: {
 							const url = switchNavigationItem.pluginSettingsPageIntegration?.url ?? ""
 							if (url) {
-								Global.pageManager.pushPage(url, { title: text })
+								// The list item text is the default title. The page's own title
+								// replaces it when that title is not empty. Do not pass title in
+								// the page properties: that replaces the page's title binding.
+								Global.pageManager.pushPluginPage(url, undefined, text)
 							}
 						}
 					}

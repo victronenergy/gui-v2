@@ -39,8 +39,6 @@ ListSetting {
 	property var valueTrue: 1
 	property var valueFalse: 0
 
-	property Switch _switchItem
-
 	signal clicked
 
 	function click() {
@@ -50,9 +48,11 @@ ListSetting {
 		if (root.updateDataOnClick) {
 			root.toggleDataValue()
 		}
-		// If checkable, update 'checked' value so that onCheckedChanged signal is fired.
-		if (checkable && !!_switchItem) {
-			checked = _switchItem.checked
+		// Toggle here, not in the Switch. A touch, the Space key and click() then each
+		// change checked once. If the Switch toggled itself, a touch would change it
+		// first, and Space and click() would not change it at all.
+		if (root.checkable) {
+			root.checked = !root.checked
 		}
 		root.clicked()
 	}
@@ -116,12 +116,14 @@ ListSetting {
 			rightPadding: rightInset
 
 			checked: root.checked
-			checkable: root.checkable && root.clickable
+			// See click(). The Switch must not toggle itself.
+			checkable: false
 			focusPolicy: Qt.NoFocus
 			enabled: root.clickable
+			// tst_listswitch.qml finds the switch by this name.
+			objectName: "switchItem"
 
 			onClicked: root.click()
-			Component.onCompleted: root._switchItem = switchItem
 		}
 
 		CaptionLabel {

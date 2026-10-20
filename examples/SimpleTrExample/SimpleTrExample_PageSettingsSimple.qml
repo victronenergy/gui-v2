@@ -1,25 +1,17 @@
 import QtQuick
-import Victron.VenusOS
+import Victron.GuiPlugins
 
-Page {
+PluginPage {
 	id: root
 
 	title: "SimpleTr"
 
-	GradientListView {
-		id: settingsListView
-
-		model: VisibleItemModel {
-			ListSwitch {
-				property bool value
-				//% "Battery"
-				text: qsTrId("simpletrexample_pagesettingssimple_text_battery")
-				checked: value
-				onClicked: {
-					value = !checked
-					console.log("Switch now checked?", checked)
-				}
-			}
+	PluginGradientListView {
+		PluginListSwitch {
+			//% "Battery"
+			text: qsTrId("simpletrexample_pagesettingssimple_text_battery")
+			checkable: true
+			onClicked: console.log("Switch now checked?", checked)
 		}
 	}
 }

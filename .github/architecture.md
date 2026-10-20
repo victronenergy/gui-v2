@@ -295,9 +295,19 @@ Run with `--mock` flag to use mock backend. Mock configurations (e.g. "maximal",
 
 `GuiPluginLoader` supports third-party UI extensions:
 - Plugins are JSON-defined with QML components
-- Integration types: settings pages, device list pages, navigation pages, quick access cards
+- Integration types: plugin settings pages, device sub-pages, navigation pages, quick access cards
 - Plugins can be loaded from MQTT (VRM) or filesystem
 - Hot-reloading supported via file system watcher
+
+Plugin settings pages and device sub-pages are written with the `Victron.GuiPlugins` types, and opened with `Global.pageManager.pushPluginPage()`, which shows the plugin page inside a `PluginHostPage`, defined in `PageStack.qml`, that owns it. See [GUI plugins](gui-plugins.md).
+
+### Module dependencies
+
+`Victron.GuiPlugins` (`guiplugins/`, `cmake/ModuleGuiPlugins.cmake`) is the module that plugin pages import. Its types wrap the `Victron.VenusOS` types, so `Victron.VenusOS` must never use `Victron.GuiPlugins`: no QML import, no entry in `IMPORTS` or `DEPENDENCIES`, no include of its headers, and no link to its library. Only the app and the tests may link it.
+
+`tools/moduledependencies.py` checks these rules, and the `tst_moduledependencies` test fails if one is broken. CMake also reads the targets' real link libraries at configure time (`cmake/CheckModuleLinks.cmake`) and stops if `VictronVenusOS` links `VictronGuiPlugins`, or if `VictronBranding` links another Victron library. `tools/moduledependencies.py` finds each module's files in the source lists in `cmake/`: the `set()` and `list(APPEND)` variables whose names start with the module's target name, such as `VictronVenusOS_CPP_SOURCES`. So keep each module's files in variables named that way (`VictronGuiPlugins_...` for `Victron.GuiPlugins`), and do not give a `Victron.GuiPlugins` header the same file name as a `Victron.VenusOS` header.
+
+Any other QML module provided in the future, for a specific kind of plugin, must also not import `Victron.VenusOS` or `Victron.GuiPlugins`, to avoid a circular import or leaking implementation details into that plugin's API.
 
 ## Translations
 

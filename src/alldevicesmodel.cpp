@@ -88,8 +88,13 @@ void AllDevicesModel::serviceAdded(VeQItem *serviceItem)
 
 void AllDevicesModel::serviceAboutToBeRemoved(VeQItem *item)
 {
-	// When a service is removed from the system, stop monitoring it and remove it from the model.
+	// serviceAdded() does not monitor services that are not devices, so this may be one of those.
 	Device *device = m_allDeviceCandidates.take(item->uniqueId());
+	if (!device) {
+		return;
+	}
+
+	// When a service is removed from the system, stop monitoring it and remove it from the model.
 	device->disconnect(this);
 	emit deviceAboutToBeRemoved(device);
 

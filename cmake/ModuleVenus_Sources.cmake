@@ -41,7 +41,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/DateSelector.qml
     components/DemoModeIndicator.qml
     components/DeviceListDelegate.qml
-    components/DeviceListPluginPage.qml
     components/DevicePage.qml
     components/DroopGraph.qml
     components/DialogDragger.qml
@@ -205,6 +204,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListAlarmLevelRadioButtonGroup.qml
     components/listitems/ListAlarmState.qml
     components/listitems/ListBriefCenterDetails.qml
+    components/listitems/ListButtonCaptionContent.qml
+    components/listitems/ListCaptionAttachment.qml
     components/listitems/ListCanbusIdCheckButton.qml
     components/listitems/ListChargeSchedule.qml
     components/listitems/ListClearHistoryButton.qml

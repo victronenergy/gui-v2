@@ -105,31 +105,107 @@ StackView {
 		if (typeof(obj) === "string") {
 			// pre-construct the object to make sure there are no errors
 			// to avoid messing up the page stack state.
+			// Qt.createComponent() has no parent. Destroy it on every path, or it stays allocated.
+			// The page does not need it after createObject() returns.
 			let checkComponent = Qt.createComponent(objectOrUrl)
 			if (checkComponent.status !== Component.Ready) {
-				console.warn("Aborted attempt to push page with errors: " + obj + ": " + checkComponent.errorString())
+				console.warn("Aborted attempt to push a page with errors: " + obj + ": " + checkComponent.errorString())
+				checkComponent.destroy()
 				return null
 			}
 			createdPageObject = checkComponent.createObject(null, properties)
 			if (!createdPageObject) {
-				console.warn("Aborted attempt to push page because createObject() failed: " + obj + ": " + checkComponent.errorString())
+				console.warn("Aborted attempt to push a page because createObject() failed: " + obj + ": " + checkComponent.errorString())
+				checkComponent.destroy()
+				return null
+			}
+			checkComponent.destroy()
+			if (!createdPageObject.__is_venus_gui_page__) {
+				createdPageObject.destroy()
+				console.warn("Aborted attempt to push a page whose base type is not a Page: " + obj
+						+ ". Use pushPluginPage() for the pages of GUI plugins.")
 				return null
 			}
 			objectOrUrl = createdPageObject
 		}
+		return _pushPageObject(objectOrUrl, properties, createdPageObject, pageUrl, operation)
+	}
 
+	// Pushes a page from a GUI plugin. The base type of a plugin page is a PluginPage (or a type
+	// derived from it) from Victron.GuiPlugins, never a Page. It is shown inside a page of
+	// type PluginHostPage, which owns it, so the two are destroyed together.
+	// 'url' is the full URL of the plugin's QML file, such as "qrc:/MyPlugin/MyPage.qml".
+	function pushPluginPage(url, properties, defaultTitle, operation) {
+		if (root.animating) {
+			return null
+		}
+		if (state === "hidden") {
+			_popAndDestroyAllPages(StackView.Immediate)
+		}
+
+		// Qt.createComponent() has no parent. Destroy it on every path, or it stays allocated.
+		// The page does not need it after createObject() returns.
+		const component = Qt.createComponent(url)
+		if (component.status !== Component.Ready) {
+			console.warn("Aborted attempt to push a plugin page with errors: " + url + ": " + component.errorString())
+			component.destroy()
+			return null
+		}
+		const hostPage = pluginHostPageComponent.createObject(null, { defaultTitle: defaultTitle || "" })
+		if (!hostPage) {
+			component.destroy()
+			console.warn("Aborted attempt to push a plugin page because its host page could not be created: " + url)
+			return null
+		}
+		// The host page is the plugin page's parent (both the QObject parent and the visual
+		// parent), so the plugin page stops and is destroyed when the host page is destroyed.
+		const pluginPage = component.createObject(hostPage, properties)
+		if (!pluginPage) {
+			const error = component.errorString()
+			component.destroy()
+			hostPage.destroy()
+			console.warn("Aborted attempt to push a plugin page because createObject() failed: " + url + ": " + error)
+			return null
+		}
+		component.destroy()
+		if (pluginPage.__is_venus_gui_page__) {
+			hostPage.destroy()
+			console.warn("Aborted attempt to push a plugin page whose base type is a Page: " + url
+					+ ". The base type of a plugin page must be a PluginPage from Victron.GuiPlugins.")
+			return null
+		}
+		// Assigning a non-item, such as a QtObject, only warns, and the blank host would still open.
+		if (!(pluginPage instanceof Item)) {
+			hostPage.destroy()
+			console.warn("Aborted attempt to push a plugin page whose base type is not an item: " + url
+					+ ". The base type of a plugin page must be a PluginPage from Victron.GuiPlugins.")
+			return null
+		}
+		// A plain Item, or any other base type that is not a PluginPage, is not a plugin page.
+		// Reading a missing property does not warn. PageStack does not import Victron.GuiPlugins.
+		if (pluginPage.__is_plugin_page__ !== true) {
+			hostPage.destroy()
+			console.warn("Aborted attempt to push a plugin page whose base type is not a PluginPage: " + url
+					+ ". The base type of a plugin page must be a PluginPage from Victron.GuiPlugins.")
+			return null
+		}
+		hostPage.pluginPage = pluginPage
+		return _pushPageObject(hostPage, undefined, hostPage, url, operation)
+	}
+
+	function _pushPageObject(objectOrUrl, pushProperties, createdPageObject, pageUrl, operation) {
 		let pushedPage = null
 		if (root.state !== "opened") {
 			// Closed or hidden: push the page immediately, then slide the stack in.
 			// Set the duration before push(). An Immediate push can mark the stack
 			// busy, which used to set the duration to 0.
 			const slideDuration = _animationDuration(operation)
-			pushedPage = root.push(objectOrUrl, properties, StackView.Immediate)
+			pushedPage = root.push(objectOrUrl, pushProperties, StackView.Immediate)
 			if (!pushedPage) {
 				if (createdPageObject && !Theme.objectHasQObjectParent(createdPageObject)) {
 					createdPageObject.destroy()
 				}
-				console.warn("Aborted attempt to push page because StackView rejected the page object: " + pageUrl)
+				console.warn("Aborted attempt to push a page because StackView rejected the page object: " + pageUrl)
 				return null
 			}
 			root._pageUrls.push(pageUrl)
@@ -138,12 +214,12 @@ StackView {
 			root.state = "opened"
 		} else {
 			// Otherwise, push the push onto the visible stack, possibly with an animation.
-			pushedPage = root.push(objectOrUrl, properties, _adjustedStackOperation(operation))
+			pushedPage = root.push(objectOrUrl, pushProperties, _adjustedStackOperation(operation))
 			if (!pushedPage) {
 				if (createdPageObject && !Theme.objectHasQObjectParent(createdPageObject)) {
 					createdPageObject.destroy()
 				}
-				console.warn("Aborted attempt to push page because StackView rejected the page object: " + pageUrl)
+				console.warn("Aborted attempt to push a page because StackView rejected the page object: " + pageUrl)
 				return null
 			}
 			root._pageUrls.push(pageUrl)
@@ -300,4 +376,34 @@ StackView {
 			}
 		}
 	]
+
+	// pushPluginPage() is the intended way to open a plugin page. This type can still be
+	// created from another file, as PageStack.PluginHostPage. The plugin page's base type is
+	// a PluginPage, not a Page. This page gives it the title, back button and size, and owns
+	// it, so the two are destroyed together.
+	component PluginHostPage: Page {
+		id: hostPage
+
+		// The plugin page. Its parent is this page.
+		property Item pluginPage
+
+		property string defaultTitle
+
+		title: pluginPage?.title || defaultTitle
+
+		// pluginPage is null when this page is created, so this cannot be written as
+		// pluginPage.anchors.fill: hostPage. That form would not follow the later assignment.
+		Binding {
+			when: pluginPage !== null
+			target: pluginPage
+			property: "anchors.fill"
+			value: hostPage
+		}
+	}
+
+	Component {
+		id: pluginHostPageComponent
+
+		PluginHostPage {}
+	}
 }
