@@ -24,6 +24,7 @@ ListSetting {
 	// If these are not set, the default values are used.
 	property color buttonBorderColor: FastUtils.invalidColor()
 	property color buttonBackgroundColor: FastUtils.invalidColor()
+	property color buttonColor: FastUtils.invalidColor()
 
 	signal clicked
 
@@ -36,6 +37,10 @@ ListSetting {
 
 	// If true, displays a text label instead of a button.
 	property bool readOnly: false
+
+	// Custom colors are the enabled appearance. Not clickable: that includes enabled, which is
+	// false while a page slides, and the button would flash its disabled colors.
+	readonly property bool _customButtonColors: interactive && userHasWriteAccess && !readOnly
 
 	interactive: true
 
@@ -68,12 +73,16 @@ ListSetting {
 				// these Binding objects can be dropped in favour of just setting something like
 				// 'borderColor: root.borderColor'.
 				Binding on borderColor {
-						when: root.buttonBorderColor.valid
+						when: root.buttonBorderColor.valid && root._customButtonColors
 						value: root.buttonBorderColor
 				}
 				Binding on backgroundColor {
-						when: root.buttonBackgroundColor.valid
+						when: root.buttonBackgroundColor.valid && root._customButtonColors
 						value: root.buttonBackgroundColor
+				}
+				Binding on color {
+						when: root.buttonColor.valid && root._customButtonColors
+						value: root.buttonColor
 				}
 			}
 		}

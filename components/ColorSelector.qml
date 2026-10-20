@@ -116,7 +116,7 @@ Item {
 		background: Shape {
 			ShapePath {
 				id: borderPath
-				strokeColor: Theme.color_blue
+				strokeColor: Theme.color_brand
 				strokeWidth: Theme.geometry_colorWheel_slider_strokeWidth
 				fillColor: "transparent"
 				capStyle: ShapePath.RoundCap
@@ -135,7 +135,7 @@ Item {
 			}
 			ShapePath {
 				id: backgroundPath
-				strokeColor: Theme.color_darkOk
+				strokeColor: Theme.color_darkBrand
 				strokeWidth: Theme.geometry_colorWheel_slider_strokeWidth - Theme.geometry_colorWheel_slider_borderWidth * 2
 				fillColor: "transparent"
 				capStyle: ShapePath.RoundCap
@@ -164,7 +164,7 @@ Item {
 		contentItem: Shape {
 			ShapePath {
 				id: highlightPath
-				strokeColor: Theme.color_blue
+				strokeColor: Theme.color_brand
 				strokeWidth: Theme.geometry_colorWheel_slider_strokeWidth - Theme.geometry_colorWheel_slider_borderWidth // margin so highlight falls within the border
 				fillColor: "transparent"
 				capStyle: ShapePath.RoundCap
@@ -323,7 +323,7 @@ Item {
 		handle: Halo {
 			x: (lowerSlider.availableWidth) * (lowerSlider.position) + (Theme.geometry_colorWheel_slider_strokeWidth - width)/2
 			y: Math.cos((Math.asin(.5 - lowerSlider.position) * lowerSlider.availableWidth)/Theme.geometry_colorWheel_slider_arc_radius) * Theme.geometry_colorWheel_slider_arc_radius - colorWheel.height/2 - Theme.geometry_colorWheel_lowerSlider_padding - root._halfStrokeWidth + (Theme.geometry_colorWheel_slider_strokeWidth - height)/2
-			color: Theme.color_blue
+			color: Theme.color_brand
 			width: Theme.geometry_colorWheel_slider_halo_diameter
 		}
 

@@ -110,7 +110,7 @@ T.Dialog {
 		Rectangle {
 			id: highlightBar
 
-			color: Theme.color_ok
+			color: Theme.color_info
 			radius: Theme.geometry_solarChart_bar_radius
 		}
 

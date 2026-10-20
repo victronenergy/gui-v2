@@ -6,18 +6,21 @@
     "color_humidity2": "#97B974",
     "color_humidity3": "#DBB78E",
 
-    "color_dimRed": "dim(color_red)",
-    "color_dimGreen": "dim(color_green)",
-    "color_darkishBlue": "dark(color_blue)",
     "color_darkBlue": "dark(color_blue)",
-    "color_darkOrange": "dark(color_orange)",
-    "color_darkRed": "dark(color_red)",
-    "color_darkGreen": "dark(color_green)",
 
-    "color_ok": "color_brand",
-    "color_darkOk": "dark(color_brand)",
+    "color_darkBrand": "dark(color_brand)",
+    "color_darkInfo": "dark(color_info)",
+    "color_darkishInfo": "dark(color_info)",
+    "color_darkSuccess": "dark(color_success)",
+    "color_dimSuccess": "dim(color_success)",
+    "color_dimSuccess_text": "text_color_on(color_dimSuccess)",
+    "color_acceptButton_success_text": "text_color_on(color_dimSuccess, color_success)",
     "color_darkWarning": "dark(color_warning)",
     "color_darkCritical": "dark(color_critical)",
+    "color_darkCritical_text": "text_color_on(color_darkCritical)",
+    "color_dimCritical": "dim(color_critical)",
+    "color_dimCritical_text": "text_color_on(color_dimCritical)",
+    "color_acceptButton_critical_text": "text_color_on(color_dimCritical, color_critical)",
     "color_critical_background": "dim(color_critical)",
 
     "color_font_disabled": "font_over_background(184)",
@@ -29,14 +32,16 @@
     "color_button": "color_brand",
     "color_button_disabled": "font_over_background(62)",
     "color_button_down": "dim(color_brand)",
-    "color_button_down_text": "text_color_on(color_ok)",
+    "color_button_down_text": "text_color_on(color_brand)",
+    "color_button_pressed_text": "text_color_on(color_button_down)",
     "color_button_icon": "color_font_secondary",
     "color_button_icon_down": "font_over_background(184)",
-    "color_button_on_background": "color_ok",
-    "color_button_off_background": "dim(color_brand)",
+    "color_button_on_background": "color_brand",
+    "color_button_off_background": "fill_for_text(dim(color_brand), color_button_down_text)",
     "color_button_on_background_disabled": "font_over_background(125)",
     "color_button_off_background_disabled": "font_over_background(80)",
     "color_button_on_background_modified": "dark(color_warning)",
+    "color_button_on_background_modified_text": "text_color_on(color_button_on_background_modified)",
     "color_button_on_border_modified": "color_warning",
     "color_button_on_text_disabled": "font_over_background(43)",
     "color_button_off_text_disabled": "color_font_disabled",
@@ -46,7 +51,7 @@
 
     "color_switch_status_disabled": "font_over_background(43)",
 
-    "color_multistepbutton_separator": "blend_onto(color_white, 62, color_darkOk)",
+    "color_multistepbutton_separator": "blend_onto(color_white, 62, color_darkBrand)",
 
     "color_card_separator": "font_over_background(43)",
 
@@ -68,7 +73,7 @@
     "color_droopGraph_gradient_edge": "color_orange",
     "color_droopGraph_operationPoint_guidelines": "color_font_primary",
 
-    "color_radioButton_indicator_on": "color_ok",
+    "color_radioButton_indicator_on": "color_brand",
     "color_radioButton_indicator_off": "font_over_background(207)",
     "color_radioButton_indicator_disabled": "color_button_disabled",
 
@@ -91,7 +96,7 @@
 
     "color_switch_groove_disabled": "color_button_disabled",
     "color_switch_groove_off": "transparent",
-    "color_switch_groove_on": "color_ok",
+    "color_switch_groove_on": "color_brand",
     "color_switch_groove_border_off": "font_over_background(125)",
     "color_switch_groove_border_on": "transparent",
 
@@ -104,11 +109,13 @@
     "color_navigationBar_button_on": "color_brand",
     "color_navigationBar_button_off": "font_over_background(184)",
 
-    "color_toastNotification_foreground": "text_color_on(color_toastNotification_background_informative, color_toastNotification_background_warning, color_toastNotification_background_error)",
-    "color_toastNotification_background_informative": "dark_mode_dim(color_brand)",
+    "color_toastNotification_foreground_informative": "text_color_on(color_toastNotification_background_informative, color_toastNotification_highlight_informative)",
+    "color_toastNotification_foreground_warning": "text_color_on(color_toastNotification_background_warning, color_toastNotification_highlight_warning)",
+    "color_toastNotification_foreground_error": "text_color_on(color_toastNotification_background_error, color_toastNotification_highlight_error)",
+    "color_toastNotification_background_informative": "dark_mode_dim(color_info)",
     "color_toastNotification_background_warning": "dark_mode_dim(color_warning)",
     "color_toastNotification_background_error": "dark_mode_dim(color_critical)",
-    "color_toastNotification_highlight_informative": "color_brand",
+    "color_toastNotification_highlight_informative": "color_info",
     "color_toastNotification_highlight_warning": "color_warning",
     "color_toastNotification_highlight_error": "color_critical",
 
@@ -133,10 +140,10 @@
     "color_solarListPage_header_text": "font_over_background(207)",
 
     "color_overviewPage_widget_background": "color_background_primary",
-    "color_overviewPage_widget_border": "color_ok",
-    "color_overviewPage_widget_solar_graph_bar": "color_ok",
-    "color_overviewPage_widget_battery_background": "dim(color_brand)",
-    "color_overviewPage_widget_battery_font_secondary": "color_dimGray2",
+    "color_overviewPage_widget_border": "color_brand",
+    "color_overviewPage_widget_solar_graph_bar": "color_info",
+    "color_overviewPage_widget_battery_background": "fill_for_text(dim(color_brand), color_font_primary)",
+    "color_overviewPage_widget_battery_font_secondary": "readable_text_on(color_dimGray2, color_overviewPage_widget_battery_background, color_overviewPage_widget_background)",
 
     "color_boatPage_background": "color_background_secondary",
 
@@ -165,7 +172,8 @@
     "color_levelsPage_airQuality_inactive": "color_gray7",
 
     "color_solarHistoryErrorView_primaryText": "text_color_on(color_toastNotification_background_error, color_toastNotification_highlight_error)",
-    "color_solarHistoryErrorView_secondaryText": "color_font_secondary",
+    "color_solarHistoryErrorView_secondaryText": "readable_text_on(color_font_secondary, color_toastNotification_background_error)",
+    "color_solarHistoryChart_bar_pressed": "blend_onto(color_info, 179, color_white)",
 
     "color_settings_gsmModem_signalStrength_inactive": "color_darkGray2",
     "color_settings_gsmModem_signalStrength_active": "color_font_primary",

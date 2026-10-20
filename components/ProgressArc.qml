@@ -31,7 +31,7 @@ Shape {
 		radius: control.radius
 		direction: control.direction
 		strokeWidth: control.strokeWidth
-		strokeColor: Theme.color_darkOk
+		strokeColor: Theme.color_darkInfo
 		fillColor: control.fillColor
 		animationEnabled: progress.animationEnabled
 	}
@@ -44,7 +44,7 @@ Shape {
 		endAngle: control.transitionAngle
 		direction: control.direction
 		strokeWidth: control.strokeWidth
-		strokeColor: Theme.color_ok
+		strokeColor: Theme.color_info
 		fillColor: control.fillColor
 		animationEnabled: control.animationEnabled
 	}

@@ -95,7 +95,7 @@ SwitchableOutputSlider {
 			closePolicy: Popup.CloseOnReleaseOutside
 
 			background: Rectangle {
-				color: Theme.color_blue
+				color: Theme.color_brand
 				radius: Theme.geometry_temperatureSlider_popup_radius
 				layer.enabled: true
 				layer.effect: Effects.MultiEffect {
@@ -113,7 +113,7 @@ SwitchableOutputSlider {
 						horizontalCenter: parent.horizontalCenter
 					}
 					source: "qrc:/images/spinbox_arrow_up.svg"
-					color: Theme.color_blue
+					color: Theme.color_brand
 					rotation: 180
 				}
 			}
@@ -139,7 +139,7 @@ SwitchableOutputSlider {
 					}
 					height: popupLabel.implicitHeight - (2 * Theme.geometry_temperatureSlider_popup_padding)
 					visible: root.measurementText.length > 0
-					color: Theme.color_gray7
+					color: Theme.color_button_down_text
 				}
 
 				Label {
@@ -152,7 +152,7 @@ SwitchableOutputSlider {
 					width: Math.max(measurementCaptionLabel.implicitWidth, implicitWidth)
 					visible: root.measurementText.length > 0
 					horizontalAlignment: Text.AlignHCenter
-					color: Theme.color_gray7
+					color: Theme.color_button_down_text
 					text: root.measurementText
 					font.pixelSize: Theme.font_size_body2
 
@@ -165,7 +165,7 @@ SwitchableOutputSlider {
 						font.pixelSize: Theme.font_size_tiny
 						width: parent.width
 						horizontalAlignment: Text.AlignHCenter
-						color: Theme.color_gray7
+						color: Theme.color_button_down_text
 					}
 				}
 			}
@@ -176,7 +176,7 @@ SwitchableOutputSlider {
 		anchors.verticalCenter: parent.verticalCenter
 		leftPadding: Theme.geometry_temperatureSlider_text_horizontal_padding
 		rightPadding: Theme.geometry_temperatureSlider_text_horizontal_padding
-		color: root.enabled ? Theme.color_button_down_text : Theme.color_font_disabled
+		color: root.enabled ? Theme.color_white : Theme.color_font_disabled
 	}
 
 	MinMaxLabel {

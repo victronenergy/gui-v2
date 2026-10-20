@@ -61,10 +61,10 @@ Item {
 			y: root.roundedSide === VenusOS.AsymmetricRoundedRectangle_RoundedSide_Bottom ? -(root.height - root.radius) : 0
 			width: root.width
 			height: root.height
-			color: Theme.color_darkOk
+			color: Theme.color_darkBrand
 			radius: Theme.geometry_button_radius
 			border.width: root.flat ? 0 : Theme.geometry_button_border_width
-			border.color: Theme.color_ok
+			border.color: Theme.color_brand
 		}
 	}
 

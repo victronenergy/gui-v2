@@ -64,7 +64,7 @@ Page {
 				//% "Add shape point"
 				text: qsTrId("devicelist_tankshape_add_shape_point")
 				iconSource: "qrc:/images/icon_plus_32.svg"
-				iconColor: Theme.color_ok
+				iconColor: Theme.color_brand
 				showAccessLevel: VenusOS.User_AccessType_Installer
 				preferredVisible: _canEditPoints && pointsListView.count < 10
 				hasSubMenu: false
@@ -308,7 +308,7 @@ Page {
 
 						CP.ColorImage {
 							source: "qrc:/images/icon_warning_24.svg"
-							color: Theme.color_red
+							color: Theme.color_critical
 						}
 
 						Label {

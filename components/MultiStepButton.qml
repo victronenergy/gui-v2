@@ -36,7 +36,7 @@ BaseListView {
 		anchors.horizontalCenter: parent.horizontalCenter
 		width: parent.width - (2 * root.horizontalPressMargin)
 		height: Theme.geometry_iochannel_control_height
-		color: enabled ? Theme.color_ok : Theme.color_font_disabled
+		color: enabled ? Theme.color_brand : Theme.color_font_disabled
 		radius: Theme.geometry_button_radius
 		z: -1
 	}
@@ -80,8 +80,8 @@ BaseListView {
 					? (checked ? Theme.color_button_down_text : Theme.color_font_primary)
 					: Theme.color_font_disabled
 			backgroundColor: !root.enabled ? (checked ? Theme.color_button_off_background_disabled : Theme.color_background_disabled)
-					: checked ? (root.checked ? Theme.color_ok : Theme.color_button_off_background)
-					: Theme.color_darkOk
+					: checked ? (root.checked ? Theme.color_brand : Theme.color_button_off_background)
+					: Theme.color_darkBrand
 			checked: index === root.currentIndex
 			focus: true
 
@@ -117,7 +117,7 @@ BaseListView {
 			borderWidth: 0
 			flat: false
 			color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
-			backgroundColor: root.enabled ? Theme.color_darkOk : Theme.color_background_disabled
+			backgroundColor: root.enabled ? Theme.color_darkBrand : Theme.color_background_disabled
 			checked: root.checked
 			focus: true
 			separatorColor: enabled ? Theme.color_multistepbutton_separator : Theme.color_font_disabled

@@ -15,7 +15,7 @@ import os, re, sys
 from themeparser import THEME_KEY_TO_BRANDING_COLOR
 
 # A theme value refers to other properties by name: directly, or inside a color formula such as
-# "dim(color_red)" or "text_color_on(color_ok)".
+# "dim(color_red)" or "text_color_on(color_brand)".
 IDENTIFIER_RE = re.compile(r'[A-Za-z_][A-Za-z0-9_]*')
 
 def find_theme_files(root_dir):

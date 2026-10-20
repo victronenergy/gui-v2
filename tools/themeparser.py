@@ -57,18 +57,6 @@ public:
 	// property accessors
 %(accessors)s
 
-	// NOTE: won't capture, so client needs to manually capture the color change signal.
-	Q_INVOKABLE QColor statusColorValue(StatusLevel level, bool darkColor = false) const
-	{
-		const QVariant c = (level == Ok && darkColor) ? color_darkOk()
-			: (level == Ok) ? color_ok()
-			: (level == Warning && darkColor) ? color_darkWarning()
-			: (level == Warning) ? color_warning()
-			: (level == Critical && darkColor) ? color_darkCritical()
-			: color_critical();
-		return c.typeId() == QMetaType::QColor ? c.value<QColor>() : QColor(c.value<QString>());
-	}
-
 protected:
 	// Computes every color scheme key for the current scheme, from the resolved branding colors and
 	// the formulas in Dark.json and Light.json.
@@ -236,7 +224,15 @@ class ThemeProperty:
 #     blend_onto(c, n, bg)     c at alpha n, blended onto bg
 #     text_color_on(c, ...)    the color of text on the colored fills c, ...: white if white has a
 #                              contrast of at least 3:1 on all of them, else the darker of the two
-#                              schemes' font_primary
+#                              schemes' font_primary, darkened toward black until it does. If even
+#                              black does not, the result is black
+#     fill_for_text(c, text)   c if text already has a contrast of at least 3:1 on it, else c mixed
+#                              toward black or white until it does. The result is opaque
+#     readable_text_on(text, c, ...)
+#                              text if it has a contrast of at least 3:1 on every fill c (a
+#                              translucent text is judged as drawn on that fill). Otherwise text
+#                              is made more opaque, then moved toward text_color_on(c, ...), until
+#                              it does
 #     with_alpha(c, n)         c with alpha n (translucent)
 # The C++ functions are in src/colorderivation.h.
 COLOR_FUNCTIONS = {
@@ -247,6 +243,8 @@ COLOR_FUNCTIONS = {
     'dark_mode_dim': ('color',),
     'blend_onto': ('color', 'number', 'color'),
     'text_color_on': None, # one or more colors
+    'fill_for_text': ('color', 'color'),
+    'readable_text_on': None, # a text color, then one or more fills
     'with_alpha': ('color', 'number'),
 }
 
@@ -388,6 +386,13 @@ class PaletteGenerator:
             cpp = 'blendOnto({}, {}, {})'.format(*values)
         elif function == 'text_color_on':
             cpp = 'textColorOn({{ {} }}, m_brandingColors.darkerFontPrimary)'.format(', '.join(values))
+        elif function == 'fill_for_text':
+            cpp = 'fillForText({}, {})'.format(*values)
+        elif function == 'readable_text_on':
+            if len(values) < 2:
+                raise ValueError('{}: readable_text_on() needs a text color and at least one fill'.format(where))
+            cpp = 'readableTextOn({}, {{ {} }}, m_brandingColors.darkerFontPrimary)'.format(
+                values[0], ', '.join(values[1:]))
         else:
             cpp = 'withAlpha({}, {})'.format(*values)
         return 'color', cpp, deps

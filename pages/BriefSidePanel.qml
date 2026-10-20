@@ -144,8 +144,8 @@ exported power v  0.4 |   /
 			}
 
 			animationEnabled: root.animationEnabled
-			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
-			belowThresholdFillColor: _graphShowsFeedIn ? Theme.color_green : Theme.color_blue
+			aboveThresholdFillColor: Theme.color_info   // warning color is not needed for inputs
+			belowThresholdFillColor: _graphShowsFeedIn ? Theme.color_success : Theme.color_info
 			initialModelValue: _graphShowsFeedIn ? 0.5 : 0
 			zeroCentered: _graphShowsFeedIn
 
@@ -217,7 +217,7 @@ exported power v  0.4 |   /
 		graph: LoadGraph {
 			animationEnabled: root.animationEnabled
 			threshold: 0    // no threshold needed for inputs
-			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
+			aboveThresholdFillColor: Theme.color_info   // warning color is not needed for inputs
 			onNextValueRequested: addValue(dcInputRange.valueAsRatio)
 		}
 		footer: CheapBarGauge {

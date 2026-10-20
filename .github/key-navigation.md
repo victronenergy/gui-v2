@@ -6,7 +6,7 @@
 
 1. **Global toggle**: `Global.keyNavigationEnabled` controls whether key navigation is active. It is enabled when a navigation key is pressed and disabled after an idle timeout.
 
-2. **Focus highlight**: A single `GlobalKeyNavigationHighlight` (BorderImage) auto-reparents itself to the current `Window.activeFocusItem`. It only appears when `Global.keyNavigationEnabled` is true and the item has opted in via `KeyNavigationHighlight.active`.
+2. **Focus highlight**: A single `GlobalKeyNavigationHighlight` (BorderImage) auto-reparents itself to the current `Window.activeFocusItem`. It only appears when `Global.keyNavigationEnabled` is true and the item has opted in via `KeyNavigationHighlight.active`. The ring is one SVG, tinted with `Theme.color_focus_highlight` by the `image://tinted` image provider, so it follows branding.
 
 3. **Focus eligibility**: `Utils.acceptsKeyNavigation(item)` checks `item.focusPolicy & Qt.TabFocus && item.enabled`. Items that should be navigable must set `focusPolicy: Qt.TabFocus`.
 
@@ -74,6 +74,7 @@ The Overview page implements custom widget-to-widget navigation that follows con
 - Every interactive element must be reachable via keyboard navigation
 - Set `focusPolicy: Qt.TabFocus` on navigable items
 - Use `KeyNavigationHighlight.active: activeFocus` to show the focus indicator
+- Do not draw a focus indicator of your own in a fixed color. If one is really needed, color it with `Theme.color_focus_highlight` (`color_success` in the Dark scheme, `color_warning` in the Light scheme), so that it follows branding like the shared ring
 - Guard key handlers with `Keys.enabled: Global.keyNavigationEnabled`
 - For lists, use `BaseListView`, `SettingsColumn`, or `SettingsFlow` which provide navigation automatically
 - For custom containers, implement a `__keyNavHelper` property

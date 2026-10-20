@@ -18,7 +18,7 @@ CP.ColorImage {
 	signal clicked()
 
 	source: "qrc:/images/icon_minus.svg"
-	color: Theme.color_ok
+	color: Theme.color_brand
 
 	PressArea {
 		anchors.centerIn: parent

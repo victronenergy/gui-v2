@@ -43,7 +43,7 @@ Rectangle {
 			//% "Skip"
 			text: qsTrId("welcome_skip")
 			flat: true
-			color: Theme.color_ok
+			color: Theme.color_brand
 			onClicked: Services.settings.setOnboardingDone()
 		}
 

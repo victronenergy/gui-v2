@@ -17,6 +17,7 @@
 #include "src/frameratemodel.h"
 #include "src/screenblanker.h"
 #include "src/urlinterceptor.h"
+#include "src/tintedimageprovider.h"
 
 #if defined(VENUS_WEBASSEMBLY_BUILD)
 #include <emscripten/html5.h>
@@ -689,6 +690,8 @@ int main(int argc, char *argv[])
 	}
 	QZXing::registerQMLTypes();
 	QZXing::registerQMLImageProvider(engine);
+	engine.addImageProvider(Victron::VenusOS::TintedImageProvider::ProviderId,
+			new Victron::VenusOS::TintedImageProvider);
 
 	initBackend(&enableFpsCounter, &skipSplashScreen);
 	perfMark("backend initialized");

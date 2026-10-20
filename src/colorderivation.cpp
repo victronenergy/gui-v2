@@ -248,10 +248,86 @@ double contrastRatio(const QColor &a, const QColor &b)
 QColor textColorOn(std::initializer_list<QColor> fills, const QColor &darkerFontPrimary)
 {
 	static const QColor white(255, 255, 255);
-	const bool whitePasses = std::all_of(fills.begin(), fills.end(), [](const QColor &fill) {
-		return contrastRatio(white, fill) >= MinimumWhiteTextContrast;
+	const auto readable = [&fills](const QColor &text) {
+		return std::all_of(fills.begin(), fills.end(), [&text](const QColor &fill) {
+			return contrastRatio(text, fill) >= MinimumWhiteTextContrast;
+		});
+	};
+	if (readable(white)) {
+		return white;
+	}
+	// A mid-gray fill can be too light for white and too close to darkerFontPrimary for that dark
+	// color. Darken it toward black until it can be read on every fill. Step 0 is the fallback
+	// itself, so a fallback that already passes is returned unchanged.
+	const QColor black(0, 0, 0);
+	const QColor from(darkerFontPrimary.red(), darkerFontPrimary.green(), darkerFontPrimary.blue());
+	for (int step = 0; step <= 255; ++step) {
+		const QColor candidate = mix(from, black, step, 255);
+		if (readable(candidate)) {
+			return candidate;
+		}
+	}
+	return black;
+}
+
+QColor fillForText(const QColor &preferred, const QColor &textColor)
+{
+	if (contrastRatio(textColor, preferred) >= MinimumWhiteTextContrast) {
+		return preferred;
+	}
+	const QColor black(0, 0, 0);
+	const QColor white(255, 255, 255);
+	const QColor &toward = contrastRatio(textColor, black) >= contrastRatio(textColor, white) ? black : white;
+	for (int step = 1; step <= 255; ++step) {
+		const QColor candidate = mix(preferred, toward, step, 255);
+		if (contrastRatio(textColor, candidate) >= MinimumWhiteTextContrast) {
+			return candidate;
+		}
+	}
+	return toward;
+}
+
+namespace {
+
+QColor drawnOnFill(const QColor &text, const QColor &fill)
+{
+	if (text.alpha() == 255) {
+		return QColor(text.red(), text.green(), text.blue());
+	}
+	return blendOnto(text, text.alpha(), fill);
+}
+
+bool readableOnFills(const QColor &text, std::initializer_list<QColor> fills)
+{
+	return std::all_of(fills.begin(), fills.end(), [&text](const QColor &fill) {
+		return contrastRatio(drawnOnFill(text, fill), fill) >= MinimumWhiteTextContrast;
 	});
-	return whitePasses ? white : darkerFontPrimary;
+}
+
+}
+
+QColor readableTextOn(const QColor &preferred, std::initializer_list<QColor> fills, const QColor &darkerFontPrimary)
+{
+	if (readableOnFills(preferred, fills)) {
+		return preferred;
+	}
+	if (preferred.alpha() < 255) {
+		for (int alpha = preferred.alpha() + 1; alpha <= 255; ++alpha) {
+			const QColor candidate = withAlpha(preferred, alpha);
+			if (readableOnFills(candidate, fills)) {
+				return candidate;
+			}
+		}
+	}
+	const QColor target = textColorOn(fills, darkerFontPrimary);
+	const QColor from(preferred.red(), preferred.green(), preferred.blue());
+	for (int step = 1; step <= 255; ++step) {
+		const QColor candidate = mix(from, target, step, 255);
+		if (readableOnFills(candidate, fills)) {
+			return candidate;
+		}
+	}
+	return target;
 }
 
 bool isValidLightModeBackgroundFactor(qreal value)

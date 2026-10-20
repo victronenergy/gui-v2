@@ -36,8 +36,8 @@ namespace ColorDerivation {
 // One color for each BrandingData::Color, in one color scheme.
 using BrandingColors = std::array<QColor, Victron::BrandingData::ColorCount>;
 
-// The alpha values of the dim, darkish and dark colors (for example color_dimRed,
-// color_button_down and color_darkOk): a color at this alpha, blended onto background_primary.
+// The alpha values of the dim, darkish and dark colors (for example color_dimCritical,
+// color_button_down and color_darkBrand): a color at this alpha, blended onto background_primary.
 constexpr int DimAlpha = 179;      // 0xB3, 70%
 constexpr int DarkishAlpha = 121;  // 47.5%: the background of a pressed button
 constexpr int DarkAlpha = 77;      // 0x4D, 30%
@@ -76,8 +76,18 @@ double relativeLuminance(const QColor &color);
 double contrastRatio(const QColor &a, const QColor &b);
 
 // The text color to use on top of the given fill colors: white if white has enough contrast on
-// every one of them, else darkerFontPrimary.
+// every one of them, else darkerFontPrimary darkened toward black until it does. If even black
+// does not, no one text color can be read on every fill; the result is black, and the caller
+// should adjust a fill with fillForText().
 QColor textColorOn(std::initializer_list<QColor> fills, const QColor &darkerFontPrimary);
+
+// preferred if textColor already has enough contrast on it, else preferred mixed toward black or
+// white until it does. The result is opaque.
+QColor fillForText(const QColor &preferred, const QColor &textColor);
+
+// preferred if it has enough contrast on every fill. A translucent preferred is judged as drawn
+// on that fill. Otherwise it is made more opaque, then moved toward textColorOn(), until it does.
+QColor readableTextOn(const QColor &preferred, std::initializer_list<QColor> fills, const QColor &darkerFontPrimary);
 
 // Returns a Branding light_mode_background_factor in thousandths, or the default if the value is
 // out of range.

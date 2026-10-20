@@ -77,7 +77,12 @@ TestCase {
 	QtObject {
 		id: boundToTheme
 		property color brand: Theme.color_brand
-		property color ok: Theme.color_ok
+		property color button: Theme.color_button
+		// Global.statusColor() must be a QML function: a binding does not record Theme reads made
+		// inside a C++ function, so these would not follow a branding change.
+		property color info: Global.statusColor(Theme.Ok)
+		property color infoDark: Global.statusColor(Theme.Ok, true)
+		property color warning: Global.statusColor(Theme.Warning)
 		property url splashLogoIcon: Theme.splash_logo_icon
 	}
 
@@ -285,7 +290,7 @@ TestCase {
 		compare(Theme.color_darkBlue.toString(), "#11263b")
 		compare(Theme.color_dimBlue.toString(), "#27588a")
 		// Not the old hand-picked #592220: the formula gives a lighter red.
-		compare(Theme.color_dimRed.toString(), "#ab413e")
+		compare(Theme.color_dimCritical.toString(), "#ab413e")
 		compare(Theme.color_darkBlue.a, 1)
 		compare(Theme.color_critical_background.a, 1)
 		// The translucent exceptions.
@@ -300,9 +305,11 @@ TestCase {
 	// The dim and dark colors are recomputed on an OEM background, even with the Victron brand color.
 	function test_dimAndDarkColorsFollowTheBackground() {
 		BrandingTestHelper.setThemeBranding([{ pluginName: "A", color_background_primary: "#1a1a1a" }])
-		compare(Theme.color_darkOk.toString(), "#23384e")
+		compare(Theme.color_darkBrand.toString(), "#23384e")
+		compare(Theme.color_darkInfo.toString(), "#23384e")
 		Theme.colorScheme = Theme.Light
-		compare(Theme.color_darkOk.toString(), "#b1c6db")
+		compare(Theme.color_darkBrand.toString(), "#b1c6db")
+		compare(Theme.color_darkInfo.toString(), "#b1c6db")
 	}
 
 	function test_brandColorChangesOnlyColorsThatUseIt() {
@@ -310,36 +317,226 @@ TestCase {
 			success: Theme.color_success.toString(),
 			warning: Theme.color_warning.toString(),
 			critical: Theme.color_critical.toString(),
+			info: Theme.color_info.toString(),
 			blue: Theme.color_blue.toString(),
 			page: Theme.color_page_background.toString(),
 		}
 		BrandingTestHelper.setThemeBranding([{ color_brand: "#003366" }])
 		compare(Theme.color_button.toString(), "#003366")
-		compare(Theme.color_ok.toString(), "#003366")
 		compare(Theme.color_navigationBar_button_on.toString(), "#003366")
-		compare(Theme.color_darkOk.toString(), "#000f1f")
+		compare(Theme.color_darkBrand.toString(), "#000f1f")
+		compare(Theme.color_info.toString(), before.info)
 		compare({
 			success: Theme.color_success.toString(),
 			warning: Theme.color_warning.toString(),
 			critical: Theme.color_critical.toString(),
+			info: Theme.color_info.toString(),
 			blue: Theme.color_blue.toString(),
 			page: Theme.color_page_background.toString(),
 		}, before)
 	}
 
-	// Text on a colored fill is white if white reaches 3.0:1 on it, else the darker font_primary.
+	// Text on colored fills is white if white reaches 3.0:1 on every listed fill, else the darker font_primary.
 	function test_textColorOnFills() {
 		compare(Theme.color_button_down_text.toString(), "#ffffff")
+		compare(Theme.color_button_pressed_text.toString(), "#ffffff")
+		compare(Theme.color_dimCritical_text.toString(), "#ffffff")
+		compare(Theme.color_acceptButton_critical_text.toString(), "#ffffff")
+		// color_dimSuccess_text is text_color_on(color_dimSuccess) only, so it stays #ffffff.
+		// color_acceptButton_success_text also passes color_success. White does not have 3:1 on
+		// color_success, so text_color_on() returns #262626. Do not add color_success to
+		// color_dimSuccess_text and update the expected value.
+		compare(Theme.color_dimSuccess_text.toString(), "#ffffff")
+		compare(Theme.color_acceptButton_success_text.toString(), "#262626")
+		compare(Theme.color_toastNotification_foreground_informative.toString(), "#ffffff")
+		compare(Theme.color_toastNotification_foreground_warning.toString(), "#262626")
+		compare(Theme.color_toastNotification_foreground_error.toString(), "#ffffff")
 		compare(Theme.color_solarHistoryErrorView_primaryText.toString(), "#ffffff")
+		// "Last" / "2nd last" are drawn on the error fill, not the page. color_font_secondary
+		// does not have 3:1 there. Do not set this back to color_font_secondary.
+		compare(Theme.color_solarHistoryErrorView_secondaryText.toString(), "#b9b9b6")
+		verify(BrandingTestHelper.contrastRatio(Theme.color_solarHistoryErrorView_secondaryText.toString(),
+				Theme.color_toastNotification_background_error.toString()) >= 3)
 		Theme.colorScheme = Theme.Light
+		compare(Theme.color_solarHistoryErrorView_secondaryText.toString(), "#b9b9b7")
 		// Only the brand color is checked, not the lighter background of the pressed button.
 		compare(Theme.color_button_down_text.toString(), "#ffffff")
+		compare(Theme.color_button_pressed_text.toString(), "#262626")
 		compare(Theme.color_demoModeIndicator_foreground.toString(), "#262626")
+		compare(Theme.color_toastNotification_foreground_warning.toString(), "#262626")
 
 		BrandingTestHelper.setThemeBranding([{ color_brand: "#72b84c" }])
 		compare(Theme.color_button_down_text.toString(), "#262626")
+		compare(Theme.color_button_pressed_text.toString(), "#262626")
 		Theme.colorScheme = Theme.Dark
 		compare(Theme.color_button_down_text.toString(), "#262626")
+		compare(Theme.color_button_pressed_text.toString(), "#ffffff")
+
+		BrandingTestHelper.setThemeBranding([{ color_brand: "#ffffff" }])
+		compare(Theme.color_button_down_text.toString(), "#262626")
+		compare(Theme.color_button_pressed_text.toString(), "#ffffff")
+		compare(Theme.color_acceptButton_critical_text.toString(), "#ffffff")
+		compare(Theme.color_acceptButton_success_text.toString(), "#262626")
+		Theme.colorScheme = Theme.Light
+		compare(Theme.color_button_pressed_text.toString(), "#262626")
+
+		BrandingTestHelper.setThemeBranding([{ color_success: "#ffff00" }])
+		Theme.colorScheme = Theme.Dark
+		compare(Theme.color_dimSuccess_text.toString(), "#262626")
+		compare(Theme.color_acceptButton_success_text.toString(), "#262626")
+		compare(Theme.color_dimCritical_text.toString(), "#ffffff")
+
+		BrandingTestHelper.setThemeBranding([{ color_info: "#cccccc" }])
+		compare(Theme.color_toastNotification_foreground_informative.toString(), "#262626")
+		compare(Theme.color_toastNotification_foreground_error.toString(), "#ffffff")
+
+		// SilenceAlarmButton uses this for its enabled label, including while pressed.
+		// A light critical color must not leave that label white.
+		BrandingTestHelper.setThemeBranding([{ color_critical: "#ffff00" }])
+		compare(Theme.color_dimCritical_text.toString(), "#262626")
+		Theme.colorScheme = Theme.Light
+		compare(Theme.color_dimCritical_text.toString(), "#262626")
+		Theme.colorScheme = Theme.Dark
+
+		// A light warning must darken only the warning toast. The old shared foreground turned the
+		// informative toast dark as well.
+		BrandingTestHelper.setThemeBranding([{ color_warning: "#ffff00" }])
+		compare(Theme.color_toastNotification_foreground_warning.toString(), "#262626")
+		compare(Theme.color_toastNotification_foreground_informative.toString(), "#ffffff")
+		compare(Theme.color_toastNotification_foreground_error.toString(), "#ffffff")
+		Theme.colorScheme = Theme.Light
+		compare(Theme.color_toastNotification_foreground_informative.toString(), "#ffffff")
+		compare(Theme.color_toastNotification_foreground_warning.toString(), "#262626")
+
+		// #969696: white is 2.96:1 on the status color, so the fallback is the dark font color.
+		// #262626 is 2.76:1 on the dimmed background (#696969). Darken it toward black: #1f1f1f
+		// is 3:1 on that background and on the status strip. Do not leave the fallback unchecked,
+		// and do not change the strip. Warning, error and the solar-history title use the same
+		// formula. Both schemes blend the toast background onto the dark background, so the
+		// foreground is the same in Light.
+		BrandingTestHelper.setThemeBranding([{
+			color_info: "#969696",
+			color_warning: "#969696",
+			color_critical: "#969696"
+		}])
+		for (const scheme of [Theme.Dark, Theme.Light]) {
+			Theme.colorScheme = scheme
+			compare(Theme.color_toastNotification_foreground_informative.toString(), "#1f1f1f")
+			compare(Theme.color_toastNotification_foreground_warning.toString(), "#1f1f1f")
+			compare(Theme.color_toastNotification_foreground_error.toString(), "#1f1f1f")
+			compare(Theme.color_solarHistoryErrorView_primaryText.toString(), "#1f1f1f")
+			verify(BrandingTestHelper.contrastRatio(
+					Theme.color_toastNotification_foreground_informative.toString(),
+					Theme.color_toastNotification_background_informative.toString()) >= 3)
+			verify(BrandingTestHelper.contrastRatio(
+					Theme.color_toastNotification_foreground_informative.toString(),
+					Theme.color_toastNotification_highlight_informative.toString()) >= 3)
+			verify(BrandingTestHelper.contrastRatio(
+					Theme.color_toastNotification_foreground_warning.toString(),
+					Theme.color_toastNotification_background_warning.toString()) >= 3)
+			verify(BrandingTestHelper.contrastRatio(
+					Theme.color_toastNotification_foreground_warning.toString(),
+					Theme.color_toastNotification_highlight_warning.toString()) >= 3)
+			verify(BrandingTestHelper.contrastRatio(
+					Theme.color_toastNotification_foreground_error.toString(),
+					Theme.color_toastNotification_background_error.toString()) >= 3)
+			verify(BrandingTestHelper.contrastRatio(
+					Theme.color_toastNotification_foreground_error.toString(),
+					Theme.color_toastNotification_highlight_error.toString()) >= 3)
+		}
+		compare(Theme.color_toastNotification_highlight_informative.toString(), "#969696")
+		compare(Theme.color_toastNotification_background_informative.toString(), "#696969")
+	}
+
+	// The selected Off side of a switch draws color_button_down_text on color_button_off_background.
+	// Unpair draws color_darkCritical_text on color_darkCritical, including while pressed.
+	// Apply-all draws color_button_on_background_modified_text on that modified fill.
+	function test_fillsStayReadableForTheirLabels() {
+		compare(Theme.color_button_off_background.toString(), "#27588a")
+		compare(Theme.color_darkCritical_text.toString(), "#ffffff")
+		compare(Theme.color_button_on_background_modified_text.toString(), "#ffffff")
+		Theme.colorScheme = Theme.Light
+		// Plain dim(color_brand) is #73a4d6, which is 2.62:1 with the white brand label.
+		compare(Theme.color_button_off_background.toString(), "#6b98c7")
+		compare(Theme.color_darkCritical_text.toString(), "#262626")
+		compare(Theme.color_button_on_background_modified_text.toString(), "#262626")
+		verify(BrandingTestHelper.contrastRatio(
+				Theme.color_button_down_text.toString(), Theme.color_button_off_background.toString()) >= 3)
+		verify(BrandingTestHelper.contrastRatio(
+				Theme.color_darkCritical_text.toString(), Theme.color_darkCritical.toString()) >= 3)
+		verify(BrandingTestHelper.contrastRatio(
+				Theme.color_button_on_background_modified_text.toString(),
+				Theme.color_button_on_background_modified.toString()) >= 3)
+
+		// #888888: the Light dimmed brand is #ababab, and white on it is 2.30:1.
+		BrandingTestHelper.setThemeBranding([{ color_brand: "#888888" }])
+		compare(Theme.color_button_down_text.toString(), "#ffffff")
+		compare(Theme.color_button_off_background.toString(), "#949494")
+		verify(BrandingTestHelper.contrastRatio(
+				Theme.color_button_down_text.toString(), Theme.color_button_off_background.toString()) >= 3)
+
+		// #959595: white is under 3:1, so the label is #262626. The Dark dimmed brand is #696969.
+		BrandingTestHelper.setThemeBranding([{ color_brand: "#959595" }])
+		Theme.colorScheme = Theme.Dark
+		compare(Theme.color_button_down_text.toString(), "#262626")
+		compare(Theme.color_button_off_background.toString(), "#6f6f6f")
+		verify(BrandingTestHelper.contrastRatio(
+				Theme.color_button_down_text.toString(), Theme.color_button_off_background.toString()) >= 3)
+
+		// A white brand does not change the critical fill, but the pressed label must stay on it.
+		BrandingTestHelper.setThemeBranding([{ color_brand: "#ffffff" }])
+		compare(Theme.color_darkCritical_text.toString(), "#ffffff")
+		verify(BrandingTestHelper.contrastRatio(
+				Theme.color_darkCritical_text.toString(), Theme.color_darkCritical.toString()) >= 3)
+		Theme.colorScheme = Theme.Light
+		verify(BrandingTestHelper.contrastRatio(
+				Theme.color_button_on_background_modified_text.toString(),
+				Theme.color_button_on_background_modified.toString()) >= 3)
+
+		BrandingTestHelper.setThemeBranding([{ color_critical: "#ffff00", color_warning: "#ffff00" }])
+		Theme.colorScheme = Theme.Dark
+		verify(BrandingTestHelper.contrastRatio(
+				Theme.color_darkCritical_text.toString(), Theme.color_darkCritical.toString()) >= 3)
+		verify(BrandingTestHelper.contrastRatio(
+				Theme.color_button_on_background_modified_text.toString(),
+				Theme.color_button_on_background_modified.toString()) >= 3)
+		Theme.colorScheme = Theme.Light
+		verify(BrandingTestHelper.contrastRatio(
+				Theme.color_darkCritical_text.toString(), Theme.color_darkCritical.toString()) >= 3)
+		verify(BrandingTestHelper.contrastRatio(
+				Theme.color_button_on_background_modified_text.toString(),
+				Theme.color_button_on_background_modified.toString()) >= 3)
+	}
+
+	function test_batteryGaugeText() {
+		compare(Theme.color_overviewPage_widget_battery_background.toString(), "#387dc5")
+		compare(Theme.color_overviewPage_widget_battery_font_secondary.toString(), "#b8ffffff")
+		Theme.colorScheme = Theme.Light
+		compare(Theme.color_overviewPage_widget_battery_background.toString(), "#73a4d6")
+		compare(Theme.color_overviewPage_widget_battery_font_secondary.toString(), "#a3272622")
+
+		// Readings use color_font_primary, on both the fill and the unfilled part. No text color
+		// has 3:1 on both a white fill and the unfilled gray, so the fill is darkened. Do not set
+		// it back to color_brand.
+		BrandingTestHelper.setThemeBranding([{ color_brand: "#ffffff" }])
+		Theme.colorScheme = Theme.Dark
+		compare(Theme.color_overviewPage_widget_battery_background.toString(), "#949494")
+		compare(Theme.color_overviewPage_widget_background.toString(), "#4d4d4d")
+		compare(Theme.color_overviewPage_widget_battery_font_secondary.toString(), "#fcffffff")
+		verify(BrandingTestHelper.contrastRatio("#ffffff", "#949494") >= 3)
+		verify(BrandingTestHelper.contrastRatio(
+				BrandingTestHelper.blendOnto("#ffffff", 0xfc, "#949494"), "#949494") >= 3)
+		verify(BrandingTestHelper.contrastRatio(
+				BrandingTestHelper.blendOnto("#ffffff", 0xfc, "#4d4d4d"), "#4d4d4d") >= 3)
+
+		BrandingTestHelper.setThemeBranding([{ color_brand: "#000000" }])
+		Theme.colorScheme = Theme.Light
+		compare(Theme.color_overviewPage_widget_battery_background.toString(), "#6f6f6f")
+		compare(Theme.color_overviewPage_widget_battery_font_secondary.toString(), "#fe272622")
+		verify(BrandingTestHelper.contrastRatio("#262626", "#6f6f6f") >= 3)
+		verify(BrandingTestHelper.contrastRatio("#262626", Theme.color_overviewPage_widget_background.toString()) >= 3)
+		verify(BrandingTestHelper.contrastRatio(
+				BrandingTestHelper.blendOnto("#272622", 0xfe, "#6f6f6f"), "#6f6f6f") >= 3)
 	}
 
 	function test_lightModeBackgroundColor_data() {
@@ -392,15 +589,33 @@ TestCase {
 	function test_aliasesFollowTheirBrandingColor() {
 		const blue = Theme.color_blue.toString()
 		BrandingTestHelper.setThemeBranding([{ color_brand: "#003366", color_success: "#00ff00", color_warning: "#ff00ff" }])
-		compare(Theme.color_ok.toString(), "#003366")
+		compare(Theme.color_button.toString(), "#003366")
 		compare(Theme.color_settings_breadcrumb_background_top_page.toString(), "#003366")
-		compare(boundToTheme.ok.toString(), "#003366")
+		compare(boundToTheme.button.toString(), "#003366")
 		compare(Theme.color_blue.toString(), blue)
 		compare(Theme.color_focus_highlight.toString(), "#00ff00")
 
 		Theme.colorScheme = Theme.Light
-		compare(Theme.color_ok.toString(), "#003366")
+		compare(Theme.color_button.toString(), "#003366")
 		compare(Theme.color_focus_highlight.toString(), "#ff00ff")
+	}
+
+	// Global.statusColor() is QML so a binding records the Theme colors it reads. A C++ lookup would
+	// leave these properties stuck on the colors from when the binding was first evaluated.
+	function test_statusColorBindingFollowsTheTheme() {
+		compare(boundToTheme.info.toString(), Theme.color_info.toString())
+		compare(boundToTheme.infoDark.toString(), Theme.color_darkInfo.toString())
+		compare(boundToTheme.warning.toString(), Theme.color_warning.toString())
+
+		BrandingTestHelper.setThemeBranding([{ color_info: "#112233", color_warning: "#ff00ff" }])
+		compare(boundToTheme.info.toString(), "#112233")
+		compare(boundToTheme.warning.toString(), "#ff00ff")
+		compare(boundToTheme.infoDark.toString(), Theme.color_darkInfo.toString())
+
+		Theme.colorScheme = Theme.Light
+		compare(boundToTheme.info.toString(), "#112233")
+		compare(boundToTheme.infoDark.toString(), Theme.color_darkInfo.toString())
+		compare(boundToTheme.warning.toString(), "#ff00ff")
 	}
 
 	function test_fontFamilies() {
@@ -615,5 +830,67 @@ TestCase {
 		}, "qrc:/fonts/Branding.qml")
 		compare(result.valid, false)
 		compare(result.fontCount, 0)
+	}
+
+	// The focus ring art is #72b84c. Tinting it with its own color keeps its transparency, and
+	// changes the color of anti-aliased edge pixels by at most 1, from rounding. The larger size is
+	// the art at a device pixel ratio of 1.5.
+	function test_tintedImageWithItsOwnColor_data() {
+		return [
+			{ tag: "1x", width: 144, height: 65 },
+			{ tag: "1.5x", width: 216, height: 98 },
+		]
+	}
+
+	function test_tintedImageWithItsOwnColor(data) {
+		const result = BrandingTestHelper.compareTintedImage("#72b84c", "images/key_navigation_highlight.svg",
+				data.width, data.height)
+		verify(result.valid)
+		verify(result.visiblePixels > 0)
+		compare(result.alphaDifferences, 0)
+		verify(result.maxDifferenceFromOriginal <= 1, "max difference: " + result.maxDifferenceFromOriginal)
+	}
+
+	// Tinting keeps each pixel's transparency, and paints it in the tint color.
+	function test_tintedImageWithAnotherColorKeepsTransparency() {
+		const result = BrandingTestHelper.compareTintedImage("#f0962e", "images/key_navigation_highlight.svg",
+				144, 65)
+		verify(result.valid)
+		verify(result.visiblePixels > 0)
+		compare(result.alphaDifferences, 0)
+		verify(result.maxDifferenceFromTint <= 1, "max difference: " + result.maxDifferenceFromTint)
+	}
+
+	function test_tintedImageSize_data() {
+		return [
+			{ tag: "not set", width: 0, height: 0, expectedWidth: 144, expectedHeight: 65 },
+			{ tag: "width and height", width: 100, height: 100, expectedWidth: 100, expectedHeight: 100 },
+			{ tag: "width only", width: 288, height: 0, expectedWidth: 288, expectedHeight: 130 },
+			{ tag: "height only", width: 0, height: 130, expectedWidth: 288, expectedHeight: 130 },
+		]
+	}
+
+	function test_tintedImageSize(data) {
+		const result = BrandingTestHelper.tintedImage("72b84c/images/key_navigation_highlight.svg",
+				data.width, data.height)
+		verify(result.valid)
+		compare(result.width, data.expectedWidth)
+		compare(result.height, data.expectedHeight)
+		compare(result.originalWidth, 144)
+		compare(result.originalHeight, 65)
+	}
+
+	function test_tintedImageWithBadUrl_data() {
+		return [
+			{ tag: "no color", id: "images/key_navigation_highlight.svg", warning: /Tinted image: expected/ },
+			{ tag: "not a color", id: "zzzzzz/images/key_navigation_highlight.svg", warning: /Tinted image: expected/ },
+			{ tag: "no path", id: "72b84c/", warning: /Tinted image: expected/ },
+			{ tag: "missing file", id: "72b84c/images/no_such_image.svg", warning: /Tinted image: cannot read/ },
+		]
+	}
+
+	function test_tintedImageWithBadUrl(data) {
+		ignoreWarning(data.warning)
+		verify(!BrandingTestHelper.tintedImage(data.id, 0, 0).valid)
 	}
 }

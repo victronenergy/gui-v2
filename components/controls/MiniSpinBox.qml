@@ -62,7 +62,7 @@ CT.SpinBox {
 				rightMargin: -border.width
 			}
 			color: root.enabled ? Theme.color_background_secondary : Theme.color_background_disabled
-			border.color: enabled ? Theme.color_ok : Theme.color_font_disabled
+			border.color: enabled ? Theme.color_brand : Theme.color_font_disabled
 			border.width: Theme.geometry_button_border_width
 		}
 
@@ -121,9 +121,9 @@ CT.SpinBox {
 		topLeftRadius: Theme.geometry_button_radius
 		bottomLeftRadius: Theme.geometry_button_radius
 		color: enabled
-			   ? (root.down.pressed ? Theme.color_ok : Theme.color_darkOk)
+			   ? (root.down.pressed ? Theme.color_brand : Theme.color_darkBrand)
 			   : Theme.color_background_disabled
-		border.color: enabled ? Theme.color_ok : Theme.color_font_disabled
+		border.color: enabled ? Theme.color_brand : Theme.color_font_disabled
 		border.width: Theme.geometry_button_border_width
 
 		MouseArea {
@@ -143,7 +143,9 @@ CT.SpinBox {
 		CP.ColorImage {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_minus.svg'
-			color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
+			color: !enabled ? Theme.color_font_disabled
+					: root.down.pressed ? Theme.color_button_down_text
+					: Theme.color_font_primary
 		}
 	}
 
@@ -154,9 +156,9 @@ CT.SpinBox {
 		topRightRadius: Theme.geometry_button_radius
 		bottomRightRadius: Theme.geometry_button_radius
 		color: enabled
-			   ? (root.up.pressed ? Theme.color_ok : Theme.color_darkOk)
+			   ? (root.up.pressed ? Theme.color_brand : Theme.color_darkBrand)
 			   : Theme.color_background_disabled
-		border.color: enabled ? Theme.color_ok : Theme.color_font_disabled
+		border.color: enabled ? Theme.color_brand : Theme.color_font_disabled
 		border.width: Theme.geometry_button_border_width
 
 		MouseArea {
@@ -176,7 +178,9 @@ CT.SpinBox {
 		CP.ColorImage {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_plus.svg'
-			color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
+			color: !enabled ? Theme.color_font_disabled
+					: root.up.pressed ? Theme.color_button_down_text
+					: Theme.color_font_primary
 		}
 	}
 }

@@ -4,10 +4,11 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import QtQuick.Shapes
 import Victron.VenusOS
 
-Image {
+CP.ColorImage {
 	id: root
 
 	property int location
@@ -30,6 +31,7 @@ Image {
 			|| location === VenusOS.WidgetConnector_Location_Right
 			? "qrc:/images/widget_connector_nub_horizontal.svg"
 			: "qrc:/images/widget_connector_nub_vertical.svg"
+	color: Theme.color_overviewPage_widget_border
 	rotation: location === VenusOS.WidgetConnector_Location_Top
 			|| location === VenusOS.WidgetConnector_Location_Left
 			? 180 : 0

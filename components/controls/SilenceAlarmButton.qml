@@ -14,6 +14,9 @@ Button {
 	defaultBackgroundHeight: Theme.geometry_notificationsPage_snoozeButton_height
 	flat: false
 	backgroundColor: Theme.color_critical_background
+	color: enabled ? Theme.color_dimCritical_text
+		: down ? Theme.color_button_on_text_disabled
+		: Theme.color_button_off_text_disabled
 	borderWidth: 0
 	icon.source: "qrc:/images/icon_alarm_snooze_24.svg"
 	text: CommonWords.silence_alarm

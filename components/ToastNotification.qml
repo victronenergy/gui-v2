@@ -23,6 +23,13 @@ Item {
 	readonly property bool isSilenceButton: notificationModelId !== 0
 			&& (root.type === VenusOS.Notification_Warning || root.type === VenusOS.Notification_Alarm)
 
+	// Each toast fill is a different status color, so one shared foreground cannot contrast with all of them.
+	readonly property color foregroundColor: root.type === VenusOS.Notification_Alarm
+			? Theme.color_toastNotification_foreground_error
+			: root.type === VenusOS.Notification_Warning
+				? Theme.color_toastNotification_foreground_warning
+				: Theme.color_toastNotification_foreground_informative
+
 	function close(immediately) {
 		if (immediately) {
 			closed()
@@ -100,7 +107,7 @@ Item {
 				y: Theme.screenSize === Theme.Portrait
 				   ? Theme.geometry_toastNotification_verticalMargin + Theme.geometry_toastNotification_padding
 				   : (parent.height - height) / 2
-				color: Theme.color_toastNotification_foreground
+				color: root.foregroundColor
 				source: root.type === VenusOS.Notification_Alarm ? "qrc:/images/icon_alarm_32.svg"
 					: root.type === VenusOS.Notification_Warning ? "qrc:/images/icon_warning_32.svg"
 					: "qrc:/images/icon_info_32.svg"
@@ -135,7 +142,7 @@ Item {
 				wrapMode: Text.Wrap
 				maximumLineCount: 12
 				elide: Text.ElideRight
-				color: Theme.color_toastNotification_foreground
+				color: root.foregroundColor
 
 				Layout.fillWidth: true
 				Layout.topMargin: Theme.geometry_toastNotification_padding
@@ -150,7 +157,7 @@ Item {
 				bottomInset: Theme.geometry_toastNotification_padding
 				defaultBackgroundWidth: Theme.geometry_button_touch_size
 				defaultBackgroundHeight: Theme.geometry_button_touch_size
-				color: Theme.color_toastNotification_foreground
+				color: root.foregroundColor
 				icon.source: "qrc:/images/icon_close_32.svg"
 				visible: !root.isSilenceButton
 
@@ -161,7 +168,7 @@ Item {
 			SilenceAlarmButton {
 				id: silenceButton
 
-				color: Theme.color_toastNotification_foreground
+				color: root.foregroundColor
 				flat: true
 				font.pixelSize: Theme.font_toastSnoozeButton_size
 				visible: root.isSilenceButton
@@ -180,7 +187,7 @@ Item {
 					}
 					radius: parent.radius
 					color: "transparent"
-					border.color: Theme.color_toastNotification_foreground
+					border.color: root.foregroundColor
 					border.width: Theme.geometry_button_border_width
 				}
 			}

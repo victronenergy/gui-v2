@@ -92,6 +92,8 @@ venus-gui-v2 --ui-test smoke/generic-capture
 venus-gui-v2 --mock --mock-conf barebones --ui-test smoke/generic-capture
 ```
 
+The `smoke/key-navigation` test captures the key navigation focus ring on a navigation bar button and on a settings list item. As `UiTestCase` cannot press keys yet, it turns on key navigation and gives each item the focus directly.
+
 
 ## Tests directory structure
 
