@@ -64,6 +64,8 @@ target_link_libraries(${TEST_NAME} PRIVATE
     VictronGaugesplugin
     VictronBoat
     VictronBoatplugin
+    VictronGuiPlugins
+    VictronGuiPluginsplugin
     VictronMock
     VictronMockplugin
     Qt6::Core

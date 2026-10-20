@@ -52,6 +52,7 @@ include(cmake/ModuleVenus_Sources.cmake)
 include(cmake/ModuleShaders_Sources.cmake)
 include(cmake/ModuleGauges_Sources.cmake)
 include(cmake/ModuleBoat_Sources.cmake)
+include(cmake/ModuleGuiPlugins_Sources.cmake)
 include(cmake/ModuleMock_Sources.cmake)
 include(cmake/ModuleUiTest_Sources.cmake)
 include(cmake/VeUtil_Sources.cmake)
@@ -64,6 +65,7 @@ include(cmake/ModuleVenus.cmake)
 include(cmake/ModuleShaders.cmake)
 include(cmake/ModuleGauges.cmake)
 include(cmake/ModuleBoat.cmake)
+include(cmake/ModuleGuiPlugins.cmake)
 include(cmake/ModuleMock.cmake)
 include(cmake/ModuleUiTest.cmake)
 
@@ -83,6 +85,8 @@ if ("${GUI_V2_BUILD}" STREQUAL "ON")
         VictronGaugesplugin
         VictronBoat
         VictronBoatplugin
+        VictronGuiPlugins
+        VictronGuiPluginsplugin
         VictronMock
         VictronMockplugin
         qzxing
@@ -93,6 +97,10 @@ if ("${GUI_V2_BUILD}" STREQUAL "ON")
     # Note: ${PROJECT_NAME} depends on ${BUILD_DIR_QM_FILES} via the qt_add_resources() in GuiV2.cmake
     include(cmake/RunTests.cmake)
 endif()
+
+# After every target_link_libraries() above. Victron.VenusOS must not link
+# Victron.GuiPlugins. See cmake/CheckModuleLinks.cmake.
+include(cmake/CheckModuleLinks.cmake)
 
 # to visualise the dependency graph, do the following:
 # $ cmake --graphviz=dependencies.dot ../gui-v2/

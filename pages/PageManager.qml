@@ -56,6 +56,11 @@ QtObject {
 		return pageStack.pushPage(obj, properties, operation)
 	}
 
+	// Pushes a page from a GUI plugin. See PageStack.pushPluginPage().
+	function pushPluginPage(url, properties, defaultTitle = undefined, operation = PageStack.PushTransition) {
+		return pageStack.pushPluginPage(url, properties, defaultTitle, operation)
+	}
+
 	function popPage(toPage, operation = PageStack.PopTransition) {
 		pageStack.popPage(toPage, operation)
 	}
