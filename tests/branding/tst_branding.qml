@@ -270,7 +270,7 @@ TestCase {
 		compare(Theme.color_darkBlue.toString(), "#11263b")
 		compare(Theme.color_dimBlue.toString(), "#27588a")
 		// Not the old hand-picked #592220: the formula gives a lighter red.
-		compare(Theme.color_dimRed.toString(), "#ab413e")
+		compare(Theme.color_dimCritical.toString(), "#ab413e")
 		compare(Theme.color_darkBlue.a, 1)
 		compare(Theme.color_critical_background.a, 1)
 		// The translucent exceptions.
@@ -553,5 +553,67 @@ TestCase {
 		const result = BrandingTestHelper.checkAndResolveBrandingSnapshot(
 			{ font_family: "Roboto", quantity_font_family: "roboto" }, pluginBrandingFileUrl)
 		compare(Object.keys(result.data), [])
+	}
+
+	// The focus ring art is #72b84c. Tinting it with its own color keeps its transparency, and
+	// changes the color of anti-aliased edge pixels by at most 1, from rounding. The larger size is
+	// the art at a device pixel ratio of 1.5.
+	function test_tintedImageWithItsOwnColor_data() {
+		return [
+			{ tag: "1x", width: 144, height: 65 },
+			{ tag: "1.5x", width: 216, height: 98 },
+		]
+	}
+
+	function test_tintedImageWithItsOwnColor(data) {
+		const result = BrandingTestHelper.compareTintedImage("#72b84c", "images/key_navigation_highlight.svg",
+				data.width, data.height)
+		verify(result.valid)
+		verify(result.visiblePixels > 0)
+		compare(result.alphaDifferences, 0)
+		verify(result.maxDifferenceFromOriginal <= 1, "max difference: " + result.maxDifferenceFromOriginal)
+	}
+
+	// Tinting keeps each pixel's transparency, and paints it in the tint color.
+	function test_tintedImageWithAnotherColorKeepsTransparency() {
+		const result = BrandingTestHelper.compareTintedImage("#f0962e", "images/key_navigation_highlight.svg",
+				144, 65)
+		verify(result.valid)
+		verify(result.visiblePixels > 0)
+		compare(result.alphaDifferences, 0)
+		verify(result.maxDifferenceFromTint <= 1, "max difference: " + result.maxDifferenceFromTint)
+	}
+
+	function test_tintedImageSize_data() {
+		return [
+			{ tag: "not set", width: 0, height: 0, expectedWidth: 144, expectedHeight: 65 },
+			{ tag: "width and height", width: 100, height: 100, expectedWidth: 100, expectedHeight: 100 },
+			{ tag: "width only", width: 288, height: 0, expectedWidth: 288, expectedHeight: 130 },
+			{ tag: "height only", width: 0, height: 130, expectedWidth: 288, expectedHeight: 130 },
+		]
+	}
+
+	function test_tintedImageSize(data) {
+		const result = BrandingTestHelper.tintedImage("72b84c/images/key_navigation_highlight.svg",
+				data.width, data.height)
+		verify(result.valid)
+		compare(result.width, data.expectedWidth)
+		compare(result.height, data.expectedHeight)
+		compare(result.originalWidth, 144)
+		compare(result.originalHeight, 65)
+	}
+
+	function test_tintedImageWithBadUrl_data() {
+		return [
+			{ tag: "no color", id: "images/key_navigation_highlight.svg", warning: /Tinted image: expected/ },
+			{ tag: "not a color", id: "zzzzzz/images/key_navigation_highlight.svg", warning: /Tinted image: expected/ },
+			{ tag: "no path", id: "72b84c/", warning: /Tinted image: expected/ },
+			{ tag: "missing file", id: "72b84c/images/no_such_image.svg", warning: /Tinted image: cannot read/ },
+		]
+	}
+
+	function test_tintedImageWithBadUrl(data) {
+		ignoreWarning(data.warning)
+		verify(!BrandingTestHelper.tintedImage(data.id, 0, 0).valid)
 	}
 }

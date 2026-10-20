@@ -72,9 +72,9 @@ Flow {
 				width: parent.width - (phaseLabel.visible ? phaseLabel.width : 0)
 				height: parent.height
 				sourceComponent: CheapBarGauge {
-					foregroundColor: Theme.color_darkOk,phaseDelegate.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
-					backgroundColor: Theme.color_darkOk,phaseDelegate.feedingToGrid ? Theme.color_darkGreen
-							: root.inOverviewWidget && valueStatus === Theme.Ok ? Theme.color_darkishBlue
+					foregroundColor: Theme.color_darkOk,phaseDelegate.feedingToGrid ? Theme.color_success : Theme.statusColorValue(valueStatus)
+					backgroundColor: Theme.color_darkOk,phaseDelegate.feedingToGrid ? Theme.color_darkSuccess
+							: root.inOverviewWidget && valueStatus === Theme.Ok ? Theme.color_darkishOk
 							: Theme.statusColorValue(valueStatus, true)
 					valueType: root.valueType
 					value: valueRange.valueAsRatio

@@ -68,18 +68,18 @@ AbstractListItem {
 			: qsTrId("temperature_air_quality_no_data")
 
 	readonly property list<color> categoryColors: [
-		Theme.color_green,
-		Theme.color_green,
+		Theme.color_success,
+		Theme.color_success,
 		Theme.color_levelsPage_airQuality_yellow,
-		Theme.color_orange,
-		Theme.color_red
+		Theme.color_warning,
+		Theme.color_critical
 	]
 	readonly property list<color> categoryDimColors: [
-		Theme.color_darkGreen,
-		Theme.color_darkGreen,
+		Theme.color_darkSuccess,
+		Theme.color_darkSuccess,
 		Theme.color_levelsPage_airQuality_darkYellow,
-		Theme.color_darkOrange,
-		Theme.color_darkRed
+		Theme.color_darkWarning,
+		Theme.color_darkCritical
 	]
 
 	// Returns the category (0-4) of a PM2.5 or CO2 value, or -1 if it is not valid.

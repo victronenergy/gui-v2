@@ -39,8 +39,8 @@ ModalDialog {
 	acceptButtonBackground: AcceptButtonBackground {
 		id: acceptButtonBackground
 
-		color: root.generatorState === VenusOS.Generators_State_Stopped ? Theme.color_dimGreen : Theme.color_dimRed
-		secondaryColor: root.generatorState === VenusOS.Generators_State_Stopped ? Theme.color_green : Theme.color_red
+		color: root.generatorState === VenusOS.Generators_State_Stopped ? Theme.color_dimSuccess : Theme.color_dimCritical
+		secondaryColor: root.generatorState === VenusOS.Generators_State_Stopped ? Theme.color_success : Theme.color_critical
 
 		states: [
 			// The state where Start/Stop has not been clicked, or it was clicked and then the

@@ -266,6 +266,10 @@ A value that names another key is an alias. In `Dark.json` / `Light.json`, an al
 
 A color scheme value can also be a function call, such as `dim(color_red)` (red at 70% alpha, blended onto `color_background_primary`) or `text_color_on(color_ok)` (white, or a dark font color if white has too little contrast on `color_ok`). The functions are listed in `tools/themeparser.py` and implemented in `src/colorderivation.h`. The generated `Theme` computes every color scheme value whenever the branding or the color scheme changes, so all of them follow the branding.
 
+When a color means something in the UI, use the color for that meaning, not a palette color: `color_brand` / `color_ok` for selected, pressed and brand fills, `color_success` for success and feed-in, `color_warning` and `color_critical` for alarms, and their dim and dark variants (`color_dimSuccess`, `color_darkCritical` and so on). Palette colors (`color_blue`, `color_green`, ...) are for data, such as a series in a graph, and do not follow branding.
+
+Images must not have brand or status colors baked in. Tint single-color art with a Theme color: `CP.ColorImage` or `IconImage` for an image, and for a `BorderImage` the `image://tinted/<rrggbb>/<resource path>` image provider (`src/tintedimageprovider.cpp`), as `GlobalKeyNavigationHighlight` does with `color_focus_highlight`.
+
 The theme supports multiple screen sizes (FiveInch, SevenInch, Portrait) with geometry values that adapt accordingly.
 
 ### Plugin branding

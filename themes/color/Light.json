@@ -6,18 +6,16 @@
     "color_humidity2": "#97B974",
     "color_humidity3": "#DBB78E",
 
-    "color_dimRed": "dim(color_red)",
-    "color_dimGreen": "dim(color_green)",
-    "color_darkishBlue": "dark(color_blue)",
     "color_darkBlue": "dark(color_blue)",
-    "color_darkOrange": "dark(color_orange)",
-    "color_darkRed": "dark(color_red)",
-    "color_darkGreen": "dark(color_green)",
 
+    "color_darkSuccess": "dark(color_success)",
+    "color_dimSuccess": "dim(color_success)",
     "color_ok": "color_brand",
     "color_darkOk": "dark(color_brand)",
+    "color_darkishOk": "dark(color_ok)",
     "color_darkWarning": "dark(color_warning)",
     "color_darkCritical": "dark(color_critical)",
+    "color_dimCritical": "dim(color_critical)",
     "color_critical_background": "dim(color_critical)",
 
     "color_font_disabled": "font_over_background(184)",
@@ -166,6 +164,7 @@
 
     "color_solarHistoryErrorView_primaryText": "text_color_on(color_toastNotification_background_error, color_toastNotification_highlight_error)",
     "color_solarHistoryErrorView_secondaryText": "color_font_secondary",
+    "color_solarHistoryChart_bar_pressed": "blend_onto(color_ok, 179, color_white)",
 
     "color_settings_gsmModem_signalStrength_inactive": "color_darkGray2",
     "color_settings_gsmModem_signalStrength_active": "color_font_primary",

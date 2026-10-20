@@ -36,7 +36,7 @@ namespace ColorDerivation {
 // One color for each BrandingData::Color, in one color scheme.
 using BrandingColors = std::array<QColor, Victron::BrandingData::ColorCount>;
 
-// The alpha values of the dim, darkish and dark colors (for example color_dimRed,
+// The alpha values of the dim, darkish and dark colors (for example color_dimCritical,
 // color_button_down and color_darkOk): a color at this alpha, blended onto background_primary.
 constexpr int DimAlpha = 179;      // 0xB3, 70%
 constexpr int DarkishAlpha = 121;  // 47.5%: the background of a pressed button

@@ -145,7 +145,7 @@ exported power v  0.4 |   /
 
 			animationEnabled: root.animationEnabled
 			aboveThresholdFillColor: Theme.color_blue   // warning color is not needed for inputs
-			belowThresholdFillColor: _graphShowsFeedIn ? Theme.color_green : Theme.color_blue
+			belowThresholdFillColor: _graphShowsFeedIn ? Theme.color_success : Theme.color_blue
 			initialModelValue: _graphShowsFeedIn ? 0.5 : 0
 			zeroCentered: _graphShowsFeedIn
 

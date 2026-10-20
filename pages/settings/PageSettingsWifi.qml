@@ -205,7 +205,7 @@ Page {
 					verticalCenter: parent.verticalCenter
 				}
 				source: "qrc:/images/icon_checkmark_32.svg"
-				color: Theme.color_green
+				color: Theme.color_success
 				visible: model.favorite
 			}
 

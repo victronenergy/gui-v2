@@ -128,7 +128,7 @@ SwitchableOutputSlider {
 				verticalAlignment: Text.AlignVCenter
 				font.pixelSize: Theme.font_size_h2
 				text: root.value.toFixed(root.switchableOutput.decimals) + Units.degreesSymbol
-				color: Theme.color_button_down_text
+				color: Theme.color_white
 
 				SeparatorBar {
 					id: popupSeparator
@@ -176,7 +176,7 @@ SwitchableOutputSlider {
 		anchors.verticalCenter: parent.verticalCenter
 		leftPadding: Theme.geometry_temperatureSlider_text_horizontal_padding
 		rightPadding: Theme.geometry_temperatureSlider_text_horizontal_padding
-		color: root.enabled ? Theme.color_button_down_text : Theme.color_font_disabled
+		color: root.enabled ? Theme.color_white : Theme.color_font_disabled
 	}
 
 	MinMaxLabel {

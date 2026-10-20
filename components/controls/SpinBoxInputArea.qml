@@ -101,7 +101,7 @@ TextInput {
 	horizontalAlignment: Qt.AlignHCenter
 	verticalAlignment: Qt.AlignVCenter
 	selectedTextColor: Theme.color_white
-	selectionColor : Theme.color_blue
+	selectionColor : Theme.color_brand
 	readOnly: !root.spinBox.editable
 	activeFocusOnPress: !readOnly && root.spinBox.editable
 	selectByMouse: activeFocusOnPress

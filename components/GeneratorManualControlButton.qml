@@ -18,7 +18,7 @@ ListItemButton {
 	enabled: defaultEnabled
 	color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
 	flat: false
-	backgroundColor: checked ? Theme.color_dimRed : Theme.color_dimGreen
+	backgroundColor: checked ? Theme.color_dimCritical : Theme.color_dimSuccess
 	borderWidth: 0
 
 	// If the stop or start dialog is open, set the button color based on the generator

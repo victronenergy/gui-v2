@@ -8,16 +8,20 @@
 #include <QQmlContext>
 #include <QFile>
 #include <QFontDatabase>
+#include <QImageReader>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QPointer>
 #include <QtEndian>
+
+#include <algorithm>
 
 #include "testutils.h"
 #include "branding.h"
 #include "colorderivation.h"
 #include "guiplugins.h"
 #include "themeobjects.h"
+#include "tintedimageprovider.h"
 
 using Victron::BrandingData;
 using Victron::VenusOS::GuiPluginLoader;
@@ -279,6 +283,66 @@ public:
 			types.append(static_cast<int>(integration.type()));
 		}
 		return types;
+	}
+
+	// Reads the image at image://tinted/<id>, with the given sourceSize (0 for "not set").
+	Q_INVOKABLE QVariantMap tintedImage(const QString &id, int width, int height) const
+	{
+		Victron::VenusOS::TintedImageProvider provider;
+		QSize originalSize;
+		const QImage image = provider.requestImage(id, &originalSize, QSize(width, height));
+		return {
+			{ QStringLiteral("valid"), !image.isNull() },
+			{ QStringLiteral("width"), image.width() },
+			{ QStringLiteral("height"), image.height() },
+			{ QStringLiteral("originalWidth"), originalSize.width() },
+			{ QStringLiteral("originalHeight"), originalSize.height() },
+		};
+	}
+
+	// Compares the resource image at path, tinted with color ("#rrggbb"), with the untinted
+	// image. Both are read at width x height. The differences are in premultiplied channel values.
+	Q_INVOKABLE QVariantMap compareTintedImage(const QString &color, const QString &path, int width, int height) const
+	{
+		Victron::VenusOS::TintedImageProvider provider;
+		const QSize size(width, height);
+		const QImage tinted = provider.requestImage(color.mid(1) + QLatin1Char('/') + path, nullptr, size);
+		QImageReader reader(QStringLiteral(":/") + path);
+		reader.setScaledSize(size);
+		const QImage original = reader.read().convertToFormat(QImage::Format_ARGB32_Premultiplied);
+		if (tinted.size() != size || original.size() != size) {
+			return { { QStringLiteral("valid"), false } };
+		}
+
+		const QColor tint = QColor::fromString(color);
+		int visiblePixels = 0;
+		int alphaDifferences = 0;
+		int maxDifferenceFromOriginal = 0;
+		int maxDifferenceFromTint = 0;
+		for (int y = 0; y < height; ++y) {
+			const QRgb *tintedLine = reinterpret_cast<const QRgb *>(tinted.constScanLine(y));
+			const QRgb *originalLine = reinterpret_cast<const QRgb *>(original.constScanLine(y));
+			for (int x = 0; x < width; ++x) {
+				const QRgb t = tintedLine[x];
+				const QRgb o = originalLine[x];
+				const QRgb expected = qPremultiply(qRgba(tint.red(), tint.green(), tint.blue(), qAlpha(o)));
+				visiblePixels += qAlpha(o) > 0 ? 1 : 0;
+				alphaDifferences += qAlpha(t) != qAlpha(o) ? 1 : 0;
+				maxDifferenceFromOriginal = std::max({ maxDifferenceFromOriginal,
+						std::abs(qRed(t) - qRed(o)), std::abs(qGreen(t) - qGreen(o)),
+						std::abs(qBlue(t) - qBlue(o)) });
+				maxDifferenceFromTint = std::max({ maxDifferenceFromTint,
+						std::abs(qRed(t) - qRed(expected)), std::abs(qGreen(t) - qGreen(expected)),
+						std::abs(qBlue(t) - qBlue(expected)) });
+			}
+		}
+		return {
+			{ QStringLiteral("valid"), true },
+			{ QStringLiteral("visiblePixels"), visiblePixels },
+			{ QStringLiteral("alphaDifferences"), alphaDifferences },
+			{ QStringLiteral("maxDifferenceFromOriginal"), maxDifferenceFromOriginal },
+			{ QStringLiteral("maxDifferenceFromTint"), maxDifferenceFromTint },
+		};
 	}
 
 public slots:
