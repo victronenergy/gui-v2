@@ -65,9 +65,11 @@ while [[ $# -gt 0 ]]; do
             echo "  -h, --help       Show this help message"
             exit 0
             ;;
-        # If the option is not recognized, print an error message
+        # If the option is not recognized, print an error message and exit
         *)
             echo "Unknown option: ${1}"
+            echo "Use -h or --help to show the available options"
+            exit 1
             ;;
     esac
 done
