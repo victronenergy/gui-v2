@@ -70,14 +70,14 @@ Page {
 		model: VisibleItemModel {
 			ListSwitch {
 				text: CommonWords.enabled
-				dataItem.uid: !!Services.settings ? Services.settings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled" : ""
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/Enabled"
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 
 			ListSwitch {
 				//% "Show temperatures"
 				text: qsTrId("pagesettingsboatpage_show_temperatures")
-				dataItem.uid: !!Services.settings ? Services.settings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/ShowTemperatures" : ""
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/ShowTemperatures"
 				writeAccessLevel: VenusOS.User_AccessType_User
 			}
 

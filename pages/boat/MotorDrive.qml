@@ -13,14 +13,14 @@ QtObject {
 
 	readonly property VeQuickItemsQuotient rpm: VeQuickItemsQuotient {
 		numeratorUid: root.serviceUid ? root.serviceUid + "/Motor/RPM" : ""
-		denominatorUid: Services.settings ? Services.settings.serviceUid  + "/Settings/Gui/Gauges/MotorDrive/RPM/Max" : ""
+		denominatorUid: Services.settings.serviceUid  + "/Settings/Gui/Gauges/MotorDrive/RPM/Max"
 		sourceUnit: VenusOS.Units_RevolutionsPerMinute
 		displayUnit: VenusOS.Units_RevolutionsPerMinute
 	}
 
 	readonly property VeQuickItemsQuotient power: VeQuickItemsQuotient {
 		numeratorUid: root.serviceUid ? root.serviceUid + "/Dc/0/Power" : ""
-		denominatorUid : Services.settings ? Services.settings.serviceUid  + "/Settings/Gui/Gauges/MotorDrive/Power/Max" : ""
+		denominatorUid : Services.settings.serviceUid + "/Settings/Gui/Gauges/MotorDrive/Power/Max"
 		sourceUnit: VenusOS.Units_Watt
 		displayUnit: VenusOS.Units_Watt
 	}

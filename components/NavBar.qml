@@ -115,10 +115,10 @@ FocusScope {
 						left: parent.horizontalCenter
 						topMargin: Theme.geometry_navigationBar_notifications_redDot_margin
 					}
-					active: (Services.notifications?.navBarNotificationCounterVisible ?? false)
+					active: Services.notifications.navBarNotificationCounterVisible
 							&& page.url.endsWith("NotificationsPage.qml")
 					sourceComponent: NotificationCounter {
-						count: Services.notifications?.unacknowledgedCount ?? 0
+						count: Services.notifications.unacknowledgedCount
 					}
 				}
 			}

@@ -46,7 +46,7 @@ Column {
 		dataObject: Services.system.load.ac
 		icon.source: "qrc:/images/acloads.svg"
 		icon.width: Theme.geometry_widgetHeader_icon_size
-		visible: !motorDriveLoad.visible && Services.system?.hasAcLoads // && !isNaN(value) once #2159 is resolved
+		visible: !motorDriveLoad.visible && Services.system.hasAcLoads // && !isNaN(value) once #2159 is resolved
 	}
 
 	QuantityLabelIconRow {
