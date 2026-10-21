@@ -71,6 +71,36 @@ else
     FILES_DIR="${BASE_DIR}/build-wasm_files_to_copy"
 fi
 
+# The 32-bit and 64-bit development shells source a Yocto SDK so native GX
+# builds work immediately. Those compiler and sysroot variables must not leak
+# into Emscripten's CMake checks: if they do, even basic libc probes such as
+# stdatomic and shm_open are compiled against the GX target and Qt's WrapRt
+# dependency is reported missing.
+if [[ -n "${OECORE_NATIVE_SYSROOT:-}" || -n "${SDKTARGETSYSROOT:-}" ]]; then
+    echo "Removing native GX SDK environment for the WASM build"
+
+    CLEAN_PATH=""
+    IFS=: read -ra PATH_ENTRIES <<< "${PATH}"
+    for PATH_ENTRY in "${PATH_ENTRIES[@]}"; do
+        case "${PATH_ENTRY}" in
+            /opt/venus/*/sysroots/*) continue ;;
+        esac
+        CLEAN_PATH="${CLEAN_PATH:+${CLEAN_PATH}:}${PATH_ENTRY}"
+    done
+    export PATH="${CLEAN_PATH}"
+
+    unset AR AS CC CFLAGS CPP CPPFLAGS CXX CXXFLAGS LD LDFLAGS GDB
+    unset NM OBJCOPY OBJDUMP PKG_CONFIG_LIBDIR PKG_CONFIG_PATH
+    unset PKG_CONFIG_SYSROOT_DIR RANLIB READELF STRIP M4
+    unset ARCH CROSS_COMPILE TARGET_PREFIX CONFIG_SITE CONFIGURE_FLAGS
+    unset CMAKE_TOOLCHAIN_FILE SDKTARGETSYSROOT
+    unset OECORE_ACLOCAL_OPTS OECORE_BASELIB OECORE_DISTRO_VERSION
+    unset OECORE_NATIVE_SYSROOT OECORE_SDK_VERSION OECORE_TARGET_ARCH
+    unset OECORE_TARGET_OS OECORE_TARGET_SYSROOT OECORE_TOOLCHAIN_SYSROOT
+    unset OECORE_TUNE_CCARGS KCFLAGS
+    hash -r
+fi
+
 
 # Load environment variables from .env file
 if [ -f "${BASE_DIR}/scripts/.env" ]; then

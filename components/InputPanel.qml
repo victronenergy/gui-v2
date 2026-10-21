@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Window
 import QtQuick.VirtualKeyboard as QtVirtualKeyboard
 import QtQuick.VirtualKeyboard.Settings
 import Victron.VenusOS
@@ -29,14 +30,18 @@ QtVirtualKeyboard.InputPanel {
 	readonly property string localeName: Language.currentLocaleName
 
 	readonly property bool requiresRotation: Global.main && Global.main.requiresRotation
+	readonly property real screenWidth: Global.main ? Global.main.width : Screen.width
+	readonly property real screenHeight: Global.main ? Global.main.height : Screen.height
+	readonly property real panelWidth: requiresRotation ? screenHeight : screenWidth
+	readonly property real panelHeight: requiresRotation ? screenWidth : screenHeight
 
 	visible: Qt.inputMethod.visible || yAnimator.running
 
-	y: requiresRotation ? 312 // manually-found coordinate transform for rpi5, see #2702
-	 : Qt.inputMethod.visible ? Theme.geometry_screen_height - root.height
-	 : Theme.geometry_screen_height
+	y: requiresRotation ? panelWidth - root.height
+	 : Qt.inputMethod.visible ? panelHeight - root.height
+	 : panelHeight
 
-	x: requiresRotation ? 480 // manually-found coordinate transform for rpi5, see #2702
+	x: requiresRotation ? panelHeight
 	 : 0
 
 	transformOrigin: Item.Center
@@ -55,7 +60,9 @@ QtVirtualKeyboard.InputPanel {
 		}
 	}
 
-	width: Theme.geometry_screen_width
+	// The EGLFS window can be smaller than the design geometry (for example, the 800x480
+	// Raspberry Pi display). Size the keyboard from the actual window so it is not clipped.
+	width: panelWidth
 
 	states: [
 		State {
