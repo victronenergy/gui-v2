@@ -36,7 +36,7 @@ NumberSelectorDialog {
 	}
 
 	property real maxCurrentLimit: -1
-	readonly property var _presetLimits: [3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0, 100, 150, 200, 300, 500, 750, 1000, 1500, 2000, 2500, 3000, 3500, 4000]
+	readonly property var _presetLimits: [5, 10, 15, 20, 30, 50, 100, 200, 500, 750, 1000, 1500, 2000, 2500, 3000, 3500, 4000]
 	function _presetAmpOptions() {
 		let upperIndex = root._presetLimits.length - 1
 		if (root.maxCurrentLimit > 0) {
