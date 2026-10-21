@@ -50,7 +50,7 @@ Column {
 
 		width: Theme.geometry_briefPage_edgeGauge_width
 		height: active ? Gauges.gaugeHeight(root._rightGaugeCount) : 0
-		active: Services.system?.hasAcLoads && !motorDriveLoadGauge.active
+		active: Services.system.hasAcLoads && !motorDriveLoadGauge.active
 
 		sourceComponent: SideMultiGauge {
 			readonly property var gaugeParams: Gauges.rightGaugeParameters(0, _rightGaugeCount, phaseModel.count > 1)

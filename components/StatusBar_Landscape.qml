@@ -244,10 +244,10 @@ FocusScope {
 
 		// The notificationButton should always be shown, even when the page is not interactive
 		opacity: 1
-		visible: !breadcrumbs.visible && (Services.notifications?.statusBarNotificationIconVisible ?? false)
+		visible: !breadcrumbs.visible && Services.notifications.statusBarNotificationIconVisible
 
-		color: Services.notifications?.statusBarNotificationIconColor ?? "transparent"
-		icon.source: Services.notifications?.statusBarNotificationIconSource ?? ""
+		color: Services.notifications.statusBarNotificationIconColor
+		icon.source: Services.notifications.statusBarNotificationIconSource
 
 		onClicked: Global.mainView.goToNotificationsPage()
 		onActiveFocusChanged: {
