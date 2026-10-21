@@ -34,6 +34,8 @@ Page {
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
+		footerPositioning: ListView.InlineFooter
+		headerPositioning: ListView.InlineHeader
 
 		// When using key navigation to scroll through the control cards, use a velocity that
 		// roughly matches the velocity produced by AuxCardsPage scrollToControl() when it scrolls
@@ -120,6 +122,60 @@ Page {
 				wheel.accepted = true
 			}
 		}
+
+		// Plugin type-5 Controls cards — ListView footer so they scroll horizontally
+		// with built-in cards (a sibling Row below cardsView is off-screen in landscape).
+		footer: FocusScope {
+			id: pluginControlFooter
+			// The list helper only enters a footer that accepts key navigation.
+			// A plain Loader has no focus policy, so the card would be skipped.
+			visible: pluginControlCards.count > 0
+			focusPolicy: visible ? Qt.TabFocus : Qt.NoFocus
+			implicitWidth: pluginControlCardsRow.implicitWidth
+			width: implicitWidth
+			height: Theme.screenSize === Theme.Portrait
+				? pluginControlCardsRow.implicitHeight
+				: cardsView.height
+
+			function linkLoadedCard(loader) {
+				if (!loader.item) {
+					return
+				}
+				const previous = pluginControlRepeater.itemAt(loader.index - 1)
+				const next = pluginControlRepeater.itemAt(loader.index + 1)
+				if (previous && previous.item) {
+					previous.item.KeyNavigation.right = loader.item
+					loader.item.KeyNavigation.left = previous.item
+				}
+				if (next && next.item) {
+					next.item.KeyNavigation.left = loader.item
+					loader.item.KeyNavigation.right = next.item
+				}
+			}
+
+			Row {
+				id: pluginControlCardsRow
+				spacing: Theme.geometry_controlCardsPage_spacing
+				height: parent.height
+
+				Repeater {
+					id: pluginControlRepeater
+					model: pluginControlCards
+
+					delegate: ListItemLoader {
+						required property int index
+						required property url url
+						required property string pluginName
+
+						focus: index === 0
+						width: root.cardWidth
+						height: Theme.screenSize === Theme.Portrait ? implicitHeight : cardsView.height
+						source: url
+						onLoaded: pluginControlFooter.linkLoadedCard(this)
+					}
+				}
+			}
+		}
 	}
 
 	FilteredDeviceModel {
@@ -142,6 +198,12 @@ Page {
 		}
 	}
 
+	GuiPluginIntegrationModel {
+		id: pluginControlCards
+		type: GuiPluginLoader.QuickAccessPaneCard
+		cardType: GuiPluginLoader.ControlsCard
+	}
+
 	Loader {
 		id: emptyPageLoader
 		anchors {
@@ -149,7 +211,7 @@ Page {
 			leftMargin: Theme.geometry_page_content_horizontalMargin
 			rightMargin: Theme.geometry_page_content_horizontalMargin
 		}
-		active: cardsView.count === 0 && !cardsView.headerItem.active
+		active: cardsView.count === 0 && !cardsView.headerItem.active && pluginControlCards.count === 0
 		sourceComponent: EmptyPageItem {
 			//% "Controls"
 			titleText: qsTrId("controlcards_empty_title")

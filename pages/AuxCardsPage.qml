@@ -17,6 +17,14 @@ Page {
 	//% "Switches"
 	title: qsTrId("aux_page_switches")
 
+	// Plugin QuickAccessPaneCard (type 5, cardType=SwitchesCard) injected
+	// after built-in switch group cards.
+	GuiPluginIntegrationModel {
+		id: pluginSwitchCards
+		type: GuiPluginLoader.QuickAccessPaneCard
+		cardType: GuiPluginLoader.SwitchesCard
+	}
+
 	BaseListView {
 		id: cardsView
 
@@ -86,6 +94,59 @@ Page {
 				}
 			}
 		}
+
+		footer: FocusScope {
+			id: pluginSwitchFooter
+
+			// The list helper only enters a footer that accepts key navigation.
+			// A plain Loader has no focus policy, so the card would be skipped.
+			visible: pluginSwitchCards.count > 0
+			focusPolicy: visible ? Qt.TabFocus : Qt.NoFocus
+			implicitWidth: pluginSwitchRow.implicitWidth
+			implicitHeight: pluginSwitchRow.implicitHeight
+			width: implicitWidth
+			height: Theme.screenSize === Theme.Portrait ? implicitHeight : cardsView.height
+
+			function linkLoadedCard(loader) {
+				if (!loader.item) {
+					return
+				}
+				const previous = pluginSwitchRepeater.itemAt(loader.index - 1)
+				const next = pluginSwitchRepeater.itemAt(loader.index + 1)
+				if (previous && previous.item) {
+					previous.item.KeyNavigation.right = loader.item
+					loader.item.KeyNavigation.left = previous.item
+				}
+				if (next && next.item) {
+					next.item.KeyNavigation.left = loader.item
+					loader.item.KeyNavigation.right = next.item
+				}
+			}
+
+			Row {
+				id: pluginSwitchRow
+				spacing: Theme.geometry_controlCardsPage_spacing
+				height: parent.height
+
+				Repeater {
+					id: pluginSwitchRepeater
+					model: pluginSwitchCards
+
+					delegate: ListItemLoader {
+						required property int index
+						required property url url
+						required property string pluginName
+
+						focus: index === 0
+						width: Theme.screenSize === Theme.Portrait ? cardsView.width : implicitWidth
+						height: Theme.screenSize === Theme.Portrait ? implicitHeight : cardsView.height
+						source: url
+						onLoaded: pluginSwitchFooter.linkLoadedCard(this)
+					}
+				}
+			}
+		}
+
 		WheelHandler {
 			enabled: Qt.platform.os === "wasm" || Global.isDesktop
 			onWheel: (wheel) => {

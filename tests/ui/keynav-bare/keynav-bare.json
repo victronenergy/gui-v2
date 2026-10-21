@@ -1,0 +1,16 @@
+{
+    "ExitWhenFinished": true,
+    "Logging": "info",
+    "Tests": [
+        "tst_keynav.qml"
+    ],
+    "Mock": {
+        "Configuration": ":/data/mock/conf/barebones.json",
+        "TimersActive": false
+    },
+    "Steps": {
+        "WaitUntil": {
+            "DefaultTimeout": 20000
+        }
+    }
+}
