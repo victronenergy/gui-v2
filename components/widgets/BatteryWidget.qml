@@ -56,7 +56,8 @@ OverviewWidget {
 			if (!activeBatteryService.valid || AllDevicesModel.count === 0) {
 				return ""
 			}
-			const device = AllDevicesModel.findDeviceWithTypeAndInstance("battery", parseInt(activeBatteryService.value.split('/')[1]))
+			const info = BackendConnection.portableIdInfo(activeBatteryService.value)
+			const device = AllDevicesModel.findDeviceWithTypeAndInstance(info.type, parseInt(info.instance))
 			return device ? device.serviceUid + "/Dc/1/Voltage" : ""
 		}
 	}
