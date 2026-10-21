@@ -48,7 +48,7 @@ QtObject {
 	readonly property VeQuickItemsQuotient power: VeQuickItemsQuotient {
 		objectName: "overallPower"
 		numeratorUid: root._firstDevice ? BackendConnection.serviceUidForType("system") + "/MotorDrive/Power" : ""
-		denominatorUid : Services.settings ? Services.settings.serviceUid  + "/Settings/Gui/Gauges/MotorDrive/Power/Max" : ""
+		denominatorUid : Services.settings.serviceUid  + "/Settings/Gui/Gauges/MotorDrive/Power/Max"
 		sourceUnit: VenusOS.Units_Watt
 		displayUnit: VenusOS.Units_Watt
 	}

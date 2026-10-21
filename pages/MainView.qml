@@ -20,7 +20,7 @@ FocusScope {
 	readonly property alias cardsLoader: cardsLoader
 
 	readonly property bool notificationButtonsEnabled: (currentPage?.url?.endsWith("NotificationsPage.qml") ?? false)
-			&& (Services.notifications?.silenceAlarmVisible ?? false)
+			&& Services.notifications.silenceAlarmVisible
 
 	property alias navBarAnimatingOut: animateNavBarOut.running
 
@@ -120,8 +120,7 @@ FocusScope {
 	// specified by the startPageTimeout.  Note that the timer should be running
 	// even if !Global.timersEnabled as the screen blank duration might be very short.
 	Timer {
-		running: !!Services.settings
-				 && Services.settings.startPageConfiguration.hasStartPage
+		running: Services.settings.startPageConfiguration.hasStartPage
 				 && Services.settings.startPageConfiguration.startPageTimeout > 0
 				 && !Global.applicationActive
 		interval: Services.settings.startPageConfiguration.startPageTimeout * 1000
@@ -131,7 +130,7 @@ FocusScope {
 	// Auto-select the start page when the application becomes inactive, if configured to do so.
 	Connections {
 		target: Global
-		enabled: !!Services.settings && Services.settings.startPageConfiguration.autoSelect
+		enabled: Services.settings.startPageConfiguration.autoSelect
 		function onApplicationActiveChanged() {
 			if (!Global.applicationActive) {
 				const mainPageName = navBar.getCurrentPage()
@@ -287,7 +286,7 @@ FocusScope {
 						height: Theme.geometry_navigationBar_notifications_redDot_size
 						radius: Theme.geometry_navigationBar_notifications_redDot_size / 2
 						color: Theme.color_red
-						visible: (Services.notifications?.unacknowledgedCount ?? 0) > 0
+						visible: Services.notifications.unacknowledgedCount > 0
 					}
 
 					Component {

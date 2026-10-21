@@ -48,11 +48,11 @@ FocusScope {
 		id: screenBlanker
 
 		property VeQuickItem displayOffItem: VeQuickItem {
-			uid: !!Services.settings ? Services.settings.serviceUid + "/Settings/Gui/DisplayOff" : ""
+			uid: Services.settings.serviceUid + "/Settings/Gui/DisplayOff"
 		}
 
 		Component.onCompleted: {
-			ScreenBlanker.enabled = Qt.binding(function() { return !UiConfig.splashScreenVisible && !(Services.notifications?.notificationButtonVisible ?? false) && !Global.boatPageActive })
+			ScreenBlanker.enabled = Qt.binding(function() { return !UiConfig.splashScreenVisible && !Services.notifications.notificationButtonVisible && !Global.boatPageActive })
 			ScreenBlanker.displayOffTime = Qt.binding(function() { return screenBlanker.displayOffItem.valid ? 1000*screenBlanker.displayOffItem.value : 0 })
 			ScreenBlanker.window = root.Window.window
 		}

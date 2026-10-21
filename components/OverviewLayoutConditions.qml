@@ -12,41 +12,41 @@ QtObject {
 	signal conditionChanged
 
 	// Affects whether one or both AcInputWidgets are shown, and their widget sizes.
-	readonly property AcInput acInput1: Services.acInputs?.input1 ?? null
+	readonly property AcInput acInput1: Services.acInputs.input1
 	onAcInput1Changed: conditionChanged()
-	readonly property AcInput acInput2: Services.acInputs?.input2 ?? null
+	readonly property AcInput acInput2: Services.acInputs.input2
 	onAcInput2Changed: conditionChanged()
 
 	// Affects whether DcInputWidget(s) are shown.
-	readonly property bool showDcInputs: Services.dcInputs?.model.count ?? 0 > 0
+	readonly property bool showDcInputs: Services.dcInputs.model.count > 0
 	onShowDcInputsChanged: conditionChanged()
-	readonly property int dcInputCount: Services.dcInputs?.model.count ?? 0
+	readonly property int dcInputCount: Services.dcInputs.model.count
 	onDcInputCountChanged: conditionChanged()
 
 	// Affects whether SolarYieldWidget is shown, and its widget size.
 	readonly property bool showSolar: Services.solarInputs.inputCount > 0
 	onShowSolarChanged: conditionChanged()
-	readonly property int pvChargerCount: Services.solarInputs?.devices.count ?? 0
+	readonly property int pvChargerCount: Services.solarInputs.devices.count
 	onPvChargerCountChanged: conditionChanged()
-	readonly property int pvInverterCount: Services.solarInputs?.pvInverterDevices.count ?? 0
+	readonly property int pvInverterCount: Services.solarInputs.pvInverterDevices.count
 	onPvInverterCountChanged: conditionChanged()
 
 	// Affects whether AcLoadsWidget is shown.
 	// When evcharger services are present, the AC loads is required because the EVCS widget might
 	// connect to the AC Loads widget.
-	readonly property bool showAcLoads: Services.system?.hasAcLoads || Services.evChargers?.model.count > 0
+	readonly property bool showAcLoads: Services.system.hasAcLoads || Services.evChargers.model.count > 0
 	onShowAcLoadsChanged: conditionChanged()
 
 	// Affects whether DcLoadsWidget is shown.
-	readonly property bool showDcLoads: Services.system?.dc.hasPower
+	readonly property bool showDcLoads: Services.system.dc.hasPower
 	onShowDcLoadsChanged: conditionChanged()
 
 	// Affects whether EssentialLoadsWidget is shown.
-	readonly property bool showEssentialLoads: Services.system?.showInputLoads && Services.system?.hasAcOutSystem
+	readonly property bool showEssentialLoads: Services.system.showInputLoads && Services.system.hasAcOutSystem
 	onShowEssentialLoadsChanged: conditionChanged()
 
 	// Affects whether EvcsWidget is shown.
-	readonly property bool showEvChargers: Services.evChargers?.model.count ?? 0 > 0
+	readonly property bool showEvChargers: Services.evChargers.model.count > 0
 	onShowEvChargersChanged: conditionChanged()
 
 	// Affects the type of DC widget that is shown for a DC input. The meter type of a DC input may

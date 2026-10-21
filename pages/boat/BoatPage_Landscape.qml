@@ -129,7 +129,7 @@ Boat.Background { // the blue shadows
 
 	VeQuickItem {
 		id: showTemperaturesItem
-		uid: !!Services.settings ? Services.settings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/ShowTemperatures" : ""
+		uid: Services.settings.serviceUid + "/Settings/Gui/ElectricPropulsionUI/ShowTemperatures"
 	}
 
 	Boat.Temperatures {

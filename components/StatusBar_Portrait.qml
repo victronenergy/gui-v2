@@ -71,13 +71,13 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 		StatusBarButton {
 			id: notificationButton
 
-			enabled: Services.notifications?.statusBarNotificationIconVisible ?? false
+			enabled: Services.notifications.statusBarNotificationIconVisible
 			visible: !breadcrumbs.visible && enabled
 			leftInset: Theme.geometry_statusBar_spacing
 			rightInset: Theme.geometry_statusBar_spacing / 2
 			bottomInset: Theme.geometry_statusBar_spacing
-			color: Services.notifications?.statusBarNotificationIconColor ?? "transparent"
-			icon.source: Services.notifications?.statusBarNotificationIconSource ?? ""
+			color: Services.notifications.statusBarNotificationIconColor
+			icon.source: Services.notifications.statusBarNotificationIconSource
 
 			Layout.alignment: Qt.AlignTop
 			KeyNavigation.right: controlCardsButton

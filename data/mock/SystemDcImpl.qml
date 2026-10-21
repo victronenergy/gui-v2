@@ -70,7 +70,7 @@ Item {
 			}
 		}
 
-		model: Services.system?.dc.serviceModel ?? undefined
+		model: Services.system.dc.serviceModel
 		delegate: QtObject {
 			id: dcLoad
 
