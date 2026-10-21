@@ -10,31 +10,8 @@ import Victron.VenusOS
 FocusScope {
 	id: root
 
-	focus: true
-	focusPolicy: Qt.TabFocus
-
-	onActiveFocusChanged: {
-		if (activeFocus && Global.keyNavigationEnabled) {
-			const fromBottom = (Global.mainView?.swipeView?.focusEdgeHint ?? 0) === Qt.BottomEdge
-			if (fromBottom) {
-				waterTile.forceActiveFocus()
-			} else {
-				batteryTile.forceActiveFocus()
-			}
-		}
-	}
-
 	property string systemUid: Global.system ? Global.system.serviceUid : ""
 	property bool fakePumpOn: false
-
-	function fmtPower(w) {
-		if (isNaN(w)) return "--"
-		return Math.abs(Math.round(w)) + " W"
-	}
-	function fmtPercent(p) {
-		if (isNaN(p)) return "--"
-		return Math.round(p) + "%"
-	}
 
 	readonly property color tileBackground: Theme.color_overviewPage_widget_background
 	readonly property color tileBorder: Theme.color_overviewPage_widget_border
@@ -42,17 +19,44 @@ FocusScope {
 	readonly property real tileRadius: Theme.geometry_overviewPage_widget_radius || 8
 	readonly property int gridColumns: 3
 
-	// Tile order is row-major, so the neighbor on the right changes when the
-	// grid drops from three columns to two.
+	focus: true
+	focusPolicy: Qt.TabFocus
+
+	function fmtPower(w) {
+		if (isNaN(w)) {
+			return "--"
+		}
+		return Math.abs(Math.round(w)) + " W"
+	}
+	function fmtPercent(p) {
+		if (isNaN(p)) {
+			return "--"
+		}
+		return Math.round(p) + "%"
+	}
+
+	// Tile order is row-major across the three columns.
 	function tileNeighbor(index, rowDelta, columnDelta) {
 		const columns = gridColumns
 		const row = Math.floor(index / columns) + rowDelta
 		const column = (index % columns) + columnDelta
-		if (row < 0 || column < 0 || column >= columns)
+		if (row < 0 || column < 0 || column >= columns) {
 			return null
+		}
 		const next = row * columns + column
 		const tiles = [batteryTile, solarTile, propaneTile, waterTile, pumpTile, dcTile]
 		return next < tiles.length ? tiles[next] : null
+	}
+
+	onActiveFocusChanged: {
+		if (activeFocus && Global.keyNavigationEnabled) {
+			const fromBottom = (Global.mainView?.swipeView?.focusEdgeHint ?? 0) === Qt.BottomEdge
+			if (fromBottom) {
+				waterTile.focus = true
+			} else {
+				batteryTile.focus = true
+			}
+		}
 	}
 
 	GridLayout {
@@ -351,7 +355,7 @@ FocusScope {
 			MouseArea {
 				anchors.fill: parent
 				onClicked: {
-					pumpTile.forceActiveFocus()
+					pumpTile.focus = true
 					root.fakePumpOn = !root.fakePumpOn
 				}
 			}

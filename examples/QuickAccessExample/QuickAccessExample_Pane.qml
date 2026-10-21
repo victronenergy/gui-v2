@@ -10,29 +10,34 @@ import Victron.VenusOS
 FocusScope {
 	id: root
 
-	focus: true
-	focusPolicy: Qt.TabFocus
 	property bool fakePumpOn: false
-
-	onActiveFocusChanged: {
-		if (activeFocus && Global.keyNavigationEnabled) {
-			batteryTile.forceActiveFocus()
-		}
-	}
-
-	function fmtPower(w) {
-		if (isNaN(w)) return "--"
-		return Math.abs(Math.round(w)) + " W"
-	}
-	function fmtPercent(p) {
-		if (isNaN(p)) return "--"
-		return Math.round(p) + "%"
-	}
 
 	readonly property color tileBackground: Theme.color_overviewPage_widget_background
 	readonly property color tileBorder: Theme.color_overviewPage_widget_border
 	readonly property real tileBorderWidth: Theme.geometry_overviewPage_widget_border_width || 2
 	readonly property real tileRadius: Theme.geometry_overviewPage_widget_radius || 8
+
+	focus: true
+	focusPolicy: Qt.TabFocus
+
+	function fmtPower(w) {
+		if (isNaN(w)) {
+			return "--"
+		}
+		return Math.abs(Math.round(w)) + " W"
+	}
+	function fmtPercent(p) {
+		if (isNaN(p)) {
+			return "--"
+		}
+		return Math.round(p) + "%"
+	}
+
+	onActiveFocusChanged: {
+		if (activeFocus && Global.keyNavigationEnabled) {
+			batteryTile.focus = true
+		}
+	}
 
 	GridLayout {
 		anchors.fill: parent

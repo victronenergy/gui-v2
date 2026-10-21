@@ -16,24 +16,28 @@ ObjectModel {
 	readonly property list<SwipeViewPage> pages: {
 		void pluginPageRevision
 		void pluginNavReady
-		var p = []
-		if (showBoatPage) p.push(boatPageLoader.item)
-		p.push(briefPage)
-		p.push(overviewPage)
-		for (var i = 0; i < pluginNavRepeater.count; i++) {
-			var loader = pluginNavRepeater.itemAt(i)
+		const pageList = []
+		if (showBoatPage) {
+			pageList.push(boatPageLoader.item)
+		}
+		pageList.push(briefPage)
+		pageList.push(overviewPage)
+		for (let i = 0; i < pluginNavRepeater.count; ++i) {
+			const loader = pluginNavRepeater.itemAt(i)
 			if (!loader || !loader.item) {
 				continue
 			}
 			if (loader.item.contentFailed) {
 				continue
 			}
-			p.push(loader.item)
+			pageList.push(loader.item)
 		}
-		if (showLevelsPage) p.push(levelsPageLoader.item)
-		p.push(notificationsPage)
-		p.push(settingsPage)
-		return p
+		if (showLevelsPage) {
+			pageList.push(levelsPageLoader.item)
+		}
+		pageList.push(notificationsPage)
+		pageList.push(settingsPage)
+		return pageList
 	}
 	readonly property bool showLevelsPage: levelsPageLoader.active && !!levelsPageLoader.item
 	readonly property bool showBoatPage: boatPageLoader.active && !!boatPageLoader.item
@@ -113,7 +117,8 @@ ObjectModel {
 	Item {
 		id: pluginPagesContainer
 		visible: false
-		width: 0; height: 0
+		width: 0
+		height: 0
 
 		Repeater {
 			id: pluginNavRepeater
@@ -131,8 +136,9 @@ ObjectModel {
 				// Keep the wrapper. Content loads on first visit.
 				active: true
 				onStatusChanged: {
-					if (status === Loader.Ready)
+					if (status === Loader.Ready) {
 						root.pluginNavReady++
+					}
 				}
 				sourceComponent: SwipeViewPage {
 					id: pluginSwipePage
@@ -164,17 +170,20 @@ ObjectModel {
 						active: pluginSwipePage.SwipeView.isCurrentItem || pluginSwipePage.contentVisited
 						source: pluginPageDelegate.url
 						onActiveChanged: {
-							if (active)
+							if (active) {
 								pluginSwipePage.contentVisited = true
+							}
 						}
 						onStatusChanged: {
 							if (status === Loader.Error) {
 								const mv = Global.mainView
-								if (mv && mv._previousMainPageUrl.length > 0)
+								if (mv && mv._previousMainPageUrl.length > 0) {
 									mv._resyncUrl = mv._previousMainPageUrl
+								}
 								root.pluginPageRevision++
-								if (mv)
+								if (mv) {
 									Qt.callLater(mv.resyncMainPageSelection)
+								}
 							}
 						}
 					}

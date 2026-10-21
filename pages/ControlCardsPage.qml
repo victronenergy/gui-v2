@@ -125,29 +125,53 @@ Page {
 
 		// Plugin type-5 Controls cards — ListView footer so they scroll horizontally
 		// with built-in cards (a sibling Row below cardsView is off-screen in landscape).
-		footer: Item {
+		footer: FocusScope {
+			id: pluginControlFooter
+			// The list helper only enters a footer that accepts key navigation.
+			// A plain Loader has no focus policy, so the card would be skipped.
 			visible: pluginControlCards.count > 0
+			focusPolicy: visible ? Qt.TabFocus : Qt.NoFocus
 			implicitWidth: pluginControlCardsRow.implicitWidth
 			width: implicitWidth
 			height: Theme.screenSize === Theme.Portrait
 				? pluginControlCardsRow.implicitHeight
 				: cardsView.height
 
+			function linkLoadedCard(loader) {
+				if (!loader.item) {
+					return
+				}
+				const previous = pluginControlRepeater.itemAt(loader.index - 1)
+				const next = pluginControlRepeater.itemAt(loader.index + 1)
+				if (previous && previous.item) {
+					previous.item.KeyNavigation.right = loader.item
+					loader.item.KeyNavigation.left = previous.item
+				}
+				if (next && next.item) {
+					next.item.KeyNavigation.left = loader.item
+					loader.item.KeyNavigation.right = next.item
+				}
+			}
+
 			Row {
 				id: pluginControlCardsRow
 				spacing: Theme.geometry_controlCardsPage_spacing
+				height: parent.height
 
 				Repeater {
+					id: pluginControlRepeater
 					model: pluginControlCards
 
-					delegate: Loader {
+					delegate: ListItemLoader {
 						required property int index
 						required property url url
 						required property string pluginName
 
+						focus: index === 0
 						width: root.cardWidth
 						height: Theme.screenSize === Theme.Portrait ? implicitHeight : cardsView.height
 						source: url
+						onLoaded: pluginControlFooter.linkLoadedCard(this)
 					}
 				}
 			}
