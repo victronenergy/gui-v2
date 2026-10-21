@@ -30,10 +30,13 @@ Page {
 			ListNavigation {
 				//% "Ethernet"
 				text: qsTrId("pagesettingsconnectivity_ethernet")
-				secondaryText: networkServices.networkState !== "idle" && networkServices.networkState !== ""
-					? (networkServices.ipAddress ? networkServices.ipAddress : Utils.connmanServiceState(networkServices.networkState))
-					//% "Unplugged"
-					: qsTrId("settings_tcpip_connection_unplugged")
+				interactive: !Global.venusInContainer
+				secondaryText: Global.venusInContainer
+					? CommonWords.unavailable_running_in_container
+					: networkServices.networkState !== "idle" && networkServices.networkState !== ""
+						? (networkServices.ipAddress ? networkServices.ipAddress : Utils.connmanServiceState(networkServices.networkState))
+						//% "Unplugged"
+						: qsTrId("settings_tcpip_connection_unplugged")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsTcpIp.qml", {"title": text})
 			}
 
@@ -42,7 +45,10 @@ Page {
 
 				//% "Wi-Fi"
 				text: qsTrId("pagesettingsconnectivity_wifi")
-				secondaryText: wifiModel.connectedNetworkName
+				interactive: !Global.venusInContainer
+				secondaryText: Global.venusInContainer
+					? CommonWords.unavailable_running_in_container
+					: wifiModel.connectedNetworkName
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsWifi.qml", {"title": text, "ethernetNetworkServices": networkServices})
 				WifiModel {
 					id: wifiModel
@@ -52,10 +58,13 @@ Page {
 			ListNavigation {
 				//% "Bluetooth (for VictronConnect App)"
 				text: qsTrId("pagesettingsconnectivity_bluetooth_for_victronconnect_app")
-				secondaryText: networkServices.hasBluetoothSupport
-					? (bluetooth.value === 1 ? CommonWords.enabled : CommonWords.disabled)
-					//% "No Bluetooth available"
-					: qsTrId("pagesettingsconnectivity_bluetooth_not_available")
+				interactive: !Global.venusInContainer
+				secondaryText: Global.venusInContainer
+					? CommonWords.unavailable_running_in_container
+					: networkServices.hasBluetoothSupport
+						? (bluetooth.value === 1 ? CommonWords.enabled : CommonWords.disabled)
+						//% "No Bluetooth available"
+						: qsTrId("pagesettingsconnectivity_bluetooth_not_available")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBluetooth.qml", {"title": text})
 
 				VeQuickItem {
@@ -69,8 +78,11 @@ Page {
 
 				//% "Mobile network"
 				text: qsTrId("pagesettingsconnectivity_mobile_network")
-				//% "No cellular modem connected"
-				secondaryText: simStatus.valid ? networkServices.mobileNetworkName : qsTrId("page_settings_no_cellular_modem_connected")
+				interactive: !Global.venusInContainer
+				secondaryText: Global.venusInContainer
+					? CommonWords.unavailable_running_in_container
+					//% "No cellular modem connected"
+					: simStatus.valid ? networkServices.mobileNetworkName : qsTrId("page_settings_no_cellular_modem_connected")
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsGsm.qml", {"title": text})
 
 				VeQuickItem {

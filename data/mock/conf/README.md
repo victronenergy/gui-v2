@@ -22,6 +22,10 @@ Also, if --mock-conf is set, the --mock option is implied. For example, the abov
     - Only contains settings and system services, with minimal settings
     - Useful for testing new/custom services during development; just add the services that you need.
 
+- container
+    - As barebones, but running in a container, for checking the container-specific settings pages
+    - Two VE.Can ports, since CAN interfaces can be passed into a container
+
 - maximal (as many services as possible)
     - Inverter/chargers:
         - Quattro with 3-phase Grid (feed-in) + Genset, prefers renewable energy
