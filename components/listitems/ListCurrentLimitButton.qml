@@ -87,10 +87,16 @@ ListButton {
 		uid: root.serviceUid + "/Devices/Dmc/Version"
 	}
 
+	VeQuickItem {
+		id: productIdItem
+		uid: root.serviceUid + "/ProductId"
+	}
+
 	Component {
 		id: currentLimitDialogComponent
 
 		CurrentLimitDialog {
+			productId: productIdItem.valid ? productIdItem.value : 0
 			maxCurrentLimit: currentLimitItem.maxCurrentLimit
 			title: Global.acInputs.currentLimitTypeToText(root.inputType)
 			secondaryTitle: CommonWords.acInputFromNumber(root.inputNumber)
