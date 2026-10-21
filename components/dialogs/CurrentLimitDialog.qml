@@ -9,7 +9,14 @@ import Victron.VenusOS
 NumberSelectorDialog {
 	id: root
 
+	property int productId
 	readonly property real transitionValue: 25.0
+
+	/* - Mask the Product id with `0xFF00`
+	 * - If the result is `0x1900` or `0x2600` it is an EU model (230VAC)
+	 * - If the result is `0x2000` or `0x2700` it is an US model (120VAC)
+	 */
+	readonly property int _productUpperByte: productId > 0 ? productId / 0x100 : 0
 
 	title: CommonWords.input_current_limit
 	suffix: Units.defaultUnitString(VenusOS.Units_Amp)
@@ -36,7 +43,11 @@ NumberSelectorDialog {
 	}
 
 	property real maxCurrentLimit: -1
-	readonly property var _presetLimits: [5, 10, 15, 20, 30, 50, 100, 200, 500, 750, 1000, 1500, 2000, 2500, 3000, 3500, 4000]
+	readonly property var _euPresetLimits: [3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0, 100, 150, 200, 300, 500, 750, 1000, 1500, 2000, 2500, 3000, 3500, 4000]
+	readonly property var _usPresetLimits: [5, 10, 15, 20, 30, 50, 100, 200, 500, 750, 1000, 1500, 2000, 2500, 3000, 3500, 4000]
+	readonly property var _presetLimits: _productUpperByte === 0x19 || _productUpperByte === 0x26 ? _euPresetLimits
+					: (_productUpperByte === 0x20 || _productUpperByte === 0x27 ? _usPresetLimits
+					: [3.0, 6.0, 10.0, 13.0, 16.0, 25.0, 32.0, 63.0, 100, 150, 200, 300, 500, 750, 1000]) // Unknown productId presets
 	function _presetAmpOptions() {
 		let upperIndex = root._presetLimits.length - 1
 		if (root.maxCurrentLimit > 0) {
