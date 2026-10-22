@@ -12,6 +12,21 @@ UiTestCase {
 
 	window: Global.main
 
+	function cleanup() {
+		Global.pageManager.popAllPages(PageStack.Immediate)
+		console.assert(Global.pageManager.pageStack.depth === 0,
+				"cleanup(): the page stack still holds", Global.pageManager.pageStack.depth, "page(s)")
+		recursivePageCapture.reset()
+
+		if (Global.mainView.cardsActive) {
+			Global.mainView.cardsLoader.hide()
+		}
+		addStep(UiTestStep.WaitUntil, { callable: ()=> {
+			return !Global.mainView.cardsActive && !Global.mainView.cardsLoader.animationRunning
+		} })
+		runSteps()
+	}
+
 	function _expectedCardsOrientation() {
 		if (Theme.screenSize === Theme.Portrait) {
 			return ListView.Vertical

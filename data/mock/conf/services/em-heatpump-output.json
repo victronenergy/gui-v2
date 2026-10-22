@@ -34,6 +34,9 @@
         "/ProductName": "Heat pump",
         "/RefreshTime": 600,
         "/Role": "heatpump",
-        "/S2/0/RmSettings/PowerSetting": 500
+        "/S2/0/Active": 1,
+        "/S2/0/RmSettings/OffHysteresis": 5,
+        "/S2/0/RmSettings/OnHysteresis": 10,
+        "/S2/0/RmSettings/PowerSetting": 2000
     }
 }

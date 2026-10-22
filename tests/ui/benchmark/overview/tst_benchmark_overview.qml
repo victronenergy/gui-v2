@@ -20,7 +20,7 @@ UiTestCase {
 		addStep(UiTestStep.WaitUntil, { callable: ()=> { return !Global.mainView.animating } })
 		addStep(UiTestStep.Invoke, { callable: ()=> {
 			if (!Global.animationEnabled || !Global.systemSettings.animationEnabled) {
-				console.warn("Overview benchmark: animations are disabled; Mock.UIAnimations opt-in was not applied")
+				console.warn("Overview benchmark: animations are disabled; UIAnimations opt-in was not applied")
 				return false
 			}
 			const page = Global.mainView.currentPage
