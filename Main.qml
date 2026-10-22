@@ -256,7 +256,7 @@ Window {
 		property bool needReload: false
 		property var toastId: null
 		function onSettingsOnlineChanged() {
-			if (Global.backendReady && !SystemServiceListener.settingsOnline) {
+			if (BackendConnection.ready && !SystemServiceListener.settingsOnline) {
 				console.info("Main: settings service is now unavailable!")
 				if (!systemServiceConnections.needReload) {
 					systemServiceConnections.needReload = true
@@ -277,7 +277,7 @@ Window {
 			}
 		}
 		function onPlatformOnlineChanged() {
-			if (Global.backendReady && !SystemServiceListener.platformOnline) {
+			if (BackendConnection.ready && !SystemServiceListener.platformOnline) {
 				console.info("Main: platform service is now unavailable!")
 				if (!systemServiceConnections.needReload) {
 					systemServiceConnections.needReload = true

@@ -53,6 +53,7 @@ void BackendConnection::setState(State backendConnectionState)
 		qDebug() << "BackendConnection state:" << backendConnectionState;
 		m_state = backendConnectionState;
 		emit stateChanged();
+		updateIsReady();
 	}
 }
 
@@ -127,6 +128,7 @@ void BackendConnection::setHeartbeatState(HeartbeatState backendHeartbeatState)
 	if (m_heartbeatState != backendHeartbeatState) {
 		m_heartbeatState = backendHeartbeatState;
 		emit heartbeatStateChanged();
+		updateIsReady();
 	}
 }
 
@@ -620,7 +622,35 @@ void BackendConnection::setVrm(bool v)
 	if (m_vrm != v) {
 		m_vrm = v;
 		emit vrmChanged();
+		updateIsReady();
 	}
+}
+
+void BackendConnection::updateIsReady()
+{
+#if defined(VENUS_WEBASSEMBLY_BUILD)
+	const bool ready = state() == Ready && (!isVrm() || heartbeatState() != HeartbeatInactive);
+#else
+	const bool ready = state() == Ready;
+#endif
+	if (ready != m_ready) {
+		m_ready = ready;
+		emit readyChanged();
+		if (ready) {
+			m_readyLatched = true;
+			emit readyLatchedChanged();
+		}
+	}
+}
+
+bool BackendConnection::isReady() const
+{
+	return m_ready;
+}
+
+bool BackendConnection::isReadyLatched() const
+{
+	return m_readyLatched;
 }
 
 VeQItemProducer *BackendConnection::producer() const

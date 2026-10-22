@@ -30,7 +30,7 @@ Item {
 	readonly property Tanks tanks: tanksLoader.item
 	readonly property VenusPlatform platform: platformLoader.item
 
-	readonly property bool appDataReady: Global.backendReady
+	readonly property bool appDataReady: BackendConnection.ready
 			&& _servicesLoaded
 			&& (BackendConnection.type !== BackendConnection.MockSource || mockSetupLoader.mockLoaded)
 			&& !GuiPluginLoader.busy
