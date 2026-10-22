@@ -16,10 +16,6 @@ QtObject {
 	property bool applicationActive: true // i.e. not in Idle mode
 	property bool keyNavigationEnabled
 
-	readonly property bool backendReady: BackendConnection.state === BackendConnection.Ready
-		&& (Qt.platform.os !== "wasm"
-			|| !BackendConnection.vrm
-			|| BackendConnection.heartbeatState !== BackendConnection.HeartbeatInactive)
 	readonly property string fontFamily: _defaultFontLoader.name
 	readonly property string quantityFontFamily: _quantityFontLoader.name
 	property var dialogLayer
@@ -36,7 +32,7 @@ QtObject {
 	// Informative, derived view of the startup sequence. This describes the boot
 	// (which the scattered flags above drive); it does not drive it itself.
 	// Splash_Phase (owned by SplashSequence) is the sub-state while Splash here.
-	readonly property int startupPhase: !backendReady ? VenusOS.Startup_Phase_LoadingBackend
+	readonly property int startupPhase: !BackendConnection.ready ? VenusOS.Startup_Phase_LoadingBackend
 			: !Services.appDataReady ? VenusOS.Startup_Phase_LoadingData
 			: !allPagesLoaded ? VenusOS.Startup_Phase_LoadingUi
 			: UiConfig.splashScreenVisible ? VenusOS.Startup_Phase_Splash
@@ -53,9 +49,6 @@ QtObject {
 
 	readonly property int int32Max: _intValidator.top
 	readonly property int int32Min: _intValidator.bottom
-
-	property bool backendReadyLatched
-	onBackendReadyChanged: if (backendReady) backendReadyLatched = true
 
 	signal aboutToFocusTextField(textField : Item, viewToScroll : Flickable)
 
