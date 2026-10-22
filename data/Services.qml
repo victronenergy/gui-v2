@@ -7,7 +7,6 @@ pragma Singleton
 
 import QtQuick
 import Victron.VenusOS
-import Victron.Mock
 
 Item {
 	id: root
@@ -170,10 +169,15 @@ Item {
 		id: mockSetupLoader
 		active: BackendConnection.type === BackendConnection.MockSource && root._servicesLoaded
 		asynchronous: true
-		sourceComponent: MockSetup {}
-		onLoaded: { console.info("Services: mock setup loaded!"); mockLoaded = true }
+
+		// Load by url to avoid importing Victron.Mock module for non-mock backends.
+		// Note this means filesystem deployments on GX will not load a user-edited MockSetup.qml.
+		source: "qrc:/qt/qml/Victron/Mock/data/mock/MockSetup.qml"
 		onStatusChanged: {
-			if (status === Loader.Error) {
+			if (status === Loader.Ready) {
+				console.info("Services: mock setup loaded!")
+				mockLoaded = true
+			} else if (status === Loader.Error) {
 				console.warn("Services: Unable to load mock setup")
 			}
 		}
