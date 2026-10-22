@@ -16,7 +16,7 @@ import Victron.VenusOS
 	HidingProgress -> FadingLogo          progress hide/pause finished
 	FadingLogo     -> PlayingGauge        logo fade finished
 	PlayingGauge   -> FadingOut           gauge paused and page preload is done
-	               -> WaitingForPreload   gauge paused and page preload is not done
+				   -> WaitingForPreload   gauge paused and page preload is not done
 	WaitingForPreload -> FadingOut        page preload finished
 	FadingOut      -> Hidden              opacity fade finished
 
