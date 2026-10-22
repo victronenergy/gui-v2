@@ -291,6 +291,34 @@ TestCase {
 		trySortedNames("Kitchen,ShellyPro3EM [22:22:22:bb:bb:bb],Garage")
 	}
 
+	function test_rescanUpdatesListedDevice() {
+		// A re-scan can invalidate and re-publish a device's values before the model has
+		// processed the change, so the device is never removed. Its row must still show the
+		// re-published values.
+		const uid = deviceUid("AAA111")
+		MockManager.setValue(uid + "/Model", null)
+		MockManager.setValue(uid + "/Name", "Attic")
+		MockManager.setValue(uid + "/Reachable", 0)
+		MockManager.setValue(uid + "/Supported", 0)
+		MockManager.setValue(uid + "/0/Enabled", 0)
+		MockManager.setValue(uid + "/Model", "ShellyPlusPlugS")
+		tryVerify(() => dataChangedSpy.count > 0)
+		wait(50)
+
+		const row = findRow("AAA111")
+		verify(row >= 0)
+		compare(roleValue(model, row, ShellyDeviceModel.NameRole), "Attic")
+		compare(roleValue(model, row, ShellyDeviceModel.ReachableRole), false)
+		compare(roleValue(model, row, ShellyDeviceModel.SupportedRole), false)
+		compare(roleValue(model, row, ShellyDeviceModel.EnabledChannelCountRole), 1)
+		compare(rowsRemovedSpy.count, 0)
+		compare(rowsInsertedSpy.count, 0)
+		compare(countChangedSpy.count, 0)
+
+		// The sorted model uses the new values too.
+		trySortedNames("ShellyPro3EM [22:22:22:bb:bb:bb],Attic,Garage")
+	}
+
 	function test_updateDevice_data() {
 		return [
 			{ tag: "name", path: "Name", value: "Office", role: ShellyDeviceModel.NameRole, expected: "Office" },
