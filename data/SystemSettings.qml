@@ -301,7 +301,7 @@ QtObject {
 	}
 
 	property VeQuickItem time: VeQuickItem {
-		uid: Global.venusPlatform.serviceUid + "/Device/Time"
+		uid: BackendConnection.serviceUidForType("platform") + "/Device/Time"
 		onValueChanged: {
 			if (value !== undefined) {
 				ClockTime.clockTime = value
@@ -365,7 +365,9 @@ QtObject {
 				root.electricalPowerDisplay = VenusOS.ElectricalPowerDisplay_Mixed
 				break
 			default:
-				console.warn("Cannot load electrical quantity,", uid, "has unsupported value:", value, "default to watts")
+				if (valid && value !== "") {
+					console.warn("Cannot load electrical quantity,", uid, "has unsupported value:", value, "default to watts")
+				}
 				root.electricalPowerDisplay = VenusOS.ElectricalPowerDisplay_PreferWatts
 				break
 			}
@@ -388,7 +390,7 @@ QtObject {
 				root.temperatureUnitSuffix = "°F"
 				break
 			default:
-				if (Global.dataManagerLoaded) {
+				if (valid && value !== "") {
 					console.warn("Cannot load temperature unit,", uid, "has unsupported value:", value, "default to celsius")
 				}
 				root.temperatureUnit = VenusOS.Units_Temperature_Celsius
@@ -421,9 +423,7 @@ QtObject {
 				root.altitudeUnit = VenusOS.Units_Foot
 				break
 			default:
-				if (Global.dataManagerLoaded
-						// If altitude is just an empty string (rather than an unexpected value), skip the warning.
-						&& value !== "") {
+				if (valid && value !== "") {
 					console.warn("Cannot load altitude unit,", uid, "has unsupported value:", value, "default to metre")
 				}
 				root.altitudeUnit = VenusOS.Units_Metre
@@ -454,7 +454,9 @@ QtObject {
 				root.volumeUnit = VenusOS.Units_Volume_GallonUS
 				break
 			default:
-				console.warn("Cannot load volume unit,", uid, "has unsupported value:", value, "default to m3")
+				if (valid && value !== "") {
+					console.warn("Cannot load volume unit,", uid, "has unsupported value:", value, "default to m3")
+				}
 				root.volumeUnit = VenusOS.Units_Volume_CubicMetre
 				break
 			}
@@ -491,12 +493,10 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _gpsPositionFormat: VeQuickItem {
-		uid: Global.systemSettings.serviceUid + "/Settings/Gps/Format"
+		uid: root.serviceUid + "/Settings/Gps/Format"
 	}
 
 	function reset() {
 		// no-op
 	}
-
-	Component.onCompleted: Global.systemSettings = root
 }

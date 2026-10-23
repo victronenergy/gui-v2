@@ -58,7 +58,7 @@ Page {
 			ListSwitch {
 				id: enable
 				text: CommonWords.enable
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Eebus"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Services/Eebus"
 			}
 
 			ListText {

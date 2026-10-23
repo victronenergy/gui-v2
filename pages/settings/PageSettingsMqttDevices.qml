@@ -27,7 +27,7 @@ Page {
 	// '[{"token_name":"token/evcharger/HQ2334EV4Q"},{"token_name":"token/evcharger/HQ2334EV4R"}]'
 	VeQuickItem {
 		id: tokenUsers
-		uid: Global.venusPlatform.serviceUid + "/Tokens/Users"
+		uid: Services.platform.serviceUid + "/Tokens/Users"
 		onValueChanged: {
 			if (!valid) {
 				mqttDevicesView.model = []
@@ -51,13 +51,13 @@ Page {
 			width: parent?.width ?? 0
 
 			ListPairingModeButton {
-				countDownUid: Global.venusPlatform.serviceUid + "/Tokens/Pairing/CountDown"
+				countDownUid: Services.platform.serviceUid + "/Tokens/Pairing/CountDown"
 				preferredVisible: pairingEnable.valid
 				onClicked: pairingEnable.setValue("")
 
 				VeQuickItem {
 					id: pairingEnable
-					uid: Global.venusPlatform.serviceUid + "/Tokens/Pairing/Enable"
+					uid: Services.platform.serviceUid + "/Tokens/Pairing/Enable"
 				}
 			}
 
@@ -100,7 +100,7 @@ Page {
 
 			VeQuickItem {
 				id: pairingRemove
-				uid: Global.venusPlatform.serviceUid + "/Tokens/Remove"
+				uid: Services.platform.serviceUid + "/Tokens/Remove"
 			}
 		}
 	}

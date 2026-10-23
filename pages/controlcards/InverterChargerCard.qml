@@ -13,7 +13,7 @@ ControlCard {
 	property string name
 	readonly property string serviceType: BackendConnection.serviceTypeFromUid(serviceUid)
 	readonly property int writeAccessLevel: VenusOS.User_AccessType_User
-	readonly property bool userHasWriteAccess: Global.systemSettings.canAccess(writeAccessLevel)
+	readonly property bool userHasWriteAccess: Services.settings.canAccess(writeAccessLevel)
 	readonly property bool vebusInverterOnlyModel: serviceType === "vebus" && numberOfAcInputs.value === 0 // for a vebus inverter-only model, such as a "Phoenix Inverter Compact 12/1200"
 
 	implicitHeight: contentLayout.y + contentLayout.implicitHeight
@@ -102,7 +102,7 @@ ControlCard {
 			flat: true
 			preferredVisible: essModeItem.valid
 			writeAccessLevel: VenusOS.User_AccessType_User
-			secondaryText: Global.systemSettings.ess.essStateToButtonText(essModeItem.value)
+			secondaryText: Services.settings.ess.essStateToButtonText(essModeItem.value)
 			onClicked: {
 				Global.dialogLayer.open(essModeDialogComponent, { essMode: essModeItem.value })
 			}

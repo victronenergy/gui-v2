@@ -15,31 +15,31 @@ Page {
 
 	VeQuickItem {
 		id: autoUpdate
-		uid: Global.systemSettings.serviceUid + "/Settings/System/AutoUpdate"
+		uid: Services.settings.serviceUid + "/Settings/System/AutoUpdate"
 	}
 	VeQuickItem {
 		id: securityProfile
-		uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
+		uid: Services.settings.serviceUid + "/Settings/System/SecurityProfile"
 	}
 	VeQuickItem {
 		id: currentVersionItem
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Version"
+		uid: Services.platform.serviceUid + "/Firmware/Installed/Version"
 	}
 	VeQuickItem {
 		id: currentBuildItem
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/Build"
+		uid: Services.platform.serviceUid + "/Firmware/Installed/Build"
 	}
 	VeQuickItem {
 		id: backupVersionItem
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Backup/AvailableVersion"
+		uid: Services.platform.serviceUid + "/Firmware/Backup/AvailableVersion"
 	}
 	VeQuickItem {
 		id: backupBuildItem
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Backup/AvailableBuild"
+		uid: Services.platform.serviceUid + "/Firmware/Backup/AvailableBuild"
 	}
 	VeQuickItem {
 		id: activateBackup
-		uid: Global.venusPlatform.serviceUid + "/Firmware/Backup/Activate"
+		uid: Services.platform.serviceUid + "/Firmware/Backup/Activate"
 	}
 
 	GradientListView {

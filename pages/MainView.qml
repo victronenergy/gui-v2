@@ -20,7 +20,7 @@ FocusScope {
 	readonly property alias cardsLoader: cardsLoader
 
 	readonly property bool notificationButtonsEnabled: (currentPage?.url?.endsWith("NotificationsPage.qml") ?? false)
-			&& (Global.notifications?.silenceAlarmVisible ?? false)
+			&& Services.notifications.silenceAlarmVisible
 
 	property alias navBarAnimatingOut: animateNavBarOut.running
 
@@ -47,7 +47,7 @@ FocusScope {
 	property int _loadedPages: 0
 	readonly property alias _pageStack: pageStack
 
-	readonly property bool _readyToInit: Global.dataManagerLoaded && !Global.needPageReload
+	readonly property bool _readyToInit: Services.appDataReady && !Global.needPageReload
 			&& swipeViewLoader.readyToLoad
 	on_ReadyToInitChanged: {
 		if (_readyToInit && swipeViewLoader.active == false) {
@@ -67,12 +67,6 @@ FocusScope {
 		cardsLoader.hide()
 		navBar.setCurrentPage("SettingsPage.qml")
 		root.currentPage.goToConnectivityPage(networkType)
-	}
-
-	function clearUi() {
-		swipeViewLoader.active = false
-		pageStack.popAllPages(StackView.Immediate)
-		_loadedPages = 0
 	}
 
 	Keys.onPressed: (event) => {
@@ -126,23 +120,22 @@ FocusScope {
 	// specified by the startPageTimeout.  Note that the timer should be running
 	// even if !Global.timersEnabled as the screen blank duration might be very short.
 	Timer {
-		running: !!Global.systemSettings
-				 && Global.systemSettings.startPageConfiguration.hasStartPage
-				 && Global.systemSettings.startPageConfiguration.startPageTimeout > 0
+		running: Services.settings.startPageConfiguration.hasStartPage
+				 && Services.settings.startPageConfiguration.startPageTimeout > 0
 				 && !Global.applicationActive
-		interval: Global.systemSettings.startPageConfiguration.startPageTimeout * 1000
+		interval: Services.settings.startPageConfiguration.startPageTimeout * 1000
 		onTriggered: pageManager.goToStartPage()
 	}
 
 	// Auto-select the start page when the application becomes inactive, if configured to do so.
 	Connections {
 		target: Global
-		enabled: !!Global.systemSettings && Global.systemSettings.startPageConfiguration.autoSelect
+		enabled: Services.settings.startPageConfiguration.autoSelect
 		function onApplicationActiveChanged() {
 			if (!Global.applicationActive) {
 				const mainPageName = navBar.getCurrentPage()
 				const mainPage = swipeView.getCurrentPage()
-				Global.systemSettings.startPageConfiguration.autoSelectStartPage(mainPageName, mainPage, pageStack.opened ? pageStack.topPageUrl : "")
+				Services.settings.startPageConfiguration.autoSelectStartPage(mainPageName, mainPage, pageStack.opened ? pageStack.topPageUrl : "")
 			}
 		}
 	}
@@ -168,7 +161,7 @@ FocusScope {
 			id: swipeViewLoader
 
 			readonly property bool readyToLoad: swipePageModel.completed
-					&& Global.notifications && Global.notificationLayer // checked by onLoaded handler
+					&& Services.notifications && Global.notificationLayer // checked by onLoaded handler
 
 			anchors {
 				top: parent.top
@@ -293,7 +286,7 @@ FocusScope {
 						height: Theme.geometry_navigationBar_notifications_redDot_size
 						radius: Theme.geometry_navigationBar_notifications_redDot_size / 2
 						color: Theme.color_red
-						visible: (Global.notifications?.unacknowledgedCount ?? 0) > 0
+						visible: Services.notifications.unacknowledgedCount > 0
 					}
 
 					Component {
@@ -531,7 +524,7 @@ FocusScope {
 
 		VeQuickItem {
 			id: demoMode
-			uid: Global.systemSettings.serviceUid + "/Settings/Gui/DemoMode"
+			uid: Services.settings.serviceUid + "/Settings/Gui/DemoMode"
 		}
 	}
 

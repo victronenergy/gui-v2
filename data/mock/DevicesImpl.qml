@@ -40,7 +40,7 @@ Item {
 			// for mock mode.
 			const serviceType = BackendConnection.serviceTypeFromUid(serviceUid)
 			const identifier = serviceUid.substring(serviceUid.indexOf(serviceType) + serviceType.length + 1)
-			return Global.systemSettings.serviceUid + "/Settings/Devices/" + identifier
+			return Services.settings.serviceUid + "/Settings/Devices/" + identifier
 		}
 	}
 

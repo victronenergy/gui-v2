@@ -20,7 +20,7 @@ LevelsTab {
 
 	model: AggregateTankModel {
 		mergeThreshold: Theme.geometry_levelsPage_tankMergeThreshold
-		tankModels: Global.tanks.allTankModels
+		tankModels: Services.tanks.allTankModels
 	}
 
 	delegate: TankGaugePanel {

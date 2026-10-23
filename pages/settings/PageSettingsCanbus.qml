@@ -10,8 +10,8 @@ Page {
 	id: root
 
 	required property CanbusProfile canbusProfile
-	readonly property string _vecanSettingsPrefix: Global.systemSettings.serviceUid + "/Settings/Vecan/" + canbusProfile.gateway
-	readonly property string _rvcSettingsPrefix: Global.systemSettings.serviceUid + "/Settings/Rvc/" + canbusProfile.gateway
+	readonly property string _vecanSettingsPrefix: Services.settings.serviceUid + "/Settings/Vecan/" + canbusProfile.gateway
+	readonly property string _rvcSettingsPrefix: Services.settings.serviceUid + "/Settings/Rvc/" + canbusProfile.gateway
 
 	/* VE.Can and RV-C are mutually exclusive */
 	readonly property bool _isRvc: rvcSameUniqueNameUsed.valid
@@ -44,7 +44,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "CAN-bus profile"
 				text: qsTrId("settings_canbus_profile")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Canbus/" + canbusProfile.gateway + "/Profile"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Canbus/" + canbusProfile.gateway + "/Profile"
 				optionModel: canbusProfile.optionModel
 			}
 

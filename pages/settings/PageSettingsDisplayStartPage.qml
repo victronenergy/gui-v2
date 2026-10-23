@@ -26,7 +26,7 @@ Page {
 
 	VeQuickItem {
 		id: startPageName
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPageName"
+		uid: Services.settings.serviceUid + "/Settings/Gui2/StartPageName"
 	}
 
 	GradientListView {
@@ -36,7 +36,7 @@ Page {
 				//% "Start page"
 				text: qsTrId("settings_startpage_name")
 				secondaryText: {
-					const options = Global.systemSettings.startPageConfiguration.options
+					const options = Services.settings.startPageConfiguration.options
 					let optionText = ""
 					for (let i = 0; i < options.length; ++i) {
 						if (options[i].value === startPageName.value) {
@@ -46,7 +46,7 @@ Page {
 					}
 					if (optionText.length) {
 						return optionText
-					} else if (Global.systemSettings.startPageConfiguration.autoSelect) {
+					} else if (Services.settings.startPageConfiguration.autoSelect) {
 						return CommonWords.auto
 					} else {
 						//% "None"
@@ -67,7 +67,7 @@ Page {
 				//% "Timeout"
 				text: qsTrId("settings_startpage_timeout")
 				optionModel: root._timeoutOptions()
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPageTimeout"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gui2/StartPageTimeout"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				//% "Revert to the start page when the application is inactive."
 				caption: qsTrId("settings_startpage_timeout_description")
@@ -90,7 +90,7 @@ Page {
 					ListSwitch {
 						id: startPageMode
 						text: CommonWords.auto
-						dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui2/StartPage"
+						dataItem.uid: Services.settings.serviceUid + "/Settings/Gui2/StartPage"
 						writeAccessLevel: VenusOS.User_AccessType_User
 						invertSourceValue: true
 						//% "After one minute of inactivity, select the current page as the start page, if it is in this list."
@@ -109,7 +109,7 @@ Page {
 						width: parent ? parent.width : 0
 
 						Repeater {
-							model: Global.systemSettings.startPageConfiguration.options
+							model: Services.settings.startPageConfiguration.options
 							delegate: ListRadioButton {
 								checked: modelData.value === startPageName.value
 								text: modelData.display

@@ -16,35 +16,15 @@ QtObject {
 	property bool applicationActive: true // i.e. not in Idle mode
 	property bool keyNavigationEnabled
 
-	readonly property bool backendReady: BackendConnection.state === BackendConnection.Ready
-		&& (Qt.platform.os !== "wasm"
-			|| !BackendConnection.vrm
-			|| BackendConnection.heartbeatState !== BackendConnection.HeartbeatInactive)
 	readonly property string fontFamily: _defaultFontLoader.name
 	readonly property string quantityFontFamily: _quantityFontLoader.name
 	property var dialogLayer
 	property var notificationLayer
 	property var pressEffect
 	property bool displayCpuUsage
-	readonly property bool animationEnabled: (systemSettings?.animationEnabled ?? true) && UiConfig.animationEnabled && UiConfig.applicationVisible && !ScreenBlanker.blanked
+	readonly property bool animationEnabled: (Services.settings?.animationEnabled ?? true) && UiConfig.animationEnabled && UiConfig.applicationVisible && !ScreenBlanker.blanked
 	readonly property bool timersEnabled: UiConfig.applicationVisible && !ScreenBlanker.blanked
 
-	// data sources
-	property var acInputs
-	property var dcInputs
-	property var environmentInputs
-	property var evChargers
-	property var generators
-	property var inverterChargers
-	property var notifications
-	property var solarInputs
-	property var system
-	property var switches
-	property var systemSettings
-	property var tanks
-
-	property var venusPlatform
-	property bool dataManagerLoaded
 	property bool allPagesLoaded
 	property bool pagePreloadComplete
 	property bool boatPageActive
@@ -52,8 +32,8 @@ QtObject {
 	// Informative, derived view of the startup sequence. This describes the boot
 	// (which the scattered flags above drive); it does not drive it itself.
 	// Splash_Phase (owned by SplashSequence) is the sub-state while Splash here.
-	readonly property int startupPhase: !backendReady ? VenusOS.Startup_Phase_LoadingBackend
-			: !dataManagerLoaded ? VenusOS.Startup_Phase_LoadingData
+	readonly property int startupPhase: !BackendConnection.ready ? VenusOS.Startup_Phase_LoadingBackend
+			: !Services.appDataReady ? VenusOS.Startup_Phase_LoadingData
 			: !allPagesLoaded ? VenusOS.Startup_Phase_LoadingUi
 			: UiConfig.splashScreenVisible ? VenusOS.Startup_Phase_Splash
 			: VenusOS.Startup_Phase_Running
@@ -70,9 +50,6 @@ QtObject {
 	readonly property int int32Max: _intValidator.top
 	readonly property int int32Min: _intValidator.bottom
 
-	property bool backendReadyLatched
-	onBackendReadyChanged: if (backendReady) backendReadyLatched = true
-
 	signal aboutToFocusTextField(textField : Item, viewToScroll : Flickable)
 
 	function showToastNotification(type, text, autoCloseInterval = 0, textFormat = Text.AutoText) {
@@ -81,8 +58,6 @@ QtObject {
 
 	function reset() {
 		// unload the gui.
-		dataManagerLoaded = false
-
 		// note: we don't reset `main
 		// as main will never be destroyed during the ui rebuild.
 		pageManager = null
@@ -91,19 +66,6 @@ QtObject {
 		dialogLayer = null
 		notificationLayer = null
 		pressEffect = null
-
-		acInputs = null
-		dcInputs = null
-		environmentInputs = null
-		evChargers = null
-		generators = null
-		inverterChargers = null
-		notifications = null
-		solarInputs = null
-		system = null
-		systemSettings = null
-		tanks = null
-		venusPlatform = null
 
 		// The last thing we do is set the splash screen visible.
 		allPagesLoaded = false

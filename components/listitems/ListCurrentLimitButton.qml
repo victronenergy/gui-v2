@@ -27,7 +27,7 @@ ListButton {
 		return qsTrId("rs_current_limit_not_adjustable")
 	}
 
-	text: Global.acInputs.currentLimitTypeToText(inputType)
+	text: Services.acInputs.currentLimitTypeToText(inputType)
 	secondaryText: Units.getCombinedDisplayText(VenusOS.Units_Amp, currentLimitItem.value)
 	interactive: limitAdjustable
 	writeAccessLevel: VenusOS.User_AccessType_User
@@ -92,7 +92,7 @@ ListButton {
 
 		CurrentLimitDialog {
 			maxCurrentLimit: currentLimitItem.maxCurrentLimit
-			title: Global.acInputs.currentLimitTypeToText(root.inputType)
+			title: Services.acInputs.currentLimitTypeToText(root.inputType)
 			secondaryTitle: CommonWords.acInputFromNumber(root.inputNumber)
 			onAccepted: currentLimitItem.setValue(value)
 		}

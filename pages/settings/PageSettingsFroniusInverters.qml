@@ -9,7 +9,7 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	property string bindPrefix: Global.systemSettings.serviceUid + "/Settings/Fronius"
+	property string bindPrefix: Services.settings.serviceUid + "/Settings/Fronius"
 
 	GradientListView {
 		id: inverterListView

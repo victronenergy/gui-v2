@@ -17,7 +17,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Auto update"
 				text: qsTrId("settings_auto_update")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/AutoUpdate"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/System/AutoUpdate"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				optionModel: [
 					{ display: CommonWords.disabled, value: VenusOS.Firmware_AutoUpdate_Disabled },
@@ -33,7 +33,7 @@ Page {
 			ListRadioButtonGroup {
 				//% "Update feed"
 				text: qsTrId("settings_update_feed")
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/ReleaseType"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/System/ReleaseType"
 				optionModel: [
 					//% "Official release"
 					{ display: qsTrId("settings_firmware_official_release"), value: FirmwareUpdater.FirmwareRelease },
@@ -41,7 +41,7 @@ Page {
 					{ display: qsTrId("settings_firmware_beta_release"), value: FirmwareUpdater.FirmwareCandidate },
 					//: Select the 'Testing' update feed
 					//% "Testing (Victron internal)"
-					{ display: qsTrId("settings_firmware_testing_internal"), value: FirmwareUpdater.FirmwareTesting, readOnly: !Global.systemSettings.canAccess(VenusOS.User_AccessType_Service) },
+					{ display: qsTrId("settings_firmware_testing_internal"), value: FirmwareUpdater.FirmwareTesting, readOnly: !Services.settings.canAccess(VenusOS.User_AccessType_Service) },
 					//: Select the 'Develop' update feed
 					//% "Develop (Victron internal)"
 					{ display: qsTrId("settings_firmware_develop_internal"), value: FirmwareUpdater.FirmwareDevelop, readOnly: true },
@@ -50,7 +50,7 @@ Page {
 
 			ListRadioButtonGroup {
 				text: CommonWords.image_type
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/System/ImageType"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/System/ImageType"
 				preferredVisible: largeImageSupport.value === 1
 				optionModel: [
 					{ display: CommonWords.firmware_type_normal, value: FirmwareUpdater.ImageTypeNormal },
@@ -59,7 +59,7 @@ Page {
 
 				VeQuickItem {
 					id: largeImageSupport
-					uid: Global.venusPlatform.serviceUid + "/Firmware/LargeImageSupport"
+					uid: Services.platform.serviceUid + "/Firmware/LargeImageSupport"
 				}
 			}
 
@@ -98,16 +98,16 @@ Page {
 
 				VeQuickItem {
 					id: progress
-					uid: Global.venusPlatform.serviceUid + "/Firmware/Progress"
+					uid: Services.platform.serviceUid + "/Firmware/Progress"
 				}
 			}
 
 			ListText {
 				//% "Update build date/time"
 				text: qsTrId("settings_firmware_update_build_date_time")
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Firmware/Online/AvailableBuild"
+				dataItem.uid: Services.platform.serviceUid + "/Firmware/Online/AvailableBuild"
 				preferredVisible: installUpdate.preferredVisible
-					&& Global.systemSettings.canAccess(VenusOS.User_AccessType_SuperUser)
+					&& Services.settings.canAccess(VenusOS.User_AccessType_SuperUser)
 			}
 		}
 	}

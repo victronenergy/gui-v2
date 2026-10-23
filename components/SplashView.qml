@@ -21,10 +21,10 @@ Rectangle {
 		splashVisible: UiConfig.splashScreenVisible
 		showAnimation: UiConfig.showSplashAnimation
 		pagesLoaded: Global.allPagesLoaded
-		dataReady: Global.dataManagerLoaded
+		dataReady: Services.appDataReady
 		// Same condition as welcomeLoader.active. This object is created first,
 		// so it must not reference the loader id.
-		welcomeActive: Global.dataManagerLoaded && Global.systemSettings.needsOnboarding
+		welcomeActive: Services.appDataReady && Services.settings.needsOnboarding
 		preloadComplete: Global.pagePreloadComplete
 
 		onPhaseChanged: root._applyPhase(phase)
@@ -79,7 +79,7 @@ Rectangle {
 			logoTextFadeOutAnim.running = true
 			break
 		case VenusOS.Splash_Phase_PlayingGauge:
-			if (Global.backendReady || Global.backendReadyLatched) {
+			if (BackendConnection.ready || BackendConnection.readyLatched) {
 				console.info("SplashView: finished fading out logo text")
 			} else {
 				// Should not happen: the logo fade starts only after data is ready.
@@ -384,7 +384,7 @@ Rectangle {
 				: BackendConnection.state === BackendConnection.Initializing ? qsTrId("splash_view_initializing")
 				: BackendConnection.state === BackendConnection.Ready
 					? (BackendConnection.vrm && BackendConnection.heartbeatState !== BackendConnection.HeartbeatActive)
-						? Global.backendReadyLatched // whether we ever had an active heartbeat
+						? BackendConnection.readyLatched // whether we ever had an active heartbeat
 							  //% "Connection to the device has been lost, awaiting reconnection"
 							? qsTrId("splash_view_device_disconnected")
 							  //% "Connected to VRM, awaiting device"
@@ -473,7 +473,7 @@ Rectangle {
 	Loader {
 		id: welcomeLoader
 
-		active: Global.dataManagerLoaded && Global.systemSettings.needsOnboarding
+		active: Services.appDataReady && Services.settings.needsOnboarding
 		anchors.fill: parent
 		sourceComponent: WelcomeView {
 			anchors.centerIn: parent

@@ -12,7 +12,7 @@ Column {
 	required property MotorDrives motorDrives
 
 	readonly property int displayUnit: {
-		switch (Global.systemSettings.speedUnit) {
+		switch (Services.settings.speedUnit) {
 			case VenusOS.Units_Speed_MilesPerHour:
 				return VenusOS.Units_Mile;
 			case VenusOS.Units_Speed_Knots:
@@ -28,7 +28,7 @@ Column {
 	VeQuickItem {
 		id: rangeItem
 
-		uid: Global.system.serviceUid ? Global.system.serviceUid + "/MotorDrive/Range" : ""
+		uid: Services.system.serviceUid ? Services.system.serviceUid + "/MotorDrive/Range" : ""
 		sourceUnit: Units.unitToVeUnit(VenusOS.Units_Kilometre)
 		displayUnit: Units.unitToVeUnit(root.displayUnit)
 	}

@@ -17,7 +17,7 @@ Item {
 	}
 
 	function setGaugesValue(path, value) {
-		MockManager.setValue(Global.systemSettings.serviceUid + "/Settings/Gui/Gauges" + path, value)
+		MockManager.setValue(Services.settings.serviceUid + "/Settings/Gui/Gauges" + path, value)
 	}
 	function gaugesValue(path) {
 		return MockManager.value("com.victronenergy.settings/Settings/Gui/Gauges" + path)
@@ -25,7 +25,7 @@ Item {
 
 	VeQuickItem {
 		id: gaugesAutoMax
-		uid: Global.systemSettings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
+		uid: Services.settings.serviceUid + "/Settings/Gui/Gauges/AutoMax"
 	}
 
 	// Set /Dc/Pv/<Power|Current> to the total charger power/current of PV chargers on the system.
@@ -51,7 +51,7 @@ Item {
 			}
 		}
 
-		model: Global.solarInputs.devices
+		model: Services.solarInputs.devices
 		delegate: SolarDevice {
 			required property BaseDevice device
 			serviceUid: device.serviceUid
@@ -100,7 +100,7 @@ Item {
 			}
 		}
 
-		model: Global.solarInputs.pvInverterDevices
+		model: Services.solarInputs.pvInverterDevices
 		delegate: PvInverter {
 			required property BaseDevice device
 			serviceUid: device.serviceUid
@@ -111,7 +111,7 @@ Item {
 
 	// Animate PV chargers.
 	Instantiator {
-		model: Global.solarInputs.devices
+		model: Services.solarInputs.devices
 		delegate: Item {
 			id: pvCharger
 

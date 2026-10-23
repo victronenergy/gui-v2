@@ -43,7 +43,7 @@ Row {
 		anchors.verticalCenter: parent.verticalCenter
 		font.pixelSize: Theme.font_boatPage_batterySoc_pixelSize
 		unit: VenusOS.Units_Percentage
-		value: Global.system.battery.stateOfCharge
+		value: Services.system.battery.stateOfCharge
 	}
 
 	CP.ColorImage {

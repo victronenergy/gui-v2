@@ -11,7 +11,7 @@ ListRadioButtonGroup {
 
 	//% "MQTT Access"
 	text: qsTrId("settings_services_mqtt_access")
-	dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/MqttLocal"
+	dataItem.uid: Services.settings.serviceUid + "/Settings/Services/MqttLocal"
 
 	optionModel: [
 		{ display: CommonWords.off, value: 0 },
@@ -47,11 +47,11 @@ ListRadioButtonGroup {
 
 	VeQuickItem {
 		id: securityProfile
-		uid: Global.systemSettings.serviceUid + "/Settings/System/SecurityProfile"
+		uid: Services.settings.serviceUid + "/Settings/System/SecurityProfile"
 	}
 
 	VeQuickItem {
 		id: tokenUsers
-		uid: Global.venusPlatform.serviceUid + "/Tokens/Users"
+		uid: Services.platform.serviceUid + "/Tokens/Users"
 	}
 }

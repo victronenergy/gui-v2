@@ -1121,6 +1121,8 @@ public:
 
 	Q_INVOKABLE QString tank_fluidTypeToText(Tank_Type type) const;
 
+	Q_INVOKABLE QString temperature_typeToText(Temperature_DeviceType type) const;
+
 	static Enums* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 };
 

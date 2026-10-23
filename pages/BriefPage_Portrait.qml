@@ -119,7 +119,7 @@ Item {
 
 		CircularSingleGauge {
 			readonly property var properties: Gauges.tankProperties(VenusOS.Tank_Type_Battery)
-			readonly property var battery: Global.system.battery
+			readonly property var battery: Services.system.battery
 
 			value: visible && !isNaN(battery.stateOfCharge) ? battery.stateOfCharge : 0
 			status: Theme.getValueStatus(value, properties.valueType)

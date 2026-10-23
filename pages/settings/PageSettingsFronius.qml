@@ -55,12 +55,12 @@ Page {
 				//% "TCP port"
 				text: qsTrId("page_settings_fronius_tcp_port")
 				preferredVisible: dataItem.value !== 80
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Fronius/PortNumber"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Fronius/PortNumber"
 			}
 
 			ListSwitch {
 				text: CommonWords.automatic_scanning
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Fronius/AutoScan"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Fronius/AutoScan"
 			}
 
 			ListNavigation {

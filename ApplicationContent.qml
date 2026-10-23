@@ -48,11 +48,11 @@ FocusScope {
 		id: screenBlanker
 
 		property VeQuickItem displayOffItem: VeQuickItem {
-			uid: !!Global.systemSettings ? Global.systemSettings.serviceUid + "/Settings/Gui/DisplayOff" : ""
+			uid: Services.settings.serviceUid + "/Settings/Gui/DisplayOff"
 		}
 
 		Component.onCompleted: {
-			ScreenBlanker.enabled = Qt.binding(function() { return !UiConfig.splashScreenVisible && !(Global.notifications?.notificationButtonVisible ?? false) && !Global.boatPageActive })
+			ScreenBlanker.enabled = Qt.binding(function() { return !UiConfig.splashScreenVisible && !Services.notifications.notificationButtonVisible && !Global.boatPageActive })
 			ScreenBlanker.displayOffTime = Qt.binding(function() { return screenBlanker.displayOffItem.valid ? 1000*screenBlanker.displayOffItem.value : 0 })
 			ScreenBlanker.window = root.Window.window
 		}
@@ -166,7 +166,7 @@ FocusScope {
 
 	// Sometimes, the wasm code may crash. Use a watchdog to detect this and reload the page when necessary.
 	Timer {
-		running: Qt.platform.os === "wasm" && Global.backendReadyLatched
+		running: Qt.platform.os === "wasm" && BackendConnection.readyLatched
 		repeat: true
 		interval: 1000
 		onTriggered: BackendConnection.hitWatchdog()

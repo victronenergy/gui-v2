@@ -27,7 +27,7 @@ Page {
 
 	VeQuickItem {
 		id: batterySoc
-		uid: Global.system.serviceUid + "/Dc/Battery/Soc"
+		uid: Services.system.serviceUid + "/Dc/Battery/Soc"
 	}
 
 	Timer {
@@ -69,18 +69,18 @@ Page {
 
 			ListText {
 				text: "Text display" + root.longPrimaryText
-				dataItem.uid: Global.venusPlatform.serviceUid + "/Device/Model"
+				dataItem.uid: Services.platform.serviceUid + "/Device/Model"
 			}
 
 			ListQuantity {
 				text: "Quantity display" + root.longPrimaryText
-				dataItem.uid: Global.system.serviceUid + "/Dc/Battery/Voltage"
+				dataItem.uid: Services.system.serviceUid + "/Dc/Battery/Voltage"
 				unit: VenusOS.Units_Volt_DC
 			}
 
 			ListTemperature {
 				text: "Temperature quantity display" + root.longPrimaryText
-				dataItem.uid: Global.system.serviceUid + "/Dc/Battery/Temperature"
+				dataItem.uid: Services.system.serviceUid + "/Dc/Battery/Temperature"
 			}
 
 			ListQuantityGroup {
@@ -134,7 +134,7 @@ Page {
 				text: "Value toggle" + root.longPrimaryText
 				caption: root.showCaptions ? "Toggles the dark/light colour scheme value, by setting the backend data value directly." : ""
 				interactive: root.interactiveControls
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Gui/ColorScheme"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Gui/ColorScheme"
 			}
 
 			ListSwitch {

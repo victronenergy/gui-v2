@@ -11,7 +11,7 @@ Loader {
 	id: root
 
 	required property bool animationEnabled
-	readonly property var _battery: Global.system && Global.system.battery ? Global.system.battery : null
+	readonly property var _battery: Services.system && Services.system.battery ? Services.system.battery : null
 	readonly property int _leftGaugeCount: _battery ? 1 : 0
 
 	objectName: "BatteryArc"

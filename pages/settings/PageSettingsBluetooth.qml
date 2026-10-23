@@ -11,7 +11,7 @@ Page {
 
 	VeQuickItem {
 		id: hasBluetoothSupport
-		uid: Global.venusPlatform.serviceUid + "/Network/HasBluetoothSupport"
+		uid: Services.platform.serviceUid + "/Network/HasBluetoothSupport"
 	}
 
 	GradientListView {
@@ -34,14 +34,14 @@ Page {
 				id: bluetoothEnabled
 
 				text: CommonWords.enabled
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Services/Bluetooth"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Services/Bluetooth"
 			}
 
 			ListTextField {
 				//% "Pincode"
 				text: qsTrId("settings_pincode")
 				preferredVisible: bluetoothEnabled.checked
-				dataItem.uid: Global.systemSettings.serviceUid + "/Settings/Ble/Service/Pincode"
+				dataItem.uid: Services.settings.serviceUid + "/Settings/Ble/Service/Pincode"
 				writeAccessLevel: VenusOS.User_AccessType_User
 				maximumLength: 6
 				inputMethodHints: Qt.ImhDigitsOnly

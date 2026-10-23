@@ -38,6 +38,8 @@ class BackendConnection : public QObject
 	Q_PROPERTY(QString signalKUrl READ signalKUrl WRITE setSignalKUrl NOTIFY signalKUrlChanged FINAL)
 	Q_PROPERTY(int idUser READ idUser WRITE setIdUser NOTIFY idUserChanged FINAL)
 	Q_PROPERTY(bool vrm READ isVrm WRITE setVrm NOTIFY vrmChanged FINAL)
+	Q_PROPERTY(bool ready READ isReady NOTIFY readyChanged FINAL)
+	Q_PROPERTY(bool readyLatched READ isReadyLatched NOTIFY readyLatchedChanged FINAL)
 
 	friend class BackendConnectionTester;
 public:
@@ -135,6 +137,9 @@ public:
 	bool isVrm() const;
 	void setVrm(bool v);
 
+	bool isReady() const;
+	bool isReadyLatched() const;
+
 	VeQItemProducer *producer() const;
 
 	// Each service type (system, settings, battery, etc.) has a base uid, which has different
@@ -181,6 +186,8 @@ Q_SIGNALS:
 	void nodeRedUrlChanged();
 	void signalKUrlChanged();
 	void producerChanged();
+	void readyChanged();
+	void readyLatchedChanged();
 
 private Q_SLOTS:
 	void onNetworkConfigChanged(const QVariant var);
@@ -196,6 +203,7 @@ private:
 	void setVrmPortalMode(VeQItemMqttProducer::VrmPortalMode backendVrmPortalMode);
 	void mqttErrorChanged();
 	void addSettings(VeQItemSettingsInfo *info);
+	void updateIsReady();
 
 #if !defined(VENUS_WEBASSEMBLY_BUILD)
 	void initDBusConnection(const QString &address);
@@ -215,6 +223,8 @@ private:
 	QString m_signalKUrl;
 
 	bool m_vrm = false;
+	bool m_ready = false;
+	bool m_readyLatched = false;
 
 	State m_state = BackendConnection::State::Idle;
 	HeartbeatState m_heartbeatState = BackendConnection::HeartbeatState::HeartbeatActive;
