@@ -18,6 +18,7 @@ Loader {
 	readonly property bool animationRunning: inAnimation.running || outAnimation.running
 	readonly property Flickable flickableView: item?.flickableView ?? null
 	property bool viewActive: false
+	property string viewId
 
 	readonly property int _animationDuration: animationEnabled ? Theme.animation_controlCards_slide_duration : 1
 

@@ -13,14 +13,14 @@ FocusScope {
 	required property PageStack pageStack
 
 	signal controlCardsActivated()
-	signal auxCardsActivated()
+	signal paneActivated(pane: StatusBarPane)
 	signal cardsDeactivated()
 	signal sidePanelToggled()
 
 	function updateBreadcrumbsFocusHint() {
 		// When breadcrumbs list is focused: if focus is arriving from the left side, focus the
 		// the left-most breadcrumb, or if from the right side, focus the right-most breadcrumb.
-		if (leftButton.activeFocus || auxButton.activeFocus) {
+		if (leftButton.activeFocus || paneButtonItems().some((button) => button.activeFocus)) {
 			breadcrumbs.focusEdgeHint = Qt.LeftEdge
 		} else if (rightButton.activeFocus || sleepButton.activeFocus) {
 			breadcrumbs.focusEdgeHint = Qt.RightEdge
@@ -30,8 +30,32 @@ FocusScope {
 		}
 	}
 
+	function paneButtonItems() {
+		const items = []
+		for (let i = 0; i < paneButtons.count; ++i) {
+			const item = paneButtons.itemAt(i)
+			if (item) {
+				items.push(item)
+			}
+		}
+		return items
+	}
+
+	// Chain key navigation through the pane buttons, which are created and destroyed as panes
+	// are added and removed.
+	function updatePaneKeyNavigation() {
+		let previous = leftButton
+		for (const button of paneButtonItems()) {
+			previous.KeyNavigation.right = button
+			previous = button
+		}
+		previous.KeyNavigation.right = breadcrumbs
+	}
+
 	implicitWidth: Theme.geometry_screen_width
 	implicitHeight: Theme.geometry_statusBar_height
+
+	Component.onCompleted: updatePaneKeyNavigation()
 
 	component NotificationButton : Button {
 		readonly property bool animating: animator.running
@@ -68,7 +92,6 @@ FocusScope {
 			: buttonType === VenusOS.StatusBar_LeftButton_Back ? "qrc:/images/icon_back_32.svg"
 			: ""
 		enabled: buttonType !== VenusOS.StatusBar_LeftButton_None
-		KeyNavigation.right: auxButton
 
 		onClicked: {
 			switch (buttonType) {
@@ -93,41 +116,54 @@ FocusScope {
 		}
 	}
 
-	StatusBarButton {
-		id: auxButton
+	Row {
+		id: paneButtonRow
 
-		readonly property bool auxCardsOpened: Global.mainView.cardsActive
-				&& leftButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
-
-		// Expand clickable area on right and bottom edges, and on left if leftButton is hidden.
+		// Expand the clickable area of the first button over leftButton, if leftButton is hidden.
 		anchors {
 			left: leftButton.right
-			leftMargin: -leftInset
+			leftMargin: leftButton.enabled ? 0 : -Theme.geometry_statusBar_spacing
 		}
-		leftInset: leftButton.enabled ? 0 : Theme.geometry_statusBar_spacing
-		rightInset: Theme.geometry_statusBar_spacing
-		bottomInset: Theme.geometry_statusBar_spacing
+		height: parent.height
 
-		visible: (!root.pageStack.opened && Global.switches.groups.count > 0)
-				|| auxCardsOpened // allow cards to be closed if all switches are disconnected while opened
-		icon.source: leftButton.buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? ""
-				: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
-				: "qrc:/images/icon_smartswitch_off_32.svg"
-		enabled: leftButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
-		KeyNavigation.right: breadcrumbs
+		Repeater {
+			id: paneButtons
 
-		onClicked: {
-			if (auxCardsOpened) {
-				root.cardsDeactivated()
-			} else {
-				root.auxCardsActivated()
+			model: Global.statusBarPanes
+			delegate: StatusBarButton {
+				required property StatusBarPane pane
+
+				// While a cards view is open, the other buttons are blank and disabled but keep
+				// their place, so that the button that closes the view does not move.
+				readonly property bool otherViewOpen: (Global.mainView?.cardsActive ?? false) && !pane.opened
+
+				// Expand clickable area on right and bottom edges, and on left of the first button if
+				// leftButton is hidden.
+				leftInset: leftButton.enabled || x > 0 ? 0 : Theme.geometry_statusBar_spacing
+				rightInset: Theme.geometry_statusBar_spacing
+				bottomInset: Theme.geometry_statusBar_spacing
+
+				visible: pane.opened || (pane.available && !root.pageStack.opened)
+				enabled: !otherViewOpen
+				icon.source: otherViewOpen ? "" : pane.opened ? pane.activeIconSource : pane.iconSource
+
+				onClicked: {
+					if (pane.opened) {
+						root.cardsDeactivated()
+					} else {
+						root.paneActivated(pane)
+					}
+				}
+
+				onActiveFocusChanged: {
+					if (activeFocus) {
+						root.updateBreadcrumbsFocusHint()
+					}
+				}
 			}
-		}
 
-		onActiveFocusChanged: {
-			if (activeFocus) {
-				root.updateBreadcrumbsFocusHint()
-			}
+			onItemAdded: Qt.callLater(root.updatePaneKeyNavigation)
+			onItemRemoved: Qt.callLater(root.updatePaneKeyNavigation)
 		}
 	}
 
@@ -345,7 +381,7 @@ FocusScope {
 		enabled: Global.keyNavigationEnabled
 		function onActiveFocusItemChanged() {
 			if (Global.main.activeFocusItem === root) {
-				for (const button of [leftButton, auxButton, breadcrumbs, notificationButton, alarmButton, rightButton, sleepButton]) {
+				for (const button of [leftButton, ...root.paneButtonItems(), breadcrumbs, notificationButton, alarmButton, rightButton, sleepButton]) {
 					if (button.enabled) {
 						button.focus = true
 						break
