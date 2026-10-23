@@ -226,6 +226,19 @@ TestCase {
 - Create QML objects with `Component.createObject()` and destroy them with `.destroy()` in cleanup
 - Do not rely on test execution order — each `test_*` function should be independent
 
+### Filesystem access
+
+Unit tests should not write to the filesystem. That includes temporary files and directories, and files that a test writes and then loads back. The reasons:
+
+- **Side effects:** the test changes the machine it runs on. Files are left behind if the test crashes or is interrupted, and tests that run at the same time can overwrite each other's files.
+- **Results depend on the environment:** the result depends on the disk, permissions, free space, path rules and caches, not only on the code under test. For example, the QML engine caches a component by its URL, so a file that is rewritten at the same path is not loaded again.
+- **It tests the wrong thing:** the test exercises file handling instead of the logic of the unit.
+- **It is unnecessary:** the code under test can almost always take its input in memory.
+
+Instead, pass the data in memory, or check in read-only test files and compile them into the test executable as Qt resources.
+
+Writing to the filesystem is allowed if it is absolutely necessary, but always ask the user first in that case.
+
 ### What to test
 
 - **C++ model logic** — filtering, sorting, aggregation, value computation
