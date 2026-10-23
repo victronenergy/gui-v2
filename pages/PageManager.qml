@@ -6,6 +6,18 @@
 import QtQml
 import Victron.VenusOS
 
+/*
+	Handles the main page operations for the application.
+
+	When key navigation is used, a special Escape + Return combination is supported:
+
+	- The Escape key jumps to the application "Start Page". If the Start Page is already shown, the
+	  Escape key cycles through the main application pages (Brief, Overview, etc).
+	- If the page stack was visible when Escape was pressed, then pressing the Return key returns
+	  the app to the page stack, in the same state as before. (If the stack state changes, e.g. if
+	  the user navigates to a new page on the stack, that cancels the behaviour and Return will have
+	  no effect.)
+*/
 QtObject {
 	id: root
 
