@@ -75,8 +75,6 @@ void MockManager::initWorker()
 	// is the paced setValue() that follows, which cannot leave this thread.
 	m_timerWorker = new MockTimerWorker(this);
 	m_valueApplier = new MockValueApplier(this);
-	connect(m_timerWorker, &MockTimerWorker::valuesReady,
-			m_valueApplier, &MockValueApplier::applyValues);
 	// VeQuickItem::setValue() writes the item directly. MockManager::setValue()
 	// calls onExternalWrite() itself and does not emit this signal.
 	connect(producer(), &VeQItemMockProducer::valueWritten,
@@ -166,10 +164,8 @@ void MockManager::removeValue(const QString &uid)
 	if (!normalized.isEmpty()) {
 		QSet<QString> dropped;
 		if (m_timerWorker) {
+			// Pauses writers and drops the prefix from the one apply queue.
 			dropped = m_timerWorker->forgetUidPrefix(normalized);
-		}
-		if (m_valueApplier) {
-			dropped.unite(m_valueApplier->dropPrefix(normalized));
 		}
 		propagateCancellation(dropped);
 	}
@@ -395,27 +391,12 @@ void MockManager::onExternalWrite(const QString &uid)
 
 void MockManager::propagateCancellation(const QSet<QString> &uids)
 {
-	if (!m_timerWorker || !m_valueApplier || uids.isEmpty()) {
+	if (!m_valueApplier || uids.isEmpty()) {
 		return;
 	}
-	// Check the unflushed batch and the applier queue, then check again with
-	// whatever those drops cancelled. A later tick may have read an output that
-	// only the other side still had.
-	QSet<QString> pending = uids;
-	QSet<QString> seen;
-	while (!pending.isEmpty()) {
-		QSet<QString> next;
-		for (const QString &uid : pending) {
-			const QString normalized = normalizedMockUid(uid);
-			if (normalized.isEmpty() || seen.contains(normalized)) {
-				continue;
-			}
-			seen.insert(normalized);
-			next.unite(m_timerWorker->dropPendingUpdate(normalized));
-			next.unite(m_valueApplier->supersede(normalized));
-		}
-		pending = next;
-	}
+	// Drop the uid and every queued output of a tick that used it, then drop
+	// anything calculated from those outputs. Repeats until nothing more drops.
+	m_valueApplier->cancel(uids);
 }
 
 bool MockManager::hasWatchedSourceUnder(const QString &prefix) const

@@ -2689,8 +2689,8 @@ TestCase {
 		}
 	}
 
-	// A later animator in the same unflushed batch replaces the value. The
-	// earlier notify must not report the value that was never applied.
+	// A later animator in the same turn replaces the value. The earlier notify
+	// must not report the value that was never applied.
 	function test_notify_dropsReplacedUnflushedValue() {
 		compare(MockManager.timersActive, false)
 		const uid = "mock/com.victronenergy.test.mockworker/Notify/Unflushed"
@@ -2777,6 +2777,115 @@ TestCase {
 			MockManager.removeValue(filler)
 			MockManager.removeValue(target)
 			MockManager.removeValue(divisor)
+		}
+	}
+
+	// The tick is staged before the flush. A write in that gap drops it, so the
+	// flush must not apply the staged value.
+	function test_tick_isQueuedBeforeFlush() {
+		compare(MockManager.timersActive, false)
+		const power = "mock/com.victronenergy.test.mockworker/SingleQueue/BeforeFlush"
+		MockManager.setValue(power, 10)
+		const randomizer = randomizerComponent.createObject(root, {
+			valueUid: power,
+			active: true,
+			minimumValue: 5000
+		})
+		verify(randomizer)
+		try {
+			MockManager.finishAppliesForTest()
+			MockManager.tickAnimatorsForTest()
+			verify(MockManager.queuedTickCountForTest() >= 1)
+			compare(MockManager.value(power), 10)
+			MockManager.setValue(power, 115)
+			MockManager.flushPendingForTest()
+			MockManager.finishAppliesForTest()
+			compare(MockManager.value(power), 115)
+			compare(MockManager.queuedTickCountForTest(), 0)
+		} finally {
+			randomizer.destroy()
+			MockManager.removeValue(power)
+		}
+	}
+
+	// The phase sum runs after the animator tick is staged, in the same flush.
+	// It must read 5000, not the producer value from before the tick.
+	function test_phaseSum_readsStagedAnimatorValue() {
+		compare(MockManager.timersActive, false)
+		const pv = "com.victronenergy.pvinverter.mockworker.staged"
+		const source = "mock/" + pv + "/Ac/L1/Power"
+		const target = "mock/com.victronenergy.system.mockworker/Ac/Staged"
+		MockManager.setValue(source, 10)
+		const calc = phaseSumComponent.createObject(root, {
+			targetPrefix: target,
+			sourcePhasePattern: "/Ac/L%1/Power"
+		})
+		verify(calc)
+		try {
+			calc.addService("mock/" + pv)
+			waitForValue(target + "/L1/Power", 10)
+			MockManager.finishAppliesForTest()
+			const randomizer = randomizerComponent.createObject(root, {
+				valueUid: source,
+				active: true,
+				minimumValue: 5000
+			})
+			verify(randomizer)
+			try {
+				MockManager.tickAnimatorsForTest()
+				compare(MockManager.value(source), 10)
+				MockManager.flushPendingForTest()
+				MockManager.finishAppliesForTest()
+				compare(MockManager.value(source), 5000)
+				compare(MockManager.value(target + "/L1/Power"), 5000)
+			} finally {
+				randomizer.destroy()
+			}
+		} finally {
+			calc.destroy()
+			MockManager.removeValue(source)
+			MockManager.removeValue(target)
+		}
+	}
+
+	// One flush applies one staged uid. The other outputs of the tick wait.
+	function test_flush_appliesOneStagedValue() {
+		compare(MockManager.timersActive, false)
+		const power = "mock/com.victronenergy.test.mockworker/SingleQueue/OneApply"
+		const current = power + "/Current"
+		const total = power + "/Total"
+		const voltage = power + "/Voltage"
+		MockManager.setValue(power, 100)
+		MockManager.setValue(current, 0.4)
+		MockManager.setValue(total, 100)
+		MockManager.setValue(voltage, 250)
+		const randomizer = randomizerComponent.createObject(root, {
+			valueUid: power,
+			active: true,
+			minimumValue: 5000,
+			totalTargetUid: total,
+			derivedTargetUids: [current],
+			derivedDivisorUids: [voltage]
+		})
+		verify(randomizer)
+		try {
+			MockManager.finishAppliesForTest()
+			MockManager.tickAnimatorsForTest()
+			MockManager.flushPendingForTest()
+			let applied = 0
+			if (MockManager.value(power) === 5000) {
+				applied++
+			}
+			if (MockManager.value(current) === 20) {
+				applied++
+			}
+			if (MockManager.value(total) === 5000) {
+				applied++
+			}
+			compare(applied, 1)
+		} finally {
+			randomizer.destroy()
+			MockManager.removeValue(power)
 		}
 	}
 

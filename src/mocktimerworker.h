@@ -18,6 +18,8 @@
 namespace Victron {
 namespace VenusOS {
 
+class MockValueApplier;
+
 using MockValueUpdate = QPair<QString, QVariant>;
 using MockValueUpdateList = QVector<MockValueUpdate>;
 
@@ -192,27 +194,24 @@ struct MockAnimatorConfig {
 	MockValueApplier applies one queued value at a time, so a tick does not
 	freeze the GUI.
 
-	Each tick reads the current value from a not-yet-flushed update, otherwise
-	from the applier queue, otherwise from the mock producer. There is no second
-	copy of the values.
+	Each tick reads a value staged earlier in the same turn, otherwise a value
+	still waiting to be applied, otherwise the producer. There is no second
+	queue. The tick is staged before any signal from that tick, and the drain
+	is held until calculators have read it. Then one value is applied.
 
-	Notify records travel with the value batch. The applier emits notifyUpdate
+	Notify records travel with the staged tick. The applier emits notifyUpdate
 	and notifyTotal after setValue() has applied the listed uids.
 
-	A UI write drops the unflushed tick that wrote that uid, including values
+	A UI write drops the queued tick that wrote that uid, including values
 	calculated from it. Removing a path pauses the writer and drops that tick
 	too, but keeps the registration. The pause lists each owned output under
 	that path that already had a value. It also lists a derived destination,
-	total, or toggler path that is still waiting to be applied, because the
-	next tick would create it. A configured input with no value, and no
-	waiting write, is not required. The writer resumes only when every listed
-	output is written again. A write of one removed output does not resume
-	the others.
+	total, or toggler path that is still queued, because the next tick would
+	create it. A configured input with no value, and no queued write, is not
+	required. The writer resumes only when every listed output is written
+	again. A write of one removed output does not resume the others.
 	Changing the configuration keeps a pause that still applies, and still
-	cancels the old tick. Outputs dropped from the applier queue are dropped
-	here as well,
-	and the other way around, so a later tick cannot apply a value calculated
-	from a cancelled one.
+	cancels the old tick.
 */
 class MockTimerWorker : public QObject
 {
@@ -245,16 +244,13 @@ public:
 		const QString &sourceCurrentPattern);
 	void clearPhaseSumConfig(int ruleId);
 
-	// Drop the unflushed tick that wrote uid, including values calculated from it.
-	// Returns outputs that were dropped, so the caller can drop them elsewhere.
-	QSet<QString> dropPendingUpdate(const QString &uid);
-	// Pause writers under prefix and drop their unflushed tick. Does not write.
+	// Pause writers under prefix and drop their queued tick. Does not write.
 	// The registration is kept. Each owned output under prefix that already
 	// had a value is recorded. A derived destination, total, or toggler path
-	// that is still waiting to be applied is recorded too. Resume waits until
-	// every one of those outputs has been written again. A configured input
-	// with no value and no waiting write is not required.
-	// Returns outputs that were dropped and are not the removed path itself.
+	// that is still queued is recorded too. Resume waits until every one of
+	// those outputs has been written again. A configured input with no value
+	// and no queued write is not required.
+	// Returns outputs that were dropped.
 	QSet<QString> forgetUidPrefix(const QString &prefix);
 	// Resume a removed output this write covers. A sibling output stays paused.
 	// Called after the write.
@@ -266,9 +262,6 @@ public:
 	void flushPendingForTest();
 
 Q_SIGNALS:
-	void valuesReady(const MockValueUpdateList &updates,
-			const MockNotifyEventList &notifications,
-			const MockTickRecordList &ticks);
 	// The vector is copied with the signal. The animator assigns it directly
 	// and must not call setActualStepSizes().
 	void actualStepSizesChanged(int animatorId, const QVector<qreal> &stepSizes,
@@ -289,14 +282,13 @@ private:
 	// applied is claimed by this calculation and is not written again.
 	void writeComparedOutput(const QString &uid, const QVariant &value);
 	void processTick(MockAnimatorConfig &config);
-	// dropped starts as uids already known to be stale. dropAnimators are writers
-	// paused for a removed path; their tick is dropped even though they stay registered.
-	// Returns outputs that were not already in dropped.
-	QSet<QString> dropPendingTicks(QSet<QString> dropped, const QSet<int> &dropAnimators = {});
+	// Stage the writes made while this tick was on the stack. Holds the drain.
+	// An empty tick is not staged. This is not a second cancellation queue.
+	void commitOpenTick(const MockTickRecord &tick);
+	MockValueApplier *applier() const;
 	void startAnimatorTimer(int animatorId, bool applyPhase = true);
 	void stopAnimatorTimer(int animatorId);
 	void pauseAnimator(int animatorId, const QString &prefix);
-	void releaseOutputOwnership(const QSet<QString> &uids);
 	void cancelPendingGaugeWrites();
 	QStringList consumptionOutputUids() const;
 	QStringList gaugeOutputUids() const;
@@ -319,20 +311,17 @@ private:
 	QHash<int, int> m_animatorToTimer;
 	QSet<int> m_phasePending; // animators whose current timer is only the initial offset
 
-	// Batching: accumulate updates from multiple animators firing in the same tick.
-	// Notifications stay with the writes they describe; the applier emits them.
-	MockValueUpdateList m_pendingUpdates;
-	MockNotifyEventList m_pendingNotifications;
-	// One entry per tick that wrote something, so a later write can drop that tick whole.
-	struct PendingTick {
-		int animatorId = -1;
-		bool calculator = false;
-		QStringList inputs;
-		QStringList outputs;
-	};
-	QVector<PendingTick> m_pendingTicks;
+	// Writes and notifies made while one tick function is on the stack. Staged
+	// together at the end of that function, so a write is not retired before its
+	// tick record claims it. Not walked by cancellation.
+	MockValueUpdateList m_openUpdates;
+	MockNotifyEventList m_openNotifications;
 	QStringList *m_recordingInputs = nullptr;
 	QStringList *m_recordingOutputs = nullptr;
+	bool m_stepSizesChanged = false;
+	// A tick or invalidation was staged. The 0ms flush runs calculators, then
+	// releases the drain. Cleared when that flush runs.
+	bool m_needsFlush = false;
 	int m_flushTimerId = 0;
 
 	// Consumption calculation state
@@ -353,11 +342,11 @@ private:
 
 	QSet<int> m_inactiveAnimators; // animators individually deactivated via setAnimatorActive(false)
 	// Removed outputs that already had a value, plus a derived destination,
-	// total, or toggler path that was still waiting to be applied. A
-	// configured input with no value and no waiting write is not listed,
-	// including an empty item created by a binding. Kept registered so a
-	// later write of the listed outputs can resume. The set of ids is the
-	// animators that still have at least one such output.
+	// total, or toggler path that was still queued. A configured input with
+	// no value and no queued write is not listed, including an empty item
+	// created by a binding. Kept registered so a later write of the listed
+	// outputs can resume. The set of ids is the animators that still have at
+	// least one such output.
 	QSet<int> m_pausedAnimators;
 	QHash<int, QSet<QString>> m_pauseOutputs;
 	QSet<int> m_pausedPhaseSums;

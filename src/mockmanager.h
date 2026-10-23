@@ -58,9 +58,8 @@ public:
 	MockTimerWorker *timerWorker() const;
 	MockValueApplier *valueApplier() const;
 
-	// Drop these uids from the unflushed batch and the applier queue, then drop
-	// anything calculated from the outputs that were cancelled. Repeats until
-	// nothing more drops.
+	// Drop these uids from the apply queue, then drop anything calculated from
+	// the outputs that were cancelled. Repeats until nothing more drops.
 	void propagateCancellation(const QSet<QString> &uids);
 
 	// Remember calculator inputs by uid. A write to one of them reruns the calculation.

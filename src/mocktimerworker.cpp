@@ -193,9 +193,9 @@ void MockTimerWorker::replaceAnimator(const MockAnimatorConfig &config)
 	// The tick was calculated with the old configuration. Drop it, including a
 	// later tick that already read it. The registration itself stays.
 	stopAnimatorTimer(animatorId);
-	QSet<QString> dropped = dropPendingTicks({}, {animatorId});
-	if (MockValueApplier *applier = MockManager::create()->valueApplier()) {
-		dropped.unite(applier->dropAnimator(animatorId));
+	QSet<QString> dropped;
+	if (MockValueApplier *values = applier()) {
+		dropped = values->dropAnimator(animatorId);
 	}
 	if (!dropped.isEmpty()) {
 		MockManager::create()->propagateCancellation(dropped);
@@ -230,12 +230,12 @@ void MockTimerWorker::unregisterAnimator(int animatorId)
 	m_inactiveAnimators.remove(animatorId);
 	m_pausedAnimators.remove(animatorId);
 	m_pauseOutputs.remove(animatorId);
-	// A batched tick made with this config must not be applied, even if the same
-	// id is registered again before the flush. Queued outputs of that tick go too,
+	// A tick made with this config must not be applied, even if the same id is
+	// registered again before the drain. Queued outputs of that tick go too,
 	// including a later tick that already read them.
-	QSet<QString> dropped = dropPendingTicks({});
-	if (MockValueApplier *applier = MockManager::create()->valueApplier()) {
-		dropped.unite(applier->dropAnimator(animatorId));
+	QSet<QString> dropped;
+	if (MockValueApplier *values = applier()) {
+		dropped = values->dropAnimator(animatorId);
 	}
 	if (!dropped.isEmpty()) {
 		MockManager::create()->propagateCancellation(dropped);
@@ -328,25 +328,18 @@ QSet<QString> MockTimerWorker::forgetUidPrefix(const QString &prefix)
 		}
 	}
 
-	// Drop every unflushed write under the removed path, and the whole tick that
-	// produced it, including outputs outside that path. A tick that only read the
-	// removed path is dropped too: its outputs were calculated from a value that
-	// is about to disappear.
+	// Drop queued writes under the removed path, and the whole tick that produced
+	// them, including outputs outside that path. A paused writer's tick is dropped
+	// even when a later tick already replaced its outputs. A tick that only read
+	// the removed path is dropped too.
 	QSet<QString> dropped;
-	for (const MockValueUpdate &update : m_pendingUpdates) {
-		if (mockUidUnderPrefix(update.first, normalized)) {
-			dropped.insert(update.first);
+	if (MockValueApplier *values = applier()) {
+		dropped = values->dropPrefix(normalized);
+		for (int animatorId : pausedNow) {
+			dropped.unite(values->dropAnimator(animatorId));
 		}
 	}
-	for (const PendingTick &tick : m_pendingTicks) {
-		const QStringList touched = tick.inputs + tick.outputs;
-		for (const QString &uid : touched) {
-			if (mockUidUnderPrefix(uid, normalized)) {
-				dropped.insert(uid);
-			}
-		}
-	}
-	return dropPendingTicks(dropped, pausedNow);
+	return dropped;
 }
 
 void MockTimerWorker::noteUidWritten(const QString &uid)
@@ -483,14 +476,14 @@ QVariant MockTimerWorker::readStoredValue(const QString &normalized)
 	if (normalized.isEmpty()) {
 		return {};
 	}
-	for (qsizetype i = m_pendingUpdates.size() - 1; i >= 0; --i) {
-		if (m_pendingUpdates.at(i).first == normalized) {
-			return m_pendingUpdates.at(i).second;
+	for (qsizetype i = m_openUpdates.size() - 1; i >= 0; --i) {
+		if (m_openUpdates.at(i).first == normalized) {
+			return m_openUpdates.at(i).second;
 		}
 	}
-	if (MockValueApplier *applier = MockManager::create()->valueApplier()) {
+	if (MockValueApplier *values = applier()) {
 		QVariant queued;
-		if (applier->pendingValue(normalized, &queued)) {
+		if (values->pendingValue(normalized, &queued)) {
 			return queued;
 		}
 	}
@@ -507,26 +500,38 @@ void MockTimerWorker::writePending(const QString &uid, const QVariant &value)
 	if (m_recordingOutputs && !m_recordingOutputs->contains(normalized)) {
 		m_recordingOutputs->append(normalized);
 	}
-	for (MockValueUpdate &update : m_pendingUpdates) {
-		if (update.first == normalized) {
-			// A later write in this batch replaces the value an older notify
-			// named. Drop that notify. The replacement's notify is appended
-			// after this write, so it is kept. The same value does not drop it.
-			if (update.second != value) {
-				m_pendingNotifications.removeIf([&normalized](const MockNotifyEvent &event) {
-					for (const QString &dep : event.dependsOn) {
-						if (normalizedMockUid(dep) == normalized) {
-							return true;
+	if (m_recordingOutputs) {
+		for (MockValueUpdate &update : m_openUpdates) {
+			if (update.first == normalized) {
+				// A later write in this tick replaces the value an older notify
+				// named. Drop that notify. The replacement's notify is appended
+				// after this write, so it is kept. The same value does not drop it.
+				if (update.second != value) {
+					m_openNotifications.removeIf([&normalized](const MockNotifyEvent &event) {
+						for (const QString &dep : event.dependsOn) {
+							if (normalizedMockUid(dep) == normalized) {
+								return true;
+							}
 						}
-					}
-					return false;
-				});
+						return false;
+					});
+				}
+				update.second = value;
+				return;
 			}
-			update.second = value;
-			return;
 		}
+		m_openUpdates.append({normalized, value});
+		return;
 	}
-	m_pendingUpdates.append({normalized, value});
+	// Not part of a tick. Stage now so the old tick does not keep this uid.
+	// Hold the drain before the 10ms timer can see the write.
+	if (MockValueApplier *values = applier()) {
+		MockValueUpdateList updates;
+		updates.append({normalized, value});
+		values->stage(updates);
+		values->holdDrain();
+		m_needsFlush = true;
+	}
 }
 
 void MockTimerWorker::writeComparedOutput(const QString &uid, const QVariant &value)
@@ -545,14 +550,14 @@ void MockTimerWorker::writeComparedOutput(const QString &uid, const QVariant &va
 	if (normalized.isEmpty() || m_recordingOutputs->contains(normalized)) {
 		return;
 	}
-	for (const MockValueUpdate &update : m_pendingUpdates) {
+	for (const MockValueUpdate &update : m_openUpdates) {
 		if (update.first == normalized) {
 			m_recordingOutputs->append(normalized);
 			return;
 		}
 	}
-	if (MockValueApplier *applier = MockManager::create()->valueApplier()) {
-		if (applier->pendingValue(normalized, nullptr)) {
+	if (MockValueApplier *values = applier()) {
+		if (values->pendingValue(normalized, nullptr)) {
 			m_recordingOutputs->append(normalized);
 		}
 	}
@@ -560,9 +565,10 @@ void MockTimerWorker::writeComparedOutput(const QString &uid, const QVariant &va
 
 void MockTimerWorker::processTick(MockAnimatorConfig &config)
 {
-	PendingTick tick;
+	MockTickRecord tick;
 	tick.animatorId = config.animatorId;
 	tick.inputs = config.uids + config.derivedDivisorUids + config.derivedMultiplierUids;
+	m_stepSizesChanged = false;
 	m_recordingOutputs = &tick.outputs;
 	switch (config.type) {
 	case MockAnimatorConfig::Randomizer:
@@ -579,85 +585,43 @@ void MockTimerWorker::processTick(MockAnimatorConfig &config)
 		break;
 	}
 	m_recordingOutputs = nullptr;
-	if (!tick.outputs.isEmpty()) {
-		m_pendingTicks.append(tick);
+	// Stage before the step-size signal. A handler setValue() must see the tick
+	// record, or the write retires the outputs and the tick never claims them.
+	commitOpenTick(tick);
+	if (m_stepSizesChanged) {
+		Q_EMIT actualStepSizesChanged(config.animatorId, config.actualStepSizes,
+				config.stepRevision);
 	}
 }
 
-QSet<QString> MockTimerWorker::dropPendingTicks(QSet<QString> dropped, const QSet<int> &dropAnimators)
+void MockTimerWorker::commitOpenTick(const MockTickRecord &tick)
 {
-	// Drop every tick that read or wrote a dropped uid, whose animator was paused
-	// for a removed path, or whose animator is gone. Its outputs are dropped too,
-	// including earlier writes of the same uid, so repeat until nothing more drops.
-	// A calculator tick has no animator. Do not drop it just because that id is
-	// missing; only a cancelled input or output should.
-	const QSet<QString> seed = dropped;
-	QSet<int> droppedAnimators;
-	for (bool changed = true; changed;) {
-		changed = false;
-		for (auto it = m_pendingTicks.begin(); it != m_pendingTicks.end();) {
-			bool drop = false;
-			if (!it->calculator) {
-				drop = dropAnimators.contains(it->animatorId)
-						|| !m_configs.contains(it->animatorId);
-			}
-			if (!drop) {
-				const QStringList touched = it->inputs + it->outputs;
-				for (const QString &uid : touched) {
-					if (dropped.contains(uid)) {
-						drop = true;
-						break;
-					}
-				}
-			}
-			if (drop) {
-				const QStringList outputs = it->outputs;
-				if (!it->calculator) {
-					droppedAnimators.insert(it->animatorId);
-				}
-				it = m_pendingTicks.erase(it);
-				for (const QString &uid : outputs) {
-					dropped.insert(uid);
-				}
-				changed = true;
-			} else {
-				++it;
-			}
-		}
+	const bool hasTick = !tick.outputs.isEmpty();
+	if (m_openUpdates.isEmpty() && m_openNotifications.isEmpty() && !hasTick) {
+		return;
 	}
-	m_pendingUpdates.removeIf([&dropped](const MockValueUpdate &update) {
-		return dropped.contains(update.first);
-	});
-	m_pendingNotifications.removeIf([&](const MockNotifyEvent &event) {
-		if (dropAnimators.contains(event.animatorId)
-				|| droppedAnimators.contains(event.animatorId)
-				|| !m_configs.contains(event.animatorId)) {
-			return true;
-		}
-		for (const QString &dep : event.dependsOn) {
-			if (dropped.contains(dep)) {
-				return true;
-			}
-		}
-		return false;
-	});
-	QSet<QString> extra;
-	for (const QString &uid : dropped) {
-		if (!seed.contains(uid)) {
-			extra.insert(uid);
-		}
+	MockValueApplier *values = applier();
+	if (!values) {
+		m_openUpdates.clear();
+		m_openNotifications.clear();
+		return;
 	}
-	return extra;
+	MockTickRecordList ticks;
+	if (hasTick) {
+		ticks.append(tick);
+	}
+	values->stage(m_openUpdates, m_openNotifications, ticks);
+	m_openUpdates.clear();
+	m_openNotifications.clear();
+	// Hold before returning to the event loop, and before the step-size signal.
+	// A due 10ms timer must not apply this tick before calculators read it.
+	values->holdDrain();
+	m_needsFlush = true;
 }
 
-QSet<QString> MockTimerWorker::dropPendingUpdate(const QString &uid)
+MockValueApplier *MockTimerWorker::applier() const
 {
-	const QString normalized = normalizedMockUid(uid);
-	if (normalized.isEmpty()) {
-		return {};
-	}
-	// A tick that wrote uid, or computed something from it, is dropped whole.
-	return dropPendingTicks({normalized});
+	return MockManager::create()->valueApplier();
 }
 
 QVector<qreal> MockTimerWorker::actualStepSizes(int animatorId) const
@@ -725,16 +689,19 @@ void MockTimerWorker::pauseAnimator(int animatorId, const QString &prefix)
 		m_pausedAnimators.insert(animatorId);
 		return;
 	}
-	MockValueApplier *values = MockManager::create()->valueApplier();
+	MockValueApplier *values = applier();
 	const MockAnimatorConfig &config = m_configs[animatorId];
 	bool added = false;
 	auto queuedWrite = [this, values](const QString &output) {
-		for (const MockValueUpdate &update : m_pendingUpdates) {
+		if (values && values->pendingValue(output, nullptr)) {
+			return true;
+		}
+		for (const MockValueUpdate &update : m_openUpdates) {
 			if (update.first == output) {
 				return true;
 			}
 		}
-		return values && values->pendingValue(output, nullptr);
+		return false;
 	};
 	// generated: a path the tick writes even when it has no value yet. That is
 	// a derived destination, a total, or a toggler uid. A numeric input with
@@ -754,9 +721,9 @@ void MockTimerWorker::pauseAnimator(int animatorId, const QString &prefix)
 		if (!generated) {
 			return;
 		}
-		// The removal drops this waiting write. The next tick would create the
+		// The removal drops this queued write. The next tick would create the
 		// item unless the output stays paused. A generated path with no value
-		// and no waiting write is not required, so restoring the inputs that
+		// and no queued write is not required, so restoring the inputs that
 		// did exist still resumes the animator.
 		if (!queuedWrite(output)) {
 			return;
@@ -784,50 +751,14 @@ void MockTimerWorker::pauseAnimator(int animatorId, const QString &prefix)
 	m_pausedAnimators.insert(animatorId);
 }
 
-void MockTimerWorker::releaseOutputOwnership(const QSet<QString> &uids)
-{
-	if (uids.isEmpty()) {
-		return;
-	}
-	for (auto it = m_pendingTicks.begin(); it != m_pendingTicks.end();) {
-		QStringList kept;
-		bool removed = false;
-		for (const QString &output : it->outputs) {
-			if (uids.contains(normalizedMockUid(output))) {
-				removed = true;
-			} else {
-				kept.append(output);
-			}
-		}
-		if (!removed) {
-			++it;
-			continue;
-		}
-		it->outputs = kept;
-		if (it->outputs.isEmpty()) {
-			it = m_pendingTicks.erase(it);
-		} else {
-			++it;
-		}
-	}
-	if (MockValueApplier *applier = MockManager::create()->valueApplier()) {
-		applier->retireOutputOwnership(uids);
-	}
-}
-
 void MockTimerWorker::cancelPendingGaugeWrites()
 {
 	const QStringList gauges = gaugeOutputUids();
 	if (gauges.isEmpty()) {
 		return;
 	}
-	const QSet<QString> uids(gauges.cbegin(), gauges.cend());
-	m_pendingUpdates.removeIf([&uids](const MockValueUpdate &update) {
-		return uids.contains(update.first);
-	});
-	releaseOutputOwnership(uids);
-	if (MockValueApplier *applier = MockManager::create()->valueApplier()) {
-		applier->discardQueuedValues(uids);
+	if (MockValueApplier *values = applier()) {
+		values->discardQueuedValues(QSet<QString>(gauges.cbegin(), gauges.cend()));
 	}
 }
 
@@ -1048,7 +979,7 @@ void MockTimerWorker::processRandomizer(MockAnimatorConfig &config)
 		tickDepends.append(itemDepends);
 		// The applier emits this after setValue() for itemDepends. Do not Q_EMIT
 		// notifyUpdate here: that runs the QML handler before setValue().
-		m_pendingNotifications.append(notifyEvent(
+		m_openNotifications.append(notifyEvent(
 				MockNotifyEvent::Update, config.animatorId, static_cast<int>(i),
 				newValue, itemDepends));
 	}
@@ -1068,7 +999,7 @@ void MockTimerWorker::processRandomizer(MockAnimatorConfig &config)
 		return;
 	}
 	// The applier emits this after setValue() for every uid in tickDepends.
-	m_pendingNotifications.append(notifyEvent(
+	m_openNotifications.append(notifyEvent(
 			MockNotifyEvent::Total, config.animatorId, -1, total, tickDepends));
 }
 
@@ -1184,22 +1115,27 @@ void MockTimerWorker::processRangeAnimator(MockAnimatorConfig &config)
 	// The applier emits this after setValue() for every uid in tickDepends.
 	// Do not Q_EMIT notifyTotal here: that runs the QML handler before setValue().
 	if (anyValue) {
-		m_pendingNotifications.append(notifyEvent(
+		m_openNotifications.append(notifyEvent(
 				MockNotifyEvent::Total, config.animatorId, -1, total, tickDepends));
 	}
 
 	if (stepSizesChanged) {
-		Q_EMIT actualStepSizesChanged(config.animatorId, config.actualStepSizes,
-				config.stepRevision);
+		m_stepSizesChanged = true;
 	}
 }
 
 void MockTimerWorker::scheduleBatchFlush()
 {
-	// Coalesce every animator tick in this event-loop iteration into one
-	// valuesReady() emission. Notifications travel in that same emission.
-	if (m_flushTimerId == 0
-			&& (!m_pendingUpdates.isEmpty() || !m_pendingNotifications.isEmpty())) {
+	// Calculators must run after every animator tick in this turn, and before
+	// the drain applies a staged value. The 0ms timer waits until animator
+	// timer events in this iteration have staged their ticks.
+	if (!m_needsFlush) {
+		return;
+	}
+	if (MockValueApplier *values = applier()) {
+		values->holdDrain();
+	}
+	if (m_flushTimerId == 0) {
 		m_flushTimerId = startTimer(0);
 	}
 }
@@ -1239,7 +1175,12 @@ void MockTimerWorker::flushPendingForTest()
 void MockTimerWorker::scheduleCalculatorFlush()
 {
 	// Consumption and phase sums must run even when no animator produced an update
-	// (mock timers off, or a source changed outside an animator tick).
+	// (mock timers off, or a source changed outside an animator tick). Hold the
+	// drain so a due 10ms timer cannot apply a staged value first.
+	m_needsFlush = true;
+	if (MockValueApplier *values = applier()) {
+		values->holdDrain();
+	}
 	if (m_flushTimerId == 0) {
 		m_flushTimerId = startTimer(0);
 	}
@@ -1251,22 +1192,21 @@ void MockTimerWorker::flushBatch()
 		killTimer(m_flushTimerId);
 		m_flushTimerId = 0;
 	}
+	m_needsFlush = false;
 
 	// Record what each calculation read and wrote, after animator ticks have
-	// queued their writes. A later write can then drop the aggregate, not only
+	// staged their writes. A later write can then drop the aggregate, not only
 	// the animator value it was calculated from. Keep the two calculations apart
 	// so cancelling one does not throw away the other.
 	auto recordCalculation = [this](auto evaluate) {
-		PendingTick tick;
+		MockTickRecord tick;
 		tick.calculator = true;
 		m_recordingInputs = &tick.inputs;
 		m_recordingOutputs = &tick.outputs;
 		evaluate();
 		m_recordingInputs = nullptr;
 		m_recordingOutputs = nullptr;
-		if (!tick.outputs.isEmpty()) {
-			m_pendingTicks.append(tick);
-		}
+		commitOpenTick(tick);
 	};
 	if (!m_consumptionServices.isEmpty()) {
 		recordCalculation([this]() { evaluateConsumption(); });
@@ -1275,34 +1215,12 @@ void MockTimerWorker::flushBatch()
 		recordCalculation([this]() { evaluatePhaseSums(); });
 	}
 
-	// These writes are about to be queued. A later UI write must not treat them
-	// as still unflushed. The applier drops any of them still waiting to be applied.
-	MockTickRecordList ticks;
-	ticks.reserve(m_pendingTicks.size());
-	for (const PendingTick &tick : m_pendingTicks) {
-		MockTickRecord record;
-		record.animatorId = tick.animatorId;
-		record.calculator = tick.calculator;
-		record.inputs = tick.inputs;
-		record.outputs = tick.outputs;
-		ticks.append(record);
+	// Calculator commits set this again. This flush is the release, not another
+	// wait. A due drain applies one value after the calculators have read.
+	m_needsFlush = false;
+	if (MockValueApplier *values = applier()) {
+		values->releaseAndDrain();
 	}
-	m_pendingTicks.clear();
-	if (m_pendingUpdates.isEmpty() && m_pendingNotifications.isEmpty()) {
-		// An equal recalculation writes nothing, but it may still claim outputs
-		// that are waiting. Deliver that tick, or the old inputs keep them.
-		if (!ticks.isEmpty()) {
-			Q_EMIT valuesReady(MockValueUpdateList(), MockNotifyEventList(), ticks);
-		}
-		return;
-	}
-	// Copy first. valuesReady() is a direct connection, and setValue() can
-	// drop pending updates while applyValues() is still reading this batch.
-	const MockValueUpdateList updates = m_pendingUpdates;
-	const MockNotifyEventList notifications = m_pendingNotifications;
-	m_pendingUpdates.clear();
-	m_pendingNotifications.clear();
-	Q_EMIT valuesReady(updates, notifications, ticks);
 }
 
 void MockTimerWorker::processStepper(MockAnimatorConfig &config)
@@ -1593,13 +1511,13 @@ void MockTimerWorker::invalidateConsumptionValues()
 	}
 
 	const QString prefix = m_consumptionSystemPrefix;
-	QSet<QString> clearing;
 	auto invalidate = [&](const QString &path) {
 		const QString uid = normalizedMockUid(prefix + path);
 		if (m_pausedConsumptionOutputs.contains(uid)) {
 			return;
 		}
-		clearing.insert(uid);
+		// Not a new tick. Staging as untracked drops the old tick's claim, or a
+		// later write of an old input cancels the clear.
 		writePending(uid, QVariant());
 	};
 
@@ -1615,10 +1533,6 @@ void MockTimerWorker::invalidateConsumptionValues()
 	invalidate(QStringLiteral("/Ac/ConsumptionOnOutput/NumberOfPhases"));
 	invalidate(QStringLiteral("/Ac/ConsumptionOnInput/NumberOfPhases"));
 	invalidate(QStringLiteral("/Ac/Consumption/NumberOfPhases"));
-
-	// These writes replace queued values but are not a new tick. Drop the old
-	// tick's claim on them, or a later write of an old input cancels the clear.
-	releaseOutputOwnership(clearing);
 	scheduleBatchFlush();
 }
 
@@ -1751,13 +1665,13 @@ void MockTimerWorker::invalidatePhaseSumValues(int ruleId)
 
 	const PhaseSumConfig &cfg = it.value();
 	const QSet<QString> pausedOutputs = m_pausedPhaseSumOutputs.value(ruleId);
-	QSet<QString> clearing;
 	auto invalidate = [&](const QString &path) {
 		const QString uid = normalizedMockUid(path);
 		if (pausedOutputs.contains(uid)) {
 			return;
 		}
-		clearing.insert(uid);
+		// Not a new tick. Staging as untracked drops the old tick's claim, or a
+		// later write of an old input cancels the clear.
 		writePending(uid, QVariant());
 	};
 
@@ -1768,9 +1682,5 @@ void MockTimerWorker::invalidatePhaseSumValues(int ruleId)
 		}
 	}
 	invalidate(cfg.targetPrefix + QStringLiteral("/NumberOfPhases"));
-
-	// These writes replace queued values but are not a new tick. Drop the old
-	// tick's claim on them, or a later write of an old input cancels the clear.
-	releaseOutputOwnership(clearing);
 	scheduleBatchFlush();
 }

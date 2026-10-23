@@ -127,11 +127,8 @@ QSet<QString> MockValueApplier::supersede(const QString &uid)
 		return candidate == normalized;
 	});
 	removeQueued(normalized);
-	if (!m_applyingValues && !m_dispatchingNotifications
-			&& (!m_queue.isEmpty() || !m_pendingNotifications.isEmpty())
-			&& !m_drainTimer.isActive()) {
-		m_drainTimer.start();
-	}
+	// Do not apply here. The caller may still drop another tick in this call.
+	continueDrain();
 	return dropped;
 }
 
@@ -151,11 +148,8 @@ QSet<QString> MockValueApplier::dropPrefix(const QString &prefix)
 	if (m_applyingValues && !m_skipPrefixes.contains(normalized)) {
 		m_skipPrefixes.append(normalized);
 	}
-	if (!m_applyingValues && !m_dispatchingNotifications
-			&& (!m_queue.isEmpty() || !m_pendingNotifications.isEmpty())
-			&& !m_drainTimer.isActive()) {
-		m_drainTimer.start();
-	}
+	// Do not apply here. A paused writer may still be dropped in this call.
+	continueDrain();
 	return dropped;
 }
 
@@ -202,6 +196,16 @@ void MockValueApplier::retireOutputOwnership(const QSet<QString> &uids)
 
 QSet<QString> MockValueApplier::dropAnimator(int animatorId)
 {
+	// A replacement keeps the registration, so unregisterNotify is not called.
+	// Drop this animator's notifies first, or a ready notify can still run.
+	QVector<MockNotifyEvent> kept;
+	kept.reserve(m_pendingNotifications.size());
+	for (const MockNotifyEvent &event : m_pendingNotifications) {
+		if (event.animatorId != animatorId) {
+			kept.append(event);
+		}
+	}
+	m_pendingNotifications = kept;
 	// Leave calculator ticks unless they used an output of this animator, or
 	// inherited that use after the output moved to a newer tick.
 	return dropQueuedTickOutputs({}, [animatorId](const MockTickRecord &tick) {
@@ -580,7 +584,7 @@ void MockValueApplier::pruneAppliedTicks()
 	m_queuedTicks = kept;
 }
 
-void MockValueApplier::applyValues(const MockValueUpdateList &updates,
+void MockValueApplier::stage(const MockValueUpdateList &updates,
 		const MockNotifyEventList &notifications, const MockTickRecordList &ticks)
 {
 	// An equal recalculation can send a tick with no new values. Still record it,
@@ -654,17 +658,38 @@ void MockValueApplier::applyValues(const MockValueUpdateList &updates,
 	retireOutputOwnership(untracked);
 	rememberTicks(ticks);
 	// Drop records whose outputs have already been applied. An ownership-only
-	// batch does not apply a value, and the drain timer may already be running,
+	// tick does not apply a value, and the drain may be held for calculators,
 	// so this cannot wait for processQueue().
 	pruneAppliedTicks();
+}
 
-	// Do not apply a long queue in this turn. Distinct uids are already
-	// collapsed to the latest value, and a synchronous drain freezes the GUI.
-	if (m_applyingValues || m_dispatchingNotifications) {
+void MockValueApplier::applyValues(const MockValueUpdateList &updates,
+		const MockNotifyEventList &notifications, const MockTickRecordList &ticks)
+{
+	stage(updates, notifications, ticks);
+	startDrain();
+}
+
+void MockValueApplier::holdDrain()
+{
+	m_drainHeld = true;
+}
+
+void MockValueApplier::releaseAndDrain()
+{
+	m_drainHeld = false;
+	startDrain();
+}
+
+void MockValueApplier::startDrain()
+{
+	// A held drain waits until calculators have read the staged values.
+	// A re-entrant call during setValue() must not apply a second value.
+	if (m_drainHeld || m_applyingValues || m_dispatchingNotifications) {
 		return;
 	}
 	if (!m_drainTimer.isActive()) {
-		// Apply the first batch immediately (no delay for the first frame)
+		// Apply the first value immediately. Later values wait for the timer.
 		processQueue();
 		if (!m_queue.isEmpty() || !m_pendingNotifications.isEmpty()) {
 			m_drainTimer.start();
@@ -672,8 +697,43 @@ void MockValueApplier::applyValues(const MockValueUpdateList &updates,
 	}
 }
 
+void MockValueApplier::continueDrain()
+{
+	if (m_drainHeld || m_applyingValues || m_dispatchingNotifications) {
+		return;
+	}
+	if ((m_queue.isEmpty() && m_pendingNotifications.isEmpty()) || m_drainTimer.isActive()) {
+		return;
+	}
+	m_drainTimer.start();
+}
+
+void MockValueApplier::cancel(const QSet<QString> &uids)
+{
+	QSet<QString> pending = uids;
+	QSet<QString> seen;
+	while (!pending.isEmpty()) {
+		QSet<QString> next;
+		for (const QString &uid : pending) {
+			const QString normalized = normalizedMockUid(uid);
+			if (normalized.isEmpty() || seen.contains(normalized)) {
+				continue;
+			}
+			seen.insert(normalized);
+			next.unite(supersede(normalized));
+		}
+		pending = next;
+	}
+}
+
 void MockValueApplier::processQueue()
 {
+	// The 10ms timer can already be due when a tick is staged. Applying now
+	// would write a value before calculators read it, and the flush could
+	// apply a second value in the same turn.
+	if (m_drainHeld) {
+		return;
+	}
 	if (!m_producer) {
 		m_drainTimer.stop();
 		return;
@@ -703,7 +763,7 @@ void MockValueApplier::processQueue()
 
 	if (m_queue.isEmpty() && m_pendingNotifications.isEmpty()) {
 		m_drainTimer.stop();
-	} else if (!m_drainTimer.isActive()) {
+	} else if (!m_drainHeld && !m_drainTimer.isActive()) {
 		m_drainTimer.start();
 	}
 }
