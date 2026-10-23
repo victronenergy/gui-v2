@@ -76,7 +76,7 @@ TextField {
 		Global.aboutToFocusTextField(root, root.flickable)
 	}
 
-	borderColor: _showErrorHighlight ? Theme.color_red : Theme.color_ok
+	borderColor: _showErrorHighlight ? Theme.color_critical : Theme.color_ok
 	focusPolicy: Qt.ClickFocus
 
 	onTextEdited: {

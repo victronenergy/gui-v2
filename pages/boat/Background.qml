@@ -24,12 +24,12 @@ Item {
 		source: "qrc:/images/boat_glow.png"
 		color: {
 			if (isShoreConnected && isMoving) {
-				return Theme.color_red;
+				return Theme.color_critical;
 			}
 			if (isBatteryCharging || motorDrives.isRegenerating) {
 				return Theme.color_boatPage_regenProgress;
 			}
-			return undefined;
+			return Theme.color_ok;
 		}
 	}
 

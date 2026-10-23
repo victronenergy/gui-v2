@@ -1,0 +1,91 @@
+{
+    "module": "Victron.Branding",
+    "version": "1.0",
+    "properties": [
+        {
+            "name": "color_brand",
+            "type": "color",
+            "since": "1.0"
+        },
+        {
+            "name": "color_success",
+            "type": "color",
+            "since": "1.0"
+        },
+        {
+            "name": "color_warning",
+            "type": "color",
+            "since": "1.0"
+        },
+        {
+            "name": "color_critical",
+            "type": "color",
+            "since": "1.0"
+        },
+        {
+            "name": "color_background_primary",
+            "type": "color",
+            "since": "1.0"
+        },
+        {
+            "name": "color_background_secondary",
+            "type": "color",
+            "since": "1.0"
+        },
+        {
+            "name": "color_background_page",
+            "type": "color",
+            "since": "1.0"
+        },
+        {
+            "name": "color_font_primary",
+            "type": "color",
+            "since": "1.0"
+        },
+        {
+            "name": "color_font_secondary",
+            "type": "color",
+            "since": "1.0"
+        },
+        {
+            "name": "light_mode_background_factor",
+            "type": "real",
+            "since": "1.0"
+        },
+        {
+            "name": "font_files",
+            "type": "stringlist",
+            "since": "1.0"
+        },
+        {
+            "name": "font_family",
+            "type": "string",
+            "since": "1.0"
+        },
+        {
+            "name": "quantity_font_family",
+            "type": "string",
+            "since": "1.0"
+        },
+        {
+            "name": "splash_logo_icon",
+            "type": "url",
+            "since": "1.0"
+        },
+        {
+            "name": "splash_logo_text",
+            "type": "url",
+            "since": "1.0"
+        },
+        {
+            "name": "splash_logo_icon_preserve_colors",
+            "type": "bool",
+            "since": "1.0"
+        },
+        {
+            "name": "splash_logo_text_preserve_colors",
+            "type": "bool",
+            "since": "1.0"
+        }
+    ]
+}

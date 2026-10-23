@@ -308,7 +308,7 @@ Page {
 
 						CP.ColorImage {
 							source: "qrc:/images/icon_warning_24.svg"
-							color: Theme.color_red
+							color: Theme.color_critical
 						}
 
 						Label {

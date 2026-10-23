@@ -9,6 +9,13 @@ qt_add_qml_module(VictronVenusOS
     SOURCES ${VictronVenusOS_CPP_SOURCES}
 )
 
+# The color computations must round identically on every platform, so that the tests which compare
+# exact expected colors pass on GX devices too: do not let the compiler combine a multiply and an
+# add into one fused multiply-add instruction. (MSVC, from Visual Studio 2022, does not do this
+# under its default /fp:precise.)
+set_source_files_properties(src/colorderivation.cpp PROPERTIES
+    COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:-ffp-contract=off>")
+
 qt_add_resources(VictronVenusOS "VictronVenusOS_large_resources"
     BIG_RESOURCES
     FILES ${VictronVenusOS_RESOURCES}
@@ -18,6 +25,9 @@ target_include_directories(VictronVenusOS PRIVATE src/veutil/inc/veutil/qt)
 target_include_directories(VictronVenusOS PUBLIC ${PROJECT_SOURCE_DIR}/src
                                                  ${PROJECT_SOURCE_DIR}/src/veutil/inc
                                                  ${PROJECT_SOURCE_DIR}/src/veutil/inc/veutil/qt)
+
+# VenusOS uses Victron.Branding from C++ only (GuiPluginLoader and Theme).
+target_link_libraries(VictronVenusOS PUBLIC VictronBranding)
 
 target_link_libraries(VictronVenusOS PRIVATE
     Qt6::Core
@@ -54,5 +64,6 @@ install(
 install(
     FILES
         ${PROJECT_SOURCE_DIR}/tools/gui-v2-plugin-compiler.py
+        ${PROJECT_SOURCE_DIR}/tools/branding-properties.json
     DESTINATION ${VENUS_QML_INSTALL_DIR})
 

@@ -74,7 +74,7 @@ Item {
 			//% "Page will automatically reload in ten seconds to load the latest version."
 			description: qsTrId("firmware_installed_build_page_will_reload")
 			icon.source: "qrc:/images/icon_info_48.svg"
-			icon.color: Theme.color_blue
+			icon.color: Theme.color_brand
 			Timer {
 				running: true
 				interval: 10*1000

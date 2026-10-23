@@ -3,6 +3,7 @@ set(VictronUiTest_QML_MODULE_SOURCES
     tests/ui/benchmark/overview/tst_benchmark_overview.qml
     tests/ui/benchmark/pages/tst_benchmark_pages.qml
     tests/ui/smoke/generic-capture/tst_all.qml
+    tests/ui/smoke/key-navigation/tst_focus_ring.qml
     tests/ui/smoke/mock-maximal/tst_boat.qml
     tests/ui/smoke/mock-maximal/tst_brief.qml
     tests/ui/smoke/mock-maximal/tst_cards.qml
@@ -17,5 +18,6 @@ SET(VictronUiTest_QML_MODULE_RESOURCES
     tests/ui/benchmark/overview/overview.json
     tests/ui/benchmark/pages/pages.json
     tests/ui/smoke/generic-capture/generic-capture.json
+    tests/ui/smoke/key-navigation/key-navigation.json
     tests/ui/smoke/mock-maximal/mock-maximal.json
 )

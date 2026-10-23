@@ -94,7 +94,7 @@ ModalDialog {
 
 				Layout.fillWidth: true
 				font.pixelSize: Theme.font_size_caption
-				color: Theme.color_red
+				color: Theme.color_critical
 				horizontalAlignment: Label.AlignHCenter
 				wrapMode: Text.Wrap
 				opacity: text.length > 0 ? 1 : 0

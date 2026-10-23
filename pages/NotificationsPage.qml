@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 SwipeViewPage {
@@ -89,10 +90,11 @@ SwipeViewPage {
 					width: Theme.geometry_icon_size_medium + (2 * Theme.geometry_listItem_content_horizontalMargin)
 					height: parent.height
 
-					Image {
+					CP.ColorImage {
 						anchors.centerIn: parent
 						source: "qrc:/images/icon_checkmark_48.svg"
 						sourceSize: Qt.size(Theme.geometry_notificationsPage_placeholder_icon_size, Theme.geometry_notificationsPage_placeholder_icon_size)
+						color: Theme.color_success
 					}
 				}
 
