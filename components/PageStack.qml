@@ -6,6 +6,15 @@
 import QtQuick
 import Victron.VenusOS
 
+/*
+	The main page stack for the application.
+
+	This is used to add above the main application layer in a stack-like manner, where pages can be
+	pushed on top and then "popped" to reveal the last-pushed page.
+
+	When the first page is pushed, the stack slides into view, and when the last page is popped, the
+	stack slides out of view.
+*/
 StackView {
 	id: root
 
