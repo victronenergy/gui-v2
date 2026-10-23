@@ -324,7 +324,7 @@ Page {
 						onClicked: {
 							const url = switchNavigationItem.pluginSettingsPageIntegration?.url ?? ""
 							if (url) {
-								Global.pageManager.pushPage(url, { title: text })
+								Global.pageManager.pushPluginPage(url, { title: text })
 							}
 						}
 					}

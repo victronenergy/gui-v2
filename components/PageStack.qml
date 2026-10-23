@@ -115,16 +115,65 @@ StackView {
 				console.warn("Aborted attempt to push page because createObject() failed: " + obj + ": " + checkComponent.errorString())
 				return null
 			}
+			if (!createdPageObject.__is_venus_gui_page__) {
+				createdPageObject.destroy()
+				console.warn("Aborted attempt to push page whose root is not a Page: " + obj
+						+ ". Use pushPluginPage() for the pages of GUI plugins.")
+				return null
+			}
 			objectOrUrl = createdPageObject
 		}
+		return _pushPageObject(objectOrUrl, properties, createdPageObject, pageUrl, operation)
+	}
 
+	// Pushes a page from a GUI plugin. The root of a plugin page is a PluginPage (or a type
+	// derived from it) from Victron.GuiPlugins, never a Page. It is shown inside a page of
+	// type PluginHostPage, which owns it, so the two are destroyed together.
+	// 'url' is the full URL of the plugin's QML file, such as "qrc:/MyPlugin/MyPage.qml".
+	function pushPluginPage(url, properties, operation) {
+		if (root.animating) {
+			return null
+		}
+		if (state === "hidden") {
+			_popAndDestroyAllPages(StackView.Immediate)
+		}
+
+		const component = Qt.createComponent(url)
+		if (component.status !== Component.Ready) {
+			console.warn("Aborted attempt to push plugin page with errors: " + url + ": " + component.errorString())
+			return null
+		}
+		const hostPage = pluginHostPageComponent.createObject(null)
+		if (!hostPage) {
+			console.warn("Aborted attempt to push plugin page because its host page could not be created: " + url)
+			return null
+		}
+		// The host page is the plugin page's parent (both the QObject parent and the visual
+		// parent), so the plugin page stops and is destroyed when the host page is destroyed.
+		const pluginPage = component.createObject(hostPage, properties)
+		if (!pluginPage) {
+			hostPage.destroy()
+			console.warn("Aborted attempt to push plugin page because createObject() failed: " + url + ": " + component.errorString())
+			return null
+		}
+		if (pluginPage.__is_venus_gui_page__) {
+			hostPage.destroy()
+			console.warn("Aborted attempt to push plugin page whose root is a Page: " + url
+					+ ". The root of a plugin page must be a PluginPage from Victron.GuiPlugins.")
+			return null
+		}
+		hostPage.pluginPage = pluginPage
+		return _pushPageObject(hostPage, undefined, hostPage, url, operation)
+	}
+
+	function _pushPageObject(objectOrUrl, pushProperties, createdPageObject, pageUrl, operation) {
 		let pushedPage = null
 		if (root.state !== "opened") {
 			// Closed or hidden: push the page immediately, then slide the stack in.
 			// Set the duration before push(). An Immediate push can mark the stack
 			// busy, which used to set the duration to 0.
 			const slideDuration = _animationDuration(operation)
-			pushedPage = root.push(objectOrUrl, properties, StackView.Immediate)
+			pushedPage = root.push(objectOrUrl, pushProperties, StackView.Immediate)
 			if (!pushedPage) {
 				if (createdPageObject && !Theme.objectHasQObjectParent(createdPageObject)) {
 					createdPageObject.destroy()
@@ -138,7 +187,7 @@ StackView {
 			root.state = "opened"
 		} else {
 			// Otherwise, push the push onto the visible stack, possibly with an animation.
-			pushedPage = root.push(objectOrUrl, properties, _adjustedStackOperation(operation))
+			pushedPage = root.push(objectOrUrl, pushProperties, _adjustedStackOperation(operation))
 			if (!pushedPage) {
 				if (createdPageObject && !Theme.objectHasQObjectParent(createdPageObject)) {
 					createdPageObject.destroy()
@@ -300,4 +349,10 @@ StackView {
 			}
 		}
 	]
+
+	Component {
+		id: pluginHostPageComponent
+
+		PluginHostPage {}
+	}
 }

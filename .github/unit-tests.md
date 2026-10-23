@@ -30,6 +30,12 @@ tests/
 └── ui/                         — visual regression tests (separate system, not covered here)
 ```
 
+The Python tools have their own tests, which `tests/CMakeLists.txt` registers with ctest when a Python 3 interpreter is found: `tst_guipluginsapi` (fails if `tools/guiplugins-api.json` or the list of versions in `.github/gui-plugins.md` is out of date, or if the `Victron.GuiPlugins` sources break the record; regenerate both with `python tools/guipluginsapi.py`), `tst_plugincompiler` (the `requiredGuiPluginsVersion` that the plugin compiler writes) and `tst_moduledependencies` (fails if a module uses one that it must not). To run the compiler tests without ctest:
+
+```bash
+python -m unittest discover -s tests/plugincompiler -p "test_*.py"
+```
+
 ## Creating a new unit test
 
 ### 1. Create the test directory

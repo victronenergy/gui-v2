@@ -40,7 +40,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/DateSelector.qml
     components/DemoModeIndicator.qml
     components/DeviceListDelegate.qml
-    components/DeviceListPluginPage.qml
     components/DevicePage.qml
     components/DroopGraph.qml
     components/DialogDragger.qml
@@ -89,6 +88,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/PageGensetModel.qml
     components/PagePreloader.qml
     components/PageStack.qml
+    components/PluginHostPage.qml
     components/VeQuickItemsQuotient.qml
     components/ProgressArc.qml
     components/QuantityGroupListHeader.qml

@@ -1,43 +1,27 @@
 import QtQuick
-import QtQuick.Layouts
-import QtQuick.Controls.impl as CP
-import Victron.VenusOS
+import Victron.GuiPlugins
 
-DeviceListPluginPage {
+PluginDevicePage {
 	id: root
 
 	//% "Cell Voltages"
 	title: qsTrId("devicelistexample_cellvoltages_title_cell_voltages")
 
-	GradientListView {
-		model: VisibleItemModel {
-			ListSwitch {
-				property bool value
-				//% "Battery"
-				text: qsTrId("devicelistexample_cellvoltages_text_battery") + " " + root.device.serviceUid
-				checked: value
-				onClicked: {
-					value = !checked
-					console.log("Switch now checked?", checked)
-				}
-			}
+	PluginGradientListView {
+		PluginListSwitch {
+			//% "Battery"
+			text: qsTrId("devicelistexample_cellvoltages_text_battery") + " " + root.serviceUid
+			checkable: true
+			onClicked: console.log("Switch now checked?", checked)
+		}
 
-			ListItem {
-				id: imageItem
+		PluginListItem {
+			//% "Image"
+			text: qsTrId("devicelistexample_cellvoltages_text_image")
 
-				contentItem: RowLayout {
-					Label {
-						//% "Image"
-						text: qsTrId("devicelistexample_cellvoltages_text_image")
-						font: imageItem.font
-						Layout.fillWidth: true
-					}
-
-					CP.IconImage {
-						source: "qrc:/DeviceListExample/customimage.svg"
-						color: Theme.color_font_primary
-					}
-				}
+			// The image has its own colors, which can be seen on both light and dark backgrounds.
+			Image {
+				source: "qrc:/DeviceListExample/customimage.svg"
 			}
 		}
 	}

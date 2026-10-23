@@ -50,6 +50,11 @@ ListSetting {
 			root.toggleDataValue()
 		}
 		// If checkable, update 'checked' value so that onCheckedChanged signal is fired.
+		// TODO: this only works for a touch on the switch, because Qt toggles the inner Switch
+		// before its onClicked calls click(). The Space key, and any other call to click(), leave
+		// the inner Switch unchanged, so a checkable switch does not toggle. This affects every
+		// checkable ListSwitch (in ListChargeSchedule, PageSettingsGsm and
+		// PageSettingsHub4Peakshaving) and PluginListSwitch. Fix them all together.
 		if (checkable && !!_switchItem) {
 			checked = _switchItem.checked
 		}
