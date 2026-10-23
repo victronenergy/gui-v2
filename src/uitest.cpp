@@ -80,7 +80,7 @@ bool UiTestConfiguration::exists(const QString &dirName)
 }
 
 // Build an ad-hoc ui-test configuration that opens one target page via a statically resolved click route.
-void UiTestConfiguration::loadTargetPageNavigation(const QString &targetPage)
+void UiTestConfiguration::loadTargetPageNavigation(const QString &targetPage, bool captureImage)
 {
 	if (targetPage.isEmpty()) {
 		qCFatal(venusGuiTest) << "Cannot load empty target page!";
@@ -129,6 +129,7 @@ void UiTestConfiguration::loadTargetPageNavigation(const QString &targetPage)
 		{ QStringLiteral("TargetPage"), normalizedTargetPage },
 		{ QStringLiteral("RouteEntryLabel"), entryNavText },
 		{ QStringLiteral("RouteSteps"), routeSteps },
+		{ QStringLiteral("CaptureImage"), captureImage },
 		{ QStringLiteral("Tests"), QStringList{ QStringLiteral("tst_target_page.qml") } },
 		{ QStringLiteral("Steps"), QVariantMap{
 			{ QStringLiteral("WaitUntil"), QVariantMap{
@@ -247,7 +248,9 @@ void UiTest::start()
 	QDir imageDir(CaptureAndCompareStep::absoluteImagePath(QString()));
 	const QString imageDirPath = imageDir.absolutePath();
 	qCInfo(venusGuiTest) << "Image captures will be saved to" << imageDirPath;
-	if (!imageDir.isEmpty()) {
+	// A page-path run saves at most one image, named after the page. Keep existing images, so
+	// that several runs can save into the same directory.
+	if (!imageDir.isEmpty() && !isTargetPageMode()) {
 		// The image directory is non-empty. Clear it if it seems safe to do so, i.e. if its parent
 		// is the application working directory, and not an arbitrary directory on the filesystem.
 		const QString appWorkingDir = QDir().absolutePath();
