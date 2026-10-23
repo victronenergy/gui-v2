@@ -12,14 +12,10 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
-
-	serviceUid: bindPrefix
-
 	settingsModel: VisibleItemModel {
 		ListSwitch {
 			text: CommonWords.switch_mode
-			dataItem.uid: root.bindPrefix + "/Mode"
+			dataItem.uid: root.serviceUid + "/Mode"
 			valueTrue: 1
 			valueFalse: 4
 			preferredVisible: dataItem.valid
@@ -29,14 +25,14 @@ DevicePage {
 		ListText {
 			text: CommonWords.state
 			secondaryText: VenusOS.system_stateToText(dataItem.value)
-			dataItem.uid: root.bindPrefix + "/State"
+			dataItem.uid: root.serviceUid + "/State"
 		}
 
 		ListSpinBox {
 			text: CommonWords.input_current_limit
 			writeAccessLevel: VenusOS.User_AccessType_User
 			preferredVisible: dataItem.valid
-			dataItem.uid: root.bindPrefix + "/Ac/In/CurrentLimit"
+			dataItem.uid: root.serviceUid + "/Ac/In/CurrentLimit"
 			suffix: Units.defaultUnitString(VenusOS.Units_Amp)
 			stepSize: 0.1
 			decimals: 1
@@ -48,7 +44,7 @@ DevicePage {
 
 			VeQuickItem {
 				id: nrOfOutputs
-				uid: root.bindPrefix + "/NrOfOutputs"
+				uid: root.serviceUid + "/NrOfOutputs"
 			}
 
 			Repeater {
@@ -58,7 +54,7 @@ DevicePage {
 					id: phaseDelegate
 
 					required property int index
-					readonly property string bindPrefix: `${root.bindPrefix}/Dc/${index}`
+					readonly property string bindPrefix: `${root.serviceUid}/Dc/${index}`
 
 					//: %1 = battery number
 					//% "Battery %1"
@@ -83,7 +79,7 @@ DevicePage {
 
 		ListTemperature {
 			text: CommonWords.battery_temperature
-			dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
+			dataItem.uid: root.serviceUid + "/Dc/0/Temperature"
 			preferredVisible: dataItem.valid
 		}
 
@@ -91,14 +87,14 @@ DevicePage {
 			//% "AC current"
 			text: qsTrId("settings_accharger_current")
 			unit: VenusOS.Units_Amp
-			dataItem.uid: root.bindPrefix + "/Ac/In/L1/I"
+			dataItem.uid: root.serviceUid + "/Ac/In/L1/I"
 			preferredVisible: dataItem.valid
 		}
 
 		ListAlarm {
 			//% "Low battery voltage alarm"
 			text: qsTrId("settings_accharger_low_battery_voltage_alarm")
-			dataItem.uid: root.bindPrefix + "/Alarms/LowVoltage"
+			dataItem.uid: root.serviceUid + "/Alarms/LowVoltage"
 			preferredVisible: dataItem.valid
 		}
 
@@ -107,19 +103,19 @@ DevicePage {
 
 			//% "High battery voltage alarm"
 			text: qsTrId("settings_accharger_high_battery_voltage_alarm")
-			dataItem.uid: root.bindPrefix + "/Alarms/HighVoltage"
+			dataItem.uid: root.serviceUid + "/Alarms/HighVoltage"
 			preferredVisible: dataItem.valid
 		}
 
 		ListText {
 			text: CommonWords.error
-			dataItem.uid: root.bindPrefix + "/ErrorCode"
+			dataItem.uid: root.serviceUid + "/ErrorCode"
 			secondaryText: dataItem.valid ? ChargerError.description(dataItem.value) : dataItem.invalidText
 		}
 
 		// This is the master´s relay state
 		ListRelayState {
-			dataItem.uid: root.bindPrefix + "/Relay/0/State"
+			dataItem.uid: root.serviceUid + "/Relay/0/State"
 		}
 	}
 }

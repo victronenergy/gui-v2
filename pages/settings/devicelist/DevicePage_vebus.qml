@@ -12,15 +12,12 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	required property string bindPrefix
 	readonly property bool isMulti: numberOfAcInputs.valid && numberOfAcInputs.value > 0
 	readonly property bool chargeInProcess: preferRenewableEnergy.value === 0
 
-	serviceUid: bindPrefix
-
 	settingsModel: VisibleItemModel {
 		ListInverterChargerModeButton {
-			serviceUid: root.bindPrefix
+			serviceUid: root.serviceUid
 		}
 
 		ListText {
@@ -62,12 +59,12 @@ DevicePage {
 			Repeater {
 				model: AcInputSettingsModel {
 					id: inputSettingsModel
-					serviceUid: root.bindPrefix
+					serviceUid: root.serviceUid
 				}
 				delegate: ListCurrentLimitButton {
 					required property AcInputSettings inputSettings
 
-					serviceUid: root.bindPrefix
+					serviceUid: root.serviceUid
 					inputNumber: inputSettings.inputNumber
 					inputType: inputSettings.inputType
 				}
@@ -150,14 +147,14 @@ DevicePage {
 		}
 
 		ListQuantity {
-			dataItem.uid: root.bindPrefix + "/Dc/0/Voltage"
+			dataItem.uid: root.serviceUid + "/Dc/0/Voltage"
 			//% "DC Voltage"
 			text: qsTrId("vebus_device_page_dc_voltage")
 			unit: VenusOS.Units_Volt_DC
 		}
 
 		ListQuantity {
-			dataItem.uid: root.bindPrefix + "/Dc/0/Current"
+			dataItem.uid: root.serviceUid + "/Dc/0/Current"
 			//% "DC Current"
 			text: qsTrId("vebus_device_page_dc_current")
 			unit: VenusOS.Units_Amp
@@ -165,35 +162,35 @@ DevicePage {
 
 		ListQuantity {
 			preferredVisible: root.isMulti
-			dataItem.uid: root.bindPrefix + "/Soc"
+			dataItem.uid: root.serviceUid + "/Soc"
 			text: CommonWords.state_of_charge
 			unit:VenusOS.Units_Percentage
 		}
 
 		ListTemperature {
 			preferredVisible: dataItem.valid && root.isMulti
-			dataItem.uid: root.bindPrefix + "/Dc/0/Temperature"
+			dataItem.uid: root.serviceUid + "/Dc/0/Temperature"
 			text: CommonWords.battery_temperature
 		}
 
 		ListActiveAcInput {
 			preferredVisible: root.isMulti
-			bindPrefix: root.bindPrefix
+			bindPrefix: root.serviceUid
 		}
 
 		VeBusAcIODisplay {
-			serviceUid: root.bindPrefix
+			serviceUid: root.serviceUid
 		}
 
 		ListNavigation {
 			//% "Microgrid parameters"
 			text: qsTrId("vebus_device_page_microgrid_parameters")
 			preferredVisible: mode.valid
-			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageMicrogrid.qml", { "bindPrefix": root.bindPrefix })
+			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageMicrogrid.qml", { "bindPrefix": root.serviceUid })
 
 			VeQuickItem {
 				id: mode
-				uid: root.bindPrefix + "/MicroGrid/Mode"
+				uid: root.serviceUid + "/MicroGrid/Mode"
 			}
 		}
 
@@ -201,7 +198,7 @@ DevicePage {
 			//% "Advanced"
 			text: qsTrId("vebus_device_page_advanced")
 			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusAdvanced.qml",
-												   { "bindPrefix": root.bindPrefix,
+												   { "bindPrefix": root.serviceUid,
 													   "title": text
 												   })
 		}
@@ -210,7 +207,7 @@ DevicePage {
 			text: CommonWords.alarm_status
 			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusAlarms.qml",
 												   {
-													   "bindPrefix": root.bindPrefix,
+													   "bindPrefix": root.serviceUid,
 													   "isMulti": root.isMulti
 												   })
 		}
@@ -243,7 +240,7 @@ DevicePage {
 			preferredVisible: bmsExpected.value === 1
 			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusBms.qml", {
 													   "title": text,
-													   "bindPrefix": root.bindPrefix
+													   "bindPrefix": root.serviceUid
 												   })
 		}
 
@@ -252,7 +249,7 @@ DevicePage {
 			showAccessLevel: VenusOS.User_AccessType_Service
 			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageAcSensors.qml", {
 													   "title": text,
-													   "bindPrefix": root.bindPrefix + "/AcSensor"
+													   "bindPrefix": root.serviceUid + "/AcSensor"
 												   }
 												   )
 		}
@@ -262,7 +259,7 @@ DevicePage {
 			showAccessLevel: VenusOS.User_AccessType_Service
 			onClicked: Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusDebug.qml", {
 													   "title": text,
-													   "bindPrefix": root.bindPrefix
+													   "bindPrefix": root.serviceUid
 												   }
 												   )
 		}
@@ -277,7 +274,7 @@ DevicePage {
 
 			ListText {
 				text: displayText
-				dataItem.uid: root.bindPrefix + pathSuffix
+				dataItem.uid: root.serviceUid + pathSuffix
 			}
 		}
 
@@ -288,7 +285,7 @@ DevicePage {
 				Global.pageManager.pushPage("/pages/vebusdevice/PageVeBusSerialNumbers.qml", {
 					//% "Serial numbers"
 					"title": qsTrId("vebus_device_serial_numbers"),
-					"bindPrefix": root.bindPrefix
+					"bindPrefix": root.serviceUid
 				})
 			}
 		}
@@ -296,31 +293,31 @@ DevicePage {
 
 	VeQuickItem {
 		id: numberOfAcInputs
-		uid: root.bindPrefix + "/Ac/NumberOfAcInputs"
+		uid: root.serviceUid + "/Ac/NumberOfAcInputs"
 	}
 
 	VeQuickItem {
 		id: bmsMode
 
-		uid: root.bindPrefix + "/Devices/Bms/Version"
+		uid: root.serviceUid + "/Devices/Bms/Version"
 	}
 
 	VeQuickItem {
 		id: bmsType
 
-		uid: root.bindPrefix + "/Bms/BmsType"
+		uid: root.serviceUid + "/Bms/BmsType"
 	}
 
 	VeQuickItem {
 		id: bmsExpected
 
-		uid: root.bindPrefix + "/Bms/BmsExpected"
+		uid: root.serviceUid + "/Bms/BmsExpected"
 	}
 
 	VeQuickItem {
 		id: mkVersion
 
-		uid: root.bindPrefix + "/Interfaces/Mk2/Version"
+		uid: root.serviceUid + "/Interfaces/Mk2/Version"
 	}
 
 	VeQuickItem {
@@ -332,16 +329,16 @@ DevicePage {
 	VeQuickItem {
 		id: preferRenewableEnergy
 
-		uid: root.bindPrefix + "/Dc/0/PreferRenewableEnergy"
+		uid: root.serviceUid + "/Dc/0/PreferRenewableEnergy"
 	}
 
 	VeQuickItem {
 		id: firmwareVersion
-		uid: root.bindPrefix + "/FirmwareVersion"
+		uid: root.serviceUid + "/FirmwareVersion"
 	}
 
 	VeQuickItem {
 		id: state
-		uid: root.bindPrefix + "/State"
+		uid: root.serviceUid + "/State"
 	}
 }

@@ -12,10 +12,6 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
-
-	serviceUid: bindPrefix
-
 	settingsModel: VisibleItemModel {
 		ListText {
 			text: CommonWords.status
@@ -36,20 +32,20 @@ DevicePage {
 		ListText {
 			//% "Latitude"
 			text: qsTrId("settings_gps_latitude")
-			dataItem.uid: bindPrefix + "/Position/Latitude"
+			dataItem.uid: root.serviceUid + "/Position/Latitude"
 			secondaryText: dataItem.valid ? Global.systemSettings.formatLatitude(dataItem.value) : "--"
 		}
 
 		ListText {
 			//% "Longitude"
 			text: qsTrId("settings_gps_longitude")
-			dataItem.uid: bindPrefix + "/Position/Longitude"
+			dataItem.uid: root.serviceUid + "/Position/Longitude"
 			secondaryText: dataItem.valid ? Global.systemSettings.formatLongitude(dataItem.value) : "--"
 		}
 
 		ListText {
 			text: CommonWords.speed
-			dataItem.uid: bindPrefix + "/Speed"
+			dataItem.uid: root.serviceUid + "/Speed"
 			secondaryText: {
 				if (!dataItem.valid) {
 					return "--"
@@ -77,7 +73,7 @@ DevicePage {
 		ListQuantity {
 			//% "Course"
 			text: qsTrId("settings_gps_course")
-			dataItem.uid: bindPrefix + "/Course"
+			dataItem.uid: root.serviceUid + "/Course"
 			preferredVisible: dataItem.valid
 			unit: VenusOS.Units_CardinalDirection
 		}
@@ -85,7 +81,7 @@ DevicePage {
 		ListQuantity {
 			//% "Altitude"
 			text: qsTrId("settings_gps_altitude")
-			dataItem.uid: root.bindPrefix + "/Altitude"
+			dataItem.uid: root.serviceUid + "/Altitude"
 			dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Metre)
 			dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.altitudeUnit)
 			unit: Global.systemSettings.altitudeUnit
@@ -94,18 +90,18 @@ DevicePage {
 		ListText {
 			//% "Number of satellites"
 			text: qsTrId("settings_gps_num_satellites")
-			dataItem.uid: bindPrefix + "/NrOfSatellites"
+			dataItem.uid: root.serviceUid + "/NrOfSatellites"
 		}
 	}
 
 	VeQuickItem {
 		id: connected
-		uid: bindPrefix + "/Connected"
+		uid: root.serviceUid + "/Connected"
 	}
 
 	VeQuickItem {
 		id: fix
-		uid: bindPrefix + "/Fix"
+		uid: root.serviceUid + "/Fix"
 	}
 
 	VeQuickItem {

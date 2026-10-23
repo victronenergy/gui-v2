@@ -13,10 +13,7 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
-
 	title: device.customName || VenusOS.digitalInput_typeToText(inputType.value)
-	serviceUid: bindPrefix
 
 	settingsModel: VisibleItemModel {
 		ListText {
@@ -26,7 +23,7 @@ DevicePage {
 
 		ListText {
 			text: CommonWords.state
-			dataItem.uid: root.bindPrefix + "/State"
+			dataItem.uid: root.serviceUid + "/State"
 			secondaryText: VenusOS.digitalInput_stateToText(dataItem.value)
 		}
 
@@ -46,20 +43,20 @@ DevicePage {
 								id: alarmSwitch
 								//% "Enable alarm"
 								text: qsTrId("digitalinput_enable_alarm")
-								dataItem.uid: root.bindPrefix + "/Settings/AlarmSetting"
+								dataItem.uid: root.serviceUid + "/Settings/AlarmSetting"
 							}
 
 							ListSwitch {
 								//% "Inverted"
 								text: qsTrId("digitalinput_inverted")
-								dataItem.uid: root.bindPrefix + "/Settings/InvertTranslation"
+								dataItem.uid: root.serviceUid + "/Settings/InvertTranslation"
 								preferredVisible: dataItem.valid
 							}
 
 							ListSwitch {
 								//% "Invert alarm logic"
 								text: qsTrId("digitalinput_invert_alarm_logic")
-								dataItem.uid: root.bindPrefix + "/Settings/InvertAlarm"
+								dataItem.uid: root.serviceUid + "/Settings/InvertAlarm"
 								preferredVisible: alarmSwitch.checked && dataItem.valid
 							}
 						}
@@ -67,7 +64,7 @@ DevicePage {
 
 					VeQuickItem {
 						id: deviceInstance
-						uid: bindPrefix + "/DeviceInstance"
+						uid: root.serviceUid + "/DeviceInstance"
 					}
 				}
 			}
@@ -76,6 +73,6 @@ DevicePage {
 
 	VeQuickItem {
 		id: inputType
-		uid: root.bindPrefix + "/Type"
+		uid: root.serviceUid + "/Type"
 	}
 }

@@ -12,8 +12,6 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
-
 	function setPageModel() {
 		if (ProductInfo.isGensetProduct(productIdDataItem.value)) {
 			modelLoader.sourceComponent = pageGensetModel
@@ -22,13 +20,12 @@ DevicePage {
 		}
 	}
 
-	serviceUid: bindPrefix
 	settingsModel: modelLoader.item
 
 	VeQuickItem {
 		id: productIdDataItem
 
-		uid: root.bindPrefix + "/ProductId"
+		uid: root.serviceUid + "/ProductId"
 		onValueChanged: {
 			if (value !== undefined && modelLoader.status === Loader.Null) {
 				setPageModel()
@@ -44,7 +41,7 @@ DevicePage {
 		id: pageGensetModel
 
 		PageGensetModel {
-			bindPrefix: root.bindPrefix
+			bindPrefix: root.serviceUid
 		}
 	}
 
@@ -52,7 +49,7 @@ DevicePage {
 		id: pageAcInModel
 
 		PageAcInModel {
-			bindPrefix: root.bindPrefix
+			bindPrefix: root.serviceUid
 			productId: productIdDataItem.value
 			deviceSettingsPage: root
 		}

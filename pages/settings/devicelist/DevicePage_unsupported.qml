@@ -12,15 +12,11 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
-
-	serviceUid: bindPrefix
-
 	settingsModel: VisibleItemModel {
 		ListText {
 			//% "Unsupported device found"
 			text: qsTrId("devicelist_unsupporteddevices_found")
-			dataItem.uid: root.bindPrefix + "/Reason"
+			dataItem.uid: root.serviceUid + "/Reason"
 		}
 	}
 }

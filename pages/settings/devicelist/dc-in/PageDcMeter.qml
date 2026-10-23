@@ -12,10 +12,8 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property alias bindPrefix: dcMeterMode.bindPrefix
-
-	serviceUid: bindPrefix
 	settingsModel: PageDcMeterModel {
 		id: dcMeterMode
+		bindPrefix: root.serviceUid
 	}
 }

@@ -15,10 +15,7 @@ DeviceListDelegate {
 		QuantityObject { object: connected.value === 1 ? null : CommonWords; key: "not_connected"; unit: VenusOS.Units_None }
 	}
 
-	onClicked: {
-		Global.pageManager.pushPage("/pages/settings/devicelist/ac-in/PageAcIn.qml",
-				{ bindPrefix : root.device.serviceUid })
-	}
+	onClicked: Global.openDevicePage(root.device.serviceUid)
 
 	VeQuickItem {
 		id: connected

@@ -16,11 +16,8 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
-
-	serviceUid: bindPrefix
 	settingsModel: PageAcInModel {
-		bindPrefix: root.bindPrefix
+		bindPrefix: root.serviceUid
 		productId: root.device.productId
 		deviceSettingsPage: root
 	}
@@ -32,7 +29,7 @@ DevicePage {
 			id: dataManagerVersion
 			//% "Data manager version"
 			text: qsTrId("ac-in-modeldefault_data_manager_version")
-			dataItem.uid: root.bindPrefix + "/DataManagerVersion"
+			dataItem.uid: root.serviceUid + "/DataManagerVersion"
 			preferredVisible: dataItem.valid
 		}
 	}

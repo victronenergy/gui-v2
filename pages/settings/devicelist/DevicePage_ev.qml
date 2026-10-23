@@ -9,10 +9,6 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	required property string bindPrefix
-
-	serviceUid: bindPrefix
-
 	function _systemDistanceUnit() {
 		switch (Global.systemSettings.speedUnit) {
 		case VenusOS.Units_Speed_KilometresPerHour:
@@ -31,21 +27,21 @@ DevicePage {
 	settingsModel: VisibleItemModel {
 		ListQuantity {
 			text: CommonWords.state_of_charge
-			dataItem.uid: root.bindPrefix + "/Soc"
+			dataItem.uid: root.serviceUid + "/Soc"
 			unit: VenusOS.Units_Percentage
 		}
 
 		ListQuantity {
 			//% "Target state of charge"
 			text: qsTrId("ev_target_soc")
-			dataItem.uid: root.bindPrefix + "/TargetSoc"
+			dataItem.uid: root.serviceUid + "/TargetSoc"
 			unit: VenusOS.Units_Percentage
 		}
 
 		ListQuantity {
 			//% "Range"
 			text: qsTrId("ev_range")
-			dataItem.uid: root.bindPrefix + "/RangeToGo"
+			dataItem.uid: root.serviceUid + "/RangeToGo"
 			dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Kilometre)
 			dataItem.displayUnit: Units.unitToVeUnit(root._systemDistanceUnit())
 			unit: root._systemDistanceUnit()
@@ -55,14 +51,14 @@ DevicePage {
 		ListQuantity {
 			//% "Battery capacity"
 			text: qsTrId("ev_battery_capacity")
-			dataItem.uid: root.bindPrefix + "/BatteryCapacity"
+			dataItem.uid: root.serviceUid + "/BatteryCapacity"
 			unit: VenusOS.Units_Energy_KiloWattHour
 		}
 
 		ListQuantity {
 			//% "Power"
 			text: qsTrId("ev_power")
-			dataItem.uid: root.bindPrefix + "/Ac/Power"
+			dataItem.uid: root.serviceUid + "/Ac/Power"
 			unit: VenusOS.Units_Watt
 			preferredVisible: dataItem.valid && chargingState.valid &&
 							 (chargingState.value === 3 || chargingState.value === 256 || chargingState.value === 259)
@@ -100,21 +96,21 @@ DevicePage {
 					return qsTrId("ev_charging_state_unknown")
 				}
 			}
-			dataItem.uid: root.bindPrefix + "/ChargingState"
+			dataItem.uid: root.serviceUid + "/ChargingState"
 		}
 
 		ListText {
 			//% "At site"
 			text: qsTrId("ev_at_site")
 			secondaryText: dataItem.valid ? (dataItem.value === 1 ? CommonWords.yes : CommonWords.no) : "--"
-			dataItem.uid: root.bindPrefix + "/AtSite"
+			dataItem.uid: root.serviceUid + "/AtSite"
 		}
 
 		ListText {
 			//% "Last contact"
 			text: qsTrId("ev_last_contact")
 			secondaryText: dataItem.valid ? Utils.formatTimestamp(new Date(dataItem.value * 1000), ClockTime.dateTime) : ""
-			dataItem.uid: root.bindPrefix + "/LastUpdated/EvContact"
+			dataItem.uid: root.serviceUid + "/LastUpdated/EvContact"
 			preferredVisible: dataItem.valid
 		}
 
@@ -122,13 +118,13 @@ DevicePage {
 			//% "VIN"
 			text: qsTrId("ev_vin")
 			secondaryText: dataItem.valid ? dataItem.value : "--"
-			dataItem.uid: root.bindPrefix + "/VIN"
+			dataItem.uid: root.serviceUid + "/VIN"
 		}
 
 		ListQuantity {
 			//% "Odometer"
 			text: qsTrId("ev_odometer")
-			dataItem.uid: root.bindPrefix + "/Odometer"
+			dataItem.uid: root.serviceUid + "/Odometer"
 			dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Kilometre)
 			dataItem.displayUnit: Units.unitToVeUnit(root._systemDistanceUnit())
 			unit: root._systemDistanceUnit()
@@ -150,7 +146,7 @@ DevicePage {
 
 		ListTemperature {
 			text: CommonWords.battery_temperature
-			dataItem.uid: root.bindPrefix + "/BatteryTemperature"
+			dataItem.uid: root.serviceUid + "/BatteryTemperature"
 			preferredVisible: dataItem.valid
 		}
 
@@ -158,23 +154,23 @@ DevicePage {
 			//% "Number of phases"
 			text: qsTrId("ev_nr_phases")
 			secondaryText: dataItem.valid ? dataItem.value.toString() : "--"
-			dataItem.uid: root.bindPrefix + "/Ac/NrOfPhases"
+			dataItem.uid: root.serviceUid + "/Ac/NrOfPhases"
 			preferredVisible: dataItem.valid
 		}
 	}
 
 	VeQuickItem {
 		id: chargingState
-		uid: root.bindPrefix + "/ChargingState"
+		uid: root.serviceUid + "/ChargingState"
 	}
 
 	VeQuickItem {
 		id: latitude
-		uid: root.bindPrefix + "/Position/Latitude"
+		uid: root.serviceUid + "/Position/Latitude"
 	}
 
 	VeQuickItem {
 		id: longitude
-		uid: root.bindPrefix + "/Position/Longitude"
+		uid: root.serviceUid + "/Position/Longitude"
 	}
 }

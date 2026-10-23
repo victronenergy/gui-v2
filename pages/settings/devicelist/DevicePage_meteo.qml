@@ -12,10 +12,7 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
 	readonly property string settingsPrefix: Global.systemSettings.serviceUid + "/Settings/Service/meteo/" + device.deviceInstance
-
-	serviceUid: bindPrefix
 
 	settingsModel: VisibleItemModel {
 		ListLink {
@@ -32,7 +29,7 @@ DevicePage {
 
 			VeQuickItem {
 				id: errorCode
-				uid: root.bindPrefix + "/ErrorCode"
+				uid: root.serviceUid + "/ErrorCode"
 			}
 		}
 
@@ -40,7 +37,7 @@ DevicePage {
 			property var displayText: Units.getDisplayText(VenusOS.Units_WattsPerSquareMetre, dataItem.value, 1)
 			//% "Irradiance"
 			text: qsTrId("page_meteo_irradiance")
-			dataItem.uid: bindPrefix + "/Irradiance"
+			dataItem.uid: root.serviceUid + "/Irradiance"
 			value: Units.getDisplayText(VenusOS.Units_WattsPerSquareMetre, dataItem.value, 1).number
 			unit: VenusOS.Units_WattsPerSquareMetre
 			decimals: 1
@@ -50,7 +47,7 @@ DevicePage {
 			//% "Cell temperature"
 			text: qsTrId("page_meteo_cell_temperature")
 			preferredVisible: dataItem.valid
-			dataItem.uid: bindPrefix + "/CellTemperature"
+			dataItem.uid: root.serviceUid + "/CellTemperature"
 			decimals: 1
 		}
 
@@ -61,14 +58,14 @@ DevicePage {
 				//% "External temperature"
 				: qsTrId("page_meteo_external_temperature")
 			preferredVisible: dataItem.valid
-			dataItem.uid: bindPrefix + "/ExternalTemperature"
+			dataItem.uid: root.serviceUid + "/ExternalTemperature"
 			decimals: 1
 		}
 
 		ListTemperature {
 			id: sensor2
 
-			dataItem.uid: bindPrefix + "/ExternalTemperature2"
+			dataItem.uid: root.serviceUid + "/ExternalTemperature2"
 			//% "External temperature (2)"
 			text: qsTrId("page_meteo_external_temperature_2")
 			preferredVisible: dataItem.valid
@@ -76,7 +73,7 @@ DevicePage {
 		}
 
 		ListQuantity {
-			dataItem.uid: bindPrefix + "/WindSpeed"
+			dataItem.uid: root.serviceUid + "/WindSpeed"
 			//% "Wind speed"
 			text: qsTrId("page_meteo_wind_speed")
 			preferredVisible: dataItem.valid
@@ -85,7 +82,7 @@ DevicePage {
 		}
 
 		ListQuantity {
-			dataItem.uid: bindPrefix + "/WindDirection"
+			dataItem.uid: root.serviceUid + "/WindDirection"
 			//% "Wind direction"
 			text: qsTrId("page_meteo_wind_direction")
 			preferredVisible: dataItem.valid
@@ -93,7 +90,7 @@ DevicePage {
 		}
 
 		ListQuantity {
-			dataItem.uid: bindPrefix + "/InstallationPower"
+			dataItem.uid: root.serviceUid + "/InstallationPower"
 			//% "Estimated power"
 			text: qsTrId("page_meteo_estimated_power")
 			preferredVisible: dataItem.valid
@@ -102,7 +99,7 @@ DevicePage {
 		}
 
 		ListQuantity {
-			dataItem.uid: bindPrefix + "/TodaysYield"
+			dataItem.uid: root.serviceUid + "/TodaysYield"
 			//% "Today's yield"
 			text: qsTrId("page_meteo_daily_yield")
 			preferredVisible: dataItem.valid
