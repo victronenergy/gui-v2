@@ -29,11 +29,16 @@ QtObject {
 	property bool pagePreloadComplete
 	property bool boatPageActive
 
+	// True if all data is ready such that the UI can be loaded.
+	readonly property bool appDataReady: Services.ready
+			&& !Services.needsReload
+			&& !GuiPluginLoader.busy
+
 	// Informative, derived view of the startup sequence. This describes the boot
 	// (which the scattered flags above drive); it does not drive it itself.
 	// Splash_Phase (owned by SplashSequence) is the sub-state while Splash here.
 	readonly property int startupPhase: !BackendConnection.ready ? VenusOS.Startup_Phase_LoadingBackend
-			: !Services.appDataReady ? VenusOS.Startup_Phase_LoadingData
+			: !appDataReady ? VenusOS.Startup_Phase_LoadingData
 			: !allPagesLoaded ? VenusOS.Startup_Phase_LoadingUi
 			: UiConfig.splashScreenVisible ? VenusOS.Startup_Phase_Splash
 			: VenusOS.Startup_Phase_Running

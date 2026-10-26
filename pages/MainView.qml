@@ -47,7 +47,7 @@ FocusScope {
 	property int _loadedPages: 0
 	readonly property alias _pageStack: pageStack
 
-	readonly property bool _readyToInit: Services.appDataReady && !Global.needPageReload
+	readonly property bool _readyToInit: !Global.needPageReload
 			&& swipeViewLoader.readyToLoad
 	on_ReadyToInitChanged: {
 		if (_readyToInit && swipeViewLoader.active == false) {

@@ -18,7 +18,6 @@ ObjectModel {
 	readonly property int environmentInputCount: Services.environment.model.count
 
 	readonly property bool completed: _completed
-		&& Services.appDataReady
 		&& ((boatPageLoader.active && levelsPageLoader.active) ? pages.length === 6
 		  : boatPageLoader.active ? pages.length === 5
 		  : levelsPageLoader.active ? pages.length === 5
