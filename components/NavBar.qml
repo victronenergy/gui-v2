@@ -18,14 +18,18 @@ FocusScope {
 
 	readonly property int currentIndex: _currentIndex
 	readonly property string currentTitle: pages[currentIndex]?.title ?? ""
+	readonly property string currentPage: _currentPage
 	readonly property real buttonWidth: buttonRow.width / visiblePageCount
 	readonly property int visiblePageCount: Math.min(pages.length,
 			buttonRow.width / Theme.geometry_navigationBar_button_minimumWidth)
 
 	// Internal reference to the currently selected index.
 	property int _currentIndex
+	property string _currentPage: getCurrentPage()
 
 	signal buttonClicked(pageIndex : int)
+
+	onCurrentIndexChanged: _currentPage = getCurrentPage()
 
 	function setCurrentPage(pageName) {
 		for (let i = 0; i < pages.length; ++i) {

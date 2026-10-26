@@ -271,6 +271,14 @@ Window {
 		}
 	}
 
+	LocalMqttClient {
+		active: guiLoader.active
+		currentAppPage: Global.mainView?.navBar?.currentPage ?? ""
+		onRequestGoToPage: (pageName) => {
+			Global.mainView.navBar.setCurrentPage(pageName + ".qml")
+		}
+	}
+
 	// Detect when localsettings or venus-platform crashes
 	// and trigger a rebuildUi() in those cases, as we
 	// need to tear down all of our data models and rebuild them.

@@ -724,6 +724,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/keynavigationhighlight.h
     src/keynavigationhighlighthelper.h
     src/keynavigationhighlighthelper.cpp
+    src/localmqtt.h
+    src/localmqtt.cpp
     src/mockanimators.h
     src/mockmanager.h
     src/mockmanager.cpp
