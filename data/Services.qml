@@ -12,10 +12,11 @@ Item {
 	id: root
 
 	// These object properties provide an interface to the VenusOS backend service data. Note these
-	// objects are loaded asynchronously, and are not valid until Services.appDataReady = true. Any
+	// objects are loaded asynchronously, and are not valid until Services.ready = true. Any
 	// code loaded by ApplicationContent and its children do not need to worry about this, because
-	// Main.qml loads ApplicationContent conditionally on Services.appDataReady, but code loaded
-	// elsewhere (e.g. Main.qml, Global.qml) must check appDataReady before accessing these objects.
+	// Main.qml does not load ApplicationContent until Global.appDataReady=true, which includes
+	// Services.ready=true. However, code loaded elsewhere (e.g. Main.qml, Global.qml) must check
+	// ready before accessing these objects.
 	readonly property AcInputs acInputs: acInputsLoader.item
 	readonly property DcInputs dcInputs: dcInputsLoader.item
 	readonly property EnvironmentInputs environment: environmentLoader.item
@@ -30,11 +31,15 @@ Item {
 	readonly property Tanks tanks: tanksLoader.item
 	readonly property VenusPlatform platform: platformLoader.item
 
-	readonly property bool appDataReady: BackendConnection.ready
+	// True when all service data is available.
+	readonly property bool ready: BackendConnection.ready
 			&& _servicesLoaded
 			&& (BackendConnection.type !== BackendConnection.MockSource || mockSetupLoader.mockLoaded)
-			&& !GuiPluginLoader.busy
 			&& !!RuntimeDeviceModel // ensure singleton is created
+
+	// True if the UI needs to be reloaded due to a system service coming back online.
+	readonly property bool needsReload: systemServiceConnections.needsReload
+			&& systemServiceConnections.servicesOnline
 
 	readonly property bool _servicesLoaded: settingsLoader.status === Loader.Ready
 			&& systemLoader.status === Loader.Ready
@@ -56,8 +61,8 @@ Item {
 		}
 	}
 
-	onAppDataReadyChanged: {
-		if (appDataReady) {
+	onReadyChanged: {
+		if (ready) {
 			console.info("Services: app data loading complete")
 		} else {
 			console.warn("Services: app data not ready!")
@@ -179,6 +184,59 @@ Item {
 				mockLoaded = true
 			} else if (status === Loader.Error) {
 				console.warn("Services: Unable to load mock setup")
+			}
+		}
+	}
+
+	// Detect when localsettings or venus-platform crashes and trigger a UI rebuild in those cases.
+	Connections {
+		id: systemServiceConnections
+
+		readonly property bool servicesOnline: SystemServiceListener.settingsOnline
+				&& SystemServiceListener.platformOnline
+		property bool needsReload
+		property var toastId: null
+
+		target: SystemServiceListener
+
+		function onSettingsOnlineChanged() {
+			if (BackendConnection.ready && !SystemServiceListener.settingsOnline) {
+				console.info("Main: settings service is now unavailable!")
+				if (!systemServiceConnections.needsReload) {
+					systemServiceConnections.needsReload = true
+					//% "Warning: detected localsettings service offline; reloading UI when it becomes available again..."
+					systemServiceConnections.toastId = Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("main_system_service_settings_offline_warning"))
+				}
+			}
+
+			if (SystemServiceListener.settingsOnline) {
+				console.info("Main: settings service is available again")
+				if (SystemServiceListener.platformOnline && systemServiceConnections.needsReload) {
+					console.info("Main: all required services are available, reloading UI")
+					systemServiceConnections.needsReload = false
+					ToastModel.requestDismiss(systemServiceConnections.toastId)
+					systemServiceConnections.toastId = null
+				}
+			}
+		}
+		function onPlatformOnlineChanged() {
+			if (BackendConnection.ready && !SystemServiceListener.platformOnline) {
+				console.info("Main: platform service is now unavailable!")
+				if (!systemServiceConnections.needsReload) {
+					systemServiceConnections.needsReload = true
+					//% "Warning: detected venus-platform service offline; reloading UI when it becomes available again..."
+					systemServiceConnections.toastId = Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("main_system_service_platform_offline_warning"))
+				}
+			}
+
+			if (SystemServiceListener.platformOnline) {
+				console.info("Main: platform service is available again")
+				if (SystemServiceListener.settingsOnline && systemServiceConnections.needsReload) {
+					console.info("Main: all required services are available, reloading UI")
+					systemServiceConnections.needsReload = false
+					ToastModel.requestDismiss(systemServiceConnections.toastId)
+					systemServiceConnections.toastId = null
+				}
 			}
 		}
 	}

@@ -38,15 +38,6 @@ Window {
 		UiConfig.splashScreenVisible = false
 	}
 
-	function rebuildUi() {
-		console.info("Main: UI rebuild required")
-		guiLoader.active = false
-		Global.reset()
-		gc()
-		guiLoader.active = true
-		console.info("Main: UI rebuild started successfully")
-	}
-
 	function ensureApplicationActive() {
 		Global.applicationActive = true
 		appIdleTimer.restart()
@@ -89,7 +80,7 @@ Window {
 
 	Component.onCompleted: Global.main = root
 
-	readonly property bool appDataReady: Services.appDataReady
+	readonly property bool appDataReady: Global.appDataReady
 	onAppDataReadyChanged: {
 		if (appDataReady) {
 			console.info("Main: app data ready has changed to true, load UI now")
@@ -244,70 +235,6 @@ Window {
 		onTriggered: {
 			Global.applicationActive = false
 			root.keyNavigationTimeout()
-		}
-	}
-
-	// Detect when localsettings or venus-platform crashes
-	// and trigger a rebuildUi() in those cases, as we
-	// need to tear down all of our data models and rebuild them.
-	Connections {
-		id: systemServiceConnections
-		target: SystemServiceListener
-		property bool needReload: false
-		property var toastId: null
-		function onSettingsOnlineChanged() {
-			if (BackendConnection.ready && !SystemServiceListener.settingsOnline) {
-				console.info("Main: settings service is now unavailable!")
-				if (!systemServiceConnections.needReload) {
-					systemServiceConnections.needReload = true
-					//% "Warning: detected localsettings service offline; reloading UI when it becomes available again..."
-					systemServiceConnections.toastId = Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("main_system_service_settings_offline_warning"))
-				}
-			}
-
-			if (SystemServiceListener.settingsOnline) {
-				console.info("Main: settings service is available again")
-				if (SystemServiceListener.platformOnline && systemServiceConnections.needReload) {
-					console.info("Main: all required services are available, reloading UI")
-					systemServiceConnections.needReload = false
-					ToastModel.requestDismiss(systemServiceConnections.toastId)
-					systemServiceConnections.toastId = null
-					root.rebuildUi()
-				}
-			}
-		}
-		function onPlatformOnlineChanged() {
-			if (BackendConnection.ready && !SystemServiceListener.platformOnline) {
-				console.info("Main: platform service is now unavailable!")
-				if (!systemServiceConnections.needReload) {
-					systemServiceConnections.needReload = true
-					//% "Warning: detected venus-platform service offline; reloading UI when it becomes available again..."
-					systemServiceConnections.toastId = Global.showToastNotification(VenusOS.Notification_Warning, qsTrId("main_system_service_platform_offline_warning"))
-				}
-			}
-
-			if (SystemServiceListener.platformOnline) {
-				console.info("Main: platform service is available again")
-				if (SystemServiceListener.settingsOnline && systemServiceConnections.needReload) {
-					console.info("Main: all required services are available, reloading UI")
-					systemServiceConnections.needReload = false
-					ToastModel.requestDismiss(systemServiceConnections.toastId)
-					systemServiceConnections.toastId = null
-					root.rebuildUi()
-				}
-			}
-		}
-	}
-
-	Connections {
-		target: GuiPluginLoader
-		// When plugins reload, rebuild the entire UI so that plugin
-		// components will be freshly compiled from the new .rcc data.
-		function onBusyChanged() {
-			if (GuiPluginLoader.busy) {
-				console.info("Main: gui plugins unloading, reloading UI")
-				root.rebuildUi()
-			}
 		}
 	}
 
