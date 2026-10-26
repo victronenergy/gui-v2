@@ -9,7 +9,7 @@
       <translation>Zakázáno</translation>
     </message>
     <message id="common_words_inverter_overload">
-      <location filename="../../components/CommonWords.qml" line="305"/>
+      <location filename="../../components/CommonWords.qml" line="308"/>
       <source>Inverter overload</source>
       <translation>Přetížení měniče</translation>
     </message>
@@ -24,12 +24,12 @@
       <translation>Vypnuto</translation>
     </message>
     <message id="common_words_auto">
-      <location filename="../../components/CommonWords.qml" line="87"/>
+      <location filename="../../components/CommonWords.qml" line="90"/>
       <source>Auto</source>
       <translation>Auto</translation>
     </message>
     <message id="common_words_high_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="263"/>
+      <location filename="../../components/CommonWords.qml" line="266"/>
       <source>High battery voltage</source>
       <translation>Vysoké napětí baterie</translation>
     </message>
@@ -39,7 +39,7 @@
       <translation>Měnič/nabíječ</translation>
     </message>
     <message id="common_words_low_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="326"/>
+      <location filename="../../components/CommonWords.qml" line="333"/>
       <source>Low battery voltage</source>
       <translation>Nízké napětí baterie</translation>
     </message>
@@ -54,7 +54,7 @@
       <translation>Žádný</translation>
     </message>
     <message id="common_words_position_ac">
-      <location filename="../../components/CommonWords.qml" line="460"/>
+      <location filename="../../components/CommonWords.qml" line="467"/>
       <source>Position</source>
       <extracomment>AC input or output position</extracomment>
       <translation>Pozice</translation>
@@ -65,7 +65,7 @@
       <translation>Rychlost</translation>
     </message>
     <message id="common_words_state">
-      <location filename="../../components/CommonWords.qml" line="554"/>
+      <location filename="../../components/CommonWords.qml" line="561"/>
       <source>State</source>
       <translation>Stav</translation>
     </message>
@@ -76,7 +76,7 @@
       <translation>Instaluji %1...</translation>
     </message>
     <message id="splash_view_unknown_error">
-      <location filename="../../components/SplashView.qml" line="327"/>
+      <location filename="../../components/SplashView.qml" line="423"/>
       <source>Unknown error</source>
       <translation>Neznámá chyba</translation>
     </message>
@@ -86,12 +86,12 @@
       <translation>Minimální SOC</translation>
     </message>
     <message id="common_words_enter_password">
-      <location filename="../../components/CommonWords.qml" line="215"/>
+      <location filename="../../components/CommonWords.qml" line="218"/>
       <source>Enter password</source>
       <translation>Zadejte heslo</translation>
     </message>
     <message id="common_words_grid">
-      <location filename="../../components/CommonWords.qml" line="254"/>
+      <location filename="../../components/CommonWords.qml" line="257"/>
       <source>Grid</source>
       <translation>Síť</translation>
     </message>
@@ -131,7 +131,7 @@
       <translation>DVCC</translation>
     </message>
     <message id="common_words_ess">
-      <location filename="../../components/CommonWords.qml" line="230"/>
+      <location filename="../../components/CommonWords.qml" line="233"/>
       <source>ESS</source>
       <translation>ESS</translation>
     </message>
@@ -172,27 +172,27 @@
       <translation>Automatické spuštění</translation>
     </message>
     <message id="settings_access_level">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="71"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="73"/>
       <source>Access level</source>
       <translation>Úroveň přístupu</translation>
     </message>
     <message id="settings_access_user">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="76"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
       <source>User</source>
       <translation>Uživatel</translation>
     </message>
     <message id="settings_access_user_installer">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="78"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="80"/>
       <source>User &amp; Installer</source>
       <translation>Uživatel a technik</translation>
     </message>
     <message id="settings_access_superuser">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="80"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="82"/>
       <source>Superuser</source>
       <translation>Superuživatel</translation>
     </message>
     <message id="settings_access_service">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="82"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="84"/>
       <source>Service</source>
       <translation>Servis</translation>
     </message>
@@ -282,7 +282,7 @@
       <translation>Verze hardwaru</translation>
     </message>
     <message id="settings_shelly_device_name">
-      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="66"/>
+      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="68"/>
       <source>Device name</source>
       <translation>Název zařízení</translation>
     </message>
@@ -317,7 +317,7 @@
       <translation>Nyní v chodu</translation>
     </message>
     <message id="common_words_manual_start">
-      <location filename="../../components/CommonWords.qml" line="351"/>
+      <location filename="../../components/CommonWords.qml" line="358"/>
       <source>Manual start</source>
       <translation>Manuální spuštění</translation>
     </message>
@@ -332,12 +332,12 @@
       <translation>Doba chodu za den</translation>
     </message>
     <message id="common_words_value_must_be_greater_than_stop_value">
-      <location filename="../../components/CommonWords.qml" line="623"/>
+      <location filename="../../components/CommonWords.qml" line="633"/>
       <source>Value must be greater than stop value</source>
       <translation>Hodnota musí být vyšší než hodnota zastavení</translation>
     </message>
     <message id="common_words_value_must_be_lower_than_start_value">
-      <location filename="../../components/CommonWords.qml" line="626"/>
+      <location filename="../../components/CommonWords.qml" line="636"/>
       <source>Value must be lower than start value</source>
       <translation>Hodnota musí být nižší než spouštěcí hodnota</translation>
     </message>
@@ -661,7 +661,7 @@
       <translation>Nahoře, ale bez služeb (250 kbit/s)</translation>
     </message>
     <message id="common_words_devices">
-      <location filename="../../components/CommonWords.qml" line="187"/>
+      <location filename="../../components/CommonWords.qml" line="190"/>
       <source>Devices</source>
       <translation>Zařízení</translation>
     </message>
@@ -696,7 +696,7 @@
       <translation>OK: Žádné jiné zařízení není spojeno s tímto unikátním číslem.</translation>
     </message>
     <message id="common_words_network_status">
-      <location filename="../../components/CommonWords.qml" line="395"/>
+      <location filename="../../components/CommonWords.qml" line="402"/>
       <source>Network status</source>
       <translation>Paralelní status</translation>
     </message>
@@ -947,17 +947,17 @@
       <translation>Zdroj aktualizace</translation>
     </message>
     <message id="common_words_image_type">
-      <location filename="../../components/CommonWords.qml" line="288"/>
+      <location filename="../../components/CommonWords.qml" line="291"/>
       <source>Image type</source>
       <translation>Typ firmware</translation>
     </message>
     <message id="iochannel_invert_normal">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="57"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="58"/>
       <source>Normal</source>
       <translation>Normální</translation>
     </message>
     <message id="common_words_firmware_type_large">
-      <location filename="../../components/CommonWords.qml" line="238"/>
+      <location filename="../../components/CommonWords.qml" line="241"/>
       <source>Large</source>
       <extracomment>The firmware type for large images</extracomment>
       <translation>Velký</translation>
@@ -1015,7 +1015,7 @@
       <translation type="unfinished">Přidat IP adresu ručně</translation>
     </message>
     <message id="page_settings_shelly_add_ip_address_manually">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="92"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="46"/>
       <source>Add IP address manually</source>
       <translation>Přidat IP adresu ručně</translation>
     </message>
@@ -1111,17 +1111,17 @@
       <translation>AC-In2 --</translation>
     </message>
     <message id="settings_remote_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="299"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="315"/>
       <source>Remote support</source>
       <translation>Vzdálená podpora</translation>
     </message>
     <message id="settings_remote_support_tunnel">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="305"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="321"/>
       <source>Remote support tunnel</source>
       <translation>Tunel vzdálené podpory</translation>
     </message>
     <message id="settings_remote_ip_and_support">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="314"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="330"/>
       <source>Remote support IP and port</source>
       <translation>IP a port vzdálené podpory</translation>
     </message>
@@ -1141,24 +1141,19 @@
       <translation>Demo režim</translation>
     </message>
     <message id="page_settings_demo_ess">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="306"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="300"/>
       <source>ESS demo</source>
       <translation>Demo ESS</translation>
     </message>
     <message id="page_settings_demo_1">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="308"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="302"/>
       <source>Boat/Motorhome demo 1</source>
       <translation>Demo pro loď / obytné auto 1</translation>
     </message>
     <message id="page_settings_demo_2">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="310"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="304"/>
       <source>Boat/Motorhome demo 2</source>
       <translation>Demo pro loď / obytné auto 2</translation>
-    </message>
-    <message id="settings_demo_mode_caption">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="314"/>
-      <source>Starting demo mode will change some settings and the user interface will be unresponsive for a moment.</source>
-      <translation>Spuštění demo režimu změní některá nastavení a uživatelské rozhraní nebude v dané chvíli reagovat.</translation>
     </message>
     <message id="page_dc_gensets_settings_conditions">
       <location filename="../../pages/settings/PageDcGensetsSettings.qml" line="43"/>
@@ -1534,8 +1529,8 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Above minimum SOC only</source>
       <translation>Pouze nad minimální SOC</translation>
     </message>
-    <message id="iochannel_showui_always">
-      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="18"/>
+    <message id="common_words_always">
+      <location filename="../../components/CommonWords.qml" line="87"/>
       <source>Always</source>
       <translation>Vždy</translation>
     </message>
@@ -2059,7 +2054,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation type="unfinished">BMS řízení</translation>
     </message>
     <message id="common_words_bms_control">
-      <location filename="../../components/CommonWords.qml" line="108"/>
+      <location filename="../../components/CommonWords.qml" line="111"/>
       <source>BMS control</source>
       <translation>BMS řízení</translation>
     </message>
@@ -2215,6 +2210,12 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Are you sure that you want to disable the access point?</source>
       <translation>Opravdu chcete deaktivovat přístupový bod?</translation>
     </message>
+    <message id="settings_tz_local">
+      <location filename="../../pages/settings/PageTzInfo.qml" line="88"/>
+      <source>Local</source>
+      <extracomment>Local date and time settings</extracomment>
+      <translation type="unfinished">Místní</translation>
+    </message>
     <message id="settings_tz_time_zone">
       <location filename="../../pages/settings/PageTzInfo.qml" line="112"/>
       <source>Time zone</source>
@@ -2297,25 +2298,25 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Alarm vysokého napětí baterie</translation>
     </message>
     <message id="common_words_last_error">
-      <location filename="../../components/CommonWords.qml" line="715"/>
+      <location filename="../../components/CommonWords.qml" line="731"/>
       <source>Last error</source>
       <extracomment>Details of last error</extracomment>
       <translation>Poslední chyba</translation>
     </message>
     <message id="common_words_2nd_last_error">
-      <location filename="../../components/CommonWords.qml" line="718"/>
+      <location filename="../../components/CommonWords.qml" line="734"/>
       <source>2nd last error</source>
       <extracomment>Details of 2nd last error</extracomment>
       <translation>Předposlední chyba</translation>
     </message>
     <message id="common_words_3rd_last_error">
-      <location filename="../../components/CommonWords.qml" line="721"/>
+      <location filename="../../components/CommonWords.qml" line="737"/>
       <source>3rd last error</source>
       <extracomment>Details of 3rd last error</extracomment>
       <translation>3. poslední chyba</translation>
     </message>
     <message id="common_words_4th_last_error">
-      <location filename="../../components/CommonWords.qml" line="724"/>
+      <location filename="../../components/CommonWords.qml" line="740"/>
       <source>4th last error</source>
       <extracomment>Details of 4th last error</extracomment>
       <translation>4. poslední chyba</translation>
@@ -2413,7 +2414,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Nabíjecí napětí</translation>
     </message>
     <message id="common_words_reset">
-      <location filename="../../components/CommonWords.qml" line="486"/>
+      <location filename="../../components/CommonWords.qml" line="493"/>
       <source>Reset</source>
       <translation>Resetovat</translation>
     </message>
@@ -2491,7 +2492,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Relace</translation>
     </message>
     <message id="common_words_locale_time">
-      <location filename="../../components/CommonWords.qml" line="316"/>
+      <location filename="../../components/CommonWords.qml" line="319"/>
       <source>Time</source>
       <extracomment>The time setting for the locale</extracomment>
       <translation>Čas</translation>
@@ -2584,10 +2585,9 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <source>Enable frame-rate visualizer</source>
       <translation>Povolení vizualizéru snímkové frekvence</translation>
     </message>
-    <message id="devicelist_unsupported">
-      <location filename="../../pages/settings/devicelist/delegates/DeviceListDelegate_unsupported.qml" line="14"/>
+    <message id="common_words_unsupported">
+      <location filename="../../components/CommonWords.qml" line="627"/>
       <source>Unsupported</source>
-      <extracomment>Device is not supported</extracomment>
       <translation>Není podporováno</translation>
     </message>
     <message id="settings_tank_pump">
@@ -2632,7 +2632,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation type="unfinished">Spálená pojistka</translation>
     </message>
     <message id="common_words_manual_control">
-      <location filename="../../components/CommonWords.qml" line="348"/>
+      <location filename="../../components/CommonWords.qml" line="355"/>
       <source>Manual control</source>
       <translation>Ruční ovládání</translation>
     </message>
@@ -2668,7 +2668,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Ohřev</translation>
     </message>
     <message id="common_words_switch">
-      <location filename="../../components/CommonWords.qml" line="581"/>
+      <location filename="../../components/CommonWords.qml" line="588"/>
       <source>Switch</source>
       <extracomment>Change the mode value</extracomment>
       <translation>Spínač</translation>
@@ -2708,7 +2708,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Stav baterie (SOH)</translation>
     </message>
     <message id="common_words_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="102"/>
+      <location filename="../../components/CommonWords.qml" line="105"/>
       <source>Battery temperature</source>
       <translation>Teplota baterie</translation>
     </message>
@@ -3501,7 +3501,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>AC</translation>
     </message>
     <message id="common_words_engine">
-      <location filename="../../components/CommonWords.qml" line="208"/>
+      <location filename="../../components/CommonWords.qml" line="211"/>
       <source>Engine</source>
       <translation>Motor</translation>
     </message>
@@ -3604,12 +3604,12 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Smappee sběrnice zařízení</translation>
     </message>
     <message id="common_words_setting_disabled_when_dmc_connected">
-      <location filename="../../components/CommonWords.qml" line="741"/>
+      <location filename="../../components/CommonWords.qml" line="757"/>
       <source>This setting is disabled when a Digital Multi Control is connected.</source>
       <translation>Toto nastavení je vypnuto, pokud je připojen digitální multifunkční ovladač.</translation>
     </message>
     <message id="common_words_setting_disabled_when_bms_connected">
-      <location filename="../../components/CommonWords.qml" line="730"/>
+      <location filename="../../components/CommonWords.qml" line="746"/>
       <source>This setting is disabled when a VE.Bus BMS is connected.</source>
       <translation>Toto nastavení je zakázáno, pokud je připojena sběrnicová jednotka BMS VE.Bus.</translation>
     </message>
@@ -3620,12 +3620,12 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>AC v %1</translation>
     </message>
     <message id="common_words_dc">
-      <location filename="../../components/CommonWords.qml" line="173"/>
+      <location filename="../../components/CommonWords.qml" line="176"/>
       <source>DC</source>
       <translation>DC</translation>
     </message>
     <message id="iochannel_invert_inverted">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="59"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="60"/>
       <source>Inverted</source>
       <translation>Invertovaný</translation>
     </message>
@@ -3740,7 +3740,7 @@ Používejte, pokud to není zakázáno poskytovatelem elektrické energie.</tra
       <translation>Napětí snímače</translation>
     </message>
     <message id="common_words_product_page">
-      <location filename="../../components/CommonWords.qml" line="466"/>
+      <location filename="../../components/CommonWords.qml" line="473"/>
       <source>Product page</source>
       <translation>Stránka produktu</translation>
     </message>
@@ -3954,7 +3954,7 @@ Chcete pokračovat?</translation>
       <translation>Hotovo</translation>
     </message>
     <message id="common_words_pending">
-      <location filename="../../components/CommonWords.qml" line="446"/>
+      <location filename="../../components/CommonWords.qml" line="453"/>
       <source>Pending</source>
       <translation>Čekající</translation>
     </message>
@@ -4055,7 +4055,7 @@ Chcete pokračovat?</translation>
       <translation>Neúspěšný krok: %1</translation>
     </message>
     <message id="common_words_vebus_device_phase_x_device_x_index_x">
-      <location filename="../../components/CommonWords.qml" line="636"/>
+      <location filename="../../components/CommonWords.qml" line="646"/>
       <source>Phase L%1, device %2 (%3)</source>
       <extracomment>eg. 'Phase L1, device 3 (6)', where '(6)' is the index into the list of reported values</extracomment>
       <translation>Fáze L%1, zařízení %2 (%3)</translation>
@@ -4285,7 +4285,7 @@ Chcete pokračovat?</translation>
       <translation>Povolit vybíjení</translation>
     </message>
     <message id="common_words_automatic_scanning">
-      <location filename="../../components/CommonWords.qml" line="90"/>
+      <location filename="../../components/CommonWords.qml" line="93"/>
       <source>Automatic scanning</source>
       <translation>Automatické skenování</translation>
     </message>
@@ -4295,17 +4295,17 @@ Chcete pokračovat?</translation>
       <translation>Baterie</translation>
     </message>
     <message id="common_words_battery_current">
-      <location filename="../../components/CommonWords.qml" line="99"/>
+      <location filename="../../components/CommonWords.qml" line="102"/>
       <source>Battery current</source>
       <translation>Proud baterie</translation>
     </message>
     <message id="common_words_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="105"/>
+      <location filename="../../components/CommonWords.qml" line="108"/>
       <source>Battery voltage</source>
       <translation>Napětí baterie</translation>
     </message>
     <message id="common_words_charge_current">
-      <location filename="../../components/CommonWords.qml" line="128"/>
+      <location filename="../../components/CommonWords.qml" line="131"/>
       <source>Charge current</source>
       <translation>Nabíjecí proud</translation>
     </message>
@@ -4315,7 +4315,7 @@ Chcete pokračovat?</translation>
       <translation>Nabíjení</translation>
     </message>
     <message id="common_words_clear_error_action">
-      <location filename="../../components/CommonWords.qml" line="144"/>
+      <location filename="../../components/CommonWords.qml" line="147"/>
       <source>Clear error</source>
       <extracomment>Action to clear an error state</extracomment>
       <translation>Vymazat chybu</translation>
@@ -4331,29 +4331,29 @@ Chcete pokračovat?</translation>
       <translation>Připojeno</translation>
     </message>
     <message id="common_words_current_amps">
-      <location filename="../../components/CommonWords.qml" line="161"/>
+      <location filename="../../components/CommonWords.qml" line="164"/>
       <source>Current</source>
       <extracomment>Electric current, as measured in Amps</extracomment>
       <translation>Proud</translation>
     </message>
     <message id="common_words_current_transformers">
-      <location filename="../../components/CommonWords.qml" line="164"/>
+      <location filename="../../components/CommonWords.qml" line="167"/>
       <source>Current transformers</source>
       <translation>Proudové transformátory</translation>
     </message>
     <message id="common_words_custom_name">
-      <location filename="../../components/CommonWords.qml" line="167"/>
+      <location filename="../../components/CommonWords.qml" line="170"/>
       <source>Custom name</source>
       <translation>Vlastní název</translation>
     </message>
     <message id="common_words_debug">
-      <location filename="../../components/CommonWords.qml" line="180"/>
+      <location filename="../../components/CommonWords.qml" line="183"/>
       <source>Debug</source>
       <extracomment>Title for a menu item which displays debugging information</extracomment>
       <translation>Odladit</translation>
     </message>
     <message id="common_words_device">
-      <location filename="../../components/CommonWords.qml" line="184"/>
+      <location filename="../../components/CommonWords.qml" line="187"/>
       <source>Device</source>
       <extracomment>Title for device information</extracomment>
       <translation>Zařízení</translation>
@@ -4374,17 +4374,17 @@ Chcete pokračovat?</translation>
       <translation>Odpojeno</translation>
     </message>
     <message id="common_words_enable">
-      <location filename="../../components/CommonWords.qml" line="202"/>
+      <location filename="../../components/CommonWords.qml" line="205"/>
       <source>Enable</source>
       <translation>Povolit</translation>
     </message>
     <message id="common_words_enabled">
-      <location filename="../../components/CommonWords.qml" line="205"/>
+      <location filename="../../components/CommonWords.qml" line="208"/>
       <source>Enabled</source>
       <translation>Povoleno</translation>
     </message>
     <message id="common_words_energy">
-      <location filename="../../components/CommonWords.qml" line="212"/>
+      <location filename="../../components/CommonWords.qml" line="215"/>
       <source>Energy</source>
       <extracomment>Amount of charged energy</extracomment>
       <translation>Energie</translation>
@@ -4396,17 +4396,17 @@ Chcete pokračovat?</translation>
       <translation>Chyba</translation>
     </message>
     <message id="common_words_error_colon">
-      <location filename="../../components/CommonWords.qml" line="221"/>
+      <location filename="../../components/CommonWords.qml" line="224"/>
       <source>Error:</source>
       <translation>Chyba:</translation>
     </message>
     <message id="common_words_error_code">
-      <location filename="../../components/CommonWords.qml" line="224"/>
+      <location filename="../../components/CommonWords.qml" line="227"/>
       <source>Error code</source>
       <translation>Kód chyby</translation>
     </message>
     <message id="common_words_firmware_version">
-      <location filename="../../components/CommonWords.qml" line="241"/>
+      <location filename="../../components/CommonWords.qml" line="244"/>
       <source>Firmware version</source>
       <translation>Verze firmwaru</translation>
     </message>
@@ -4416,38 +4416,38 @@ Chcete pokračovat?</translation>
       <translation>Generátor</translation>
     </message>
     <message id="common_words_high_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="260"/>
+      <location filename="../../components/CommonWords.qml" line="263"/>
       <source>High battery temperature</source>
       <translation>Vysoká teplota baterie</translation>
     </message>
     <message id="common_words_high_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="267"/>
+      <location filename="../../components/CommonWords.qml" line="270"/>
       <source>High level alarm</source>
       <extracomment>An alarm that triggers when the level is too high</extracomment>
       <translation>Alarm vysoké úrovně</translation>
     </message>
     <message id="common_words_high_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="270"/>
+      <location filename="../../components/CommonWords.qml" line="273"/>
       <source>High starter battery voltage</source>
       <translation>Vysoké napětí startovací baterie</translation>
     </message>
     <message id="common_words_high_temperature">
-      <location filename="../../components/CommonWords.qml" line="273"/>
+      <location filename="../../components/CommonWords.qml" line="276"/>
       <source>High temperature</source>
       <translation>Vysoká teplota</translation>
     </message>
     <message id="common_words_high_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="276"/>
+      <location filename="../../components/CommonWords.qml" line="279"/>
       <source>High voltage alarms</source>
       <translation>Alarmy vysokého napětí</translation>
     </message>
     <message id="common_words_history">
-      <location filename="../../components/CommonWords.qml" line="279"/>
+      <location filename="../../components/CommonWords.qml" line="282"/>
       <source>History</source>
       <translation>Historie</translation>
     </message>
     <message id="common_words_x_hours">
-      <location filename="../../components/CommonWords.qml" line="282"/>
+      <location filename="../../components/CommonWords.qml" line="285"/>
       <source>%1 Hour(s)</source>
       <translation>%1 Hodina(y)</translation>
     </message>
@@ -4463,73 +4463,73 @@ Chcete pokračovat?</translation>
       <translation>Neaktivní</translation>
     </message>
     <message id="common_words_ip_address">
-      <location filename="../../components/CommonWords.qml" line="308"/>
+      <location filename="../../components/CommonWords.qml" line="311"/>
       <source>IP address</source>
       <translation>IP adresa</translation>
     </message>
     <message id="common_words_low_battery_temperature">
-      <location filename="../../components/CommonWords.qml" line="323"/>
+      <location filename="../../components/CommonWords.qml" line="330"/>
       <source>Low battery temperature</source>
       <translation>Nízká teplota baterie</translation>
     </message>
     <message id="common_words_low_level_alarm">
-      <location filename="../../components/CommonWords.qml" line="330"/>
+      <location filename="../../components/CommonWords.qml" line="337"/>
       <source>Low level alarm</source>
       <extracomment>An alarm that triggers when the level is too low</extracomment>
       <translation>Alarm nízké úrovně</translation>
     </message>
     <message id="common_words_low_starter_battery_voltage">
-      <location filename="../../components/CommonWords.qml" line="333"/>
+      <location filename="../../components/CommonWords.qml" line="340"/>
       <source>Low starter battery voltage</source>
       <translation>Nízké napětí startovací baterie</translation>
     </message>
     <message id="common_words_low_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="336"/>
+      <location filename="../../components/CommonWords.qml" line="343"/>
       <source>Low state-of-charge</source>
       <translation>Nízká úroveň nabití</translation>
     </message>
     <message id="common_words_low_temperature">
-      <location filename="../../components/CommonWords.qml" line="339"/>
+      <location filename="../../components/CommonWords.qml" line="346"/>
       <source>Low temperature</source>
       <translation>Nízká teplota</translation>
     </message>
     <message id="common_words_low_voltage_alarms">
-      <location filename="../../components/CommonWords.qml" line="342"/>
+      <location filename="../../components/CommonWords.qml" line="349"/>
       <source>Low voltage alarms</source>
       <translation>Alarmy nízkého napětí</translation>
     </message>
     <message id="common_words_manufacturer">
-      <location filename="../../components/CommonWords.qml" line="357"/>
+      <location filename="../../components/CommonWords.qml" line="364"/>
       <source>Manufacturer</source>
       <translation>Výrobce</translation>
     </message>
     <message id="common_words_maximum_temperature">
-      <location filename="../../components/CommonWords.qml" line="370"/>
+      <location filename="../../components/CommonWords.qml" line="377"/>
       <source>Maximum temperature</source>
       <translation>Maximální teplota</translation>
     </message>
     <message id="common_words_maximum_voltage">
-      <location filename="../../components/CommonWords.qml" line="373"/>
+      <location filename="../../components/CommonWords.qml" line="380"/>
       <source>Maximum voltage</source>
       <translation>Maximální napětí</translation>
     </message>
     <message id="common_words_minimum_temperature">
-      <location filename="../../components/CommonWords.qml" line="383"/>
+      <location filename="../../components/CommonWords.qml" line="390"/>
       <source>Minimum temperature</source>
       <translation>Minimální teplota</translation>
     </message>
     <message id="common_words_minimum_voltage">
-      <location filename="../../components/CommonWords.qml" line="386"/>
+      <location filename="../../components/CommonWords.qml" line="393"/>
       <source>Minimum voltage</source>
       <translation>Minimální napětí</translation>
     </message>
     <message id="common_words_mode">
-      <location filename="../../components/CommonWords.qml" line="389"/>
+      <location filename="../../components/CommonWords.qml" line="396"/>
       <source>Mode</source>
       <translation>Režim</translation>
     </message>
     <message id="common_words_model_name">
-      <location filename="../../components/CommonWords.qml" line="392"/>
+      <location filename="../../components/CommonWords.qml" line="399"/>
       <source>Model name</source>
       <translation>Název modelu</translation>
     </message>
@@ -4549,12 +4549,12 @@ Chcete pokračovat?</translation>
       <translation>Není k dispozici</translation>
     </message>
     <message id="common_words_not_connected">
-      <location filename="../../components/CommonWords.qml" line="414"/>
+      <location filename="../../components/CommonWords.qml" line="421"/>
       <source>Not connected</source>
       <translation>Nepřipojeno</translation>
     </message>
     <message id="common_words_offline">
-      <location filename="../../components/CommonWords.qml" line="424"/>
+      <location filename="../../components/CommonWords.qml" line="431"/>
       <source>Offline</source>
       <translation>Offline</translation>
     </message>
@@ -4569,7 +4569,7 @@ Chcete pokračovat?</translation>
       <translation>Zapnuto</translation>
     </message>
     <message id="common_words_online">
-      <location filename="../../components/CommonWords.qml" line="433"/>
+      <location filename="../../components/CommonWords.qml" line="440"/>
       <source>Online</source>
       <translation>Online</translation>
     </message>
@@ -4579,44 +4579,44 @@ Chcete pokračovat?</translation>
       <translation>Rozpojeno</translation>
     </message>
     <message id="common_words_password">
-      <location filename="../../components/CommonWords.qml" line="449"/>
+      <location filename="../../components/CommonWords.qml" line="456"/>
       <source>Password</source>
       <translation>Heslo</translation>
     </message>
     <message id="common_words_phase">
-      <location filename="../../components/CommonWords.qml" line="456"/>
+      <location filename="../../components/CommonWords.qml" line="463"/>
       <source>Phase</source>
       <translation>Fáze</translation>
     </message>
     <message id="common_words_pv_inverter">
-      <location filename="../../components/CommonWords.qml" line="469"/>
+      <location filename="../../components/CommonWords.qml" line="476"/>
       <source>PV Inverter</source>
       <translation>FV střídač</translation>
     </message>
     <message id="common_words_pv_power">
-      <location filename="../../components/CommonWords.qml" line="473"/>
+      <location filename="../../components/CommonWords.qml" line="480"/>
       <source>PV Power</source>
       <extracomment>Photovoltaic power (for a solar charger or tracker)</extracomment>
       <translation>FV výkon</translation>
     </message>
     <message id="common_words_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="476"/>
+      <location filename="../../components/CommonWords.qml" line="483"/>
       <source>Quiet hours</source>
       <translation>Noční klid</translation>
     </message>
     <message id="common_words_relay">
-      <location filename="../../components/CommonWords.qml" line="483"/>
+      <location filename="../../components/CommonWords.qml" line="490"/>
       <source>Relay</source>
       <extracomment>Relay switch</extracomment>
       <translation>Relé</translation>
     </message>
     <message id="common_words_reboot">
-      <location filename="../../components/CommonWords.qml" line="492"/>
+      <location filename="../../components/CommonWords.qml" line="499"/>
       <source>Reboot</source>
       <translation>Restart</translation>
     </message>
     <message id="common_words_remove">
-      <location filename="../../components/CommonWords.qml" line="495"/>
+      <location filename="../../components/CommonWords.qml" line="502"/>
       <source>Remove</source>
       <translation>Odstranit</translation>
     </message>
@@ -4626,27 +4626,27 @@ Chcete pokračovat?</translation>
       <translation>Chod</translation>
     </message>
     <message id="common_words_scanning">
-      <location filename="../../components/CommonWords.qml" line="506"/>
+      <location filename="../../components/CommonWords.qml" line="513"/>
       <source>Scanning %1%</source>
       <translation>Skenování %1%</translation>
     </message>
     <message id="common_words_serial_number">
-      <location filename="../../components/CommonWords.qml" line="509"/>
+      <location filename="../../components/CommonWords.qml" line="516"/>
       <source>Serial number</source>
       <translation>Sériové číslo</translation>
     </message>
     <message id="nav_settings">
-      <location filename="../../pages/SettingsPage.qml" line="19"/>
+      <location filename="../../pages/SettingsPage.qml" line="20"/>
       <source>Settings</source>
       <translation>Nastavení</translation>
     </message>
     <message id="common_words_setup">
-      <location filename="../../components/CommonWords.qml" line="515"/>
+      <location filename="../../components/CommonWords.qml" line="522"/>
       <source>Setup</source>
       <translation>Nastavení</translation>
     </message>
     <message id="common_words_signal_strength">
-      <location filename="../../components/CommonWords.qml" line="518"/>
+      <location filename="../../components/CommonWords.qml" line="525"/>
       <source>Signal strength</source>
       <translation>Síla signálu</translation>
     </message>
@@ -4657,32 +4657,32 @@ Chcete pokračovat?</translation>
       <translation>Standby</translation>
     </message>
     <message id="common_words_start_after_condition_reached_for">
-      <location filename="../../components/CommonWords.qml" line="542"/>
+      <location filename="../../components/CommonWords.qml" line="549"/>
       <source>Start after the condition is reached for</source>
       <translation>Spuštění po dosažení podmínek pro</translation>
     </message>
     <message id="common_words_start_time">
-      <location filename="../../components/CommonWords.qml" line="545"/>
+      <location filename="../../components/CommonWords.qml" line="552"/>
       <source>Start time</source>
       <translation>Čas spuštění</translation>
     </message>
     <message id="common_words_start_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="548"/>
+      <location filename="../../components/CommonWords.qml" line="555"/>
       <source>Start value during quiet hours</source>
       <translation>Spouštěcí hodnota během doby klidu</translation>
     </message>
     <message id="common_words_start_when_warning_is_active_for">
-      <location filename="../../components/CommonWords.qml" line="551"/>
+      <location filename="../../components/CommonWords.qml" line="558"/>
       <source>Start when warning is active for</source>
       <translation>Spustit, když je upozornění aktivní po dobu</translation>
     </message>
     <message id="common_words_state_of_charge">
-      <location filename="../../components/CommonWords.qml" line="557"/>
+      <location filename="../../components/CommonWords.qml" line="564"/>
       <source>State of charge</source>
       <translation>Stav nabití</translation>
     </message>
     <message id="common_words_status">
-      <location filename="../../components/CommonWords.qml" line="560"/>
+      <location filename="../../components/CommonWords.qml" line="567"/>
       <source>Status</source>
       <translation>Stav</translation>
     </message>
@@ -4693,12 +4693,12 @@ Chcete pokračovat?</translation>
       <translation>Spuštění (%1)</translation>
     </message>
     <message id="common_words_stop_value_during_quiet_hours">
-      <location filename="../../components/CommonWords.qml" line="571"/>
+      <location filename="../../components/CommonWords.qml" line="578"/>
       <source>Stop value during quiet hours</source>
       <translation>Hodnota zastavení v době klidu</translation>
     </message>
     <message id="common_words_stop_after_the_condition_is_reached_for">
-      <location filename="../../components/CommonWords.qml" line="574"/>
+      <location filename="../../components/CommonWords.qml" line="581"/>
       <source>Stop after the condition is reached for</source>
       <translation>Zastavit po dosažení podmínek pro</translation>
     </message>
@@ -4713,22 +4713,22 @@ Chcete pokračovat?</translation>
       <translation>Teplota</translation>
     </message>
     <message id="common_words_temperature_sensor">
-      <location filename="../../components/CommonWords.qml" line="587"/>
+      <location filename="../../components/CommonWords.qml" line="594"/>
       <source>Temperature sensor</source>
       <translation>Teplotní snímač</translation>
     </message>
     <message id="common_words_today">
-      <location filename="../../components/CommonWords.qml" line="593"/>
+      <location filename="../../components/CommonWords.qml" line="600"/>
       <source>Today</source>
       <translation>Dnes</translation>
     </message>
     <message id="common_words_total">
-      <location filename="../../components/CommonWords.qml" line="596"/>
+      <location filename="../../components/CommonWords.qml" line="603"/>
       <source>Total</source>
       <translation>Celkem</translation>
     </message>
     <message id="common_words_tracker">
-      <location filename="../../components/CommonWords.qml" line="603"/>
+      <location filename="../../components/CommonWords.qml" line="610"/>
       <source>Tracker</source>
       <extracomment>Solar tracker</extracomment>
       <translation>Monitorování</translation>
@@ -4739,7 +4739,7 @@ Chcete pokračovat?</translation>
       <translation>Typ</translation>
     </message>
     <message id="common_words_unique_id_number">
-      <location filename="../../components/CommonWords.qml" line="613"/>
+      <location filename="../../components/CommonWords.qml" line="620"/>
       <source>Unique Identity Number</source>
       <translation>Unikátní identifikační číslo</translation>
     </message>
@@ -4749,22 +4749,22 @@ Chcete pokračovat?</translation>
       <translation>Neznámý</translation>
     </message>
     <message id="common_words_vebus_error">
-      <location filename="../../components/CommonWords.qml" line="632"/>
+      <location filename="../../components/CommonWords.qml" line="642"/>
       <source>VE.Bus Error</source>
       <translation>VE.Bus chyba</translation>
     </message>
     <message id="common_words_voltage">
-      <location filename="../../components/CommonWords.qml" line="639"/>
+      <location filename="../../components/CommonWords.qml" line="649"/>
       <source>Voltage</source>
       <translation>Napětí</translation>
     </message>
     <message id="common_words_vrm_instance">
-      <location filename="../../components/CommonWords.qml" line="642"/>
+      <location filename="../../components/CommonWords.qml" line="655"/>
       <source>VRM instance</source>
       <translation>Připojení k VRM</translation>
     </message>
     <message id="common_words_when_warning_is_cleared_stop_after">
-      <location filename="../../components/CommonWords.qml" line="645"/>
+      <location filename="../../components/CommonWords.qml" line="661"/>
       <source>When warning is cleared stop after</source>
       <translation>Po zrušení upozornění zastavit po</translation>
     </message>
@@ -4774,12 +4774,12 @@ Chcete pokračovat?</translation>
       <translation>Ano</translation>
     </message>
     <message id="common_words_yesterday">
-      <location filename="../../components/CommonWords.qml" line="651"/>
+      <location filename="../../components/CommonWords.qml" line="667"/>
       <source>Yesterday</source>
       <translation>Včera</translation>
     </message>
     <message id="common_words_yield_kwh">
-      <location filename="../../components/CommonWords.qml" line="655"/>
+      <location filename="../../components/CommonWords.qml" line="671"/>
       <source>Yield</source>
       <extracomment>Solar charger yield, in kWh (kilowatt hours)</extracomment>
       <translation>Výroba</translation>
@@ -4826,7 +4826,7 @@ Chcete pokračovat?</translation>
       <translation>Nastavit</translation>
     </message>
     <message id="common_words_cancel">
-      <location filename="../../components/CommonWords.qml" line="125"/>
+      <location filename="../../components/CommonWords.qml" line="128"/>
       <source>Cancel</source>
       <translation>Zrušit</translation>
     </message>
@@ -4985,12 +4985,12 @@ Chcete pokračovat?</translation>
       <translation>Neupravená voda</translation>
     </message>
     <message id="listItem_no_access">
-      <location filename="../../components/listitems/core/ListSetting.qml" line="79"/>
+      <location filename="../../components/listitems/core/ListSetting.qml" line="85"/>
       <source>Setting locked for access level</source>
       <translation>Nastavení uzamčené úrovně přístupu</translation>
     </message>
     <message id="settings_access_incorrect_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="89"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="91"/>
       <source>Incorrect password</source>
       <translation>Chybné heslo</translation>
     </message>
@@ -5010,7 +5010,7 @@ Chcete pokračovat?</translation>
       <translation>Úrovně</translation>
     </message>
     <message id="common_words_notifications">
-      <location filename="../../components/CommonWords.qml" line="418"/>
+      <location filename="../../components/CommonWords.qml" line="425"/>
       <source>Notifications</source>
       <extracomment>The 'Notifications' page</extracomment>
       <translation>Oznámení</translation>
@@ -5175,7 +5175,7 @@ Chcete pokračovat?</translation>
       <translation>Stav relé</translation>
     </message>
     <message id="common_words_batteryhistory_reset_history_on_the_monitor_itself">
-      <location filename="../../components/CommonWords.qml" line="489"/>
+      <location filename="../../components/CommonWords.qml" line="496"/>
       <source>Reset history on the monitor itself</source>
       <translation>Obnovení historie na samotném monitoru</translation>
     </message>
@@ -5384,12 +5384,12 @@ Chcete pokračovat?</translation>
       <translation>Maximální výkon</translation>
     </message>
     <message id="splash_view_unable_to_connect">
-      <location filename="../../components/SplashView.qml" line="279"/>
+      <location filename="../../components/SplashView.qml" line="375"/>
       <source>Unable to connect</source>
       <translation>Nelze se připojit</translation>
     </message>
     <message id="splash_view_reconnecting">
-      <location filename="../../components/SplashView.qml" line="281"/>
+      <location filename="../../components/SplashView.qml" line="377"/>
       <source>Disconnected, attempting to reconnect</source>
       <translation>Odpojeno, pokus o opětovné připojení</translation>
     </message>
@@ -5399,67 +5399,67 @@ Chcete pokračovat?</translation>
       <translation>Připojení</translation>
     </message>
     <message id="splash_view_connecting">
-      <location filename="../../components/SplashView.qml" line="284"/>
+      <location filename="../../components/SplashView.qml" line="380"/>
       <source>Connecting</source>
       <translation type="unfinished">Připojení</translation>
     </message>
     <message id="splash_view_connected">
-      <location filename="../../components/SplashView.qml" line="286"/>
+      <location filename="../../components/SplashView.qml" line="382"/>
       <source>Connected, awaiting broker messages</source>
       <translation>Připojeno, čeká na zprávy zprostředkovatele</translation>
     </message>
     <message id="splash_view_initializing">
-      <location filename="../../components/SplashView.qml" line="288"/>
+      <location filename="../../components/SplashView.qml" line="384"/>
       <source>Connected, receiving broker messages</source>
       <translation>Připojeno, příjem zpráv od zprostředkovatele</translation>
     </message>
     <message id="splash_view_ready">
-      <location filename="../../components/SplashView.qml" line="297"/>
+      <location filename="../../components/SplashView.qml" line="393"/>
       <source>Connected, loading user interface</source>
       <translation>Připojené, načítání uživatelského rozhraní</translation>
     </message>
     <message id="splash_view_invalid_protocol_version">
-      <location filename="../../components/SplashView.qml" line="313"/>
+      <location filename="../../components/SplashView.qml" line="409"/>
       <source>Invalid protocol version</source>
       <translation>Nesprávná verze protokolu</translation>
     </message>
     <message id="splash_view_client_id_rejected">
-      <location filename="../../components/SplashView.qml" line="315"/>
+      <location filename="../../components/SplashView.qml" line="411"/>
       <source>Client ID rejected</source>
       <translation>ID klienta odmítnuto</translation>
     </message>
     <message id="splash_view_server_unavailable">
-      <location filename="../../components/SplashView.qml" line="317"/>
+      <location filename="../../components/SplashView.qml" line="413"/>
       <source>Broker service not available</source>
       <translation>Zprostředkovatelská služba není k dispozici</translation>
     </message>
     <message id="splash_view_bad_username_or_password">
-      <location filename="../../components/SplashView.qml" line="319"/>
+      <location filename="../../components/SplashView.qml" line="415"/>
       <source>Bad username or password</source>
       <translation>Špatné uživatelské jméno nebo heslo</translation>
     </message>
     <message id="splash_view_not_authorized">
-      <location filename="../../components/SplashView.qml" line="321"/>
+      <location filename="../../components/SplashView.qml" line="417"/>
       <source>Client not authorized</source>
       <translation>Klient není oprávněn</translation>
     </message>
     <message id="splash_view_transport_invalid">
-      <location filename="../../components/SplashView.qml" line="323"/>
+      <location filename="../../components/SplashView.qml" line="419"/>
       <source>Transport connection error</source>
       <translation>Chyba trasportního spojení</translation>
     </message>
     <message id="splash_view_protocol_violation">
-      <location filename="../../components/SplashView.qml" line="325"/>
+      <location filename="../../components/SplashView.qml" line="421"/>
       <source>Protocol violation error</source>
       <translation>Chyba při porušení protokolu</translation>
     </message>
     <message id="splash_view_mqtt5_error">
-      <location filename="../../components/SplashView.qml" line="329"/>
+      <location filename="../../components/SplashView.qml" line="425"/>
       <source>MQTT protocol level 5 error</source>
       <translation>Chyba protokolu MQTT úrovně 5</translation>
     </message>
     <message id="common_words_silence_alarm">
-      <location filename="../../components/CommonWords.qml" line="521"/>
+      <location filename="../../components/CommonWords.qml" line="528"/>
       <source>Silence alarm</source>
       <translation>Ztišit alarm</translation>
     </message>
@@ -5693,12 +5693,12 @@ Chcete pokračovat?</translation>
       <translation>Zahájení nabíjení</translation>
     </message>
     <message id="evchargers_status_unknown">
-      <location filename="../../data/EvChargers.qml" line="113"/>
+      <location filename="../../data/EvChargers.qml" line="115"/>
       <source>Unknown</source>
       <translation type="unfinished">Neznámý</translation>
     </message>
     <message id="evchargers_mode_scheduled">
-      <location filename="../../data/EvChargers.qml" line="126"/>
+      <location filename="../../data/EvChargers.qml" line="128"/>
       <source>Scheduled</source>
       <translation>Naplánováno</translation>
     </message>
@@ -6063,7 +6063,7 @@ Chcete pokračovat?</translation>
       <translation>Limit nabíjecího proudu</translation>
     </message>
     <message id="common_words_bms_control_info">
-      <location filename="../../components/CommonWords.qml" line="111"/>
+      <location filename="../../components/CommonWords.qml" line="114"/>
       <source>BMS control is enabled automatically when a BMS is present. Reset it if the system configuration changed or if there is no BMS present.</source>
       <translation>Kontrola BMS se aktivuje automaticky, když je BMS přítomný. Vynulujte, pokud se konfigurace systému změnila nebo žádný BMS není k dispozici.</translation>
     </message>
@@ -6473,7 +6473,7 @@ Chcete pokračovat?</translation>
       <translation type="unfinished">Stav podpory</translation>
     </message>
     <message id="settings_demo_mode">
-      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="299"/>
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="293"/>
       <source>Demo mode</source>
       <translation type="unfinished">Demo režim</translation>
     </message>
@@ -6581,42 +6581,42 @@ Chcete pokračovat?</translation>
       <translation>Tento FV střídač podporuje omezení výkonu. Pokud toto nastavení narušuje normální provoz, zakažte jej.</translation>
     </message>
     <message id="settings_local_network_security_profile">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="128"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="144"/>
       <source>Local network security profile</source>
       <translation>Profil zabezpečení místní sítě</translation>
     </message>
     <message id="settings_security_profile_indeterminate">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="133"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="149"/>
       <source>Please select...</source>
       <translation>Vyberte prosím...</translation>
     </message>
     <message id="settings_security_profile_secured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="137"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="153"/>
       <source>Secured</source>
       <translation>Zabezpečeno</translation>
     </message>
     <message id="settings_security_profile_secured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="140"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="156"/>
       <source>Password protected and the network communication is encrypted</source>
       <translation>Chráněno heslem a síťová komunikace je šifrovaná.</translation>
     </message>
     <message id="settings_security_profile_weak">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="145"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="161"/>
       <source>Weak</source>
       <translation>Slabé</translation>
     </message>
     <message id="settings_security_profile_weak_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="148"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="164"/>
       <source>Password protected, but the network communication is not encrypted</source>
       <translation>Chráněno heslem, ale síťová komunikace není šifrována.</translation>
     </message>
     <message id="settings_security_profile_unsecured">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="153"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="169"/>
       <source>Unsecured</source>
       <translation>Nezajištěné</translation>
     </message>
     <message id="settings_security_profile_unsecured_caption">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="156"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="172"/>
       <source>No password and the network communication is not encrypted</source>
       <translation>Žádné heslo a síťová komunikace není šifrovaná.</translation>
     </message>
@@ -6626,22 +6626,22 @@ Chcete pokračovat?</translation>
       <translation>Heslo musí mít alespoň 8 znaků</translation>
     </message>
     <message id="settings_security_profile_secured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="227"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="243"/>
       <source>Select 'Secured' profile?</source>
       <translation>Zvolit profil "Zabezpečený"?</translation>
     </message>
     <message id="settings_security_profile_weak_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="230"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="246"/>
       <source>Select 'Weak' profile?</source>
       <translation>Zvolit profil "Slabý"?</translation>
     </message>
     <message id="settings_security_profile_unsecured_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="233"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="249"/>
       <source>Select 'Unsecured' profile?</source>
       <translation>Zvolit profil "Nezajištěný"?</translation>
     </message>
     <message id="settings_security_profile_secured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="244"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="260"/>
       <source>• Local network services are password protected
 • The network communication is encrypted
 • A secure connection with VRM is enabled
@@ -6652,81 +6652,81 @@ Chcete pokračovat?</translation>
 • Nezabezpečená nastavení nelze povolit</translation>
     </message>
     <message id="settings_security_profile_weak_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="247"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="263"/>
       <source>• Local network services are password protected
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• Místní síťové služby jsou chráněny heslem
 • Je povolen i nešifrovaný přístup k místním webovým stránkám (HTTP/HTTPS).</translation>
     </message>
     <message id="settings_security_profile_unsecured_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="250"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="266"/>
       <source>• Local network services do not need a password
 • Unencrypted access to local websites is enabled as well (HTTP/HTTPS)</source>
       <translation>• Místní síťové služby nepotřebují heslo
 • Je povolen i nešifrovaný přístup k místním webovým stránkám (HTTP/HTTPS).</translation>
     </message>
     <message id="access_and_security_page_will_reload">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="122"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="138"/>
       <source>Page will automatically reload in 5 seconds</source>
       <translation>Stránka se automaticky načte za 5 sekund</translation>
     </message>
     <message id="settings_security_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="163"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="179"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">Heslo musí mít alespoň 8 znaků</translation>
     </message>
     <message id="settings_security_profile_update">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="191"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="207"/>
       <source>Update</source>
       <translation type="unfinished">Aktualizovat</translation>
     </message>
     <message id="settings_root_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="269"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="285"/>
       <source>Root password</source>
       <translation>Kořenové heslo</translation>
     </message>
     <message id="settings_root_enter_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="272"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="288"/>
       <source>Enter password</source>
       <translation type="unfinished">Zadejte heslo</translation>
     </message>
     <message id="settings_root_too_short_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="277"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="293"/>
       <source>Password needs to be at least 8 characters long</source>
       <translation type="unfinished">Heslo musí mít alespoň 8 znaků</translation>
     </message>
     <message id="settings_root_password_changed_to">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="283"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="299"/>
       <source>Root password changed to %1</source>
       <translation>Heslo kořene změněno na %1</translation>
     </message>
     <message id="settings_enable_ssh_on_lan">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="290"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="306"/>
       <source>Enable SSH on LAN</source>
       <translation>Povolení SSH v síti LAN</translation>
     </message>
     <message id="settings_logout">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="321"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="337"/>
       <source>Logout</source>
       <translation>Odhlásit se</translation>
     </message>
     <message id="settings_logout_now">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="323"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="339"/>
       <source>Log out now</source>
       <translation>Odhlásit se</translation>
     </message>
     <message id="settings_logout_dialog_title">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="335"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="351"/>
       <source>Log out?</source>
       <translation>Odhlásit se?</translation>
     </message>
     <message id="settings_logout_dialog_description">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="337"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="353"/>
       <source>This will disconnect all local network connections.</source>
       <translation>Tím se odpojí všechna místní síťová připojení.</translation>
     </message>
     <message id="settings_logout_dialog_accept_text">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="339"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="355"/>
       <source>Log out</source>
       <translation>Odhlásit se</translation>
     </message>
@@ -7026,44 +7026,49 @@ Chcete pokračovat?</translation>
       <translation>Arktida</translation>
     </message>
     <message id="settings_all_connected_devices">
-      <location filename="../../pages/SettingsPage.qml" line="68"/>
+      <location filename="../../pages/SettingsPage.qml" line="85"/>
       <source>All connected devices</source>
       <translation>Všechna připojená zařízení</translation>
     </message>
     <message id="settings_general">
-      <location filename="../../pages/SettingsPage.qml" line="76"/>
+      <location filename="../../pages/SettingsPage.qml" line="93"/>
       <source>General</source>
       <translation type="unfinished">Všeobecné</translation>
     </message>
     <message id="settings_connectivity">
-      <location filename="../../pages/SettingsPage.qml" line="87"/>
+      <location filename="../../pages/SettingsPage.qml" line="104"/>
       <source>Connectivity</source>
       <translation>Připojení</translation>
     </message>
     <message id="settings_ethernet_wifi_bluetooth_vecan">
-      <location filename="../../pages/SettingsPage.qml" line="89"/>
+      <location filename="../../pages/SettingsPage.qml" line="106"/>
       <source>Ethernet, Wi-Fi, Bluetooth, VE.Can</source>
       <translation>Ethernet, Wi-Fi, Bluetooth, VE.Can</translation>
     </message>
     <message id="settings_vrm">
-      <location filename="../../pages/SettingsPage.qml" line="96"/>
+      <location filename="../../pages/SettingsPage.qml" line="113"/>
       <source>VRM</source>
-      <translation>VRM</translation>
-    </message>
-    <message id="settings_remote_monitoring_portal">
-      <location filename="../../pages/SettingsPage.qml" line="98"/>
-      <source>Remote monitoring portal</source>
-      <translation>Portál pro vzdálené monitorování</translation>
+      <translation type="unfinished">VRM</translation>
     </message>
     <message id="settings_advanced">
-      <location filename="../../pages/SettingsPage.qml" line="105"/>
+      <location filename="../../pages/SettingsPage.qml" line="122"/>
       <source>Advanced</source>
       <translation type="unfinished">Pokročilé</translation>
     </message>
     <message id="settings_integrations">
-      <location filename="../../pages/SettingsPage.qml" line="110"/>
+      <location filename="../../pages/SettingsPage.qml" line="127"/>
       <source>Integrations</source>
       <translation type="unfinished">Integrace</translation>
+    </message>
+    <message id="common_words_vrm">
+      <location filename="../../components/CommonWords.qml" line="652"/>
+      <source>VRM</source>
+      <translation>VRM</translation>
+    </message>
+    <message id="settings_remote_monitoring_portal">
+      <location filename="../../pages/SettingsPage.qml" line="115"/>
+      <source>Remote monitoring portal</source>
+      <translation>Portál pro vzdálené monitorování</translation>
     </message>
     <message id="pagesettingssupportstate_integrations">
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="443"/>
@@ -7071,22 +7076,22 @@ Chcete pokračovat?</translation>
       <translation>Integrace</translation>
     </message>
     <message id="settings_acdcsystem_ess_dvcc_battery">
-      <location filename="../../pages/SettingsPage.qml" line="121"/>
+      <location filename="../../pages/SettingsPage.qml" line="138"/>
       <source>AC/DC system, ESS, DVCC, Battery...</source>
       <translation>Systém AC/DC, ESS, DVCC, baterie...</translation>
     </message>
     <message id="settings_debug_and_develop">
-      <location filename="../../pages/SettingsPage.qml" line="128"/>
+      <location filename="../../pages/SettingsPage.qml" line="145"/>
       <source>Debug &amp; Develop</source>
       <translation>Ladění a vývoj</translation>
     </message>
     <message id="settings_profilingtools_debugstatistics_appversion">
-      <location filename="../../pages/SettingsPage.qml" line="130"/>
+      <location filename="../../pages/SettingsPage.qml" line="147"/>
       <source>Profiling tools, debug statistics, app version...</source>
       <translation>Nástroje pro profilování, statistiky ladění, verze aplikace...</translation>
     </message>
     <message id="settings_system_setup">
-      <location filename="../../pages/SettingsPage.qml" line="119"/>
+      <location filename="../../pages/SettingsPage.qml" line="136"/>
       <source>System Setup</source>
       <translation>Nastavení systému</translation>
     </message>
@@ -7160,7 +7165,7 @@ Chcete pokračovat?</translation>
       <translation>Posledních %1 dní</translation>
     </message>
     <message id="common_words_bms_controlled">
-      <location filename="../../components/CommonWords.qml" line="114"/>
+      <location filename="../../components/CommonWords.qml" line="117"/>
       <source>BMS controlled</source>
       <translation>Řízeno BMS</translation>
     </message>
@@ -7190,7 +7195,7 @@ Chcete pokračovat?</translation>
       <translation>Restartování systému VE.Bus resetuje všechny měniče na sběrnici a způsobí ztrátu napájení jejich výstupů.</translation>
     </message>
     <message id="common_words_dynamic_power_limit">
-      <location filename="../../components/CommonWords.qml" line="662"/>
+      <location filename="../../components/CommonWords.qml" line="678"/>
       <source>Dynamic power limit</source>
       <translation>Dynamické omezení výkonu</translation>
     </message>
@@ -7200,272 +7205,272 @@ Chcete pokračovat?</translation>
       <translation>Přidat zařízení</translation>
     </message>
     <message id="controlcard_generator_autostarted">
-      <location filename="../../components/CommonWords.qml" line="93"/>
+      <location filename="../../components/CommonWords.qml" line="96"/>
       <source>Auto-started • %1</source>
       <translation>Automatické spuštění • %1</translation>
     </message>
     <message id="common_words_battery">
-      <location filename="../../components/CommonWords.qml" line="96"/>
+      <location filename="../../components/CommonWords.qml" line="99"/>
       <source>Battery</source>
       <translation type="unfinished">Baterie</translation>
     </message>
     <message id="common_words_boat_page">
-      <location filename="../../components/CommonWords.qml" line="118"/>
+      <location filename="../../components/CommonWords.qml" line="121"/>
       <source>Boat</source>
       <extracomment>The 'Boat' page</extracomment>
       <translation type="unfinished">Loď</translation>
     </message>
     <message id="common_words_brief_page">
-      <location filename="../../components/CommonWords.qml" line="122"/>
+      <location filename="../../components/CommonWords.qml" line="125"/>
       <source>Brief</source>
       <extracomment>The 'Brief' page</extracomment>
       <translation type="unfinished">Krátce</translation>
     </message>
     <message id="common_words_charging">
-      <location filename="../../components/CommonWords.qml" line="132"/>
+      <location filename="../../components/CommonWords.qml" line="135"/>
       <source>Charging</source>
       <extracomment>"Charging" state</extracomment>
       <translation type="unfinished">Nabíjení</translation>
     </message>
     <message id="common_words_closed_status">
-      <location filename="../../components/CommonWords.qml" line="148"/>
+      <location filename="../../components/CommonWords.qml" line="151"/>
       <source>Closed</source>
       <extracomment>Status is 'closed'</extracomment>
       <translation type="unfinished">Sepnuto</translation>
     </message>
     <message id="common_words_connected">
-      <location filename="../../components/CommonWords.qml" line="154"/>
+      <location filename="../../components/CommonWords.qml" line="157"/>
       <source>Connected</source>
       <translation type="unfinished">Připojeno</translation>
     </message>
     <message id="common_words_confirm">
-      <location filename="../../components/CommonWords.qml" line="157"/>
+      <location filename="../../components/CommonWords.qml" line="160"/>
       <source>Confirm</source>
       <translation type="unfinished">Ano, odhlaste mě</translation>
     </message>
     <message id="common_words_daily_history">
-      <location filename="../../components/CommonWords.qml" line="170"/>
+      <location filename="../../components/CommonWords.qml" line="173"/>
       <source>Daily history</source>
       <translation>Denní historie</translation>
     </message>
     <message id="common_words_disabled">
-      <location filename="../../components/CommonWords.qml" line="190"/>
+      <location filename="../../components/CommonWords.qml" line="193"/>
       <source>Disabled</source>
       <translation type="unfinished">Zakázáno</translation>
     </message>
     <message id="common_words_discharging">
-      <location filename="../../components/CommonWords.qml" line="193"/>
+      <location filename="../../components/CommonWords.qml" line="196"/>
       <source>Discharging</source>
       <translation type="unfinished">vybíjení</translation>
     </message>
     <message id="common_words_disconnected">
-      <location filename="../../components/CommonWords.qml" line="196"/>
+      <location filename="../../components/CommonWords.qml" line="199"/>
       <source>Disconnected</source>
       <translation type="unfinished">Odpojeno</translation>
     </message>
     <message id="common_words_error">
-      <location filename="../../components/CommonWords.qml" line="218"/>
+      <location filename="../../components/CommonWords.qml" line="221"/>
       <source>Error</source>
       <translation type="unfinished">Chyba</translation>
     </message>
     <message id="common_words_error_not_a_number">
-      <location filename="../../components/CommonWords.qml" line="227"/>
+      <location filename="../../components/CommonWords.qml" line="230"/>
       <source>'%1' is not a number.</source>
       <translation>'%1' není číslo.</translation>
     </message>
     <message id="common_words_firmware_type_normal">
-      <location filename="../../components/CommonWords.qml" line="234"/>
+      <location filename="../../components/CommonWords.qml" line="237"/>
       <source>Normal</source>
       <extracomment>The firmware type for normal images</extracomment>
       <translation type="unfinished">Normální</translation>
     </message>
     <message id="common_words_generator">
-      <location filename="../../components/CommonWords.qml" line="247"/>
+      <location filename="../../components/CommonWords.qml" line="250"/>
       <source>Generator</source>
       <translation type="unfinished">Generátor</translation>
     </message>
     <message id="common_words_gx_device_relays">
-      <location filename="../../components/CommonWords.qml" line="257"/>
+      <location filename="../../components/CommonWords.qml" line="260"/>
       <source>GX device relays</source>
       <translation type="unfinished">Relé zařízení GX</translation>
     </message>
     <message id="common_words_idle">
-      <location filename="../../components/CommonWords.qml" line="285"/>
+      <location filename="../../components/CommonWords.qml" line="288"/>
       <source>Idle</source>
       <translation type="unfinished">Nečinný</translation>
     </message>
     <message id="common_words_inactive_status">
-      <location filename="../../components/CommonWords.qml" line="292"/>
+      <location filename="../../components/CommonWords.qml" line="295"/>
       <source>Inactive</source>
       <extracomment>Status is 'inactive'</extracomment>
       <translation type="unfinished">Neaktivní</translation>
     </message>
     <message id="common_words_input_current_limit">
-      <location filename="../../components/CommonWords.qml" line="295"/>
+      <location filename="../../components/CommonWords.qml" line="298"/>
       <source>Input current limit</source>
       <translation>Limit vstupního proudu</translation>
     </message>
     <message id="common_words_inverter_charger">
-      <location filename="../../components/CommonWords.qml" line="298"/>
+      <location filename="../../components/CommonWords.qml" line="301"/>
       <source>Inverter / Charger</source>
       <translation type="unfinished">Měnič/nabíječ</translation>
     </message>
     <message id="common_words_inverter_mode_eco">
-      <location filename="../../components/CommonWords.qml" line="302"/>
+      <location filename="../../components/CommonWords.qml" line="305"/>
       <source>Eco</source>
       <extracomment>Inverter 'Eco' mode</extracomment>
       <translation>Eco</translation>
     </message>
     <message id="common_words_manual">
-      <location filename="../../components/CommonWords.qml" line="345"/>
+      <location filename="../../components/CommonWords.qml" line="352"/>
       <source>Manual</source>
       <translation type="unfinished">Ruční</translation>
     </message>
     <message id="common_words_manual_stop">
-      <location filename="../../components/CommonWords.qml" line="354"/>
+      <location filename="../../components/CommonWords.qml" line="361"/>
       <source>Manual stop</source>
       <translation>Ruční zastavení</translation>
     </message>
     <message id="common_words_maximum_current">
-      <location filename="../../components/CommonWords.qml" line="364"/>
+      <location filename="../../components/CommonWords.qml" line="371"/>
       <source>Maximum current</source>
       <translation>Maximální proud</translation>
     </message>
     <message id="common_words_maximum_power">
-      <location filename="../../components/CommonWords.qml" line="367"/>
+      <location filename="../../components/CommonWords.qml" line="374"/>
       <source>Maximum power</source>
       <translation>Maximální výkon</translation>
     </message>
     <message id="common_words_minimum_current">
-      <location filename="../../components/CommonWords.qml" line="380"/>
+      <location filename="../../components/CommonWords.qml" line="387"/>
       <source>Minimum current</source>
       <translation>Minimální proud</translation>
     </message>
     <message id="common_words_no">
-      <location filename="../../components/CommonWords.qml" line="398"/>
+      <location filename="../../components/CommonWords.qml" line="405"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="248"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="428"/>
       <source>No</source>
       <translation type="unfinished">Ne</translation>
     </message>
     <message id="common_words_no_error">
-      <location filename="../../components/CommonWords.qml" line="401"/>
+      <location filename="../../components/CommonWords.qml" line="408"/>
       <source>No error</source>
       <translation type="unfinished">Žádná chyba</translation>
     </message>
     <message id="common_words_none_option">
-      <location filename="../../components/CommonWords.qml" line="404"/>
+      <location filename="../../components/CommonWords.qml" line="411"/>
       <source>None</source>
       <translation type="unfinished">Žádný</translation>
     </message>
     <message id="common_words_none_errors">
-      <location filename="../../components/CommonWords.qml" line="408"/>
+      <location filename="../../components/CommonWords.qml" line="415"/>
       <source>None</source>
       <extracomment>Indicates there are no errors</extracomment>
       <translation type="unfinished">Žádný</translation>
     </message>
     <message id="common_words_not_available">
-      <location filename="../../components/CommonWords.qml" line="411"/>
+      <location filename="../../components/CommonWords.qml" line="418"/>
       <source>Not available</source>
       <translation type="unfinished">Není k dispozici</translation>
     </message>
     <message id="common_words_off">
-      <location filename="../../components/CommonWords.qml" line="421"/>
+      <location filename="../../components/CommonWords.qml" line="428"/>
       <source>Off</source>
       <translation type="unfinished">Vypnuto</translation>
     </message>
     <message id="common_words_ok">
-      <location filename="../../components/CommonWords.qml" line="427"/>
+      <location filename="../../components/CommonWords.qml" line="434"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="36"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="40"/>
       <source>OK</source>
       <translation type="unfinished">Ok</translation>
     </message>
     <message id="common_words_on">
-      <location filename="../../components/CommonWords.qml" line="430"/>
+      <location filename="../../components/CommonWords.qml" line="437"/>
       <source>On</source>
       <translation type="unfinished">Zapnuto</translation>
     </message>
     <message id="common_words_open_status">
-      <location filename="../../components/CommonWords.qml" line="437"/>
+      <location filename="../../components/CommonWords.qml" line="444"/>
       <source>Open</source>
       <extracomment>Status is 'open'</extracomment>
       <translation type="unfinished">Rozpojeno</translation>
     </message>
     <message id="common_words_open_circuit">
-      <location filename="../../components/CommonWords.qml" line="440"/>
+      <location filename="../../components/CommonWords.qml" line="447"/>
       <source>Open circuit</source>
       <translation>Rozpojený obvod</translation>
     </message>
     <message id="common_words_overall_history">
-      <location filename="../../components/CommonWords.qml" line="443"/>
+      <location filename="../../components/CommonWords.qml" line="450"/>
       <source>Overall history</source>
       <translation>Celková historie</translation>
     </message>
     <message id="common_words_power_watts">
-      <location filename="../../components/CommonWords.qml" line="453"/>
+      <location filename="../../components/CommonWords.qml" line="460"/>
       <source>Power</source>
       <extracomment>Electric power, as measured in Watts</extracomment>
       <translation type="unfinished">Výkon</translation>
     </message>
     <message id="common_words_running_status">
-      <location filename="../../components/CommonWords.qml" line="499"/>
+      <location filename="../../components/CommonWords.qml" line="506"/>
       <source>Running</source>
       <extracomment>Status = "running"</extracomment>
       <translation type="unfinished">Chod</translation>
     </message>
     <message id="common_words_settings">
-      <location filename="../../components/CommonWords.qml" line="512"/>
+      <location filename="../../components/CommonWords.qml" line="519"/>
       <source>Settings</source>
       <translation type="unfinished">Nastavení</translation>
     </message>
     <message id="common_words_soc">
-      <location filename="../../components/CommonWords.qml" line="525"/>
+      <location filename="../../components/CommonWords.qml" line="532"/>
       <source>SOC %1</source>
       <extracomment>State of charge (as a percentage). %1 = the SOC value</extracomment>
       <translation>SOC %1%</translation>
     </message>
     <message id="common_words_speed">
-      <location filename="../../components/CommonWords.qml" line="532"/>
+      <location filename="../../components/CommonWords.qml" line="539"/>
       <source>Speed</source>
       <extracomment>A speed measurement value</extracomment>
       <translation type="unfinished">Rychlost</translation>
     </message>
     <message id="common_words_standby">
-      <location filename="../../components/CommonWords.qml" line="535"/>
+      <location filename="../../components/CommonWords.qml" line="542"/>
       <source>Standby</source>
       <translation type="unfinished">Standby</translation>
     </message>
     <message id="common_words_startup_status">
-      <location filename="../../components/CommonWords.qml" line="564"/>
+      <location filename="../../components/CommonWords.qml" line="571"/>
       <source>Startup (%1)</source>
       <extracomment>Status = "start up". %1 = the startup status number</extracomment>
       <translation type="unfinished">Spuštění (%1)</translation>
     </message>
     <message id="common_words_stopped">
-      <location filename="../../components/CommonWords.qml" line="577"/>
+      <location filename="../../components/CommonWords.qml" line="584"/>
       <source>Stopped</source>
       <translation type="unfinished">Zastavený</translation>
     </message>
     <message id="common_words_temperature">
-      <location filename="../../components/CommonWords.qml" line="584"/>
+      <location filename="../../components/CommonWords.qml" line="591"/>
       <source>Temperature</source>
       <translation type="unfinished">Teplota</translation>
     </message>
     <message id="common_words_type">
-      <location filename="../../components/CommonWords.qml" line="606"/>
+      <location filename="../../components/CommonWords.qml" line="613"/>
       <source>Type</source>
       <translation type="unfinished">Typ</translation>
     </message>
     <message id="common_words_unknown_status">
-      <location filename="../../components/CommonWords.qml" line="617"/>
+      <location filename="../../components/CommonWords.qml" line="624"/>
       <location filename="../../src/enums.cpp" line="947"/>
       <source>Unknown</source>
       <extracomment>Status = "unknown"</extracomment>
       <translation type="unfinished">Neznámý</translation>
     </message>
     <message id="common_words_yes">
-      <location filename="../../components/CommonWords.qml" line="648"/>
+      <location filename="../../components/CommonWords.qml" line="664"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="148"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="248"/>
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="426"/>
@@ -7473,25 +7478,25 @@ Chcete pokračovat?</translation>
       <translation type="unfinished">Ano</translation>
     </message>
     <message id="common_words_yield_today">
-      <location filename="../../components/CommonWords.qml" line="659"/>
+      <location filename="../../components/CommonWords.qml" line="675"/>
       <source>Yield Today</source>
       <extracomment>Solar charger yield for today, in kWh (kilowatt hours)</extracomment>
       <translation>Dnešní výroba</translation>
     </message>
     <message id="common_words_format_error">
-      <location filename="../../components/CommonWords.qml" line="709"/>
+      <location filename="../../components/CommonWords.qml" line="725"/>
       <source>#%1 %2</source>
       <extracomment>%1 = error number, %2 = text description of this error</extracomment>
       <translation>#%1 %2</translation>
     </message>
     <message id="common_words_bms_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="735"/>
+      <location filename="../../components/CommonWords.qml" line="751"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_bms_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
     </message>
     <message id="common_words_dmc_disabled_go_to_redetect">
-      <location filename="../../components/CommonWords.qml" line="746"/>
+      <location filename="../../components/CommonWords.qml" line="762"/>
       <source>%1 %2</source>
       <extracomment>%1 = the translated text of common_words_setting_disabled_when_dmc_connected %2 = the translated text of common_words_go_to_redetect_system</extracomment>
       <translation type="unfinished">%1 %2</translation>
@@ -7532,22 +7537,22 @@ Chcete pokračovat?</translation>
       <translation>Hodnota pro deaktivaci</translation>
     </message>
     <message id="splash_view_device_disconnected">
-      <location filename="../../components/SplashView.qml" line="293"/>
+      <location filename="../../components/SplashView.qml" line="389"/>
       <source>Connection to the device has been lost, awaiting reconnection</source>
       <translation>Připojení k zařízení bylo ztraceno, čeká se na opětovné připojení</translation>
     </message>
     <message id="splash_view_awaiting_heartbeat">
-      <location filename="../../components/SplashView.qml" line="295"/>
+      <location filename="../../components/SplashView.qml" line="391"/>
       <source>Connected to VRM, awaiting device</source>
       <translation>Připojeno k VRM, čeká na zařízení</translation>
     </message>
     <message id="splash_view_heartbeat_missing">
-      <location filename="../../components/SplashView.qml" line="345"/>
+      <location filename="../../components/SplashView.qml" line="441"/>
       <source>Device may have lost connectivity to VRM</source>
       <translation>Zařízení mohlo ztratit připojení k VRM</translation>
     </message>
     <message id="splash_view_heartbeat_inactive">
-      <location filename="../../components/SplashView.qml" line="347"/>
+      <location filename="../../components/SplashView.qml" line="443"/>
       <source>Device is not connected to VRM</source>
       <translation>Zařízení není připojeno k VRM</translation>
     </message>
@@ -7881,7 +7886,7 @@ Chcete pokračovat?</translation>
       <translation>Zastavení nabíjení</translation>
     </message>
     <message id="evchargers_status_reserved">
-      <location filename="../../data/EvChargers.qml" line="110"/>
+      <location filename="../../data/EvChargers.qml" line="112"/>
       <source>Reserved</source>
       <translation>Rezervováno</translation>
     </message>
@@ -7926,17 +7931,17 @@ Chcete pokračovat?</translation>
       <translation>Stav přetížení měniče</translation>
     </message>
     <message id="application_content_touch_input_on">
-      <location filename="../../ApplicationContent.qml" line="71"/>
+      <location filename="../../ApplicationContent.qml" line="75"/>
       <source>Touch input on</source>
       <translation>Dotykový vstup zapnut</translation>
     </message>
     <message id="application_content_touch_input_off">
-      <location filename="../../ApplicationContent.qml" line="73"/>
+      <location filename="../../ApplicationContent.qml" line="77"/>
       <source>Touch input off</source>
       <translation>Dotykový vstup vypnut</translation>
     </message>
     <message id="application_content_touch_input_disabled">
-      <location filename="../../ApplicationContent.qml" line="87"/>
+      <location filename="../../ApplicationContent.qml" line="91"/>
       <source>Touch input disabled</source>
       <translation>Dotykový vstup deaktivován</translation>
     </message>
@@ -8156,11 +8161,6 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <extracomment>Whether to adjust the min/max values in the range dynamically, based on the lowest and highest values observed on the system.</extracomment>
       <translation>Automatické nastavení</translation>
     </message>
-    <message id="settings_minmax_autorange_desc">
-      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="21"/>
-      <source>When enabled, the minima and maxima of gauges and graphs are automatically adjusted based on past values.</source>
-      <translation>Pokud je tato funkce povolena, minima a maxima měřidel a grafů se automaticky upravují na základě minulých hodnot.</translation>
-    </message>
     <message id="settings_minmax_reset">
       <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="26"/>
       <source>Reset all range values to zero</source>
@@ -8203,7 +8203,7 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <translation>Stejnosměrný výstup</translation>
     </message>
     <message id="common_words_solar">
-      <location filename="../../components/CommonWords.qml" line="528"/>
+      <location filename="../../components/CommonWords.qml" line="535"/>
       <source>Solar</source>
       <translation>Solární energie</translation>
     </message>
@@ -8237,7 +8237,7 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <translation>Vrátit se na úvodní stránku, když je aplikace neaktivní.</translation>
     </message>
     <message id="settings_startpage_auto_description">
-      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="97"/>
+      <location filename="../../pages/settings/PageSettingsDisplayStartPage.qml" line="98"/>
       <source>After one minute of inactivity, select the current page as the start page, if it is in this list.</source>
       <translation>Po jedné minutě nečinnosti vyberte aktuální stránku jako úvodní stránku, pokud je v tomto seznamu.</translation>
     </message>
@@ -8267,7 +8267,7 @@ Všimněte si, že tato nabídka zobrazuje pouze měřiče Carlo Gavazzi připoj
       <translation>Uložená zařízení</translation>
     </message>
     <message id="common_words_discovered_devices">
-      <location filename="../../components/CommonWords.qml" line="199"/>
+      <location filename="../../components/CommonWords.qml" line="202"/>
       <source>Discovered devices</source>
       <translation>Objevená zařízení</translation>
     </message>
@@ -8653,7 +8653,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Nepodporovaný typ: %1</translation>
     </message>
     <message id="common_words_press">
-      <location filename="../../components/CommonWords.qml" line="463"/>
+      <location filename="../../components/CommonWords.qml" line="470"/>
       <source>Press</source>
       <translation>Stisk</translation>
     </message>
@@ -8693,7 +8693,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>RPM</translation>
     </message>
     <message id="common_words_time_to_go">
-      <location filename="../../components/CommonWords.qml" line="590"/>
+      <location filename="../../components/CommonWords.qml" line="597"/>
       <source>Time To Go</source>
       <translation>Čas odejít</translation>
     </message>
@@ -9025,7 +9025,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Poznámka: Záložní soubory jsou specifické pro verzi firmwaru VE.Bus a lze je použít pouze k obnovení nastavení produktů s odpovídající verzí firmwaru.</translation>
     </message>
     <message id="settings_security_profile_change_password">
-      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="189"/>
+      <location filename="../../pages/settings/PageSettingsAccessAndSecurity.qml" line="205"/>
       <source>Change password</source>
       <translation>Změnit heslo</translation>
     </message>
@@ -9041,7 +9041,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Dokumentace</translation>
     </message>
     <message id="common_words_ac_input_number">
-      <location filename="../../components/CommonWords.qml" line="671"/>
+      <location filename="../../components/CommonWords.qml" line="687"/>
       <source>AC input %1</source>
       <extracomment>%1 = number of the AC input</extracomment>
       <translation>AC vstup %1</translation>
@@ -9067,7 +9067,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Povolte toto nastavení, pokud máte sekundární systém MultiPlus nebo Quattro napájený ze stejné bateriové banky jako hlavní systém měniče/nabíječe. Když je toto nastavení povoleno, tento sekundární systém bude používat parametry CVL a DCL vybraného BMS.</translation>
     </message>
     <message id="settings_access_control_display_firmware">
-      <location filename="../../pages/SettingsPage.qml" line="78"/>
+      <location filename="../../pages/SettingsPage.qml" line="95"/>
       <source>Access control, Display, Firmware, Support</source>
       <translation>Řízení přístupu, Displej, Firmware, Podpora</translation>
     </message>
@@ -9087,7 +9087,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Nabíjení jiné baterie z hlavní baterie</translation>
     </message>
     <message id="iochannel_showui_controls">
-      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="12"/>
+      <location filename="../../components/listitems/ListIOChannelShowDetails.qml" line="41"/>
       <source>Show controls</source>
       <extracomment>Whether UI controls should be shown for this input/output</extracomment>
       <translation>Zobrazit ovládací prvky</translation>
@@ -9575,12 +9575,12 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Chcete-li změnit ID jednotek Modbus-TCP, přejděte do nabídky Nastavení → VRM → Instance zařízení VRM.</translation>
     </message>
     <message id="settings_shelly_refresh_devices">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="99"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="53"/>
       <source>Refresh devices</source>
       <translation>Obnovit zařízení</translation>
     </message>
     <message id="common_words_total_power">
-      <location filename="../../components/CommonWords.qml" line="599"/>
+      <location filename="../../components/CommonWords.qml" line="606"/>
       <source>Total power</source>
       <translation>Celkový výkon</translation>
     </message>
@@ -9597,7 +9597,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Stav: %1</translation>
     </message>
     <message id="page_switchable_output_polarity">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="223"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="224"/>
       <source>Polarity</source>
       <translation>Polarita</translation>
     </message>
@@ -9612,13 +9612,13 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Heslo bylo aktualizováno</translation>
     </message>
     <message id="common_words_max">
-      <location filename="../../components/CommonWords.qml" line="361"/>
+      <location filename="../../components/CommonWords.qml" line="368"/>
       <source>Max</source>
       <extracomment>Short for Maximum</extracomment>
       <translation>Max.</translation>
     </message>
     <message id="common_words_min">
-      <location filename="../../components/CommonWords.qml" line="377"/>
+      <location filename="../../components/CommonWords.qml" line="384"/>
       <source>Min</source>
       <extracomment>Short for Minimum</extracomment>
       <translation>Min.</translation>
@@ -9659,7 +9659,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Povolte použití firmwaru Venus OS Large pro Node-RED nebo Signal-K</translation>
     </message>
     <message id="settings_relays_sensors_tanks">
-      <location filename="../../pages/SettingsPage.qml" line="112"/>
+      <location filename="../../pages/SettingsPage.qml" line="129"/>
       <source>Relays, Sensors, PV Inverters, Modbus, Node-RED</source>
       <translation>Relé, Snímače, FV střídače, Modbus, Node-RED</translation>
     </message>
@@ -9827,7 +9827,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Přemostěno</translation>
     </message>
     <message id="common_words_auto_status">
-      <location filename="../../components/CommonWords.qml" line="677"/>
+      <location filename="../../components/CommonWords.qml" line="693"/>
       <source>Auto (%1)</source>
       <extracomment>%1 = status such as 'On' or 'Off'</extracomment>
       <translation>Automaticky (%1)</translation>
@@ -9848,17 +9848,17 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Integruje se se seznamem zařízení</translation>
     </message>
     <message id="common_words_color">
-      <location filename="../../components/CommonWords.qml" line="151"/>
+      <location filename="../../components/CommonWords.qml" line="154"/>
       <source>Color</source>
       <translation>Barva</translation>
     </message>
     <message id="common_words_value_must_be_greater_than_start_value">
-      <location filename="../../components/CommonWords.qml" line="620"/>
+      <location filename="../../components/CommonWords.qml" line="630"/>
       <source>Value must be greater than start value</source>
       <translation>Hodnota musí být větší než počáteční hodnota</translation>
     </message>
     <message id="common_words_value_must_be_lower_than_stop_value">
-      <location filename="../../components/CommonWords.qml" line="629"/>
+      <location filename="../../components/CommonWords.qml" line="639"/>
       <source>Value must be lower than stop value</source>
       <translation>Hodnota musí být menší než koncová hodnota</translation>
     </message>
@@ -9900,12 +9900,6 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <location filename="../../components/listitems/ListLink.qml" line="89"/>
       <source>Show QR code</source>
       <translation>Zobrazit QR kód</translation>
-    </message>
-    <message id="listlink_scan_qr_code">
-      <location filename="../../components/listitems/ListLink.qml" line="114"/>
-      <source>Open the QR code to scan it with your portable device.&lt;br /&gt;Or insert the link: %1</source>
-      <extracomment>%1 = url text</extracomment>
-      <translation>Otevřete QR kód a naskenujte jej pomocí svého přenosného zařízení.&lt;br /&gt;Nebo vložte odkaz: %1</translation>
     </message>
     <message id="color_preset">
       <location filename="../../components/ColorPresetGrid.qml" line="33"/>
@@ -10020,60 +10014,50 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Pouze pokud je výstup vypnutý</translation>
     </message>
     <message id="page_switchable_output_startup_state">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="159"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="160"/>
       <source>Startup switch state</source>
       <translation>Stav spínače při spuštění</translation>
     </message>
     <message id="page_switchable_output_startup_state_restore_from_memory">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="168"/>
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="175"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="169"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="176"/>
       <source>Restore from memory</source>
       <translation>Obnovit z paměti</translation>
     </message>
     <message id="page_switchable_output_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="174"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="175"/>
       <source>Startup dim level</source>
       <translation type="unfinished">Úroveň stmívání při spuštění</translation>
     </message>
     <message id="settings_dvcc_startup_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="207"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="208"/>
       <source>Startup dim level</source>
       <translation>Úroveň stmívání při spuštění</translation>
     </message>
     <message id="page_switchable_output_restore_dim_level">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="196"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="197"/>
       <source>Restore dim level from memory</source>
       <translation>Obnovit úroveň stmívání z paměti</translation>
     </message>
     <message id="page_switchable_output_polarity_normal">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="230"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="231"/>
       <source>Normal</source>
       <translation type="unfinished">Normální</translation>
     </message>
     <message id="page_switchable_output_polarity_inverted">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="232"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="233"/>
       <source>Inverted</source>
       <translation type="unfinished">Invertovaný</translation>
     </message>
     <message id="settings_dvcc_output_limit_min">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="238"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="239"/>
       <source>Output limit min</source>
       <translation>Minimální limit výstupu</translation>
     </message>
     <message id="settings_dvcc_output_limit_max">
-      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="251"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageSwitchableOutput.qml" line="252"/>
       <source>Output limit max</source>
       <translation>Maximální limit výstupu</translation>
-    </message>
-    <message id="iochannel_showui_local">
-      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="20"/>
-      <source>Only local</source>
-      <translation>Pouze lokální</translation>
-    </message>
-    <message id="iochannel_showui_vrm">
-      <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="22"/>
-      <source>Only on VRM</source>
-      <translation>Pouze na VRM</translation>
     </message>
     <message id="control_cards_title">
       <location filename="../../pages/ControlCardsPage.qml" line="21"/>
@@ -10096,7 +10080,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Registrace zařízení VRM</translation>
     </message>
     <message id="common_words_go_to_redetect_system">
-      <location filename="../../components/CommonWords.qml" line="251"/>
+      <location filename="../../components/CommonWords.qml" line="254"/>
       <source>If it was recently disconnected, go to Settings → Devices → %1 → Advanced, and select 'Redetect VE.Bus system'.</source>
       <extracomment>%1 = name of the device</extracomment>
       <translation>Pokud byl nedávno odpojen, přejděte do Nastavení → Zařízení → %1 → Pokročilé a vyberte možnost „Znovu detekovat systém VE.Bus“.</translation>
@@ -10581,7 +10565,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Vstupy</translation>
     </message>
     <message id="list-spin-box-range_minimum_maximum_delimiter">
-      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="96"/>
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="97"/>
       <source>to</source>
       <extracomment>Used as a delimiter between two values that specify a range (e.g. '-70% to 80%')</extracomment>
       <translation>na</translation>
@@ -10613,7 +10597,7 @@ Zařízení GX může ovládat pouze jednu připojenou generátorovou soustavu a
       <translation>Kompatibilita s BatteryLife</translation>
     </message>
     <message id="page_generic_input_invert">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="50"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="51"/>
       <source>Invert</source>
       <translation>Invertovat</translation>
     </message>
@@ -10782,7 +10766,7 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <translation>Tím se zařízení odpojí a bude nutné jej znovu spárovat pro opětovné připojení.</translation>
     </message>
     <message id="common_words_frequency">
-      <location filename="../../components/CommonWords.qml" line="244"/>
+      <location filename="../../components/CommonWords.qml" line="247"/>
       <source>Frequency</source>
       <translation>Frekvence</translation>
     </message>
@@ -10833,17 +10817,17 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <translation>Otočte zařízení pro zobrazení %1</translation>
     </message>
     <message id="list_device_priority_no_control">
-      <location filename="../../components/listitems/ListDevicePriority.qml" line="137"/>
+      <location filename="../../components/listitems/ListDevicePriority.qml" line="140"/>
       <source>No control</source>
       <translation>Žádné ovládání</translation>
     </message>
     <message id="list-spin-box-range_minimum_value">
-      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="81"/>
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="82"/>
       <source>Minimum value</source>
       <translation>Minimální hodnota</translation>
     </message>
     <message id="list-spin-box-range_maximum_value">
-      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="125"/>
+      <location filename="../../components/listitems/ListSpinBoxRange.qml" line="127"/>
       <source>Maximum value</source>
       <translation>Maximální hodnota</translation>
     </message>
@@ -10869,7 +10853,7 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <translation>Vysoké vytížení systému, grafy skryty pro snížení vytížení procesoru</translation>
     </message>
     <message id="navbar_more">
-      <location filename="../../pages/MainView.qml" line="281"/>
+      <location filename="../../pages/MainView.qml" line="310"/>
       <source>More</source>
       <extracomment>Click to show more available items</extracomment>
       <translation>Více</translation>
@@ -10914,25 +10898,25 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <source>These settings cannot currently be changed because auto-start is enabled.</source>
       <translation>Tato nastavení momentálně nelze změnit, protože je povoleno automatické spuštění.</translation>
     </message>
-    <message id="settings_tz_local">
-      <location filename="../../pages/settings/PageTzInfo.qml" line="88"/>
+    <message id="common_words_local">
+      <location filename="../../components/CommonWords.qml" line="327"/>
       <source>Local</source>
-      <extracomment>Local date and time settings</extracomment>
+      <extracomment>Local, as in: not remote</extracomment>
       <translation>Místní</translation>
     </message>
     <message id="common_words_dc_gensets">
-      <location filename="../../components/CommonWords.qml" line="176"/>
+      <location filename="../../components/CommonWords.qml" line="179"/>
       <source>DC Gensets</source>
       <translation>DC generátory</translation>
     </message>
     <message id="common_words_locale_date">
-      <location filename="../../components/CommonWords.qml" line="312"/>
+      <location filename="../../components/CommonWords.qml" line="315"/>
       <source>Date</source>
       <extracomment>The date setting for the locale</extracomment>
       <translation>Datum</translation>
     </message>
     <message id="common_words_locale_utc">
-      <location filename="../../components/CommonWords.qml" line="320"/>
+      <location filename="../../components/CommonWords.qml" line="323"/>
       <source>UTC</source>
       <extracomment>UTC date/time</extracomment>
       <translation>UTC</translation>
@@ -11035,42 +11019,42 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <translation>Restartovat</translation>
     </message>
     <message id="common_words_check_now">
-      <location filename="../../components/CommonWords.qml" line="136"/>
+      <location filename="../../components/CommonWords.qml" line="139"/>
       <source>Check now</source>
       <extracomment>Checks for a particular state</extracomment>
       <translation>Zkontrolovat nyní</translation>
     </message>
     <message id="common_words_clear_action">
-      <location filename="../../components/CommonWords.qml" line="140"/>
+      <location filename="../../components/CommonWords.qml" line="143"/>
       <source>Clear</source>
       <extracomment>Trigger an action that clears a value</extracomment>
       <translation>Vymazat</translation>
     </message>
     <message id="common_words_redetect">
-      <location filename="../../components/CommonWords.qml" line="479"/>
+      <location filename="../../components/CommonWords.qml" line="486"/>
       <source>Redetect</source>
       <translation>Znovu detekovat</translation>
     </message>
     <message id="common_words_scan_action">
-      <location filename="../../components/CommonWords.qml" line="503"/>
+      <location filename="../../components/CommonWords.qml" line="510"/>
       <source>Scan</source>
       <extracomment>Trigger a scanning-type action</extracomment>
       <translation>Skenování</translation>
     </message>
     <message id="common_words_start">
-      <location filename="../../components/CommonWords.qml" line="539"/>
+      <location filename="../../components/CommonWords.qml" line="546"/>
       <source>Start</source>
       <extracomment>Start a particular action</extracomment>
       <translation>START</translation>
     </message>
     <message id="common_words_stop_action">
-      <location filename="../../components/CommonWords.qml" line="568"/>
+      <location filename="../../components/CommonWords.qml" line="575"/>
       <source>Stop</source>
       <extracomment>Stop a particular action</extracomment>
       <translation>STOP</translation>
     </message>
     <message id="common_words_update_to_version">
-      <location filename="../../components/CommonWords.qml" line="610"/>
+      <location filename="../../components/CommonWords.qml" line="617"/>
       <source>Update to %1</source>
       <extracomment>Update the firmware to a specific version</extracomment>
       <translation>Aktualizovat na %1</translation>
@@ -11111,7 +11095,7 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <translation>Smazat - %1</translation>
     </message>
     <message id="settings_shelly_refresh">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="101"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="55"/>
       <source>Refresh</source>
       <translation>Obnovit</translation>
     </message>
@@ -11146,18 +11130,18 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <translation>Vypnutí přístupu k MQTT také deaktivuje spárovaná zařízení MQTT, dokud nebude přístup znovu povolen.</translation>
     </message>
     <message id="settings_shelly_channel">
-      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="48"/>
+      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="50"/>
       <source>Channel %1</source>
       <extracomment>%1 = channel number</extracomment>
       <translation>Kanál %1</translation>
     </message>
     <message id="settings_shelly_channels">
-      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="106"/>
+      <location filename="../../pages/settings/PageSettingsShellyDevice.qml" line="108"/>
       <source>Channels</source>
       <translation>Kanály</translation>
     </message>
     <message id="iochannel_input_mode">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="65"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="66"/>
       <source>Input mode</source>
       <translation>Vstupní režim</translation>
     </message>
@@ -11556,11 +11540,6 @@ Aktualizujte na nejnovější firmware, abyste mohli tato nastavení upravit.</t
       <source>Current (amps)</source>
       <translation>Proud (ampéry)</translation>
     </message>
-    <message id="settings_dvcc_shared_current_sense">
-      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="131"/>
-      <source>SCS - Shared Current Sense</source>
-      <translation>SCS – sdílený snímač proudu</translation>
-    </message>
     <message id="page_setting_fronius_inverters_add_a_pv_inverter">
       <location filename="../../pages/settings/PageSettingsFroniusInverters.qml" line="26"/>
       <source>Add a PV inverter by using the “Find PV inverter” function or by entering an IP address manually on the previous page.</source>
@@ -11944,32 +11923,32 @@ UPOZORNĚNÍ: Používejte pouze v případě, že to vyžaduje dodavatel elektr
       <translation>Port/ID jednotky %1</translation>
     </message>
     <message id="iochannel_digital_input_mode_follow_state">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="73"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="74"/>
       <source>Sensor | Outputs → follow state</source>
       <translation>Senzor | Výstupy → Sledovat stav</translation>
     </message>
     <message id="iochannel_digital_input_mode_follow_position">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="75"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="76"/>
       <source>Switch | Outputs → follow position</source>
       <translation>Spínač | Výstupy → Sledovat polohu</translation>
     </message>
     <message id="iochannel_digital_input_mode_toggle_on_change">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="77"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="78"/>
       <source>Switch | Outputs → toggle on change</source>
       <translation>Spínač | Výstupy → Přepnout při změně</translation>
     </message>
     <message id="iochannel_digital_input_mode_toggle_on_press">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="79"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="80"/>
       <source>Button | Outputs → toggle on press</source>
       <translation>Tlačítko | Výstupy → Přepnout při stisknutí</translation>
     </message>
     <message id="iochannel_digital_input_mode_toggle_and_dim">
-      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
+      <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="82"/>
       <source>Button | Outputs → toggle and dim</source>
       <translation>Tlačítko | Výstupy → Přepnout a stmívat</translation>
     </message>
     <message id="settings_shelly_integration">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="79"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="33"/>
       <source>Enable Shelly integration</source>
       <translation>Povolit integraci Shelly</translation>
     </message>
@@ -11986,7 +11965,7 @@ UPOZORNĚNÍ: Používejte pouze v případě, že to vyžaduje dodavatel elektr
       <translation>umístění</translation>
     </message>
     <message id="settings_shelly_autoscan">
-      <location filename="../../pages/settings/PageSettingsShelly.qml" line="85"/>
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="39"/>
       <source>Automatic device discovery</source>
       <translation>Automatické vyhledávání zařízení</translation>
     </message>
@@ -12047,9 +12026,65 @@ UPOZORNĚNÍ: Používejte pouze v případě, že to vyžaduje dodavatel elektr
       <translation>Kvalita vzduchu</translation>
     </message>
     <message id="overview_widget_battery_starter_title">
-      <location filename="../../components/widgets/BatteryWidget.qml" line="412"/>
+      <location filename="../../components/widgets/BatteryWidget.qml" line="413"/>
       <source>Starter</source>
       <translation>Spuštění</translation>
+    </message>
+    <message id="settings_dvcc_shared_current_sense">
+      <location filename="../../pages/settings/PageSettingsDvcc.qml" line="131"/>
+      <source>SCS - Shared current sense</source>
+      <translation>SCS – sdílený snímač proudu</translation>
+    </message>
+    <message id="settings_demo_mode_consequence">
+      <location filename="../../pages/settings/PageSettingsGeneral.qml" line="308"/>
+      <source>Starting demo mode changes some settings and causes the screen to stop responding for a moment.</source>
+      <translation>Spuštění demo režimu změní některá nastavení a způsobí chvilkovou nečinnost obrazovky.</translation>
+    </message>
+    <message id="common_words_watch_app">
+      <location filename="../../components/CommonWords.qml" line="658"/>
+      <source>Watch app</source>
+      <translation>Aplikace pro hodinky</translation>
+    </message>
+    <message id="listlink_scan_qr_code_with_phone">
+      <location filename="../../components/listitems/ListLink.qml" line="114"/>
+      <source>Scan the QR code with your phone, or go to: %1</source>
+      <extracomment>%1 = url text</extracomment>
+      <translation>Naskenujte QR kód telefonem nebo přejděte na: %1</translation>
+    </message>
+    <message id="settings_minmax_autorange_adjust_desc">
+      <location filename="../../pages/settings/PageSettingsDisplayMinMax.qml" line="21"/>
+      <source>Adjust the minima and maxima of gauges and graphs automatically, based on past values.</source>
+      <translation>Automaticky upravovat minima a maxima ukazatelů a grafů podle minulých hodnot.</translation>
+    </message>
+    <message id="iochannel_showui_custom_local_caption">
+      <location filename="../../components/listitems/ListIOChannelShowDetails.qml" line="89"/>
+      <source>GX screen and local LAN</source>
+      <translation>Obrazovka GX a místní LAN</translation>
+    </message>
+    <message id="iochannel_showui_custom_vrm_caption">
+      <location filename="../../components/listitems/ListIOChannelShowDetails.qml" line="98"/>
+      <source>VRM Portal</source>
+      <translation>Portál VRM</translation>
+    </message>
+    <message id="iochannel_showui_custom_watch_caption">
+      <location filename="../../components/listitems/ListIOChannelShowDetails.qml" line="107"/>
+      <source>Victron watch app</source>
+      <translation>Aplikace Victron pro hodinky</translation>
+    </message>
+    <message id="iochannel_showui_note">
+      <location filename="../../components/listitems/ListIOChannelShowDetails.qml" line="116"/>
+      <source>Choose where this switch can be operated. The switch keeps working when its control is hidden.</source>
+      <translation>Vyberte, kde lze tento spínač ovládat. Spínač funguje dál, i když je jeho ovládání skryté.</translation>
+    </message>
+    <message id="settings_shelly_no_device_discovered">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="76"/>
+      <source>No devices discovered</source>
+      <translation>Nebyla nalezena žádná zařízení</translation>
+    </message>
+    <message id="settings_shelly_unreachable">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="103"/>
+      <source>Unreachable</source>
+      <translation>Nedostupné</translation>
     </message>
     <message id="dc_input">
       <location filename="../../components/listitems/ListDcInputQuantityGroup.qml" line="16"/>
@@ -12069,7 +12104,7 @@ UPOZORNĚNÍ: Používejte pouze v případě, že to vyžaduje dodavatel elektr
       <translation type="unfinished">Kontrola...</translation>
     </message>
     <message id="settings_radio_button_group_unknown">
-      <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="44"/>
+      <location filename="../../components/listitems/core/ListRadioButtonGroup.qml" line="49"/>
       <source>Unknown</source>
       <translation type="unfinished">Neznámý</translation>
     </message>
@@ -12092,6 +12127,12 @@ UPOZORNĚNÍ: Používejte pouze v případě, že to vyžaduje dodavatel elektr
       <location filename="../../pages/OverviewPage.qml" line="13"/>
       <source>Overview</source>
       <translation type="unfinished">Přehled</translation>
+    </message>
+    <message id="devicelist_unsupported">
+      <location filename="../../pages/settings/devicelist/delegates/DeviceListDelegate_unsupported.qml" line="14"/>
+      <source>Unsupported</source>
+      <extracomment>Device is not supported</extracomment>
+      <translation type="unfinished">Není podporováno</translation>
     </message>
     <message id="inverter_pv">
       <location filename="../../pages/settings/devicelist/inverter/PageInverter.qml" line="56"/>
