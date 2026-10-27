@@ -125,10 +125,18 @@ SwipeViewPage {
 			SettingsListNavigation {
 				//% "Integrations"
 				text: qsTrId("settings_integrations")
-				//% "Relays, Sensors, PV Inverters, Modbus, Node-RED"
-				caption: qsTrId("settings_relays_sensors_tanks")
+				//% "Relays, Sensors, PV Inverters, Modbus"
+				caption: qsTrId("settings_relays_sensors_tanks") +
+					//: Continues the list for Venus OS large images
+					//% ", Node-RED, SignalK"
+					(imageType.value === "large" ? qsTrId("settings_relays_sensors_tanks_additional") : "")
 				pageSource: "/pages/settings/PageSettingsIntegrations.qml"
 				pageIconSource: "qrc:/images/icon_integration_32.svg"
+
+				VeQuickItem {
+					id: imageType
+					uid: Global.venusPlatform.serviceUid + "/Firmware/Installed/ImageType"
+				}
 			}
 
 			SettingsListNavigation {
