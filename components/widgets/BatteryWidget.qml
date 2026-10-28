@@ -83,7 +83,9 @@ OverviewWidget {
 
 		implicitWidth: Theme.geometry_overviewPage_widget_centerWidgetWidth
 		implicitHeight: Theme.geometry_overviewPage_widget_compact_l_height
-		foregroundColor: Theme.color_overviewPage_widget_battery_background
+		foregroundColor: !isNaN(Global.system.battery.current) && Global.system.battery.current > 0
+    ? Theme.color_green
+    : Theme.color_overviewPage_widget_battery_background
 		backgroundColor: Theme.color_overviewPage_widget_background
 		borderWidth: enabled ? Theme.geometry_overviewPage_widget_border_width : 0
 		borderColor: Theme.color_overviewPage_widget_border
