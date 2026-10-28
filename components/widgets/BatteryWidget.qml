@@ -47,7 +47,11 @@ OverviewWidget {
 
 	VeQuickItem {
 		id: bmsChargeMode
-		uid: BackendConnection.serviceUidFromName("com.victronenergy.battery.ttyUSB1") + "/Info/ChargeMode"
+		uid: {
+			if (!batteries.valid || !batteries.value) return ""
+			const battery = batteries.value.find(info => info.id === "com.victronenergy.battery.ttyUSB1")
+			return battery ? BackendConnection.serviceUidFromName(battery.id, battery.instance) + "/Info/ChargeMode" : ""
+		}
 	}
 
 	VeQuickItem {
