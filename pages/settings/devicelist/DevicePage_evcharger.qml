@@ -12,10 +12,7 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	required property string bindPrefix
 	readonly property bool energyMeterMode: !chargeMode.dataItem.valid
-
-	serviceUid: bindPrefix
 
 	settingsHeader: ListItem {
 		id: tableListItem
@@ -164,11 +161,11 @@ DevicePage {
 		}
 
 		PowerGuardConsumptionSettings {
-			bindPrefix: root.bindPrefix
+			bindPrefix: root.serviceUid
 		}
 
 		PowerGuardProductionSettings {
-			bindPrefix: root.bindPrefix
+			bindPrefix: root.serviceUid
 		}
 
 		ListNavigation {
@@ -193,6 +190,6 @@ DevicePage {
 
 	EvCharger {
 		id: evCharger
-		serviceUid: root.bindPrefix
+		serviceUid: root.serviceUid
 	}
 }

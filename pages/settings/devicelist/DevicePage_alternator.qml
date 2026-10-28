@@ -15,15 +15,12 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
-
-	serviceUid: root.bindPrefix
 	settingsModel: modelLoader.item
 
 	VeQuickItem {
 		id: productIdDataItem
 
-		uid: root.bindPrefix + "/ProductId"
+		uid: root.serviceUid + "/ProductId"
 		onValueChanged: {
 			if (value !== undefined && modelLoader.status === Loader.Null) {
 				if (ProductInfo.isRealAlternatorProduct(value) || ProductInfo.isOrionXsProduct(value)) {
@@ -43,7 +40,7 @@ DevicePage {
 		id: alternatorModelComponent
 
 		PageAlternatorModel {
-			bindPrefix: root.bindPrefix
+			bindPrefix: root.serviceUid
 			page: root
 		}
 	}
@@ -52,7 +49,7 @@ DevicePage {
 		id: dcMeterModelComponent
 
 		PageDcMeterModel {
-			bindPrefix: root.bindPrefix
+			bindPrefix: root.serviceUid
 		}
 	}
 }

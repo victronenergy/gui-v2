@@ -12,15 +12,12 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
-
-	serviceUid: bindPrefix
 
 	settingsModel: VisibleItemModel {
 		ListQuantity {
 			//% "Aggregate"
 			text: qsTrId("pulsecounter_aggregate")
-			dataItem.uid: bindPrefix + "/Aggregate"
+			dataItem.uid: root.serviceUid + "/Aggregate"
 			unit: Global.systemSettings.volumeUnit
 		}
 
@@ -28,7 +25,7 @@ DevicePage {
 			text: CommonWords.setup
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/pulsemeter/PagePulseCounterSetup.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix, "inputNumber": device.deviceInstance })
+						{ "title": text, "bindPrefix": root.serviceUid, "inputNumber": device.deviceInstance })
 			}
 		}
 	}

@@ -12,10 +12,6 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
-
-	serviceUid: bindPrefix
-
 	settingsModel: VisibleItemModel {
 		ListQuantityGroup {
 			text: CommonWords.dc
@@ -30,24 +26,24 @@ DevicePage {
 
 			VeQuickItem {
 				id: dcVoltage
-				uid: root.bindPrefix + "/Dc/0/Voltage"
+				uid: root.serviceUid + "/Dc/0/Voltage"
 			}
 
 			VeQuickItem {
 				id: dcCurrent
-				uid: root.bindPrefix + "/Dc/0/Current"
+				uid: root.serviceUid + "/Dc/0/Current"
 			}
 
 			VeQuickItem {
 				id: dcPower
-				uid: root.bindPrefix + "/Dc/0/Power"
+				uid: root.serviceUid + "/Dc/0/Power"
 			}
 		}
 
 		ListQuantity {
 			//% "Motor RPM"
 			text: qsTrId("devicelist_motordrive_motorrpm")
-			dataItem.uid: root.bindPrefix + "/Motor/RPM"
+			dataItem.uid: root.serviceUid + "/Motor/RPM"
 			unit: VenusOS.Units_RevolutionsPerMinute
 			preferredVisible: dataItem.valid
 		}
@@ -55,14 +51,14 @@ DevicePage {
 		ListMotorDriveGear {
 			//% "Motor direction"
 			text: qsTrId("devicelist_motordrive_motordirection")
-			dataItem.uid: root.bindPrefix + "/Motor/Direction"
+			dataItem.uid: root.serviceUid + "/Motor/Direction"
 			preferredVisible: dataItem.valid
 		}
 
 		ListQuantity {
 			//% "Motor torque"
 			text: qsTrId("devicelist_motordrive_motortorque")
-			dataItem.uid: root.bindPrefix + "/Motor/Torque"
+			dataItem.uid: root.serviceUid + "/Motor/Torque"
 			unit: VenusOS.Units_NewtonMeter
 			preferredVisible: dataItem.valid
 		}
@@ -70,28 +66,28 @@ DevicePage {
 		ListTemperature {
 			//% "Motor temperature"
 			text: qsTrId("devicelist_motordrive_motortemperature")
-			dataItem.uid: root.bindPrefix + "/Motor/Temperature"
+			dataItem.uid: root.serviceUid + "/Motor/Temperature"
 			preferredVisible: dataItem.valid
 		}
 
 		ListTemperature {
 			//% "Coolant temperature"
 			text: qsTrId("devicelist_motordrive_coolanttemperature")
-			dataItem.uid: root.bindPrefix + "/Coolant/Temperature"
+			dataItem.uid: root.serviceUid + "/Coolant/Temperature"
 			preferredVisible: dataItem.valid
 		}
 
 		ListTemperature {
 			//% "Controller temperature"
 			text: qsTrId("devicelist_motordrive_controllertemperature")
-			dataItem.uid: root.bindPrefix + "/Controller/Temperature"
+			dataItem.uid: root.serviceUid + "/Controller/Temperature"
 			preferredVisible: dataItem.valid
 		}
 
 		ListSwitch {
 			//% "Motor direction inverted"
 			text: qsTrId("devicelist_motordrive_motordirectioninverted")
-			dataItem.uid: root.bindPrefix + "/Settings/Motor/DirectionInverted"
+			dataItem.uid: root.serviceUid + "/Settings/Motor/DirectionInverted"
 			dataItem.invalidate: false
 			preferredVisible: dataItem.valid
 		}

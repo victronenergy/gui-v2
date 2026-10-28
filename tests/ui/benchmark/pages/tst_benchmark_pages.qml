@@ -24,14 +24,14 @@ UiTestCase {
 	window: Global.main
 
 	readonly property var pageUrls: [
-		"/pages/settings/devicelist/battery/PageBattery.qml",
-		"/pages/settings/devicelist/ac-in/PageAcIn.qml",
-		"/pages/vebusdevice/PageVeBus.qml",
+		"/pages/settings/devicelist/DevicePage_battery.qml",
+		"/pages/settings/devicelist/DevicePage_pvinverter.qml",
+		"/pages/settings/devicelist/DevicePage_vebus.qml",
 		"/pages/solar/SolarDevicePage.qml",
 		"/pages/solar/SolarInputListPage.qml",
 		"/pages/loads/AcLoadListPage.qml",
 		"/pages/loads/DcLoadListPage.qml",
-		"/pages/evcs/EvChargerPage.qml",
+		"/pages/settings/devicelist/DevicePage_evcharger.qml",
 		"/pages/battery/BatteryListPage.qml",
 		"/pages/invertercharger/InverterChargerListPage.qml",
 		"/pages/settings/devicelist/DeviceListPage.qml",
@@ -41,7 +41,7 @@ UiTestCase {
 		"/pages/settings/PageSettingsDvcc.qml",
 		"/pages/settings/PageSettingsHub4.qml",
 		"/pages/settings/devicelist/battery/PageBatterySettings.qml",
-		"/pages/settings/devicelist/inverter/PageInverter.qml",
+		"/pages/settings/devicelist/DevicePage_inverter.qml",
 		"/pages/settings/PageControllableLoads.qml",
 	]
 
@@ -195,19 +195,20 @@ UiTestCase {
 
 	function _pageProperties(url) {
 		switch (url) {
-		case "/pages/settings/devicelist/battery/PageBattery.qml":
+		case "/pages/settings/devicelist/DevicePage_battery.qml":
+			return { serviceUid: _uid("com.victronenergy.battery.ttyUSB1") }
 		case "/pages/settings/devicelist/battery/PageBatterySettings.qml":
 			return { bindPrefix: _uid("com.victronenergy.battery.ttyUSB1") }
-		case "/pages/settings/devicelist/ac-in/PageAcIn.qml":
-			return { bindPrefix: _uid("com.victronenergy.pvinverter.socketcan_vecan0_vi0_uc451502") }
-		case "/pages/vebusdevice/PageVeBus.qml":
-			return { bindPrefix: _uid("com.victronenergy.vebus.ttyS2") }
+		case "/pages/settings/devicelist/DevicePage_pvinverter.qml":
+			return { serviceUid: _uid("com.victronenergy.pvinverter.socketcan_vecan0_vi0_uc451502") }
+		case "/pages/settings/devicelist/DevicePage_vebus.qml":
+			return { serviceUid: _uid("com.victronenergy.vebus.ttyS2") }
 		case "/pages/solar/SolarDevicePage.qml":
 			return { serviceUid: _uid("com.victronenergy.solarcharger.ttyO0") }
-		case "/pages/evcs/EvChargerPage.qml":
-			return { bindPrefix: _uid("com.victronenergy.evcharger.evc_ABC123456") }
-		case "/pages/settings/devicelist/inverter/PageInverter.qml":
-			return { bindPrefix: _uid("com.victronenergy.inverter.socketcan_can0_vi0_uc87197") }
+		case "/pages/settings/devicelist/DevicePage_evcharger.qml":
+			return { serviceUid: _uid("com.victronenergy.evcharger.evc_ABC123456") }
+		case "/pages/settings/devicelist/DevicePage_inverter.qml":
+			return { serviceUid: _uid("com.victronenergy.inverter.socketcan_can0_vi0_uc87197") }
 		case "/pages/loads/AcLoadListPage.qml":
 			return {
 				measurements: Global.system.load.ac,

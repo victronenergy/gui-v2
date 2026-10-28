@@ -12,29 +12,26 @@ import Victron.VenusOS
 DevicePage {
 	id: root
 
-	property string bindPrefix
-
 	title: tankDescription.description
-	serviceUid: bindPrefix
 
 	settingsModel: VisibleItemModel {
 		ListText {
 			text: CommonWords.status
-			dataItem.uid: root.bindPrefix + "/Status"
+			dataItem.uid: root.serviceUid + "/Status"
 			secondaryText: Global.tanks.statusToText(dataItem.value)
 		}
 
 		ListQuantity {
 			//% "Level"
 			text: qsTrId("devicelist_tanksensor_level")
-			dataItem.uid: root.bindPrefix + "/Level"
+			dataItem.uid: root.serviceUid + "/Level"
 			unit: VenusOS.Units_Percentage
 		}
 
 		ListQuantity {
 			//% "Remaining"
 			text: qsTrId("devicelist_tanksensor_remaining")
-			dataItem.uid: root.bindPrefix + "/Remaining"
+			dataItem.uid: root.serviceUid + "/Remaining"
 			dataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Volume_CubicMetre)
 			dataItem.displayUnit: Units.unitToVeUnit(Global.systemSettings.volumeUnit)
 			unit: Global.systemSettings.volumeUnit
@@ -42,27 +39,27 @@ DevicePage {
 
 		ListTemperature {
 			text: CommonWords.temperature
-			dataItem.uid: root.bindPrefix + "/Temperature"
+			dataItem.uid: root.serviceUid + "/Temperature"
 			preferredVisible: dataItem.valid
 		}
 
 		ListQuantity {
 			//% "Sensor battery"
 			text: qsTrId("devicelist_tanksensor_sensor_battery")
-			dataItem.uid: root.bindPrefix + "/BatteryVoltage"
+			dataItem.uid: root.serviceUid + "/BatteryVoltage"
 			unit: VenusOS.Units_Volt_DC
 			preferredVisible: dataItem.valid
 		}
 
 		ListAlarm {
 			text: CommonWords.low_level_alarm
-			dataItem.uid: root.bindPrefix + "/Alarms/Low/State"
+			dataItem.uid: root.serviceUid + "/Alarms/Low/State"
 			preferredVisible: dataItem.valid
 		}
 
 		ListAlarm {
 			text: CommonWords.high_level_alarm
-			dataItem.uid: root.bindPrefix + "/Alarms/High/State"
+			dataItem.uid: root.serviceUid + "/Alarms/High/State"
 			preferredVisible: dataItem.valid
 		}
 
@@ -70,14 +67,14 @@ DevicePage {
 			text: CommonWords.setup
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/devicelist/tank/PageTankSetup.qml",
-						{ "title": text, "bindPrefix": root.bindPrefix })
+						{ "title": text, "bindPrefix": root.serviceUid })
 			}
 		}
 	}
 
 	TankDescription {
 		id: tankDescription
-		device: Device { serviceUid: root.bindPrefix }
+		device: Device { serviceUid: root.serviceUid }
 	}
 
 }
