@@ -263,11 +263,13 @@ void WifiModel::updateConnectedNetworkName()
 
 	if (name.isNull()) {
 		if (m_accessPointItem && m_accessPointItem->getValue().isValid()) {
-			name = m_accessPointItem->getValue().toInt() == 1
+			if (m_accessPointItem->getValue().toInt() == 1) {
 				//% "Disconnected | AP On"
-				? qtTrId("wifimodel_disconnected_ap_on")
+				name = qtTrId("wifimodel_disconnected_ap_on");
+			} else {
 				//% "Disconnected | AP Off"
-				: qtTrId("wifimodel_disconnected_ap_off");
+				name = qtTrId("wifimodel_disconnected_ap_off");
+			}
 		} else {
 			//% "Disconnected"
 			name = qtTrId("wifimodel_disconnected");
