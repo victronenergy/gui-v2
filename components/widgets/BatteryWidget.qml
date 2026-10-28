@@ -46,6 +46,11 @@ OverviewWidget {
 	}
 
 	VeQuickItem {
+		id: bmsChargeMode
+		uid: BackendConnection.serviceUidFromName("com.victronenergy.battery.ttyUSB1") + "/Info/ChargeMode"
+	}
+
+	VeQuickItem {
 		id: activeBatteryService
 		uid: Global.system.serviceUid + "/ActiveBatteryService"
 	}
@@ -240,6 +245,15 @@ OverviewWidget {
 			ColumnLayout {
 				spacing: 0
 				Layout.fillWidth: true
+
+				Label {
+					text: bmsChargeMode.valid && bmsChargeMode.value ? "BMS: " + String(bmsChargeMode.value).split(" | ")[0] : ""
+					visible: text !== ""
+					elide: Text.ElideRight
+					color: Theme.color_overviewPage_widget_battery_font_secondary
+					font.pixelSize: Theme.font_overviewPage_battery_small
+					Layout.fillWidth: true
+				}
 
 				Label {
 					id: modeText
