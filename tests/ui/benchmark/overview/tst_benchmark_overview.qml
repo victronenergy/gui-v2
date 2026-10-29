@@ -28,7 +28,8 @@ UiTestCase {
 				console.warn("Overview benchmark: current page animations are not enabled")
 				return false
 			}
-			const anim = findItem(Global.mainView, { objectName: "overviewConnectorAnimation" })
+			// FrameAnimation is not an Item, so findItem() cannot see it.
+			const anim = findObject(Global.mainView, { objectName: "overviewConnectorAnimation" })
 			if (Theme.screenSize !== Theme.Portrait) {
 				if (!anim || !anim.running) {
 					console.warn("Overview benchmark: connector FrameAnimation is not running")
@@ -43,7 +44,7 @@ UiTestCase {
 			if (Theme.screenSize === Theme.Portrait) {
 				return true
 			}
-			const anim = findItem(Global.mainView, { objectName: "overviewConnectorAnimation" })
+			const anim = findObject(Global.mainView, { objectName: "overviewConnectorAnimation" })
 			return !!(anim && anim.elapsedTime > root._animationElapsedAtCheck)
 		} })
 		runSteps()
