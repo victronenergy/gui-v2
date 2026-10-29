@@ -591,7 +591,7 @@ FocusScope {
 	FrameAnimation {
 		id: overviewPageRootAnimation
 
-		objectName: "overviewConnectorAnimation" // required by tst_benchmark_pages.qml
+		objectName: "overviewConnectorAnimation" // required by tests/ui/benchmark/overview/tst_benchmark_overview.qml
 		paused: cpuInfo.overLimit
 		running: root.animationEnabled
 		property real previousElapsed
