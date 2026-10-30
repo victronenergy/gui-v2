@@ -10,10 +10,10 @@ Item {
 	id: root
 
 	function setSystemValue(path, value) {
-		MockManager.setValue("com.victronenergy.system" + path, value)
+		MockManager.setValue(Services.system.serviceUid + path, value)
 	}
 	function systemValue(path) {
-		return MockManager.value("com.victronenergy.system" + path)
+		return MockManager.value(Services.system.serviceUid + path)
 	}
 
 	function setGaugesValue(path, value) {

@@ -12,7 +12,7 @@ Item {
 	readonly property string motorDriveUid: motorDriveServices.firstUid
 
 	function setSystemValue(path, value) {
-		MockManager.setValue("com.victronenergy.system" + path, value)
+		MockManager.setValue(Services.system.serviceUid + path, value)
 	}
 
 	FilteredServiceModel {
