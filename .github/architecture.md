@@ -299,6 +299,16 @@ Run with `--mock` flag to use mock backend. Mock configurations (e.g. "maximal",
 - Plugins can be loaded from MQTT (VRM) or filesystem
 - Hot-reloading supported via file system watcher
 
+Settings pages and device list pages are written with the `Victron.GuiPlugins` types, and opened with `Global.pageManager.pushPluginPage()`, which shows the plugin page inside a `PluginHostPage` that owns it. See [GUI plugins](gui-plugins.md).
+
+### Module dependencies
+
+`Victron.GuiPlugins` (`guiplugins/`, `cmake/ModuleGuiPlugins.cmake`) is the module that plugin pages import. Its types wrap the `Victron.VenusOS` types, so `Victron.VenusOS` must never use `Victron.GuiPlugins`: no QML import, no entry in `IMPORTS` or `DEPENDENCIES`, no include of its headers, and no link to its library. Only the app and the tests may link it. If a `Victron.Branding` module is in the tree, it must not use another Victron module.
+
+`tools/moduledependencies.py` checks these rules, and the `tst_moduledependencies` test fails if one is broken. It finds each module's files in the source lists in `cmake/`: the `set()` and `list(APPEND)` variables whose names start with the module's target name, such as `VictronVenusOS_CPP_SOURCES`. So keep each module's files in variables named that way (`VictronGuiPlugins_...` for `Victron.GuiPlugins`), and do not give a `Victron.GuiPlugins` header the same file name as a `Victron.VenusOS` header.
+
+`Victron.GuiPlugins` may use `Victron.VenusOS` in its own code, but no `Victron.VenusOS` type may appear in its API, because plugins do not import `Victron.VenusOS`. `tools/guipluginsapi.py` checks this, and keeps the checked-in record of the API, `tools/guiplugins-api.json`; the `tst_guipluginsapi` test fails if either is wrong. The plugin compiler reads the record to write each plugin's `requiredGuiPluginsVersion`. See [Changing Victron.GuiPlugins](gui-plugins.md#changing-victronguiplugins-gui-v2-contributors).
+
 ## Translations
 
 See [Internationalisation and Localisation](.github/i18n-l10n.md) for full details.

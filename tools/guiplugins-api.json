@@ -1,0 +1,401 @@
+{
+    "module": "Victron.GuiPlugins",
+    "version": "1.0",
+    "types": [
+        {
+            "name": "PluginAccessLevel",
+            "kind": "namespace",
+            "since": "1.0",
+            "enums": [
+                {
+                    "name": "Level",
+                    "since": "1.0",
+                    "values": [
+                        {"name": "User", "value": 0, "since": "1.0"},
+                        {"name": "Installer", "value": 1, "since": "1.0"},
+                        {"name": "SuperUser", "value": 2, "since": "1.0"},
+                        {"name": "Service", "value": 3, "since": "1.0"}
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "PluginDataItem",
+            "kind": "object",
+            "base": "QtObject",
+            "since": "1.0",
+            "properties": [
+                {"name": "max", "type": "real", "readonly": true, "since": "1.0"},
+                {"name": "min", "type": "real", "readonly": true, "since": "1.0"},
+                {"name": "path", "type": "string", "since": "1.0"},
+                {"name": "serviceType", "type": "string", "since": "1.0"},
+                {"name": "uid", "type": "string", "since": "1.0"},
+                {"name": "valid", "type": "bool", "readonly": true, "since": "1.0"},
+                {"name": "value", "type": "var", "readonly": true, "since": "1.0"}
+            ],
+            "signals": [
+                {"name": "maxChanged", "parameters": [], "since": "1.0"},
+                {"name": "minChanged", "parameters": [], "since": "1.0"},
+                {"name": "pathChanged", "parameters": [], "since": "1.0"},
+                {"name": "serviceTypeChanged", "parameters": [], "since": "1.0"},
+                {"name": "uidChanged", "parameters": [], "since": "1.0"},
+                {"name": "validChanged", "parameters": [], "since": "1.0"},
+                {"name": "valueChanged", "parameters": [], "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "setValue", "parameters": ["value: var"], "returns": "void", "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginDevicePage",
+            "kind": "object",
+            "base": "PluginPage",
+            "since": "1.0",
+            "properties": [
+                {"name": "deviceName", "type": "string", "required": true, "since": "1.0"},
+                {"name": "productId", "type": "int", "required": true, "since": "1.0"},
+                {"name": "serviceUid", "type": "string", "required": true, "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginGradientListView",
+            "kind": "object",
+            "base": "FocusScope",
+            "since": "1.0",
+            "properties": [
+                {"name": "rows", "type": "list<PluginListRow>", "default": true, "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginIconImage",
+            "kind": "object",
+            "base": "Item",
+            "since": "1.0",
+            "properties": [
+                {"name": "source", "type": "url", "since": "1.0"},
+                {"name": "tint", "type": "int", "since": "1.0"}
+            ],
+            "enums": [
+                {
+                    "name": "Tint",
+                    "since": "1.0",
+                    "values": [
+                        {"name": "Text", "value": 0, "since": "1.0"},
+                        {"name": "SecondaryText", "value": 1, "since": "1.0"},
+                        {"name": "Warning", "value": 2, "since": "1.0"},
+                        {"name": "Critical", "value": 3, "since": "1.0"},
+                        {"name": "Success", "value": 4, "since": "1.0"},
+                        {"name": "Disabled", "value": 5, "since": "1.0"}
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "PluginIcons",
+            "kind": "singleton",
+            "base": "QtObject",
+            "since": "1.0",
+            "properties": [
+                {"name": "alarm", "type": "url", "readonly": true, "since": "1.0"},
+                {"name": "battery", "type": "url", "readonly": true, "since": "1.0"},
+                {"name": "checkmark", "type": "url", "readonly": true, "since": "1.0"},
+                {"name": "close", "type": "url", "readonly": true, "since": "1.0"},
+                {"name": "devices", "type": "url", "readonly": true, "since": "1.0"},
+                {"name": "humidity", "type": "url", "readonly": true, "since": "1.0"},
+                {"name": "info", "type": "url", "readonly": true, "since": "1.0"},
+                {"name": "minus", "type": "url", "readonly": true, "since": "1.0"},
+                {"name": "open_link", "type": "url", "readonly": true, "since": "1.0"},
+                {"name": "plus", "type": "url", "readonly": true, "since": "1.0"},
+                {"name": "refresh", "type": "url", "readonly": true, "since": "1.0"},
+                {"name": "temperature", "type": "url", "readonly": true, "since": "1.0"},
+                {"name": "trash", "type": "url", "readonly": true, "since": "1.0"},
+                {"name": "warning", "type": "url", "readonly": true, "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginListButton",
+            "kind": "object",
+            "base": "PluginListRow",
+            "since": "1.0",
+            "properties": [
+                {"name": "caption", "type": "string", "since": "1.0"},
+                {"name": "interactive", "type": "bool", "since": "1.0"},
+                {"name": "secondaryText", "type": "string", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"},
+                {"name": "writeAccessLevel", "type": "int", "since": "1.0"}
+            ],
+            "signals": [
+                {"name": "clicked", "parameters": [], "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "checkWriteAccessLevel", "parameters": [], "since": "1.0"},
+                {"name": "click", "parameters": [], "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginListItem",
+            "kind": "object",
+            "base": "PluginListRow",
+            "since": "1.0",
+            "properties": [
+                {"name": "caption", "type": "string", "since": "1.0"},
+                {"name": "clickable", "type": "bool", "readonly": true, "since": "1.0"},
+                {"name": "content", "type": "alias", "default": true, "since": "1.0"},
+                {"name": "interactive", "type": "bool", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"},
+                {"name": "writeAccessLevel", "type": "int", "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "checkWriteAccessLevel", "parameters": [], "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginListNavigation",
+            "kind": "object",
+            "base": "PluginListRow",
+            "since": "1.0",
+            "properties": [
+                {"name": "caption", "type": "string", "since": "1.0"},
+                {"name": "interactive", "type": "bool", "since": "1.0"},
+                {"name": "pageProperties", "type": "var", "since": "1.0"},
+                {"name": "pageUrl", "type": "url", "since": "1.0"},
+                {"name": "secondaryText", "type": "string", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"}
+            ],
+            "signals": [
+                {"name": "clicked", "parameters": [], "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "click", "parameters": [], "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginListQuantity",
+            "kind": "object",
+            "base": "PluginListRow",
+            "since": "1.0",
+            "properties": [
+                {"name": "caption", "type": "string", "since": "1.0"},
+                {"name": "dataItem", "type": "PluginDataItem", "readonly": true, "since": "1.0"},
+                {"name": "decimals", "type": "int", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"},
+                {"name": "unit", "type": "int", "since": "1.0"},
+                {"name": "value", "type": "real", "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginListRadioButtonGroup",
+            "kind": "object",
+            "base": "PluginListRow",
+            "since": "1.0",
+            "properties": [
+                {"name": "caption", "type": "string", "since": "1.0"},
+                {"name": "currentIndex", "type": "int", "since": "1.0"},
+                {"name": "dataItem", "type": "PluginDataItem", "readonly": true, "since": "1.0"},
+                {"name": "defaultSecondaryText", "type": "string", "since": "1.0"},
+                {"name": "interactive", "type": "bool", "since": "1.0"},
+                {"name": "optionModel", "type": "var", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"},
+                {"name": "updateDataOnClick", "type": "bool", "since": "1.0"},
+                {"name": "writeAccessLevel", "type": "int", "since": "1.0"}
+            ],
+            "signals": [
+                {"name": "optionClicked", "parameters": ["index: int"], "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "checkWriteAccessLevel", "parameters": [], "since": "1.0"},
+                {"name": "click", "parameters": [], "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginListRow",
+            "kind": "object",
+            "base": "FocusScope",
+            "since": "1.0",
+            "properties": [
+                {"name": "effectiveVisible", "type": "bool", "readonly": true, "since": "1.0"},
+                {"name": "preferredVisible", "type": "bool", "since": "1.0"},
+                {"name": "showAccessLevel", "type": "int", "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginListSpinBox",
+            "kind": "object",
+            "base": "PluginListRow",
+            "since": "1.0",
+            "properties": [
+                {"name": "caption", "type": "string", "since": "1.0"},
+                {"name": "dataItem", "type": "PluginDataItem", "readonly": true, "since": "1.0"},
+                {"name": "decimals", "type": "int", "since": "1.0"},
+                {"name": "from", "type": "real", "since": "1.0"},
+                {"name": "interactive", "type": "bool", "since": "1.0"},
+                {"name": "stepSize", "type": "real", "since": "1.0"},
+                {"name": "suffix", "type": "string", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"},
+                {"name": "to", "type": "real", "since": "1.0"},
+                {"name": "value", "type": "real", "since": "1.0"},
+                {"name": "writeAccessLevel", "type": "int", "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "checkWriteAccessLevel", "parameters": [], "since": "1.0"},
+                {"name": "click", "parameters": [], "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginListSwitch",
+            "kind": "object",
+            "base": "PluginListRow",
+            "since": "1.0",
+            "properties": [
+                {"name": "caption", "type": "string", "since": "1.0"},
+                {"name": "checkable", "type": "bool", "since": "1.0"},
+                {"name": "checked", "type": "bool", "since": "1.0"},
+                {"name": "dataItem", "type": "PluginDataItem", "readonly": true, "since": "1.0"},
+                {"name": "interactive", "type": "bool", "since": "1.0"},
+                {"name": "secondaryText", "type": "string", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"},
+                {"name": "updateDataOnClick", "type": "bool", "since": "1.0"},
+                {"name": "valueFalse", "type": "var", "since": "1.0"},
+                {"name": "valueTrue", "type": "var", "since": "1.0"},
+                {"name": "writeAccessLevel", "type": "int", "since": "1.0"}
+            ],
+            "signals": [
+                {"name": "clicked", "parameters": [], "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "checkWriteAccessLevel", "parameters": [], "since": "1.0"},
+                {"name": "click", "parameters": [], "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginListTemperature",
+            "kind": "object",
+            "base": "PluginListRow",
+            "since": "1.0",
+            "properties": [
+                {"name": "caption", "type": "string", "since": "1.0"},
+                {"name": "dataItem", "type": "PluginDataItem", "readonly": true, "since": "1.0"},
+                {"name": "decimals", "type": "int", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginListText",
+            "kind": "object",
+            "base": "PluginListRow",
+            "since": "1.0",
+            "properties": [
+                {"name": "caption", "type": "string", "since": "1.0"},
+                {"name": "dataItem", "type": "PluginDataItem", "readonly": true, "since": "1.0"},
+                {"name": "secondaryText", "type": "string", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginListTextField",
+            "kind": "object",
+            "base": "PluginListRow",
+            "since": "1.0",
+            "properties": [
+                {"name": "caption", "type": "string", "since": "1.0"},
+                {"name": "dataItem", "type": "PluginDataItem", "readonly": true, "since": "1.0"},
+                {"name": "maximumLength", "type": "int", "since": "1.0"},
+                {"name": "placeholderText", "type": "string", "since": "1.0"},
+                {"name": "secondaryText", "type": "string", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"},
+                {"name": "writeAccessLevel", "type": "int", "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "checkWriteAccessLevel", "parameters": [], "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginPage",
+            "kind": "object",
+            "base": "FocusScope",
+            "since": "1.0",
+            "properties": [
+                {"name": "title", "type": "string", "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginPrimaryListLabel",
+            "kind": "object",
+            "base": "PluginListRow",
+            "since": "1.0",
+            "properties": [
+                {"name": "text", "type": "string", "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginSettingsListHeader",
+            "kind": "object",
+            "base": "PluginListRow",
+            "since": "1.0",
+            "properties": [
+                {"name": "text", "type": "string", "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginUnit",
+            "kind": "namespace",
+            "since": "1.0",
+            "enums": [
+                {
+                    "name": "Unit",
+                    "since": "1.0",
+                    "values": [
+                        {"name": "None", "value": 0, "since": "1.0"},
+                        {"name": "Amp", "value": 1, "since": "1.0"},
+                        {"name": "AmpHour", "value": 2, "since": "1.0"},
+                        {"name": "Energy_KiloWattHour", "value": 7, "since": "1.0"},
+                        {"name": "Percentage", "value": 20, "since": "1.0"},
+                        {"name": "RevolutionsPerMinute", "value": 22, "since": "1.0"},
+                        {"name": "VoltAmpere", "value": 34, "since": "1.0"},
+                        {"name": "Volt_AC", "value": 36, "since": "1.0"},
+                        {"name": "Volt_DC", "value": 37, "since": "1.0"},
+                        {"name": "Watt", "value": 42, "since": "1.0"}
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "PluginWords",
+            "kind": "singleton",
+            "base": "QtObject",
+            "since": "1.0",
+            "properties": [
+                {"name": "alarms", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "auto", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "battery", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "current_amps", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "custom_name", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "disabled", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "enabled", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "error", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "firmware_version", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "history", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "manufacturer", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "mode", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "model_name", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "no", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "off", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "on", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "power_watts", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "remove", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "reset", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "serial_number", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "settings", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "setup", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "state", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "status", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "temperature", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "total", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "type", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "unknown_status", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "voltage", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "yes", "type": "string", "readonly": true, "since": "1.0"}
+            ]
+        }
+    ]
+}
