@@ -12,6 +12,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
 
     ApplicationContent.qml
     FrameRateVisualizer.qml
+    VictronBranding.qml
 
     components/AcceptButtonBackground.qml
     components/AcPhasesCurrentRange.qml
@@ -669,6 +670,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/basetankdevicemodel.cpp
     src/classandvrminstancemodel.h
     src/classandvrminstancemodel.cpp
+    src/colorderivation.h
+    src/colorderivation.cpp
     src/colordimmerdata.h
     src/colordimmerdata.cpp
     src/dcmeterdevicemodel.h
@@ -769,6 +772,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/systemservicelistener.cpp
     src/switchableoutput.h
     src/switchableoutput.cpp
+    src/tintedimageprovider.h
+    src/tintedimageprovider.cpp
     src/veqitemmockproducer.h
     src/veqitemmockproducer.cpp
     src/widgetconnectorpathupdater.h
@@ -814,8 +819,7 @@ set(VictronVenusOS_RESOURCES
     images/electron.svg
     images/electron_arrow.svg
     images/ess.svg
-    images/key_navigation_highlight_dark.svg
-    images/key_navigation_highlight_light.svg
+    images/key_navigation_highlight.svg
     images/overview_lightning_bolts.svg
     images/icon_black_water_32.svg
     images/icon_charging_generator.svg

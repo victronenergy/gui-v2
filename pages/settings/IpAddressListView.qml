@@ -39,7 +39,7 @@ GradientListView {
 		//% "Add IP address"
 		text: qsTrId("settings_add_ip_addresses")
 		iconSource: "qrc:/images/icon_plus_32.svg"
-		iconColor: Theme.color_ok
+		iconColor: Theme.color_brand
 		showAccessLevel: root.writeAccessLevel
 		hasSubMenu: false
 		onClicked: {
@@ -84,7 +84,7 @@ GradientListView {
 			//% "Remove IP address?"
 			title: qsTrId("settings_fronius_remove_ip_address")
 			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-			icon.color: Theme.color_orange
+			icon.color: Theme.color_warning
 			acceptText: CommonWords.remove
 
 			onAccepted: {

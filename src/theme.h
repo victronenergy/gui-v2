@@ -10,9 +10,14 @@
 #include <QScreen>
 #include <QObject>
 #include <QSizeF>
+#include <QColor>
+#include <QList>
+#include <QUrl>
 #include <qqmlintegration.h>
 
 #include "enums.h"
+#include "branding.h"
+#include "colorderivation.h"
 
 namespace Victron {
 namespace VenusOS {
@@ -31,6 +36,16 @@ class Theme : public QObject
 	Q_PROPERTY(bool adjustingGeometry READ adjustingGeometry NOTIFY adjustingGeometryChanged FINAL)
 	Q_PROPERTY(int visualViewportBottom READ visualViewportBottom NOTIFY visualViewportBottomChanged FINAL)
 	Q_PROPERTY(bool virtualKeyboardOpened READ virtualKeyboardOpened NOTIFY virtualKeyboardOpenedChanged FINAL)
+
+	// Branding-dependent values. An empty font family means the language font.
+	Q_PROPERTY(QString font_family READ font_family NOTIFY themeValuesChanged FINAL)
+	Q_PROPERTY(QString quantity_font_family READ quantity_font_family NOTIFY themeValuesChanged FINAL)
+	Q_PROPERTY(QUrl splash_logo_icon READ splash_logo_icon NOTIFY themeValuesChanged FINAL)
+	Q_PROPERTY(QUrl splash_logo_text READ splash_logo_text NOTIFY themeValuesChanged FINAL)
+	Q_PROPERTY(bool splash_logo_icon_preserve_colors READ splash_logo_icon_preserve_colors NOTIFY themeValuesChanged FINAL)
+	Q_PROPERTY(bool splash_logo_text_preserve_colors READ splash_logo_text_preserve_colors NOTIFY themeValuesChanged FINAL)
+	Q_PROPERTY(QUrl splash_gauge_animation READ splash_gauge_animation NOTIFY themeValuesChanged FINAL)
+	Q_PROPERTY(QUrl splash_gauge_animation_light READ splash_gauge_animation_light NOTIFY themeValuesChanged FINAL)
 
 public:
 	enum ScreenSize {
@@ -106,6 +121,27 @@ public:
 	void setVisualViewportHeight(int height);
 	void setVisualViewportOffsetTop(int offsetTop);
 
+	// Victron's branding is the first entry. Plugin branding follows, in plugin-name order.
+	// When more than one entry sets a property, the last one is used, except that
+	// light_mode_background_factor, background_secondary and background_page are used only with
+	// their own background_primary (see ColorDerivation::resolveBrandingColors()).
+	// The palette is resolved once Victron's branding has been added. Emits themeValuesChanged().
+	Q_INVOKABLE void addBranding(QObject *branding);
+	void setPluginBranding(const QList<Victron::BrandingData> &pluginBranding);
+	QList<Victron::BrandingData> pluginBranding() const;
+
+	QString font_family() const;
+	QString quantity_font_family() const;
+	QUrl splash_logo_icon() const;
+	QUrl splash_logo_text() const;
+	bool splash_logo_icon_preserve_colors() const;
+	bool splash_logo_text_preserve_colors() const;
+	QUrl splash_gauge_animation() const;
+	QUrl splash_gauge_animation_light() const;
+
+	// The branding colors of both color schemes, after Victron's branding and the plugin branding.
+	const ColorDerivation::ResolvedBrandingColors &resolvedBrandingColors() const { return m_brandingColors; }
+
 Q_SIGNALS:
 	void screenSizeChanged(Victron::VenusOS::Theme::ScreenSize screenSize);
 	void screenSizeChanged_parameterless();
@@ -120,9 +156,20 @@ Q_SIGNALS:
 	void visualViewportBottomChanged();
 	void virtualKeyboardOpenedChanged();
 
+	// Emitted when a branding-dependent or color-scheme-dependent value may have changed.
+	void themeValuesChanged();
+
 protected:
 	void setAdjustingGeometry(bool adjusting);
 	void updateViewportAndKeyboardProperties();
+
+	// The generated ThemeSingleton computes the colors of the current scheme from m_brandingColors.
+	virtual void resolvePalette();
+
+	// Resolves m_brandingColors from Victron's branding and the plugin branding.
+	void resolveBrandingColors(bool warnAboutContrast = false);
+	void resolveBranding();
+	QString resolveFontFamily();
 
 	ScreenSize m_screenSize = SevenInch;
 	ColorScheme m_colorScheme = Dark;
@@ -136,6 +183,29 @@ protected:
 	int m_visualViewportOffsetTop = 0;
 	bool m_adjustingGeometry = false;
 	bool m_virtualKeyboardOpened = false;
+
+	QList<Victron::BrandingData> m_pluginBranding;
+	ColorDerivation::ResolvedBrandingColors m_brandingColors;
+	QUrl m_splashLogoIcon;
+	QUrl m_splashLogoText;
+	bool m_splashLogoIconPreserveColors = false;
+	bool m_splashLogoTextPreserveColors = false;
+	QUrl m_splashGaugeAnimation;
+	QUrl m_splashGaugeAnimationLight;
+	QString m_fontFamily;
+	QString m_quantityFontFamily;
+	QString m_lastFontCoverageWarning;
+	bool m_languageConnected = false;
+
+private:
+	void connectLanguageFontChanges();
+	void registerBuiltinFonts();
+	void resolveThemeValues();
+	QList<Victron::BrandingData> brandingList() const;
+	bool languageUsesBuiltinFont(const QUrl &languageFontUrl) const;
+
+	std::optional<Victron::BrandingData> m_builtinBranding;
+	QList<int> m_builtinFontIds;
 };
 
 }

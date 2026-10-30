@@ -20,6 +20,7 @@ add_subdirectory(allservicesmodel)
 add_subdirectory(backendconnection)
 add_subdirectory(basetankdevice)
 add_subdirectory(basetankdevicemodel)
+add_subdirectory(branding)
 add_subdirectory(classandvrminstancemodel)
 add_subdirectory(device)
 add_subdirectory(filtereddevicemodel)
@@ -47,3 +48,22 @@ add_subdirectory(uitestutils)
 add_subdirectory(units)
 add_subdirectory(visibleitemmodel)
 add_subdirectory(wifimodel)
+
+# Tests for the Python tools: the plugin compiler's Branding import and name checks, and the generated Branding
+# property list (which is also the Victron.Branding API record).
+find_package(Python3 COMPONENTS Interpreter)
+if (Python3_Interpreter_FOUND)
+    # -B: do not write __pycache__ directories into the source tree.
+    add_test(NAME tst_themepruner
+        COMMAND ${Python3_EXECUTABLE} -B -m unittest discover -s ${CMAKE_CURRENT_SOURCE_DIR}/themepruner -p "test_*.py")
+    add_test(NAME tst_plugincompiler
+        COMMAND ${Python3_EXECUTABLE} -B -m unittest discover -s ${CMAKE_CURRENT_SOURCE_DIR}/plugincompiler -p "test_*.py")
+    add_test(NAME tst_brandingproperties
+        COMMAND ${Python3_EXECUTABLE} -B -m unittest discover -s ${CMAKE_CURRENT_SOURCE_DIR}/brandingproperties -p "test_*.py")
+    # Lets tst_plugincompiler run qmllint on the example branding plugins, against the
+    # Victron.Branding module in the build directory.
+    if (TARGET Qt6::qmllint)
+        set_tests_properties(tst_plugincompiler PROPERTIES ENVIRONMENT
+            "GUI_V2_QMLLINT=$<TARGET_FILE:Qt6::qmllint>;GUI_V2_QML_IMPORT_PATH=${CMAKE_BINARY_DIR}")
+    endif()
+endif()

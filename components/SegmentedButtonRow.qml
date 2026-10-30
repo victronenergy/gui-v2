@@ -70,10 +70,10 @@ FocusScope {
 					color: mouseArea.enabled === false && model.index !== root.currentIndex
 						   ? Theme.color_background_disabled
 						   : ((mouseArea.pressed || model.index === root.currentIndex)
-							  ? modelData.selectedBackgroundColor ?? Theme.color_ok
-							  : Theme.color_darkOk)
+							  ? modelData.selectedBackgroundColor ?? Theme.color_brand
+							  : Theme.color_darkBrand)
 					border.width: Theme.geometry_button_border_width
-					border.color: (!root.showBorderWhenDisabled && mouseArea.enabled === false && model.index !== root.currentIndex) ? buttonDelegate.color : Theme.color_ok
+					border.color: (!root.showBorderWhenDisabled && mouseArea.enabled === false && model.index !== root.currentIndex) ? buttonDelegate.color : Theme.color_brand
 					radius: Theme.geometry_button_radius
 					roundedSide: model.index === 0 ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Left
 							: model.index === (buttonRepeater.count-1) ? VenusOS.AsymmetricRoundedRectangle_RoundedSide_Right

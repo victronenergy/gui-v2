@@ -16,8 +16,9 @@ QtObject {
 	property bool applicationActive: true // i.e. not in Idle mode
 	property bool keyNavigationEnabled
 
-	readonly property string fontFamily: _defaultFontLoader.name
-	readonly property string quantityFontFamily: _quantityFontLoader.name
+	// A branding font is used when Theme provides one (i.e. it covers the current language).
+	readonly property string fontFamily: Theme.font_family !== "" ? Theme.font_family : _defaultFontLoader.name
+	readonly property string quantityFontFamily: Theme.quantity_font_family !== "" ? Theme.quantity_font_family : _quantityFontLoader.name
 	property var dialogLayer
 	property var notificationLayer
 	property var pressEffect
@@ -59,6 +60,17 @@ QtObject {
 
 	function showToastNotification(type, text, autoCloseInterval = 0, textFormat = Text.AutoText) {
 		return ToastModel.add(type, text, autoCloseInterval, textFormat)
+	}
+
+	// level is Theme.Ok, Theme.Warning or Theme.Critical. Pass dark for the darkened color, used for
+	// a gauge remainder or a historical icon. Anything that is not a warning or an alarm is info.
+	// This must stay in QML: a binding does not record Theme reads made inside a C++ function, or in
+	// a .pragma library script, so the returned color would not follow a theme change.
+	function statusColor(level, dark) {
+		const useDark = dark === true
+		return level === Theme.Warning ? (useDark ? Theme.color_darkWarning : Theme.color_warning)
+				: level === Theme.Critical ? (useDark ? Theme.color_darkCritical : Theme.color_critical)
+				: (useDark ? Theme.color_darkInfo : Theme.color_info)
 	}
 
 	function reset() {

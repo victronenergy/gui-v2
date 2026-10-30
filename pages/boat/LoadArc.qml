@@ -40,8 +40,8 @@ Column {
 			animationEnabled: root.animationEnabled
 			valueType: VenusOS.Gauges_ValueType_RisingPercentage
 			value: Math.abs(motorDrives.dcConsumption.quotient.percentage)
-			progressColor: motorDrives.isRegenerating ? Theme.color_boatPage_regenProgress : Theme.color_ok
-			remainderColor: motorDrives.isRegenerating ? Theme.color_boatPage_regenRemainder : Theme.color_darkOk
+			progressColor: motorDrives.isRegenerating ? Theme.color_boatPage_regenProgress : Theme.color_info
+			remainderColor: motorDrives.isRegenerating ? Theme.color_boatPage_regenRemainder : Theme.color_darkInfo
 		}
 	}
 

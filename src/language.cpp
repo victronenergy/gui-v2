@@ -10,7 +10,9 @@
 #include <QQmlEngine>
 #include <QQmlContext>
 #include <QTranslator>
+#include <QFont>
 #include <QFontDatabase>
+#include <QRawFont>
 #include <QFile>
 
 using namespace Victron::VenusOS;
@@ -46,6 +48,71 @@ QUrl fontUrlForLanguage(QLocale::Language language, const QString &urlPrefix = Q
 
 	// Use the default font on other platforms.
 	return defaultFontUrl;
+}
+
+QFontDatabase::WritingSystem writingSystemForLanguage(QLocale::Language language)
+{
+	switch (QLocale(language).script()) {
+	case QLocale::LatinScript: return QFontDatabase::Latin;
+	case QLocale::CyrillicScript: return QFontDatabase::Cyrillic;
+	case QLocale::GreekScript: return QFontDatabase::Greek;
+	case QLocale::ArabicScript: return QFontDatabase::Arabic;
+	case QLocale::HebrewScript: return QFontDatabase::Hebrew;
+	case QLocale::ThaiScript: return QFontDatabase::Thai;
+	case QLocale::SimplifiedHanScript: return QFontDatabase::SimplifiedChinese;
+	case QLocale::TraditionalHanScript: return QFontDatabase::TraditionalChinese;
+	case QLocale::JapaneseScript: return QFontDatabase::Japanese;
+	case QLocale::KoreanScript: return QFontDatabase::Korean;
+	default: return QFontDatabase::Any;
+	}
+}
+
+// A selection of letters other than A-Z and a-z which are commonly
+// required in the language. Used to decide whether a font should be
+// treated as supporting that language. Not a complete alphabet, and
+// it does not have to be updated when translations change.
+//
+// English returns none because it needs no such letters.
+// Russian, Ukrainian, Arabic, Chinese, Japanese and Thai return none
+// because this table only lists Latin letters.
+QList<char32_t> sampleCharacters(QLocale::Language language)
+{
+	switch (language) {
+	case QLocale::Afrikaans:
+		return { 0x00E8, 0x00EA, 0x00EB, 0x00EF, 0x00F3, 0x00FB };
+	case QLocale::Czech:
+		return { 0x00E1, 0x00E9, 0x00ED, 0x00F3, 0x00FA, 0x00FD, 0x010D, 0x010F, 0x011B, 0x0148, 0x0159, 0x0161,
+				0x0165, 0x016F, 0x017E, 0x00C1, 0x00C9, 0x00CD, 0x00DA, 0x00DD,
+				0x010C, 0x011A, 0x0158, 0x0160, 0x017D };
+	case QLocale::Danish:
+		return { 0x00E5, 0x00E6, 0x00E9, 0x00F8, 0x00C5, 0x00C6, 0x00D8 };
+	case QLocale::German:
+		return { 0x00DF, 0x00E4, 0x00F6, 0x00FC, 0x00C4, 0x00D6, 0x00DC };
+	case QLocale::Spanish:
+		return { 0x00AA, 0x00BA, 0x00E1, 0x00E9, 0x00ED, 0x00F1, 0x00F3, 0x00FA, 0x00C1, 0x00CD, 0x00D3, 0x00DA };
+	case QLocale::French:
+		return { 0x00E0, 0x00E2, 0x00E7, 0x00E8, 0x00E9, 0x00EA, 0x00EB, 0x00EE, 0x00EF, 0x00F4, 0x00F9, 0x00FB,
+				0x0153, 0x00C0, 0x00C9, 0x00CA };
+	case QLocale::Italian:
+		return { 0x00E0, 0x00E8, 0x00E9, 0x00EC, 0x00F2, 0x00F9, 0x00C8 };
+	case QLocale::Dutch:
+		return { 0x00E8, 0x00E9, 0x00EB, 0x00EF, 0x00F3, 0x00FC };
+	case QLocale::Polish:
+		return { 0x00F3, 0x0105, 0x0107, 0x0119, 0x0142, 0x0144, 0x015B, 0x017A, 0x017C, 0x0141, 0x015A, 0x0179,
+				0x017B };
+	case QLocale::Portuguese:
+		return { 0x00BA, 0x00E0, 0x00E1, 0x00E2, 0x00E3, 0x00E7, 0x00E8, 0x00E9, 0x00EA, 0x00ED, 0x00F3, 0x00F5,
+				0x00FA, 0x00C1, 0x00C3, 0x00C7, 0x00C9, 0x00CD, 0x00D3, 0x00DA };
+	case QLocale::Romanian:
+		return { 0x00E2, 0x00EE, 0x0103, 0x015F, 0x0163, 0x0219, 0x021B, 0x00CE, 0x0162, 0x0218, 0x021A };
+	case QLocale::Swedish:
+		return { 0x00E4, 0x00E5, 0x00F6, 0x00C4, 0x00C5, 0x00D6 };
+	case QLocale::Turkish:
+		return { 0x00E7, 0x00F6, 0x00FC, 0x011F, 0x0131, 0x015F, 0x00C7, 0x00D6,
+				0x00DC, 0x011E, 0x0130, 0x015E };
+	default:
+		return {};
+	}
 }
 
 bool isLanguageRenderingSupported(QLocale::Language language)
@@ -259,6 +326,25 @@ QString Language::getCurrentLocaleName() const
 QUrl Language::fontFileUrl() const
 {
 	return m_fontFileUrl;
+}
+
+bool Language::fontFamilyCovers(const QString &family, QLocale::Language language)
+{
+	const QFontDatabase::WritingSystem writingSystem = writingSystemForLanguage(language);
+	if (writingSystem != QFontDatabase::Any
+			&& !QFontDatabase::writingSystems(family).contains(writingSystem)) {
+		return false;
+	}
+	const QList<char32_t> samples = sampleCharacters(language);
+	if (!samples.isEmpty()) {
+		const QRawFont rawFont = QRawFont::fromFont(QFont(family));
+		for (char32_t c : samples) {
+			if (!rawFont.supportsCharacter(c)) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 QString Language::fontUrlPrefix() const

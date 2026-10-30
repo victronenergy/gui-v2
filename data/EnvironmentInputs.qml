@@ -36,11 +36,11 @@ QtObject {
 			return defaultColor
 		}
 		if (iaqs >= 80) {
-			return Theme.color_green
+			return Theme.color_success
 		} else if (iaqs >= 50) {
-			return Theme.color_orange
+			return Theme.color_warning
 		} else {
-			return Theme.color_red
+			return Theme.color_critical
 		}
 	}
 

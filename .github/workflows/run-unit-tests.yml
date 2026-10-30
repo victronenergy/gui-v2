@@ -27,6 +27,11 @@ jobs:
         with:
           submodules: recursive
 
+      # brandingproperties.py compares the Branding API with the latest vX.Y.Z
+      # tag. The default checkout is shallow, and a shallow clone fails that check.
+      - name: Fetch release tags
+        run: git fetch --tags --unshallow origin
+
       - name: Set up environment variables from "scripts/.env" file
         run: |
           if [ -f "scripts/.env" ]; then

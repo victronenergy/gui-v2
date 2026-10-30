@@ -262,7 +262,28 @@ themes/
 
 `tools/themeparser.py` generates `src/themeobjects.h` at build time, creating the `Theme` C++ singleton with all properties accessible in QML as `Theme.color_*`, `Theme.geometry_*`, `Theme.animation_*`, `Theme.font_*`.
 
+A value that names another key is an alias. In `Dark.json` / `Light.json`, an alias of another color scheme key reads that key's computed value (`color_button` is `color_brand`), so it follows that key's branding. Any other alias, for example of a `ColorDesign.json` palette color or a geometry key, is copied in as a literal. Data colors (tank, temperature and similar) must alias palette colors, not color scheme keys, so that they never follow branding. Aliases may be chained.
+
+A color scheme value can also be a function call, such as `dim(color_red)` (red at 70% alpha, blended onto `color_background_primary`) or `text_color_on(color_brand)` (white if white has at least 3:1 contrast on every listed fill, otherwise a dark font color darkened toward black until it does). When no one text color can be read on every fill the text is drawn on, `fill_for_text()` darkens or lightens one fill until a chosen text color can be read on it. `readable_text_on()` instead moves the text color until it can be read on those fills. The functions are listed in `tools/themeparser.py` and implemented in `src/colorderivation.h`. The generated `Theme` computes every color scheme value whenever the branding or the color scheme changes, so all of them follow the branding.
+
+When a color means something in the UI, use the color for that meaning, not a palette color: `color_brand` for controls and chrome, `color_info` for informative notifications and for quantities that are not a success, a warning or an alarm, `color_success` for success and feed-in, `color_warning` and `color_critical` for alarms, and their dark variants (`color_darkBrand`, `color_darkInfo`, `color_darkCritical` and so on). A gauge that picks a status color by level uses `Global.statusColor()`, which reads the Theme colors in QML so the binding updates when the theme changes. Palette colors (`color_blue`, `color_green`, ...) are for data, such as a tank fluid or a temperature, and do not follow branding.
+
+Images must not have brand or status colors baked in. Tint single-color art with a Theme color: `CP.ColorImage` or `IconImage` for an image, and for a `BorderImage` the `image://tinted/<rrggbb>/<resource path>` image provider (`src/tintedimageprovider.cpp`), as `GlobalKeyNavigationHighlight` does with `color_focus_highlight`.
+
 The theme supports multiple screen sizes (FiveInch, SevenInch, Portrait) with geometry values that adapt accordingly.
+
+### Theme branding
+
+Victron's own look is a `Branding` object, `VictronBranding.qml`. `Main.qml` adds it with `Theme.addBranding()` before showing the splash screen. The palette is not resolved until that object has been added. A branding plugin (see [GUI plugins](#gui-plugins)) can override the same values: ten colors (`color_brand`, `color_success`, `color_warning`, `color_critical`, `color_info`, `color_background_primary`, `color_background_secondary`, `color_background_page`, `color_font_primary` and `color_font_secondary`), `light_mode_background_factor`, the font families, and the splash logos.
+- `GuiPluginLoader` creates each plugin's `Branding` object once, copies the values that it sets into a `BrandingData` struct, and destroys the object, so no plugin binding stays alive. Those values are given to `Theme::setPluginBranding()` in plugin-name order, and are applied after Victron's branding. When more than one entry sets a value, the last one is used, except that `light_mode_background_factor` is used only from the entry whose `color_background_primary` is used, and `color_background_secondary` and `color_background_page` only from that entry or a later one (see `ColorDerivation::resolveBrandingColors()`).
+- The Branding colors are the Dark scheme's colors, whatever their lightness. The Light scheme's colors are computed from them: the brand and status colors are kept; `color_background_primary` and `color_background_secondary` have their lightness inverted (scaled by `light_mode_background_factor`); `color_font_primary` has its lightness inverted and is moved 15% toward the background; and the page background is computed from those. A color that an entry does not set is taken from an earlier entry, or is computed from the colors that are set. `Theme` logs a warning if a plugin's `color_font_primary` has too little contrast on `color_background_primary`.
+- All other color scheme values are computed from these ten colors (see [Theme system](#theme-system)), so they follow the branding.
+- `Theme.font_family` and `Theme.quantity_font_family` come from the same list: Victron's families, unless a later entry sets them. An empty `Theme.font_family` means the language font (`Global`'s `FontLoader`). A language that has its own font keeps it. A plugin family is not used for a language that it does not cover. A plugin that sets either family must list, in that same plugin, a font file that registers it. A family from another plugin, or only installed on the device, is not used: that plugin's branding integration is ignored.
+- `Theme.splash_logo_icon` and `Theme.splash_logo_text` come from the same list. `SplashView` tints them with the splash colors unless `splash_logo_*_preserve_colors` is set.
+- `Theme.splash_gauge_animation` and `Theme.splash_gauge_animation_light` come from the same list. `SplashView` plays the light file in the Light scheme when it is set, otherwise the dark file, at the file's own size, to its last frame. If that file is also unset, Victron's size-specific animation is used, which pauses at a fixed frame.
+- Every change to the branding or to the color scheme emits `Theme.themeValuesChanged`, which is the NOTIFY signal of the affected properties.
+
+With no branding plugin installed, the values are Victron's, from `VictronBranding.qml`.
 
 ## Build variants
 
@@ -295,9 +316,15 @@ Run with `--mock` flag to use mock backend. Mock configurations (e.g. "maximal",
 
 `GuiPluginLoader` supports third-party UI extensions:
 - Plugins are JSON-defined with QML components
-- Integration types: settings pages, device list pages, navigation pages, quick access cards
+- Integration types: settings pages, device list pages, navigation pages, quick access panes and cards, and branding (type 6)
 - Plugins can be loaded from MQTT (VRM) or filesystem
 - Hot-reloading supported via file system watcher
+
+Plugins are built with `tools/gui-v2-plugin-compiler.py`. Its `--branding` option checks a `Branding.qml` file before packing it: `import Victron.Branding` is required, `QtQml` and `QtQuick` are allowed, and the file must not contain a few obvious calls such as `createQmlObject` or `XMLHttpRequest`. It does not check property values. It packs every `.svg`, `.png`, `.ttf` and `.otf` file under the plugin directory, and writes `requiredBrandingVersion` from properties assigned as `name:` on their own line, after indentation. The property names and versions come from `tools/branding-properties.json`, generated from `src/branding/branding.h` by `tools/brandingproperties.py`; the `tst_brandingproperties` test fails if it is out of date. The list is also the checked-in record of the `Victron.Branding` API, and the script will not remove a property from it, or change one, without a new major version. After a release tag contains the list, it also rejects a property the latest release does not have unless the module version is newer than that release. See [Branding plugins](branding-plugins.md).
+
+### Branding module
+
+The `Branding` type is in its own QML module, `Victron.Branding` (`src/branding/`, `cmake/ModuleBranding.cmake`), so that a branding plugin is checked against this one small module, and so that it has its own version. The module's `qmldir` and `qmltypes` are installed next to the plugin compiler, which runs `qmllint` against them.
 
 ## Translations
 

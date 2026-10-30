@@ -10,9 +10,9 @@ import Victron.VenusOS
 T.Slider {
 	id: root
 
-	property color highlightColor: enabled ? Theme.color_ok : Theme.color_button_on_background_disabled
-	property color backgroundColor: enabled ? Theme.color_darkOk : Theme.color_background_disabled
-	property color borderColor: enabled ? Theme.color_ok : Theme.color_font_disabled
+	property color highlightColor: enabled ? Theme.color_brand : Theme.color_button_on_background_disabled
+	property color backgroundColor: enabled ? Theme.color_darkBrand : Theme.color_background_disabled
+	property color borderColor: enabled ? Theme.color_brand : Theme.color_font_disabled
 	property int borderWidth: Theme.geometry_button_border_width
 	property bool animationEnabled: visible && Global.animationEnabled
 

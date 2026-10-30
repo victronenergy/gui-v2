@@ -15,8 +15,8 @@ import Victron.VenusOS
 T.Slider {
 	id: root
 
-	property color grooveColor: enabled ? Theme.color_darkOk : Theme.color_background_disabled
-	property color highlightColor: enabled ? Theme.color_ok : Theme.color_switch_groove_disabled
+	property color grooveColor: enabled ? Theme.color_darkBrand : Theme.color_background_disabled
+	property color highlightColor: enabled ? Theme.color_brand : Theme.color_switch_groove_disabled
 	property bool showHandle: true
 
 	implicitWidth: Math.max(implicitBackgroundWidth, implicitHandleWidth) + leftInset + rightInset

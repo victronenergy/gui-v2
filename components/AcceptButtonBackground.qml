@@ -17,7 +17,7 @@ Rectangle {
 
 	signal animationFinished()
 
-	color: Theme.color_dimGreen
+	color: Theme.color_dimSuccess
 	topLeftRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_button_radius : 0
 	topRightRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_button_radius : 0
 	bottomLeftRadius: Theme.screenSize === Theme.Portrait ? Theme.geometry_button_radius : 0

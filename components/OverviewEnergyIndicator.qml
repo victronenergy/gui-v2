@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 /*
@@ -21,10 +22,11 @@ Item {
 
 	// Animate two copies of the same image continuously, to make it look like the same image is
 	// being looped.
-	Image {
+	CP.ColorImage {
 		id: boltImage1
 		x: parent.width/2 - width/2
 		source: "qrc:/images/overview_lightning_bolts.svg"
+		color: Theme.color_overviewPage_widget_border
 
 		NumberAnimation on y {
 			from: 0
@@ -34,11 +36,12 @@ Item {
 			loops: Animation.Infinite
 		}
 	}
-	Image {
+	CP.ColorImage {
 		id: boltImage2
 		x: parent.width/2 - width/2
 		y: height
 		source: "qrc:/images/overview_lightning_bolts.svg"
+		color: Theme.color_overviewPage_widget_border
 
 		NumberAnimation on y {
 			from: boltImage2.height

@@ -35,7 +35,7 @@ Item {
 			startAngle: control.transitionAngle
 			direction: control.direction
 			strokeWidth: control.strokeWidth
-			strokeColor: Theme.color_darkOk
+			strokeColor: Theme.color_darkInfo
 			fillColor: control.fillColor
 			animationEnabled: progress.animationEnabled
 		}
@@ -59,7 +59,7 @@ Item {
 			endAngle: control.transitionAngle
 			direction: control.direction
 			strokeWidth: control.strokeWidth
-			strokeColor: Theme.color_ok
+			strokeColor: Theme.color_info
 			fillColor: control.fillColor
 		}
 	}

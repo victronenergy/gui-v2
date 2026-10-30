@@ -35,7 +35,7 @@ Page {
 				//% "Add port and unit ID"
 				text: qsTrId("page_settings_fronius_modbus_add_title")
 				iconSource: "qrc:/images/icon_plus_32.svg"
-				iconColor: Theme.color_ok
+				iconColor: Theme.color_brand
 				showAccessLevel: VenusOS.User_AccessType_Installer
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsFroniusAddLocation.qml", { locations: _locations } )
 			}
@@ -61,7 +61,7 @@ Page {
 			//% "Port/unit ID %1"
 			text: qsTrId("page_settings_fronius_modbus_location_number").arg(locationNumber)
 			iconSource: "qrc:/images/icon_minus_32.svg"
-			iconColor: Theme.color_ok
+			iconColor: Theme.color_brand
 			hasSubMenu: false
 			spacing: Theme.geometry_listItem_content_spacing // add space between text and remove icon
 			quantityModel: QuantityObjectModel {
@@ -94,7 +94,7 @@ Page {
 			//% "Remove Modbus port and unit ID?"
 			title: qsTrId("page_settings_fronius_modbus_remove_location")
 			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-			icon.color: Theme.color_orange
+			icon.color: Theme.color_warning
 			acceptText: CommonWords.remove
 
 			onAccepted: {

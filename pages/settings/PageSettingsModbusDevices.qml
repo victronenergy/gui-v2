@@ -24,7 +24,7 @@ Page {
 				id: addDevice
 				text: CommonWords.add_modbus_device
 				iconSource: "qrc:/images/icon_plus_32.svg"
-				iconColor: Theme.color_ok
+				iconColor: Theme.color_brand
 				showAccessLevel: VenusOS.User_AccessType_Installer
 				hasSubMenu: false
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsModbusAddDevice.qml", { devices: _devices } )
@@ -63,7 +63,7 @@ Page {
 			//% "Device %1"
 			text: qsTrId("page_settings_modbus_device_number").arg(deviceNumber)
 			iconSource: "qrc:/images/icon_minus_32.svg"
-			iconColor: Theme.color_ok
+			iconColor: Theme.color_brand
 			hasSubMenu: false
 			spacing: Theme.geometry_listItem_content_spacing // add space between text and remove icon
 			forceColumnLayout: Theme.screenSize === Theme.Portrait // avoid mixing one- and two-line layouts in portrait
@@ -99,7 +99,7 @@ Page {
 			//% "Remove Modbus device?"
 			title: qsTrId("page_settings_modbus_device_remove_device")
 			dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_OkAndCancel
-			icon.color: Theme.color_orange
+			icon.color: Theme.color_warning
 			acceptText: CommonWords.remove
 
 			onAccepted: {

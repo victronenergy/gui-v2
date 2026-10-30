@@ -75,7 +75,8 @@ private:
 #else
 	bool m_showSplashAnimation = true;
 #endif
-	bool m_splashScreenVisible = true;
+	// Main.qml sets this after adding Victron's branding, so the splash is not created first.
+	bool m_splashScreenVisible = false;
 };
 
 } /* VenusOS */
