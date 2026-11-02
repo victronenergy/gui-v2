@@ -18,53 +18,28 @@ ListSetting {
 	property int decimals: -1 // if -1, use default decimals
 	property int formatHints
 
-	// Layout has 2 columns, 2 rows. The caption spans across both columns.
-	// | Primary label | Quantity label |
-	// | Caption                        |
-	contentItem: Item {
-		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: contentLayout.implicitHeight
+	contentItem: RowLayout {
+		spacing: root.spacing
 
-		GridLayout {
-			id: contentLayout
+		Label {
+			text: root.text
+			textFormat: root.textFormat
+			font: root.font
+			wrapMode: Text.Wrap
 
-			anchors {
-				left: parent.left
-				right: parent.right
-				verticalCenter: parent.verticalCenter
-			}
-			columns: 2
-			columnSpacing: root.spacing
-			rowSpacing: Theme.geometry_listItem_content_verticalSpacing
+			Layout.fillWidth: true
+		}
 
-			Label {
-				text: root.text
-				textFormat: root.textFormat
-				font: root.font
-				wrapMode: Text.Wrap
+		QuantityLabel {
+			font.pixelSize: Theme.font_listItem_secondary_size
+			value: root.value
+			valueColor: root.valueColor
+			unit: root.unit
+			unitColor: root.unitColor
+			decimals: root.decimals
+			formatHints: root.formatHints
 
-				Layout.fillWidth: true
-			}
-
-			QuantityLabel {
-				font.pixelSize: Theme.font_listItem_secondary_size
-				value: root.value
-				valueColor: root.valueColor
-				unit: root.unit
-				unitColor: root.unitColor
-				decimals: root.decimals
-				formatHints: root.formatHints
-
-				Layout.alignment: Qt.AlignRight
-			}
-
-			CaptionLabel {
-				text: root.caption
-				visible: text.length > 0
-
-				Layout.columnSpan: 2
-				Layout.maximumWidth: root.availableWidth
-			}
+			Layout.alignment: Qt.AlignRight
 		}
 	}
 

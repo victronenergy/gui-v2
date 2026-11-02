@@ -11,7 +11,6 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-
 			ListRadioButtonGroup {
 				id: systemNameRadioButtons
 
@@ -54,13 +53,20 @@ Page {
 			}
 
 			ListNavigation {
+				id: oppLoads
+
 				topInset: Theme.geometry_listItem_itemSeparator_height
 				//% "Opportunity Loads"
 				text: qsTrId("pagesettingssystem_opportunity_loads")
-				//% "Automate controllable devices to maximize solar self-consumption"
-				caption: qsTrId("pagesettingssystem_automate_controllable_devices")
 				secondaryText: opportunityLoadsMode.value ? CommonWords.enabled : CommonWords.disabled
 				preferredVisible: opportunityLoadsMode.valid
+				contentItem: ListNavigationCaptionedLayout {
+					primaryText: oppLoads.text
+					primaryLabel.font: oppLoads.font
+					secondaryText: oppLoads.secondaryText
+					//% "Automate controllable devices to maximize solar self-consumption"
+					caption: qsTrId("pagesettingssystem_automate_controllable_devices")
+				}
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageControllableLoads.qml", { title: text })
 
 				VeQuickItem {
@@ -70,18 +76,30 @@ Page {
 			}
 
 			ListNavigation {
+				id: acSystem
+
 				topInset: Theme.geometry_listItem_itemSeparator_height
 				//% "AC system"
 				text: qsTrId("pagesettingssystem_ac_system")
-				//% "Inputs and monitoring"
-				caption: qsTrId("pagesettingssystem_inputs_and_monitoring")
+				contentItem: ListNavigationCaptionedLayout {
+					primaryText: acSystem.text
+					primaryLabel.font: acSystem.font
+					//% "Inputs and monitoring"
+					caption: qsTrId("pagesettingssystem_inputs_and_monitoring")
+				}
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsAcSystem.qml", { title: text })
 			}
 
 			ListNavigation {
+				id: hub4
+
 				text: systemType.value === "Hub-4" ? systemType.value : CommonWords.ess
-				//% "Energy Storage System"
-				caption: qsTrId("pagesettingssystem_energy_storage_System")
+				contentItem: ListNavigationCaptionedLayout {
+					primaryText: hub4.text
+					primaryLabel.font: hub4.font
+					//% "Energy Storage System"
+					caption: qsTrId("pagesettingssystem_energy_storage_System")
+				}
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsHub4.qml", { title: text })
 
 				VeQuickItem {
@@ -91,17 +109,29 @@ Page {
 			}
 
 			ListNavigation {
+				id: bms
+
 				text: CommonWords.batteries
-				//% "Batteries and Battery Management Systems (BMS)"
-				caption: qsTrId("pagesettingssystem_batteries_and_bms")
+				contentItem: ListNavigationCaptionedLayout {
+					primaryText: bms.text
+					primaryLabel.font: bms.font
+					//% "Batteries and Battery Management Systems (BMS)"
+					caption: qsTrId("pagesettingssystem_batteries_and_bms")
+				}
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsBatteries.qml", { title: text })
 			}
 
 			ListNavigation {
+				id: dvcc
+
 				//% "Charge control"
 				text: qsTrId("settings_system_charge_control")
-				//% "Distributed Voltage and Current Control (DVCC)"
-				caption: qsTrId("pagesettingssystem_distributed_voltage_and_current_control")
+				contentItem: ListNavigationCaptionedLayout {
+					primaryText: dvcc.text
+					primaryLabel.font: dvcc.font
+					//% "Distributed Voltage and Current Control (DVCC)"
+					caption: qsTrId("pagesettingssystem_distributed_voltage_and_current_control")
+				}
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsDvcc.qml", { title: text })
 			}
 

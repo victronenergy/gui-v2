@@ -11,7 +11,7 @@ import Victron.VenusOS
 
 	When extending this type:
 
-	- Implement your own contentItem that displays the specified text and caption, along with other
+	- Implement your own contentItem that displays the specified text along with other
 	  items relevant to your custom type. The text should respect the font and textFormat, as
 	  provided by ListItem.
 	- If you need to override the background, you can use ListSettingBackground to ensure the
@@ -47,7 +47,6 @@ ListItem {
 	id: root
 
 	property string text
-	property string caption
 
 	property int showAccessLevel: VenusOS.User_AccessType_User
 	property int writeAccessLevel: VenusOS.User_AccessType_Installer

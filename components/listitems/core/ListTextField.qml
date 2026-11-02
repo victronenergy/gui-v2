@@ -54,10 +54,7 @@ ListSetting {
 
 	interactive: (dataItem.uid === "" || dataItem.valid)
 
-	// Layout has 2 columns, 2 rows. The caption spans across both columns.
-	// | Primary label | Text field |
-	// | Caption                    |
-	contentItem: GridLayout {
+	contentItem: RowLayout {
 		function runValidation(mode) {
 			return textField.runValidation(mode)
 		}
@@ -66,9 +63,7 @@ ListSetting {
 			textField.forceInputFocus()
 		}
 
-		columns: 2
-		columnSpacing: root.spacing
-		rowSpacing: 0 // not needed, there is padding below the primary label already
+		spacing: root.spacing
 
 		Label {
 			topPadding: Theme.geometry_listItem_content_verticalMargin
@@ -126,15 +121,6 @@ ListSetting {
 			opacity: textField.echoMode === TextInput.Password ? 0 : 1
 
 			Layout.fillWidth: true
-		}
-
-		CaptionLabel {
-			text: root.caption
-			visible: text.length > 0
-
-			Layout.columnSpan: 2
-			Layout.maximumWidth: root.availableWidth
-			Layout.bottomMargin: Theme.geometry_listItem_content_verticalMargin
 		}
 	}
 

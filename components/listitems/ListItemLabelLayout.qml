@@ -31,17 +31,17 @@ GridLayout {
 	id: root
 
 	required property string primaryText
-	property alias secondaryText: secondaryLabel.text
-	property alias primaryLabel: primaryLabel
-	property alias secondaryLabel: secondaryLabel
+	property string secondaryText
+	readonly property alias primaryLabel: primaryLabel
+	readonly property alias secondaryLabel: secondaryLabel
 
 	readonly property real _maxSecondaryLabelWidth: (width * Theme.geometry_listItem_secondary_maximumWidthProportion)  - columnSpacing
-	readonly property bool _mainTextWouldWrap: Math.ceil(primaryLabel.implicitWidth)
+	readonly property bool _contentWouldWrap: Math.ceil(primaryLabel.implicitWidth)
 			+ Math.ceil(secondaryLabel.implicitWidth) >= (width - Theme.geometry_listItem_content_spacing)
 	readonly property bool _useColumnLayout: secondaryText.length === 0
-			|| (_mainTextWouldWrap && Math.ceil(secondaryLabel.implicitWidth) > _maxSecondaryLabelWidth)
+			|| (_contentWouldWrap && Math.ceil(secondaryLabel.implicitWidth) > _maxSecondaryLabelWidth)
 
-	columns: 2
+	columns: _useColumnLayout ? 1 : 2
 	columnSpacing: Theme.geometry_listItem_content_spacing
 	rowSpacing: Theme.geometry_listItem_content_verticalSpacing
 
@@ -50,14 +50,13 @@ GridLayout {
 
 		text: root.primaryText
 		wrapMode: Text.WordWrap
-
 		Layout.fillWidth: true
-		Layout.columnSpan: root._useColumnLayout ? 2 : 1
 	}
 
 	SecondaryListLabel {
 		id: secondaryLabel
 
+		text: root.secondaryText
 		horizontalAlignment: root._useColumnLayout ? Text.AlignLeft : Text.AlignRight
 		visible: text.length > 0
 		wrapMode: Text.WordWrap
@@ -66,6 +65,5 @@ GridLayout {
 
 		Layout.alignment: Qt.AlignVCenter
 		Layout.fillWidth: root._useColumnLayout
-		Layout.columnSpan: root._useColumnLayout ? 2 : 1
 	}
 }

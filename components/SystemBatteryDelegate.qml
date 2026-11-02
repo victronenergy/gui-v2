@@ -87,8 +87,8 @@ ListItem {
 				}
 			}
 
-			TwoLabelQuantityRowLayout {
-				primaryText: {
+			ListItemQuantitiesLayout {
+				text: {
 					const modeText = VenusOS.battery_modeToText(root.device.mode)
 					if (root.device.mode === VenusOS.Battery_Mode_Discharging
 							&& root.device.timeToGo > 0) {
@@ -105,8 +105,9 @@ ListItem {
 					QuantityObject { object: root.device; key: "power"; unit: VenusOS.Units_Watt }
 					QuantityObject { object: root.device; key: "temperature"; unit: Services.settings.temperatureUnit }
 				}
-				primaryLabel.font: root.font
-				primaryLabel.color: Theme.color_font_secondary
+				label.font: root.font
+				label.textFormat: root.textFormat
+				label.color: Theme.color_font_secondary
 
 				Layout.fillWidth: true
 			}

@@ -330,7 +330,18 @@ VisibleItemModel {
 							secondaryText: CommonWords.yesOrNo(dataItem.value)
 							dataItem.uid: root.bindPrefix + "/Settings/BmsPresent"
 							preferredVisible: dataItem.valid
-							caption: bmsControlled.dataItem.value === 1 ? CommonWords.bms_control_info : ""
+							contentItem: ListItemLabelLayout {
+								primaryText: bmsControlled.text
+								primaryLabel.font: bmsControlled.font
+								secondaryText: bmsControlled.secondaryText
+
+								CaptionLabel {
+									text: bmsControlled.dataItem.value === 1 ? CommonWords.bms_control_info : ""
+									visible: text.length > 0
+									Layout.fillWidth: true
+									Layout.columnSpan: parent.columns
+								}
+							}
 						}
 
 						ListButton {

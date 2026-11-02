@@ -35,6 +35,7 @@ ListSetting {
 			? optionModel[currentIndex].display
 			: defaultSecondaryText
 	property color secondaryTextColor: Theme.color_font_secondary
+	property string caption
 	readonly property var currentValue: currentIndex >= 0 && optionModel.length !== undefined && currentIndex < optionModel.length
 			? optionModel[currentIndex].value
 			: undefined
@@ -71,7 +72,7 @@ ListSetting {
 		columnSpacing: root.spacing
 		rowSpacing: Theme.geometry_listItem_content_verticalSpacing
 
-		TwoLabelLayout {
+		ListItemLabelLayout {
 			primaryText: root.text
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat

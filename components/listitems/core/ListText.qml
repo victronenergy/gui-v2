@@ -17,25 +17,12 @@ ListSetting {
 	property string secondaryText: dataItem.valid ? dataItem.value : ""
 	property color secondaryTextColor: Theme.color_font_secondary
 
-	contentItem: ColumnLayout {
-		spacing: Theme.geometry_listItem_content_verticalSpacing
-
-		TwoLabelLayout {
-			primaryText: root.text
-			primaryLabel.font: root.font
-			primaryLabel.textFormat: root.textFormat
-			secondaryText: root.secondaryText
-			secondaryLabel.color: root.secondaryTextColor
-
-			Layout.fillWidth: true
-		}
-
-		CaptionLabel {
-			visible: text.length > 0
-			text: root.caption
-
-			Layout.fillWidth: true
-		}
+	contentItem: ListItemLabelLayout {
+		primaryText: root.text
+		primaryLabel.font: root.font
+		primaryLabel.textFormat: root.textFormat
+		secondaryText: root.secondaryText
+		secondaryLabel.color: root.secondaryTextColor
 	}
 
 	VeQuickItem {

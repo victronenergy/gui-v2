@@ -76,7 +76,6 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/KeyNavigationListHelper.qml
     components/MockTerminal.qml
     components/MultiStepButton.qml
-    components/TwoLabelQuantityRowLayout.qml
     components/NavBar.qml
     components/NavButton.qml
     components/NetworkServices.qml
@@ -135,10 +134,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/ThreePhaseDisplay.qml
     components/ThreePhaseIOTable.qml
     components/ThreePhaseQuantityTable.qml
-    components/TwoLabelItemLayout.qml
     components/TimeSelector.qml
     components/ToastNotification.qml
-    components/TwoLabelLayout.qml
     components/Utils.js
     components/VeBusAcIODisplay.qml
     components/VeQItemFilteredServiceModel.qml
@@ -208,6 +205,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListAlarmLevelRadioButtonGroup.qml
     components/listitems/ListAlarmState.qml
     components/listitems/ListBriefCenterDetails.qml
+    components/listitems/ListCanbusIdCheckButton.qml
     components/listitems/ListChargeSchedule.qml
     components/listitems/ListClearHistoryButton.qml
     components/listitems/ListCurrentLimitButton.qml
@@ -229,10 +227,14 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListIOChannelNameField.qml
     components/listitems/ListIOChannelShowDetails.qml
     components/listitems/ListIOChannelTypeRadioButtonGroup.qml
+    components/listitems/ListItemLabelLayout.qml
+    components/listitems/ListItemLoaderLayout.qml
+    components/listitems/ListItemQuantitiesLayout.qml
     components/listitems/ListLink.qml
     components/listitems/ListMotorDriveGear.qml
     components/listitems/ListMqttAccessSwitch.qml
     components/listitems/ListMountStateButton.qml
+    components/listitems/ListNavigationCaptionedLayout.qml
     components/listitems/ListPairingModeButton.qml
     components/listitems/ListAcInPositionRadioButtonGroup.qml
     components/listitems/ListOutputBatteryRadioButtonGroup.qml

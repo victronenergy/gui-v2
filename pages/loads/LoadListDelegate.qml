@@ -80,16 +80,22 @@ ListItem {
 		Component {
 			id: portraitLayoutComponent
 
-			TwoLabelQuantityRowLayout {
-				primaryText: root.name
-				primaryLabel.textFormat: root.textFormat
-				primaryLabel.font: root.font
+			ListItemQuantitiesLayout {
+				text: root.name
+				label.font: root.font
+				label.textFormat: root.textFormat
 				model: QuantityObjectModel {
 					filterType: QuantityObjectModel.HasValue
 					QuantityObject { object: root; key: "temperature"; unit: Services.settings.temperatureUnit }
 					QuantityObject { object: root; key: root._unitAmps ? "current" : "power"; unit: root._unitAmps ? VenusOS.Units_Amp : VenusOS.Units_Watt }
 				}
-				captionText: root._statusLabelText
+
+				CaptionLabel {
+					text: root._statusLabelText
+					visible: text.length > 0
+					Layout.fillWidth: true
+					Layout.columnSpan: parent.columns
+				}
 			}
 		}
 

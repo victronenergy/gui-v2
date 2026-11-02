@@ -39,18 +39,17 @@ ListSetting {
 			}
 		}
 
-		TwoLabelItemLayout {
+		ListItemLoaderLayout {
 			id: contentLayout
 
 			anchors.verticalCenter: parent.verticalCenter
 			width: parent.width
-			primaryText: root.text
-			primaryLabel.font: root.font
-			primaryLabel.textFormat: root.textFormat
-			primaryLabel.color: root.interactive ? Theme.color_font_primary : Theme.color_font_disabled
-			captionText: root.caption
-
-			secondaryComponent: RowLayout {
+			text: root.text
+			label.font: root.font
+			label.textFormat: root.textFormat
+			label.color: root.interactive ? Theme.color_font_primary : Theme.color_font_disabled
+			loader.focus: true
+			loader.sourceComponent: RowLayout {
 				spacing: Theme.geometry_listItem_content_spacing
 
 				ListItemButton {

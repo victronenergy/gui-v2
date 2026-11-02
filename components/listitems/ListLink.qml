@@ -28,6 +28,7 @@ ListSetting {
 	property int mode: Qt.platform.os === "wasm" ? VenusOS.ListLink_Mode_LinkButton : VenusOS.ListLink_Mode_QRCode
 	property string url
 	readonly property string formattedUrl: "<font color=\"%1\">%2</font>".arg(Theme.color_font_primary).arg(url)
+	property string caption
 
 	function click() {
 		if (root.clickable) {
@@ -47,18 +48,17 @@ ListSetting {
 
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: contentLayout.isMultiLine ? contentLayout.implicitHeight : 0
+		implicitHeight: contentLayout.isMultiLine || root.caption.length > 0 ? contentLayout.implicitHeight : 0
 
-		TwoLabelItemLayout {
+		ListItemLoaderLayout {
 			id: contentLayout
 
 			anchors.verticalCenter: parent.verticalCenter
 			width: parent.width
-			primaryText: root.text
-			primaryLabel.font: root.font
-			primaryLabel.textFormat: root.textFormat
-			captionText: root.caption
-			secondaryComponent: root.mode === VenusOS.ListLink_Mode_LinkButton ? linkButtonComponent : qrCodeComponent
+			text: root.text
+			label.font: root.font
+			label.textFormat: root.textFormat
+			loader.sourceComponent: root.mode === VenusOS.ListLink_Mode_LinkButton ? linkButtonComponent : qrCodeComponent
 
 			Component {
 				id: linkButtonComponent
@@ -93,6 +93,13 @@ ListSetting {
 
 					onClicked: root.click()
 				}
+			}
+
+			CaptionLabel {
+				text: root.caption
+				visible: text.length > 0
+				Layout.fillWidth: true
+				Layout.columnSpan: parent.columns
 			}
 		}
 	}

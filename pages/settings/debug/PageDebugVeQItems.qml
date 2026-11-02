@@ -103,8 +103,14 @@ Page {
 
 			text: id
 			secondaryText: interactive ? "" : (JSON.stringify(value) ?? "--")
-			caption: interactive || value === undefined ? "" : typeof(value)
 			interactive: subModel.rowCount > 0
+			contentItem: ListNavigationCaptionedLayout {
+				interactive: rowDelegate.interactive
+				primaryText: rowDelegate.text
+				primaryLabel.font: rowDelegate.font
+				secondaryText: rowDelegate.secondaryText
+				caption: rowDelegate.interactive || rowDelegate.value === undefined ? "" : typeof(rowDelegate.value)
+			}
 
 			// When 'P' is pressed, dump the stringified object tree from this node.
 			// If Shift+P is pressed, use a pretty print.

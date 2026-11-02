@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 Page {
@@ -37,11 +38,20 @@ Page {
 			readonly property string servicePath: root.modbustcpServiceUid + "/Services/" + model.index
 
 			text: device.name || root._shortServiceName(serviceName.value) || "--"
-			//: Modbus TCP service details. %1 = service name or uid, %2 = unit id
-			//% "%1 | unit ID: %2"
-			caption: qsTrId("settings_modbus_unit_name_and_id")
-					.arg(root._shortServiceName(serviceName.value))
-					.arg(unitId.value)
+			contentItem: ListItemLabelLayout {
+				primaryText: serviceDelegate.text
+				primaryLabel.font: serviceDelegate.font
+
+				CaptionLabel {
+					//: Modbus TCP service details. %1 = service name or uid, %2 = unit id
+					//% "%1 | unit ID: %2"
+					text: qsTrId("settings_modbus_unit_name_and_id")
+							.arg(root._shortServiceName(serviceName.value))
+							.arg(unitId.value)
+					Layout.fillWidth: true
+					Layout.columnSpan: parent.columns
+				}
+			}
 
 			Device {
 				id: device
