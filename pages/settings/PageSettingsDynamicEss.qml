@@ -17,7 +17,10 @@ Page {
 				dataItem.uid: Services.settings.serviceUid + "/Settings/DynamicEss/Mode"
 				interactive: opportunityLoads.value !== 1
 				//% "Dynamic ESS cannot be enabled while Opportunity Loads is enabled. Disable Opportunity Loads first."
-				caption: interactive ? "" : qsTrId("settings_ess_disable_ol_first")
+				caption: !interactive ? qsTrId("settings_ess_disable_ol_first")
+						//% "Dynamic ESS has not been set up yet. Set it up on the VRM Portal first."
+						: !(batteryCapacity.value > 0) ? qsTrId("settings_ess_dess_setup_in_vrm")
+						: ""
 				optionModel: [
 					{ display: CommonWords.off, value: 0 },
 					{ display: CommonWords.auto, value: 1 }
@@ -26,6 +29,11 @@ Page {
 				VeQuickItem {
 					id: opportunityLoads
 					uid: BackendConnection.serviceUidForType("platform") + "/Services/OpportunityLoads/Mode"
+				}
+
+				VeQuickItem {
+					id: batteryCapacity
+					uid: Services.settings.serviceUid + "/Settings/DynamicEss/BatteryCapacity"
 				}
 			}
 

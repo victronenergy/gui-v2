@@ -313,16 +313,10 @@ Page {
 		ListNavigation {
 			//% "Dynamic ESS"
 			text: qsTrId("settings_ess_dynamic")
-			preferredVisible: (dEssModeItem.value > 0 || Services.settings.canAccess(VenusOS.User_AccessType_Service))
-					&& essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
+			preferredVisible: essMode.value !== VenusOS.Ess_Hub4ModeState_Disabled
 					&& batteryLifeState.dataItem.value !== VenusOS.Ess_BatteryLifeState_KeepCharged
 			onClicked: {
 				Global.pageManager.pushPage("/pages/settings/PageSettingsDynamicEss.qml", { title: text })
-			}
-
-			VeQuickItem {
-				id: dEssModeItem
-				uid: Services.settings.serviceUid + "/Settings/DynamicEss/Mode"
 			}
 		}
 

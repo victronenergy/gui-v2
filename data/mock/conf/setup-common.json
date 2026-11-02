@@ -15,6 +15,7 @@
     },
     "com.victronenergy.settings": {
         "/Settings/Alarm/System/GridLost": 1,
+        "/Settings/DynamicEss/BatteryCapacity": 10,
         "/Settings/DynamicEss/Mode": 0,
         "/Settings/Gps/Format": 0,
         "/Settings/Gps/SpeedUnit": "km/h",

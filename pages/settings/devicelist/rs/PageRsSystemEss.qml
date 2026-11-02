@@ -16,12 +16,6 @@ Page {
 		VenusOS.Ess_State_OptimizedWithoutBatteryLife].includes(essMode.dataItem.value)
 
 	VeQuickItem {
-		id: dEssModeItem
-
-		uid: Services.settings.serviceUid + "/Settings/DynamicEss/Mode"
-	}
-
-	VeQuickItem {
 		id: essMinSocItem
 		uid: bindPrefix + "/Settings/Ess/MinimumSocLimit"
 	}
@@ -95,7 +89,7 @@ Page {
 			ListNavigation {
 				//% "Dynamic ESS"
 				text: qsTrId("settings_rs_ess_dess")
-				preferredVisible: dEssModeItem.value > 0 || Services.settings.canAccess(VenusOS.User_AccessType_Service)
+				preferredVisible: root.isModeOptimized
 				onClicked: {
 					Global.pageManager.pushPage("/pages/settings/PageSettingsDynamicEss.qml",
 							{ title: text })
