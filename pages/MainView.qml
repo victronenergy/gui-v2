@@ -116,22 +116,6 @@ FocusScope {
 		navBar: navBar
 	}
 
-	// Revert to the start page when the application has been inactive for the period of time
-	// specified by the startPageTimeout.  Note that the timer should be running
-	// even if !Global.timersEnabled as the screen blank duration might be very short.
-	Timer {
-		running: Services.settings.startPageConfiguration.hasStartPage
-				 && Services.settings.startPageConfiguration.startPageTimeout > 0
-				 && !Global.applicationActive
-		interval: Services.settings.startPageConfiguration.startPageTimeout * 1000
-		onTriggered: {
-			if (cardsActive) {
-				cardsLoader.hide()
-			}
-			pageManager.goToStartPage()
-		}
-	}
-
 	// Auto-select the start page when the application becomes inactive, if configured to do so.
 	Connections {
 		target: Global

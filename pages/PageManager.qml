@@ -50,6 +50,20 @@ QtObject {
 		}
 	}
 
+	// Revert to the start page when the application has been inactive for the period of time
+	// specified by the startPageTimeout. Note that the timer should be running even if
+	// !Global.timersEnabled as the screen blank duration might be very short.
+	readonly property Timer _startPageTimer: Timer {
+		readonly property bool timeoutEnabled: Services.settings.startPageConfiguration.hasStartPage
+				&& Services.settings.startPageConfiguration.startPageTimeout > 0
+		running: timeoutEnabled
+		interval: Services.settings.startPageConfiguration.startPageTimeout * 1000
+		onTriggered: {
+			Global.mainView.cardsLoader.hide()
+			root.goToStartPage()
+		}
+	}
+
 	property string _hiddenStackMainPage
 
 	function pushPage(obj, properties, operation = PageStack.PushTransition) {
@@ -88,6 +102,9 @@ QtObject {
 	function ensureInteractive() {
 		if (idleModeTimer.running) {
 			idleModeTimer.restart()
+		}
+		if (_startPageTimer.timeoutEnabled) {
+			_startPageTimer.restart()
 		}
 		if (interactivity === VenusOS.PageManager_InteractionMode_Idle) {
 			interactivity = VenusOS.PageManager_InteractionMode_EndFullScreen
