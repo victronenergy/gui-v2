@@ -43,18 +43,16 @@ ListSetting {
 		implicitWidth: Theme.geometry_listItem_width
 		implicitHeight: contentLayout.isMultiLine ? contentLayout.implicitHeight : 0
 
-		TwoLabelItemLayout {
+		ListItemLoaderLayout {
 			id: contentLayout
 
 			anchors.verticalCenter: parent.verticalCenter
 			width: parent.width
-			primaryText: root.text
-			primaryLabel.font: root.font
-			primaryLabel.textFormat: root.textFormat
-			primaryLabel.color: root.interactive ? Theme.color_font_primary : Theme.color_font_disabled
-			captionText: root.caption
-
-			secondaryComponent: ListItemButton {
+			text: root.text
+			label.font: root.font
+			label.textFormat: root.textFormat
+			label.color: root.interactive ? Theme.color_font_primary : Theme.color_font_disabled
+			loader.sourceComponent: ListItemButton {
 				text: root.secondaryText
 				font.pixelSize: root.secondaryFontSize
 				down: root.clickable && (pressed || checked)
@@ -68,12 +66,12 @@ ListSetting {
 				// these Binding objects can be dropped in favour of just setting something like
 				// 'borderColor: root.borderColor'.
 				Binding on borderColor {
-						when: root.buttonBorderColor.valid
-						value: root.buttonBorderColor
+					when: root.buttonBorderColor.valid
+					value: root.buttonBorderColor
 				}
 				Binding on backgroundColor {
-						when: root.buttonBackgroundColor.valid
-						value: root.buttonBackgroundColor
+					when: root.buttonBackgroundColor.valid
+					value: root.buttonBackgroundColor
 				}
 			}
 		}

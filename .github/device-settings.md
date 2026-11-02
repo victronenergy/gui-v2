@@ -74,7 +74,7 @@ All settings UI is built from a hierarchy of list item components in `components
 
 ```
 ListItem (base: focusable row with background and key navigation)
-└── ListSetting (adds: text, caption, access control, interactive state)
+└── ListSetting (adds: text, access control, interactive state)
     ├── ListText         — read-only display of a text value
     ├── ListQuantity     — read-only display of a numeric value with units
     ├── ListSwitch       — toggle switch (on/off setting)
@@ -98,7 +98,6 @@ Every `ListSetting`-derived item inherits:
 | Property | Purpose |
 |----------|---------|
 | `text` | Primary label shown on the left |
-| `caption` | Optional secondary description below the label |
 | `showAccessLevel` | Minimum access level to see this item |
 | `writeAccessLevel` | Minimum access level to modify this item |
 | `interactive` | Whether the item can be interacted with (typically bound to `dataItem.valid`) |

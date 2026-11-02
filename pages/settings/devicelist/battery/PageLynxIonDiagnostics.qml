@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 Page {
@@ -44,7 +45,18 @@ Page {
 
 						text: modelData
 						secondaryText: error.textValue
-						caption: errorTimestamp.textValue
+						contentItem: ListItemLabelLayout {
+							primaryText: errorDelegate.text
+							primaryLabel.font: errorDelegate.font
+							secondaryText: errorDelegate.secondaryText
+
+							CaptionLabel {
+								text: errorTimestamp.textValue
+								visible: text.length > 0
+								Layout.fillWidth: true
+								Layout.columnSpan: parent.columns
+							}
+						}
 
 						VeQuickItem {
 							id: error

@@ -12,6 +12,7 @@ ListSetting {
 
 	property bool checked
 	property string secondaryText
+	property string caption
 
 	signal clicked()
 
@@ -28,7 +29,7 @@ ListSetting {
 		columnSpacing: root.spacing
 		rowSpacing: Theme.geometry_listItem_content_verticalSpacing
 
-		TwoLabelLayout {
+		ListItemLabelLayout {
 			primaryText: root.text
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat

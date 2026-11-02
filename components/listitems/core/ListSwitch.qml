@@ -32,6 +32,7 @@ ListSetting {
 	property bool checked: invertSourceValue ? dataItem.value === valueFalse : dataItem.value === valueTrue
 	property bool checkable
 	property string secondaryText
+	property string caption
 	property bool updateDataOnClick: true
 	property bool invertSourceValue
 
@@ -78,9 +79,9 @@ ListSetting {
 
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: labelLayout.implicitHeight + (captionLabel.visible ? captionLabel.implicitHeight : 0)
+		implicitHeight: labelLayout.implicitHeight + captionLabel.height
 
-		TwoLabelLayout {
+		ListItemLabelLayout {
 			id: labelLayout
 
 			anchors {
@@ -88,7 +89,7 @@ ListSetting {
 				right: switchItem.left
 				rightMargin: root.spacing
 				verticalCenter: parent.verticalCenter
-				verticalCenterOffset: captionLabel.visible ? -captionLabel.height/2 : 0
+				verticalCenterOffset: -captionLabel.height / 2
 			}
 			primaryText: root.text
 			primaryLabel.font: root.font
@@ -126,15 +127,12 @@ ListSetting {
 		CaptionLabel {
 			id: captionLabel
 
-			anchors {
-				top: labelLayout.bottom
-				left: parent.left
-				right: parent.right
-				rightMargin: root.horizontalContentPadding
-			}
-			visible: text.length > 0
+			anchors.top: labelLayout.bottom
 			topPadding: Theme.geometry_listItem_content_verticalSpacing
+			rightPadding: root.horizontalContentPadding
+			width: parent.width
 			text: root.caption
+			visible: text.length > 0
 		}
 	}
 

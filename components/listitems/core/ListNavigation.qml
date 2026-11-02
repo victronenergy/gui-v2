@@ -37,7 +37,7 @@ ListSetting {
 		columnSpacing: root.spacing
 		rowSpacing: Theme.geometry_listItem_content_verticalSpacing
 
-		TwoLabelLayout {
+		ListItemLabelLayout {
 			primaryText: root.text
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat
@@ -51,14 +51,6 @@ ListSetting {
 			source: root.iconSource
 			color: root.iconColor
 			visible: root.interactive
-		}
-
-		CaptionLabel {
-			visible: text.length > 0
-			text: root.caption
-
-			Layout.columnSpan: root.interactive ? 2 : 1
-			Layout.fillWidth: true
 		}
 	}
 

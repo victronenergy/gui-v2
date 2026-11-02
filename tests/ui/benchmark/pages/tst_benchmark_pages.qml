@@ -121,11 +121,11 @@ UiTestCase {
 		["Item",                   itemComponent],
 		["Label",                  labelComponent],
 		["VeQuickItem",            veQuickItemComponent],
-		["TwoLabelLayout",         twoLabelLayoutComponent],
+		["ListItemLabelLayout",    twoLabelLayoutComponent],
 		["ListItem",               listItemComponent],
 		["ListSetting",            listSettingComponent],
 		["ListNavigation",         listNavigationComponent],
-		["SettingsListNavigation", settingsListNavigationComponent],
+		["MainListNavigation",     mainListNavigationComponent],
 		["ListSwitch",             listSwitchComponent],
 		["ListQuantity",           listQuantityComponent],
 		["ListRadioButtonGroup",   listRadioButtonGroupComponent],
@@ -134,16 +134,17 @@ UiTestCase {
 	Component { id: itemComponent; Item {} }
 	Component { id: labelComponent; Label { text: "abc" } }
 	Component { id: veQuickItemComponent; VeQuickItem {} }
-	Component { id: twoLabelLayoutComponent; TwoLabelLayout { primaryText: "abc" } }
+	Component { id: twoLabelLayoutComponent; ListItemLabelLayout { primaryText: "abc" } }
 	Component { id: listItemComponent; ListItem {} }
 	Component { id: listSettingComponent; ListSetting { text: "abc" } }
 	Component { id: listNavigationComponent; ListNavigation { text: "abc" } }
 	Component {
-		id: settingsListNavigationComponent
-		SettingsPage.SettingsListNavigation {
+		id: mainListNavigationComponent
+		SettingsPage.MainListNavigation {
 			text: "abc"
 			pageSource: "/pages/settings/PageSettingsGeneral.qml"
 			pageIconSource: "qrc:/images/icon_general_32.svg"
+			caption: ""
 		}
 	}
 	Component { id: listSwitchComponent; ListSwitch { text: "abc" } }

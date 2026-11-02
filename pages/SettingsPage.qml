@@ -32,11 +32,12 @@ SwipeViewPage {
 		}
 	}
 
-	component SettingsListNavigation : ListNavigation {
+	component MainListNavigation : ListNavigation {
 		id: settingsNavigation
 
-		property string pageIconSource
-		property string pageSource
+		required property string pageIconSource
+		required property string pageSource
+		required property string caption
 
 		contentItem: RowLayout {
 			spacing: settingsNavigation.horizontalContentPadding
@@ -79,7 +80,7 @@ SwipeViewPage {
 
 		clip: true
 		model: VisibleItemModel {
-			SettingsListNavigation {
+			MainListNavigation {
 				text: CommonWords.devices
 				//% "All connected devices"
 				caption: qsTrId("settings_all_connected_devices")
@@ -87,7 +88,7 @@ SwipeViewPage {
 				pageIconSource: "qrc:/images/icon_devices_32.svg"
 			}
 
-			SettingsListNavigation {
+			MainListNavigation {
 				topInset: Theme.geometry_listItem_itemSeparator_height
 				//% "General"
 				text: qsTrId("settings_general")
@@ -97,7 +98,7 @@ SwipeViewPage {
 				pageIconSource: "qrc:/images/icon_general_32.svg"
 			}
 
-			SettingsListNavigation {
+			MainListNavigation {
 				id: connectivityListItem
 
 				//% "Connectivity"
@@ -108,7 +109,7 @@ SwipeViewPage {
 				pageIconSource: "qrc:/images/icon_connectivity_32.svg"
 			}
 
-			SettingsListNavigation {
+			MainListNavigation {
 				//% "VRM"
 				text: qsTrId("settings_vrm")
 				//% "Remote monitoring portal"
@@ -122,7 +123,7 @@ SwipeViewPage {
 				text: qsTrId("settings_advanced")
 			}
 
-			SettingsListNavigation {
+			MainListNavigation {
 				//% "Integrations"
 				text: qsTrId("settings_integrations")
 				//% "Relays, Sensors, PV Inverters, Modbus, Node-RED"
@@ -131,7 +132,7 @@ SwipeViewPage {
 				pageIconSource: "qrc:/images/icon_integration_32.svg"
 			}
 
-			SettingsListNavigation {
+			MainListNavigation {
 				//% "System Setup"
 				text: qsTrId("settings_system_setup")
 				//% "AC/DC system, ESS, DVCC, Battery..."
@@ -140,7 +141,7 @@ SwipeViewPage {
 				pageIconSource: "qrc:/images/icon_system_32.svg"
 			}
 
-			SettingsListNavigation {
+			MainListNavigation {
 				//% "Debug & Develop"
 				text: qsTrId("settings_debug_and_develop")
 				//% "Profiling tools, debug statistics, app version..."

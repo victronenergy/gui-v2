@@ -14,18 +14,16 @@ ListSetting {
 
 	// Standard layout:
 	// | Primary label       | Quantity row |
-	// | Caption                            |
 	//
 	// A column layout is used if the minimum primary text length would not fit together with the
 	// quantity row on one line:
 	// | Primary label   |
 	// | Quantity row    |
-	// | Caption         |
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
 		implicitHeight: contentLayout.implicitHeight
 
-		TwoLabelQuantityRowLayout {
+		ListItemQuantitiesLayout {
 			id: contentLayout
 
 			anchors {
@@ -34,11 +32,10 @@ ListSetting {
 				verticalCenter: parent.verticalCenter
 			}
 
-			primaryText: root.text
+			text: root.text
+			label.font: root.font
+			label.textFormat: root.textFormat
 			model: root.model
-			primaryLabel.textFormat: root.textFormat
-			primaryLabel.font: root.font
-			captionLabel.text: root.caption
 		}
 	}
 }

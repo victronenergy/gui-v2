@@ -65,12 +65,10 @@ ListSetting {
 
 	// Landscape layout:
 	// | Primary label | Slider (fill width) |
-	// | Caption                             |
 	//
 	// Portrait layout:
 	// | Primary label |
 	// | Slider        |
-	// | Caption       |
 	contentItem: FocusScope {
 		implicitHeight: gridLayout.implicitHeight
 
@@ -181,15 +179,6 @@ ListSetting {
 					text: Units.formatNumber(sliderItem.second.value, root.decimals) + root.suffix
 					color: root.interactive ? Theme.color_font_secondary : Theme.color_font_disabled
 				}
-			}
-
-			CaptionLabel {
-				text: root.caption
-				visible: text.length > 0
-
-				Layout.columnSpan: 2
-				Layout.maximumWidth: root.availableWidth
-				Layout.bottomMargin: Theme.geometry_listItem_content_verticalMargin
 			}
 		}
 	}

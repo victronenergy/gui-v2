@@ -47,7 +47,7 @@ ListSetting {
 		implicitWidth: Theme.geometry_listItem_width
 		implicitHeight: contentLayout.implicitHeight
 
-		TwoLabelQuantityRowLayout {
+		ListItemQuantitiesLayout {
 			id: contentLayout
 
 			anchors {
@@ -57,11 +57,10 @@ ListSetting {
 				verticalCenter: parent.verticalCenter
 			}
 
-			primaryText: root.text
+			text: root.text
+			label.font: root.font
+			label.textFormat: root.textFormat
 			model: root.quantityModel
-			primaryLabel.textFormat: root.textFormat
-			primaryLabel.font: root.font
-			captionLabel.text: root.caption
 			tableMode: root.tableMode
 			forceColumnLayout: root.forceColumnLayout
 		}

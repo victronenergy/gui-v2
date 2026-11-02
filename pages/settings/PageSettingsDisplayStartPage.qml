@@ -33,6 +33,7 @@ Page {
 		model: VisibleItemModel {
 			ListNavigation {
 				id: startPageNavigation
+
 				//% "Start page"
 				text: qsTrId("settings_startpage_name")
 				secondaryText: {
@@ -54,8 +55,13 @@ Page {
 					}
 				}
 
-				//% "Go to this page when the application starts."
-				caption: qsTrId("settings_startpage_description")
+				contentItem: ListNavigationCaptionedLayout {
+					primaryText: startPageNavigation.text
+					primaryLabel.font: startPageNavigation.font
+					secondaryText: startPageNavigation.secondaryText
+					//% "Go to this page when the application starts."
+					caption: qsTrId("settings_startpage_description")
+				}
 
 				onClicked: {
 					Global.pageManager.pushPage(startPageOptionsComponent, { title: text })

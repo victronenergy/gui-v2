@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 Page {
@@ -23,13 +24,13 @@ Page {
 	VeQuickItem {
 		id: vecanSameUniqueNameUsed
 		uid: canbusService.vecanServiceUid ? canbusService.vecanServiceUid + "/Alarms/SameUniqueNameUsed" : ""
-		onValueChanged: if (value === 1) timer.running = false
+		onValueChanged: if (value === 1) uniqueCheck.stopTimer()
 	}
 
 	VeQuickItem {
 		id: rvcSameUniqueNameUsed
 		uid: canbusService.rvcServiceUid ? canbusService.rvcServiceUid + "/Alarms/SameUniqueNameUsed" : ""
-		onValueChanged: if (value === 1) timer.running = false
+		onValueChanged: if (value === 1) uniqueCheck.stopTimer()
 	}
 
 	VeQuickItem {
@@ -95,19 +96,37 @@ Page {
 			}
 
 			ListSpinBox {
+				id: uniqueIdSelector
 				readonly property string _serviceUid: root._isRvc ? canbusService.rvcServiceUid : canbusService.vecanServiceUid
 
 				//% "Unique identity number selector"
 				text: qsTrId("settings_canbus_unique_id_select")
 				preferredVisible: (root._isVecan || root._isRvc) && dataItem.valid
 				dataItem.uid: _serviceUid ? _serviceUid + "/Settings/VenusUniqueId" : ""
-				caption: root._isVecan
-					//% "Above selector sets which block of unique identity numbers to use for the NAME Unique Identity Numbers in the PGN 60928 NAME field. Change only when using multiple GX Devices in one VE.Can network."
-					? qsTrId("settings_canbus_unique_id_vecan_description")
-					: root._isRvc
-						//% "Above selector sets which block of unique identity numbers to use for the serial number in the DGN 60928 ADDRESS_CLAIM field. Change only when using multiple GX Devices in one RV-C network."
-						? qsTrId("settings_canbus_unique_id_rvc_description")
-						: ""
+				contentItem: ListItemLoaderLayout {
+					text: uniqueIdSelector.text
+					label.font: uniqueIdSelector.font
+					label.color: uniqueIdSelector.interactive ? Theme.color_font_primary : Theme.color_font_disabled
+					loader.sourceComponent: ListItemButton {
+						text: uniqueIdSelector.secondaryText
+						focusPolicy: Qt.NoFocus
+						onClicked: uniqueIdSelector.click()
+					}
+
+					CaptionLabel {
+						text: root._isVecan
+							//% "Above selector sets which block of unique identity numbers to use for the NAME Unique Identity Numbers in the PGN 60928 NAME field. Change only when using multiple GX Devices in one VE.Can network."
+							? qsTrId("settings_canbus_unique_id_vecan_description")
+							: root._isRvc
+								//% "Above selector sets which block of unique identity numbers to use for the serial number in the DGN 60928 ADDRESS_CLAIM field. Change only when using multiple GX Devices in one RV-C network."
+								? qsTrId("settings_canbus_unique_id_rvc_description")
+								: ""
+						visible: text.length > 0
+						Layout.fillWidth: true
+						Layout.columnSpan: parent.columns
+					}
+				}
+
 				onSelectorAccepted: {
 					//% "Please wait, changing and checking the unique number takes a while"
 					Global.showToastNotification(VenusOS.Notification_Info, qsTrId("settings_canbus_unique_id_wait"), 5000)
@@ -115,23 +134,10 @@ Page {
 				}
 			}
 
-			ListButton {
+			ListCanbusIdCheckButton {
 				id: uniqueCheck
 
-				property bool testDone
-
-				function startCheck(timeout) {
-					timer.remainingTime = timeout
-					timer.running = true
-					testDone = false
-				}
-
-				//% "Check unique id numbers"
-				text: qsTrId("settings_canbus_unique_id_choose")
 				preferredVisible: root._isVecan || root._isRvc
-				secondaryText: timer.running
-					? Utils.secondsToString(timer.remainingTime)
-					: CommonWords.check_now
 				caption: {
 					if (vecanSameUniqueNameUsed.value === 1 || rvcSameUniqueNameUsed.value === 1) {
 						//% "There is another device connected with this unique number, please select a new number."
@@ -151,21 +157,6 @@ Page {
 						vecanSameUniqueNameUsed.setValue(0)
 					}
 					startCheck(3)
-				}
-
-				Timer {
-					id: timer
-
-					property int remainingTime
-
-					interval: 1000
-					repeat: true
-					onTriggered: {
-						if (--remainingTime === 0) {
-							running = false
-							uniqueCheck.testDone = true
-						}
-					}
 				}
 			}
 
