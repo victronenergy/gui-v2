@@ -30,6 +30,12 @@ T.SwipeView {
 		return listView.currentItem
 	}
 
+	// The view applies inserted, moved and removed pages when it next lays out, and then moves
+	// currentIndex so that the same page stays current. This applies them now instead.
+	function forceLayout() {
+		listView.forceLayout()
+	}
+
 	implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
 							contentWidth + leftPadding + rightPadding)
 	implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,

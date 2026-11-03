@@ -20,4 +20,17 @@ FocusScope {
 	readonly property bool __is_plugin_page__: true
 
 	focus: true
+
+	// A direct list or card sets focusPolicy when it can take key navigation.
+	// Items in a layout are not reached, so they do not count.
+	focusPolicy: {
+		const kids = children
+		for (let i = 0; i < kids.length; ++i) {
+			const child = kids[i]
+			if (child.enabled && child.visible && (child.focusPolicy & Qt.TabFocus)) {
+				return Qt.TabFocus
+			}
+		}
+		return Qt.NoFocus
+	}
 }

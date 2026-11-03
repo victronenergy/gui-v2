@@ -41,6 +41,8 @@ FocusScope {
 	width: parent?.width ?? 0
 	height: parent?.height ?? 0
 	focus: true
+	// The page reads this. Delegates are created by the view, not as children of the page.
+	focusPolicy: count > 0 ? Qt.TabFocus : Qt.NoFocus
 
 	GradientListView {
 		id: listView

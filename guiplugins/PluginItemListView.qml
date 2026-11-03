@@ -32,6 +32,15 @@ FocusScope {
 	width: parent?.width ?? 0
 	height: parent?.height ?? 0
 	focus: true
+	// The page reads this. The list items are in the model, not children of the page.
+	focusPolicy: {
+		for (let i = 0; i < items.length; ++i) {
+			if (hiddenItemFocus.canFocus(items[i])) {
+				return Qt.TabFocus
+			}
+		}
+		return Qt.NoFocus
+	}
 
 	GradientListView {
 		id: listView
