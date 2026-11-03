@@ -28,16 +28,20 @@ tests/
 ├── pluginpagestack/            — plugin page hosting, rejection, and cleanup on PageStack
 ├── splashsequence/             — splash phase transitions (no animations)
 ├── (many more...)
+├── plugins/                    — test plugins, compiled at build time (see below)
+├── quickaccesspanecards/       — built-in and plugin cards in the Controls and Switches panes
 ├── plugincompiler/             — Python tests for tools/gui-v2-plugin-compiler.py (not a QML test)
 ├── themepruner/                — Python tests for tools/themepruner.py (not a QML test)
 └── ui/                         — visual regression tests (separate system, not covered here)
 ```
 
-The Python tools have their own tests, which `tests/CMakeLists.txt` registers with ctest when a Python 3 interpreter is found: `tst_guipluginsapi` (fails if `tools/guiplugins-api.json` or the list of versions in `.github/gui-plugins.md` is out of date, if the `Victron.GuiPlugins` sources break the record, or if a new member would be saved without a newer module version; for an out-of-date record, regenerate both with `python tools/guipluginsapi.py`), `tst_plugincompiler` (the plugin compiler's Branding import and name checks, the image and font files it packs, and the `requiredGuiPluginsVersion` and `Victron.Branding` version that it writes), `tst_brandingproperties` (fails if `tools/branding-properties.json` is out of date, or if a property was added after a release tag without a newer module version; regenerate it with `python tools/brandingproperties.py`), `tst_moduledependencies` (fails if a module uses one that it must not), and `tst_themepruner` (keeps commas inside color formulas). To run the compiler tests without ctest:
+The Python tools have their own tests, which `tests/CMakeLists.txt` registers with ctest when a Python 3 interpreter is found: `tst_guipluginsapi` (fails if `tools/guiplugins-api.json` or the list of versions in `.github/gui-plugins.md` is out of date, if the `Victron.GuiPlugins` sources break the record, or if a new member would be saved without a newer module version; for an out-of-date record, regenerate both with `python tools/guipluginsapi.py`), `tst_plugincompiler` (the plugin compiler's Branding import and name checks, the image and font files it packs, the `requiredGuiPluginsVersion` and `Victron.Branding` version that it writes, and the card integration that it writes for each `--card` option), `tst_brandingproperties` (fails if `tools/branding-properties.json` is out of date, or if a property was added after a release tag without a newer module version; regenerate it with `python tools/brandingproperties.py`), `tst_moduledependencies` (fails if a module uses one that it must not), and `tst_themepruner` (keeps commas inside color formulas). To run the compiler tests without ctest:
 
 ```bash
 python -m unittest discover -s tests/plugincompiler -p "test_*.py"
 ```
+
+When a Python 3 interpreter is found, `tests/plugins` also compiles test plugins at build time, with the plugin compiler, into the `test-plugins` folder of the build directory (`TEST_PLUGINS_DIR`). A test that loads them depends on the `test_plugins` target, and sets `VENUS_GUI_PLUGINS_DIR` to that folder before the plugins are loaded, as `tst_quickaccesspanecards.cpp` does. On Windows, the plugins are also installed with the tests, into `tests/test-plugins` next to the test executables, and the test uses that copy when the build directory is not there. To add a test plugin, add a folder with its files to `tests/plugins`, and an `add_test_plugin()` call with its compiler arguments to `tests/plugins/CMakeLists.txt`.
 
 ## Creating a new unit test
 

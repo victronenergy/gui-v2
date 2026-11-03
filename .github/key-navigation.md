@@ -10,7 +10,7 @@
 
 3. **Focus eligibility**: `Utils.acceptsKeyNavigation(item)` checks `item.focusPolicy & Qt.TabFocus && item.enabled`. Items that should be navigable must set `focusPolicy: Qt.TabFocus`.
 
-4. **List navigation**: `BaseListView` (extends ListView) integrates `KeyNavigationListHelper` which provides Up/Down (or Left/Right for horizontal) navigation between list items. The built-in ListView key navigation is disabled; all navigation flows through the helper.
+4. **List navigation**: `BaseListView` (extends ListView) integrates `KeyNavigationListHelper` which provides Up/Down (or Left/Right for horizontal) navigation between list items. The built-in ListView key navigation is disabled; all navigation flows through the helper. The view scrolls to show the current item, but only the start of an item that is larger than the view. The Controls and Switches panes (`ControlCardsPage`, `AuxCardsPage`) turn that off (`highlightFollowsCurrentItem: false`), and call `scrollToFocusedItem()` when the focus moves inside a card: it shows the whole card if it fits in the view, otherwise the focused control.
 
 5. **Inter-section navigation**: `KeyNavigation.up` / `KeyNavigation.down` properties connect navigation between major sections (StatusBar ↔ SwipeView/PageStack ↔ NavBar).
 

@@ -93,6 +93,13 @@ FocusScope {
 		}
 	}
 
+	// Plugin cards for the Switches pane. The pane can be opened when it shows only these.
+	GuiPluginIntegrationModel {
+		id: pluginSwitchCards
+		type: GuiPluginLoader.QuickAccessPaneCard
+		cardType: GuiPluginLoader.SwitchesCard
+	}
+
 	StatusBarButton {
 		id: auxButton
 
@@ -108,7 +115,8 @@ FocusScope {
 		rightInset: Theme.geometry_statusBar_spacing
 		bottomInset: Theme.geometry_statusBar_spacing
 
-		visible: (!root.pageStack.opened && Services.ioChannels.groups.count > 0)
+		visible: (!root.pageStack.opened
+				&& (Services.ioChannels.groups.count > 0 || pluginSwitchCards.count > 0))
 				|| auxCardsOpened // allow cards to be closed if all switches are disconnected while opened
 		icon.source: leftButton.buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? ""
 				: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
