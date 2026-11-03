@@ -141,6 +141,11 @@ public:
 			QList<Victron::BrandingData> *branding,
 			QList<int> *fontIds);
 
+	// Logs a warning for each card that it removes. Does not catch a card that compiles but
+	// cannot be created, or check a file that is not local. Removes and returns each plugin
+	// that is left without integrations, so the caller can unload it.
+	static QVector<GuiPlugin> removeCardsThatCannotBeCompiled(QQmlEngine *engine, QVector<GuiPlugin> *plugins);
+
 	// Prepares the values copied from the Branding file at url for use:
 	// - drops colors that are not opaque
 	// - drops a light_mode_background_factor that is not more than 0 and at
@@ -186,7 +191,8 @@ private:
 	bool loadPluginData(const GuiPlugin &plugin);
 	void unloadPluginData(bool clearCache);
 	void unloadSinglePluginData(const GuiPlugin &plugin);
-	void loadBranding(QVector<GuiPlugin> *plugins);
+	void loadBrandingAndCards(QVector<GuiPlugin> *plugins);
+	void loadPendingBrandingAndCards();
 	void applyBranding();
 	bool installPluginTranslatorForLanguage(const QString &pluginName, QLocale::Language language);
 	QString m_pluginsJson;
@@ -202,7 +208,7 @@ private:
 	QTimer m_invokeOnceTimer;
 	QTimer m_timeoutTimer;
 	bool m_busy = true;
-	bool m_brandingPending = false;
+	bool m_brandingAndCardsPending = false;
 	QPointer<QQmlEngine> m_qmlEngine;
 };
 
@@ -239,9 +245,9 @@ There are currently 6 supported types of integrations:
 		  Only the first custom branding plugin in load order is enabled.
 		  A later plugin that has a custom branding integration is not enabled.
 
-** TODO: actually support 4/5. **
-Types 1, 2, 3 (navigation page) and 6 (custom branding) are supported.
-Types 4 and 5 are not.
+** TODO: actually support 4. **
+Types 1, 2, 3 (navigation page), 5 (quick access pane card) and 6 (custom branding) are supported.
+Type 4 (quick access pane) is not.
 */
 class GuiPluginIntegration
 {
@@ -395,7 +401,7 @@ class GuiPluginIntegrationModel : public QAbstractListModel, public QQmlParserSt
 	// filtering
 	Q_PROPERTY(GuiPluginLoader::IntegrationType type READ type WRITE setType NOTIFY typeChanged)
 	Q_PROPERTY(QString productId READ productId WRITE setProductId NOTIFY productIdChanged)
-	// TODO: add filtering for cardType also.
+	Q_PROPERTY(GuiPluginLoader::QuickAccessPaneCardType cardType READ cardType WRITE setCardType NOTIFY cardTypeChanged)
 
 public:
 	enum RoleNames {
@@ -427,11 +433,14 @@ public:
 	void setType(GuiPluginLoader::IntegrationType t);
 	QString productId() const;
 	void setProductId(const QString &productId);
+	GuiPluginLoader::QuickAccessPaneCardType cardType() const;
+	void setCardType(GuiPluginLoader::QuickAccessPaneCardType ct);
 
 Q_SIGNALS:
 	void countChanged();
 	void typeChanged();
 	void productIdChanged();
+	void cardTypeChanged();
 
 protected:
 	QHash<int, QByteArray> roleNames() const override;
@@ -445,6 +454,7 @@ private:
 	QVector<GuiPluginIntegration> m_integrations;
 	QString m_productId;
 	GuiPluginLoader::IntegrationType m_type = GuiPluginLoader::InvalidIntegrationType;
+	GuiPluginLoader::QuickAccessPaneCardType m_cardType = GuiPluginLoader::InvalidCardType;
 	bool m_complete = false;
 };
 

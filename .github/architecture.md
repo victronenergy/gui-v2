@@ -321,7 +321,7 @@ Run with `--mock` flag to use mock backend. Mock configurations (e.g. "maximal",
 
 `GuiPluginLoader` supports third-party UI extensions:
 - Plugins are JSON-defined with QML components
-- Integration types: plugin settings pages, device sub-pages, navigation pages, quick access cards, and custom branding (type 6)
+- Integration types: plugin settings pages (type 1), device sub-pages (type 2), navigation pages (type 3), quick access panes (type 4, not in the plugin API yet), a card in the Controls or Switches pane (type 5), and custom branding (type 6)
 - A navigation page is inserted at a named gap (`BeforeBoat` through `AfterSettings`). A missing location defaults to `BeforeNotifications`. In the plugin JSON, a present location must be the integer 1-7 for one of those gaps (the `NavigationPageLocation` values); a name or any other value is rejected. The compiler accepts only the name, and only as the last `--navigation` argument, and writes the integer. The gap is not a visible button. Boat and Levels are not always shown. `BeforeBoat` stays first when Boat is hidden. `BeforeLevels` sits after Overview when Levels is hidden.
 - The compiler and the loader reject a navigation page named `BoatPage.qml`, `BriefPage.qml`, `OverviewPage.qml`, `LevelsPage.qml`, `NotificationsPage.qml` or `SettingsPage.qml`. gui-v2 remembers a plugin navigation page by its full URL, so two plugins may use the same file name. A caller that passes only the file name selects the first page with that name. Two navigation pages in one plugin must use different file names, because they would have the same URL.
 - Plugins can be loaded from MQTT (VRM) or filesystem
@@ -333,7 +333,7 @@ Plugins are built with `tools/gui-v2-plugin-compiler.py`. Its `--branding` optio
 
 The `Branding` type is in its own QML module, `Victron.Branding` (`src/branding/`, `cmake/ModuleBranding.cmake`), so that a custom branding plugin is checked against this one small module, and so that it has its own version. The module's `qmldir` and `qmltypes` are installed next to the plugin compiler, which runs `qmllint` against them.
 
-Plugin settings pages, device sub-pages and navigation pages are written with the `Victron.GuiPlugins` types. Settings and device pages are opened with `Global.pageManager.pushPluginPage()`, which shows the plugin page inside a `PluginHostPage`, defined in `PageStack.qml`, that owns it. A navigation page is loaded into the swipe view at its location. It is not opened with `pushPluginPage()`. See [GUI plugins](gui-plugins.md).
+Plugin settings pages, device sub-pages and navigation pages are written with the `Victron.GuiPlugins` types. Settings and device pages are opened with `Global.pageManager.pushPluginPage()`, which shows the plugin page inside a `PluginHostPage`, defined in `PageStack.qml`, that owns it. A navigation page is loaded into the swipe view at its location. It is not opened with `pushPluginPage()`. A card in the Controls or Switches pane is a `PluginCard`, which `ControlCardsPage` or `AuxCardsPage` shows after its own cards, in the same list: a `CombinedListModel` (`src/combinedlistmodel.h`) gives the list the rows of the pane's own model, followed by the rows of a `GuiPluginIntegrationModel`. When the plugins are loaded, `GuiPluginLoader` compiles each card's file, and leaves out a card whose file has an error, so that a pane does not count a card that it cannot show. See [GUI plugins](gui-plugins.md).
 
 ### Module dependencies
 
