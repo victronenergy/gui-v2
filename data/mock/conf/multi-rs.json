@@ -10,9 +10,13 @@
         ":/data/mock/conf/services/notifications-alarm.json"
     ],
     "setup": {
+        "com.victronenergy.acsystem.socketcan_vecan0_sys0": {
+            "/Settings/Ess/Mode": 1
+        },
         "com.victronenergy.settings": {
             "/Settings/Canbus/vecan0/Profile": 1,
             "/Settings/Canbus/vecan1/Profile": 0,
+            "/Settings/DynamicEss/Mode": 1,
             "/Settings/SystemSetup/AcInput1": 1,
             "/Settings/SystemSetup/AcInput2": 0
         },
@@ -23,7 +27,13 @@
             "/Ac/In/0/ServiceType": "acsystem",
             "/Ac/In/0/ServiceName": "com.victronenergy.acsystem.socketcan_vecan0_sys0",
             "/Ac/In/0/Source": 1,
-            "/ActiveBatteryService": "com.victronenergy.battery/512"
+            "/ActiveBatteryService": "com.victronenergy.battery/512",
+            "/DynamicEss/ErrorCode": 7,
+            "/DynamicEss/LastScheduledEnd": 1793743200,
+            "/DynamicEss/LastScheduledStart": 1793742300,
+            "/DynamicEss/ReactiveStrategy": 90,
+            "/DynamicEss/TargetSoc": 0,
+            "/DynamicEss/WindowSlot": 8
         }
     }
 }
