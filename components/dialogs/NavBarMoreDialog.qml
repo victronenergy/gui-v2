@@ -57,8 +57,10 @@ ModalDialog {
 								left: parent.horizontalCenter
 								topMargin: Theme.geometry_navigationBar_notifications_redDot_margin
 							}
+							// The built-in page. endsWith("/NotificationsPage.qml") matches that page as a
+							// qrc URL or a file URL, and does not match MyCustomNotificationsPage.qml.
 							active: Services.notifications.navBarNotificationCounterVisible
-									&& hiddenPageItem.page.url.endsWith("NotificationsPage.qml")
+									&& hiddenPageItem.page.url.endsWith("/NotificationsPage.qml")
 							sourceComponent: NotificationCounter {
 								count: Services.notifications.unacknowledgedCount
 							}

@@ -64,6 +64,7 @@ QtObject {
 		}
 	}
 
+	// Full URL of the main page that was under the page stack.
 	property string _hiddenStackMainPage
 
 	function pushPage(obj, properties, operation = PageStack.PushTransition) {
@@ -115,7 +116,7 @@ QtObject {
 
 	function goToStartPage() {
 		const config = Services.settings.startPageConfiguration.startPageInfo
-		const prevMainPage = navBar.getCurrentPage()
+		const prevMainPageUrl = navBar.getCurrentPageUrl()
 
 		// Load the main page and its properties.
 		if (!Global.mainView || !config?.main || !navBar.setCurrentPage(config.main.page)) {
@@ -155,7 +156,7 @@ QtObject {
 			// There are no config stack pages, but we are currently on a stack page. Hide the stack
 			// instead of popping all of its pages, so that we can return instantly to this stack
 			// page later.
-			_hiddenStackMainPage = prevMainPage
+			_hiddenStackMainPage = prevMainPageUrl
 			pageStack.hide()
 		}
 	}
@@ -168,7 +169,7 @@ QtObject {
 			// - otherwise, go to the start page.
 			const config = Services.settings.startPageConfiguration.startPageInfo
 			if (!config || config.stack[config.stack.length - 1]?.page === pageStack.topPageUrl) {
-				_hiddenStackMainPage = navBar.getCurrentPage()
+				_hiddenStackMainPage = navBar.getCurrentPageUrl()
 				pageStack.hide()
 			} else {
 				goToStartPage()

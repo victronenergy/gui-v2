@@ -25,14 +25,27 @@ FocusScope {
 
 	// Internal references.
 	property int _currentIndex
-	property string _currentPage: getCurrentPage()
+	// Full URL of the page to restore. A file name would not tell two plugins apart.
+	property string _currentPageUrl
 
 	signal buttonClicked(pageIndex : int)
 
+	function _pageMatches(pageName, url) {
+		const pageUrl = url ?? ""
+		if (!pageName || pageUrl.length === 0) {
+			return false
+		}
+		if (pageName.indexOf("/") >= 0) {
+			return pageUrl === pageName
+		}
+		return pageUrl.endsWith("/" + pageName)
+	}
+
+	// A file name selects the first page with that name. A full URL selects
+	// that page, so two plugins with the same file name stay distinct.
 	function setCurrentPage(pageName) {
 		for (let i = 0; i < pages.length; ++i) {
-			const url = pages[i].url
-			if (url.endsWith("/" + pageName)) {
+			if (_pageMatches(pageName, pages[i].url)) {
 				return setCurrentIndex(i)
 			}
 		}
@@ -40,9 +53,18 @@ FocusScope {
 		return false
 	}
 
+	function hasPage(pageName) {
+		for (let i = 0; i < pages.length; ++i) {
+			if (_pageMatches(pageName, pages[i].url)) {
+				return true
+			}
+		}
+		return false
+	}
+
 	function setCurrentIndex(index) {
 		if (index === _currentIndex) {
-			_currentPage = getCurrentPage()
+			_currentPageUrl = getCurrentPageUrl()
 			return true
 		}
 		if (index >= pages.length) { // index < 0 is ok, if clearing the current index
@@ -51,18 +73,22 @@ FocusScope {
 		}
 		modified = true
 		_currentIndex = index
-		_currentPage = getCurrentPage()
+		_currentPageUrl = getCurrentPageUrl()
 		return true
 	}
 
 	function getCurrentPage() {
-		const url = pages[currentIndex]?.url ?? ""
+		const url = getCurrentPageUrl()
 		return url.substring(url.lastIndexOf("/") + 1)
 	}
 
+	function getCurrentPageUrl() {
+		return pages[currentIndex]?.url ?? ""
+	}
+
 	function restoreCurrentPage() {
-		if (_currentPage) {
-			return setCurrentPage(_currentPage)
+		if (_currentPageUrl.length > 0) {
+			return setCurrentPage(_currentPageUrl)
 		}
 		return false
 	}
@@ -115,8 +141,10 @@ FocusScope {
 						left: parent.horizontalCenter
 						topMargin: Theme.geometry_navigationBar_notifications_redDot_margin
 					}
+					// The built-in page. endsWith("/NotificationsPage.qml") matches that page as a
+					// qrc URL or a file URL, and does not match MyCustomNotificationsPage.qml.
 					active: Services.notifications.navBarNotificationCounterVisible
-							&& page.url.endsWith("NotificationsPage.qml")
+							&& page.url.endsWith("/NotificationsPage.qml")
 					sourceComponent: NotificationCounter {
 						count: Services.notifications.unacknowledgedCount
 					}
