@@ -16,11 +16,81 @@ import Victron.VenusOS
 	the start or end of the normal list items will cause adjacent list items to be obscured, as the
 	list auto-scrolls to show the full header/footer. Also, key navigation within the header and
 	footer does not auto-scroll the view.
+
+	When the current item changes, the view auto-scrolls to show it, but only shows the start of an
+	item that is larger than the view. To show the focused control inside such an item instead, set
+	highlightFollowsCurrentItem to false, and call scrollToFocusedItem() when the focus moves inside
+	the view.
 */
 ListView {
 	id: root
 
 	readonly property KeyNavigationListHelper __keyNavHelper: keyNavHelper
+
+	// Scrolls the view by the shortest distance that shows the item, which can be a delegate or an
+	// item inside a delegate. If the item is larger than the view, shows the start of the item.
+	function scrollToItem(item) {
+		// Stop any scroll that is still running, as it could carry the item out of view again.
+		cancelFlick()
+
+		const horizontal = orientation === ListView.Horizontal
+		const itemContentPos = contentItem.mapFromItem(item, 0, 0)
+		const distance = horizontal
+				? _scrollDistance(itemContentPos.x, item.width, contentX, width)
+				: _scrollDistance(itemContentPos.y, item.height, contentY, height)
+		if (distance === 0) {
+			return
+		}
+
+		// A flick slows down from at most maximumFlickVelocity, so it can only scroll this far.
+		const furthestFlick = maximumFlickVelocity * maximumFlickVelocity / (2 * flickDeceleration)
+		const viewSize = horizontal ? width : height
+		if (Math.abs(distance) > Math.min(viewSize * 2, furthestFlick)) {
+			// The item is far away, or too far for a flick, so jump to it.
+			if (horizontal) {
+				contentX += distance
+			} else {
+				contentY += distance
+			}
+			returnToBounds()
+		} else {
+			// The item is close by, so just scroll to it.
+			let velocity = Math.sqrt(2 * Math.abs(distance) * flickDeceleration)
+			if (distance > 0) {
+				velocity = -velocity
+			}
+			flick(horizontal ? velocity : 0, horizontal ? 0 : velocity)
+		}
+	}
+
+	// Scrolls the view to show the delegate that contains the focused item. If the delegate is
+	// larger than the view, shows the focused item instead.
+	function scrollToFocusedItem(focusedItem) {
+		let delegate = focusedItem
+		while (delegate && delegate.parent !== contentItem) {
+			delegate = delegate.parent
+		}
+		if (!delegate) {
+			return
+		}
+		const delegateFits = orientation === ListView.Horizontal
+				? delegate.width <= width
+				: delegate.height <= height
+		scrollToItem(delegateFits ? delegate : focusedItem)
+	}
+
+	function _scrollDistance(itemContentPos, itemSize, contentPos, viewSize) {
+		if (itemContentPos + itemSize > contentPos + viewSize) {
+			// Scroll right or scroll down, to show the end of the item. If the item is larger
+			// than the view, show its start instead.
+			return Math.min((itemContentPos + itemSize) - (contentPos + viewSize), itemContentPos - contentPos)
+		} else if (itemContentPos < contentPos) {
+			// Scroll left or scroll up (return a negative distance)
+			return (itemContentPos - contentPos)
+		} else {
+			return 0
+		}
+	}
 
 	function pageDown() {
 		if ((orientation === Qt.Vertical && atYEnd) || (orientation === Qt.Horizontal && atXEnd)) {

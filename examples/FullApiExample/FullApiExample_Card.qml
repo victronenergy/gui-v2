@@ -5,11 +5,10 @@ import Victron.GuiPlugins
 	Cards with an icon, a title and a status, and content of your own, in a list of cards laid out
 	as in the Controls pane.
 
-	A plugin card is meant to be shown in the Controls pane or the Switches pane, beside gui-v2's
-	own cards. That is not supported yet, so this example shows the cards on a page, in a
-	PluginCardListView. The list sets the size of each card. With key navigation, the Left and Right
-	keys move between the cards, or in portrait layout, the Up and Down keys do, from the first or
-	last list item in a card.
+	This example shows the cards on a page, in a PluginCardListView. A plugin can also add a card
+	to the Controls pane or the Switches pane. The list sets the size of each card. With key
+	navigation, the Left and Right keys move between the cards, or in portrait layout, the Up and
+	Down keys do, from the first or last list item in a card.
 
 	The pump card shows the pump's power, drawn in gui-v2's font for numbers, and three flat list
 	items that control the pump: a switch, a button and a slider. The flat list items have their
