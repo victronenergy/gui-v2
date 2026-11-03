@@ -90,6 +90,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/PageGensetModel.qml
     components/PagePreloader.qml
     components/PageStack.qml
+    components/PluginCardLoader.qml
     components/VeQuickItemsQuotient.qml
     components/ProgressArc.qml
     components/QuantityGroupListHeader.qml
@@ -689,6 +690,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/colorderivation.cpp
     src/colordimmerdata.h
     src/colordimmerdata.cpp
+    src/combinedlistmodel.h
+    src/combinedlistmodel.cpp
     src/dcmeterdevicemodel.h
     src/dcmeterdevicemodel.cpp
     src/device.h

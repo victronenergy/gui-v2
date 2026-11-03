@@ -22,6 +22,7 @@ add_subdirectory(basetankdevice)
 add_subdirectory(basetankdevicemodel)
 add_subdirectory(branding)
 add_subdirectory(classandvrminstancemodel)
+add_subdirectory(combinedlistmodel)
 add_subdirectory(device)
 add_subdirectory(filtereddevicemodel)
 add_subdirectory(filteredservicemodel)
@@ -64,9 +65,17 @@ add_subdirectory(units)
 add_subdirectory(visibleitemmodel)
 add_subdirectory(wifimodel)
 
+find_package(Python3 COMPONENTS Interpreter)
+
+# Tests that load plugins, compiled at build time with tools/gui-v2-plugin-compiler.py.
+if (Python3_Interpreter_FOUND)
+    set(TEST_PLUGINS_DIR "${CMAKE_BINARY_DIR}/test-plugins")
+    add_subdirectory(plugins)
+    add_subdirectory(quickaccesspanecards)
+endif()
+
 # Tests for the Python tools: the Victron.GuiPlugins API record, the plugin
 # compiler, the Branding property list, the module dependency rules, and the theme pruner.
-find_package(Python3 COMPONENTS Interpreter)
 if (Python3_Interpreter_FOUND)
     # -B: do not write __pycache__ directories into the source tree.
     add_test(NAME tst_guipluginsapi

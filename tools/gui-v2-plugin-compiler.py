@@ -867,6 +867,30 @@ def navigation_integration(integration, pluginName, qmlFiles, imageFiles, seenNa
         navIntegration["location"] = location
     return navIntegration
 
+# Returns the JSON integration for the args of one --card option.
+def card_integration(integration, pluginName, qmlFiles):
+    if len(integration) != 2:
+        print("\n\nERROR: --card requires 2 args: page.qml cardType (1=controls, 2=switches)")
+        sys.exit(1)
+    pageQml = integration[0]
+    try:
+        cardType = int(integration[1])
+    except ValueError:
+        print("\n\nERROR: Card type must be an integer (1=controls, 2=switches)")
+        sys.exit(1)
+    if cardType not in (1, 2):
+        print("\n\nERROR: Card type must be 1 (controls) or 2 (switches)")
+        sys.exit(1)
+    if not pageQml.endswith('.qml'):
+        print("\n\nERROR: Card page must be a .qml file")
+        sys.exit(1)
+    require_packed_file(pageQml, qmlFiles, "Card page")
+    return {
+        "type": 5,
+        "url": "qrc:/" + pluginName + "/" + pageQml,
+        "cardType": cardType
+    }
+
 def require_packed_file(path, packedFiles, description):
     # Only the files directly in the current directory are packed, and resource paths are
     # case-sensitive, so the name must match a packed file exactly.
@@ -1120,7 +1144,7 @@ if __name__ == '__main__':
                              'location name follows it. Omitted location defaults to BeforeNotifications. '
                              'A built-in page file name is an error. Do not use the same file name twice in this plugin.')
     parser.add_argument('-q', '--quickaccess', default='')
-    parser.add_argument('-c', '--card', default='')
+    parser.add_argument('-c', '--card', required=False, nargs='+', action='append', help='Pair of page .qml and card type (1=controls, 2=switches)')
     parser.add_argument('-b', '--branding', default='',     help='The Branding .qml file of a custom branding plugin')
     parser.add_argument('--qml-import-path', default=os.path.dirname(os.path.abspath(__file__)),
                         help='The directory containing Victron/Branding/qmldir, used by qmllint '
@@ -1233,8 +1257,9 @@ if __name__ == '__main__':
             integrations.append(navigation_integration(integration, args.name, qmlFiles, imageFiles, seenNavPages))
     if len(args.quickaccess) > 0:
         print("TODO: quick access...")
-    if len(args.card) > 0:
-        print("TODO: card...")
+    if args.card:
+        for integration in args.card:
+            integrations.append(card_integration(integration, args.name, qmlFiles))
     if len(args.branding) > 0:
         brandingIntegration = {
             "type": BRANDING_INTEGRATION_TYPE,

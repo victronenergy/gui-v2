@@ -9,9 +9,8 @@ import Victron.VenusOS
 /*
 	A card with an icon, a title and a status, drawn like the cards in the Controls pane.
 
-	A plugin card is meant to be shown in the Controls pane or the Switches pane, beside gui-v2's
-	own cards. That is not supported yet: for now, a plugin shows the card on a page of its own,
-	in a PluginCardListView.
+	A plugin can show the card on a page of its own, in a PluginCardListView, or add it to the
+	Controls pane or the Switches pane, after gui-v2's own cards.
 
 	The card draws the icon, title and status in the current theme. iconSource is a single-color
 	image, such as one of the PluginIcons: the card tints it with the primary font color. title and
@@ -25,9 +24,11 @@ import Victron.VenusOS
 	status. If it wraps, or fills the line, also set its width to the card's width minus twice
 	contentMargin.
 
-	The card is the usual control-card size, so it is visible without a layout. A page can set its
-	width and height; a PluginCardListView sets them. If the content needs more room, the card
-	grows.
+	The card is the usual control-card size, so it is visible without a layout, and grows if the
+	content needs more room. A page can set its width and height. A PluginCardListView, and the
+	Controls and Switches panes, set the card's size. In portrait layout, the card still grows to
+	fit its content. Otherwise, it is as tall as the list or pane, so the content must fit in that
+	height.
 
 	Key navigation works as in gui-v2's own cards. When the card has the key focus, the Up and Down
 	keys move the focus between the list items and controls declared directly inside the card. At
