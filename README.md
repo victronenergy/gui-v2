@@ -8,6 +8,10 @@ gui-v2 is for the on-screen display on a GX Touch 50, 70 and Ekrano GX. And also
 
 For more technical information on Venus OS, see the [Venus OS wiki](https://github.com/victronenergy/venus/wiki).
 
+## Contributing
+
+Read [CONTRIBUTIONS.md](CONTRIBUTIONS.md) before you open a pull request.
+
 ## Main differences between gui-v1 and gui-v2
 
 - Touch oriented, rather than button oriented.

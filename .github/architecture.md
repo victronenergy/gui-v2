@@ -19,7 +19,7 @@
 
 ## Overview
 
-gui-v2 is a Qt6/QML application that serves as the UI for Victron Energy Venus OS devices. It runs natively on GX hardware (ARM), as a WebAssembly build in browsers, and as a desktop application for development. The application displays real-time energy system data (solar, battery, AC inputs, tanks, etc.) and provides device configuration.
+gui-v2 is a Qt6/QML application that serves as the UI for Victron Energy Venus OS devices. It runs natively on GX hardware (ARM), and as a desktop application for development. The WebAssembly build can be loaded in a web browser from the Cerbo GX via the local LAN, or from VRM via the Internet. The same build can be loaded inside VictronConnect, from the Cerbo GX directly or from VRM via the Internet. The application displays real-time energy system data (solar, battery, AC inputs, tanks, etc.) and provides device configuration.
 
 ## Backend data layer
 

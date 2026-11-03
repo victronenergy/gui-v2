@@ -434,9 +434,11 @@ These apply when a change introduces a performance optimisation that trades off 
 
 4.c.i. **Public API documentation**: Public C++ methods exposed to QML should have brief doc comments explaining purpose, preconditions, and thread-safety requirements.
 
-4.c.ii. **Non-obvious logic**: Complex algorithms, workarounds for Qt bugs, and platform-specific code should have comments explaining WHY, not WHAT.
+4.c.ii. **Non-obvious logic**: Complex algorithms, workarounds for Qt bugs, and platform-specific code should have a comment explaining WHY the code is that way; but almost never any comments describing WHAT the code does.
 
 4.c.iii. **Architecture decisions**: If a design choice isn't obvious (e.g., "why is this on a worker thread?"), document the reasoning near the code or in the relevant topic guide under `.github/`.
+
+4.c.iv. **Code comments and documentation**: Ensure that all code comments and documentation adhere to the rules specified in [Code Comments and Documentation](../CONTRIBUTIONS.md#code-comments-and-documentation); re-read it now.
 
 ### 4.d. Test coverage
 
