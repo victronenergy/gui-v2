@@ -213,6 +213,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/listitems/ListDcOutputQuantityGroup.qml
     components/listitems/ListDevicePriority.qml
     components/listitems/ListDroopGraph.qml
+    components/listitems/ListDynamicEssError.qml
     components/listitems/ListEvcsSetCurrentSpinBox.qml
     components/listitems/ListEvcsStartStopButton.qml
     components/listitems/ListFirmwareCheckButton.qml

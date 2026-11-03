@@ -1080,6 +1080,64 @@ public:
 	};
 	Q_ENUM(MicrogridError)
 
+	enum DynamicEss_Mode {
+		DynamicEss_Mode_Off = 0,
+		DynamicEss_Mode_Auto = 1,
+		DynamicEss_Mode_Buy = 2,
+		DynamicEss_Mode_Sell = 3,
+		DynamicEss_Mode_NodeRed = 4
+	};
+	Q_ENUM(DynamicEss_Mode)
+
+	enum DynamicEss_ReactiveStrategy {
+		DynamicEss_ReactiveStrategy_ScheduledSelfConsume = 1,
+		DynamicEss_ReactiveStrategy_ScheduledChargeAllowGrid = 2,
+		DynamicEss_ReactiveStrategy_ScheduledChargeEnhanced = 3,
+		DynamicEss_ReactiveStrategy_SelfConsumeAcceptCharge = 4,
+		DynamicEss_ReactiveStrategy_IdleScheduledFeedIn = 5,
+		DynamicEss_ReactiveStrategy_ScheduledDischarge = 6,
+		DynamicEss_ReactiveStrategy_SelfConsumeAcceptDischarge = 7,
+		DynamicEss_ReactiveStrategy_IdleMaintainSurplus = 8,
+		DynamicEss_ReactiveStrategy_IdleMaintainTargetSoc = 9,
+		DynamicEss_ReactiveStrategy_ScheduledChargeSmoothTransition = 10,
+		DynamicEss_ReactiveStrategy_ScheduledChargeFeedIn = 11,
+		DynamicEss_ReactiveStrategy_ScheduledChargeNoGrid = 12,
+		DynamicEss_ReactiveStrategy_ScheduledMinimumDischarge = 13,
+		DynamicEss_ReactiveStrategy_SelfConsumeNoGrid = 14,
+		DynamicEss_ReactiveStrategy_IdleNoOpportunity = 15,
+		DynamicEss_ReactiveStrategy_UnscheduledChargeCatchupTargetSoc = 16,
+		DynamicEss_ReactiveStrategy_SelfConsumeIncreasedDischarge = 17,
+		DynamicEss_ReactiveStrategy_KeepBatteryCharged = 18,
+		DynamicEss_ReactiveStrategy_ScheduledDischargeSmoothTransition = 19,
+		DynamicEss_ReactiveStrategy_SelfConsumeAcceptBelowTargetSoc = 20,
+		DynamicEss_ReactiveStrategy_IdleNoDischargeOpportunity = 21,
+		DynamicEss_ReactiveStrategy_ControlledDischargeEvcs = 22,
+		DynamicEss_ReactiveStrategy_ChargeToMinSoc = 23,
+		DynamicEss_ReactiveStrategy_ErrorCode = 90,
+		DynamicEss_ReactiveStrategy_SelfConsumeInvalidTargetSoc = 91,
+		DynamicEss_ReactiveStrategy_DessDisabled = 92,
+		DynamicEss_ReactiveStrategy_SelfConsumeUnexpectedException = 93,
+		DynamicEss_ReactiveStrategy_SelfConsumeFaultyChargeRate = 94,
+		DynamicEss_ReactiveStrategy_UnknownOperatingMode = 95,
+		DynamicEss_ReactiveStrategy_EssLowSoc = 96,
+		DynamicEss_ReactiveStrategy_SelfConsumeUnmappedState = 97,
+		DynamicEss_ReactiveStrategy_SelfConsumeUnpredicted = 98,
+		DynamicEss_ReactiveStrategy_NoWindow = 99
+	};
+	Q_ENUM(DynamicEss_ReactiveStrategy)
+
+	enum DynamicEss_ErrorCode {
+		DynamicEss_ErrorCode_NoError = 0,
+		DynamicEss_ErrorCode_NoEss = 1,
+		DynamicEss_ErrorCode_EssMode = 2,
+		DynamicEss_ErrorCode_NoMatchingSchedule = 3,
+		DynamicEss_ErrorCode_SocLow = 4,
+		DynamicEss_ErrorCode_BatteryCapacityUnset = 5,
+		DynamicEss_ErrorCode_DessDisabled = 6,
+		DynamicEss_ErrorCode_ChargeControlNotAcquired = 7
+	};
+	Q_ENUM(DynamicEss_ErrorCode)
+
 	enum ElectricalPowerDisplay {
 		ElectricalPowerDisplay_PreferWatts,
 		ElectricalPowerDisplay_PreferAmps,
@@ -1126,6 +1184,10 @@ public:
 
 	Q_INVOKABLE QString microgridModeToText(MicrogridMode mode, MicrogridExternalControl control) const;
 	Q_INVOKABLE QString microgrid_errorToText(MicrogridError error) const;
+
+	Q_INVOKABLE QString dynamicEss_reactiveStrategyToText(int strategy) const;
+	Q_INVOKABLE QString dynamicEss_errorToText(DynamicEss_ErrorCode error) const;
+	Q_INVOKABLE QString dynamicEss_errorHint(DynamicEss_ErrorCode error, DynamicEss_Mode mode) const;
 
 	Q_INVOKABLE QString system_stateToText(System_State state) const;
 

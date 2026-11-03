@@ -979,6 +979,175 @@ QString Enums::microgrid_errorToText(MicrogridError error) const
 }
 }
 
+QString Enums::dynamicEss_reactiveStrategyToText(int strategy) const
+{
+	switch (strategy) {
+	case DynamicEss_ReactiveStrategy_ScheduledSelfConsume:
+		//% "Self-consumption"
+		return qtTrId("dess_strategy_scheduled_selfconsume");
+	case DynamicEss_ReactiveStrategy_ScheduledChargeAllowGrid:
+		//% "Charging from grid to target SOC"
+		return qtTrId("dess_strategy_scheduled_charge_allow_grid");
+	case DynamicEss_ReactiveStrategy_ScheduledChargeEnhanced:
+		//% "Charging from solar to target SOC"
+		return qtTrId("dess_strategy_scheduled_charge_enhanced");
+	case DynamicEss_ReactiveStrategy_SelfConsumeAcceptCharge:
+		//% "Self-consumption, storing solar surplus"
+		return qtTrId("dess_strategy_selfconsume_accept_charge");
+	case DynamicEss_ReactiveStrategy_IdleScheduledFeedIn:
+		//% "Idle, feeding solar surplus into the grid"
+		return qtTrId("dess_strategy_idle_scheduled_feedin");
+	case DynamicEss_ReactiveStrategy_ScheduledDischarge:
+		//% "Discharging to target SOC"
+		return qtTrId("dess_strategy_scheduled_discharge");
+	case DynamicEss_ReactiveStrategy_SelfConsumeAcceptDischarge:
+		//% "Self-consumption, supplying loads"
+		return qtTrId("dess_strategy_selfconsume_accept_discharge");
+	case DynamicEss_ReactiveStrategy_IdleMaintainSurplus:
+		//% "Idle, maintaining surplus"
+		return qtTrId("dess_strategy_idle_maintain_surplus");
+	case DynamicEss_ReactiveStrategy_IdleMaintainTargetSoc:
+		//% "Idle, maintaining target SOC"
+		return qtTrId("dess_strategy_idle_maintain_targetsoc");
+	case DynamicEss_ReactiveStrategy_ScheduledChargeSmoothTransition:
+		//% "Charging towards the next target SOC"
+		return qtTrId("dess_strategy_scheduled_charge_smooth_transition");
+	case DynamicEss_ReactiveStrategy_ScheduledChargeFeedIn:
+		//% "Charging to target SOC, feeding in the rest"
+		return qtTrId("dess_strategy_scheduled_charge_feedin");
+	case DynamicEss_ReactiveStrategy_ScheduledChargeNoGrid:
+		//% "Charging to target SOC without grid"
+		return qtTrId("dess_strategy_scheduled_charge_no_grid");
+	case DynamicEss_ReactiveStrategy_ScheduledMinimumDischarge:
+		//% "Discharging at minimum rate"
+		return qtTrId("dess_strategy_scheduled_minimum_discharge");
+	case DynamicEss_ReactiveStrategy_SelfConsumeNoGrid:
+		//% "Charging from solar only"
+		return qtTrId("dess_strategy_selfconsume_no_grid");
+	case DynamicEss_ReactiveStrategy_IdleNoOpportunity:
+		//% "Idle, no way to reach target SOC"
+		return qtTrId("dess_strategy_idle_no_opportunity");
+	case DynamicEss_ReactiveStrategy_UnscheduledChargeCatchupTargetSoc:
+		//% "Catching up to target SOC"
+		return qtTrId("dess_strategy_unscheduled_charge_catchup_targetsoc");
+	case DynamicEss_ReactiveStrategy_SelfConsumeIncreasedDischarge:
+		//% "Self-consumption, increased discharge"
+		return qtTrId("dess_strategy_selfconsume_increased_discharge");
+	case DynamicEss_ReactiveStrategy_KeepBatteryCharged:
+		//% "Keeping battery charged"
+		return qtTrId("dess_strategy_keep_battery_charged");
+	case DynamicEss_ReactiveStrategy_ScheduledDischargeSmoothTransition:
+		//% "Discharging towards the next target SOC"
+		return qtTrId("dess_strategy_scheduled_discharge_smooth_transition");
+	case DynamicEss_ReactiveStrategy_SelfConsumeAcceptBelowTargetSoc:
+		//% "Self-consumption, below target SOC allowed"
+		return qtTrId("dess_strategy_selfconsume_accept_below_targetsoc");
+	case DynamicEss_ReactiveStrategy_IdleNoDischargeOpportunity:
+		//% "Idle, battery discharge to grid not allowed"
+		return qtTrId("dess_strategy_idle_no_discharge_opportunity");
+	case DynamicEss_ReactiveStrategy_ControlledDischargeEvcs:
+		//% "Discharging to supply EV charging"
+		return qtTrId("dess_strategy_controlled_discharge_evcs");
+	case DynamicEss_ReactiveStrategy_ChargeToMinSoc:
+		//% "Charging to minimum SOC"
+		return qtTrId("dess_strategy_charge_to_minsoc");
+	case DynamicEss_ReactiveStrategy_ErrorCode:
+		//% "Paused because of an error"
+		return qtTrId("dess_strategy_error_code");
+	case DynamicEss_ReactiveStrategy_SelfConsumeInvalidTargetSoc:
+		//% "Self-consumption, schedule has no valid target SOC"
+		return qtTrId("dess_strategy_selfconsume_invalid_targetsoc");
+	case DynamicEss_ReactiveStrategy_DessDisabled:
+		//% "Dynamic ESS disabled"
+		return qtTrId("dess_strategy_dess_disabled");
+	case DynamicEss_ReactiveStrategy_SelfConsumeUnexpectedException:
+		//% "Self-consumption after an internal error"
+		return qtTrId("dess_strategy_selfconsume_unexpected_exception");
+	case DynamicEss_ReactiveStrategy_SelfConsumeFaultyChargeRate:
+		//% "Self-consumption, no charge rate available"
+		return qtTrId("dess_strategy_selfconsume_faulty_chargerate");
+	case DynamicEss_ReactiveStrategy_UnknownOperatingMode:
+		//% "Unknown operating mode"
+		return qtTrId("dess_strategy_unknown_operating_mode");
+	case DynamicEss_ReactiveStrategy_EssLowSoc:
+		//% "Battery below minimum SOC"
+		return qtTrId("dess_strategy_ess_low_soc");
+	case DynamicEss_ReactiveStrategy_SelfConsumeUnmappedState:
+	case DynamicEss_ReactiveStrategy_SelfConsumeUnpredicted:
+		//% "Self-consumption, unexpected situation"
+		return qtTrId("dess_strategy_selfconsume_unexpected_situation");
+	case DynamicEss_ReactiveStrategy_NoWindow:
+		//% "Self-consumption, no schedule for now"
+		return qtTrId("dess_strategy_no_window");
+	default:
+		//: %1 = the reactive strategy number reported by Dynamic ESS
+		//% "Unknown (%1)"
+		return qtTrId("dess_strategy_unknown").arg(strategy);
+	}
+}
+
+QString Enums::dynamicEss_errorToText(DynamicEss_ErrorCode error) const
+{
+	switch (error) {
+	case DynamicEss_ErrorCode_NoError:
+		//% "No error"
+		return qtTrId("dess_error_none");
+	case DynamicEss_ErrorCode_NoEss:
+		//% "No ESS device found"
+		return qtTrId("dess_error_no_ess");
+	case DynamicEss_ErrorCode_EssMode:
+		//% "ESS mode not supported"
+		return qtTrId("dess_error_ess_mode");
+	case DynamicEss_ErrorCode_NoMatchingSchedule:
+		//% "No schedule for the current time"
+		return qtTrId("dess_error_no_matching_schedule");
+	case DynamicEss_ErrorCode_SocLow:
+		//% "Battery SOC or minimum SOC not available"
+		return qtTrId("dess_error_soc_low");
+	case DynamicEss_ErrorCode_BatteryCapacityUnset:
+		//% "Battery capacity not set"
+		return qtTrId("dess_error_battery_capacity_unset");
+	case DynamicEss_ErrorCode_DessDisabled:
+		//% "Dynamic ESS disabled"
+		return qtTrId("dess_error_dess_disabled");
+	case DynamicEss_ErrorCode_ChargeControlNotAcquired:
+		//% "Charge control not available"
+		return qtTrId("dess_error_charge_control_not_acquired");
+	default:
+		return statusText_unknown();
+	}
+}
+
+QString Enums::dynamicEss_errorHint(DynamicEss_ErrorCode error, DynamicEss_Mode mode) const
+{
+	switch (error) {
+	case DynamicEss_ErrorCode_NoEss:
+		//% "Dynamic ESS needs an ESS-capable inverter/charger."
+		return qtTrId("dess_error_hint_no_ess");
+	case DynamicEss_ErrorCode_EssMode:
+		//% "Set the ESS mode to Optimized. Keep batteries charged and External control are not supported."
+		return qtTrId("dess_error_hint_ess_mode");
+	case DynamicEss_ErrorCode_NoMatchingSchedule:
+		if (mode == DynamicEss_Mode_NodeRed) {
+			//% "Node-RED has not written a schedule for now. Check the flow that sets the Dynamic ESS schedule."
+			return qtTrId("dess_error_hint_no_matching_schedule_node_red");
+		}
+		//% "VRM has not sent a schedule for now. Check the internet connection of the GX device."
+		return qtTrId("dess_error_hint_no_matching_schedule");
+	case DynamicEss_ErrorCode_SocLow:
+		//% "The battery SOC or the minimum SOC of the system is not known, for example during a firmware update or when the battery monitor is not reporting."
+		return qtTrId("dess_error_hint_soc_low");
+	case DynamicEss_ErrorCode_BatteryCapacityUnset:
+		//% "Set the battery capacity in the Dynamic ESS settings on the VRM Portal."
+		return qtTrId("dess_error_hint_battery_capacity_unset");
+	case DynamicEss_ErrorCode_ChargeControlNotAcquired:
+		//% "Another function controls battery charging: ESS scheduled charge levels or load shedding."
+		return qtTrId("dess_error_hint_charge_control_not_acquired");
+	default:
+		return QString();
+	}
+}
+
 Enums* Enums::create(QQmlEngine *engine, QJSEngine *jsEngine)
 {
 	Q_UNUSED(engine)
