@@ -159,6 +159,10 @@ namespace {
 		}
 		return QStringList();
 #elif defined(VENUS_DESKTOP_BUILD)
+		const QByteArray overrideDir = qgetenv("VENUS_GUI_PLUGINS_DIR");
+		if (!overrideDir.isEmpty()) {
+			return QStringList { QString::fromLocal8Bit(overrideDir) };
+		}
 		// look in ~appdir/plugins/
 		const QString appDirPath = QCoreApplication::applicationDirPath();
 		QDir pluginDir = QDir(appDirPath);
@@ -187,9 +191,7 @@ GuiPluginLoader* GuiPluginLoader::create(QQmlEngine *engine, QJSEngine *)
 	static GuiPluginLoader* instance = new GuiPluginLoader(engine, nullptr);
 	if (engine && !instance->m_qmlEngine) {
 		instance->m_qmlEngine = engine;
-		if (instance->m_brandingPending) {
-			instance->applyBranding();
-		}
+		instance->loadPendingBrandingAndCards();
 	}
 	return instance;
 }
@@ -974,13 +976,13 @@ void GuiPluginLoader::populatePlugins()
 		}
 	}
 
-	// Branding objects can only be created once the QML engine is known.
+	// Branding objects can only be created, and cards compiled, once the QML engine is known.
 	if (m_qmlEngine) {
-		loadBranding(&data);
+		loadBrandingAndCards(&data);
 	} else {
-		m_brandingPending = std::any_of(data.cbegin(), data.cend(), [](const GuiPlugin &p) {
+		m_brandingAndCardsPending = std::any_of(data.cbegin(), data.cend(), [](const GuiPlugin &p) {
 			return std::any_of(p.m_integrations.cbegin(), p.m_integrations.cend(), [](const GuiPluginIntegration &i) {
-				return i.type() == GuiPluginLoader::Branding;
+				return i.type() == GuiPluginLoader::Branding || i.type() == GuiPluginLoader::QuickAccessPaneCard;
 			});
 		});
 	}
@@ -1158,33 +1160,80 @@ QVector<GuiPlugin> GuiPluginLoader::enableFirstBrandingPlugin(
 	return removed;
 }
 
-void GuiPluginLoader::loadBranding(QVector<GuiPlugin> *plugins)
+void GuiPluginLoader::loadBrandingAndCards(QVector<GuiPlugin> *plugins)
 {
-	// loadPluginData() has already registered these plugins. Unload any that are not enabled.
-	const QVector<GuiPlugin> removed = enableFirstBrandingPlugin(
+	// loadPluginData() has already registered these plugins. Unload any that are not enabled,
+	// or that are left without integrations.
+	QVector<GuiPlugin> removed = enableFirstBrandingPlugin(
 			m_qmlEngine, plugins, &m_branding, &m_brandingFontIds);
-	for (const GuiPlugin &plugin : removed) {
+	removed += removeCardsThatCannotBeCompiled(m_qmlEngine, plugins);
+	for (const GuiPlugin &plugin : std::as_const(removed)) {
 		unloadSinglePluginData(plugin);
 	}
 }
 
+void GuiPluginLoader::loadPendingBrandingAndCards()
+{
+	if (!m_brandingAndCardsPending || !m_qmlEngine) {
+		return;
+	}
+	m_brandingAndCardsPending = false;
+	QVector<GuiPlugin> plugins = m_plugins;
+	loadBrandingAndCards(&plugins);
+	m_plugins = plugins;
+	Q_EMIT pluginsChanged();
+	applyBranding();
+}
+
 void GuiPluginLoader::applyBranding()
 {
-	if (m_brandingPending) {
-		if (!m_qmlEngine) {
-			return;
-		}
-		m_brandingPending = false;
-		QVector<GuiPlugin> plugins = m_plugins;
-		loadBranding(&plugins);
-		m_plugins = plugins;
-		Q_EMIT pluginsChanged();
+	// The Branding files are read once the QML engine is known.
+	if (m_brandingAndCardsPending) {
+		return;
 	}
 
 	ThemeSingleton *theme = ThemeSingleton::create();
 	if (!m_branding.isEmpty() || !theme->pluginBranding().isEmpty()) {
 		theme->setPluginBranding(m_branding);
 	}
+}
+
+QVector<GuiPlugin> GuiPluginLoader::removeCardsThatCannotBeCompiled(QQmlEngine *engine, QVector<GuiPlugin> *plugins)
+{
+	QVector<GuiPlugin> removed;
+	if (!engine || !plugins) {
+		return removed;
+	}
+
+	for (auto it = plugins->begin(); it != plugins->end();) {
+		QVector<GuiPluginIntegration> integrations;
+		for (const GuiPluginIntegration &integration : std::as_const(it->m_integrations)) {
+			if (integration.type() == QuickAccessPaneCard) {
+				// A file that is not local is still loading, so it is not checked, and the
+				// pane hides the card if it fails to load.
+				QQmlComponent component(engine, integration.url(), QQmlComponent::PreferSynchronous);
+				if (component.isError()) {
+					qCWarning(venusGui).noquote() << QStringLiteral(
+							"Ignoring card that cannot be compiled in plugin %1: %2")
+							.arg(it->name(), component.errorString().trimmed());
+					continue;
+				}
+			}
+			integrations.append(integration);
+		}
+
+		if (integrations.size() == it->m_integrations.size()) {
+			++it;
+		} else if (integrations.isEmpty()) {
+			qCWarning(venusGui) << "Ignoring plugin without valid integrations:" << it->name();
+			removed.append(*it);
+			it = plugins->erase(it);
+		} else {
+			it->m_integrations = integrations;
+			++it;
+		}
+	}
+	return removed;
 }
 
 std::optional<Victron::BrandingData> GuiPluginLoader::createBrandingSnapshot(
@@ -1636,7 +1685,8 @@ void GuiPluginIntegrationModel::updateIntegrations()
 		const QVector<GuiPluginIntegration> integrations = p.integrations();
 		for (const GuiPluginIntegration &i : integrations) {
 			if ((m_type == GuiPluginLoader::InvalidIntegrationType || i.type() == m_type)
-					&& (m_productId.isEmpty() || i.productId().compare(m_productId, Qt::CaseInsensitive) == 0)) {
+					&& (m_productId.isEmpty() || i.productId().compare(m_productId, Qt::CaseInsensitive) == 0)
+					&& (m_cardType == GuiPluginLoader::InvalidCardType || i.cardType() == m_cardType)) {
 				data.append(i);
 			}
 		}
@@ -1681,6 +1731,20 @@ void GuiPluginIntegrationModel::setProductId(const QString &id)
 	if (m_productId != id) {
 		m_productId = id;
 		Q_EMIT productIdChanged();
+		updateIntegrations();
+	}
+}
+
+GuiPluginLoader::QuickAccessPaneCardType GuiPluginIntegrationModel::cardType() const
+{
+	return m_cardType;
+}
+
+void GuiPluginIntegrationModel::setCardType(GuiPluginLoader::QuickAccessPaneCardType ct)
+{
+	if (m_cardType != ct) {
+		m_cardType = ct;
+		Q_EMIT cardTypeChanged();
 		updateIntegrations();
 	}
 }
