@@ -784,6 +784,7 @@ QVector<GuiPluginIntegration> GuiPluginLoader::parseIntegrations(const QJsonObje
 		const QString integrationProductId = integration.value(QStringLiteral("productId")).toString();
 		const QString integrationTitle = integration.value(QStringLiteral("title")).toString();
 		const QString integrationIcon = integration.value(QStringLiteral("icon")).toString();
+		const QString integrationIconActive = integration.value(QStringLiteral("iconActive")).toString();
 		const int integrationCardType = integration.value(QStringLiteral("cardType")).toInt(0);
 
 		const bool invalidType = integrationType == GuiPluginLoader::InvalidIntegrationType
@@ -826,7 +827,7 @@ QVector<GuiPluginIntegration> GuiPluginLoader::parseIntegrations(const QJsonObje
 		const bool hasIcon = integrationType == GuiPluginLoader::NavigationPage
 				|| integrationType == GuiPluginLoader::QuickAccessPane;
 		const bool isCard = integrationType == GuiPluginLoader::QuickAccessPaneCard;
-		integrations.append(GuiPluginIntegration(
+		GuiPluginIntegration parsed(
 				pluginName,
 				static_cast<GuiPluginLoader::IntegrationType>(integrationType),
 				QUrl(integrationUrl),
@@ -834,7 +835,11 @@ QVector<GuiPluginIntegration> GuiPluginLoader::parseIntegrations(const QJsonObje
 				isDeviceList ? integrationTitle : QString(),
 				hasIcon ? QUrl(integrationIcon) : QUrl(),
 				isCard ? static_cast<GuiPluginLoader::QuickAccessPaneCardType>(integrationCardType)
-						: GuiPluginLoader::InvalidCardType));
+						: GuiPluginLoader::InvalidCardType);
+		if (hasIcon && !integrationIconActive.isEmpty()) {
+			parsed.m_iconActive = QUrl(integrationIconActive);
+		}
+		integrations.append(parsed);
 	}
 
 	return integrations;
@@ -1626,6 +1631,8 @@ QVariant GuiPluginIntegrationModel::data(const QModelIndex &index, int role) con
 		return QVariant(m_integrations.at(row).productId());
 	case IconRole:
 		return QVariant(m_integrations.at(row).icon());
+	case IconActiveRole:
+		return QVariant(m_integrations.at(row).iconActive());
 	case UrlRole:
 		return QVariant(m_integrations.at(row).url());
 	case TypeRole:
@@ -1651,6 +1658,7 @@ QHash<int, QByteArray> GuiPluginIntegrationModel::roleNames() const
 		{ TitleRole, "title" },
 		{ ProductIdRole, "productId" },
 		{ IconRole, "icon" },
+		{ IconActiveRole, "iconActive" },
 		{ UrlRole, "url" },
 		{ TypeRole, "type" },
 		{ CardTypeRole, "cardType" }
