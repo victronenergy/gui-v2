@@ -95,7 +95,10 @@ public:
 	// Triggers a mouse press and mouse release event on the centre of the given item.
 	Q_INVOKABLE bool mouseClick(QQuickItem *item);
 
-	// TODO add keyPress(QQuickItem *item);
+	// Posts a key press and release to the item's window. Focuses item first when it
+	// does not already have active focus, so a chain of keyClicks can walk from the
+	// item that received the previous key.
+	Q_INVOKABLE bool keyClick(QQuickItem *item, int key);
 
 	// Sanitizes a string so that it can be used as part of the file name for an image.
 	Q_INVOKABLE QString sanitizedImageName(const QString &imageName) const;
