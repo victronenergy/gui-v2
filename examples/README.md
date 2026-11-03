@@ -11,8 +11,9 @@ deploy instructions.
 | 1    | **PluginSettingsPage**     | Settings > Integrations > UI Plugins > *your plugin* | `SimpleExample/`, `SimpleTrExample/` |
 | 2    | **DeviceListSettingsPage** | Device list settings for a specific product ID       | `DeviceListExample/`                 |
 | 3    | **NavigationPage**         | Main navigation bar, at a named location (default: `BeforeNotifications`). The location name is the last compiler argument; an integer is an error. | `NavigationExample/`                 |
+| 5    | **QuickAccessPaneCard**    | Card injected into the Controls or Switches pane     | `CardExample/`                       |
 
-Quick-access panes and cards are not supported yet.
+A quick access pane (type 4) is not supported yet.
 
 A single plugin can combine multiple integration types (e.g. a settings
 page and a navigation page in one JSON file).
@@ -20,7 +21,7 @@ page and a navigation page in one JSON file).
 ## Building Plugins
 
 All examples use `tools/gui-v2-plugin-compiler.py`. Requirements:
-Python 3, Qt tools (`rcc`) in PATH.
+Python 3, and the Qt tools `lupdate`, `lrelease` and `rcc` in PATH.
 
 ```
 cd examples/SimpleExample/
@@ -73,6 +74,12 @@ Adds a page to the main nav bar with a brick icon. The page is a
 of battery, DC PV and DC system values, with `PluginPalette` colors and
 text sizes, in a grid in landscape layout and a column in portrait
 layout.
+
+### CardExample (Type 5)
+
+Injects a compact dashboard card into the Controls pane showing
+battery, solar, water, and a water pump switch alongside
+the built-in ESS, EVCS, and inverter cards.
 
 ### FullApiExample
 
