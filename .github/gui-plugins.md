@@ -11,13 +11,14 @@ A quick access pane (integration type 4) is not yet part of the plugin API. Plug
 
 This document is for OEM and third-party developers, and for AI agents that write or check a plugin. It is complete on its own: you do not need to read gui-v2's internals. Custom branding plugins, which change the GUI's colors, fonts and logos, are a separate kind of plugin and are not covered here.
 
-Five example plugins show the rules in practice:
+Six example plugins show the rules in practice:
 
 - `examples/SimpleExample`: a plugin settings page with one switch.
 - `examples/SimpleTrExample`: the same, with the switch text translated.
 - `examples/DeviceListExample`: device sub-pages.
 - `examples/NavigationExample`: a navigation page that draws tiles of live system values with `PluginPalette` colors and text sizes, and changes layout with `PluginPalette.orientation`.
 - `examples/FullApiExample`: a plugin settings page and a device sub-page that, between them, show every type in the [type reference](#type-reference).
+- `examples/CardExample`: a card in the Controls pane.
 
 `Victron.GuiPlugins` is not finished yet. It has the types in the [type reference](#type-reference); more list item types will be added.
 
