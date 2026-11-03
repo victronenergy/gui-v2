@@ -65,3 +65,50 @@ if (WIN32)
 	install(FILES ${test_plugin_jsons}
 		CONFIGURATIONS Debug DESTINATION ${CMAKE_INSTALL_BINDIR}/tests/test-plugins)
 endif()
+
+# Quick access pane used by the UI tests in tests/ui/plugins. The icon is copied from the example.
+set(PLUGIN_ICON "${CMAKE_SOURCE_DIR}/examples/QuickAccessExample/icon_brick_off.svg")
+set(PROBE_ROOT "${CMAKE_BINARY_DIR}/probe-plugins")
+
+function(add_probe_plugin DIR QML)
+	set(work "${PROBE_ROOT}/${DIR}")
+	set(json "${TEST_PLUGINS_DIR}/${DIR}.json")
+	set(prepared "${work}/prepared")
+	add_custom_command(
+		OUTPUT "${prepared}"
+		COMMAND ${CMAKE_COMMAND} -E make_directory "${work}" "${TEST_PLUGINS_DIR}"
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different
+			"${CMAKE_CURRENT_SOURCE_DIR}/${DIR}/${QML}" "${work}/${QML}"
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different
+			"${PLUGIN_ICON}" "${work}/icon_brick.svg"
+		COMMAND ${CMAKE_COMMAND} -E touch "${prepared}"
+		DEPENDS
+			"${CMAKE_CURRENT_SOURCE_DIR}/${DIR}/${QML}"
+			"${PLUGIN_ICON}"
+		VERBATIM
+	)
+	add_custom_command(
+		OUTPUT "${json}"
+		COMMAND ${Python3_EXECUTABLE} "${PLUGIN_COMPILER}" ${ARGN}
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different "${work}/${DIR}.json" "${json}"
+		WORKING_DIRECTORY "${work}"
+		DEPENDS
+			"${prepared}"
+			"${PLUGIN_COMPILER}"
+		VERBATIM
+	)
+	set(accumulated ${probe_jsons})
+	list(APPEND accumulated "${json}")
+	set(probe_jsons "${accumulated}" PARENT_SCOPE)
+endfunction()
+
+set(probe_jsons "")
+add_probe_plugin(ProbeQuick ProbeQuick_Pane.qml
+	--quickaccess ProbeQuick_Pane.qml icon_brick.svg icon_brick.svg)
+
+add_custom_target(probe_plugins DEPENDS ${probe_jsons})
+add_custom_command(TARGET probe_plugins POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E rm -f
+		"${CMAKE_BINARY_DIR}/bin/plugins/ProbeQuick.json"
+	VERBATIM
+)

@@ -245,9 +245,7 @@ There are currently 6 supported types of integrations:
 		  Only the first custom branding plugin in load order is enabled.
 		  A later plugin that has a custom branding integration is not enabled.
 
-** TODO: actually support 4. **
-Types 1, 2, 3 (navigation page), 5 (quick access pane card) and 6 (custom branding) are supported.
-Type 4 (quick access pane) is not.
+Types 1, 2, 3 (navigation page), 4 (quick access pane), 5 (quick access pane card) and 6 (custom branding) are supported.
 */
 class GuiPluginIntegration
 {
