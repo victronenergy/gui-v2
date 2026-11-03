@@ -20,4 +20,9 @@ FocusScope {
 	readonly property bool __is_plugin_page__: true
 
 	focus: true
+
+	// Up from the navigation bar enters a navigation page when the page's
+	// focusPolicy includes Qt.TabFocus. Set Qt.NoFocus when nothing on the page
+	// can take the key focus.
+	focusPolicy: Qt.TabFocus
 }

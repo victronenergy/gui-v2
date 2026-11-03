@@ -19,13 +19,56 @@ FocusScope {
 			: (pageStack.currentPage ?? swipeView?.currentItem ?? null)
 	readonly property alias cardsLoader: cardsLoader
 
-	readonly property bool notificationButtonsEnabled: (currentPage?.url?.endsWith("NotificationsPage.qml") ?? false)
+	// The built-in page. endsWith("/NotificationsPage.qml") matches that page as a
+	// qrc URL or a file URL, and does not match MyCustomNotificationsPage.qml.
+	readonly property bool notificationButtonsEnabled: (currentPage?.url ?? "").endsWith("/NotificationsPage.qml")
 			&& Services.notifications.silenceAlarmVisible
 
 	property alias navBarAnimatingOut: animateNavBarOut.running
 
 	property bool mainViewVisible: UiConfig.applicationVisible && !UiConfig.splashScreenVisible
 	onMainViewVisibleChanged: if (mainViewVisible) console.info("MainView: UI loaded and visible")
+
+	// Previous and current main-page URLs. If the current page is removed
+	// from the list, the previous page is selected. If that page is not in
+	// the list, Brief is selected. The URL is stored so that another plugin's
+	// page with the same file name is not treated as the removed page.
+	property string _previousPageUrl
+	property string _currentPageUrl
+
+	function _recordCurrentPageUrl(page) {
+		if (!page || !page.url) {
+			return
+		}
+		const pageUrl = page.url
+		if (pageUrl.length === 0) {
+			return
+		}
+		if (_currentPageUrl.length > 0 && _currentPageUrl !== pageUrl) {
+			_previousPageUrl = _currentPageUrl
+		}
+		_currentPageUrl = pageUrl
+	}
+
+	// The page list has finished changing. If the selected page was removed,
+	// show the previous page, or Brief. Otherwise keep the start page unless
+	// the user has already navigated.
+	function _choosePageAfterListChange() {
+		if (!Global.allPagesLoaded || !swipeView || swipeView.count !== navBar.pages.length) {
+			return
+		}
+		if (_currentPageUrl.length > 0 && !navBar.hasPage(_currentPageUrl)) {
+			navBar.setCurrentPage(navBar.hasPage(_previousPageUrl) ? _previousPageUrl : "BriefPage.qml")
+		} else if (pageStack.opened || cardsLoader.viewActive || navBar.modified) {
+			navBar.restoreCurrentPage()
+		} else {
+			pageManager.goToStartPage()
+		}
+		// Inserting or removing a page can move the view to another page without changing the
+		// nav bar index, so show the nav bar's current page in the view, and record it.
+		swipeView.setCurrentIndex(navBar.currentIndex)
+		_recordCurrentPageUrl(navBar.pages[navBar.currentIndex])
+	}
 
 	// To reduce the animation load, disable page animations when the PageStack is transitioning
 	// between pages, or when flicking between the main pages. Note that animations are still
@@ -165,6 +208,10 @@ FocusScope {
 			visible: swipeView && swipeView.ready && !pageStack.opened
 					 && !(root.cardsActive && !cardsLoader.animationRunning)
 			onLoaded: {
+				// The page list is inserted one row at a time. Do that before
+				// selecting the start page, in case the view was created before
+				// the model saw it.
+				swipePageModel.setSwipeViewPages()
 				// If there is an active alarm, the notifications page will be shown; otherwise, show the
 				// application start page, if set.
 				if (NotificationModel.activeAlarms > 0) {
@@ -172,6 +219,9 @@ FocusScope {
 				} else {
 					pageManager.goToStartPage()
 				}
+				// If the page was already at the nav bar index, the index did not change, and
+				// the page was not recorded.
+				root._recordCurrentPageUrl(navBar.pages[navBar.currentIndex])
 				// Notify that the UI is ready to be displayed.
 				console.info("MainView: swipe view pages loaded!")
 				Global.allPagesLoaded = true
@@ -191,45 +241,23 @@ FocusScope {
 					anchors.fill: parent
 					animationEnabled: ready && root.allowPageAnimations
 					focus: true
-					contentChildren: swipePageModel.pages
 
 					// Update the NavBar currentIndex when the view is swiped. Use onUserMovingChanged
-					// instead of onCurrentIndexChanged to avoid triggering this on initialization or
-					// when the swipe model is rebuilt.
+					// instead of onCurrentIndexChanged to avoid triggering this on initialization.
 					onUserMovingChanged: {
 						if (!userMoving) {
 							navBar.setCurrentIndex(currentIndex)
+							root._recordCurrentPageUrl(currentItem)
 						}
 					}
 
-					// When the page model changes, the view currentIndex resets to 0. This may
-					// happen on startup if the Boat/Levels availability is not known until after
-					// the main UI is loaded; in that case, go to the Start Page to avoid confusion.
-					// Or, if the model resets later on and the user has navigated elsewhere, then
-					// restore the selected main page, instead of closing the stack/cards and/or
-					// going to another page and disrupting the user selection.
-					onCountChanged: {
-						if (Global.allPagesLoaded && count === swipePageModel.pages.length) {
-							if (pageStack.opened || cardsLoader.viewActive || navBar.modified) {
-								// If a new page was inserted after the restored page (e.g. Overview
-								// is shown, and Levels is inserted) or if the current page dropped
-								// out, then the current index does not change and NavBar
-								// onCurrentIndexChanged does not fire. For this case, force-sync
-								// sync with the swipeView so that the view and swipeView current
-								// indexes match.
-								navBar.restoreCurrentPage()
-								swipeView.setCurrentIndex(navBar.currentIndex)
-							} else {
-								pageManager.goToStartPage()
-							}
-						}
-					}
 				}
 			}
 
 			SwipePageModel {
 				id: swipePageModel
 				view: swipeView
+				onPagesApplied: root._choosePageAfterListChange()
 			}
 
 			// For portrait: show top/bottom gradients when user has scrolled the view.
@@ -262,6 +290,7 @@ FocusScope {
 				if (swipeView) {
 					swipeView.setCurrentIndex(currentIndex)
 				}
+				root._recordCurrentPageUrl(pages[currentIndex])
 			}
 
 			onActiveFocusChanged: {

@@ -99,6 +99,51 @@ TestCase {
 		compare(GuiPluginLoaderTestHelper.integrationTypes(JSON.stringify(plugin)), allTypes)
 	}
 
+	// GuiPluginLoader.NavigationPage, and NavigationPageLocation_BeforeNotifications
+	// and BeforeLevels. The enum values are not used directly, as that would create
+	// the GuiPluginLoader singleton.
+	readonly property int navigationPageType: 3
+	readonly property int beforeNotifications: 5
+	readonly property int beforeLevels: 4
+
+	function navigationPlugin(url, location) {
+		const integration = {
+			type: root.navigationPageType,
+			url: url,
+			icon: "qrc:/TestPlugin/icon.svg"
+		}
+		if (location !== undefined) {
+			integration.location = location
+		}
+		return { integrations: [ integration ] }
+	}
+
+	function test_omittedNavigationLocationIsBeforeNotifications() {
+		const plugin = navigationPlugin("qrc:/TestPlugin/CustomPage.qml")
+		compare(GuiPluginLoaderTestHelper.navigationLocations(JSON.stringify(plugin)), [root.beforeNotifications])
+	}
+
+	function test_explicitNavigationLocationIsKept() {
+		const plugin = navigationPlugin("qrc:/TestPlugin/CustomPage.qml", root.beforeLevels)
+		compare(GuiPluginLoaderTestHelper.navigationLocations(JSON.stringify(plugin)), [root.beforeLevels])
+	}
+
+	function test_reservedNavigationPageNameIsIgnored() {
+		const plugin = navigationPlugin("qrc:/TestPlugin/NotificationsPage.qml", root.beforeNotifications)
+		ignoreWarning(/^Ignoring invalid integration at index 0 in plugin TestPlugin - type: 3 url: qrc:\/TestPlugin\/NotificationsPage.qml - navigation page file name matches a built-in page/)
+		compare(GuiPluginLoaderTestHelper.integrationTypes(JSON.stringify(plugin)), [])
+	}
+
+	function test_reservedNameDoesNotDropASettingsPage() {
+		const plugin = {
+			integrations: [{
+				type: root.settingsPageType,
+				url: "qrc:/TestPlugin/NotificationsPage.qml"
+			}]
+		}
+		compare(GuiPluginLoaderTestHelper.integrationTypes(JSON.stringify(plugin)), [root.settingsPageType])
+	}
+
 	function test_unsupportedVersionDropsEveryIntegration() {
 		const plugin = pluginWithEachIntegrationType()
 		const major = Number(GuiPluginLoaderTestHelper.guiPluginsModuleVersion().split(".")[0])
