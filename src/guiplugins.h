@@ -229,8 +229,9 @@ There are currently 6 supported types of integrations:
 		  Only the first custom branding plugin in load order is enabled.
 		  A later plugin that has a custom branding integration is not enabled.
 
-** TODO: actually support 3/4. **
-In the prototype, only type 1, 2, 5 and 6 are supported.
+** TODO: actually support 3. **
+Types 1, 2, 4 (quick access pane), 5 (quick access pane card) and 6 (custom branding) are supported.
+Type 3 is not.
 */
 class GuiPluginIntegration
 {
@@ -243,6 +244,7 @@ class GuiPluginIntegration
 
 	// valid for navigation page and quick access pane integrations
 	Q_PROPERTY(QUrl icon READ icon)
+	Q_PROPERTY(QUrl iconActive READ iconActive)
 
 	// valid for device list settings page integrations only
 	Q_PROPERTY(QString title READ title)
@@ -256,6 +258,7 @@ public:
 	QString title() const { return m_title; }
 	QString productId() const { return m_productId; }
 	QUrl icon() const { return m_icon; }
+	QUrl iconActive() const { return m_iconActive; }
 	QUrl url() const { return m_url; }
 	GuiPluginLoader::IntegrationType type() const { return m_type; }
 	GuiPluginLoader::QuickAccessPaneCardType cardType() const { return m_cardType; }
@@ -276,6 +279,7 @@ private:
 	QString m_title;
 	QString m_productId;
 	QUrl m_icon;
+	QUrl m_iconActive;
 	QUrl m_url;
 	GuiPluginLoader::IntegrationType m_type = GuiPluginLoader::InvalidIntegrationType;
 	GuiPluginLoader::QuickAccessPaneCardType m_cardType = GuiPluginLoader::InvalidCardType;
@@ -386,6 +390,7 @@ public:
 		TitleRole,
 		ProductIdRole,
 		IconRole,
+		IconActiveRole,
 		UrlRole,
 		TypeRole,
 		CardTypeRole

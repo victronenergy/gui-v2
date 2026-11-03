@@ -12,6 +12,9 @@ set(VictronUiTest_QML_MODULE_SOURCES
     tests/ui/smoke/mock-maximal/tst_overview.qml
     tests/ui/smoke/mock-maximal/tst_settings.qml
     tests/ui/target-page/tst_target_page.qml
+    tests/ui/plugins/tst_plugins.qml
+    tests/ui/keynav-switches/tst_keynav.qml
+    tests/ui/keynav-bare/tst_keynav.qml
 )
 
 SET(VictronUiTest_QML_MODULE_RESOURCES
@@ -20,4 +23,7 @@ SET(VictronUiTest_QML_MODULE_RESOURCES
     tests/ui/smoke/generic-capture/generic-capture.json
     tests/ui/smoke/key-navigation/key-navigation.json
     tests/ui/smoke/mock-maximal/mock-maximal.json
+    tests/ui/plugins/plugins.json
+    tests/ui/keynav-switches/keynav-switches.json
+    tests/ui/keynav-bare/keynav-bare.json
 )
