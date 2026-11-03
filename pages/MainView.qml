@@ -18,6 +18,8 @@ FocusScope {
 	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready && cardsLoader.item ? cardsLoader.item
 			: (pageStack.currentPage ?? swipeView?.currentItem ?? null)
 	readonly property alias cardsLoader: cardsLoader
+	readonly property alias controlCardsComponent: _controlCardsComponent
+	readonly property alias auxCardsComponent: _auxCardsComponent
 
 	readonly property bool notificationButtonsEnabled: (currentPage?.url?.endsWith("NotificationsPage.qml") ?? false)
 			&& Services.notifications.silenceAlarmVisible
@@ -39,6 +41,21 @@ FocusScope {
 	// True if any of the view animations are running.
 	readonly property bool animating: pageStack.animating || swipeView?.flicking || swipeView?.moving
 				|| navBarStartupAnim.running
+
+	property url pluginQuickAccessUrl
+	property string pluginQuickAccessName
+
+	function showPluginQuickAccess(pluginName, pageUrl) {
+		pluginQuickAccessName = pluginName
+		pluginQuickAccessUrl = pageUrl
+		cardsLoader.show(pluginQuickAccessComponent)
+	}
+
+	function pluginQuickAccessOpen(pageUrl) {
+		return cardsActive
+				&& cardsLoader.sourceComponent === pluginQuickAccessComponent
+				&& String(pluginQuickAccessUrl) === String(pageUrl)
+	}
 
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
 	// and Settings).
@@ -483,13 +500,41 @@ FocusScope {
 		KeyNavigation.up: statusBar
 
 		Component {
-			id: controlCardsComponent
+			id: _controlCardsComponent
 			ControlCardsPage {}
 		}
 
 		Component {
-			id: auxCardsComponent
+			id: _auxCardsComponent
 			AuxCardsPage {}
+		}
+
+		Component {
+			id: pluginQuickAccessComponent
+
+			Page {
+				title: root.pluginQuickAccessName
+				focusPolicy: Qt.TabFocus
+
+				Loader {
+					id: pluginPaneLoader
+					anchors.fill: parent
+					// Loader is a FocusScope. This keeps it the page's focus
+					// child, so key navigation stays inside the pane.
+					focus: true
+					active: String(root.pluginQuickAccessUrl).length > 0
+					source: root.pluginQuickAccessUrl
+					asynchronous: true
+					onLoaded: {
+						// A plugin Page binds focus to isCurrentPage, which is
+						// false inside this wrapper. Assigning focus selects it
+						// within the loader without stealing focus from outside.
+						if (item) {
+							item.focus = true
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -501,8 +546,8 @@ FocusScope {
 		opacity: 0.0
 		pageStack: root._pageStack
 
-		onControlCardsActivated: cardsLoader.show(controlCardsComponent)
-		onAuxCardsActivated: cardsLoader.show(auxCardsComponent)
+		onControlCardsActivated: cardsLoader.show(_controlCardsComponent)
+		onAuxCardsActivated: cardsLoader.show(_auxCardsComponent)
 		onCardsDeactivated: cardsLoader.hide()
 		onSidePanelToggled: root.currentPage.toggleSidePanel()
 
