@@ -6,8 +6,8 @@ A GUI plugin adds pages to gui-v2, without changing gui-v2. A plugin can add a:
 - **device sub-page**, opened from the page of a device in the Devices list
 - **navigation page**, added to the main navigation bar at a named location
 - **card in the Controls or Switches pane**, shown after gui-v2's own cards
-
-A quick access pane (integration type 4) is not yet part of the plugin API. Plugin pages and cards are written with the types of the `Victron.GuiPlugins` module, which gui-v2 keeps stable for plugins.
+- **quick access pane**, opened from a status-bar icon, in the same overlay as Controls and Switches
+- **card in the Controls or Switches pane**, shown after gui-v2's own cards
 
 This document is for OEM and third-party developers, and for AI agents that write or check a plugin. It is complete on its own: you do not need to read gui-v2's internals. Custom branding plugins, which change the GUI's colors, fonts and logos, are a separate kind of plugin and are not covered here.
 
@@ -35,6 +35,8 @@ Six example plugins show the rules in practice:
    For a device sub-page, give the product id, the page file and the list item text instead: `--devicelist 0x106 PluginNameDevice.qml "Cell Voltages"`. The list item text can be a translation id instead, as for a navigation page below. `examples/DeviceListExample` passes the id of its page's `title`.
 
    For a navigation page, give the page, the icon and the bar title: `--navigation PluginNamePage.qml icon.svg "Title"`. The bar title is also shown in the status bar in portrait layout. To translate it, give the id of a `qsTrId()` in your plugin's QML instead, usually the id of the page's `title`, as `examples/NavigationExample` does. Other text is shown as written. The location, if given, must be the last argument and one of `BeforeBoat`, `BeforeBrief`, `BeforeOverview`, `BeforeLevels`, `BeforeNotifications`, `BeforeSettings` or `AfterSettings`. An integer is an error. If you omit the location, the page is inserted at `BeforeNotifications`. Boat and Levels are not always shown. A page at `BeforeBoat` stays first when Boat is hidden. A page at `BeforeLevels` sits after Overview when Levels is hidden. The compiler rejects a page named `BoatPage.qml`, `BriefPage.qml`, `OverviewPage.qml`, `LevelsPage.qml`, `NotificationsPage.qml` or `SettingsPage.qml`, and the GUI ignores that integration. gui-v2 sometimes selects a navigation page by file name, and then shows the first page with that name. Do not use the same file name for two navigation pages in one plugin: both pages would have the same URL. Another plugin may use the same file name. The page and the icons must be in the plugin directory, not in a subdirectory.
+
+   For a quick access pane, give the pane file, the status-bar icon, and an optional icon shown while the pane is open: `--quickaccess PluginNamePane.qml icon.svg icon_active.svg`.
 
    For a card, give the card file and the pane, `1` for Controls or `2` for Switches: `--card PluginNameCard.qml 1`.
 
@@ -80,6 +82,14 @@ PluginPage {
 	}
 }
 ```
+
+## Quick access pane
+
+A quick access pane adds a status-bar icon. A press opens the pane in the same overlay as Controls and Switches. The overlay title is the plugin name, not the pane's `title`. The pane fills the overlay. Compile it with `--quickaccess`, as in the [quick start](#quick-start). The third file, if given, is the icon shown while the pane is open.
+
+The pane's base type is `PluginPage`. Put a `PluginItemListView` or a `PluginModelListView` in it, with the same list item types as a plugin settings page. Those types draw the text.
+
+To show devices, such as tanks or solar chargers, use a `PluginDeviceModel`. See [Devices](#devices).
 
 ## Backend data values
 
