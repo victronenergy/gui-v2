@@ -46,8 +46,14 @@
         "/Settings/CGwacs/PvPowerSetpointOffset": 200
     },
     "com.victronenergy.system": {
-        "/DynamicEss/Active": 2,
+        "/DynamicEss/Active": 1,
+        "/DynamicEss/Capabilities": 0,
+        "/DynamicEss/ErrorCode": 0,
+        "/DynamicEss/LastScheduledEnd": 1793743200,
+        "/DynamicEss/LastScheduledStart": 1793742300,
+        "/DynamicEss/ReactiveStrategy": 9,
         "/DynamicEss/TargetSoc": 55,
+        "/DynamicEss/WindowSlot": 1,
         "/Hub": 4,
         "/SystemState/ChargeDisabled": 1,
         "/SystemState/DischargeDisabled": 1,

@@ -25,7 +25,9 @@ Page {
 			ListSwitch {
 				dataItem.uid: BackendConnection.serviceUidForType("platform") + "/Services/OpportunityLoads/Mode"
 				text: CommonWords.enabled
-				interactive: dEssModeItem.value === 0
+				interactive: dEssModeItem.value === VenusOS.DynamicEss_Mode_Off
+					|| dEssModeItem.value === VenusOS.DynamicEss_Mode_Buy
+					|| dEssModeItem.value === VenusOS.DynamicEss_Mode_Sell
 				//% "Opportunity Loads cannot be enabled while Dynamic ESS is running. Disable Dynamic ESS first."
 				caption: interactive ? "" : qsTrId("pagecontrollableloads_disable_dess_first")
 
