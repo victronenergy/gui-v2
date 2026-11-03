@@ -7,6 +7,42 @@ import base64
 import shutil
 import xml.etree.ElementTree as ET
 
+# Numeric values match GuiPluginLoader.NavigationPageLocation and are a
+# plugin JSON contract. Do not renumber them.
+NAVIGATION_PAGE_LOCATIONS = {
+    "BeforeBoat": 1,
+    "BeforeBrief": 2,
+    "BeforeOverview": 3,
+    "BeforeLevels": 4,
+    "BeforeNotifications": 5,
+    "BeforeSettings": 6,
+    "AfterSettings": 7,
+}
+
+BUILTIN_NAV_PAGE_NAMES = {
+    "BoatPage.qml",
+    "BriefPage.qml",
+    "OverviewPage.qml",
+    "LevelsPage.qml",
+    "NotificationsPage.qml",
+    "SettingsPage.qml",
+}
+
+def navigation_location(token):
+    return NAVIGATION_PAGE_LOCATIONS.get(token)
+
+def warn_navigation_page_name(page_qml, seen):
+    base = os.path.basename(page_qml)
+    if base in BUILTIN_NAV_PAGE_NAMES:
+        print("\nWARNING: navigation page file name \"" + base
+              + "\" matches a built-in page. The navbar matches the file name only.",
+              file=sys.stderr)
+    if base in seen:
+        print("\nWARNING: navigation page file name \"" + base
+              + "\" is used more than once. File names must be unique.",
+              file=sys.stderr)
+    seen.add(base)
+
 def collect_filenames(directory, suffix):
     files = []
     for filename in os.listdir(directory):
@@ -154,7 +190,14 @@ if __name__ == '__main__':
     parser.add_argument('-x', '--max-required-version', default='', help='The maximum gui-v2 version compatible with this plugin')
     parser.add_argument('-s', '--settings', default='', help='The main settings page .qml associated with your plugin')
     parser.add_argument('-d', '--devicelist', required=False, nargs='+', action='append', help='Triplet of product id, settings page .qml, and title text (or translation id)')
-    parser.add_argument('-g', '--navigation', default='')
+    parser.add_argument('-g', '--navigation', required=False, nargs='+', action='append',
+                        help='2-5 args: page.qml icon.svg [title] [icon_active.svg] [location]. '
+                             'location, if given, must be the last argument and a name: '
+                             'BeforeBoat, BeforeBrief, BeforeOverview, BeforeLevels, '
+                             'BeforeNotifications, BeforeSettings or AfterSettings. '
+                             'An integer is an error. A title may be a location name only when a '
+                             'location name follows it. Omitted location defaults to BeforeLevels. '
+                             'The page file name must be unique and must not match a built-in page.')
     parser.add_argument('-q', '--quickaccess', default='')
     parser.add_argument('-c', '--card', default='')
     parser.add_argument('-f', '--filter-empty-sources', action='store_true', help='Strip empty source entries from .ts files')
@@ -231,8 +274,70 @@ if __name__ == '__main__':
                     "title": integration[2]
                 }
                 integrations.append(devicelistIntegration)
-    if len(args.navigation) > 0:
-        print("TODO: navigation...")
+    seenNavPages = set()
+    if args.navigation:
+        for integration in args.navigation:
+            if len(integration) < 2 or len(integration) > 5:
+                print("\n\nERROR: --navigation requires 2-5 args: page.qml icon.svg [title] [icon_active.svg] [location]")
+                sys.exit(1)
+            pageQml = integration[0]
+            iconFile = integration[1]
+            extras = integration[2:]
+            title = ''
+            iconActiveFile = ''
+            location = None
+            if len(extras) > 0:
+                last = extras[-1]
+                if last.isdigit():
+                    print("\n\nERROR: --navigation location must be a name, not an integer: " + last)
+                    print("Valid names: " + ", ".join(NAVIGATION_PAGE_LOCATIONS))
+                    sys.exit(1)
+                parsedLocation = navigation_location(last)
+                if parsedLocation is not None:
+                    location = parsedLocation
+                    extras = extras[:-1]
+            if len(extras) > 2:
+                print("\n\nERROR: --navigation accepts only one title and one active icon")
+                sys.exit(1)
+            if len(extras) == 2:
+                title = extras[0]
+                iconActiveFile = extras[1]
+                if not (iconActiveFile.endswith('.svg') or iconActiveFile.endswith('.png')):
+                    print("\n\nERROR: Navigation active icon must be a .svg or .png file")
+                    sys.exit(1)
+            elif len(extras) == 1:
+                if extras[0].endswith('.svg') or extras[0].endswith('.png'):
+                    iconActiveFile = extras[0]
+                else:
+                    title = extras[0]
+            warn_navigation_page_name(pageQml, seenNavPages)
+            if not pageQml.endswith('.qml'):
+                print("\n\nERROR: Navigation page must be a .qml file")
+                sys.exit(1)
+            if not os.path.exists(pageQml):
+                print(f"\n\nERROR: Navigation page \"{pageQml}\" not found in current directory")
+                sys.exit(1)
+            if not (iconFile.endswith('.svg') or iconFile.endswith('.png')):
+                print("\n\nERROR: Navigation icon must be a .svg or .png file")
+                sys.exit(1)
+            if not os.path.exists(iconFile):
+                print(f"\n\nERROR: Navigation icon \"{iconFile}\" not found in current directory")
+                sys.exit(1)
+            navIntegration = {
+                "type": 3,
+                "url": "qrc:/" + args.name + "/" + pageQml,
+                "icon": "qrc:/" + args.name + "/" + iconFile
+            }
+            if len(title) > 0:
+                navIntegration["title"] = title
+            if len(iconActiveFile) > 0:
+                if not os.path.exists(iconActiveFile):
+                    print(f"\n\nERROR: Navigation active icon \"{iconActiveFile}\" not found in current directory")
+                    sys.exit(1)
+                navIntegration["iconActive"] = "qrc:/" + args.name + "/" + iconActiveFile
+            if location is not None:
+                navIntegration["location"] = location
+            integrations.append(navIntegration)
     if len(args.quickaccess) > 0:
         print("TODO: quick access...")
     if len(args.card) > 0:

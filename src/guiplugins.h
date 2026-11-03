@@ -63,6 +63,22 @@ public:
 	};
 	Q_ENUM(QuickAccessPaneCardType)
 
+	// Gaps between the built-in navigation pages. The numeric values are the
+	// plugin JSON contract and must not be renumbered. Zero is invalid, so a
+	// missing or bad value is not treated as BeforeBoat. A missing location
+	// defaults to BeforeLevels. The name is a gap, not a visible button.
+	enum NavigationPageLocation {
+		InvalidNavigationPageLocation = 0,
+		NavigationPageLocation_BeforeBoat = 1,
+		NavigationPageLocation_BeforeBrief = 2,
+		NavigationPageLocation_BeforeOverview = 3,
+		NavigationPageLocation_BeforeLevels = 4,
+		NavigationPageLocation_BeforeNotifications = 5,
+		NavigationPageLocation_BeforeSettings = 6,
+		NavigationPageLocation_AfterSettings = 7
+	};
+	Q_ENUM(NavigationPageLocation)
+
 	static GuiPluginLoader* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 	GuiPluginLoader() = delete;
 	GuiPluginLoader(const GuiPluginLoader&) = delete;
@@ -125,9 +141,9 @@ There are currently 5 supported types of integrations:
 		  the device list settings page associated with any
 		  device whose productId matches the specified productId.
 	3) a navigation page
-		- causes a new icon to be added to the navigation bar,
-		  and an associated page to be added to be navigation
-		  swipe view.
+		- causes a new icon to be added to the navigation bar
+		  at a named location (default: before Levels), and an
+		  associated page to be added to the swipe view.
 	4) a quick access pane
 		- causes a new icon to be added to the status bar,
 		  which opens an associated custom quick access pane
@@ -137,8 +153,8 @@ There are currently 5 supported types of integrations:
 		  existing quick action pane views (i.e. either a
 		  controls card, or a switches card).
 
-** TODO: actually support 3/4/5. **
-In the prototype, only type 1 and 2 are supported.
+** TODO: actually support 4/5. **
+Type 3 (navigation page) is supported. Types 4 and 5 are not.
 */
 class GuiPluginIntegration
 {
@@ -151,6 +167,7 @@ class GuiPluginIntegration
 
 	// valid for navigation page and quick access pane integrations
 	Q_PROPERTY(QUrl icon READ icon)
+	Q_PROPERTY(QUrl iconActive READ iconActive)
 
 	// valid for device list settings page integrations only
 	Q_PROPERTY(QString title READ title)
@@ -159,14 +176,19 @@ class GuiPluginIntegration
 	// valid for quick access pane card integrations only
 	Q_PROPERTY(GuiPluginLoader::QuickAccessPaneCardType cardType READ cardType)
 
+	// valid for navigation page integrations only
+	Q_PROPERTY(GuiPluginLoader::NavigationPageLocation location READ location)
+
 public:
 	QString pluginName() const { return m_pluginName; }
 	QString title() const { return m_title; }
 	QString productId() const { return m_productId; }
 	QUrl icon() const { return m_icon; }
+	QUrl iconActive() const { return m_iconActive; }
 	QUrl url() const { return m_url; }
 	GuiPluginLoader::IntegrationType type() const { return m_type; }
 	GuiPluginLoader::QuickAccessPaneCardType cardType() const { return m_cardType; }
+	GuiPluginLoader::NavigationPageLocation location() const { return m_location; }
 
 private:
 	friend class GuiPluginLoader;
@@ -174,9 +196,11 @@ private:
 	QString m_title;
 	QString m_productId;
 	QUrl m_icon;
+	QUrl m_iconActive;
 	QUrl m_url;
 	GuiPluginLoader::IntegrationType m_type = GuiPluginLoader::InvalidIntegrationType;
 	GuiPluginLoader::QuickAccessPaneCardType m_cardType = GuiPluginLoader::InvalidCardType;
+	GuiPluginLoader::NavigationPageLocation m_location = GuiPluginLoader::InvalidNavigationPageLocation;
 };
 
 /*
@@ -284,9 +308,11 @@ public:
 		TitleRole,
 		ProductIdRole,
 		IconRole,
+		IconActiveRole,
 		UrlRole,
 		TypeRole,
-		CardTypeRole
+		CardTypeRole,
+		LocationRole
 	};
 
 	explicit GuiPluginIntegrationModel(QObject *parent = nullptr);
