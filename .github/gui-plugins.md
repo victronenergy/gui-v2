@@ -10,12 +10,13 @@ A navigation page and a quick access pane (integration types 3 and 4) are not ye
 
 This document is for OEM and third-party developers, and for AI agents that write or check a plugin. It is complete on its own: you do not need to read gui-v2's internals. Custom branding plugins, which change the GUI's colors, fonts and logos, are a separate kind of plugin and are not covered here.
 
-Four example plugins show the rules in practice:
+Five example plugins show the rules in practice:
 
 - `examples/SimpleExample`: a plugin settings page with one switch.
 - `examples/SimpleTrExample`: the same, with the switch text translated.
 - `examples/DeviceListExample`: device sub-pages.
 - `examples/FullApiExample`: a plugin settings page and a device sub-page that, between them, show every type in the [type reference](#type-reference).
+- `examples/CardExample`: a card in the Controls pane.
 
 `Victron.GuiPlugins` is not finished yet. It has the types in the [type reference](#type-reference); more list item types will be added.
 
