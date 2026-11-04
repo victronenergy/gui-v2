@@ -19,23 +19,10 @@ ListSetting {
 	// quantity row on one line:
 	// | Primary label   |
 	// | Quantity row    |
-	contentItem: Item {
-		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: contentLayout.implicitHeight
-
-		ListItemQuantitiesLayout {
-			id: contentLayout
-
-			anchors {
-				left: parent.left
-				right: parent.right
-				verticalCenter: parent.verticalCenter
-			}
-
-			text: root.text
-			label.font: root.font
-			label.textFormat: root.textFormat
-			model: root.model
-		}
+	contentItem: ListItemQuantitiesLayout {
+		text: root.text
+		label.font: root.font
+		label.textFormat: root.textFormat
+		model: root.model
 	}
 }
