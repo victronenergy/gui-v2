@@ -43,7 +43,8 @@
         "/Settings/CGwacs/MaxFeedInPower": -1,
         "/Settings/CGwacs/OvervoltageFeedIn": 0,
         "/Settings/CGwacs/PreventFeedback": 0,
-        "/Settings/CGwacs/PvPowerSetpointOffset": 200
+        "/Settings/CGwacs/PvPowerSetpointOffset": 200,
+        "/Settings/Network/VrmPortal": 2
     },
     "com.victronenergy.system": {
         "/DynamicEss/Active": 1,
