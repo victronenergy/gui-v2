@@ -10,6 +10,7 @@ import Victron.VenusOS
 ListText {
 	id: root
 
+	property int dessMode: VenusOS.DynamicEss_Mode_Auto
 	readonly property bool hasError: dataItem.valid && dataItem.value !== VenusOS.DynamicEss_ErrorCode_NoError
 
 	preferredVisible: hasError
@@ -23,7 +24,7 @@ ListText {
 		secondaryText: root.secondaryText
 
 		CaptionLabel {
-			text: dataItem.valid ? VenusOS.dynamicEss_errorHint(dataItem.value) : ""
+			text: dataItem.valid ? VenusOS.dynamicEss_errorHint(dataItem.value, root.dessMode) : ""
 			Layout.fillWidth: true
 			Layout.columnSpan: parent.columns
 		}

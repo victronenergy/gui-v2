@@ -70,7 +70,8 @@ Page {
 						&& lastScheduledStart.valid && lastScheduledEnd.valid
 					? windowSlot.value * (lastScheduledEnd.value - lastScheduledStart.value)
 					: 0
-				readonly property bool scheduleOutdated: scheduleAge >= 90 * 60
+				readonly property bool scheduleOutdated: dEssMode.dataItem.value === VenusOS.DynamicEss_Mode_Auto
+					&& scheduleAge >= 90 * 60
 
 				text: CommonWords.status
 				preferredVisible: root._dessActive
@@ -103,6 +104,7 @@ Page {
 				preferredVisible: root._dessActive && hasError
 					&& dataItem.value !== VenusOS.DynamicEss_ErrorCode_BatteryCapacityUnset
 				dataItem.uid: Services.system.serviceUid + "/DynamicEss/ErrorCode"
+				dessMode: dEssMode.dataItem.value ?? VenusOS.DynamicEss_Mode_Auto
 			}
 
 			ListQuantity {

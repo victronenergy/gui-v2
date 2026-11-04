@@ -1102,7 +1102,7 @@ QString Enums::dynamicEss_errorToText(DynamicEss_ErrorCode error) const
 		//% "No schedule for the current time"
 		return qtTrId("dess_error_no_matching_schedule");
 	case DynamicEss_ErrorCode_SocLow:
-		//% "Minimum SOC not available"
+		//% "Battery SOC or minimum SOC not available"
 		return qtTrId("dess_error_soc_low");
 	case DynamicEss_ErrorCode_BatteryCapacityUnset:
 		//% "Battery capacity not set"
@@ -1118,7 +1118,7 @@ QString Enums::dynamicEss_errorToText(DynamicEss_ErrorCode error) const
 	}
 }
 
-QString Enums::dynamicEss_errorHint(DynamicEss_ErrorCode error) const
+QString Enums::dynamicEss_errorHint(DynamicEss_ErrorCode error, DynamicEss_Mode mode) const
 {
 	switch (error) {
 	case DynamicEss_ErrorCode_NoEss:
@@ -1128,10 +1128,14 @@ QString Enums::dynamicEss_errorHint(DynamicEss_ErrorCode error) const
 		//% "Set the ESS mode to Optimized. Keep batteries charged and External control are not supported."
 		return qtTrId("dess_error_hint_ess_mode");
 	case DynamicEss_ErrorCode_NoMatchingSchedule:
+		if (mode == DynamicEss_Mode_NodeRed) {
+			//% "Node-RED has not written a schedule for now. Check the flow that sets the Dynamic ESS schedule."
+			return qtTrId("dess_error_hint_no_matching_schedule_node_red");
+		}
 		//% "VRM has not sent a schedule for now. Check the internet connection of the GX device."
 		return qtTrId("dess_error_hint_no_matching_schedule");
 	case DynamicEss_ErrorCode_SocLow:
-		//% "The minimum SOC of the system is not known yet, for example during a firmware update."
+		//% "The battery SOC or the minimum SOC of the system is not known, for example during a firmware update or when the battery monitor is not reporting."
 		return qtTrId("dess_error_hint_soc_low");
 	case DynamicEss_ErrorCode_BatteryCapacityUnset:
 		//% "Set the battery capacity in the Dynamic ESS settings on the VRM Portal."

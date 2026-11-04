@@ -1187,7 +1187,7 @@ public:
 
 	Q_INVOKABLE QString dynamicEss_reactiveStrategyToText(int strategy) const;
 	Q_INVOKABLE QString dynamicEss_errorToText(DynamicEss_ErrorCode error) const;
-	Q_INVOKABLE QString dynamicEss_errorHint(DynamicEss_ErrorCode error) const;
+	Q_INVOKABLE QString dynamicEss_errorHint(DynamicEss_ErrorCode error, DynamicEss_Mode mode) const;
 
 	Q_INVOKABLE QString system_stateToText(System_State state) const;
 
