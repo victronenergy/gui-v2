@@ -17,6 +17,7 @@
             "/Settings/Canbus/vecan0/Profile": 1,
             "/Settings/Canbus/vecan1/Profile": 0,
             "/Settings/DynamicEss/Mode": 1,
+            "/Settings/Network/VrmPortal": 1,
             "/Settings/SystemSetup/AcInput1": 1,
             "/Settings/SystemSetup/AcInput2": 0
         },

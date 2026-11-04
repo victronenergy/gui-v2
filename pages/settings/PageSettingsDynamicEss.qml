@@ -24,11 +24,17 @@ Page {
 		model: VisibleItemModel {
 			ListRadioButtonGroup {
 				id: dEssMode
+
+				readonly property bool vrmPortalNotFull: vrmPortal.valid && vrmPortal.value !== VenusOS.Vrm_PortalMode_Full
+					&& dataItem.value !== VenusOS.DynamicEss_Mode_NodeRed
+
 				text: CommonWords.mode
 				dataItem.uid: Services.settings.serviceUid + "/Settings/DynamicEss/Mode"
 				interactive: opportunityLoads.value !== 1
 				//% "Dynamic ESS cannot be enabled while Opportunity Loads is enabled. Disable Opportunity Loads first."
 				caption: !interactive ? qsTrId("settings_ess_disable_ol_first")
+						//% "Dynamic ESS receives its schedule from VRM, which needs VRM Portal access set to Full. Change it in Settings > VRM."
+						: vrmPortalNotFull ? qsTrId("settings_ess_dess_vrm_portal_not_full")
 						//% "Dynamic ESS has not been set up yet. Set it up on the VRM Portal first."
 						: !(batteryCapacity.value > 0) ? qsTrId("settings_ess_dess_setup_in_vrm")
 						: ""
@@ -57,6 +63,11 @@ Page {
 				VeQuickItem {
 					id: batteryCapacity
 					uid: Services.settings.serviceUid + "/Settings/DynamicEss/BatteryCapacity"
+				}
+
+				VeQuickItem {
+					id: vrmPortal
+					uid: Services.settings.serviceUid + "/Settings/Network/VrmPortal"
 				}
 
 				VeQuickItem {
