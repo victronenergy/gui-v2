@@ -296,6 +296,8 @@ Run with `--mock` flag to use mock backend. Mock configurations (e.g. "maximal",
 `GuiPluginLoader` supports third-party UI extensions:
 - Plugins are JSON-defined with QML components
 - Integration types: settings pages, device list pages, navigation pages, quick access cards
+- A navigation page is inserted at a named gap (`BeforeBoat` through `AfterSettings`). A missing location defaults to before Levels. A present location must be one of those names, or the matching integer 1-7; any other value is rejected. The compiler accepts only the name, and only as the last `--navigation` argument. The gap is not a visible button, so `BeforeBoat` stays first when Boat is hidden.
+- A navigation page file name must be unique and must not match a built-in page (`BoatPage.qml`, `BriefPage.qml`, `OverviewPage.qml`, `LevelsPage.qml`, `NotificationsPage.qml`, `SettingsPage.qml`). The navbar matches the file name only.
 - Plugins can be loaded from MQTT (VRM) or filesystem
 - Hot-reloading supported via file system watcher
 
