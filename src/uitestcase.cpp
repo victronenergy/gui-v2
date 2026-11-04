@@ -5,6 +5,7 @@
 
 #include <QCoreApplication>
 #include <QImage>
+#include <QKeyEvent>
 #include <QMetaMethod>
 #include <QMetaObject>
 #include <QMouseEvent>
@@ -333,6 +334,24 @@ bool UiTestCase::mouseClick(QQuickItem *item)
 	}
 
 	UiConfig::create()->mouseClick(item);
+	return true;
+}
+
+bool UiTestCase::keyClick(QQuickItem *item, int key)
+{
+	if (!item || !item->window()) {
+		qCWarning(venusGuiTest) << "keyClick(): invalid item!";
+		return false;
+	}
+
+	// KeyNavigation and Keys handlers are delivered by the window to the focus
+	// item. Posting the event on the item itself does not take that path.
+	if (!item->hasActiveFocus()) {
+		item->forceActiveFocus();
+	}
+	QWindow *window = item->window();
+	QCoreApplication::postEvent(window, new QKeyEvent(QEvent::KeyPress, key, Qt::NoModifier));
+	QCoreApplication::postEvent(window, new QKeyEvent(QEvent::KeyRelease, key, Qt::NoModifier));
 	return true;
 }
 
