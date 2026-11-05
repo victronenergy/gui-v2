@@ -707,7 +707,7 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--devicelist', required=False, nargs='+', action='append', help='Triplet of product id, settings page .qml, and title text (or translation id)')
     parser.add_argument('-g', '--navigation', default='')
     parser.add_argument('-q', '--quickaccess', default='')
-    parser.add_argument('-c', '--card', default='')
+    parser.add_argument('-c', '--card', required=False, nargs='+', action='append', help='Pair of page .qml and card type (1=controls, 2=switches)')
     parser.add_argument('-f', '--filter-empty-sources', action='store_true', help='Strip empty source entries from .ts files')
     parser.add_argument('--install', metavar='HOST', default='',
                         help='For testing only: install the compiled JSON on a GX device as root. '
@@ -801,8 +801,33 @@ if __name__ == '__main__':
         print("TODO: navigation...")
     if len(args.quickaccess) > 0:
         print("TODO: quick access...")
-    if len(args.card) > 0:
-        print("TODO: card...")
+    if args.card:
+        for integration in args.card:
+            if len(integration) != 2:
+                print("\n\nERROR: --card requires 2 args: page.qml cardType (1=controls, 2=switches)")
+                sys.exit(1)
+            pageQml = integration[0]
+            try:
+                cardType = int(integration[1])
+            except ValueError:
+                print("\n\nERROR: Card type must be an integer (1=controls, 2=switches)")
+                sys.exit(1)
+            if cardType not in (1, 2):
+                print("\n\nERROR: Card type must be 1 (controls) or 2 (switches)")
+                sys.exit(1)
+            if not pageQml.endswith('.qml'):
+                print("\n\nERROR: Card page must be a .qml file")
+                sys.exit(1)
+            if not os.path.exists(pageQml):
+                print(f"\n\nERROR: Card page \"{pageQml}\" not found in current directory")
+                sys.exit(1)
+            cardIntegration = {
+                "type": 5,
+                "url": "qrc:/" + args.name + "/" + pageQml,
+                "cardType": cardType
+            }
+            integrations.append(cardIntegration)
+
 
     print("--- writing compiled json")
     write_compiled_json(args.name, args.version, args.min_required_version, args.max_required_version, translations,

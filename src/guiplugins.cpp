@@ -81,6 +81,10 @@ namespace {
 		}
 		return QStringList();
 #elif defined(VENUS_DESKTOP_BUILD)
+		const QByteArray overrideDir = qgetenv("VENUS_GUI_PLUGINS_DIR");
+		if (!overrideDir.isEmpty()) {
+			return QStringList { QString::fromLocal8Bit(overrideDir) };
+		}
 		// look in ~appdir/plugins/
 		const QString appDirPath = QCoreApplication::applicationDirPath();
 		QDir pluginDir = QDir(appDirPath);
@@ -1312,7 +1316,8 @@ void GuiPluginIntegrationModel::updateIntegrations()
 		const QVector<GuiPluginIntegration> integrations = p.integrations();
 		for (const GuiPluginIntegration &i : integrations) {
 			if ((m_type == GuiPluginLoader::InvalidIntegrationType || i.type() == m_type)
-					&& (m_productId.isEmpty() || i.productId().compare(m_productId, Qt::CaseInsensitive) == 0)) {
+					&& (m_productId.isEmpty() || i.productId().compare(m_productId, Qt::CaseInsensitive) == 0)
+					&& (m_cardType == GuiPluginLoader::InvalidCardType || i.cardType() == m_cardType)) {
 				data.append(i);
 			}
 		}
@@ -1357,6 +1362,20 @@ void GuiPluginIntegrationModel::setProductId(const QString &id)
 	if (m_productId != id) {
 		m_productId = id;
 		Q_EMIT productIdChanged();
+		updateIntegrations();
+	}
+}
+
+GuiPluginLoader::QuickAccessPaneCardType GuiPluginIntegrationModel::cardType() const
+{
+	return m_cardType;
+}
+
+void GuiPluginIntegrationModel::setCardType(GuiPluginLoader::QuickAccessPaneCardType ct)
+{
+	if (m_cardType != ct) {
+		m_cardType = ct;
+		Q_EMIT cardTypeChanged();
 		updateIntegrations();
 	}
 }

@@ -52,6 +52,7 @@ add_subdirectory(pluginpagestack)
 add_subdirectory(uitestutils)
 add_subdirectory(units)
 add_subdirectory(visibleitemmodel)
+add_subdirectory(plugins)
 add_subdirectory(wifimodel)
 
 # Tests for the Python tools: the Victron.GuiPlugins API record, the plugin
