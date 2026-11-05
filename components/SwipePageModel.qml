@@ -7,21 +7,29 @@ ObjectModel {
 	id: root
 
 	required property SwipeView view
-	readonly property list<SwipeViewPage> pages
-		: showBoatPage && showLevelsPage ? [ boatPageLoader.item, briefPage, overviewPage, levelsPageLoader.item, notificationsPage, settingsPage ]
-		: showBoatPage ? [ boatPageLoader.item, briefPage, overviewPage, notificationsPage, settingsPage ]
-		: showLevelsPage ? [ briefPage, overviewPage, levelsPageLoader.item, notificationsPage, settingsPage ]
-		: [ briefPage, overviewPage, notificationsPage, settingsPage ]
+	readonly property list<SwipeViewPage> pages: {
+		let list = []
+		if (showBoatPage) {
+			list.push(boatPageLoader.item)
+		}
+		list.push(briefPage, overviewPage)
+		if (showCamperPage) {
+			list.push(camperPageLoader.item)
+		}
+		if (showLevelsPage) {
+			list.push(levelsPageLoader.item)
+		}
+		list.push(notificationsPage, settingsPage)
+		return list
+	}
 	readonly property bool showLevelsPage: levelsPageLoader.active && !!levelsPageLoader.item
 	readonly property bool showBoatPage: boatPageLoader.active && !!boatPageLoader.item
+	readonly property bool showCamperPage: camperPageLoader.active && !!camperPageLoader.item
 	readonly property int tankCount: Services.tanks.totalTankCount
 	readonly property int environmentInputCount: Services.environment.model.count
 
 	readonly property bool completed: _completed
-		&& ((boatPageLoader.active && levelsPageLoader.active) ? pages.length === 6
-		  : boatPageLoader.active ? pages.length === 5
-		  : levelsPageLoader.active ? pages.length === 5
-		  : pages.length === 4)
+		&& pages.length === 4 + (boatPageLoader.active ? 1 : 0) + (camperPageLoader.active ? 1 : 0) + (levelsPageLoader.active ? 1 : 0)
 
 	property bool _completed: false
 
@@ -58,6 +66,21 @@ ObjectModel {
 	OverviewPage {
 		id: overviewPage
 		view: root.view
+	}
+
+	Loader {
+		id: camperPageLoader
+
+		// 0: no illustration, 1: RV illustration
+		active: customIllustrationItem.value === 1
+		sourceComponent: CamperPage {
+			view: root.view
+		}
+
+		VeQuickItem {
+			id: customIllustrationItem
+			uid: Services.settings.serviceUid + "/Settings/Gui/CustomIllustration"
+		}
 	}
 
 	Loader {

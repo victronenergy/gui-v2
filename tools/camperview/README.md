@@ -1,46 +1,57 @@
 # camperview
 
-Standalone Camper visualization app for desktop and WebAssembly builds.
+Standalone RV illustration, for embedding in hosts such as VictronConnect, VRM and MFDs. It shares
+its QML with the gui-v2 `CamperPage`, from `components/camper`.
 
-## Build (desktop)
+## Build
 
-```bash
-cmake -S tools/camperview -B build-camperview-desktop -DCMAKE_PREFIX_PATH=C:\Development\Qt\6.8.3\msvc2022_64
-cmake --build build-camperview-desktop --config Debug
-```
-
-Run:
+WebAssembly, using the toolchain from `scripts/.env`:
 
 ```bash
-build-camperview-desktop\Debug\camperview.exe
+bash scripts/build-camperview-wasm.sh
 ```
 
-## Build (WebAssembly)
+The files to host are written to `build-camperview-wasm_files_to_copy/`, including `.gz` and `.br`
+versions of the wasm file, which has been optimized with `wasm-opt`.
 
-Use a Qt-for-WASM toolchain with Ninja, for example:
+Desktop, for development only. This build has no host, so it cycles through sample data:
 
 ```bash
-cmake -G Ninja -S tools/camperview -B build-camperview-wasm ^
-  -DCMAKE_TOOLCHAIN_FILE=C:\Development\Qt\6.8.3\wasm_singlethread\lib\cmake\Qt6\qt.toolchain.cmake ^
-  -DQT_HOST_PATH=C:\Development\Qt\6.8.3\msvc2022_64
-cmake --build build-camperview-wasm
+/opt/Qt/6.8.3/gcc_64/bin/qt-cmake -S tools/camperview -B build-camperview
+cmake --build build-camperview
+build-camperview/camperview
 ```
 
-## Host data contract (WASM)
+## Host data contract
 
-The app polls `window.camperViewData` and expects a JSON-like object:
+The app reads `window.camperViewData` every 750 ms. The host fills it in from the Venus OS paths in
+the comments below, and is expected to embed this illustration only if
+`/Settings/Gui/CustomIllustration` is 1.
 
 ```js
 window.camperViewData = {
-  activeInputSource: "grid",   // "grid" | "shore" | "generator" | "none"
-  gridShorePower: 1850,
-  generatorPower: null,
+  colorScheme: "light",      // "light" | "dark"
+
+  activeInputSource: 3,      // com.victronenergy.system/Ac/ActiveIn/Source
+  acInputConnected: true,    // whether any com.victronenergy.system/Ac/In/x/Connected is 1
+  alternatorState: 0,        // com.victronenergy.alternator/State; omit if there is no alternator
+  lowSocAlarm: 0,            // /Alarms/LowSoc of the active battery service
+  solarPresent: true,        // whether the installation has solar panels
+  generatorPresent: true,    // whether any com.victronenergy.system/Ac/In/x/Source is 2
+
+  // Values in Watts, except for batterySoc, which is a percentage. Omit any that are not available.
+  activeInputPower: 1850,
+  generatorPower: 0,
   solarPower: 1320,
-  batteryPower: 410,
   alternatorPower: 0,
+  batteryPower: 410,         // positive when charging, as for /Dc/Battery/Power
+  batterySoc: 82,
   dcLoadsPower: 290,
   acLoadsPower: 1210
 };
 ```
 
-If no host object is available, the app falls back to animated mock data.
+If `window.camperViewData` is not set, the illustration shows no values. It does not fall back to
+sample data, as that could be mistaken for real readings.
+
+Text is currently in English only.

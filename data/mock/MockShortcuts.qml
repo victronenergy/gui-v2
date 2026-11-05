@@ -17,7 +17,7 @@ QtObject {
 		"qrc:/qt/qml/Victron/VenusOS/pages/OverviewPage.qml": briefAndOverviewConfig,
 		"qrc:/qt/qml/Victron/VenusOS/pages/LevelsPage.qml": levelsConfig,
 		"qrc:/qt/qml/Victron/Boat/BoatPage.qml": boatPageConfig,
-		"qrc:/qt/qml/Victron/VenusOS/pages/SettingsPage.qml": camperPageConfig,
+		"qrc:/qt/qml/Victron/VenusOS/pages/CamperPage.qml": camperPageConfig,
 	})
 
 	function setConfigIndex(pageConfig, configIndex) {
@@ -93,13 +93,11 @@ QtObject {
 			}
 			break
 		case Qt.Key_Comma:
-//			console.log(Global.pageManager.navBar.pages[Global.pageManager.navBar.currentIndex].url)
 			if (!!Global.pageManager && (currentNavBarUrl() in root._configs)) {
 				previousConfig()
 			}
 			break
 		case Qt.Key_Period:
-//			console.log(Global.pageManager.navBar.pages[Global.pageManager.navBar.currentIndex].url)
 			if (!!Global.pageManager && (currentNavBarUrl() in root._configs)) {
 				nextConfig()
 			}

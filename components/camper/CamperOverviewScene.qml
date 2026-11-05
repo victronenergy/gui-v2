@@ -14,17 +14,15 @@ Item {
 	readonly property int scenarioOffGrid: 3
 
 	property int scenario: scenarioOffGrid
-	property string scenarioText: "Stationary"
 	property string gridShoreTitle: "Shore"
 	property bool gridShoreIsShore: false
 	property string solarTitle: "PV"
 	property string generatorTitle: "Generator"
-	property string batteryTitle: "Battery"
 	property string alternatorTitle: "Alternator"
 	property string dcLoadsTitle: "DC"
 	property string acLoadsTitle: "AC"
 
-	property bool shorePower: false
+	property bool lowBatteryAlarm: false
 	property bool solar: true
 	property bool generator: true
 	property real gridShorePower: NaN
@@ -51,14 +49,9 @@ Item {
 	readonly property bool _dcLoadsActive: _isActivePower(root.dcLoadsPower)
 	readonly property bool _acLoadsActive: _isActivePower(root.acLoadsPower)
 	readonly property bool _batteryFlowActive: _isActivePower(batteryPower, 60)
-	readonly property bool _batterySocWarning: isFinite(batterySoc) && batterySoc <= 50
-	readonly property bool _batterySocAlarm: isFinite(batterySoc) && batterySoc <= 10
-	readonly property bool _acCut: _batterySocAlarm && !_gridShoreActive && !_generatorActive
-	readonly property bool _passThroughMode: _gridShoreActive
-			&& !_solarActive
-			&& !_generatorActive
-			&& !_alternatorActive
-			&& !_batteryFlowActive
+	readonly property bool _batteryCharging: isFinite(batteryPower) && batteryPower >= 60
+	readonly property bool _batteryDischarging: isFinite(batteryPower) && batteryPower <= -60
+	readonly property bool _acCut: lowBatteryAlarm && !_gridShoreActive && !_generatorActive
 	readonly property bool _hubVisible: _solarActive
 			|| _alternatorActive
 			|| _gridShoreActive
@@ -66,8 +59,6 @@ Item {
 			|| _batteryFlowActive
 			|| _acLoadsActive
 			|| _dcLoadsActive
-	readonly property bool _flowSolarToDc: _solarActive && _dcLoadsActive
-	readonly property bool _flowSolarToBattery: _solarActive
 	readonly property bool _dcCardActive: _dcLoadsActive
 			|| _solarActive
 			|| _gridShoreActive
@@ -75,16 +66,17 @@ Item {
 			|| _generatorActive
 			|| _batteryFlowActive
 	readonly property bool _flowBatteryToDc: _dcCardActive && _hubVisible
-	readonly property bool _flowHubToAc: _acLoadsActive && !_acCut && !_passThroughMode
-	readonly property bool _flowHubToBattery: _gridShoreActive || _flowGeneratorToHub
-	readonly property bool _flowBatteryToHub: _acLoadsActive && !_acCut && !_passThroughMode
-	readonly property bool _flowGridToHub: _gridShoreActive && !_passThroughMode
-	readonly property bool _flowGeneratorToHub: _generatorActive && !_passThroughMode
+	readonly property bool _flowHubToAc: _acLoadsActive && !_acCut
+	readonly property bool _flowHubToBattery: _batteryCharging && (_gridShoreActive || _generatorActive)
+	readonly property bool _flowBatteryToHub: _batteryDischarging && _acLoadsActive && !_acCut
+	readonly property bool _flowGridToHub: _gridShoreActive
+	readonly property bool _flowGeneratorToHub: _generatorActive
+	readonly property bool _flowSolarToBattery: _solarActive
 	readonly property bool _flowAlternatorToBattery: _alternatorActive
-	readonly property bool _flowInputToAc: (_gridShoreActive || _generatorActive) && _acLoadsActive
-	readonly property string _socText: !isFinite(batterySoc) ? "--%"
-			: batteryPower < -80 ? "+" + Math.round(Math.max(0, Math.min(100, batterySoc))).toString() + "%"
-			: Math.round(Math.max(0, Math.min(100, batterySoc))).toString() + "%"
+	readonly property string _scenarioImageName: scenario === scenarioCharging ? "charging"
+			: scenario === scenarioDriving ? "driving"
+			: scenario === scenarioParking ? "parking"
+			: "offgrid"
 
 	function _isActivePower(value, threshold) {
 		const effectiveThreshold = isFinite(threshold) ? threshold
@@ -124,54 +116,30 @@ Item {
 				width * (root._portrait ? 0.98 : 0.92),
 				height * _camperAspect * (root._portrait ? 0.88 : 0.94))
 		readonly property real _camperHeight: _camperWidth / _camperAspect
-		readonly property real _cardWidth: Math.max(122, Math.min(170, _camperWidth * 0.175))
-		readonly property real _cardExtraWidth: Math.max(122, Math.min(170, _camperWidth * 0.275))
+		readonly property real _cardWidth: root._portrait ? Math.max(88, _camperWidth * 0.21)
+				: Math.max(122, _camperWidth * 0.175)
+		readonly property real _cardExtraWidth: root._portrait ? Math.max(124, _camperWidth * 0.30)
+				: Math.max(150, _camperWidth * 0.275)
 		readonly property real _cardHeight: Math.round(_cardWidth * 0.62)
 		readonly property real _hubSize: Math.max(34, Math.round(_cardHeight * 0.75))
-		readonly property real _batteryWidth: Math.max(78, Math.round(_cardWidth * 0.78))
-		readonly property real _batteryHeight: Math.max(40, Math.round(_cardHeight * 0.52))
+		readonly property real _batteryWidth: Math.max(70, Math.round(_cardWidth * 0.78))
+		readonly property real _batteryHeight: Math.max(28, Math.round(_cardHeight * 0.52))
 		readonly property real _nodeGap: Math.max(8, Math.round(_cardHeight * 0.14))
 
 		Image {
 			id: camperImage
 
-			readonly property var _backgroundImage: root.colorScheme === 0
-					? root.solar ? [ "qrc:/images/camper/camper_solar_charging_light.svg",
-									"qrc:/images/camper/camper_solar_driving_light.svg",
-									"qrc:/images/camper/camper_solar_parking_light.svg",
-									"qrc:/images/camper/camper_solar_offgrid_light.svg" ]
-								: [ "qrc:/images/camper/camper_nosolar_charging_light.svg",
-									"qrc:/images/camper/camper_nosolar_driving_light.svg",
-									"qrc:/images/camper/camper_nosolar_parking_light.svg",
-									"qrc:/images/camper/camper_nosolar_offgrid_light.svg" ]
-					: root.solar ? [ "qrc:/images/camper/camper_solar_charging_dark.svg",
-									"qrc:/images/camper/camper_solar_driving_dark.svg",
-									"qrc:/images/camper/camper_solar_parking_dark.svg",
-									"qrc:/images/camper/camper_solar_offgrid_dark.svg" ]
-								: [ "qrc:/images/camper/camper_nosolar_charging_dark.svg",
-									"qrc:/images/camper/camper_nosolar_driving_dark.svg",
-									"qrc:/images/camper/camper_nosolar_parking_dark.svg",
-									"qrc:/images/camper/camper_nosolar_offgrid_dark.svg" ]
-
 			z: 0
 			width: sceneLayer._camperWidth
 			height: sceneLayer._camperHeight
 			anchors.centerIn: parent
-			source: root.scenario === root.scenarioCharging ? _backgroundImage[0]
-				: root.scenario === root.scenarioDriving ? _backgroundImage[1]
-				: root.scenario === root.scenarioParking ? _backgroundImage[2]
-				: _backgroundImage[3]
+			source: "qrc:/images/camper/camper_%1_%2_%3.svg"
+					.arg(root.solar ? "solar" : "nosolar")
+					.arg(root._scenarioImageName)
+					.arg(root.colorScheme === 0 ? "light" : "dark")
+			sourceSize.width: width
 			fillMode: Image.PreserveAspectFit
 			smooth: true
-
-			Rectangle {
-				x: 0
-				y: 0
-				width: parent.width * .65
-				height: parent.height * .097
-				color: root._pageBackground
-				visible: !root.solar // hide solar panel
-			}
 		}
 
 		CamperDevice {
@@ -181,8 +149,8 @@ Item {
 			height: sceneLayer._hubSize
 			x: root._boundedX(camperImage.x + camperImage.width * 0.36 - width * 0.50, width, sceneLayer.width)
 			y: root._boundedY(camperImage.y + camperImage.height * 0.60 - height * 0.50, height, sceneLayer.height)
-			active: !root._passThroughMode
-			alarm: _batterySocAlarm
+			active: root._hubVisible
+			alarm: root.lowBatteryAlarm
 			colorScheme: root.colorScheme
 		}
 
@@ -192,6 +160,9 @@ Item {
 			width: sceneLayer._batteryWidth
 			height: sceneLayer._batteryHeight
 			value: root.batterySoc
+			charging: root._batteryCharging
+			discharging: root._batteryDischarging
+			alarm: root.lowBatteryAlarm
 			x: root._boundedX(camperImage.x + camperImage.width * 0.39 - width * 0.50, width, sceneLayer.width)
 			y: root._boundedY(camperImage.y + camperImage.height * 0.28 - height * 0.50, height, sceneLayer.height)
 			colorScheme: root.colorScheme
@@ -345,7 +316,7 @@ Item {
 		CamperFlowArrow {
 			z: 2
 			anchors.fill: parent
-			visible: root._flowHubToAc && !root._acCut
+			visible: root._flowHubToAc
 			strokeColor: root._flowColor
 			startX: hub.x + hub.width + sceneLayer._nodeGap
 			startY: hub.y + hub.height * 0.5
@@ -371,11 +342,10 @@ Item {
 			anchors.fill: parent
 			visible: root._flowGeneratorToHub
 			strokeColor: root._flowColor
-			startX: generatorCard.x + generatorCard.width * 0.5
+			startX: hub.x + hub.width * 0.5
 			startY: generatorCard.y - sceneLayer._nodeGap
 			endX: hub.x + hub.width * 0.5
 			endY: hub.y + hub.height + sceneLayer._nodeGap
-			turnY: startY - (startY - endY)/2
 			horizontalFirst: false
 		}
 

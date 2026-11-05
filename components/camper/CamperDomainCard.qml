@@ -14,8 +14,6 @@ Item {
 	property real value: NaN
 	property bool active: false
 	property bool alarm: false
-	property string valueOverride: ""
-	property string unitOverride: ""
 
 	property int colorScheme: 0
 
@@ -24,23 +22,16 @@ Item {
 	readonly property color _primaryTextColor: colorScheme === 0  ? "#343A40" : "#DEE2E6"
 	readonly property color _secondaryTextColor: colorScheme === 0  ? "#495057" : "#ADB5BD"
 	readonly property real _radius: Math.max(10, Math.round(height * 0.19))
-	readonly property real _iconSize: Math.max(24, Math.round(height * 0.32))
-	readonly property real _hMargin: Math.max(10, Math.round(width * 0.10))
-	readonly property real _vMargin: Math.max(7, Math.round(height * 0.11))
+	readonly property real _iconSize: Math.max(16, Math.round(height * 0.32))
+	readonly property real _hMargin: Math.max(6, Math.round(width * 0.10))
+	readonly property real _vMargin: Math.max(4, Math.round(height * 0.11))
 	readonly property real _unitSpacing: 4
-	readonly property int _titleFontSize: Math.max(14, Math.round(height * 0.28))
-	readonly property int _valueFontSize: Math.max(16, Math.round(height * 0.35))
-	readonly property bool _iconNeedsBacking: !active && !alarm
+	readonly property int _titleFontSize: Math.max(12, Math.round(height * 0.24))
+	readonly property int _valueFontSize: Math.max(14, Math.round(height * 0.35))
 
-	readonly property var _formattedValue: _formatPower(value, valueOverride, unitOverride)
+	readonly property var _formattedValue: _formatPower(value)
 
-	function _formatPower(power, overrideValue, overrideUnit) {
-		if (overrideValue.length > 0) {
-			return {
-				valueText: overrideValue,
-				unitText: overrideUnit
-			}
-		}
+	function _formatPower(power) {
 		if (!isFinite(power)) {
 			return { valueText: "--", unitText: "" }
 		}
@@ -103,7 +94,7 @@ Item {
 					height: root._iconSize
 
 					property string source: root.iconSource
-					property color color: _secondaryTextColor
+					property color color: root._secondaryTextColor
 
 					Image {
 						id: sourceImage
