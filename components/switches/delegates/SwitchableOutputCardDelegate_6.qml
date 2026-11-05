@@ -46,6 +46,19 @@ FocusScope {
 	ComboBox {
 		id: dropdown
 
+		function rebuildModel() {
+			const value = dropdownLabels.value
+			if (value === undefined || typeof value === "string") {
+				dropdown.model = []
+			} else {
+				let items = []
+				for (const text of value) {
+					items.push({ text: VenusOS.ioChannel_labelToText(text) })
+				}
+				dropdown.model = items
+			}
+		}
+
 		anchors {
 			left: parent.left
 			right: parent.right
@@ -118,18 +131,15 @@ FocusScope {
 		}
 
 		VeQuickItem {
+			id: dropdownLabels
 			uid: root.switchableOutput.uid + "/Settings/Labels"
-			onValueChanged: {
-				if (value === undefined) {
-					dropdown.model = []
-				} else {
-					let items = []
-					for (const text of value) {
-						items.push({ text: text })
-					}
-					dropdown.model = items
-				}
-			}
+			onValueChanged: dropdown.rebuildModel()
+		}
+
+		// Reserved "/keyword" labels are translated when the model is built
+		Connections {
+			target: Language
+			function onCurrentLanguageChanged() { dropdown.rebuildModel() }
 		}
 	}
 }

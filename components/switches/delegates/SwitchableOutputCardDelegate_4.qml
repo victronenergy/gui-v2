@@ -85,19 +85,44 @@ FocusScope {
 		VeQuickItem {
 			id: multiStepMax
 			uid: root.switchableOutput.uid + "/Settings/DimmingMax"
-			onValueChanged: {
-				if (multiStepMax.value === undefined) {
-					multiStep.model = []
-				} else {
-					let items = []
-					// limit maximum number of options
-					let totalOptions = Math.min(7, multiStepMax.value)
-					for (let i = 0; i < totalOptions; i++) {
-						items.push({ 'text': i + 1 })   // options are 1-based
-					}
-					multiStep.model = items
-				}
+			onValueChanged: multiStep.rebuildModel()
+		}
+
+		// The optional /Settings/Labels names the options. Like /Dimming it is 1-based, so
+		// index 0 belongs to the off state and is not used here.
+		VeQuickItem {
+			id: multiStepLabels
+			uid: root.switchableOutput.uid + "/Settings/Labels"
+			onValueChanged: multiStep.rebuildModel()
+		}
+
+		// Reserved "/keyword" labels are translated when the model is built
+		Connections {
+			target: Language
+			function onCurrentLanguageChanged() { multiStep.rebuildModel() }
+		}
+
+		function rebuildModel() {
+			if (multiStepMax.value === undefined) {
+				multiStep.model = []
+				multiStep.labels = []
+				return
 			}
+			const rawLabels = multiStepLabels.value && typeof multiStepLabels.value !== "string" && multiStepLabels.value.length
+					? multiStepLabels.value : []
+			let items = []
+			let labels = []
+			// limit maximum number of options
+			let totalOptions = Math.min(7, multiStepMax.value)
+			for (let i = 0; i < totalOptions; i++) {
+				items.push({ 'text': i + 1 })   // options are 1-based
+				const label = rawLabels[i + 1]
+				labels.push(typeof label === "string" && label.trim().length > 0
+						? VenusOS.ioChannel_labelToText(label)
+						: "")
+			}
+			multiStep.model = items
+			multiStep.labels = labels
 		}
 
 		SettingSync {

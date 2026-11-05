@@ -20,12 +20,44 @@ BaseListView {
 
 	readonly property real _totalDelegateWidth: width - (headerItem?.width ?? 0) - Theme.geometry_button_border_width
 
+	// Optional text per step, indexed like the model. An empty entry keeps the model text.
+	// The labels are only shown when every one of them fits its button, otherwise all
+	// steps fall back to the model text (e.g. the step number).
+	property var labels: []
+
+	readonly property bool labelsFit: {
+		if (!model || !model.length || !labels || !labels.length) {
+			return false
+		}
+		// Reference the font so that the check is re-run once the font has been loaded or
+		// when the language font changes; advanceWidth() alone does not create a dependency.
+		const fontFamily = labelMetrics.font.family
+		const fontSize = labelMetrics.font.pixelSize
+		// Each button paints its background over the same slot width. Keep the button padding
+		// free on both sides so the text is not pressed against the neighbouring buttons.
+		const slotWidth = (_totalDelegateWidth - horizontalPressMargin) / model.length
+		const available = slotWidth - (2 * Theme.geometry_button_padding)
+		for (let i = 0; i < model.length; ++i) {
+			const label = labels[i]
+			if (label && labelMetrics.advanceWidth(label) > available) {
+				return false
+			}
+		}
+		return true
+	}
+
 	signal indexClicked(index: int)
 	signal onClicked()
 	signal offClicked()
 
 	implicitWidth: Theme.geometry_control_width
 	implicitHeight: Theme.geometry_iochannel_control_height
+
+	FontMetrics {
+		id: labelMetrics
+		font.family: Global.fontFamily
+		font.pixelSize: Theme.font_size_body1
+	}
 
 	orientation: ListView.Horizontal
 	focus: false
@@ -74,7 +106,7 @@ BaseListView {
 			bottomRightRadius: lastListItem ? Theme.geometry_button_radius - Theme.geometry_button_border_width : 0
 			borderWidth: 0
 			flat: false
-			text: modelData.text
+			text: root.labelsFit && root.labels[index] ? root.labels[index] : modelData.text
 			font.pixelSize: Theme.font_size_body1
 			color: root.enabled
 					? (checked ? Theme.color_button_down_text : Theme.color_font_primary)
