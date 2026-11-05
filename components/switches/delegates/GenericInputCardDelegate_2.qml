@@ -55,8 +55,8 @@ Item {
 			// Set to false so control is not interactive, change requires
 			// colors to overridden.
 			enabled: false
-			highlightColor: Theme.color_ok
-			backgroundColor: Theme.color_darkOk
+			highlightColor: Theme.color_brand
+			backgroundColor: Theme.color_darkBrand
 
 			value: root.genericInput.value
 			from: root.genericInput.rangeMin

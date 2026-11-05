@@ -40,6 +40,7 @@ When asked to review code, you **must** immediately re-read the **entire** [Code
 - [Internationalisation](.github/i18n-l10n.md) — translations, dynamic language changes, POEditor workflow
 - [Device Settings](.github/device-settings.md) — settings data binding, access levels, ListSetting component hierarchy
 - [GUI Plugins](.github/gui-plugins.md) — plugin pages: Victron.GuiPlugins types, page and list item rules, data items, how plugin pages are hosted
+- [Custom branding plugins](.github/branding-plugins.md) — custom branding plugins: Branding.qml rules, colors, logos, fonts, versioning, generated property reference
 - [Unit Tests](.github/unit-tests.md) — test framework, creating tests, running tests, best practices
 - [Visual Regression Tests](.github/visual-regression-tests.md) — image-capture testing, comparison tool, verifying UI changes
 - [Benchmarking](.github/benchmarking.md) — animation performance measurement, QSG_RENDER_TIMING workflow

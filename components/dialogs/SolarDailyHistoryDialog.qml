@@ -110,13 +110,14 @@ T.Dialog {
 		Rectangle {
 			id: highlightBar
 
-			color: Theme.color_ok
+			color: Theme.color_info
 			radius: Theme.geometry_solarChart_bar_radius
 		}
 
 		component ArrowButton : IconButton {
 			icon.sourceSize.height: Theme.geometry_solarDailyHistoryDialog_arrow_icon_size
-			icon.color: containsPress ? Theme.color_gray4 : Theme.color_gray5
+			// Fixed palette grays. color_gray4 and color_gray5 follow the scheme.
+			icon.color: containsPress ? Theme.color_darkWhite : Theme.color_dimWhite
 			icon.source: "qrc:/images/icon_chevron_right_24.svg"
 			effectEnabled: false
 		}

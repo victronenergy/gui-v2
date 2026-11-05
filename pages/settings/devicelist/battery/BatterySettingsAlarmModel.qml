@@ -14,8 +14,8 @@ VisibleItemModel {
 	ListRangeSlider {
 		text: CommonWords.low_state_of_charge
 		suffix: "%"
-		firstColor: Theme.color_red
-		secondColor: Theme.color_green
+		firstColor: Theme.color_critical
+		secondColor: Theme.color_success
 		firstDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowSoc"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowSocClear"
 		preferredVisible: dataValid
@@ -26,8 +26,8 @@ VisibleItemModel {
 		suffix: "V"
 		decimals: 1
 		stepSize: 0.1
-		firstColor: Theme.color_red
-		secondColor: Theme.color_green
+		firstColor: Theme.color_critical
+		secondColor: Theme.color_success
 		firstDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowVoltage"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowVoltageClear"
 		preferredVisible: dataValid
@@ -38,8 +38,8 @@ VisibleItemModel {
 		suffix: "V"
 		decimals: 1
 		stepSize: 0.1
-		firstColor: Theme.color_green
-		secondColor: Theme.color_red
+		firstColor: Theme.color_success
+		secondColor: Theme.color_critical
 		firstDataItem.uid: root.bindPrefix + "/Settings/Alarm/HighVoltageClear"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/HighVoltage"
 		preferredVisible: dataValid
@@ -50,8 +50,8 @@ VisibleItemModel {
 		suffix: "V"
 		decimals: 1
 		stepSize: 0.1
-		firstColor: Theme.color_red
-		secondColor: Theme.color_green
+		firstColor: Theme.color_critical
+		secondColor: Theme.color_success
 		firstDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowStarterVoltage"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowStarterVoltageClear"
 		preferredVisible: dataValid
@@ -62,8 +62,8 @@ VisibleItemModel {
 		suffix: "V"
 		decimals: 1
 		stepSize: 0.1
-		firstColor: Theme.color_green
-		secondColor: Theme.color_red
+		firstColor: Theme.color_success
+		secondColor: Theme.color_critical
 		firstDataItem.uid: root.bindPrefix + "/Settings/Alarm/HighStarterVoltageClear"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Alarm/HighStarterVoltage"
 		preferredVisible: dataValid
@@ -72,8 +72,8 @@ VisibleItemModel {
 	ListRangeSlider {
 		text: CommonWords.low_battery_temperature
 		suffix: Services.settings.temperatureUnitSuffix
-		firstColor: Theme.color_red
-		secondColor: Theme.color_green
+		firstColor: Theme.color_critical
+		secondColor: Theme.color_success
 		firstDataItem.uid: root.bindPrefix + "/Settings/Alarm/LowBatteryTemperature"
 		firstDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
 		firstDataItem.displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
@@ -86,8 +86,8 @@ VisibleItemModel {
 	ListRangeSlider {
 		text: CommonWords.high_battery_temperature
 		suffix: Services.settings.temperatureUnitSuffix
-		firstColor: Theme.color_green
-		secondColor: Theme.color_red
+		firstColor: Theme.color_success
+		secondColor: Theme.color_critical
 		firstDataItem.uid: root.bindPrefix + "/Settings/Alarm/HighBatteryTemperatureClear"
 		firstDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
 		firstDataItem.displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)

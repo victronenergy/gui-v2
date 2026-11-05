@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Controls.impl as CP
 import QtQuick.Templates as T
 import QtQuick.Layouts
 import Victron.VenusOS
@@ -202,7 +203,7 @@ T.SpinBox {
 						 && !upDownHintFrame.visible
 						 && !spinBoxContentItem.KeyNavigationHighlight.active
 				color: "transparent"
-				border.color: Theme.color_blue
+				border.color: Theme.color_brand
 				border.width: Theme.geometry_focus_highlight_border_size
 				radius: Theme.geometry_button_radius
 			}
@@ -218,6 +219,8 @@ T.SpinBox {
 	}
 
 	up.indicator: Rectangle {
+		id: upIndicator
+
 		x: orientation === Qt.Horizontal
 		   ? parent.width - width
 		   : contentItem.x + (contentItem.width / 2) - (width / 2)
@@ -236,14 +239,19 @@ T.SpinBox {
 		// text input if it has not yet been accepted.
 		enabled: !inputArea.activeFocus && root.value < root.to
 
-		Image {
+		CP.ColorImage {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_plus.svg'
-			opacity: root.enabled ? 1.0 : 0.4 // TODO add Theme opacity constants
+			color: !upIndicator.enabled ? Theme.color_font_disabled
+				: root.up.pressed ? Theme.color_button_pressed_text
+				: Theme.color_button_down_text
+			opacity: upIndicator.enabled && !root.enabled ? 0.4 : 1.0 // TODO add Theme opacity constants
 		}
 	}
 
 	down.indicator: Rectangle {
+		id: downIndicator
+
 		x: orientation === Qt.Horizontal
 		   ? 0
 		   : contentItem.x + (contentItem.width / 2) - (width / 2)
@@ -258,10 +266,13 @@ T.SpinBox {
 			   : Theme.color_background_disabled
 		enabled: !inputArea.activeFocus && root.value > root.from
 
-		Image {
+		CP.ColorImage {
 			anchors.centerIn: parent
 			source: 'qrc:/images/icon_minus.svg'
-			opacity: root.enabled ? 1.0 : 0.4 // TODO add Theme opacity constants
+			color: !downIndicator.enabled ? Theme.color_font_disabled
+				: downIndicatorPressArea.pressed ? Theme.color_button_pressed_text
+				: Theme.color_button_down_text
+			opacity: downIndicator.enabled && !root.enabled ? 0.4 : 1.0 // TODO add Theme opacity constants
 		}
 	}
 

@@ -9,7 +9,7 @@ import Victron.VenusOS
 
 // When the power is negative, show the "<" green arrow, and don't show a minus symbol. Do this
 // regardless of whether ESS feedback is enabled.
-// When the power is positive, show the ">" blue arrow if ESS feedback is enabled.
+// When the power is positive, show the ">" arrow in the info color if ESS feedback is enabled.
 CP.ColorImage {
 	required property AcInput input
 
@@ -18,5 +18,5 @@ CP.ColorImage {
 			? (input.power < 0 ? "qrc:/images/icon_to_grid.svg" : "qrc:/images/icon_from_grid.svg")
 			: ""
 	opacity: (input?.power || 0) === 0 ? 0 : 1  // hide when power is 0
-	color: input?.power < 0 ? Theme.color_green : Theme.color_blue
+	color: input?.power < 0 ? Theme.color_success : Theme.color_info
 }

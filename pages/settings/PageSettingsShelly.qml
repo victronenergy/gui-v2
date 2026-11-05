@@ -104,7 +104,7 @@ Page {
 							: shellyDeviceDelegate.enabledChannelCount > 0 ? CommonWords.enabled
 							: ""
 					secondaryTextColor: shellyDeviceDelegate.reachable && shellyDeviceDelegate.enabledChannelCount > 0
-							? Theme.color_dimGreen : Theme.color_listItem_secondaryText
+							? Theme.color_dimSuccess : Theme.color_font_secondary
 					onClicked: {
 						Global.pageManager.pushPage("/pages/settings/PageSettingsShellyDevice.qml", {
 							deviceUid: shellyDeviceDelegate.uid,

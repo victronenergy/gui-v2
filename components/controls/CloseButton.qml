@@ -9,6 +9,6 @@ import Victron.VenusOS
 IconButton {
 	width: Theme.geometry_button_touch_size
 	height: Theme.geometry_button_touch_size
-	icon.color: Theme.color_ok
+	icon.color: Theme.color_brand
 	icon.source: "qrc:/images/icon_close_32.svg"
 }

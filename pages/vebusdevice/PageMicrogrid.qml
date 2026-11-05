@@ -324,6 +324,7 @@ Page {
 
 					buttonBorderColor: Theme.color_button_on_border_modified
 					buttonBackgroundColor: Theme.color_button_on_background_modified
+					buttonColor: Theme.color_button_on_background_modified_text
 
 					onClicked: applyAll.setValue(1)
 

@@ -28,7 +28,13 @@
 #include <QQmlEngine>
 #include <QQmlParserStatus>
 
+#include <optional>
+
+#include "branding.h"
+
 class QFileSystemWatcher;
+class QJsonObject;
+class QJsonValue;
 
 namespace Victron {
 namespace VenusOS {
@@ -55,7 +61,8 @@ public:
 		DeviceListSettingsPage,
 		NavigationPage,
 		QuickAccessPane,
-		QuickAccessPaneCard
+		QuickAccessPaneCard,
+		Branding
 	};
 	Q_ENUM(IntegrationType)
 
@@ -70,7 +77,7 @@ public:
 	GuiPluginLoader() = delete;
 	GuiPluginLoader(const GuiPluginLoader&) = delete;
 	GuiPluginLoader& operator=(const GuiPluginLoader&) = delete;
-	GuiPluginLoader(QObject *parent);
+	GuiPluginLoader(QQmlEngine *engine, QObject *parent);
 	~GuiPluginLoader() override;
 
 	bool busy() const;
@@ -99,9 +106,50 @@ public:
 	// the plugin resources.
 	static QVector<GuiPlugin> pluginsFromJson(const QString &json);
 
+	// Creates the Branding object at url, copies the properties that it set,
+	// destroys it, and passes the copy to checkAndResolveBrandingSnapshot().
+	// Returns nullopt on error.
+	static std::optional<Victron::BrandingData> createBrandingSnapshot(
+			QQmlEngine *engine, const QUrl &url, const QString &pluginName, QList<int> *fontIds);
+
+	// Enables the first custom branding plugin in *plugins (load order). A later plugin
+	// that has a custom branding integration is removed and returned, so the caller can
+	// unload it; its Branding file is not read. Replaces *branding with that
+	// plugin's snapshot. Font ids from the snapshot are appended to *fontIds.
+	// A Branding file that cannot be loaded does not count as enabled, so a later
+	// custom branding plugin can still be enabled. A second custom branding integration on the
+	// accepted plugin is not read.
+	static QVector<GuiPlugin> enableFirstBrandingPlugin(
+			QQmlEngine *engine,
+			QVector<GuiPlugin> *plugins,
+			QList<Victron::BrandingData> *branding,
+			QList<int> *fontIds);
+
+	// Prepares the values copied from the Branding file at url for use:
+	// - drops colors that are not opaque
+	// - drops a light_mode_background_factor that is not more than 0 and at
+	//   most 2, and rounds a valid one to thousandths
+	// - resolves URLs against url, and registers font_files with QFontDatabase
+	//   (the ids are appended to fontIds)
+	// - rejects the snapshot if font_family or quantity_font_family is not a
+	//   family that this plugin's own font files registered. A family from
+	//   another plugin, or only installed on the device, is not used. Fonts
+	//   registered before the rejection are removed and not appended to fontIds.
+	// Returns false if the custom branding integration must be ignored. Logs a warning
+	// for each value that it drops, and for a rejection.
+	static bool checkAndResolveBrandingSnapshot(Victron::BrandingData *data, const QUrl &url, QList<int> *fontIds);
+
+	// Checks the requiredBrandingVersion value from a compiled plugin.
+	// Returns an empty string if this build can load the plugin's Branding
+	// file, or the reason it cannot. A missing value means no requirement.
+	// The value must be a "major.minor" string, with the same major as the
+	// Victron.Branding module and a minor that is not newer.
+	static QString checkRequiredBrandingVersion(const QJsonValue &value);
+
 	// Returns the valid integrations of the plugin. If
 	// checkRequiredGuiPluginsVersion() rejects requiredGuiPluginsVersion,
-	// the integrations are left out.
+	// the integrations are left out. If checkRequiredBrandingVersion()
+	// rejects requiredBrandingVersion, its custom branding integrations are left out.
 	static QVector<GuiPluginIntegration> parseIntegrations(const QJsonObject &plugin, const QString &pluginName);
 
 Q_SIGNALS:
@@ -121,9 +169,14 @@ private:
 	static QColor determineColor(const QString &pluginName, const QVector<GuiPlugin> &otherPlugins);
 	bool loadPluginData(const GuiPlugin &plugin);
 	void unloadPluginData(bool clearCache);
+	void unloadSinglePluginData(const GuiPlugin &plugin);
+	void loadBranding(QVector<GuiPlugin> *plugins);
+	void applyBranding();
 	bool installPluginTranslatorForLanguage(const QString &pluginName, QLocale::Language language);
 	QString m_pluginsJson;
 	QVector<GuiPlugin> m_plugins;
+	QList<Victron::BrandingData> m_branding;
+	QList<int> m_brandingFontIds;
 	QHash<QString, QHash<QLocale::Language, QTranslator*> > m_pluginTranslators;
 	QHash<QString, QPointer<QTranslator> > m_currentTranslators;
 	QFileSystemWatcher *m_enabledAppsDirWatcher = nullptr;
@@ -133,7 +186,8 @@ private:
 	QTimer m_invokeOnceTimer;
 	QTimer m_timeoutTimer;
 	bool m_busy = true;
-	QQmlEngine *m_qmlEngine = nullptr;
+	bool m_brandingPending = false;
+	QPointer<QQmlEngine> m_qmlEngine;
 };
 
 /*
@@ -142,7 +196,7 @@ Each plugin can specify one or more integrations.
 Each integration is associated with a plugin,
 which is identified by the pluginName property.
 
-There are currently 5 supported types of integrations:
+There are currently 6 supported types of integrations:
 	1) a plugin settings page
 		- causes the plugin entry in Settings/Integrations/UI Plugins
 		  to become a drill-down to the custom settings page.
@@ -162,9 +216,15 @@ There are currently 5 supported types of integrations:
 		- causes a new card to be injected into one of the
 		  existing quick action pane views (i.e. either a
 		  controls card, or a switches card).
+	6) custom branding
+		- the url is a Branding.qml file (Victron.Branding module)
+		  whose colors, fonts and splash logos override the
+		  built-in ones. The loader reads it once and destroys it.
+		  Only the first custom branding plugin in load order is enabled.
+		  A later plugin that has a custom branding integration is not enabled.
 
 ** TODO: actually support 3/4/5. **
-In the prototype, only type 1 and 2 are supported.
+In the prototype, only type 1, 2 and 6 are supported.
 */
 class GuiPluginIntegration
 {

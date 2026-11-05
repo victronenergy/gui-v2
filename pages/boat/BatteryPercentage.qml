@@ -54,7 +54,7 @@ Row {
 		width: Theme.geometry_boatPage_shoreGauge_icon_size
 		height: width
 		fillMode: Image.PreserveAspectFit
-		color: isMoving ? Theme.color_red : Theme.color_orange
+		color: isMoving ? Theme.color_critical : Theme.color_warning
 		source: isMoving ? "qrc:/images/icon_shore_error.svg" : "qrc:/images/icon_shore.svg"
 	}
 }

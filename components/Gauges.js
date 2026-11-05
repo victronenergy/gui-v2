@@ -12,7 +12,7 @@ function tankProperties(type) {
 		return {
 			icon: "qrc:/images/icon_battery_32.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
-			color: V.Theme.color_ok,
+			color: V.Theme.color_blue, // palette blue: a data color, like the other tank fluids
 			//% "Battery"
 			name: qsTrId("gauges_battery")
 		}

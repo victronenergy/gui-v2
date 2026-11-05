@@ -17,11 +17,11 @@ IOChannelCardDelegateHeader {
 	statusColor: {
 		switch (root.genericInput.status) {
 		case VenusOS.GenericInput_Status_Fault:
-			return Theme.color_red
+			return Theme.color_critical
 		case VenusOS.GenericInput_Type_SensorBatteryLow:
-			return Theme.color_orange
+			return Theme.color_warning
 		default:
-			return Theme.color_red
+			return Theme.color_critical
 		}
 	}
 }

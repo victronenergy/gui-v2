@@ -42,9 +42,9 @@ CT.Button {
 		id: backgroundRect
 
 		implicitHeight: Theme.geometry_iochannel_control_height
-		color: root.enabled ? (root.down ? Theme.color_ok : Theme.color_darkOk) : Theme.color_background_disabled
+		color: root.enabled ? (root.down ? Theme.color_brand : Theme.color_darkBrand) : Theme.color_background_disabled
 		border.width: Theme.geometry_button_border_width
-		border.color: root.enabled ? Theme.color_ok : Theme.color_font_disabled
+		border.color: root.enabled ? Theme.color_brand : Theme.color_font_disabled
 		radius: Theme.geometry_button_radius
 
 		BasePressEffect {

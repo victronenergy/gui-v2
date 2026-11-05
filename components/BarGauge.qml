@@ -30,8 +30,8 @@ Item {
 	readonly property int valueStatus: isNaN(value)
 			? (valueType === VenusOS.Gauges_ValueType_FallingPercentage ? Theme.Critical : Theme.Ok)
 			: Theme.getValueStatus(Math.max(0, Math.min(1, value)) * 100, valueType)
-	property color foregroundColor: Theme.color_darkOk,Theme.statusColorValue(valueStatus)
-	property color backgroundColor: Theme.color_darkOk,Theme.statusColorValue(valueStatus, true)
+	property color foregroundColor: Global.statusColor(valueStatus)
+	property color backgroundColor: Global.statusColor(valueStatus, true)
 
 	// The radius of the two end corners (on top edge when vertical, or right edge when horizontal).
 	// By default, these are progressively rounded as the progress reaches the total, to prevent the
