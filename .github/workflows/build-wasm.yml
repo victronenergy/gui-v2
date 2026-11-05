@@ -2,6 +2,7 @@ name: build-wasm
 run-name: ${{ github.actor }} is building wasm file
 
 on:
+  workflow_dispatch:
   push:
     paths-ignore:
       - '**/README.md'
