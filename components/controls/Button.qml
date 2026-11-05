@@ -15,9 +15,9 @@ T.Button {
 		? (down ? Theme.color_button_down_text : Theme.color_font_primary)
 		: (down ? Theme.color_button_on_text_disabled : Theme.color_button_off_text_disabled)
 	property color backgroundColor: enabled
-		? (down ? Theme.color_ok : Theme.color_darkOk)
+		? (down ? Theme.color_brand : Theme.color_darkBrand)
 		: (down ? Theme.color_button_on_background_disabled : Theme.color_background_disabled)
-	property color borderColor: enabled ? Theme.color_ok : Theme.color_font_disabled
+	property color borderColor: enabled ? Theme.color_brand : Theme.color_font_disabled
 	property real borderWidth: Theme.geometry_button_border_width
 	property real radius: Theme.geometry_button_radius
 	property real topLeftRadius: NaN

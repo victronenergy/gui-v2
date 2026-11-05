@@ -92,8 +92,8 @@ Rectangle {
 				Layout.preferredHeight: Theme.geometry_listItem_height
 				//% "Back"
 				text: qsTrId("welcome_page_back")
-				color: enabled ? Theme.color_white : Theme.color_font_secondary
-				backgroundColor: enabled ? Theme.color_ok : Theme.color_radioButton_indicator_off
+				color: enabled ? Theme.color_button_down_text : Theme.color_font_secondary
+				backgroundColor: enabled ? Theme.color_brand : Theme.color_radioButton_indicator_off
 				flat: false
 				enabled: root.backButtonEnabled
 				onClicked: root.backClicked()
@@ -103,8 +103,8 @@ Rectangle {
 				Layout.fillWidth: true
 				Layout.preferredHeight: Theme.geometry_listItem_height
 				text: root.nextButtonText
-				color: Theme.color_white
-				backgroundColor: Theme.color_ok
+				color: Theme.color_button_down_text
+				backgroundColor: Theme.color_brand
 				flat: false
 				onClicked: root.nextClicked()
 			}

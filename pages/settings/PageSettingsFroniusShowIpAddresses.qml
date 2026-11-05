@@ -20,7 +20,7 @@ Page {
 			//% "Rescan for IP addresses"
 			text: qsTrId("settings_fronius_rescan_for_ip_addresses")
 			iconSource: "qrc:/images/icon_refresh_32.svg"
-			iconColor: Theme.color_ok
+			iconColor: Theme.color_brand
 			showAccessLevel: VenusOS.User_AccessType_Installer
 			hasSubMenu: false
 			onClicked: {

@@ -45,7 +45,7 @@ ListItem {
 
 			anchors.verticalCenter: parent.verticalCenter
 			color: root.type === VenusOS.Notification_Info
-				? (root.historical ? Theme.color_darkOk : Theme.color_ok)
+				? (root.historical ? Theme.color_darkInfo : Theme.color_info)
 				: root.type === VenusOS.Notification_Warning
 					? (root.historical ? Theme.color_darkWarning : Theme.color_warning)
 					: (root.historical ? Theme.color_darkCritical : Theme.color_critical)

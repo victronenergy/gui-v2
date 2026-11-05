@@ -14,7 +14,7 @@ Button {
 	radius: 0
 	backgroundColor: "transparent"  // don't show background when disabled
 	display: Button.IconOnly
-	color: Theme.color_ok
+	color: Theme.color_brand
 
 	// For convenience, bind the paddings to the offsets that are used to expand the clickable
 	// area. If the button only contains an icon, no additional padding is required as the icon

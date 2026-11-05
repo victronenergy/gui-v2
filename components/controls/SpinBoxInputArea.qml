@@ -100,8 +100,9 @@ TextInput {
 	font.pixelSize: root.fontPixelSize
 	horizontalAlignment: Qt.AlignHCenter
 	verticalAlignment: Qt.AlignVCenter
-	selectedTextColor: Theme.color_white
-	selectionColor : Theme.color_blue
+	// color_button_down_text is text_color_on(color_brand), so selected text stays readable on a light brand.
+	selectedTextColor: Theme.color_button_down_text
+	selectionColor : Theme.color_brand
 	readOnly: !root.spinBox.editable
 	activeFocusOnPress: !readOnly && root.spinBox.editable
 	selectByMouse: activeFocusOnPress

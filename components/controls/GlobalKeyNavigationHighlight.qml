@@ -26,9 +26,11 @@ BorderImage {
 		top: helper.verticalBorders
 		bottom: helper.verticalBorders
 	}
-	source: Theme.colorScheme === Theme.Light
-			? "qrc:/images/key_navigation_highlight_light.svg"
-			: "qrc:/images/key_navigation_highlight_dark.svg"
+	// The ring art has one color, and is drawn in color_focus_highlight.
+	// TODO: BorderImage cannot set sourceSize, so Qt reads image provider images at a
+	// device pixel ratio of 1. The ring is sharp on GX devices, but soft on high-DPI screens.
+	source: "image://tinted/" + Theme.color_focus_highlight.toString().substring(1)
+			+ "/images/key_navigation_highlight.svg"
 
 	visible: helper.showHighlight
 

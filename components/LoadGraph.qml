@@ -15,8 +15,8 @@ Item {
 	property real offsetFraction
 	property real threshold: 0.8    // same as 80% warning level for gauges
 	property int dotSize: Theme.geometry_briefPage_sidePanel_loadGraph_dotSize
-	property color aboveThresholdFillColor: Theme.color_orange
-	property color belowThresholdFillColor: Theme.color_blue
+	property color aboveThresholdFillColor: Theme.color_warning
+	property color belowThresholdFillColor: Theme.color_info
 	property color horizontalGradientColor1: Theme.screenSize === Theme.Portrait ? Theme.color_background_secondary : Theme.color_briefPage_background
 	property color horizontalGradientColor2: "transparent"
 	property bool zeroCentered

@@ -17,10 +17,10 @@ SwitchableOutputSlider {
 
 	leftPadding: dimmingToggleButton.width
 	highlightColor: enabled
-		? (dimmingToggleButton.checked ? Theme.color_ok : Theme.color_button_off_background)
+		? (dimmingToggleButton.checked ? Theme.color_brand : Theme.color_button_off_background)
 		: (dimmingToggleButton.checked ? Theme.color_button_on_background_disabled : Theme.color_button_off_background_disabled)
-	backgroundColor: enabled ? Theme.color_darkOk : Theme.color_background_disabled
-	borderColor: enabled ? Theme.color_ok : Theme.color_font_disabled
+	backgroundColor: enabled ? Theme.color_darkBrand : Theme.color_background_disabled
+	borderColor: enabled ? Theme.color_brand : Theme.color_font_disabled
 
 	Keys.onPressed: (event) => {
 		switch (event.key) {

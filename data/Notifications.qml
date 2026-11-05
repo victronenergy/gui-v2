@@ -25,7 +25,7 @@ QtObject {
 
 	readonly property color statusBarNotificationIconColor: statusBarNotificationIconPriority === VenusOS.Notification_Alarm ? Theme.color_critical
 			: statusBarNotificationIconPriority === VenusOS.Notification_Warning ? Theme.color_warning
-			: statusBarNotificationIconPriority === VenusOS.Notification_Info ? Theme.color_ok
+			: statusBarNotificationIconPriority === VenusOS.Notification_Info ? Theme.color_info
 			: "transparent"
 
 	readonly property url statusBarNotificationIconSource: statusBarNotificationIconPriority === VenusOS.Notification_Alarm ? "qrc:/images/icon_alarm_32.svg"

@@ -58,7 +58,7 @@ ListModel {
 					name: "",
 					icon: "",
 					valueType: VenusOS.Gauges_ValueType_NeutralPercentage,
-					color: Theme.color_ok,
+					color: Theme.color_blue,
 					level: 0,
 					value: 0,
 				})
@@ -124,7 +124,7 @@ ListModel {
 			readonly property real level: item?.level ?? NaN
 			readonly property real remaining: item?.remaining ?? NaN
 			readonly property int valueType: properties.valueType ?? VenusOS.Gauges_ValueType_NeutralPercentage
-			readonly property color color: properties.color ?? Theme.color_ok
+			readonly property color color: properties.color ?? Theme.color_blue
 			readonly property var properties: type >= 0 ? Gauges.tankProperties(type) : ({})
 
 			property bool canUpdate

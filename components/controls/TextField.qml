@@ -10,7 +10,7 @@ import Victron.VenusOS
 T.TextField {
 	id: root
 
-	property color borderColor: Theme.color_ok
+	property color borderColor: Theme.color_brand
 
 	font.family: Global.fontFamily
 	font.pixelSize: Theme.font_listItem_primary_size
@@ -26,8 +26,9 @@ T.TextField {
 	verticalAlignment: Text.AlignVCenter
 	color: Theme.color_font_primary
 
-	selectedTextColor: Theme.color_white
-	selectionColor : Theme.color_blue
+	// color_button_down_text is text_color_on(color_brand), so selected text stays readable on a light brand.
+	selectedTextColor: Theme.color_button_down_text
+	selectionColor : Theme.color_brand
 	selectByMouse: !readOnly
 
 	background: Rectangle {

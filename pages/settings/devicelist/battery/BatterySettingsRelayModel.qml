@@ -62,8 +62,8 @@ VisibleItemModel {
 
 		text: CommonWords.low_state_of_charge
 		suffix: "%"
-		firstColor: Theme.color_red
-		secondColor: Theme.color_green
+		firstColor: Theme.color_critical
+		secondColor: Theme.color_success
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowSoc"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowSocClear"
 		preferredVisible: dataValid && showSetting(0, 1)
@@ -74,8 +74,8 @@ VisibleItemModel {
 		suffix: "V"
 		decimals: 1
 		stepSize: 0.1
-		firstColor: Theme.color_red
-		secondColor: Theme.color_green
+		firstColor: Theme.color_critical
+		secondColor: Theme.color_success
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowVoltage"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowVoltageClear"
 		preferredVisible: dataValid && showSetting(0, 1)
@@ -86,8 +86,8 @@ VisibleItemModel {
 		suffix: "V"
 		decimals: 1
 		stepSize: 0.1
-		firstColor: Theme.color_green
-		secondColor: Theme.color_red
+		firstColor: Theme.color_success
+		secondColor: Theme.color_critical
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighVoltageClear"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighVoltage"
 		preferredVisible: dataValid && showSetting(0)
@@ -98,8 +98,8 @@ VisibleItemModel {
 		suffix: "V"
 		decimals: 1
 		stepSize: 0.1
-		firstColor: Theme.color_red
-		secondColor: Theme.color_green
+		firstColor: Theme.color_critical
+		secondColor: Theme.color_success
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowStarterVoltage"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/LowStarterVoltageClear"
 		preferredVisible: dataValid && showSetting(0)
@@ -110,8 +110,8 @@ VisibleItemModel {
 		suffix: "V"
 		decimals: 1
 		stepSize: 0.1
-		firstColor: Theme.color_green
-		secondColor: Theme.color_red
+		firstColor: Theme.color_success
+		secondColor: Theme.color_critical
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighStarterVoltageClear"
 		secondDataItem.uid: root.bindPrefix + "/Settings/Relay/HighStarterVoltage"
 		preferredVisible: dataValid && showSetting(0)
@@ -127,8 +127,8 @@ VisibleItemModel {
 	ListRangeSlider {
 		text: CommonWords.low_battery_temperature
 		suffix: Services.settings.temperatureUnitSuffix
-		firstColor: Theme.color_red
-		secondColor: Theme.color_green
+		firstColor: Theme.color_critical
+		secondColor: Theme.color_success
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/LowBatteryTemperature"
 		firstDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
 		firstDataItem.displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
@@ -141,8 +141,8 @@ VisibleItemModel {
 	ListRangeSlider {
 		text: CommonWords.high_battery_temperature
 		suffix: Services.settings.temperatureUnitSuffix
-		firstColor: Theme.color_green
-		secondColor: Theme.color_red
+		firstColor: Theme.color_success
+		secondColor: Theme.color_critical
 		firstDataItem.uid: root.bindPrefix + "/Settings/Relay/HighBatteryTemperatureClear"
 		firstDataItem.sourceUnit: Units.unitToVeUnit(VenusOS.Units_Temperature_Kelvin)
 		firstDataItem.displayUnit: Units.unitToVeUnit(Services.settings.temperatureUnit)
