@@ -181,6 +181,26 @@ END property reference
                 brandingproperties.parse_properties(HEADER, 'branding.h', (1, 1)),
                 entries, 'branding.h', 'branding.cpp')
 
+    def test_victron_colors_are_the_qml_hexes(self):
+        text = '''
+        Branding {
+            color_brand: "#112233" // color_blue
+            // color_success: "#000000"
+            /*
+            color_warning: "#000000"
+            */
+            color_font_secondary: "#969591" // color_gray5
+        }
+        '''
+        colors = brandingproperties.parse_victron_colors(
+            text, 'Branding.qml', ['color_brand', 'color_success', 'color_warning', 'color_font_secondary'])
+        self.assertEqual(colors, {'color_brand': '#112233', 'color_font_secondary': '#969591'})
+
+    def test_victron_color_must_be_a_hex_literal(self):
+        text = 'color_font_secondary: "color_gray5"\n'
+        with self.assertRaisesRegex(ValueError, 'color_font_secondary'):
+            brandingproperties.parse_victron_colors(text, 'Branding.qml', ['color_font_secondary'])
+
     def test_source_tree_is_up_to_date(self):
         result = subprocess.run([sys.executable, '-B', os.path.join(TOOLS_DIR, 'brandingproperties.py'), '--check'],
                                 capture_output=True, text=True)
