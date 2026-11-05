@@ -11,37 +11,35 @@
 
 class QTimer;
 
+/*
+	Provides the values to be displayed in the illustration.
+
+	In a WebAssembly build they are read from window.camperViewData, which is set by the hosting
+	page. If the host has not provided any values, the data is empty and the illustration shows
+	no values: it never shows made-up values that could be mistaken for real ones.
+
+	In a desktop build, which is only for development, there is no host, so sample data is used.
+*/
 class CamperDataProvider : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(QVariantMap data READ data NOTIFY dataChanged FINAL)
-	Q_PROPERTY(QString sourceName READ sourceName NOTIFY sourceNameChanged FINAL)
-	Q_PROPERTY(bool hostDataAvailable READ hostDataAvailable NOTIFY hostDataAvailableChanged FINAL)
 
 public:
 	explicit CamperDataProvider(QObject *parent = nullptr);
 
 	QVariantMap data() const;
-	QString sourceName() const;
-	bool hostDataAvailable() const;
-
-	Q_INVOKABLE void refresh();
 
 Q_SIGNALS:
 	void dataChanged();
-	void sourceNameChanged();
-	void hostDataAvailableChanged();
 
 private:
-	QVariantMap buildMockData();
-	bool tryReadHostData(QVariantMap *data) const;
-	void applyData(const QVariantMap &data, const QString &sourceName, bool hostDataAvailable);
+	void refresh();
+	QVariantMap readData();
 
 	QTimer *m_refreshTimer = nullptr;
 	QVariantMap m_data;
-	QString m_sourceName;
-	bool m_hostDataAvailable = false;
-	double m_mockPhase = 0.0;
+	int m_sampleIndex = 0;
 };
 
 #endif // CAMPERDATAPROVIDER_H

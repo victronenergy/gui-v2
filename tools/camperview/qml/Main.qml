@@ -4,97 +4,41 @@
 */
 
 import QtQuick
-import QtQuick.Controls
 
-ApplicationWindow {
+Window {
 	id: root
+
+	readonly property var _data: camperDataProvider.data
+
+	function _number(value) {
+		// Number(null) is 0, but a missing value must be displayed as missing, not as zero.
+		return value === null || value === undefined ? NaN : Number(value)
+	}
 
 	width: 1280
 	height: 720
 	visible: true
-	color: "#121417"
-	title: "Camper View (%1)".arg(camperDataProvider.sourceName)
+	title: "Camper View"
 
-	readonly property var _data: camperDataProvider.data
-	readonly property string _activeInputSource: (_data.activeInputSource ?? "none").toString().toLowerCase()
-	readonly property bool _gridOrShoreActive: _activeInputSource === "grid" || _activeInputSource === "shore"
-	readonly property bool _generatorActive: _activeInputSource === "generator"
-	readonly property real _movingAlternatorThreshold: 50
-	readonly property real _alternatorPower: _toFiniteNumber(_data.alternatorPower)
-	readonly property int _scenario: _gridOrShoreActive ? camperView.scenarioCharging
-			: _alternatorPower > _movingAlternatorThreshold ? camperView.scenarioDriving
-			: _generatorActive ? camperView.scenarioParking
-			: camperView.scenarioOffGrid
-	readonly property string _scenarioText: _scenario === camperView.scenarioCharging ? "Charging"
-			: _scenario === camperView.scenarioDriving ? "Driving"
-			: _scenario === camperView.scenarioParking ? "Parking"
-			: "Off-grid"
-	readonly property string _gridShoreTitle: _activeInputSource === "shore" ? "Shore"
-			: _activeInputSource === "grid" ? "Grid"
-			: "Grid/Shore"
+	CamperOverviewView {
+		anchors.fill: parent
 
-	function _toFiniteNumber(value) {
-		const parsed = Number(value)
-		return isFinite(parsed) ? parsed
-				: NaN
-	}
+		colorScheme: root._data.colorScheme === "dark" ? 1 : 0
 
-	Rectangle {
-		id: toolbar
+		activeInputSource: root._data.activeInputSource ?? 0
+		acInputConnected: root._data.acInputConnected ?? false
+		alternatorState: root._data.alternatorState ?? -1
+		lowSocAlarm: root._data.lowSocAlarm ?? 0
+		solarPresent: root._data.solarPresent ?? true
+		generatorPresent: root._data.generatorPresent ?? true
 
-		anchors {
-			top: parent.top
-			left: parent.left
-			right: parent.right
-		}
-		height: 48
-		color: "#1C232C"
-
-		Row {
-			anchors {
-				fill: parent
-				leftMargin: 12
-				rightMargin: 12
-			}
-			spacing: 12
-
-			Label {
-				anchors.verticalCenter: parent.verticalCenter
-				color: "#F3F5F7"
-				text: camperDataProvider.hostDataAvailable ? "Host data active (window.camperViewData)"
-					: "No host data detected; displaying mock data"
-			}
-
-			Button {
-				anchors.verticalCenter: parent.verticalCenter
-				text: "Refresh"
-				onClicked: camperDataProvider.refresh()
-			}
-		}
-	}
-
-	CamperOverviewScene {
-		id: camperView
-
-		anchors {
-			top: toolbar.bottom
-			left: parent.left
-			right: parent.right
-			bottom: parent.bottom
-		}
-		scenario: root._scenario
-		scenarioText: root._scenarioText
-		gridShoreTitle: root._gridShoreTitle
-		gridShoreIsShore: root._activeInputSource === "shore"
-		gridShorePower: root._gridOrShoreActive ? root._toFiniteNumber(root._data.gridShorePower)
-			: NaN
-		generatorPower: root._generatorActive ? root._toFiniteNumber(root._data.generatorPower)
-			: NaN
-		solarPower: root._toFiniteNumber(root._data.solarPower)
-		batteryPower: root._toFiniteNumber(root._data.batteryPower)
-		batterySoc: root._toFiniteNumber(root._data.batterySoc)
-		alternatorPower: root._alternatorPower
-		dcLoadsPower: root._toFiniteNumber(root._data.dcLoadsPower)
-		acLoadsPower: root._toFiniteNumber(root._data.acLoadsPower)
+		activeInputPower: root._number(root._data.activeInputPower)
+		generatorPower: root._number(root._data.generatorPower)
+		solarPower: root._number(root._data.solarPower)
+		alternatorPower: root._number(root._data.alternatorPower)
+		batteryPower: root._number(root._data.batteryPower)
+		batterySoc: root._number(root._data.batterySoc)
+		dcLoadsPower: root._number(root._data.dcLoadsPower)
+		acLoadsPower: root._number(root._data.acLoadsPower)
 	}
 }

@@ -1,137 +1,85 @@
 /*
-** Copyright (C) 2025 Victron Energy B.V.
+** Copyright (C) 2026 Victron Energy B.V.
 ** See LICENSE.txt for license information.
 */
 
 import QtQuick
 import Victron.VenusOS
 
+/*
+	A configuration for each of the states of the RV illustration.
+
+	These set the paths that a real system publishes, and use fixed values so that captures of
+	these configurations are reproducible.
+*/
 Item {
 	id: root
 
-	property int mockDeviceCount
+	readonly property string _solarServiceUid: "com.victronenergy.solarcharger.camper"
+	readonly property string _alternatorServiceUid: "com.victronenergy.alternator.ttyUSB0"
+	readonly property string _batteryServiceUid: "com.victronenergy.battery.ttyUSB1"
+	readonly property string _veBusServiceUid: "com.victronenergy.vebus.ttyS2"
 
 	readonly property var configs: [
 		{
-			name: "Driving (solar and generator), alternator active",
-			alternatorActive: true,
-			generatorPresent: true,
-			generatorActive: false,
-			shorePowerConnected: false,
-			solarPresent: true,
-			solarActive: false,
-			acLoad: false,
-			dcLoad: true,
+			name: "Shore charging",
+			source: VenusOS.AcInputs_InputSource_Shore,
+			inputPower: 1850, batteryPower: 560, soc: 80, solar: 320, dc: 210, ac: 1080,
 		},
 		{
-			name: "Driving (solar only), alternator active",
-			alternatorActive: true,
-			generatorPresent: false,
-			generatorActive: false,
-			shorePowerConnected: false,
-			solarPresent: true,
-			solarActive: false,
-			acLoad: false,
-			dcLoad: true,
+			name: "Pass-through",
+			source: VenusOS.AcInputs_InputSource_Shore,
+			inputPower: 1080, batteryPower: 0, soc: 100, dc: 210, ac: 1080,
 		},
 		{
-			name: "Driving (generator only), alternator active",
-			alternatorActive: true,
-			generatorPresent: true,
-			generatorActive: false,
-			shorePowerConnected: false,
-			solarPresent: false,
-			solarActive: false,
-			acLoad: false,
-			dcLoad: true,
+			name: "Grid charging",
+			source: VenusOS.AcInputs_InputSource_Grid,
+			inputPower: 1850, batteryPower: 560, soc: 80, dc: 210, ac: 1080,
 		},
 		{
-			name: "Off Grid (solar and generator), generator active",
-			alternatorActive: false,
-			generatorPresent: true,
-			generatorActive: true,
-			shorePowerConnected: false,
-			solarPresent: true,
-			solarActive: false,
-			acLoad: true,
-			dcLoad: false,
+			name: "Driving",
+			source: VenusOS.AcInputs_InputSource_Inverting,
+			alternatorState: 4, alternatorPower: 620, batteryPower: 480, soc: 60, solar: 320, dc: 210,
 		},
 		{
-			name: "Off Grid (solar and generator), generator and solar active",
-			alternatorActive: false,
-			generatorPresent: true,
-			generatorActive: true,
-			shorePowerConnected: false,
-			solarPresent: true,
-			solarActive: true,
-			acLoad: true,
-			dcLoad: true,
+			name: "Parked",
+			source: VenusOS.AcInputs_InputSource_Inverting,
+			alternatorState: 0, batteryPower: -780, soc: 50, solar: 320, dc: 210, ac: 890,
 		},
 		{
-			name: "Off Grid (solar and generator), nothing active",
-			alternatorActive: false,
-			generatorPresent: true,
-			generatorActive: false,
-			shorePowerConnected: false,
-			solarPresent: true,
-			solarActive: false,
-			acLoad: false,
-			dcLoad: false,
+			name: "Off-grid, discharging (no alternator state)",
+			source: VenusOS.AcInputs_InputSource_Inverting,
+			batteryPower: -780, soc: 50, solar: 320, dc: 210, ac: 890,
 		},
 		{
-			name: "Parking (solar and generator), nothing active",
-			alternatorActive: false,
-			generatorPresent: true,
-			generatorActive: false,
-			shorePowerConnected: false,
-			solarPresent: true,
-			solarActive: false,
-			acLoad: false,
-			dcLoad: false,
+			name: "Generator running",
+			source: VenusOS.AcInputs_InputSource_Generator,
+			inputPower: 2600, batteryPower: 900, soc: 40, dc: 210, ac: 1400,
 		},
 		{
-			name: "Parking (solar and generator), solar active",
-			alternatorActive: false,
-			generatorPresent: true,
-			generatorActive: false,
-			shorePowerConnected: false,
-			solarPresent: true,
-			solarActive: true,
-			acLoad: false,
-			dcLoad: true,
+			name: "Solar only",
+			source: VenusOS.AcInputs_InputSource_Inverting,
+			alternatorState: 0, noGenerator: true, batteryPower: 300, soc: 80, solar: 620, dc: 210, ac: 110,
 		},
 		{
-			name: "Charging (solar and generator), shore active",
-			alternatorActive: false,
-			generatorPresent: true,
-			generatorActive: false,
-			shorePowerConnected: true,
-			solarPresent: true,
-			solarActive: false,
-			acLoad: true,
-			dcLoad: true,
+			name: "Low battery alarm",
+			source: VenusOS.AcInputs_InputSource_Inverting,
+			alternatorState: 0, lowSocAlarm: 2, batteryPower: -320, soc: 12, solar: 0, dc: 320, ac: 0,
 		},
 		{
-			name: "Charging (solar only), shore active",
-			alternatorActive: false,
-			generatorPresent: false,
-			generatorActive: false,
-			shorePowerConnected: true,
-			solarPresent: true,
-			solarActive: false,
-			acLoad: true,
-			dcLoad: true,
+			name: "No solar panels",
+			source: VenusOS.AcInputs_InputSource_Shore,
+			noSolar: true, inputPower: 1850, batteryPower: 560, soc: 80, dc: 210, ac: 1080,
 		},
 		{
-			name: "Charging (generator only ), shore active",
-			alternatorActive: false,
-			generatorPresent: true,
-			generatorActive: false,
-			shorePowerConnected: true,
-			solarPresent: false,
-			solarActive: false,
-			acLoad: true,
-			dcLoad: true,
+			name: "No solar panels, no generator",
+			source: VenusOS.AcInputs_InputSource_Shore,
+			noSolar: true, noGenerator: true, inputPower: 1850, batteryPower: 560, soc: 80, dc: 210, ac: 1080,
+		},
+		{
+			name: "No values available",
+			source: VenusOS.AcInputs_InputSource_NotAvailable,
+			noSolar: true, noGenerator: true,
 		},
 	]
 
@@ -143,57 +91,46 @@ Item {
 		const config = configs[configIndex]
 		if (!config) return
 
-		// Remove set values
-		MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/AcPower", config.acLoad ? Math.random() * 1000 : 0)
-		MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/DcPower", config.dcLoad ? Math.random() * 500 : 0)
-		MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/BatteryPower", 1000)
+		const systemUid = Services.system.serviceUid
+		const generatorActive = config.source === VenusOS.AcInputs_InputSource_Generator
+		const externalActive = config.source === VenusOS.AcInputs_InputSource_Shore
+				|| config.source === VenusOS.AcInputs_InputSource_Grid
 
-		// Add new services if needed
-		let deviceInstance
-		let serviceUid
-		if (config.shorePowerConnected) {
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/Shore", 1)
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/ShorePower", Math.random() * 2000)
+		MockManager.setValue(systemUid + "/Ac/ActiveIn/Source", config.source)
+		MockManager.setValue(systemUid + "/Ac/In/0/Source", config.source === VenusOS.AcInputs_InputSource_Grid
+				? VenusOS.AcInputs_InputSource_Grid : VenusOS.AcInputs_InputSource_Shore)
+		MockManager.setValue(systemUid + "/Ac/In/0/Connected", externalActive ? 1 : 0)
+		MockManager.setValue(systemUid + "/Ac/In/1/Source", config.noGenerator
+				? VenusOS.AcInputs_InputSource_NotAvailable : VenusOS.AcInputs_InputSource_Generator)
+		MockManager.setValue(systemUid + "/Ac/In/1/Connected", generatorActive ? 1 : 0)
+		MockManager.setValue(_veBusServiceUid + "/Ac/ActiveIn/L1/P", config.inputPower ?? undefined)
+		MockManager.setValue(_veBusServiceUid + "/Ac/ActiveIn/L2/P", undefined)
+		MockManager.setValue(_veBusServiceUid + "/Ac/ActiveIn/L3/P", undefined)
+
+		MockManager.setValue(_alternatorServiceUid + "/State", config.alternatorState ?? undefined)
+		MockManager.setValue(_alternatorServiceUid + "/Dc/0/Power", config.alternatorPower ?? 0)
+		MockManager.setValue(_batteryServiceUid + "/Alarms/LowSoc", config.lowSocAlarm ?? 0)
+
+		if (config.noSolar) {
+			if (MockManager.value(_solarServiceUid + "/DeviceInstance") !== undefined) {
+				MockManager.removeValue(_solarServiceUid)
+			}
 		} else {
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/Shore", 0)
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/ShorePower", 0)
+			MockManager.setValue(_solarServiceUid + "/DeviceInstance", 256)
+			MockManager.setValue(_solarServiceUid + "/ProductName", "SmartSolar")
+			MockManager.setValue(_solarServiceUid + "/Connected", 1)
+			// SolarInputsImpl derives the system PV power from the solar chargers.
+			MockManager.setValue(_solarServiceUid + "/Yield/Power", config.solar ?? undefined)
 		}
-		if (config.generatorPresent) {
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/Generator", 1)
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/GeneratorPower", 0)
-		} else {
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/Generator", 0)
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/GeneratorPower", 0)
 
-		}
-		if (config.generatorActive) {
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/GeneratorPower", Math.random() * 2000)
-		} else {
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/GeneratorPower", 0)
-		}
-		if (config.alternatorActive) {
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/AlternatorPower", Math.random() * 2000)
+		MockManager.setValue(systemUid + "/Dc/Battery/Power", config.batteryPower ?? undefined)
+		MockManager.setValue(systemUid + "/Dc/Battery/Soc", config.soc ?? undefined)
+		MockManager.setValue(systemUid + "/Dc/System/Power", config.dc ?? undefined)
+		// SystemAcImpl derives the system AC consumption values from the vebus output.
+		MockManager.setValue(_veBusServiceUid + "/Ac/Out/L1/P", config.ac ?? undefined)
+		MockManager.setValue(_veBusServiceUid + "/Ac/Out/L2/P", undefined)
+		MockManager.setValue(_veBusServiceUid + "/Ac/Out/L3/P", undefined)
 
-		} else {
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/AlternatorPower", 0)
-
-		}
-		if (config.solarPresent) {
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/Solar", 1)
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/SolarPower", 0)
-
-		} else {
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/Solar", 0)
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/SolarPower", 0)
-
-		}
-		if (config.solarActive) {
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/SolarPower", Math.random() * 2000)
-
-		} else {
-			MockManager.setValue(Global.system.serviceUid + "/Settings/Camper/SolarPower", 0)
-
-		}
 		return config.name
 	}
 

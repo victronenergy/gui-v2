@@ -13,13 +13,14 @@ Rectangle {
 	// 1 - Charging
 	// 2 - Discharging
 	// 3 - Low
-	readonly property int batteryState: value < 10 ? 3
+	readonly property int batteryState: alarm ? 3
 							: discharging ? 2
 							: charging ? 1
 							: 0
-	property int value: 66
+	property real value: NaN
 	property bool charging: false
 	property bool discharging: false
+	property bool alarm: false
 	property int colorScheme: 0
 
 	readonly property real batteryNubWidth: Math.max(4, Math.round(height * 0.08))
@@ -46,12 +47,12 @@ Rectangle {
 			bottomMargin: root._doubleBorderWidth
 		}
 
-		width: (root.width - root.border.width * 4) * (root.value / 100)
+		width: (root.width - root.border.width * 4) * (isFinite(root.value) ? Math.max(0, Math.min(100, root.value)) / 100 : 0)
 		bottomLeftRadius: root.radius - root.border.width
 		topLeftRadius: root.radius - root.border.width
 		bottomRightRadius: 0 // math here
 		topRightRadius: 0 // math here
-		color: _batteryColor[root.batteryState]
+		color: root._batteryColor[root.batteryState]
 	}
 
 	Rectangle {
@@ -72,14 +73,14 @@ Rectangle {
 		Canvas {
 			id: batteryIcon
 			property color color: root._iconColor
-			property bool style: root.charging ? true : false
+			property bool style: root.charging
 
 			anchors {
 				verticalCenter: parent.verticalCenter
 				left: parent.left
 			}
 			width: height
-			height: Math.max(16, Math.round(parent.height * 0.45))
+			height: Math.max(12, Math.round(parent.height * 0.45))
 			onPaint: {
 				const ctx = getContext("2d")
 				ctx.clearRect(0, 0, width, height)
@@ -120,9 +121,9 @@ Rectangle {
 				left: batteryIcon.visible ? batteryIcon.right : parent.left
 			}
 
-			text: root.value + "%"
+			text: isFinite(root.value) ? Math.round(root.value) + "%" : "--%"
 			color: root._textColor
-			font.pixelSize: Math.max(16, Math.round(parent.height * 0.6))
+			font.pixelSize: Math.max(13, Math.round(parent.height * 0.6))
 			font.bold: true
 		}
 	}
