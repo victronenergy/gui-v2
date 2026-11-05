@@ -5,7 +5,9 @@
 # The module version, which a plugin's requiredBrandingVersion is checked against.
 # tools/brandingproperties.py reads these two lines. When adding a Branding
 # property, increase the minor version and tag the property with
-# REVISION(major, minor).
+# REVISION(major, minor). After a vX.Y.Z release includes this module, that
+# script rejects a new property that is not a newer version than the latest
+# such release. See .github/branding-plugins.md.
 set(VICTRON_BRANDING_VERSION_MAJOR 1)
 set(VICTRON_BRANDING_VERSION_MINOR 0)
 

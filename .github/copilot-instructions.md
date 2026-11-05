@@ -37,9 +37,11 @@ When asked to review code, you **must** immediately re-read the **entire** [Code
 - [Code Review](.github/code-review.md) — structured correctness, performance, and maintainability checklist for reviews
 - [Key Navigation](.github/key-navigation.md) — keyboard/button navigation system (must be supported by all features)
 - [Layout Modes](.github/layout-modes.md) — landscape and portrait mode implementation (must be supported by all features)
+- [Design system](.github/design-system.md) — how custom branding changes the Theme colors, which colors to use, when a palette color is allowed, how to add a color key, how to color images (must work with custom branding)
 - [Internationalisation](.github/i18n-l10n.md) — translations, dynamic language changes, POEditor workflow
 - [Device Settings](.github/device-settings.md) — settings data binding, access levels, ListSetting component hierarchy
 - [GUI Plugins](.github/gui-plugins.md) — plugin pages: Victron.GuiPlugins types, page and list item rules, data items, how plugin pages are hosted
+- [Custom branding plugins](.github/branding-plugins.md) — custom branding plugins: Branding.qml rules, colors, logos, fonts, versioning, generated property reference
 - [Unit Tests](.github/unit-tests.md) — test framework, creating tests, running tests, best practices
 - [Visual Regression Tests](.github/visual-regression-tests.md) — image-capture testing, comparison tool, verifying UI changes
 - [Benchmarking](.github/benchmarking.md) — animation performance measurement, QSG_RENDER_TIMING workflow
@@ -76,7 +78,7 @@ This tells Qt to write to stderr even without a detected console, making output 
 ## Key conventions
 
 - **QML imports**: Every QML file imports `Victron.VenusOS` (provides `Theme`, `Global`, `VenusOS` enums, `CommonWords`).
-- **Theme values**: Use `Theme.color_*`, `Theme.geometry_*`, `Theme.font_*` — never hardcode colors or sizes.
+- **Theme values**: Use `Theme.color_*`, `Theme.geometry_*`, `Theme.font_*` — never hardcode colors or sizes. Use role colors (`color_brand`, `color_info`, `color_success`, `color_warning`, `color_critical`, ...) rather than palette colors (`color_blue`, `color_red`, ...), except in the cases listed in [Design system](.github/design-system.md).
 - **Pages**: Extend `components/Page.qml`. Navigate with `Global.pageManager.pushPage()`/`popPage()`.
 - **List items**: Build settings UIs with types from `components/listitems/core/` (e.g. `ListSwitch`, `ListNavigation`, `ListSpinBox`).
 - **Data binding**: Use `VeQuickItem { uid: ... }` to bind to Venus OS data paths. Access aggregated data via `Global.system`, `Global.tanks`, etc.
