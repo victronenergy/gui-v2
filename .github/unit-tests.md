@@ -28,10 +28,12 @@ tests/
 ├── pluginpagestack/            — plugin page hosting, rejection, and cleanup on PageStack
 ├── splashsequence/             — splash phase transitions (no animations)
 ├── (many more...)
+├── plugincompiler/             — Python tests for tools/gui-v2-plugin-compiler.py (not a QML test)
+├── themepruner/                — Python tests for tools/themepruner.py (not a QML test)
 └── ui/                         — visual regression tests (separate system, not covered here)
 ```
 
-The Python tools have their own tests, which `tests/CMakeLists.txt` registers with ctest when a Python 3 interpreter is found: `tst_guipluginsapi` (fails if `tools/guiplugins-api.json` or the list of versions in `.github/gui-plugins.md` is out of date, if the `Victron.GuiPlugins` sources break the record, or if a new member would be saved without a newer module version; for an out-of-date record, regenerate both with `python tools/guipluginsapi.py`), `tst_plugincompiler` (the `requiredGuiPluginsVersion` that the plugin compiler writes) and `tst_moduledependencies` (fails if a module uses one that it must not). To run the compiler tests without ctest:
+The Python tools have their own tests, which `tests/CMakeLists.txt` registers with ctest when a Python 3 interpreter is found: `tst_guipluginsapi` (fails if `tools/guiplugins-api.json` or the list of versions in `.github/gui-plugins.md` is out of date, if the `Victron.GuiPlugins` sources break the record, or if a new member would be saved without a newer module version; for an out-of-date record, regenerate both with `python tools/guipluginsapi.py`), `tst_plugincompiler` (the plugin compiler's Branding import and name checks, the image and font files it packs, and the `requiredGuiPluginsVersion` and `Victron.Branding` version that it writes), `tst_brandingproperties` (fails if `tools/branding-properties.json` is out of date, or if a property was added after a release tag without a newer module version; regenerate it with `python tools/brandingproperties.py`), `tst_moduledependencies` (fails if a module uses one that it must not), and `tst_themepruner` (keeps commas inside color formulas). To run the compiler tests without ctest:
 
 ```bash
 python -m unittest discover -s tests/plugincompiler -p "test_*.py"

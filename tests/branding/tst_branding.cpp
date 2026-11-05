@@ -9,10 +9,10 @@
 #include <QLoggingCategory>
 #include <QFile>
 #include <QFontDatabase>
-#include <QPointer>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QPointer>
 #include <QtEndian>
 
 #include "testutils.h"
@@ -477,18 +477,23 @@ public:
 
 	// Runs the loader's checks on custom branding values, as though they came from the Branding file at
 	// brandingFileUrl. Fonts that font_files registers are removed again before this returns.
+	// valid is false when the loader ignores the custom branding integration.
 	Q_INVOKABLE QVariantMap checkAndResolveBrandingSnapshot(const QVariantMap &branding,
 			const QString &brandingFileUrl) const
 	{
 		BrandingData data = fromVariantMap(branding);
 		data.pluginName = TestPluginName;
 		QList<int> fontIds;
-		GuiPluginLoader::checkAndResolveBrandingSnapshot(&data, QUrl(brandingFileUrl), &fontIds);
+		const bool valid = GuiPluginLoader::checkAndResolveBrandingSnapshot(&data, QUrl(brandingFileUrl), &fontIds);
 		removeFonts(fontIds);
-		return {
-			{ QStringLiteral("data"), toVariantMap(data) },
+		QVariantMap result{
+			{ QStringLiteral("valid"), valid },
 			{ QStringLiteral("fontCount"), fontIds.count() },
 		};
+		if (valid) {
+			result.insert(QStringLiteral("data"), toVariantMap(data));
+		}
+		return result;
 	}
 
 	// The test Branding file data/<name>/Branding.qml, which CMakeLists.txt compiles into the
@@ -513,6 +518,32 @@ public:
 	Q_INVOKABLE QVariantMap brandingLoadedBeforeQtQuick() const
 	{
 		return m_brandingLoadedBeforeQtQuick;
+	}
+
+	// The Victron.Branding module version of this build, as "major.minor".
+	Q_INVOKABLE QString brandingModuleVersion() const
+	{
+		return QStringLiteral("%1.%2").arg(Victron::BrandingModuleMajorVersion)
+				.arg(Victron::BrandingModuleMinorVersion);
+	}
+
+	// Runs the loader's requiredBrandingVersion check on the plugin entry in pluginJson.
+	Q_INVOKABLE QString checkRequiredBrandingVersion(const QString &pluginJson) const
+	{
+		const QJsonObject plugin = QJsonDocument::fromJson(pluginJson.toUtf8()).object();
+		return GuiPluginLoader::checkRequiredBrandingVersion(plugin.value(QStringLiteral("requiredBrandingVersion")));
+	}
+
+	// The types of the integrations that the loader keeps from the plugin entry in pluginJson.
+	Q_INVOKABLE QVariantList integrationTypes(const QString &pluginJson) const
+	{
+		const QJsonObject plugin = QJsonDocument::fromJson(pluginJson.toUtf8()).object();
+		QVariantList types;
+		for (const Victron::VenusOS::GuiPluginIntegration &integration
+				: GuiPluginLoader::parseIntegrations(plugin, TestPluginName)) {
+			types.append(static_cast<int>(integration.type()));
+		}
+		return types;
 	}
 
 public slots:

@@ -21,6 +21,11 @@
 
 namespace Victron {
 
+// The version of the Victron.Branding module, set in cmake/ModuleBranding.cmake.
+// The loader checks each plugin's requiredBrandingVersion against it.
+inline constexpr int BrandingModuleMajorVersion = VICTRON_BRANDING_VERSION_MAJOR;
+inline constexpr int BrandingModuleMinorVersion = VICTRON_BRANDING_VERSION_MINOR;
+
 /*
 A plain-value copy of the properties that a Branding file set.
 
