@@ -12,7 +12,7 @@ function tankProperties(type) {
 		return {
 			icon: "qrc:/images/icon_battery_32.svg",
 			valueType: V.VenusOS.Gauges_ValueType_FallingPercentage,
-			color: V.Theme.color_ok,
+			color: V.Theme.color_blue, // palette blue: a data color, like the other tank fluids
 			//% "Battery"
 			name: qsTrId("gauges_battery")
 		}
@@ -103,6 +103,17 @@ function tankProperties(type) {
 	}
 	console.warn("Unknown tank type", type)
 	return {}
+}
+
+// level is Theme.Ok, Theme.Warning or Theme.Critical. Pass dark for the darkened color, used for
+// a gauge remainder or a historical icon. Anything that is not a warning or an alarm is info.
+// This is not a C++ Theme function, because a binding does not record Theme reads made inside a
+// C++ function, so the returned color would not follow a theme change.
+function statusColor(level, dark) {
+	const useDark = dark === true
+	return level === V.Theme.Warning ? (useDark ? V.Theme.color_darkWarning : V.Theme.color_warning)
+			: level === V.Theme.Critical ? (useDark ? V.Theme.color_darkCritical : V.Theme.color_critical)
+			: (useDark ? V.Theme.color_darkInfo : V.Theme.color_info)
 }
 
 function width(count, maxCount, availableSpace){

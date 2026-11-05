@@ -50,7 +50,7 @@ BaseAutoToggleSwitch {
 			radius: Theme.geometry_button_radius
 			flat: false
 			borderWidth: Theme.geometry_button_border_width
-			borderColor: root.enabled ? Theme.color_ok : Theme.color_font_disabled
+			borderColor: root.enabled ? Theme.color_brand : Theme.color_font_disabled
 			text: CommonWords.auto
 			checked: root.autoChecked
 			focus: true

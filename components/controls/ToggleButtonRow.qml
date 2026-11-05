@@ -37,7 +37,7 @@ FocusScope {
 		y: root.topInset
 		width: root.defaultBackgroundWidth
 		height: root.defaultBackgroundHeight
-		color: enabled ? Theme.color_ok : Theme.color_font_disabled
+		color: enabled ? Theme.color_brand : Theme.color_font_disabled
 		radius: Theme.geometry_button_radius
 	}
 
@@ -73,7 +73,7 @@ FocusScope {
 			when: root.useOffButtonColors
 			property: "backgroundColor"
 			value: offButton.enabled
-					? (offButton.down ? Theme.color_button_off_background : Theme.color_darkOk)
+					? (offButton.down ? Theme.color_button_off_background : Theme.color_darkBrand)
 					: (offButton.down ? Theme.color_button_off_background_disabled : Theme.color_background_disabled)
 		}
 	}

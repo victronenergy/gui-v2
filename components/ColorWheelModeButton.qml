@@ -31,7 +31,7 @@ Rectangle {
 		height: rgbColorIcon.width + ((parent.height - rgbColorIcon.height) / 2)
 		color: "transparent"
 		radius: width / 2
-		border.color: Theme.color_ok
+		border.color: Theme.color_brand
 		border.width: Theme.geometry_button_border_width
 	}
 

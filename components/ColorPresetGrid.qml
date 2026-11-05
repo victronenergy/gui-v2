@@ -106,7 +106,7 @@ FocusScope {
 				width: Theme.geometry_colorWheelDialog_preset_button_width
 				height: Theme.geometry_colorWheelDialog_preset_button_width
 				borderWidth: Theme.geometry_button_border_width
-				borderColor: presetDelegate.displayColor.valid ? Theme.color_ok
+				borderColor: presetDelegate.displayColor.valid ? Theme.color_brand
 							: enabled ? Theme.color_colorWheelDialog_preset_empty_button_border
 							: Theme.color_colorWheelDialog_preset_empty_button_border_disabled
 				radius: Theme.geometry_colorWheelDialog_preset_button_radius

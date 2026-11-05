@@ -130,8 +130,8 @@ ModalWarningDialog {
 				 ? "qrc:/images/icon_alarm_48.svg"
 				 : "qrc:/images/icon_checkmark_48.svg"
 	icon.color: dialogDoneOptions === VenusOS.ModalDialog_DoneOptions_OkAndCancel || _errorOccurred
-				? Theme.color_red
-				: Theme.color_green
+				? Theme.color_critical
+				: Theme.color_success
 
 	closePolicy: _busy ? Popup.NoAutoClose : (Popup.CloseOnEscape | Popup.CloseOnPressOutside)
 	footer.enabled: !_busy

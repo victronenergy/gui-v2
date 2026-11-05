@@ -107,7 +107,7 @@ LevelsTab {
 						right: parent.right
 						rightMargin: Theme.geometry_tankGaugeDialog_closeButton_rightMargin
 					}
-					color: Theme.color_ok
+					color: Theme.color_brand
 					source: "qrc:/images/icon_close_32.svg"
 				}
 

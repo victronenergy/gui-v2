@@ -35,17 +35,17 @@ IOChannelCardDelegateHeader {
 		case VenusOS.SwitchableOutput_Status_Off:
 			return Theme.color_font_secondary
 		case VenusOS.SwitchableOutput_Status_Powered:
-			return Theme.color_green
+			return Theme.color_success
 		case VenusOS.SwitchableOutput_Status_On:
 			if (root.switchableOutput.type === VenusOS.SwitchableOutput_Type_BilgePump) {
 				break
 			}
-			return Theme.color_green
+			return Theme.color_success
 		case VenusOS.SwitchableOutput_Status_ExternalControl:
-			return Theme.color_green
+			return Theme.color_success
 		case VenusOS.SwitchableOutput_Status_Bypassed:
 		case VenusOS.SwitchableOutput_Status_Disabled_On:
-			return Theme.color_orange
+			return Theme.color_warning
 		case VenusOS.SwitchableOutput_Status_OutputFault:
 		case VenusOS.SwitchableOutput_Status_Tripped:
 		case VenusOS.SwitchableOutput_Status_OverTemperature:
@@ -58,7 +58,7 @@ IOChannelCardDelegateHeader {
 		case VenusOS.SwitchableOutput_Status_Bypassed_OverTemperature:
 		case VenusOS.SwitchableOutput_Status_ExternalControl_Tripped:
 		case VenusOS.SwitchableOutput_Status_ExternalControl_OverTemperature:
-			return Theme.color_red
+			return Theme.color_critical
 		default:
 			break
 		}
@@ -69,11 +69,11 @@ IOChannelCardDelegateHeader {
 				&& ((root.switchableOutput.status & VenusOS.SwitchableOutput_Status_On) === VenusOS.SwitchableOutput_Status_On)) {
 			if ((root.switchableOutput.status & VenusOS.SwitchableOutput_Status_OverTemperature)
 				|| (root.switchableOutput.status & VenusOS.SwitchableOutput_Status_Disabled)) {
-				return Theme.color_red
+				return Theme.color_critical
 			} else {
-				return Theme.color_orange
+				return Theme.color_warning
 			}
 		}
-		return Theme.color_red
+		return Theme.color_critical
 	}
 }
