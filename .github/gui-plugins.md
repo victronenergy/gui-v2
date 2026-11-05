@@ -7,7 +7,7 @@ A GUI plugin adds pages to gui-v2, without changing gui-v2. A plugin can add a:
 
 A navigation page, a quick access pane, and a card in a quick access pane (integration types 3, 4 and 5) are not yet part of the plugin API. Plugin pages are written with the types of the `Victron.GuiPlugins` module, which gui-v2 keeps stable for plugins.
 
-This document is for OEM and third-party developers, and for AI agents that write or check a plugin. It is complete on its own: you do not need to read gui-v2's internals. Branding plugins, which change the GUI's colors, fonts and logos, are a separate kind of plugin and are not covered here.
+This document is for OEM and third-party developers, and for AI agents that write or check a plugin. It is complete on its own: you do not need to read gui-v2's internals. Custom branding plugins, which change the GUI's colors, fonts and logos, are a separate kind of plugin and are not covered here.
 
 Four example plugins show the rules in practice:
 
@@ -46,7 +46,7 @@ The compiler does not check these rules. A page that breaks them may work today,
 6. **Access levels.** Use `PluginAccessLevel.User`, `.Installer`, `.SuperUser` and `.Service` for `showAccessLevel` and `writeAccessLevel`.
 7. **Key navigation.** The GUI can be used with keys or buttons, as well as touch. The list item types handle this. In a `PluginListSetting`, handle key presses on the list item, for example with `Keys.onSpacePressed`. Those handlers run only while key navigation is active. Call `checkWriteAccessLevel()` before changing a setting.
 8. **Text.** For common words, such as "Status", "Voltage" or "On", use `PluginWords`: they are already translated, and change with the user's language. Translate other text with `qsTrId()`, with a `//% "Source text"` comment above it, and ship the translations in the plugin's own `.ts` files, as `examples/SimpleTrExample` does. See [Words and icons](#words-and-icons).
-9. **Colors and fonts.** Plugins cannot read the GUI's colors and fonts, which change with light and dark mode, the screen size, and OEM branding. The list item types draw their text with them, so let the list items draw text: set the list item's `text`, and its `caption` where it has one, rather than adding your own label. `PluginListSetting` has no `caption`. Draw icons with `PluginIconImage`, which colors them by purpose. Other images that your plugin ships must be visible on both light and dark backgrounds, as in `examples/DeviceListExample`.
+9. **Colors and fonts.** Plugins cannot read the GUI's colors and fonts, which change with light and dark mode, the screen size, and custom branding. The list item types draw their text with them, so let the list items draw text: set the list item's `text`, and its `caption` where it has one, rather than adding your own label. `PluginListSetting` has no `caption`. Draw icons with `PluginIconImage`, which colors them by purpose. Other images that your plugin ships must be visible on both light and dark backgrounds, as in `examples/DeviceListExample`.
 
 For example, a plugin settings page with a switch and a subpage:
 

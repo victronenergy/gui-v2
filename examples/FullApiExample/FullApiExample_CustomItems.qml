@@ -4,7 +4,7 @@ import Victron.GuiPlugins
 /*
 	List items with content of your own, built with PluginListSetting.
 
-	Plugins cannot read the GUI's colors, which change with light and dark mode and with OEM
+	Plugins cannot read the GUI's colors, which change with light and dark mode and with custom
 	branding. So the content here has no text of its own, as the list items draw their text, and uses
 	colors that can be seen on both light and dark backgrounds.
 */

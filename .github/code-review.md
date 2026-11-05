@@ -29,6 +29,7 @@ Structured checklist for reviewing changes to gui-v2. Items are ordered by prior
   - [2.q. Mock data synchronization](#2q-mock-data-synchronization)
   - [2.r. Platform-specific correctness](#2r-platform-specific-correctness)
   - [2.s. API design and encapsulation](#2s-api-design-and-encapsulation)
+  - [2.t. Theme colors and custom branding](#2t-theme-colors-and-custom-branding)
 - [3. Performance (medium priority)](#3-performance-medium-priority)
   - [3.a. GUI thread stalls](#3a-gui-thread-stalls)
   - [3.b. GUI thread execution pressure](#3b-gui-thread-execution-pressure)
@@ -309,6 +310,12 @@ See [Device Settings](.github/device-settings.md) for the access level system.
 2.s.iii. **Method constness changes**: When a method changes from `const` to non-`const` (or vice versa), verify no callers hold the object through a const pointer/reference. In QML-facing code this is rare, but C++ unit tests or helper functions may be affected.
 
 2.s.iv. **Ownership and lifetime ambiguity**: When a component accepts an externally-provided object via property (e.g., `property Item electronsParent`), the ownership boundary should be clear. Verify the component does not destroy, reparent, or retain the provided object beyond its own lifetime. Document who owns what.
+
+### 2.t. Theme colors and custom branding
+
+See [Design system](design-system.md) for the role colors and the allowed exceptions.
+
+2.t.i. **Role colors, not palette colors**: Controls, text, backgrounds, notifications and status must use role colors (`color_brand`, `color_info`, `color_success`, `color_warning`, `color_critical`, their dark and dim variants, `color_font_*`, `color_background_*`) or keys set to them, not palette colors such as `color_blue`, `color_red`, `color_orange`, `color_green`, `color_white` or the fixed grays. A palette color does not follow custom branding, so that part keeps Victron's colors, or becomes hard to read, under a custom branding. Text or icons drawn on a role color must use a key computed with `text_color_on()`, not a fixed `color_white`. Every new use of a palette color, whether in QML, JavaScript or a `Dark.json` / `Light.json` key, must match one of the exceptions in the design system guide (for example, a data color such as a tank fluid, which must not follow custom branding).
 
 ---
 
