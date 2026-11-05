@@ -236,6 +236,9 @@ tests/ui/
 ├── README.md                       — detailed API documentation
 ├── RecursivePageCapture.qml        — reusable recursive navigation component
 └── smoke/
+    ├── key-navigation/             — key navigation highlight
+    │   ├── key-navigation.json     — test configuration
+    │   └── tst_focus_highlight.qml — key navigation highlight on a nav bar button and a list item
     └── mock-maximal/               — smoke test using "maximal" mock config
         ├── mock-maximal.json       — test configuration
         ├── tst_brief.qml           — Brief page tests

@@ -75,13 +75,13 @@ ListItem {
 					font: root.font
 					visible: !isNaN(root.device.stateOfCharge)
 					valueColor: root.device.mode === VenusOS.Battery_Mode_Idle ? Theme.color_font_primary
-							: statusLevel === Theme.Critical ? Theme.color_red
-							: statusLevel === Theme.Warning ? Theme.color_orange
-							: Theme.color_green
+							: statusLevel === Theme.Critical ? Theme.color_critical
+							: statusLevel === Theme.Warning ? Theme.color_warning
+							: Theme.color_success
 					unitColor: root.device.mode === VenusOS.Battery_Mode_Idle ? Theme.color_font_secondary
-							: statusLevel === Theme.Critical ? Theme.color_red
-							: statusLevel === Theme.Warning ? Theme.color_orange
-							: Theme.color_green
+							: statusLevel === Theme.Critical ? Theme.color_critical
+							: statusLevel === Theme.Warning ? Theme.color_warning
+							: Theme.color_success
 
 					Layout.alignment: Qt.AlignTop
 				}

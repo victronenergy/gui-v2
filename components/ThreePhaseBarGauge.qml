@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Gauges
 
 Flow {
 	id: root
@@ -72,10 +73,10 @@ Flow {
 				width: parent.width - (phaseLabel.visible ? phaseLabel.width : 0)
 				height: parent.height
 				sourceComponent: CheapBarGauge {
-					foregroundColor: Theme.color_darkOk,phaseDelegate.feedingToGrid ? Theme.color_green : Theme.statusColorValue(valueStatus)
-					backgroundColor: Theme.color_darkOk,phaseDelegate.feedingToGrid ? Theme.color_darkGreen
-							: root.inOverviewWidget && valueStatus === Theme.Ok ? Theme.color_darkishBlue
-							: Theme.statusColorValue(valueStatus, true)
+					foregroundColor: phaseDelegate.feedingToGrid ? Theme.color_success : Gauges.statusColor(valueStatus)
+					backgroundColor: phaseDelegate.feedingToGrid ? Theme.color_darkSuccess
+							: root.inOverviewWidget && valueStatus === Theme.Ok ? Theme.color_darkishInfo
+							: Gauges.statusColor(valueStatus, true)
 					valueType: root.valueType
 					value: valueRange.valueAsRatio
 					orientation: root.orientation

@@ -5,6 +5,7 @@
 
 import QtQuick
 import Victron.VenusOS
+import Victron.Gauges
 
 // Displays measurements for one or more phases.
 // For OverviewWidget_Size_XS / S:
@@ -45,8 +46,8 @@ Flow {
 			readonly property bool feedingToGrid: root.inputMode && power < -1.0 // ignore noise values (close to zero)
 			readonly property int valueStatus: Theme.getValueStatus(valueRange.valueAsRatio * 100, root.valueType)
 			readonly property bool criticalOrWarning: valueStatus === Theme.Critical || valueStatus === Theme.Warning
-			readonly property color textColor: Theme.color_darkOk,feedingToGrid ? Theme.color_green
-					: criticalOrWarning ? Theme.statusColorValue(valueStatus)
+			readonly property color textColor: feedingToGrid ? Theme.color_success
+					: criticalOrWarning ? Gauges.statusColor(valueStatus)
 					: Theme.color_font_primary
 
 			width: root.widgetSize <= VenusOS.OverviewWidget_Size_S

@@ -7,6 +7,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls.impl as CP
 import Victron.VenusOS
+import Victron.Gauges
 
 Item {
 	id: gauges
@@ -52,8 +53,8 @@ Item {
 						startAngle: 0
 						endAngle: 270
 						value: loader.level
-						progressColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus)
-						remainderColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus, true)
+						progressColor: Gauges.statusColor(loader.gaugeStatus)
+						remainderColor: Gauges.statusColor(loader.gaugeStatus, true)
 						strokeWidth: gauges.strokeWidth
 						animationEnabled: gauges.animationEnabled
 						shineAnimationEnabled: Services.system.battery.mode === VenusOS.Battery_Mode_Charging
@@ -67,8 +68,8 @@ Item {
 						startAngle: 0
 						endAngle: 270
 						value: loader.level
-						progressColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus)
-						remainderColor: Theme.color_darkOk,Theme.statusColorValue(loader.gaugeStatus, true)
+						progressColor: Gauges.statusColor(loader.gaugeStatus)
+						remainderColor: Gauges.statusColor(loader.gaugeStatus, true)
 						strokeWidth: gauges.strokeWidth
 						animationEnabled: gauges.animationEnabled
 					}

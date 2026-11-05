@@ -30,13 +30,13 @@ T.ProgressBar {
 		width: root.availableWidth
 		height: implicitHeight
 		radius: Theme.geometry_progressBar_radius
-		color: Theme.color_darkOk
+		color: Theme.color_darkBrand
 
 		Rectangle {
 			id: highlightRect
 
 			height: Theme.geometry_progressBar_height
-			color: Theme.color_ok
+			color: Theme.color_brand
 			radius: Theme.geometry_progressBar_radius
 
 			Binding {

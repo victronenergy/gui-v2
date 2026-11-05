@@ -26,6 +26,7 @@ T.Dialog {
 	property real backgroundTopRadius: Theme.geometry_modalDialog_topCorners_radius
 	property real backgroundBottomRadius: Theme.geometry_modalDialog_bottomCorners_radius
 	property Item acceptButtonBackground
+	property var acceptButtonForegroundColor // var so that it can be left unset / undefined
 	property int dialogDoneOptions: VenusOS.ModalDialog_DoneOptions_SetAndCancel
 	property bool canAccept: true
 	property bool headerShowsTitles: true
@@ -303,7 +304,9 @@ T.Dialog {
 			}
 			focus: enabled && !rejectButton.enabled
 			font.pixelSize: Theme.font_dialog_acceptButton_size
-			color: checked ? Theme.color_white : Theme.color_font_primary
+			color: root.acceptButtonForegroundColor !== undefined ? root.acceptButtonForegroundColor
+				: checked ? Theme.color_button_down_text
+				: Theme.color_font_primary
 			spacing: 0
 			text: root.acceptText
 			enabled: root.canAccept

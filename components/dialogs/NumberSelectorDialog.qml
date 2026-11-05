@@ -86,7 +86,7 @@ ModalDialog {
 					id: alarmIcon
 					anchors.verticalCenter: parent.verticalCenter
 					source: "qrc:/images/icon_alarm_32.svg"
-					color: Theme.color_red
+					color: Theme.color_critical
 				}
 			}
 

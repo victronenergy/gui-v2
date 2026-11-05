@@ -151,7 +151,7 @@ DevicePage {
 						return ""
 					}
 				}
-				readonly property color textColor: value === 1 ? Theme.color_red : Theme.color_green
+				readonly property color textColor: value === 1 ? Theme.color_critical : Theme.color_success
 
 				uid: bindPrefix + "/Alarms/LowBattery"
 			}
