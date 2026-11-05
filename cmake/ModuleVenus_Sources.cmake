@@ -837,19 +837,15 @@ set(VictronVenusOS_RESOURCES
     images/camper/camper_nosolar_charging_light.svg
     images/camper/camper_nosolar_driving_light.svg
     images/camper/camper_nosolar_offgrid_light.svg
-    images/camper/camper_nosolar_parking_light.svg
     images/camper/camper_nosolar_charging_dark.svg
     images/camper/camper_nosolar_driving_dark.svg
     images/camper/camper_nosolar_offgrid_dark.svg
-    images/camper/camper_nosolar_parking_dark.svg
     images/camper/camper_solar_charging_light.svg
     images/camper/camper_solar_driving_light.svg
     images/camper/camper_solar_offgrid_light.svg
-    images/camper/camper_solar_parking_light.svg
     images/camper/camper_solar_charging_dark.svg
     images/camper/camper_solar_driving_dark.svg
     images/camper/camper_solar_offgrid_dark.svg
-    images/camper/camper_solar_parking_dark.svg
     images/camper/camper_device.svg
     images/color_wheel_rgb.png
     images/color_wheel_temperature.png

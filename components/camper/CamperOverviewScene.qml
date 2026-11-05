@@ -10,8 +10,7 @@ Item {
 
 	readonly property int scenarioCharging: 0
 	readonly property int scenarioDriving: 1
-	readonly property int scenarioParking: 2
-	readonly property int scenarioOffGrid: 3
+	readonly property int scenarioOffGrid: 2
 
 	property int scenario: scenarioOffGrid
 	property string gridShoreTitle: "Shore"
@@ -23,6 +22,7 @@ Item {
 	property string acLoadsTitle: "AC"
 
 	property bool lowBatteryAlarm: false
+	property bool acOutputCut: false
 	property bool solar: true
 	property bool generator: true
 	property real gridShorePower: NaN
@@ -51,7 +51,6 @@ Item {
 	readonly property bool _batteryFlowActive: _isActivePower(batteryPower, 60)
 	readonly property bool _batteryCharging: isFinite(batteryPower) && batteryPower >= 60
 	readonly property bool _batteryDischarging: isFinite(batteryPower) && batteryPower <= -60
-	readonly property bool _acCut: lowBatteryAlarm && !_gridShoreActive && !_generatorActive
 	readonly property bool _hubVisible: _solarActive
 			|| _alternatorActive
 			|| _gridShoreActive
@@ -66,16 +65,15 @@ Item {
 			|| _generatorActive
 			|| _batteryFlowActive
 	readonly property bool _flowBatteryToDc: _dcCardActive && _hubVisible
-	readonly property bool _flowHubToAc: _acLoadsActive && !_acCut
+	readonly property bool _flowHubToAc: _acLoadsActive && !acOutputCut
 	readonly property bool _flowHubToBattery: _batteryCharging && (_gridShoreActive || _generatorActive)
-	readonly property bool _flowBatteryToHub: _batteryDischarging && _acLoadsActive && !_acCut
+	readonly property bool _flowBatteryToHub: _batteryDischarging && _acLoadsActive && !acOutputCut
 	readonly property bool _flowGridToHub: _gridShoreActive
 	readonly property bool _flowGeneratorToHub: _generatorActive
 	readonly property bool _flowSolarToBattery: _solarActive
 	readonly property bool _flowAlternatorToBattery: _alternatorActive
 	readonly property string _scenarioImageName: scenario === scenarioCharging ? "charging"
 			: scenario === scenarioDriving ? "driving"
-			: scenario === scenarioParking ? "parking"
 			: "offgrid"
 
 	function _isActivePower(value, threshold) {
@@ -244,7 +242,7 @@ Item {
 			title: root.acLoadsTitle
 			value: root.acLoadsPower
 			active: root._acLoadsActive
-			alarm: root._acCut
+			alarm: root.acOutputCut
 			colorScheme: root.colorScheme
 		}
 

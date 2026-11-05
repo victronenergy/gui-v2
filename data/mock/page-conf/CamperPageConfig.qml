@@ -20,60 +20,82 @@ Item {
 	readonly property string _batteryServiceUid: "com.victronenergy.battery.ttyUSB1"
 	readonly property string _veBusServiceUid: "com.victronenergy.vebus.ttyS2"
 
+	// com.victronenergy.vebus/State values; the mock copies the vebus state to /SystemState/State.
+	readonly property int _stateFault: 2
+	readonly property int _stateBulk: 3
+	readonly property int _statePassthru: 8
+	readonly property int _stateInverting: 9
+	readonly property int _stateExternalControl: 252
+
 	readonly property var configs: [
 		{
 			name: "Shore charging",
-			source: VenusOS.AcInputs_InputSource_Shore,
+			source: VenusOS.AcInputs_InputSource_Shore, state: _stateBulk,
 			inputPower: 1850, batteryPower: 560, soc: 80, solar: 320, dc: 210, ac: 1080,
 		},
 		{
 			name: "Pass-through",
-			source: VenusOS.AcInputs_InputSource_Shore,
+			source: VenusOS.AcInputs_InputSource_Shore, state: _statePassthru,
+			inputPower: 1080, batteryPower: 0, soc: 100, dc: 210, ac: 1080,
+		},
+		{
+			name: "Shore charging, external control",
+			source: VenusOS.AcInputs_InputSource_Shore, state: _stateExternalControl, inverterChargerPower: 560,
+			inputPower: 1850, batteryPower: 560, soc: 80, solar: 320, dc: 210, ac: 1080,
+		},
+		{
+			name: "Pass-through, external control",
+			source: VenusOS.AcInputs_InputSource_Shore, state: _stateExternalControl, inverterChargerPower: 0,
 			inputPower: 1080, batteryPower: 0, soc: 100, dc: 210, ac: 1080,
 		},
 		{
 			name: "Grid charging",
-			source: VenusOS.AcInputs_InputSource_Grid,
+			source: VenusOS.AcInputs_InputSource_Grid, state: _stateBulk,
 			inputPower: 1850, batteryPower: 560, soc: 80, dc: 210, ac: 1080,
 		},
 		{
 			name: "Driving",
-			source: VenusOS.AcInputs_InputSource_Inverting,
+			source: VenusOS.AcInputs_InputSource_Inverting, state: _stateInverting,
 			alternatorState: 4, alternatorPower: 620, batteryPower: 480, soc: 60, solar: 320, dc: 210,
 		},
 		{
-			name: "Parked",
-			source: VenusOS.AcInputs_InputSource_Inverting,
+			name: "Off-grid, discharging",
+			source: VenusOS.AcInputs_InputSource_Inverting, state: _stateInverting,
 			alternatorState: 0, batteryPower: -780, soc: 50, solar: 320, dc: 210, ac: 890,
 		},
 		{
 			name: "Off-grid, discharging (no alternator state)",
-			source: VenusOS.AcInputs_InputSource_Inverting,
+			source: VenusOS.AcInputs_InputSource_Inverting, state: _stateInverting,
 			batteryPower: -780, soc: 50, solar: 320, dc: 210, ac: 890,
 		},
 		{
-			name: "Generator running",
-			source: VenusOS.AcInputs_InputSource_Generator,
+			name: "Off-grid, generator running",
+			source: VenusOS.AcInputs_InputSource_Generator, state: _stateBulk,
 			inputPower: 2600, batteryPower: 900, soc: 40, dc: 210, ac: 1400,
 		},
 		{
 			name: "Solar only",
-			source: VenusOS.AcInputs_InputSource_Inverting,
+			source: VenusOS.AcInputs_InputSource_Inverting, state: _stateInverting,
 			alternatorState: 0, noGenerator: true, batteryPower: 300, soc: 80, solar: 620, dc: 210, ac: 110,
 		},
 		{
-			name: "Low battery alarm",
-			source: VenusOS.AcInputs_InputSource_Inverting,
-			alternatorState: 0, lowSocAlarm: 2, batteryPower: -320, soc: 12, solar: 0, dc: 320, ac: 0,
+			name: "Low battery alarm, AC output cut",
+			source: VenusOS.AcInputs_InputSource_Inverting, state: _stateFault,
+			alternatorState: 0, lowSocAlarm: 2, veBusLowBatteryAlarm: 2, batteryPower: -320, soc: 12, solar: 0, dc: 320, ac: 0,
+		},
+		{
+			name: "Low battery alarm, still inverting",
+			source: VenusOS.AcInputs_InputSource_Inverting, state: _stateInverting,
+			alternatorState: 0, lowSocAlarm: 2, batteryPower: -520, soc: 12, solar: 0, dc: 320, ac: 200,
 		},
 		{
 			name: "No solar panels",
-			source: VenusOS.AcInputs_InputSource_Shore,
+			source: VenusOS.AcInputs_InputSource_Shore, state: _stateBulk,
 			noSolar: true, inputPower: 1850, batteryPower: 560, soc: 80, dc: 210, ac: 1080,
 		},
 		{
 			name: "No solar panels, no generator",
-			source: VenusOS.AcInputs_InputSource_Shore,
+			source: VenusOS.AcInputs_InputSource_Shore, state: _stateBulk,
 			noSolar: true, noGenerator: true, inputPower: 1850, batteryPower: 560, soc: 80, dc: 210, ac: 1080,
 		},
 		{
@@ -103,6 +125,10 @@ Item {
 		MockManager.setValue(systemUid + "/Ac/In/1/Source", config.noGenerator
 				? VenusOS.AcInputs_InputSource_NotAvailable : VenusOS.AcInputs_InputSource_Generator)
 		MockManager.setValue(systemUid + "/Ac/In/1/Connected", generatorActive ? 1 : 0)
+		MockManager.setValue(_veBusServiceUid + "/State", config.state ?? undefined)
+		// The mock sums the inverter/charger DC power into /Dc/InverterCharger/Power.
+		MockManager.setValue(_veBusServiceUid + "/Dc/0/Power", config.inverterChargerPower ?? config.batteryPower ?? undefined)
+		MockManager.setValue(_veBusServiceUid + "/Alarms/LowBattery", config.veBusLowBatteryAlarm ?? 0)
 		MockManager.setValue(_veBusServiceUid + "/Ac/ActiveIn/L1/P", config.inputPower ?? undefined)
 		MockManager.setValue(_veBusServiceUid + "/Ac/ActiveIn/L2/P", undefined)
 		MockManager.setValue(_veBusServiceUid + "/Ac/ActiveIn/L3/P", undefined)

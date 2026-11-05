@@ -30,9 +30,11 @@ SwipeViewPage {
 		colorScheme: Theme.colorScheme === Theme.Light ? 0 : 1
 
 		activeInputSource: Services.acInputs.activeInSource
-		acInputConnected: Services.acInputs.input1Info.connected || Services.acInputs.input2Info.connected
+		systemState: systemStateItem.valid ? systemStateItem.value : -1
+		inverterChargerPower: inverterChargerPowerItem.valid ? inverterChargerPowerItem.value : NaN
 		alternatorState: alternatorStateItem.valid ? alternatorStateItem.value : -1
 		lowSocAlarm: lowSocAlarmItem.valid ? lowSocAlarmItem.value : 0
+		veBusLowBatteryAlarm: veBusLowBatteryAlarmItem.valid ? veBusLowBatteryAlarmItem.value : 0
 
 		solarPresent: Services.solar.inputCount > 0
 		generatorPresent: !!root._generatorInput
@@ -63,6 +65,21 @@ SwipeViewPage {
 	DcMeterDeviceModel {
 		id: alternatorModel
 		serviceTypes: ["alternator"]
+	}
+
+	VeQuickItem {
+		id: systemStateItem
+		uid: Services.system.serviceUid + "/SystemState/State"
+	}
+
+	VeQuickItem {
+		id: inverterChargerPowerItem
+		uid: Services.system.serviceUid + "/Dc/InverterCharger/Power"
+	}
+
+	VeQuickItem {
+		id: veBusLowBatteryAlarmItem
+		uid: Services.system.veBus.serviceUid ? Services.system.veBus.serviceUid + "/Alarms/LowBattery" : ""
 	}
 
 	VeQuickItem {

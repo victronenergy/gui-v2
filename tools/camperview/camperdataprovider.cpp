@@ -50,21 +50,25 @@ QVariantMap CamperDataProvider::readData()
 #else
 	static const QList<QVariantMap> samples = {
 		// Shore charging
-		{ { "activeInputSource", 3 }, { "acInputConnected", true }, { "activeInputPower", 1800 },
-		  { "batteryPower", 560 }, { "batterySoc", 82 }, { "solarPower", 300 },
-		  { "dcLoadsPower", 220 }, { "acLoadsPower", 900 }, { "alternatorState", 0 } },
+		{ { "activeInputSource", 3 }, { "systemState", 3 }, { "activeInputPower", 1800 },
+		  { "batteryPower", 560 }, { "batterySoc", 82 }, { "solarPresent", true }, { "solarPower", 300 },
+		  { "generatorPresent", true }, { "dcLoadsPower", 220 }, { "acLoadsPower", 900 },
+		  { "alternatorState", 0 } },
 		// Driving
-		{ { "activeInputSource", 240 }, { "alternatorState", 4 }, { "alternatorPower", 420 },
-		  { "batteryPower", 150 }, { "batterySoc", 66 }, { "solarPower", 560 },
+		{ { "activeInputSource", 240 }, { "systemState", 9 }, { "alternatorState", 4 },
+		  { "alternatorPower", 420 }, { "batteryPower", 150 }, { "batterySoc", 66 },
+		  { "solarPresent", true }, { "solarPower", 560 }, { "generatorPresent", true },
 		  { "dcLoadsPower", 220 }, { "acLoadsPower", 0 } },
-		// Parked
-		{ { "activeInputSource", 240 }, { "alternatorState", 0 }, { "alternatorPower", 0 },
-		  { "batteryPower", -400 }, { "batterySoc", 58 }, { "solarPower", 340 },
+		// Off-grid, discharging
+		{ { "activeInputSource", 240 }, { "systemState", 9 }, { "alternatorState", 0 },
+		  { "alternatorPower", 0 }, { "batteryPower", -400 }, { "batterySoc", 58 },
+		  { "solarPresent", true }, { "solarPower", 340 }, { "generatorPresent", true },
 		  { "dcLoadsPower", 220 }, { "acLoadsPower", 520 } },
-		// Low battery alarm
-		{ { "activeInputSource", 240 }, { "alternatorState", 0 }, { "alternatorPower", 0 },
-		  { "lowSocAlarm", 2 }, { "batteryPower", -300 }, { "batterySoc", 9 }, { "solarPower", 0 },
-		  { "dcLoadsPower", 220 }, { "acLoadsPower", 0 } },
+		// Low battery alarm, with the inverter/charger cutting the AC output
+		{ { "activeInputSource", 240 }, { "systemState", 2 }, { "alternatorState", 0 },
+		  { "alternatorPower", 0 }, { "lowSocAlarm", 2 }, { "veBusLowBatteryAlarm", 2 },
+		  { "batteryPower", -300 }, { "batterySoc", 9 }, { "solarPresent", true }, { "solarPower", 0 },
+		  { "generatorPresent", true }, { "dcLoadsPower", 220 }, { "acLoadsPower", 0 } },
 	};
 	const QVariantMap sample = samples.at(m_sampleIndex);
 	m_sampleIndex = (m_sampleIndex + 1) % samples.count();

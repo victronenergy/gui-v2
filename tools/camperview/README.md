@@ -33,10 +33,12 @@ window.camperViewData = {
   colorScheme: "light",      // "light" | "dark"
 
   activeInputSource: 3,      // com.victronenergy.system/Ac/ActiveIn/Source
-  acInputConnected: true,    // whether any com.victronenergy.system/Ac/In/x/Connected is 1
+  systemState: 3,            // com.victronenergy.system/SystemState/State
+  inverterChargerPower: 560, // com.victronenergy.system/Dc/InverterCharger/Power
   alternatorState: 0,        // com.victronenergy.alternator/State; omit if there is no alternator
   lowSocAlarm: 0,            // /Alarms/LowSoc of the active battery service
-  solarPresent: true,        // whether the installation has solar panels
+  veBusLowBatteryAlarm: 0,   // com.victronenergy.vebus/Alarms/LowBattery
+  solarPresent: true,        // whether there is a com.victronenergy.solarcharger service
   generatorPresent: true,    // whether any com.victronenergy.system/Ac/In/x/Source is 2
 
   // Values in Watts, except for batterySoc, which is a percentage. Omit any that are not available.

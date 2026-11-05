@@ -26,11 +26,13 @@ Window {
 		colorScheme: root._data.colorScheme === "dark" ? 1 : 0
 
 		activeInputSource: root._data.activeInputSource ?? 0
-		acInputConnected: root._data.acInputConnected ?? false
+		systemState: root._data.systemState ?? -1
+		inverterChargerPower: root._number(root._data.inverterChargerPower)
 		alternatorState: root._data.alternatorState ?? -1
 		lowSocAlarm: root._data.lowSocAlarm ?? 0
-		solarPresent: root._data.solarPresent ?? true
-		generatorPresent: root._data.generatorPresent ?? true
+		veBusLowBatteryAlarm: root._data.veBusLowBatteryAlarm ?? 0
+		solarPresent: root._data.solarPresent ?? false
+		generatorPresent: root._data.generatorPresent ?? false
 
 		activeInputPower: root._number(root._data.activeInputPower)
 		generatorPower: root._number(root._data.generatorPower)

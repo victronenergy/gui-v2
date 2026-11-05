@@ -16,13 +16,14 @@ Item {
 	property int colorScheme: 0
 
 	property alias activeInputSource: stateModel.activeInputSource
-	property alias acInputConnected: stateModel.acInputConnected
+	property alias systemState: stateModel.systemState
+	property alias inverterChargerPower: stateModel.inverterChargerPower
 	property alias alternatorState: stateModel.alternatorState
 	property alias lowSocAlarm: stateModel.lowSocAlarm
+	property alias veBusLowBatteryAlarm: stateModel.veBusLowBatteryAlarm
+	property alias solarPresent: stateModel.solarPresent
+	property alias generatorPresent: stateModel.generatorPresent
 	readonly property alias state: stateModel
-
-	property bool solarPresent: true
-	property bool generatorPresent: true
 
 	property real activeInputPower: NaN
 	property real generatorPower: NaN
@@ -43,8 +44,6 @@ Item {
 
 	CamperStateModel {
 		id: stateModel
-
-		batteryPower: root.batteryPower
 	}
 
 	CamperOverviewScene {
@@ -53,6 +52,7 @@ Item {
 		colorScheme: root.colorScheme
 		scenario: stateModel.scenario
 		lowBatteryAlarm: stateModel.lowBatteryAlarm
+		acOutputCut: stateModel.acOutputCut
 
 		gridShoreTitle: stateModel.activeInputSource === stateModel.sourceGrid ? root.gridTitle : root.shoreTitle
 		gridShoreIsShore: stateModel.activeInputSource !== stateModel.sourceGrid
@@ -62,8 +62,8 @@ Item {
 		dcLoadsTitle: root.dcLoadsTitle
 		acLoadsTitle: root.acLoadsTitle
 
-		solar: root.solarPresent
-		generator: root.generatorPresent
+		solar: stateModel.solarPresent
+		generator: stateModel.generatorPresent
 
 		gridShorePower: stateModel.externalAcInput ? root.activeInputPower : NaN
 		generatorPower: root.generatorPower
