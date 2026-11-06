@@ -887,6 +887,31 @@
       <source>SCS - Shared current sense</source>
       <translation>SCS - Gemeinsamer Stromsensor</translation>
     </message>
+    <message id="common_words_watch_app">
+      <location filename="../../components/CommonWords.qml" line="655"/>
+      <source>Watch app</source>
+      <translation>Watch-App</translation>
+    </message>
+    <message id="iochannel_showui_custom_local_caption">
+      <location filename="../../components/listitems/ListIOChannelShowDetails.qml" line="89"/>
+      <source>GX screen and local LAN</source>
+      <translation>GX-Bildschirm und lokales LAN</translation>
+    </message>
+    <message id="iochannel_showui_custom_vrm_caption">
+      <location filename="../../components/listitems/ListIOChannelShowDetails.qml" line="98"/>
+      <source>VRM Portal</source>
+      <translation>VRM Portal</translation>
+    </message>
+    <message id="iochannel_showui_custom_watch_caption">
+      <location filename="../../components/listitems/ListIOChannelShowDetails.qml" line="107"/>
+      <source>Victron watch app</source>
+      <translation>Victron Watch-App</translation>
+    </message>
+    <message id="iochannel_showui_note">
+      <location filename="../../components/listitems/ListIOChannelShowDetails.qml" line="116"/>
+      <source>Choose where this switch can be operated. The switch keeps working when its control is hidden.</source>
+      <translation>Wählen Sie, wo dieser Schalter bedient werden kann. Der Schalter funktioniert weiter, wenn sein Bedienelement ausgeblendet ist.</translation>
+    </message>
     <message id="settings_dvcc_scs_status">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="138"/>
       <source>SCS status</source>
@@ -1612,6 +1637,11 @@ Verwendung, sofern nicht vom Energieversorger untersagt.</translation>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="53"/>
       <source>Above minimum SOC only</source>
       <translation>Nur oberhalb des Mindest-SoC</translation>
+    </message>
+    <message id="common_words_always">
+      <location filename="../../components/CommonWords.qml" line="87"/>
+      <source>Always</source>
+      <translation>Immer</translation>
     </message>
     <message id="iochannel_showui_always">
       <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="18"/>
@@ -7461,6 +7491,11 @@ Möchtest Sie fortfahren?</translation>
       <source>Integrations</source>
       <translation type="unfinished">Integrationen</translation>
     </message>
+    <message id="common_words_vrm">
+      <location filename="../../components/CommonWords.qml" line="649"/>
+      <source>VRM</source>
+      <translation>VRM</translation>
+    </message>
     <message id="pagesettingssupportstate_integrations">
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="443"/>
       <source>Integrations</source>
@@ -11526,6 +11561,12 @@ Bitte aktualisieren Sie auf die neueste Firmware, um diese Einstellungen anpasse
       <source>These settings cannot currently be changed because auto-start is enabled.</source>
       <translation>Diese Einstellungen können derzeit nicht geändert werden, da der Autostart aktiviert ist.</translation>
     </message>
+    <message id="common_words_local">
+      <location filename="../../components/CommonWords.qml" line="327"/>
+      <source>Local</source>
+      <extracomment>Local, as in: not remote</extracomment>
+      <translation>Lokal</translation>
+    </message>
     <message id="settings_tz_local">
       <location filename="../../pages/settings/PageTzInfo.qml" line="88"/>
       <source>Local</source>
@@ -11797,6 +11838,11 @@ Bitte aktualisieren Sie auf die neueste Firmware, um diese Einstellungen anpasse
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
       <source>Button | Outputs → Toggle and dim</source>
       <translation>Taster | Ausgänge → Umschalten und dimmen</translation>
+    </message>
+    <message id="settings_shelly_integration">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="79"/>
+      <source>Enable Shelly integration</source>
+      <translation>Shelly-Integration aktivieren</translation>
     </message>
     <message id="pagesettingssystem_automate_controllable_devices">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="61"/>

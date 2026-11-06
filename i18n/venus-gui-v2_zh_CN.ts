@@ -887,6 +887,31 @@
       <source>SCS - Shared current sense</source>
       <translation>SCS 共用电流感应</translation>
     </message>
+    <message id="common_words_watch_app">
+      <location filename="../../components/CommonWords.qml" line="655"/>
+      <source>Watch app</source>
+      <translation>手表 App</translation>
+    </message>
+    <message id="iochannel_showui_custom_local_caption">
+      <location filename="../../components/listitems/ListIOChannelShowDetails.qml" line="89"/>
+      <source>GX screen and local LAN</source>
+      <translation>GX 屏幕和局域网 (LAN)</translation>
+    </message>
+    <message id="iochannel_showui_custom_vrm_caption">
+      <location filename="../../components/listitems/ListIOChannelShowDetails.qml" line="98"/>
+      <source>VRM Portal</source>
+      <translation>VRM端口</translation>
+    </message>
+    <message id="iochannel_showui_custom_watch_caption">
+      <location filename="../../components/listitems/ListIOChannelShowDetails.qml" line="107"/>
+      <source>Victron watch app</source>
+      <translation>Victron 手表 App</translation>
+    </message>
+    <message id="iochannel_showui_note">
+      <location filename="../../components/listitems/ListIOChannelShowDetails.qml" line="116"/>
+      <source>Choose where this switch can be operated. The switch keeps working when its control is hidden.</source>
+      <translation>选择可操作此开关的位置。隐藏控制控件后，开关仍会继续工作。</translation>
+    </message>
     <message id="settings_dvcc_scs_status">
       <location filename="../../pages/settings/PageSettingsDvcc.qml" line="138"/>
       <source>SCS status</source>
@@ -1612,6 +1637,11 @@ Use unless prohibited by the utility provider.</source>
       <location filename="../../pages/settings/PageSettingsHub4Peakshaving.qml" line="53"/>
       <source>Above minimum SOC only</source>
       <translation>只在最小SOC以上</translation>
+    </message>
+    <message id="common_words_always">
+      <location filename="../../components/CommonWords.qml" line="87"/>
+      <source>Always</source>
+      <translation>总是</translation>
     </message>
     <message id="iochannel_showui_always">
       <location filename="../../components/listitems/ListIOChannelShowRadioButtonGroup.qml" line="18"/>
@@ -7460,6 +7490,11 @@ Do you want to continue?</source>
       <source>Integrations</source>
       <translation type="unfinished">集成</translation>
     </message>
+    <message id="common_words_vrm">
+      <location filename="../../components/CommonWords.qml" line="649"/>
+      <source>VRM</source>
+      <translation>VRM</translation>
+    </message>
     <message id="pagesettingssupportstate_integrations">
       <location filename="../../pages/settings/PageSettingsSupportStatus.qml" line="443"/>
       <source>Integrations</source>
@@ -11524,6 +11559,12 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <source>These settings cannot currently be changed because auto-start is enabled.</source>
       <translation>由于已启用自动启动，当前无法更改这些设置。</translation>
     </message>
+    <message id="common_words_local">
+      <location filename="../../components/CommonWords.qml" line="327"/>
+      <source>Local</source>
+      <extracomment>Local, as in: not remote</extracomment>
+      <translation>本地</translation>
+    </message>
     <message id="settings_tz_local">
       <location filename="../../pages/settings/PageTzInfo.qml" line="88"/>
       <source>Local</source>
@@ -11795,6 +11836,11 @@ Please update to the latest firmware to be able to adjust these settings.</sourc
       <location filename="../../pages/settings/devicelist/iochannel/PageGenericInput.qml" line="81"/>
       <source>Button | Outputs → Toggle and dim</source>
       <translation>按钮 | 输出 → 切换并调光</translation>
+    </message>
+    <message id="settings_shelly_integration">
+      <location filename="../../pages/settings/PageSettingsShelly.qml" line="79"/>
+      <source>Enable Shelly integration</source>
+      <translation>启用 Shelly 集成</translation>
     </message>
     <message id="pagesettingssystem_automate_controllable_devices">
       <location filename="../../pages/settings/PageSettingsSystem.qml" line="61"/>
