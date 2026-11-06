@@ -10,6 +10,7 @@ set(VictronUiTest_QML_MODULE_SOURCES
     tests/ui/smoke/mock-maximal/tst_notifications.qml
     tests/ui/smoke/mock-maximal/tst_overview.qml
     tests/ui/smoke/mock-maximal/tst_settings.qml
+    tests/ui/smoke/mock-rv/tst_rv.qml
     tests/ui/target-page/tst_target_page.qml
 )
 
@@ -18,4 +19,5 @@ SET(VictronUiTest_QML_MODULE_RESOURCES
     tests/ui/benchmark/pages/pages.json
     tests/ui/smoke/generic-capture/generic-capture.json
     tests/ui/smoke/mock-maximal/mock-maximal.json
+    tests/ui/smoke/mock-rv/mock-rv.json
 )

@@ -140,6 +140,13 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/VeQItemFilteredServiceModel.qml
     components/ViewGradient.qml
     components/WasmVirtualKeyboardHandler.qml
+    components/camper/CamperBattery.qml
+    components/camper/CamperDevice.qml
+    components/camper/CamperDomainCard.qml
+    components/camper/CamperFlowArrow.qml
+    components/camper/CamperOverviewScene.qml
+    components/camper/CamperOverviewView.qml
+    components/camper/CamperStateModel.qml
     components/controls/AutoToggleButton.qml
     components/controls/Button.qml
     components/controls/CaptionLabel.qml
@@ -371,6 +378,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/BriefPage_Landscape.qml
     pages/BriefPage_Portrait.qml
     pages/BriefPage.qml
+    pages/CamperPage.qml
     pages/ControlCardsPage.qml
     pages/DialogLayer.qml
     pages/EnvironmentTab.qml
@@ -809,6 +817,23 @@ set(VictronVenusOS_RESOURCES
     images/icon_system_32.svg
     images/icon_vrm_32.svg
     images/brief.svg
+    images/camper/camper_nosolar_charging_light.svg
+    images/camper/camper_nosolar_driving_light.svg
+    images/camper/camper_nosolar_offgrid_light.svg
+    images/camper/camper_nosolar_parking_light.svg
+    images/camper/camper_nosolar_charging_dark.svg
+    images/camper/camper_nosolar_driving_dark.svg
+    images/camper/camper_nosolar_offgrid_dark.svg
+    images/camper/camper_nosolar_parking_dark.svg
+    images/camper/camper_solar_charging_light.svg
+    images/camper/camper_solar_driving_light.svg
+    images/camper/camper_solar_offgrid_light.svg
+    images/camper/camper_solar_parking_light.svg
+    images/camper/camper_solar_charging_dark.svg
+    images/camper/camper_solar_driving_dark.svg
+    images/camper/camper_solar_offgrid_dark.svg
+    images/camper/camper_solar_parking_dark.svg
+    images/camper/camper_device.svg
     images/color_wheel_rgb.png
     images/color_wheel_temperature.png
     images/controlcards-no-devices.svg

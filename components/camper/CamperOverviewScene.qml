@@ -1,0 +1,365 @@
+/*
+** Copyright (C) 2026 Victron Energy B.V.
+** See LICENSE.txt for license information.
+*/
+
+import QtQuick
+
+Item {
+	id: root
+
+	readonly property int scenarioCharging: 0
+	readonly property int scenarioDriving: 1
+	readonly property int scenarioParking: 2
+	readonly property int scenarioOffGrid: 3
+
+	property int scenario: scenarioOffGrid
+	property string gridShoreTitle: "Shore"
+	property bool gridShoreIsShore: false
+	property string solarTitle: "PV"
+	property string generatorTitle: "Generator"
+	property string alternatorTitle: "Alternator"
+	property string dcLoadsTitle: "DC"
+	property string acLoadsTitle: "AC"
+
+	property bool lowBatteryAlarm: false
+	property bool solar: true
+	property bool generator: true
+	property real gridShorePower: NaN
+	property real generatorPower: NaN
+	property real solarPower: NaN
+	property real batteryPower: NaN
+	property real batterySoc: NaN
+	property real alternatorPower: NaN
+	property real dcLoadsPower: NaN
+	property real acLoadsPower: NaN
+
+	property int colorScheme: 0
+	readonly property color _pageBackground: colorScheme === 0 ? lightColorBackground : darkColorBackground
+	readonly property color lightColorBackground: "#E9ECEF"
+	readonly property color darkColorBackground: "#0A0C0E"
+
+	readonly property color _flowColor: colorScheme === 0 ? "#005FBE" : "#66B0FF"
+	readonly property bool _portrait: root.height > root.width
+
+	readonly property bool _gridShoreActive: _isActivePower(gridShorePower)
+	readonly property bool _generatorActive: _isActivePower(root.generatorPower)
+	readonly property bool _solarActive: _isActivePower(root.solarPower)
+	readonly property bool _alternatorActive: _isActivePower(root.alternatorPower)
+	readonly property bool _dcLoadsActive: _isActivePower(root.dcLoadsPower)
+	readonly property bool _acLoadsActive: _isActivePower(root.acLoadsPower)
+	readonly property bool _batteryFlowActive: _isActivePower(batteryPower, 60)
+	readonly property bool _batteryCharging: isFinite(batteryPower) && batteryPower >= 60
+	readonly property bool _batteryDischarging: isFinite(batteryPower) && batteryPower <= -60
+	readonly property bool _acCut: lowBatteryAlarm && !_gridShoreActive && !_generatorActive
+	readonly property bool _hubVisible: _solarActive
+			|| _alternatorActive
+			|| _gridShoreActive
+			|| _generatorActive
+			|| _batteryFlowActive
+			|| _acLoadsActive
+			|| _dcLoadsActive
+	readonly property bool _dcCardActive: _dcLoadsActive
+			|| _solarActive
+			|| _gridShoreActive
+			|| _alternatorActive
+			|| _generatorActive
+			|| _batteryFlowActive
+	readonly property bool _flowBatteryToDc: _dcCardActive && _hubVisible
+	readonly property bool _flowHubToAc: _acLoadsActive && !_acCut
+	readonly property bool _flowHubToBattery: _batteryCharging && (_gridShoreActive || _generatorActive)
+	readonly property bool _flowBatteryToHub: _batteryDischarging && _acLoadsActive && !_acCut
+	readonly property bool _flowGridToHub: _gridShoreActive
+	readonly property bool _flowGeneratorToHub: _generatorActive
+	readonly property bool _flowSolarToBattery: _solarActive
+	readonly property bool _flowAlternatorToBattery: _alternatorActive
+	readonly property string _scenarioImageName: scenario === scenarioCharging ? "charging"
+			: scenario === scenarioDriving ? "driving"
+			: scenario === scenarioParking ? "parking"
+			: "offgrid"
+
+	function _isActivePower(value, threshold) {
+		const effectiveThreshold = isFinite(threshold) ? threshold
+				: 30
+		return isFinite(value) && Math.abs(value) >= effectiveThreshold
+	}
+
+	function _boundedX(x, width, containerWidth) {
+		return Math.max(0, Math.min(containerWidth - width, x))
+	}
+
+	function _boundedY(y, height, containerHeight) {
+		return Math.max(0, Math.min(containerHeight - height, y))
+	}
+
+	Rectangle {
+		anchors.fill: parent
+		color: root._pageBackground
+	}
+	Item {
+		id: sceneLayer
+
+		anchors {
+			fill: parent
+			leftMargin: root._portrait ? 10
+				: 26
+			rightMargin: root._portrait ? 10
+				: 26
+			topMargin: root._portrait ? 12
+				: 16
+			bottomMargin: root._portrait ? 12
+				: 16
+		}
+
+		readonly property real _camperAspect: 335 / 149
+		readonly property real _camperWidth: Math.min(
+				width * (root._portrait ? 0.98 : 0.92),
+				height * _camperAspect * (root._portrait ? 0.88 : 0.94))
+		readonly property real _camperHeight: _camperWidth / _camperAspect
+		readonly property real _cardWidth: root._portrait ? Math.max(88, _camperWidth * 0.21)
+				: Math.max(122, _camperWidth * 0.175)
+		readonly property real _cardExtraWidth: root._portrait ? Math.max(124, _camperWidth * 0.30)
+				: Math.max(150, _camperWidth * 0.275)
+		readonly property real _cardHeight: Math.round(_cardWidth * 0.62)
+		readonly property real _hubSize: Math.max(34, Math.round(_cardHeight * 0.75))
+		readonly property real _batteryWidth: Math.max(70, Math.round(_cardWidth * 0.78))
+		readonly property real _batteryHeight: Math.max(28, Math.round(_cardHeight * 0.52))
+		readonly property real _nodeGap: Math.max(8, Math.round(_cardHeight * 0.14))
+
+		Image {
+			id: camperImage
+
+			z: 0
+			width: sceneLayer._camperWidth
+			height: sceneLayer._camperHeight
+			anchors.centerIn: parent
+			source: "qrc:/images/camper/camper_%1_%2_%3.svg"
+					.arg(root.solar ? "solar" : "nosolar")
+					.arg(root._scenarioImageName)
+					.arg(root.colorScheme === 0 ? "light" : "dark")
+			sourceSize.width: width
+			fillMode: Image.PreserveAspectFit
+			smooth: true
+		}
+
+		CamperDevice {
+			id: hub
+			z: 4
+			width: sceneLayer._hubSize
+			height: sceneLayer._hubSize
+			x: root._boundedX(camperImage.x + camperImage.width * 0.36 - width * 0.50, width, sceneLayer.width)
+			y: root._boundedY(camperImage.y + camperImage.height * 0.60 - height * 0.50, height, sceneLayer.height)
+			active: root._hubVisible
+			alarm: root.lowBatteryAlarm
+			colorScheme: root.colorScheme
+		}
+
+		CamperBattery {
+			id: battery
+			z: 5
+			width: sceneLayer._batteryWidth
+			height: sceneLayer._batteryHeight
+			value: root.batterySoc
+			charging: root._batteryCharging
+			discharging: root._batteryDischarging
+			alarm: root.lowBatteryAlarm
+			x: root._boundedX(camperImage.x + camperImage.width * 0.39 - width * 0.50, width, sceneLayer.width)
+			y: root._boundedY(camperImage.y + camperImage.height * 0.28 - height * 0.50, height, sceneLayer.height)
+			colorScheme: root.colorScheme
+		}
+
+
+		CamperDomainCard {
+			id: solarCard
+
+			z: 3
+			x: root._boundedX(camperImage.x + camperImage.width * 0.18 - width * 0.50, width, sceneLayer.width)
+			y: root._boundedY(camperImage.y + camperImage.height * 0.10 - height * 0.50, height, sceneLayer.height)
+			width: sceneLayer._cardWidth
+			height: sceneLayer._cardHeight
+			iconSource: "qrc:/images/solaryield.svg"
+			title: root.solarTitle
+			value: root.solarPower
+			active: root._solarActive
+			visible: root.solar
+			colorScheme: root.colorScheme
+		}
+
+		CamperDomainCard {
+			id: gridShoreCard
+
+			z: 3
+			x: root._boundedX(camperImage.x + camperImage.width * 0.10 - width * 0.50, width, sceneLayer.width)
+			y: root._boundedY(camperImage.y + camperImage.height * 0.38, height, sceneLayer.height)
+			width: sceneLayer._cardWidth
+			height: sceneLayer._cardHeight
+			iconSource: root.gridShoreIsShore ? "qrc:/images/shore.svg"
+				: "qrc:/images/grid.svg"
+			title: root.gridShoreTitle
+			value: root.gridShorePower
+			active: root._gridShoreActive
+			colorScheme: root.colorScheme
+		}
+
+		CamperDomainCard {
+			id: generatorCard
+
+			z: 3
+			x: root._boundedX(camperImage.x + camperImage.width * 0.30 - width * 0.50, width, sceneLayer.width)
+			y: root._boundedY(camperImage.y + camperImage.height * 0.83, height, sceneLayer.height)
+			width: sceneLayer._cardExtraWidth
+			height: sceneLayer._cardHeight
+			iconSource: "qrc:/images/generator.svg"
+			title: root.generatorTitle
+			value: root.generatorPower
+			active: root._generatorActive
+			visible: root.generator
+			colorScheme: root.colorScheme
+		}
+
+		CamperDomainCard {
+			id: dcCard
+
+			z: 3
+			x: root._boundedX(camperImage.x + camperImage.width * 0.62 - width * 0.50, width, sceneLayer.width)
+			y: root._boundedY(camperImage.y + camperImage.height * 0.02, height, sceneLayer.height)
+			width: sceneLayer._cardWidth
+			height: sceneLayer._cardHeight
+			iconSource: "qrc:/images/dcloads.svg"
+			title: root.dcLoadsTitle
+			value: root.dcLoadsPower
+			active: root._dcCardActive
+			colorScheme: root.colorScheme
+		}
+
+		CamperDomainCard {
+			id: acCard
+
+			z: 3
+			x: root._boundedX(camperImage.x + camperImage.width * 0.62 - width * 0.50, width, sceneLayer.width)
+			y: root._boundedY(camperImage.y + camperImage.height * 0.70, height, sceneLayer.height)
+			width: sceneLayer._cardWidth
+			height: sceneLayer._cardHeight
+			iconSource: "qrc:/images/acloads.svg"
+			title: root.acLoadsTitle
+			value: root.acLoadsPower
+			active: root._acLoadsActive
+			alarm: root._acCut
+			colorScheme: root.colorScheme
+		}
+
+		CamperDomainCard {
+			id: alternatorCard
+
+			z: 3
+			x: root._boundedX(camperImage.x + camperImage.width * 0.90 - width * 0.50, width, sceneLayer.width)
+			y: root._boundedY(camperImage.y + camperImage.height * 0.4, height, sceneLayer.height)
+			width: sceneLayer._cardExtraWidth
+			height: sceneLayer._cardHeight
+			iconSource: "qrc:/images/alternator.svg"
+			title: root.alternatorTitle
+			value: root.alternatorPower
+			active: root._alternatorActive
+			colorScheme: root.colorScheme
+		}
+
+		CamperFlowArrow {
+			z: 2
+			anchors.fill: parent
+			visible: root._flowSolarToBattery
+			strokeColor: root._flowColor
+			startX: solarCard.x + solarCard.width * 0.50
+			startY: solarCard.y + solarCard.height + sceneLayer._nodeGap
+			turnX: startX
+			endX: battery.x - sceneLayer._nodeGap
+			endY: battery.y + battery.height * 0.56
+		}
+
+		CamperFlowArrow {
+			z: 2
+			anchors.fill: parent
+			visible: root._flowBatteryToDc
+			strokeColor: root._flowColor
+			startX: battery.x + battery.width + sceneLayer._nodeGap
+			startY: battery.y + battery.height * 0.50
+			endX: dcCard.x - sceneLayer._nodeGap
+			endY: dcCard.y + dcCard.height * 0.52
+			turnX: startX + (endX - startX) / 2
+		}
+
+		CamperFlowArrow {
+			z: 2
+			anchors.fill: parent
+			visible: root._flowHubToBattery
+			strokeColor: root._flowColor
+			startX: hub.x + hub.width * 0.50
+			startY: hub.y - sceneLayer._nodeGap
+			endX: battery.x + battery.width * 0.50
+			endY: battery.y + battery.height + sceneLayer._nodeGap
+			turnY: startY + (endY - startY) / 2
+			horizontalFirst: false
+		}
+
+		CamperFlowArrow {
+			z: 2
+			anchors.fill: parent
+			visible: root._flowBatteryToHub
+			strokeColor: root._flowColor
+			startX: battery.x + battery.width * 0.50
+			startY: battery.y + battery.height + sceneLayer._nodeGap
+			endX: hub.x + hub.width * 0.50
+			endY: hub.y - sceneLayer._nodeGap
+			turnY: startY + (endY - startY) / 2
+			horizontalFirst: false
+		}
+
+		CamperFlowArrow {
+			z: 2
+			anchors.fill: parent
+			visible: root._flowHubToAc
+			strokeColor: root._flowColor
+			startX: hub.x + hub.width + sceneLayer._nodeGap
+			startY: hub.y + hub.height * 0.5
+			endX: acCard.x - sceneLayer._nodeGap
+			endY: acCard.y + acCard.height * 0.5
+			turnX: startX + (endX - startX) / 2
+		}
+
+		CamperFlowArrow {
+			z: 2
+			anchors.fill: parent
+			visible: root._flowGridToHub
+			strokeColor: root._flowColor
+			startX: gridShoreCard.x + gridShoreCard.width + sceneLayer._nodeGap
+			startY: gridShoreCard.y + gridShoreCard.height * 0.5
+			endX: hub.x - sceneLayer._nodeGap
+			endY: hub.y + hub.height * 0.5
+			turnX: startX + (endX - startX)/2
+		}
+
+		CamperFlowArrow {
+			z: 2
+			anchors.fill: parent
+			visible: root._flowGeneratorToHub
+			strokeColor: root._flowColor
+			startX: hub.x + hub.width * 0.5
+			startY: generatorCard.y - sceneLayer._nodeGap
+			endX: hub.x + hub.width * 0.5
+			endY: hub.y + hub.height + sceneLayer._nodeGap
+			horizontalFirst: false
+		}
+
+		CamperFlowArrow {
+			z: 2
+			anchors.fill: parent
+			visible: root._flowAlternatorToBattery
+			strokeColor: root._flowColor
+			cornerRadius: 24
+			startX: alternatorCard.x - sceneLayer._nodeGap
+			startY: alternatorCard.y + alternatorCard.height * 0.5
+			endX: battery.x + battery.width * 0.80
+			endY: battery.y + battery.height + sceneLayer._nodeGap
+			turnY: startY
+		}
+	}
+}

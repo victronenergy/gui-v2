@@ -17,6 +17,7 @@ QtObject {
 		"qrc:/qt/qml/Victron/VenusOS/pages/OverviewPage.qml": briefAndOverviewConfig,
 		"qrc:/qt/qml/Victron/VenusOS/pages/LevelsPage.qml": levelsConfig,
 		"qrc:/qt/qml/Victron/Boat/BoatPage.qml": boatPageConfig,
+		"qrc:/qt/qml/Victron/VenusOS/pages/CamperPage.qml": camperPageConfig,
 	})
 
 	function setConfigIndex(pageConfig, configIndex) {
@@ -382,6 +383,10 @@ QtObject {
 	}
 
 	property BoatPageConfig boatPageConfig: BoatPageConfig {
+		property int configIndex: -1
+	}
+
+	property CamperPageConfig camperPageConfig: CamperPageConfig {
 		property int configIndex: -1
 	}
 
