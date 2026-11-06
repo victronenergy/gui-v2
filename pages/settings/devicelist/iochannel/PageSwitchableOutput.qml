@@ -41,6 +41,61 @@ Page {
 				interactive: _writeable
 			}
 
+			ListNavigation {
+				//% "Circuit"
+				text: qsTrId("page_switchable_output_circuit")
+				preferredVisible: circuit.valid
+				secondaryText: (circuit.valid && circuit.value >= 0) ? circuit.value : CommonWords.disabled
+				showAccessLevel: productId.isAurelia ? VenusOS.User_AccessType_Installer : VenusOS.User_AccessType_User
+				interactive: _writeable
+				onClicked: Global.pageManager.pushPage(circuitComponent, { title: text })
+
+				VeQuickItem {
+					id: circuit
+					uid: switchableOutput.uid + "/Settings/Circuit"
+				}
+
+				Component {
+					id: circuitComponent
+					Page {
+						GradientListView {
+							id: settingsListView
+
+							model: VisibleItemModel {
+
+								PrimaryListLabel {
+									//% "All outputs in a circuit are controlled by the inputs in that same circuit."
+									text: qsTrId("page_switchable_output_enable_circuit_description")
+								}
+
+								ListSwitch {
+									id: enable_circuit_switch
+									//% "Enable circuit"
+									text: qsTrId("page_switchable_output_enable_circuit")
+									preferredVisible: circuit.valid
+									checked: circuit.value >= 0
+									interactive: _writeable
+									onClicked: {
+										circuit.setValue(checked ? -1 : -2)
+									}
+								}
+
+								ListSpinBox {
+									//% "Circuit number"
+									text: qsTrId("page_switchable_output_circuit_number")
+									preferredVisible: circuit.valid && circuit.value >= 0
+									enabled: circuit.value >= 0
+									from: 0
+									to: 100
+									decimals: 0
+									dataItem.uid: circuit.uid
+								}
+							}
+						}
+					}
+				}
+			}
+
 			ListRadioButtonGroup {
 				id: switchMode
 
