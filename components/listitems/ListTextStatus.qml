@@ -15,11 +15,12 @@ ListSetting {
 
 	readonly property alias dataItem: dataItem
 	property string secondaryText: dataItem.valid ? dataItem.value : ""
+	property string caption
 	property int alarmStatus: -1
 
 	contentItem: Item {
 		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: labelLayout.implicitHeight
+		implicitHeight: labelLayout.implicitHeight + (captionLabel.text.length ? captionLabel.implicitHeight : 0)
 
 		ListItemLabelLayout {
 			id: labelLayout
@@ -29,6 +30,7 @@ ListSetting {
 				right: parent.right
 				rightMargin: alarmStatusIcon.visible ? alarmStatusIcon.width + root.spacing : 0
 				verticalCenter: parent.verticalCenter
+				verticalCenterOffset: -captionLabel.height / 2
 			}
 			primaryText: root.text
 			primaryLabel.font: root.font
@@ -48,6 +50,18 @@ ListSetting {
 			color: alarmStatus === VenusOS.Alarm_Level_OK ? Theme.color_green
 				: alarmStatus === VenusOS.Alarm_Level_Warning ? Theme.color_orange : Theme.color_red
 			visible: alarmStatus !== -1
+		}
+
+		CaptionLabel {
+			id: captionLabel
+
+			anchors {
+				top: labelLayout.bottom
+				left: parent.left
+				right: parent.right
+			}
+			topPadding: Theme.geometry_listItem_content_verticalMargin
+			text: root.caption
 		}
 	}
 
