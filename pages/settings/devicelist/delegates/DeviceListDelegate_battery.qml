@@ -35,9 +35,22 @@ DeviceListDelegate {
 
 		filterType: QuantityObjectModel.HasValue
 
+		QuantityObject { object: chargeModeDiagnostic; key: "textValue"; unit: VenusOS.Units_None }
 		QuantityObject { object: soc; unit: VenusOS.Units_Percentage }
 		QuantityObject { object: voltage; unit: VenusOS.Units_Volt_DC }
 		QuantityObject { object: current; unit: VenusOS.Units_Amp }
+	}
+
+	VeQuickItem {
+		id: chargeModeDiagnostic
+		uid: root.device.serviceUid + "/Soc"
+		readonly property string textValue: "DBG:" + root.device.serviceUid + " BMS=" + (bmsChargeMode.valid ? String(bmsChargeMode.value) : "INVALID")
+	}
+
+	VeQuickItem {
+		id: bmsChargeMode
+		readonly property string textValue: valid && value !== undefined && value !== null ? String(value).split(" | ")[0].toUpperCase() : ""
+		uid: root.device.serviceUid + "/Info/ChargeMode"
 	}
 
 	VeQuickItem {
