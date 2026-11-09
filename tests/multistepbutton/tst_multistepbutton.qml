@@ -101,4 +101,116 @@ TestCase {
 		compare(button.labelsFit, true)
 		compare(stepTexts(button), ["Low", "Med", "High"])
 	}
+	function headerButton(button) {
+		return button.headerItem ? button.headerItem.children[0] : null
+	}
+
+	function stepChecked(button) {
+		let checked = []
+		for (let i = 0; i < button.count; ++i) {
+			const delegate = button.itemAtIndex(i)
+			let value = false
+			for (const child of delegate.children) {
+				if (child.checked !== undefined) {
+					value = child.checked
+				}
+			}
+			checked.push(value)
+		}
+		return checked
+	}
+
+	function test_exclusiveOff() {
+		const button = createTemporaryObject(buttonComponent, root)
+		verify(button)
+		waitForRendering(button)
+		button.currentIndex = 1
+
+		// Legacy: the header is the On/Off toggle and the selected step stays highlighted while off
+		compare(button.exclusive, false)
+		button.checked = false
+		compare(String(headerButton(button).text), CommonWords.off)
+		compare(stepChecked(button), [false, true, false])
+		button.checked = true
+		compare(String(headerButton(button).text), CommonWords.on)
+
+		// Named off state: single choice
+		button.offText = "Standby"
+		compare(button.exclusive, true)
+		compare(String(headerButton(button).text), "Standby")
+		compare(stepChecked(button), [false, true, false])
+		button.checked = false
+		compare(String(headerButton(button).text), "Standby")
+		compare(stepChecked(button), [false, false, false])
+		compare(headerButton(button).separatorVisible, false)
+		compare(headerButton(button).backgroundColor, Theme.color_button_off_background)
+		button.checked = true
+		compare(headerButton(button).backgroundColor, Theme.color_darkBrand)
+		button.checked = false
+
+		// The off button is one of four equal segments, whatever its text
+		compare(headerButton(button).defaultBackgroundWidth, button._segmentWidth)
+		compare(button.itemAtIndex(0).width, button._segmentWidth)
+		button.offText = "A very long name for the off state of this output"
+		compare(headerButton(button).defaultBackgroundWidth, button._segmentWidth)
+		compare(button.itemAtIndex(0).width, button._segmentWidth)
+	}
+
+	function test_exclusiveOffClicks() {
+		const button = createTemporaryObject(buttonComponent, root)
+		verify(button)
+		waitForRendering(button)
+		button.offText = "Standby"
+		button.currentIndex = 1
+
+		const offSpy = createTemporaryObject(spyComponent, root, { target: button, signalName: "offClicked" })
+		const onSpy = createTemporaryObject(spyComponent, root, { target: button, signalName: "onClicked" })
+
+		// Off and clicking the off button: nothing happens
+		button.checked = false
+		mouseClick(headerButton(button))
+		compare(offSpy.count, 0)
+		compare(onSpy.count, 0)
+
+		// On and clicking the off button: switches off only
+		button.checked = true
+		mouseClick(headerButton(button))
+		compare(offSpy.count, 1)
+		compare(onSpy.count, 0)
+
+		// Legacy toggle still switches on
+		button.offText = ""
+		button.checked = false
+		mouseClick(headerButton(button))
+		compare(onSpy.count, 1)
+	}
+
+	function test_pixelAlignedSteps() {
+		const button = createTemporaryObject(buttonComponent, root)
+		verify(button)
+		button.offText = "Off"
+		// A width that does not divide evenly over the three steps
+		button.width = 701
+		waitForRendering(button)
+
+		let x = 0
+		let total = 0
+		for (let i = 0; i < button.count; ++i) {
+			const delegate = button.itemAtIndex(i)
+			verify(delegate)
+			compare(delegate.x, Math.round(delegate.x), "step " + i + " starts on a whole pixel")
+			if (i < button.count - 1) {
+				compare(delegate.width, Math.round(delegate.width), "step " + i + " has a whole-pixel width")
+			}
+			x = delegate.x
+			total += delegate.width
+		}
+		// The steps fill the space after the header exactly, press margin included
+		compare(total, button._totalDelegateWidth)
+	}
+
+	Component {
+		id: spyComponent
+		SignalSpy {}
+	}
 }

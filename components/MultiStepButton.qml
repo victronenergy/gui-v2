@@ -12,6 +12,12 @@ BaseListView {
 	property int currentIndex
 	property bool checked
 
+	// Optional text for the first (off) button. When set, the control is a single-choice group:
+	// the off button is highlighted while unchecked and only switches off, the steps are only
+	// highlighted while checked, and clicking a step is expected to switch on as well.
+	property string offText: ""
+	readonly property bool exclusive: offText.length > 0
+
 	// Expand clickable area to the left of the On/Off button, and to the right of the last button.
 	readonly property real horizontalPressMargin: Theme.geometry_controlCard_button_margins
 
@@ -19,6 +25,16 @@ BaseListView {
 	readonly property real verticalPressMargin: Theme.geometry_button_touch_verticalMargin
 
 	readonly property real _totalDelegateWidth: width - (headerItem?.width ?? 0) - Theme.geometry_button_border_width
+
+	// Whole-pixel step widths, the last step takes the remainder: the last button has rounded
+	// corners and is therefore antialiased, so a fractional left edge would show as a seam
+	// between it and its neighbour.
+	readonly property real _stepsWidth: _totalDelegateWidth - horizontalPressMargin
+	readonly property real _stepWidth: Math.floor(_stepsWidth / Math.max(1, model?.length ?? 1))
+
+	// In single-choice mode the off button is one of (steps + 1) equal segments of the control.
+	readonly property real _segmentWidth: Math.floor((width - (2 * horizontalPressMargin) - (2 * Theme.geometry_button_border_width))
+			/ ((model?.length ?? 0) + 1))
 
 	// Optional text per step, indexed like the model. An empty entry keeps the model text.
 	// The labels are only shown when every one of them fits its button, otherwise all
@@ -35,7 +51,7 @@ BaseListView {
 		const fontSize = labelMetrics.font.pixelSize
 		// Each button paints its background over the same slot width. Keep the button padding
 		// free on both sides so the text is not pressed against the neighbouring buttons.
-		const slotWidth = (_totalDelegateWidth - horizontalPressMargin) / model.length
+		const slotWidth = _stepWidth
 		const available = slotWidth - (2 * Theme.geometry_button_padding)
 		for (let i = 0; i < model.length; ++i) {
 			const label = labels[i]
@@ -58,6 +74,16 @@ BaseListView {
 		font.family: Global.fontFamily
 		font.pixelSize: Theme.font_size_body1
 	}
+
+	// The On/Off button is sized like MiniToggleButton sizes itself: to the longer of On/Off.
+	TextMetrics {
+		id: headerTextMetrics
+		font.family: Global.fontFamily
+		font.pixelSize: Theme.font_size_body1
+		text: (CommonWords.on.length > CommonWords.off.length) ? CommonWords.on : CommonWords.off
+	}
+	readonly property real _headerTextWidth: Math.ceil(headerTextMetrics.tightBoundingRect.x + headerTextMetrics.tightBoundingRect.width)
+			+ (2 * Theme.geometry_miniSlider_text_padding)
 
 	orientation: ListView.Horizontal
 	focus: false
@@ -83,13 +109,15 @@ BaseListView {
 		implicitHeight: numberButton.height
 
 		// Allow Utils.acceptsKeyNavigation() to accept moving focus to this item.
-		focusPolicy: root.checked ? Qt.TabFocus : Qt.NoFocus
+		focusPolicy: (root.checked || root.exclusive) ? Qt.TabFocus : Qt.NoFocus
 
 		Button {
 			id: numberButton
 
 			y: -root.verticalPressMargin
-			defaultBackgroundWidth: (root._totalDelegateWidth - root.horizontalPressMargin) / root.model.length
+			defaultBackgroundWidth: lastListItem
+					? root._stepsWidth - root._stepWidth * (root.model.length - 1)
+					: root._stepWidth
 			defaultBackgroundHeight: Theme.geometry_iochannel_control_height - (2 * Theme.geometry_button_border_width)
 			topInset: root.verticalPressMargin + Theme.geometry_button_border_width
 			bottomInset: root.verticalPressMargin + Theme.geometry_button_border_width
@@ -114,7 +142,7 @@ BaseListView {
 			backgroundColor: !root.enabled ? (checked ? Theme.color_button_off_background_disabled : Theme.color_background_disabled)
 					: checked ? (root.checked ? Theme.color_brand : Theme.color_button_off_background)
 					: Theme.color_darkBrand
-			checked: index === root.currentIndex
+			checked: index === root.currentIndex && (!root.exclusive || root.checked)
 			focus: true
 
 			onClicked: root.indexClicked(index)
@@ -148,14 +176,35 @@ BaseListView {
 			bottomRightRadius: 0
 			borderWidth: 0
 			flat: false
-			color: enabled ? Theme.color_font_primary : Theme.color_font_disabled
-			backgroundColor: root.enabled ? Theme.color_darkBrand : Theme.color_background_disabled
+			text: root.exclusive ? root.offText : (checked ? CommonWords.on : CommonWords.off)
+			defaultBackgroundWidth: root.exclusive ? root._segmentWidth : root._headerTextWidth
+			// An equal segment regardless of the off text, which elides when too long
+			width: root.exclusive ? root._segmentWidth + leftInset + rightInset : implicitWidth
+			color: !enabled ? Theme.color_font_disabled
+					: (root.exclusive && !root.checked) ? Theme.color_button_down_text
+					: Theme.color_font_primary
+			// The selected off state uses the same colour as an off toggle / the selected step of an
+			// off switch, not the "on" colour of a selected step.
+			backgroundColor: !root.enabled ? (root.exclusive && !root.checked ? Theme.color_button_off_background_disabled : Theme.color_background_disabled)
+					: (root.exclusive && !root.checked) ? Theme.color_button_off_background
+					: Theme.color_darkBrand
 			checked: root.checked
 			focus: true
 			separatorColor: enabled ? Theme.color_multistepbutton_separator : Theme.color_font_disabled
-			separatorVisible: root.currentIndex !== 0
+			separatorVisible: !root.exclusive && root.currentIndex !== 0
 
-			onClicked: root.checked ? root.offClicked() : root.onClicked()
+			onClicked: {
+				if (root.exclusive) {
+					// The off button only switches off; a step switches on.
+					if (root.checked) {
+						root.offClicked()
+					}
+				} else if (root.checked) {
+					root.offClicked()
+				} else {
+					root.onClicked()
+				}
+			}
 		}
 	}
 

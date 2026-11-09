@@ -65,12 +65,11 @@ FocusScope {
 		// Get/set the current index. Note Dimming and DimmingMax are 1-based. E.g. if Dimming=1
 		// and DimmingMax=5, the options are 1-5 inclusive, and the first option is selected.
 		currentIndex: dimmingSync.expectedValue - 1
-		onIndexClicked: (index) => { dimmingSync.writeValue(index + 1) }
-
-		Connections {
-			target: root.switchableOutput
-			function onDimmingChanged() {
-				multiStep.currentIndex = root.switchableOutput.dimming - 1
+		onIndexClicked: (index) => {
+			dimmingSync.writeValue(index + 1)
+			// With a named off state (single-choice control) selecting a step also switches on.
+			if (multiStep.exclusive && multiStepState.expectedValue !== 1) {
+				multiStepState.writeValue(1)
 			}
 		}
 
@@ -88,8 +87,8 @@ FocusScope {
 			onValueChanged: multiStep.rebuildModel()
 		}
 
-		// The optional /Settings/Labels names the options. Like /Dimming it is 1-based, so
-		// index 0 belongs to the off state and is not used here.
+		// The optional /Settings/Labels names the options. Like /Dimming it is 1-based; index 0
+		// optionally names the off state, which turns the control into a single-choice group.
 		VeQuickItem {
 			id: multiStepLabels
 			uid: root.switchableOutput.uid + "/Settings/Labels"
@@ -106,10 +105,15 @@ FocusScope {
 			if (multiStepMax.value === undefined) {
 				multiStep.model = []
 				multiStep.labels = []
+				multiStep.offText = ""
 				return
 			}
 			const rawLabels = multiStepLabels.value && typeof multiStepLabels.value !== "string" && multiStepLabels.value.length
 					? multiStepLabels.value : []
+			const offLabel = rawLabels[0]
+			multiStep.offText = typeof offLabel === "string" && offLabel.trim().length > 0
+					? VenusOS.ioChannel_labelToText(offLabel)
+					: ""
 			let items = []
 			let labels = []
 			// limit maximum number of options
