@@ -20,6 +20,18 @@
             ]
         },
         {
+            "name": "PluginCard",
+            "kind": "object",
+            "base": "FocusScope",
+            "since": "1.0",
+            "properties": [
+                {"name": "content", "type": "alias", "default": true, "since": "1.0"},
+                {"name": "iconSource", "type": "url", "since": "1.0"},
+                {"name": "status", "type": "string", "since": "1.0"},
+                {"name": "title", "type": "string", "since": "1.0"}
+            ]
+        },
+        {
             "name": "PluginDataItem",
             "kind": "object",
             "base": "QtObject",
