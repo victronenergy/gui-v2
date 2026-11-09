@@ -8,7 +8,8 @@ Skylla-i charger (product id 0x106):
   temperatures.
 - FullApiExample_Settings.qml: switches, text fields, numbers, options and
   buttons, with and without data items.
-- FullApiExample_CustomItems.qml: list items with content of their own.
+- FullApiExample_CustomItems.qml: list items with content of their own,
+  drawn with PluginPalette colors.
 - FullApiExample_AccessLevels.qml: list items shown, or changed, only from an
   access level.
 - FullApiExample_WordsAndIcons.qml: the common words, already translated,

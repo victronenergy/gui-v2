@@ -110,7 +110,7 @@ PluginPage {
 
 		PluginListSetting {
 			text: "Tints"
-			// The tints are Text, SecondaryText, Warning, Critical, Success and Disabled.
+			// The tints are Text, SecondaryText, Warning, Critical, Success, Brand and Disabled.
 
 			Row {
 				spacing: 8
@@ -142,6 +142,11 @@ PluginPage {
 				}
 
 				PluginIconImage {
+					source: PluginIcons.devices
+					tint: PluginIconImage.Brand
+				}
+
+				PluginIconImage {
 					source: PluginIcons.close
 					tint: PluginIconImage.Disabled
 				}
@@ -150,7 +155,7 @@ PluginPage {
 
 		PluginListSetting {
 			text: "Disabled, and sized"
-			// A disabled icon uses the Disabled color, whatever its tint. Set width and height for a size other than the usual one.
+			// A disabled icon uses the Disabled color, regardless of its tint. Set width and height for a size other than the usual one.
 
 			Row {
 				spacing: 8
