@@ -61,6 +61,68 @@
             ]
         },
         {
+            "name": "PluginDataPathModel",
+            "kind": "object",
+            "base": "QAbstractListModel",
+            "since": "1.0",
+            "properties": [
+                {"name": "count", "type": "int", "readonly": true, "since": "1.0"},
+                {"name": "deviceInstance", "type": "int", "since": "1.0"},
+                {"name": "path", "type": "string", "since": "1.0"},
+                {"name": "serviceType", "type": "string", "since": "1.0"},
+                {"name": "uid", "type": "string", "since": "1.0"}
+            ],
+            "signals": [
+                {"name": "countChanged", "parameters": [], "since": "1.0"},
+                {"name": "deviceInstanceChanged", "parameters": [], "since": "1.0"},
+                {"name": "pathChanged", "parameters": [], "since": "1.0"},
+                {"name": "serviceTypeChanged", "parameters": [], "since": "1.0"},
+                {"name": "uidChanged", "parameters": [], "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "childNameAt", "parameters": ["index: int"], "returns": "string", "since": "1.0"},
+                {"name": "childPathAt", "parameters": ["index: int"], "returns": "string", "since": "1.0"},
+                {"name": "childUidAt", "parameters": ["index: int"], "returns": "string", "since": "1.0"}
+            ],
+            "roles": [
+                {"name": "childName", "type": "string", "since": "1.0"},
+                {"name": "childPath", "type": "string", "since": "1.0"},
+                {"name": "childUid", "type": "string", "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginDeviceModel",
+            "kind": "object",
+            "base": "QAbstractListModel",
+            "since": "1.0",
+            "properties": [
+                {"name": "availableServiceTypes", "type": "list<string>", "readonly": true, "since": "1.0"},
+                {"name": "count", "type": "int", "readonly": true, "since": "1.0"},
+                {"name": "requiredPaths", "type": "list<string>", "since": "1.0"},
+                {"name": "serviceTypes", "type": "list<string>", "since": "1.0"}
+            ],
+            "signals": [
+                {"name": "availableServiceTypesChanged", "parameters": [], "since": "1.0"},
+                {"name": "countChanged", "parameters": [], "since": "1.0"},
+                {"name": "requiredPathsChanged", "parameters": [], "since": "1.0"},
+                {"name": "serviceTypesChanged", "parameters": [], "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "deviceInstanceAt", "parameters": ["index: int"], "returns": "int", "since": "1.0"},
+                {"name": "nameAt", "parameters": ["index: int"], "returns": "string", "since": "1.0"},
+                {"name": "productIdAt", "parameters": ["index: int"], "returns": "int", "since": "1.0"},
+                {"name": "serviceTypeAt", "parameters": ["index: int"], "returns": "string", "since": "1.0"},
+                {"name": "serviceUidAt", "parameters": ["index: int"], "returns": "string", "since": "1.0"}
+            ],
+            "roles": [
+                {"name": "deviceInstance", "type": "int", "since": "1.0"},
+                {"name": "name", "type": "string", "since": "1.0"},
+                {"name": "productId", "type": "int", "since": "1.0"},
+                {"name": "serviceType", "type": "string", "since": "1.0"},
+                {"name": "serviceUid", "type": "string", "since": "1.0"}
+            ]
+        },
+        {
             "name": "PluginDevicePage",
             "kind": "object",
             "base": "PluginPage",

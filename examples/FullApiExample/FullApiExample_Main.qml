@@ -32,6 +32,12 @@ PluginPage {
 		}
 
 		PluginListNavigation {
+			text: "Devices"
+			caption: "The devices on the system, such as every tank"
+			pageUrl: Qt.resolvedUrl("FullApiExample_Devices.qml")
+		}
+
+		PluginListNavigation {
 			text: "Settings"
 			caption: "Switches, text fields, numbers, options and buttons"
 			// PluginWords are common words, already translated into the user's language.

@@ -1,8 +1,14 @@
 set(VictronGuiPlugins_CPP_SOURCES
+    guiplugins/devicewatcher.h
+    guiplugins/devicewatcher.cpp
     guiplugins/pluginaccesslevel.h
     guiplugins/pluginaccesslevel.cpp
     guiplugins/plugindataitem.h
     guiplugins/plugindataitem.cpp
+    guiplugins/plugindatapathmodel.h
+    guiplugins/plugindatapathmodel.cpp
+    guiplugins/plugindevicemodel.h
+    guiplugins/plugindevicemodel.cpp
     guiplugins/pluginunit.h
     guiplugins/pluginunit.cpp
 )
