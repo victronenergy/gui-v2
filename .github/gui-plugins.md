@@ -46,7 +46,7 @@ The compiler does not check these rules. A page that breaks them may work today,
 6. **Access levels.** Use `PluginAccessLevel.User`, `.Installer`, `.SuperUser` and `.Service` for `showAccessLevel` and `writeAccessLevel`.
 7. **Key navigation.** The GUI can be used with keys or buttons, as well as touch. The list item types handle this. In a `PluginListSetting`, handle key presses on the list item, for example with `Keys.onSpacePressed`. Those handlers run only while key navigation is active. Call `checkWriteAccessLevel()` before changing a setting.
 8. **Text.** For common words, such as "Status", "Voltage" or "On", use `PluginWords`: they are already translated, and change with the user's language. Translate other text with `qsTrId()`, with a `//% "Source text"` comment above it, and ship the translations in the plugin's own `.ts` files, as `examples/SimpleTrExample` does. See [Words and icons](#words-and-icons).
-9. **Colors and fonts.** Plugins cannot read the GUI's colors and fonts, which change with light and dark mode, the screen size, and custom branding. The list item types draw their text with them, so let the list items draw text: set the list item's `text`, and its `caption` where it has one, rather than adding your own label. `PluginListSetting` has no `caption`. Draw icons with `PluginIconImage`, which colors them by purpose. Other images that your plugin ships must be visible on both light and dark backgrounds, as in `examples/DeviceListExample`.
+9. **Colors and fonts.** Plugins can read the main colors, the font families and the main text sizes from `PluginPalette`. The families and the colors change with custom branding. The colors also change with light and dark mode, and the text sizes with the screen size. Prefer the list item types for text: set the list item's `text`, and its `caption` where it has one, rather than adding your own label. `PluginListSetting` has no `caption`. When you draw your own component, use a `PluginPalette` color, not a fixed color. Draw icons with `PluginIconImage`, which colors them by purpose. Other images that your plugin ships must be visible on both light and dark backgrounds, as in `examples/DeviceListExample`.
 
 For example, a plugin settings page with a switch and a subpage:
 
@@ -102,7 +102,7 @@ For any other text, use your own translations (rule 8).
 
 **`PluginIcons`** has the urls of common icons: `alarm`, `warning`, `info`, `checkmark`, `close`, `plus`, `minus`, `trash`, `refresh`, `open_link`, `battery`, `temperature`, `humidity`, `devices`. An icon keeps its name, even if the image behind it changes.
 
-**`PluginIconImage`** draws an icon in one of the GUI's colors. Its `source` is one of the `PluginIcons`, or a single-color image that your plugin ships. Set `tint` to choose the color by its purpose: `PluginIconImage.Text` (the default), `SecondaryText`, `Warning`, `Critical`, `Success` or `Disabled`. When the icon is disabled (`enabled: false`), it is drawn in the `Disabled` color, whatever its `tint`. The icon is the GUI's usual icon size, unless you set its `width` and `height`; the image keeps its shape, and is centred. Do not draw the `PluginIcons` with an `Image`: they have a single color, which may not show on the background.
+**`PluginIconImage`** draws an icon in one of the GUI's colors. Its `source` is one of the `PluginIcons`, or a single-color image that your plugin ships. Set `tint` to choose the color by its purpose: `PluginIconImage.Text` (the default), `SecondaryText`, `Warning`, `Critical`, `Success`, `Brand` or `Disabled`. When the icon is disabled (`enabled: false`), it is drawn in the `Disabled` color, regardless of its `tint`. The icon is the GUI's usual icon size, unless you set its `width` and `height`; the image keeps its shape, and is centred. Do not draw the `PluginIcons` with an `Image`: they have a single color, which may not show on the background.
 
 ```qml
 PluginListSetting {
@@ -111,6 +111,45 @@ PluginListSetting {
 	PluginIconImage {
 		source: PluginIcons.warning
 		tint: PluginIconImage.Warning
+	}
+}
+```
+
+## Colors
+
+**`PluginPalette`** has the main colors of the GUI, its font families, and its main text sizes. The colors are the ten colors that custom branding can change, and the color of disabled text. They also change with light and dark mode. Use them when you draw your own component, for example `color: PluginPalette.color_font_primary`, `font.family: PluginPalette.font_family` and `font.pixelSize: PluginPalette.font_size_medium`. The color and font family names match a branding file, except `color_font_disabled`. A name stays the same, even if gui-v2 renames it.
+
+- Backgrounds: `color_background_primary`, `color_background_secondary`, `color_background_page`.
+- Text: `color_font_primary`, `color_font_secondary`, `color_font_disabled`.
+- Roles: `color_brand`, `color_info`, `color_success`, `color_warning`, `color_critical`.
+- Fonts: `font_family`, `quantity_font_family`.
+- Text sizes: `font_size_small`, `font_size_medium`, `font_size_large`.
+
+`color_background_page` is the page background.
+
+`color_font_disabled` is the color of disabled text. It is not in a branding file: Theme works it out from the text and background colors, so it follows custom branding too.
+
+`font_family` is the font family for text. It is empty when the current language uses its own font, or when a branding family does not cover the current language. `quantity_font_family` is the font for numbers with their units. A branding file uses that family for every language.
+
+The text sizes are pixel sizes. `font_size_small` is the size of a list item's caption, and of a card's title. `font_size_medium` is the size of a list item's text, and of its value. `font_size_large` is the size of a card's status. They change with the screen size, as the GUI's own text does. For example, text is smaller in portrait layout.
+
+These are not every color in the GUI. A computed color, such as a button color or the focus highlight, is not here. Use a color from this list, or let a list item or `PluginIconImage` draw it.
+
+For a fainter version of a color, such as the background of a bar, build it from the colors in this list, so that it still follows light and dark mode and custom branding. `Qt.alpha(color, 0.3)` gives the color at 30% opacity. `Qt.tint(background, color)` lays a see-through color over a background color, and gives a solid color, which looks the same regardless of what is behind it. `examples/FullApiExample` draws its battery bar this way:
+
+```qml
+Rectangle {
+	width: parent.width
+	height: 12
+	radius: 6
+	// A faint brand color: the brand color at 30%, laid over the background.
+	color: Qt.tint(PluginPalette.color_background_primary, Qt.alpha(PluginPalette.color_brand, 0.3))
+
+	Rectangle {
+		width: parent.width * 0.6
+		height: parent.height
+		radius: parent.radius
+		color: PluginPalette.color_brand
 	}
 }
 ```
@@ -153,6 +192,7 @@ The list item types:
 - **`PluginDataItem`**: a value on the system. `serviceType` and `path` name it; set `deviceInstance` to name one device. See [Backend data values](#backend-data-values).
 - **`PluginAccessLevel`**: `User`, `Installer`, `SuperUser`, `Service`.
 - **`PluginUnit`**: the units for `PluginListQuantity`: `None`, `Amp`, `AmpHour`, `Energy_KiloWattHour`, `Percentage`, `RevolutionsPerMinute`, `VoltAmpere`, `Volt_AC`, `Volt_DC`, `Watt`.
+- **`PluginPalette`**: the main GUI colors, the font families, and the main text sizes. See [Colors](#colors).
 - **`PluginWords`**, **`PluginIcons`** and **`PluginIconImage`**: see [Words and icons](#words-and-icons).
 
 ### Versions
@@ -179,6 +219,7 @@ The version of `Victron.GuiPlugins` that added each type. A type's members came 
 - `PluginListText`: 1.0
 - `PluginListTextField`: 1.0
 - `PluginPage`: 1.0
+- `PluginPalette`: 1.0
 - `PluginPrimaryListLabel`: 1.0
 - `PluginSettingsListHeader`: 1.0
 - `PluginUnit`: 1.0
@@ -216,5 +257,20 @@ The version of `Victron.GuiPlugins` that added each type. A type's members came 
 - To deprecate a type or member, add `"deprecated": true` to it in `tools/guiplugins-api.json`, say so in the type reference, and run `python3 tools/guipluginsapi.py`. The script keeps the flag. The compiler then warns a plugin that uses it; the GUI does not. Removing it still needs a new major version.
 - The compiler reads `tools/guiplugins-api.json`, which is installed next to it, to work out each plugin's `requiredGuiPluginsVersion` and to warn about deprecated types and members (see [Versioning](#versioning)). The plugin loader, in `src/guiplugins.cpp`, gets the module version from `cmake/ModuleGuiPlugins.cmake` as two compile definitions, and drops a plugin's pages if it needs a version that the GUI does not have. The `tst_plugincompiler` and `tst_guipluginloader` tests cover both.
 - The enums for plugins, `PluginAccessLevel` and `PluginUnit`, are C++ namespaces with explicit values, equal to the `VenusOS` values that the wrappers pass them to. `pluginaccesslevel.cpp` and `pluginunit.cpp` check this at build time. If a `VenusOS` value changes, keep the plugin value, and map it in the wrapper instead.
-- `PluginWords` copies `CommonWords`, and `PluginIcons` points at the images in `qrc:/images`. Both are promises: never rename or remove one of their properties. If a `CommonWords` word or an image is renamed, point the existing property at the new one; for a word, also add the old and new names to `renamedWords` in `tst_pluginwordsandicons`. That test checks that each word has the text of the `CommonWords` word with the same (or new) name, and that each icon loads. `PluginIconImage` is the only way that plugins get the GUI's colors, and it gives only the colors named by its `tint` values.
+- `PluginWords` copies `CommonWords`. Never rename or remove a `PluginWords` property. If a `CommonWords` word is renamed, point the existing property at the new one, and add the old and new names to `renamedWords` in `tst_pluginwordsandicons`. `tst_pluginwordsandicons` checks each word against the `CommonWords` word with the same name, unless `renamedWords` names a different one.
+- `PluginIcons` points at the images in `qrc:/images`. Never rename or remove a `PluginIcons` property. If an image is renamed, point the existing property at the new one. `tst_pluginwordsandicons` checks that each icon loads.
+- `PluginPalette` exposes ten colors with the branding names: `color_background_primary`, `color_background_secondary`, `color_background_page`, `color_font_primary`, `color_font_secondary`, `color_brand`, `color_info`, `color_success`, `color_warning` and `color_critical`.
+  `PluginPalette` also exposes `font_family` and `quantity_font_family` with the branding names.
+  `color_font_disabled` uses the `Theme` name. `color_font_disabled` is not a branding name.
+  If `Theme` renames one of those ten colors, `color_font_disabled`, `font_family` or `quantity_font_family`, keep the `PluginPalette` name and point that property at the new `Theme` property.
+  `color_background_page` already differs from its `Theme` name. `Theme` calls that color `color_page_background`.
+  Add that pair of names to `renamedColors` in `tst_pluginpalette`.
+  `tst_pluginpalette` compares each `PluginPalette` color with the `Theme` color of the same name, unless `renamedColors` names a different `Theme` color.
+  `tst_pluginpalette` makes that comparison in the dark scheme and in the light scheme.
+  `tst_pluginpalette` also checks that `font_family` and `quantity_font_family` match the `Theme` properties of the same names.
+- `PluginPalette` exposes `font_size_small`, `font_size_medium` and `font_size_large`. Those are `Theme` font sizes chosen by purpose: the list item caption size, the list item text size, and the control card status size. If `Theme` renames or changes those sizes, point each `PluginPalette` size at the nearest `Theme` size with the same purpose, and update `fontSizes` in `tst_pluginpalette`. `tst_pluginpalette` checks those sizes in each screen size.
+- `PluginIconImage` tints an icon by purpose, with `PluginPalette` colors. Its `Success` tint is `color_success`, and its `Brand` tint is `color_brand`. `tst_pluginwordsandicons` checks each tint.
+- In this module, only `PluginPalette` names a `Theme` color or text size.
+  A Plugin* type that sets a color or a text size takes that value from `PluginPalette`, or from a gui-v2 type that the Plugin* type wraps.
+  Some spacing and sizes come from `Theme`. Those `Theme` names are not part of the API.
 - `PageStack.pushPluginPage()` (reached through `Global.pageManager.pushPluginPage()`) opens a plugin page. It creates a `PluginHostPage` (defined in `PageStack.qml`), which is a `Page`, and then the plugin page with the host page as its parent, so the two are destroyed together. The host shows the plugin page's title, or `defaultTitle` while that title is empty. A list item that opens the page passes its text as `defaultTitle`. Callers must not assign `pluginPage.title`: that replaces the page's title binding. A page whose base type is a `Page` from `Victron.VenusOS`, is not an item, or is not a `PluginPage`, is destroyed with the host and is not opened. `PageStack.pushPage()` is for gui-v2's own pages, and refuses a page whose base type is not a `Page`.
