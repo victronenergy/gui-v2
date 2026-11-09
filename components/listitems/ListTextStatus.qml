@@ -4,7 +4,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls.impl as CP
+import QtQuick.Layouts
 import Victron.VenusOS
 
 /*
@@ -18,50 +18,18 @@ ListSetting {
 	property string caption
 	property int alarmStatus: -1
 
-	contentItem: Item {
-		implicitWidth: Theme.geometry_listItem_width
-		implicitHeight: labelLayout.implicitHeight + (captionLabel.text.length ? captionLabel.implicitHeight : 0)
+	contentItem: RowLayout {
+		spacing: root.spacing
 
 		ListItemLabelLayout {
-			id: labelLayout
-
-			anchors {
-				left: parent.left
-				right: parent.right
-				rightMargin: alarmStatusIcon.visible ? alarmStatusIcon.width + root.spacing : 0
-				verticalCenter: parent.verticalCenter
-				verticalCenterOffset: -captionLabel.height / 2
-			}
 			primaryText: root.text
 			primaryLabel.font: root.font
 			primaryLabel.textFormat: root.textFormat
 			secondaryText: root.secondaryText
 		}
 
-		CP.ColorImage {
-			id: alarmStatusIcon
-
-			anchors {
-				right: parent.right
-				verticalCenter: labelLayout.verticalCenter
-			}
-			source: alarmStatus === VenusOS.Alarm_Level_OK ? "qrc:/images/icon_checkmark_32.svg"
-				: alarmStatus === VenusOS.Alarm_Level_Warning ? "qrc:/images/icon_warning_32.svg" : "qrc:/images/icon_alarm_32.svg"
-			color: alarmStatus === VenusOS.Alarm_Level_OK ? Theme.color_green
-				: alarmStatus === VenusOS.Alarm_Level_Warning ? Theme.color_orange : Theme.color_red
-			visible: alarmStatus !== -1
-		}
-
-		CaptionLabel {
-			id: captionLabel
-
-			anchors {
-				top: labelLayout.bottom
-				left: parent.left
-				right: parent.right
-			}
-			topPadding: Theme.geometry_listItem_content_verticalMargin
-			text: root.caption
+		AlarmIcon {
+			alarmStatus: root.alarmStatus
 		}
 	}
 
