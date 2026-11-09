@@ -10,12 +10,13 @@ A navigation page, and a card added to the Controls or Switches pane (integratio
 
 This document is for OEM and third-party developers, and for AI agents that write or check a plugin. It is complete on its own: you do not need to read gui-v2's internals. Custom branding plugins, which change the GUI's colors, fonts and logos, are a separate kind of plugin and are not covered here.
 
-Four example plugins show the rules in practice:
+Five example plugins show the rules in practice:
 
 - `examples/SimpleExample`: a plugin settings page with one switch.
 - `examples/SimpleTrExample`: the same, with the switch text translated.
 - `examples/DeviceListExample`: device sub-pages.
 - `examples/FullApiExample`: a plugin settings page and a device sub-page that, between them, show every type in the [type reference](#type-reference).
+- `examples/QuickAccessExample`: a quick access pane, with cards laid out as in the Controls pane.
 
 `Victron.GuiPlugins` is not finished yet. It has the types in the [type reference](#type-reference); more list item types will be added.
 
@@ -81,6 +82,8 @@ PluginPage {
 A quick access pane adds a status-bar icon. A press opens the pane in the same overlay as Controls and Switches. The overlay title is the plugin name, not the pane's `title`. The pane fills the overlay. Compile it with `--quickaccess`, as in the [quick start](#quick-start). The third file, if given, is the icon shown while the pane is open.
 
 The pane's base type is `PluginPage`. Put a `PluginItemListView` or a `PluginModelListView` in it, with the same list item types as a plugin settings page. Those types draw the text.
+
+Or show `PluginCard`s, laid out as in the Controls pane, as `examples/QuickAccessExample` does. Put the cards in a Qt Quick `ListView`, with an `ObjectModel` as its `model`, and set `focus: true` on the `ListView`. Make the `ListView` horizontal, and in the portrait layout, when the window is taller than it is wide, vertical. Bind each card's height to the height of the `ListView`, or in portrait layout, its width to the width of the `ListView`. The `ListView` gives the key focus to its current card. With key navigation, the Left and Right keys move to the previous or next card, or the Up and Down keys in portrait layout. The plugin API does not give the spacing of gui-v2's own cards, so choose your own.
 
 To show devices, such as tanks or solar chargers, use a `PluginDeviceModel`. See [Devices](#devices).
 
@@ -385,7 +388,7 @@ PluginCard {
 
 **`PluginCard`** is a card with an icon, a title and a status, drawn like the cards in the Controls pane. A plugin card is meant to be shown in the Controls pane or the Switches pane, beside gui-v2's own cards. That is not supported yet: for now, put the card on your own page, in a `PluginCardListView`: see [Lists of cards](#lists-of-cards).
 
-Set `title` and `status` to the text. Set `iconSource` to a single-color image, such as one of the `PluginIcons`. The card tints the icon with the primary font color, and draws the title and status in the current theme. `title` and `status` are the text, not the labels that draw them.
+Set `title` and `status` to the text. Set `iconSource` to a single-color image, such as one of the `PluginIcons`. For an image that your plugin ships, set it to `Qt.resolvedUrl("icon.svg")`: a plain file name is looked up next to gui-v2's own card, not next to your file. The card tints the icon with the primary font color, and draws the title and status in the current theme. `title` and `status` are the text, not the labels that draw them.
 
 Declare any other content directly inside the card. It is placed in a column below the status, or below the title when `status` is empty. The column is as wide as the card, as in gui-v2's own cards. Every list item in the card must be flat, and a flat list item adds its own margins: see below. Content that is not a list item, such as a `PluginLabel` or a `PluginButton`, starts at the left edge of the card, so set its `x` to the card's `contentMargin`, as gui-v2's own cards do, so that it lines up with the icon and the status. If it wraps, or fills the line, also set its `width` to the card's `width` minus twice `contentMargin`. Color that content with `PluginPalette`. The card is the usual control-card size. Set its width or height to change that; in a `PluginCardListView`, the list sets them. If the content needs more room, the card grows.
 
