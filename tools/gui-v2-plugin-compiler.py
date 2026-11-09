@@ -1274,15 +1274,11 @@ if __name__ == '__main__':
             if not pageQml.endswith('.qml'):
                 print("\n\nERROR: Quick access page must be a .qml file")
                 sys.exit(1)
-            if not os.path.exists(pageQml):
-                print(f"\n\nERROR: Quick access page \"{pageQml}\" not found in current directory")
-                sys.exit(1)
+            require_packed_file(pageQml, qmlFiles, "Quick access page")
             if not (iconFile.endswith('.svg') or iconFile.endswith('.png')):
                 print("\n\nERROR: Quick access icon must be a .svg or .png file")
                 sys.exit(1)
-            if not os.path.exists(iconFile):
-                print(f"\n\nERROR: Quick access icon \"{iconFile}\" not found in current directory")
-                sys.exit(1)
+            require_packed_file(iconFile, imageFiles, "Quick access icon")
             qaIntegration = {
                 "type": 4,
                 "url": resource_url(args.name, pageQml),
@@ -1292,9 +1288,7 @@ if __name__ == '__main__':
                 if not (iconActiveFile.endswith('.svg') or iconActiveFile.endswith('.png')):
                     print("\n\nERROR: Quick access active icon must be a .svg or .png file")
                     sys.exit(1)
-                if not os.path.exists(iconActiveFile):
-                    print(f"\n\nERROR: Quick access active icon \"{iconActiveFile}\" not found in current directory")
-                    sys.exit(1)
+                require_packed_file(iconActiveFile, imageFiles, "Quick access active icon")
                 qaIntegration["iconActive"] = resource_url(args.name, iconActiveFile)
             integrations.append(qaIntegration)
     if args.card:
