@@ -1,6 +1,6 @@
 FullApiExample: a plugin that uses every type in Victron.GuiPlugins
 
-It adds a settings page with five subpages, and a page on the page of a
+It adds a settings page with six subpages, and a page on the page of a
 Skylla-i charger (product id 0x106):
 
 - FullApiExample_Main.qml: the settings page, with navigation list items.
@@ -14,6 +14,8 @@ Skylla-i charger (product id 0x106):
   access level.
 - FullApiExample_WordsAndIcons.qml: the common words, already translated,
   and the icons, drawn in the GUI's colors.
+- FullApiExample_Card.qml: a card with an icon, a title and a status, and
+  content of your own.
 - FullApiExample_Device.qml: the device page.
 
 Together, the pages show every type in the API. A member that several types

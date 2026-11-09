@@ -5,7 +5,7 @@ A GUI plugin adds pages to gui-v2, without changing gui-v2. A plugin can add a:
 - **plugin settings page**, opened from Settings -> Integrations -> UI Plugins
 - **device sub-page**, opened from the page of a device in the Devices list
 
-A navigation page, a quick access pane, and a card in a quick access pane (integration types 3, 4 and 5) are not yet part of the plugin API. Plugin pages are written with the types of the `Victron.GuiPlugins` module, which gui-v2 keeps stable for plugins.
+A navigation page, a quick access pane, and a card in a quick access pane (integration types 3, 4 and 5) are not yet part of the plugin API. `PluginCard` is a card on the plugin's own page. It is not added to the Controls or Switches pane. Plugin pages are written with the types of the `Victron.GuiPlugins` module, which gui-v2 keeps stable for plugins.
 
 This document is for OEM and third-party developers, and for AI agents that write or check a plugin. It is complete on its own: you do not need to read gui-v2's internals. Custom branding plugins, which change the GUI's colors, fonts and logos, are a separate kind of plugin and are not covered here.
 
@@ -46,7 +46,7 @@ The compiler does not check these rules. A page that breaks them may work today,
 6. **Access levels.** Use `PluginAccessLevel.User`, `.Installer`, `.SuperUser` and `.Service` for `showAccessLevel` and `writeAccessLevel`.
 7. **Key navigation.** The GUI can be used with keys or buttons, as well as touch. The list item types handle this. In a `PluginListSetting`, handle key presses on the list item, for example with `Keys.onSpacePressed`. Those handlers run only while key navigation is active. Call `checkWriteAccessLevel()` before changing a setting.
 8. **Text.** For common words, such as "Status", "Voltage" or "On", use `PluginWords`: they are already translated, and change with the user's language. Translate other text with `qsTrId()`, with a `//% "Source text"` comment above it, and ship the translations in the plugin's own `.ts` files, as `examples/SimpleTrExample` does. See [Words and icons](#words-and-icons).
-9. **Colors and fonts.** Plugins can read the main colors, the font families and the main text sizes from `PluginPalette`. The families and the colors change with custom branding. The colors also change with light and dark mode, and the text sizes with the screen size. Prefer the list item types for text: set the list item's `text`, and its `caption` where it has one, rather than adding your own label. `PluginListSetting` has no `caption`. When you draw your own component, use a `PluginPalette` color, not a fixed color. Draw icons with `PluginIconImage`, which colors them by purpose. Other images that your plugin ships must be visible on both light and dark backgrounds, as in `examples/DeviceListExample`.
+9. **Colors and fonts.** Plugins can read the main colors, the font families and the main text sizes from `PluginPalette`. The families and the colors change with custom branding. The colors also change with light and dark mode, and the text sizes with the screen size. Prefer the list item types for text: set the list item's `text`, and its `caption` where it has one, rather than adding your own label. A `PluginCard` draws its icon, title and status: set those, rather than drawing them yourself. `PluginListSetting` has no `caption`. When you draw your own component, use a `PluginPalette` color, not a fixed color. Draw icons with `PluginIconImage`, which colors them by purpose. Other images that your plugin ships must be visible on both light and dark backgrounds, as in `examples/DeviceListExample`.
 
 For example, a plugin settings page with a switch and a subpage:
 
@@ -154,6 +154,16 @@ Rectangle {
 }
 ```
 
+## Cards
+
+**`PluginCard`** is a card with an icon, a title and a status, drawn like a card on the Controls pane. It is not added to that pane, or to the Switches pane. Put it on your own page.
+
+Set `title` and `status` to the text. Set `iconSource` to a single-color image, such as one of the `PluginIcons`. The card tints the icon with the primary font color, and draws the title and status in the current theme. `title` and `status` are the text, not the labels that draw them.
+
+Declare any other content directly inside the card. It is placed below the status, or below the title when `status` is empty. It is inset by the card's content margin, and it is as wide as the card. Color that content with `PluginPalette`. The card is the usual control-card size. Set its width or height to change that. If the content needs more room, the card grows.
+
+When the card has the key focus, it shows the key navigation highlight. If an item inside the card has `focus: true`, the card passes the key focus to that item instead.
+
 ## Type reference
 
 All of these are in `Victron.GuiPlugins`.
@@ -189,6 +199,7 @@ The list item types:
 
 ### Other types
 
+- **`PluginCard`**: a card with an icon, a title and a status. See [Cards](#cards).
 - **`PluginDataItem`**: a value on the system. `serviceType` and `path` name it; set `deviceInstance` to name one device. See [Backend data values](#backend-data-values).
 - **`PluginAccessLevel`**: `User`, `Installer`, `SuperUser`, `Service`.
 - **`PluginUnit`**: the units for `PluginListQuantity`: `None`, `Amp`, `AmpHour`, `Energy_KiloWattHour`, `Percentage`, `RevolutionsPerMinute`, `VoltAmpere`, `Volt_AC`, `Volt_DC`, `Watt`.
@@ -202,6 +213,7 @@ The version of `Victron.GuiPlugins` that added each type. A type's members came 
 <!-- BEGIN versions. tools/guipluginsapi.py writes this part from tools/guiplugins-api.json: do not edit it. -->
 
 - `PluginAccessLevel`: 1.0
+- `PluginCard`: 1.0
 - `PluginDataItem`: 1.0
 - `PluginDevicePage`: 1.0
 - `PluginGradientListView`: 1.0
@@ -273,4 +285,8 @@ The version of `Victron.GuiPlugins` that added each type. A type's members came 
 - In this module, only `PluginPalette` names a `Theme` color or text size.
   A Plugin* type that sets a color or a text size takes that value from `PluginPalette`, or from a gui-v2 type that the Plugin* type wraps.
   Some spacing and sizes come from `Theme`. Those `Theme` names are not part of the API.
+- `PluginCard` wraps `ControlCard`.
+  `PluginCard` exposes `title`, `status` and `iconSource`, and a default `content` item.
+  `PluginCard` does not expose the inner label or image.
+  If `ControlCard` changes, keep the properties `PluginCard` exposes, and map `title`, `status` and `iconSource` to the new inner items.
 - `PageStack.pushPluginPage()` (reached through `Global.pageManager.pushPluginPage()`) opens a plugin page. It creates a `PluginHostPage` (defined in `PageStack.qml`), which is a `Page`, and then the plugin page with the host page as its parent, so the two are destroyed together. The host shows the plugin page's title, or `defaultTitle` while that title is empty. A list item that opens the page passes its text as `defaultTitle`. Callers must not assign `pluginPage.title`: that replaces the page's title binding. A page whose base type is a `Page` from `Victron.VenusOS`, is not an item, or is not a `PluginPage`, is destroyed with the host and is not opened. `PageStack.pushPage()` is for gui-v2's own pages, and refuses a page whose base type is not a `Page`.
