@@ -62,6 +62,12 @@ PluginPage {
 		}
 
 		PluginListNavigation {
+			text: "Card"
+			caption: "An icon, a title and a status, and content of your own"
+			pageUrl: Qt.resolvedUrl("FullApiExample_Card.qml")
+		}
+
+		PluginListNavigation {
 			text: "Not clickable"
 			caption: "A navigation item with interactive set to false has no arrow, and opens nothing."
 			interactive: false

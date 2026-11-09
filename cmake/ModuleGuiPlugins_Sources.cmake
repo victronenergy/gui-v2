@@ -16,6 +16,7 @@ set_source_files_properties(${VictronGuiPlugins_QML_MODULE_SINGLETON_SOURCES} PR
 
 set(VictronGuiPlugins_QML_MODULE_SOURCES
     ${VictronGuiPlugins_QML_MODULE_SINGLETON_SOURCES}
+    guiplugins/PluginCard.qml
     guiplugins/PluginDevicePage.qml
     guiplugins/PluginGradientListView.qml
     guiplugins/PluginIconImage.qml
