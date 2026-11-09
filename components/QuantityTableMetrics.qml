@@ -25,6 +25,7 @@ FontMetrics {
 			+ (unit === VenusOS.Units_PowerFactor ? "PF" : Units.defaultUnitString(unit)))
 		const defaultDecimals = Units.defaultUnitDecimals(unit)
 		return maxTextRect.width + maxTextRect.x
+			+ Theme.geometry_quantityLabel_spacing
 			// Add a buffer to increase the padding around quantity labels, especially for quantity
 			// table headers, which are longer and ideally should not be elided.
 			+ Theme.geometry_quantityMetricPadding
@@ -32,6 +33,6 @@ FontMetrics {
 			+ (decimals > defaultDecimals ? (decimals - defaultDecimals) * averageCharacterWidth : 0)
 	}
 
-	font.family: Global.fontFamily
+	font.family: Global.quantityFontFamily
 	font.pixelSize: Theme.font_size_body3
 }
