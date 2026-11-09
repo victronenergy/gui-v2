@@ -113,5 +113,16 @@ PluginDevicePage {
 			unit: PluginUnit.Amp
 			dataItem.uid: root.serviceUid + "/Ac/In/CurrentLimit"
 		}
+
+		PluginSettingsListHeader {
+			text: "Paths"
+		}
+
+		PluginListNavigation {
+			text: "Paths of this device"
+			caption: "Every path that the device has, with its value"
+			pageUrl: Qt.resolvedUrl("FullApiExample_Paths.qml")
+			pageProperties: ({ pathUid: root.serviceUid })
+		}
 	}
 }
