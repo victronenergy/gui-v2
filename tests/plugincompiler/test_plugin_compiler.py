@@ -60,6 +60,10 @@ class RequiredGuiPluginsVersionTest(unittest.TestCase):
                 {'name': 'yes', 'type': 'string', 'since': '1.0'},
                 {'name': 'reset', 'type': 'string', 'since': '1.3'},
             ]},
+            {'name': 'PluginDeviceModel', 'base': 'QAbstractListModel', 'since': '1.1', 'roles': [
+                {'name': 'serviceUid', 'type': 'string', 'since': '1.1'},
+                {'name': 'productId', 'type': 'int', 'since': '1.2'},
+            ]},
         ],
     }
 
@@ -138,6 +142,11 @@ class RequiredGuiPluginsVersionTest(unittest.TestCase):
             # A quoted string may span lines. A name inside it does not count. A name after it does.
             'PluginListItem { text: "line 1\nPluginWords.reset\nline2" }': ('1.0', []),
             'PluginListItem { text: "line 1\nline2"; text: PluginWords.reset }': ('1.3', ['PluginWords.reset']),
+            # A model's role names are members, so a delegate that reads a newer one needs its version.
+            'Repeater { model: PluginDeviceModel {} delegate: Item { required property string serviceUid } }':
+                ('1.1', ['PluginDeviceModel', 'PluginDeviceModel.serviceUid']),
+            'Repeater { model: PluginDeviceModel {} delegate: Item { required property int productId } }':
+                ('1.2', ['PluginDeviceModel.productId']),
         }
         for qml, expected in cases.items():
             with self.subTest(qml=qml):

@@ -97,6 +97,22 @@ TestCase {
 		compare(deviceItem.uid, "mock/com.victronenergy.settings/Settings/System/AccessLevel")
 	}
 
+	function test_leadingSlashIsOptional() {
+		deviceItem.serviceType = "settings"
+		deviceItem.path = "Settings/System/AccessLevel"
+		compare(deviceItem.uid, "mock/com.victronenergy.settings/Settings/System/AccessLevel")
+
+		const uid = "mock/com.victronenergy.battery.pdi_slash"
+		addDevice(uid, 9111)
+		deviceItem.serviceType = "battery"
+		deviceItem.deviceInstance = 9111
+		deviceItem.path = "Dc/0/Voltage"
+		compare(deviceItem.uid, uid + "/Dc/0/Voltage")
+		compare(deviceItem.value, 12.5)
+		deviceItem.path = "/Dc/0/Voltage"
+		compare(deviceItem.uid, uid + "/Dc/0/Voltage")
+	}
+
 	function test_deviceInstanceFollowsTheDevice() {
 		const lateUid = "mock/com.victronenergy.battery.pdi_late"
 		const otherUid = "mock/com.victronenergy.battery.pdi_other"
