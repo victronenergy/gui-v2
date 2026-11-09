@@ -509,6 +509,19 @@ FocusScope {
 					active: String(root.pluginQuickAccessUrl).length > 0
 					source: root.pluginQuickAccessUrl
 					asynchronous: true
+
+					function dismissFailedPane() {
+						if (status === Loader.Error) {
+							console.warn("Failed to load quick access pane:", source)
+							cardsLoader.hide()
+							root.pluginQuickAccessUrl = ""
+						}
+					}
+					onStatusChanged: {
+						if (status === Loader.Error) {
+							Qt.callLater(pluginPaneLoader.dismissFailedPane)
+						}
+					}
 					onLoaded: {
 						// A plugin Page binds focus to isCurrentPage, which is
 						// false inside this wrapper. Assigning focus selects it
@@ -518,6 +531,16 @@ FocusScope {
 						}
 					}
 				}
+			}
+		}
+	}
+
+	Connections {
+		target: GuiPluginLoader
+		function onPluginsChanged() {
+			if (cardsLoader.sourceComponent === pluginQuickAccessComponent) {
+				cardsLoader.hide()
+				root.pluginQuickAccessUrl = ""
 			}
 		}
 	}
