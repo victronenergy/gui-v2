@@ -9,6 +9,7 @@ set(VictronGuiPlugins_CPP_SOURCES
 
 set(VictronGuiPlugins_QML_MODULE_SINGLETON_SOURCES
     guiplugins/PluginIcons.qml
+    guiplugins/PluginPalette.qml
     guiplugins/PluginWords.qml
 )
 set_source_files_properties(${VictronGuiPlugins_QML_MODULE_SINGLETON_SOURCES} PROPERTIES QT_QML_SINGLETON_TYPE TRUE)

@@ -4,9 +4,8 @@ import Victron.GuiPlugins
 /*
 	List items with content of your own, built with PluginListSetting.
 
-	Plugins cannot read the GUI's colors, which change with light and dark mode and with custom
-	branding. So the content here has no text of its own, as the list items draw their text, and uses
-	colors that can be seen on both light and dark backgrounds.
+	Draw that content with PluginPalette colors, so it follows light and dark mode and custom
+	branding. The list items still draw the text.
 */
 PluginPage {
 	id: root
@@ -30,6 +29,102 @@ PluginPage {
 	}
 
 	PluginGradientListView {
+		PluginSettingsListHeader {
+			text: "Theme colors"
+		}
+
+		PluginPrimaryListLabel {
+			text: "These are the PluginPalette colors. They follow light and dark mode, and custom branding."
+		}
+
+		PluginListSetting {
+			Flow {
+				width: parent.width
+				spacing: 8
+
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_background_primary
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_background_secondary
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_background_page
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_font_primary
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_font_secondary
+					border.width: 1
+					border.color: PluginPalette.color_font_primary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_brand
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_info
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_success
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_warning
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_critical
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+			}
+		}
+
 		PluginPrimaryListLabel {
 			text: "Battery state of charge"
 		}
@@ -41,13 +136,14 @@ PluginPage {
 				width: parent.width
 				height: 12
 				radius: 6
-				color: "#80969591"
+				// A faint brand color: the brand color at 30%, laid over the background.
+				color: Qt.tint(PluginPalette.color_background_primary, Qt.alpha(PluginPalette.color_brand, 0.3))
 
 				Rectangle {
 					width: parent.width * Math.max(0, Math.min(100, socItem.value ?? 0)) / 100
 					height: parent.height
 					radius: parent.radius
-					color: "#387DC5"
+					color: PluginPalette.color_brand
 				}
 			}
 		}
@@ -80,7 +176,9 @@ PluginPage {
 						width: 32
 						height: 32
 						radius: 4
-						color: levelSetting.valid && square.index < levelSetting.value ? "#387DC5" : "#80969591"
+						color: levelSetting.valid && square.index < levelSetting.value
+							? PluginPalette.color_brand
+							: PluginPalette.color_font_secondary
 
 						MouseArea {
 							anchors.fill: parent

@@ -87,7 +87,8 @@
                         {"name": "Warning", "value": 2, "since": "1.0"},
                         {"name": "Critical", "value": 3, "since": "1.0"},
                         {"name": "Success", "value": 4, "since": "1.0"},
-                        {"name": "Disabled", "value": 5, "since": "1.0"}
+                        {"name": "Brand", "value": 5, "since": "1.0"},
+                        {"name": "Disabled", "value": 6, "since": "1.0"}
                     ]
                 }
             ]
@@ -317,6 +318,30 @@
             "since": "1.0",
             "properties": [
                 {"name": "title", "type": "string", "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginPalette",
+            "kind": "singleton",
+            "base": "QtObject",
+            "since": "1.0",
+            "properties": [
+                {"name": "color_background_page", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_background_primary", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_background_secondary", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_brand", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_critical", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_font_disabled", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_font_primary", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_font_secondary", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_info", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_success", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_warning", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "font_family", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "font_size_large", "type": "int", "readonly": true, "since": "1.0"},
+                {"name": "font_size_medium", "type": "int", "readonly": true, "since": "1.0"},
+                {"name": "font_size_small", "type": "int", "readonly": true, "since": "1.0"},
+                {"name": "quantity_font_family", "type": "string", "readonly": true, "since": "1.0"}
             ]
         },
         {

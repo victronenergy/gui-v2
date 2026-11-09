@@ -43,7 +43,7 @@ PluginPage {
 
 		PluginListNavigation {
 			text: "Custom items"
-			caption: "Items with content of your own"
+			caption: "Items with content of your own, in the theme colors"
 			pageUrl: Qt.resolvedUrl("FullApiExample_CustomItems.qml")
 			// Sets a title other than the list item's text, and a property that the subpage declares.
 			pageProperties: ({ title: "Items of your own", levelCount: 5 })

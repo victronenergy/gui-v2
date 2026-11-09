@@ -15,6 +15,8 @@ A custom branding plugin overrides colors with its own `Branding.qml`. It can se
 
 The branding colors are the Dark scheme's colors. The Light scheme keeps the brand and status colors, and computes its backgrounds and text colors from the Dark ones (see [Colors](branding-plugins.md#colors)).
 
+A GUI plugin does not import `Victron.VenusOS`, so it cannot read `Theme`. It reads these ten branding colors, and the font families, from `PluginPalette`. See [Colors](gui-plugins.md#colors).
+
 Whenever the custom branding or the color scheme changes, `Theme` computes every computed color again and emits `themeValuesChanged`. A computed color follows the custom branding if it is built from branding colors, directly or through other computed colors. One that is built only from palette colors does not. So:
 - To make a part follow the custom branding, give it a branding color or a color computed from one. See [Choosing a color](#choosing-a-color) and [Adding a color key](#adding-a-color-key).
 - To let a plugin change a part that it cannot change yet, prefer computing that part's color from the existing branding colors. A new `Branding` property changes the `Victron.Branding` API that plugins depend on (see [Changing Victron.Branding](branding-plugins.md#changing-victronbranding-gui-v2-contributors)).
