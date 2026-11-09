@@ -19,6 +19,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/AcOutput.qml
     components/AcPhase.qml
     components/AirQualityGaugePanel.qml
+    components/AlarmIcon.qml
     components/Arc.qml
     components/ArcGauge.qml
     components/ArcGaugeQuantityRow.qml

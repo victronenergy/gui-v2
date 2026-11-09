@@ -4,6 +4,7 @@
 */
 
 import QtQuick
+import QtQuick.Layouts
 import Victron.VenusOS
 
 Page {
@@ -77,6 +78,7 @@ Page {
 			}
 
 			ListTextStatus {
+				id: dessStatus
 				readonly property real scheduleAge: windowSlot.valid && windowSlot.value >= 0
 						&& lastScheduledStart.valid && lastScheduledEnd.valid
 					? windowSlot.value * (lastScheduledEnd.value - lastScheduledStart.value)
@@ -89,11 +91,31 @@ Page {
 				dataItem.uid: Services.system.serviceUid + "/DynamicEss/ReactiveStrategy"
 				secondaryText: dataItem.valid ? VenusOS.dynamicEss_reactiveStrategyToText(dataItem.value) : CommonWords.inactive_status
 				alarmStatus: scheduleOutdated ? VenusOS.Alarm_Level_Warning : -1
-				caption: scheduleOutdated
-						//: %1 = how long ago, e.g. "2h 0m"
-						//% "The schedule from VRM has not been updated for at least %1. Dynamic ESS keeps following the last schedule it received."
-						? qsTrId("settings_ess_dess_schedule_not_updated").arg(Utils.secondsToString(scheduleAge, false))
-						: ""
+				contentItem: GridLayout {
+					columnSpacing: dessStatus.spacing
+					rowSpacing: 0
+					columns: 2
+
+					ListItemLabelLayout {
+						primaryText: dessStatus.text
+						primaryLabel.font: dessStatus.font
+						secondaryText: dessStatus.secondaryText
+					}
+
+					AlarmIcon {
+						alarmStatus: dessStatus.alarmStatus
+					}
+
+					CaptionLabel {
+						text: dessStatus.scheduleOutdated
+								//: %1 = how long ago, e.g. "2h 0m"
+								//% "The schedule from VRM has not been updated for at least %1. Dynamic ESS keeps following the last schedule it received."
+								? qsTrId("settings_ess_dess_schedule_not_updated").arg(Utils.secondsToString(dessStatus.scheduleAge, false))
+								: ""
+						Layout.fillWidth: true
+						Layout.columnSpan: parent.columns
+					}
+				}
 
 				VeQuickItem {
 					id: windowSlot
