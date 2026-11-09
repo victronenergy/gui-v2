@@ -333,9 +333,12 @@ FocusScope {
 			KeyNavigation.left: {
 				void root.pluginButtonReady
 				if (pluginPaneButtons.visible && pluginRepeater.count > 0) {
-					const last = pluginRepeater.itemAt(pluginRepeater.count - 1)
-					if (last && last.visible && last.enabled)
-						return last
+					for (let i = pluginRepeater.count - 1; i >= 0; --i) {
+						const button = pluginRepeater.itemAt(i)
+						if (button && button.visible && button.enabled) {
+							return button
+						}
+					}
 				}
 				if (auxButton.visible && auxButton.enabled)
 					return auxButton

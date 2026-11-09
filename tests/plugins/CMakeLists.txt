@@ -89,12 +89,22 @@ function(add_probe_plugin DIR QML)
 	)
 	add_custom_command(
 		OUTPUT "${json}"
-		COMMAND ${Python3_EXECUTABLE} "${PLUGIN_COMPILER}" ${ARGN}
-		COMMAND ${CMAKE_COMMAND} -E copy_if_different "${work}/${DIR}.json" "${json}"
-		WORKING_DIRECTORY "${work}"
+		COMMAND ${CMAKE_COMMAND}
+		        "-DPYTHON=${Python3_EXECUTABLE}"
+			"-DCOMPILER=${PLUGIN_COMPILER}"
+			"-DLUPDATE=$<TARGET_FILE:Qt6::lupdate>"
+			"-DLRELEASE=$<TARGET_FILE:Qt6::lrelease>"
+			"-DRCC=$<TARGET_FILE:Qt6::rcc>"
+			"-DSOURCE_DIR=${work}"
+			"-DWORK_DIR=${CMAKE_CURRENT_BINARY_DIR}/${DIR}"
+			"-DOUTPUT=${json}"
+			-P "${CMAKE_CURRENT_SOURCE_DIR}/compile_test_plugin.cmake"
+			-- ${ARGN}
 		DEPENDS
 			"${prepared}"
+			"${CMAKE_CURRENT_SOURCE_DIR}/compile_test_plugin.cmake"
 			"${PLUGIN_COMPILER}"
+			"${CMAKE_SOURCE_DIR}/tools/guiplugins-api.json"
 		VERBATIM
 	)
 	set(accumulated ${probe_jsons})

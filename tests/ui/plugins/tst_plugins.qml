@@ -101,6 +101,11 @@ UiTestCase {
 			timeout: 90000
 		})
 		addStep(UiTestStep.Wait, { timeout: 700 })
+		addStep(UiTestStep.WaitUntil, { callable: () => Global.mainView.cardsActive, timeout: 5000 })
+		 		addStep(UiTestStep.WaitUntil, {
+ 			callable: () => !!findItem(Global.mainView.cardsLoader, { "text": "ProbeQuick" }),
+ 			timeout: 5000
+ 		})
 		addStep(UiTestStep.Invoke, { callable: () => {
 			const ticks = root.probeNavTicks()
 			console.warn("PROBE ticks before visit", ticks)
