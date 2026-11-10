@@ -25,8 +25,10 @@
 # It cannot see a change to a property's initial value, or to what a function does. Those can still
 # break a plugin, and they need a new major version too.
 #
-# A member that the record does not have yet gets the current module version. Increase
-# VICTRON_GUIPLUGINS_VERSION_MINOR before adding to the API. Each addition needs its own minor
+# A member that the record does not have yet gets the current module version. Version 1.0 stays
+# open until the first GUI with this module is released: until then, additions are saved at 1.0,
+# and the minor version is not increased (see UNRELEASED_VERSION). After that release, increase
+# VICTRON_GUIPLUGINS_VERSION_MINOR before adding to the API. Each addition then needs its own minor
 # version, even if the previous one has not been released. If the version is not already higher
 # than the version in the record, the script refuses to write the record, and prints what to do.
 #
@@ -54,6 +56,11 @@ DEFAULT_DOCS = os.path.join(SOURCE_DIR, '.github', 'gui-plugins.md')
 MODULE_CMAKE_FILE = 'cmake/ModuleGuiPlugins.cmake'
 MODULE_TARGET = 'VictronGuiPlugins'
 MODULE_URI = 'Victron.GuiPlugins'
+
+# The module version that no released GUI has yet. Additions are saved at this version without
+# increasing VICTRON_GUIPLUGINS_VERSION_MINOR. When the first GUI with this module is released, set
+# this to None.
+UNRELEASED_VERSION = (1, 0)
 
 # The list of versions in the type reference in .github/gui-plugins.md is between these two lines.
 DOCS_BEGIN = ('<!-- BEGIN versions. tools/guipluginsapi.py writes this part from tools/guiplugins-api.json: '
@@ -873,8 +880,10 @@ def display_path(path):
 
 def unbumped_additions(old_record, module_version, record):
     """Returns new member names that must not be saved, because module_version is not newer than the
-    version already in old_record. Empty if there is no old record, or the version was increased."""
-    if old_record is None or tuple(module_version) > parse_version(old_record['version']):
+    version already in old_record. Empty if there is no old record, if the version was increased, or
+    if module_version is UNRELEASED_VERSION."""
+    if (old_record is None or tuple(module_version) > parse_version(old_record['version'])
+            or tuple(module_version) == UNRELEASED_VERSION):
         return []
     return new_members(old_record, record)
 
