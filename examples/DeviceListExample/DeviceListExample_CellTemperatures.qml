@@ -6,7 +6,7 @@ PluginDevicePage {
 
 	title: "Cell Temperatures" // No translation, just as an example.
 
-	PluginGradientListView {
+	PluginItemListView {
 		PluginListSwitch {
 			text: "Temperatures" + " " + root.serviceUid // Again, no translation, just as an example.
 			checkable: true

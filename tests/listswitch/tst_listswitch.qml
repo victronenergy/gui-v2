@@ -122,7 +122,7 @@ TestCase {
 			property alias first: firstSwitch
 			property alias second: secondSwitch
 
-			PluginGradientListView {
+			PluginItemListView {
 
 				PluginListSwitch {
 					id: firstSwitch

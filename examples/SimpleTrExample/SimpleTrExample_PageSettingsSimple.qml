@@ -6,7 +6,7 @@ PluginPage {
 
 	title: "SimpleTr"
 
-	PluginGradientListView {
+	PluginItemListView {
 		PluginListSwitch {
 			//% "Battery"
 			text: qsTrId("simpletrexample_pagesettingssimple_text_battery")
