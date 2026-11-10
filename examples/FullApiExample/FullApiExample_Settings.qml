@@ -6,7 +6,8 @@ import Victron.GuiPlugins
 
 	The first group changes the plugin's own settings, under /Settings/FullApiExample/ in
 	com.victronenergy.settings. On a GX device, the plugin's own service creates its settings: see
-	the README. In mock mode, the settings do not exist until "Reset to defaults" is clicked.
+	the README. In mock mode, the settings do not exist until "Reset to defaults" is clicked. The
+	Enabled switch asks the user to confirm before it turns the example off.
 
 	The second group has no data items: the page keeps the values itself.
 */
@@ -47,15 +48,28 @@ PluginPage {
 			secondaryText: enabledSwitch.checked ? "Running" : "Stopped"
 			dataItem.serviceType: "settings"
 			dataItem.path: "/Settings/FullApiExample/Enabled"
-			// The page writes the value itself, so that turning the example off also sets Mode to Off.
+			// The page writes the value itself, so that it can ask before turning the example off,
+			// which also sets Mode to Off.
 			updateDataOnClick: false
 
 			onClicked: {
-				// 'checked' is still the value from before the click. Keep it, as writing the
-				// value may change 'checked' straight away.
-				const turnOff = enabledSwitch.checked
-				enabledSwitch.dataItem.setValue(turnOff ? 0 : 1)
-				if (turnOff) {
+				// 'checked' is still the value from before the click.
+				if (enabledSwitch.checked) {
+					disableDialog.open()
+				} else {
+					enabledSwitch.dataItem.setValue(1)
+				}
+			}
+
+			PluginConfirmationDialog {
+				id: disableDialog
+
+				title: "Turn off the example?"
+				description: "This also sets Mode to Off."
+				acceptText: "Turn off"
+
+				onAccepted: {
+					enabledSwitch.dataItem.setValue(0)
 					modeGroup.dataItem.setValue(0)
 				}
 			}
