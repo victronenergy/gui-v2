@@ -32,6 +32,25 @@
             ]
         },
         {
+            "name": "PluginConfirmationDialog",
+            "kind": "object",
+            "base": "QtObject",
+            "since": "1.0",
+            "properties": [
+                {"name": "acceptText", "type": "string", "since": "1.0"},
+                {"name": "description", "type": "string", "since": "1.0"},
+                {"name": "rejectText", "type": "string", "since": "1.0"},
+                {"name": "title", "type": "string", "since": "1.0"}
+            ],
+            "signals": [
+                {"name": "accepted", "parameters": [], "since": "1.0"},
+                {"name": "rejected", "parameters": [], "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "open", "parameters": [], "since": "1.0"}
+            ]
+        },
+        {
             "name": "PluginDataItem",
             "kind": "object",
             "base": "QtObject",
@@ -187,6 +206,21 @@
             "since": "1.0",
             "properties": [
                 {"name": "items", "type": "list<PluginListItem>", "default": true, "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginLabel",
+            "kind": "object",
+            "base": "Item",
+            "since": "1.0",
+            "properties": [
+                {"name": "color", "type": "color", "since": "1.0"},
+                {"name": "elide", "type": "int", "since": "1.0"},
+                {"name": "fontSize", "type": "int", "since": "1.0"},
+                {"name": "horizontalAlignment", "type": "int", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"},
+                {"name": "verticalAlignment", "type": "int", "since": "1.0"},
+                {"name": "wrapMode", "type": "int", "since": "1.0"}
             ]
         },
         {
@@ -440,6 +474,23 @@
             ]
         },
         {
+            "name": "PluginQuantityLabel",
+            "kind": "object",
+            "base": "Item",
+            "since": "1.0",
+            "properties": [
+                {"name": "dataItem", "type": "PluginDataItem", "readonly": true, "since": "1.0"},
+                {"name": "decimals", "type": "int", "since": "1.0"},
+                {"name": "fontSize", "type": "int", "since": "1.0"},
+                {"name": "horizontalAlignment", "type": "int", "since": "1.0"},
+                {"name": "unit", "type": "int", "since": "1.0"},
+                {"name": "unitColor", "type": "color", "since": "1.0"},
+                {"name": "value", "type": "real", "since": "1.0"},
+                {"name": "valueColor", "type": "color", "since": "1.0"},
+                {"name": "verticalAlignment", "type": "int", "since": "1.0"}
+            ]
+        },
+        {
             "name": "PluginSettingsListHeader",
             "kind": "object",
             "base": "PluginListItem",
@@ -461,12 +512,22 @@
                         {"name": "Amp", "value": 1, "since": "1.0"},
                         {"name": "AmpHour", "value": 2, "since": "1.0"},
                         {"name": "Energy_KiloWattHour", "value": 7, "since": "1.0"},
+                        {"name": "Hectopascal", "value": 9, "since": "1.0"},
+                        {"name": "Hertz", "value": 10, "since": "1.0"},
+                        {"name": "Kilopascal", "value": 12, "since": "1.0"},
                         {"name": "Percentage", "value": 20, "since": "1.0"},
+                        {"name": "PowerFactor", "value": 21, "since": "1.0"},
                         {"name": "RevolutionsPerMinute", "value": 22, "since": "1.0"},
+                        {"name": "Time_Day", "value": 30, "since": "1.0"},
+                        {"name": "Time_Hour", "value": 31, "since": "1.0"},
+                        {"name": "Time_Minute", "value": 32, "since": "1.0"},
+                        {"name": "Time_Second", "value": 33, "since": "1.0"},
                         {"name": "VoltAmpere", "value": 34, "since": "1.0"},
+                        {"name": "VoltAmpereReactive", "value": 35, "since": "1.0"},
                         {"name": "Volt_AC", "value": 36, "since": "1.0"},
                         {"name": "Volt_DC", "value": 37, "since": "1.0"},
-                        {"name": "Watt", "value": 42, "since": "1.0"}
+                        {"name": "Watt", "value": 42, "since": "1.0"},
+                        {"name": "WattsPerSquareMetre", "value": 43, "since": "1.0"}
                     ]
                 }
             ]

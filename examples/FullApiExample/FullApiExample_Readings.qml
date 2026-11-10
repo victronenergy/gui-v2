@@ -103,9 +103,34 @@ PluginPage {
 		}
 
 		PluginListQuantity {
+			text: "Hectopascal"
+			value: 1013
+			unit: PluginUnit.Hectopascal
+		}
+
+		PluginListQuantity {
+			text: "Hertz"
+			value: 50
+			unit: PluginUnit.Hertz
+		}
+
+		PluginListQuantity {
+			text: "Kilopascal"
+			value: 101.3
+			unit: PluginUnit.Kilopascal
+		}
+
+		PluginListQuantity {
 			text: "Percentage"
 			value: 87
 			unit: PluginUnit.Percentage
+		}
+
+		PluginListQuantity {
+			text: "PowerFactor"
+			caption: "A number with no unit"
+			value: 0.95
+			unit: PluginUnit.PowerFactor
 		}
 
 		PluginListQuantity {
@@ -115,9 +140,39 @@ PluginPage {
 		}
 
 		PluginListQuantity {
+			text: "Time_Day"
+			value: 3
+			unit: PluginUnit.Time_Day
+		}
+
+		PluginListQuantity {
+			text: "Time_Hour"
+			value: 5
+			unit: PluginUnit.Time_Hour
+		}
+
+		PluginListQuantity {
+			text: "Time_Minute"
+			value: 45
+			unit: PluginUnit.Time_Minute
+		}
+
+		PluginListQuantity {
+			text: "Time_Second"
+			value: 30
+			unit: PluginUnit.Time_Second
+		}
+
+		PluginListQuantity {
 			text: "VoltAmpere"
 			value: 3000
 			unit: PluginUnit.VoltAmpere
+		}
+
+		PluginListQuantity {
+			text: "VoltAmpereReactive"
+			value: 500
+			unit: PluginUnit.VoltAmpereReactive
 		}
 
 		PluginListQuantity {
@@ -138,6 +193,12 @@ PluginPage {
 			text: "Watt"
 			value: 1500
 			unit: PluginUnit.Watt
+		}
+
+		PluginListQuantity {
+			text: "WattsPerSquareMetre"
+			value: 850
+			unit: PluginUnit.WattsPerSquareMetre
 		}
 
 		PluginListQuantity {
