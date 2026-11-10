@@ -377,6 +377,8 @@ Item {
         self.assertNotIn('deprecated', next(value for value in again_unit['enums'][0]['values']
                                             if value['name'] == 'None'))
 
+    # The rule after the first release, when 1.0 is no longer open.
+    @mock.patch.object(guipluginsapi, 'UNRELEASED_VERSION', None)
     def test_unbumped_additions_are_refused(self):
         types = api(qml=QML_TYPE.replace('\tsignal clicked\n', '\tsignal clicked\n\tproperty string caption\n'))
         record = guipluginsapi.make_record(OLD_RECORD, (1, 0), types)
@@ -407,6 +409,16 @@ Item {
         self.assertIn('is 1.0, which is older than 1.1 in tools/guiplugins-api.json', older)
         self.assertIn('newer than 1.1', older)
 
+    @mock.patch.object(guipluginsapi, 'UNRELEASED_VERSION', (1, 0))
+    def test_additions_to_the_unreleased_version_are_saved(self):
+        types = api(qml=QML_TYPE.replace('\tsignal clicked\n', '\tsignal clicked\n\tproperty string caption\n'))
+        record = guipluginsapi.make_record(OLD_RECORD, (1, 0), types)
+        self.assertEqual(versions(record)['Example.caption'], '1.0')
+        self.assertEqual(guipluginsapi.unbumped_additions(OLD_RECORD, (1, 0), record), [])
+        self.assertEqual(guipluginsapi.unbumped_additions_message(
+            OLD_RECORD, (1, 0), record, 'tools/guiplugins-api.json', '.github/gui-plugins.md'), '')
+
+    @mock.patch.object(guipluginsapi, 'UNRELEASED_VERSION', None)
     def test_script_does_not_write_an_unbumped_addition(self):
         version, types = guipluginsapi.read_api(guipluginsapi.SOURCE_DIR)
         types = json.loads(json.dumps(types))
