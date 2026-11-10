@@ -24,8 +24,8 @@ set(VictronGuiPlugins_QML_MODULE_SOURCES
     ${VictronGuiPlugins_QML_MODULE_SINGLETON_SOURCES}
     guiplugins/PluginCard.qml
     guiplugins/PluginDevicePage.qml
-    guiplugins/PluginGradientListView.qml
     guiplugins/PluginIconImage.qml
+    guiplugins/PluginItemListView.qml
     guiplugins/PluginListButton.qml
     guiplugins/PluginListItem.qml
     guiplugins/PluginListNavigation.qml
@@ -37,6 +37,7 @@ set(VictronGuiPlugins_QML_MODULE_SOURCES
     guiplugins/PluginListTemperature.qml
     guiplugins/PluginListText.qml
     guiplugins/PluginListTextField.qml
+    guiplugins/PluginModelListView.qml
     guiplugins/PluginPage.qml
     guiplugins/PluginPrimaryListLabel.qml
     guiplugins/PluginSettingsListHeader.qml

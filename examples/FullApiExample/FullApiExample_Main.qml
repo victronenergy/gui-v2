@@ -16,7 +16,7 @@ PluginPage {
 		path: "/Settings/FullApiExample/Enabled"
 	}
 
-	PluginGradientListView {
+	PluginItemListView {
 		PluginPrimaryListLabel {
 			text: "This plugin uses every type in Victron.GuiPlugins. Each subpage shows one group of types."
 		}

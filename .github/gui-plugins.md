@@ -40,11 +40,11 @@ The compiler does not check these rules. A page that breaks them may work today,
 
 1. **Imports.** Import `Victron.GuiPlugins`, without a version, and Qt modules such as `QtQuick` and `QtQuick.Layouts`. Never import `Victron.VenusOS`, or any other Victron module: their types are gui-v2's own, and change without notice.
 2. **The base type.** The base type of a plugin settings page, and of every subpage, is `PluginPage`. The base type of a device sub-page is `PluginDevicePage`. It may also be a type that your plugin defines in its own file, if that file's base type is one of these. The GUI refuses a page whose base type is a `Page` from the `Victron.VenusOS` module, or a type derived from it. It does not open it, and logs `Aborted attempt to push a plugin page whose base type is a Page`. It also refuses a page whose base type is not an item, such as `QtObject`, and logs `Aborted attempt to push a plugin page whose base type is not an item`. It also refuses a page whose base type is an item but not a `PluginPage`, such as a plain `Item`, and logs `Aborted attempt to push a plugin page whose base type is not a PluginPage`. Plugins written for older versions of gui-v2, with a `Page` base type, must be ported.
-3. **List items.** Declare the list items as direct children of a `PluginGradientListView`, in the order they are shown. Only the `Plugin*` list item types can be list items. The list items are fixed when the page is created: to hide a list item, set its `preferredVisible` to `false`, and the list item then takes no space, and key navigation skips it. If that list item has the key focus, focus moves to a visible list item. Never set `visible` on a list item. A list of devices is not fixed. Give a `PluginDeviceModel` to a `ListView` or a `Repeater`. See [Devices](#devices).
+3. **List items.** Declare the list items as direct children of a `PluginItemListView`, in the order they are shown. Only the `Plugin*` list item types can be list items. The list items are fixed when the page is created: to hide a list item, set its `preferredVisible` to `false`, and the list item then takes no space, and key navigation skips it. If that list item has the key focus, focus moves to a visible list item. Never set `visible` on a list item. A list of devices is not fixed. Show it in a `PluginModelListView`, with a `PluginDeviceModel` as its `model` and a `Plugin*` list item as its `delegate`. See [Devices](#devices) and [Lists from a model](#lists-from-a-model).
 4. **Subpages.** Open a subpage with a `PluginListNavigation` list item, and give its file as `pageUrl: Qt.resolvedUrl("SubPage.qml")`, so that it is found next to your page. A subpage must be a file of its own: a page written inline, as a `Component`, cannot be opened.
 5. **Backend data values.** Read and write values with a `PluginDataItem`, which every list item with a value has as `dataItem`. To find the devices on the system, use a `PluginDeviceModel`, and to find the paths on a device or service, use a `PluginDataPathModel`. See [Backend data values](#backend-data-values), [Devices](#devices) and [Paths on a device or service](#paths-on-a-device-or-service).
 6. **Access levels.** Use `PluginAccessLevel.User`, `.Installer`, `.SuperUser` and `.Service` for `showAccessLevel` and `writeAccessLevel`.
-7. **Key navigation.** The GUI can be used with keys or buttons, as well as touch. The list item types handle this. In a `PluginListSetting`, handle key presses on the list item, for example with `Keys.onSpacePressed`. Those handlers run only while key navigation is active. Call `checkWriteAccessLevel()` before changing a setting.
+7. **Key navigation.** The GUI can be used with keys or buttons, as well as touch. The list item types handle this, in a `PluginItemListView` or a `PluginModelListView`. List items in a `ListView`, a `Repeater` or a layout have no key navigation. In a `PluginListSetting`, handle key presses on the list item, for example with `Keys.onSpacePressed`. Those handlers run only while key navigation is active. Call `checkWriteAccessLevel()` before changing a setting.
 8. **Text.** For common words, such as "Status", "Voltage" or "On", use `PluginWords`: they are already translated, and change with the user's language. Translate other text with `qsTrId()`, with a `//% "Source text"` comment above it, and ship the translations in the plugin's own `.ts` files, as `examples/SimpleTrExample` does. See [Words and icons](#words-and-icons).
 9. **Colors and fonts.** Plugins can read the main colors, the font families and the main text sizes from `PluginPalette`. The families and the colors change with custom branding. The colors also change with light and dark mode, and the text sizes with the screen size. Prefer the list item types for text: set the list item's `text`, and its `caption` where it has one, rather than adding your own label. A `PluginCard` draws its icon, title and status: set those, rather than drawing them yourself. `PluginListSetting` has no `caption`. When you draw your own component, use a `PluginPalette` color, not a fixed color. Draw icons with `PluginIconImage`, which colors them by purpose. Other images that your plugin ships must be visible on both light and dark backgrounds, as in `examples/DeviceListExample`.
 
@@ -57,7 +57,7 @@ import Victron.GuiPlugins
 PluginPage {
 	title: "OemName"
 
-	PluginGradientListView {
+	PluginItemListView {
 		PluginListSwitch {
 			text: "Enabled"
 			dataItem.serviceType: "settings"
@@ -91,7 +91,7 @@ To find which devices are on the system, and their service uids, use a `PluginDe
 
 ## Devices
 
-**`PluginDeviceModel`** is the devices on the system, such as every tank or every solar charger. It is a list model. Give it to a `Repeater` or a `ListView`, or read the device at an index with `serviceUidAt()`, `serviceTypeAt()`, `deviceInstanceAt()`, `nameAt()` and `productIdAt()`.
+**`PluginDeviceModel`** is the devices on the system, such as every tank or every solar charger. It is a list model. Show it in a `PluginModelListView`, or read the device at an index with `serviceUidAt()`, `serviceTypeAt()`, `deviceInstanceAt()`, `nameAt()` and `productIdAt()`.
 
 Set `serviceTypes` to the short names, such as `["tank"]` or `["solarcharger", "multi"]`. The short name is `"tank"`, not `com.victronenergy.tank`. Leave `serviceTypes` empty to list every device. A service that is not a device, such as `settings`, `system` or `platform`, is never in the list. A device is in the list once it has a device instance and a name. The common service types are listed [below](#common-service-types).
 
@@ -128,7 +128,7 @@ PluginDeviceModel {
 	serviceTypes: ["tank"]
 }
 
-ListView {
+PluginModelListView {
 	model: tanks
 
 	delegate: PluginListText {
@@ -158,7 +158,7 @@ These are the device service types that the GUI knows. Other types can appear, f
 
 Or set `serviceType` and `path` instead, and `deviceInstance` for a device, as on a `PluginDataItem`. See [Backend data values](#backend-data-values). For example, `serviceType: "settings"` and `path: "/Settings/Gui"` lists the child paths of `/Settings/Gui`, and `serviceType: "solarcharger"`, `deviceInstance: 0` and `path: "/Pv"` lists the trackers of solar charger `0`, such as `0` and `1`. Set `path` to `"/"` to list the top-level paths of the service or device. As on a `PluginDataItem`, the `/` at the start of `path` is optional. `uid` is then the full uid that they name. It is empty while only one of `serviceType` and `path` is set, and, for a device, until that device is present. Do not set `uid` as well as `serviceType` and `path`. The order of those assignments is not defined, so the result can differ between machines.
 
-It is a list model. Give it to a `Repeater` or a `ListView`, or read the child path at an index with `childNameAt()`, `childPathAt()` and `childUidAt()`. `count` is the number of child paths. The model has these role names, and those methods return the same values:
+It is a list model. Show it in a `PluginModelListView`, or read the child path at an index with `childNameAt()`, `childPathAt()` and `childUidAt()`. `count` is the number of child paths. The model has these role names, and those methods return the same values:
 
 - `childName`: the name of the child path, such as `Dc` or `0`.
 - `childPath`: the child path on the service, such as `/Pv/0`: the model's `path`, then `/`, then `childName`. Give it to the `path` of a `PluginDataItem` that has the same `serviceType` and `deviceInstance`. It is empty when you set `uid` yourself.
@@ -212,7 +212,7 @@ Each delegate reads its required properties through its `id`, so that it is clea
 
 ### Devices that need different paths
 
-`requiredPaths` applies to every type in `serviceTypes`. When the types need different paths, use one `PluginDeviceModel` for each group of types, each with its own `requiredPaths`, and show each list, for example with one `Repeater` for each model.
+`requiredPaths` applies to every type in `serviceTypes`. When the types need different paths, use one `PluginDeviceModel` for each group of types, each with its own `requiredPaths`. A `PluginModelListView` shows one model, so show each model in a list of its own, for example each on its own subpage.
 
 For example, to list the devices that have solar trackers: every solar charger has at least one tracker, but an older solar charger with one tracker does not have `NrOfTrackers`. A Multi RS (`multi`) or an inverter (`inverter`) has trackers only if it has a valid `NrOfTrackers`. So `NrOfTrackers` is required only of the second group:
 
@@ -231,7 +231,37 @@ PluginDeviceModel {
 }
 ```
 
-`requiredPaths` does not check the value, and `NrOfTrackers` can be `0`. Read it with a `PluginDataItem` for each device in `otherSolarDevices`, and skip a device whose value is `0`. To see the paths of the trackers, use a `PluginDataPathModel` with `uid: serviceUid + "/Pv"`: a device with more than one tracker lists each tracker by its number.
+`requiredPaths` does not check the value, and `NrOfTrackers` can be `0`. Read it with a `PluginDataItem` for each device in `otherSolarDevices`, and hide the list item of a device whose value is `0`, with `preferredVisible: false`. To see the paths of the trackers, use a `PluginDataPathModel` with `uid: serviceUid + "/Pv"`: a device with more than one tracker lists each tracker by its number.
+
+## Lists from a model
+
+**`PluginModelListView`** is a scrolling list with one list item for each entry in a model, such as a `PluginDeviceModel` or a `PluginDataPathModel`. It fills its parent. Set:
+
+- `model`: the list model.
+- `delegate`: the list item for each entry in the model. It must be a `Plugin*` list item. In it, declare a required property for each role name that it uses. See [Devices](#devices).
+- `header`: optional. An item above the list items, such as a `PluginPrimaryListLabel`. It scrolls with the list items. Keep it shorter than the list: key navigation scrolls to show all of it, which can hide the list items below it.
+
+`count` is the number of list items, including hidden ones.
+
+Key navigation moves through the list items, as in a `PluginItemListView`. To hide a list item, set its `preferredVisible` to `false`: it then takes no space, and key navigation skips it. If the list item with the key focus is hidden, or its entry is removed from the model, focus moves to a visible list item.
+
+```qml
+PluginModelListView {
+	model: PluginDeviceModel {
+		serviceTypes: ["tank"]
+	}
+
+	header: PluginPrimaryListLabel {
+		text: "The tanks on this system."
+	}
+
+	delegate: PluginListText {
+		required property string name
+
+		text: name
+	}
+}
+```
 
 ## Words and icons
 
@@ -318,7 +348,8 @@ All of these are in `Victron.GuiPlugins`.
 
 - **`PluginPage`**: the base type of a plugin page. `title` is shown in the status bar. If it is empty, the list item that opened the page supplies the title, until the page sets one. The GUI provides the back button, and sizes the page.
 - **`PluginDevicePage`**: a `PluginPage` for a device sub-page. The GUI sets `serviceUid` (the start of the device's uids), `productId` and `deviceName` when it opens the page.
-- **`PluginGradientListView`**: a scrolling list of list items, which fills its parent.
+- **`PluginItemListView`**: a scrolling list of the list items declared inside it, which fills its parent.
+- **`PluginModelListView`**: a scrolling list with one list item for each entry in a model, which fills its parent. See [Lists from a model](#lists-from-a-model).
 
 ### List items
 
@@ -366,9 +397,9 @@ The version of `Victron.GuiPlugins` that added each type. A type's members came 
 - `PluginDataPathModel`: 1.0
 - `PluginDeviceModel`: 1.0
 - `PluginDevicePage`: 1.0
-- `PluginGradientListView`: 1.0
 - `PluginIconImage`: 1.0
 - `PluginIcons`: 1.0
+- `PluginItemListView`: 1.0
 - `PluginListButton`: 1.0
 - `PluginListItem`: 1.0
 - `PluginListNavigation`: 1.0
@@ -380,6 +411,7 @@ The version of `Victron.GuiPlugins` that added each type. A type's members came 
 - `PluginListTemperature`: 1.0
 - `PluginListText`: 1.0
 - `PluginListTextField`: 1.0
+- `PluginModelListView`: 1.0
 - `PluginPage`: 1.0
 - `PluginPalette`: 1.0
 - `PluginPrimaryListLabel`: 1.0

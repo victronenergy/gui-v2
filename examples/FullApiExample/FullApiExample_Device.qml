@@ -17,7 +17,7 @@ PluginDevicePage {
 		uid: root.serviceUid + "/NrOfOutputs"
 	}
 
-	PluginGradientListView {
+	PluginItemListView {
 		PluginSettingsListHeader {
 			text: "Device"
 		}

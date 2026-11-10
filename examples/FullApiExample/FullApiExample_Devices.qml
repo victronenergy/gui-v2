@@ -14,19 +14,12 @@ PluginPage {
 		serviceTypes: ["tank"]
 	}
 
-	PluginPrimaryListLabel {
-		id: intro
-
-		width: parent.width
-		text: "Each list item is a tank. The number on the right is its level."
-	}
-
-	ListView {
-		anchors.top: intro.bottom
-		anchors.bottom: parent.bottom
-		width: parent.width
-		clip: true
+	PluginModelListView {
 		model: tanks
+
+		header: PluginPrimaryListLabel {
+			text: "Each list item is a tank. The number on the right is its level."
+		}
 
 		delegate: PluginListText {
 			required property int index
@@ -36,7 +29,6 @@ PluginPage {
 			required property int deviceInstance
 			required property int productId
 
-			width: ListView.view.width
 			text: name
 			caption: serviceType + ", instance " + deviceInstance + ", product " + productId
 			dataItem.uid: serviceUid + "/Level"

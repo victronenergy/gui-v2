@@ -8,11 +8,12 @@ import QtQml.Models
 import Victron.VenusOS
 
 /*
-	A scrolling list of items, which fills its parent.
+	A scrolling list of the items declared inside it, which fills its parent. For a list with one
+	item for each entry in a model, use PluginModelListView.
 
 	Declare the items as direct children of it, for example:
 
-		PluginGradientListView {
+		PluginItemListView {
 			PluginListSwitch { text: "Enabled" }
 			PluginListNavigation { text: "Advanced"; pageUrl: Qt.resolvedUrl("AdvancedPage.qml") }
 		}
@@ -36,35 +37,35 @@ FocusScope {
 		id: listView
 
 		model: ObjectModel {
-			id: rowModel
+			id: itemModel
 		}
 	}
 
 	// Nested, so this is not part of the plugin API. A function on the list would be.
 	QtObject {
-		id: hiddenRowFocus
+		id: hiddenItemFocus
 
-		function watch(row) {
+		function watch(item) {
 			// The parameter, not the loop variable: every connection must see its own list item.
-			row.effectiveVisibleChanged.connect(function() {
-				if (row.effectiveVisible || !row.activeFocus) {
+			item.effectiveVisibleChanged.connect(function() {
+				if (item.effectiveVisible || !item.activeFocus) {
 					return
 				}
-				Qt.callLater(function() { move(row) })
+				Qt.callLater(function() { move(item) })
 			})
 		}
 
-		function move(row) {
-			if (row.effectiveVisible || !row.activeFocus) {
+		function move(item) {
+			if (item.effectiveVisible || !item.activeFocus) {
 				return
 			}
 			// focusPolicy follows effectiveVisible, so this runs after that binding updates.
 			// Otherwise the helper still accepts this list item and puts focus back on it.
 			listView.__keyNavHelper.updateFocusedItem()
-			if (!row.activeFocus) {
+			if (!item.activeFocus) {
 				return
 			}
-			const next = nextVisibleRow(row)
+			const next = nextVisibleItem(item)
 			if (next) {
 				for (let i = 0; i < root.items.length; ++i) {
 					if (root.items[i] === next) {
@@ -74,16 +75,16 @@ FocusScope {
 				}
 				next.forceActiveFocus()
 			}
-			if (row.activeFocus) {
-				row.focus = false
+			if (item.activeFocus) {
+				item.focus = false
 			}
 		}
 
-		function nextVisibleRow(row) {
+		function nextVisibleItem(item) {
 			const items = root.items
 			let index = -1
 			for (let i = 0; i < items.length; ++i) {
-				if (items[i] === row) {
+				if (items[i] === item) {
 					index = i
 					break
 				}
@@ -101,9 +102,9 @@ FocusScope {
 			return null
 		}
 
-		function canFocus(row) {
+		function canFocus(item) {
 			// Same test as Utils.acceptsKeyNavigation(): TabFocus, and enabled.
-			return row.effectiveVisible && row.enabled && (row.focusPolicy & Qt.TabFocus)
+			return item.effectiveVisible && item.enabled && (item.focusPolicy & Qt.TabFocus)
 		}
 	}
 
@@ -111,9 +112,9 @@ FocusScope {
 		// Fill the model once, when every list item exists. The model is not bound to 'items', as the
 		// items are fixed when the list is created.
 		for (let i = 0; i < root.items.length; ++i) {
-			const row = root.items[i]
-			rowModel.append(row)
-			hiddenRowFocus.watch(row)
+			const item = root.items[i]
+			itemModel.append(item)
+			hiddenItemFocus.watch(item)
 		}
 	}
 }

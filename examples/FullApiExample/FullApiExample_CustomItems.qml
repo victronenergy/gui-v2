@@ -28,7 +28,7 @@ PluginPage {
 		path: "/Settings/FullApiExample/Level"
 	}
 
-	PluginGradientListView {
+	PluginItemListView {
 		PluginSettingsListHeader {
 			text: "Theme colors"
 		}
@@ -149,7 +149,7 @@ PluginPage {
 		}
 
 		PluginListSetting {
-			id: levelRow
+			id: levelListItem
 
 			text: "Level"
 			interactive: levelSetting.valid
@@ -157,7 +157,7 @@ PluginPage {
 
 			// Key presses go to the list item. Check the access level before changing the setting.
 			Keys.onSpacePressed: {
-				if (levelRow.interactive && levelRow.checkWriteAccessLevel()) {
+				if (levelListItem.interactive && levelListItem.checkWriteAccessLevel()) {
 					levelSetting.setValue(levelSetting.value % root.levelCount + 1)
 				}
 			}
@@ -183,7 +183,7 @@ PluginPage {
 						MouseArea {
 							anchors.fill: parent
 							// clickable is true when the list item is interactive, and the user has writeAccessLevel.
-							enabled: levelRow.clickable
+							enabled: levelListItem.clickable
 							onClicked: levelSetting.setValue(square.index + 1)
 						}
 					}

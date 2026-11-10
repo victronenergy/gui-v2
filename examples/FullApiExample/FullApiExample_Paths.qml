@@ -20,19 +20,12 @@ PluginPage {
 		uid: root.pathUid
 	}
 
-	PluginPrimaryListLabel {
-		id: intro
-
-		width: parent.width
-		text: root.pathUid + " has " + paths.count + " child paths."
-	}
-
-	ListView {
-		anchors.top: intro.bottom
-		anchors.bottom: parent.bottom
-		width: parent.width
-		clip: true
+	PluginModelListView {
 		model: paths
+
+		header: PluginPrimaryListLabel {
+			text: root.pathUid + " has " + paths.count + " child paths."
+		}
 
 		delegate: PluginListNavigation {
 			id: pathListItem
@@ -50,7 +43,6 @@ PluginPage {
 				uid: pathListItem.hasChildPaths ? "" : pathListItem.childUid
 			}
 
-			width: ListView.view.width
 			text: pathListItem.childName
 			secondaryText: pathListItem.hasChildPaths ? ""
 				: pathListItem.pathValue.valid ? String(pathListItem.pathValue.value)

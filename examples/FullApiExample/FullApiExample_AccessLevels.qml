@@ -5,7 +5,7 @@ import Victron.GuiPlugins
 	List items that are shown, or can be changed, only from an access level.
 
 	The hints name the current Access level value from Settings, and which value to set to see
-	the other rows.
+	the other list items.
 */
 PluginPage {
 	id: root
@@ -70,7 +70,7 @@ PluginPage {
 		return "The access level is not known yet."
 	}
 
-	PluginGradientListView {
+	PluginItemListView {
 		PluginPrimaryListLabel {
 			text: root.shownHint
 		}

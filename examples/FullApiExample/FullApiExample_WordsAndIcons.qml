@@ -11,7 +11,7 @@ import Victron.GuiPlugins
 PluginPage {
 	id: root
 
-	PluginGradientListView {
+	PluginItemListView {
 		PluginSettingsListHeader {
 			text: "Answers and actions"
 		}

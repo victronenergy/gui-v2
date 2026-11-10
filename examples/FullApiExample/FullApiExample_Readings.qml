@@ -11,7 +11,7 @@ PluginPage {
 		path: "/Dc/Battery/Soc"
 	}
 
-	PluginGradientListView {
+	PluginItemListView {
 		PluginSettingsListHeader {
 			text: "System"
 		}
