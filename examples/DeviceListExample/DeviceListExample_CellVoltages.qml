@@ -7,7 +7,7 @@ PluginDevicePage {
 	//% "Cell Voltages"
 	title: qsTrId("devicelistexample_cellvoltages_title_cell_voltages")
 
-	PluginGradientListView {
+	PluginItemListView {
 		PluginListSwitch {
 			//% "Battery"
 			text: qsTrId("devicelistexample_cellvoltages_text_battery") + " " + root.serviceUid

@@ -29,7 +29,7 @@ PluginPage {
 		root.levelSetting.setValue(3)
 	}
 
-	PluginGradientListView {
+	PluginItemListView {
 		PluginPrimaryListLabel {
 			text: "The example's settings do not exist yet. In mock mode, click Reset to defaults to create them. On a GX device, create them as the plugin's README describes."
 			// Hidden once the settings exist.

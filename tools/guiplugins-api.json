@@ -134,15 +134,6 @@
             ]
         },
         {
-            "name": "PluginGradientListView",
-            "kind": "object",
-            "base": "FocusScope",
-            "since": "1.0",
-            "properties": [
-                {"name": "items", "type": "list<PluginListItem>", "default": true, "since": "1.0"}
-            ]
-        },
-        {
             "name": "PluginIconImage",
             "kind": "object",
             "base": "Item",
@@ -187,6 +178,15 @@
                 {"name": "temperature", "type": "url", "readonly": true, "since": "1.0"},
                 {"name": "trash", "type": "url", "readonly": true, "since": "1.0"},
                 {"name": "warning", "type": "url", "readonly": true, "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginItemListView",
+            "kind": "object",
+            "base": "FocusScope",
+            "since": "1.0",
+            "properties": [
+                {"name": "items", "type": "list<PluginListItem>", "default": true, "since": "1.0"}
             ]
         },
         {
@@ -383,6 +383,18 @@
             ],
             "methods": [
                 {"name": "checkWriteAccessLevel", "parameters": [], "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginModelListView",
+            "kind": "object",
+            "base": "FocusScope",
+            "since": "1.0",
+            "properties": [
+                {"name": "count", "type": "int", "readonly": true, "since": "1.0"},
+                {"name": "delegate", "type": "Component", "since": "1.0"},
+                {"name": "header", "type": "Component", "since": "1.0"},
+                {"name": "model", "type": "var", "since": "1.0"}
             ]
         },
         {
