@@ -5,11 +5,27 @@ project(camperview VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick Svg)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick Svg Mqtt)
 
 qt_standard_project_setup(REQUIRES 6.8)
 
 set(GUIV2_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../..")
+
+# Victron.VeUtil provides VeQuickItem and the MQTT backend. It needs the same definitions as in
+# the gui-v2 build (see cmake/BuildDefines.cmake).
+if("${CMAKE_SYSTEM_NAME}" STREQUAL "Emscripten")
+	set(VENUS_WEBASSEMBLY_BUILD ON)
+	add_compile_definitions(VENUS_WEBASSEMBLY_BUILD MQTT_WEBSOCKETS_ENABLED)
+	find_package(Qt6 REQUIRED COMPONENTS WebSockets)
+else()
+	find_package(Qt6 REQUIRED COMPONENTS DBus Xml)
+endif()
+set(VENUS_QML_INSTALL_DIR ".")
+include("${GUIV2_ROOT_DIR}/cmake/VeUtil_Sources.cmake")
+# The source list is relative to the gui-v2 root, as cmake/Translations.cmake expects.
+list(TRANSFORM VictronVeUtil_CPP_SOURCES PREPEND "${GUIV2_ROOT_DIR}/")
+include_directories("${GUIV2_ROOT_DIR}/src/veutil/inc")
+include("${GUIV2_ROOT_DIR}/cmake/ModuleVeUtil.cmake")
 set(CAMPER_SHARED_QML_DIR "${GUIV2_ROOT_DIR}/components/camper")
 
 set(CAMPER_SHARED_QML_FILES
@@ -47,8 +63,8 @@ endforeach()
 
 qt_add_executable(camperview
 	main.cpp
-	camperdataprovider.cpp
-	camperdataprovider.h
+	camperbackend.cpp
+	camperbackend.h
 )
 
 qt_add_qml_module(camperview
@@ -75,4 +91,8 @@ target_link_libraries(camperview PRIVATE
 	Qt6::Qml
 	Qt6::Quick
 	Qt6::Svg
+	VictronVeUtil
+	VictronVeUtilplugin
 )
+
+qt_import_qml_plugins(camperview)

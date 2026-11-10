@@ -18,8 +18,8 @@ qt_add_qml_module(VictronVeUtil
 )
 
 target_include_directories(VictronVeUtil PUBLIC
-    ${PROJECT_SOURCE_DIR}/src/veutil/inc
-    ${PROJECT_SOURCE_DIR}/src/veutil/inc/veutil/qt)
+    ${CMAKE_CURRENT_LIST_DIR}/../src/veutil/inc
+    ${CMAKE_CURRENT_LIST_DIR}/../src/veutil/inc/veutil/qt)
 
 # The public headers include the Qt Quick, Qt MQTT and (outside WebAssembly)
 # Qt D-Bus headers, so whoever links this module needs them too.
