@@ -23,9 +23,11 @@ set_source_files_properties(${VictronGuiPlugins_QML_MODULE_SINGLETON_SOURCES} PR
 set(VictronGuiPlugins_QML_MODULE_SOURCES
     ${VictronGuiPlugins_QML_MODULE_SINGLETON_SOURCES}
     guiplugins/PluginCard.qml
+    guiplugins/PluginConfirmationDialog.qml
     guiplugins/PluginDevicePage.qml
     guiplugins/PluginIconImage.qml
     guiplugins/PluginItemListView.qml
+    guiplugins/PluginLabel.qml
     guiplugins/PluginListButton.qml
     guiplugins/PluginListItem.qml
     guiplugins/PluginListNavigation.qml
@@ -40,5 +42,6 @@ set(VictronGuiPlugins_QML_MODULE_SOURCES
     guiplugins/PluginModelListView.qml
     guiplugins/PluginPage.qml
     guiplugins/PluginPrimaryListLabel.qml
+    guiplugins/PluginQuantityLabel.qml
     guiplugins/PluginSettingsListHeader.qml
 )
