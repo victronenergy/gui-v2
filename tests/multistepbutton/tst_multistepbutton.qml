@@ -148,12 +148,61 @@ TestCase {
 		compare(headerButton(button).backgroundColor, Theme.color_darkBrand)
 		button.checked = false
 
-		// The off button is one of four equal segments, whatever its text
-		compare(headerButton(button).defaultBackgroundWidth, button._segmentWidth)
-		compare(button.itemAtIndex(0).width, button._segmentWidth)
+		// The off button is one of four equal segments, whatever its text: the visible widths
+		// (background, without press margins and underlap) are all the same
+		button.width = 4 * 100 + 2 * button.horizontalPressMargin + 2 * Theme.geometry_button_border_width
+		compare(button._segmentWidth, 100)
+		const visibleWidth = (item) => item.width - Math.max(0, item.leftInset) - Math.max(0, item.rightInset)
+		compare(visibleWidth(headerButton(button)), 100)
+		for (let i = 0; i < button.count; ++i) {
+			compare(visibleWidth(button.itemAtIndex(i).children[0]), 100, "step " + i)
+		}
 		button.offText = "A very long name for the off state of this output"
-		compare(headerButton(button).defaultBackgroundWidth, button._segmentWidth)
-		compare(button.itemAtIndex(0).width, button._segmentWidth)
+		compare(visibleWidth(headerButton(button)), 100)
+		compare(visibleWidth(button.itemAtIndex(0).children[0]), 100)
+
+		// Without a custom off text the On/Off button keeps its text width
+		button.offText = ""
+		compare(visibleWidth(headerButton(button)), button._headerTextWidth)
+	}
+
+	function test_singleStepNoHeader() {
+		const button = createTemporaryObject(segmentsComponent, root)
+		verify(button)
+		button.model = [ { text: 1 } ]
+		waitForRendering(button)
+
+		const only = button.itemAtIndex(0).children[0]
+		// Rounded on both sides, nothing to underlap
+		verify(only.topLeftRadius > 0)
+		verify(only.topRightRadius > 0)
+		compare(only.leftInset, button.horizontalPressMargin + Theme.geometry_button_border_width)
+		compare(only.rightInset, button.horizontalPressMargin)
+		compare(button.itemAtIndex(0).x + only.width - only.rightInset,
+				button.width - button.horizontalPressMargin - Theme.geometry_button_border_width)
+	}
+
+	function test_labelsFitBoundary() {
+		const button = createTemporaryObject(segmentsComponent, root)
+		verify(button)
+		waitForRendering(button)
+		// Find a label whose width is right at the limit of a segment
+		const available = button._stepWidth - 2 * Theme.geometry_button_padding
+		let label = ""
+		while (Math.ceil(metrics.advanceWidth(label + "M")) <= available) {
+			label += "M"
+		}
+		verify(label.length > 0)
+		button.labels = [label, "", ""]
+		compare(button.labelsFit, true)
+		button.labels = [label + "M", "", ""]
+		compare(button.labelsFit, false)
+	}
+
+	FontMetrics {
+		id: metrics
+		font.family: Global.fontFamily
+		font.pixelSize: Theme.font_size_body1
 	}
 
 	function test_exclusiveOffClicks() {
@@ -193,6 +242,24 @@ TestCase {
 		button.width = 701
 		waitForRendering(button)
 
+		// Buttons keep their slot width whatever their text, so a label the fit check lets
+		// through can never push the following buttons off their pixels
+		button.labels = ["Boost", "Boost", "Boost"]
+		for (let i = 0; i < button.count; ++i) {
+			const b = button.itemAtIndex(i).children[0]
+			compare(b.width, b.defaultBackgroundWidth + Math.max(0, b.leftInset) + Math.max(0, b.rightInset))
+		}
+
+		// The antialiased last button starts one pixel under its (crisp) neighbour, which
+		// paints on top of it; so does the On/Off header on its right
+		const lastDelegate = button.itemAtIndex(button.count - 1)
+		const previousDelegate = button.itemAtIndex(button.count - 2)
+		compare(lastDelegate.children[0].leftInset, -1)
+		compare(lastDelegate.children[0].leftPadding, 0)
+		verify(previousDelegate.z > lastDelegate.z)
+		compare(headerButton(button).rightInset, -1)
+		verify(button.itemAtIndex(0).z > button.headerItem.z)
+
 		let x = 0
 		let total = 0
 		for (let i = 0; i < button.count; ++i) {
@@ -207,6 +274,66 @@ TestCase {
 		}
 		// The steps fill the space after the header exactly, press margin included
 		compare(total, button._totalDelegateWidth)
+	}
+
+	Component {
+		id: segmentsComponent
+
+		MultiStepButton {
+			width: 700
+			showHeader: false
+			checked: true
+			model: [ { text: 1 }, { text: 2 }, { text: 3 } ]
+		}
+	}
+
+	function test_noHeader() {
+		const button = createTemporaryObject(segmentsComponent, root)
+		verify(button)
+		waitForRendering(button)
+		compare(button.headerItem, null)
+
+		button.labels = ["Low", "Mid", "High"]
+		button.currentIndex = 1
+		compare(button.labelsFit, true)
+		compare(stepTexts(button), ["Low", "Mid", "High"])
+		compare(stepChecked(button), [false, true, false])
+
+		// The segments (press margins included in the first and last) fill the control up to
+		// the right border, on whole pixels
+		let total = 0
+		for (let i = 0; i < button.count; ++i) {
+			const delegate = button.itemAtIndex(i)
+			compare(delegate.x, Math.round(delegate.x))
+			total += delegate.width
+		}
+		compare(total, button.width - Theme.geometry_button_border_width)
+		// ... so the backgrounds leave the border visible on both sides
+		const firstButton = button.itemAtIndex(0).children[0]
+		const lastItem = button.itemAtIndex(button.count - 1)
+		compare(button.itemAtIndex(0).x + firstButton.leftInset, button.horizontalPressMargin + Theme.geometry_button_border_width)
+		compare(lastItem.x + lastItem.children[0].width - lastItem.children[0].rightInset,
+				button.width - button.horizontalPressMargin - Theme.geometry_button_border_width)
+
+		// The first and last buttons carry the press margin and the rounded corners
+		const first = button.itemAtIndex(0).children[0]
+		const last = button.itemAtIndex(button.count - 1).children[0]
+		compare(first.leftInset, button.horizontalPressMargin + Theme.geometry_button_border_width)
+		verify(first.topLeftRadius > 0)
+		// ... and, being antialiased, extends one pixel under the second button
+		compare(first.rightInset, -1)
+		compare(first.rightPadding, 0)
+		verify(button.itemAtIndex(1).z > button.itemAtIndex(0).z)
+		verify(button.itemAtIndex(1).z > button.itemAtIndex(button.count - 1).z)
+		compare(last.rightInset, button.horizontalPressMargin)
+		verify(last.topRightRadius > 0)
+		compare(button.itemAtIndex(1).children[0].topLeftRadius, 0)
+
+		// An off item is highlighted in the off colour, the others in the active colour
+		compare(button.itemAtIndex(1).children[0].backgroundColor, Theme.color_brand)
+		button.offIndex = 0
+		button.currentIndex = 0
+		compare(button.itemAtIndex(0).children[0].backgroundColor, Theme.color_button_off_background)
 	}
 
 	Component {
