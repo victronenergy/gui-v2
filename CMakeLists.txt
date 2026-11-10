@@ -63,6 +63,7 @@ include(cmake/GenerateTheme.cmake)
 include(cmake/Translations.cmake)
 
 include(cmake/ModuleBranding.cmake)
+include(cmake/ModuleVeUtil.cmake)
 include(cmake/ModuleVenus.cmake)
 include(cmake/ModuleShaders.cmake)
 include(cmake/ModuleGauges.cmake)
@@ -81,6 +82,8 @@ if ("${GUI_V2_BUILD}" STREQUAL "ON")
     target_link_libraries(${PROJECT_NAME} PRIVATE
         VictronBranding
         VictronBrandingplugin
+        VictronVeUtil
+        VictronVeUtilplugin
         VictronVenusOS
         VictronVenusOSplugin
         VictronVenusOSShaders

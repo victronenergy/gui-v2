@@ -15,7 +15,7 @@ sys.dont_write_bytecode = True
 sys.path.insert(0, TOOLS_DIR)
 import moduledependencies  # noqa: E402
 
-# A tree that follows the rules: GuiPlugins uses VenusOS, and VenusOS uses Branding.
+# A tree that follows the rules: GuiPlugins uses VenusOS, and VenusOS uses Branding and VeUtil.
 TREE = {
     'CMakeLists.txt': 'include(cmake/ModuleVenus.cmake)\n',
     'cmake/ModuleVenus_Sources.cmake': (
@@ -32,7 +32,18 @@ TREE = {
         '    IMPORTS QtQuick.Controls.Basic\n'
         '    QML_FILES ${VictronVenusOS_QML_MODULE_SOURCES}\n'
         ')\n'
-        'target_link_libraries(VictronVenusOS PUBLIC VictronBranding)\n'),
+        'target_link_libraries(VictronVenusOS PUBLIC VictronBranding VictronVeUtil)\n'),
+    'cmake/VeUtil_Sources.cmake': (
+        'set(VictronVeUtil_CPP_SOURCES\n'
+        '    src/veutil/inc/veutil/qt/ve_quick_item.hpp\n'
+        '    src/veutil/src/qt/ve_quick_item.cpp\n'
+        ')\n'),
+    'cmake/ModuleVeUtil.cmake': (
+        'qt_add_qml_module(VictronVeUtil\n'
+        '    URI Victron.VeUtil\n'
+        '    DEPENDENCIES QtQml\n'
+        ')\n'
+        'target_link_libraries(VictronVeUtil PUBLIC Qt6::Core)\n'),
     'cmake/ModuleBranding_Sources.cmake': (
         'set(VictronBranding_CPP_SOURCES\n'
         '    src/branding/branding.h\n'
@@ -56,7 +67,9 @@ TREE = {
         ')\n'
         'target_link_libraries(VictronGuiPlugins PRIVATE VictronVenusOS)\n'),
     'components/Gauge.qml': 'import QtQuick\nimport Victron.VenusOS\nItem {}\n',
-    'src/theme.h': '#include <QObject>\n#include "branding.h"\n',
+    'src/theme.h': '#include <QObject>\n#include "branding.h"\n#include <veutil/qt/ve_quick_item.hpp>\n',
+    'src/veutil/inc/veutil/qt/ve_quick_item.hpp': '#include <QObject>\n',
+    'src/veutil/src/qt/ve_quick_item.cpp': '#include <veutil/qt/ve_quick_item.hpp>\n',
     'src/theme.cpp': '#include "theme.h"\n',
     'src/branding/branding.h': '#include <QObject>\n#include <optional>\n',
     'src/branding/branding.cpp': '#include "branding.h"\n',
@@ -244,6 +257,26 @@ class TestModuleDependencies(unittest.TestCase):
     def test_branding_links_victron_library(self):
         cmake = TREE['cmake/ModuleBranding.cmake'] + 'target_link_libraries(VictronBranding PUBLIC VictronVenusOS)\n'
         self.assertOneProblem({'cmake/ModuleBranding.cmake': cmake}, 'VictronBranding links VictronVenusOS')
+
+    def test_veutil_qml_module_lists_victron_module(self):
+        cmake = TREE['cmake/ModuleVeUtil.cmake'].replace('DEPENDENCIES QtQml', 'IMPORTS Victron.VenusOS')
+        self.assertOneProblem({'cmake/ModuleVeUtil.cmake': cmake},
+                              'qt_add_qml_module(VictronVeUtil) lists Victron.VenusOS. Victron.VeUtil must not')
+
+    def test_veutil_source_includes_victron_header(self):
+        for include in ('"theme.h"', '<branding.h>'):
+            with self.subTest(include=include):
+                text = '#include <veutil/qt/ve_quick_item.hpp>\n#include %s\n' % include
+                self.assertOneProblem({'src/veutil/src/qt/ve_quick_item.cpp': text},
+                                      'src/veutil/src/qt/ve_quick_item.cpp includes')
+
+    def test_veutil_links_victron_library(self):
+        cmake = TREE['cmake/ModuleVeUtil.cmake'] + 'target_link_libraries(VictronVeUtil PRIVATE VictronVenusOS)\n'
+        self.assertOneProblem({'cmake/ModuleVeUtil.cmake': cmake}, 'VictronVeUtil links VictronVenusOS')
+
+    def test_branding_includes_veutil_header(self):
+        text = '#include "branding.h"\n#include <veutil/qt/ve_quick_item.hpp>\n'
+        self.assertOneProblem({'src/branding/branding.cpp': text}, 'Victron.Branding must not use one')
 
     def test_guiplugins_header_has_same_name_as_venusos_header(self):
         venus = TREE['cmake/ModuleVenus_Sources.cmake'].replace('    src/theme.h\n', '    src/theme.h\n    src/units.h\n')

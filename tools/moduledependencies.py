@@ -9,9 +9,10 @@
 #    qt_add_qml_module() does not list it in IMPORTS or DEPENDENCIES, none of its C++ files includes
 #    a GuiPlugins header, and its library does not link the GuiPlugins library. (GuiPlugins uses
 #    VenusOS, so the reverse would make a cycle.)
-#  - Victron.Branding uses no other Victron module: no Victron QML import, no Victron entry in
-#    IMPORTS or DEPENDENCIES, no include of another Victron module's header, and no Victron library
-#    in its links. (Plugins compile against it alone.)
+#  - Victron.Branding and Victron.VeUtil use no other Victron module: no Victron QML import, no
+#    Victron entry in IMPORTS or DEPENDENCIES, no include of another Victron module's header, and no
+#    Victron library in their links. (Branding plugins compile against Victron.Branding alone, and a
+#    standalone app can use Victron.VeUtil without Victron.VenusOS.)
 #  - No GuiPlugins header has the same file name as a VenusOS header, so that the include check
 #    can tell them apart.
 #
@@ -44,6 +45,9 @@ SOURCE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 VENUSOS_TARGET = 'VictronVenusOS'
 BRANDING_TARGET = 'VictronBranding'
+VEUTIL_TARGET = 'VictronVeUtil'
+# The modules that must not use any other Victron module, with their URIs.
+STANDALONE_MODULES = ((BRANDING_TARGET, 'Victron.Branding'), (VEUTIL_TARGET, 'Victron.VeUtil'))
 GUIPLUGINS_TARGET = 'VictronGuiPlugins'
 GUIPLUGINS_URI = 'Victron.GuiPlugins'
 
@@ -446,22 +450,47 @@ def qml_imports(text):
     return _matches_in_code(QML_IMPORT_RE, text)
 
 
+def _standalone_module_problems(read_file, cmake_texts, all_headers, target, uri):
+    """Returns a message for each use of another Victron module by the module target (URI uri)."""
+    files = module_files(cmake_texts, target)
+    own_headers = {os.path.basename(path) for path in files if HEADER_RE.search(path)}
+    other_headers = all_headers - own_headers
+    problems = []
+    for path in files:
+        text = read_file(path) or ''
+        if path.endswith('.qml'):
+            for name in qml_imports(text):
+                if name.startswith('Victron.') and name != uri:
+                    problems.append('%s imports %s. %s must not use another Victron module.' % (path, name, uri))
+        else:
+            for name in includes(text):
+                basename = os.path.basename(name)
+                if basename not in own_headers and basename in other_headers:
+                    problems.append('%s includes %s, from another Victron module. %s must not use one.'
+                                    % (path, name, uri))
+    for name in qml_module_imports(cmake_texts, target):
+        if name.startswith('Victron.'):
+            problems.append('qt_add_qml_module(%s) lists %s. %s must not use another Victron module.'
+                            % (target, name, uri))
+    for library in linked_libraries(cmake_texts, target):
+        if library.startswith('Victron'):
+            problems.append('%s links %s. %s must not use another Victron module.' % (target, library, uri))
+    return problems
+
+
 def check(read_file, cmake_paths):
     """Returns a message for each broken rule. read_file(path) returns the text of the file at path,
     relative to the source directory, or None if there is none. cmake_paths are the CMake files.
     """
     cmake_texts = [read_file(path) or '' for path in cmake_paths]
     venus_files = module_files(cmake_texts, VENUSOS_TARGET)
-    branding_files = module_files(cmake_texts, BRANDING_TARGET)
     guiplugins_headers = {os.path.basename(path): path for path in module_files(cmake_texts, GUIPLUGINS_TARGET)
                           if HEADER_RE.search(path)}
-    branding_headers = {os.path.basename(path) for path in branding_files if HEADER_RE.search(path)}
-    # The headers of every other module, including the veutil ones in VEUTIL_* variables.
-    other_headers = set()
+    # The header file names listed in any module's source variables.
+    all_headers = set()
     for text in cmake_texts:
         for args in cmake_calls(text, 'set') + cmake_calls(text, 'list'):
-            other_headers |= {os.path.basename(word) for word in args[1:] if HEADER_RE.search(word)}
-    other_headers -= branding_headers
+            all_headers |= {os.path.basename(word) for word in args[1:] if HEADER_RE.search(word)}
 
     problems = []
 
@@ -484,27 +513,8 @@ def check(read_file, cmake_paths):
             problems.append('%s links %s. Victron.VenusOS must not use %s.'
                             % (VENUSOS_TARGET, library, GUIPLUGINS_URI))
 
-    for path in branding_files:
-        text = read_file(path) or ''
-        if path.endswith('.qml'):
-            for name in qml_imports(text):
-                if name.startswith('Victron.') and name != 'Victron.Branding':
-                    problems.append('%s imports %s. Victron.Branding must not use another Victron module.'
-                                    % (path, name))
-        else:
-            for name in includes(text):
-                basename = os.path.basename(name)
-                if basename not in branding_headers and basename in other_headers:
-                    problems.append('%s includes %s, from another Victron module. Victron.Branding must not '
-                                    'use one.' % (path, name))
-    for name in qml_module_imports(cmake_texts, BRANDING_TARGET):
-        if name.startswith('Victron.'):
-            problems.append('qt_add_qml_module(%s) lists %s. Victron.Branding must not use another Victron '
-                            'module.' % (BRANDING_TARGET, name))
-    for library in linked_libraries(cmake_texts, BRANDING_TARGET):
-        if library.startswith('Victron'):
-            problems.append('%s links %s. Victron.Branding must not use another Victron module.'
-                            % (BRANDING_TARGET, library))
+    for target, uri in STANDALONE_MODULES:
+        problems += _standalone_module_problems(read_file, cmake_texts, all_headers, target, uri)
 
     for path in venus_files:
         header = guiplugins_headers.get(os.path.basename(path))

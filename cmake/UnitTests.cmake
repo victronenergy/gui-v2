@@ -58,6 +58,8 @@ endif()
 target_link_libraries(${TEST_NAME} PRIVATE
     VictronBranding
     VictronBrandingplugin
+    VictronVeUtil
+    VictronVeUtilplugin
     VictronVenusOS
     VictronVenusOSplugin
     VictronVenusOSShaders
