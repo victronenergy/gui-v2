@@ -64,7 +64,8 @@ TestCase {
 	}
 
 	function test_colorsMatchTheme() {
-		const names = root.colorNames.concat(["font_family", "quantity_font_family"], Object.keys(root.fontSizes))
+		const names = root.colorNames.concat(["font_family", "quantity_font_family", "orientation"],
+				Object.keys(root.fontSizes))
 		compare(promisedNames(PluginPalette).slice().sort().join(","), names.slice().sort().join(","))
 		compare(PluginPalette.font_family, Theme.font_family)
 		compare(PluginPalette.quantity_font_family, Theme.quantity_font_family)
@@ -99,6 +100,17 @@ TestCase {
 		const landscapeSize = PluginPalette.font_size_medium
 		Theme.screenSize = Theme.Portrait
 		verify(PluginPalette.font_size_medium < landscapeSize)
+		Theme.screenSize = previousScreenSize
+	}
+
+	function test_orientationFollowsScreenSize() {
+		const previousScreenSize = Theme.screenSize
+		Theme.screenSize = Theme.FiveInch
+		compare(PluginPalette.orientation, Qt.LandscapeOrientation)
+		Theme.screenSize = Theme.SevenInch
+		compare(PluginPalette.orientation, Qt.LandscapeOrientation)
+		Theme.screenSize = Theme.Portrait
+		compare(PluginPalette.orientation, Qt.PortraitOrientation)
 		Theme.screenSize = previousScreenSize
 	}
 }

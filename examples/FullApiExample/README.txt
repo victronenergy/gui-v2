@@ -12,13 +12,15 @@ Skylla-i charger (product id 0x106), with a subpage of its own:
   buttons, with and without data items, and a dialog that asks the user to
   confirm a change.
 - FullApiExample_CustomItems.qml: list items with content of their own,
-  drawn with PluginPalette colors.
+  drawn with PluginPalette colors, and a label and a button of your own.
 - FullApiExample_AccessLevels.qml: list items shown, or changed, only from an
   access level.
 - FullApiExample_WordsAndIcons.qml: the common words, already translated,
   and the icons, drawn in the GUI's colors.
-- FullApiExample_Card.qml: a card with an icon, a title and a status, and
-  content of your own: a number and some text in the GUI's text sizes.
+- FullApiExample_Card.qml: cards with an icon, a title and a status, and
+  content of your own, in a list of cards laid out as in the Controls
+  pane. The pump card has a number in the GUI's font for numbers, and a
+  switch, a button and a slider, as flat list items.
 - FullApiExample_Device.qml: the device page.
 - FullApiExample_Paths.qml: the paths of the device, with their values,
   opened from the device page. A path with child paths opens the page

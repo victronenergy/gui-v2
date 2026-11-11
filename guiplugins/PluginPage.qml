@@ -10,7 +10,7 @@ import QtQuick
 
 	The app shows it inside a page of its own, which provides the status bar title (from 'title'),
 	the back button, and the page size. Put a PluginItemListView or a PluginModelListView inside it
-	to show a list of list items.
+	to show a list of list items, or a PluginCardListView to show cards.
 */
 FocusScope {
 	// The page title, shown in the status bar.

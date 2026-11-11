@@ -29,6 +29,7 @@ PluginListItem {
 	ListTemperature {
 		id: inner
 
+		flat: root.flat
 		text: root.text
 		decimals: root.decimals
 		dataItem.uid: root.dataItem.uid

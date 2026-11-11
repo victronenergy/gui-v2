@@ -47,6 +47,7 @@ PluginListItem {
 	ListTextField {
 		id: inner
 
+		flat: root.flat
 		text: root.text
 		placeholderText: root.placeholderText
 		maximumLength: root.maximumLength

@@ -68,8 +68,8 @@ PluginPage {
 		}
 
 		PluginListNavigation {
-			text: "Card"
-			caption: "An icon, a title and a status, and content of your own"
+			text: "Cards"
+			caption: "Cards with an icon, a title and a status, and content of your own"
 			pageUrl: Qt.resolvedUrl("FullApiExample_Card.qml")
 		}
 
