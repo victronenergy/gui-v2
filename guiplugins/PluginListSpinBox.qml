@@ -64,6 +64,7 @@ PluginListItem {
 	ListSpinBox {
 		id: inner
 
+		flat: root.flat
 		text: root.text
 		suffix: root.suffix
 		decimals: root.decimals

@@ -20,15 +20,38 @@
             ]
         },
         {
+            "name": "PluginButton",
+            "kind": "object",
+            "base": "Item",
+            "since": "1.0",
+            "properties": [
+                {"name": "iconSource", "type": "url", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"}
+            ],
+            "signals": [
+                {"name": "clicked", "parameters": [], "since": "1.0"}
+            ]
+        },
+        {
             "name": "PluginCard",
             "kind": "object",
             "base": "FocusScope",
             "since": "1.0",
             "properties": [
                 {"name": "content", "type": "alias", "default": true, "since": "1.0"},
+                {"name": "contentMargin", "type": "real", "readonly": true, "since": "1.0"},
                 {"name": "iconSource", "type": "url", "since": "1.0"},
                 {"name": "status", "type": "string", "since": "1.0"},
                 {"name": "title", "type": "string", "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginCardListView",
+            "kind": "object",
+            "base": "FocusScope",
+            "since": "1.0",
+            "properties": [
+                {"name": "cards", "type": "list<PluginCard>", "default": true, "since": "1.0"}
             ]
         },
         {
@@ -250,6 +273,7 @@
             "since": "1.0",
             "properties": [
                 {"name": "effectiveVisible", "type": "bool", "readonly": true, "since": "1.0"},
+                {"name": "flat", "type": "bool", "since": "1.0"},
                 {"name": "preferredVisible", "type": "bool", "since": "1.0"},
                 {"name": "showAccessLevel", "type": "int", "since": "1.0"}
             ]
@@ -322,6 +346,25 @@
                 {"name": "content", "type": "alias", "default": true, "since": "1.0"},
                 {"name": "interactive", "type": "bool", "since": "1.0"},
                 {"name": "text", "type": "string", "since": "1.0"},
+                {"name": "writeAccessLevel", "type": "int", "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "checkWriteAccessLevel", "parameters": [], "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginListSlider",
+            "kind": "object",
+            "base": "PluginListItem",
+            "since": "1.0",
+            "properties": [
+                {"name": "dataItem", "type": "PluginDataItem", "readonly": true, "since": "1.0"},
+                {"name": "from", "type": "real", "since": "1.0"},
+                {"name": "interactive", "type": "bool", "since": "1.0"},
+                {"name": "stepSize", "type": "real", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"},
+                {"name": "to", "type": "real", "since": "1.0"},
+                {"name": "value", "type": "real", "since": "1.0"},
                 {"name": "writeAccessLevel", "type": "int", "since": "1.0"}
             ],
             "methods": [
@@ -461,6 +504,7 @@
                 {"name": "font_size_large", "type": "int", "readonly": true, "since": "1.0"},
                 {"name": "font_size_medium", "type": "int", "readonly": true, "since": "1.0"},
                 {"name": "font_size_small", "type": "int", "readonly": true, "since": "1.0"},
+                {"name": "orientation", "type": "int", "readonly": true, "since": "1.0"},
                 {"name": "quantity_font_family", "type": "string", "readonly": true, "since": "1.0"}
             ]
         },

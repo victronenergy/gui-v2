@@ -5,7 +5,7 @@ A GUI plugin adds pages to gui-v2, without changing gui-v2. A plugin can add a:
 - **plugin settings page**, opened from Settings -> Integrations -> UI Plugins
 - **device sub-page**, opened from the page of a device in the Devices list
 
-A navigation page, a quick access pane, and a card in a quick access pane (integration types 3, 4 and 5) are not yet part of the plugin API. `PluginCard` is a card on the plugin's own page. It is not added to the Controls or Switches pane. Plugin pages are written with the types of the `Victron.GuiPlugins` module, which gui-v2 keeps stable for plugins.
+A navigation page, a quick access pane, and a card in a quick access pane (integration types 3, 4 and 5) are not yet part of the plugin API. A `PluginCard` is meant to be shown in the Controls pane or the Switches pane, beside gui-v2's own cards, but that is not supported yet: for now, show it on the plugin's own page, in a `PluginCardListView`. Plugin pages are written with the types of the `Victron.GuiPlugins` module, which gui-v2 keeps stable for plugins.
 
 This document is for OEM and third-party developers, and for AI agents that write or check a plugin. It is complete on its own: you do not need to read gui-v2's internals. Custom branding plugins, which change the GUI's colors, fonts and logos, are a separate kind of plugin and are not covered here.
 
@@ -44,7 +44,7 @@ The compiler does not check these rules. A page that breaks them may work today,
 4. **Subpages.** Open a subpage with a `PluginListNavigation` list item, and give its file as `pageUrl: Qt.resolvedUrl("SubPage.qml")`, so that it is found next to your page. A subpage must be a file of its own: a page written inline, as a `Component`, cannot be opened.
 5. **Backend data values.** Read and write values with a `PluginDataItem`, which every list item with a value has as `dataItem`. To find the devices on the system, use a `PluginDeviceModel`, and to find the paths on a device or service, use a `PluginDataPathModel`. See [Backend data values](#backend-data-values), [Devices](#devices) and [Paths on a device or service](#paths-on-a-device-or-service).
 6. **Access levels.** Use `PluginAccessLevel.User`, `.Installer`, `.SuperUser` and `.Service` for `showAccessLevel` and `writeAccessLevel`.
-7. **Key navigation.** The GUI can be used with keys or buttons, as well as touch. The list item types handle this, in a `PluginItemListView` or a `PluginModelListView`. List items in a `ListView`, a `Repeater` or a layout have no key navigation. In a `PluginListSetting`, handle key presses on the list item, for example with `Keys.onSpacePressed`. Those handlers run only while key navigation is active. Call `checkWriteAccessLevel()` before changing a setting.
+7. **Key navigation.** The GUI can be used with keys or buttons, as well as touch. The list item types handle this, in a `PluginItemListView`, in a `PluginModelListView`, or directly inside a `PluginCard`. A `PluginCardListView` moves the key focus between its cards. List items in a `ListView`, a `Repeater` or a layout have no key navigation. In a `PluginListSetting`, handle key presses on the list item, for example with `Keys.onSpacePressed`. Those handlers run only while key navigation is active. Call `checkWriteAccessLevel()` before changing a setting.
 8. **Text.** For common words, such as "Status", "Voltage" or "On", use `PluginWords`: they are already translated, and change with the user's language. Translate other text with `qsTrId()`, with a `//% "Source text"` comment above it, and ship the translations in the plugin's own `.ts` files, as `examples/SimpleTrExample` does. See [Words and icons](#words-and-icons).
 9. **Colors and fonts.** Draw your own text with `PluginLabel`, and a number with its unit with `PluginQuantityLabel`. See [Text and numbers](#text-and-numbers). Plugins can read the main colors, the font families and the main text sizes from `PluginPalette`. The families and the colors change with custom branding. The colors also change with light and dark mode, and the text sizes with the screen size. Prefer the list item types for text: set the list item's `text`, and its `caption` where it has one, rather than adding your own label. A `PluginCard` draws its icon, title and status: set those, rather than drawing them yourself. `PluginListSetting` has no `caption`. When you draw your own component, use a `PluginPalette` color, not a fixed color. Draw icons with `PluginIconImage`, which colors them by purpose. Other images that your plugin ships must be visible on both light and dark backgrounds, as in `examples/DeviceListExample`.
 
@@ -293,13 +293,14 @@ PluginListSetting {
 
 ## Colors
 
-**`PluginPalette`** has the main colors of the GUI, its font families, and its main text sizes. The colors are the ten colors that custom branding can change, and the color of disabled text. They also change with light and dark mode. Use them when you draw your own component, for example `color: PluginPalette.color_font_primary`, `font.family: PluginPalette.font_family` and `font.pixelSize: PluginPalette.font_size_medium`. The color and font family names match a branding file, except `color_font_disabled`. A name stays the same, even if gui-v2 renames it.
+**`PluginPalette`** has the main colors of the GUI, its font families, its main text sizes, and its layout orientation. The colors are the ten colors that custom branding can change, and the color of disabled text. They also change with light and dark mode. Use them when you draw your own component, for example `color: PluginPalette.color_font_primary`, `font.family: PluginPalette.font_family` and `font.pixelSize: PluginPalette.font_size_medium`. The color and font family names match a branding file, except `color_font_disabled`. A name stays the same, even if gui-v2 renames it.
 
 - Backgrounds: `color_background_primary`, `color_background_secondary`, `color_background_page`.
 - Text: `color_font_primary`, `color_font_secondary`, `color_font_disabled`.
 - Roles: `color_brand`, `color_info`, `color_success`, `color_warning`, `color_critical`.
 - Fonts: `font_family`, `quantity_font_family`.
 - Text sizes: `font_size_small`, `font_size_medium`, `font_size_large`.
+- Layout: `orientation`.
 
 `color_background_page` is the page background. Theme calls that color `color_page_background`.
 
@@ -309,7 +310,9 @@ PluginListSetting {
 
 The text sizes are pixel sizes. `font_size_small` is the size of a list item's caption, and of a card's title. `font_size_medium` is the size of a list item's text, and of its value. `font_size_large` is the size of a card's status. They change with the screen size, as the GUI's own text does. For example, text is smaller in portrait layout.
 
-These are not every color in the GUI. A computed color, such as a button color or the focus highlight, is not here. Use a color from this list, or let a list item or `PluginIconImage` draw it.
+`orientation` is `Qt.PortraitOrientation` when the GUI uses its portrait layout, which it does when its window is taller than it is wide, as in a remote console on a phone. Otherwise, it is `Qt.LandscapeOrientation`. Use it to lay out your own components, for example `orientation: PluginPalette.orientation === Qt.PortraitOrientation ? ListView.Vertical : ListView.Horizontal`. A `PluginCardListView` follows it already.
+
+These are not every color in the GUI. A computed color, such as a button color or the focus highlight, is not here. Use a color from this list, or let a list item, `PluginButton` or `PluginIconImage` draw it.
 
 For a fainter version of a color, such as the background of a bar, build it from the colors in this list, so that it still follows light and dark mode and custom branding. `Qt.alpha(color, 0.3)` gives the color at 30% opacity. `Qt.tint(background, color)` lays a see-through color over a background color, and gives a solid color, which looks the same regardless of what is behind it. `examples/FullApiExample` draws its battery bar this way:
 
@@ -344,9 +347,12 @@ Each label is as big as its text, unless you set its width or height. In a label
 
 ```qml
 PluginCard {
+	id: card
+
 	title: "Pump"
 
 	PluginQuantityLabel {
+		x: card.contentMargin
 		dataItem.serviceType: "oemname"
 		dataItem.path: "/Pump/Power"
 		unit: PluginUnit.Watt
@@ -354,7 +360,8 @@ PluginCard {
 	}
 
 	PluginLabel {
-		width: parent.width
+		x: card.contentMargin
+		width: card.width - 2 * card.contentMargin
 		text: "Running since 08:00"
 		fontSize: PluginPalette.font_size_small
 		color: PluginPalette.color_font_secondary
@@ -365,13 +372,118 @@ PluginCard {
 
 ## Cards
 
-**`PluginCard`** is a card with an icon, a title and a status, drawn like a card on the Controls pane. It is not added to that pane, or to the Switches pane. Put it on your own page.
+**`PluginCard`** is a card with an icon, a title and a status, drawn like the cards in the Controls pane. A plugin card is meant to be shown in the Controls pane or the Switches pane, beside gui-v2's own cards. That is not supported yet: for now, put the card on your own page, in a `PluginCardListView`: see [Lists of cards](#lists-of-cards).
 
 Set `title` and `status` to the text. Set `iconSource` to a single-color image, such as one of the `PluginIcons`. The card tints the icon with the primary font color, and draws the title and status in the current theme. `title` and `status` are the text, not the labels that draw them.
 
-Declare any other content directly inside the card. It is placed below the status, or below the title when `status` is empty. It is inset by the card's content margin, and it is as wide as the card. Color that content with `PluginPalette`. The card is the usual control-card size. Set its width or height to change that. If the content needs more room, the card grows.
+Declare any other content directly inside the card. It is placed in a column below the status, or below the title when `status` is empty. The column is as wide as the card, as in gui-v2's own cards. Every list item in the card must be flat, and a flat list item adds its own margins: see below. Content that is not a list item, such as a `PluginLabel` or a `PluginButton`, starts at the left edge of the card, so set its `x` to the card's `contentMargin`, as gui-v2's own cards do, so that it lines up with the icon and the status. If it wraps, or fills the line, also set its `width` to the card's `width` minus twice `contentMargin`. Color that content with `PluginPalette`. The card is the usual control-card size. Set its width or height to change that; in a `PluginCardListView`, the list sets them. If the content needs more room, the card grows.
 
-When the card has the key focus, it shows the key navigation highlight. If an item inside the card has `focus: true`, the card passes the key focus to that item instead.
+For a line with a label and a switch, a button or a slider, use `PluginListSwitch`, `PluginListButton` or `PluginListSlider`, or another list item type. Every list item in a card must be flat: set `flat: true` on it. A list item that is not flat draws its own background, inset by the page margins, as in a list on a page. A flat list item is drawn as in gui-v2's own cards: without a background, and as wide as the card. Its key navigation highlight spans the card. The list item checks the user's access level, as it does in a list. gui-v2's own cards let every user use their controls, so set `writeAccessLevel: PluginAccessLevel.User` if that suits your plugin. In a card, use a `PluginLabel` rather than a `PluginSettingsListHeader` or a `PluginPrimaryListLabel`, which ignore `flat`.
+
+Key navigation works as in gui-v2's own cards. When the card has the key focus, the Up and Down keys move the focus between the list items and `PluginButton`s declared directly inside the card. They skip labels, and other items that cannot take the key focus. At the first or last of them, the key goes to the item that holds the card. Items inside a `Row`, a `Column` or another layout in the card are not reached, so declare each list item directly inside the card. If nothing inside the card can take the key focus, the card keeps it, and shows the key navigation highlight.
+
+```qml
+PluginCard {
+	id: pumpCard
+
+	property bool pumpOn: true
+
+	title: "Pump"
+	status: pumpOn ? PluginWords.on : PluginWords.off
+	iconSource: PluginIcons.battery
+
+	PluginQuantityLabel {
+		x: pumpCard.contentMargin
+		dataItem.serviceType: "oemname"
+		dataItem.path: "/Pump/Power"
+		unit: PluginUnit.Watt
+		fontSize: PluginPalette.font_size_large
+	}
+
+	PluginListSwitch {
+		flat: true
+		text: "Pump"
+		checked: pumpCard.pumpOn
+		writeAccessLevel: PluginAccessLevel.User
+		onClicked: pumpCard.pumpOn = !pumpCard.pumpOn
+	}
+
+	PluginListSlider {
+		flat: true
+		text: "Speed"
+		dataItem.serviceType: "oemname"
+		dataItem.path: "/Pump/Speed"
+		interactive: pumpCard.pumpOn && dataItem.valid
+		writeAccessLevel: PluginAccessLevel.User
+	}
+}
+```
+
+### Lists of cards
+
+**`PluginCardListView`** shows the cards declared directly inside it, laid out as in the Controls pane, and fills its parent. The cards stand side by side, and scroll sideways. In portrait layout, they stand one above the other, and scroll up and down. The cards are fixed when the list is created.
+
+The list sets the width and height of each card, as in the Controls pane, so do not set them on the card. In portrait layout, each card is as wide as the list. Otherwise, each card is as tall as the list, and does not grow to fit its content.
+
+With key navigation, the Left and Right keys move the key focus to the previous or next card, and the Up and Down keys move it between the items inside a card. In portrait layout, the Up and Down keys also move to the previous or next card, from the first or last item in a card.
+
+```qml
+PluginPage {
+	PluginCardListView {
+		PluginCard {
+			title: "Pump"
+			iconSource: PluginIcons.battery
+
+			PluginListSwitch {
+				flat: true
+				text: "Pump"
+				dataItem.serviceType: "oemname"
+				dataItem.path: "/Pump/On"
+				writeAccessLevel: PluginAccessLevel.User
+			}
+		}
+
+		PluginCard {
+			title: "Tank"
+			iconSource: PluginIcons.devices
+
+			PluginListQuantity {
+				flat: true
+				text: "Level"
+				unit: PluginUnit.Percentage
+				dataItem.serviceType: "oemname"
+				dataItem.path: "/Tank/Level"
+			}
+		}
+	}
+}
+```
+
+## Buttons
+
+**`PluginButton`** is a push button, drawn like gui-v2's own, for an action that needs a large button of its own, such as the button that starts and stops a generator on gui-v2's generator card. For a line with a label and a button, use a `PluginListButton` instead. Unlike the list items, `PluginButton` does not check the user's access level.
+
+It shows `text`, and `iconSource` if it is set. `iconSource` is a single-color image, such as one of the `PluginIcons`. A click emits `clicked()`. Set `enabled: false` to grey it out, so that it ignores touches and keys.
+
+With key navigation, Space clicks the button when it has the key focus. In a card, declare the button directly inside the card, so that the Up and Down keys reach it. In a `PluginListSetting`, the list item has the key focus, not its content, so handle the keys on the list item. See [Rules for plugin pages](#rules-for-plugin-pages).
+
+```qml
+PluginCard {
+	id: pumpCard
+
+	property bool pumpOn
+
+	title: "Pump"
+	status: pumpOn ? PluginWords.on : PluginWords.off
+
+	PluginButton {
+		x: pumpCard.contentMargin
+		width: pumpCard.width - 2 * pumpCard.contentMargin
+		text: pumpCard.pumpOn ? "Stop" : "Start"
+		onClicked: pumpCard.pumpOn = !pumpCard.pumpOn
+	}
+}
+```
 
 ## Asking the user to confirm
 
@@ -425,6 +537,7 @@ All of these are in `Victron.GuiPlugins`.
 - **`PluginDevicePage`**: a `PluginPage` for a device sub-page. The GUI sets `serviceUid` (the start of the device's uids), `productId` and `deviceName` when it opens the page.
 - **`PluginItemListView`**: a scrolling list of the list items declared inside it, which fills its parent.
 - **`PluginModelListView`**: a scrolling list with one list item for each entry in a model, which fills its parent. See [Lists from a model](#lists-from-a-model).
+- **`PluginCardListView`**: a scrolling list of the cards declared inside it, laid out as in the Controls pane, which fills its parent. See [Lists of cards](#lists-of-cards).
 
 ### List items
 
@@ -433,16 +546,18 @@ Every list item derives from `PluginListItem`, which you do not use directly. So
 - `preferredVisible`: set it to `false` to hide the list item. If the list item has the key focus, focus moves to a visible list item.
 - `showAccessLevel`: the lowest access level that shows the list item. The default is `PluginAccessLevel.User`.
 - `effectiveVisible` (read only): whether the list item is shown.
+- `flat`: every list item declared inside a `PluginCard` must set it to `true`. The list item is then drawn as in gui-v2's own cards: without a background, and as wide as the card. See [Cards](#cards). `PluginSettingsListHeader` and `PluginPrimaryListLabel` ignore it.
 
 The list item types:
 
-- **`PluginListSwitch`**: a label and a toggle switch. Either set `dataItem`, and the switch shows whether the value is `valueTrue` (default 1), and a click writes `valueFalse` (default 0) or `valueTrue`; or set `checkable: true`, and use `checked` and `onClicked`. Set `updateDataOnClick: false` to handle the click yourself, for example to ask before writing, with a [`PluginConfirmationDialog`](#asking-the-user-to-confirm). Also: `text`, `caption`, `secondaryText`, `writeAccessLevel`, `interactive`, `click()`, `checkWriteAccessLevel()`.
+- **`PluginListSwitch`**: a label and a toggle switch. Either set `dataItem`, and the switch shows whether the value is `valueTrue` (default 1), and a click writes `valueFalse` (default 0) or `valueTrue`; or set `checkable: true`, and use `checked` and `onClicked`. A click on a checkable switch writes a new value to `checked`, which replaces any binding on it. Without `dataItem` or `checkable`, a click only emits `clicked()`: bind `checked`, and change the bound value in `onClicked`. Set `updateDataOnClick: false` to handle the click yourself, for example to ask before writing, with a [`PluginConfirmationDialog`](#asking-the-user-to-confirm). Also: `text`, `caption`, `secondaryText`, `writeAccessLevel`, `interactive`, `click()`, `checkWriteAccessLevel()`.
 - **`PluginListTextField`**: a label and an editable text field. The field shows `secondaryText`, which is the value of `dataItem` by default; when the user finishes editing, the new text is written to `dataItem`. Also: `text`, `caption`, `placeholderText`, `maximumLength`, `writeAccessLevel`, `checkWriteAccessLevel()`.
 - **`PluginListNavigation`**: a list item with an arrow, which opens `pageUrl` when clicked, with `pageProperties` set on the new page. The host shows the page's `title`, or this list item's `text` while that title is empty. `pageProperties.title`, if set, replaces the page's title binding. Or leave `pageUrl` empty and handle `onClicked`. Also: `caption`, `secondaryText`, `interactive`, `click()`.
 - **`PluginListText`**: a label, and read-only text on the right. The text is `secondaryText`, which is the value of `dataItem` by default. Also: `text`, `caption`.
 - **`PluginListQuantity`**: a label, and a value with its unit on the right, such as "12.35 V". The value is `value`, which is the value of `dataItem` by default; if it is not a number, the list item shows "--". Set `unit` to a `PluginUnit`, and `decimals` to the number of decimal places (by default, the default number of decimals for the specified unit and value will be used). Also: `text`, `caption`. For a temperature, use `PluginListTemperature`.
 - **`PluginListTemperature`**: a label, and a temperature on the right, in the unit the user chose (Celsius or Fahrenheit). The temperature is the value of `dataItem`, which must be in degrees Celsius. Also: `text`, `caption`, `decimals`.
 - **`PluginListSpinBox`**: a label, and a clickable number on the right. A click opens a dialog in which the user picks a new number, from `from` to `to` (by default, the `min` and `max` of `dataItem`, if the system gives them), in steps of `stepSize` (default 1). The number shown is the `value` property. By default, that is the value of `dataItem`, and the picked number is written to `dataItem`. Without a `dataItem`, the dialog's accepted handler writes the picked number to `value`, which replaces any binding on it. Also: `text`, `caption`, `suffix` (shown after the number, such as `" A"`), `decimals` (default 0), `writeAccessLevel`, `interactive`, `click()`, `checkWriteAccessLevel()`.
+- **`PluginListSlider`**: a label and a horizontal slider, with - and + buttons on either side of it. In portrait layout, the slider is below the label. The slider moves from `from` to `to` (by default, the `min` and `max` of `dataItem`, if the system gives them, or else 0 and 1), in steps of `stepSize` (by default, a tenth of the range), which is also how much the - and + buttons change the number. The slider shows the `value` property. By default, that is the value of `dataItem`, and moving the slider writes the new number to `dataItem`. Without a `dataItem`, moving the slider writes the new number to `value`, which replaces any binding on it. With key navigation, Space starts changing the number: Left and Right change it, and Return, Enter or Escape stop. Also: `text`, `writeAccessLevel`, `interactive`, `checkWriteAccessLevel()`.
 - **`PluginListRadioButtonGroup`**: a label, and the current option on the right. A click opens a page that lists the options, and the user picks one. `optionModel` is an array of options, each an object with `display` (the option's text) and `value`, for example `[ { display: "Off", value: 0 }, { display: "On", value: 1 } ]`. `currentIndex` is the index of the current option, or -1 for none, when the list item shows `defaultSecondaryText` ("Unknown" by default). By default, `currentIndex` is the option whose `value` is equal to `dataItem.value`, and picking an option writes its `value` to `dataItem`. Without a `dataItem`, set `currentIndex` yourself in `onOptionClicked(index)`. Set `updateDataOnClick: false` to handle the pick yourself, for example to ask before writing, with a [`PluginConfirmationDialog`](#asking-the-user-to-confirm). Also: `text`, `caption`, `writeAccessLevel`, `interactive`, `click()`, `checkWriteAccessLevel()`.
 - **`PluginListButton`**: a label, and a button on the right that shows `secondaryText`. A click emits `clicked()`, if the user has `writeAccessLevel`. Also: `text`, `caption`, `interactive`, `click()`, `checkWriteAccessLevel()`.
 - **`PluginSettingsListHeader`**: a heading, `text`, above a group of list items. Key navigation skips it.
@@ -455,12 +570,13 @@ The list item types:
 - **`PluginConfirmationDialog`**: a dialog that asks the user to confirm a change. Set `title`, `description`, `acceptText` and `rejectText`, call `open()`, and handle `onAccepted` and `onRejected`. See [Asking the user to confirm](#asking-the-user-to-confirm).
 - **`PluginLabel`**: text in the GUI's font. Set `text`, `fontSize`, `color`, `horizontalAlignment`, `verticalAlignment`, `wrapMode` and `elide`. See [Text and numbers](#text-and-numbers).
 - **`PluginQuantityLabel`**: a number with its unit, such as "230 V". Set `value` or `dataItem`, `unit`, `decimals`, `fontSize`, `valueColor`, `unitColor`, `horizontalAlignment` and `verticalAlignment`. See [Text and numbers](#text-and-numbers).
+- **`PluginButton`**: a large push button. Set `text` and `iconSource`, and handle `onClicked`. See [Buttons](#buttons).
 - **`PluginDataItem`**: a value on the system. `serviceType` and `path` name it; set `deviceInstance` to name one device. See [Backend data values](#backend-data-values).
 - **`PluginDeviceModel`**: the devices on the system, filtered by `serviceTypes` and `requiredPaths` and sorted by name, and the service types on the system, in `availableServiceTypes`. See [Devices](#devices).
 - **`PluginDataPathModel`**: the child paths of a `uid`, such as the top-level paths of a device, or of `path` on the service or device named by `serviceType` and `deviceInstance`. See [Paths on a device or service](#paths-on-a-device-or-service).
 - **`PluginAccessLevel`**: `User`, `Installer`, `SuperUser`, `Service`.
 - **`PluginUnit`**: the units for `PluginListQuantity` and `PluginQuantityLabel`: `None`, `Amp`, `AmpHour`, `Energy_KiloWattHour`, `Hectopascal`, `Hertz`, `Kilopascal`, `Percentage`, `PowerFactor` (a number with no unit), `RevolutionsPerMinute`, `Time_Day`, `Time_Hour`, `Time_Minute`, `Time_Second`, `VoltAmpere`, `VoltAmpereReactive`, `Volt_AC`, `Volt_DC`, `Watt`, `WattsPerSquareMetre`. The units of temperature, volume, speed and distance are not here, because the user picks which of those the GUI shows. For a temperature, use `PluginListTemperature`.
-- **`PluginPalette`**: the main GUI colors, the font families, and the main text sizes. See [Colors](#colors).
+- **`PluginPalette`**: the main GUI colors, the font families, the main text sizes, and the layout orientation. See [Colors](#colors).
 - **`PluginWords`**, **`PluginIcons`** and **`PluginIconImage`**: see [Words and icons](#words-and-icons).
 
 ### Versions
@@ -470,7 +586,9 @@ The version of `Victron.GuiPlugins` that added each type. A type's members came 
 <!-- BEGIN versions. tools/guipluginsapi.py writes this part from tools/guiplugins-api.json: do not edit it. -->
 
 - `PluginAccessLevel`: 1.0
+- `PluginButton`: 1.0
 - `PluginCard`: 1.0
+- `PluginCardListView`: 1.0
 - `PluginConfirmationDialog`: 1.0
 - `PluginDataItem`: 1.0
 - `PluginDataPathModel`: 1.0
@@ -486,6 +604,7 @@ The version of `Victron.GuiPlugins` that added each type. A type's members came 
 - `PluginListQuantity`: 1.0
 - `PluginListRadioButtonGroup`: 1.0
 - `PluginListSetting`: 1.0
+- `PluginListSlider`: 1.0
 - `PluginListSpinBox`: 1.0
 - `PluginListSwitch`: 1.0
 - `PluginListTemperature`: 1.0
@@ -533,5 +652,5 @@ The version of `Victron.GuiPlugins` that added each type. A type's members came 
 - The compiler reads `tools/guiplugins-api.json`, which is installed next to it, to work out each plugin's `requiredGuiPluginsVersion` and to warn about deprecated types and members (see [Versioning](#versioning)). The plugin loader, in `src/guiplugins.cpp`, gets the module version from `cmake/ModuleGuiPlugins.cmake` as two compile definitions, and drops a plugin's pages if it needs a version that the GUI does not have. The `tst_plugincompiler` and `tst_guipluginloader` tests cover both.
 - The enums for plugins, `PluginAccessLevel` and `PluginUnit`, are C++ namespaces with explicit values, equal to the `VenusOS` values that the wrappers pass them to. `pluginaccesslevel.cpp` and `pluginunit.cpp` check this at build time. If a `VenusOS` value changes, keep the plugin value, and map it in the wrapper instead. `PluginUnit` leaves out the units that the user picks in the settings (temperature, volume, speed and distance), because the wrappers show the unit they are given, not the user's unit.
 - `PluginLabel` wraps `Label`, and `PluginQuantityLabel` wraps `QuantityLabel`. Each exposes only its own properties, not the inner label or its `font`, so that the text keeps the GUI's font family. `PluginConfirmationDialog` is a `QtObject` that opens a `ModalWarningDialog` with OK and Cancel options in `Global.dialogLayer`. It keeps the GUI's warning icon, and does not expose the dialog. It destroys the dialog when it is destroyed, so that the dialog never calls the handlers of a destroyed object. Its private parts are in its `__private__` property, because a `QtObject` cannot have child objects.
-- `PluginWords` copies `CommonWords`, and `PluginIcons` points at the images in `qrc:/images`. Both are promises: never rename or remove one of their properties. If a `CommonWords` word or an image is renamed, point the existing property at the new one; for a word, also add the old and new names to `renamedWords` in `tst_pluginwordsandicons`. That test checks that each word has the text of the `CommonWords` word with the same (or new) name, and that each icon loads. `PluginPalette` exposes the ten branding colors, and `font_family` and `quantity_font_family`, with the branding names, and `color_font_disabled`, with its `Theme` name. It is the same kind of promise: if `Theme` renames one, keep the existing name and point the existing property at the new one. `color_background_page` already does this: Theme calls it `color_page_background`. Add such a pair to `renamedColors` in `tst_pluginpalette`. That test checks that each color matches the `Theme` color, in both color schemes, and that each font family matches `Theme`. `PluginPalette` also exposes `font_size_small`, `font_size_medium` and `font_size_large`, which are `Theme` font sizes chosen by purpose: the list item caption size, the list item text size, and the control card status size. If `Theme` renames or changes those sizes, point each one at the nearest size with the same purpose, and update `fontSizes` in `tst_pluginpalette`, which checks them in each screen size. `PluginIconImage` tints an icon by purpose, with `PluginPalette` colors. Its `Success` tint is `color_success`, and its `Brand` tint is `color_brand`, the color of a switch that is on. `tst_pluginwordsandicons` checks each tint. The Plugin* types take their colors and text sizes from `PluginPalette`, not from `Theme`, so that a `Theme` rename needs a change only in `PluginPalette`. Their spacing and other sizes still come from `Theme`, and are not part of the API. `PluginCard` wraps `ControlCard`. It exposes `title`, `status` and `iconSource`, and a default `content` item, not the inner label or image. If `ControlCard` changes, keep those properties and map them to the new inner items. `PluginDeviceModel` wraps `FilteredDeviceModel`, and reads `availableServiceTypes` from `AllDevicesModel`. It applies `requiredPaths` itself, with a `VeQuickItem` for each required path on each device, so that "valid" means what it means for `PluginDataItem`. It follows the inner model by inserting, removing and moving rows, rather than resetting the model, so that views keep their delegates. A change made during an update, such as a delegate setting `serviceTypes`, is applied by one more update from the event loop. After two such extra updates in a row, it warns about a loop and stops, until a change comes from elsewhere. It exposes `serviceTypes`, `requiredPaths`, `availableServiceTypes`, `count`, and the role names `serviceUid`, `serviceType`, `deviceInstance`, `name` and `productId`. It does not expose the GUI's device object, or the child filter. If `FilteredDeviceModel` changes, keep those and map them. `PluginDataPathModel` reads the children of the backend item (`VeQItem`) at its `uid`. It lists a child when the state of the child, or of one of its descendants, shows that the system gave it a value, so that an item that the GUI only asked for is not listed. It never asks the system for a value. A change to a descendant of `uid` starts a 100 ms timer, and the list is updated once when it fires, so that a burst of changes is one update. If the item at `uid` is deleted, as the mock backend does when it removes a device, the model creates it again, so that it lists the paths if they come back. It builds `uid` from `serviceType`, `deviceInstance` and `path` as `PluginDataItem` does. Both use the internal `DeviceWatcher` (`guiplugins/devicewatcher.h`), which reads `AllDevicesModel`, to find the service uid of a device. It exposes `uid`, `serviceType`, `deviceInstance`, `path`, `count`, and the role names `childName`, `childPath` and `childUid`. The role names start with `child`, so that they differ from the `uid` and `path` properties: in a delegate, a nested model's `uid: uid` would bind its `uid` to itself.
+- `PluginWords` copies `CommonWords`, and `PluginIcons` points at the images in `qrc:/images`. Both are promises: never rename or remove one of their properties. If a `CommonWords` word or an image is renamed, point the existing property at the new one; for a word, also add the old and new names to `renamedWords` in `tst_pluginwordsandicons`. That test checks that each word has the text of the `CommonWords` word with the same (or new) name, and that each icon loads. `PluginPalette` exposes the ten branding colors, and `font_family` and `quantity_font_family`, with the branding names, and `color_font_disabled`, with its `Theme` name. It is the same kind of promise: if `Theme` renames one, keep the existing name and point the existing property at the new one. `color_background_page` already does this: Theme calls it `color_page_background`. Add such a pair to `renamedColors` in `tst_pluginpalette`. That test checks that each color matches the `Theme` color, in both color schemes, and that each font family matches `Theme`. `PluginPalette` also exposes `font_size_small`, `font_size_medium` and `font_size_large`, which are `Theme` font sizes chosen by purpose: the list item caption size, the list item text size, and the control card status size. If `Theme` renames or changes those sizes, point each one at the nearest size with the same purpose, and update `fontSizes` in `tst_pluginpalette`, which checks them in each screen size. `PluginIconImage` tints an icon by purpose, with `PluginPalette` colors. Its `Success` tint is `color_success`, and its `Brand` tint is `color_brand`, the color of a switch that is on. `tst_pluginwordsandicons` checks each tint. The Plugin* types take their colors and text sizes from `PluginPalette`, not from `Theme`, so that a `Theme` rename needs a change only in `PluginPalette`. Their spacing and other sizes still come from `Theme`, and are not part of the API. `PluginCard` wraps `ControlCard`. It exposes `title`, `status`, `iconSource` and `contentMargin`, and a default `content` item, not the inner label or image. If `ControlCard` changes, keep those properties and map them to the new inner items. `PluginCard` puts its content in a `SettingsColumn`, so that the Up and Down keys move the key focus between the card's children as in gui-v2's own cards. The column is not part of the API. The column is as wide as the card, as in gui-v2's own cards, so a flat list item spans the card, and adds its own margins. `contentMargin` is `geometry_controlCard_contentMargins`, which gui-v2's own cards use to inset content that is not a list item. Only its purpose is promised, not its value. `PluginCardListView` wraps `BaseListView`, with the layout of `ControlCardsPage`: its margins, spacing, card sizes, orientation and scrolling. If `ControlCardsPage` changes its layout, change `PluginCardListView` to match. `PluginPalette.orientation` follows `Theme.screenSize`, and `tst_pluginpalette` checks it in each screen size. `PluginButton` wraps `Button`. The root item takes the key focus and draws the key navigation highlight, and the inner button never takes the focus itself (`focusPolicy: Qt.NoFocus`), so the plugin sees one focusable item. `PluginListSlider` wraps `ListSlider`, and syncs `value` both ways, as `PluginListSpinBox` does. `PluginDeviceModel` wraps `FilteredDeviceModel`, and reads `availableServiceTypes` from `AllDevicesModel`. It applies `requiredPaths` itself, with a `VeQuickItem` for each required path on each device, so that "valid" means what it means for `PluginDataItem`. It follows the inner model by inserting, removing and moving rows, rather than resetting the model, so that views keep their delegates. A change made during an update, such as a delegate setting `serviceTypes`, is applied by one more update from the event loop. After two such extra updates in a row, it warns about a loop and stops, until a change comes from elsewhere. It exposes `serviceTypes`, `requiredPaths`, `availableServiceTypes`, `count`, and the role names `serviceUid`, `serviceType`, `deviceInstance`, `name` and `productId`. It does not expose the GUI's device object, or the child filter. If `FilteredDeviceModel` changes, keep those and map them. `PluginDataPathModel` reads the children of the backend item (`VeQItem`) at its `uid`. It lists a child when the state of the child, or of one of its descendants, shows that the system gave it a value, so that an item that the GUI only asked for is not listed. It never asks the system for a value. A change to a descendant of `uid` starts a 100 ms timer, and the list is updated once when it fires, so that a burst of changes is one update. If the item at `uid` is deleted, as the mock backend does when it removes a device, the model creates it again, so that it lists the paths if they come back. It builds `uid` from `serviceType`, `deviceInstance` and `path` as `PluginDataItem` does. Both use the internal `DeviceWatcher` (`guiplugins/devicewatcher.h`), which reads `AllDevicesModel`, to find the service uid of a device. It exposes `uid`, `serviceType`, `deviceInstance`, `path`, `count`, and the role names `childName`, `childPath` and `childUid`. The role names start with `child`, so that they differ from the `uid` and `path` properties: in a delegate, a nested model's `uid: uid` would bind its `uid` to itself.
 - `PageStack.pushPluginPage()` (reached through `Global.pageManager.pushPluginPage()`) opens a plugin page. It creates a `PluginHostPage` (defined in `PageStack.qml`), which is a `Page`, and then the plugin page with the host page as its parent, so the two are destroyed together. The host shows the plugin page's title, or `defaultTitle` while that title is empty. A list item that opens the page passes its text as `defaultTitle`. Callers must not assign `pluginPage.title`: that replaces the page's title binding. A page whose base type is a `Page` from `Victron.VenusOS`, is not an item, or is not a `PluginPage`, is destroyed with the host and is not opened. `PageStack.pushPage()` is for gui-v2's own pages, and refuses a page whose base type is not a `Page`.

@@ -66,6 +66,7 @@ PluginListItem {
 	ListSwitch {
 		id: inner
 
+		flat: root.flat
 		text: root.text
 		caption: root.caption
 		secondaryText: root.secondaryText

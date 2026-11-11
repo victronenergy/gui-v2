@@ -63,6 +63,7 @@ PluginListItem {
 	ListRadioButtonGroup {
 		id: inner
 
+		flat: root.flat
 		text: root.text
 		caption: root.caption
 		optionModel: root.optionModel

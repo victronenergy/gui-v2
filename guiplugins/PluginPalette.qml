@@ -9,8 +9,8 @@ import QtQml
 import Victron.VenusOS
 
 /*
-	The main colors of the GUI, its font families, and its main text sizes, for a plugin that draws
-	its own component. For example: color: PluginPalette.color_font_primary
+	The main colors of the GUI, its font families, its main text sizes, and its layout orientation,
+	for a plugin that draws its own component. For example: color: PluginPalette.color_font_primary
 
 	The color and font family names match a branding file, except color_font_disabled. The colors
 	come from gui-v2's Theme. They change with light and dark mode, and with custom branding. If a
@@ -26,6 +26,9 @@ import Victron.VenusOS
 
 	font_size_small, font_size_medium and font_size_large are the sizes of a list item's caption, a
 	list item's text, and a card's status. They change with the screen size.
+
+	orientation is Qt.PortraitOrientation when gui-v2 uses its portrait layout, which it does when
+	its window is taller than it is wide, and Qt.LandscapeOrientation otherwise.
 */
 QtObject {
 	readonly property color color_background_primary: Theme.color_background_primary
@@ -48,4 +51,7 @@ QtObject {
 	readonly property int font_size_small: Theme.font_listItem_caption_size
 	readonly property int font_size_medium: Theme.font_listItem_primary_size
 	readonly property int font_size_large: Theme.font_controlCard_status
+
+	readonly property int orientation: Theme.screenSize === Theme.Portrait
+			? Qt.PortraitOrientation : Qt.LandscapeOrientation
 }

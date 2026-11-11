@@ -101,6 +101,7 @@ In portrait mode:
 - List views that are horizontal in landscape should become vertical in portrait (use conditional `orientation`)
 - Widget sizes must account for the available height being much larger (and width smaller) in portrait
 - Do not assume fixed screen dimensions — portrait width varies by device/browser
+- GUI plugins cannot read `Theme`: they read the layout from `PluginPalette.orientation`, and `PluginCardListView` lays out their cards as `ControlCardsPage` does. See [GUI plugins](gui-plugins.md)
 
 ## Naming convention for orientation variants
 

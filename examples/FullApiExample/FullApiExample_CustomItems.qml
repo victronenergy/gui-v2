@@ -5,13 +5,16 @@ import Victron.GuiPlugins
 	List items with content of your own, built with PluginListSetting.
 
 	Draw that content with PluginPalette colors, so it follows light and dark mode and custom
-	branding. The list items still draw the text.
+	branding. The list items still draw the text. The Counter list item's content is a PluginLabel
+	and a PluginButton.
 */
 PluginPage {
 	id: root
 
 	// The number of squares in the Level list item. The main page sets it with pageProperties.
 	property int levelCount: 3
+	// The number that the Counter list item shows.
+	property int count
 
 	PluginDataItem {
 		id: socItem
@@ -187,6 +190,38 @@ PluginPage {
 							onClicked: levelSetting.setValue(square.index + 1)
 						}
 					}
+				}
+			}
+		}
+
+		PluginListSetting {
+			id: counterListItem
+
+			text: "Counter"
+			interactive: true
+			writeAccessLevel: PluginAccessLevel.User
+
+			// The list item has the key focus, not the button, so the list item handles Space.
+			Keys.onSpacePressed: {
+				if (counterListItem.checkWriteAccessLevel()) {
+					root.count += 1
+				}
+			}
+
+			Row {
+				spacing: 16
+
+				PluginLabel {
+					anchors.verticalCenter: parent.verticalCenter
+					text: String(root.count)
+					color: PluginPalette.color_font_secondary
+				}
+
+				PluginButton {
+					text: "Add one"
+					iconSource: PluginIcons.plus
+					enabled: counterListItem.clickable
+					onClicked: root.count += 1
 				}
 			}
 		}

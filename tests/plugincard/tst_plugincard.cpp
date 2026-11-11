@@ -3,6 +3,8 @@
 ** See LICENSE.txt for license information.
 */
 
+#include "backendconnection.h"
+
 #include "testutils.h"
 
-VENUS_QUICK_TEST_MAIN(plugincard)
+VENUS_MOCK_TEST_MAIN(plugincard)

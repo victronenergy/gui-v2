@@ -27,6 +27,10 @@ FocusScope {
 	// and breaks this binding, so the list item would stay hidden after settings arrive.
 	readonly property bool effectiveVisible: preferredVisible
 			&& (Services.settings?.canAccess(showAccessLevel) ?? false)
+	// Every list item declared inside a PluginCard must set this to true. The list item is then
+	// drawn as in gui-v2's own cards: without a background, and as wide as the card.
+	// PluginSettingsListHeader and PluginPrimaryListLabel ignore it: in a card, use a PluginLabel.
+	property bool flat
 
 	width: parent?.width ?? implicitWidth
 	visible: effectiveVisible
