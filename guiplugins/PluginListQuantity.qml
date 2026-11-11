@@ -30,6 +30,7 @@ PluginListItem {
 	ListQuantity {
 		id: inner
 
+		flat: root.flat
 		text: root.text
 		value: root.value
 		// The PluginUnit values are the VenusOS.Units_* values (see pluginunit.cpp).

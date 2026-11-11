@@ -11,6 +11,9 @@ import Victron.GuiPlugins
 TestCase {
 	id: root
 
+	readonly property string sliderUid: "mock/com.victronenergy.test.listslider/Speed"
+	property real sliderHostValue
+
 	name: "ListSwitchTest"
 	when: windowShown
 	// TestCase is invisible, so a child cannot take active focus. The focus test needs that.
@@ -204,6 +207,132 @@ TestCase {
 		}
 	}
 
+	// The gui-v2 list item that a Plugin* list item wraps.
+	function innerListItem(pluginListItem) {
+		for (let i = 0; i < pluginListItem.children.length; ++i) {
+			const child = pluginListItem.children[i]
+			if (child.flat !== undefined) {
+				return child
+			}
+		}
+		return null
+	}
+
+	function test_flatIsPassedToTheInnerListItem_data() {
+		return [
+			{ tag: "button", component: pluginButtonComponent },
+			{ tag: "navigation", component: pluginNavigationComponent },
+			{ tag: "quantity", component: pluginQuantityComponent },
+			{ tag: "radio", component: pluginRadioComponent },
+			{ tag: "setting", component: pluginSettingComponent },
+			{ tag: "slider", component: pluginSliderComponent },
+			{ tag: "spinbox", component: pluginSpinBoxComponent },
+			{ tag: "switch", component: pluginListSwitchComponent },
+			{ tag: "temperature", component: pluginTemperatureComponent },
+			{ tag: "text", component: pluginTextComponent },
+			{ tag: "textfield", component: pluginTextFieldComponent },
+		]
+	}
+
+	function test_flatIsPassedToTheInnerListItem(data) {
+		const plain = createTemporaryObject(data.component, root, { text: "Label", width: 300 })
+		const flat = createTemporaryObject(data.component, root, { text: "Label", width: 300, flat: true })
+		verify(plain)
+		verify(flat)
+		const plainInner = innerListItem(plain)
+		const flatInner = innerListItem(flat)
+		verify(plainInner !== null)
+		verify(flatInner !== null)
+
+		compare(plainInner.flat, false)
+		compare(plainInner.x, 0)
+		compare(plainInner.width, 300)
+		compare(flatInner.flat, true)
+		compare(flatInner.x, 0)
+		compare(flatInner.width, 300)
+	}
+
+	function findSlider(item) {
+		if (!item) {
+			return null
+		}
+		if (typeof item.valueAt === "function" && item.position !== undefined) {
+			return item
+		}
+		for (let i = 0; i < item.children.length; ++i) {
+			const found = findSlider(item.children[i])
+			if (found) {
+				return found
+			}
+		}
+		return null
+	}
+
+	function test_sliderShowsTheBoundValue() {
+		root.sliderHostValue = 30
+		const row = createTemporaryObject(boundSliderComponent, root, { width: 400 })
+		verify(row)
+		const slider = findSlider(row)
+		verify(slider !== null)
+		compare(row.value, 30)
+		compare(slider.value, 30)
+
+		root.sliderHostValue = 70
+		compare(row.value, 70)
+		compare(slider.value, 70)
+	}
+
+	function test_sliderKeysChangeTheValue() {
+		Global.keyNavigationEnabled = true
+		root.sliderHostValue = 50
+		const row = createTemporaryObject(boundSliderComponent, root, { width: 400 })
+		verify(row)
+		tryVerify(function() { return row.visible && row.height > 0 })
+		compare(row.stepSize, 10)
+
+		row.forceActiveFocus()
+		tryCompare(row, "activeFocus", true)
+
+		// Left and Right change the number only after Space, until Escape.
+		keyClick(Qt.Key_Right)
+		compare(row.value, 50)
+		keyClick(Qt.Key_Space)
+		keyClick(Qt.Key_Right)
+		compare(row.value, 60)
+		keyClick(Qt.Key_Left)
+		keyClick(Qt.Key_Left)
+		compare(row.value, 40)
+		keyClick(Qt.Key_Escape)
+		keyClick(Qt.Key_Right)
+		compare(row.value, 40)
+	}
+
+	function test_sliderUsesTheDataItem() {
+		MockManager.setValue(root.sliderUid, 40)
+		MockManager.setProperty(root.sliderUid, "min", 0)
+		MockManager.setProperty(root.sliderUid, "max", 200)
+		Global.keyNavigationEnabled = true
+		const row = createTemporaryObject(dataSliderComponent, root, { width: 400 })
+		verify(row)
+		tryCompare(row, "value", 40)
+		compare(row.from, 0)
+		compare(row.to, 200)
+		compare(row.stepSize, 20)
+		tryVerify(function() { return row.visible && row.height > 0 })
+
+		row.forceActiveFocus()
+		tryCompare(row, "activeFocus", true)
+		keyClick(Qt.Key_Space)
+		keyClick(Qt.Key_Right)
+		tryCompare(row, "value", 60)
+		compare(MockManager.value(root.sliderUid), 60)
+
+		// Remove the value only after the row stops using it.
+		row.destroy()
+		wait(0)
+		MockManager.removeValue(root.sliderUid)
+	}
+
 	Component {
 		id: listSwitchComponent
 
@@ -265,5 +394,36 @@ TestCase {
 		id: pluginTextFieldComponent
 
 		PluginListTextField { secondaryText: "name" }
+	}
+
+	Component {
+		id: pluginSettingComponent
+
+		PluginListSetting {
+			PluginLabel { text: "Content" }
+		}
+	}
+
+	Component {
+		id: pluginSliderComponent
+
+		PluginListSlider {}
+	}
+
+	Component {
+		id: boundSliderComponent
+
+		PluginListSlider {
+			to: 100
+			value: root.sliderHostValue
+		}
+	}
+
+	Component {
+		id: dataSliderComponent
+
+		PluginListSlider {
+			dataItem.uid: root.sliderUid
+		}
 	}
 }

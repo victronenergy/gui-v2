@@ -25,6 +25,7 @@ PluginListItem {
 	ListText {
 		id: inner
 
+		flat: root.flat
 		text: root.text
 		secondaryText: root.secondaryText
 		preferredVisible: root.preferredVisible

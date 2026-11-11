@@ -13,6 +13,10 @@ TestCase {
 
 	name: "PluginCardTest"
 	when: windowShown
+	// TestCase is invisible, so a child cannot take active focus. The key tests need that.
+	visible: true
+	width: 600
+	height: 800
 
 	Component {
 		id: plainCard
@@ -26,6 +30,8 @@ TestCase {
 		id: filledCard
 
 		PluginCard {
+			id: filled
+
 			focus: false
 			title: "Pump"
 			status: "Off"
@@ -35,6 +41,12 @@ TestCase {
 				objectName: "extra"
 				width: 4
 				height: 4
+			}
+
+			PluginLabel {
+				objectName: "inset"
+				x: filled.contentMargin
+				text: "Inset"
 			}
 		}
 	}
@@ -53,18 +65,74 @@ TestCase {
 	}
 
 	Component {
-		id: cardWithFocusedContent
+		id: cardInHostComponent
 
-		PluginCard {
-			focus: false
+		// Counts the Up and Down keys that reach it from the card.
+		Item {
+			id: host
 
-			Item {
-				objectName: "focusedContent"
-				width: 4
-				height: 4
-				focus: true
+			property int upPresses
+			property int downPresses
+			property alias card: card
+			property alias pumpSwitch: pumpSwitch
+			property alias resetButton: resetButton
+			property alias speedSlider: speedSlider
+
+			width: 600
+			height: 800
+			Keys.onUpPressed: host.upPresses += 1
+			Keys.onDownPressed: host.downPresses += 1
+
+			PluginCard {
+				id: card
+
+				focus: false
+				title: "Pump"
+
+				PluginListSwitch {
+					id: pumpSwitch
+
+					flat: true
+					text: "Pump"
+					checkable: true
+					writeAccessLevel: PluginAccessLevel.User
+				}
+				PluginLabel {
+					text: "Speed"
+				}
+				PluginButton {
+					id: resetButton
+
+					text: "Reset"
+				}
+				PluginListSlider {
+					id: speedSlider
+
+					flat: true
+					text: "Speed"
+					to: 100
+				}
 			}
 		}
+	}
+
+	function initTestCase() {
+		// Unit tests do not load a mock configuration, so the access level is unset and
+		// canAccess() is false, which hides the list items. User is enough to show them.
+		MockManager.setValue("mock/com.victronenergy.settings/Settings/System/AccessLevel",
+				VenusOS.User_AccessType_User)
+		tryVerify(function() {
+			return !!Services.settings
+					&& Services.settings.canAccess(VenusOS.User_AccessType_User)
+		}, 20000)
+	}
+
+	function init() {
+		Global.keyNavigationEnabled = false
+	}
+
+	function cleanup() {
+		Global.keyNavigationEnabled = false
 	}
 
 	function findNamed(item, objectName) {
@@ -78,6 +146,27 @@ TestCase {
 			}
 		}
 		return null
+	}
+
+	// The gui-v2 list item that a Plugin* list item wraps.
+	function innerListItem(pluginListItem) {
+		for (let i = 0; i < pluginListItem.children.length; ++i) {
+			const child = pluginListItem.children[i]
+			if (child.flat !== undefined) {
+				return child
+			}
+		}
+		return null
+	}
+
+	function createHost() {
+		const host = createTemporaryObject(cardInHostComponent, root)
+		verify(host !== null)
+		tryVerify(function() {
+			return host.pumpSwitch.visible && host.speedSlider.visible
+					&& host.pumpSwitch.height > 0 && host.speedSlider.height > 0
+		})
+		return host
 	}
 
 	function test_propertiesRoundTrip() {
@@ -108,10 +197,35 @@ TestCase {
 		verify(extra.parent !== null)
 		verify(extra.parent !== card)
 		// The rectangle is the first item in the content column, so its own y is 0.
-		// The column sits below the title and status, inset by the card's content margin.
+		// The column sits below the title and status, and is as wide as the card.
 		compare(extra.y, 0)
-		verify(extra.parent.y > 0, "content y was " + extra.parent.y)
-		compare(extra.parent.x, Theme.geometry_controlCard_contentMargins)
+		const position = extra.mapToItem(card, 0, 0)
+		verify(position.y > 0, "content y was " + position.y)
+		compare(position.x, 0)
+	}
+
+	function findText(item, text) {
+		if (item.text === text) {
+			return item
+		}
+		for (let i = 0; i < item.children.length; ++i) {
+			const found = findText(item.children[i], text)
+			if (found) {
+				return found
+			}
+		}
+		return null
+	}
+
+	function test_contentMarginLinesUpContentWithTheStatus() {
+		const card = createTemporaryObject(filledCard, root)
+		verify(card !== null)
+		verify(card.contentMargin > 0)
+		const inset = findNamed(card, "inset")
+		const status = findText(card, "Off")
+		verify(inset !== null)
+		verify(status !== null)
+		compare(inset.mapToItem(card, 0, 0).x, status.mapToItem(card, 0, 0).x)
 	}
 
 	function test_growsToFitContent() {
@@ -131,28 +245,73 @@ TestCase {
 		verify(card.implicitHeight > 0)
 	}
 
-	function test_cardWithTheKeyFocusShowsTheHighlight() {
+	function test_flatListItemsSpanTheCard() {
+		const host = createHost()
+		const items = [ host.pumpSwitch, host.speedSlider ]
+		for (let i = 0; i < items.length; ++i) {
+			const inner = innerListItem(items[i])
+			verify(inner !== null)
+			compare(inner.flat, true)
+			compare(inner.mapToItem(host.card, 0, 0).x, 0)
+			compare(inner.width, host.card.width)
+		}
+	}
+
+	function test_cardWithoutFocusableContentShowsTheHighlight() {
+		Global.keyNavigationEnabled = true
 		const card = createTemporaryObject(filledCard, root)
 		verify(card !== null)
 		verify(!card.KeyNavigationHighlight.active)
 
 		card.forceActiveFocus()
 		tryCompare(card, "activeFocus", true)
-		compare(card.Window.activeFocusItem, card)
 		verify(card.KeyNavigationHighlight.active)
 	}
 
-	function test_keyFocusGoesToContentWithFocus() {
-		const card = createTemporaryObject(cardWithFocusedContent, root)
-		verify(card !== null)
-		const content = findNamed(card, "focusedContent")
-		verify(content !== null)
+	function test_upAndDownMoveTheKeyFocusBetweenTheControls() {
+		Global.keyNavigationEnabled = true
+		const host = createHost()
 
-		card.forceActiveFocus()
-		tryCompare(content, "activeFocus", true)
-		compare(card.Window.activeFocusItem, content)
-		// The card has activeFocus too, because the content is inside it, but it is not highlighted.
-		verify(card.activeFocus)
-		verify(!card.KeyNavigationHighlight.active)
+		// The first control inside the card takes the key focus, and the card is not highlighted.
+		host.card.forceActiveFocus()
+		tryCompare(host.pumpSwitch, "activeFocus", true)
+		verify(!host.card.KeyNavigationHighlight.active)
+
+		// The label cannot take the key focus, so Down moves past it to the button.
+		keyClick(Qt.Key_Down)
+		tryCompare(host.resetButton, "activeFocus", true)
+		keyClick(Qt.Key_Down)
+		tryCompare(host.speedSlider, "activeFocus", true)
+		keyClick(Qt.Key_Up)
+		tryCompare(host.resetButton, "activeFocus", true)
+		keyClick(Qt.Key_Up)
+		tryCompare(host.pumpSwitch, "activeFocus", true)
+		verify(!host.card.KeyNavigationHighlight.active)
+
+		// The key reaches the focused control.
+		keyClick(Qt.Key_Space)
+		compare(host.pumpSwitch.checked, true)
+
+		compare(host.upPresses, 0)
+		compare(host.downPresses, 0)
+	}
+
+	function test_keysPastEitherEndGoToTheItemThatHoldsTheCard() {
+		Global.keyNavigationEnabled = true
+		const host = createHost()
+
+		host.card.forceActiveFocus()
+		tryCompare(host.pumpSwitch, "activeFocus", true)
+		keyClick(Qt.Key_Up)
+		compare(host.upPresses, 1)
+		verify(host.pumpSwitch.activeFocus)
+
+		keyClick(Qt.Key_Down)
+		keyClick(Qt.Key_Down)
+		tryCompare(host.speedSlider, "activeFocus", true)
+		keyClick(Qt.Key_Down)
+		compare(host.downPresses, 1)
+		verify(host.speedSlider.activeFocus)
+		compare(host.upPresses, 1)
 	}
 }
