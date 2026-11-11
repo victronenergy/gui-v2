@@ -9,23 +9,25 @@ import Victron.VenusOS
 //
 // An AC input's metadata, from com.victronenergy.system/Ac/In/<1|2>.
 //
-QtObject {
+AcInputInfo {
 	id: root
 
 	required property int inputIndex
 	required property string bindPrefix
 	required property string settingsServiceUid
 
-	readonly property bool valid: deviceInstance >= 0 && serviceType.length && serviceName.length
-	readonly property bool connected: !!_connected.value
-	readonly property int deviceInstance: _deviceInstance.valid ? _deviceInstance.value : -1
-	readonly property string serviceType: _serviceType.value || "" // e.g. "vebus"
-	readonly property string serviceName: _serviceName.value || "" // e.g. com.victronenergy.vebus.ttyO, com.victronenergy.grid.ttyO
-	readonly property int source: _source.valid ? _source.value : VenusOS.AcInputs_InputSource_NotAvailable
-	readonly property real minimumCurrent: _minimumCurrent.valid ? _minimumCurrent.value : NaN
-	readonly property real maximumCurrent: _maximumCurrent.valid ? _maximumCurrent.value : NaN
+	// The service name of the device, e.g. "com.victronenergy.vebus.ttyO" or "com.victronenergy.grid.ttyO".
+	readonly property string serviceName: _serviceName.value || ""
 
 	signal serviceInfoChanged
+
+	valid: deviceInstance >= 0 && serviceType.length && serviceName.length
+	connected: !!_connected.value
+	deviceInstance: _deviceInstance.valid ? _deviceInstance.value : -1
+	serviceType: _serviceType.value || ""
+	source: _source.valid ? _source.value : VenusOS.AcInputs_InputSource_NotAvailable
+	minimumCurrent: _minimumCurrent.valid ? _minimumCurrent.value : NaN
+	maximumCurrent: _maximumCurrent.valid ? _maximumCurrent.value : NaN
 
 	readonly property VeQuickItem _connected: VeQuickItem {
 		uid: root.bindPrefix ? root.bindPrefix + "/Connected" : ""

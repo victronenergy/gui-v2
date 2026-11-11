@@ -86,6 +86,9 @@ Note also that a page may ask for paths that no real device publishes either - f
     - Wind charger, Orion XS DC-DC, Pylontech battery, multiple DC gensets, motor drive
     - CAN-bus: VE.Can port 1 running CANopen E-drive
 
+- charger-only (system in "Charger only" configuration)
+    - Skylla charger, Lynx BMS, AcInput1 = grid
+
 
 ## Future mock configurations
 

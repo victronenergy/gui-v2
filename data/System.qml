@@ -23,6 +23,11 @@ QtObject {
 			&& (hasVebusEss ? (hasGridMeter && _withoutGridMeter.value === 0) : hasGridMeter)
 	readonly property bool feedbackEnabled: _feedbackEnabled.value === 1
 
+	// True when the system has a "Charger only" configuration: when /Ac/HasAcLoads = 0, and there
+	// are one or more chargers (causing their power to be written to /Dc/Charger/Power) and no
+	// inverters. (Note this is different from the "Charger only" mode for Multis.)
+	readonly property bool chargerOnly: _hasAcLoads.value === 0 && dc.charger._power.valid
+
 	readonly property ActiveSystemBattery battery: ActiveSystemBattery {
 		systemServiceUid: root.serviceUid
 	}
@@ -61,6 +66,15 @@ QtObject {
 
 		readonly property FilteredServiceModel serviceModel: FilteredServiceModel {
 			serviceTypes: ["dcload", "dcsystem", "dcdc"]
+		}
+
+		readonly property QtObject charger: QtObject {
+			readonly property real power: _power.valid ? _power.value || 0 : NaN
+			readonly property real current: NaN  // Currently /Dc/Charger/Current is not supported.
+
+			readonly property VeQuickItem _power: VeQuickItem {
+				uid: root.serviceUid + "/Dc/Charger/Power"
+			}
 		}
 	}
 

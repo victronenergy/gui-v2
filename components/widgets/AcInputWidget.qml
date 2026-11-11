@@ -10,7 +10,7 @@ import Victron.VenusOS
 AcWidget {
 	id: root
 
-	readonly property AcInputSystemInfo inputInfo: input?.inputInfo ?? null
+	readonly property AcInputInfo inputInfo: input?.inputInfo ?? null
 	readonly property bool inputOperational: input && input.operational
 
 	readonly property bool _showSideGauge: inputOperational && size >= VenusOS.OverviewWidget_Size_M
@@ -20,7 +20,7 @@ AcWidget {
 	title: !!inputInfo ? Services.acInputs.sourceToText(inputInfo.source) : ""
 	quantitySourceType: VenusOS.ElectricalQuantity_Source_AcInputOnly
 	quantityDataObject: inputOperational ? input : null
-	phaseModel: inputOperational && input.phases.count > 1 ? input.phases : null
+	phaseModel: inputOperational && (input.phases?.count ?? 0) > 1 ? input.phases : null
 	enabled: !!inputInfo
 
 	contentItem: Item {
@@ -61,5 +61,15 @@ AcWidget {
 		}
 	}
 
-	onClicked: Global.openDevicePage(BackendConnection.serviceUidFromName(root.inputInfo.serviceName, root.inputInfo.deviceInstance))
+	onClicked: {
+		if (Services.system.chargerOnly
+				&& root.input.serviceType === "charger"
+				&& Services.inverterChargers.chargerModel.count > 1) {
+			// In a "Charger only" system configuration, if this widget is showing the charger
+			// details and there are multiple chargers, show a list instead of a single device.
+			Global.pageManager.pushPage("/pages/invertercharger/InverterChargerListPage.qml")
+		} else {
+			Global.openDevicePage(root.input.serviceUid)
+		}
+	}
 }

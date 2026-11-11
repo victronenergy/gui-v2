@@ -13,23 +13,18 @@ OverviewWidget {
 	onClicked: {
 		if (Services.inverterChargers.deviceCount > 1) {
 			Global.pageManager.pushPage("/pages/invertercharger/InverterChargerListPage.qml")
-		} else {
+		} else if (!!Services.inverterChargers.chargerModel.firstObject) {
 			// Show page for chargers
-			chargerModelLoader.active = true
-			if (chargerModelLoader.item.count > 0) {
-				const charger = chargerModelLoader.item.firstObject
-				Global.openDevicePage(charger.serviceUid)
-			} else {
-				// Show page for inverter, vebus and acsystem services
-				const device = Services.inverterChargers.firstObject
-				Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml",
-						{ "serviceUid": device.serviceUid })
-			}
+			Global.openDevicePage(Services.inverterChargers.chargerModel.firstObject.serviceUid)
+		} else {
+			// Show page for inverter, vebus and acsystem services
+			const device = Services.inverterChargers.firstObject
+			Global.pageManager.pushPage("/pages/invertercharger/OverviewInverterChargerPage.qml",
+					{ "serviceUid": device.serviceUid })
 		}
 	}
 
-	//% "Inverter / Charger"
-	title: qsTrId("overview_widget_inverter_title")
+	title: Services.system.chargerOnly ? CommonWords.charger : CommonWords.inverter_charger
 	type: VenusOS.OverviewWidget_Type_VeBusDevice
 	enabled: !!Services.inverterChargers.firstObject
 	rightPadding: Theme.geometry_overviewPage_widget_sideGauge_margins
@@ -51,9 +46,19 @@ OverviewWidget {
 				Layout.fillWidth: true
 			}
 
+			OverviewElectricalQuantityLabel {
+				id: chargerQuantityLabel
+				widgetSize: root.size
+				visible: Services.system.chargerOnly
+				dataObject: Services.system.dc.charger
+				sourceType: VenusOS.ElectricalQuantity_Source_Dc
+				Layout.fillWidth: true
+			}
+
 			Label {
 				text: VenusOS.system_stateToText(Services.system.state)
-				font.pixelSize: Theme.font_overviewPage_widget_quantityLabel_medium
+				font.pixelSize: chargerQuantityLabel.visible ? root.secondaryFontSize
+						: Theme.font_overviewPage_widget_quantityLabel_medium
 				minimumPixelSize: Theme.font_overviewPage_widget_quantityLabel_small
 				fontSizeMode: Text.Fit
 				wrapMode: Text.WordWrap
@@ -92,15 +97,6 @@ OverviewWidget {
 						&& !Global.isGxDevice // reduce Overview animations on GX
 				inOverviewWidget: true
 			}
-		}
-	}
-
-	Loader {
-		id: chargerModelLoader
-		active: false
-		sourceComponent: FilteredDeviceModel {
-			serviceTypes: ["charger"]
-			sorting: FilteredDeviceModel.DeviceInstance
 		}
 	}
 }

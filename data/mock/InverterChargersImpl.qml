@@ -50,6 +50,27 @@ Item {
 	}
 
 	FilteredDeviceModel {
+		id: chargerOnlyModel
+		serviceTypes: ["charger"]
+	}
+
+	VeQuickItem {
+		id: hasAcLoads
+		uid: Services.system.serviceUid + "/Ac/HasAcLoads"
+	}
+
+	// When only charger services are present, set /Dc/Charger/Power to a randomised value.
+	MockDataRandomizer {
+		readonly property bool chargerOnlyConfig: hasAcLoads.value === 0
+				&& chargerOnlyModel.count > 0 && inverterChargerModel.count === chargerOnlyModel.count
+		active: Global.mainView && Global.mainView.mainViewVisible
+		onChargerOnlyConfigChanged: {
+			root.setSystemValue("/Dc/Charger/Power", chargerOnlyConfig ? Math.random() * 100 : undefined)
+		}
+		VeQuickItem { uid: Services.system.serviceUid + "/Dc/Charger/Power" }
+	}
+
+	FilteredDeviceModel {
 		id: vebusModel
 		serviceTypes: ["vebus"]
 	}

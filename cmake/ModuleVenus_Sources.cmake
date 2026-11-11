@@ -346,10 +346,10 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     data/VenusPlatform.qml
 
     data/common/AcData.qml
+    data/common/AcInput.qml
+    data/common/AcInputInfo.qml
     data/common/AcInputSettings.qml
     data/common/AcInputSettingsModel.qml
-    data/common/AcInputSystemInfo.qml
-    data/common/AcInput.qml
     data/common/ActiveSystemBattery.qml
     data/common/DcDevice.qml
     data/common/DeviceModel.qml
@@ -365,6 +365,8 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     data/common/SolarHistoryErrorModel.qml
     data/common/SolarTracker.qml
     data/common/SolarTrackerDailyHistory.qml
+    data/common/SystemAcInput.qml
+    data/common/SystemAcInputInfo.qml
     data/common/Tank.qml
     data/common/TankDescription.qml
     data/common/TankModel.qml

@@ -90,9 +90,11 @@ Item {
 		active: BackendConnection.type !== BackendConnection.UnknownSource
 				&& systemLoader.status === Loader.Ready
 				&& settingsLoader.status === Loader.Ready
+				&& inverterChargersLoader.status === Loader.Ready
 		sourceComponent: AcInputs {
 			systemServiceUid: systemLoader.item.serviceUid
 			settingsServiceUid: settingsLoader.item.serviceUid
+			chargerInputDevice: systemLoader.item.chargerOnly ? inverterChargersLoader.item.chargerModel.firstObject : null
 		}
 		onStatusChanged: root._checkLoaderStatus(status, "acInputs")
 	}

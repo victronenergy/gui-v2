@@ -74,7 +74,7 @@ Page {
 
 						SettingsListHeader {
 							text: {
-								const inputInfo = Services.acInputs["input" + (index + 1) + "Info"]
+								const inputInfo = index === 0 ? Services.acInputs.systemInput1Info : Services.acInputs.systemInput2Info
 								if (inputInfo.source === VenusOS.AcInputs_InputSource_NotAvailable) {
 									//: %1 = 'AC input 1' or 'AC input 2'
 									//% "%1 (not available)"

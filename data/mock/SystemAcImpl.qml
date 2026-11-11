@@ -40,13 +40,16 @@ Item {
 			id: acInputDelegate
 
 			required property int index
-			readonly property AcInput acInput: Services.acInputs["input" + (index + 1)]
+			readonly property AcInput acInput: index === 0 ? Services.acInputs.input1 : Services.acInputs.input2
 
 			function updateMinMaxCurrent() {
 				if (!acInput) {
 					return
 				}
 				const objAcConn = acInput._phaseMeasurements
+				if (!objAcConn) {
+					return
+				}
 				let maximumCurrent = MockManager.value(objAcConn.bindPrefix + "/CurrentLimit")
 				if (isNaN(maximumCurrent)) {
 					for (let i = 0; i < objAcConn.phaseCount; ++i) {
@@ -228,23 +231,23 @@ Item {
 
 	// Animate AC input values.
 	Instantiator {
-		model: [Services.acInputs.input1Info, Services.acInputs.input2Info]
+		model: [Services.acInputs.systemInput1Info, Services.acInputs.systemInput2Info]
 		delegate: Item {
 			required property int index
-			required property AcInputSystemInfo modelData
-			readonly property AcInputSystemInfo acInputInfo: modelData
-			readonly property AcInput acInput: Services.acInputs["input" + (index + 1)]
+			required property AcInputInfo modelData
+			readonly property AcInputInfo acInputInfo: modelData
+			readonly property AcInput acInput: index === 0 ? Services.acInputs.input1 : Services.acInputs.input2
 
 			// For each phase, slide between the minimum and maximum current values.
 			MockDataRangeAnimator {
-				active: Global.mainView && Global.mainView.mainViewVisible
+				active: Global.mainView && Global.mainView.mainViewVisible && !!acInput?._phaseMeasurements
 				maximumValue: acInputInfo.maximumCurrent
 				minimumValue: acInputInfo.minimumCurrent
 				stepSize: (maximumValue - minimumValue) / 10
 				dataItems: [
-					acInput?._phaseMeasurements.currentL1 ?? null,
-					acInput?._phaseMeasurements.currentL2 ?? null,
-					acInput?._phaseMeasurements.currentL3 ?? null,
+					acInput?._phaseMeasurements?.currentL1 ?? null,
+					acInput?._phaseMeasurements?.currentL2 ?? null,
+					acInput?._phaseMeasurements?.currentL3 ?? null,
 				]
 
 				onNotifyTotal: {
@@ -305,7 +308,7 @@ Item {
 
 	FilteredServiceModel {
 		id: hasAcLoadsModel
-		serviceTypes: ["inverter", "charger", "evcharger", "acload", "heatpump", "vebus", "acsystem"]
+		serviceTypes: ["inverter", "evcharger", "acload", "heatpump", "vebus", "acsystem"]
 		onCountChanged: Qt.callLater(updateHasAcLoads)
 		Component.onCompleted: Qt.callLater(updateHasAcLoads)
 		function updateHasAcLoads() {

@@ -411,8 +411,8 @@ Item {
 	}
 
 	function setAcInputs(config) {
-		setAcInputInfo(Services.acInputs.input1Info, config ? config[0] : emptyAcInput)
-		setAcInputInfo(Services.acInputs.input2Info, config ? config[1] : emptyAcInput)
+		setAcInputInfo(Services.acInputs.systemInput1Info, config ? config[0] : emptyAcInput)
+		setAcInputInfo(Services.acInputs.systemInput2Info, config ? config[1] : emptyAcInput)
 	}
 
 	function setAcInputInfo(inputInfo, inputInfoConfig) {
@@ -441,7 +441,7 @@ Item {
 		}
 		inputInfo.serviceInfoChanged() // force AcInputs.qml to update the acInput object now, so phases can be set
 
-		const input = Services.acInputs["input" + (inputInfo.inputIndex + 1)]
+		const input = inputInfo.inputIndex === 0 ? Services.acInputs.input1 : Services.acInputs.input2
 		if (input) {
 			// Set phase data
 			const objectAcConn = input._phaseMeasurements

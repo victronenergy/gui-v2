@@ -9,8 +9,11 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	//% "Inverter/Chargers"
-	title: qsTrId("inverter_chargers_title")
+	title: Services.system.chargerOnly
+			  //% "Chargers"
+			? qsTrId("inverter_chargers_chargers_title")
+			  //% "Inverter/Chargers"
+			: qsTrId("inverter_chargers_title")
 
 	GradientListView {
 		model: FilteredDeviceModel {

@@ -11,9 +11,16 @@ QtObject {
 
 	required property string systemServiceUid
 	required property string settingsServiceUid
+	required property Device chargerInputDevice
 
-	property AcInput input1
-	property AcInput input2
+	// The first AC input, as defined by com.victronenergy.system/Ac/In/1. On "Charger only"
+	// systems, if that system input is not set, then this is an input-like object providing the
+	// charger details instead.
+	readonly property AcInput input1: _systemInput1 ?? _chargerInput
+
+	// The second AC input, as defined by com.victronenergy.system/Ac/In/2.
+	readonly property AcInput input2: _systemInput2
+
 	readonly property int activeInSource: _activeInSource.value ?? VenusOS.AcInputs_InputSource_NotAvailable
 	readonly property string activeInServiceType: _activeInServiceType.value || ""
 	readonly property real maximumAcCurrent: _maximumAcCurrent.valid ? _maximumAcCurrent.value : NaN
@@ -55,18 +62,45 @@ QtObject {
 	]
 
 	// AC input metadata from com.victronenergy.system/Ac/In/<1|2>. There are always two inputs.
-	property AcInputSystemInfo input1Info: AcInputSystemInfo {
+	readonly property SystemAcInputInfo systemInput1Info: SystemAcInputInfo {
 		inputIndex: 0
 		bindPrefix: root.systemServiceUid + "/Ac/In/" + inputIndex
 		settingsServiceUid: root.settingsServiceUid
-		onServiceInfoChanged: input1 = root.resetInput(input1, input1Info)
+		onServiceInfoChanged: {
+			const serviceUid = valid ? BackendConnection.serviceUidFromName(serviceName, deviceInstance) : ""
+			_systemInput1 = root.resetInput(_systemInput1, systemInput1Info, _systemAcInputComponent, serviceUid)
+		}
 	}
-	property AcInputSystemInfo input2Info: AcInputSystemInfo {
+	readonly property SystemAcInputInfo systemInput2Info: SystemAcInputInfo {
 		inputIndex: 1
 		bindPrefix: root.systemServiceUid + "/Ac/In/" + inputIndex
 		settingsServiceUid: root.settingsServiceUid
-		onServiceInfoChanged: input2 = root.resetInput(input2, input2Info)
+		onServiceInfoChanged: {
+			const serviceUid = valid ? BackendConnection.serviceUidFromName(serviceName, deviceInstance) : ""
+			_systemInput2 = root.resetInput(_systemInput2, systemInput2Info, _systemAcInputComponent, serviceUid)
+		}
 	}
+	// The input objects created from the system AC input data.
+	property SystemAcInput _systemInput1
+	property SystemAcInput _systemInput2
+
+	// Metadata used to present charger measurements as an AC input. This is available when the
+	// system has a "Charger only" configuration.
+	readonly property AcInputInfo chargerInputInfo: AcInputInfo {
+		readonly property VeQuickItem _systemSetup1Source: VeQuickItem {
+			uid: root.settingsServiceUid + "/Settings/SystemSetup/AcInput1"
+		}
+		valid: !!root.chargerInputDevice
+		connected: !!root.chargerInputDevice
+		deviceInstance: root.chargerInputDevice?.deviceInstance ?? -1
+		serviceType: root.chargerInputDevice?.serviceType ?? ""
+		source: !!root.chargerInputDevice && _systemSetup1Source.valid ? _systemSetup1Source.value : VenusOS.AcInputs_InputSource_NotAvailable
+	}
+	onChargerInputDeviceChanged: {
+		_chargerInput = root.resetInput(_chargerInput, chargerInputInfo, _chargerAcInputComponent, root.chargerInputDevice?.serviceUid ?? "")
+	}
+	// The input object created from the charger-only input data.
+	property AcInput _chargerInput
 
 	readonly property VeQuickItem _activeInSource: VeQuickItem {
 		uid: root.systemServiceUid + "/Ac/ActiveIn/Source"
@@ -77,13 +111,25 @@ QtObject {
 	}
 
 	readonly property VeQuickItem _maximumAcCurrent: VeQuickItem {
-		uid: root.input1Info.connected ? root.settingsServiceUid + "/Settings/Gui/Gauges/Ac/AcIn1/Consumption/Current/Max"
-		   : root.input2Info.connected ? root.settingsServiceUid + "/Settings/Gui/Gauges/Ac/AcIn2/Consumption/Current/Max"
+		uid: root.systemInput1Info.connected || root.chargerInputInfo.connected ? root.settingsServiceUid + "/Settings/Gui/Gauges/Ac/AcIn1/Consumption/Current/Max"
+		   : root.systemInput2Info.connected ? root.settingsServiceUid + "/Settings/Gui/Gauges/Ac/AcIn2/Consumption/Current/Max"
 		   : root.settingsServiceUid + "/Settings/Gui/Gauges/Ac/NoAcIn/Consumption/Current/Max"
 	}
 
-	readonly property Component _acInputComponent: Component {
-		AcInput {}
+	readonly property Component _systemAcInputComponent: Component {
+		SystemAcInput {}
+	}
+
+	readonly property Component _chargerAcInputComponent: Component {
+		AcInput {
+			operational: true
+
+			// Note: normally AcInputs.qml should avoid referencing other objects in the Services
+			// singleton, but these references are in a Component so they will not be loaded
+			// immediately when AcInputs.qml is instantiated.
+			power: Services.system.dc.charger.power
+			current: Services.system.dc.charger.current
+		}
 	}
 
 	property int previousActiveInSource: root.activeInSource
@@ -102,24 +148,25 @@ QtObject {
 	}
 
 	function findValidSource() {
-		if (sourceValid(input1Info.source)) {
-			return input1Info.source
-		} else if (sourceValid(input2Info.source)) {
-			return input2Info.source
+		if (sourceValid(systemInput1Info.source)) {
+			return systemInput1Info.source
+		} else if (sourceValid(systemInput2Info.source)) {
+			return systemInput2Info.source
+		} else if (sourceValid(chargerInputInfo.source)) {
+			return chargerInputInfo.source
 		}
 		return VenusOS.AcInputs_InputSource_NotAvailable
 	}
 
-	function resetInput(input, inputInfo) {
+	function resetInput(input, inputInfo, templateComponent, serviceUid) {
 		if (input) {
 			// Invalidate bindings in AcInput so that data is not fetched anymore.
 			input.inputInfo = null
 			input.destroy()
 		}
 
-		if (inputInfo.valid) {
-			const serviceUid = BackendConnection.serviceUidFromName(inputInfo.serviceName, inputInfo.deviceInstance)
-			return _acInputComponent.createObject(root, { serviceUid: serviceUid, inputInfo: inputInfo })
+		if (serviceUid.length > 0) {
+			return templateComponent.createObject(root, { serviceUid: serviceUid, inputInfo: inputInfo })
 		}
 		return null
 	}

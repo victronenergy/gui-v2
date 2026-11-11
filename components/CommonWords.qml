@@ -130,6 +130,9 @@ QtObject {
 	//% "Charge current"
 	readonly property string charge_current: qsTrId("common_words_charge_current")
 
+	//% "Charger"
+	readonly property string charger: qsTrId("common_words_charger")
+
 	//: "Charging" state
 	//% "Charging"
 	readonly property string charging: qsTrId("common_words_charging")

@@ -6,77 +6,27 @@
 import QtQuick
 import Victron.VenusOS
 
+/*
+	A device that acts as an AC input.
+*/
 Device {
-	id: root
+	required property AcInputInfo inputInfo
 
-	required property AcInputSystemInfo inputInfo
+	// True if the input is considered operational (e.g. is currently active, or considered to be
+	// always "on").
+	required property bool operational
 
-	// True if this is an energy meter, or is the active input for a Multi/Quattro or MultiRS.
-	readonly property bool operational: _phaseMeasurements.bindPrefix.length > 0
+	// The connection status and service info, as provided by the inputInfo object.
+	readonly property bool connected: inputInfo?.connected ?? false
+	readonly property int source: inputInfo?.source ?? VenusOS.AcInputs_InputSource_NotAvailable
 
-	readonly property bool connected: inputInfo && inputInfo.connected
-	readonly property string serviceType: !!inputInfo ? inputInfo.serviceType : ""
-	readonly property string serviceName: !!inputInfo ? inputInfo.serviceName : ""
+	// The overall quantity measurements for the AC input.
+	required property real power
+	required property real current
 
-	readonly property int source: !!inputInfo ? inputInfo.source : VenusOS.AcInputs_InputSource_NotAvailable
-	readonly property int gensetStatusCode: _gensetStatusCode.valid ? _gensetStatusCode.value : -1
-	readonly property string measurementsUid: _phaseMeasurements.bindPrefix
+	// The per-phase data for the AC input.
+	property PhaseModel phases
 
-	// clamp to zero any values with magnitude < 1 (assume it's noise) to avoid UI flicker.
-	readonly property real power: (Math.floor(Math.abs(_phaseMeasurements.power)) < 1.0) ? 0.0 : _phaseMeasurements.power
-	readonly property real current: _phaseMeasurements.current
-	readonly property alias phases: _phaseMeasurements.phases
-
-	// Phase measurements from the input.
-	readonly property ObjectAcConnection _phaseMeasurements: ObjectAcConnection {
-		id: _phaseMeasurements
-
-		bindPrefix: {
-			if (!root.inputInfo || !root.inputInfo.valid) {
-				return ""
-			}
-			switch (root.serviceType) {
-			case "vebus":
-				// Multi/Quattro can only measure its active input, so if connected=true, then we
-				// know this is the active input. Do not attempt to match inputInfo.inputIndex
-				// against the value of system /Ac/ActiveIn/ActiveInput, as those do not match if
-				// the first vebus input is disconnected.
-				if (root.inputInfo.connected) {
-					return root.serviceUid + "/Ac/ActiveIn"
-				}
-				break
-			case "acsystem":
-				// Multi RS is like the vebus case; it can only measure its active input.
-				if (root.inputInfo.connected) {
-					return "%1/Ac/In/%2".arg(root.serviceUid).arg(root.inputInfo.inputIndex + 1)
-				}
-				break
-			case "grid":
-			case "genset":
-				// Energy meter measurements can always be read. Ignore /Ac/In/<x>/Connected value
-				// as the meter may produce power even when not connected.
-				return root.serviceUid + "/Ac"
-			default:
-				console.warn("AcInput: unsupported service type", root.serviceType)
-			}
-			return ""
-		}
-		powerKey: root.serviceType === "vebus" || root.serviceType === "acsystem" ? "P" : "Power"
-		currentKey: root.serviceType === "vebus" || root.serviceType === "acsystem" ? "I" : "Current"
-		_phaseCount.uid: {
-			if (root.inputInfo && root.inputInfo.valid) {
-				if (root.serviceType === "vebus" || root.serviceType === "acsystem") {
-					return root.serviceUid + "/Ac/NumberOfPhases"
-				} else if (root.serviceType === "grid" || root.serviceType === "genset") {
-					return root.serviceUid + "/NrOfPhases"
-				}
-			}
-			return ""
-		}
-	}
-
-	// StatusCode is only valid for genset devices
-	readonly property VeQuickItem _gensetStatusCode: VeQuickItem {
-		uid: root.inputInfo && root.inputInfo.valid && root.serviceType === "genset" ? root.serviceUid + "/StatusCode" : ""
-	}
+	// The uid where per-phase measurements are provided for this input, if available.
+	property string measurementsUid
 }

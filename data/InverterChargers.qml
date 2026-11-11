@@ -21,6 +21,11 @@ QtObject {
 		sorting: FilteredDeviceModel.ServiceTypeOrder | FilteredDeviceModel.DeviceInstance
 	}
 
+	readonly property FilteredDeviceModel chargerModel: FilteredDeviceModel {
+		serviceTypes: ["charger"]
+		sorting: FilteredDeviceModel.DeviceInstance
+	}
+
 	readonly property var rsAlarms: [
 		{ text: CommonWords.low_state_of_charge, alarmSuffix: "/LowSoc", pathSuffix: "/Settings/AlarmLevel/LowSoc" },
 		{ text: CommonWords.low_battery_voltage, alarmSuffix: "/LowVoltage", pathSuffix: "/Settings/AlarmLevel/LowVoltage" },
