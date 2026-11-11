@@ -139,9 +139,10 @@ Page {
 				opacity: status === Image.Ready ? 1 : 0 // keep space even if no icon is available, to maintain vertical alignments
 				source: {
 					switch (typeItem.value) {
-					case "switch": return "qrc:/images/icon_switchdev_32.svg"
 					case "em1": return "qrc:/images/icon_energymeter_1f_32.svg"
 					case "em": return "qrc:/images/icon_energymeter_3f_32.svg"
+					case "input": return "qrc:/images/icon_digital_input_32.svg"
+					case "switch": return "qrc:/images/icon_switchdev_32.svg"
 					default: return ""
 					}
 				}
