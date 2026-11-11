@@ -815,6 +815,7 @@ set(VictronVenusOS_RESOURCES
     images/icon_connectivity_32.svg
     images/icon_debug_32.svg
     images/icon_devices_32.svg
+    images/icon_digital_input_32.svg
     images/icon_energymeter_1f_32.svg
     images/icon_energymeter_3f_32.svg
     images/icon_general_32.svg
