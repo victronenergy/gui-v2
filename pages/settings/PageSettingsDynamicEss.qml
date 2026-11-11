@@ -154,6 +154,25 @@ Page {
 				value: targetSoc.value
 				unit: VenusOS.Units_Percentage
 			}
+
+			SettingsListHeader {
+				text: CommonWords.settings
+			}
+
+			PrimaryListLabel {
+				//% "Most of the Dynamic ESS configuration, such as the price formulas, is done on the VRM Portal."
+				text: qsTrId("settings_ess_dess_configured_in_vrm")
+			}
+
+			ListSpinBox {
+				//% "Battery capacity"
+				text: qsTrId("settings_ess_dess_battery_capacity")
+				dataItem.uid: Services.settings.serviceUid + "/Settings/DynamicEss/BatteryCapacity"
+				preferredVisible: dataItem.valid
+				suffix: Units.defaultUnitString(VenusOS.Units_Energy_KiloWattHour)
+				decimals: 1
+				stepSize: 0.1
+			}
 		}
 	}
 }
