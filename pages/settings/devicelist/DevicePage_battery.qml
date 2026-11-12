@@ -36,7 +36,7 @@ DevicePage {
 					return ""
 				}
 				if (dataItem.value >= 0 && dataItem.value <= 8) {
-					//% "Initializing"
+					//% "Initialising"
 					return qsTrId("devicelist_battery_initializing")
 				}
 				switch (dataItem.value) {

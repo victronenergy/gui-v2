@@ -45,7 +45,7 @@ Page {
 			}
 
 			ListSwitch {
-				//% "Enable frame-rate visualizer"
+				//% "Enable frame-rate visualiser"
 				text: qsTrId("settings_page_debug_enable_fps_visualizer")
 				checked: FrameRateModel.enabled
 				onClicked: FrameRateModel.enabled = !FrameRateModel.enabled

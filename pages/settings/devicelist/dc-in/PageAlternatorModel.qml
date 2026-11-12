@@ -72,7 +72,7 @@ VisibleItemModel {
 	}
 
 	ListQuantity {
-		//% "Utilization"
+		//% "Utilisation"
 		text: qsTrId("alternator_wakespeed_utilization")
 		dataItem.uid: root.bindPrefix + "/Utilization"
 		unit: VenusOS.Units_Percentage

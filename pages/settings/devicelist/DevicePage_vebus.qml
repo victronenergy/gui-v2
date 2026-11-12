@@ -94,7 +94,7 @@ DevicePage {
 				id: newPageComponent
 
 				Page {
-					//% "The system will return to normal operation, prioritizing renewable energy.\nDo you want to continue?"
+					//% "The system will return to normal operation, prioritising renewable energy.\nDo you want to continue?"
 					readonly property string returnToNormal: qsTrId("vebus_device_return_to_normal_operation")
 
 					//% "Charge battery"
@@ -120,7 +120,7 @@ DevicePage {
 												: returnToNormal
 									} else {
 										message = !chargeInProcess
-												? //% "Shore power will be used to complete a full battery charge for one time.\nAfter the charging process is complete, the system will return to normal operation, prioritizing solar and wind energy.\nDo you want to continue?"
+												? //% "Shore power will be used to complete a full battery charge for one time.\nAfter the charging process is complete, the system will return to normal operation, prioritising solar and wind energy.\nDo you want to continue?"
 												  qsTrId("ebus_device_use_shore_power_once")
 												: returnToNormal
 									}
