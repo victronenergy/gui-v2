@@ -4,7 +4,8 @@
 #
 # Tests for tools/gui-v2-plugin-compiler.py: the requiredGuiPluginsVersion that it writes,
 # the warning it prints for a deprecated type or member, the Branding import and name checks,
-# the image and font files it packs, and the requiredBrandingVersion that it writes.
+# the image and font files it packs, the requiredBrandingVersion that it writes, and the navigation
+# page integration that it writes for each --navigation option.
 
 import contextlib
 import copy
@@ -311,6 +312,91 @@ class GxInstallCommandTest(unittest.TestCase):
         self.assertEqual(run.call_args.kwargs['input'], payload)
         self.assertEqual(run.call_args.args[0][0], 'ssh')
         self.assertIn('root@gx.local', run.call_args.args[0])
+
+
+class NavigationLocationTest(unittest.TestCase):
+    def test_integer_is_an_error(self):
+        for token in ('3', '-1', '+2'):
+            with self.subTest(token=token):
+                with contextlib.redirect_stdout(io.StringIO()) as output:
+                    with self.assertRaises(SystemExit) as raised:
+                        compiler.navigation_location(token)
+                self.assertEqual(raised.exception.code, 1)
+                self.assertIn('must be a name, not an integer: ' + token, output.getvalue())
+
+
+class NavigationIntegrationTest(unittest.TestCase):
+    QML_FILES = ['Page.qml', 'OtherPage.qml', 'LevelsPage.qml']
+    IMAGE_FILES = ['icon.svg', 'icon.png', 'icon_active.svg']
+
+    def integration(self, args, seenNavPages=None):
+        return compiler.navigation_integration(args, 'Nav', self.QML_FILES, self.IMAGE_FILES,
+                                               set() if seenNavPages is None else seenNavPages)
+
+    def test_fields(self):
+        page = {'type': 3, 'url': 'qrc:/Nav/Page.qml', 'icon': 'qrc:/Nav/icon.svg'}
+        iconActive = 'qrc:/Nav/icon_active.svg'
+        cases = [
+            (['Page.qml', 'icon.svg'], {}),
+            (['Page.qml', 'icon.svg', 'Title'], {'title': 'Title'}),
+            (['Page.qml', 'icon.svg', 'icon_active.svg'], {'iconActive': iconActive}),
+            (['Page.qml', 'icon.svg', 'Title', 'icon_active.svg'], {'title': 'Title', 'iconActive': iconActive}),
+            (['Page.qml', 'icon.svg', 'BeforeSettings'], {'location': 6}),
+            (['Page.qml', 'icon.svg', 'Title', 'BeforeBoat'], {'title': 'Title', 'location': 1}),
+            (['Page.qml', 'icon.svg', 'icon_active.svg', 'AfterSettings'], {'iconActive': iconActive, 'location': 7}),
+            (['Page.qml', 'icon.svg', 'Title', 'icon_active.svg', 'BeforeNotifications'],
+             {'title': 'Title', 'iconActive': iconActive, 'location': 5}),
+            # A title that is a location name is a title only when another location follows it.
+            (['Page.qml', 'icon.svg', 'BeforeLevels'], {'location': 4}),
+            (['Page.qml', 'icon.svg', 'BeforeLevels', 'BeforeBrief'], {'title': 'BeforeLevels', 'location': 2}),
+        ]
+        for args, extraFields in cases:
+            with self.subTest(args=args):
+                self.assertEqual(self.integration(args), {**page, **extraFields})
+        with self.subTest(args='png icon'):
+            self.assertEqual(self.integration(['Page.qml', 'icon.png'])['icon'], 'qrc:/Nav/icon.png')
+
+    def test_errors(self):
+        cases = [
+            (['Page.qml'], '--navigation requires 2-5 args'),
+            (['Page.qml', 'icon.svg', 'A', 'B', 'C', 'BeforeBoat'], '--navigation requires 2-5 args'),
+            (['Page.qml', 'icon.svg', 'Title', 'icon_active.svg', 'Extra'], 'only one title and one active icon'),
+            (['Page.qml', 'icon.svg', 'Title', 'Other', 'BeforeBoat'], 'active icon must be a .svg or .png file'),
+            (['Page.qml', 'icon.svg', '3'], 'must be a name, not an integer: 3'),
+            (['Page.txt', 'icon.svg'], 'Navigation page must be a .qml file'),
+            (['Page.qml', 'icon.jpg'], 'Navigation icon must be a .svg or .png file'),
+            (['Missing.qml', 'icon.svg'], 'Navigation page "Missing.qml" is not a file in the current directory'),
+            (['sub/Page.qml', 'icon.svg'], 'Navigation page "sub/Page.qml" is not a file in the current directory'),
+            (['page.qml', 'icon.svg'], 'Navigation page "page.qml" is not a file in the current directory'),
+            (['Page.qml', 'missing.svg'], 'Navigation icon "missing.svg" is not a file in the current directory'),
+            (['Page.qml', 'icon.svg', 'missing_active.svg'],
+             'Navigation active icon "missing_active.svg" is not a file in the current directory'),
+        ]
+        for args, message in cases:
+            with self.subTest(args=args):
+                with contextlib.redirect_stdout(io.StringIO()) as output:
+                    with self.assertRaises(SystemExit) as raised:
+                        self.integration(args)
+                self.assertEqual(raised.exception.code, 1)
+                self.assertIn(message, output.getvalue())
+
+    def test_page_name_warnings(self):
+        cases = [
+            ([['Page.qml', 'icon.svg'], ['OtherPage.qml', 'icon.svg']], []),
+            ([['Page.qml', 'icon.svg'], ['Page.qml', 'icon.png', 'Second']],
+             ['"Page.qml" is used more than once']),
+            ([['LevelsPage.qml', 'icon.svg']], ['"LevelsPage.qml" matches a built-in page']),
+        ]
+        for options, warnings in cases:
+            with self.subTest(options=options):
+                seenNavPages = set()
+                with contextlib.redirect_stderr(io.StringIO()) as errors:
+                    integrations = [self.integration(args, seenNavPages) for args in options]
+                self.assertEqual([integration['url'] for integration in integrations],
+                                 ['qrc:/Nav/' + args[0] for args in options])
+                self.assertEqual(errors.getvalue().count('WARNING'), len(warnings))
+                for warning in warnings:
+                    self.assertIn(warning, errors.getvalue())
 
 
 with open(os.path.join(TOOLS_DIR, 'branding-properties.json'), encoding='utf-8') as propertiesFile:

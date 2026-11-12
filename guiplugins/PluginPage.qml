@@ -14,6 +14,8 @@ import QtQuick
 */
 FocusScope {
 	// The page title, shown in the status bar.
+	// If the page you define is a Navigation page, the translation id of the value
+	// assigned to this `title` property should be passed to the compiler as its `title`.
 	property string title
 
 	// The page stack reads this to recognise a plugin page. It is not part of the plugin API.
