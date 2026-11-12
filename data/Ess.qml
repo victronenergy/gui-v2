@@ -23,16 +23,16 @@ QtObject {
 			value: VenusOS.Ess_State_KeepBatteriesCharged
 		},
 		{
-			//% "Optimized with BatteryLife"
+			//% "Optimised with BatteryLife"
 			display: qsTrId("ess_state_optimized_with_batterylife"),
-			//% "Optimized + BatteryLife"
+			//% "Optimised + BatteryLife"
 			buttonText: qsTrId("ess_state_optimized_with_batterylife_button"),
 			value: VenusOS.Ess_State_OptimizedWithBatteryLife
 		},
 		{
-			//% "Optimized without BatteryLife"
+			//% "Optimised without BatteryLife"
 			display: qsTrId("ess_state_optimized_without_batterylife"),
-			//% "Optimized"
+			//% "Optimised"
 			buttonText: qsTrId("ess_state_optimized_without_batterylife_button"),
 			value: VenusOS.Ess_State_OptimizedWithoutBatteryLife
 		},

@@ -64,7 +64,7 @@ Page {
 					primaryText: oppLoads.text
 					primaryLabel.font: oppLoads.font
 					secondaryText: oppLoads.secondaryText
-					//% "Automate controllable devices to maximize solar self-consumption"
+					//% "Automate controllable devices to maximise solar self-consumption"
 					caption: qsTrId("pagesettingssystem_automate_controllable_devices")
 				}
 				onClicked: Global.pageManager.pushPage("/pages/settings/PageControllableLoads.qml", { title: text })

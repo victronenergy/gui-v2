@@ -16,7 +16,7 @@ ListNavigation {
 		return deviceName ? `${deviceName} [${deviceInstance}]` : ""
 	}
 
-	//% "Center details"
+	//% "Centre details"
 	text: qsTrId("settings_briefview_center_details")
 	secondaryText: centerService.value ? customServiceDescription : activeBatteryName
 

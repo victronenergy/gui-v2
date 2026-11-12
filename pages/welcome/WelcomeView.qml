@@ -81,7 +81,7 @@ Rectangle {
 			title: qsTrId("welcome_brief_title"),
 			imageUrl: "qrc:/images/welcome-brief.png",
 			//% "All the key information you need, presented in a clean and simple layout. The "
-			//% "centerpiece is a customizable widget featuring rings, giving you quick access to "
+			//% "centrepiece is a customisable widget featuring rings, giving you quick access to "
 			//% "your system insights at a glance."
 			text: qsTrId("welcome_brief_text")
 		},

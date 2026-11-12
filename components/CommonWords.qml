@@ -150,7 +150,7 @@ QtObject {
 	//% "Closed"
 	readonly property string closed_status: qsTrId("common_words_closed_status")
 
-	//% "Color"
+	//% "Colour"
 	readonly property string color: qsTrId("common_words_color")
 
 	//% "Connected"

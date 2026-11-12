@@ -12,7 +12,7 @@ Page {
 	GradientListView {
 		model: VisibleItemModel {
 			ListText {
-				//% "Synchronize VE.Bus SOC with battery"
+				//% "Synchronise VE.Bus SOC with battery"
 				text: qsTrId("settings_system_status_sync_vebus_soc_with_battery")
 				dataItem.uid: Services.system.serviceUid + "/Control/VebusSoc"
 				secondaryText: CommonWords.onOrOff(dataItem.value)

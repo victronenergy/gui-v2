@@ -69,7 +69,7 @@ VisibleItemModel {
 	// Show when not startstop controlled, but only if the genset service is present.
 	PrimaryListLabel {
 		preferredVisible: gensetInstance.valid && !root.isStartStopControlled
-		//% "Multiple genset controllers detected.\nThe GX device can only control one connected genset and takes the one with the lowest VRM instance number. To avoid unexpected behavior, make sure that only one unit is available to the GX device."
+		//% "Multiple genset controllers detected.\nThe GX device can only control one connected genset and takes the one with the lowest VRM instance number. To avoid unexpected behaviour, make sure that only one unit is available to the GX device."
 		text: qsTrId("genset_controller_multiple_genset_controllers")
 	}
 

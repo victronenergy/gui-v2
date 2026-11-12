@@ -98,20 +98,20 @@ Page {
 				{
 					let text = ""
 					if (isEssOrHub4) {
-						//% "Warning: Activating equalization in an ESS system with solar chargers can cause charging the battery at high voltage with a too high current."
+						//% "Warning: Activating equalisation in an ESS system with solar chargers can cause charging the battery at high voltage with a too high current."
 						text = qsTrId("vebus_device_warning")
 					}
 
-					//% "The system will automatically switch over to float once the Equalization charge has been completed."
+					//% "The system will automatically switch over to float once the Equalisation charge has been completed."
 					text += qsTrId("vebus_device_switch_to_float")
 
 					Global.showToastNotification(VenusOS.Notification_Info, text, 15000)
 				}
 
 				text: interrupt
-						//% "Interrupt equalization"
+						//% "Interrupt equalisation"
 					  ? qsTrId("vebus_device_interrupt_equalization")
-						//% "Equalization"
+						//% "Equalisation"
 					  : qsTrId("vebus_device_equalization")
 				secondaryText: {
 					if (interruptTimer.running)
@@ -140,11 +140,11 @@ Page {
 
 					switch (vebusSubState.value) {
 					case VenusOS.VeBusDevice_ChargeState_InitializingCharger:
-						//% "Charger not ready, equalization cannot be started"
+						//% "Charger not ready, equalisation cannot be started"
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("vebus_device_charger_not_ready"), 5000)
 						break;
 					case VenusOS.VeBusDevice_ChargeState_Bulk:
-						//% "Equalization cannot be triggered during bulk charge state"
+						//% "Equalisation cannot be triggered during bulk charge state"
 						Global.showToastNotification(VenusOS.Notification_Info, qsTrId("vebus_device_no_equalisation_during_bulk"), 5000)
 						break;
 					case VenusOS.VeBusDevice_ChargeState_Equalize:
@@ -161,7 +161,7 @@ Page {
 			ListRadioButtonGroup {
 				id: stopEq
 
-				//% "Interrupt equalization"
+				//% "Interrupt equalisation"
 				text: qsTrId("vebus_device_interrupt_equalization")
 				optionModel: [
 					{

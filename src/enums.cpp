@@ -473,7 +473,7 @@ QString Enums::solarCharger_stateToText(SolarCharger_State state) const
 		//% "Storage"
 		return qtTrId("solarchargers_state_storage");
 	case SolarCharger_State_Equalize:
-		//% "Equalize"
+		//% "Equalise"
 		return qtTrId("solarchargers_state_equalize");
 	case SolarCharger_State_ExternalControl:
 		//% "External control"
@@ -587,15 +587,15 @@ QString Enums::switchableOutput_typeToText(SwitchableOutput_Type value, const QS
 		//% "Bilge pump"
 		return qtTrId("switchable_output_bilge_pump");
 	case SwitchableOutput_Type_ColorDimmerRgb:
-		//% "RGB color wheel"
+		//% "RGB colour wheel"
 		return qtTrId("switchable_output_rgb_color_wheel");
 	case SwitchableOutput_Type_ColorDimmerCct:
 		//: Correlated Color Temperature color wheel
-		//% "CCT color wheel"
+		//% "CCT colour wheel"
 		return qtTrId("switchable_output_cct_color_wheel");
 	case SwitchableOutput_Type_ColorDimmerRgbW:
 		//: RGB + white color wheel
-		//% "RGB + W color wheel"
+		//% "RGB + W colour wheel"
 		return qtTrId("switchable_output_rgbw_color_wheel");
 	default:
 		//% "Unsupported type: %1"
@@ -757,7 +757,7 @@ QString Enums::system_stateToText(System_State state) const
 		//% "Storage mode"
 		return qtTrId("system_state_storagemode");
 	case System_State_EqualizationCharging:
-		//% "Equalization charging"
+		//% "Equalisation charging"
 		return qtTrId("system_state_equalisationcharging");
 	case System_State_PassThrough:
 		//% "Pass-thru"
@@ -782,7 +782,7 @@ QString Enums::system_stateToText(System_State state) const
 		//% "Repeated absorption"
 		return qtTrId("system_state_repeatedabsorption");
 	case System_State_AutoEqualize:
-		//% "Auto equalize"
+		//% "Auto equalise"
 		return qtTrId("system_state_autoequalize");
 	case System_State_BatterySafe:
 		//% "Battery safe"
@@ -1128,7 +1128,7 @@ QString Enums::dynamicEss_errorHint(DynamicEss_ErrorCode error, DynamicEss_Mode 
 		//% "Dynamic ESS needs an ESS-capable inverter/charger."
 		return qtTrId("dess_error_hint_no_ess");
 	case DynamicEss_ErrorCode_EssMode:
-		//% "Set the ESS mode to Optimized. Keep batteries charged and External control are not supported."
+		//% "Set the ESS mode to Optimised. Keep batteries charged and External control are not supported."
 		return qtTrId("dess_error_hint_ess_mode");
 	case DynamicEss_ErrorCode_NoMatchingSchedule:
 		if (mode == DynamicEss_Mode_NodeRed) {
