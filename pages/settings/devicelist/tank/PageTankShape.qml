@@ -203,16 +203,14 @@ Page {
 				: qsTrId("devicelist_tankshape_edit_point").arg(modelIndex+1)
 
 			contentItem: ModalDialog.FocusableContentItem {
+				implicitWidth: spinBoxLayout.implicitWidth + (2 * Theme.geometry_page_content_horizontalMargin)
 				implicitHeight: spinBoxLayout.implicitHeight
 
 				GridLayout {
 					id: spinBoxLayout
 
 					anchors {
-						left: parent.left
-						leftMargin: Theme.geometry_page_content_horizontalMargin
-						right: parent.right
-						rightMargin: Theme.geometry_page_content_horizontalMargin
+						horizontalCenter: parent.horizontalCenter
 						verticalCenter: parent.verticalCenter
 						verticalCenterOffset: -(Theme.geometry_modalDialog_content_spacing / 2)
 					}
