@@ -123,6 +123,56 @@ TestCase {
 		}
 	}
 
+	Component {
+		id: tallCardComponent
+
+		FocusScope {
+			id: tallCardHost
+
+			property real spacerHeight: 1000
+			property alias list: list
+			property alias tallCard: tallCard
+			property alias topSwitch: topSwitch
+			property alias bottomSwitch: bottomSwitch
+
+			width: 400
+			height: 600
+			focus: true
+
+			PluginCardListView {
+				id: list
+
+				PluginCard {
+					id: tallCard
+
+					title: "Tall"
+
+					PluginListSwitch {
+						id: topSwitch
+
+						flat: true
+						text: "Top"
+						writeAccessLevel: PluginAccessLevel.User
+					}
+
+					// Makes the card taller than the list.
+					Item {
+						width: 1
+						height: tallCardHost.spacerHeight
+					}
+
+					PluginListSwitch {
+						id: bottomSwitch
+
+						flat: true
+						text: "Bottom"
+						writeAccessLevel: PluginAccessLevel.User
+					}
+				}
+			}
+		}
+	}
+
 	function initTestCase() {
 		root.initialScreenSize = Theme.screenSize
 		// Unit tests do not load a mock configuration, so the access level is unset and
@@ -163,6 +213,26 @@ TestCase {
 					&& host.pumpSwitch.height > 0 && host.tankSwitch.height > 0
 		})
 		return host
+	}
+
+	// Creates a portrait list that holds one card, which is taller than the list, and gives the key
+	// focus to the first control in the card.
+	function createTallCardHost(properties) {
+		Theme.screenSize = Theme.Portrait
+		Global.keyNavigationEnabled = true
+		const host = createTemporaryObject(tallCardComponent, root, properties)
+		verify(host !== null)
+		tryVerify(function() { return host.bottomSwitch.visible && host.bottomSwitch.height > 0 })
+		verify(host.tallCard.height > innerListView(host.list).height)
+		host.forceActiveFocus()
+		tryCompare(host.topSwitch, "activeFocus", true)
+		return host
+	}
+
+	// Whether the whole item can be seen in the vertical view.
+	function isShown(item, view) {
+		const pos = item.mapToItem(view, 0, 0)
+		return pos.y >= -1 && pos.y + item.height <= view.height + 1
 	}
 
 	function test_landscapeLayout_data() {
@@ -321,5 +391,56 @@ TestCase {
 		compare(host.leftPresses, 1)
 		compare(host.rightPresses, 1)
 		verify(host.pumpSwitch.activeFocus)
+	}
+
+	function test_portraitScrollsToTheFocusInATallCard_data() {
+		return [
+			{ tag: "close by", height: 600, spacerHeight: 1000, smoothScroll: true },
+			{ tag: "too far for a smooth scroll", height: 800, spacerHeight: 2000, smoothScroll: false },
+		]
+	}
+
+	// In a card that is taller than the list, the list scrolls to show the control with the key
+	// focus. A smooth scroll has a top speed, which limits how far it can go, so the list jumps to a
+	// control that is further away than that.
+	function test_portraitScrollsToTheFocusInATallCard(data) {
+		const host = createTallCardHost({ height: data.height, spacerHeight: data.spacerHeight })
+		const view = innerListView(host.list)
+		verify(isShown(host.topSwitch, view))
+		verify(!isShown(host.bottomSwitch, view))
+
+		// Check that the row tests what its tag says. The list also jumps to a control that is more
+		// than twice its height away, so a control that is too far for a smooth scroll must be
+		// nearer than that.
+		const distance = host.bottomSwitch.mapToItem(view, 0, 0).y + host.bottomSwitch.height - view.height
+		const furthestSmoothScroll = view.maximumFlickVelocity * view.maximumFlickVelocity
+				/ (2 * view.flickDeceleration)
+		if (data.smoothScroll) {
+			verify(distance <= furthestSmoothScroll)
+		} else {
+			verify(distance > furthestSmoothScroll && distance <= 2 * view.height)
+		}
+
+		keyClick(Qt.Key_Down)
+		tryCompare(host.bottomSwitch, "activeFocus", true)
+		tryVerify(function() { return !view.moving && isShown(host.bottomSwitch, view) })
+
+		keyClick(Qt.Key_Up)
+		tryCompare(host.topSwitch, "activeFocus", true)
+		tryVerify(function() { return !view.moving && isShown(host.topSwitch, view) })
+	}
+
+	// If the key focus moves while the list is still scrolling, the list stops that scroll, so that
+	// it does not carry the new focus item out of view.
+	function test_portraitFocusChangeStopsAnEarlierScroll() {
+		const host = createTallCardHost({})
+		const view = innerListView(host.list)
+
+		keyClick(Qt.Key_Down)
+		verify(view.moving)
+		keyClick(Qt.Key_Up)
+		tryCompare(host.topSwitch, "activeFocus", true)
+		tryVerify(function() { return !view.moving })
+		verify(isShown(host.topSwitch, view))
 	}
 }

@@ -24,7 +24,8 @@ import Victron.VenusOS
 
 	Key navigation works as in the Controls pane. The Left and Right keys move the key focus to the
 	previous or next card. In portrait layout, the Up and Down keys do, from the first or last item
-	in a card.
+	in a card. The list scrolls to show the card with the key focus, or, in a card that is larger
+	than the list, the item with the key focus.
 */
 FocusScope {
 	id: root
@@ -42,6 +43,9 @@ FocusScope {
 
 		readonly property real cardWidth: orientation === ListView.Vertical ? width
 				: root.cards.length > 2 ? Theme.geometry_controlCard_minimumWidth : Theme.geometry_controlCard_maximumWidth
+		readonly property Item focusedItem: activeFocus && Global.keyNavigationEnabled
+				? Window.activeFocusItem
+				: null
 
 		anchors {
 			fill: parent
@@ -51,11 +55,19 @@ FocusScope {
 		}
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
-		highlightMoveVelocity: Theme.animation_cards_highlightMoveVelocity
-		highlightMoveDuration: -1
+
+		// The built-in ListView scrolling only shows the start of each card. Instead, scroll to show
+		// the focused control, so that it can be seen even if its card is larger than the view.
+		highlightFollowsCurrentItem: false
 
 		model: ObjectModel {
 			id: cardModel
+		}
+
+		onFocusedItemChanged: {
+			if (focusedItem) {
+				scrollToFocusedItem(focusedItem)
+			}
 		}
 
 		WheelHandler {

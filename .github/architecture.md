@@ -315,7 +315,7 @@ Run with `--mock` flag to use mock backend. Mock configurations (e.g. "maximal",
 
 `GuiPluginLoader` supports third-party UI extensions:
 - Plugins are JSON-defined with QML components
-- Integration types: plugin settings pages, device sub-pages, navigation pages, quick access cards, and custom branding (type 6)
+- Integration types: plugin settings pages (type 1), device sub-pages (type 2), navigation pages (type 3, not in the plugin API yet), quick access panes (type 4, not in the plugin API yet), a card in the Controls or Switches pane (type 5), and custom branding (type 6)
 - Plugins can be loaded from MQTT (VRM) or filesystem
 - Hot-reloading supported via file system watcher
 
@@ -325,7 +325,7 @@ Plugins are built with `tools/gui-v2-plugin-compiler.py`. Its `--branding` optio
 
 The `Branding` type is in its own QML module, `Victron.Branding` (`src/branding/`, `cmake/ModuleBranding.cmake`), so that a custom branding plugin is checked against this one small module, and so that it has its own version. The module's `qmldir` and `qmltypes` are installed next to the plugin compiler, which runs `qmllint` against them.
 
-Plugin settings pages and device sub-pages are written with the `Victron.GuiPlugins` types, and opened with `Global.pageManager.pushPluginPage()`, which shows the plugin page inside a `PluginHostPage`, defined in `PageStack.qml`, that owns it. See [GUI plugins](gui-plugins.md).
+Plugin settings pages and device sub-pages are written with the `Victron.GuiPlugins` types, and opened with `Global.pageManager.pushPluginPage()`, which shows the plugin page inside a `PluginHostPage`, defined in `PageStack.qml`, that owns it. A card in the Controls or Switches pane is a `PluginCard`, which `ControlCardsPage` or `AuxCardsPage` shows after its own cards, in the same list: a `CombinedListModel` (`src/combinedlistmodel.h`) gives the list the rows of the pane's own model, followed by the rows of a `GuiPluginIntegrationModel`. When the plugins are loaded, `GuiPluginLoader` compiles each card's file, and leaves out a card whose file has an error, so that a pane does not count a card that it cannot show. See [GUI plugins](gui-plugins.md).
 
 ### Module dependencies
 
