@@ -1182,6 +1182,9 @@ public:
 	Q_INVOKABLE QString switchableOutput_typeToText(SwitchableOutput_Type value, const QString &channelId = QString()) const;
 	Q_INVOKABLE QString switchableOutput_functionToText(SwitchableOutput_Function value) const;
 	Q_INVOKABLE QString switchableOutput_statusToText(SwitchableOutput_Status value, SwitchableOutput_Type type) const;
+	// Translates reserved "/keyword" entries of an IO channel /Settings/Labels value (e.g. "/low"),
+	// returns any other label unchanged.
+	Q_INVOKABLE QString ioChannel_labelToText(const QString &label) const;
 
 	Q_INVOKABLE QString microgridModeToText(MicrogridMode mode, MicrogridExternalControl control) const;
 	Q_INVOKABLE QString microgrid_errorToText(MicrogridError error) const;
