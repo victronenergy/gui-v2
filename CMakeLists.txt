@@ -56,8 +56,10 @@ include(cmake/ModuleBoat_Sources.cmake)
 include(cmake/ModuleGuiPlugins_Sources.cmake)
 include(cmake/ModuleMock_Sources.cmake)
 include(cmake/ModuleUiTest_Sources.cmake)
-include(cmake/VeUtil_Sources.cmake)
 include(cmake/GuiV2_Sources.cmake)
+
+# Before Translations.cmake, which reads the veutil translation sources.
+include(cmake/VeUtil.cmake)
 
 include(cmake/GenerateTheme.cmake)
 include(cmake/Translations.cmake)
@@ -81,6 +83,8 @@ if ("${GUI_V2_BUILD}" STREQUAL "ON")
     target_link_libraries(${PROJECT_NAME} PRIVATE
         VictronBranding
         VictronBrandingplugin
+        VictronVeUtil
+        VictronVeUtilplugin
         VictronVenusOS
         VictronVenusOSplugin
         VictronVenusOSShaders
