@@ -5,8 +5,9 @@
 # Tests for tools/gui-v2-plugin-compiler.py: the requiredGuiPluginsVersion that it writes,
 # the warning it prints for a deprecated type or member, the Branding import and name checks,
 # the image and font files it packs, the requiredBrandingVersion that it writes, the navigation
-# page integration that it writes for each --navigation option, and the card integration that it
-# writes for each --card option.
+# page integration that it writes for each --navigation option, the card integration that it
+# writes for each --card option, and the escaping of file names in the resource URLs and the
+# .qrc file that it writes.
 
 import contextlib
 import copy
@@ -17,6 +18,7 @@ import os
 import subprocess
 import sys
 import unittest
+import xml.etree.ElementTree as ET
 from unittest import mock
 from unittest.mock import mock_open, patch
 
@@ -401,7 +403,7 @@ class NavigationIntegrationTest(unittest.TestCase):
 
 
 class CardIntegrationTest(unittest.TestCase):
-    QML_FILES = ['Card.qml', 'OtherCard.qml']
+    QML_FILES = ['Card.qml', 'OtherCard.qml', 'Card#1.qml']
 
     def integration(self, args):
         return compiler.card_integration(args, 'Cards', self.QML_FILES)
@@ -410,6 +412,7 @@ class CardIntegrationTest(unittest.TestCase):
         cases = [
             (['Card.qml', '1'], {'type': 5, 'url': 'qrc:/Cards/Card.qml', 'cardType': 1}),
             (['Card.qml', '2'], {'type': 5, 'url': 'qrc:/Cards/Card.qml', 'cardType': 2}),
+            (['Card#1.qml', '1'], {'type': 5, 'url': 'qrc:/Cards/Card%231.qml', 'cardType': 1}),
         ]
         for args, integration in cases:
             with self.subTest(args=args):
@@ -443,6 +446,31 @@ class CardIntegrationTest(unittest.TestCase):
                         self.integration(args)
                 self.assertEqual(raised.exception.code, 1)
                 self.assertIn(message, output.getvalue())
+
+
+class ResourceUrlTest(unittest.TestCase):
+    def test_encodes_file_name(self):
+        cases = [
+            ('Page.qml', 'qrc:/Plugin/Page.qml'),
+            ('Page#1.qml', 'qrc:/Plugin/Page%231.qml'),
+            ('Page?.qml', 'qrc:/Plugin/Page%3F.qml'),
+            ('Page%20.qml', 'qrc:/Plugin/Page%2520.qml'),
+            ('My Page.qml', 'qrc:/Plugin/My%20Page.qml'),
+            ('branding/Branding.qml', 'qrc:/Plugin/branding/Branding.qml'),
+        ]
+        for fileName, url in cases:
+            with self.subTest(fileName=fileName):
+                self.assertEqual(compiler.resource_url('Plugin', fileName), url)
+
+
+class WriteQrcTest(unittest.TestCase):
+    def test_escapes_file_names(self):
+        with patch('builtins.open', mock_open()) as opened:
+            compiler.write_qrc(['A&B.qml', '<Card>.qml'], ['Plugin_en.qm'], ['logo.svg'], 'Plugin')
+        opened.assert_called_once_with('Plugin.qrc', 'w')
+        contents = ''.join(call.args[0] for call in opened().write.call_args_list)
+        files = [element.text for element in ET.fromstring(contents).iter('file')]
+        self.assertEqual(files, ['A&B.qml', '<Card>.qml', 'Plugin_en.qm', 'logo.svg'])
 
 
 with open(os.path.join(TOOLS_DIR, 'branding-properties.json'), encoding='utf-8') as propertiesFile:
