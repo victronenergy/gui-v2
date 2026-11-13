@@ -6,7 +6,7 @@ PluginPage {
 
 	title: "Simple"
 
-	PluginGradientListView {
+	PluginItemListView {
 		PluginListSwitch {
 			text: "Switch"
 			checkable: true

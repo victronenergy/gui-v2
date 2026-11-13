@@ -20,6 +20,60 @@
             ]
         },
         {
+            "name": "PluginButton",
+            "kind": "object",
+            "base": "Item",
+            "since": "1.0",
+            "properties": [
+                {"name": "iconSource", "type": "url", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"}
+            ],
+            "signals": [
+                {"name": "clicked", "parameters": [], "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginCard",
+            "kind": "object",
+            "base": "FocusScope",
+            "since": "1.0",
+            "properties": [
+                {"name": "content", "type": "alias", "default": true, "since": "1.0"},
+                {"name": "contentMargin", "type": "real", "readonly": true, "since": "1.0"},
+                {"name": "iconSource", "type": "url", "since": "1.0"},
+                {"name": "status", "type": "string", "since": "1.0"},
+                {"name": "title", "type": "string", "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginCardListView",
+            "kind": "object",
+            "base": "FocusScope",
+            "since": "1.0",
+            "properties": [
+                {"name": "cards", "type": "list<PluginCard>", "default": true, "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginConfirmationDialog",
+            "kind": "object",
+            "base": "QtObject",
+            "since": "1.0",
+            "properties": [
+                {"name": "acceptText", "type": "string", "since": "1.0"},
+                {"name": "description", "type": "string", "since": "1.0"},
+                {"name": "rejectText", "type": "string", "since": "1.0"},
+                {"name": "title", "type": "string", "since": "1.0"}
+            ],
+            "signals": [
+                {"name": "accepted", "parameters": [], "since": "1.0"},
+                {"name": "rejected", "parameters": [], "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "open", "parameters": [], "since": "1.0"}
+            ]
+        },
+        {
             "name": "PluginDataItem",
             "kind": "object",
             "base": "QtObject",
@@ -49,6 +103,68 @@
             ]
         },
         {
+            "name": "PluginDataPathModel",
+            "kind": "object",
+            "base": "QAbstractListModel",
+            "since": "1.0",
+            "properties": [
+                {"name": "count", "type": "int", "readonly": true, "since": "1.0"},
+                {"name": "deviceInstance", "type": "int", "since": "1.0"},
+                {"name": "path", "type": "string", "since": "1.0"},
+                {"name": "serviceType", "type": "string", "since": "1.0"},
+                {"name": "uid", "type": "string", "since": "1.0"}
+            ],
+            "signals": [
+                {"name": "countChanged", "parameters": [], "since": "1.0"},
+                {"name": "deviceInstanceChanged", "parameters": [], "since": "1.0"},
+                {"name": "pathChanged", "parameters": [], "since": "1.0"},
+                {"name": "serviceTypeChanged", "parameters": [], "since": "1.0"},
+                {"name": "uidChanged", "parameters": [], "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "childNameAt", "parameters": ["index: int"], "returns": "string", "since": "1.0"},
+                {"name": "childPathAt", "parameters": ["index: int"], "returns": "string", "since": "1.0"},
+                {"name": "childUidAt", "parameters": ["index: int"], "returns": "string", "since": "1.0"}
+            ],
+            "roles": [
+                {"name": "childName", "type": "string", "since": "1.0"},
+                {"name": "childPath", "type": "string", "since": "1.0"},
+                {"name": "childUid", "type": "string", "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginDeviceModel",
+            "kind": "object",
+            "base": "QAbstractListModel",
+            "since": "1.0",
+            "properties": [
+                {"name": "availableServiceTypes", "type": "list<string>", "readonly": true, "since": "1.0"},
+                {"name": "count", "type": "int", "readonly": true, "since": "1.0"},
+                {"name": "requiredPaths", "type": "list<string>", "since": "1.0"},
+                {"name": "serviceTypes", "type": "list<string>", "since": "1.0"}
+            ],
+            "signals": [
+                {"name": "availableServiceTypesChanged", "parameters": [], "since": "1.0"},
+                {"name": "countChanged", "parameters": [], "since": "1.0"},
+                {"name": "requiredPathsChanged", "parameters": [], "since": "1.0"},
+                {"name": "serviceTypesChanged", "parameters": [], "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "deviceInstanceAt", "parameters": ["index: int"], "returns": "int", "since": "1.0"},
+                {"name": "nameAt", "parameters": ["index: int"], "returns": "string", "since": "1.0"},
+                {"name": "productIdAt", "parameters": ["index: int"], "returns": "int", "since": "1.0"},
+                {"name": "serviceTypeAt", "parameters": ["index: int"], "returns": "string", "since": "1.0"},
+                {"name": "serviceUidAt", "parameters": ["index: int"], "returns": "string", "since": "1.0"}
+            ],
+            "roles": [
+                {"name": "deviceInstance", "type": "int", "since": "1.0"},
+                {"name": "name", "type": "string", "since": "1.0"},
+                {"name": "productId", "type": "int", "since": "1.0"},
+                {"name": "serviceType", "type": "string", "since": "1.0"},
+                {"name": "serviceUid", "type": "string", "since": "1.0"}
+            ]
+        },
+        {
             "name": "PluginDevicePage",
             "kind": "object",
             "base": "PluginPage",
@@ -57,15 +173,6 @@
                 {"name": "deviceName", "type": "string", "required": true, "since": "1.0"},
                 {"name": "productId", "type": "int", "required": true, "since": "1.0"},
                 {"name": "serviceUid", "type": "string", "required": true, "since": "1.0"}
-            ]
-        },
-        {
-            "name": "PluginGradientListView",
-            "kind": "object",
-            "base": "FocusScope",
-            "since": "1.0",
-            "properties": [
-                {"name": "items", "type": "list<PluginListItem>", "default": true, "since": "1.0"}
             ]
         },
         {
@@ -87,7 +194,8 @@
                         {"name": "Warning", "value": 2, "since": "1.0"},
                         {"name": "Critical", "value": 3, "since": "1.0"},
                         {"name": "Success", "value": 4, "since": "1.0"},
-                        {"name": "Disabled", "value": 5, "since": "1.0"}
+                        {"name": "Brand", "value": 5, "since": "1.0"},
+                        {"name": "Disabled", "value": 6, "since": "1.0"}
                     ]
                 }
             ]
@@ -112,6 +220,30 @@
                 {"name": "temperature", "type": "url", "readonly": true, "since": "1.0"},
                 {"name": "trash", "type": "url", "readonly": true, "since": "1.0"},
                 {"name": "warning", "type": "url", "readonly": true, "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginItemListView",
+            "kind": "object",
+            "base": "FocusScope",
+            "since": "1.0",
+            "properties": [
+                {"name": "items", "type": "list<PluginListItem>", "default": true, "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginLabel",
+            "kind": "object",
+            "base": "Item",
+            "since": "1.0",
+            "properties": [
+                {"name": "color", "type": "color", "since": "1.0"},
+                {"name": "elide", "type": "int", "since": "1.0"},
+                {"name": "fontSize", "type": "int", "since": "1.0"},
+                {"name": "horizontalAlignment", "type": "int", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"},
+                {"name": "verticalAlignment", "type": "int", "since": "1.0"},
+                {"name": "wrapMode", "type": "int", "since": "1.0"}
             ]
         },
         {
@@ -141,6 +273,7 @@
             "since": "1.0",
             "properties": [
                 {"name": "effectiveVisible", "type": "bool", "readonly": true, "since": "1.0"},
+                {"name": "flat", "type": "bool", "since": "1.0"},
                 {"name": "preferredVisible", "type": "bool", "since": "1.0"},
                 {"name": "showAccessLevel", "type": "int", "since": "1.0"}
             ]
@@ -213,6 +346,25 @@
                 {"name": "content", "type": "alias", "default": true, "since": "1.0"},
                 {"name": "interactive", "type": "bool", "since": "1.0"},
                 {"name": "text", "type": "string", "since": "1.0"},
+                {"name": "writeAccessLevel", "type": "int", "since": "1.0"}
+            ],
+            "methods": [
+                {"name": "checkWriteAccessLevel", "parameters": [], "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginListSlider",
+            "kind": "object",
+            "base": "PluginListItem",
+            "since": "1.0",
+            "properties": [
+                {"name": "dataItem", "type": "PluginDataItem", "readonly": true, "since": "1.0"},
+                {"name": "from", "type": "real", "since": "1.0"},
+                {"name": "interactive", "type": "bool", "since": "1.0"},
+                {"name": "stepSize", "type": "real", "since": "1.0"},
+                {"name": "text", "type": "string", "since": "1.0"},
+                {"name": "to", "type": "real", "since": "1.0"},
+                {"name": "value", "type": "real", "since": "1.0"},
                 {"name": "writeAccessLevel", "type": "int", "since": "1.0"}
             ],
             "methods": [
@@ -311,6 +463,18 @@
             ]
         },
         {
+            "name": "PluginModelListView",
+            "kind": "object",
+            "base": "FocusScope",
+            "since": "1.0",
+            "properties": [
+                {"name": "count", "type": "int", "readonly": true, "since": "1.0"},
+                {"name": "delegate", "type": "Component", "since": "1.0"},
+                {"name": "header", "type": "Component", "since": "1.0"},
+                {"name": "model", "type": "var", "since": "1.0"}
+            ]
+        },
+        {
             "name": "PluginPage",
             "kind": "object",
             "base": "FocusScope",
@@ -320,12 +484,54 @@
             ]
         },
         {
+            "name": "PluginPalette",
+            "kind": "singleton",
+            "base": "QtObject",
+            "since": "1.0",
+            "properties": [
+                {"name": "color_background_page", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_background_primary", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_background_secondary", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_brand", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_critical", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_font_disabled", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_font_primary", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_font_secondary", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_info", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_success", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "color_warning", "type": "color", "readonly": true, "since": "1.0"},
+                {"name": "font_family", "type": "string", "readonly": true, "since": "1.0"},
+                {"name": "font_size_large", "type": "int", "readonly": true, "since": "1.0"},
+                {"name": "font_size_medium", "type": "int", "readonly": true, "since": "1.0"},
+                {"name": "font_size_small", "type": "int", "readonly": true, "since": "1.0"},
+                {"name": "orientation", "type": "int", "readonly": true, "since": "1.0"},
+                {"name": "quantity_font_family", "type": "string", "readonly": true, "since": "1.0"}
+            ]
+        },
+        {
             "name": "PluginPrimaryListLabel",
             "kind": "object",
             "base": "PluginListItem",
             "since": "1.0",
             "properties": [
                 {"name": "text", "type": "string", "since": "1.0"}
+            ]
+        },
+        {
+            "name": "PluginQuantityLabel",
+            "kind": "object",
+            "base": "Item",
+            "since": "1.0",
+            "properties": [
+                {"name": "dataItem", "type": "PluginDataItem", "readonly": true, "since": "1.0"},
+                {"name": "decimals", "type": "int", "since": "1.0"},
+                {"name": "fontSize", "type": "int", "since": "1.0"},
+                {"name": "horizontalAlignment", "type": "int", "since": "1.0"},
+                {"name": "unit", "type": "int", "since": "1.0"},
+                {"name": "unitColor", "type": "color", "since": "1.0"},
+                {"name": "value", "type": "real", "since": "1.0"},
+                {"name": "valueColor", "type": "color", "since": "1.0"},
+                {"name": "verticalAlignment", "type": "int", "since": "1.0"}
             ]
         },
         {
@@ -350,12 +556,22 @@
                         {"name": "Amp", "value": 1, "since": "1.0"},
                         {"name": "AmpHour", "value": 2, "since": "1.0"},
                         {"name": "Energy_KiloWattHour", "value": 7, "since": "1.0"},
+                        {"name": "Hectopascal", "value": 9, "since": "1.0"},
+                        {"name": "Hertz", "value": 10, "since": "1.0"},
+                        {"name": "Kilopascal", "value": 12, "since": "1.0"},
                         {"name": "Percentage", "value": 20, "since": "1.0"},
+                        {"name": "PowerFactor", "value": 21, "since": "1.0"},
                         {"name": "RevolutionsPerMinute", "value": 22, "since": "1.0"},
+                        {"name": "Time_Day", "value": 30, "since": "1.0"},
+                        {"name": "Time_Hour", "value": 31, "since": "1.0"},
+                        {"name": "Time_Minute", "value": 32, "since": "1.0"},
+                        {"name": "Time_Second", "value": 33, "since": "1.0"},
                         {"name": "VoltAmpere", "value": 34, "since": "1.0"},
+                        {"name": "VoltAmpereReactive", "value": 35, "since": "1.0"},
                         {"name": "Volt_AC", "value": 36, "since": "1.0"},
                         {"name": "Volt_DC", "value": 37, "since": "1.0"},
-                        {"name": "Watt", "value": 42, "since": "1.0"}
+                        {"name": "Watt", "value": 42, "since": "1.0"},
+                        {"name": "WattsPerSquareMetre", "value": 43, "since": "1.0"}
                     ]
                 }
             ]

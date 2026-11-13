@@ -4,15 +4,17 @@ import Victron.GuiPlugins
 /*
 	List items with content of your own, built with PluginListSetting.
 
-	Plugins cannot read the GUI's colors, which change with light and dark mode and with custom
-	branding. So the content here has no text of its own, as the list items draw their text, and uses
-	colors that can be seen on both light and dark backgrounds.
+	Draw that content with PluginPalette colors, so it follows light and dark mode and custom
+	branding. The list items still draw the text. The Counter list item's content is a PluginLabel
+	and a PluginButton.
 */
 PluginPage {
 	id: root
 
 	// The number of squares in the Level list item. The main page sets it with pageProperties.
 	property int levelCount: 3
+	// The number that the Counter list item shows.
+	property int count
 
 	PluginDataItem {
 		id: socItem
@@ -29,7 +31,103 @@ PluginPage {
 		path: "/Settings/FullApiExample/Level"
 	}
 
-	PluginGradientListView {
+	PluginItemListView {
+		PluginSettingsListHeader {
+			text: "Theme colors"
+		}
+
+		PluginPrimaryListLabel {
+			text: "These are the PluginPalette colors. They follow light and dark mode, and custom branding."
+		}
+
+		PluginListSetting {
+			Flow {
+				width: parent.width
+				spacing: 8
+
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_background_primary
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_background_secondary
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_background_page
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_font_primary
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_font_secondary
+					border.width: 1
+					border.color: PluginPalette.color_font_primary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_brand
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_info
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_success
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_warning
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+				Rectangle {
+					width: 28
+					height: 28
+					radius: 4
+					color: PluginPalette.color_critical
+					border.width: 1
+					border.color: PluginPalette.color_font_secondary
+				}
+			}
+		}
+
 		PluginPrimaryListLabel {
 			text: "Battery state of charge"
 		}
@@ -41,19 +139,20 @@ PluginPage {
 				width: parent.width
 				height: 12
 				radius: 6
-				color: "#80969591"
+				// A faint brand color: the brand color at 30%, laid over the background.
+				color: Qt.tint(PluginPalette.color_background_primary, Qt.alpha(PluginPalette.color_brand, 0.3))
 
 				Rectangle {
 					width: parent.width * Math.max(0, Math.min(100, socItem.value ?? 0)) / 100
 					height: parent.height
 					radius: parent.radius
-					color: "#387DC5"
+					color: PluginPalette.color_brand
 				}
 			}
 		}
 
 		PluginListSetting {
-			id: levelRow
+			id: levelListItem
 
 			text: "Level"
 			interactive: levelSetting.valid
@@ -61,7 +160,7 @@ PluginPage {
 
 			// Key presses go to the list item. Check the access level before changing the setting.
 			Keys.onSpacePressed: {
-				if (levelRow.interactive && levelRow.checkWriteAccessLevel()) {
+				if (levelListItem.interactive && levelListItem.checkWriteAccessLevel()) {
 					levelSetting.setValue(levelSetting.value % root.levelCount + 1)
 				}
 			}
@@ -80,15 +179,49 @@ PluginPage {
 						width: 32
 						height: 32
 						radius: 4
-						color: levelSetting.valid && square.index < levelSetting.value ? "#387DC5" : "#80969591"
+						color: levelSetting.valid && square.index < levelSetting.value
+							? PluginPalette.color_brand
+							: PluginPalette.color_font_secondary
 
 						MouseArea {
 							anchors.fill: parent
 							// clickable is true when the list item is interactive, and the user has writeAccessLevel.
-							enabled: levelRow.clickable
+							enabled: levelListItem.clickable
 							onClicked: levelSetting.setValue(square.index + 1)
 						}
 					}
+				}
+			}
+		}
+
+		PluginListSetting {
+			id: counterListItem
+
+			text: "Counter"
+			interactive: true
+			writeAccessLevel: PluginAccessLevel.User
+
+			// The list item has the key focus, not the button, so the list item handles Space.
+			Keys.onSpacePressed: {
+				if (counterListItem.checkWriteAccessLevel()) {
+					root.count += 1
+				}
+			}
+
+			Row {
+				spacing: 16
+
+				PluginLabel {
+					anchors.verticalCenter: parent.verticalCenter
+					text: String(root.count)
+					color: PluginPalette.color_font_secondary
+				}
+
+				PluginButton {
+					text: "Add one"
+					iconSource: PluginIcons.plus
+					enabled: counterListItem.clickable
+					onClicked: root.count += 1
 				}
 			}
 		}

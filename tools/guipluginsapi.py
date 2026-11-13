@@ -4,8 +4,8 @@
 # See LICENSE.txt for license information.
 #
 # Writes tools/guiplugins-api.json: the checked-in record of the Victron.GuiPlugins API. It lists
-# every type that plugins can use, and each type's properties, signals, methods and enums, with the
-# module version that added each one. It also writes those versions into the type reference in
+# every type that plugins can use, and each type's properties, signals, methods, role names and enums,
+# with the module version that added each one. It also writes those versions into the type reference in
 # .github/gui-plugins.md, between the BEGIN and END lines below. The script reads them from the
 # module's source files (the
 # files in the VictronGuiPlugins_... variables in cmake/), and the module version from
@@ -15,7 +15,10 @@
 #    hidden from plugins. A declaration whose name starts and ends with __ is not recorded.
 #    A regular expression literal is refused: the script does not read one;
 #  - a C++ header's API is the class or namespace that it registers with QML_ELEMENT or
-#    QML_NAMED_ELEMENT: its Q_PROPERTY, Q_INVOKABLE, signal and Q_ENUM declarations.
+#    QML_NAMED_ELEMENT: its Q_PROPERTY, Q_INVOKABLE, signal and Q_ENUM declarations. A class whose
+#    base is QAbstractListModel also has role names: the names that its roleNames() returns, read
+#    from the header or from the .cpp file with the same name. Each role name's type is the return
+#    type of its Q_INVOKABLE <name>At(int index) method, which each role name must have.
 #
 # A plugin built for one version must keep working with each later version that has the same major
 # version. So the script refuses a change that would break such a plugin, such as removing a member
@@ -25,8 +28,10 @@
 # It cannot see a change to a property's initial value, or to what a function does. Those can still
 # break a plugin, and they need a new major version too.
 #
-# A member that the record does not have yet gets the current module version. Increase
-# VICTRON_GUIPLUGINS_VERSION_MINOR before adding to the API. Each addition needs its own minor
+# A member that the record does not have yet gets the current module version. Version 1.0 stays
+# open until the first GUI with this module is released: until then, additions are saved at 1.0,
+# and the minor version is not increased (see UNRELEASED_VERSION). After that release, increase
+# VICTRON_GUIPLUGINS_VERSION_MINOR before adding to the API. Each addition then needs its own minor
 # version, even if the previous one has not been released. If the version is not already higher
 # than the version in the record, the script refuses to write the record, and prints what to do.
 #
@@ -55,16 +60,22 @@ MODULE_CMAKE_FILE = 'cmake/ModuleGuiPlugins.cmake'
 MODULE_TARGET = 'VictronGuiPlugins'
 MODULE_URI = 'Victron.GuiPlugins'
 
+# The module version that no released GUI has yet. Additions are saved at this version without
+# increasing VICTRON_GUIPLUGINS_VERSION_MINOR. When the first GUI with this module is released, set
+# this to None.
+UNRELEASED_VERSION = (1, 0)
+
 # The list of versions in the type reference in .github/gui-plugins.md is between these two lines.
 DOCS_BEGIN = ('<!-- BEGIN versions. tools/guipluginsapi.py writes this part from tools/guiplugins-api.json: '
               'do not edit it. -->')
 DOCS_END = '<!-- END versions -->'
 
 # Besides its own types, the API may use only QML's basic types and these Qt types, because plugins
-# import only Victron.GuiPlugins, QtQml and QtQuick.
+# import only Victron.GuiPlugins, QtQml and QtQuick. QAbstractListModel is a Qt list model, so a
+# plugin can pass it to a Repeater without importing Victron.VenusOS.
 BASIC_TYPES = {'bool', 'int', 'real', 'string', 'url', 'color', 'var', 'date', 'point', 'size', 'rect', 'void',
                'alias'}
-QT_TYPES = {'QtObject', 'Item', 'FocusScope', 'Component'}
+QT_TYPES = {'QtObject', 'Item', 'FocusScope', 'Component', 'QAbstractListModel'}
 
 QML_TYPE_NAMES = {'double': 'real', 'variant': 'var'}
 CPP_TYPE_NAMES = {
@@ -111,6 +122,18 @@ CPP_SECTION_RE = re.compile(r'\b(?:(?:public|protected|private)\s*(Q_SLOTS|slots
 CPP_INVOKABLE_RE = re.compile(r'Q_INVOKABLE\s+([^;{}()]*?)\s*\b(\w+)\s*\(([^()]*)\)')
 CPP_SIGNAL_RE = re.compile(r'void\s+(\w+)\s*\(([^()]*)\)')
 ENUM_VALUE_RE = re.compile(r'(\w+)(?:\s*=\s*(-?(?:0[xX][0-9a-fA-F]+|\d+)))?')
+# The start of a roleNames() definition. %s is what comes before roleNames: nothing in the class
+# body, or "<class>::" in the .cpp file.
+CPP_ROLE_NAMES_RE = r'\b%sroleNames\s*\(\s*\)\s*const\b[^{;]*\{'
+# The body that roleNames() must have, so that every role name can be read:
+# return { { <role>, "<name>" }, ... };
+CPP_ROLE_NAMES_BODY_RE = re.compile(r'\s*return\s*\{(.*)\}\s*;\s*', re.DOTALL)
+# One { <role>, "<name>" } pair in the hash that roleNames() returns.
+CPP_ROLE_RE = re.compile(r'\{\s*[\w:]+\s*,\s*"(\w+)"\s*\}')
+# A type with this base is a list model, so it must have role names.
+LIST_MODEL_BASE = 'QAbstractListModel'
+# The sections of a type's record that hold members, in the order in which they are written.
+MEMBER_SECTIONS = ('properties', 'signals', 'methods', 'roles')
 
 
 def strip_comments(text, path, keep_strings):
@@ -219,14 +242,14 @@ def new_type(name, kind, base):
     api_type = {'name': name, 'kind': kind}
     if base is not None:
         api_type['base'] = base
-    api_type.update({'properties': [], 'signals': [], 'methods': [], 'enums': []})
+    api_type.update({'properties': [], 'signals': [], 'methods': [], 'roles': [], 'enums': []})
     return api_type
 
 
 def finish_type(api_type, path):
     """Sorts the members of api_type by name (but keeps enum values in order), checks that no name is
     used twice, and drops the empty lists."""
-    for section in ('properties', 'signals', 'methods', 'enums'):
+    for section in MEMBER_SECTIONS + ('enums',):
         names = [member['name'] for member in api_type[section]]
         twice = sorted({name for name in names if names.count(name) > 1})
         if twice:
@@ -528,9 +551,10 @@ def matching_brace(text, start, path):
     raise ValueError('%s: a { is not closed' % path)
 
 
-def parse_cpp_types(text, path):
+def parse_cpp_types(text, path, source_text=None, source_path=None):
     """Returns the API of the QML type that the C++ header at path registers, as a list of one type,
-    or an empty list if the header registers none."""
+    or an empty list if the header registers none. source_text is the text of the .cpp file with
+    the same name, at source_path, or None if there is none. It is read only for roleNames()."""
     text = strip_comments(text, path, keep_strings=True)
     macros = list(QML_MACRO_RE.finditer(text))
     if not macros:
@@ -618,7 +642,46 @@ def parse_cpp_types(text, path):
             raise ValueError('%s: cannot find the enum %s' % (path, enum_name))
         api_type['enums'].append({'name': enum_name, 'values': parse_enum_values(enum.group(1), path, enum_name)})
 
+    if scope.group(1):
+        roles = parse_cpp_roles(scope.group(1), body, path, source_text, source_path, api_type)
+        if roles is None and base == LIST_MODEL_BASE:
+            raise ValueError('%s: %s is a list model, but its roleNames() is not defined in the class or in %s. '
+                             'Define it there, so that its role names are recorded.'
+                             % (path, name, source_path or os.path.splitext(path)[0] + '.cpp'))
+        api_type['roles'] = roles or []
+
     return [finish_type(api_type, path)]
+
+
+def parse_cpp_roles(cpp_class, body, path, source_text, source_path, api_type):
+    """Returns the role names of the C++ class cpp_class, as {'name', 'type'} records, or None if
+    it does not define roleNames(). The class body is body, from the header at path. source_text
+    is the .cpp file at source_path, or None. A role name's type is the return type of the method
+    <name>At(int index), which api_type must have."""
+    places = [(body, path, CPP_ROLE_NAMES_RE % '')]
+    if source_text is not None:
+        places.append((strip_comments(source_text, source_path, keep_strings=True), source_path,
+                       CPP_ROLE_NAMES_RE % (re.escape(cpp_class) + r'\s*::\s*')))
+    found = [(text, where, match) for text, where, pattern in places for match in re.finditer(pattern, text)]
+    if not found:
+        return None
+    if len(found) > 1:
+        raise ValueError('%s: %s defines roleNames() more than once' % (path, cpp_class))
+    text, where, match = found[0]
+    returned = CPP_ROLE_NAMES_BODY_RE.fullmatch(text[match.end():matching_brace(text, match.end() - 1, where)])
+    if not returned or CPP_ROLE_RE.sub('', returned.group(1)).strip(' \t\n,'):
+        raise ValueError('%s: cannot read the role names in %s::roleNames(). Write its body as '
+                         '"return { { <role>, "<name>" }, ... };".' % (where, cpp_class))
+    methods = {method['name']: method for method in api_type['methods']}
+    roles = []
+    for name in CPP_ROLE_RE.findall(returned.group(1)):
+        method = methods.get(name + 'At')
+        if method is None or [parameter.partition(': ')[2] for parameter in method['parameters']] != ['int']:
+            raise ValueError('%s: %s has the role name %s, but no "Q_INVOKABLE <type> %sAt(int index)". Add it: '
+                             'its return type is the type of the role name, and it lets a plugin read the value at an '
+                             'index without a delegate.' % (path, cpp_class, name, name))
+        roles.append({'name': name, 'type': method['returns']})
+    return roles
 
 
 def parse_cpp_property(line, path):
@@ -650,7 +713,13 @@ def read_types(read_file, files):
         if path.endswith('.qml'):
             types.append(parse_qml_type(os.path.splitext(os.path.basename(path))[0], text, path))
         elif re.search(r'\.(h|hpp)$', path):
-            types += parse_cpp_types(text, path)
+            source_path = os.path.splitext(path)[0] + '.cpp'
+            source_text = None
+            if source_path in files:
+                source_text = read_file(source_path)
+                if source_text is None:
+                    raise ValueError('%s: cannot read this file' % source_path)
+            types += parse_cpp_types(text, path, source_text, source_path if source_text is not None else None)
     names = [api_type['name'] for api_type in types]
     twice = sorted({name for name in names if names.count(name) > 1})
     if twice:
@@ -695,6 +764,7 @@ def disallowed_types(types):
         if 'base' in api_type:
             uses.append(('its base type', api_type['base']))
         uses += [('property ' + prop['name'], prop['type']) for prop in api_type.get('properties', [])]
+        uses += [('role name ' + role['name'], role['type']) for role in api_type.get('roles', [])]
         for section, word in (('signals', 'signal'), ('methods', 'method')):
             for member in api_type.get(section, []):
                 uses += [('%s %s' % (word, member['name']), parameter.partition(': ')[2])
@@ -788,6 +858,15 @@ def member_changes(type_name, old_type, api_type):
                 messages.append('%s.%s changed its return type, from %s to %s'
                                 % (type_name, name, old['returns'], member.get('returns', 'none')))
 
+    new_roles = by_name(api_type, 'roles')
+    for name, old in by_name(old_type, 'roles').items():
+        role = new_roles.get(name)
+        if role is None:
+            messages.append('%s role name %s was removed or renamed' % (type_name, name))
+        elif role['type'] != old['type']:
+            messages.append('%s role name %s changed type, from %s to %s'
+                            % (type_name, name, old['type'], role['type']))
+
     new_enums = by_name(api_type, 'enums')
     for name, old in by_name(old_type, 'enums').items():
         enum = new_enums.get(name)
@@ -835,7 +914,7 @@ def make_record(old_record, module_version, types):
         record_type['since'] = since(old_type)
         if old_type and old_type.get('deprecated'):
             record_type['deprecated'] = True
-        for section in ('properties', 'signals', 'methods'):
+        for section in MEMBER_SECTIONS:
             if section in api_type:
                 old_members = old_type.get(section, []) if old_type else None
                 record_type[section] = [recorded(member, find(old_members, member['name']))
@@ -873,8 +952,10 @@ def display_path(path):
 
 def unbumped_additions(old_record, module_version, record):
     """Returns new member names that must not be saved, because module_version is not newer than the
-    version already in old_record. Empty if there is no old record, or the version was increased."""
-    if old_record is None or tuple(module_version) > parse_version(old_record['version']):
+    version already in old_record. Empty if there is no old record, if the version was increased, or
+    if module_version is UNRELEASED_VERSION."""
+    if (old_record is None or tuple(module_version) > parse_version(old_record['version'])
+            or tuple(module_version) == UNRELEASED_VERSION):
         return []
     return new_members(old_record, record)
 
@@ -916,11 +997,14 @@ def unbumped_additions_message(old_record, module_version, record, output_path, 
 
 
 def new_members(old_record, record):
-    """Returns the names of the types and members in record that old_record does not have."""
+    """Returns the names of the types and members in record that old_record does not have. A role
+    name is written as "<type> role name <name>", since a property can have the same name."""
     def names(some_record):
         result = set()
         for record_type in some_record['types']:
             result.add(record_type['name'])
+            result |= {'%s role name %s' % (record_type['name'], role['name'])
+                       for role in record_type.get('roles', [])}
             for section in ('properties', 'signals', 'methods', 'enums'):
                 for member in record_type.get(section, []):
                     result.add('%s.%s' % (record_type['name'], member['name']))
@@ -955,20 +1039,21 @@ def generate_json(record):
 def generate_versions(record):
     """Returns the list of versions for the type reference: the lines from DOCS_BEGIN to DOCS_END,
     ending with a newline. Each type has the version that added it, and is followed by the
-    members, enums and enum values that a later version added."""
+    members, role names, enums and enum values that a later version added."""
     lines = [DOCS_BEGIN, '']
     for record_type in record['types']:
         later = []
-        for section in ('properties', 'signals', 'methods', 'enums'):
+        for section in MEMBER_SECTIONS + ('enums',):
             for member in record_type.get(section, []):
                 if parse_version(member['since']) > parse_version(record_type['since']):
-                    later.append((parse_version(member['since']), member['name']))
+                    label = ('role name `%s`' if section == 'roles' else '`%s`') % member['name']
+                    later.append((parse_version(member['since']), member['name'], label))
                 for value in member.get('values', []):
                     if parse_version(value['since']) > parse_version(member['since']):
-                        later.append((parse_version(value['since']), value['name']))
+                        later.append((parse_version(value['since']), value['name'], '`%s`' % value['name']))
         text = '- `%s`: %s' % (record_type['name'], record_type['since'])
         if later:
-            items = ['`%s` (%s)' % (name, format_version(version)) for version, name in sorted(later)]
+            items = ['%s (%s)' % (label, format_version(version)) for version, _name, label in sorted(later)]
             text += ', except ' + (items[0] if len(items) == 1 else ', '.join(items[:-1]) + ' and ' + items[-1])
         lines.append(text)
     lines += ['', DOCS_END]

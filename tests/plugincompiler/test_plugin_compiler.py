@@ -60,6 +60,10 @@ class RequiredGuiPluginsVersionTest(unittest.TestCase):
                 {'name': 'yes', 'type': 'string', 'since': '1.0'},
                 {'name': 'reset', 'type': 'string', 'since': '1.3'},
             ]},
+            {'name': 'PluginDeviceModel', 'base': 'QAbstractListModel', 'since': '1.1', 'roles': [
+                {'name': 'serviceUid', 'type': 'string', 'since': '1.1'},
+                {'name': 'productId', 'type': 'int', 'since': '1.2'},
+            ]},
         ],
     }
 
@@ -138,6 +142,11 @@ class RequiredGuiPluginsVersionTest(unittest.TestCase):
             # A quoted string may span lines. A name inside it does not count. A name after it does.
             'PluginListItem { text: "line 1\nPluginWords.reset\nline2" }': ('1.0', []),
             'PluginListItem { text: "line 1\nline2"; text: PluginWords.reset }': ('1.3', ['PluginWords.reset']),
+            # A model's role names are members, so a delegate that reads a newer one needs its version.
+            'Repeater { model: PluginDeviceModel {} delegate: Item { required property string serviceUid } }':
+                ('1.1', ['PluginDeviceModel', 'PluginDeviceModel.serviceUid']),
+            'Repeater { model: PluginDeviceModel {} delegate: Item { required property int productId } }':
+                ('1.2', ['PluginDeviceModel.productId']),
         }
         for qml, expected in cases.items():
             with self.subTest(qml=qml):
@@ -146,14 +155,24 @@ class RequiredGuiPluginsVersionTest(unittest.TestCase):
                 self.assertEqual(compiler.required_guiplugins_version(self.API, names), expected)
 
     def test_examples(self):
-        """The examples work with the first version of the checked-in record."""
-        firstVersion = compiler.load_guiplugins_api()['version'].split('.')[0] + '.0'
-        for name in ['DeviceListExample', 'FullApiExample', 'SimpleExample', 'SimpleTrExample']:
+        """Examples that do not use a newer type still work with the first version.
+
+        FullApiExample shows every type, so it needs the current module version.
+        """
+        api = compiler.load_guiplugins_api()
+        firstVersion = api['version'].split('.')[0] + '.0'
+        expected = {
+            'DeviceListExample': firstVersion,
+            'FullApiExample': api['version'],
+            'SimpleExample': firstVersion,
+            'SimpleTrExample': firstVersion,
+        }
+        for name, version in expected.items():
             with self.subTest(example=name):
                 directory = os.path.join(EXAMPLES_DIR, name)
                 paths = [os.path.join(directory, file) for file in os.listdir(directory) if file.endswith('.qml')]
                 with contextlib.redirect_stdout(io.StringIO()):
-                    self.assertEqual(compiler.check_guiplugins_version(paths), firstVersion)
+                    self.assertEqual(compiler.check_guiplugins_version(paths), version)
 
     def test_no_import(self):
         with contextlib.redirect_stdout(io.StringIO()):

@@ -8,7 +8,8 @@ import Victron.VenusOS
 
 /*
 	The base type of every Plugin* list item, such as PluginListSwitch and PluginListSetting. Only
-	list items of this type can be declared in a PluginGradientListView.
+	list items of this type can be declared in a PluginItemListView, or be the delegate of a
+	PluginModelListView.
 
 	It holds what every list item does in the same way: whether the list item is shown, and key
 	navigation. Do not use it directly. For a list item that the other Plugin* types do not cover,
@@ -17,7 +18,7 @@ import Victron.VenusOS
 FocusScope {
 	// Set to false to hide the list item. It then takes no space, and key navigation skips it.
 	// Do not set 'visible'. Hiding a list item that already has key focus does not clear that
-	// focus; PluginGradientListView moves it to a visible list item.
+	// focus; the list view moves it to a visible list item.
 	property bool preferredVisible: true
 	// The lowest access level that shows the list item.
 	property int showAccessLevel: PluginAccessLevel.User
@@ -26,6 +27,10 @@ FocusScope {
 	// and breaks this binding, so the list item would stay hidden after settings arrive.
 	readonly property bool effectiveVisible: preferredVisible
 			&& (Services.settings?.canAccess(showAccessLevel) ?? false)
+	// Every list item declared inside a PluginCard must set this to true. The list item is then
+	// drawn as in gui-v2's own cards: without a background, and as wide as the card.
+	// PluginSettingsListHeader and PluginPrimaryListLabel ignore it: in a card, use a PluginLabel.
+	property bool flat
 
 	width: parent?.width ?? implicitWidth
 	visible: effectiveVisible

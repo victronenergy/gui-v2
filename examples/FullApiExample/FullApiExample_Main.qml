@@ -16,7 +16,7 @@ PluginPage {
 		path: "/Settings/FullApiExample/Enabled"
 	}
 
-	PluginGradientListView {
+	PluginItemListView {
 		PluginPrimaryListLabel {
 			text: "This plugin uses every type in Victron.GuiPlugins. Each subpage shows one group of types."
 		}
@@ -32,6 +32,12 @@ PluginPage {
 		}
 
 		PluginListNavigation {
+			text: "Devices"
+			caption: "The devices on the system, such as every tank"
+			pageUrl: Qt.resolvedUrl("FullApiExample_Devices.qml")
+		}
+
+		PluginListNavigation {
 			text: "Settings"
 			caption: "Switches, text fields, numbers, options and buttons"
 			// PluginWords are common words, already translated into the user's language.
@@ -43,7 +49,7 @@ PluginPage {
 
 		PluginListNavigation {
 			text: "Custom items"
-			caption: "Items with content of your own"
+			caption: "Items with content of your own, in the theme colors"
 			pageUrl: Qt.resolvedUrl("FullApiExample_CustomItems.qml")
 			// Sets a title other than the list item's text, and a property that the subpage declares.
 			pageProperties: ({ title: "Items of your own", levelCount: 5 })
@@ -59,6 +65,12 @@ PluginPage {
 			text: "Words and icons"
 			caption: "Common words, already translated, and icons in the GUI's colors"
 			pageUrl: Qt.resolvedUrl("FullApiExample_WordsAndIcons.qml")
+		}
+
+		PluginListNavigation {
+			text: "Cards"
+			caption: "Cards with an icon, a title and a status, and content of your own"
+			pageUrl: Qt.resolvedUrl("FullApiExample_Card.qml")
 		}
 
 		PluginListNavigation {

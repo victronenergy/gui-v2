@@ -48,6 +48,7 @@ PluginListItem {
 	ListSetting {
 		id: inner
 
+		flat: root.flat
 		text: root.text
 		preferredVisible: root.preferredVisible
 		showAccessLevel: root.showAccessLevel

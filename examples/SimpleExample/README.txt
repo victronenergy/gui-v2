@@ -1,7 +1,7 @@
 SimpleExample: a plugin that adds a settings page
 
 The page has one switch. It is written with the Victron.GuiPlugins types
-(PluginPage, PluginGradientListView and PluginListSwitch); a plugin page
+(PluginPage, PluginItemListView and PluginListSwitch); a plugin page
 must not import Victron.VenusOS. The rules that plugin pages must follow are
 in .github/gui-plugins.md in the gui-v2 source.
 

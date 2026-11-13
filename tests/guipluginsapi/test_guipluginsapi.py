@@ -115,11 +115,69 @@ Q_ENUM_NS(Unit)
 }
 '''
 
+MODEL_HEADER = '''
+namespace Victron {
+namespace GuiPlugins {
 
-def api(qml=QML_TYPE, header=HEADER, namespace_header=NAMESPACE_HEADER):
+class ExampleModel : public QAbstractListModel
+{
+	Q_OBJECT
+	QML_ELEMENT
+
+public:
+	Q_INVOKABLE QString nameAt(int index) const;
+	Q_INVOKABLE int levelAt(int index) const;
+
+	int rowCount(const QModelIndex &parent) const override;
+	QHash<int, QByteArray> roleNames() const override;
+
+private:
+	enum Role { NameRole = Qt::UserRole, LevelRole };
+};
+
+}
+}
+'''
+
+MODEL_SOURCE = '''
+#include "examplemodel.h"
+
+// The role names are read from roleNames(), not from { NameRole, "comment" } here.
+QHash<int, QByteArray> ExampleModel::roleNames() const
+{
+	return {
+		{ NameRole, "name" },
+		{ LevelRole, "level" },
+	};
+}
+
+QHash<int, QByteArray> OtherModel::roleNames() const
+{
+	return { { OtherRole, "other" } };
+}
+'''
+
+ROLE_NAMES_BODY = '''	return {
+		{ NameRole, "name" },
+		{ LevelRole, "level" },
+	};'''
+
+# The model sources above, with one more role name: extra.
+EXTRA_ROLE_NAME = {
+    'model_header': MODEL_HEADER.replace('\tQ_INVOKABLE int levelAt',
+                                         '\tQ_INVOKABLE int extraAt(int index) const;\n\tQ_INVOKABLE int levelAt'),
+    'model_source': MODEL_SOURCE.replace('{ LevelRole, "level" },',
+                                         '{ LevelRole, "level" },\n\t\t{ ExtraRole, "extra" },'),
+}
+
+
+def api(qml=QML_TYPE, header=HEADER, namespace_header=NAMESPACE_HEADER, model_header=MODEL_HEADER,
+        model_source=MODEL_SOURCE):
     """Returns the API types of the given sources. A source that is None is left out."""
     sources = {path: text for path, text in (('Example.qml', qml), ('exampleitem.h', header),
-                                             ('exampleunit.h', namespace_header)) if text is not None}
+                                             ('exampleunit.h', namespace_header),
+                                             ('examplemodel.h', model_header),
+                                             ('examplemodel.cpp', model_source)) if text is not None}
     return guipluginsapi.read_types(sources.get, list(sources))
 
 
@@ -128,10 +186,13 @@ OLD_RECORD = guipluginsapi.make_record(None, (1, 0), api())
 
 
 def versions(record):
-    """Returns {name: the version that added it} for each type, member and enum value of record."""
+    """Returns {name: the version that added it} for each type, member, role name and enum value of
+    record. A role name is "<type> role name <name>"."""
     result = {}
     for record_type in record['types']:
         result[record_type['name']] = record_type['since']
+        result.update({'%s role name %s' % (record_type['name'], role['name']): role['since']
+                       for role in record_type.get('roles', [])})
         for section in ('properties', 'signals', 'methods', 'enums'):
             for member in record_type.get(section, []):
                 name = '%s.%s' % (record_type['name'], member['name'])
@@ -220,6 +281,42 @@ Item {
         }])
         self.assertEqual(guipluginsapi.parse_cpp_types('class Helper : public QObject {};', 'helper.h'), [])
 
+    def test_role_names_are_read(self):
+        expected = [{'name': 'level', 'type': 'int'}, {'name': 'name', 'type': 'string'}]
+        model = guipluginsapi.parse_cpp_types(MODEL_HEADER, 'examplemodel.h', MODEL_SOURCE, 'examplemodel.cpp')
+        self.assertEqual(model[0]['roles'], expected)
+        inline = MODEL_HEADER.replace('roleNames() const override;',
+                                      'roleNames() const override\n\t{\n%s\n\t}' % ROLE_NAMES_BODY)
+        self.assertEqual(guipluginsapi.parse_cpp_types(inline, 'examplemodel.h')[0]['roles'], expected)
+        self.assertEqual(next(api_type for api_type in api() if api_type['name'] == 'ExampleModel')['roles'],
+                         expected)
+
+    def test_role_names_that_cannot_be_recorded_are_errors(self):
+        inline = MODEL_HEADER.replace('roleNames() const override;',
+                                      'roleNames() const override\n\t{\n%s\n\t}' % ROLE_NAMES_BODY)
+        built_in_steps = '\tQHash<int, QByteArray> roles;\n\troles[LevelRole] = "level";\n\treturn roles;'
+        cases = [
+            ({'model_header': MODEL_HEADER.replace('\tQ_INVOKABLE int levelAt(int index) const;\n', '')},
+             r'has the role name level, but no "Q_INVOKABLE <type> levelAt\(int index\)"'),
+            ({'model_header': MODEL_HEADER.replace('levelAt(int index)', 'levelAt()')},
+             'has the role name level, but no'),
+            ({'model_source': MODEL_SOURCE.replace(ROLE_NAMES_BODY, built_in_steps)},
+             r'cannot read the role names in ExampleModel::roleNames\(\)'),
+            ({'model_source': MODEL_SOURCE.replace('{ LevelRole, "level" }', '{ LevelRole, levelName() }')},
+             r'cannot read the role names in ExampleModel::roleNames\(\)'),
+            ({'model_source': None},
+             r'ExampleModel is a list model, but its roleNames\(\) is not defined in the class or in '
+             r'examplemodel.cpp'),
+            ({'model_header': inline},
+             r'ExampleModel defines roleNames\(\) more than once'),
+        ]
+        for sources, expected in cases:
+            with self.subTest(expected=expected):
+                for text in sources.values():
+                    self.assertTrue(text is None or text not in (MODEL_HEADER, MODEL_SOURCE))
+                with self.assertRaisesRegex(ValueError, expected):
+                    api(**sources)
+
     def test_declarations_that_cannot_be_recorded_are_errors(self):
         cases = [
             ('Example.qml', QML_TYPE.replace('\tsignal clicked\n', '\tcomponent Inner: Item {}\n'),
@@ -301,10 +398,17 @@ Item {
                 {'header': HEADER.replace('On = 4', 'On = 3')},
             'ExampleUnit was removed or renamed':
                 {'namespace_header': None},
+            'ExampleModel role name level was removed or renamed':
+                {'model_source': MODEL_SOURCE.replace('\t\t{ LevelRole, "level" },\n', '')},
         }
         for expected, sources in cases.items():
             with self.subTest(expected=expected):
                 self.assertEqual(guipluginsapi.breaking_changes(OLD_RECORD, (1, 0), api(**sources)), [expected])
+        self.assertEqual(guipluginsapi.breaking_changes(OLD_RECORD, (1, 0), api(
+            model_header=MODEL_HEADER.replace('int levelAt', 'double levelAt'))), [
+            'ExampleModel.levelAt changed its return type, from int to real',
+            'ExampleModel role name level changed type, from int to real',
+        ])
         self.assertEqual(guipluginsapi.breaking_changes(OLD_RECORD, (0, 9), api()),
                          ['the module version went down, from 1.0 to 0.9'])
 
@@ -331,13 +435,15 @@ Item {
                                                                    header=HEADER.replace('On = 4', 'On = 4, Auto')))
         record = guipluginsapi.make_record(record, (1, 2), api(
             qml=QML_TYPE.replace('\tsignal clicked\n', caption + '\tproperty int more\n\tsignal extra\n'),
-            header=HEADER.replace('On = 4', 'On = 4, Auto')))
+            header=HEADER.replace('On = 4', 'On = 4, Auto'), **EXTRA_ROLE_NAME))
+        self.assertEqual(versions(record)['ExampleModel role name extra'], '1.2')
         lines = guipluginsapi.generate_versions(record).splitlines()
         self.assertEqual((lines[0], lines[-1]), (guipluginsapi.DOCS_BEGIN, guipluginsapi.DOCS_END))
         self.assertEqual(lines[1:-1], [
             '',
             '- `Example`: 1.0, except `caption` (1.1), `extra` (1.2) and `more` (1.2)',
             '- `ExampleItem`: 1.0, except `Auto` (1.1)',
+            '- `ExampleModel`: 1.0, except role name `extra` (1.2) and `extraAt` (1.2)',
             '- `ExampleUnit`: 1.0',
             '',
         ])
@@ -377,6 +483,8 @@ Item {
         self.assertNotIn('deprecated', next(value for value in again_unit['enums'][0]['values']
                                             if value['name'] == 'None'))
 
+    # The rule after the first release, when 1.0 is no longer open.
+    @mock.patch.object(guipluginsapi, 'UNRELEASED_VERSION', None)
     def test_unbumped_additions_are_refused(self):
         types = api(qml=QML_TYPE.replace('\tsignal clicked\n', '\tsignal clicked\n\tproperty string caption\n'))
         record = guipluginsapi.make_record(OLD_RECORD, (1, 0), types)
@@ -384,6 +492,8 @@ Item {
             OLD_RECORD, (1, 0), record, 'tools/guiplugins-api.json', '.github/gui-plugins.md')
         self.assertIn('Refusing to write tools/guiplugins-api.json.', message)
         self.assertIn('  Example.caption', message)
+        self.assertIn('ExampleModel role name extra', guipluginsapi.unbumped_additions(
+            OLD_RECORD, (1, 0), guipluginsapi.make_record(OLD_RECORD, (1, 0), api(**EXTRA_ROLE_NAME))))
         self.assertIn('is still 1.0, the same version as in tools/guiplugins-api.json', message)
         self.assertIn('Increase VICTRON_GUIPLUGINS_VERSION_MINOR in cmake/ModuleGuiPlugins.cmake', message)
         self.assertIn('so the module version is newer than 1.0', message)
@@ -407,6 +517,16 @@ Item {
         self.assertIn('is 1.0, which is older than 1.1 in tools/guiplugins-api.json', older)
         self.assertIn('newer than 1.1', older)
 
+    @mock.patch.object(guipluginsapi, 'UNRELEASED_VERSION', (1, 0))
+    def test_additions_to_the_unreleased_version_are_saved(self):
+        types = api(qml=QML_TYPE.replace('\tsignal clicked\n', '\tsignal clicked\n\tproperty string caption\n'))
+        record = guipluginsapi.make_record(OLD_RECORD, (1, 0), types)
+        self.assertEqual(versions(record)['Example.caption'], '1.0')
+        self.assertEqual(guipluginsapi.unbumped_additions(OLD_RECORD, (1, 0), record), [])
+        self.assertEqual(guipluginsapi.unbumped_additions_message(
+            OLD_RECORD, (1, 0), record, 'tools/guiplugins-api.json', '.github/gui-plugins.md'), '')
+
+    @mock.patch.object(guipluginsapi, 'UNRELEASED_VERSION', None)
     def test_script_does_not_write_an_unbumped_addition(self):
         version, types = guipluginsapi.read_api(guipluginsapi.SOURCE_DIR)
         types = json.loads(json.dumps(types))

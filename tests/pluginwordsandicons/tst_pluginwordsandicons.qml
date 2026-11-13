@@ -6,6 +6,7 @@
 import QtQuick
 import QtTest
 import Victron.VenusOS
+import Victron.Branding
 import Victron.GuiPlugins
 
 TestCase {
@@ -13,10 +14,24 @@ TestCase {
 
 	name: "PluginWordsAndIconsTest"
 
+	VictronBranding {
+		id: victronBranding
+	}
+
 	Component {
 		id: imageComponent
 
 		Image {}
+	}
+
+	Component {
+		id: iconImageComponent
+
+		PluginIconImage {}
+	}
+
+	function initTestCase() {
+		Theme.addBranding(victronBranding)
 	}
 
 	// Returns the names of the promised properties of a PluginWords or PluginIcons singleton.
@@ -52,5 +67,26 @@ TestCase {
 			const image = createTemporaryObject(imageComponent, root, { source: PluginIcons[name] })
 			tryCompare(image, "status", Image.Ready, 5000, name)
 		}
+	}
+
+	// Each tint draws the icon in the PluginPalette color for its purpose. A disabled icon uses the
+	// disabled color, whatever its tint.
+	function test_iconTints_data() {
+		return [
+			{ tag: "Text", tint: PluginIconImage.Text, enabled: true, colorName: "color_font_primary" },
+			{ tag: "SecondaryText", tint: PluginIconImage.SecondaryText, enabled: true, colorName: "color_font_secondary" },
+			{ tag: "Warning", tint: PluginIconImage.Warning, enabled: true, colorName: "color_warning" },
+			{ tag: "Critical", tint: PluginIconImage.Critical, enabled: true, colorName: "color_critical" },
+			{ tag: "Success", tint: PluginIconImage.Success, enabled: true, colorName: "color_success" },
+			{ tag: "Brand", tint: PluginIconImage.Brand, enabled: true, colorName: "color_brand" },
+			{ tag: "Disabled", tint: PluginIconImage.Disabled, enabled: true, colorName: "color_font_disabled" },
+			{ tag: "disabled icon", tint: PluginIconImage.Warning, enabled: false, colorName: "color_font_disabled" },
+		]
+	}
+
+	function test_iconTints(data) {
+		const icon = createTemporaryObject(iconImageComponent, root, { tint: data.tint, enabled: data.enabled })
+		verify(icon !== null)
+		compare(icon.children[0].color.toString(), PluginPalette[data.colorName].toString())
 	}
 }

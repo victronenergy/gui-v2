@@ -700,7 +700,7 @@ def _api_uses(api, names):
     while pending:
         apiType = types[pending.pop()]
         nextTypes = {apiType.get('base', '')}
-        for section in ('properties', 'signals', 'methods'):
+        for section in ('properties', 'signals', 'methods', 'roles'):
             for member in apiType.get(section, []):
                 if member['name'] in names:
                     uses.append((member['since'], apiType['name'] + '.' + member['name'], member))
