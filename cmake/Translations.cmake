@@ -47,6 +47,8 @@ endforeach()
 
 list(APPEND ABSOLUTE_PATH_TRANSLATION_SOURCES ${TRANSLATION_SOURCES})
 list(TRANSFORM ABSOLUTE_PATH_TRANSLATION_SOURCES PREPEND "${CMAKE_CURRENT_SOURCE_DIR}/")
+# The veutil submodule exports its own list, with absolute paths (src/veutil/CMakeLists.txt).
+list(APPEND ABSOLUTE_PATH_TRANSLATION_SOURCES ${VictronVeUtil_TRANSLATION_SOURCES})
 file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/i18n/translation_sources.txt"
     CONTENT "$<JOIN:${ABSOLUTE_PATH_TRANSLATION_SOURCES},\n>"
 )
@@ -58,7 +60,7 @@ add_custom_target(generate_translation_sources_file ALL
 add_custom_command(
     OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts"
     COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}.ts" "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts"
-    DEPENDS ${TRANSLATION_SOURCES} "${PROJECT_SOURCE_DIR}/src/themeobjects.h"
+    DEPENDS ${ABSOLUTE_PATH_TRANSLATION_SOURCES} "${PROJECT_SOURCE_DIR}/src/themeobjects.h"
     COMMENT "copying: ${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}.ts to ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts"
 )
 set_source_files_properties("${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_en.ts" PROPERTIES
@@ -79,7 +81,7 @@ foreach(TsCode IN ITEMS ${TS_CODES})
     add_custom_command(
         OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts"
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts" "${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts"
-        DEPENDS ${TRANSLATION_SOURCES} "${PROJECT_SOURCE_DIR}/src/themeobjects.h"
+        DEPENDS ${ABSOLUTE_PATH_TRANSLATION_SOURCES} "${PROJECT_SOURCE_DIR}/src/themeobjects.h"
         COMMENT "copying: ${CMAKE_CURRENT_SOURCE_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts to ${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts"
     )
     set_source_files_properties("${CMAKE_CURRENT_BINARY_DIR}/i18n/${PROJECT_NAME}_${TsCode}.ts" PROPERTIES
