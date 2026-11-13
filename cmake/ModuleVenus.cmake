@@ -3,7 +3,7 @@ qt_add_qml_module(VictronVenusOS
     ${QML_MODULE_OPTARGS}
     URI Victron.VenusOS
     VERSION 2.0
-    IMPORTS QtQuick.Controls.Basic Victron.Branding
+    IMPORTS QtQuick.Controls.Basic Victron.Branding Victron.VeUtil
     OUTPUT_DIRECTORY Victron/VenusOS
     QML_FILES ${VictronVenusOS_QML_MODULE_SOURCES}
     SOURCES ${VictronVenusOS_CPP_SOURCES}
@@ -21,13 +21,13 @@ qt_add_resources(VictronVenusOS "VictronVenusOS_large_resources"
     FILES ${VictronVenusOS_RESOURCES}
 )
 
-target_include_directories(VictronVenusOS PRIVATE src/veutil/inc/veutil/qt)
-target_include_directories(VictronVenusOS PUBLIC ${PROJECT_SOURCE_DIR}/src
-                                                 ${PROJECT_SOURCE_DIR}/src/veutil/inc
-                                                 ${PROJECT_SOURCE_DIR}/src/veutil/inc/veutil/qt)
+target_include_directories(VictronVenusOS PUBLIC ${PROJECT_SOURCE_DIR}/src)
 
 # VictronBranding.qml instantiates Victron.Branding. C++ uses it from GuiPluginLoader and Theme.
-target_link_libraries(VictronVenusOS PUBLIC VictronBranding)
+# Victron.VeUtil provides VeQuickItem and the backends, and its headers appear in this
+# module's public headers. Both are imported (IMPORTS above), so a QML file that imports
+# Victron.VenusOS sees VeQuickItem too.
+target_link_libraries(VictronVenusOS PUBLIC VictronBranding VictronVeUtil)
 
 target_link_libraries(VictronVenusOS PRIVATE
     Qt6::Core
