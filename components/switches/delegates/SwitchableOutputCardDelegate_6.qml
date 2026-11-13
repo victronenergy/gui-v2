@@ -93,6 +93,8 @@ FocusScope {
 				segments.labels = items.map(item => item.text)
 				segments.offIndex = value[0] === "/off" ? 0 : -1
 			}
+			// Assigning a model resets the ComboBox's currentIndex: restore the selection
+			dropdownSync.syncValueToDropdown()
 		}
 
 		visible: !root.segmented

@@ -340,4 +340,52 @@ TestCase {
 		id: spyComponent
 		SignalSpy {}
 	}
+
+	Component {
+		id: outputComponent
+		SwitchableOutput {}
+	}
+
+	Component {
+		id: dropdownCardComponent
+		SwitchableOutputCardDelegate_6 {
+			width: 400
+		}
+	}
+
+	function test_dropdownCardKeepsSelectionOnModelRebuild() {
+		const uid = "mock/com.victronenergy.test.a/SwitchableOutput/0"
+		MockManager.setValue(uid + "/Settings/Type", VenusOS.SwitchableOutput_Type_Dropdown)
+		MockManager.setValue(uid + "/Settings/Labels", ["Option 0", "Option 1", "Option 2", "Option 3", "Option 4"])
+		MockManager.setValue(uid + "/Dimming", 3)
+
+		const output = createTemporaryObject(outputComponent, root, { uid: uid })
+		verify(output)
+		const card = createTemporaryObject(dropdownCardComponent, root, { switchableOutput: output })
+		verify(card)
+		waitForRendering(card)
+
+		let dropdown = null
+		for (const child of card.children) {
+			if (child instanceof ComboBox) {
+				dropdown = child
+			}
+		}
+		verify(dropdown, "dropdown not found")
+		tryCompare(dropdown, "count", 5)
+		compare(dropdown.currentIndex, 3)
+
+		// Reserved labels are re-translated on a language change, which rebuilds the model.
+		// The selection must still follow /Dimming afterwards.
+		Language.currentLanguageChanged()
+		compare(dropdown.count, 5)
+		compare(dropdown.currentIndex, 3)
+
+		// Likewise when the labels themselves change
+		MockManager.setValue(uid + "/Settings/Labels", ["A", "B", "C", "D", "E"])
+		compare(dropdown.count, 5)
+		compare(dropdown.currentIndex, 3)
+
+		MockManager.removeValue(uid)
+	}
 }
