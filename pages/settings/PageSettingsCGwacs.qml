@@ -62,7 +62,7 @@ Page {
 				//% "Phase type"
 				text: qsTrId("settings_cgwacs_phase_type")
 				dataItem.uid: root.devicePath + "/IsMultiphase"
-				interactive: dataItem.valid && multiPhaseSupport.value !== undefined
+				interactive: dataItem.valid && !!multiPhaseSupport.value
 				optionModel: [
 					//% "Single phase"
 					{ display: qsTrId("settings_single_phase"), value: 0},
