@@ -8,7 +8,9 @@ import subprocess
 import argparse
 import base64
 import shutil
+import urllib.parse
 import xml.etree.ElementTree as ET
+import xml.sax.saxutils
 
 # The Branding property list (name and version), generated from src/branding/branding.h by
 # tools/brandingproperties.py. It is installed next to this script. The compiler uses it to
@@ -855,14 +857,14 @@ def navigation_integration(integration, pluginName, qmlFiles, imageFiles, seenNa
     require_packed_file(iconFile, imageFiles, "Navigation icon")
     navIntegration = {
         "type": 3,
-        "url": "qrc:/" + pluginName + "/" + pageQml,
-        "icon": "qrc:/" + pluginName + "/" + iconFile
+        "url": resource_url(pluginName, pageQml),
+        "icon": resource_url(pluginName, iconFile)
     }
     if len(title) > 0:
         navIntegration["title"] = title
     if len(iconActiveFile) > 0:
         require_packed_file(iconActiveFile, imageFiles, "Navigation active icon")
-        navIntegration["iconActive"] = "qrc:/" + pluginName + "/" + iconActiveFile
+        navIntegration["iconActive"] = resource_url(pluginName, iconActiveFile)
     if location is not None:
         navIntegration["location"] = location
     return navIntegration
@@ -887,9 +889,15 @@ def card_integration(integration, pluginName, qmlFiles):
     require_packed_file(pageQml, qmlFiles, "Card page")
     return {
         "type": 5,
-        "url": "qrc:/" + pluginName + "/" + pageQml,
+        "url": resource_url(pluginName, pageQml),
         "cardType": cardType
     }
+
+# Returns the URL of a file that is packed in the plugin's resources. The file name is
+# percent-encoded, so that characters such as '#', '%' and '?' are part of the name, rather than
+# starting a URL fragment, an escape or a query.
+def resource_url(pluginName, fileName):
+    return "qrc:/" + pluginName + "/" + urllib.parse.quote(fileName)
 
 def require_packed_file(path, packedFiles, description):
     # Only the files directly in the current directory are packed, and resource paths are
@@ -950,7 +958,7 @@ def write_qrc(qmlFiles, qmFiles, imageFiles, name):
     allFiles = list(dict.fromkeys(qmlFiles + qmFiles + imageFiles))
     contents = "<RCC>\n<qresource prefix=\"/" + name + "\">\n"
     for filename in allFiles:
-        contents += "<file>" + filename + "</file>\n"
+        contents += "<file>" + xml.sax.saxutils.escape(filename) + "</file>\n"
     contents += "</qresource>\n</RCC>\n"
     try:
         filename = "" + name + ".qrc"
@@ -1213,7 +1221,7 @@ if __name__ == '__main__':
     print("--- building translations array")
     translations = []
     for qmFile in qmFiles:
-        translations.append("qrc:/" + args.name + "/" + qmFile)
+        translations.append(resource_url(args.name, qmFile))
 
     print("--- building integrations dictionary")
     integrations = []
@@ -1226,7 +1234,7 @@ if __name__ == '__main__':
             sys.exit(1)
         settingsIntegration = {
             "type": 1,
-            "url": "qrc:/" + args.name + "/" + args.settings
+            "url": resource_url(args.name, args.settings)
         }
         integrations.append(settingsIntegration)
     if args.devicelist:
@@ -1247,7 +1255,7 @@ if __name__ == '__main__':
                 devicelistIntegration = {
                     "type": 2,
                     "productId": integration[0],
-                    "url": "qrc:/" + args.name + "/" + integration[1],
+                    "url": resource_url(args.name, integration[1]),
                     "title": integration[2]
                 }
                 integrations.append(devicelistIntegration)
@@ -1263,7 +1271,7 @@ if __name__ == '__main__':
     if len(args.branding) > 0:
         brandingIntegration = {
             "type": BRANDING_INTEGRATION_TYPE,
-            "url": "qrc:/" + args.name + "/" + brandingFiles[-1]
+            "url": resource_url(args.name, brandingFiles[-1])
         }
         integrations.append(brandingIntegration)
 
