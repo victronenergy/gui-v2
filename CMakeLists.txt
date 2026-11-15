@@ -49,6 +49,7 @@ if (${NO_CACHEGEN})
 endif()
 
 include(cmake/ModuleBranding_Sources.cmake)
+include(cmake/ModuleVeQuickItem_Sources.cmake)
 include(cmake/ModuleVenus_Sources.cmake)
 include(cmake/ModuleShaders_Sources.cmake)
 include(cmake/ModuleGauges_Sources.cmake)
@@ -56,13 +57,13 @@ include(cmake/ModuleBoat_Sources.cmake)
 include(cmake/ModuleGuiPlugins_Sources.cmake)
 include(cmake/ModuleMock_Sources.cmake)
 include(cmake/ModuleUiTest_Sources.cmake)
-include(cmake/VeUtil_Sources.cmake)
 include(cmake/GuiV2_Sources.cmake)
 
 include(cmake/GenerateTheme.cmake)
 include(cmake/Translations.cmake)
 
 include(cmake/ModuleBranding.cmake)
+include(cmake/ModuleVeQuickItem.cmake)
 include(cmake/ModuleVenus.cmake)
 include(cmake/ModuleShaders.cmake)
 include(cmake/ModuleGauges.cmake)
@@ -81,6 +82,8 @@ if ("${GUI_V2_BUILD}" STREQUAL "ON")
     target_link_libraries(${PROJECT_NAME} PRIVATE
         VictronBranding
         VictronBrandingplugin
+        VictronVeQuickItem
+        VictronVeQuickItemplugin
         VictronVenusOS
         VictronVenusOSplugin
         VictronVenusOSShaders

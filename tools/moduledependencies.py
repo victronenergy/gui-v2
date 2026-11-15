@@ -456,7 +456,7 @@ def check(read_file, cmake_paths):
     guiplugins_headers = {os.path.basename(path): path for path in module_files(cmake_texts, GUIPLUGINS_TARGET)
                           if HEADER_RE.search(path)}
     branding_headers = {os.path.basename(path) for path in branding_files if HEADER_RE.search(path)}
-    # The headers of every other module, including the veutil ones in VEUTIL_* variables.
+    # The headers of every other module, including the veutil ones in Victron.VeQuickItem.
     other_headers = set()
     for text in cmake_texts:
         for args in cmake_calls(text, 'set') + cmake_calls(text, 'list'):

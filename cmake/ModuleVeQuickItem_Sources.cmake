@@ -1,6 +1,7 @@
-include_directories(src/veutil/inc src .)
-
-set(VEUTIL_CORE_SOURCES
+# The veutil sources: VeQuickItem, the VeQItem item tree it reads and writes, Unit
+# (its unit conversions), the item models, the error description types and the
+# MQTT and D-Bus producers.
+set(VictronVeQuickItem_CPP_SOURCES
     src/veutil/inc/veutil/qt/alternator_error.hpp
     src/veutil/inc/veutil/qt/bms_error.hpp
     src/veutil/inc/veutil/qt/charger_error.hpp
@@ -31,13 +32,13 @@ set(VEUTIL_CORE_SOURCES
     src/veutil/src/qt/ve_quick_item.cpp
 )
 
-set(VEUTIL_MQTT_SOURCES
+set(VictronVeQuickItem_MQTT_SOURCES
     src/veutil/inc/veutil/qt/ve_qitems_mqtt.hpp
 
     src/veutil/src/qt/ve_qitems_mqtt.cpp
 )
 
-SET(VEUTIL_DBUS_SOURCES
+set(VictronVeQuickItem_DBUS_SOURCES
     src/veutil/inc/veutil/qt/ve_dbus_connection.hpp
     src/veutil/inc/veutil/qt/ve_qitems_dbus.hpp
 
@@ -45,9 +46,7 @@ SET(VEUTIL_DBUS_SOURCES
     src/veutil/src/qt/ve_qitems_dbus.cpp
 )
 
-list(APPEND VictronVenusOS_CPP_SOURCES ${VEUTIL_CORE_SOURCES})
-list(APPEND VictronVenusOS_CPP_SOURCES ${VEUTIL_MQTT_SOURCES})
+list(APPEND VictronVeQuickItem_CPP_SOURCES ${VictronVeQuickItem_MQTT_SOURCES})
 if(NOT VENUS_WEBASSEMBLY_BUILD)
-    list(APPEND VictronVenusOS_CPP_SOURCES ${VEUTIL_DBUS_SOURCES} )
+    list(APPEND VictronVeQuickItem_CPP_SOURCES ${VictronVeQuickItem_DBUS_SOURCES})
 endif()
-

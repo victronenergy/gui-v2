@@ -333,6 +333,10 @@ The `Branding` type is in its own QML module, `Victron.Branding` (`src/branding/
 
 Plugin settings pages and device sub-pages are written with the `Victron.GuiPlugins` types, and opened with `Global.pageManager.pushPluginPage()`, which shows the plugin page inside a `PluginHostPage`, defined in `PageStack.qml`, that owns it. See [GUI plugins](gui-plugins.md).
 
+### Victron.VeQuickItem module
+
+The veutil sources are built into their own QML module, `Victron.VeQuickItem` (`cmake/ModuleVeQuickItem.cmake`), listed in `cmake/ModuleVeQuickItem_Sources.cmake`: `VeQuickItem`, the `VeQItem` and `Unit` types it uses, the VeQItem models, the error description types such as `BmsError`, and the MQTT and D-Bus producers. The module uses only Qt. `Victron.VenusOS` lists it in `IMPORTS` and links it, so QML that imports `Victron.VenusOS` can still use these types without importing this module.
+
 ### Module dependencies
 
 `Victron.GuiPlugins` (`guiplugins/`, `cmake/ModuleGuiPlugins.cmake`) is the module that plugin pages import. Its types wrap the `Victron.VenusOS` types, so `Victron.VenusOS` must never use `Victron.GuiPlugins`: no QML import, no entry in `IMPORTS` or `DEPENDENCIES`, no include of its headers, and no link to its library. Only the app and the tests may link it.
