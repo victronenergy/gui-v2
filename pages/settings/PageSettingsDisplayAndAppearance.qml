@@ -171,6 +171,7 @@ Page {
 					  : qsTrId("settings_display_remote_console_ui")
 				dataItem.uid: Services.settings.serviceUid + "/Settings/Gui/RunningVersion"
 				writeAccessLevel: VenusOS.User_AccessType_User
+				preferredVisible: !Services.platform.isContainer
 				updateDataOnClick: false
 				optionModel: [
 					{
