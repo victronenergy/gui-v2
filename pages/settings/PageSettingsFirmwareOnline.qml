@@ -23,8 +23,6 @@ Page {
 					{ display: CommonWords.disabled, value: VenusOS.Firmware_AutoUpdate_Disabled },
 					//% "Check only"
 					{ display: qsTrId("settings_firmware_check_only"), value: VenusOS.Firmware_AutoUpdate_CheckOnly },
-					//% "Check and download only"
-					{ display: qsTrId("settings_firmware_check_and_download_only"), value: VenusOS.Firmware_AutoUpdate_CheckAndDownloadOnly, readOnly: true },
 					//% "Check and update"
 					{ display: qsTrId("settings_firmware_check_and_update"), value: VenusOS.Firmware_AutoUpdate_CheckAndUpdate }
 				]
