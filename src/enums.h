@@ -725,8 +725,7 @@ public:
 	enum Firmware_AutoUpdate {
 		Firmware_AutoUpdate_Disabled,
 		Firmware_AutoUpdate_CheckAndUpdate,
-		Firmware_AutoUpdate_CheckOnly,
-		Firmware_AutoUpdate_CheckAndDownloadOnly
+		Firmware_AutoUpdate_CheckOnly
 	};
 	Q_ENUM(Firmware_AutoUpdate)
 
