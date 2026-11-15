@@ -23,7 +23,7 @@ Autopilot (keep working) mode does not change this: ask, call `task_complete`, a
 
 ## Git
 
-An AI agent must never push to any remote repository; a human must always do that.
+An AI agent pushes only a branch to the developer's own fork, and only when asked; never anywhere else. It never opens, merges or comments on pull requests; a human does.
 
 ## Code review
 
