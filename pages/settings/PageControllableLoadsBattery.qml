@@ -13,12 +13,15 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-			ListQuantityField {
+			ListSpinBox {
 				id: startingBatterySoc
-				unit: VenusOS.Units_Percentage
 				//% "Activate following loads when battery reaches"
 				text: qsTrId("pagecontrollableloads_battery_activate_following_loads_when_battery_reaches")
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/ReservationStartSoc"
+				suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
+				from: 0
+				to: 100
+				preferredVisible: dataItem.valid
 			}
 
 			PrimaryListLabel {
@@ -32,21 +35,23 @@ Page {
 				text: qsTrId("pagecontrollableloads_battery_advanced")
 			}
 
-			ListQuantityField {
-				unit: VenusOS.Units_Watt
+			ListSpinBox {
 				//% "At or above <font color=\"%1\">%2%</font> SOC"
 				text: qsTrId("pagecontrollableloads_battery_at_or_above_x_soc")
 						.arg(Theme.color_font_secondary)
 						.arg(startingBatterySoc.dataItem.value)
 				textFormat: Text.RichText
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/ReservationBasePower"
+				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
+				preferredVisible: dataItem.valid
 			}
 
-			ListQuantityField {
-				unit: VenusOS.Units_Watt
+			ListSpinBox {
 				//% "At %1% SOC"
 				text: qsTrId("pagecontrollableloads_battery_at_x_soc").arg(100)
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/ReservationEndPower"
+				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
+				preferredVisible: dataItem.valid
 			}
 
 			PrimaryListLabel {

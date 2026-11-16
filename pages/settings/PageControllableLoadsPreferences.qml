@@ -25,12 +25,14 @@ Page {
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/PauseWhenOffgrid"
 			}
 
-			ListQuantityField {
-				preferredVisible: dataItem.valid
-				unit: VenusOS.Units_Percentage
+			ListSpinBox {
 				//% "Nominal inverter utilisation limit"
 				text: qsTrId("pagecontrollableloads_preferences_nominal_inverter_utilization_limit")
 				dataItem.uid: BackendConnection.serviceUidForType("opportunityloads") + "/NominalInverterUtilizationLimit"
+				suffix: Units.defaultUnitString(VenusOS.Units_Percentage)
+				from: 0
+				to: 100
+				preferredVisible: dataItem.valid
 			}
 
 			SettingsListHeader {
