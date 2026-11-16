@@ -9,11 +9,15 @@ import Victron.VenusOS
 ModalDialog {
 	id: root
 
+	property alias showMinuteSecondOnly: timeSelector.showMinuteSecondOnly
+
 	property alias hour: timeSelector.hour
 	property alias minute: timeSelector.minute
+	property alias second: timeSelector.second
 
 	property alias maximumHour: timeSelector.maximumHour
 	property alias maximumMinute: timeSelector.maximumMinute
+	property alias maximumSecond: timeSelector.maximumSecond
 
 	//% "Set time"
 	title: qsTrId("timeselectordialog_set_time")
