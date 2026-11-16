@@ -13,12 +13,12 @@ Page {
 
 	GradientListView {
 		model: VisibleItemModel {
-			ListQuantityField {
-				preferredVisible: dataItem.valid
-				unit: VenusOS.Units_Watt
+			ListSpinBox {
 				//% "Maximum charging power"
 				text: qsTrId("pagecontrollableloads_evcs_maximum_charging_power")
 				dataItem.uid: root.device ? root.device.serviceUid + "/S2/0/RmSettings/MaxChargePower" : ""
+				suffix: Units.defaultUnitString(VenusOS.Units_Watt)
+				preferredVisible: dataItem.valid
 			}
 
 			ListSwitch {
