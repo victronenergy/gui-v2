@@ -213,8 +213,11 @@ Page {
 				text: largeEnabled
 					//% "Venus OS Large features"
 					? qsTrId("pagesettingsintegrations_venus_os_large_features")
-					//% "Enable the Venus OS Large firmware to use Node-RED or Signal-K"
-					: qsTrId("pagesettingsintegrations_venus_os_enable_large_features")
+					: Services.platform.isContainer
+						//% "Pull the large container image to use Node-RED or Signal K"
+						? qsTrId("pagesettingsintegrations_container_enable_large_features")
+						//% "Enable the Venus OS Large firmware to use Node-RED or Signal-K"
+						: qsTrId("pagesettingsintegrations_venus_os_enable_large_features")
 			}
 
 			ListNavigation {
