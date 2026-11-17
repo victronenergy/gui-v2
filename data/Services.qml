@@ -69,16 +69,18 @@ Item {
 		}
 	}
 
+	// Do not load these objects until the backend has been ready. Creating
+	// them sets item uids, and that crashes if the D-Bus connection was not opened.
 	Loader {
 		id: settingsLoader
-		active: BackendConnection.type !== BackendConnection.UnknownSource
+		active: BackendConnection.readyLatched
 		asynchronous: true
 		sourceComponent: SystemSettings {}
 		onStatusChanged: root._checkLoaderStatus(status, "settings")
 	}
 	Loader {
 		id: systemLoader
-		active: BackendConnection.type !== BackendConnection.UnknownSource
+		active: BackendConnection.readyLatched
 				&& settingsLoader.status === Loader.Ready
 		asynchronous: true
 		sourceComponent: System { settingsServiceUid: settingsLoader.item.serviceUid }
@@ -87,7 +89,7 @@ Item {
 	Loader {
 		id: acInputsLoader
 		asynchronous: true
-		active: BackendConnection.type !== BackendConnection.UnknownSource
+		active: BackendConnection.readyLatched
 				&& systemLoader.status === Loader.Ready
 				&& settingsLoader.status === Loader.Ready
 		sourceComponent: AcInputs {
@@ -98,7 +100,7 @@ Item {
 	}
 	Loader {
 		id: dcInputsLoader
-		active: BackendConnection.type !== BackendConnection.UnknownSource
+		active: BackendConnection.readyLatched
 				&& settingsLoader.status === Loader.Ready
 		asynchronous: true
 		sourceComponent: DcInputs { settingsServiceUid: settingsLoader.item.serviceUid }
@@ -106,63 +108,63 @@ Item {
 	}
 	Loader {
 		id: environmentLoader
-		active: BackendConnection.type !== BackendConnection.UnknownSource
+		active: BackendConnection.readyLatched
 		asynchronous: true
 		sourceComponent: EnvironmentInputs {}
 		onStatusChanged: root._checkLoaderStatus(status, "environment")
 	}
 	Loader {
 		id: evchargerLoader
-		active: BackendConnection.type !== BackendConnection.UnknownSource
+		active: BackendConnection.readyLatched
 		asynchronous: true
 		sourceComponent: EvChargers {}
 		onStatusChanged: root._checkLoaderStatus(status, "evcharger")
 	}
 	Loader {
 		id: generatorsLoader
-		active: BackendConnection.type !== BackendConnection.UnknownSource
+		active: BackendConnection.readyLatched
 		asynchronous: true
 		sourceComponent: Generators {}
 		onStatusChanged: root._checkLoaderStatus(status, "generators")
 	}
 	Loader {
 		id: inverterChargersLoader
-		active: BackendConnection.type !== BackendConnection.UnknownSource
+		active: BackendConnection.readyLatched
 		asynchronous: true
 		sourceComponent: InverterChargers {}
 		onStatusChanged: root._checkLoaderStatus(status, "inverterChargers")
 	}
 	Loader {
 		id: ioChannelsLoader
-		active: BackendConnection.type !== BackendConnection.UnknownSource
+		active: BackendConnection.readyLatched
 		asynchronous: true
 		sourceComponent: IOChannels {}
 		onStatusChanged: root._checkLoaderStatus(status, "ioChannels")
 	}
 	Loader {
 		id: notificationsLoader
-		active: BackendConnection.type !== BackendConnection.UnknownSource
+		active: BackendConnection.readyLatched
 		asynchronous: true
 		sourceComponent: Notifications {}
 		onStatusChanged: root._checkLoaderStatus(status, "notifications")
 	}
 	Loader {
 		id: solarLoader
-		active: BackendConnection.type !== BackendConnection.UnknownSource
+		active: BackendConnection.readyLatched
 		asynchronous: true
 		sourceComponent: SolarInputs {}
 		onStatusChanged: root._checkLoaderStatus(status, "solar")
 	}
 	Loader {
 		id: tanksLoader
-		active: BackendConnection.type !== BackendConnection.UnknownSource
+		active: BackendConnection.readyLatched
 		asynchronous: true
 		sourceComponent: Tanks {}
 		onStatusChanged: root._checkLoaderStatus(status, "tanks")
 	}
 	Loader {
 		id: platformLoader
-		active: BackendConnection.type !== BackendConnection.UnknownSource
+		active: BackendConnection.readyLatched
 		asynchronous: true
 		sourceComponent: VenusPlatform {}
 		onStatusChanged: root._checkLoaderStatus(status, "platform")
