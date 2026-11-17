@@ -7,12 +7,11 @@
 # Only the app and the tests link it, so that plugin QML can import it at run
 # time. Its sources live in guiplugins/, apart from the VenusOS sources.
 
-# The module version. tools/guipluginsapi.py reads these two lines, and records
-# in tools/guiplugins-api.json the version that added each type and member.
-# Version 1.0 stays open until the first GUI with this module is released:
-# until then, additions are saved at 1.0. After that release, increase the
-# minor version before adding to the API. If you do not, the script refuses
-# to write the record. See .github/gui-plugins.md.
+# The module version. tools/guipluginsapi.py reads the two set() lines below,
+# and records in tools/guiplugins-api.json the version that added each type and
+# member. Increase the minor version before adding to the API. If you add to
+# the API without increasing it, the script refuses to write the record. See
+# .github/gui-plugins.md.
 set(VICTRON_GUIPLUGINS_VERSION_MAJOR 1)
 set(VICTRON_GUIPLUGINS_VERSION_MINOR 0)
 
