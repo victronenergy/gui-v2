@@ -28,12 +28,11 @@
 # It cannot see a change to a property's initial value, or to what a function does. Those can still
 # break a plugin, and they need a new major version too.
 #
-# A member that the record does not have yet gets the current module version. Version 1.0 stays
-# open until the first GUI with this module is released: until then, additions are saved at 1.0,
-# and the minor version is not increased (see UNRELEASED_VERSION). After that release, increase
-# VICTRON_GUIPLUGINS_VERSION_MINOR before adding to the API. Each addition then needs its own minor
-# version, even if the previous one has not been released. If the version is not already higher
-# than the version in the record, the script refuses to write the record, and prints what to do.
+# A member that the record does not have yet gets the current module version. Increase
+# VICTRON_GUIPLUGINS_VERSION_MINOR before adding that member. Each addition needs its own minor
+# version, even if the previous one has not been released. If the module version is not already
+# higher than the version in the record, the script refuses to save the new member, and prints
+# what to do.
 #
 # The plugin compiler, gui-v2-plugin-compiler.py, reads the record (installed next to it) to work
 # out a plugin's requiredGuiPluginsVersion.
@@ -60,10 +59,10 @@ MODULE_CMAKE_FILE = 'cmake/ModuleGuiPlugins.cmake'
 MODULE_TARGET = 'VictronGuiPlugins'
 MODULE_URI = 'Victron.GuiPlugins'
 
-# The module version that no released GUI has yet. Additions are saved at this version without
-# increasing VICTRON_GUIPLUGINS_VERSION_MINOR. When the first GUI with this module is released, set
-# this to None.
-UNRELEASED_VERSION = (1, 0)
+# None, so a new type or member is refused unless the module version is already higher than the
+# version in the record. A tuple equal to the module version would save additions at that version
+# without increasing VICTRON_GUIPLUGINS_VERSION_MINOR. Leave this as None.
+UNRELEASED_VERSION = None
 
 # The list of versions in the type reference in .github/gui-plugins.md is between these two lines.
 DOCS_BEGIN = ('<!-- BEGIN versions. tools/guipluginsapi.py writes this part from tools/guiplugins-api.json: '
