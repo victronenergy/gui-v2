@@ -42,6 +42,16 @@ Window {
 		UiConfig.splashScreenVisible = false
 	}
 
+	// required for demo mode switching
+	function rebuildUi() {
+		console.info("Main: UI rebuild required")
+		guiLoader.active = false
+		Global.reset()
+		gc()
+		guiLoader.active = true
+		console.info("Main: UI rebuild started successfully")
+	}
+
 	function ensureApplicationActive() {
 		Global.applicationActive = true
 		appIdleTimer.restart()
