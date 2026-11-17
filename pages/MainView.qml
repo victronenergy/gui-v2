@@ -42,19 +42,23 @@ FocusScope {
 	readonly property bool animating: pageStack.animating || swipeView?.flicking || swipeView?.moving
 				|| navBarStartupAnim.running
 
-	property url pluginQuickAccessUrl
-	property string pluginQuickAccessName
+	property url quickAccessUrl
+	property string quickAccessName
 
-	function showPluginQuickAccess(pluginName, pageUrl) {
-		pluginQuickAccessName = pluginName
-		pluginQuickAccessUrl = pageUrl
-		cardsLoader.show(pluginQuickAccessComponent)
+	function showQuickAccess(pluginName, pageUrl) {
+		quickAccessName = pluginName
+		quickAccessUrl = pageUrl
+		if (pageUrl === "AuxCardsPage.qml") {
+			cardsLoader.show(_auxCardsComponent)
+		} else if (pageUrl === "ControlCardsPage.qml") {
+			cardsLoader.show(_controlCardsComponent)
+		} else {
+			cardsLoader.show(pluginQuickAccessComponent)
+		}
 	}
 
-	function pluginQuickAccessOpen(pageUrl) {
-		return cardsActive
-				&& cardsLoader.sourceComponent === pluginQuickAccessComponent
-				&& String(pluginQuickAccessUrl) === String(pageUrl)
+	function quickAccessOpen(pageUrl) {
+		return cardsActive && String(quickAccessUrl) === String(pageUrl)
 	}
 
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
@@ -497,7 +501,7 @@ FocusScope {
 			id: pluginQuickAccessComponent
 
 			Page {
-				title: root.pluginQuickAccessName
+				title: root.quickAccessName
 				focusPolicy: Qt.TabFocus
 
 				Loader {
@@ -506,8 +510,8 @@ FocusScope {
 					// Loader is a FocusScope. This keeps it the page's focus
 					// child, so key navigation stays inside the pane.
 					focus: true
-					active: String(root.pluginQuickAccessUrl).length > 0
-					source: root.pluginQuickAccessUrl
+					active: String(root.quickAccessUrl).length > 0
+					source: root.quickAccessUrl
 					asynchronous: true
 					onLoaded: {
 						// A plugin Page binds focus to isCurrentPage, which is
@@ -530,9 +534,6 @@ FocusScope {
 		opacity: 0.0
 		pageStack: root._pageStack
 
-		onControlCardsActivated: cardsLoader.show(_controlCardsComponent)
-		onAuxCardsActivated: cardsLoader.show(_auxCardsComponent)
-		onCardsDeactivated: cardsLoader.hide()
 		onSidePanelToggled: root.currentPage.toggleSidePanel()
 
 		Component.onCompleted: if (!UiConfig.showSplashAnimation || !Global.animationEnabled) { statusBar.opacity = 1.0 }
