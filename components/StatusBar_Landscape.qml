@@ -5,6 +5,7 @@
 
 import QtQuick
 import QtQuick.Controls.impl as CP
+import QtQuick.Templates as T
 import Victron.VenusOS
 
 FocusScope {
@@ -16,11 +17,36 @@ FocusScope {
 	// dependency, so key chains must also read this counter (bumped by the repeater).
 	property int quickAccessButtonReady: 0
 
+	// ListModel.get() is not a binding dependency, so bindings that read
+	// quickAccessOverflowModel entries also read this counter (bumped on rebuild).
+	property int quickAccessOverflowRevision: 0
+
 	// The left button is always the first entry in quickAccessModel.
 	readonly property Item leftButton: quickAccessItem(0)
 
 	// Index of the left-most visible quick access button, or -1 if none are visible.
 	readonly property int firstVisibleQuickAccessIndex: nextVisibleQuickAccessIndex(0)
+
+	// The number of plugin (or "more") buttons that fit in quickAccessRow, after the fixed
+	// left/aux buttons, without overlapping the clock label. Always at least 1, so that the
+	// "more" button can be shown if no plugin buttons fit.
+	readonly property int quickAccessPluginCapacity: {
+		void quickAccessButtonReady
+		let fixedWidth = 0
+		for (let i = 0; i < quickAccessFixedCount; ++i) {
+			const slot = quickAccessRepeater.itemAt(i)
+			if (slot && slot.visible) {
+				fixedWidth += slot.width
+			}
+		}
+		const availableWidth = clockLabel.x - Theme.geometry_statusBar_spacing - fixedWidth
+		return Math.max(1, Math.floor(availableWidth / Theme.geometry_statusBar_button_height))
+	}
+
+	// The number of fixed (left/aux) entries at the start of quickAccessModel.
+	readonly property int quickAccessFixedCount: 2
+
+	onQuickAccessPluginCapacityChanged: Qt.callLater(rebuildQuickAccessModel)
 
 	signal sidePanelToggled()
 
@@ -59,23 +85,57 @@ FocusScope {
 		return -1
 	}
 
+	// Returns the index in quickAccessOverflowModel of the plugin pane that is currently open, or
+	// -1 if no overflow plugin pane is open.
+	function openOverflowIndex() {
+		void quickAccessOverflowRevision
+		for (let i = 0; i < quickAccessOverflowModel.count; ++i) {
+			if (Global.mainView.quickAccessOpen(quickAccessOverflowModel.get(i).pluginUrl)) {
+				return i
+			}
+		}
+		return -1
+	}
+
 	// Keeps the fixed left/aux entries in place (so their delegates and focus survive) and
 	// replaces the plugin entries after them with the current QuickAccessPane integrations.
+	// As many plugin buttons are shown in the row as fit in the space to the left of the clock
+	// (quickAccessPluginCapacity); if not all of them fit, the last slot is used for a "more"
+	// button instead, which lists the remaining plugins in quickAccessOverflowModel.
 	function rebuildQuickAccessModel() {
-		const fixedCount = 2
+		const fixedCount = quickAccessFixedCount
+		const needsOverflow = pluginQuickAccessModel.count > quickAccessPluginCapacity
+		const maxQuickAccessPlugins = needsOverflow ? quickAccessPluginCapacity - 1 : quickAccessPluginCapacity
 		if (quickAccessModel.count > fixedCount) {
 			quickAccessModel.remove(fixedCount, quickAccessModel.count - fixedCount)
 		}
+		quickAccessOverflowModel.clear()
+
 		for (let i = 0; i < pluginQuickAccessModel.count; ++i) {
 			const integration = pluginQuickAccessModel.integrationAt(i)
-			quickAccessModel.append({
+			const entry = {
 				buttonKind: "plugin",
 				pluginName: integration.pluginName,
 				pluginUrl: String(integration.url),
 				pluginIcon: String(integration.icon),
 				pluginIconActive: String(integration.iconActive)
+			}
+			if (needsOverflow && i >= maxQuickAccessPlugins) {
+				quickAccessOverflowModel.append(entry)
+			} else {
+				quickAccessModel.append(entry)
+			}
+		}
+		if (needsOverflow) {
+			quickAccessModel.append({
+				buttonKind: "more",
+				pluginName: "",
+				pluginUrl: "",
+				pluginIcon: "qrc:/images/icon_more_dots.svg",
+				pluginIconActive: ""
 			})
 		}
+		quickAccessOverflowRevision++
 	}
 
 	function updateBreadcrumbsFocusHint() {
@@ -130,7 +190,7 @@ FocusScope {
 	GuiPluginIntegrationModel {
 		id: pluginQuickAccessModel
 		type: GuiPluginLoader.QuickAccessPane
-		onModelReset: root.rebuildQuickAccessModel()
+		onModelReset: Qt.callLater(rebuildQuickAccessModel)
 	}
 
 	ListModel {
@@ -139,6 +199,12 @@ FocusScope {
 		// Fixed entries. Plugin entries are appended by rebuildQuickAccessModel().
 		ListElement { buttonKind: "left"; pluginName: ""; pluginUrl: "ControlCardsPage.qml"; pluginIcon: "qrc:/images/icon_controls_off_32.svg"; pluginIconActive: "qrc:/images/icon_controls_on_32.svg" }
 		ListElement { buttonKind: "aux"; pluginName: ""; pluginUrl: "AuxCardsPage.qml"; pluginIcon: "qrc:/images/icon_smartswitch_off_32.svg"; pluginIconActive: "qrc:/images/icon_smartswitch_on_32.svg" }
+	}
+
+	// Plugin entries that do not fit in quickAccessRow. These are listed in the popup opened by
+	// the "more" button.
+	ListModel {
+		id: quickAccessOverflowModel
 	}
 
 	Row {
@@ -170,8 +236,16 @@ FocusScope {
 				readonly property bool isLeftButton: buttonKind === "left"
 				readonly property bool isAuxButton: buttonKind === "aux"
 				readonly property bool isPluginButton: buttonKind === "plugin"
+				readonly property bool isMoreButton: buttonKind === "more"
 
 				readonly property bool cardsActive: Global.mainView?.cardsActive ?? false
+
+				// For the "more" button: the overflow plugin whose pane is open, or -1.
+				readonly property int openOverflowIndex: isMoreButton ? root.openOverflowIndex() : -1
+				readonly property var openOverflowEntry: {
+					void root.quickAccessOverflowRevision
+					return openOverflowIndex >= 0 ? quickAccessOverflowModel.get(openOverflowIndex) : null
+				}
 
 				readonly property int leftButtonType: {
 					if (!isLeftButton) {
@@ -183,8 +257,10 @@ FocusScope {
 					return Global.mainView.currentPage?.topLeftButton ?? VenusOS.StatusBar_LeftButton_None
 				}
 
-				// Whether this pane (controls, aux or plugin) is the one currently open.
-				readonly property bool paneOpened: Global.mainView.quickAccessOpen(pluginUrl)
+				// Whether this pane (controls, aux or plugin) is the one currently open. For the
+				// "more" button, whether any of the overflow plugin panes is open.
+				readonly property bool paneOpened: isMoreButton ? openOverflowIndex >= 0
+						: Global.mainView.quickAccessOpen(pluginUrl)
 
 				// Whether the button is available in the current context, regardless of whether
 				// any pane is open. This decides whether the slot takes up space in the row.
@@ -221,13 +297,19 @@ FocusScope {
 					visible: !quickAccessSlot.cardsActive || quickAccessSlot.paneOpened
 							|| (quickAccessSlot.isLeftButton && root.pageStack.opened)
 					enabled: quickAccessSlot.isLeftButton ? quickAccessSlot.leftButtonType !== VenusOS.StatusBar_LeftButton_None
-							: quickAccessSlot.isPluginButton ? Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+							: (quickAccessSlot.isPluginButton || quickAccessSlot.isMoreButton) ? Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
 							: true
 
 					icon.cache: true
 					icon.source: {
 						if (quickAccessSlot.leftButtonType === VenusOS.StatusBar_LeftButton_Back) {
 							return "qrc:/images/icon_back_32.svg"
+						}
+						// While an overflow plugin pane is open, the "more" button shows that
+						// plugin's icon, and closes the pane when clicked.
+						const entry = quickAccessSlot.openOverflowEntry
+						if (entry) {
+							return entry.pluginIconActive.length > 0 ? entry.pluginIconActive : entry.pluginIcon
 						}
 						return (quickAccessSlot.paneOpened && quickAccessSlot.pluginIconActive.length > 0) ? quickAccessSlot.pluginIconActive : quickAccessSlot.pluginIcon
 					}
@@ -241,6 +323,8 @@ FocusScope {
 							Global.pageManager.popPage()
 						} else if (quickAccessSlot.paneOpened) {
 							Global.mainView.cardsLoader.hide()
+						} else if (quickAccessSlot.isMoreButton) {
+							overflowPopup.openFrom(quickAccessButton)
 						} else {
 							Global.mainView.showQuickAccess(quickAccessSlot.pluginName, quickAccessSlot.pluginUrl)
 						}
@@ -251,6 +335,89 @@ FocusScope {
 							root.updateBreadcrumbsFocusHint()
 						}
 					}
+				}
+			}
+		}
+	}
+
+	// Vertical list of the plugins that do not fit in quickAccessRow, dropped down from the
+	// bottom of the "more" button.
+	T.Popup {
+		id: overflowPopup
+
+		property StatusBarButton anchorButton
+
+		function openFrom(button) {
+			if (opened) {
+				console.log("opened")
+				close()
+				return
+			}
+			anchorButton = button
+			parent = button
+			open()
+		}
+
+		function focusEntry(index) {
+			const item = overflowRepeater.itemAt(index)
+			if (item) {
+				item.focus = true
+			}
+		}
+
+		x: anchorButton ? anchorButton.leftInset : 0
+		y: anchorButton ? anchorButton.height - anchorButton.bottomInset : 0
+		width: anchorButton ? anchorButton.width - anchorButton.leftInset - anchorButton.rightInset : 0
+		padding: Theme.geometry_button_border_width
+		focus: true
+
+		contentItem: Column {
+			Repeater {
+				id: overflowRepeater
+
+				model: quickAccessOverflowModel
+				delegate: StatusBarButton {
+					required property int index
+					required property string pluginName
+					required property string pluginUrl
+					required property string pluginIcon
+
+					width: overflowPopup.availableWidth
+					icon.cache: true
+					icon.source: pluginIcon
+					enabled: Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+
+					Keys.enabled: Global.keyNavigationEnabled
+					Keys.onUpPressed: overflowPopup.focusEntry(index - 1)
+					Keys.onDownPressed: overflowPopup.focusEntry(index + 1)
+
+					onClicked: {
+						overflowPopup.close()
+						Global.mainView.showQuickAccess(pluginName, pluginUrl)
+					}
+				}
+			}
+		}
+
+		background: Rectangle {
+			width: Theme.geometry_statusBar_button_height
+			height: quickAccessOverflowModel.count * Theme.geometry_statusBar_button_height
+			color: Theme.color_background_secondary
+		}
+
+		onOpened: focusEntry(0)
+		onClosed: {
+			if (Global.keyNavigationEnabled && anchorButton && anchorButton.visible) {
+				anchorButton.focus = true
+			}
+		}
+
+		Connections {
+			// Close the list if the "more" button is hidden, e.g. when a sub-page is opened.
+			target: overflowPopup.anchorButton?.parent ?? null
+			function onVisibleChanged() {
+				if (!target.visible) {
+					overflowPopup.close()
 				}
 			}
 		}
