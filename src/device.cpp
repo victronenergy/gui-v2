@@ -4,6 +4,7 @@
 */
 
 #include "device.h"
+#include "alldevicesmodel.h"
 #include "allservicesmodel.h"
 #include "enums.h"
 #include "language.h"
@@ -16,6 +17,8 @@ Device::Device(QObject *parent)
 	: BaseDevice(parent)
 {
 	connect(this, &Device::serviceUidChanged, this, &Device::initializeFromServiceUid);
+	connect(this, &Device::serviceTypeChanged, this, &Device::initializeFromServiceTypeAndDeviceInstance);
+	connect(this, &Device::deviceInstanceChanged, this, &Device::initializeFromServiceTypeAndDeviceInstance);
 	connect(Language::create(), &Language::currentLanguageChanged, this, &Device::refreshName);
 }
 
@@ -149,6 +152,10 @@ void Device::initializeFromServiceUid()
 {
 	if (!serviceUid().isEmpty() && !m_serviceItem) {
 		disconnect(this, &Device::serviceUidChanged, this, &Device::initializeFromServiceUid);
+		disconnect(this, &Device::serviceTypeChanged, this, &Device::initializeFromServiceTypeAndDeviceInstance);
+		disconnect(this, &Device::deviceInstanceChanged, this, &Device::initializeFromServiceTypeAndDeviceInstance);
+		// Stop any pending lookup by serviceType and deviceInstance.
+		disconnect(m_deviceAddedConnection);
 
 		AllServicesModel *allServicesModel = AllServicesModel::create();
 		VeQItem *serviceItem = allServicesModel->itemAt(allServicesModel->indexOf(serviceUid()));
@@ -163,4 +170,32 @@ void Device::initializeFromServiceUid()
 			});
 		}
 	}
+}
+
+void Device::initializeFromServiceTypeAndDeviceInstance()
+{
+	if (m_serviceItem || !serviceUid().isEmpty()) {
+		return;
+	}
+
+	// Restart any pending lookup, as the serviceType or deviceInstance has changed.
+	disconnect(m_deviceAddedConnection);
+
+	if (serviceType().isEmpty() || deviceInstance() < 0) {
+		return;
+	}
+
+	// Find the device with a matching serviceType and deviceInstance. If it is not found yet, wait
+	// until it is added. Setting the serviceUid triggers initializeFromServiceUid(), which ends the
+	// lookup.
+	AllDevicesModel *allDevicesModel = AllDevicesModel::create();
+	if (Device *device = allDevicesModel->findDeviceWithTypeAndInstance(serviceType(), deviceInstance())) {
+		setServiceUid(device->serviceUid());
+		return;
+	}
+	m_deviceAddedConnection = connect(allDevicesModel, &AllDevicesModel::deviceAdded, this, [this](Device *device) {
+		if (device->serviceType() == serviceType() && device->deviceInstance() == deviceInstance()) {
+			setServiceUid(device->serviceUid());
+		}
+	});
 }

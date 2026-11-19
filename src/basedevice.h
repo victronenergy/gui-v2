@@ -34,6 +34,10 @@ namespace VenusOS {
 	lifetime. However, when a service is disconnected and reconnected, the uid may have a different
 	suffix on a D-Bus backend if it is reconnected using a different port.
 
+	If the serviceUid is not known, the serviceType and deviceInstance can be set instead, and
+	subclasses (e.g. Device) will look up the matching serviceUid. Once the serviceUid is set, the
+	serviceType cannot be changed, as it is derived from the serviceUid.
+
 	The isValid() method returns true if serviceUid and deviceInstance are set, as well as either
 	productName() or customName().
 */
@@ -43,7 +47,7 @@ class BaseDevice : public QObject
 	QML_ELEMENT
 	Q_PROPERTY(bool valid READ isValid NOTIFY validChanged)
 	Q_PROPERTY(QString serviceUid READ serviceUid WRITE setServiceUid NOTIFY serviceUidChanged)
-	Q_PROPERTY(QString serviceType READ serviceType NOTIFY serviceTypeChanged)
+	Q_PROPERTY(QString serviceType READ serviceType WRITE setServiceType NOTIFY serviceTypeChanged)
 	Q_PROPERTY(int deviceInstance READ deviceInstance WRITE setDeviceInstance NOTIFY deviceInstanceChanged)
 	Q_PROPERTY(int productId READ productId WRITE setProductId NOTIFY productIdChanged)
 	Q_PROPERTY(QString productName READ productName WRITE setProductName NOTIFY productNameChanged)
@@ -54,7 +58,9 @@ public:
 	explicit BaseDevice(QObject *parent = nullptr);
 
 	bool isValid() const;
+
 	QString serviceType() const;
+	void setServiceType(const QString &serviceType);
 
 	QString serviceUid() const;
 	void setServiceUid(const QString &serviceUid);

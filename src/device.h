@@ -29,7 +29,8 @@ public:
 	// according to the values from the item. The Device does not take ownership of the item.
 	Device(QObject *parent, VeQItem *serviceItem);
 
-	// Initializes a Device without a service; the service item will be set when serviceUid is set.
+	// Initializes a Device without a service; the service item will be set when serviceUid is set,
+	// or when serviceType and deviceInstance are both set and a matching service is found.
 	explicit Device(QObject *parent = nullptr);
 
 	// The service that defines the device. The pointer is owned by the backend producer.
@@ -44,8 +45,10 @@ private:
 	void serviceChildAboutToBeRemoved(VeQItem *child);
 	void refreshName();
 	void initializeFromServiceUid();
+	void initializeFromServiceTypeAndDeviceInstance();
 
 	VeQItem *m_serviceItem = nullptr;
+	QMetaObject::Connection m_deviceAddedConnection;
 	VeQItem *m_customNameItem = nullptr;
 	VeQItem *m_productNameItem = nullptr;
 	int m_fluidType = -1;

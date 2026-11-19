@@ -25,13 +25,31 @@ QString BaseDevice::serviceType() const
 	return m_serviceType;
 }
 
+void BaseDevice::setServiceType(const QString &serviceType)
+{
+	// The service type is derived from the serviceUid when that is set, so it should only be set
+	// externally when the serviceUid is not yet known. In that case, subclasses may use the
+	// serviceType and deviceInstance to look up the serviceUid.
+	if (!m_serviceUid.isEmpty()) {
+		if (m_serviceType != serviceType) {
+			qmlWarning(this) << "Cannot set serviceType to " << serviceType << ", serviceUid is already set to " << m_serviceUid;
+		}
+		return;
+	}
+
+	if (m_serviceType != serviceType) {
+		m_serviceType = serviceType;
+		emit serviceTypeChanged();
+	}
+}
+
 QString BaseDevice::serviceUid() const
 {
 	return m_serviceUid;
 }
 
 void BaseDevice::setServiceUid(const QString &serviceUid)
-{    
+{
 	// Service uids should not change during the lifetime of an object, as this affects the ability
 	// of device models to consistently identify devices by serviceUid. Allow this behavior but
 	// show a warning.
