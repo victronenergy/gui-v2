@@ -89,7 +89,8 @@ Page {
 
 			inputMethodHints: Qt.ImhDigitsOnly
 			secondaryText: model.vrmInstance
-			preferredVisible: model.deviceClass.length > 0 && model.vrmInstance >= 0
+			// Show negative VRM instances too, so that the user can see and correct them.
+			preferredVisible: model.valid
 			validateInput: function() {
 				const newVrmInstance = parseInt(secondaryText)
 				if (isNaN(newVrmInstance)) {

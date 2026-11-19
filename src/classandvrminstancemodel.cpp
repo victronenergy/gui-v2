@@ -57,7 +57,7 @@ void ClassAndVrmInstance::setDevice(Device *device)
 
 bool ClassAndVrmInstance::isValid() const
 {
-	return m_vrmInstance >= 0 && !m_deviceClass.isEmpty();
+	return m_vrmInstanceParsed && !m_deviceClass.isEmpty();
 }
 
 VeQItem *ClassAndVrmInstance::instanceItem()
@@ -107,7 +107,7 @@ bool ClassAndVrmInstance::setVrmInstance(int newVrmInstance)
 		qWarning() << "Cannot set VRM instance for" << m_item->uniqueId() << "device class not set!";
 		return false;
 	}
-	m_pendingVrmInstance = newVrmInstance;
+	m_hasPendingVrmInstance = true;
 	m_item->setValue(QStringLiteral("%1:%2").arg(m_deviceClass).arg(newVrmInstance));
 	return true;
 }
@@ -120,7 +120,7 @@ bool ClassAndVrmInstance::hasVrmInstanceChanges() const
 	return m_vrmInstance != m_initialVrmInstance
 			// True if setVrmInstance() has been called but the new value has not yet been written
 			// to the backend.
-			|| m_pendingVrmInstance >= 0;
+			|| m_hasPendingVrmInstance;
 }
 
 void ClassAndVrmInstance::classAndVrmInstanceChanged(QVariant variant)
@@ -131,12 +131,17 @@ void ClassAndVrmInstance::classAndVrmInstanceChanged(QVariant variant)
 
 	m_deviceClass.clear();
 	m_vrmInstance = -1;
-	m_pendingVrmInstance = -1;
+	m_vrmInstanceParsed = false;
+	m_hasPendingVrmInstance = false;
 	if (variant.isValid()) {
 		const QStringList classAndInstance = variant.toString().split(':');
 		bool instanceOk = false;
 		m_deviceClass = classAndInstance.value(0);
-		m_vrmInstance = classAndInstance.value(1).toInt(&instanceOk);
+		const int vrmInstance = classAndInstance.value(1).toInt(&instanceOk);
+		if (instanceOk) {
+			m_vrmInstance = vrmInstance;
+			m_vrmInstanceParsed = true;
+		}
 		if (m_deviceClass.isEmpty() || !instanceOk) {
 			qWarning() << "Unable to parse device class and VRM instance from variant:" << variant;
 		}

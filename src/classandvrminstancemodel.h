@@ -72,8 +72,11 @@ private:
 	VeQItem *m_item = nullptr;
 	BaseDevice *m_device = nullptr;
 	int m_vrmInstance = -1;
-	int m_pendingVrmInstance = -1;
 	int m_initialVrmInstance = -1;
+	// The stored VRM instance may be any integer, including a negative number set elsewhere,
+	// so track separately whether it was parsed, rather than using -1 to mean "no value".
+	bool m_vrmInstanceParsed = false;
+	bool m_hasPendingVrmInstance = false;
 };
 
 
