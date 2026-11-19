@@ -101,6 +101,11 @@ ListNavigation {
 		uid: root._scheduleSource + "/Soc"
 	}
 
+	VeQuickItem {
+		id: maxChargeCurrentControl
+		uid: Services.system.serviceUid + "/Control/MaxChargeCurrent"
+	}
+
 	Component {
 		id: scheduledOptionsComponent
 
@@ -172,6 +177,30 @@ ListNavigation {
 							//% "PV & Battery"
 							{ display: qsTrId("cgwacs_battery_schedule_pv_and_battery"), value: 1 }
 						]
+					}
+
+					ListSwitch {
+						id: maxChargePowerSwitch
+
+						//% "Limit charge power"
+						text: qsTrId("settings_ess_limit_charge_power")
+						checked: maxChargePower.dataItem.value >= 0
+						// The limit is applied through DVCC charge current control
+						preferredVisible: itemEnabled.checked && maxChargeCurrentControl.valid && maxChargeCurrentControl.value
+						onClicked: maxChargePower.dataItem.setValue(maxChargePower.dataItem.value < 0 ? 1000 : -1)
+					}
+
+					ListSpinBox {
+						id: maxChargePower
+
+						//% "Maximum charge power"
+						text: qsTrId("settings_ess_max_charge_power")
+						preferredVisible: maxChargePowerSwitch.visible && maxChargePowerSwitch.checked
+						dataItem.uid: root._scheduleSource + "/MaxChargePower"
+						suffix: Units.defaultUnitString(VenusOS.Units_Watt)
+						from: 0
+						to: 200000
+						stepSize: 50
 					}
 				}
 			}
