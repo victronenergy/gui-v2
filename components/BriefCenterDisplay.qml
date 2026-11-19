@@ -13,6 +13,8 @@ Column {
 
 	property bool showFullDetails
 
+	visible: centerService.value !== "none"
+
 	readonly property bool _useTemperature: BackendConnection.portableIdInfo(centerService.value).type === "temperature"
 
 	VeQuickItem {
