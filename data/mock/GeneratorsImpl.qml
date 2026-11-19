@@ -36,17 +36,15 @@ Item {
 						generator._runtime.setValue(0)
 					}
 				}
+			}
 
-				// When the generator is running, update the /Runtime.
-				property Timer _runTimeTick: Timer {
-					running: MockManager.timersActive
-							 && generator.state === VenusOS.Generators_State_Running
-					interval: 1000
-					repeat: true
-					onTriggered: {
-						generator._runtime.setValue(generator.runtime + 1)
-					}
-				}
+			// When the generator is running, increment /Runtime in C++.
+			MockDataStepper {
+				active: MockManager.timersActive
+						&& generator.state === VenusOS.Generators_State_Running
+				stepSize: 1
+				interval: 1000
+				dataItems: [generator._runtime]
 			}
 		}
 	}
