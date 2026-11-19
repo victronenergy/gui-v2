@@ -23,6 +23,7 @@ Page {
 	// The cards list view is made up of:
 	// - Header - ESS card
 	// - Per-device Control Cards for EVCS, Generators, Inverter/chargers
+	// - Plugin-provided Cards
 	BaseListView {
 		id: cardsView
 
@@ -35,14 +36,9 @@ Page {
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
 
-		// When using key navigation to scroll through the control cards, use a velocity that
-		// roughly matches the velocity produced by AuxCardsPage scrollToControl() when it scrolls
-		// through the Switch Pane.
-		// Note that the control cards do not need a scrollToControl() function, as these cards
-		// always fit within a single screen, so it can rely on the ListView auto-scroll behaviour
-		// that moves to the start of each card.
-		highlightMoveVelocity: Theme.animation_cards_highlightMoveVelocity
-		highlightMoveDuration: -1
+		// The built-in ListView scrolling only shows the start of each card. Instead, scroll to show
+		// the focused control, so that it can be seen even if its card is larger than the view.
+		highlightFollowsCurrentItem: false
 
 		header: ListItemLoader {
 			active: systemType.value === "ESS" || systemType.value === "Hub-4"
@@ -64,21 +60,59 @@ Page {
 			}
 		}
 
-		model: controlCardModel
+		// The models are declared inside the view, so that the view is destroyed first. Otherwise,
+		// it could warn when it stops creating a delegate for a row that has already been removed.
+		model: CombinedListModel {
+			firstModel: FilteredDeviceModel {
+				sorting: FilteredDeviceModel.ServiceTypeOrder | FilteredDeviceModel.Name
+				serviceTypes: [ "evcharger", "generator", "vebus", "acsystem", "inverter" ]
+				childFilterIds: { "evcharger": ["Mode"], "generator": ["Enabled"] }
+				childFilterFunction: (device, childItems) => {
+					if (device.serviceType === "evcharger") {
+						// Only include EV chargers that represent controllable EV chargers (with valid
+						// /Mode values), to prevent Energy Meters from appearing in the cards.
+						return childItems["Mode"]?.value !== undefined
+					} else if (device.serviceType === "generator") {
+						// Only include generators with /Enabled=1, which means they have the startstop1
+						// for starting/stopping the generator.
+						return childItems["Enabled"]?.value === 1
+					} else {
+						return true
+					}
+				}
+			}
+			secondModel: GuiPluginIntegrationModel {
+				type: GuiPluginLoader.QuickAccessPaneCard
+				cardType: GuiPluginLoader.ControlsCard
+			}
+		}
 		delegate: ListItemLoader {
-			id: deviceDelegate
+			id: cardDelegate
 
-			required property Device device
+			required property bool fromSecondModel
+			required property var model
+			readonly property Item focusedItem: activeFocus && Global.keyNavigationEnabled
+					? Window.activeFocusItem
+					: null
 
-			width: root.cardWidth
+			width: effectiveVisible ? root.cardWidth : 0
 			height: Theme.screenSize === Theme.Portrait ? implicitHeight : cardsView.height
+			preferredVisible: !fromSecondModel || item?.status === Loader.Ready
 			sourceComponent: {
-				if (device.serviceType === "evcharger") {
+				if (fromSecondModel) {
+					return pluginCardComponent
+				} else if (model.device.serviceType === "evcharger") {
 					return evcsComponent
-				} else if (device.serviceType === "generator") {
+				} else if (model.device.serviceType === "generator") {
 					return generatorComponent
 				}
 				return inverterChargerComponent
+			}
+
+			onFocusedItemChanged: {
+				if (focusedItem) {
+					cardsView.scrollToFocusedItem(focusedItem)
+				}
 			}
 
 			Component {
@@ -86,7 +120,7 @@ Page {
 
 				EVCSCard {
 					width: root.cardWidth
-					serviceUid: deviceDelegate.device.serviceUid
+					serviceUid: cardDelegate.model.device.serviceUid
 				}
 			}
 
@@ -95,7 +129,7 @@ Page {
 
 				GeneratorCard {
 					width: root.cardWidth
-					serviceUid: deviceDelegate.device.serviceUid
+					serviceUid: cardDelegate.model.device.serviceUid
 				}
 			}
 
@@ -104,8 +138,30 @@ Page {
 
 				InverterChargerCard {
 					width: root.cardWidth
-					serviceUid: deviceDelegate.device.serviceUid
-					name: deviceDelegate.device.name
+					serviceUid: cardDelegate.model.device.serviceUid
+					name: cardDelegate.model.device.name
+				}
+			}
+
+			Component {
+				id: pluginCardComponent
+
+				Loader {
+					focus: true
+					source: cardDelegate.model.url
+					onLoaded: {
+						if (item) {
+							item.focus = true
+						}
+					}
+					onStatusChanged: {
+						if (status === Loader.Error) {
+							// The Loader clears source when the card cannot be created.
+							console.warn("Unable to load card from plugin %1: %2"
+								.arg(cardDelegate.model.pluginName)
+								.arg(cardDelegate.model.url))
+						}
+					}
 				}
 			}
 		}
@@ -118,26 +174,6 @@ Page {
 				// note the sign of that view velocity is opposite to the flick velocity, hence minus.
 				cardsView.flick((cardsView.flickDeceleration * 2.0*wheel.angleDelta.y/360) - cardsView.horizontalVelocity, 0)
 				wheel.accepted = true
-			}
-		}
-	}
-
-	FilteredDeviceModel {
-		id: controlCardModel
-		sorting: FilteredDeviceModel.ServiceTypeOrder | FilteredDeviceModel.Name
-		serviceTypes: [ "evcharger", "generator", "vebus", "acsystem", "inverter" ]
-		childFilterIds: { "evcharger": ["Mode"], "generator": ["Enabled"] }
-		childFilterFunction: (device, childItems) => {
-			if (device.serviceType === "evcharger") {
-				// Only include EV chargers that represent controllable EV chargers (with valid
-				// /Mode values), to prevent Energy Meters from appearing in the cards.
-				return childItems["Mode"]?.value !== undefined
-			} else if (device.serviceType === "generator") {
-				// Only include generators with /Enabled=1, which means they have the startstop1
-				// for starting/stopping the generator.
-				return childItems["Enabled"]?.value === 1
-			} else {
-				return true
 			}
 		}
 	}

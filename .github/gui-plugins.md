@@ -4,17 +4,19 @@ A GUI plugin adds pages to gui-v2, without changing gui-v2. A plugin can add a:
 
 - **plugin settings page**, opened from Settings -> Integrations -> UI Plugins
 - **device sub-page**, opened from the page of a device in the Devices list
+- **card in the Controls or Switches pane**, shown after gui-v2's own cards
 
-A navigation page, a quick access pane, and a card in a quick access pane (integration types 3, 4 and 5) are not yet part of the plugin API. A `PluginCard` is meant to be shown in the Controls pane or the Switches pane, beside gui-v2's own cards, but that is not supported yet: for now, show it on the plugin's own page, in a `PluginCardListView`. Plugin pages are written with the types of the `Victron.GuiPlugins` module, which gui-v2 keeps stable for plugins.
+A navigation page and a quick access pane (integration types 3 and 4) are not yet part of the plugin API. Plugin pages and cards are written with the types of the `Victron.GuiPlugins` module, which gui-v2 keeps stable for plugins.
 
 This document is for OEM and third-party developers, and for AI agents that write or check a plugin. It is complete on its own: you do not need to read gui-v2's internals. Custom branding plugins, which change the GUI's colors, fonts and logos, are a separate kind of plugin and are not covered here.
 
-Four example plugins show the rules in practice:
+Five example plugins show the rules in practice:
 
 - `examples/SimpleExample`: a plugin settings page with one switch.
 - `examples/SimpleTrExample`: the same, with the switch text translated.
 - `examples/DeviceListExample`: device sub-pages.
 - `examples/FullApiExample`: a plugin settings page and a device sub-page that, between them, show every type in the [type reference](#type-reference).
+- `examples/CardExample`: a card in the Controls pane.
 
 `Victron.GuiPlugins` is not finished yet. It has the types in the [type reference](#type-reference); more list item types will be added.
 
@@ -29,6 +31,8 @@ Four example plugins show the rules in practice:
    ```
 
    For a device sub-page, give the product id, the page file and the list item text instead: `--devicelist 0x106 PluginNameDevice.qml "Cell Voltages"`.
+
+   For a card, give the card file and the pane, `1` for Controls or `2` for Switches: `--card PluginNameCard.qml 1`.
 
    Alternatively, compile it on a GX device if a Large image is installed, using `/opt/victronenergy/gui-v2/gui-v2-plugin-compiler.py`.
 4. The compiler packs every `.qml` file in the directory, so subpages need no option of their own. It writes `PluginName.json`.
@@ -372,11 +376,11 @@ PluginCard {
 
 ## Cards
 
-**`PluginCard`** is a card with an icon, a title and a status, drawn like the cards in the Controls pane. A plugin card is meant to be shown in the Controls pane or the Switches pane, beside gui-v2's own cards. That is not supported yet: for now, put the card on your own page, in a `PluginCardListView`: see [Lists of cards](#lists-of-cards).
+**`PluginCard`** is a card with an icon, a title and a status, drawn like the cards in the Controls pane. Put it on your own page, in a `PluginCardListView` (see [Lists of cards](#lists-of-cards)), or add it to the Controls or Switches pane: compile its file with `--card`, as in the [quick start](#quick-start). The base type of that file is `PluginCard`, or a type that your plugin defines in its own file, if that file's base type is `PluginCard`. The GUI does not check that base type, but a card must still follow this rule. The pane shows the card after its own cards, and sets the card's size to match them. When gui-v2 loads the plugin, it compiles the card's file. If the file has an error, such as a syntax error or an unknown type, the card is left out, and gui-v2 logs a warning. If the card compiles, but cannot be created, the pane leaves it out, and logs a warning.
 
 Set `title` and `status` to the text. Set `iconSource` to a single-color image, such as one of the `PluginIcons`. The card tints the icon with the primary font color, and draws the title and status in the current theme. `title` and `status` are the text, not the labels that draw them.
 
-Declare any other content directly inside the card. It is placed in a column below the status, or below the title when `status` is empty. The column is as wide as the card, as in gui-v2's own cards. Every list item in the card must be flat, and a flat list item adds its own margins: see below. Content that is not a list item, such as a `PluginLabel` or a `PluginButton`, starts at the left edge of the card, so set its `x` to the card's `contentMargin`, as gui-v2's own cards do, so that it lines up with the icon and the status. If it wraps, or fills the line, also set its `width` to the card's `width` minus twice `contentMargin`. Color that content with `PluginPalette`. The card is the usual control-card size. Set its width or height to change that; in a `PluginCardListView`, the list sets them. If the content needs more room, the card grows.
+Declare any other content directly inside the card. It is placed in a column below the status, or below the title when `status` is empty. The column is as wide as the card, as in gui-v2's own cards. Every list item in the card must be flat, and a flat list item adds its own margins: see below. Content that is not a list item, such as a `PluginLabel` or a `PluginButton`, starts at the left edge of the card, so set its `x` to the card's `contentMargin`, as gui-v2's own cards do, so that it lines up with the icon and the status. If it wraps, or fills the line, also set its `width` to the card's `width` minus twice `contentMargin`. Color that content with `PluginPalette`. The card is the usual control-card size, and grows if the content needs more room. Set its width or height to change that. A `PluginCardListView`, and the Controls and Switches panes, set the card's size. In portrait layout, the card still grows to fit its content. Otherwise, it is as tall as the list or pane, so the content must fit in that height.
 
 For a line with a label and a switch, a button or a slider, use `PluginListSwitch`, `PluginListButton` or `PluginListSlider`, or another list item type. Every list item in a card must be flat: set `flat: true` on it. A list item that is not flat draws its own background, inset by the page margins, as in a list on a page. A flat list item is drawn as in gui-v2's own cards: without a background, and as wide as the card. Its key navigation highlight spans the card. The list item checks the user's access level, as it does in a list. gui-v2's own cards let every user use their controls, so set `writeAccessLevel: PluginAccessLevel.User` if that suits your plugin. In a card, use a `PluginLabel` rather than a `PluginSettingsListHeader` or a `PluginPrimaryListLabel`, which ignore `flat`.
 
@@ -421,7 +425,7 @@ PluginCard {
 
 ### Lists of cards
 
-**`PluginCardListView`** shows the cards declared directly inside it, laid out as in the Controls pane, and fills its parent. The cards stand side by side, and scroll sideways. In portrait layout, they stand one above the other, and scroll up and down. The cards are fixed when the list is created.
+**`PluginCardListView`** shows the cards declared directly inside it, laid out as in the Controls pane, and fills its parent. The cards stand side by side, and scroll sideways. In portrait layout, they stand one above the other, and scroll up and down. With key navigation, the list scrolls to show the card with the key focus, or, in a card that is larger than the list, the control with the key focus. The cards are fixed when the list is created.
 
 The list sets the width and height of each card, as in the Controls pane, so do not set them on the card. In portrait layout, each card is as wide as the list. Otherwise, each card is as tall as the list, and does not grow to fit its content.
 

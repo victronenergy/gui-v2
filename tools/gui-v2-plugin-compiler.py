@@ -8,7 +8,9 @@ import subprocess
 import argparse
 import base64
 import shutil
+import urllib.parse
 import xml.etree.ElementTree as ET
+import xml.sax.saxutils
 
 # The Branding property list (name and version), generated from src/branding/branding.h by
 # tools/brandingproperties.py. It is installed next to this script. The compiler uses it to
@@ -767,6 +769,44 @@ def check_guiplugins_version(qmlFiles):
     return version
 
 
+# Returns the JSON integration for the args of one --card option.
+def card_integration(integration, pluginName, qmlFiles):
+    if len(integration) != 2:
+        print("\n\nERROR: --card requires 2 args: page.qml cardType (1=controls, 2=switches)")
+        sys.exit(1)
+    pageQml = integration[0]
+    try:
+        cardType = int(integration[1])
+    except ValueError:
+        print("\n\nERROR: Card type must be an integer (1=controls, 2=switches)")
+        sys.exit(1)
+    if cardType not in (1, 2):
+        print("\n\nERROR: Card type must be 1 (controls) or 2 (switches)")
+        sys.exit(1)
+    if not pageQml.endswith('.qml'):
+        print("\n\nERROR: Card page must be a .qml file")
+        sys.exit(1)
+    require_packed_file(pageQml, qmlFiles, "Card page")
+    return {
+        "type": 5,
+        "url": resource_url(pluginName, pageQml),
+        "cardType": cardType
+    }
+
+# Returns the URL of a file that is packed in the plugin's resources. The file name is
+# percent-encoded, so that characters such as '#', '%' and '?' are part of the name, rather than
+# starting a URL fragment, an escape or a query.
+def resource_url(pluginName, fileName):
+    return "qrc:/" + pluginName + "/" + urllib.parse.quote(fileName)
+
+def require_packed_file(path, packedFiles, description):
+    # Only the files directly in the current directory are packed, and resource paths are
+    # case-sensitive, so the name must match a packed file exactly.
+    if path not in packedFiles:
+        print(f"\n\nERROR: {description} \"{path}\" is not a file in the current directory. It must not be"
+              " in a subdirectory, and its name must have the same case as the file name.")
+        sys.exit(1)
+
 def collect_filenames(directory, suffix):
     files = []
     for filename in os.listdir(directory):
@@ -818,7 +858,7 @@ def write_qrc(qmlFiles, qmFiles, imageFiles, name):
     allFiles = list(dict.fromkeys(qmlFiles + qmFiles + imageFiles))
     contents = "<RCC>\n<qresource prefix=\"/" + name + "\">\n"
     for filename in allFiles:
-        contents += "<file>" + filename + "</file>\n"
+        contents += "<file>" + xml.sax.saxutils.escape(filename) + "</file>\n"
     contents += "</qresource>\n</RCC>\n"
     try:
         filename = "" + name + ".qrc"
@@ -1004,7 +1044,7 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--devicelist', required=False, nargs='+', action='append', help='Triplet of product id, settings page .qml, and title text (or translation id)')
     parser.add_argument('-g', '--navigation', default='')
     parser.add_argument('-q', '--quickaccess', default='')
-    parser.add_argument('-c', '--card', default='')
+    parser.add_argument('-c', '--card', required=False, nargs='+', action='append', help='Pair of page .qml and card type (1=controls, 2=switches)')
     parser.add_argument('-b', '--branding', default='',     help='The Branding .qml file of a custom branding plugin')
     parser.add_argument('--qml-import-path', default=os.path.dirname(os.path.abspath(__file__)),
                         help='The directory containing Victron/Branding/qmldir, used by qmllint '
@@ -1073,7 +1113,7 @@ if __name__ == '__main__':
     print("--- building translations array")
     translations = []
     for qmFile in qmFiles:
-        translations.append("qrc:/" + args.name + "/" + qmFile)
+        translations.append(resource_url(args.name, qmFile))
 
     print("--- building integrations dictionary")
     integrations = []
@@ -1086,7 +1126,7 @@ if __name__ == '__main__':
             sys.exit(1)
         settingsIntegration = {
             "type": 1,
-            "url": "qrc:/" + args.name + "/" + args.settings
+            "url": resource_url(args.name, args.settings)
         }
         integrations.append(settingsIntegration)
     if args.devicelist:
@@ -1107,7 +1147,7 @@ if __name__ == '__main__':
                 devicelistIntegration = {
                     "type": 2,
                     "productId": integration[0],
-                    "url": "qrc:/" + args.name + "/" + integration[1],
+                    "url": resource_url(args.name, integration[1]),
                     "title": integration[2]
                 }
                 integrations.append(devicelistIntegration)
@@ -1115,12 +1155,13 @@ if __name__ == '__main__':
         print("TODO: navigation...")
     if len(args.quickaccess) > 0:
         print("TODO: quick access...")
-    if len(args.card) > 0:
-        print("TODO: card...")
+    if args.card:
+        for integration in args.card:
+            integrations.append(card_integration(integration, args.name, qmlFiles))
     if len(args.branding) > 0:
         brandingIntegration = {
             "type": BRANDING_INTEGRATION_TYPE,
-            "url": "qrc:/" + args.name + "/" + brandingFiles[-1]
+            "url": resource_url(args.name, brandingFiles[-1])
         }
         integrations.append(brandingIntegration)
 

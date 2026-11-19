@@ -20,49 +20,6 @@ Page {
 	BaseListView {
 		id: cardsView
 
-		// When using key navigation to move between items in the grid view, auto-scroll the parent
-		// ListView to ensure the focused control can be seen. Otherwise, if the group card is wider
-		// than a single screen, the focused control may remain off-screen, as the ListView auto-
-		// scroll behaviour simply scrolls to the beginning of each group card.
-		function scrollToControl(item) {
-			const itemContentPos = contentItem.mapFromItem(item, 0, 0)
-			const distance = orientation === ListView.Horizontal
-					? _scrollDistance(itemContentPos.x, item.width, contentX, width)
-					: _scrollDistance(itemContentPos.y, item.height, contentY, height)
-			if (distance === 0) {
-				return
-			}
-
-			// If item is far away, jump to the new content pos, instead of flicking.
-			if (orientation === ListView.Horizontal && Math.abs(distance) > width * 2) {
-				contentX += distance
-				returnToBounds()
-			} else if (orientation === ListView.Vertical && Math.abs(distance) > height * 2) {
-				contentY += distance
-				returnToBounds()
-			} else {
-				// The item is close by, so just scroll to it.
-				let velocity = Math.sqrt(2 * Math.abs(distance) * flickDeceleration)
-				if (distance > 0) {
-					velocity = -velocity
-				}
-				flick(orientation === ListView.Horizontal ? velocity : 0,
-					  orientation === ListView.Vertical ? velocity : 0)
-			}
-		}
-
-		function _scrollDistance(itemContentPos, itemSize, contentPos, viewSize) {
-			if (itemContentPos + itemSize > contentPos + viewSize) {
-				// Scroll right or scroll down (return a positive distance)
-				return (itemContentPos + itemSize) - (contentPos + viewSize)
-			} else if (itemContentPos < contentPos) {
-				// Scroll left or scroll up (return a negative distance)
-				return (itemContentPos - contentPos)
-			} else {
-				return 0
-			}
-		}
-
 		anchors {
 			fill: parent
 			leftMargin: Theme.geometry_controlCardsPage_horizontalMargin
@@ -72,17 +29,73 @@ Page {
 		spacing: Theme.geometry_controlCardsPage_spacing
 		orientation: Theme.screenSize === Theme.Portrait ? ListView.Vertical : ListView.Horizontal
 
-		// Allow scrollToControl() to auto-scroll the view without interference from the built-in
-		// ListView scroll behaviour.
+		// The built-in ListView scrolling only shows the start of each card. Instead, scroll to show
+		// the focused control, so that it can be seen even if its card is larger than the view.
 		highlightFollowsCurrentItem: false
 
-		model: SortedIOChannelGroupModel { sourceModel: Services.ioChannels.groups }
-		delegate: IOChannelGroupCard {
+		// The models are declared inside the view, so that the view is destroyed first. Otherwise,
+		// it could warn when it stops creating a delegate for a row that has already been removed.
+		model: CombinedListModel {
+			firstModel: SortedIOChannelGroupModel { sourceModel: Services.ioChannels.groups }
+			secondModel: GuiPluginIntegrationModel {
+				type: GuiPluginLoader.QuickAccessPaneCard
+				cardType: GuiPluginLoader.SwitchesCard
+			}
+		}
+		delegate: ListItemLoader {
+			id: cardDelegate
+
+			required property bool fromSecondModel
+			required property var model
+
 			width: Theme.screenSize === Theme.Portrait ? cardsView.width : implicitWidth
 			height: Theme.screenSize === Theme.Portrait ? implicitHeight : cardsView.height
-			onCurrentItemChanged: {
-				if (currentItem) {
-					cardsView.scrollToControl(currentItem)
+			preferredVisible: !fromSecondModel || item?.status === Loader.Ready
+			sourceComponent: fromSecondModel ? pluginCardComponent : groupCardComponent
+
+			Component {
+				id: groupCardComponent
+
+				IOChannelGroupCard {
+					group: cardDelegate.model.group
+					onCurrentItemChanged: {
+						if (currentItem) {
+							cardsView.scrollToFocusedItem(currentItem)
+						}
+					}
+				}
+			}
+
+			Component {
+				id: pluginCardComponent
+
+				Loader {
+					id: pluginCardLoader
+
+					readonly property Item focusedItem: activeFocus && Global.keyNavigationEnabled
+							? Window.activeFocusItem
+							: null
+
+					focus: true
+					source: cardDelegate.model.url
+					onLoaded: {
+						if (item) {
+							item.focus = true
+						}
+					}
+					onFocusedItemChanged: {
+						if (focusedItem) {
+							cardsView.scrollToFocusedItem(focusedItem)
+						}
+					}
+					onStatusChanged: {
+						if (status === Loader.Error) {
+							// The Loader clears source when the card cannot be created.
+							console.warn("Unable to load card from plugin %1: %2"
+								.arg(cardDelegate.model.pluginName)
+								.arg(cardDelegate.model.url))
+						}
+					}
 				}
 			}
 		}
