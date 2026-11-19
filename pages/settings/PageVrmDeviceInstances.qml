@@ -89,11 +89,16 @@ Page {
 
 			inputMethodHints: Qt.ImhDigitsOnly
 			secondaryText: model.vrmInstance
-			preferredVisible: model.deviceClass.length > 0 && model.vrmInstance >= 0
+			// Show negative VRM instances too, so that the user can see and correct them.
+			preferredVisible: model.valid
 			validateInput: function() {
 				const newVrmInstance = parseInt(secondaryText)
 				if (isNaN(newVrmInstance)) {
 					return Utils.validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(secondaryText))
+				}
+				if (newVrmInstance < 0 || newVrmInstance > 65535) {
+					//% "'%1' is not a valid vrm instance number. Use a number between 0-65535."
+					return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_vrm_device_instances_outofrange").arg(newVrmInstance))
 				}
 				return Utils.validationResult(VenusOS.InputValidation_Result_OK, "", newVrmInstance)
 			}
