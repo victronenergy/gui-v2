@@ -12,19 +12,37 @@ ListNavigation {
 	required property string activeBatteryName
 	property string customServiceDescription
 
+	readonly property string _noneServiceId: "none"
+	readonly property bool _noneSelected: centerService.value === _noneServiceId
+
 	function _summaryText(deviceName, deviceInstance) {
 		return deviceName ? `${deviceName} [${deviceInstance}]` : ""
 	}
 
 	//% "Centre details"
 	text: qsTrId("settings_briefview_center_details")
-	secondaryText: centerService.value ? customServiceDescription : activeBatteryName
+	secondaryText: _noneSelected ? CommonWords.none_option
+			: centerService.value ? customServiceDescription
+			: activeBatteryName
 
 	onClicked: {
 		const deviceModel = Services.environment.model
-		let selectedIndex = centerService.value ? -1 : 0
-		//% "Active battery monitor"
-		let deviceOptionModel = [{ display: activeBatteryName, value: "", section: qsTrId("settings_briefview_center_active_battery_monitor") }]
+		let selectedIndex = _noneSelected ? 0
+				: centerService.value ? -1
+				: 1
+		let deviceOptionModel = []
+		deviceOptionModel.push({
+			display: CommonWords.none_option,
+			value: root._noneServiceId,
+			//% "General"
+			section: qsTrId("settings_briefview_center_general")
+		})
+		deviceOptionModel.push({
+			display: activeBatteryName,
+			value: "",
+			//% "Active battery monitor"
+			section: qsTrId("settings_briefview_center_active_battery_monitor")
+		})
 		for (let i = 0; i < deviceModel.count; ++i) {
 			const device = deviceModel.deviceAt(i)
 			const portableServiceId = BackendConnection.serviceUidToPortableId(device.serviceUid, device.deviceInstance)
@@ -35,7 +53,7 @@ ListNavigation {
 				section: qsTrId("settings_briefview_center_temperature_services")
 			})
 			if (selectedIndex < 0 && portableServiceId === centerService.value) {
-				selectedIndex = i+1 // allow for the prepended active battery option
+				selectedIndex = i+2 // allow for the prepended "None" and active battery options
 			}
 		}
 		Global.pageManager.pushPage(deviceOptionsComponent, {
