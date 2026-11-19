@@ -95,6 +95,10 @@ Page {
 				if (isNaN(newVrmInstance)) {
 					return Utils.validationResult(VenusOS.InputValidation_Result_Error, CommonWords.error_nan.arg(secondaryText))
 				}
+				if (newVrmInstance < 0 || newVrmInstance > 2147483646) {
+					//% "'%1' is not a valid vrm instance number. Use a number between 0-2147483646."
+					return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_vrm_device_instances_outofrange").arg(newVrmInstance))
+				}
 				return Utils.validationResult(VenusOS.InputValidation_Result_OK, "", newVrmInstance)
 			}
 			saveInput: function() {
