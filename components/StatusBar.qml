@@ -11,9 +11,6 @@ Loader {
 
 	required property PageStack pageStack
 
-	signal controlCardsActivated()
-	signal auxCardsActivated()
-	signal cardsDeactivated()
 	signal sidePanelToggled()
 
 	sourceComponent: Theme.screenSize === Theme.Portrait ? statusBarPortrait : statusBarLandscape
@@ -25,9 +22,6 @@ Loader {
 			pageStack: root.pageStack
 			focus: true
 
-			onControlCardsActivated: root.controlCardsActivated()
-			onAuxCardsActivated: root.auxCardsActivated()
-			onCardsDeactivated: root.cardsDeactivated()
 			onSidePanelToggled: root.sidePanelToggled()
 		}
 	}
@@ -39,9 +33,6 @@ Loader {
 			pageStack: root.pageStack
 			focus: true
 
-			onControlCardsActivated: root.controlCardsActivated()
-			onAuxCardsActivated: root.auxCardsActivated()
-			onCardsDeactivated: root.cardsDeactivated()
 			onSidePanelToggled: root.sidePanelToggled()
 		}
 	}

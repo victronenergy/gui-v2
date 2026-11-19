@@ -5,6 +5,7 @@
 
 import QtQuick
 import QtQuick.Controls.impl as CP
+import QtQuick.Templates as T
 import Victron.VenusOS
 
 FocusScope {
@@ -12,23 +13,148 @@ FocusScope {
 
 	required property PageStack pageStack
 
-	signal controlCardsActivated()
-	signal auxCardsActivated()
-	signal cardsDeactivated()
+	// Repeater count changes before delegates exist. itemAt() is not a binding
+	// dependency, so key chains must also read this counter (bumped by the repeater).
+	property int quickAccessButtonReady: 0
+
+	// ListModel.get() is not a binding dependency, so bindings that read
+	// quickAccessOverflowModel entries also read this counter (bumped on rebuild).
+	property int quickAccessOverflowRevision: 0
+
+	// The left button is always the first entry in quickAccessModel.
+	readonly property Item leftButton: quickAccessItem(0)
+
+	// Index of the left-most visible quick access button, or -1 if none are visible.
+	readonly property int firstVisibleQuickAccessIndex: nextVisibleQuickAccessIndex(0)
+
+	// The number of plugin (or "more") buttons that fit in quickAccessRow, after the fixed
+	// left/aux buttons, without overlapping the clock label. Always at least 1, so that the
+	// "more" button can be shown if no plugin buttons fit.
+	readonly property int quickAccessPluginCapacity: {
+		void quickAccessButtonReady
+		let fixedWidth = 0
+		for (let i = 0; i < quickAccessFixedCount; ++i) {
+			const slot = quickAccessRepeater.itemAt(i)
+			if (slot && slot.visible) {
+				fixedWidth += slot.width
+			}
+		}
+		const availableWidth = clockLabel.x - Theme.geometry_statusBar_spacing - fixedWidth
+		return Math.max(1, Math.floor(availableWidth / Theme.geometry_statusBar_button_height))
+	}
+
+	// The number of fixed (left/aux) entries at the start of quickAccessModel.
+	readonly property int quickAccessFixedCount: 2
+
+	onQuickAccessPluginCapacityChanged: Qt.callLater(rebuildQuickAccessModel)
+
 	signal sidePanelToggled()
+
+	function firstFocusable(candidates) {
+		for (let i = 0; i < candidates.length; ++i) {
+			const b = candidates[i]
+			if (b && b.visible && b.enabled)
+				return b
+		}
+		return null
+	}
+
+	// Returns the button of the quick access slot at the given index.
+	function quickAccessItem(index) {
+		void quickAccessButtonReady
+		return quickAccessRepeater.itemAt(index)?.button ?? null
+	}
+
+	// Returns the first visible and enabled quick access button, searching from startIndex in the
+	// given direction (1 = rightwards, -1 = leftwards), or null if there is none.
+	function nextFocusableQuickAccessItem(startIndex, step) {
+		for (let i = startIndex; i >= 0 && i < quickAccessRepeater.count; i += step) {
+			const item = quickAccessItem(i)
+			if (item && item.visible && item.enabled)
+				return item
+		}
+		return null
+	}
+
+	function nextVisibleQuickAccessIndex(startIndex) {
+		for (let i = startIndex; i < quickAccessRepeater.count; ++i) {
+			const item = quickAccessItem(i)
+			if (item && item.visible)
+				return i
+		}
+		return -1
+	}
+
+	// Returns the index in quickAccessOverflowModel of the plugin pane that is currently open, or
+	// -1 if no overflow plugin pane is open.
+	function openOverflowIndex() {
+		void quickAccessOverflowRevision
+		for (let i = 0; i < quickAccessOverflowModel.count; ++i) {
+			if (Global.mainView.quickAccessOpen(quickAccessOverflowModel.get(i).pluginUrl)) {
+				return i
+			}
+		}
+		return -1
+	}
+
+	// Keeps the fixed left/aux entries in place (so their delegates and focus survive) and
+	// replaces the plugin entries after them with the current QuickAccessPane integrations.
+	// As many plugin buttons are shown in the row as fit in the space to the left of the clock
+	// (quickAccessPluginCapacity); if not all of them fit, the last slot is used for a "more"
+	// button instead, which lists the remaining plugins in quickAccessOverflowModel.
+	function rebuildQuickAccessModel() {
+		const fixedCount = quickAccessFixedCount
+		const needsOverflow = pluginQuickAccessModel.count > quickAccessPluginCapacity
+		const maxQuickAccessPlugins = needsOverflow ? quickAccessPluginCapacity - 1 : quickAccessPluginCapacity
+		if (quickAccessModel.count > fixedCount) {
+			quickAccessModel.remove(fixedCount, quickAccessModel.count - fixedCount)
+		}
+		quickAccessOverflowModel.clear()
+
+		for (let i = 0; i < pluginQuickAccessModel.count; ++i) {
+			const integration = pluginQuickAccessModel.integrationAt(i)
+			const entry = {
+				buttonKind: "plugin",
+				pluginName: integration.pluginName,
+				pluginUrl: String(integration.url),
+				pluginIcon: String(integration.icon),
+				pluginIconActive: String(integration.iconActive)
+			}
+			if (needsOverflow && i >= maxQuickAccessPlugins) {
+				quickAccessOverflowModel.append(entry)
+			} else {
+				quickAccessModel.append(entry)
+			}
+		}
+		if (needsOverflow) {
+			quickAccessModel.append({
+				buttonKind: "more",
+				pluginName: "",
+				pluginUrl: "",
+				pluginIcon: "qrc:/images/icon_more_dots.svg",
+				pluginIconActive: ""
+			})
+		}
+		quickAccessOverflowRevision++
+	}
 
 	function updateBreadcrumbsFocusHint() {
 		// When breadcrumbs list is focused: if focus is arriving from the left side, focus the
 		// the left-most breadcrumb, or if from the right side, focus the right-most breadcrumb.
-		if (leftButton.activeFocus || auxButton.activeFocus) {
-			breadcrumbs.focusEdgeHint = Qt.LeftEdge
-		} else if (rightButton.activeFocus || sleepButton.activeFocus) {
+		if (rightButton.activeFocus || sleepButton.activeFocus) {
 			breadcrumbs.focusEdgeHint = Qt.RightEdge
-		} else {
-			// Focus is coming elsewhere, so do not change the current index
-			breadcrumbs.focusEdgeHint = -1
+			return
 		}
+		for (let i = 0; i < quickAccessRepeater.count; i++) {
+			if (quickAccessItem(i)?.activeFocus) {
+				breadcrumbs.focusEdgeHint = Qt.LeftEdge
+				return
+			}
+		}
+		breadcrumbs.focusEdgeHint = -1
 	}
+
+	Component.onCompleted: rebuildQuickAccessModel()
 
 	implicitWidth: Theme.geometry_screen_width
 	implicitHeight: Theme.geometry_statusBar_height
@@ -48,50 +174,11 @@ FocusScope {
 		}
 	}
 
-	StatusBarButton {
-		id: leftButton
-
-		readonly property int buttonType: {
-			const customButton = Global.mainView.currentPage?.topLeftButton ?? VenusOS.StatusBar_LeftButton_None
-			if (customButton === VenusOS.StatusBar_LeftButton_None && pageStack.opened) {
-				return VenusOS.StatusBar_LeftButton_Back
-			}
-			return customButton
-		}
-
-		// Expand clickable area on left and bottom edges.
-		leftInset: Theme.geometry_statusBar_horizontalMargin
-		bottomInset: Theme.geometry_statusBar_spacing
-
-		icon.source: buttonType === VenusOS.StatusBar_LeftButton_ControlsInactive ? "qrc:/images/icon_controls_off_32.svg"
-			: buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? "qrc:/images/icon_controls_on_32.svg"
-			: buttonType === VenusOS.StatusBar_LeftButton_Back ? "qrc:/images/icon_back_32.svg"
-			: ""
-		enabled: buttonType !== VenusOS.StatusBar_LeftButton_None
-		KeyNavigation.right: auxButton
-
-		onClicked: {
-			switch (buttonType) {
-			case VenusOS.StatusBar_LeftButton_ControlsInactive:
-				root.controlCardsActivated()
-				break
-			case VenusOS.StatusBar_LeftButton_ControlsActive:
-				root.cardsDeactivated()
-				break;
-			case VenusOS.StatusBar_LeftButton_Back:
-				Global.pageManager.popPage()
-				break
-			default:
-				break
-			}
-		}
-
-		onActiveFocusChanged: {
-			if (activeFocus) {
-				root.updateBreadcrumbsFocusHint()
-			}
-		}
-	}
+	// ── Zone 1: Quick Access (leftButton, auxButton, plugin buttons) ──
+	// On the main page these are the left-most interactive items. They are all delegates of
+	// quickAccessRepeater, populated from quickAccessModel.
+	// Internal chain: each button links to the previous/next visible and enabled button.
+	// Zone exit (right): last visible item → wifiButton (zone 3).
 
 	// Plugin cards for the Switches pane. The pane can be opened when it shows only these.
 	GuiPluginIntegrationModel {
@@ -100,44 +187,246 @@ FocusScope {
 		cardType: GuiPluginLoader.SwitchesCard
 	}
 
-	StatusBarButton {
-		id: auxButton
+	GuiPluginIntegrationModel {
+		id: pluginQuickAccessModel
+		type: GuiPluginLoader.QuickAccessPane
+		onModelReset: Qt.callLater(rebuildQuickAccessModel)
+	}
 
-		readonly property bool auxCardsOpened: Global.mainView.cardsActive
-				&& leftButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
+	ListModel {
+		id: quickAccessModel
 
-		// Expand clickable area on right and bottom edges, and on left if leftButton is hidden.
-		anchors {
-			left: leftButton.right
-			leftMargin: -leftInset
-		}
-		leftInset: leftButton.enabled ? 0 : Theme.geometry_statusBar_spacing
-		rightInset: Theme.geometry_statusBar_spacing
-		bottomInset: Theme.geometry_statusBar_spacing
+		// Fixed entries. Plugin entries are appended by rebuildQuickAccessModel().
+		ListElement { buttonKind: "left"; pluginName: ""; pluginUrl: "ControlCardsPage.qml"; pluginIcon: "qrc:/images/icon_controls_off_32.svg"; pluginIconActive: "qrc:/images/icon_controls_on_32.svg" }
+		ListElement { buttonKind: "aux"; pluginName: ""; pluginUrl: "AuxCardsPage.qml"; pluginIcon: "qrc:/images/icon_smartswitch_off_32.svg"; pluginIconActive: "qrc:/images/icon_smartswitch_on_32.svg" }
+	}
 
-		visible: (!root.pageStack.opened
-				&& (Services.ioChannels.groups.count > 0 || pluginSwitchCards.count > 0))
-				|| auxCardsOpened // allow cards to be closed if all switches are disconnected while opened
-		icon.source: leftButton.buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? ""
-				: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
-				: "qrc:/images/icon_smartswitch_off_32.svg"
-		enabled: leftButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
-		KeyNavigation.right: breadcrumbs
+	// Plugin entries that do not fit in quickAccessRow. These are listed in the popup opened by
+	// the "more" button.
+	ListModel {
+		id: quickAccessOverflowModel
+	}
 
-		onClicked: {
-			if (auxCardsOpened) {
-				root.cardsDeactivated()
-			} else {
-				root.auxCardsActivated()
-			}
-		}
+	Row {
+		id: quickAccessRow
 
-		onActiveFocusChanged: {
-			if (activeFocus) {
-				root.updateBreadcrumbsFocusHint()
+		Repeater {
+			id: quickAccessRepeater
+
+			model: quickAccessModel
+
+			onItemAdded: root.quickAccessButtonReady++
+			onItemRemoved: root.quickAccessButtonReady++
+
+			// Each entry is a slot holding its button. The slot reserves the button's space in the
+			// row whenever the button is available, even while it is hidden because a pane is open,
+			// so that the button that opened the pane stays in place.
+			delegate: Item {
+				id: quickAccessSlot
+
+				readonly property alias button: quickAccessButton
+
+				required property int index
+				required property string buttonKind
+				required property string pluginName
+				required property string pluginUrl
+				required property string pluginIcon
+				required property string pluginIconActive
+
+				readonly property bool isLeftButton: buttonKind === "left"
+				readonly property bool isAuxButton: buttonKind === "aux"
+				readonly property bool isPluginButton: buttonKind === "plugin"
+				readonly property bool isMoreButton: buttonKind === "more"
+
+				readonly property bool cardsActive: Global.mainView?.cardsActive ?? false
+
+				// For the "more" button: the overflow plugin whose pane is open, or -1.
+				readonly property int openOverflowIndex: isMoreButton ? root.openOverflowIndex() : -1
+				readonly property var openOverflowEntry: {
+					void root.quickAccessOverflowRevision
+					return openOverflowIndex >= 0 ? quickAccessOverflowModel.get(openOverflowIndex) : null
+				}
+
+				readonly property int leftButtonType: {
+					if (!isLeftButton) {
+						return VenusOS.StatusBar_LeftButton_None
+					}
+					if (root.pageStack.opened) {
+						return VenusOS.StatusBar_LeftButton_Back
+					}
+					return Global.mainView.currentPage?.topLeftButton ?? VenusOS.StatusBar_LeftButton_None
+				}
+
+				// Whether this pane (controls, aux or plugin) is the one currently open. For the
+				// "more" button, whether any of the overflow plugin panes is open.
+				readonly property bool paneOpened: isMoreButton ? openOverflowIndex >= 0
+						: Global.mainView.quickAccessOpen(pluginUrl)
+
+				// Whether the button is available in the current context, regardless of whether
+				// any pane is open. This decides whether the slot takes up space in the row.
+				visible: {
+					if (isLeftButton) {
+						return true
+					}
+					if (isAuxButton) {
+						return (!root.pageStack.opened
+								&& (Services.ioChannels.groups.count > 0 || pluginSwitchCards.count > 0))
+							|| paneOpened // allow cards to be closed if all switches are disconnected while opened
+					}
+					return Global.allPagesLoaded && !root.pageStack.opened
+				}
+				// The button may extend to the left of the slot to expand its clickable area.
+				width: quickAccessButton.width + quickAccessButton.x
+				height: quickAccessButton.height
+
+				StatusBarButton {
+					id: quickAccessButton
+
+					// Expand clickable area on the bottom edge, and on the left edge for the left-most
+					// button (or for the first visible button, if the left button is hidden). The left
+					// button reserves its margin within its slot; other buttons extend over the
+					// previous (hidden) slot, so that their icons do not move.
+					x: quickAccessSlot.isLeftButton ? 0 : -leftInset
+					leftInset: quickAccessSlot.isLeftButton ? Theme.geometry_statusBar_horizontalMargin
+							: root.firstVisibleQuickAccessIndex === quickAccessSlot.index ? Theme.geometry_statusBar_spacing
+							: 0
+					bottomInset: Theme.geometry_statusBar_spacing
+
+					// While a pane is open, only the button for that pane is shown (and the
+					// back button, when a sub-page is open).
+					visible: !quickAccessSlot.cardsActive || quickAccessSlot.paneOpened
+							|| (quickAccessSlot.isLeftButton && root.pageStack.opened)
+					enabled: quickAccessSlot.isLeftButton ? quickAccessSlot.leftButtonType !== VenusOS.StatusBar_LeftButton_None
+							: (quickAccessSlot.isPluginButton || quickAccessSlot.isMoreButton) ? Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+							: true
+
+					icon.cache: true
+					icon.source: {
+						if (quickAccessSlot.leftButtonType === VenusOS.StatusBar_LeftButton_Back) {
+							return "qrc:/images/icon_back_32.svg"
+						}
+						// While an overflow plugin pane is open, the "more" button shows that
+						// plugin's icon, and closes the pane when clicked.
+						const entry = quickAccessSlot.openOverflowEntry
+						if (entry) {
+							return entry.pluginIconActive.length > 0 ? entry.pluginIconActive : entry.pluginIcon
+						}
+						return (quickAccessSlot.paneOpened && quickAccessSlot.pluginIconActive.length > 0) ? quickAccessSlot.pluginIconActive : quickAccessSlot.pluginIcon
+					}
+
+					KeyNavigation.left: root.nextFocusableQuickAccessItem(quickAccessSlot.index - 1, -1)
+					KeyNavigation.right: root.nextFocusableQuickAccessItem(quickAccessSlot.index + 1, 1)
+							?? root.firstFocusable([wifiButton, mobileButton, notificationButton, alarmButton, rightButton, sleepButton])
+
+					onClicked: {
+						if (quickAccessSlot.leftButtonType === VenusOS.StatusBar_LeftButton_Back) {
+							Global.pageManager.popPage()
+						} else if (quickAccessSlot.paneOpened) {
+							Global.mainView.cardsLoader.hide()
+						} else if (quickAccessSlot.isMoreButton) {
+							overflowPopup.openFrom(quickAccessButton)
+						} else {
+							Global.mainView.showQuickAccess(quickAccessSlot.pluginName, quickAccessSlot.pluginUrl)
+						}
+					}
+
+					onActiveFocusChanged: {
+						if (activeFocus) {
+							root.updateBreadcrumbsFocusHint()
+						}
+					}
+				}
 			}
 		}
 	}
+
+	// Vertical list of the plugins that do not fit in quickAccessRow, dropped down from the
+	// bottom of the "more" button.
+	T.Popup {
+		id: overflowPopup
+
+		property StatusBarButton anchorButton
+
+		function openFrom(button) {
+			if (opened) {
+				console.log("opened")
+				close()
+				return
+			}
+			anchorButton = button
+			parent = button
+			open()
+		}
+
+		function focusEntry(index) {
+			const item = overflowRepeater.itemAt(index)
+			if (item) {
+				item.focus = true
+			}
+		}
+
+		x: anchorButton ? anchorButton.leftInset : 0
+		y: anchorButton ? anchorButton.height - anchorButton.bottomInset : 0
+		width: anchorButton ? anchorButton.width - anchorButton.leftInset - anchorButton.rightInset : 0
+		padding: Theme.geometry_button_border_width
+		focus: true
+
+		contentItem: Column {
+			Repeater {
+				id: overflowRepeater
+
+				model: quickAccessOverflowModel
+				delegate: StatusBarButton {
+					required property int index
+					required property string pluginName
+					required property string pluginUrl
+					required property string pluginIcon
+
+					width: overflowPopup.availableWidth
+					icon.cache: true
+					icon.source: pluginIcon
+					enabled: Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
+
+					Keys.enabled: Global.keyNavigationEnabled
+					Keys.onUpPressed: overflowPopup.focusEntry(index - 1)
+					Keys.onDownPressed: overflowPopup.focusEntry(index + 1)
+
+					onClicked: {
+						overflowPopup.close()
+						Global.mainView.showQuickAccess(pluginName, pluginUrl)
+					}
+				}
+			}
+		}
+
+		background: Rectangle {
+			width: Theme.geometry_statusBar_button_height
+			height: quickAccessOverflowModel.count * Theme.geometry_statusBar_button_height
+			color: Theme.color_background_secondary
+		}
+
+		onOpened: focusEntry(0)
+		onClosed: {
+			if (Global.keyNavigationEnabled && anchorButton && anchorButton.visible) {
+				anchorButton.focus = true
+			}
+		}
+
+		Connections {
+			// Close the list if the "more" button is hidden, e.g. when a sub-page is opened.
+			target: overflowPopup.anchorButton?.parent ?? null
+			function onVisibleChanged() {
+				if (!target.visible) {
+					overflowPopup.close()
+				}
+			}
+		}
+	}
+
+	// ── Zone 2: Breadcrumbs (sub-pages only) ──
+	// Visible only when pageStack.opened (sub-page navigation).
+	// On sub-pages, quick-access and connectivity zones are hidden,
+	// so breadcrumbs links only to leftButton (back) and rightButtonRow.
 
 	Breadcrumbs {
 		id: breadcrumbs
@@ -145,13 +434,14 @@ FocusScope {
 		anchors {
 			top: parent.top
 			topMargin: Theme.geometry_settings_breadcrumb_topMargin
-			left: leftButton.right
+			left: quickAccessRow.right
 			leftMargin: Theme.geometry_settings_breadcrumb_horizontalMargin
 			right: rightButtonRow.left
 		}
 		pageStack: root.pageStack
 
-		KeyNavigation.right: wifiButton
+		KeyNavigation.left: root.leftButton
+		KeyNavigation.right: rightButton
 
 		Rectangle { // fade out the breadcrumbs RHS when overflowing
 			width: parent.width
@@ -185,6 +475,12 @@ FocusScope {
 		text: ClockTime.currentTime
 	}
 
+	// ── Zone 3: Connectivity (wifi, mobile, notification, alarm) ──
+	// Visible only on the main page (!breadcrumbs.visible).
+	// Internal chain: wifiButton → mobileButton → notificationButton → alarmButton.
+	// Zone entry (left): wifiButton ← last item of zone 1.
+	// Zone exit (right): alarmButton → rightButton (zone 4).
+
 	Row {
 		id: connectivityRow
 
@@ -209,6 +505,7 @@ FocusScope {
 				: signalStrength.value > 0 ? "qrc:/images/icon_WiFi_1_32.svg"
 				: "qrc:/images/icon_WiFi_noconnection_32.svg"
 
+			KeyNavigation.left: root.nextFocusableQuickAccessItem(quickAccessRepeater.count - 1, -1)
 			KeyNavigation.right: mobileButton
 
 			onClicked: Global.mainView.goToConnectivityPage("wifi")
@@ -282,9 +579,12 @@ FocusScope {
 		bottomInset: Theme.geometry_statusBar_spacing
 		enabled: Global.mainView?.notificationButtonsEnabled
 		visible: enabled
+		KeyNavigation.right: rightButton.visible && rightButton.enabled ? rightButton : sleepButton
 
 		onClicked: NotificationModel.acknowledgeAll()
 	}
+
+	// ── Zone 4: Right buttons (side panel, sleep) ──
 
 	Row {
 		id: rightButtonRow
@@ -335,6 +635,7 @@ FocusScope {
 
 			icon.source: "qrc:/images/icon_screen_sleep_32.svg"
 			visible: ScreenBlanker.supported && ScreenBlanker.enabled
+			KeyNavigation.left: rightButton.visible && rightButton.enabled ? rightButton : alarmButton
 
 			onClicked: ScreenBlanker.setDisplayOff()
 			onActiveFocusChanged: {
@@ -353,11 +654,10 @@ FocusScope {
 		enabled: Global.keyNavigationEnabled
 		function onActiveFocusItemChanged() {
 			if (Global.main.activeFocusItem === root) {
-				for (const button of [leftButton, auxButton, breadcrumbs, notificationButton, alarmButton, rightButton, sleepButton]) {
-					if (button.enabled) {
-						button.focus = true
-						break
-					}
+				const quickAccessButton = root.nextFocusableQuickAccessItem(0, 1)
+				if (quickAccessButton) { quickAccessButton.focus = true; return }
+				for (const button of [breadcrumbs, wifiButton, mobileButton, notificationButton, alarmButton, rightButton, sleepButton]) {
+					if (button.visible && button.enabled) { button.focus = true; return }
 				}
 			}
 		}

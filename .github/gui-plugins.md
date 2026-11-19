@@ -4,18 +4,20 @@ A GUI plugin adds pages to gui-v2, without changing gui-v2. A plugin can add a:
 
 - **plugin settings page**, opened from Settings -> Integrations -> UI Plugins
 - **device sub-page**, opened from the page of a device in the Devices list
+- **quick access pane**, opened from a status-bar icon, in the same overlay as Controls and Switches
 - **card in the Controls or Switches pane**, shown after gui-v2's own cards
 
-A navigation page and a quick access pane (integration types 3 and 4) are not yet part of the plugin API. Plugin pages and cards are written with the types of the `Victron.GuiPlugins` module, which gui-v2 keeps stable for plugins.
+A navigation page (integration type 3) is not yet part of the plugin API. Plugin pages and cards are written with the types of the `Victron.GuiPlugins` module, which gui-v2 keeps stable for plugins.
 
 This document is for OEM and third-party developers, and for AI agents that write or check a plugin. It is complete on its own: you do not need to read gui-v2's internals. Custom branding plugins, which change the GUI's colors, fonts and logos, are a separate kind of plugin and are not covered here.
 
-Five example plugins show the rules in practice:
+Six example plugins show the rules in practice:
 
 - `examples/SimpleExample`: a plugin settings page with one switch.
 - `examples/SimpleTrExample`: the same, with the switch text translated.
 - `examples/DeviceListExample`: device sub-pages.
 - `examples/FullApiExample`: a plugin settings page and a device sub-page that, between them, show every type in the [type reference](#type-reference).
+- `examples/QuickAccessExample`: a quick access pane, with cards laid out as in the Controls pane.
 - `examples/CardExample`: a card in the Controls pane.
 
 `Victron.GuiPlugins` is not finished yet. It has the types in the [type reference](#type-reference); more list item types will be added.
@@ -32,6 +34,8 @@ Five example plugins show the rules in practice:
 
    For a device sub-page, give the product id, the page file and the list item text instead: `--devicelist 0x106 PluginNameDevice.qml "Cell Voltages"`.
 
+   For a quick access pane, give the pane file, the status-bar icon, and an optional icon shown while the pane is open: `--quickaccess PluginNamePane.qml icon.svg icon_active.svg`.
+
    For a card, give the card file and the pane, `1` for Controls or `2` for Switches: `--card PluginNameCard.qml 1`.
 
    Alternatively, compile it on a GX device if a Large image is installed, using `/opt/victronenergy/gui-v2/gui-v2-plugin-compiler.py`.
@@ -43,7 +47,7 @@ Five example plugins show the rules in practice:
 The compiler does not check these rules. A page that breaks them may work today, and then break with any GUI update.
 
 1. **Imports.** Import `Victron.GuiPlugins`, without a version, and Qt modules such as `QtQuick` and `QtQuick.Layouts`. Never import `Victron.VenusOS`, or any other Victron module: their types are gui-v2's own, and change without notice.
-2. **The base type.** The base type of a plugin settings page, and of every subpage, is `PluginPage`. The base type of a device sub-page is `PluginDevicePage`. It may also be a type that your plugin defines in its own file, if that file's base type is one of these. The GUI refuses a page whose base type is a `Page` from the `Victron.VenusOS` module, or a type derived from it. It does not open it, and logs `Aborted attempt to push a plugin page whose base type is a Page`. It also refuses a page whose base type is not an item, such as `QtObject`, and logs `Aborted attempt to push a plugin page whose base type is not an item`. It also refuses a page whose base type is an item but not a `PluginPage`, such as a plain `Item`, and logs `Aborted attempt to push a plugin page whose base type is not a PluginPage`. Plugins written for older versions of gui-v2, with a `Page` base type, must be ported.
+2. **The base type.** The base type of a plugin settings page, of every subpage, and of a quick access pane, is `PluginPage`. The base type of a device sub-page is `PluginDevicePage`. It may also be a type that your plugin defines in its own file, if that file's base type is one of these. When the GUI opens a settings page, a device sub-page or a subpage, it refuses a page whose base type is a `Page` from the `Victron.VenusOS` module, or a type derived from it. It does not open it, and logs `Aborted attempt to push a plugin page whose base type is a Page`. It also refuses a page whose base type is not an item, such as `QtObject`, and logs `Aborted attempt to push a plugin page whose base type is not an item`. It also refuses a page whose base type is an item but not a `PluginPage`, such as a plain `Item`, and logs `Aborted attempt to push a plugin page whose base type is not a PluginPage`. Plugins written for older versions of gui-v2, with a `Page` base type, must be ported. The GUI does not check the base type of a quick access pane, but a quick access pane must still follow this rule.
 3. **List items.** Declare the list items as direct children of a `PluginItemListView`, in the order they are shown. Only the `Plugin*` list item types can be list items. The list items are fixed when the page is created: to hide a list item, set its `preferredVisible` to `false`, and the list item then takes no space, and key navigation skips it. If that list item has the key focus, focus moves to a visible list item. Never set `visible` on a list item. A list of devices is not fixed. Show it in a `PluginModelListView`, with a `PluginDeviceModel` as its `model` and a `Plugin*` list item as its `delegate`. See [Devices](#devices) and [Lists from a model](#lists-from-a-model).
 4. **Subpages.** Open a subpage with a `PluginListNavigation` list item, and give its file as `pageUrl: Qt.resolvedUrl("SubPage.qml")`, so that it is found next to your page. A subpage must be a file of its own: a page written inline, as a `Component`, cannot be opened.
 5. **Backend data values.** Read and write values with a `PluginDataItem`, which every list item with a value has as `dataItem`. To find the devices on the system, use a `PluginDeviceModel`, and to find the paths on a device or service, use a `PluginDataPathModel`. See [Backend data values](#backend-data-values), [Devices](#devices) and [Paths on a device or service](#paths-on-a-device-or-service).
@@ -76,6 +80,16 @@ PluginPage {
 	}
 }
 ```
+
+## Quick access pane
+
+A quick access pane adds a status-bar icon. A press opens the pane in the same overlay as Controls and Switches. The overlay title is the plugin name, not the pane's `title`. The pane fills the overlay. Compile it with `--quickaccess`, as in the [quick start](#quick-start). The third file, if given, is the icon shown while the pane is open.
+
+The pane's base type is `PluginPage`. Put a `PluginItemListView` or a `PluginModelListView` in it, with the same list item types as a plugin settings page. Those types draw the text.
+
+Or show `PluginCard`s, laid out as in the Controls pane, as `examples/QuickAccessExample` does. Put the cards in a Qt Quick `ListView`, with an `ObjectModel` as its `model`, and set `focus: true` on the `ListView`. Make the `ListView` horizontal, and in the portrait layout, when the window is taller than it is wide, vertical. Bind each card's height to the height of the `ListView`, or in portrait layout, its width to the width of the `ListView`. The `ListView` gives the key focus to its current card. With key navigation, the Left and Right keys move to the previous or next card, or the Up and Down keys in portrait layout. The plugin API does not give the spacing of gui-v2's own cards, so choose your own.
+
+To show devices, such as tanks or solar chargers, use a `PluginDeviceModel`. See [Devices](#devices).
 
 ## Backend data values
 
@@ -378,7 +392,7 @@ PluginCard {
 
 **`PluginCard`** is a card with an icon, a title and a status, drawn like the cards in the Controls pane. Put it on your own page, in a `PluginCardListView` (see [Lists of cards](#lists-of-cards)), or add it to the Controls or Switches pane: compile its file with `--card`, as in the [quick start](#quick-start). The base type of that file is `PluginCard`, or a type that your plugin defines in its own file, if that file's base type is `PluginCard`. The GUI does not check that base type, but a card must still follow this rule. The pane shows the card after its own cards, and sets the card's size to match them. When gui-v2 loads the plugin, it compiles the card's file. If the file has an error, such as a syntax error or an unknown type, the card is left out, and gui-v2 logs a warning. If the card compiles, but cannot be created, the pane leaves it out, and logs a warning.
 
-Set `title` and `status` to the text. Set `iconSource` to a single-color image, such as one of the `PluginIcons`. The card tints the icon with the primary font color, and draws the title and status in the current theme. `title` and `status` are the text, not the labels that draw them.
+Set `title` and `status` to the text. Set `iconSource` to a single-color image, such as one of the `PluginIcons`. For an image that your plugin ships, set it to `Qt.resolvedUrl("icon.svg")`: a plain file name is looked up next to gui-v2's own card, not next to your file. The card tints the icon with the primary font color, and draws the title and status in the current theme. `title` and `status` are the text, not the labels that draw them.
 
 Declare any other content directly inside the card. It is placed in a column below the status, or below the title when `status` is empty. The column is as wide as the card, as in gui-v2's own cards. Every list item in the card must be flat, and a flat list item adds its own margins: see below. Content that is not a list item, such as a `PluginLabel` or a `PluginButton`, starts at the left edge of the card, so set its `x` to the card's `contentMargin`, as gui-v2's own cards do, so that it lines up with the icon and the status. If it wraps, or fills the line, also set its `width` to the card's `width` minus twice `contentMargin`. Color that content with `PluginPalette`. The card is the usual control-card size, and grows if the content needs more room. Set its width or height to change that. A `PluginCardListView`, and the Controls and Switches panes, set the card's size. In portrait layout, the card still grows to fit its content. Otherwise, it is as tall as the list or pane, so the content must fit in that height.
 
