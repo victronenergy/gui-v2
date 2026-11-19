@@ -31,10 +31,17 @@ import Victron.VenusOS
 Page {
 	id: root
 
-	function _changeVrmInstance(uid, deviceClass, newVrmInstance, errorFunc) {
+	function _changeVrmInstance(uid, deviceClass, currentVrmInstance, newVrmInstance, errorFunc) {
 		// See if another device of this class already has this VRM instance.
 		const conflictingInstanceUid = classAndVrmInstanceModel.findInstanceUid(deviceClass, newVrmInstance)
 		if (conflictingInstanceUid) {
+			// Do not transfer an out-of-range instance to the other device.
+			if (currentVrmInstance < 0 || currentVrmInstance > 2147483646 || newVrmInstance < 0 || newVrmInstance > 2147483646) {
+				if (!!errorFunc) {
+					errorFunc()
+				}
+				return false
+			}
 			// Show a dialog to confirm whether to swap device instances with the conflicting one.
 			const maximumVrmInstance = classAndVrmInstanceModel.maximumVrmInstance(deviceClass)
 			const dialogParams = {
@@ -89,7 +96,8 @@ Page {
 
 			inputMethodHints: Qt.ImhDigitsOnly
 			secondaryText: model.vrmInstance
-			preferredVisible: model.deviceClass.length > 0 && model.vrmInstance >= 0
+			// Show negative VRM instances too, so that the user can see and correct them.
+			preferredVisible: model.valid
 			validateInput: function() {
 				const newVrmInstance = parseInt(secondaryText)
 				if (isNaN(newVrmInstance)) {
@@ -99,12 +107,18 @@ Page {
 					//% "'%1' is not a valid vrm instance number. Use a number between 0-2147483646."
 					return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_vrm_device_instances_outofrange").arg(newVrmInstance))
 				}
+				if ((model.vrmInstance < 0 || model.vrmInstance > 2147483646) && newVrmInstance !== model.vrmInstance
+						&& classAndVrmInstanceModel.findInstanceUid(model.deviceClass, newVrmInstance)) {
+					// Swapping would give the other device this device's out-of-range instance.
+					//% "VRM instance %1 is already in use. Choose an unused number."
+					return Utils.validationResult(VenusOS.InputValidation_Result_Error, qsTrId("settings_vrm_device_instances_in_use").arg(newVrmInstance))
+				}
 				return Utils.validationResult(VenusOS.InputValidation_Result_OK, "", newVrmInstance)
 			}
 			saveInput: function() {
 				const newVrmInstance = parseInt(secondaryText)
 				if (newVrmInstance !== model.vrmInstance) {
-					_changeVrmInstance(model.uid, model.deviceClass, newVrmInstance, revertText)
+					_changeVrmInstance(model.uid, model.deviceClass, model.vrmInstance, newVrmInstance, revertText)
 				}
 			}
 			on_ModelVrmInstanceChanged: {
