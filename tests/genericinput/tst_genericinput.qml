@@ -890,4 +890,19 @@ TestCase {
 		input.uid = ""
 		MockManager.removeValue(data.uid)
 	}
+
+	function test_labelToText_data() {
+		return [
+			{ tag: "reserved low", label: "/low", text: qsTrId("generic_input_label_low") },
+			{ tag: "reserved high", label: "/high", text: qsTrId("generic_input_label_high") },
+			{ tag: "reserved off", label: "/off", text: qsTrId("generic_input_label_off") },
+			{ tag: "plain text", label: "Eco", text: "Eco" },
+			{ tag: "unknown keyword", label: "/eco", text: "/eco" },
+			{ tag: "empty", label: "", text: "" },
+		]
+	}
+
+	function test_labelToText(data) {
+		compare(VenusOS.ioChannel_labelToText(data.label), data.text)
+	}
 }

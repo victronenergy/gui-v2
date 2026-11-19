@@ -902,6 +902,29 @@ TestCase {
 		]
 	}
 
+	SignalSpy {
+		id: dimmingSpy
+		target: output
+		signalName: "dimmingChanged"
+	}
+
+	function test_dimmingChanged() {
+		const uid = "mock/com.victronenergy.test.a/SwitchableOutput/0"
+		setOutputProperties(uid, { "Dimming": 1 })
+		output.uid = uid
+		compare(output.dimming, 1)
+
+		// A /Dimming change on the backend must notify the dimming property, not only state
+		dimmingSpy.clear()
+		MockManager.setValue(uid + "/Dimming", 3)
+		compare(output.dimming, 3)
+		compare(dimmingSpy.count, 1)
+
+		// Clean up
+		output.uid = ""
+		MockManager.removeValue(uid)
+	}
+
 	function test_status_masking(data) {
 		// Set test values and verify the output of switchableOutput_statusToText() is correct.
 		setOutputProperties(data.uid, data.outputProperties)

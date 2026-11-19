@@ -105,6 +105,7 @@ void SwitchableOutput::setDimming(const QVariant &variant)
 {
 	m_dimming = variant;
 	updateAllowedInGroupModel();
+	emit dimmingChanged();
 	emit stateChanged();
 }
 
