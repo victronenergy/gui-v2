@@ -22,6 +22,9 @@ int VeQItemMock::setValue(QVariant const &value)
 	VeQItem::setValue(value);
 	m_producer->trackUndefinedUid(this, value);
 	produceValue(value);
+	if (m_producer) {
+		Q_EMIT m_producer->valueWritten(uniqueId());
+	}
 	return 0;
 }
 
@@ -54,6 +57,11 @@ QVariant VeQItemMockProducer::value(const QString &uid) const
 		return item->getValue();
 	}
 	return QVariant();
+}
+
+bool VeQItemMockProducer::hasItem(const QString &uid) const
+{
+	return mProducerRoot->itemGet(normalizedUid(uid)) != nullptr;
 }
 
 void VeQItemMockProducer::setProperty(const QString &uid, const QString &name, const QVariant &value)
@@ -154,9 +162,9 @@ VeQItem *VeQItemMockProducer::createItem()
 
 QString VeQItemMockProducer::normalizedUid(const QString &uid)
 {
+	// Must match normalizedMockUid(): strip a leading "mock/" only.
 	return uid.startsWith("mock/") ? uid.mid(5) : uid;
 }
-
 
 } /* VenusOS */
 
