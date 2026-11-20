@@ -4,6 +4,10 @@
 
     "geometry_control_width": 80,
     "geometry_icon_size_medium": 32,
+    "geometry_icon_size_small": 24,
+    "geometry_icon_margin_small": 4,
+    "geometry_icon_margin_medium": 8,
+    "geometry_icon_battery_terminal_height": 4,
 
     "geometry_splashScreen_logo_width": 284,
     "geometry_splashScreen_logo_height": 55,
@@ -29,6 +33,11 @@
 
     "geometry_roundCloseButton_size": 44,
     "geometry_roundCloseButton_radius": 22,
+
+    "geometry_checkBox_size": 24,
+    "geometry_checkBox_border_size": 2,
+    "geometry_checkBox_radius": 4,
+    "geometry_checkBox_spacing": 8,
 
     "geometry_colorWheel_width": 332,
     "geometry_colorWheel_height": 280,
@@ -240,7 +249,9 @@
     "geometry_modalDialog_footer_height": 80,
     "geometry_modalDialog_footer_midSeparator_width": 1,
     "geometry_modalDialog_content_spacing": 16,
+    "geometry_modalDialog_content_spacing_large": 24,
     "geometry_modalDialog_content_horizontalMargin": 16,
+    "geometry_modalDialog_content_horizontalMargin_small": 16,
     "geometry_modalDialog_topPadding": 12,
     "geometry_modalDialog_bottomPadding": 12,
     "geometry_modalDialog_contentItem_defaultHeight": 200,
@@ -355,9 +366,6 @@
     "geometry_colorWheelDialog_preset_button_width": 56,
     "geometry_colorWheelDialog_preset_button_radius": 6,
     "geometry_colorWheelDialog_preset_button_spacing": 32,
-
-    "geometry_generatorIconLabel_icon_width": 24,
-    "geometry_generatorIconLabel_icon_margin": 4,
 
     "geometry_overviewPage_widget_radius": 8,
     "geometry_overviewPage_widget_border_width": 2,

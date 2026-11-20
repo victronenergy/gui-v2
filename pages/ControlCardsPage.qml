@@ -13,7 +13,9 @@ Page {
 	readonly property alias flickableView: cardsView
 	readonly property int cardWidth: Theme.screenSize === Theme.Portrait
 		? Theme.geometry_screen_width - (2 * Theme.geometry_page_content_horizontalMargin)
-		: (cardsView.count > 2 ? Theme.geometry_controlCard_minimumWidth : Theme.geometry_controlCard_maximumWidth)
+		: (_cardCount > 2 ? Theme.geometry_controlCard_minimumWidth : Theme.geometry_controlCard_maximumWidth)
+
+	readonly property int _cardCount: cardsView.count + (cardsView.headerItem?.headerCardCount ?? 0)
 
 	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsActive
 
@@ -44,23 +46,39 @@ Page {
 		highlightMoveVelocity: Theme.animation_cards_highlightMoveVelocity
 		highlightMoveDuration: -1
 
-		header: ListItemLoader {
-			active: systemType.value === "ESS" || systemType.value === "Hub-4"
-			sourceComponent: FocusScope {
-				width: essCard.width + cardsView.spacing
-				height: essCard.height + cardsView.spacing
-				focus: true
+		header: SettingsFlow {
+			readonly property int headerCardCount: emergencyChargeDeviceModel.count
+								+ (essCardLoader.active ? 1 : 0)
+			width: Theme.screenSize === Theme.Portrait
+					? cardsView.width
+					: (headerCardCount * root.cardWidth) + (headerCardCount * Theme.geometry_controlCardsPage_spacing)
+			height: Theme.screenSize === Theme.Portrait
+					? implicitHeight + Theme.geometry_controlCardsPage_spacing
+					: cardsView.height
+			spacing: Theme.geometry_controlCardsPage_spacing
+			focus: true
 
-				ESSCard {
-					id: essCard
+			Repeater {
+				model: emergencyChargeDeviceModel
+				delegate: EmergencyChargeCard {
 					width: root.cardWidth
 					height: Theme.screenSize === Theme.Portrait ? implicitHeight : cardsView.height
 				}
 			}
 
-			VeQuickItem {
-				id: systemType
-				uid: Services.system.serviceUid + "/SystemType"
+			ListItemLoader {
+				id: essCardLoader
+				width: root.cardWidth
+				height: Theme.screenSize === Theme.Portrait ? implicitHeight : cardsView.height
+				active: systemType.value === "ESS" || systemType.value === "Hub-4"
+				sourceComponent: ESSCard {
+					width: root.cardWidth
+				}
+
+				VeQuickItem {
+					id: systemType
+					uid: Services.system.serviceUid + "/SystemType"
+				}
 			}
 		}
 
@@ -142,6 +160,35 @@ Page {
 		}
 	}
 
+	// Note this model of emergency charge devices cannot be simply a FilteredDeviceModel with a
+	// childFilterFunction that filters out invalid /EmergencyCharge/Control values, because with
+	// such an implementation, the model would be rebuilt every time the /EmergencyCharge/Control
+	// value was changed inside EmergencyChargerCard, which in turn would cause the view to
+	// re-create the EmergencyChargerCard delegate.
+	DeviceModel {
+		id: emergencyChargeDeviceModel
+	}
+	Instantiator {
+		model: FilteredDeviceModel {
+			sorting: FilteredDeviceModel.Name
+			serviceTypes: [ "alternator", "dcdc" ]
+		}
+		delegate: VeQuickItem {
+			required property Device device
+			uid: device.serviceUid + "/EmergencyCharge/Control"
+			onValidChanged: {
+				if (valid) {
+					emergencyChargeDeviceModel.addDevice(device)
+				} else {
+					emergencyChargeDeviceModel.removeDevice(device.serviceUid)
+				}
+			}
+		}
+		onObjectRemoved: (index, obj) => {
+			emergencyChargeDeviceModel.removeDevice(obj.device.serviceUid)
+		}
+	}
+
 	Loader {
 		id: emptyPageLoader
 		anchors {
@@ -149,7 +196,7 @@ Page {
 			leftMargin: Theme.geometry_page_content_horizontalMargin
 			rightMargin: Theme.geometry_page_content_horizontalMargin
 		}
-		active: cardsView.count === 0 && !cardsView.headerItem.active
+		active: root._cardCount === 0
 		sourceComponent: EmptyPageItem {
 			//% "Controls"
 			titleText: qsTrId("controlcards_empty_title")

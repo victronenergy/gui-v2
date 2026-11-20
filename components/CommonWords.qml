@@ -201,6 +201,9 @@ QtObject {
 	//% "Discovered devices"
 	readonly property string discovered_devices: qsTrId("common_words_discovered_devices")
 
+	//% "Emergency charge"
+	readonly property string emergency_charge: qsTrId("common_words_emergency_charge")
+
 	//% "Enable"
 	readonly property string enable: qsTrId("common_words_enable")
 
@@ -527,6 +530,10 @@ QtObject {
 	//% "Silence alarm"
 	readonly property string silence_alarm: qsTrId("common_words_silence_alarm")
 
+	//: Skip a particular action
+	//% "Skip"
+	readonly property string skip_action: qsTrId("common_words_skip")
+
 	//: State of charge (as a percentage). %1 = the SOC value
 	//% "SOC %1"
 	readonly property string soc_with_prefix: qsTrId("common_words_soc")
@@ -556,6 +563,10 @@ QtObject {
 
 	//% "Start when warning is active for"
 	readonly property string start_when_warning_is_active_for: qsTrId("common_words_start_when_warning_is_active_for")
+
+	//: Refers to a starter battery
+	//% "Starter"
+	readonly property string starter_battery_short_name: qsTrId("common_words_starter_battery")
 
 	//% "State"
 	readonly property string state: qsTrId("common_words_state")

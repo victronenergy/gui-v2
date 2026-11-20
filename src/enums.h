@@ -1154,6 +1154,13 @@ public:
 	};
 	Q_ENUM(ElectricalQuantity_Source)
 
+	enum EmergencyCharge_Control {
+		EmergencyCharge_Control_NotAvailable = 0,
+		EmergencyCharge_Control_Available = 2,
+		EmergencyCharge_Control_Charging = 3,
+	};
+	Q_ENUM(EmergencyCharge_Control)
+
 	Q_INVOKABLE QString statusText_off() const;
 	Q_INVOKABLE QString statusText_unknown() const;
 

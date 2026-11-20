@@ -398,8 +398,7 @@ OverviewWidget {
 
 					Label {
 						id: starterText
-						//% "Starter"
-						text: qsTrId("overview_widget_battery_starter_title")
+						text: CommonWords.starter_battery_short_name
 						elide: Text.ElideRight
 						font.pixelSize: Theme.font_overviewPage_battery_small
 						Layout.fillWidth: true
