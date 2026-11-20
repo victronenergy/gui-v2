@@ -21,8 +21,11 @@ Loader {
 
 	readonly property int _animationDuration: animationEnabled ? Theme.animation_controlCards_slide_duration : 1
 
-	active: viewActive
-	onActiveChanged: if (active) active = viewActive // remove binding
+	// Load the view when it is shown, and keep it loaded while it animates out, then unload it, so
+	// that a closed view (e.g. a plugin Quick Access pane) does not keep running its timers and
+	// bindings in the background.
+	active: false
+	onViewActiveChanged: if (viewActive) active = true
 	opacity: 0.0
 	enabled: viewActive || outAnimation.running
 
@@ -116,6 +119,11 @@ Loader {
 				property: "focus"
 				value: true
 			}
+		}
+		// The view has animated out, so unload it. If the view is shown again before this, the
+		// animation stops (viewActive is true again), so this does not run and the view stays loaded.
+		ScriptAction {
+			script: root.active = false
 		}
 	}
 }

@@ -19,7 +19,6 @@ FocusScope {
 			&& !ScreenBlanker.blanked
 	property bool animationEnabled: defaultAnimationEnabled && isCurrentPage
 
-	property int topLeftButton: VenusOS.StatusBar_LeftButton_None
 	property int topRightButton: VenusOS.StatusBar_RightButton_None
 
 	// Optional function that is called when the stack is about to pop this page. Return true if

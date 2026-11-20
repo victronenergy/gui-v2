@@ -20,7 +20,6 @@ SwipeViewPage {
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/BriefPage.qml"
 	backgroundColor: Theme.screenSize === Theme.Portrait ? Theme.color_page_background : Theme.color_briefPage_background
 	fullScreenWhenIdle: true
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	topRightButton: pageLoader.item?.topRightButton ?? VenusOS.StatusBar_RightButton_None
 	showTopGradient: pageLoader.sourceComponent === portraitComponent
 			&& pageLoader.item && !pageLoader.item.atYBeginning

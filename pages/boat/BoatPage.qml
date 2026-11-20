@@ -16,7 +16,6 @@ SwipeViewPage {
 	url: "qrc:/qt/qml/Victron/Boat/BoatPage.qml"
 	backgroundColor: Theme.color_boatPage_background
 	fullScreenWhenIdle: true
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 
 	Loader {
 		anchors.fill: parent

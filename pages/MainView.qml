@@ -18,8 +18,6 @@ FocusScope {
 	readonly property Page currentPage: cardsActive && cardsLoader.status === Loader.Ready && cardsLoader.item ? cardsLoader.item
 			: (pageStack.currentPage ?? swipeView?.currentItem ?? null)
 	readonly property alias cardsLoader: cardsLoader
-	readonly property alias controlCardsComponent: _controlCardsComponent
-	readonly property alias auxCardsComponent: _auxCardsComponent
 
 	// The built-in page. endsWith("/NotificationsPage.qml") matches that page as a
 	// qrc URL or a file URL, and does not match MyCustomNotificationsPage.qml.
@@ -85,19 +83,22 @@ FocusScope {
 	readonly property bool animating: pageStack.animating || swipeView?.flicking || swipeView?.moving
 				|| navBarStartupAnim.running
 
-	property url pluginQuickAccessUrl
-	property string pluginQuickAccessName
+	property url quickAccessUrl
+	property string quickAccessName
+	property bool quickAccessAsynchronous
 
-	function showPluginQuickAccess(pluginName, pageUrl) {
-		pluginQuickAccessName = pluginName
-		pluginQuickAccessUrl = pageUrl
-		cardsLoader.show(pluginQuickAccessComponent)
+	// Relative urls (e.g. "ControlCardsPage.qml" in quickAccessModel) are resolved against this
+	// file, so they always refer to the built-in panes in the pages directory.
+	function showQuickAccess(name, url) {
+		quickAccessName = name ?? ""
+		quickAccessAsynchronous = !String(Qt.resolvedUrl(url)).startsWith(String(Qt.resolvedUrl(".")))
+		quickAccessUrl = url
+		cardsLoader.show(quickAccessComponent)
 	}
 
-	function pluginQuickAccessOpen(pageUrl) {
+	function quickAccessOpen(pageUrl) {
 		return cardsActive
-				&& cardsLoader.sourceComponent === pluginQuickAccessComponent
-				&& String(pluginQuickAccessUrl) === String(pageUrl)
+				&& String(quickAccessUrl) === String(pageUrl)
 	}
 
 	// This SwipeView contains the main application pages (Brief, Overview, Levels, Notifications,
@@ -480,6 +481,24 @@ FocusScope {
 	CardViewLoader {
 		id: cardsLoader
 
+		// The buttons of the QuickAccessView: the built-in Controls and Switches buttons,
+		// followed by a button for each QuickAccessPane plugin integration.
+		readonly property CombinedListModel quickAccessModel: CombinedListModel {
+			firstModel: ListModel {
+				ListElement { buttonId: "control"; url: "ControlCardsPage.qml"; icon: "qrc:/images/icon_controls_off_32.svg"; iconActive: "qrc:/images/icon_controls_on_32.svg" }
+				ListElement { buttonId: "aux"; url: "AuxCardsPage.qml"; icon: "qrc:/images/icon_smartswitch_off_32.svg"; iconActive: "qrc:/images/icon_smartswitch_on_32.svg" }
+			}
+			secondModel: GuiPluginIntegrationModel {
+				type: GuiPluginLoader.QuickAccessPane
+				onCountChanged: {
+					if (root.quickAccessName.length > 0) {
+						cardsLoader.hide()
+						root.quickAccessUrl = ""
+					}
+				}
+			}
+		}
+
 		function show(viewComponent) {
 			sourceComponent = viewComponent
 			viewActive = true
@@ -513,20 +532,15 @@ FocusScope {
 		KeyNavigation.up: statusBar
 
 		Component {
-			id: _controlCardsComponent
-			ControlCardsPage {}
-		}
-
-		Component {
-			id: _auxCardsComponent
-			AuxCardsPage {}
-		}
-
-		Component {
-			id: pluginQuickAccessComponent
+			id: quickAccessComponent
 
 			Page {
-				title: root.pluginQuickAccessName
+				id: quickAccessPage
+
+				// Built-in panes (e.g. ControlCardsPage) provide their own title and flickable view.
+				readonly property Flickable flickableView: pluginPaneLoader.item?.flickableView ?? null
+
+				title: root.quickAccessName || (pluginPaneLoader.item?.title ?? "")
 				focusPolicy: Qt.TabFocus
 
 				Loader {
@@ -535,15 +549,15 @@ FocusScope {
 					// Loader is a FocusScope. This keeps it the page's focus
 					// child, so key navigation stays inside the pane.
 					focus: true
-					active: String(root.pluginQuickAccessUrl).length > 0
-					source: root.pluginQuickAccessUrl
-					asynchronous: true
+					active: String(root.quickAccessUrl).length > 0
+					source: root.quickAccessUrl
+					asynchronous: root.quickAccessAsynchronous
 
 					function dismissFailedPane() {
 						if (status === Loader.Error) {
 							console.warn("Failed to load quick access pane:", source)
 							cardsLoader.hide()
-							root.pluginQuickAccessUrl = ""
+							root.quickAccessUrl = ""
 						}
 					}
 					onStatusChanged: {
@@ -560,6 +574,15 @@ FocusScope {
 						}
 					}
 				}
+
+				// The loaded pane is not Global.mainView.currentPage (this wrapper is), so its own
+				// animationEnabled would always be false. Use the wrapper's value instead.
+				Binding {
+					target: pluginPaneLoader.item
+					property: "animationEnabled"
+					value: quickAccessPage.animationEnabled
+					when: pluginPaneLoader.item?.__is_venus_gui_page__ ?? false
+				}
 			}
 		}
 	}
@@ -567,9 +590,9 @@ FocusScope {
 	Connections {
 		target: GuiPluginLoader
 		function onPluginsChanged() {
-			if (cardsLoader.sourceComponent === pluginQuickAccessComponent) {
+			if (cardsLoader.viewActive && cardsLoader.sourceComponent === quickAccessComponent && root.quickAccessName.length > 0) {
 				cardsLoader.hide()
-				root.pluginQuickAccessUrl = ""
+				root.quickAccessUrl = ""
 			}
 		}
 	}
@@ -582,9 +605,6 @@ FocusScope {
 		opacity: 0.0
 		pageStack: root._pageStack
 
-		onControlCardsActivated: cardsLoader.show(_controlCardsComponent)
-		onAuxCardsActivated: cardsLoader.show(_auxCardsComponent)
-		onCardsDeactivated: cardsLoader.hide()
 		onSidePanelToggled: root.currentPage.toggleSidePanel()
 
 		Component.onCompleted: if (!UiConfig.showSplashAnimation || !Global.animationEnabled) { statusBar.opacity = 1.0 }
