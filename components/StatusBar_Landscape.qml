@@ -4,7 +4,6 @@
 */
 
 import QtQuick
-import QtQuick.Controls.impl as CP
 import Victron.VenusOS
 
 FocusScope {
@@ -12,52 +11,16 @@ FocusScope {
 
 	required property PageStack pageStack
 
-	// Repeater count changes before delegates exist. itemAt() is not a binding
-	// dependency, so key chains must also read this counter (bumped from the delegate).
-	property int pluginButtonReady: 0
-
-	signal controlCardsActivated()
-	signal auxCardsActivated()
-	signal cardsDeactivated()
 	signal sidePanelToggled()
-
-	function firstFocusable(candidates) {
-		for (let i = 0; i < candidates.length; ++i) {
-			const b = candidates[i]
-			if (b && b.visible && b.enabled)
-				return b
-		}
-		return null
-	}
-
-	function focusablesAfterPlugin(startIndex) {
-		void pluginButtonReady
-		let list = []
-		if (pluginPaneButtons.visible) {
-			for (let i = startIndex; i < pluginRepeater.count; ++i) {
-				const item = pluginRepeater.itemAt(i)
-				if (item)
-					list.push(item)
-			}
-		}
-		list.push(wifiButton, mobileButton, notificationButton, alarmButton, rightButton, sleepButton)
-		return list
-	}
 
 	function updateBreadcrumbsFocusHint() {
 		// When breadcrumbs list is focused: if focus is arriving from the left side, focus the
 		// the left-most breadcrumb, or if from the right side, focus the right-most breadcrumb.
-		if (leftButton.activeFocus || auxButton.activeFocus) {
+		if (backButton.activeFocus) {
 			breadcrumbs.focusEdgeHint = Qt.LeftEdge
 		} else if (rightButton.activeFocus || sleepButton.activeFocus) {
 			breadcrumbs.focusEdgeHint = Qt.RightEdge
 		} else {
-			for (let i = 0; i < pluginRepeater.count; i++) {
-				if (pluginRepeater.itemAt(i)?.activeFocus) {
-					breadcrumbs.focusEdgeHint = Qt.LeftEdge
-					return
-				}
-			}
 			breadcrumbs.focusEdgeHint = -1
 		}
 	}
@@ -80,56 +43,27 @@ FocusScope {
 		}
 	}
 
-	// ── Zone 1: Quick Access (leftButton, auxButton, plugin buttons) ──
-	// On the main page these are the left-most interactive items.
-	// Internal chain: leftButton → auxButton → plugin(0) → … → plugin(n).
-	// Zone exit (right): last visible item → wifiButton (zone 3).
+	// ── Zone 1: Back button (sub-pages) and Quick Access (control, aux, plugin buttons) ──
+	// On sub-pages, only the back button is shown. On the main page, the quick access buttons are
+	// the left-most interactive items.
+	// Internal chain: control → aux → plugin(0) → … → plugin(n).
+	// Zone exit (right): back button or last visible quick access button → breadcrumbs (zone 2)
+	// or wifiButton (zone 3).
 
 	StatusBarButton {
-		id: leftButton
-
-		readonly property bool controlsPaneActive: (Global.mainView?.cardsActive ?? false)
-				&& Global.mainView.cardsLoader.sourceComponent === Global.mainView.controlCardsComponent
-
-		readonly property int buttonType: {
-			if (controlsPaneActive) {
-				return VenusOS.StatusBar_LeftButton_ControlsActive
-			}
-			if (pageStack.opened) {
-				return VenusOS.StatusBar_LeftButton_Back
-			}
-			return Global.mainView.currentPage?.topLeftButton ?? VenusOS.StatusBar_LeftButton_None
-		}
+		id: backButton
 
 		// Expand clickable area on left and bottom edges.
 		leftInset: Theme.geometry_statusBar_horizontalMargin
 		bottomInset: Theme.geometry_statusBar_spacing
 
-		visible: !(Global.mainView?.cardsActive ?? false) || controlsPaneActive
-				|| pageStack.opened
-		icon.source: buttonType === VenusOS.StatusBar_LeftButton_ControlsInactive ? "qrc:/images/icon_controls_off_32.svg"
-			: buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? "qrc:/images/icon_controls_on_32.svg"
-			: buttonType === VenusOS.StatusBar_LeftButton_Back ? "qrc:/images/icon_back_32.svg"
-			: ""
-		enabled: buttonType !== VenusOS.StatusBar_LeftButton_None
-		KeyNavigation.right: auxButton.visible ? auxButton : root.firstFocusable(root.focusablesAfterPlugin(0))
+		visible: root.pageStack.opened
+		enabled: visible
+		icon.source: "qrc:/images/icon_back_32.svg"
 
-		onClicked: {
-			switch (buttonType) {
-			case VenusOS.StatusBar_LeftButton_ControlsInactive:
-				root.controlCardsActivated()
-				break
-			case VenusOS.StatusBar_LeftButton_ControlsActive:
-				root.cardsDeactivated()
-				break;
-			case VenusOS.StatusBar_LeftButton_Back:
-				Global.pageManager.popPage()
-				break
-			default:
-				break
-			}
-		}
+		KeyNavigation.right: breadcrumbs
 
+		onClicked: Global.pageManager.popPage()
 		onActiveFocusChanged: {
 			if (activeFocus) {
 				root.updateBreadcrumbsFocusHint()
@@ -137,121 +71,22 @@ FocusScope {
 		}
 	}
 
-	// Plugin cards for the Switches pane. The pane can be opened when it shows only these.
-	GuiPluginIntegrationModel {
-		id: pluginSwitchCards
-		type: GuiPluginLoader.QuickAccessPaneCard
-		cardType: GuiPluginLoader.SwitchesCard
-	}
+	QuickAccessView {
+		id: quickAccessView
 
-	StatusBarButton {
-		id: auxButton
-
-		readonly property bool auxCardsOpened: (Global.mainView?.cardsActive ?? false)
-				&& Global.mainView.cardsLoader.sourceComponent === Global.mainView.auxCardsComponent
-
-		// Expand clickable area on right and bottom edges, and on left if leftButton is hidden.
-		anchors {
-			left: leftButton.right
-			leftMargin: -leftInset
-		}
-		leftInset: leftButton.visible ? 0 : Theme.geometry_statusBar_spacing
+		anchors.left: parent.left
+		firstLeftInset: Theme.geometry_statusBar_horizontalMargin
 		bottomInset: Theme.geometry_statusBar_spacing
+		visible: !root.pageStack.opened
 
-		visible: (!root.pageStack.opened
-				&& (Services.ioChannels.groups.count > 0 || pluginSwitchCards.count > 0)
-				&& !(Global.mainView?.cardsActive ?? false))
-				|| auxCardsOpened // allow cards to be closed if all switches are disconnected while opened
-		icon.source: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
-				: "qrc:/images/icon_smartswitch_off_32.svg"
-
-		KeyNavigation.right: root.firstFocusable(root.focusablesAfterPlugin(0))
-
-		onClicked: {
-			if (auxCardsOpened) {
-				root.cardsDeactivated()
-			} else {
-				root.auxCardsActivated()
-			}
-		}
-
-		onActiveFocusChanged: {
-			if (activeFocus) {
-				root.updateBreadcrumbsFocusHint()
-			}
-		}
-	}
-
-	GuiPluginIntegrationModel {
-		id: pluginQuickAccessModel
-		type: GuiPluginLoader.QuickAccessPane
-	}
-
-	Row {
-		id: pluginPaneButtons
-
-		anchors.left: auxButton.right
-		visible: Global.allPagesLoaded
-				&& !root.pageStack.opened
-				&& pluginQuickAccessModel.count > 0
-
-		Repeater {
-			id: pluginRepeater
-
-			model: pluginQuickAccessModel
-
-			delegate: StatusBarButton {
-				id: pluginPaneButton
-
-				required property int index
-				required property string pluginName
-				required property url url
-				readonly property url pluginIcon: pluginQuickAccessModel.integrationAt(index).icon
-				readonly property url pluginIconActive: pluginQuickAccessModel.integrationAt(index).iconActive
-
-				readonly property bool paneOpened: Global.mainView.pluginQuickAccessOpen(url)
-				readonly property bool shouldHide: (Global.mainView?.cardsActive ?? false) && !paneOpened
-				readonly property bool interactiveChrome:
-						Global.pageManager?.interactivity === VenusOS.PageManager_InteractionMode_Interactive
-
-				visible: !shouldHide
-				opacity: interactiveChrome ? 1 : 0
-				enabled: visible && interactiveChrome
-				bottomInset: Theme.geometry_statusBar_spacing
-				icon.cache: false
-				icon.source: (paneOpened && String(pluginIconActive).length > 0)
-						? pluginPaneButton.pluginIconActive : pluginPaneButton.pluginIcon
-
-				KeyNavigation.left: {
-					void root.pluginButtonReady
-					return index > 0 ? pluginRepeater.itemAt(index - 1)
-							: (auxButton.visible ? auxButton : leftButton)
-				}
-				Component.onCompleted: root.pluginButtonReady++
-				Component.onDestruction: root.pluginButtonReady++
-				KeyNavigation.right: root.firstFocusable(root.focusablesAfterPlugin(index + 1))
-
-				onActiveFocusChanged: {
-					if (activeFocus) {
-						root.updateBreadcrumbsFocusHint()
-					}
-				}
-
-				onClicked: {
-					if (paneOpened) {
-						Global.mainView.cardsLoader.hide()
-					} else {
-						Global.mainView.showPluginQuickAccess(pluginName, url)
-					}
-				}
-			}
-		}
+		model: Global.mainView?.cardsLoader.quickAccessModel ?? null
+		KeyNavigation.right: wifiButton
 	}
 
 	// ── Zone 2: Breadcrumbs (sub-pages only) ──
 	// Visible only when pageStack.opened (sub-page navigation).
 	// On sub-pages, quick-access and connectivity zones are hidden,
-	// so breadcrumbs links only to leftButton (back) and rightButtonRow.
+	// so breadcrumbs links only to backButton and rightButtonRow.
 
 	Breadcrumbs {
 		id: breadcrumbs
@@ -259,13 +94,15 @@ FocusScope {
 		anchors {
 			top: parent.top
 			topMargin: Theme.geometry_settings_breadcrumb_topMargin
-			left: pluginPaneButtons.visible ? pluginPaneButtons.right : auxButton.visible ? auxButton.right : leftButton.right
+			// On sub-pages the quick access buttons are hidden, so place the breadcrumbs directly after
+			// backButton instead of after the empty quick access slots.
+			left: backButton.right
 			leftMargin: Theme.geometry_settings_breadcrumb_horizontalMargin
 			right: rightButtonRow.left
 		}
 		pageStack: root.pageStack
 
-		KeyNavigation.left: leftButton
+		KeyNavigation.left: backButton
 		KeyNavigation.right: rightButton
 
 		Rectangle { // fade out the breadcrumbs RHS when overflowing
@@ -330,22 +167,8 @@ FocusScope {
 				: signalStrength.value > 0 ? "qrc:/images/icon_WiFi_1_32.svg"
 				: "qrc:/images/icon_WiFi_noconnection_32.svg"
 
-			KeyNavigation.left: {
-				void root.pluginButtonReady
-				if (pluginPaneButtons.visible && pluginRepeater.count > 0) {
-					for (let i = pluginRepeater.count - 1; i >= 0; --i) {
-						const button = pluginRepeater.itemAt(i)
-						if (button && button.visible && button.enabled) {
-							return button
-						}
-					}
-				}
-				if (auxButton.visible && auxButton.enabled)
-					return auxButton
-				if (leftButton.visible && leftButton.enabled)
-					return leftButton
-				return null
-			}
+			KeyNavigation.left: root.pageStack.opened ? breadcrumbs
+							: quickAccessView.lastFocusableButton
 			KeyNavigation.right: mobileButton
 
 			onClicked: Global.mainView.goToConnectivityPage("wifi")
@@ -363,6 +186,7 @@ FocusScope {
 			opacity: enabled ? 1.0 : 0.0 //  Override fading icon on unit inactivity
 			visible: mobileIcon.valid
 
+			KeyNavigation.left: wifiButton
 			KeyNavigation.right: notificationButton
 
 			onClicked: Global.mainView.goToConnectivityPage("mobile")
@@ -494,12 +318,9 @@ FocusScope {
 		enabled: Global.keyNavigationEnabled
 		function onActiveFocusItemChanged() {
 			if (Global.main.activeFocusItem === root) {
-				if (leftButton.visible && leftButton.enabled) { leftButton.focus = true; return }
-				if (auxButton.visible && auxButton.enabled) { auxButton.focus = true; return }
-				for (let i = 0; i < pluginRepeater.count; i++) {
-					let btn = pluginRepeater.itemAt(i)
-					if (btn && btn.visible) { btn.focus = true; return }
-				}
+				if (backButton.visible && backButton.enabled) { backButton.focus = true; return }
+				const quickAccessButton = quickAccessView.firstFocusableButton
+				if (quickAccessButton) { quickAccessButton.focus = true; return }
 				for (const button of [breadcrumbs, wifiButton, mobileButton, notificationButton, alarmButton, rightButton, sleepButton]) {
 					if (button.visible && button.enabled) { button.focus = true; return }
 				}

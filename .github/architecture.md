@@ -202,7 +202,7 @@ When adding a page for a new service type, name it `DevicePage_<service-type>.qm
 
 Each main page extends `SwipeViewPage.qml` which provides:
 - `title`, `iconSource`, `url` — for NavBar display
-- `topLeftButton` / `topRightButton` — StatusBar button configuration
+- `topRightButton` — StatusBar button configuration
 - `fullScreenWhenIdle` — whether page expands when inactive
 
 ## UI component organization
@@ -228,7 +228,7 @@ All pages must extend `components/Page.qml` (a FocusScope):
 - `title: string` — displayed in StatusBar breadcrumbs
 - `isCurrentPage: bool` — true when this page is visible
 - `animationEnabled: bool` — tracks whether animations should run
-- `topLeftButton` / `topRightButton` — configure StatusBar buttons
+- `topRightButton` — configure StatusBar buttons
 - `tryPop: function` — optional guard called before page is popped
 
 The `__is_venus_gui_page__` readonly property allows child components to detect they are inside a Page.

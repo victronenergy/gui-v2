@@ -99,6 +99,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/QuantityTable.qml
     components/QuantityTableMetrics.qml
     components/QuantityTableSummary.qml
+    components/QuickAccessView.qml
     components/RadioButtonListPage.qml
     components/RotateDevicePrompt.qml
     components/RsSystemAcIODisplay.qml
