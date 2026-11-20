@@ -43,14 +43,6 @@ public:
 	};
 	Q_ENUM(Gauges_ValueType)
 
-	enum StatusBar_LeftButton {
-		StatusBar_LeftButton_None,
-		StatusBar_LeftButton_ControlsInactive,
-		StatusBar_LeftButton_ControlsActive,
-		StatusBar_LeftButton_Back
-	};
-	Q_ENUM(StatusBar_LeftButton)
-
 	enum StatusBar_RightButton {
 		StatusBar_RightButton_None,
 		StatusBar_RightButton_SidePanelInactive,

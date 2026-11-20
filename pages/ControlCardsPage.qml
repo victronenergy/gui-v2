@@ -15,8 +15,6 @@ Page {
 		? Theme.geometry_screen_width - (2 * Theme.geometry_page_content_horizontalMargin)
 		: (cardsView.count > 2 ? Theme.geometry_controlCard_minimumWidth : Theme.geometry_controlCard_maximumWidth)
 
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsActive
-
 	//% "Controls"
 	title: qsTrId("control_cards_title")
 
