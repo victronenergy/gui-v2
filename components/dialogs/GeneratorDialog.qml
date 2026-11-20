@@ -37,8 +37,8 @@ ModalDialog {
 	title: CommonWords.generator
 
 	acceptButtonForegroundColor: root.generatorState === VenusOS.Generators_State_Stopped
-		? Theme.color_acceptButton_success_text
-		: Theme.color_acceptButton_critical_text
+		? Theme.color_dimSuccess_text
+		: Theme.color_dimCritical_text
 
 	acceptButtonBackground: AcceptButtonBackground {
 		id: acceptButtonBackground

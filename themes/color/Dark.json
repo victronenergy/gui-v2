@@ -20,7 +20,6 @@
     "color_darkSuccess": "dark(color_success)",
     "color_dimSuccess": "dim(color_success)",
     "color_dimSuccess_text": "text_color_on(color_dimSuccess)",
-    "color_acceptButton_success_text": "text_color_on(color_dimSuccess, color_success)",
     "color_warning": "color_orange",
     "color_darkWarning": "dark(color_warning)",
     "color_critical": "color_red",
@@ -28,7 +27,6 @@
     "color_darkCritical_text": "text_color_on(color_darkCritical)",
     "color_dimCritical": "dim(color_critical)",
     "color_dimCritical_text": "text_color_on(color_dimCritical)",
-    "color_acceptButton_critical_text": "text_color_on(color_dimCritical, color_critical)",
     "color_critical_background": "dim(color_critical)",
 
     "color_font_primary": "color_white",
