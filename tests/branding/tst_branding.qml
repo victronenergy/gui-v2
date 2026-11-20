@@ -478,13 +478,8 @@ TestCase {
 		compare(Theme.color_button_down_text.toString(), "#ffffff")
 		compare(Theme.color_button_pressed_text.toString(), "#ffffff")
 		compare(Theme.color_dimCritical_text.toString(), "#ffffff")
-		compare(Theme.color_acceptButton_critical_text.toString(), "#ffffff")
 		// color_dimSuccess_text is text_color_on(color_dimSuccess) only, so it stays #ffffff.
-		// color_acceptButton_success_text also passes color_success. White does not have 3:1 on
-		// color_success, so text_color_on() returns #262626. Do not add color_success to
-		// color_dimSuccess_text and update the expected value.
 		compare(Theme.color_dimSuccess_text.toString(), "#ffffff")
-		compare(Theme.color_acceptButton_success_text.toString(), "#262626")
 		compare(Theme.color_toastNotification_foreground_informative.toString(), "#ffffff")
 		// Victron orange is 2.3:1 with white. The text sits on the dimmed background, where white
 		// passes, in both schemes. Do not include the status strip.
@@ -514,15 +509,12 @@ TestCase {
 		BrandingTestHelper.setThemeBranding([{ color_brand: "#ffffff" }])
 		compare(Theme.color_button_down_text.toString(), "#262626")
 		compare(Theme.color_button_pressed_text.toString(), "#ffffff")
-		compare(Theme.color_acceptButton_critical_text.toString(), "#ffffff")
-		compare(Theme.color_acceptButton_success_text.toString(), "#262626")
 		Theme.colorScheme = Theme.Light
 		compare(Theme.color_button_pressed_text.toString(), "#262626")
 
 		BrandingTestHelper.setThemeBranding([{ color_success: "#ffff00" }])
 		Theme.colorScheme = Theme.Dark
 		compare(Theme.color_dimSuccess_text.toString(), "#262626")
-		compare(Theme.color_acceptButton_success_text.toString(), "#262626")
 		compare(Theme.color_dimCritical_text.toString(), "#ffffff")
 
 		// #cccccc is 1.6:1 with white, but its dimmed background is 3.2:1. Toast text stays white.

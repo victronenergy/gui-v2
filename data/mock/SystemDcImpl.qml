@@ -131,4 +131,95 @@ Item {
 			}
 		}
 	}
+
+	// Emergency charge: when the emergency charge is activated, the AUX battery is used to charge
+	// the starter battery for 15 minutes, then it goes to a "blocked" state for 5 minutes (during
+	// which the vehicle can be started) to prevent the charger from drawing energy from the starter
+	// battery or alternator.
+	// For mock mode, just "charge" for 15 seconds and block for 5 seconds instead.
+	Instantiator {
+		model: FilteredDeviceModel {
+			sorting: FilteredDeviceModel.Name
+			serviceTypes: [ "alternator", "dcdc" ]
+			childFilterIds: { "alternator": ["EmergencyCharge/Control"], "dcdc": ["EmergencyCharge/Control"] }
+			childFilterFunction: (device, childItems) => {
+				for (const name in childItems) {
+					return !!childItems[name]
+				}
+				return false
+			}
+		}
+		delegate: Item {
+			id: emergencyChargeDelegate
+
+			required property Device device
+
+			VeQuickItem {
+				id: emergencyChargeControl
+
+				uid: emergencyChargeDelegate.device.serviceUid + "/EmergencyCharge/Control"
+				onValueChanged: {
+					if (value === VenusOS.EmergencyCharge_Control_Charging) {
+						MockManager.setValue(emergencyChargeDelegate.device.serviceUid + "/Dc/In/I", Math.random())
+						emergencyChargeStartTimer.updateCountdown(15)
+					} else {
+						MockManager.setValue(emergencyChargeDelegate.device.serviceUid + "/EmergencyCharge/ChargingCountdown", 0)
+						MockManager.setValue(emergencyChargeDelegate.device.serviceUid + "/EmergencyCharge/BlockedCountdown", 0)
+						emergencyChargeStartTimer.stop()
+						emergencyChargeBlockedTimer.stop()
+					}
+				}
+			}
+
+			Timer {
+				id: emergencyChargeStartTimer
+
+				property int secondsRemaining
+
+				function updateCountdown(s) {
+					secondsRemaining = s
+					MockManager.setValue(emergencyChargeDelegate.device.serviceUid + "/EmergencyCharge/ChargingCountdown", s)
+					if (s <= 0) {
+						stop()
+						emergencyChargeBlockedTimer.updateCountdown(5)
+					} else if (!running) {
+						start()
+					}
+				}
+
+				interval: 1000
+				repeat: true
+				onTriggered: {
+					if (secondsRemaining > 0) {
+						updateCountdown(secondsRemaining - 1)
+					}
+				}
+			}
+
+			Timer {
+				id: emergencyChargeBlockedTimer
+
+				property int secondsRemaining
+
+				function updateCountdown(s) {
+					secondsRemaining = s
+					MockManager.setValue(emergencyChargeDelegate.device.serviceUid + "/EmergencyCharge/BlockedCountdown", s)
+					if (s <= 0) {
+						stop()
+						emergencyChargeControl.setValue(VenusOS.EmergencyCharge_Control_Available)
+					} else if (!running) {
+						start()
+					}
+				}
+
+				interval: 1000
+				repeat: true
+				onTriggered: {
+					if (secondsRemaining > 0) {
+						updateCountdown(secondsRemaining - 1)
+					}
+				}
+			}
+		}
+	}
 }

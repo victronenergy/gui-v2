@@ -11,6 +11,7 @@ FocusScope {
 	property alias icon: icon
 	property alias title: title
 	property alias status: status
+	property alias statusQuantity: statusQuantity
 
 	implicitWidth: Theme.geometry_controlCard_maximumWidth
 	implicitHeight: Theme.geometry_controlCard_height
@@ -56,10 +57,20 @@ FocusScope {
 			topMargin: Theme.geometry_controlCard_status_topMargin
 			left: parent.left
 			leftMargin: Theme.geometry_controlCard_contentMargins
-			right: parent.right
+			right: statusQuantity.visible ? statusQuantity.left : parent.right
 			rightMargin: Theme.geometry_controlCard_contentMargins
 		}
 		font.pixelSize: Theme.font_controlCard_status
 		wrapMode: Text.Wrap
+	}
+
+	QuantityLabel {
+		id: statusQuantity
+		anchors {
+			verticalCenter: status.verticalCenter
+			right: parent.right
+			rightMargin: Theme.geometry_controlCard_contentMargins
+		}
+		visible: !isNaN(value)
 	}
 }

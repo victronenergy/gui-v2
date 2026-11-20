@@ -30,6 +30,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/Breadcrumbs.qml
     components/BriefSidePanelWidget.qml
     components/BriefCenterDisplay.qml
+    components/CardButton.qml
     components/CardViewLoader.qml
     components/CheapBarGauge.qml
     components/CircularMultiGauge.qml
@@ -141,10 +142,12 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/VeBusAcIODisplay.qml
     components/VeQItemFilteredServiceModel.qml
     components/ViewGradient.qml
+    components/WarningIconLabel.qml
     components/WasmVirtualKeyboardHandler.qml
     components/controls/AutoToggleButton.qml
     components/controls/Button.qml
     components/controls/CaptionLabel.qml
+    components/controls/CheckBox.qml
     components/controls/CloseButton.qml
     components/controls/ComboBox.qml
     components/controls/EditFrame.qml
@@ -182,6 +185,9 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/dialogs/DateSelectorDialog.qml
     components/dialogs/DialogHeader_Portrait.qml
     components/dialogs/DialogShadow.qml
+    components/dialogs/EmergencyChargeSkipDialog.qml
+    components/dialogs/EmergencyChargeStartDialog.qml
+    components/dialogs/EmergencyChargeStopDialog.qml
     components/dialogs/VrmInstanceSwapDialog.qml
     components/dialogs/ESSMinimumSOCDialog.qml
     components/dialogs/EvcsChargerModeDialog.qml
@@ -388,6 +394,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/PageManager.qml
     pages/SettingsPage.qml
     pages/TanksTab.qml
+    pages/controlcards/EmergencyChargeCard.qml
     pages/controlcards/ESSCard.qml
     pages/controlcards/EVCSCard.qml
     pages/controlcards/GeneratorCard.qml
@@ -803,8 +810,11 @@ set(VictronVenusOS_RESOURCES
     fonts/Roboto-Regular.ttf
     images/acloads.svg
     images/alternator.svg
+    images/battery_outline.svg
     images/breadcrumb_lhs.svg
     images/breadcrumb_rhs.svg
+    images/check.svg
+    images/icon_alert_24.svg
     images/icon_arrow.svg
     images/icon_battery_24.svg
     images/icon_battery_charging_24.svg
