@@ -35,6 +35,8 @@ FocusScope {
 	width: parent?.width ?? 0
 	height: parent?.height ?? 0
 	focus: true
+	// The page reads this. Each card accepts key navigation.
+	focusPolicy: cards.length > 0 ? Qt.TabFocus : Qt.NoFocus
 
 	// The same layout as ControlCardsPage.
 	BaseListView {

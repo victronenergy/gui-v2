@@ -1,0 +1,13 @@
+{
+    "ExitWhenFinished": true,
+    "Logging": "info",
+    "Tests": [
+        "tst_plugins.qml"
+    ],
+    "MockConfiguration": ":/data/mock/conf/maximal.json",
+    "Steps": {
+        "WaitUntil": {
+            "DefaultTimeout": 20000
+        }
+    }
+}

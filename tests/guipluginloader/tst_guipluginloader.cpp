@@ -65,6 +65,20 @@ public:
 		return types;
 	}
 
+	// The locations of the navigation pages that the loader keeps.
+	Q_INVOKABLE QVariantList navigationLocations(const QString &pluginJson) const
+	{
+		const QJsonObject plugin = QJsonDocument::fromJson(pluginJson.toUtf8()).object();
+		QVariantList locations;
+		for (const GuiPluginIntegration &integration
+				: GuiPluginLoader::parseIntegrations(plugin, QStringLiteral("TestPlugin"))) {
+			if (integration.type() == GuiPluginLoader::NavigationPage) {
+				locations.append(static_cast<int>(integration.location()));
+			}
+		}
+		return locations;
+	}
+
 public slots:
 	void qmlEngineAvailable(QQmlEngine *engine)
 	{

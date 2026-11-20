@@ -57,8 +57,9 @@ ModalDialog {
 								left: parent.horizontalCenter
 								topMargin: Theme.geometry_navigationBar_notifications_redDot_margin
 							}
+							// The built-in page only. endsWith("NotificationsPage.qml") also matches a plugin page.
 							active: Services.notifications.navBarNotificationCounterVisible
-									&& hiddenPageItem.page.url.endsWith("NotificationsPage.qml")
+									&& hiddenPageItem.page.url === "qrc:/qt/qml/Victron/VenusOS/pages/NotificationsPage.qml"
 							sourceComponent: NotificationCounter {
 								count: Services.notifications.unacknowledgedCount
 							}

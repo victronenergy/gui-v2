@@ -29,6 +29,7 @@
 #include <QQmlComponent>
 #include <QQmlInfo>
 #include <QPointer>
+#include <QtNumeric>
 
 #include <algorithm>
 #include <memory>
@@ -105,6 +106,67 @@ namespace {
 						<< "imports" << match.captured(1) << "- only Victron.Branding, QtQml and QtQuick are supported";
 			}
 		}
+	}
+
+	// location is optional. A missing key defaults to BeforeNotifications.
+	// A present value must be an integer in the named range; it is not clamped.
+	bool readNavigationPageLocation(const QJsonObject &integration,
+			GuiPluginLoader::NavigationPageLocation *location, QString *reason)
+	{
+		const QString key = QStringLiteral("location");
+		if (!integration.contains(key)) {
+			*location = GuiPluginLoader::NavigationPageLocation_BeforeNotifications;
+			return true;
+		}
+
+		const QJsonValue value = integration.value(key);
+		if (!value.isDouble()) {
+			*reason = QStringLiteral("location is not an integer");
+			return false;
+		}
+
+		// Reject non-finite and out-of-range values before casting. Casting a
+		// double that does not fit in int is undefined.
+		const double number = value.toDouble();
+		if (!qIsFinite(number)) {
+			*reason = QStringLiteral("location is not an integer");
+			return false;
+		}
+		// Cast before comparing. Comparing the enum with this double warns.
+		const int firstLocation = static_cast<int>(GuiPluginLoader::NavigationPageLocation_BeforeBoat);
+		const int lastLocation = static_cast<int>(GuiPluginLoader::NavigationPageLocation_AfterSettings);
+		if (number < firstLocation || number > lastLocation) {
+			*reason = QStringLiteral("location is out of range");
+			return false;
+		}
+		const int asInt = static_cast<int>(number);
+		if (static_cast<double>(asInt) != number) {
+			*reason = QStringLiteral("location is not an integer");
+			return false;
+		}
+
+		*location = static_cast<GuiPluginLoader::NavigationPageLocation>(asInt);
+		return true;
+	}
+
+	// A caller that passes only the file name selects the first page with that name.
+	bool navigationPageFileNameIsReserved(const QString &url, QString *reason)
+	{
+		const int slash = url.lastIndexOf(QLatin1Char('/'));
+		const QString fileName = slash < 0 ? url : url.mid(slash + 1);
+		static const QStringList reservedNames = {
+			QStringLiteral("BoatPage.qml"),
+			QStringLiteral("BriefPage.qml"),
+			QStringLiteral("OverviewPage.qml"),
+			QStringLiteral("LevelsPage.qml"),
+			QStringLiteral("NotificationsPage.qml"),
+			QStringLiteral("SettingsPage.qml"),
+		};
+		if (!reservedNames.contains(fileName)) {
+			return false;
+		}
+		*reason = QStringLiteral("navigation page file name matches a built-in page");
+		return true;
 	}
 
 	QString enabledAppsDir() {
@@ -759,7 +821,8 @@ QVector<GuiPluginIntegration> GuiPluginLoader::parseIntegrations(const QJsonObje
 		// {
 		//     type: 3, // new navigation page
 		//     icon: "qrc:/AppName/icon.svg",
-		//     url: "qrc:/AppName/CustomNavPage.qml"
+		//     url: "qrc:/AppName/CustomNavPage.qml",
+		//     location: 5 // optional, NavigationPageLocation; omitted means BeforeNotifications
 		// },
 		// {
 		//     type: 4, // new quick access pane
@@ -782,6 +845,7 @@ QVector<GuiPluginIntegration> GuiPluginLoader::parseIntegrations(const QJsonObje
 		const QString integrationProductId = integration.value(QStringLiteral("productId")).toString();
 		const QString integrationTitle = integration.value(QStringLiteral("title")).toString();
 		const QString integrationIcon = integration.value(QStringLiteral("icon")).toString();
+		const QString integrationIconActive = integration.value(QStringLiteral("iconActive")).toString();
 		const int integrationCardType = integration.value(QStringLiteral("cardType")).toInt(0);
 
 		const bool invalidType = integrationType == GuiPluginLoader::InvalidIntegrationType
@@ -794,12 +858,22 @@ QVector<GuiPluginIntegration> GuiPluginLoader::parseIntegrations(const QJsonObje
 		const bool invalidCardType = integrationType == GuiPluginLoader::QuickAccessPaneCard
 				&& integrationCardType != GuiPluginLoader::ControlsCard
 				&& integrationCardType != GuiPluginLoader::SwitchesCard;
-		if (invalidType || missingDeviceListFields || missingIcon || invalidCardType || integrationUrl.isEmpty()) {
+		GuiPluginLoader::NavigationPageLocation integrationLocation = GuiPluginLoader::InvalidNavigationPageLocation;
+		QString locationReason;
+		const bool invalidLocation = integrationType == GuiPluginLoader::NavigationPage
+				&& !readNavigationPageLocation(integration, &integrationLocation, &locationReason);
+		QString reservedNameReason;
+		const bool reservedPageName = integrationType == GuiPluginLoader::NavigationPage
+				&& navigationPageFileNameIsReserved(integrationUrl, &reservedNameReason);
+		if (invalidType || missingDeviceListFields || missingIcon || invalidCardType
+				|| invalidLocation || reservedPageName || integrationUrl.isEmpty()) {
 			QStringList reasons;
 			if (invalidType)              reasons << QStringLiteral("invalid type");
 			if (missingDeviceListFields)  reasons << QStringLiteral("missing productId or title");
 			if (missingIcon)              reasons << QStringLiteral("missing icon");
 			if (invalidCardType)          reasons << QStringLiteral("invalid cardType");
+			if (invalidLocation)          reasons << locationReason;
+			if (reservedPageName)         reasons << reservedNameReason;
 			if (integrationUrl.isEmpty()) reasons << QStringLiteral("missing url");
 			qCWarning(venusGui).noquote() << "Ignoring invalid integration at index" << j << "in plugin" << pluginName
 				<< "- type:" << integrationType
@@ -821,18 +895,25 @@ QVector<GuiPluginIntegration> GuiPluginLoader::parseIntegrations(const QJsonObje
 		}
 
 		const bool isDeviceList = integrationType == GuiPluginLoader::DeviceListSettingsPage;
-		const bool hasIcon = integrationType == GuiPluginLoader::NavigationPage
-				|| integrationType == GuiPluginLoader::QuickAccessPane;
+		const bool isNavigationPage = integrationType == GuiPluginLoader::NavigationPage;
+		const bool hasIcon = isNavigationPage || integrationType == GuiPluginLoader::QuickAccessPane;
 		const bool isCard = integrationType == GuiPluginLoader::QuickAccessPaneCard;
-		integrations.append(GuiPluginIntegration(
+		GuiPluginIntegration parsed(
 				pluginName,
 				static_cast<GuiPluginLoader::IntegrationType>(integrationType),
 				QUrl(integrationUrl),
 				isDeviceList ? integrationProductId : QString(),
-				isDeviceList ? integrationTitle : QString(),
+				(isDeviceList || hasIcon) ? integrationTitle : QString(),
 				hasIcon ? QUrl(integrationIcon) : QUrl(),
 				isCard ? static_cast<GuiPluginLoader::QuickAccessPaneCardType>(integrationCardType)
-						: GuiPluginLoader::InvalidCardType));
+						: GuiPluginLoader::InvalidCardType);
+		if (hasIcon && !integrationIconActive.isEmpty()) {
+			parsed.m_iconActive = QUrl(integrationIconActive);
+		}
+		if (isNavigationPage) {
+			parsed.m_location = integrationLocation;
+		}
+		integrations.append(parsed);
 	}
 
 	return integrations;
@@ -1572,17 +1653,22 @@ QVariant GuiPluginIntegrationModel::data(const QModelIndex &index, int role) con
 	case PluginColorRole:
 		return QVariant(GuiPluginLoader::create()->plugin(m_integrations.at(row).pluginName()).color());
 	case TitleRole:
+	case SourceTitleRole:
 		return QVariant(m_integrations.at(row).title());
 	case ProductIdRole:
 		return QVariant(m_integrations.at(row).productId());
 	case IconRole:
 		return QVariant(m_integrations.at(row).icon());
+	case IconActiveRole:
+		return QVariant(m_integrations.at(row).iconActive());
 	case UrlRole:
 		return QVariant(m_integrations.at(row).url());
 	case TypeRole:
 		return QVariant(m_integrations.at(row).type());
 	case CardTypeRole:
 		return QVariant(m_integrations.at(row).cardType());
+	case LocationRole:
+		return static_cast<int>(m_integrations.at(row).location());
 	default:
 		return QVariant();
 	}
@@ -1602,9 +1688,12 @@ QHash<int, QByteArray> GuiPluginIntegrationModel::roleNames() const
 		{ TitleRole, "title" },
 		{ ProductIdRole, "productId" },
 		{ IconRole, "icon" },
+		{ IconActiveRole, "iconActive" },
 		{ UrlRole, "url" },
 		{ TypeRole, "type" },
-		{ CardTypeRole, "cardType" }
+		{ CardTypeRole, "cardType" },
+		{ LocationRole, "location" },
+		{ SourceTitleRole, "sourceTitle" }
 	};
 	return roles;
 }
@@ -1640,6 +1729,21 @@ void GuiPluginIntegrationModel::updateIntegrations()
 				data.append(i);
 			}
 		}
+	}
+
+	// Same location stays in plugin-name then URL order. Other integration
+	// types keep discovery order.
+	if (m_type == GuiPluginLoader::NavigationPage) {
+		std::stable_sort(data.begin(), data.end(), [](const GuiPluginIntegration &a, const GuiPluginIntegration &b) {
+			if (a.location() != b.location()) {
+				return a.location() < b.location();
+			}
+			const int nameOrder = QString::compare(a.pluginName(), b.pluginName(), Qt::CaseSensitive);
+			if (nameOrder != 0) {
+				return nameOrder < 0;
+			}
+			return QString::compare(a.url().toString(), b.url().toString(), Qt::CaseSensitive) < 0;
+		});
 	}
 
 	// perform a model reset
