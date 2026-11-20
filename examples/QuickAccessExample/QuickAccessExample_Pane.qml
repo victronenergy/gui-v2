@@ -20,8 +20,8 @@ import Victron.GuiPlugins
 PluginPage {
 	id: root
 
-	// gui-v2 uses its portrait layout when its window is taller than it is wide.
-	readonly property bool portrait: Window.width < Window.height
+	// Follow gui-v2's layout, including when a GX display rotates the content.
+	readonly property bool portrait: PluginPalette.orientation === Qt.PortraitOrientation
 	// The space between the cards, and around them. The plugin API does not give the spacing of
 	// the Controls pane, so the pane uses its own.
 	readonly property real cardSpacing: 16

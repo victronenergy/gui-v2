@@ -13,7 +13,6 @@ SwipeViewPage {
 	title: qsTrId("nav_overview")
 	iconSource: "qrc:/images/overview.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/OverviewPage.qml"
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	fullScreenWhenIdle: true
 	focusPolicy: pageLoader.item?.focusPolicy ?? Qt.NoFocus
 	showTopGradient: pageLoader.sourceComponent === portraitComponent

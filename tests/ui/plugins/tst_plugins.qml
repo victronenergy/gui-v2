@@ -47,7 +47,7 @@ UiTestCase {
 			}
 			return mouseClick(btn)
 		}})
-		addStep(UiTestStep.WaitUntil, { callable: () => Global.mainView.cardsActive, timeout: 5000 })
+		addStep(UiTestStep.WaitUntil, { callable: () => Global.mainView.cardsActive && !!findItem(Global.mainView.cardsLoader, { "text": "ProbeQuick" }), timeout: 5000 })
 		addStep(UiTestStep.Invoke, { callable: () => {
 			const img = findItem(Global.mainView.statusBar, { "source": Qt.url("qrc:/ProbeQuick/icon_brick.svg") })
 			const btn = findClickableParent(img)

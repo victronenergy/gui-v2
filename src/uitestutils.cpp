@@ -567,7 +567,7 @@ void parseStatusBarActivations(const QString &filePath, QHash<QString, ClickIden
 
 	static const QRegularExpression svgRe(R"REGEX("([^"]+\.svg)")REGEX");
 	static const QRegularExpression signalRe(
-			R"REGEX(\b(controlCardsActivated|auxCardsActivated|sidePanelToggled)\s*\()REGEX");
+			R"REGEX(\b(sidePanelToggled)\s*\()REGEX");
 
 	const QStringList lines = QString::fromUtf8(file.readAll()).split('\n');
 	bool inButton = false;
@@ -775,18 +775,19 @@ QList<ShownTypeRoute> scanShownTypeRoutes(const QList<RootRoute> &swipeRoots)
 	QHash<QString, QStringList> typeToContainerTypes;
 	QSet<QString> onDemandTypes;
 	QSet<QString> typesWithToggleSidePanel;
-	QHash<QString, QString> mainViewComponentIdToType;
-	QHash<QString, QString> mainViewSignalToComponentId;
+	// Quick Access panes (e.g. ControlCardsPage) by type name, with the status bar icon that opens
+	// each one. Read from the quickAccessModel ListElements in MainView.qml.
+	QHash<QString, ClickIdentifier> quickAccessPaneClickByType;
 	QHash<QString, ClickIdentifier> tabActivationByType;
 
 	static const QRegularExpression sourceComponentRe(
 			R"REGEX(^\s*sourceComponent\s*:\s*([A-Z][A-Za-z0-9_]*))REGEX");
 	static const QRegularExpression loaderStartRe(R"REGEX(\bLoader\s*\{)REGEX");
 	static const QRegularExpression componentStartRe(R"REGEX(^\s*Component\s*\{)REGEX");
-	static const QRegularExpression componentIdRe(R"REGEX(^\s*id\s*:\s*([A-Za-z_][A-Za-z0-9_]*))REGEX");
 	static const QRegularExpression typeBraceRe(R"REGEX(^\s*([A-Z][A-Za-z0-9_]*)\s*\{)REGEX");
-	static const QRegularExpression cardsShowRe(
-			R"REGEX(on([A-Za-z]+)\s*:\s*cardsLoader\.show\((\w+)\))REGEX");
+	static const QRegularExpression quickAccessElementRe(R"REGEX(\bListElement\s*\{([^}]*)\})REGEX");
+	static const QRegularExpression quickAccessUrlRe(R"REGEX(\burl\s*:\s*"([^"]+\.qml)")REGEX");
+	static const QRegularExpression quickAccessIconRe(R"REGEX(\bicon\s*:\s*"([^"]+\.svg)")REGEX");
 	static const QRegularExpression toggleSidePanelRe(R"REGEX(\btoggleSidePanel\s*\()REGEX");
 
 	const bool portraitLayout = isPortraitLayout();
@@ -852,14 +853,18 @@ QList<ShownTypeRoute> scanShownTypeRoutes(const QList<RootRoute> &swipeRoots)
 			}
 		}
 
-		QRegularExpressionMatchIterator showMatches = cardsShowRe.globalMatch(content);
-		while (showMatches.hasNext()) {
-			const QRegularExpressionMatch match = showMatches.next();
-			QString signalName = match.captured(1);
-			if (!signalName.isEmpty()) {
-				signalName[0] = signalName[0].toLower();
+		if (isMainView) {
+			QRegularExpressionMatchIterator elementMatches = quickAccessElementRe.globalMatch(content);
+			while (elementMatches.hasNext()) {
+				const QString element = elementMatches.next().captured(1);
+				const QRegularExpressionMatch urlMatch = quickAccessUrlRe.match(element);
+				const QRegularExpressionMatch iconMatch = quickAccessIconRe.match(element);
+				if (!urlMatch.hasMatch() || !iconMatch.hasMatch()) {
+					continue;
+				}
+				quickAccessPaneClickByType.insert(QFileInfo(urlMatch.captured(1)).baseName(),
+						ClickIdentifier{ ClickIdentifier::IconSource, QStringList{ iconMatch.captured(1) } });
 			}
-			mainViewSignalToComponentId.insert(signalName, match.captured(2));
 		}
 
 		bool inLoader = false;
@@ -867,7 +872,6 @@ QList<ShownTypeRoute> scanShownTypeRoutes(const QList<RootRoute> &swipeRoots)
 		int depth = 0;
 		QString loaderType;
 		bool loaderActiveFalse = false;
-		QString componentId;
 		QString componentType;
 
 		// active: false may be on the Loader opening line (`Loader { active: false`).
@@ -909,7 +913,6 @@ QList<ShownTypeRoute> scanShownTypeRoutes(const QList<RootRoute> &swipeRoots)
 				} else if (componentStartRe.match(line).hasMatch()) {
 					inComponent = true;
 					depth = countChar(line, '{') - countChar(line, '}');
-					componentId.clear();
 					componentType.clear();
 				} else {
 					continue;
@@ -928,11 +931,6 @@ QList<ShownTypeRoute> scanShownTypeRoutes(const QList<RootRoute> &swipeRoots)
 					finishLoader();
 				}
 			} else if (inComponent) {
-				if (componentId.isEmpty()) {
-					if (const QRegularExpressionMatch idMatch = componentIdRe.match(line); idMatch.hasMatch()) {
-						componentId = idMatch.captured(1);
-					}
-				}
 				if (componentType.isEmpty()) {
 					if (const QRegularExpressionMatch typeMatch = typeBraceRe.match(line); typeMatch.hasMatch()) {
 						componentType = typeMatch.captured(1);
@@ -941,9 +939,6 @@ QList<ShownTypeRoute> scanShownTypeRoutes(const QList<RootRoute> &swipeRoots)
 				if (depth <= 0) {
 					if (!componentType.isEmpty()) {
 						recordInstantiation(componentType, containerType);
-						if (isMainView && !componentId.isEmpty()) {
-							mainViewComponentIdToType.insert(componentId, componentType);
-						}
 					}
 					inComponent = false;
 				}
@@ -982,10 +977,9 @@ QList<ShownTypeRoute> scanShownTypeRoutes(const QList<RootRoute> &swipeRoots)
 		routes.append(route);
 	};
 
-	for (auto it = mainViewSignalToComponentId.cbegin(); it != mainViewSignalToComponentId.cend(); ++it) {
-		const QString typeName = mainViewComponentIdToType.value(it.value());
-		const QString typeUrl = uniquePageUrlForTypeName(qmlFilesByTypeName, typeName);
-		const ClickIdentifier identifier = signalToClick.value(it.key());
+	for (auto it = quickAccessPaneClickByType.cbegin(); it != quickAccessPaneClickByType.cend(); ++it) {
+		const QString typeUrl = uniquePageUrlForTypeName(qmlFilesByTypeName, it.key());
+		const ClickIdentifier &identifier = it.value();
 		if (typeUrl.isEmpty() || identifier.values.isEmpty() || briefEntry.isEmpty()) {
 			continue;
 		}

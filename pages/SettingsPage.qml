@@ -20,7 +20,6 @@ SwipeViewPage {
 	title: qsTrId("nav_settings")
 	iconSource: "qrc:/images/settings.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/SettingsPage.qml"
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	focusPolicy: Qt.TabFocus
 	showTopGradient: Theme.screenSize === Theme.Portrait && !settingsListView.atYBeginning
 
