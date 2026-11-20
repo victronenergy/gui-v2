@@ -74,6 +74,7 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/services/opportunityloads.json
     data/mock/conf/services/orionxs-alternator.json
     data/mock/conf/services/orionxs-dcdc.json
+    data/mock/conf/services/orionxs-dcdc-emergencycharge.json
     data/mock/conf/services/phoenix-smart-charger.json
     data/mock/conf/services/pulsemeter.json
     data/mock/conf/services/pvinverter.json

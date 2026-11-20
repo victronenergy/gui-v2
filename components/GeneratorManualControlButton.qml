@@ -6,7 +6,7 @@
 import QtQuick
 import Victron.VenusOS
 
-ListItemButton {
+CardButton {
 	id: root
 
 	required property string generatorUid
@@ -19,9 +19,7 @@ ListItemButton {
 	color: !enabled ? Theme.color_font_disabled
 		: checked ? Theme.color_dimCritical_text
 		: Theme.color_dimSuccess_text
-	flat: false
 	backgroundColor: checked ? Theme.color_dimCritical : Theme.color_dimSuccess
-	borderWidth: 0
 
 	// If the stop or start dialog is open, set the button color based on the generator
 	// state at the time dialog was opened. This avoid changing the color of the button

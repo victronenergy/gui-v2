@@ -40,8 +40,7 @@ Rectangle {
 				verticalCenter: whatsNewLabel.verticalCenter
 			}
 			font.pixelSize: Theme.font_size_body2
-			//% "Skip"
-			text: qsTrId("welcome_skip")
+			text: CommonWords.skip_action
 			flat: true
 			color: Theme.color_brand
 			onClicked: Services.settings.setOnboardingDone()
