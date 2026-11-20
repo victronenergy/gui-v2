@@ -21,6 +21,7 @@
     "font_controlCard_status": "font_size_body2",
     "font_dialog_acceptButton_size": "font_size_caption",
     "font_dialog_body_size": "font_size_caption",
+    "font_dialog_body_size_large": "font_size_body1",
     "font_dialog_body_secondary_size": "font_size_tiny",
     "font_dialog_control_smallSize": "font_size_body1",
     "font_dialog_control_largeSize": "font_size_h1",

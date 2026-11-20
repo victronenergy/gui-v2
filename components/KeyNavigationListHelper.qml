@@ -54,6 +54,7 @@ QtObject {
 			if (_focusContainerOrItem(headerItem)) {
 				headerItem.focus = true
 				_currentIndex = -1
+				scrollToStartRequested() // ensure header can be seen
 				return true
 			} else {
 				return focusNextItem(-1)

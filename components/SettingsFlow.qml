@@ -33,6 +33,8 @@ FocusScope {
 
 	Keys.onUpPressed: (event) => event.accepted = keyNavHelper.focusPreviousItem()
 	Keys.onDownPressed: (event) => event.accepted = keyNavHelper.focusNextItem()
+	Keys.onLeftPressed: (event) => event.accepted = keyNavHelper.focusPreviousItem()
+	Keys.onRightPressed: (event) => event.accepted = keyNavHelper.focusNextItem()
 	Keys.enabled: Global.keyNavigationEnabled
 
 	onActiveFocusChanged: {
