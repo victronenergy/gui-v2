@@ -10,7 +10,10 @@ deploy instructions.
 | ---- | -------------------------- | ---------------------------------------------------- | ------------------------------------ |
 | 1    | **PluginSettingsPage**     | Settings > Integrations > UI Plugins > *your plugin* | `SimpleExample/`, `SimpleTrExample/` |
 | 2    | **DeviceListSettingsPage** | Device list settings for a specific product ID       | `DeviceListExample/`                 |
+| 4    | **QuickAccessPane**        | Status bar icon that opens a full pane overlay       | `QuickAccessExample/`                |
 | 5    | **QuickAccessPaneCard**    | Card injected into the Controls or Switches pane     | `CardExample/`                       |
+
+A navigation page (integration type 3) is not yet part of the plugin API.
 
 A single plugin can combine multiple integration types (e.g. a settings
 page and a device list page in one JSON file).
@@ -63,6 +66,13 @@ Same as SimpleExample but with French translations via `.ts` files.
 
 Injects custom pages into the device list for devices matching
 product ID `0x106` (Skylla-i 24/100).
+
+### QuickAccessExample (Type 4)
+
+Adds a brick icon to the status bar. Clicking it opens a full-screen
+overlay pane (like the built-in Controls and Switches panes) with
+battery, solar and pump cards, laid out and scrolled as in the Controls
+pane. The pump card has a local toggle.
 
 ### CardExample (Type 5)
 

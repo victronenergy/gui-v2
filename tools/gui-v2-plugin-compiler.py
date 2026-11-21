@@ -1043,7 +1043,7 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--settings', default='', help='The main settings page .qml associated with your plugin')
     parser.add_argument('-d', '--devicelist', required=False, nargs='+', action='append', help='Triplet of product id, settings page .qml, and title text (or translation id)')
     parser.add_argument('-g', '--navigation', default='')
-    parser.add_argument('-q', '--quickaccess', default='')
+    parser.add_argument('-q', '--quickaccess', required=False, nargs='+', action='append', help='2-3 args: page.qml icon.svg [icon_active.svg]')
     parser.add_argument('-c', '--card', required=False, nargs='+', action='append', help='Pair of page .qml and card type (1=controls, 2=switches)')
     parser.add_argument('-b', '--branding', default='',     help='The Branding .qml file of a custom branding plugin')
     parser.add_argument('--qml-import-path', default=os.path.dirname(os.path.abspath(__file__)),
@@ -1153,8 +1153,34 @@ if __name__ == '__main__':
                 integrations.append(devicelistIntegration)
     if len(args.navigation) > 0:
         print("TODO: navigation...")
-    if len(args.quickaccess) > 0:
-        print("TODO: quick access...")
+    if args.quickaccess:
+        for integration in args.quickaccess:
+            if len(integration) < 2 or len(integration) > 3:
+                print("\n\nERROR: --quickaccess requires 2-3 args: page.qml icon.svg [icon_active.svg]")
+                sys.exit(1)
+            pageQml = integration[0]
+            iconFile = integration[1]
+            iconActiveFile = integration[2] if len(integration) == 3 else ''
+            if not pageQml.endswith('.qml'):
+                print("\n\nERROR: Quick access page must be a .qml file")
+                sys.exit(1)
+            require_packed_file(pageQml, qmlFiles, "Quick access page")
+            if not (iconFile.endswith('.svg') or iconFile.endswith('.png')):
+                print("\n\nERROR: Quick access icon must be a .svg or .png file")
+                sys.exit(1)
+            require_packed_file(iconFile, imageFiles, "Quick access icon")
+            qaIntegration = {
+                "type": 4,
+                "url": resource_url(args.name, pageQml),
+                "icon": resource_url(args.name, iconFile)
+            }
+            if len(iconActiveFile) > 0:
+                if not (iconActiveFile.endswith('.svg') or iconActiveFile.endswith('.png')):
+                    print("\n\nERROR: Quick access active icon must be a .svg or .png file")
+                    sys.exit(1)
+                require_packed_file(iconActiveFile, imageFiles, "Quick access active icon")
+                qaIntegration["iconActive"] = resource_url(args.name, iconActiveFile)
+            integrations.append(qaIntegration)
     if args.card:
         for integration in args.card:
             integrations.append(card_integration(integration, args.name, qmlFiles))
