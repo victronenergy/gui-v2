@@ -109,6 +109,7 @@ Item {
 			BriefCenterDisplay {
 				anchors.centerIn: parent
 				width: parent.width - (gaugeModel.count * circularMultiGauge._stepSize) + Theme.geometry_circularMultiGauge_spacing
+				height: parent.height - (gaugeModel.count * circularMultiGauge._stepSize) + Theme.geometry_circularMultiGauge_spacing
 				showFullDetails: gaugeModel.count === 1
 			}
 		}
@@ -129,6 +130,7 @@ Item {
 			BriefCenterDisplay {
 				anchors.centerIn: parent
 				width: parent.width
+				height: parent.height
 				showFullDetails: true
 			}
 		}
