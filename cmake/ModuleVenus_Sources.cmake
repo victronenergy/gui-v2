@@ -780,6 +780,8 @@ list(APPEND VictronVenusOS_CPP_SOURCES
     src/screenblanker.cpp
     src/shellydevicemodel.h
     src/shellydevicemodel.cpp
+    src/slicedlistmodel.h
+    src/slicedlistmodel.cpp
     src/solarinput.h
     src/solarinput.cpp
     src/solarinputmodel.h
