@@ -569,6 +569,15 @@ FocusScope {
 						// A plugin Page binds focus to isCurrentPage, which is
 						// false inside this wrapper. Assigning focus selects it
 						// within the loader without stealing focus from outside.
+						if (root.quickAccessName.length > 0
+								&& (!(item instanceof Item) || item.__is_venus_gui_page__
+									|| item.__is_plugin_page__ !== true)) {
+							console.warn("Rejected quick access pane:", source,
+									"The base type must be a PluginPage from Victron.GuiPlugins.")
+							cardsLoader.hide()
+							root.quickAccessUrl = ""
+							return
+						}
 						if (item) {
 							item.focus = true
 						}
@@ -583,6 +592,20 @@ FocusScope {
 					value: quickAccessPage.animationEnabled
 					when: pluginPaneLoader.item?.__is_venus_gui_page__ ?? false
 				}
+			}
+		}
+	}
+
+	// A Quick Access pane is above the page stack, so close it when the stack opens, e.g. when a
+	// pane pushes a sub-page. Otherwise the pane would cover the sub-page, while the status bar
+	// shows the sub-page's back button and breadcrumbs, and Back would pop a page that cannot be
+	// seen. This happens as soon as the stack starts to open, so the pane slides out while the
+	// sub-page slides in.
+	Connections {
+		target: pageStack
+		function onStateChanged() {
+			if (pageStack.state === "opened" && root.cardsActive) {
+				cardsLoader.hide()
 			}
 		}
 	}

@@ -91,9 +91,13 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 			buttonInset: Theme.geometry_statusBar_spacing / 2
 			bottomInset: Theme.geometry_statusBar_spacing
 			collapseHiddenButtons: true
+			// Show a single plugin button in the row. If there is more than one, move them all into
+			// the overflow popup.
+			maximumPluginButtons: 1
 
 			model: Global.mainView?.cardsLoader.quickAccessModel ?? null
 			visible: !breadcrumbs.visible
+			KeyNavigation.left: notificationButton
 
 			Layout.alignment: Qt.AlignTop
 		}

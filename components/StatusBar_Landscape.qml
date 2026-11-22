@@ -77,6 +77,9 @@ FocusScope {
 		anchors.left: parent.left
 		firstLeftInset: Theme.geometry_statusBar_horizontalMargin
 		bottomInset: Theme.geometry_statusBar_spacing
+		// Move the buttons that would reach the clock into the overflow popup. The clock is centred
+		// in the status bar, so its position does not depend on the quick access buttons.
+		maximumWidth: clockLabel.x - x - Theme.geometry_statusBar_spacing
 		visible: !root.pageStack.opened
 
 		model: Global.mainView?.cardsLoader.quickAccessModel ?? null
