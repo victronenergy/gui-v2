@@ -5,9 +5,9 @@
 # Tests for tools/gui-v2-plugin-compiler.py: the requiredGuiPluginsVersion that it writes,
 # the warning it prints for a deprecated type or member, the Branding import and name checks,
 # the image and font files it packs, the requiredBrandingVersion that it writes, the navigation
-# page integration that it writes for each --navigation option, the card integration that it
-# writes for each --card option, and the escaping of file names in the resource URLs and the
-# .qrc file that it writes.
+# page integration that it writes for each --navigation option, the quick access integration that
+# it writes for each --quickaccess option, the card integration that it writes for each --card
+# option, and the escaping of file names in the resource URLs and the .qrc file that it writes.
 
 import contextlib
 import copy
@@ -400,6 +400,59 @@ class NavigationIntegrationTest(unittest.TestCase):
                 self.assertEqual(errors.getvalue().count('WARNING'), len(warnings))
                 for warning in warnings:
                     self.assertIn(warning, errors.getvalue())
+
+
+class QuickAccessIntegrationTest(unittest.TestCase):
+    QML_FILES = ['Pane.qml', 'OtherPane.qml', 'Pane#1.qml']
+    IMAGE_FILES = ['icon.svg', 'icon.png', 'icon_active.svg', 'icon_active.png']
+
+    def integration(self, args):
+        return compiler.quickaccess_integration(args, 'Quick', self.QML_FILES, self.IMAGE_FILES)
+
+    def test_fields(self):
+        pane = {'type': 4, 'url': 'qrc:/Quick/Pane.qml', 'icon': 'qrc:/Quick/icon.svg'}
+        cases = [
+            (['Pane.qml', 'icon.svg'], pane),
+            (['Pane.qml', 'icon.png'], {**pane, 'icon': 'qrc:/Quick/icon.png'}),
+            (['Pane.qml', 'icon.svg', 'icon_active.svg'], {**pane, 'iconActive': 'qrc:/Quick/icon_active.svg'}),
+            (['Pane.qml', 'icon.svg', 'icon_active.png'], {**pane, 'iconActive': 'qrc:/Quick/icon_active.png'}),
+            (['Pane#1.qml', 'icon.svg'], {**pane, 'url': 'qrc:/Quick/Pane%231.qml'}),
+        ]
+        for args, integration in cases:
+            with self.subTest(args=args):
+                self.assertEqual(self.integration(args), integration)
+
+    def test_repeated_options(self):
+        options = [['Pane.qml', 'icon.svg'], ['OtherPane.qml', 'icon.png', 'icon_active.svg'], ['Pane.qml', 'icon.png']]
+        self.assertEqual([self.integration(args) for args in options], [
+            {'type': 4, 'url': 'qrc:/Quick/Pane.qml', 'icon': 'qrc:/Quick/icon.svg'},
+            {'type': 4, 'url': 'qrc:/Quick/OtherPane.qml', 'icon': 'qrc:/Quick/icon.png',
+             'iconActive': 'qrc:/Quick/icon_active.svg'},
+            {'type': 4, 'url': 'qrc:/Quick/Pane.qml', 'icon': 'qrc:/Quick/icon.png'},
+        ])
+
+    def test_errors(self):
+        cases = [
+            (['Pane.qml'], '--quickaccess requires 2-3 args'),
+            (['Pane.qml', 'icon.svg', 'icon_active.svg', 'Extra'], '--quickaccess requires 2-3 args'),
+            (['Pane.txt', 'icon.svg'], 'Quick access page must be a .qml file'),
+            (['Pane.qml', 'icon.jpg'], 'Quick access icon must be a .svg or .png file'),
+            (['Pane.qml', 'icon.svg', 'Title'], 'Quick access active icon must be a .svg or .png file'),
+            (['Missing.qml', 'icon.svg'], 'Quick access page "Missing.qml" is not a file in the current directory'),
+            (['sub/Pane.qml', 'icon.svg'], 'Quick access page "sub/Pane.qml" is not a file in the current directory'),
+            (['pane.qml', 'icon.svg'], 'Quick access page "pane.qml" is not a file in the current directory'),
+            (['Pane.qml', 'missing.svg'], 'Quick access icon "missing.svg" is not a file in the current directory'),
+            (['Pane.qml', 'Icon.svg'], 'Quick access icon "Icon.svg" is not a file in the current directory'),
+            (['Pane.qml', 'icon.svg', 'missing_active.svg'],
+             'Quick access active icon "missing_active.svg" is not a file in the current directory'),
+        ]
+        for args, message in cases:
+            with self.subTest(args=args):
+                with contextlib.redirect_stdout(io.StringIO()) as output:
+                    with self.assertRaises(SystemExit) as raised:
+                        self.integration(args)
+                self.assertEqual(raised.exception.code, 1)
+                self.assertIn(message, output.getvalue())
 
 
 class CardIntegrationTest(unittest.TestCase):

@@ -57,6 +57,20 @@ add_test_plugin(TestCards
 		--card TestCards_SwitchesCard.qml 2
 )
 
+# Quick access panes for tst_quickaccesspane. Panes A and B have an active icon, and pane C does not.
+add_test_plugin(TestQuickAccess
+	SOURCES
+		TestQuickAccess_PaneA.qml
+		TestQuickAccess_PaneB.qml
+		TestQuickAccess_PaneC.qml
+		icon_pane.svg
+		icon_pane_active.svg
+	COMPILER_ARGS
+		--quickaccess TestQuickAccess_PaneA.qml icon_pane.svg icon_pane_active.svg
+		--quickaccess TestQuickAccess_PaneB.qml icon_pane.svg icon_pane_active.svg
+		--quickaccess TestQuickAccess_PaneC.qml icon_pane.svg
+)
+
 add_custom_target(test_plugins DEPENDS ${test_plugin_jsons})
 
 # On Windows, the tests are installed, and can run without the build tree, so install the plugins

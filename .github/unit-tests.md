@@ -29,6 +29,7 @@ tests/
 ├── splashsequence/             — splash phase transitions (no animations)
 ├── (many more...)
 ├── plugins/                    — test plugins, compiled at build time (see below)
+├── quickaccesspane/            — status bar quick access buttons, plugin panes and the overflow popup
 ├── quickaccesspanecards/       — built-in and plugin cards in the Controls and Switches panes
 ├── plugincompiler/             — Python tests for tools/gui-v2-plugin-compiler.py (not a QML test)
 ├── themepruner/                — Python tests for tools/themepruner.py (not a QML test)
