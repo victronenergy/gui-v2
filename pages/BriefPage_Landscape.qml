@@ -363,10 +363,15 @@ Item {
 	Loader {
 		id: sidePanel
 		width: Theme.geometry_briefPage_sidePanel_width
-		sourceComponent: BriefSidePanel {
+		sourceComponent: Flickable {
 			width: Theme.geometry_briefPage_sidePanel_width
 			height: Math.max(root._unexpandedHeight, implicitHeight)
-			animationEnabled: root.animationEnabled
+			contentHeight: loadedSidePanel.height
+
+			BriefSidePanel {
+				id: loadedSidePanel
+				animationEnabled: root.animationEnabled
+			}
 		}
 		onStatusChanged: if (status === Loader.Error) console.warn("Unable to load side panel")
 

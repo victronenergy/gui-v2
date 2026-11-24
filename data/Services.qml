@@ -30,6 +30,7 @@ Item {
 	readonly property SystemSettings settings: settingsLoader.item
 	readonly property Tanks tanks: tanksLoader.item
 	readonly property VenusPlatform platform: platformLoader.item
+	readonly property Vrm vrm: vrmLoader.item
 
 	// True when all service data is available.
 	readonly property bool ready: BackendConnection.ready
@@ -54,6 +55,7 @@ Item {
 			&& solarLoader.status === Loader.Ready
 			&& tanksLoader.status === Loader.Ready
 			&& platformLoader.status === Loader.Ready
+			&& vrmLoader.status === Loader.Ready
 
 	function _checkLoaderStatus(status, name) {
 		if (status === Loader.Error) {
@@ -161,6 +163,13 @@ Item {
 		asynchronous: true
 		sourceComponent: Tanks {}
 		onStatusChanged: root._checkLoaderStatus(status, "tanks")
+	}
+	Loader {
+		id: vrmLoader
+		active: BackendConnection.readyLatched
+		asynchronous: true
+		sourceComponent: Vrm {}
+		onStatusChanged: root._checkLoaderStatus(status, "vrm")
 	}
 	Loader {
 		id: platformLoader

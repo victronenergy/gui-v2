@@ -68,6 +68,12 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 			Layout.preferredHeight: Theme.geometry_statusBar_button_height
 		}
 
+		StatusBarWeather {
+			visible: active && !breadcrumbs.visible
+			Layout.alignment: Qt.AlignTop
+			Layout.preferredHeight: Theme.geometry_statusBar_button_height
+		}
+
 		StatusBarButton {
 			id: notificationButton
 

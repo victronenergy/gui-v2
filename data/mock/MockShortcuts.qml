@@ -337,8 +337,44 @@ QtObject {
 			root.removeTanksAndTemperatures()
 			break
 		case Qt.Key_W:
-			pageConfigTitle.text = "Return to start page"
-			Global.mainView.loadStartPage()
+			const prevWeatherCondition = MockManager.value(Services.vrm.serviceUid + "/Weather/Condition")
+			const conditions = [
+				 undefined,
+				 VenusOS.WeatherCondition_ClearDay,
+				 VenusOS.WeatherCondition_PartiallyCloudyDay,
+				 VenusOS.WeatherCondition_CloudyDay,
+				 VenusOS.WeatherCondition_CloudsDay,
+				 VenusOS.WeatherCondition_ShowerRainDay,
+				 VenusOS.WeatherCondition_CloudyWithRainDay,
+				 VenusOS.WeatherCondition_ThunderstormWithRainDay,
+				 VenusOS.WeatherCondition_SnowDay,
+				 VenusOS.WeatherCondition_FogDay,
+				 VenusOS.WeatherCondition_ClearNight,
+				 VenusOS.WeatherCondition_PartiallyCloudyNight,
+				 VenusOS.WeatherCondition_CloudyNight,
+				 VenusOS.WeatherCondition_CloudsNight,
+				 VenusOS.WeatherCondition_ShowerRainNight,
+				 VenusOS.WeatherCondition_CloudyWithRainNight,
+				 VenusOS.WeatherCondition_ThunderstormWithRainNight,
+				 VenusOS.WeatherCondition_SnowNight,
+				 VenusOS.WeatherCondition_FogNight,
+			]
+			let newWeatherCondition
+			if (modifiers & Qt.ShiftModifier) {
+				newWeatherCondition = conditions.indexOf(prevWeatherCondition) === 0 ? conditions[conditions.length - 1]
+						: conditions[conditions.indexOf(prevWeatherCondition) - 1]
+			} else {
+				newWeatherCondition = conditions.indexOf(prevWeatherCondition) === conditions.length - 1 ? undefined
+						: conditions[conditions.indexOf(prevWeatherCondition) + 1]
+			}
+			if (newWeatherCondition === undefined) {
+				MockManager.setValue(Services.vrm.serviceUid + "/Heartbeat", undefined)
+			} else if (prevWeatherCondition === undefined) {
+				MockManager.setValue(Services.vrm.serviceUid + "/Heartbeat", new Date().getTime() / 1000)
+			}
+			MockManager.setValue(Services.vrm.serviceUid + "/Weather/Condition", newWeatherCondition)
+
+			pageConfigTitle.text = "Weather %1 -> %2".arg(prevWeatherCondition).arg(newWeatherCondition)
 			break
 		case Qt.Key_X:
 			Services.settings.accessLevel.setValue(Utils.modulo(Services.settings.accessLevel.value + 1, VenusOS.User_AccessType_Service + 1))

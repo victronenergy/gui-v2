@@ -28,6 +28,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/BarGauge.qml
     components/BaseListView.qml
     components/Breadcrumbs.qml
+    components/BriefSidePanelWeather.qml
     components/BriefSidePanelWidget.qml
     components/BriefCenterDisplay.qml
     components/CardViewLoader.qml
@@ -122,6 +123,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     components/StatusBar.qml
     components/StatusBar_Landscape.qml
     components/StatusBar_Portrait.qml
+    components/StatusBarWeather.qml
     components/SwipePageModel.qml
     components/SwipeViewPage.qml
     components/SystemBatteryDelegate.qml
@@ -344,6 +346,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     data/SystemSettings.qml
     data/Tanks.qml
     data/VenusPlatform.qml
+    data/Vrm.qml
 
     data/common/AcData.qml
     data/common/AcInputSettings.qml
@@ -915,6 +918,17 @@ set(VictronVenusOS_RESOURCES
     images/icon_close_small.svg
     images/icon_info_32.svg
     images/icon_info_48.svg
+    images/icon_weather_clearnight_24.svg
+    images/icon_weather_cloudy_24.svg
+    images/icon_weather_mist_24.svg
+    images/icon_weather_notavailable_24.svg
+    images/icon_weather_overcast_24.svg
+    images/icon_weather_partcloudy_24.svg
+    images/icon_weather_partcloudynight_24.svg
+    images/icon_weather_rain_24.svg
+    images/icon_weather_snow_24.svg
+    images/icon_weather_sunny_24.svg
+    images/icon_weather_thunderstorm_24.svg
     images/icon_WiFi_1_32.svg
     images/icon_WiFi_2_32.svg
     images/icon_WiFi_3_32.svg

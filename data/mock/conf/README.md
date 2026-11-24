@@ -79,6 +79,7 @@ Note also that a page may ask for paths that no real device publishes either - f
         - Single EV charger
     - DC genset with startstop1 generator
     - Relay function: tank pump, with the tank pump service
+    - Outdoor water tank with temperature
 
 - split-phase (MultiPlus II with split-phase setup)
     - Inverter/chargers: MultiPlus II with two phases, with /Ac/State/SplitPhaseL2Passthru=1

@@ -1153,6 +1153,29 @@ public:
 	};
 	Q_ENUM(ElectricalQuantity_Source)
 
+	enum WeatherCondition {
+		WeatherCondition_Unknown = 0,
+		WeatherCondition_ClearDay = 1,
+		WeatherCondition_PartiallyCloudyDay = 2,
+		WeatherCondition_CloudyDay = 3,
+		WeatherCondition_CloudsDay = 4,
+		WeatherCondition_ShowerRainDay = 9,
+		WeatherCondition_CloudyWithRainDay = 10,
+		WeatherCondition_ThunderstormWithRainDay = 11,
+		WeatherCondition_SnowDay = 13,
+		WeatherCondition_FogDay = 50,
+		WeatherCondition_ClearNight = 101,
+		WeatherCondition_PartiallyCloudyNight = 102,
+		WeatherCondition_CloudyNight = 103,
+		WeatherCondition_CloudsNight = 104,
+		WeatherCondition_ShowerRainNight = 109,
+		WeatherCondition_CloudyWithRainNight = 110,
+		WeatherCondition_ThunderstormWithRainNight = 111,
+		WeatherCondition_SnowNight = 113,
+		WeatherCondition_FogNight = 150
+	};
+	Q_ENUM(WeatherCondition)
+
 	Q_INVOKABLE QString statusText_off() const;
 	Q_INVOKABLE QString statusText_unknown() const;
 
@@ -1194,6 +1217,9 @@ public:
 	Q_INVOKABLE QString tank_fluidTypeToText(Tank_Type type) const;
 
 	Q_INVOKABLE QString temperature_typeToText(Temperature_DeviceType type) const;
+
+	Q_INVOKABLE QString weather_conditionToText(WeatherCondition condition) const;
+	Q_INVOKABLE QString weather_conditionToIcon(WeatherCondition condition) const;
 
 	static Enums* create(QQmlEngine *engine = nullptr, QJSEngine *jsEngine = nullptr);
 };

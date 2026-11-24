@@ -181,6 +181,8 @@
     "geometry_statusBar_height": 52,
     "geometry_statusBar_horizontalMargin": 16,
     "geometry_statusBar_spacing": 8,
+    "geometry_statusBar_spacing_small": 2,
+    "geometry_statusBar_clock_spacing": 12,
 
     "geometry_tabBar_width": 464,
     "geometry_tabBar_height": "geometry_button_height",
@@ -313,6 +315,8 @@
     "geometry_sidePanel_sideWidget_spacing": 16,
     "geometry_sidePanel_quantityLabel_bottomMargin": 6,
     "geometry_sidePanel_spacing": 8,
+    "geometry_sidePanel_weather_spacing_horizontal": 8,
+    "geometry_sidePanel_weather_spacing_vertical": 2,
 
     "geometry_acInputDirectionIcon_rightMargin": 2,
 
