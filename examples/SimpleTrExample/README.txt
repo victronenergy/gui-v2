@@ -13,7 +13,7 @@ python3 ../../tools/gui-v2-plugin-compiler.py \
     --min-required-version v1.4.1 \
     --settings SimpleTrExample_PageSettingsSimple.qml
 
-Alternatively: copy the contents of this directory to the device, ssh in, and compile it on device (requires Large image):
+Alternatively: copy the contents of this directory to the device, ssh in, and compile it on device (first install the compiler on the device, see .github/gui-plugins.md):
 
 rsync -avc . root@gx.device.ip.address:/tmp/SimpleTrExample/
 ssh root@gx.device.ip.address

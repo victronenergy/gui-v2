@@ -44,7 +44,7 @@ python3 ../../tools/gui-v2-plugin-compiler.py \
     --settings FullApiExample_Main.qml \
     --devicelist 0x106 FullApiExample_Device.qml 'Full API example'
 
-Alternatively: copy the contents of this directory to the device, ssh in, and compile it on device (requires Large image):
+Alternatively: copy the contents of this directory to the device, ssh in, and compile it on device (first install the compiler on the device, see .github/gui-plugins.md):
 
 rsync -avc . root@gx.device.ip.address:/tmp/FullApiExample/
 ssh root@gx.device.ip.address

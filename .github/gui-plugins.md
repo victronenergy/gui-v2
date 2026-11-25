@@ -38,7 +38,7 @@ Six example plugins show the rules in practice:
 
    For a card, give the card file and the pane, `1` for Controls or `2` for Switches: `--card PluginNameCard.qml 1`.
 
-   Alternatively, compile it on a GX device if a Large image is installed, using `/opt/victronenergy/gui-v2/gui-v2-plugin-compiler.py`.
+   Alternatively, compile it on a GX device, using `/opt/victronenergy/gui-v2/gui-v2-plugin-compiler.py`. Since Venus OS v3.90-beta15 no image includes the compiler, so install it first. On a beta, run `/opt/victronenergy/swupdate-scripts/set-feed.sh candidate`, which also moves firmware updates to the beta channel; on an official release, run `/opt/victronenergy/swupdate-scripts/resize2fs.sh`. Then run `opkg update && opkg install gui-v2-plugin-compiler`.
 4. The compiler packs every `.qml` file in the directory, so subpages need no option of their own. It writes `PluginName.json`.
 5. To try it on a GX device, add `--install <gx-host> --ssh-key <private-key>` to the compile command. This is for testing only. The compiler connects as root with that key, copies `PluginName.json` to `/data/apps/available/PluginName/gui-v2/`, and symlinks that app directory to `/data/apps/enabled/PluginName`. A repeat install replaces that symlink. It will not replace a real directory. You can do the same copy and symlink by hand. On a desktop build of gui-v2, copy `PluginName.json` into the `plugins` directory next to the `venus-gui-v2` executable.
 

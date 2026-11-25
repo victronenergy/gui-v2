@@ -16,7 +16,7 @@ python3 ../../tools/gui-v2-plugin-compiler.py \
     --devicelist 0x106 DeviceListExample_CellTemperatures.qml 'Cell Temperatures' \
     --devicelist 0x106 DeviceListExample_ComponentError.qml 'Invalid Customisation'
 
-Alternatively: copy the contents of this directory to the device, ssh in, and compile it on device (requires Large image):
+Alternatively: copy the contents of this directory to the device, ssh in, and compile it on device (first install the compiler on the device, see .github/gui-plugins.md):
 
 rsync -avc . root@gx.device.ip.address:/tmp/DeviceListExample/
 ssh root@gx.device.ip.address
