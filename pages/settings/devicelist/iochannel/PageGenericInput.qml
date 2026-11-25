@@ -42,7 +42,7 @@ Page {
 			}
 
 			ListIOChannelShowDetails {
-				capabilitiesUid: "" // GenericInputs do not have a "/Capabilities" setting
+				capabilitiesUid: genericInput.serviceUid + "/SwitchableOutput/Capabilities"
 				showUiUid: genericInput.uid + "/Settings/ShowUIInput"
 			}
 
