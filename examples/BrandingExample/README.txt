@@ -30,7 +30,7 @@ Either: run the following in a terminal which has sourced the Venus OS SDK envir
 
 python3 ../../tools/gui-v2-plugin-compiler.py --branding Branding.qml
 
-Alternatively: copy the contents of this directory to the device, ssh in, and compile it on device (requires Large image):
+Alternatively: copy the contents of this directory to the device, ssh in, and compile it on device (first install the compiler on the device, see .github/gui-plugins.md):
 
 rsync -avc . root@gx.device.ip.address:/tmp/BrandingExample/
 ssh root@gx.device.ip.address
