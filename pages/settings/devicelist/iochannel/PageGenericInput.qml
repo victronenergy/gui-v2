@@ -42,8 +42,9 @@ Page {
 			}
 
 			ListIOChannelShowDetails {
-				capabilitiesUid: "" // GenericInputs do not have a "/Capabilities" setting
+				capabilitiesUid: genericInput.serviceUid + "/GenericInput/Capabilities"
 				showUiUid: genericInput.uid + "/Settings/ShowUIInput"
+				showOutputNote: false
 			}
 
 			ListRadioButtonGroup {
