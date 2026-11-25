@@ -117,7 +117,6 @@ ListNavigation {
 						font.pixelSize: Theme.font_size_caption
 						color: Theme.color_font_secondary
 						leftPadding: Theme.geometry_page_content_horizontalMargin
-						preferredVisible: root.capabilitiesUid !== ""
 					}
 				}
 			}
