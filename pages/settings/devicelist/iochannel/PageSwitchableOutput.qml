@@ -190,6 +190,8 @@ Page {
 			ListIOChannelShowDetails {
 				capabilitiesUid: switchableOutput.serviceUid + "/SwitchableOutput/Capabilities"
 				showUiUid: switchableOutput.uid + "/Settings/ShowUIControl"
+				//% "Choose where this switch can be operated. The switch keeps working when its control is hidden."
+				note: qsTrId("iochannel_showui_output_note")
 				interactive: _writeable
 			}
 

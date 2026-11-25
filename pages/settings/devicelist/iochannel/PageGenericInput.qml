@@ -44,7 +44,8 @@ Page {
 			ListIOChannelShowDetails {
 				capabilitiesUid: genericInput.serviceUid + "/GenericInput/Capabilities"
 				showUiUid: genericInput.uid + "/Settings/ShowUIInput"
-				showOutputNote: false
+				//% "Choose where this input can be operated. The input keeps working when its control is hidden."
+				note: qsTrId("iochannel_showui_input_note")
 			}
 
 			ListRadioButtonGroup {
