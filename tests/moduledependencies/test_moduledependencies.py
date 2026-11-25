@@ -55,6 +55,16 @@ TREE = {
         '    IMPORTS Victron.VenusOS\n'
         ')\n'
         'target_link_libraries(VictronGuiPlugins PRIVATE VictronVenusOS)\n'),
+    'cmake/ModuleCamper_Sources.cmake': (
+        'set(VictronCamper_QML_MODULE_SOURCES\n'
+        '    components/camper/CamperState.qml\n'
+        ')\n'),
+    'cmake/ModuleCamper.cmake': (
+        'qt_add_qml_module(VictronCamper\n'
+        '    URI Victron.Camper\n'
+        '    QML_FILES ${VictronCamper_QML_MODULE_SOURCES}\n'
+        ')\n'),
+    'components/camper/CamperState.qml': 'import QtQml\nQtObject {}\n',
     'components/Gauge.qml': 'import QtQuick\nimport Victron.VenusOS\nItem {}\n',
     'src/theme.h': '#include <QObject>\n#include "branding.h"\n',
     'src/theme.cpp': '#include "theme.h"\n',
@@ -244,6 +254,19 @@ class TestModuleDependencies(unittest.TestCase):
     def test_branding_links_victron_library(self):
         cmake = TREE['cmake/ModuleBranding.cmake'] + 'target_link_libraries(VictronBranding PUBLIC VictronVenusOS)\n'
         self.assertOneProblem({'cmake/ModuleBranding.cmake': cmake}, 'VictronBranding links VictronVenusOS')
+
+    def test_camper_qml_file_imports_victron_module(self):
+        self.assertOneProblem({'components/camper/CamperState.qml': 'import QtQml\nimport Victron.VenusOS\nQtObject {}\n'},
+                              'components/camper/CamperState.qml imports Victron.VenusOS')
+
+    def test_camper_qml_module_lists_victron_module(self):
+        cmake = TREE['cmake/ModuleCamper.cmake'].replace('    QML_FILES', '    IMPORTS Victron.VenusOS\n    QML_FILES')
+        self.assertOneProblem({'cmake/ModuleCamper.cmake': cmake},
+                              'qt_add_qml_module(VictronCamper) lists Victron.VenusOS')
+
+    def test_camper_links_victron_library(self):
+        cmake = TREE['cmake/ModuleCamper.cmake'] + 'target_link_libraries(VictronCamper PRIVATE VictronVenusOS)\n'
+        self.assertOneProblem({'cmake/ModuleCamper.cmake': cmake}, 'VictronCamper links VictronVenusOS')
 
     def test_guiplugins_header_has_same_name_as_venusos_header(self):
         venus = TREE['cmake/ModuleVenus_Sources.cmake'].replace('    src/theme.h\n', '    src/theme.h\n    src/units.h\n')

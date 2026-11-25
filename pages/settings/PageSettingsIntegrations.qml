@@ -55,12 +55,6 @@ Page {
 			}
 
 			ListNavigation {
-				//% "Camper"
-				text: qsTrId("pagesettingsintegrations_camper")
-				onClicked: Global.pageManager.pushPage("/pages/settings/PageSettingsCamper.qml", {"title": text})
-			}
-
-			ListNavigation {
 				//% "Bluetooth sensors"
 				text: qsTrId("pagesettingsintegrations_bluetooth_sensors")
 				preferredVisible: !!hasBluetoothSupport.value

@@ -12,6 +12,9 @@
 #  - Victron.Branding uses no other Victron module: no Victron QML import, no Victron entry in
 #    IMPORTS or DEPENDENCIES, no include of another Victron module's header, and no Victron library
 #    in its links. (Plugins compile against it alone.)
+#  - Victron.Camper uses no other Victron module: no Victron QML import, no Victron entry in
+#    IMPORTS or DEPENDENCIES, and no Victron library in its links. (Hosts without gui-v2, such as
+#    tools/camperview, build it.)
 #  - No GuiPlugins header has the same file name as a VenusOS header, so that the include check
 #    can tell them apart.
 #
@@ -44,6 +47,7 @@ SOURCE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 VENUSOS_TARGET = 'VictronVenusOS'
 BRANDING_TARGET = 'VictronBranding'
+CAMPER_TARGET = 'VictronCamper'
 GUIPLUGINS_TARGET = 'VictronGuiPlugins'
 GUIPLUGINS_URI = 'Victron.GuiPlugins'
 
@@ -506,6 +510,21 @@ def check(read_file, cmake_paths):
         if library.startswith('Victron'):
             problems.append('%s links %s. Victron.Branding must not use another Victron module.'
                             % (BRANDING_TARGET, library))
+
+    for path in module_files(cmake_texts, CAMPER_TARGET):
+        if path.endswith('.qml'):
+            for name in qml_imports(read_file(path) or ''):
+                if name.startswith('Victron.'):
+                    problems.append('%s imports %s. Victron.Camper must not use another Victron module.'
+                                    % (path, name))
+    for name in qml_module_imports(cmake_texts, CAMPER_TARGET):
+        if name.startswith('Victron.'):
+            problems.append('qt_add_qml_module(%s) lists %s. Victron.Camper must not use another Victron '
+                            'module.' % (CAMPER_TARGET, name))
+    for library in linked_libraries(cmake_texts, CAMPER_TARGET):
+        if library.startswith('Victron') and not library.startswith(CAMPER_TARGET):
+            problems.append('%s links %s. Victron.Camper must not use another Victron module.'
+                            % (CAMPER_TARGET, library))
 
     for path in venus_files:
         header = guiplugins_headers.get(os.path.basename(path))

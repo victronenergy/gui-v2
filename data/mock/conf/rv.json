@@ -1,0 +1,23 @@
+{
+    "files": [
+        ":/data/mock/conf/setup-common.json",
+        ":/data/mock/conf/services/quattro-3phase-grid-genset.json",
+        ":/data/mock/conf/services/alternator.json",
+        ":/data/mock/conf/services/smartshunt-battery.json"
+    ],
+    "setup": {
+        "com.victronenergy.settings": {
+            "/Settings/Gui/CustomIllustration": 1,
+            "/Settings/SystemSetup/HasDcSystem": 1
+        },
+        "com.victronenergy.system": {
+            "/ActiveBatteryService": "com.victronenergy.battery/289",
+            "/Ac/In/0/DeviceInstance": 274,
+            "/Ac/In/0/ServiceType": "vebus",
+            "/Ac/In/0/ServiceName": "com.victronenergy.vebus.ttyS2",
+            "/Ac/In/1/DeviceInstance": 274,
+            "/Ac/In/1/ServiceType": "vebus",
+            "/Ac/In/1/ServiceName": "com.victronenergy.vebus.ttyS2"
+        }
+    }
+}

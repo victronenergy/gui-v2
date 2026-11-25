@@ -4,164 +4,118 @@
 */
 
 import QtQuick
-import QtQuick.Effects
+import QtQuick.Controls.impl as CP
 
 Item {
 	id: root
+
+	required property CamperTheme theme
+	// Screen px per design px, from the scene.
+	required property real designScale
+	// Formats a finite power in Watts as { number, unit }. The host provides it, so that gui-v2 uses Units.
+	required property var powerFormatter
 
 	property url iconSource
 	property string title
 	property real value: NaN
 	property bool active: false
 	property bool alarm: false
-	property string valueOverride: ""
-	property string unitOverride: ""
 
-	property int colorScheme: 0
+	readonly property real _hPadding: theme.cardHorizontalPadding * designScale
+	readonly property real _rowHeight: theme.cardRowHeight * designScale
 
-	readonly property var _cardColor: colorScheme === 0 ? [ "#F8F9FA", "#CCE5FF", "#FBD2C5" ] : [ "#121518", "#002A54", "#561400" ]
-	readonly property var _cardBorderColor: colorScheme === 0 ? [ "#E6E6E6", "#005FBE", "#E84A1A" ] : [ "#121518", "#3395FF", "#E84A1A" ]
-	readonly property color _primaryTextColor: colorScheme === 0  ? "#343A40" : "#DEE2E6"
-	readonly property color _secondaryTextColor: colorScheme === 0  ? "#495057" : "#ADB5BD"
-	readonly property real _radius: Math.max(10, Math.round(height * 0.19))
-	readonly property real _iconSize: Math.max(24, Math.round(height * 0.32))
-	readonly property real _hMargin: Math.max(10, Math.round(width * 0.10))
-	readonly property real _vMargin: Math.max(7, Math.round(height * 0.11))
-	readonly property real _unitSpacing: 4
-	readonly property int _titleFontSize: Math.max(14, Math.round(height * 0.28))
-	readonly property int _valueFontSize: Math.max(16, Math.round(height * 0.35))
-	readonly property bool _iconNeedsBacking: !active && !alarm
+	readonly property var _formattedValue: isFinite(value) ? powerFormatter(value) : { number: "--", unit: "" }
 
-	readonly property var _formattedValue: _formatPower(value, valueOverride, unitOverride)
+	// Hugs the wider row, as the design's card does.
+	implicitWidth: Math.ceil(Math.max(titleRow.implicitWidth, valueLabel.implicitWidth) + 2 * _hPadding)
+	implicitHeight: Math.round(theme.cardHeight * designScale)
 
-	function _formatPower(power, overrideValue, overrideUnit) {
-		if (overrideValue.length > 0) {
-			return {
-				valueText: overrideValue,
-				unitText: overrideUnit
-			}
-		}
-		if (!isFinite(power)) {
-			return { valueText: "--", unitText: "" }
-		}
+	// The design's drop shadow, from a pre-blurred 9-slice image: a blur effect would cost a shader
+	// pass per card. The image is drawn at its own scale, then scaled down to the scene.
+	BorderImage {
+		// These match tools/camper-card-shadow.py: image px per design px, and in design px, how far
+		// the shadow reaches past the card and the size of each slice.
+		readonly property real _imageScale: 8
+		readonly property real _reach: 6
+		readonly property real _slice: 14
 
-		const absoluteValue = Math.abs(power)
-		if (absoluteValue >= 1000) {
-			const kiloWattsDecimals = absoluteValue >= 10000 ? 0
-					: 1
-			return {
-				valueText: (absoluteValue / 1000).toFixed(kiloWattsDecimals),
-				unitText: "kW"
-			}
-		}
-
-		return {
-			valueText: Math.round(absoluteValue).toString(),
-			unitText: "W"
-		}
+		x: -_reach * root.designScale
+		y: (root.theme.cardShadowOffsetY - _reach) * root.designScale
+		width: (root.width / root.designScale + 2 * _reach) * _imageScale
+		height: (root.height / root.designScale + 2 * _reach) * _imageScale
+		scale: root.designScale / _imageScale
+		transformOrigin: Item.TopLeft
+		source: "qrc:/images/camper/camper_card_shadow.png"
+		border.left: _slice * _imageScale
+		border.right: _slice * _imageScale
+		border.top: _slice * _imageScale
+		border.bottom: _slice * _imageScale
 	}
 
 	Rectangle {
-		z: -1
-		color: Qt.rgba(0.0, 0.0, 0.0, 0.1)
-		y: 2
-		width: parent.width
-		height: parent.height
-		radius: root._radius
-	}
-
-	Rectangle {
-		id: card
+		id: background
 
 		anchors.fill: parent
-		color: root.alarm ? root._cardColor[2]
-			: root.active ? root._cardColor[1]
-			: root._cardColor[0]
-		border.width: 1
-		border.color: root.alarm ? root._cardBorderColor[2]
-			: root.active ? root._cardBorderColor[1]
-			: root._cardBorderColor[0]
-		radius: root._radius
+		radius: root.theme.cardRadius * root.designScale
+		color: root.alarm ? root.theme.colors.cardAlarmBackground
+			: root.active ? root.theme.colors.cardActiveBackground
+			: root.theme.colors.cardBackground
+	}
 
-		Column {
-			anchors {
-				fill: parent
-				leftMargin: root._hMargin
-				rightMargin: root._hMargin
-				topMargin: root._vMargin
-				bottomMargin: root._vMargin
-			}
-			spacing: Math.max(3, Math.round(root._vMargin * 0.55))
+	// Drawn over the fill, so that a translucent border tints it as in the design.
+	Rectangle {
+		anchors.fill: parent
+		radius: background.radius
+		color: "transparent"
+		border.width: Math.max(1, Math.round(root.theme.cardBorderWidth * root.designScale))
+		border.color: root.alarm ? root.theme.colors.cardAlarmBorder
+			: root.active ? root.theme.colors.cardActiveBorder
+			: root.theme.colors.cardBorder
+	}
 
-			Row {
-				width: parent.width
-				height: root._iconSize
-				spacing: Math.max(6, Math.round(root._hMargin * 0.40))
+	Column {
+		x: root._hPadding
+		y: root.theme.cardVerticalPadding * root.designScale
+		opacity: root.active || root.alarm ? 1 : root.theme.cardInactiveContentOpacity
 
-				Item {
-					width: root._iconSize
-					height: root._iconSize
+		Row {
+			id: titleRow
 
-					property string source: root.iconSource
-					property color color: _secondaryTextColor
+			height: root._rowHeight
+			spacing: root.theme.cardIconSpacing * root.designScale
 
-					Image {
-						id: sourceImage
-						source: parent.source
-						sourceSize: Qt.size(parent.width, parent.height)
-						mipmap: true
-						visible: false
-					}
-
-					MultiEffect {
-						source: sourceImage
-						anchors.fill: parent
-						colorization: 1
-						colorizationColor: parent.color
-					}
-				}
-
-				Text {
-					width: parent.width - root._iconSize - parent.spacing
-					anchors.verticalCenter: parent.verticalCenter
-					text: root.title
-					color: root._secondaryTextColor
-					font.bold: true
-					font.pixelSize: root._titleFontSize
-					elide: Text.ElideRight
-				}
+			CP.ColorImage {
+				width: Math.round(root.theme.cardIconSize * root.designScale)
+				height: width
+				anchors.verticalCenter: parent.verticalCenter
+				source: root.iconSource
+				sourceSize: Qt.size(width, height)
+				color: root.theme.colors.secondaryText
 			}
 
-			Item {
-				width: parent.width
-				height: parent.height - root._iconSize - parent.spacing
-
-				Text {
-					id: valueText
-
-					anchors {
-						left: parent.left
-						bottom: parent.bottom
-					}
-					text: root._formattedValue.valueText
-					color: root._primaryTextColor
-					font.pixelSize: root._valueFontSize
-					font.weight: Font.DemiBold
-					elide: Text.ElideRight
-				}
-
-				Text {
-					anchors {
-						left: valueText.right
-						leftMargin: root._unitSpacing
-						baseline: valueText.baseline
-					}
-					text: root._formattedValue.unitText
-					color: root._primaryTextColor
-					font.pixelSize: root._valueFontSize
-					visible: text.length > 0
-				}
+			Text {
+				anchors.verticalCenter: parent.verticalCenter
+				text: root.title
+				color: root.theme.colors.secondaryText
+				font.family: root.theme.fontFamily
+				font.pixelSize: Math.round(root.theme.titleFontSize * root.designScale)
+				font.weight: root.theme.titleFontWeight
+				font.letterSpacing: root.theme.titleLetterSpacing * root.designScale
 			}
+		}
+
+		// The value and unit share one style with no gap, so they are one label.
+		Text {
+			id: valueLabel
+
+			height: root._rowHeight
+			verticalAlignment: Text.AlignVCenter
+			text: root._formattedValue.number + root._formattedValue.unit
+			color: root.theme.colors.primaryText
+			font.family: root.theme.quantityFontFamily
+			font.pixelSize: Math.round(root.theme.valueFontSize * root.designScale)
+			font.weight: root.theme.valueFontWeight
+			font.letterSpacing: root.theme.valueLetterSpacing * root.designScale
 		}
 	}
 }

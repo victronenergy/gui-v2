@@ -8,33 +8,31 @@ import QtQuick
 Rectangle {
 	id: root
 
-	// BatteryState
-	// 0 - Idle
-	// 1 - Charging
-	// 2 - Discharging
-	// 3 - Low
-	readonly property int batteryState: value < 10 ? 3
-							: discharging ? 2
-							: charging ? 1
-							: 0
-	property int value: 66
+	required property CamperTheme theme
+	// Screen px per design px, from the scene.
+	required property real designScale
+
+	property real value: NaN
 	property bool charging: false
 	property bool discharging: false
-	property int colorScheme: 0
-
-	readonly property real batteryNubWidth: Math.max(4, Math.round(height * 0.08))
-	readonly property color _backgroundColor: colorScheme === 0 ? "#F8F9FA" : "#121518"
-	readonly property var _batteryColor: colorScheme === 0 ? [ "#CCE5FF", "#C0F0D4", "#FFE4B8", "#FBD2C5" ] : [ "#002A54", "#042E15", "#522F00", "#561400" ]
-	readonly property var _batteryBorderColor: colorScheme === 0 ? [ "#005FBE", "#148443", "#FF9500", "#DB3500" ] : [ "#3395FF", "#33E47D", "#FF9500", "#FF5C28" ]
-	readonly property color _iconColor: root.colorScheme === 0 ? "#121518" : "#F1F3F5"
-	readonly property color _textColor: root.colorScheme === 0 ? "#343A40" : "#DEE2E6"
-
+	property bool alarm: false
 	readonly property real _doubleBorderWidth: border.width * 2
 
-	radius: Math.round(height/5)
-	color: _backgroundColor
-	border.width: Math.max(1, height/22)
-	border.color: _batteryBorderColor[root.batteryState]
+	// The alarm look wins over charging or discharging.
+	readonly property color _fillColor: alarm ? theme.colors.batteryAlarmFill
+			: discharging ? theme.colors.batteryDischargingFill
+			: charging ? theme.colors.batteryChargingFill
+			: theme.colors.batteryIdleFill
+
+	implicitWidth: Math.round(theme.batteryWidth * designScale)
+	implicitHeight: Math.round(theme.batteryHeight * designScale)
+	radius: theme.batteryRadius * designScale
+	color: theme.colors.batteryBackground
+	border.width: Math.max(1, Math.round(theme.batteryBorderWidth * designScale))
+	border.color: alarm ? theme.colors.batteryAlarmBorder
+			: discharging ? theme.colors.batteryDischargingBorder
+			: charging ? theme.colors.batteryChargingBorder
+			: theme.colors.batteryIdleBorder
 
 	Rectangle { // The internal color representing charge amount
 		anchors {
@@ -46,17 +44,23 @@ Rectangle {
 			bottomMargin: root._doubleBorderWidth
 		}
 
-		width: (root.width - root.border.width * 4) * (root.value / 100)
-		bottomLeftRadius: root.radius - root.border.width
-		topLeftRadius: root.radius - root.border.width
-		bottomRightRadius: 0 // math here
-		topRightRadius: 0 // math here
-		color: _batteryColor[root.batteryState]
+		readonly property real _fullWidth: root.width - root.border.width * 4
+		readonly property real _innerRadius: Math.max(0, root.radius - root.border.width)
+		// Round the right edge only once it reaches the outline's corners, so a full battery
+		// follows the outline instead of poking past it.
+		readonly property real _rightRadius: Math.max(0, _innerRadius - (_fullWidth - width))
+
+		width: _fullWidth * (isFinite(root.value) ? Math.max(0, Math.min(100, root.value)) / 100 : 0)
+		bottomLeftRadius: _innerRadius
+		topLeftRadius: _innerRadius
+		bottomRightRadius: _rightRadius
+		topRightRadius: _rightRadius
+		color: root._fillColor
 	}
 
 	Rectangle {
-		width: root.batteryNubWidth
-		height: Math.round(parent.height/3)
+		width: Math.round(root.theme.batteryNubWidth * root.designScale)
+		height: Math.round(root.theme.batteryNubHeight * root.designScale)
 		x: parent.width + width/4
 		y: Math.round((parent.height - height)/2)
 		bottomRightRadius: width
@@ -71,15 +75,15 @@ Rectangle {
 
 		Canvas {
 			id: batteryIcon
-			property color color: root._iconColor
-			property bool style: root.charging ? true : false
+			property color color: root.theme.colors.batteryIcon
+			property bool style: root.charging
 
 			anchors {
 				verticalCenter: parent.verticalCenter
 				left: parent.left
 			}
 			width: height
-			height: Math.max(16, Math.round(parent.height * 0.45))
+			height: Math.round(root.theme.batteryIconSize * root.designScale)
 			onPaint: {
 				const ctx = getContext("2d")
 				ctx.clearRect(0, 0, width, height)
@@ -120,10 +124,12 @@ Rectangle {
 				left: batteryIcon.visible ? batteryIcon.right : parent.left
 			}
 
-			text: root.value + "%"
-			color: root._textColor
-			font.pixelSize: Math.max(16, Math.round(parent.height * 0.6))
-			font.bold: true
+			text: isFinite(root.value) ? Math.round(root.value) + "%" : "--%"
+			color: root.theme.colors.batteryText
+			font.family: root.theme.quantityFontFamily
+			font.pixelSize: Math.round(root.theme.valueFontSize * root.designScale)
+			font.weight: root.theme.valueFontWeight
+			font.letterSpacing: root.theme.valueLetterSpacing * root.designScale
 		}
 	}
 }

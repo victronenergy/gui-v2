@@ -5,113 +5,84 @@
 
 import QtQuick
 
+/*
+	The RV illustration, for a given set of system values.
+
+	This has no backend dependencies. The owner provides the values, and may replace the text.
+*/
 Item {
 	id: root
 
-	readonly property int scenarioCharging: 0
-	readonly property int scenarioDriving: 1
-	readonly property int scenarioParking: 2
-	readonly property int scenarioOffGrid: 3
+	property int colorScheme: 0  // 0: light, 1: dark
+	property CamperTheme theme: CamperTheme {
+		colors.dark: root.colorScheme === 1
+	}
 
-	readonly property int _inputSourceNotAvailable: 0
-	readonly property int _inputSourceGrid: 1
-	readonly property int _inputSourceGenerator: 2
-	readonly property int _inputSourceShore: 3
-
-	property int colorScheme: 0
-	property int activeInputSource: _inputSourceNotAvailable
-	property bool shorePower: false
-
-	property bool generator: true
-	property bool solar: true
-
-	property real alternatorPower: NaN
-	property real generatorPower: NaN
-	property real solarPower: NaN
-
-	property real activeInputPower: NaN
-	property real batteryPower: NaN
+	// The raw system values, which CamperState interprets. See CamperState for their meaning.
+	property alias activeInputSource: rvState.activeInputSource
+	property alias acInputSources: rvState.acInputSources
+	property alias systemState: rvState.systemState
+	property alias inverterChargerPower: rvState.inverterChargerPower
+	property alias alternatorStates: rvState.alternatorStates
+	property alias lowSocAlarm: rvState.lowSocAlarm
+	property alias veBusLowBatteryAlarm: rvState.veBusLowBatteryAlarm
+	property alias solarDeviceCount: rvState.solarDeviceCount
+	property alias activeInputPower: rvState.activeInputPower
+	property alias generatorPower: rvState.generatorPower
+	property alias solarPower: rvState.solarPower
+	property alias alternatorPower: rvState.alternatorPower
+	property alias batteryPower: rvState.batteryPower
+	property alias dcLoadsPower: rvState.dcLoadsPower
+	property alias acLoadsPower: rvState.acLoadsPower
 	property real batterySoc: NaN
-	property real dcLoadsPower: NaN
-	property real acLoadsPower: NaN
 
-	readonly property int _activeInputSource: Number(activeInputSource)
-	readonly property bool _gridOrShoreActive: shorePower
-			|| _activeInputSource === _inputSourceGrid
-			|| _activeInputSource === _inputSourceShore
-	readonly property bool _generatorActive: generatorPower > _movingAlternatorThreshold
-
-	readonly property real _movingAlternatorThreshold: 50
-	readonly property int _scenario: _gridOrShoreActive ? scenarioCharging
-			: alternatorPower > _movingAlternatorThreshold ? scenarioDriving
-			: _generatorActive ? scenarioParking
-			: scenarioOffGrid
-
-	readonly property real gridShorePower: _gridOrShoreActive && isFinite(activeInputPower) ? activeInputPower
-			: NaN
-
+	// Translated defaults, which a host may replace with its own, e.g. gui-v2's CommonWords.
 	//% "Shore"
-	readonly property string _gridShoreTitle: _activeInputSource === _inputSourceShore ? qsTrId("camper_card_shore")
-			//% "Grid"
-			: _activeInputSource === _inputSourceGrid ? qsTrId("camper_card_grid")
-			//% "Grid/Shore"
-			: qsTrId("camper_card_grid_shore")
-	//% "Charging"
-	readonly property string _scenarioText: _scenario === scenarioCharging ? qsTrId("camper_scenario_charging")
-			//% "Driving"
-			: _scenario === scenarioDriving ? qsTrId("camper_scenario_driving")
-			//% "Parking"
-			: _scenario === scenarioParking ? qsTrId("camper_scenario_parking")
-			//% "Off-grid"
-			: qsTrId("camper_scenario_offgrid")
+	property string shoreTitle: qsTrId("camperoverviewview_shore")
+	//% "Grid"
+	property string gridTitle: qsTrId("camperoverviewview_grid")
+	//% "PV"
+	property string solarTitle: qsTrId("camperoverviewview_solar_pv")
+	//% "Generator"
+	property string generatorTitle: qsTrId("camperoverviewview_generator")
+	//% "Alternator"
+	property string alternatorTitle: qsTrId("camperoverviewview_alternator")
+	//% "DC"
+	property string dcLoadsTitle: qsTrId("camperoverviewview_dc_loads")
+	//% "AC"
+	property string acLoadsTitle: qsTrId("camperoverviewview_ac_loads")
+	//% "AC off"
+	property string acOffTitle: qsTrId("camperoverviewview_ac_off")
+	//% "AC cut"
+	property string acCutTitle: qsTrId("camperoverviewview_ac_cut")
 
-
-	function _sumPowerValues(values) {
-		let total = NaN
-		for (let i = 0; i < values.length; ++i) {
-			if (isFinite(values[i])) {
-				total = isFinite(total) ? total + values[i]
-						: values[i]
-			}
+	// Formats a finite power in Watts as { number, unit }. This default follows gui-v2's Units for
+	// Watts, for hosts that have no Units: whole Watts below 10 kW, else kW with two decimals.
+	property var powerFormatter: function(watts) {
+		if (Math.abs(watts) >= 10000) {
+			return { number: (watts / 1000).toFixed(2), unit: "kW" }
 		}
-		return total
+		const rounded = Math.round(watts)
+		return { number: (rounded === 0 ? 0 : rounded).toString(), unit: "W" }
+	}
+
+	CamperState {
+		id: rvState
 	}
 
 	CamperOverviewScene {
 		anchors.fill: parent
-
-		colorScheme: root.colorScheme
-		scenario: root._scenario
-		scenarioText: root._scenarioText
-
-		gridShoreTitle: root._gridShoreTitle
-
-		//% "PV"
-		solarTitle: qsTrId("camper_card_solar_pv")
-		//% "Generator"
-		generatorTitle: qsTrId("camper_card_generator")
-		//% "Battery"
-		batteryTitle: qsTrId("camper_card_battery")
-		//% "Alternator"
-		alternatorTitle: qsTrId("camper_card_alternator")
-		//% "DC"
-		dcLoadsTitle: qsTrId("camper_card_dc_loads")
-		//% "AC"
-		acLoadsTitle: qsTrId("camper_card_ac_loads")
-
-		gridShoreIsShore: _activeInputSource === _inputSourceShore
-
-		shorePower: root.shorePower
-		solar: root.solar
-		generator: root.generator
-
-		gridShorePower: root.gridShorePower
-		generatorPower: root.generatorPower
-		solarPower: root.solarPower
-		batteryPower: root.batteryPower
+		camperState: rvState
+		theme: root.theme
+		powerFormatter: root.powerFormatter
+		gridShoreTitle: rvState.gridInput ? root.gridTitle : root.shoreTitle
+		solarTitle: root.solarTitle
+		generatorTitle: root.generatorTitle
+		alternatorTitle: root.alternatorTitle
+		dcLoadsTitle: root.dcLoadsTitle
+		acLoadsTitle: root.acLoadsTitle
+		acOffTitle: root.acOffTitle
+		acCutTitle: root.acCutTitle
 		batterySoc: root.batterySoc
-		alternatorPower: root.alternatorPower
-		dcLoadsPower: root.dcLoadsPower
-		acLoadsPower: root.acLoadsPower
 	}
 }

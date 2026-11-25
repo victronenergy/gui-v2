@@ -8,6 +8,10 @@ import QtQuick
 Item {
 	id: root
 
+	required property CamperTheme theme
+	// Screen px per design px, as in the other camper components.
+	required property real designScale
+
 	property real startX: NaN
 	property real startY: NaN
 	property real endX: NaN
@@ -15,14 +19,12 @@ Item {
 	property real turnX: NaN
 	property real turnY: NaN
 	property bool horizontalFirst: true
-	property color strokeColor: lightColor
-	property real strokeWidth: 2
-	property real headLength: 6
-	property real headWidth: 12
-	property real cornerRadius: 12
 
-	readonly property color darkColor: "#66B0FF"
-	readonly property color lightColor: "#005FBE"
+	property color strokeColor: theme.colors.flow
+	property real strokeWidth: theme.arrowStrokeWidth * designScale
+	property real headLength: theme.arrowHeadLength * designScale
+	property real headWidth: theme.arrowHeadWidth * designScale
+	property real cornerRadius: theme.arrowCornerRadius * designScale
 
 	function _isFiniteNumber(value) {
 		return typeof value === "number" && isFinite(value)
@@ -73,6 +75,7 @@ Item {
 	onStrokeWidthChanged: canvas.requestPaint()
 	onHeadLengthChanged: canvas.requestPaint()
 	onHeadWidthChanged: canvas.requestPaint()
+	onCornerRadiusChanged: canvas.requestPaint()
 	onVisibleChanged: canvas.requestPaint()
 
 	Canvas {

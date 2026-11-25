@@ -8,89 +8,28 @@ import QtQuick
 Item {
 	id: root
 
-	readonly property int scenarioCharging: 0
-	readonly property int scenarioDriving: 1
-	readonly property int scenarioParking: 2
-	readonly property int scenarioOffGrid: 3
+	required property CamperState camperState
+	required property CamperTheme theme
+	required property var powerFormatter
 
-	property int scenario: scenarioOffGrid
-	property string scenarioText: "Stationary"
-	property string gridShoreTitle: "Shore"
-	property bool gridShoreIsShore: false
-	property string solarTitle: "PV"
-	property string generatorTitle: "Generator"
-	property string batteryTitle: "Battery"
-	property string alternatorTitle: "Alternator"
-	property string dcLoadsTitle: "DC"
-	property string acLoadsTitle: "AC"
+	// Set by CamperOverviewView, which holds the translated defaults.
+	property string gridShoreTitle
+	property string solarTitle
+	property string generatorTitle
+	property string alternatorTitle
+	property string dcLoadsTitle
+	property string acLoadsTitle
+	property string acOffTitle
+	property string acCutTitle
 
-	property bool shorePower: false
-	property bool solar: true
-	property bool generator: true
-	property real gridShorePower: NaN
-	property real generatorPower: NaN
-	property real solarPower: NaN
-	property real batteryPower: NaN
 	property real batterySoc: NaN
-	property real alternatorPower: NaN
-	property real dcLoadsPower: NaN
-	property real acLoadsPower: NaN
 
-	property int colorScheme: 0
-	readonly property color _pageBackground: colorScheme === 0 ? lightColorBackground : darkColorBackground
-	readonly property color lightColorBackground: "#E9ECEF"
-	readonly property color darkColorBackground: "#0A0C0E"
-
-	readonly property color _flowColor: colorScheme === 0 ? "#005FBE" : "#66B0FF"
 	readonly property bool _portrait: root.height > root.width
 
-	readonly property bool _gridShoreActive: _isActivePower(gridShorePower)
-	readonly property bool _generatorActive: _isActivePower(root.generatorPower)
-	readonly property bool _solarActive: _isActivePower(root.solarPower)
-	readonly property bool _alternatorActive: _isActivePower(root.alternatorPower)
-	readonly property bool _dcLoadsActive: _isActivePower(root.dcLoadsPower)
-	readonly property bool _acLoadsActive: _isActivePower(root.acLoadsPower)
-	readonly property bool _batteryFlowActive: _isActivePower(batteryPower, 60)
-	readonly property bool _batterySocWarning: isFinite(batterySoc) && batterySoc <= 50
-	readonly property bool _batterySocAlarm: isFinite(batterySoc) && batterySoc <= 10
-	readonly property bool _acCut: _batterySocAlarm && !_gridShoreActive && !_generatorActive
-	readonly property bool _passThroughMode: _gridShoreActive
-			&& !_solarActive
-			&& !_generatorActive
-			&& !_alternatorActive
-			&& !_batteryFlowActive
-	readonly property bool _hubVisible: _solarActive
-			|| _alternatorActive
-			|| _gridShoreActive
-			|| _generatorActive
-			|| _batteryFlowActive
-			|| _acLoadsActive
-			|| _dcLoadsActive
-	readonly property bool _flowSolarToDc: _solarActive && _dcLoadsActive
-	readonly property bool _flowSolarToBattery: _solarActive
-	readonly property bool _dcCardActive: _dcLoadsActive
-			|| _solarActive
-			|| _gridShoreActive
-			|| _alternatorActive
-			|| _generatorActive
-			|| _batteryFlowActive
-	readonly property bool _flowBatteryToDc: _dcCardActive && _hubVisible
-	readonly property bool _flowHubToAc: _acLoadsActive && !_acCut && !_passThroughMode
-	readonly property bool _flowHubToBattery: _gridShoreActive || _flowGeneratorToHub
-	readonly property bool _flowBatteryToHub: _acLoadsActive && !_acCut && !_passThroughMode
-	readonly property bool _flowGridToHub: _gridShoreActive && !_passThroughMode
-	readonly property bool _flowGeneratorToHub: _generatorActive && !_passThroughMode
-	readonly property bool _flowAlternatorToBattery: _alternatorActive
-	readonly property bool _flowInputToAc: (_gridShoreActive || _generatorActive) && _acLoadsActive
-	readonly property string _socText: !isFinite(batterySoc) ? "--%"
-			: batteryPower < -80 ? "+" + Math.round(Math.max(0, Math.min(100, batterySoc))).toString() + "%"
-			: Math.round(Math.max(0, Math.min(100, batterySoc))).toString() + "%"
-
-	function _isActivePower(value, threshold) {
-		const effectiveThreshold = isFinite(threshold) ? threshold
-				: 30
-		return isFinite(value) && Math.abs(value) >= effectiveThreshold
-	}
+	// An unknown scenario shows the off-grid background, which claims no external input or driving.
+	readonly property string _scenarioImageName: camperState.scenario === camperState.scenarioCharging ? "charging"
+			: camperState.scenario === camperState.scenarioDriving ? "driving"
+			: "offgrid"
 
 	function _boundedX(x, width, containerWidth) {
 		return Math.max(0, Math.min(containerWidth - width, x))
@@ -102,225 +41,81 @@ Item {
 
 	Rectangle {
 		anchors.fill: parent
-		color: root._pageBackground
+		color: root.theme.colors.background
 	}
+
 	Item {
 		id: sceneLayer
 
 		anchors {
 			fill: parent
-			leftMargin: root._portrait ? 10
-				: 26
-			rightMargin: root._portrait ? 10
-				: 26
-			topMargin: root._portrait ? 12
-				: 16
-			bottomMargin: root._portrait ? 12
-				: 16
+			leftMargin: root._portrait ? root.theme.portraitHorizontalMargin : root.theme.landscapeHorizontalMargin
+			rightMargin: root._portrait ? root.theme.portraitHorizontalMargin : root.theme.landscapeHorizontalMargin
+			topMargin: root._portrait ? root.theme.portraitVerticalMargin : root.theme.landscapeVerticalMargin
+			bottomMargin: root._portrait ? root.theme.portraitVerticalMargin : root.theme.landscapeVerticalMargin
 		}
 
-		readonly property real _camperAspect: 335 / 149
+		readonly property real _camperAspect: root.theme.illustrationAspectRatio
 		readonly property real _camperWidth: Math.min(
-				width * (root._portrait ? 0.98 : 0.92),
-				height * _camperAspect * (root._portrait ? 0.88 : 0.94))
+				width * (root._portrait ? root.theme.portraitWidthFill : root.theme.landscapeWidthFill),
+				height * _camperAspect * (root._portrait ? root.theme.portraitHeightFill : root.theme.landscapeHeightFill))
 		readonly property real _camperHeight: _camperWidth / _camperAspect
-		readonly property real _cardWidth: Math.max(122, Math.min(170, _camperWidth * 0.175))
-		readonly property real _cardExtraWidth: Math.max(122, Math.min(170, _camperWidth * 0.275))
-		readonly property real _cardHeight: Math.round(_cardWidth * 0.62)
-		readonly property real _hubSize: Math.max(34, Math.round(_cardHeight * 0.75))
-		readonly property real _batteryWidth: Math.max(78, Math.round(_cardWidth * 0.78))
-		readonly property real _batteryHeight: Math.max(40, Math.round(_cardHeight * 0.52))
-		readonly property real _nodeGap: Math.max(8, Math.round(_cardHeight * 0.14))
+		// Screen px per design px: the design drawn at the illustration's width.
+		readonly property real _scale: _camperWidth / root.theme.designWidth
+		readonly property real _nodeGap: root.theme.arrowGap * _scale
+
+		// Converts a design x or y on the illustration to a scene position.
+		function _sceneX(designX) {
+			return camperImage.x + designX * _scale
+		}
+		function _sceneY(designY) {
+			return camperImage.y + designY * _scale
+		}
 
 		Image {
 			id: camperImage
 
-			readonly property var _backgroundImage: root.colorScheme === 0
-					? root.solar ? [ "qrc:/images/camper/camper_solar_charging_light.svg",
-									"qrc:/images/camper/camper_solar_driving_light.svg",
-									"qrc:/images/camper/camper_solar_parking_light.svg",
-									"qrc:/images/camper/camper_solar_offgrid_light.svg" ]
-								: [ "qrc:/images/camper/camper_nosolar_charging_light.svg",
-									"qrc:/images/camper/camper_nosolar_driving_light.svg",
-									"qrc:/images/camper/camper_nosolar_parking_light.svg",
-									"qrc:/images/camper/camper_nosolar_offgrid_light.svg" ]
-					: root.solar ? [ "qrc:/images/camper/camper_solar_charging_dark.svg",
-									"qrc:/images/camper/camper_solar_driving_dark.svg",
-									"qrc:/images/camper/camper_solar_parking_dark.svg",
-									"qrc:/images/camper/camper_solar_offgrid_dark.svg" ]
-								: [ "qrc:/images/camper/camper_nosolar_charging_dark.svg",
-									"qrc:/images/camper/camper_nosolar_driving_dark.svg",
-									"qrc:/images/camper/camper_nosolar_parking_dark.svg",
-									"qrc:/images/camper/camper_nosolar_offgrid_dark.svg" ]
-
-			z: 0
 			width: sceneLayer._camperWidth
 			height: sceneLayer._camperHeight
 			anchors.centerIn: parent
-			source: root.scenario === root.scenarioCharging ? _backgroundImage[0]
-				: root.scenario === root.scenarioDriving ? _backgroundImage[1]
-				: root.scenario === root.scenarioParking ? _backgroundImage[2]
-				: _backgroundImage[3]
+			source: "qrc:/images/camper/camper_%1_%2_%3.svg"
+					.arg(root.camperState.solarPresent ? "solar" : "nosolar")
+					.arg(root._scenarioImageName)
+					.arg(root.theme.colors.dark ? "dark" : "light")
+			sourceSize.width: width
 			fillMode: Image.PreserveAspectFit
 			smooth: true
-
-			Rectangle {
-				x: 0
-				y: 0
-				width: parent.width * .65
-				height: parent.height * .097
-				color: root._pageBackground
-				visible: !root.solar // hide solar panel
-			}
-		}
-
-		CamperDevice {
-			id: hub
-			z: 4
-			width: sceneLayer._hubSize
-			height: sceneLayer._hubSize
-			x: root._boundedX(camperImage.x + camperImage.width * 0.36 - width * 0.50, width, sceneLayer.width)
-			y: root._boundedY(camperImage.y + camperImage.height * 0.60 - height * 0.50, height, sceneLayer.height)
-			active: !root._passThroughMode
-			alarm: _batterySocAlarm
-			colorScheme: root.colorScheme
-		}
-
-		CamperBattery {
-			id: battery
-			z: 5
-			width: sceneLayer._batteryWidth
-			height: sceneLayer._batteryHeight
-			value: root.batterySoc
-			x: root._boundedX(camperImage.x + camperImage.width * 0.39 - width * 0.50, width, sceneLayer.width)
-			y: root._boundedY(camperImage.y + camperImage.height * 0.28 - height * 0.50, height, sceneLayer.height)
-			colorScheme: root.colorScheme
-		}
-
-
-		CamperDomainCard {
-			id: solarCard
-
-			z: 3
-			x: root._boundedX(camperImage.x + camperImage.width * 0.18 - width * 0.50, width, sceneLayer.width)
-			y: root._boundedY(camperImage.y + camperImage.height * 0.10 - height * 0.50, height, sceneLayer.height)
-			width: sceneLayer._cardWidth
-			height: sceneLayer._cardHeight
-			iconSource: "qrc:/images/solaryield.svg"
-			title: root.solarTitle
-			value: root.solarPower
-			active: root._solarActive
-			visible: root.solar
-			colorScheme: root.colorScheme
-		}
-
-		CamperDomainCard {
-			id: gridShoreCard
-
-			z: 3
-			x: root._boundedX(camperImage.x + camperImage.width * 0.10 - width * 0.50, width, sceneLayer.width)
-			y: root._boundedY(camperImage.y + camperImage.height * 0.38, height, sceneLayer.height)
-			width: sceneLayer._cardWidth
-			height: sceneLayer._cardHeight
-			iconSource: root.gridShoreIsShore ? "qrc:/images/shore.svg"
-				: "qrc:/images/grid.svg"
-			title: root.gridShoreTitle
-			value: root.gridShorePower
-			active: root._gridShoreActive
-			colorScheme: root.colorScheme
-		}
-
-		CamperDomainCard {
-			id: generatorCard
-
-			z: 3
-			x: root._boundedX(camperImage.x + camperImage.width * 0.30 - width * 0.50, width, sceneLayer.width)
-			y: root._boundedY(camperImage.y + camperImage.height * 0.83, height, sceneLayer.height)
-			width: sceneLayer._cardExtraWidth
-			height: sceneLayer._cardHeight
-			iconSource: "qrc:/images/generator.svg"
-			title: root.generatorTitle
-			value: root.generatorPower
-			active: root._generatorActive
-			visible: root.generator
-			colorScheme: root.colorScheme
-		}
-
-		CamperDomainCard {
-			id: dcCard
-
-			z: 3
-			x: root._boundedX(camperImage.x + camperImage.width * 0.62 - width * 0.50, width, sceneLayer.width)
-			y: root._boundedY(camperImage.y + camperImage.height * 0.02, height, sceneLayer.height)
-			width: sceneLayer._cardWidth
-			height: sceneLayer._cardHeight
-			iconSource: "qrc:/images/dcloads.svg"
-			title: root.dcLoadsTitle
-			value: root.dcLoadsPower
-			active: root._dcCardActive
-			colorScheme: root.colorScheme
-		}
-
-		CamperDomainCard {
-			id: acCard
-
-			z: 3
-			x: root._boundedX(camperImage.x + camperImage.width * 0.62 - width * 0.50, width, sceneLayer.width)
-			y: root._boundedY(camperImage.y + camperImage.height * 0.70, height, sceneLayer.height)
-			width: sceneLayer._cardWidth
-			height: sceneLayer._cardHeight
-			iconSource: "qrc:/images/acloads.svg"
-			title: root.acLoadsTitle
-			value: root.acLoadsPower
-			active: root._acLoadsActive
-			alarm: root._acCut
-			colorScheme: root.colorScheme
-		}
-
-		CamperDomainCard {
-			id: alternatorCard
-
-			z: 3
-			x: root._boundedX(camperImage.x + camperImage.width * 0.90 - width * 0.50, width, sceneLayer.width)
-			y: root._boundedY(camperImage.y + camperImage.height * 0.4, height, sceneLayer.height)
-			width: sceneLayer._cardExtraWidth
-			height: sceneLayer._cardHeight
-			iconSource: "qrc:/images/alternator.svg"
-			title: root.alternatorTitle
-			value: root.alternatorPower
-			active: root._alternatorActive
-			colorScheme: root.colorScheme
 		}
 
 		CamperFlowArrow {
-			z: 2
 			anchors.fill: parent
-			visible: root._flowSolarToBattery
-			strokeColor: root._flowColor
+			visible: root.camperState.flowSolarToBattery
+			theme: root.theme
+			designScale: sceneLayer._scale
 			startX: solarCard.x + solarCard.width * 0.50
 			startY: solarCard.y + solarCard.height + sceneLayer._nodeGap
 			turnX: startX
 			endX: battery.x - sceneLayer._nodeGap
-			endY: battery.y + battery.height * 0.56
+			endY: battery.y + battery.height * root.theme.solarArrowBatteryY
 		}
 
 		CamperFlowArrow {
-			z: 2
 			anchors.fill: parent
-			visible: root._flowBatteryToDc
-			strokeColor: root._flowColor
+			visible: root.camperState.flowBatteryToDc
+			theme: root.theme
+			designScale: sceneLayer._scale
 			startX: battery.x + battery.width + sceneLayer._nodeGap
 			startY: battery.y + battery.height * 0.50
 			endX: dcCard.x - sceneLayer._nodeGap
-			endY: dcCard.y + dcCard.height * 0.52
+			endY: dcCard.y + dcCard.height * root.theme.dcArrowCardY
 			turnX: startX + (endX - startX) / 2
 		}
 
 		CamperFlowArrow {
-			z: 2
 			anchors.fill: parent
-			visible: root._flowHubToBattery
-			strokeColor: root._flowColor
+			visible: root.camperState.flowHubToBattery
+			theme: root.theme
+			designScale: sceneLayer._scale
 			startX: hub.x + hub.width * 0.50
 			startY: hub.y - sceneLayer._nodeGap
 			endX: battery.x + battery.width * 0.50
@@ -330,10 +125,10 @@ Item {
 		}
 
 		CamperFlowArrow {
-			z: 2
 			anchors.fill: parent
-			visible: root._flowBatteryToHub
-			strokeColor: root._flowColor
+			visible: root.camperState.flowBatteryToHub
+			theme: root.theme
+			designScale: sceneLayer._scale
 			startX: battery.x + battery.width * 0.50
 			startY: battery.y + battery.height + sceneLayer._nodeGap
 			endX: hub.x + hub.width * 0.50
@@ -343,10 +138,10 @@ Item {
 		}
 
 		CamperFlowArrow {
-			z: 2
 			anchors.fill: parent
-			visible: root._flowHubToAc && !root._acCut
-			strokeColor: root._flowColor
+			visible: root.camperState.flowHubToAc
+			theme: root.theme
+			designScale: sceneLayer._scale
 			startX: hub.x + hub.width + sceneLayer._nodeGap
 			startY: hub.y + hub.height * 0.5
 			endX: acCard.x - sceneLayer._nodeGap
@@ -355,10 +150,10 @@ Item {
 		}
 
 		CamperFlowArrow {
-			z: 2
 			anchors.fill: parent
-			visible: root._flowGridToHub
-			strokeColor: root._flowColor
+			visible: root.camperState.flowGridToHub
+			theme: root.theme
+			designScale: sceneLayer._scale
 			startX: gridShoreCard.x + gridShoreCard.width + sceneLayer._nodeGap
 			startY: gridShoreCard.y + gridShoreCard.height * 0.5
 			endX: hub.x - sceneLayer._nodeGap
@@ -367,29 +162,139 @@ Item {
 		}
 
 		CamperFlowArrow {
-			z: 2
 			anchors.fill: parent
-			visible: root._flowGeneratorToHub
-			strokeColor: root._flowColor
-			startX: generatorCard.x + generatorCard.width * 0.5
+			visible: root.camperState.flowGeneratorToHub
+			theme: root.theme
+			designScale: sceneLayer._scale
+			startX: hub.x + hub.width * 0.5
 			startY: generatorCard.y - sceneLayer._nodeGap
 			endX: hub.x + hub.width * 0.5
 			endY: hub.y + hub.height + sceneLayer._nodeGap
-			turnY: startY - (startY - endY)/2
 			horizontalFirst: false
 		}
 
 		CamperFlowArrow {
-			z: 2
 			anchors.fill: parent
-			visible: root._flowAlternatorToBattery
-			strokeColor: root._flowColor
-			cornerRadius: 24
+			visible: root.camperState.flowAlternatorToBattery
+			theme: root.theme
+			designScale: sceneLayer._scale
+			cornerRadius: root.theme.arrowLongCornerRadius * sceneLayer._scale
 			startX: alternatorCard.x - sceneLayer._nodeGap
 			startY: alternatorCard.y + alternatorCard.height * 0.5
-			endX: battery.x + battery.width * 0.80
+			endX: battery.x + battery.width * root.theme.alternatorArrowBatteryX
 			endY: battery.y + battery.height + sceneLayer._nodeGap
 			turnY: startY
+		}
+
+		CamperDomainCard {
+			id: solarCard
+
+			x: root._boundedX(sceneLayer._sceneX(root.theme.solarCardPosition.x) - width / 2, width, sceneLayer.width)
+			y: root._boundedY(sceneLayer._sceneY(root.theme.solarCardPosition.y), height, sceneLayer.height)
+			iconSource: "qrc:/images/solaryield.svg"
+			title: root.solarTitle
+			value: root.camperState.solarPower
+			active: root.camperState.solarActive
+			visible: root.camperState.solarPresent
+			theme: root.theme
+			designScale: sceneLayer._scale
+			powerFormatter: root.powerFormatter
+		}
+
+		CamperDomainCard {
+			id: gridShoreCard
+
+			x: root._boundedX(sceneLayer._sceneX(root.theme.gridShoreCardPosition.x) - width / 2, width, sceneLayer.width)
+			y: root._boundedY(sceneLayer._sceneY(root.theme.gridShoreCardPosition.y), height, sceneLayer.height)
+			iconSource: root.camperState.gridInput ? "qrc:/images/grid.svg" : "qrc:/images/shore.svg"
+			title: root.gridShoreTitle
+			value: root.camperState.gridShorePower
+			active: root.camperState.gridShoreActive
+			theme: root.theme
+			designScale: sceneLayer._scale
+			powerFormatter: root.powerFormatter
+		}
+
+		CamperDomainCard {
+			id: generatorCard
+
+			x: root._boundedX(sceneLayer._sceneX(root.theme.generatorCardPosition.x) - width / 2, width, sceneLayer.width)
+			y: root._boundedY(sceneLayer._sceneY(root.theme.generatorCardPosition.y), height, sceneLayer.height)
+			iconSource: "qrc:/images/generator.svg"
+			title: root.generatorTitle
+			value: root.camperState.generatorPower
+			active: root.camperState.generatorActive
+			visible: root.camperState.generatorPresent
+			theme: root.theme
+			designScale: sceneLayer._scale
+			powerFormatter: root.powerFormatter
+		}
+
+		CamperDomainCard {
+			id: dcCard
+
+			x: root._boundedX(sceneLayer._sceneX(root.theme.dcCardPosition.x) - width / 2, width, sceneLayer.width)
+			y: root._boundedY(sceneLayer._sceneY(root.theme.dcCardPosition.y), height, sceneLayer.height)
+			iconSource: "qrc:/images/dcloads.svg"
+			title: root.dcLoadsTitle
+			value: root.camperState.dcLoadsPower
+			active: root.camperState.dcLoadsActive
+			theme: root.theme
+			designScale: sceneLayer._scale
+			powerFormatter: root.powerFormatter
+		}
+
+		CamperDomainCard {
+			id: acCard
+
+			x: root._boundedX(sceneLayer._sceneX(root.theme.acCardPosition.x) - width / 2, width, sceneLayer.width)
+			y: root._boundedY(sceneLayer._sceneY(root.theme.acCardPosition.y), height, sceneLayer.height)
+			iconSource: "qrc:/images/acloads.svg"
+			title: root.camperState.acOutputCut ? root.acCutTitle
+				: root.camperState.inverterChargerOff ? root.acOffTitle
+				: root.acLoadsTitle
+			value: root.camperState.acLoadsPower
+			active: root.camperState.acLoadsActive
+			alarm: root.camperState.acOutputCut
+			theme: root.theme
+			designScale: sceneLayer._scale
+			powerFormatter: root.powerFormatter
+		}
+
+		CamperDomainCard {
+			id: alternatorCard
+
+			x: root._boundedX(sceneLayer._sceneX(root.theme.alternatorCardPosition.x) - width / 2, width, sceneLayer.width)
+			y: root._boundedY(sceneLayer._sceneY(root.theme.alternatorCardPosition.y), height, sceneLayer.height)
+			iconSource: "qrc:/images/alternator.svg"
+			title: root.alternatorTitle
+			value: root.camperState.alternatorPower
+			active: root.camperState.alternatorActive
+			theme: root.theme
+			designScale: sceneLayer._scale
+			powerFormatter: root.powerFormatter
+		}
+
+		CamperDevice {
+			id: hub
+			x: root._boundedX(sceneLayer._sceneX(root.theme.hubCenter.x) - width / 2, width, sceneLayer.width)
+			y: root._boundedY(sceneLayer._sceneY(root.theme.hubCenter.y) - height / 2, height, sceneLayer.height)
+			active: root.camperState.hubActive
+			alarm: root.camperState.acOutputCut
+			theme: root.theme
+			designScale: sceneLayer._scale
+		}
+
+		CamperBattery {
+			id: battery
+			value: root.batterySoc
+			charging: root.camperState.batteryCharging
+			discharging: root.camperState.batteryDischarging
+			alarm: root.camperState.lowBatteryAlarm
+			x: root._boundedX(sceneLayer._sceneX(root.theme.batteryCenter.x) - width / 2, width, sceneLayer.width)
+			y: root._boundedY(sceneLayer._sceneY(root.theme.batteryCenter.y) - height / 2, height, sceneLayer.height)
+			theme: root.theme
+			designScale: sceneLayer._scale
 		}
 	}
 }

@@ -1,0 +1,20 @@
+{
+    "ExitWhenFinished": true,
+    "Logging": "info",
+    "Tests": [
+        "tst_rv.qml"
+    ],
+    "MockConfiguration": ":/data/mock/conf/rv.json",
+    "Steps": {
+        "CaptureAndCompare": {
+            "ImageDir": "image-captures",
+            "StabilizationInterval": 16,
+            "StabilizationTimeout": 1000,
+            "MaximumStabilizationAttempts": 3,
+            "FailIfComparisonFails": false
+        },
+        "WaitUntil": {
+            "DefaultTimeout": 5000
+        }
+    }
+}
