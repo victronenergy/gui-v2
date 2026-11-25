@@ -10,7 +10,7 @@ ListNavigation {
 	id: root
 	required property string capabilitiesUid
 	required property string showUiUid
-	property bool showOutputNote: capabilitiesUid !== ""
+	property string note
 
 	function calculatedShowUiControlValue(platformBit, switchCurrentlyOn) {
 		let value = VenusOS.IOChannel_ShowUI_Off
@@ -113,12 +113,10 @@ ListNavigation {
 						preferredVisible: (capabilities.value & VenusOS.IOChannel_Capability_Watch)
 					}
 					PrimaryListLabel {
-						//% "Choose where this switch can be operated. The switch keeps working when its control is hidden."
-						text: qsTrId("iochannel_showui_note")
+						text: root.note
 						font.pixelSize: Theme.font_size_caption
 						color: Theme.color_font_secondary
 						leftPadding: Theme.geometry_page_content_horizontalMargin
-						preferredVisible: root.showOutputNote
 					}
 				}
 			}
