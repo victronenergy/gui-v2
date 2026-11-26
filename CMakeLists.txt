@@ -53,6 +53,7 @@ include(cmake/ModuleVenus_Sources.cmake)
 include(cmake/ModuleShaders_Sources.cmake)
 include(cmake/ModuleGauges_Sources.cmake)
 include(cmake/ModuleBoat_Sources.cmake)
+include(cmake/ModuleCamper_Sources.cmake)
 include(cmake/ModuleGuiPlugins_Sources.cmake)
 include(cmake/ModuleMock_Sources.cmake)
 include(cmake/ModuleUiTest_Sources.cmake)
@@ -69,6 +70,7 @@ include(cmake/ModuleVenus.cmake)
 include(cmake/ModuleShaders.cmake)
 include(cmake/ModuleGauges.cmake)
 include(cmake/ModuleBoat.cmake)
+include(cmake/ModuleCamper.cmake)
 include(cmake/ModuleGuiPlugins.cmake)
 include(cmake/ModuleMock.cmake)
 include(cmake/ModuleUiTest.cmake)
@@ -93,6 +95,8 @@ if ("${GUI_V2_BUILD}" STREQUAL "ON")
         VictronGaugesplugin
         VictronBoat
         VictronBoatplugin
+        VictronCamper
+        VictronCamperplugin
         VictronGuiPlugins
         VictronGuiPluginsplugin
         VictronMock

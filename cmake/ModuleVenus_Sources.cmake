@@ -375,6 +375,7 @@ set (VictronVenusOS_QML_MODULE_SOURCES
     pages/BriefPage_Landscape.qml
     pages/BriefPage_Portrait.qml
     pages/BriefPage.qml
+    pages/CamperPage.qml
     pages/ControlCardsPage.qml
     pages/DialogLayer.qml
     pages/EnvironmentTab.qml

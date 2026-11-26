@@ -4,6 +4,7 @@ set(GUIV2_QML_SOURCES
 
 set(GUIV2_CPP_SOURCES
     src/main.cpp
+    src/mqttaddress.cpp
 )
 
 set_source_files_properties(

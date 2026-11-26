@@ -48,6 +48,9 @@ ObjectModel {
 		pageList.push(briefPage)
 		pageList.push(...pluginPages(GuiPluginLoader.NavigationPageLocation_BeforeOverview))
 		pageList.push(overviewPage)
+		if (showCamperPage) {
+			pageList.push(camperPageLoader.item)
+		}
 		pageList.push(...pluginPages(GuiPluginLoader.NavigationPageLocation_BeforeLevels))
 		if (showLevelsPage) {
 			pageList.push(levelsPageLoader.item)
@@ -113,12 +116,18 @@ ObjectModel {
 
 	readonly property bool showLevelsPage: levelsPageLoader.active && !!levelsPageLoader.item
 	readonly property bool showBoatPage: boatPageLoader.active && !!boatPageLoader.item
+	readonly property bool showCamperPage: camperPageLoader.active && !!camperPageLoader.item
 	onShowLevelsPageChanged: {
 		if (_pagesReady) {
 			setSwipeViewPages()
 		}
 	}
 	onShowBoatPageChanged: {
+		if (_pagesReady) {
+			setSwipeViewPages()
+		}
+	}
+	onShowCamperPageChanged: {
 		if (_pagesReady) {
 			setSwipeViewPages()
 		}
@@ -130,6 +139,7 @@ ObjectModel {
 	// A hanging plugin must not block startup.
 	readonly property bool completed: _completed
 		&& (!boatPageLoader.active || showBoatPage)
+		&& (!camperPageLoader.active || showCamperPage)
 		&& (!levelsPageLoader.active || showLevelsPage)
 		&& pluginNavRepeater.count === pluginNavIntegrations.count
 
@@ -268,6 +278,21 @@ ObjectModel {
 					root.setSwipeViewPages()
 				}
 			}
+		}
+	}
+
+	Loader {
+		id: camperPageLoader
+
+		// 0: no illustration, 1: RV illustration
+		active: customIllustrationItem.value === 1
+		sourceComponent: CamperPage {
+			view: root.view
+		}
+
+		VeQuickItem {
+			id: customIllustrationItem
+			uid: Services.settings.serviceUid + "/Settings/Gui/CustomIllustration"
 		}
 	}
 

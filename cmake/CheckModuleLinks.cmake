@@ -6,9 +6,9 @@
 # seen too, and a commented-out target_link_libraries() is not a link. It does
 # not depend on the build tool or the generator.
 #
-# Victron.VenusOS must not link Victron.GuiPlugins. Victron.Branding and
-# Victron.VeUtil, when those targets exist, must not link another Victron
-# library. A library Qt generates for that same target, such as
+# Victron.VenusOS must not link Victron.GuiPlugins. Victron.Branding,
+# Victron.VeUtil and Victron.Camper, when those targets exist, must not link
+# another Victron library. A library Qt generates for that same target, such as
 # VictronBranding_resources_1, is not another module. The app and the tests may
 # link Victron.GuiPlugins. See "Module dependencies" in .github/architecture.md.
 
@@ -90,6 +90,9 @@ _victron_forbidden_links(VictronBranding "(^|[^A-Za-z0-9_])Victron" FALSE
     _victron_link_problems)
 _victron_forbidden_links(VictronVeUtil "(^|[^A-Za-z0-9_])Victron" FALSE
     "VictronVeUtil links another Victron module. Victron.VeUtil must not use one."
+    _victron_link_problems)
+_victron_forbidden_links(VictronCamper "(^|[^A-Za-z0-9_])Victron" FALSE
+    "VictronCamper links another Victron module. Victron.Camper must not use one."
     _victron_link_problems)
 if(_victron_link_problems)
     message(FATAL_ERROR "${_victron_link_problems}")

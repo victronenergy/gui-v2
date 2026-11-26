@@ -15,6 +15,8 @@ QtObject {
 	property AcInput input1
 	property AcInput input2
 	readonly property int activeInSource: _activeInSource.value ?? VenusOS.AcInputs_InputSource_NotAvailable
+	// False while /Ac/ActiveIn/Source is unknown, which activeInSource reports as NotAvailable.
+	readonly property bool activeInSourceValid: _activeInSource.valid
 	readonly property string activeInServiceType: _activeInServiceType.value || ""
 	readonly property real maximumAcCurrent: _maximumAcCurrent.valid ? _maximumAcCurrent.value : NaN
 

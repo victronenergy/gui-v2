@@ -68,6 +68,8 @@ target_link_libraries(${TEST_NAME} PRIVATE
     VictronGaugesplugin
     VictronBoat
     VictronBoatplugin
+    VictronCamper
+    VictronCamperplugin
     VictronGuiPlugins
     VictronGuiPluginsplugin
     VictronMock
