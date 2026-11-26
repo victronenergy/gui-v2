@@ -83,7 +83,6 @@
         "/GenericInput/temp_1/Settings/RangeMin": 0,
         "/GenericInput/temp_1/Settings/RangeMax": 100,
         "/GenericInput/temp_1/Status": 0,
-        "/GenericInput/Capabilities": 1,
 
         "/SwitchableOutput/momentary_1/Name": "Out-00a. Momentary",
         "/SwitchableOutput/momentary_1/Settings/Adjustable": 0,
