@@ -62,6 +62,7 @@ add_subdirectory(guipluginloader)
 add_subdirectory(pluginpagestack)
 add_subdirectory(uitestutils)
 add_subdirectory(units)
+add_subdirectory(mockworker)
 add_subdirectory(visibleitemmodel)
 add_subdirectory(wifimodel)
 
