@@ -91,6 +91,12 @@ public:
 	void loadConfiguration(const UiTestConfiguration &conf);
 	Q_INVOKABLE void start();
 
+	// In headless mode, captured images are not saved or compared; the test steps are run as a
+	// quick smoke test, and the results are printed to stdout/stderr.
+	// This must be set before loadConfiguration() is called.
+	void setHeadless(bool headless);
+	bool isHeadless() const;
+
 	Status status() const;
 	int testCaseCount() const;
 
@@ -123,6 +129,7 @@ private:
 	Status m_status = NotConfigured;
 	QSet<QString> m_recordedQmlWarnings;
 	QMetaObject::Connection m_qmlWarningsConnection;
+	bool m_headless = false;
 };
 
 }

@@ -14,6 +14,8 @@
 #include <QQmlComponent>
 #include <QQmlEngine>
 
+#include <iostream>
+
 #include "veutil/qt/ve_qitem.hpp"
 
 #include "uitest.h"
@@ -233,6 +235,16 @@ void UiTest::loadConfiguration(const UiTestConfiguration &conf)
 	setStatus(Ready);
 }
 
+void UiTest::setHeadless(bool headless)
+{
+	m_headless = headless;
+}
+
+bool UiTest::isHeadless() const
+{
+	return m_headless;
+}
+
 void UiTest::start()
 {
 	if (m_status != Ready) {
@@ -246,6 +258,14 @@ void UiTest::start()
 
 	qCInfo(venusGuiTest) << "Starting UI tests...";
 	setTargetPageWarningMonitoringEnabled(isTargetPageMode());
+
+	if (m_headless) {
+		// No images are saved, so there is no image directory to prepare.
+		qCInfo(venusGuiTest) << "Headless mode: captured images will not be saved or compared.";
+		m_currentTestIndex = -1;
+		QTimer::singleShot(0, this, &UiTest::startNextTestCase);
+		return;
+	}
 
 	QDir imageDir(CaptureAndCompareStep::absoluteImagePath(QString()));
 	const QString imageDirPath = imageDir.absolutePath();
@@ -337,16 +357,30 @@ void UiTest::startNextTestCase()
 				: QStringLiteral("%1m %2s")
 					.arg(totalSeconds / 60)
 					.arg(totalSeconds < 60 ? totalSeconds : totalSeconds % 60);
-		qCInfo(venusGuiTest) << qPrintable(QStringLiteral("All tests finished: %1 steps passed, %2 steps failed, %3 runtime QML errors, in %4")
+		const QString resultText = QStringLiteral("All tests finished: %1 steps passed, %2 steps failed, %3 runtime QML errors, in %4")
 				.arg(m_passCount)
 				.arg(m_failCount)
 				.arg(m_runtimeQmlErrorCount)
-				.arg(durationText));
+				.arg(durationText);
+		qCInfo(venusGuiTest) << qPrintable(resultText);
 		qCInfo(venusGuiTest) << "********************************************************";
 		setTargetPageWarningMonitoringEnabled(false);
+
+		const int exitCode = UiTestUtils::exitCodeForFailures(m_failCount, m_runtimeQmlErrorCount);
+		if (m_headless) {
+			// Report the result on stdout/stderr as well, so that it is visible regardless of the
+			// logging configuration, e.g. when this is run as a smoke test from a CI pipeline.
+			const QString summaryText = QStringLiteral("UI test '%1' %2: %3")
+					.arg(m_relativeTestDir)
+					.arg(exitCode != 0 ? QStringLiteral("FAILED") : QStringLiteral("PASSED"))
+					.arg(resultText);
+			std::ostream &stream = exitCode != 0 ? std::cerr : std::cout;
+			stream << qPrintable(summaryText) << std::endl;
+		}
+
 		setStatus(Finished);
 		if (exitWhenFinished()) {
-			qApp->exit(UiTestUtils::exitCodeForFailures(m_failCount, m_runtimeQmlErrorCount));
+			qApp->exit(exitCode);
 		}
 	}
 }
