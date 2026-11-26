@@ -682,6 +682,29 @@ bool isActiveOrientationType(const QString &typeName, bool portraitLayout)
 	return true;
 }
 
+// Returns the indexes of lines inside an inline `sourceComponent: Type { ... }` body (excluding
+// the sourceComponent line itself). Types declared there belong to the Loader's loaded content,
+// not to the file's always-present children.
+QSet<int> inlineSourceComponentBodyLines(const QStringList &lines)
+{
+	static const QRegularExpression inlineSourceComponentRe(
+			R"REGEX(^\s*sourceComponent\s*:\s*[A-Z][A-Za-z0-9_]*\s*\{)REGEX");
+
+	QSet<int> bodyLines;
+	for (int i = 0; i < lines.size(); ++i) {
+		if (!inlineSourceComponentRe.match(lines.at(i)).hasMatch()) {
+			continue;
+		}
+		int depth = countChar(lines.at(i), '{') - countChar(lines.at(i), '}');
+		for (++i; depth > 0 && i < lines.size(); ++i) {
+			bodyLines.insert(i);
+			depth += countChar(lines.at(i), '{') - countChar(lines.at(i), '}');
+		}
+		--i;
+	}
+	return bodyLines;
+}
+
 // True when the TypeName { block has a property-level visible: binding
 // that is not unconditionally true. Nested children's visible: lines are
 // ignored. Used to skip constructed-but-hidden types, except LevelsPage
@@ -828,7 +851,11 @@ QList<ShownTypeRoute> scanShownTypeRoutes(const QList<RootRoute> &swipeRoots)
 				: QStringList();
 		static const QRegularExpression typeStartRe(
 				R"REGEX(^\s*([A-Z][A-Za-z0-9_]*)\s*\{)REGEX");
+		const QSet<int> loaderBodyLines = inlineSourceComponentBodyLines(lines);
 		for (int i = 0; i < lines.size(); ++i) {
+			if (loaderBodyLines.contains(i)) {
+				continue;
+			}
 			const QString &line = lines.at(i);
 			if (const QRegularExpressionMatch typeMatch = typeStartRe.match(line); typeMatch.hasMatch()) {
 				const QString typeName = typeMatch.captured(1);
@@ -866,6 +893,7 @@ QList<ShownTypeRoute> scanShownTypeRoutes(const QList<RootRoute> &swipeRoots)
 		bool inComponent = false;
 		int depth = 0;
 		QString loaderType;
+		QStringList loaderNestedTypes;
 		bool loaderActiveFalse = false;
 		QString componentId;
 		QString componentType;
@@ -884,23 +912,29 @@ QList<ShownTypeRoute> scanShownTypeRoutes(const QList<RootRoute> &swipeRoots)
 			}
 		};
 		const auto finishLoader = [&]() {
+			QStringList loadedTypes = loaderNestedTypes;
 			if (!loaderType.isEmpty()) {
-				recordInstantiation(loaderType, containerType);
+				loadedTypes.prepend(loaderType);
+			}
+			for (const QString &loadedType : std::as_const(loadedTypes)) {
+				recordInstantiation(loadedType, containerType);
 				if (loaderActiveFalse
-						&& isActiveOrientationType(loaderType, portraitLayout)
+						&& isActiveOrientationType(loadedType, portraitLayout)
 						&& isActiveOrientationType(containerType, portraitLayout)) {
-					onDemandTypes.insert(loaderType);
+					onDemandTypes.insert(loadedType);
 				}
 			}
 			inLoader = false;
 		};
 
-		for (const QString &line : lines) {
+		for (int lineIndex = 0; lineIndex < lines.size(); ++lineIndex) {
+			const QString &line = lines.at(lineIndex);
 			if (!inLoader && !inComponent) {
 				if (loaderStartRe.match(line).hasMatch()) {
 					inLoader = true;
 					depth = countChar(line, '{') - countChar(line, '}');
 					loaderType.clear();
+					loaderNestedTypes.clear();
 					loaderActiveFalse = false;
 					noteLoaderLine(line, true);
 					if (depth <= 0) {
@@ -924,6 +958,14 @@ QList<ShownTypeRoute> scanShownTypeRoutes(const QList<RootRoute> &swipeRoots)
 			depth += countChar(line, '{') - countChar(line, '}');
 			if (inLoader) {
 				noteLoaderLine(line, false);
+				// Page types declared inside an inline `sourceComponent: Wrapper { ... }` are
+				// what the Loader loads.
+				if (loaderBodyLines.contains(lineIndex)) {
+					const QRegularExpressionMatch nestedMatch = typeStartRe.match(line);
+					if (nestedMatch.hasMatch() && qmlFilesByTypeName.contains(nestedMatch.captured(1))) {
+						loaderNestedTypes.append(nestedMatch.captured(1));
+					}
+				}
 				if (depth <= 0) {
 					finishLoader();
 				}

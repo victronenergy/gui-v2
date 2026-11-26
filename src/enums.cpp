@@ -979,7 +979,97 @@ QString Enums::microgrid_errorToText(MicrogridError error) const
 		return qtTrId("microgrid_error_qu_uq_mismatch");
 	default:
 		return qtTrId("common_words_unknown_status");
+	}
 }
+
+QString Enums::weather_conditionToText(WeatherCondition condition) const
+{
+	switch (condition) {
+	case WeatherCondition_Unknown:
+		return QString();
+	case WeatherCondition_ClearDay:
+	case WeatherCondition_ClearNight:
+		//% "Clear"
+		return qtTrId("weather_clearday");
+	case WeatherCondition_PartiallyCloudyDay:
+	case WeatherCondition_PartiallyCloudyNight:
+		//% "Partly cloudy"
+		return qtTrId("weather_partlycloudy");
+	case WeatherCondition_CloudyDay:
+	case WeatherCondition_CloudyNight:
+		//% "Cloudy"
+		return qtTrId("weather_cloudy");
+	case WeatherCondition_CloudsDay:
+	case WeatherCondition_CloudsNight:
+		//% "Overcast"
+		return qtTrId("weather_overcast");
+	case WeatherCondition_ShowerRainDay:
+	case WeatherCondition_ShowerRainNight:
+		//% "Showers"
+		return qtTrId("weather_showers");
+	case WeatherCondition_CloudyWithRainDay:
+	case WeatherCondition_CloudyWithRainNight:
+		//% "Rain"
+		return qtTrId("weather_rain");
+	case WeatherCondition_ThunderstormWithRainDay:
+	case WeatherCondition_ThunderstormWithRainNight:
+		//% "Thunderstorm"
+		return qtTrId("weather_thunderstorm");
+	case WeatherCondition_SnowDay:
+	case WeatherCondition_SnowNight:
+		//% "Snow"
+		return qtTrId("weather_snow");
+	case WeatherCondition_FogDay:
+	case WeatherCondition_FogNight:
+		//% "Fog"
+		return qtTrId("weather_fog");
+	}
+	return QString();
+}
+
+QString Enums::weather_conditionToIcon(WeatherCondition condition) const
+{
+	switch (condition) {
+	case WeatherCondition_Unknown:
+		return QString();
+	case WeatherCondition_ClearDay:
+		return "qrc:/images/icon_weather_sunny_24.svg";
+	case WeatherCondition_PartiallyCloudyDay:
+		return "qrc:/images/icon_weather_partcloudy_24.svg";
+	case WeatherCondition_CloudyDay:
+		return "qrc:/images/icon_weather_cloudy_24.svg";
+	case WeatherCondition_CloudsDay:
+		return "qrc:/images/icon_weather_overcast_24.svg";
+	case WeatherCondition_ShowerRainDay:
+		return "qrc:/images/icon_weather_rain_24.svg";
+	case WeatherCondition_CloudyWithRainDay:
+		return "qrc:/images/icon_weather_rain_24.svg";
+	case WeatherCondition_ThunderstormWithRainDay:
+		return "qrc:/images/icon_weather_thunderstorm_24.svg";
+	case WeatherCondition_SnowDay:
+		return "qrc:/images/icon_weather_snow_24.svg";
+	case WeatherCondition_FogDay:
+		return "qrc:/images/icon_weather_mist_24.svg";
+	case WeatherCondition_ClearNight:
+		return "qrc:/images/icon_weather_clearnight_24.svg";
+	case WeatherCondition_PartiallyCloudyNight:
+		return "qrc:/images/icon_weather_partcloudynight_24.svg";
+	case WeatherCondition_CloudyNight:
+		return "qrc:/images/icon_weather_cloudy_24.svg";
+	case WeatherCondition_CloudsNight:
+		return "qrc:/images/icon_weather_overcast_24.svg";
+	case WeatherCondition_ShowerRainNight:
+		return "qrc:/images/icon_weather_rain_24.svg";
+	case WeatherCondition_CloudyWithRainNight:
+		return "qrc:/images/icon_weather_rain_24.svg";
+	case WeatherCondition_ThunderstormWithRainNight:
+		return "qrc:/images/icon_weather_thunderstorm_24.svg";
+	case WeatherCondition_SnowNight:
+		return "qrc:/images/icon_weather_snow_24.svg";
+	case WeatherCondition_FogNight:
+		return "qrc:/images/icon_weather_mist_24.svg";
+	}
+	return "qrc:/images/icon_weather_notavailable_24.svg";
 }
 
 QString Enums::dynamicEss_reactiveStrategyToText(int strategy) const

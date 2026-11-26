@@ -177,19 +177,35 @@ FocusScope {
 		}
 	}
 
-	Label {
-		id: clockLabel
+	Row {
+		id: centreRow
 		anchors.centerIn: parent
-		font.pixelSize: Theme.font_size_body2
+		spacing: Theme.geometry_statusBar_clock_spacing
 		visible: !breadcrumbs.visible
-		text: ClockTime.currentTime
+
+		Label {
+			anchors.verticalCenter: parent.verticalCenter
+			font.pixelSize: Theme.font_size_body2
+			text: ClockTime.currentTime
+		}
+
+		SeparatorBar {
+			height: parent.height
+			visible: weatherInfo.visible
+		}
+
+		StatusBarWeather {
+			id: weatherInfo
+			height: parent.height
+			visible: active
+		}
 	}
 
 	Row {
 		id: connectivityRow
 
 		anchors {
-			left: clockLabel.right
+			left: centreRow.right
 			leftMargin: Theme.geometry_statusBar_spacing
 			verticalCenter: parent.verticalCenter
 		}

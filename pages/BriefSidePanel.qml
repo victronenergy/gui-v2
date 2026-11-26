@@ -21,6 +21,13 @@ ColumnLayout {
 
 	spacing: Theme.geometry_sidePanel_spacing
 
+	Loader {
+		active: Services.vrm.weatherCondition !== VenusOS.WeatherCondition_Unknown
+		visible: active
+		Layout.fillWidth: true
+		sourceComponent: BriefSidePanelWeather {}
+	}
+
 	BriefSidePanelWidget {
 		title: CommonWords.solar
 		icon.source: "qrc:/images/solaryield.svg"

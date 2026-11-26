@@ -104,6 +104,7 @@ SET(VictronMock_QML_MODULE_RESOURCES
     data/mock/conf/services/temperature-freezer.json
     data/mock/conf/services/temperature-watertank.json
     data/mock/conf/services/unsupported.json
+    data/mock/conf/services/vrm.json
     data/mock/conf/services/wind.json
     data/mock/conf/setup-common.json
     data/mock/conf/setup-essential-loads.json
