@@ -4,6 +4,7 @@
 */
 
 #include "device.h"
+#include "alldevicesmodel.h"
 #include "allservicesmodel.h"
 #include "enums.h"
 #include "language.h"
@@ -16,6 +17,8 @@ Device::Device(QObject *parent)
 	: BaseDevice(parent)
 {
 	connect(this, &Device::serviceUidChanged, this, &Device::initializeFromServiceUid);
+	connect(this, &Device::serviceTypeChanged, this, &Device::initializeFromServiceTypeAndDeviceInstance);
+	connect(this, &Device::deviceInstanceChanged, this, &Device::initializeFromServiceTypeAndDeviceInstance);
 	connect(Language::create(), &Language::currentLanguageChanged, this, &Device::refreshName);
 }
 
@@ -149,6 +152,9 @@ void Device::initializeFromServiceUid()
 {
 	if (!serviceUid().isEmpty() && !m_serviceItem) {
 		disconnect(this, &Device::serviceUidChanged, this, &Device::initializeFromServiceUid);
+		disconnect(this, &Device::serviceTypeChanged, this, &Device::initializeFromServiceTypeAndDeviceInstance);
+		disconnect(this, &Device::deviceInstanceChanged, this, &Device::initializeFromServiceTypeAndDeviceInstance);
+		stopServiceTypeAndDeviceInstanceLookup();
 
 		AllServicesModel *allServicesModel = AllServicesModel::create();
 		VeQItem *serviceItem = allServicesModel->itemAt(allServicesModel->indexOf(serviceUid()));
@@ -163,4 +169,46 @@ void Device::initializeFromServiceUid()
 			});
 		}
 	}
+}
+
+void Device::initializeFromServiceTypeAndDeviceInstance()
+{
+	if (m_serviceItem || !serviceUid().isEmpty()) {
+		return;
+	}
+
+	// Restart any pending lookup, as the serviceType or deviceInstance has changed.
+	stopServiceTypeAndDeviceInstanceLookup();
+
+	if (serviceType().isEmpty() || deviceInstance() < 0) {
+		return;
+	}
+
+	// Find the device with a matching serviceType and deviceInstance. If it is not found yet, wait
+	// until it is added, or until the deviceInstance of an existing device changes to match, or
+	// until the model is reset (which repopulates it without emitting deviceAdded()). Setting the
+	// serviceUid triggers initializeFromServiceUid(), which ends the lookup.
+	AllDevicesModel *allDevicesModel = AllDevicesModel::create();
+	if (Device *device = allDevicesModel->findDeviceWithTypeAndInstance(serviceType(), deviceInstance())) {
+		setServiceUid(device->serviceUid());
+		return;
+	}
+	const auto matchDevice = [this](Device *device) {
+		if (device->serviceType() == serviceType() && device->deviceInstance() == deviceInstance()) {
+			setServiceUid(device->serviceUid());
+		}
+	};
+	m_lookupConnections = {
+		connect(allDevicesModel, &AllDevicesModel::deviceAdded, this, matchDevice),
+		connect(allDevicesModel, &AllDevicesModel::deviceInstanceChanged, this, matchDevice),
+		connect(allDevicesModel, &AllDevicesModel::modelReset, this, &Device::initializeFromServiceTypeAndDeviceInstance),
+	};
+}
+
+void Device::stopServiceTypeAndDeviceInstanceLookup()
+{
+	for (const QMetaObject::Connection &connection : std::as_const(m_lookupConnections)) {
+		disconnect(connection);
+	}
+	m_lookupConnections.clear();
 }

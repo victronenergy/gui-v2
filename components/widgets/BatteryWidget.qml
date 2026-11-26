@@ -39,16 +39,41 @@ OverviewWidget {
 		uid: Services.system.serviceUid + "/ActiveBatteryService"
 	}
 
+	// A Device cannot be reinitialized once its serviceUid is set, so create a new Device whenever
+	// the active battery service changes.
+	Instantiator {
+		id: activeBatteryDevice
+
+		model: activeBatteryService.valid ? [ activeBatteryService.value ] : []
+		delegate: Device {
+			required property var modelData
+			readonly property var batteryInfo: BackendConnection.portableIdInfo(modelData)
+
+			serviceType: batteryInfo.type
+			deviceInstance: batteryInfo.instance
+		}
+	}
+
+	Connections {
+		target: AllDevicesModel
+		function restartLookup() {
+			activeBatteryDevice.active = false
+			activeBatteryDevice.active = true
+		}
+		function onRowsRemoved() {
+			const serviceUid = activeBatteryDevice.object?.serviceUid
+			if (serviceUid && AllDevicesModel.indexOf(serviceUid) < 0) {
+				restartLookup()
+			}
+		}
+		function onModelReset() {
+			restartLookup()
+		}
+	}
+
 	VeQuickItem {
 		id: starterBatteryVoltage
-		uid: {
-			if (!activeBatteryService.valid || AllDevicesModel.count === 0) {
-				return ""
-			}
-			const info = BackendConnection.portableIdInfo(activeBatteryService.value)
-			const device = AllDevicesModel.findDeviceWithTypeAndInstance(info.type, parseInt(info.instance))
-			return device ? device.serviceUid + "/Dc/1/Voltage" : ""
-		}
+		uid: activeBatteryDevice.object?.serviceUid ? activeBatteryDevice.object.serviceUid + "/Dc/1/Voltage" : ""
 	}
 
 	VeQuickItem {

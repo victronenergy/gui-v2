@@ -61,6 +61,9 @@ Q_SIGNALS:
 	void deviceAdded(Device *device);
 	void deviceAboutToBeRemoved(Device *device);
 
+	// Emitted when the deviceInstance of a device in the model changes.
+	void deviceInstanceChanged(Device *device);
+
 protected:
 	QHash<int, QByteArray> roleNames() const override;
 
