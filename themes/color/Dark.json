@@ -160,8 +160,8 @@
     "color_boatPage_background": "color_background_primary",
 
     "color_briefPage_background": "color_background_primary",
-    "color_briefPage_battery_value_text_color": "color_font_secondary",
-    "color_briefPage_battery_unit_text_color": "color_gray4",
+    "color_briefPage_temperature_value_text_color": "color_font_primary",
+    "color_briefPage_temperature_unit_text_color": "color_font_secondary",
     "color_briefPage_circularGauge_shine": "#BBFFFFFF",
     "color_briefPage_sidePanel_loadGraph_dotColor": "font_over_background(78)",
 
