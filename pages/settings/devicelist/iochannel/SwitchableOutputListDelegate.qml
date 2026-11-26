@@ -141,8 +141,11 @@ ListQuantityGroupNavigation {
 
 	VeQuickItem {
 		id: dropdownLabelsItem
-		readonly property string selectedLabel: uid.length === 0 || !valid || !value ? ""
-				: (value[output.dimming] || "")
+		readonly property string selectedLabel: {
+			const language = Language.current   // re-translate reserved "/keyword" labels on language change
+			return uid.length === 0 || !valid || !value ? ""
+					: VenusOS.ioChannel_labelToText(value[output.dimming] || "")
+		}
 		uid: output.type === VenusOS.SwitchableOutput_Type_Dropdown ? root.uid + "/Settings/Labels" : ""
 	}
 }

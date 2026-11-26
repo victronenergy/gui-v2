@@ -895,6 +895,73 @@ QString Enums::temperature_typeToText(Temperature_DeviceType type) const
 	return qtTrId("temperature_type_unknown");
 }
 
+QString Enums::ioChannel_labelToText(const QString &label) const
+{
+	// Translate reserved label keywords at call time (not via a static map of qtTrId
+	// results) so lupdate extracts them reliably and language changes take effect.
+	if (label == QLatin1String("/low")) {
+		//% "Low"
+		return qtTrId("generic_input_label_low");
+	}
+	if (label == QLatin1String("/high")) {
+		//% "High"
+		return qtTrId("generic_input_label_high");
+	}
+	if (label == QLatin1String("/off")) {
+		//% "Off"
+		return qtTrId("generic_input_label_off");
+	}
+	if (label == QLatin1String("/on")) {
+		//% "On"
+		return qtTrId("generic_input_label_on");
+	}
+	if (label == QLatin1String("/no")) {
+		//% "No"
+		return qtTrId("generic_input_label_no");
+	}
+	if (label == QLatin1String("/yes")) {
+		//% "Yes"
+		return qtTrId("generic_input_label_yes");
+	}
+	if (label == QLatin1String("/open")) {
+		//% "Open"
+		return qtTrId("generic_input_label_open");
+	}
+	if (label == QLatin1String("/closed")) {
+		//% "Closed"
+		return qtTrId("generic_input_label_closed");
+	}
+	if (label == QLatin1String("/ok")) {
+		//% "OK"
+		return qtTrId("generic_input_label_ok");
+	}
+	if (label == QLatin1String("/alarm")) {
+		//% "Alarm"
+		return qtTrId("generic_input_label_alarm");
+	}
+	if (label == QLatin1String("/stopped")) {
+		//% "Stopped"
+		return qtTrId("generic_input_label_stopped");
+	}
+	if (label == QLatin1String("/running")) {
+		//% "Running"
+		return qtTrId("generic_input_label_running");
+	}
+	if (label == QLatin1String("/released")) {
+		//% "Released"
+		return qtTrId("generic_input_label_released");
+	}
+	if (label == QLatin1String("/pressed")) {
+		//% "Pressed"
+		return qtTrId("generic_input_label_pressed");
+	}
+	if (label == QLatin1String("/holding")) {
+		//% "Holding"
+		return qtTrId("generic_input_label_holding");
+	}
+	return label;
+}
+
 QString Enums::microgridModeToText(MicrogridMode mode, MicrogridExternalControl control) const
 {
 	switch (mode) {
