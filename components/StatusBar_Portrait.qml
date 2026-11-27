@@ -21,13 +21,6 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 	implicitWidth: Theme.geometry_screen_width
 	implicitHeight: Theme.geometry_statusBar_height
 
-	// Plugin cards for the Switches pane. The pane can be opened when it shows only these.
-	GuiPluginIntegrationModel {
-		id: pluginSwitchCards
-		type: GuiPluginLoader.QuickAccessPaneCard
-		cardType: GuiPluginLoader.SwitchesCard
-	}
-
 	RowLayout {
 		anchors {
 			left: parent.left
@@ -48,7 +41,7 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 			opacity: breadcrumbs.opacity
 
 			Layout.alignment: Qt.AlignTop
-			KeyNavigation.right: controlCardsButton
+			KeyNavigation.right: quickAccessView
 			onClicked: Global.pageManager.popPage()
 		}
 
@@ -87,70 +80,23 @@ Item { // Doesn't need to be a FocusScope, as we don't need key navigation in po
 			icon.source: Services.notifications.statusBarNotificationIconSource
 
 			Layout.alignment: Qt.AlignTop
-			KeyNavigation.right: controlCardsButton
+			KeyNavigation.right: quickAccessView
 
 			onClicked: Global.mainView.goToNotificationsPage()
 		}
 
-		StatusBarButton {
-			id: controlCardsButton
+		QuickAccessView {
+			id: quickAccessView
 
-			readonly property int buttonType: Global.mainView.currentPage?.topLeftButton ?? VenusOS.StatusBar_LeftButton_None
-
-			leftInset: Theme.geometry_statusBar_spacing / 2
-			rightInset: Theme.geometry_statusBar_spacing / 2
+			buttonsEnabled: !breadcrumbs.enabled
+			// Expand clickable area on right and bottom edges.
+			firstLeftInset: Theme.geometry_statusBar_spacing / 2
+			lastRightInset: Theme.geometry_statusBar_horizontalMargin
+			buttonInset: Theme.geometry_statusBar_spacing / 2
 			bottomInset: Theme.geometry_statusBar_spacing
-			icon.source: buttonType === VenusOS.StatusBar_LeftButton_ControlsInactive ? "qrc:/images/icon_controls_off_32.svg"
-				: buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? "qrc:/images/icon_controls_on_32.svg"
-				: ""
-			enabled: !breadcrumbs.enabled && buttonType !== VenusOS.StatusBar_LeftButton_None
-			visible: enabled
-
-			Layout.alignment: Qt.AlignTop
-			KeyNavigation.right: auxButton
-
-			onClicked: {
-				switch (buttonType) {
-				case VenusOS.StatusBar_LeftButton_ControlsInactive:
-					root.controlCardsActivated()
-					break
-				case VenusOS.StatusBar_LeftButton_ControlsActive:
-					root.cardsDeactivated()
-					break;
-				default:
-					break
-				}
-			}
-		}
-
-		StatusBarButton {
-			id: auxButton
-
-			readonly property bool auxCardsOpened: Global.mainView.cardsActive
-					&& controlCardsButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
-
-			// Expand clickable area on right and bottom edges, and on left if leftButton is hidden.
-			leftInset: Theme.geometry_statusBar_spacing / 2
-			rightInset: Theme.geometry_statusBar_horizontalMargin
-			bottomInset: Theme.geometry_statusBar_spacing
-
-			visible: ((!root.pageStack.opened
-					&& (Services.ioChannels.groups.count > 0 || pluginSwitchCards.count > 0))
-					|| auxCardsOpened) // allow cards to be closed if all switches are disconnected while opened
-			icon.source: controlCardsButton.buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? ""
-					: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
-					: "qrc:/images/icon_smartswitch_off_32.svg"
-			enabled: !breadcrumbs.enabled && controlCardsButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
 
 			Layout.alignment: Qt.AlignTop
 
-			onClicked: {
-				if (auxCardsOpened) {
-					root.cardsDeactivated()
-				} else {
-					root.auxCardsActivated()
-				}
-			}
 		}
 	}
 }
