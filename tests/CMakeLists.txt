@@ -71,6 +71,7 @@ find_package(Python3 COMPONENTS Interpreter)
 if (Python3_Interpreter_FOUND)
     set(TEST_PLUGINS_DIR "${CMAKE_BINARY_DIR}/test-plugins")
     add_subdirectory(plugins)
+    add_subdirectory(quickaccesspane)
     add_subdirectory(quickaccesspanecards)
 endif()
 

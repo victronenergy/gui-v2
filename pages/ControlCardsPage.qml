@@ -17,8 +17,6 @@ Page {
 
 	readonly property int _cardCount: cardsView.count + (cardsView.headerItem?.headerCardCount ?? 0)
 
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsActive
-
 	//% "Controls"
 	title: qsTrId("control_cards_title")
 

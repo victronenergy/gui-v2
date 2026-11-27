@@ -20,6 +20,9 @@ set(VictronUiTest_QML_MODULE_SOURCES
     tests/ui/start-page/maximal/tst_start_page.qml
     tests/ui/start-page/no-levels/tst_start_page.qml
     tests/ui/target-page/tst_target_page.qml
+    tests/ui/plugins/tst_plugins.qml
+    tests/ui/keynav-switches/tst_keynav.qml
+    tests/ui/keynav-bare/tst_keynav.qml
 )
 
 set_source_files_properties(tests/ui/plugins/ProbeBroken_Page.qml PROPERTIES
@@ -35,4 +38,7 @@ SET(VictronUiTest_QML_MODULE_RESOURCES
     tests/ui/smoke/mock-maximal/mock-maximal.json
     tests/ui/start-page/maximal/maximal.json
     tests/ui/start-page/no-levels/no-levels.json
+    tests/ui/plugins/plugins.json
+    tests/ui/keynav-switches/keynav-switches.json
+    tests/ui/keynav-bare/keynav-bare.json
 )

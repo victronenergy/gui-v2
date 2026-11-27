@@ -869,6 +869,35 @@ def navigation_integration(integration, pluginName, qmlFiles, imageFiles, seenNa
         navIntegration["location"] = location
     return navIntegration
 
+# Returns the JSON integration for the args of one --quickaccess option.
+def quickaccess_integration(integration, pluginName, qmlFiles, imageFiles):
+    if len(integration) < 2 or len(integration) > 3:
+        print("\n\nERROR: --quickaccess requires 2-3 args: page.qml icon.svg [icon_active.svg]")
+        sys.exit(1)
+    pageQml = integration[0]
+    iconFile = integration[1]
+    iconActiveFile = integration[2] if len(integration) == 3 else ''
+    if not pageQml.endswith('.qml'):
+        print("\n\nERROR: Quick access page must be a .qml file")
+        sys.exit(1)
+    require_packed_file(pageQml, qmlFiles, "Quick access page")
+    if not (iconFile.endswith('.svg') or iconFile.endswith('.png')):
+        print("\n\nERROR: Quick access icon must be a .svg or .png file")
+        sys.exit(1)
+    require_packed_file(iconFile, imageFiles, "Quick access icon")
+    qaIntegration = {
+        "type": 4,
+        "url": resource_url(pluginName, pageQml),
+        "icon": resource_url(pluginName, iconFile)
+    }
+    if len(iconActiveFile) > 0:
+        if not (iconActiveFile.endswith('.svg') or iconActiveFile.endswith('.png')):
+            print("\n\nERROR: Quick access active icon must be a .svg or .png file")
+            sys.exit(1)
+        require_packed_file(iconActiveFile, imageFiles, "Quick access active icon")
+        qaIntegration["iconActive"] = resource_url(pluginName, iconActiveFile)
+    return qaIntegration
+
 # Returns the JSON integration for the args of one --card option.
 def card_integration(integration, pluginName, qmlFiles):
     if len(integration) != 2:
@@ -1151,7 +1180,7 @@ if __name__ == '__main__':
                              'An integer is an error. A title may be a location name only when a '
                              'location name follows it. Omitted location defaults to BeforeNotifications. '
                              'A built-in page file name is an error. Do not use the same file name twice in this plugin.')
-    parser.add_argument('-q', '--quickaccess', default='')
+    parser.add_argument('-q', '--quickaccess', required=False, nargs='+', action='append', help='2-3 args: page.qml icon.svg [icon_active.svg]')
     parser.add_argument('-c', '--card', required=False, nargs='+', action='append', help='Pair of page .qml and card type (1=controls, 2=switches)')
     parser.add_argument('-b', '--branding', default='',     help='The Branding .qml file of a custom branding plugin')
     parser.add_argument('--qml-import-path', default=os.path.dirname(os.path.abspath(__file__)),
@@ -1263,8 +1292,9 @@ if __name__ == '__main__':
     if args.navigation:
         for integration in args.navigation:
             integrations.append(navigation_integration(integration, args.name, qmlFiles, imageFiles, seenNavPages))
-    if len(args.quickaccess) > 0:
-        print("TODO: quick access...")
+    if args.quickaccess:
+        for integration in args.quickaccess:
+            integrations.append(quickaccess_integration(integration, args.name, qmlFiles, imageFiles))
     if args.card:
         for integration in args.card:
             integrations.append(card_integration(integration, args.name, qmlFiles))

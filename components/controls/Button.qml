@@ -114,6 +114,7 @@ T.Button {
 			height: root.icon.height || Theme.geometry_icon_size_medium
 			source: root.icon.source
 			color: root.icon.color
+			cache: root.icon.cache
 			visible: root.display !== T.AbstractButton.TextOnly
 		}
 	}

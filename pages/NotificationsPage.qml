@@ -13,7 +13,6 @@ SwipeViewPage {
 	title: CommonWords.notifications
 	iconSource: Services.notifications.navBarNotificationCounterVisible ? "qrc:/images/notifications_subtract.svg" : "qrc:/images/notifications.svg"
 	url: "qrc:/qt/qml/Victron/VenusOS/pages/NotificationsPage.qml"
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	focusPolicy: notificationsView.count > 0 ? Qt.TabFocus : Qt.NoFocus
 	showTopGradient: Theme.screenSize === Theme.Portrait && !notificationsView.atYBeginning
 

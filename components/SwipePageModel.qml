@@ -201,7 +201,6 @@ ObjectModel {
 				// The compiler title may be a translation id from the plugin's own translations.
 				title: sourceTitle !== "" ? qsTrId(sourceTitle) : pluginName
 				view: root.view
-				topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 				iconSource: pluginPage.SwipeView.isCurrentItem && String(iconActive).length > 0
 						? iconActive
 						: icon

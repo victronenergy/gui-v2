@@ -14,7 +14,6 @@ SwipeViewPage {
 
 	readonly property LevelsTab currentTabView: tabBar.currentIndex === 0 ? tanksTab : environmentTab
 
-	topLeftButton: VenusOS.StatusBar_LeftButton_ControlsInactive
 	fullScreenWhenIdle: true
 	focusPolicy: Qt.TabFocus
 	//% "Levels"
