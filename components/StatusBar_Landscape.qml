@@ -20,7 +20,7 @@ FocusScope {
 	function updateBreadcrumbsFocusHint() {
 		// When breadcrumbs list is focused: if focus is arriving from the left side, focus the
 		// the left-most breadcrumb, or if from the right side, focus the right-most breadcrumb.
-		if (leftButton.activeFocus || auxButton.activeFocus) {
+		if (backButton.activeFocus || quickAccessView.activeFocus) {
 			breadcrumbs.focusEdgeHint = Qt.LeftEdge
 		} else if (rightButton.activeFocus || sleepButton.activeFocus) {
 			breadcrumbs.focusEdgeHint = Qt.RightEdge
@@ -49,42 +49,18 @@ FocusScope {
 	}
 
 	StatusBarButton {
-		id: leftButton
-
-		readonly property int buttonType: {
-			const customButton = Global.mainView.currentPage?.topLeftButton ?? VenusOS.StatusBar_LeftButton_None
-			if (customButton === VenusOS.StatusBar_LeftButton_None && pageStack.opened) {
-				return VenusOS.StatusBar_LeftButton_Back
-			}
-			return customButton
-		}
+		id: backButton
 
 		// Expand clickable area on left and bottom edges.
 		leftInset: Theme.geometry_statusBar_horizontalMargin
 		bottomInset: Theme.geometry_statusBar_spacing
 
-		icon.source: buttonType === VenusOS.StatusBar_LeftButton_ControlsInactive ? "qrc:/images/icon_controls_off_32.svg"
-			: buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? "qrc:/images/icon_controls_on_32.svg"
-			: buttonType === VenusOS.StatusBar_LeftButton_Back ? "qrc:/images/icon_back_32.svg"
-			: ""
-		enabled: buttonType !== VenusOS.StatusBar_LeftButton_None
-		KeyNavigation.right: auxButton
+		icon.source: "qrc:/images/icon_back_32.svg"
+		enabled: root.pageStack.opened
+		visible: enabled
+		KeyNavigation.right: quickAccessView
 
-		onClicked: {
-			switch (buttonType) {
-			case VenusOS.StatusBar_LeftButton_ControlsInactive:
-				root.controlCardsActivated()
-				break
-			case VenusOS.StatusBar_LeftButton_ControlsActive:
-				root.cardsDeactivated()
-				break;
-			case VenusOS.StatusBar_LeftButton_Back:
-				Global.pageManager.popPage()
-				break
-			default:
-				break
-			}
-		}
+		onClicked: Global.pageManager.popPage()
 
 		onActiveFocusChanged: {
 			if (activeFocus) {
@@ -93,45 +69,35 @@ FocusScope {
 		}
 	}
 
-	// Plugin cards for the Switches pane. The pane can be opened when it shows only these.
-	GuiPluginIntegrationModel {
-		id: pluginSwitchCards
-		type: GuiPluginLoader.QuickAccessPaneCard
-		cardType: GuiPluginLoader.SwitchesCard
-	}
+	QuickAccessView {
+		id: quickAccessView
 
-	StatusBarButton {
-		id: auxButton
+		width: clockLabel.x - parent.x
+		height: Theme.geometry_statusBar_button_height
 
-		readonly property bool auxCardsOpened: Global.mainView.cardsActive
-				&& leftButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
+		model: Global.mainView?.cardsLoader.quickAccessModel ?? null
 
-		// Expand clickable area on right and bottom edges, and on left if leftButton is hidden.
-		anchors {
-			left: leftButton.right
-			leftMargin: -leftInset
-		}
-		leftInset: leftButton.enabled ? 0 : Theme.geometry_statusBar_spacing
-		rightInset: Theme.geometry_statusBar_spacing
+		// Expand clickable area on left edge if this is the left-most button, and on right and bottom edges.
+		firstLeftInset: backButton.visible ? 0 : Theme.geometry_statusBar_horizontalMargin
+		lastRightInset: Theme.geometry_statusBar_spacing
 		bottomInset: Theme.geometry_statusBar_spacing
 
-		visible: (!root.pageStack.opened
-				&& (Services.ioChannels.groups.count > 0 || pluginSwitchCards.count > 0))
-				|| auxCardsOpened // allow cards to be closed if all switches are disconnected while opened
-		icon.source: leftButton.buttonType === VenusOS.StatusBar_LeftButton_ControlsActive ? ""
-				: auxCardsOpened ? "qrc:/images/icon_smartswitch_on_32.svg"
-				: "qrc:/images/icon_smartswitch_off_32.svg"
-		enabled: leftButton.buttonType !== VenusOS.StatusBar_LeftButton_ControlsActive
+		KeyNavigation.left: backButton
 		KeyNavigation.right: breadcrumbs
 
-		onClicked: {
-			if (auxCardsOpened) {
-				root.cardsDeactivated()
-			} else {
-				root.auxCardsActivated()
+		moreButton: moreButtonComponent
+
+		Component {
+			id: moreButtonComponent
+
+			StatusBarButton {
+				icon.source: "qrc:/images/icon_more_dots.svg"
 			}
 		}
 
+		onControlCardsActivated: root.controlCardsActivated()
+		onAuxCardsActivated: root.auxCardsActivated()
+		onCardsDeactivated: root.cardsDeactivated()
 		onActiveFocusChanged: {
 			if (activeFocus) {
 				root.updateBreadcrumbsFocusHint()
@@ -145,7 +111,7 @@ FocusScope {
 		anchors {
 			top: parent.top
 			topMargin: Theme.geometry_settings_breadcrumb_topMargin
-			left: leftButton.right
+			left: leftButtonRow.right
 			leftMargin: Theme.geometry_settings_breadcrumb_horizontalMargin
 			right: rightButtonRow.left
 		}
@@ -353,9 +319,10 @@ FocusScope {
 		enabled: Global.keyNavigationEnabled
 		function onActiveFocusItemChanged() {
 			if (Global.main.activeFocusItem === root) {
-				for (const button of [leftButton, auxButton, breadcrumbs, notificationButton, alarmButton, rightButton, sleepButton]) {
+				for (const button of [backButton, quickAccessView.controlCardsButton, quickAccessView.auxButton, breadcrumbs, notificationButton, alarmButton, rightButton, sleepButton]) {
 					if (button.enabled) {
-						button.focus = true
+						// forceActiveFocus() also focuses the QuickAccessView scope that holds its buttons.
+						button.forceActiveFocus()
 						break
 					}
 				}

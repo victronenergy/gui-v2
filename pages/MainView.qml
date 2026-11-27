@@ -495,6 +495,24 @@ FocusScope {
 
 		KeyNavigation.up: statusBar
 
+		// The buttons of the QuickAccessView: the built-in Controls and Switches buttons,
+		// followed by a button for each QuickAccessPane plugin integration.
+		readonly property CombinedListModel quickAccessModel: CombinedListModel {
+			firstModel: ListModel {
+				ListElement { buttonId: "control"; url: "ControlCardsPage.qml"; icon: "qrc:/images/icon_controls_off_32.svg"; iconActive: "qrc:/images/icon_controls_on_32.svg" }
+				ListElement { buttonId: "aux"; url: "AuxCardsPage.qml"; icon: "qrc:/images/icon_smartswitch_off_32.svg"; iconActive: "qrc:/images/icon_smartswitch_on_32.svg" }
+			}
+			secondModel: GuiPluginIntegrationModel {
+				type: GuiPluginLoader.QuickAccessPane
+				onCountChanged: {
+					if (root.quickAccessName.length > 0) {
+						cardsLoader.hide()
+						root.quickAccessUrl = ""
+					}
+				}
+			}
+		}
+
 		Component {
 			id: controlCardsComponent
 			ControlCardsPage {}
