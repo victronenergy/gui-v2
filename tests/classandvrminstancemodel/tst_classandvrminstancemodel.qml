@@ -216,6 +216,39 @@ TestCase {
 					},
 				],
 			},
+			{
+				tag: "Negative VRM instance",
+				devices: [
+					{
+						uid: "mock/com.victronenergy.settings/Settings/Devices/A",
+						children: {
+							"ClassAndVrmInstance": "tank:-5",
+						},
+					},
+					{
+						uid: "mock/com.victronenergy.settings/Settings/Devices/B",
+						children: {
+							"ClassAndVrmInstance": "tank:2",
+						},
+					},
+				],
+				expectedData: [
+					{
+						valid: true,
+						uid: "mock/com.victronenergy.settings/Settings/Devices/A/ClassAndVrmInstance",
+						vrmInstance: -5,
+						deviceClass: "tank",
+						name: "",
+					},
+					{
+						valid: true,
+						uid: "mock/com.victronenergy.settings/Settings/Devices/B/ClassAndVrmInstance",
+						vrmInstance: 2,
+						deviceClass: "tank",
+						name: "",
+					},
+				],
+			},
 		]
 	}
 
@@ -262,6 +295,26 @@ TestCase {
 						valid: true,
 						uid: "mock/com.victronenergy.settings/Settings/Devices/A/ClassAndVrmInstance",
 						vrmInstance: 1,
+						deviceClass: "tank",
+						name: "",
+					}
+				],
+			},
+			{
+				tag: "Negative VRM instance is not filtered out",
+				devices: [
+					{
+						uid: "mock/com.victronenergy.settings/Settings/Devices/A",
+						children: {
+							"ClassAndVrmInstance": "tank:-1",
+						},
+					}
+				],
+				expectedData: [
+					{
+						valid: true,
+						uid: "mock/com.victronenergy.settings/Settings/Devices/A/ClassAndVrmInstance",
+						vrmInstance: -1,
 						deviceClass: "tank",
 						name: "",
 					}
@@ -468,6 +521,32 @@ TestCase {
 						valid: true,
 						uid: "mock/com.victronenergy.settings/Settings/Devices/A/ClassAndVrmInstance",
 						vrmInstance: 1,
+						deviceClass: "motordrive",
+						name: "",
+					}
+				],
+			},
+			{
+				tag: "Negative VRM instance is filtered out",
+				devices: [
+					{
+						uid: "mock/com.victronenergy.settings/Settings/Devices/A",
+						children: {
+							"ClassAndVrmInstance": "motordrive:-1",
+						},
+					},
+					{
+						uid: "mock/com.victronenergy.settings/Settings/Devices/B",
+						children: {
+							"ClassAndVrmInstance": "motordrive:3",
+						},
+					}
+				],
+				expectedData: [
+					{
+						valid: true,
+						uid: "mock/com.victronenergy.settings/Settings/Devices/B/ClassAndVrmInstance",
+						vrmInstance: 3,
 						deviceClass: "motordrive",
 						name: "",
 					}
